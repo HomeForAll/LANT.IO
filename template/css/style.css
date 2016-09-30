@@ -1,0 +1,50 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+#wrapper {
+    margin: 100px auto;
+    width: 900px;
+    background: grey;
+    border: 1px solid black;
+}
+
+#navigation {
+    width: inherit;
+    height: 50px;
+}
+
+#navigation li {
+    list-style: none;
+    float: left;
+}
+
+#navigation a {
+    padding: 0 20px 0 20px;
+    display: block;
+    line-height: 50px;
+    text-decoration: none;
+    color: #ffffff;
+}
+
+#navigation li .active {
+    color: #000;
+    background: #ffffff;
+}
+
+#navigation a:hover {
+    color: #000;
+    background: #ffffff;
+}
+
+#content {
+    width: 860px;
+    padding: 20px;
+    min-height: 500px;
+    background: #ffffff;
+}
+
+input[type=submit] {
+    padding: 7px 15px 7px 15px;
+}
