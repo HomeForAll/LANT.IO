@@ -22,7 +22,7 @@ class Router {
                 $segments = explode('/', $path);
 
                 $firstArraySegment = ucfirst(array_shift($segments));
-                $secondSegment = lcfirst(array_shift($segments));
+                $secondSegment = strtolower(array_shift($segments));
 
                 $controllerName = $firstArraySegment . 'Controller';
                 $actionName = 'action' . ucfirst($secondSegment);

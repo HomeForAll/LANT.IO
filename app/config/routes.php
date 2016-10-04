@@ -3,6 +3,8 @@
 return array(
     '' => 'site/index/Главная',
     'registration' => 'user/registration/Регистрация',
+    'search' => 'site/search/Поиск',
     'login' => 'user/login/Вход',
-    'search' => 'site/search/Поиск'
+    'logout' => 'user/logout/Выход',
+    'cp' => 'user/CP/Личный кабинет'
 );

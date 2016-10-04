@@ -23,4 +23,18 @@ class UserModel extends Model {
         $stmt->bindParam(':phoneNumber', $_POST['phoneNumber']);
         $stmt->execute();
     }
+
+    public function userVerify() {
+        $stmt = $this->db->prepare("SELECT * FROM users WHERE email = :email");
+        $stmt->bindParam(':email', $_POST['email']);
+        $stmt->execute();
+        $result = $stmt->fetch();
+
+        if ($result) {
+            $_SESSION['userID'] = $result['id'];
+            return password_verify($_POST['password'], $result['password']);
+        }
+
+        return false;
+    }
 }

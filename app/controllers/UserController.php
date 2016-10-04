@@ -29,6 +29,27 @@ class UserController extends Controller {
     }
 
     public function actionLogin() {
+        if (isset($_POST['submit'])) {
+            if ($this->model->userVerify()) {
+                $_SESSION['authorized'] = true;
+                header('Location: http://' . $_SERVER['HTTP_HOST'] . '/cp');
+            } else {
+                $data = '<span style="color: red;">Вы указали неверные сведения.</span><br>';
+                $this->view->displayPage($this->viewName, $this->title, $data);
+            }
+        } elseif (isset($_SESSION['authorized'])) {
+            header('Location: http://' . $_SERVER['HTTP_HOST'] . '/cp');
+        } else {
+            $this->view->displayPage($this->viewName, $this->title);
+        }
+    }
+
+    public function actionLogout() {
+        unset($_SESSION['authorized']);
+        header('Location: http://' . $_SERVER['HTTP_HOST']);
+    }
+
+    public function actionCP() {
         $this->view->displayPage($this->viewName, $this->title);
     }
 }
