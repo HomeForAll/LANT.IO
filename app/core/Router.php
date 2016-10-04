@@ -22,15 +22,17 @@ class Router {
                 $segments = explode('/', $path);
 
                 $firstArraySegment = ucfirst(array_shift($segments));
+                $secondSegment = lcfirst(array_shift($segments));
+
                 $controllerName = $firstArraySegment . 'Controller';
-                $actionName = 'action' . ucfirst(array_shift($segments));
+                $actionName = 'action' . ucfirst($secondSegment);
                 $pageName = ucfirst(array_shift($segments));
                 $modelName = $firstArraySegment . 'Model';
 
                 $controllerFile = ROOT_DIR . '/app/controllers/' . $controllerName . '.php';
 
                 if (file_exists($controllerFile)) {
-                    $controllerObject = new $controllerName($pageName, $this->settings, $modelName);
+                    $controllerObject = new $controllerName($pageName, $this->settings, $secondSegment, $modelName); // $secondSegment - ViewName
                     $controllerObject->$actionName();
                 }
             }
