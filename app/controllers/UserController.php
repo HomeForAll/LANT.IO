@@ -1,8 +1,8 @@
 <?php
 
 class UserController extends Controller {
-    public function __construct($pageName, $settings, $modelName) {
-        parent::__construct($pageName);
+    public function __construct($pageName, $settings, $view, $modelName) {
+        parent::__construct($pageName, $settings, $view, $modelName);
         $this->model = new $modelName($settings);
     }
 
@@ -25,11 +25,10 @@ class UserController extends Controller {
 
             }
         }
-
-        $this->view->displayPage(__FUNCTION__, $this->title, $data);
+        $this->view->displayPage($this->viewName, $this->title, $data);
     }
 
     public function actionLogin() {
-        $this->view->displayPage(__FUNCTION__, $this->title);
+        $this->view->displayPage($this->viewName, $this->title);
     }
 }

@@ -29,6 +29,26 @@ foreach ($data as $error) {
         </tr>
         <tr>
             <td>
+                <label for="patronymic">
+                    Отчество:
+                </label>
+            </td>
+            <td>
+                <input name="patronymic" id="patronymic" type="text" value="<?php if (!empty($_POST['patronymic'])) echo $_POST['patronymic']; ?>">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="birthday">
+                    Дата рождения:
+                </label>
+            </td>
+            <td>
+                <input name="birthday" id="birthday" type="text" value="<?php if (!empty($_POST['birthday'])) echo $_POST['birthday']; ?>">
+            </td>
+        </tr>
+        <tr>
+            <td>
                 <label for="email">
                     E-Mail:
                 </label>
