@@ -1,6 +1,6 @@
 <?php
 foreach ($data as $error) {
-    echo $error;
+    echo '<span style="color: red;">' . $error . '</span><br>';
 }
 ?>
 
@@ -49,6 +49,16 @@ foreach ($data as $error) {
         </tr>
         <tr>
             <td>
+                <label for="phoneNumber">
+                    Номер телефона:
+                </label>
+            </td>
+            <td>
+                <input name="phoneNumber" id="phoneNumber" type="text"  value="<?php if (!empty($_POST['phoneNumber'])) echo $_POST['phoneNumber']; ?>">
+            </td>
+        </tr>
+        <tr>
+            <td>
                 <label for="email">
                     E-Mail:
                 </label>
@@ -65,16 +75,6 @@ foreach ($data as $error) {
             </td>
             <td>
                 <input name="password" id="password" type="password">
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label for="phoneNumber">
-                    Номер телефона:
-                </label>
-            </td>
-            <td>
-                <input name="phoneNumber" id="phoneNumber" type="text"  value="<?php if (!empty($_POST['phoneNumber'])) echo $_POST['phoneNumber']; ?>">
             </td>
         </tr>
         <tr>

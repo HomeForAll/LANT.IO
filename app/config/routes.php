@@ -1,10 +1,12 @@
 <?php
 
 return array(
+    // 'URI' => 'controller/action/pageTitle'
     '' => 'site/index/Главная',
-    'registration' => 'user/registration/Регистрация',
     'search' => 'site/search/Поиск',
+    'registration' => 'user/registration/Регистрация',
     'login' => 'user/login/Вход',
     'logout' => 'user/logout/Выход',
-    'cp' => 'user/CP/Личный кабинет'
+    'cp' => 'CP/CP/Личный кабинет',
+    'cp/chat' => 'CP/chat/Чат'
 );

@@ -1,11 +1,45 @@
 <?php
 
 class UserModel extends Model {
-    public function checkEmailValidationErrors($email) {
+    public function __construct() {
+        $this->getConnect();
+    }
+
+    public function checkUserInformation() {
+        $errors = array();
+
+        if (!$this->checkEmailValidationErrors($_POST['email'])) {
+            $errors[] = '- Укажите корректный E-mail.';
+        }
+        if ($this->checkEmailAvailability($_POST['email'])) {
+            $errors[] = '- Такой E-mail уже зарегистрирован.';
+        }
+        if ($_POST['firstName'] == '') {
+            $errors[] = '- Укажите имя.';
+        }
+        if ($_POST['lastName'] == '') {
+            $errors[] = '- Укажите фамилию.';
+        }
+        if ($_POST['patronymic'] == '') {
+            $errors[] = '- Укажите отчество.';
+        }
+        if ($_POST['birthday'] == '') {
+            $errors[] = '- Укажите дату рождения.';
+        }
+        if ($_POST['phoneNumber'] == '') {
+            $errors[] = '- Укажите телефон.';
+        }
+        if ($_POST['password'] == '') {
+            $errors[] = '- Вы не указали пароль.';
+        }
+        return $errors;
+    }
+
+    private function checkEmailValidationErrors($email) {
         return (filter_var($email, FILTER_VALIDATE_EMAIL)) ? true : false;
     }
 
-    public function checkEmailAvailability($email) {
+    private function checkEmailAvailability($email) {
         $stmt = $this->db->prepare("SELECT * FROM users WHERE email = :email");
         $stmt->bindParam(':email', $email);
         $stmt->execute();
