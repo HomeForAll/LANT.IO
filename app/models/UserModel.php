@@ -2,7 +2,8 @@
 
 class UserModel extends Model {
     public function __construct() {
-        $this->getConnect();
+        parent::__construct();
+        $this->db = $this->getPGConnect();
     }
 
     public function checkUserInformation() {
