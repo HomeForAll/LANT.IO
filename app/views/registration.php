@@ -1,7 +1,14 @@
 <?php
-foreach ($data as $error) {
+foreach ($data['info'] as $error) {
     echo '<span style="color: red;">' . $error . '</span><br>';
 }
+
+$firstName = (!empty($_POST['firstName'])) ? $_POST['firstName'] : (isset($_SESSION['firstName'])) ? $_SESSION['firstName'] : '' ;
+$lastName = (!empty($_POST['lastName'])) ? $_POST['lastName'] : (isset($_SESSION['lastName'])) ? $_SESSION['lastName'] : '' ;;
+$patronymic = (!empty($_POST['patronymic'])) ? $_POST['patronymic'] : '' ;;
+$birthday = (!empty($_POST['birthday'])) ? $_POST['birthday'] : (isset($_SESSION['birthday'])) ? $_SESSION['birthday'] : '' ;;
+$phoneNumber = (!empty($_POST['phoneNumber'])) ? $_POST['phoneNumber'] : '' ;;
+$email = (!empty($_POST['email'])) ? $_POST['email'] : (isset($_SESSION['email'])) ? $_SESSION['email'] : '' ;;
 ?>
 
 <h1>Регистрация</h1>
@@ -14,7 +21,8 @@ foreach ($data as $error) {
                 </label>
             </td>
             <td>
-                <input name="firstName" id="firstName" type="text" value="<?php if (!empty($_POST['firstName'])) echo $_POST['firstName']; ?>">
+                <input name="firstName" id="firstName" type="text"
+                       value="<?php echo $firstName; ?>">
             </td>
         </tr>
         <tr>
@@ -24,7 +32,8 @@ foreach ($data as $error) {
                 </label>
             </td>
             <td>
-                <input name="lastName" id="lastName" type="text" value="<?php if (!empty($_POST['lastName'])) echo $_POST['lastName']; ?>">
+                <input name="lastName" id="lastName" type="text"
+                       value="<?php echo $lastName; ?>">
             </td>
         </tr>
         <tr>
@@ -34,7 +43,8 @@ foreach ($data as $error) {
                 </label>
             </td>
             <td>
-                <input name="patronymic" id="patronymic" type="text" value="<?php if (!empty($_POST['patronymic'])) echo $_POST['patronymic']; ?>">
+                <input name="patronymic" id="patronymic" type="text"
+                       value="<?php echo $patronymic; ?>">
             </td>
         </tr>
         <tr>
@@ -44,7 +54,8 @@ foreach ($data as $error) {
                 </label>
             </td>
             <td>
-                <input name="birthday" id="birthday" type="text" value="<?php if (!empty($_POST['birthday'])) echo $_POST['birthday']; ?>">
+                <input name="birthday" id="birthday" type="text"
+                       value="<?php echo $birthday; ?>">
             </td>
         </tr>
         <tr>
@@ -54,7 +65,8 @@ foreach ($data as $error) {
                 </label>
             </td>
             <td>
-                <input name="phoneNumber" id="phoneNumber" type="text"  value="<?php if (!empty($_POST['phoneNumber'])) echo $_POST['phoneNumber']; ?>">
+                <input name="phoneNumber" id="phoneNumber" type="text"
+                       value="<?php echo $phoneNumber; ?>">
             </td>
         </tr>
         <tr>
@@ -64,7 +76,8 @@ foreach ($data as $error) {
                 </label>
             </td>
             <td>
-                <input name="email" id="email" type="text" value="<?php if (!empty($_POST['email'])) echo $_POST['email']; ?>">
+                <input name="email" id="email" type="text"
+                       value="<?php echo $email; ?>">
             </td>
         </tr>
         <tr>
@@ -85,3 +98,4 @@ foreach ($data as $error) {
         </tr>
     </table>
 </form>
+<h2><a href="auth/vk">Заполнить данные используя Вконтакте</a></h2>

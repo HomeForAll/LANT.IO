@@ -7,33 +7,35 @@ class UserModel extends Model {
     }
 
     public function checkUserInformation() {
-        $errors = array();
+        $data = array(
+            'info' => array()
+        );
 
         if (!$this->checkEmailValidationErrors($_POST['email'])) {
-            $errors[] = '- Укажите корректный E-mail.';
+            $data['info'][] = '- Укажите корректный E-mail.';
         }
         if ($this->checkEmailAvailability($_POST['email'])) {
-            $errors[] = '- Такой E-mail уже зарегистрирован.';
+            $data['info'][] = '- Такой E-mail уже зарегистрирован.';
         }
         if ($_POST['firstName'] == '') {
-            $errors[] = '- Укажите имя.';
+            $data['info'][] = '- Укажите имя.';
         }
         if ($_POST['lastName'] == '') {
-            $errors[] = '- Укажите фамилию.';
+            $data['info'][] = '- Укажите фамилию.';
         }
         if ($_POST['patronymic'] == '') {
-            $errors[] = '- Укажите отчество.';
+            $data['info'][] = '- Укажите отчество.';
         }
         if ($_POST['birthday'] == '') {
-            $errors[] = '- Укажите дату рождения.';
+            $data['info'][] = '- Укажите дату рождения.';
         }
         if ($_POST['phoneNumber'] == '') {
-            $errors[] = '- Укажите телефон.';
+            $data['info'][] = '- Укажите телефон.';
         }
         if ($_POST['password'] == '') {
-            $errors[] = '- Вы не указали пароль.';
+            $data['info'][] = '- Вы не указали пароль.';
         }
-        return $errors;
+        return $data;
     }
 
     private function checkEmailValidationErrors($email) {

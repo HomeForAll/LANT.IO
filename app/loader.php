@@ -6,7 +6,8 @@ function __autoload($className) {
     $pathsArray = array(
         '/app/core/',
         '/app/controllers/',
-        '/app/models/'
+        '/app/models/',
+        '/app/modules/' . $className
     );
 
     foreach ($pathsArray as $path){

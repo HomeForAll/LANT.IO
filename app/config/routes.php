@@ -8,5 +8,6 @@ return array(
     'login' => 'user/login/Вход',
     'logout' => 'user/logout/Выход',
     'cp' => 'CP/CP/Личный кабинет',
-    'cp/chat' => 'CP/chat/Чат'
+    'cp/chat' => 'CP/chat/Чат',
+    'auth/vk' => 'auth/vk/Авторизация',
 );
