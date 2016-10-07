@@ -8,7 +8,7 @@ $lastName = (!empty($_POST['lastName'])) ? $_POST['lastName'] : (isset($_SESSION
 $patronymic = (!empty($_POST['patronymic'])) ? $_POST['patronymic'] : '' ;;
 $birthday = (!empty($_POST['birthday'])) ? $_POST['birthday'] : (isset($_SESSION['birthday'])) ? $_SESSION['birthday'] : '' ;;
 $phoneNumber = (!empty($_POST['phoneNumber'])) ? $_POST['phoneNumber'] : '' ;;
-$email = (!empty($_POST['email'])) ? $_POST['email'] : (isset($_SESSION['email'])) ? $_SESSION['email'] : '' ;;
+$email = (!empty($_POST['email'])) ? $_POST['email'] : (isset($_SESSION['vkUserEmail'])) ? $_SESSION['vkUserEmail'] : '' ;;
 ?>
 
 <h1>Регистрация</h1>
