@@ -52,13 +52,16 @@ class UserModel extends Model {
     public function registerUser() {
         $passwordHash = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-        $stmt = $this->db->prepare("INSERT INTO users (first_name, last_name, email, password, phone_number) VALUES (:firstName, :lastName, :email, :password, :phoneNumber)");
+        $stmt = $this->db->prepare("INSERT INTO users (first_name, last_name, patronymic, birthday, phone_number, email, password) VALUES (:firstName, :lastName, :patronymic, :birthday, :phoneNumber, :email, :password)");
         $stmt->bindParam(':firstName', $_POST['firstName']);
         $stmt->bindParam(':lastName', $_POST['lastName']);
+        $stmt->bindParam(':patronymic', $_POST['patronymic']);
+        $stmt->bindParam(':birthday', $_POST['birthday']);
+        $stmt->bindParam(':phoneNumber', $_POST['phoneNumber']);
         $stmt->bindParam(':email', $_POST['email']);
         $stmt->bindParam(':password', $passwordHash);
-        $stmt->bindParam(':phoneNumber', $_POST['phoneNumber']);
         $stmt->execute();
+        print_r($stmt->errorInfo());
     }
 
     public function userVerify() {

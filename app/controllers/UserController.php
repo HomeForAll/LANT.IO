@@ -17,7 +17,7 @@ class UserController extends Controller
         if (isset($_POST['submit'])) {
             $data = $this->model->checkUserInformation();
 
-            if (empty($errors)) {
+            if (empty($data['info'])) {
                 $data['info'][] = 'Благодарим вас за регистрацию!';
                 $this->model->registerUser();
                 unset($_POST);
