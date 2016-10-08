@@ -18,16 +18,11 @@ class Loader
                 if (file_exists($path)) {
                     include_once $path;
                     self::setClassPath($class, $path);
-                    self::putPathsArrayToFile(static::$paths);
+                    self::putPathsToFile(static::$paths);
                     break;
                 }
             }
         }
-    }
-
-    public static function getPathsFromFile()
-    {
-        static::$paths = unserialize(file_get_contents(ROOT_DIR . '/app/config/paths.php'));
     }
 
     private static function getDirectories($path)
@@ -66,14 +61,14 @@ class Loader
         static::$paths[$className] = (string)$path;
     }
 
-    private static function putPathsArrayToFile(Array $array)
+    private static function putPathsToFile(Array $array)
     {
         file_put_contents(ROOT_DIR . '/app/config/paths.php', serialize($array));
     }
 
-    private static function getPathsArrayFromFile()
+    public static function getPathsFromFile()
     {
-        return unserialize(file_get_contents(ROOT_DIR . '/app/config/paths.php'));
+        static::$paths = unserialize(file_get_contents(ROOT_DIR . '/app/config/paths.php'));
     }
 }
 

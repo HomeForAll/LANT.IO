@@ -10,4 +10,5 @@ return array(
     'cp' => 'CP/CP/Личный кабинет',
     'cp/chat' => 'CP/chat/Чат',
     'auth/vk' => 'auth/vk/Авторизация',
+    'auth/unset' => 'auth/unset/Отключение сервиса',
 );

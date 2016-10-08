@@ -7,7 +7,7 @@ defined('CONFIG_DIR') or define("CONFIG_DIR", ROOT_DIR . '/app/config/');
 
 require_once ROOT_DIR . '/app/core/Loader.php';
 
-Loader::getPathsFromFile();
 spl_autoload_register(array('Loader', 'classLoad'));
 
+Loader::getPathsFromFile();
 (new Router())->run();

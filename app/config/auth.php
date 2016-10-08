@@ -1,6 +1,6 @@
 <?php
 return array(
-    'vkAppID' => '5658177',
-    'vkSecretKey' => '2vDraLX94jpnVTBWIzlU',
-    'vkRedirectURL' => 'http://localhost/auth/vk/'
+    'vk_AppID' => '5658177',
+    'vk_SecretKey' => '2vDraLX94jpnVTBWIzlU',
+    'vk_RedirectURL' => 'http://localhost/auth/vk/'
 );
