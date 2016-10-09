@@ -23,9 +23,6 @@ class UserModel extends Model {
         if ($_POST['lastName'] == '') {
             $data['info'][] = '- Укажите фамилию.';
         }
-        if ($_POST['patronymic'] == '') {
-            $data['info'][] = '- Укажите отчество.';
-        }
         if ($_POST['birthday'] == '') {
             $data['info'][] = '- Укажите дату рождения.';
         }
