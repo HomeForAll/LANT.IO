@@ -1,3 +1,4 @@
+<?php if (isset($data)) echo $data; ?>
 <form action="" method="post">
     <table>
         <tr>
@@ -17,7 +18,7 @@
                 </label>
             </td>
             <td>
-                <input name="password" id="password" type="text">
+                <input name="password" id="password" type="password">
             </td>
         </tr>
         <tr>

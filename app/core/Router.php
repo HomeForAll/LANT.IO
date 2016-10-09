@@ -2,12 +2,10 @@
 
 class Router {
     private $routes;
-    private $settings;
 
     public function __construct() {
         $routesPath = ROOT_DIR . '/app/config/routes.php';
         $this->routes = require $routesPath;
-        $this->settings = require_once ROOT_DIR . '/app/config/settings.php';
     }
 
     /**
@@ -16,13 +14,13 @@ class Router {
      */
     public function run() {
         $uri = $this->getURI();
-
+        
         foreach ($this->routes as $uriPattern => $path) {
             if (preg_match("~^{$uriPattern}$~", $uri)) {
                 $segments = explode('/', $path);
 
                 $firstArraySegment = ucfirst(array_shift($segments));
-                $secondSegment = lcfirst(array_shift($segments));
+                $secondSegment = strtolower(array_shift($segments));
 
                 $controllerName = $firstArraySegment . 'Controller';
                 $actionName = 'action' . ucfirst($secondSegment);
@@ -32,8 +30,8 @@ class Router {
                 $controllerFile = ROOT_DIR . '/app/controllers/' . $controllerName . '.php';
 
                 if (file_exists($controllerFile)) {
-                    $controllerObject = new $controllerName($pageName, $this->settings, $secondSegment, $modelName); // $secondSegment - ViewName
-                    $controllerObject->$actionName();
+                    $controllerObject = new $controllerName($pageName, $secondSegment, $modelName); // $secondSegment - ViewName
+                    $controllerObject->$actionName($uri);
                 }
             }
         }

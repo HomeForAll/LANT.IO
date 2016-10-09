@@ -1,11 +1,46 @@
 <?php
 
 class UserModel extends Model {
-    public function checkEmailValidationErrors($email) {
+    public function __construct() {
+        parent::__construct();
+        $this->db = $this->getPGConnect();
+    }
+
+    public function checkUserInformation() {
+        $errors = array();
+
+        if (!$this->checkEmailValidationErrors($_POST['email'])) {
+            $errors[] = '- Укажите корректный E-mail.';
+        }
+        if ($this->checkEmailAvailability($_POST['email'])) {
+            $errors[] = '- Такой E-mail уже зарегистрирован.';
+        }
+        if ($_POST['firstName'] == '') {
+            $errors[] = '- Укажите имя.';
+        }
+        if ($_POST['lastName'] == '') {
+            $errors[] = '- Укажите фамилию.';
+        }
+        if ($_POST['patronymic'] == '') {
+            $errors[] = '- Укажите отчество.';
+        }
+        if ($_POST['birthday'] == '') {
+            $errors[] = '- Укажите дату рождения.';
+        }
+        if ($_POST['phoneNumber'] == '') {
+            $errors[] = '- Укажите телефон.';
+        }
+        if ($_POST['password'] == '') {
+            $errors[] = '- Вы не указали пароль.';
+        }
+        return $errors;
+    }
+
+    private function checkEmailValidationErrors($email) {
         return (filter_var($email, FILTER_VALIDATE_EMAIL)) ? true : false;
     }
 
-    public function checkEmailAvailability($email) {
+    private function checkEmailAvailability($email) {
         $stmt = $this->db->prepare("SELECT * FROM users WHERE email = :email");
         $stmt->bindParam(':email', $email);
         $stmt->execute();
@@ -22,5 +57,19 @@ class UserModel extends Model {
         $stmt->bindParam(':password', $passwordHash);
         $stmt->bindParam(':phoneNumber', $_POST['phoneNumber']);
         $stmt->execute();
+    }
+
+    public function userVerify() {
+        $stmt = $this->db->prepare("SELECT * FROM users WHERE email = :email");
+        $stmt->bindParam(':email', $_POST['email']);
+        $stmt->execute();
+        $result = $stmt->fetch();
+
+        if ($result) {
+            $_SESSION['userID'] = $result['id'];
+            return password_verify($_POST['password'], $result['password']);
+        }
+
+        return false;
     }
 }
