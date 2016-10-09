@@ -14,7 +14,6 @@ class Router {
      */
     public function run() {
         $uri = $this->getURI();
-        print_r($uri);
         foreach ($this->routes as $uriPattern => $path) {
             if (preg_match("~^{$uriPattern}$~", $uri)) {
                 $segments = explode('/', $path);
@@ -44,8 +43,9 @@ class Router {
      */
     private function getURI() {
         if (!empty($_SERVER['REQUEST_URI'])) {
+            $url = parse_url(urldecode($_SERVER['REQUEST_URI']), PHP_URL_PATH);
             if (SERVER == 'nginx') {
-                return trim(str_replace('index.php', '', parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)), '/');
+                return trim(str_replace('index.php', '', trim($url, '/')), '/');
             } elseif (SERVER == 'apache') {
                 return trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
             }
