@@ -5,6 +5,10 @@ class Loader
     private static $paths = array();
     private static $directories = array();
 
+    /*
+     * Подключает файл класса по пути полученному из файла /app/config/paths.php,
+     * если его нет, производит поиск, подключает и записывает путь к файлу в paths.php
+     */
     public static function classLoad($class)
     {
         if (isset(static::$paths[$class])) {
@@ -25,6 +29,9 @@ class Loader
         }
     }
 
+    /*
+     * Получает список директроий по указанному пути
+     */
     private static function getDirectories($path)
     {
         chdir($path);
@@ -40,6 +47,9 @@ class Loader
         return $directories;
     }
 
+    /*
+     * Генерирует пути папок которые находятся в заданной директории $path
+     */
     private static function getDirPaths($path)
     {
         $path = str_replace('\\', '/', $path);
