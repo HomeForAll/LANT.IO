@@ -60,14 +60,13 @@ class Router {
         $pageName = array_shift($segments);
         $controller = array_shift($segments);
         $action = array_shift($segments);
-        $model = $controller . 'Model';
 
         return array(
             'pageName' => $pageName,
             'controllerName' => ucfirst($controller) . 'Controller',
             'actionName' => 'action' . ucfirst($action),
             'viewName' => strtolower($action),
-            'modelName' => ucfirst($model) . 'Model',
+            'modelName' => ucfirst($controller) . 'Model',
             'params' => $segments
         );
     }

@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    // 'URI' => 'controller/action/pageTitle'
+    // 'URI' => 'pageTitle/controller/action'
     '' => 'Главная/site/index',
     'search' => 'Поиск/site/search',
     'registration' => 'Регистрация/user/registration',
