@@ -19,6 +19,7 @@ class AuthModel
                 $this->ok();
                 break;
             case 'fb':
+                $this->fb();
                 break;
         }
     }
@@ -75,6 +76,11 @@ class AuthModel
     }
 
     private function ok()
+    {
+
+    }
+
+    private function fb()
     {
 
     }

@@ -10,27 +10,19 @@ class Router {
 
     /**
      * Метод проверяет наличие строки запроса в таблице маршрутизации routes.php,
-     * при наличии, определяет контроллер и передает ему управление.
+     * если присутствует, определяет контроллер и передает ему управление,
+     * при наличии параметров в строке запроса, передает их action в виде массива.
      */
     public function run() {
         $uri = $this->getURI();
         foreach ($this->routes as $uriPattern => $path) {
             if (preg_match("~^{$uriPattern}$~", $uri)) {
-                $segments = explode('/', $path);
 
-                $firstArraySegment = ucfirst(array_shift($segments));
-                $secondSegment = strtolower(array_shift($segments));
+                $options = $this->getOptions($uriPattern, $uri, $path);
 
-                $controllerName = $firstArraySegment . 'Controller';
-                $actionName = 'action' . ucfirst($secondSegment);
-                $pageName = ucfirst(array_shift($segments));
-                $modelName = $firstArraySegment . 'Model';
-
-                $controllerFile = ROOT_DIR . '/app/controllers/' . $controllerName . '.php';
-
-                if (file_exists($controllerFile)) {
-                    $controllerObject = new $controllerName($pageName, $secondSegment, $modelName); // $secondSegment - ViewName
-                    $controllerObject->$actionName();
+                if (file_exists(ROOT_DIR . '/app/controllers/' . $options['controllerName'] . '.php')) {
+                    $controllerObject = new $options['controllerName']($options['pageName'], $options['viewName'], $options['modelName']);
+                    $controllerObject->$options['actionName']($options['params']);
                 }
             }
         }
@@ -51,5 +43,32 @@ class Router {
             }
         }
         return false;
+    }
+
+    /*
+     * Возвращает массив с такими параметрами:
+     * array['controllerName']
+     * array['actionName']
+     * array['viewName']
+     * array['modelName']
+     * array['params'][]
+     */
+    private function getOptions ($pattern, $uri, $path) {
+        $route = preg_replace("~^{$pattern}$~", $path, $uri);
+        $segments = explode('/', $route);
+
+        $pageName = array_shift($segments);
+        $controller = array_shift($segments);
+        $action = array_shift($segments);
+        $model = $controller . 'Model';
+
+        return array(
+            'pageName' => $pageName,
+            'controllerName' => ucfirst($controller) . 'Controller',
+            'actionName' => 'action' . ucfirst($action),
+            'viewName' => strtolower($action),
+            'modelName' => ucfirst($model) . 'Model',
+            'params' => $segments
+        );
     }
 }
