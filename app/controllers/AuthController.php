@@ -13,13 +13,18 @@ class AuthController extends Controller
         $this->model->getUserInfo('vk');
     }
 
-    public function actionUnset() {
-        unset($_SESSION['service']);
-        unset($_SESSION['vk_userID']);
-        unset($_SESSION['vk_email']);
-        unset($_SESSION['vk_firstName']);
-        unset($_SESSION['vk_lastName']);
-        unset($_SESSION['vk_birthday']);
-        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
+    public function actionOk()
+    {
+        $this->model->getUserInfo('ok');
+    }
+
+    public function actionMail()
+    {
+        $this->model->getUserInfo('mail');
+    }
+
+    public function actionUnset()
+    {
+        $this->model->unsetServices();
     }
 }

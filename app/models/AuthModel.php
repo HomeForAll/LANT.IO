@@ -18,6 +18,9 @@ class AuthModel
             case 'ok':
                 $this->ok();
                 break;
+            case 'mail':
+                $this->mail();
+                break;
             case 'fb':
                 $this->fb();
                 break;
@@ -50,6 +53,7 @@ class AuthModel
                 }
 
                 $_SESSION['service'] = 'vk';
+                $_SESSION['vk_avatar'] = $userInfo['photo_big'];
                 $_SESSION['vk_userID'] = $token['user_id'];
                 $_SESSION['vk_email'] = $token['email'];
                 $_SESSION['vk_firstName'] = $userInfo['first_name'];
@@ -77,11 +81,92 @@ class AuthModel
 
     private function ok()
     {
+        if (isset($_GET['code'])) {
+            $params = array(
+                'code' => $_GET['code'],
+                'redirect_uri' => $this->settings['ok_RedirectURL'],
+                'grant_type' => 'authorization_code',
+                'client_id' => $this->settings['ok_AppID'],
+                'client_secret' => $this->settings['ok_SecretKey']
+            );
+
+            $url = 'http://api.odnoklassniki.ru/oauth/token.do';
+
+            $curl = curl_init();
+            curl_setopt($curl, CURLOPT_URL, $url);
+            curl_setopt($curl, CURLOPT_POST, 1);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, urldecode(http_build_query($params)));
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+            $result = curl_exec($curl);
+            curl_close($curl);
+
+            $token = json_decode($result, true);
+
+            if (isset($token['access_token'])) {
+                $sign = md5("application_key={$this->settings['ok_PublicKey']}format=jsonmethod=users.getCurrentUser" . md5("{$token['access_token']}{$this->settings['ok_SecretKey']}"));
+
+                $params = array(
+                    'method' => 'users.getCurrentUser',
+                    'access_token' => $token['access_token'],
+                    'application_key' => $this->settings['ok_PublicKey'],
+                    'format' => 'json',
+                    'sig' => $sign
+                );
+
+                $userInfo = json_decode(file_get_contents('http://api.odnoklassniki.ru/fb.do' . '?' . urldecode(http_build_query($params))), true);
+
+                $_SESSION['service'] = 'ok';
+                $_SESSION['ok_userID'] = $userInfo['uid'];
+                $_SESSION['ok_avatar'] = $userInfo['pic_3'];
+                $_SESSION['ok_firstName'] = $userInfo['first_name'];
+                $_SESSION['ok_lastName'] = $userInfo['last_name'];
+                $_SESSION['ok_birthday'] = preg_replace('~([0-9]+)-([0-9]+)-([0-9]+)~', '$3.$2.$1',$userInfo['birthday']);
+
+                header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
+            }
+        } else {
+            $url = 'http://www.odnoklassniki.ru/oauth/authorize';
+
+            $params = array(
+                'client_id' => $this->settings['ok_AppID'],
+                'response_type' => 'code',
+                'redirect_uri' => $this->settings['ok_RedirectURL']
+            );
+
+            $location = $url . '?' . urldecode(http_build_query($params));
+
+            header('Location: ' . $location);
+        }
+    }
+
+    private function mail()
+    {
 
     }
 
     private function fb()
     {
 
+    }
+
+    public function unsetServices()
+    {
+        unset($_SESSION['service']);
+
+        unset($_SESSION['vk_userID']);
+        unset($_SESSION['vk_email']);
+        unset($_SESSION['vk_firstName']);
+        unset($_SESSION['vk_lastName']);
+        unset($_SESSION['vk_birthday']);
+        unset($_SESSION['vk_avatar']);
+
+        unset($_SESSION['ok_userID']);
+        unset($_SESSION['ok_avatar']);
+        unset($_SESSION['ok_firstName']);
+        unset($_SESSION['ok_lastName']);
+        unset($_SESSION['ok_birthday']);
+
+        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
     }
 }
