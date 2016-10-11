@@ -21,6 +21,9 @@ class AuthModel
             case 'mail':
                 $this->mail();
                 break;
+            case 'ya':
+                $this->ya();
+                break;
             case 'fb':
                 $this->fb();
                 break;
@@ -194,6 +197,60 @@ class AuthModel
                 'client_id'     => $this->settings['mail_AppID'],
                 'response_type' => 'code',
                 'redirect_uri'  => $this->settings['mail_RedirectURL']
+            );
+            $location = $url . '?' . urldecode(http_build_query($params));
+
+            header('Location: ' . $location);
+        }
+    }
+
+    private function ya()
+    {
+        if (isset($_GET['code'])) {
+            $params = array(
+                'grant_type'    => 'authorization_code',
+                'code'          => $_GET['code'],
+                'client_id'     => $this->settings['ya_AppID'],
+                'client_secret' => $this->settings['ya_SecretKey']
+            );
+
+            $url = 'https://oauth.yandex.ru/token';
+
+            $curl = curl_init();
+            curl_setopt($curl, CURLOPT_URL, $url);
+            curl_setopt($curl, CURLOPT_POST, 1);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, urldecode(http_build_query($params)));
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+            $result = curl_exec($curl);
+            curl_close($curl);
+
+            $token = json_decode($result, true);
+
+            if (isset($token['access_token'])) {
+                $params = array(
+                    'format'       => 'json',
+                    'oauth_token'  => $token['access_token']
+                );
+
+                $userInfo = json_decode(file_get_contents('https://login.yandex.ru/info' . '?' . urldecode(http_build_query($params))), true);
+                if (isset($userInfo['id'])) {
+                    $_SESSION['service'] = 'ya';
+                    $_SESSION['ya_userID'] = $userInfo['id'];
+                    $_SESSION['ya_avatar'] = (isset($userInfo['is_avatar_empty'])) ? 'https://avatars.mds.yandex.net/get-yapic/0/0-0/islands-200' : 'https://avatars.yandex.net/get-yapic/' . $userInfo['default_avatar_id'] . '/islands-200';
+                    $_SESSION['ya_firstName'] = $userInfo['first_name'];
+                    $_SESSION['ya_lastName'] = $userInfo['last_name'];
+                    $_SESSION['ya_birthday'] = $userInfo['birthday'];
+
+                    header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
+                }
+            }
+        } else {
+            $url = 'https://oauth.yandex.ru/authorize';
+            $params = array(
+                'response_type' => 'code',
+                'client_id'     => $this->settings['ya_AppID'],
+                'display'       => 'popup'
             );
             $location = $url . '?' . urldecode(http_build_query($params));
 

@@ -23,6 +23,11 @@ class AuthController extends Controller
         $this->model->getUserInfo('mail');
     }
 
+    public function actionYa()
+    {
+        $this->model->getUserInfo('ya');
+    }
+
     public function actionUnset()
     {
         $this->model->unsetServices();

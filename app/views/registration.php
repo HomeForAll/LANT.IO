@@ -10,7 +10,8 @@ if (isset($_SESSION['service'])) {
             ?>
             <div style="height: 100px; padding: 15px 0">
                 <h3>Ваш профиль Вконтакте авторизован:</h3>
-                <img style="float: left; width: 70px; padding: 0 15px 0 0" src="<?php echo $_SESSION['vk_avatar']; ?>" alt="Аватар">
+                <img style="float: left; width: 70px; padding: 0 15px 0 0" src="<?php echo $_SESSION['vk_avatar']; ?>"
+                     alt="Аватар">
                 Имя: <?php echo $_SESSION['vk_firstName']; ?><br>
                 Фамилия: <?php echo $_SESSION['vk_lastName']; ?><br>
                 Дата рождения: <?php echo $_SESSION['vk_birthday']; ?>
@@ -88,7 +89,8 @@ if (isset($_SESSION['service'])) {
             ?>
             <div style="height: 100px; padding: 15px 0">
                 <h3>Ваш профиль Одноклассники авторизован:</h3>
-                <img style="float: left; width: 70px; padding: 0 15px 0 0" src="<?php echo $_SESSION['ok_avatar']; ?>" alt="Аватар">
+                <img style="float: left; width: 70px; padding: 0 15px 0 0" src="<?php echo $_SESSION['ok_avatar']; ?>"
+                     alt="Аватар">
                 Имя: <?php echo $_SESSION['ok_firstName']; ?><br>
                 Фамилия: <?php echo $_SESSION['ok_lastName']; ?><br>
                 Дата рождения: <?php echo $_SESSION['ok_birthday']; ?>
@@ -166,7 +168,8 @@ if (isset($_SESSION['service'])) {
             ?>
             <div style="height: 100px; padding: 15px 0">
                 <h3>Ваш профиль Mail.ru авторизован:</h3>
-                <img style="float: left; width: 70px; padding: 0 15px 0 0" src="<?php echo $_SESSION['mail_avatar']; ?>" alt="Аватар">
+                <img style="float: left; width: 70px; padding: 0 15px 0 0" src="<?php echo $_SESSION['mail_avatar']; ?>"
+                     alt="Аватар">
                 Имя: <?php echo $_SESSION['mail_firstName']; ?><br>
                 Фамилия: <?php echo $_SESSION['mail_lastName']; ?><br>
                 Дата рождения: <?php echo $_SESSION['mail_birthday']; ?>
@@ -238,6 +241,102 @@ if (isset($_SESSION['service'])) {
                 </table>
             </form>
             <a href="auth/unset">Отвязать Mail.ru</a><br><br>
+            <?php
+            break;
+        case 'ya':
+            ?>
+            <div style="height: 100px; padding: 15px 0">
+                <h3>Ваш профиль Yandex.ru авторизован:</h3>
+                <img style="float: left; width: 70px; padding: 0 15px 0 0" src="<?php echo $_SESSION['ya_avatar']; ?>"
+                     alt="Аватар">
+                Имя: <?php echo $_SESSION['ya_firstName']; ?><br>
+                Фамилия: <?php echo $_SESSION['ya_lastName']; ?><br>
+                <?php if (!empty($_SESSION['ya_birthday'])) {
+                    echo 'Дата рождения: ' . $_SESSION['ya_birthday'] . '<br>';
+                } ?>
+            </div>
+            <form action="" method="post">
+                <table>
+                    <tr>
+                        <td>
+                        </td>
+                        <td>
+                            <input name="firstName" id="firstName" type="text"
+                                   value="<?php echo $_SESSION['ya_firstName']; ?>" hidden>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                        <td>
+                            <input name="lastName" id="lastName" type="text"
+                                   value="<?php echo $_SESSION['ya_lastName']; ?>" hidden>
+                        </td>
+                    </tr>
+
+                    <?php if (!empty($_SESSION['ya_birthday'])) { ?>
+                    <tr>
+                        <td>
+                        </td>
+                        <td>
+                            <input name="birthday" id="birthday" type="text"
+                                   value="<?php echo $_SESSION['mail_birthday']; ?>" hidden>
+                        </td>
+                    </tr>
+                    <?php } else { ?>
+                        <tr>
+                            <td>
+                                <label for="birthday">
+                                    Дата рождения:
+                                </label>
+                            </td>
+                            <td>
+                                <input name="birthday" id="birthday" type="text"
+                                       value="<?php echo (!empty($_POST['birthday'])) ? $_POST['birthday'] : ''; ?>">
+                            </td>
+                        </tr>
+                    <?php } ?>
+                    <tr>
+                        <td>
+                            <label for="phoneNumber">
+                                Номер телефона:
+                            </label>
+                        </td>
+                        <td>
+                            <input name="phoneNumber" id="phoneNumber" type="text"
+                                   value="<?php echo (!empty($_POST['phoneNumber'])) ? $_POST['phoneNumber'] : ''; ?>">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="email">
+                                E-Mail:
+                            </label>
+                        </td>
+                        <td>
+                            <input name="email" id="email" type="text"
+                                   value="<?php echo (!empty($_POST['email'])) ? $_POST['email'] : ''; ?>">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="password">
+                                Пароль:
+                            </label>
+                        </td>
+                        <td>
+                            <input name="password" id="password" type="password">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="submit" name="submit" value="Зарегистрировать">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+            <a href="auth/unset">Отвязать Yandex.ru</a><br><br>
             <?php
             break;
         case 'fb':
@@ -342,5 +441,6 @@ if (isset($_SESSION['service'])) {
     </form>
     <a href="auth/vk">Авторизоваться через Вконтакте</a><br>
     <a href="auth/ok">Авторизоваться через Одноклассники</a><br>
-    <a href="auth/mail">Авторизоваться через Mail.ru</a><br><br>
+    <a href="auth/mail">Авторизоваться через Mail.ru</a><br>
+    <a href="auth/ya">Авторизоваться через Yandex.ru</a><br>
 <?php } ?>

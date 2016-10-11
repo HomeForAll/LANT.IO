@@ -15,5 +15,6 @@ return array(
     'auth/vk' => 'Вконтакте/auth/vk',
     'auth/ok' => 'Одноклассники/auth/ok',
     'auth/mail' => 'Mail.ru/auth/mail',
+    'auth/ya' => 'Mail.ru/auth/ya',
     'auth/unset' => 'Отключение сервиса/auth/unset',
 );
