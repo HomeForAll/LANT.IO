@@ -28,6 +28,15 @@ class AuthController extends Controller
         $this->model->getUserInfo('ya');
     }
 
+    public function actionGoo() {
+        // TODO: Реализовать авторизацию через Google
+    }
+
+    public function actionFb()
+    {
+        $this->model->getUserInfo('fb');
+    }
+
     public function actionUnset()
     {
         $this->model->unsetServices();

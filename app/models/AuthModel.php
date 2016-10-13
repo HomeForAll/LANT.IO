@@ -24,6 +24,9 @@ class AuthModel
             case 'ya':
                 $this->ya();
                 break;
+            case 'goo':
+                $this->goo();
+                break;
             case 'fb':
                 $this->fb();
                 break;
@@ -256,6 +259,11 @@ class AuthModel
 
             header('Location: ' . $location);
         }
+    }
+
+    private function goo()
+    {
+
     }
 
     private function fb()

@@ -1,11 +1,17 @@
 <?php
 
-class Router {
+class Router
+{
     private $routes;
+    private $title;
+    private $controller;
+    private $action;
 
-    public function __construct() {
+    public function __construct($page = null)
+    {
         $routesPath = ROOT_DIR . '/app/config/routes.php';
         $this->routes = require $routesPath;
+        $this->page = $page;
     }
 
     /**
@@ -13,7 +19,8 @@ class Router {
      * если присутствует, определяет контроллер и передает ему управление,
      * при наличии параметров в строке запроса, передает их action в виде массива.
      */
-    public function run() {
+    public function run()
+    {
         $uri = $this->getURI();
         foreach ($this->routes as $uriPattern => $path) {
             if (preg_match("~^{$uriPattern}$~", $uri)) {
@@ -33,7 +40,8 @@ class Router {
      *
      * @return bool|string
      */
-    private function getURI() {
+    private function getURI()
+    {
         if (!empty($_SERVER['REQUEST_URI'])) {
             $url = parse_url(urldecode($_SERVER['REQUEST_URI']), PHP_URL_PATH);
             if (SERVER == 'nginx') {
@@ -53,13 +61,27 @@ class Router {
      * array['modelName']
      * array['params'][]
      */
-    private function getOptions ($pattern, $uri, $path) {
+    private function getOptions($pattern, $uri, $path)
+    {
         $route = preg_replace("~^{$pattern}$~", $path, $uri);
         $segments = explode('/', $route);
 
-        $pageName = array_shift($segments);
-        $controller = array_shift($segments);
-        $action = array_shift($segments);
+        if (STATUS == '1')
+        {
+            if ($_SESSION['access']) {
+                $pageName = array_shift($segments);
+                $controller = array_shift($segments);
+                $action = array_shift($segments);
+            } else {
+                $pageName = 'Проверка доступа';
+                $controller = 'site';
+                $action = 'access';
+            }
+        } else {
+            $pageName = array_shift($segments);
+            $controller = array_shift($segments);
+            $action = array_shift($segments);
+        }
 
         return array(
             'pageName' => $pageName,
@@ -69,5 +91,10 @@ class Router {
             'modelName' => ucfirst($controller) . 'Model',
             'params' => $segments
         );
+    }
+
+    private function getAccess()
+    {
+
     }
 }

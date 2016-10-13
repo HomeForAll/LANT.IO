@@ -18,4 +18,8 @@ class View {
     protected function getFooter() {
         include_once ROOT_DIR . '/template/layouts/footer.php';
     }
+
+    public function displayAccessPage($view = null, $data = null) {
+        $this->getBody($view, $data);
+    }
 }
