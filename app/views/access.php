@@ -77,7 +77,7 @@
             outline: none;
             width: 460px;
             height: 65px;
-            font: 18pt 'Gotham Pro Regular';
+            font: 16pt 'Gotham Pro Regular';
             border-radius: 3px;
             background: #4f85c8;
             margin: 0 0 0 -230px;
