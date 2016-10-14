@@ -68,7 +68,7 @@ class Router
 
         if (STATUS == '1')
         {
-            if ($_SESSION['access']) {
+            if (isset($_SESSION['access'])) {
                 $pageName = array_shift($segments);
                 $controller = array_shift($segments);
                 $action = array_shift($segments);
