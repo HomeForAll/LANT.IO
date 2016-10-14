@@ -11,5 +11,7 @@ require_once ROOT_DIR . '/app/core/Loader.php';
 
 spl_autoload_register(array('Loader', 'classLoad'));
 
+//unset($_SESSION['access']);
+
 Loader::getPathsFromFile();
 (new Router())->run();

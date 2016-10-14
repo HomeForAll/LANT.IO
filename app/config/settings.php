@@ -1,7 +1,7 @@
 <?php
 return array(
-    'host' => '91.202.180.160',
+    'host' => 'localhost',
     'username' => 'postgres',
-    'password' => 'ZSH1wb88',
+    'password' => '',
     'db' => 'site'
 );

@@ -8,49 +8,51 @@ class SiteModel extends Model
         $this->db = $this->getPGConnect();
     }
 
-    public function checkAccess()
+    public function getAccessByEmail()
     {
-        if ($_POST['submit'] && !isset($_POST['key'])) {
+        $data = '';
+
+        if (!empty($_POST['key'])) {
+            if ($this->getKeyAvailability()) {
+                $this->setUserAccess();
+            } else {
+                $data = 'wrongKey';
+            }
+        } else {
             $stmt = $this->db->prepare("SELECT * FROM access WHERE email = :email");
             $stmt->bindParam(':email', $_POST['email']);
             $stmt->execute();
             $result = $stmt->fetch();
 
-            if (isset($result['email'])) {
+            $data = (isset($result['email']) && !empty($result['email'])) ? 'accessConfirmed' : 'keyRequest';
+            if ($data == 'accessConfirmed') {
                 $_SESSION['access'] = true;
                 header('Location: http://' . $_SERVER['HTTP_HOST']);
-            } else {
-                return false;
             }
         }
-        return true;
+        return $data;
     }
 
-    public function getAccess()
+    private function getKeyAvailability()
     {
-        if ($_POST['submit'] && isset($_POST['key'])) {
-            $keyStmt = $this->db->prepare("SELECT * FROM access WHERE email = :email");
-            $keyStmt->bindParam(':email', $_POST['email']);
-            $keyStmt->execute();
-            $result = $keyStmt->fetch();
+        $stmt = $this->db->prepare("SELECT * FROM access WHERE key = :key");
+        $stmt->bindParam(':key', $_POST['key']);
+        $stmt->execute();
+        $result = $stmt->fetch();
 
-            if (isset($result['key'])) {
-                if ($result['key'] == $_POST['key']) {
-                    return false;
-                }
-            }
+        return (isset($result['key']) && !empty($result['key'])) ? true : false;
+    }
 
-            $stmt = $this->db->prepare("INSERT INTO access (email, `key`) VALUES (:email, :key)");
-            $stmt->bindParam(':email', $_POST['email']);
-            $stmt->bindParam(':key', $_POST['key']);
-            $stmt->execute();
+    private function setUserAccess()
+    {
+        $stmt = $this->db->prepare("UPDATE access SET email = :email WHERE key = :key");
+        $stmt->bindParam(':email', $_POST['email']);
+        $stmt->bindParam(':key', $_POST['key']);
+        $stmt->execute();
 
-            if (!$stmt->errorInfo()) {
-                $_SESSION['access'] = true;
-                header('Location: http://' . $_SERVER['HTTP_HOST']);
-                return true;
-            }
+        if ($stmt->rowCount()) {
+            $_SESSION['access'] = true;
+            header('Location: http://' . $_SERVER['HTTP_HOST']);
         }
-        return false;
     }
 }

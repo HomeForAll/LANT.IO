@@ -12,11 +12,12 @@ class SiteController extends Controller {
     }
 
     public function actionAccess() {
-        $data = array(
-            'title' => $this->title,
-            'email_exists' => $this->model->checkAccess()
-        );
-        $this->model->getAccess();
+        $data = '';
+
+        if (isset($_POST['submit'])) {
+            $data = $this->model->getAccessByEmail();
+        }
+
         $this->view->displayAccessPage($this->viewName, $data);
     }
 
