@@ -59,6 +59,15 @@
             background: url("/template/images/key.png") 30px 19px no-repeat #ffffff;
         }
 
+        #keyError {
+            border: solid 4px #c65555;
+            width: 350px;
+            height: 10px;
+            padding: 22px 16px 22px 86px;
+            margin: 0 0 25px -230px;
+            background: url("/template/images/key.png") 26px 15px no-repeat #ffffff;
+        }
+
         input[type=submit] {
             position: relative;
             cursor: pointer;
@@ -82,12 +91,12 @@
 <body>
 <div id="logo">lant.io</div>
 
-<form action="" method="post">
+<form action="" method="post" autocomplete="off">
     <input id="email" name="email" type="text" placeholder="Ваш email" value="<?php if (!empty($_POST['email'])) echo $_POST['email']; ?>"><br>
     <?php if ($data == 'keyRequest') { ?>
     <input id="key" name="key" placeholder="Ключ доступа" type="text"><br>
     <?php } elseif($data == 'wrongKey') { ?>
-        <input style="border: solid 1px red;" id="key" name="key" placeholder="Ключ доступа" type="text"><br>
+        <input id="keyError" name="key" placeholder="Ключ доступа" type="text"><br>
     <?php } ?>
     <input type="submit" name="submit" value="Войти">
 </form>
