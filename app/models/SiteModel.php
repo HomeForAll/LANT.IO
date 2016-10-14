@@ -40,7 +40,7 @@ class SiteModel extends Model
         $stmt->execute();
         $result = $stmt->fetch();
 
-        return (isset($result['key']) && !empty($result['key'])) ? true : false;
+        return (isset($result['key']) && !empty($result['key']) && empty($result['email'])) ? true : false;
     }
 
     private function setUserAccess()
