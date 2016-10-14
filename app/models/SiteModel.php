@@ -30,7 +30,6 @@ class SiteModel extends Model
                 header('Location: http://' . $_SERVER['HTTP_HOST']);
             }
         }
-        print_r($this->db->errorInfo());
         return $data;
     }
 

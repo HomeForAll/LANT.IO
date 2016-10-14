@@ -19,6 +19,7 @@
 
         #logo {
             position: relative;
+            cursor: default;
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
@@ -95,6 +96,11 @@
             border-radius: 4px;
             background: #4f85c8;
             margin: 0 0 0 -230px;
+
+            -webkit-transition: background 0.25s;
+            -moz-transition: background 0.25s;
+            -o-transition: background 0.25s;
+            transition: background 0.25s;
         }
 
         input[type=submit]:hover {
@@ -106,6 +112,12 @@
             color: #ffffff;
             text-decoration: none;
             opacity: 0.7;
+
+            -webkit-transition: opacity 0.25s;
+            -moz-transition: opacity 0.25s;
+            -o-transition: opacity 0.25s;
+            transition: opacity 0.25s;
+
         }
 
         a:hover {
@@ -126,7 +138,7 @@
     <?php if ($data == 'keyRequest') { ?>
     <input id="key" name="key" placeholder="Ключ доступа" type="text"><br>
     <?php } elseif($data == 'wrongKey') { ?>
-        <input id="keyError" name="key" placeholder="Ключ доступа" type="text"><br>
+        <input id="keyError" name="key" placeholder="Ключ доступа" type="text" value="<?php if (!empty($_POST['key'])) echo $_POST['key']; ?>"><br>
     <?php } ?>
     <input type="submit" name="submit" value="Войти">
 </form>
