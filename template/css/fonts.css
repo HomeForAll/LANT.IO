@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Fedra Sense Pro Bold';
+    src: url('/template/fonts/FEDRASANSPRO_BOLD.otf');
+}
+
+@font-face {
+    font-family: 'Gotham Pro Regular';
+    src: url('/template/fonts/GothaProReg.otf');
+}
