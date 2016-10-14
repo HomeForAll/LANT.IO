@@ -5,6 +5,7 @@
     <title>Получение доступа</title>
     <link rel="stylesheet" href="/template/css/fonts.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <style>
         * {
             padding: 0;
@@ -17,25 +18,38 @@
         }
 
         #logo {
+            position: relative;
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
             padding: 170px 0 0 0;
             color: #ffffff;
-            font: 150pt 'Fedra Sense Pro Bold';
+            font: 130pt 'Fedra Sense Pro Bold';
             text-align: center;
         }
 
+        img {
+            position: absolute;
+            top: 325px;
+            left: 50%;
+            margin-left: -210px;
+            width: 135px;
+        }
+
+        form {
+            padding-top: 30px;
+        }
+
         input::-moz-placeholder {
-            color: #000000;
+            color: #494949;
         }
 
         input::-webkit-input-placeholder {
-            color: #000000;
+            color: #494949;
         }
 
         input:-ms-input-placeholder {
-            color: #000000;
+            color: #494949;
         }
 
         input[type=text] {
@@ -43,7 +57,7 @@
             left: 50%;
             font: 11pt 'Gotham Pro Regular';
             border: none;
-            border-radius: 3px;
+            border-radius: 4px;
             outline: none;
             width: 350px;
             height: 10px;
@@ -77,8 +91,8 @@
             outline: none;
             width: 460px;
             height: 65px;
-            font: 16pt 'Gotham Pro Regular';
-            border-radius: 3px;
+            font: 18pt 'Gotham Pro Regular';
+            border-radius: 4px;
             background: #4f85c8;
             margin: 0 0 0 -230px;
         }
@@ -86,10 +100,26 @@
         input[type=submit]:hover {
             background: #2f66aa;
         }
+
+        a {
+            font: 12pt 'Open Sans';
+            color: #ffffff;
+            text-decoration: none;
+            opacity: 0.7;
+        }
+
+        a:hover {
+            opacity: 1;
+        }
+
+        #link {
+            padding: 40px 0;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-<div id="logo">lant.io</div>
+<div id="logo"><img src="/template/images/access_logo_element.png" alt="access">lant.io</div>
 
 <form action="" method="post" autocomplete="off">
     <input id="email" name="email" type="text" placeholder="Ваш email" value="<?php if (!empty($_POST['email'])) echo $_POST['email']; ?>"><br>
@@ -100,6 +130,8 @@
     <?php } ?>
     <input type="submit" name="submit" value="Войти">
 </form>
+
+<div id="link"><a href="https://docs.google.com/forms/d/e/1FAIpQLSdimqMUr3q4ruMuDQAXGec4wXeL56sS9V6nqKGvhY9YZXIoug/viewform?c=0&w=1" target="_blank">У меня нет доступа</a></div>
 
 </body>
 </html>
