@@ -4,8 +4,28 @@
     <meta charset="UTF-8">
     <title><?php echo $title; ?></title>
     <link rel="stylesheet" href="/template/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+        $(window).on('load', function () {
+            $("#loading-center").fadeOut(800, function () {
+                $("#loading").fadeOut(1000);
+            });
+        });
+    </script>
 </head>
 <body>
+
+<div id="loading">
+    <div id="loading-center">
+        <div id="loading-center-absolute">
+            <div class="object" id="object_four"></div>
+            <div class="object" id="object_three"></div>
+            <div class="object" id="object_two"></div>
+            <div class="object" id="object_one"></div>
+        </div>
+    </div>
+</div>
+
 <div id="wrapper">
     <div id="navigation">
         <ul>

@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <title>Получение доступа</title>
     <link rel="stylesheet" href="/template/css/fonts.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
+    <script src="/template/js/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <style>
         * {
@@ -243,6 +244,39 @@
                 $("#loading").fadeOut(1000);
             });
         });
+        $(document).ready(function () {
+            $("form").on('submit', function (event) {
+                event.preventDefault();
+
+                var emailInput = $('input[name=email]');
+                var keyInput = $("input[name=key]");
+
+                var email = emailInput.val();
+                var key = keyInput.val();
+
+                var request = "email=" + email + "&key=" + key;
+
+                $.ajax({
+                    type: "POST",
+                    url: "/",
+                    data: "type=emailBetaAccess&" + request,
+                    success: function(msg){
+                        switch (msg) {
+                            case 'accessGranted':
+                                location.reload();
+                                break;
+                            case 'keyRequest':
+                                keyInput.removeAttr("hidden");
+                                $("input[type=submit]").val('Активировать доступ');
+                                break;
+                            case 'incorrectKey':
+                                keyInput.attr('id', 'keyError');
+                                break;
+                        }
+                    }
+                });
+            });
+        });
     </script>
 </head>
 <body>
@@ -253,7 +287,6 @@
             <div class="object" id="object_three"></div>
             <div class="object" id="object_two"></div>
             <div class="object" id="object_one"></div>
-
         </div>
     </div>
 </div>
@@ -261,12 +294,8 @@
 <div id="logo"><img src="/template/images/access_logo_element.png" alt="access">lant.io</div>
 
 <form action="" method="post" autocomplete="off">
-    <input id="email" name="email" type="text" placeholder="Ваш email" value="<?php if (!empty($_POST['email'])) echo $_POST['email']; ?>"><br>
-    <?php if ($data == 'keyRequest') { ?>
-    <input id="key" name="key" placeholder="Ключ доступа" type="text"><br>
-    <?php } elseif($data == 'wrongKey') { ?>
-        <input id="keyError" name="key" placeholder="Ключ доступа" type="text" value="<?php if (!empty($_POST['key'])) echo $_POST['key']; ?>"><br>
-    <?php } ?>
+    <input id="email" name="email" type="text" placeholder="Ваш email"><br>
+    <input id="key" name="key" type="text" placeholder="Ключ доступа" hidden><br>
     <input type="submit" name="submit" value="Войти">
 </form>
 

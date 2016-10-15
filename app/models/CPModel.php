@@ -2,6 +2,10 @@
 
 class CPModel extends Model
 {
+    public function getData() {
+
+    }
+
     public function generateKey()
     {
         if (isset($_POST['submit'])) {

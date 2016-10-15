@@ -3,9 +3,6 @@
 class Router
 {
     private $routes;
-    private $title;
-    private $controller;
-    private $action;
 
     public function __construct($page = null)
     {

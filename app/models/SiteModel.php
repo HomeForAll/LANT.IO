@@ -8,15 +8,21 @@ class SiteModel extends Model
         $this->db = $this->getPGConnect();
     }
 
+    public function getData() {
+        switch ($_POST['type']) {
+            case 'emailBetaAccess':
+                $this->getAccessByEmail();
+                break;
+        }
+    }
+
     public function getAccessByEmail()
     {
-        $data = '';
-
         if (!empty($_POST['key'])) {
             if ($this->getKeyAvailability()) {
                 $this->setUserAccess();
             } else {
-                $data = 'wrongKey';
+                echo 'incorrectKey';
             }
         } else {
             $stmt = $this->db->prepare("SELECT * FROM access WHERE email = :email");
@@ -24,13 +30,13 @@ class SiteModel extends Model
             $stmt->execute();
             $result = $stmt->fetch();
 
-            $data = (isset($result['email']) && !empty($result['email'])) ? 'accessConfirmed' : 'keyRequest';
-            if ($data == 'accessConfirmed') {
+            if (isset($result['email']) && !empty($result['email'])) {
                 $_SESSION['access'] = true;
-                header('Location: http://' . $_SERVER['HTTP_HOST']);
+                echo 'accessGranted';
+            } else {
+                echo 'keyRequest';
             }
         }
-        return $data;
     }
 
     private function getKeyAvailability()
@@ -52,7 +58,7 @@ class SiteModel extends Model
 
         if ($stmt->rowCount()) {
             $_SESSION['access'] = true;
-            header('Location: http://' . $_SERVER['HTTP_HOST']);
+            echo 'accessGranted';
         }
     }
 }
