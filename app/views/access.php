@@ -72,6 +72,10 @@
         }
 
         #key {
+            display: none;
+            padding: 0 20px 0 90px;
+            margin: 0 0 0 -230px;
+            height: 0;
             background: url("/template/images/key.png") 30px 19px no-repeat #ffffff;
         }
 
@@ -260,13 +264,17 @@
                     type: "POST",
                     url: "/",
                     data: "type=emailBetaAccess&" + request,
-                    success: function(msg){
+                    success: function (msg) {
                         switch (msg) {
                             case 'accessGranted':
                                 location.reload();
                                 break;
                             case 'keyRequest':
-                                keyInput.removeAttr("hidden");
+                                keyInput.animate({
+                                    padding: '26px 20px 26px 90px',
+                                    margin: '0 0 25px -230px',
+                                    height: '10px'
+                                }, 150);
                                 $("input[type=submit]").val('Активировать доступ');
                                 break;
                             case 'incorrectKey':
@@ -295,11 +303,13 @@
 
 <form action="" method="post" autocomplete="off">
     <input id="email" name="email" type="text" placeholder="Ваш email"><br>
-    <input id="key" name="key" type="text" placeholder="Ключ доступа" hidden><br>
+    <input id="key" name="key" type="text" placeholder="Ключ доступа"><br>
     <input type="submit" name="submit" value="Войти">
 </form>
 
-<div id="link"><a href="https://docs.google.com/forms/d/e/1FAIpQLSdimqMUr3q4ruMuDQAXGec4wXeL56sS9V6nqKGvhY9YZXIoug/viewform?c=0&w=1" target="_blank">У меня нет доступа</a></div>
+<div id="link"><a
+        href="https://docs.google.com/forms/d/e/1FAIpQLSdimqMUr3q4ruMuDQAXGec4wXeL56sS9V6nqKGvhY9YZXIoug/viewform?c=0&w=1"
+        target="_blank">У меня нет доступа</a></div>
 
 </body>
 </html>
