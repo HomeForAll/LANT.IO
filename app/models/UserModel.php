@@ -6,7 +6,7 @@ class UserModel extends Model {
         $this->db = $this->getPGConnect();
     }
 
-    public function getData() {
+    public function ajaxHandler() {
 
     }
 

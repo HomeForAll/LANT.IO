@@ -71,6 +71,15 @@
             background: url("/template/images/msg.png") 33px 23px no-repeat #ffffff;
         }
 
+        #emailError {
+            border: solid 4px #c65555;
+            width: 350px;
+            height: 10px;
+            padding: 22px 16px 22px 86px;
+            margin: 0 0 25px -230px;
+            background: url("/template/images/msg.png") 29px 19px no-repeat #ffffff;
+        }
+
         #key {
             display: none;
             padding: 0 20px 0 90px;
@@ -268,6 +277,9 @@
                         switch (msg) {
                             case 'accessGranted':
                                 location.reload();
+                                break;
+                            case 'incorrectEmail':
+                                emailInput.attr('id', 'emailError');
                                 break;
                             case 'keyRequest':
                                 keyInput.animate({

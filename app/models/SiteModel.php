@@ -8,7 +8,8 @@ class SiteModel extends Model
         $this->db = $this->getPGConnect();
     }
 
-    public function getData() {
+    public function ajaxHandler()
+    {
         switch ($_POST['type']) {
             case 'emailBetaAccess':
                 $this->getAccessByEmail();
@@ -18,24 +19,28 @@ class SiteModel extends Model
 
     public function getAccessByEmail()
     {
-        if (!empty($_POST['key'])) {
-            if ($this->getKeyAvailability()) {
-                $this->setUserAccess();
+        if (!empty($_POST['email']) && filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+            if (!empty($_POST['key'])) {
+                if ($this->getKeyAvailability()) {
+                    $this->setUserAccess();
+                } else {
+                    echo 'incorrectKey';
+                }
             } else {
-                echo 'incorrectKey';
+                $stmt = $this->db->prepare("SELECT * FROM access WHERE email = :email");
+                $stmt->bindParam(':email', $_POST['email']);
+                $stmt->execute();
+                $result = $stmt->fetch();
+
+                if (isset($result['email']) && !empty($result['email'])) {
+                    $_SESSION['access'] = true;
+                    echo 'accessGranted';
+                } else {
+                    echo 'keyRequest';
+                }
             }
         } else {
-            $stmt = $this->db->prepare("SELECT * FROM access WHERE email = :email");
-            $stmt->bindParam(':email', $_POST['email']);
-            $stmt->execute();
-            $result = $stmt->fetch();
-
-            if (isset($result['email']) && !empty($result['email'])) {
-                $_SESSION['access'] = true;
-                echo 'accessGranted';
-            } else {
-                echo 'keyRequest';
-            }
+            echo 'incorrectEmail';
         }
     }
 
