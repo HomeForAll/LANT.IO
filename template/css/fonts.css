@@ -7,3 +7,8 @@
     font-family: 'Gotham Pro Regular';
     src: url('../fonts/GothaProReg.otf');
 }
+
+@font-face {
+    font-family: 'Gotham Pro Bold';
+    src: url('../fonts/GothaProBol.otf');
+}

@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <title>Получение доступа</title>
     <link rel="stylesheet" href="/template/css/fonts.css">
+    <link rel="stylesheet" href="/template/css/jquery.scrollbar.css">
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
     <script src="/template/js/jquery.min.js"></script>
+    <script src="/template/js/jquery.scrollbar.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <style>
         * {
@@ -218,6 +220,80 @@
 
         }
 
+        #rules {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            opacity: 0;
+            visibility: hidden;
+            margin-left: -385px;
+            width: 770px;
+            height: 860px;
+            background: #FFFFFF;
+            z-index: 999;
+        }
+
+        .rulesTitle {
+            font: 15pt 'Gotham Pro Bold';
+            padding: 75px 70px 45px 70px;
+        }
+
+        .rulesWrapper {
+            overflow: hidden;
+            margin: 0 auto;
+            width: 630px;
+            height: 500px;
+        }
+
+        .rulesBody {
+            font: 10pt 'Gotham Pro Regular';
+            line-height: 20px;
+            width: 596px;
+        }
+
+        #buttons {
+            position: relative;
+            width: inherit;
+            text-align: center;
+        }
+
+        #agree {
+            display: block;
+            margin: 30px auto 0 auto;
+            font: 11pt 'Gotham Pro Regular';
+            width: 150px;
+            padding: 14px 45px 14px 45px;
+            border-radius: 4px;
+            opacity: 1;
+            background: #75b668;
+
+            -webkit-transition: background 0.25s;
+            -moz-transition: background 0.25s;
+            -o-transition: background 0.25s;
+            transition: background 0.25s;
+        }
+
+        #agree:hover {
+            background: #60a253;
+        }
+
+        #denial {
+            display: block;
+            font: 11pt 'Gotham Pro Regular';
+            opacity: 0.3;
+            margin-top: 35px;
+            color: #000000;
+
+            -webkit-transition: opacity 0.25s;
+            -moz-transition: opacity 0.25s;
+            -o-transition: opacity 0.25s;
+            transition: opacity 0.25s;
+        }
+
+        #denial:hover {
+            opacity: 1;
+        }
+
         @-webkit-keyframes animate {
 
             50% {
@@ -257,18 +333,80 @@
                 $("#loading").fadeOut(1000);
             });
         });
-        $(document).ready(function () {
-            $("form").on('submit', function (event) {
-                event.preventDefault();
 
-                var emailInput = $('input[name=email]');
-                var keyInput = $("input[name=key]");
+        setCookie('agree', 'rules');
 
-                var email = emailInput.val();
-                var key = keyInput.val();
+        function getCookie(name) {
+            var matches = document.cookie.match(new RegExp(
+                "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+            ));
+            return matches ? decodeURIComponent(matches[1]) : undefined;
+        }
 
-                var request = "email=" + email + "&key=" + key;
+        function setCookie(name, value, options) {
+            options = options || {};
 
+            var expires = options.expires;
+
+            if (typeof expires == "number" && expires) {
+                var d = new Date();
+                d.setTime(d.getTime() + expires * 1000);
+                expires = options.expires = d;
+            }
+            if (expires && expires.toUTCString) {
+                options.expires = expires.toUTCString();
+            }
+
+            value = encodeURIComponent(value);
+
+            var updatedCookie = name + "=" + value;
+
+            for (var propName in options) {
+                updatedCookie += "; " + propName;
+                var propValue = options[propName];
+                if (propValue !== true) {
+                    updatedCookie += "=" + propValue;
+                }
+            }
+
+            document.cookie = updatedCookie;
+        }
+
+        function showRules() {
+            $('#rules').css({
+                visibility: 'visible'
+            }).animate({
+                top: '30px',
+                opacity: '1'
+            }, 400)
+        }
+
+        function hideRules() {
+            $.when(
+                $('#rules').animate({
+                    top: '20px',
+                    opacity: '0'
+                }, 400)
+            ).then(function () {
+                $(this).css({
+                    visibility: 'hidden'
+                });
+            });
+        }
+
+        function query() {
+            var emailInput = $('input[name=email]');
+            var keyInput = $("input[name=key]");
+
+            var email = emailInput.val();
+            var key = keyInput.val();
+
+            var request = "email=" + email + "&key=" + key + "&agree=" + getCookie('agree');
+
+            if (key !== '' && getCookie('agree') == 'rules') {
+                setCookie('agree', '');
+                showRules();
+            } else {
                 $.ajax({
                     type: "POST",
                     url: "/",
@@ -276,7 +414,9 @@
                     success: function (msg) {
                         switch (msg) {
                             case 'accessGranted':
-                                location.reload();
+                                $.then(
+                                    location.reload()
+                                );
                                 break;
                             case 'incorrectEmail':
                                 emailInput.attr('id', 'emailError');
@@ -290,16 +430,91 @@
                                 $("input[type=submit]").val('Активировать доступ');
                                 break;
                             case 'incorrectKey':
+                                setCookie('agree', 'rules');
                                 keyInput.attr('id', 'keyError');
+                                break;
+                            case 'keyDeleted':
+                                $.then(
+                                    location.reload()
+                                );
                                 break;
                         }
                     }
                 });
+            }
+        }
+
+        $(document).ready(function () {
+            $('.scrollbar-inner').scrollbar();
+
+            $("form").on('submit', function (event) {
+                query();
+                event.preventDefault();
+            });
+
+            $("#agree").on('click', function (event) {
+                setCookie('agree', true);
+                query();
+                hideRules();
+                event.preventDefault();
+            });
+
+            $("#denial").on('click', function (event) {
+                setCookie('agree', '');
+                query();
+                hideRules();
+                event.preventDefault();
             });
         });
     </script>
 </head>
 <body>
+<div id="rules">
+    <div class="rulesTitle">Соглашение о <span style="color: red;">неразглашении конфиденциальной информации</span> в
+        ходе тестирования «LANT.IO»
+    </div>
+    <div class="rulesWrapper scrollbar-inner">
+        <div class="rulesBody">
+            В момент подачи заявки на участие в тестировании проекта, Вы соглашаетесь, что Вы прочитали, полностью
+            поняли, приняли и согласились с условиями настоящего соглашения о неразглашении конфиденциальной информации
+            и предоставлении лицензии для тестирования (далее – «Соглашение»).<br><br>
+            Соглашение о неразглашении конфиденциальной информации и предоставлении лицензии для тестирования сайта
+            «<strong>LANT.IO</strong>».<br><br>
+            Компания предоставляет Вам ограниченную лицензию для тестирования сайта, доступ к сайту, включая обновления,
+            документацию, доступ к конфиденциальным разделам сайта <strong>www.lant.io</strong> , другую
+            конфиденциальную информацию, исключительно для Вашего личного использования, при условии соблюдения
+            настоящего Соглашения.<br><br>
+            Компания <strong>LANT.IO</strong>, именуемая в дальнейшем, в зависимости от контекста, «Раскрывающая
+            сторона», «Компания», «мы», и допущенный к тестированию проекта «<strong>LANT.IO</strong>» (далее – «Сайт»
+            или «Платформа») пользователь, именуемый в дальнейшем, в зависимости от контекста, «Получающая сторона»,
+            «Пользователь», «Вы», «Я», далее совместно именуемые «Стороны», заключили настоящее Соглашение о
+            нижеследующем:<br><br><br><br><br>
+
+
+            <span style="color: red;">Я обязуюсь не разглашать информацию и сведения</span>, являющиеся
+            конфиденциальными и ставшие мне известными в результате тестирования. В соответствии с настоящим
+            Соглашением, Раскрывающая сторона предоставляет Получающей стороне определенную конфиденциальную информацию,
+            ограниченную лицензию для тестирования Сайта, доступ к Сайту, включая обновления, документацию, доступ к
+            конфиденциальным разделам сайта на условиях, описанных в данном Соглашении.<br><br>
+            <span style="color: red;">Я предупрежден(а)</span>, что версия Сайта, доступ к которой предоставляется мне
+            по настоящему Соглашению, содержит дефекты и основной целью предоставления мне данной лицензии для
+            тестирования Сайта и конфиденциальной информации является получение от меня обратной связи по
+            функционированию Сайта и выявление дефектов или проблем Сайта.<br><br>
+            <span style="color: red;">Я предупрежден(а), что несу ответственность и обязательства</span> по защите
+            конфиденциальной информации и персональных данных, обязуюсь соблюдать должную предусмотрительность и
+            осторожность в использовании Сайта, не рассчитывать и не полагаться каким-либо образом на корректное
+            функционирование Сайта и / или сопутствующих материалов.<br><br>
+            <span style="color: red;">Я предупрежден(а)</span>, что в случае нарушения любых пунктов данного соглашения
+            я буду лишён(а) всех выданных мне привилегий на сайте «LANT.IO», а также понесу наказание в соответствии
+            нынешнего законодательства.<br><br>
+        </div>
+    </div>
+    <div id="buttons">
+        <a href="" id="agree">Принимаю условия</a>
+        <a href="" id="denial">Отказ, анулирует ключ</a>
+    </div>
+</div>
+
 <div id="loading">
     <div id="loading-center">
         <div id="loading-center-absolute">
@@ -321,7 +536,8 @@
 
 <div id="link"><a
         href="https://docs.google.com/forms/d/e/1FAIpQLSdimqMUr3q4ruMuDQAXGec4wXeL56sS9V6nqKGvhY9YZXIoug/viewform?c=0&w=1"
-        target="_blank">У меня нет доступа</a></div>
+        target="_blank">У меня нет доступа</a>
+</div>
 
 </body>
 </html>

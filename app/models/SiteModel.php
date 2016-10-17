@@ -22,7 +22,11 @@ class SiteModel extends Model
         if (!empty($_POST['email']) && filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
             if (!empty($_POST['key'])) {
                 if ($this->getKeyAvailability()) {
-                    $this->setUserAccess();
+                    if (!empty($_POST['agree'])) {
+                        $this->setUserAccess();
+                    } else {
+                        echo 'keyDeleted';
+                    }
                 } else {
                     echo 'incorrectKey';
                 }
