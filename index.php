@@ -1,7 +1,17 @@
 <?php
+session_start();
 
 ini_set('display_errors', 1);
-defined('ROOT_DIR') || define("ROOT_DIR", dirname(__FILE__));
-defined('CONFIG_DIR') || define("CONFIG_DIR", ROOT_DIR . '/app/config/');
+defined('ROOT_DIR') or define('ROOT_DIR', dirname(__FILE__));
+defined('CONFIG_DIR') or define('CONFIG_DIR', ROOT_DIR . '/app/config/');
+defined('SERVER') or define('SERVER', 'nginx'); // 'apache' or 'nginx'
+defined('STATUS') or define('STATUS', '0'); // NORMAL: 0; DEV: 1;
 
-require_once ROOT_DIR . '/app/loader.php';
+require_once ROOT_DIR . '/app/core/Loader.php';
+
+spl_autoload_register(array('Loader', 'classLoad'));
+
+unset($_SESSION['access']);
+
+Loader::getPathsFromFile();
+(new Router())->run();

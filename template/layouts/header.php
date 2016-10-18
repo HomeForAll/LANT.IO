@@ -11,6 +11,7 @@
         <ul>
             <li><a href="/">Главная</a></li>
             <li><a href="/search">Поиск</a></li>
+            <li><a href="/news">Новости</a></li>
             <?php if (isset($_SESSION['authorized'])) { ?>
                 <li><a href="/cp">Личный кабинет</a></li>
                 <li><a href="/logout">Выход</a></li>

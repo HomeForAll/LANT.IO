@@ -1,16 +1,28 @@
 <?php
 
 return array(
-    // 'URI' => 'controller/action/pageTitle'
-    '' => 'site/index/Главная',
-    'search' => 'site/search/Поиск',
-    'registration' => 'user/registration/Регистрация',
-    'login' => 'user/login/Вход',
-    'logout' => 'user/logout/Выход',
-    'cp' => 'CP/CP/Личный кабинет',
-    'cp/chat' => 'CP/chat/Чат',
-    'news/[0-9]+' => 'news/news_id/Новости', 
-    'news/editor' => 'news/news_editor/Новости',
-    'news/editor/[0-9]+' => 'news/news_editor/Новости',
-    'news' => 'news/news_list/Новости' 
+    // 'URI' => 'pageTitle/controller/action'
+    '' => 'Главная/site/index',
+    'search' => 'Поиск/site/search',
+
+    'registration' => 'Регистрация/user/registration',
+    'login' => 'Вход/user/login',
+    'logout' => 'Выход/user/logout',
+
+    'cp' => 'Личный кабинет/CP/CP',
+    'cp/chat' => 'Чат/CP/chat',
+
+    'auth/vk' => 'Вконтакте/auth/vk',
+    'auth/ok' => 'Одноклассники/auth/ok',
+    'auth/mail' => 'Mail.ru/auth/mail',
+    'auth/ya' => 'Mail.ru/auth/ya',
+    'auth/goo' => 'Mail.ru/auth/goo',
+    'auth/fb' => 'Mail.ru/auth/fb',
+    'auth/unset' => 'Отключение сервиса/auth/unset',
+
+    'news/page([0-9]+)' => 'Новости/news/news_list/$1',
+    'news/([0-9]+)' => 'Новости/news/news_id/$1', 
+    'news/editor' => 'Новости/news/news_editor',
+    'news/editor/([0-9]+)' => 'Новости/news/news_editor/$1',
+    'news' => 'Новости/news/news_list'
 );

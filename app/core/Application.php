@@ -7,6 +7,9 @@ class Application {
         $this->settings = require CONFIG_DIR . 'settings.php';
     }
 
+    /*
+     * Возвращает экземпляр класса PDO с драйвером PostgreSQL
+     */
     protected function getPGConnect() {
         try {
             return new PDO('pgsql:host=' . $this->settings['host'] . ';port=5432;dbname=' . $this->settings['db'], $this->settings['username'], $this->settings['password']);

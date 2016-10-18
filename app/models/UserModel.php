@@ -7,33 +7,32 @@ class UserModel extends Model {
     }
 
     public function checkUserInformation() {
-        $errors = array();
+        $data = array(
+            'info' => array()
+        );
 
         if (!$this->checkEmailValidationErrors($_POST['email'])) {
-            $errors[] = '- Укажите корректный E-mail.';
+            $data['info'][] = '- Укажите корректный E-mail.';
         }
         if ($this->checkEmailAvailability($_POST['email'])) {
-            $errors[] = '- Такой E-mail уже зарегистрирован.';
+            $data['info'][] = '- Такой E-mail уже зарегистрирован.';
         }
         if ($_POST['firstName'] == '') {
-            $errors[] = '- Укажите имя.';
+            $data['info'][] = '- Укажите имя.';
         }
         if ($_POST['lastName'] == '') {
-            $errors[] = '- Укажите фамилию.';
-        }
-        if ($_POST['patronymic'] == '') {
-            $errors[] = '- Укажите отчество.';
+            $data['info'][] = '- Укажите фамилию.';
         }
         if ($_POST['birthday'] == '') {
-            $errors[] = '- Укажите дату рождения.';
+            $data['info'][] = '- Укажите дату рождения.';
         }
         if ($_POST['phoneNumber'] == '') {
-            $errors[] = '- Укажите телефон.';
+            $data['info'][] = '- Укажите телефон.';
         }
         if ($_POST['password'] == '') {
-            $errors[] = '- Вы не указали пароль.';
+            $data['info'][] = '- Вы не указали пароль.';
         }
-        return $errors;
+        return $data;
     }
 
     private function checkEmailValidationErrors($email) {
@@ -50,13 +49,16 @@ class UserModel extends Model {
     public function registerUser() {
         $passwordHash = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-        $stmt = $this->db->prepare("INSERT INTO users (first_name, last_name, email, password, phone_number) VALUES (:firstName, :lastName, :email, :password, :phoneNumber)");
+        $stmt = $this->db->prepare("INSERT INTO users (first_name, last_name, patronymic, birthday, phone_number, email, password) VALUES (:firstName, :lastName, :patronymic, :birthday, :phoneNumber, :email, :password)");
         $stmt->bindParam(':firstName', $_POST['firstName']);
         $stmt->bindParam(':lastName', $_POST['lastName']);
+        $stmt->bindParam(':patronymic', $_POST['patronymic']);
+        $stmt->bindParam(':birthday', $_POST['birthday']);
+        $stmt->bindParam(':phoneNumber', $_POST['phoneNumber']);
         $stmt->bindParam(':email', $_POST['email']);
         $stmt->bindParam(':password', $passwordHash);
-        $stmt->bindParam(':phoneNumber', $_POST['phoneNumber']);
         $stmt->execute();
+        print_r($stmt->errorInfo());
     }
 
     public function userVerify() {
