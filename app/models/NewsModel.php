@@ -197,8 +197,8 @@ class NewsModel extends Application {
         $name_rand = time() . rand(100, 999); // Базовая часть
         $name_big = 'news_' . $name_rand; // Новое имя для большой картинки
         $name_small = 's_' . $name_big; // Новое имя для маленькой картинки
-
-        if (!empty($_FILES['newsPicture'])) {
+        
+        if (!empty($_FILES['newsPicture']['name'])) {
             //
             // Загрузка картинки в директоритю и получение ссылки на нее
             // Проверяем тип файла
