@@ -39,14 +39,15 @@ class NewsController extends Controller {
         if (!empty($news_to_edit_id)) {
             //           сообщение о редактировании $message[message][0]
             array_push($news_message,'Редактирование новости');
+            
 // Если были посланны данные обновляем новость в БД
-            if (!empty($_POST[newsTitle]) and !empty($_POST[newsContent])) {
-                $this->model->saveNewsPictures();
-                if ($this->model->makeNewsUpdate($news_to_edit_id)) {
+            if (!empty($_POST['newsTitle']) and !empty($_POST['newsContent'])) {
+                $preview_img = $this->model->saveNewsPictures();
+                if ($this->model->makeNewsUpdate($news_to_edit_id, $preview_img)) {
                     // Добавление сообщения
-                    array_push($news_message, 'Новость: "' . $_POST[newsTitle] . '" успешно отредактирована!');
+                    array_push($news_message, 'Новость: "' . $_POST['newsTitle'] . '" успешно отредактирована!');
                 } else {
-                    array_push($news_error, 'Новость: "' . $_POST[newsTitle] . '" не удалось отредактировать!');
+                    array_push($news_error, 'Новость: "' . $_POST['newsTitle'] . '" не удалось отредактировать!');
                 }
             }
 // Загружаем новость для редактирования из БД в $news_to_edit 
@@ -57,16 +58,18 @@ class NewsController extends Controller {
 // Добавление новости в БД
         if (empty($news_to_edit_id) and ! empty($_POST['submit_editor'])) {
 
-            if (!empty($_POST[newsTitle]) and !empty($_POST[newsContent])) {
-
-                if ($this->model->makeNewsInsert()) {
+            if (!empty($_POST['newsTitle']) and !empty($_POST['newsContent'])) {
+                //Записываем картинку
+                $preview_img = $this->model->saveNewsPictures();
+                //Записываем в БД
+                if ($this->model->makeNewsInsert($preview_img)) {
                     // Добавление сообщения
-                    array_push($news_message, 'Новость: "' . $_POST[newsTitle] . '" успешно добавлена');
+                    array_push($news_message, 'Новость: "' . $_POST['newsTitle'] . '" успешно добавлена');
                 } else {
-                    array_push($news_error, 'Новость: "' . $_POST[newsTitle] . '" не удалось добавить!');
+                    array_push($news_error, 'Новость: "' . $_POST['newsTitle'] . '" не удалось добавить!');
                 }
             } else {
-                array_push($news_error, 'Новость: "' . $_POST[newsTitle] . '" не удалось добавить так как не заполнены все поля!');
+                array_push($news_error, 'Новость: "' . $_POST['newsTitle'] . '" не удалось добавить так как не заполнены все поля!');
             }
         }
 
@@ -81,7 +84,7 @@ class NewsController extends Controller {
         $news_list = $this->model->getNewsForEditor();
         $stat_arr = array();
         foreach ($news_list as $k => $i) {
-            $stat_arr += array($i[id_news] => $i[status]);
+            $stat_arr += array($i['id_news'] => $i['status']);
         }
         $_SESSION['stat_arr'] = $stat_arr;
 // Объеденяем массивы данных в один для передачи data[] = параметры новости (если редактирование новости) + массив-лист всех новостей + массив сообщений
