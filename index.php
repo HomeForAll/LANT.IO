@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 ini_set('display_errors', 1);
 defined('ROOT_DIR') or define('ROOT_DIR', __DIR__);

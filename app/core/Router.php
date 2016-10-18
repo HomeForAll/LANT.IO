@@ -8,17 +8,15 @@ class Router
     {
         $routesPath = ROOT_DIR . '/app/config/routes.php';
         $this->routes = require $routesPath;
-        $this->page = $page;
     }
 
     /**
      * Метод проверяет наличие строки запроса в таблице маршрутизации routes.php,
-     * если присутствует, определяет контроллер и передает ему управление,
-     * при наличии параметров в строке запроса, передает их action в виде массива.
+     * при наличии, определяет контроллер и передает ему управление.
      */
-    public function run()
-    {
+    public function run() {
         $uri = $this->getURI();
+
         foreach ($this->routes as $uriPattern => $path) {
             if (preg_match("~^{$uriPattern}$~", $uri)) {
 
@@ -37,15 +35,9 @@ class Router
      *
      * @return bool|string
      */
-    private function getURI()
-    {
+    private function getURI() {
         if (!empty($_SERVER['REQUEST_URI'])) {
-            $url = parse_url(urldecode($_SERVER['REQUEST_URI']), PHP_URL_PATH);
-            if (SERVER == 'nginx') {
-                return trim(str_replace('index.php', '', trim($url, '/')), '/');
-            } elseif (SERVER == 'apache') {
-                return trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
-            }
+            return trim($_SERVER['REQUEST_URI'], '/');
         }
         return false;
     }
