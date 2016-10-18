@@ -25,7 +25,7 @@ class SiteModel extends Model
                     if (!empty($_POST['agree'])) {
                         $this->setUserAccess();
                     } else {
-                        echo 'keyDeleted';
+                        $this->deleteActivationKey();
                     }
                 } else {
                     echo 'incorrectKey';
@@ -68,6 +68,16 @@ class SiteModel extends Model
         if ($stmt->rowCount()) {
             $_SESSION['access'] = true;
             echo 'accessGranted';
+        }
+    }
+
+    private function deleteActivationKey() {
+        $stmt = $this->db->prepare("DELETE FROM access WHERE key = :key");
+        $stmt->bindParam(':key', $_POST['key']);
+        $stmt->execute();
+
+        if ($stmt->rowCount()) {
+            echo 'keyDeleted';
         }
     }
 }
