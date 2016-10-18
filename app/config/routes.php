@@ -19,4 +19,11 @@ return array(
     'auth/goo' => 'Mail.ru/auth/goo',
     'auth/fb' => 'Mail.ru/auth/fb',
     'auth/unset' => 'Отключение сервиса/auth/unset',
+
+
+    'news/page([0-9]+)' => 'Новости/news/news_list/$1',
+    'news/([0-9]+)' => 'Новости/news/news_id/$1',
+    'news/editor' => 'Новости/news/news_editor',
+    'news/editor/([0-9]+)' => 'Новости/news/news_editor/$1',
+    'news' => 'Новости/news/news_list'
 );
