@@ -37,7 +37,12 @@ class Router
      */
     private function getURI() {
         if (!empty($_SERVER['REQUEST_URI'])) {
-            return trim($_SERVER['REQUEST_URI'], '/');
+            $url = parse_url(urldecode($_SERVER['REQUEST_URI']), PHP_URL_PATH);
+            if (SERVER == 'nginx') {
+                return trim(str_replace('index.php', '', trim($url, '/')), '/');
+            } elseif (SERVER == 'apache') {
+                return trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
+            }
         }
         return false;
     }
@@ -80,10 +85,5 @@ class Router
             'modelName' => ucfirst($controller) . 'Model',
             'params' => $segments
         );
-    }
-
-    private function getAccess()
-    {
-
     }
 }
