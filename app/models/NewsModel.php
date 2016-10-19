@@ -11,7 +11,7 @@ class NewsModel extends Application {
         $stmt = $this->db->prepare("SELECT category FROM news_category ORDER BY category");
         $stmt->execute();
         $coll = $stmt->fetchall(PDO::FETCH_NUM);
-        for ($i = 0; $coll[$i][0]; $i++) {
+        for ($i = 0; !empty($coll[$i][0]); $i++) {
             $result[$i] = $coll[$i][0];
         }
         return $result;
