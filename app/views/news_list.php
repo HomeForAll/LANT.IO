@@ -8,12 +8,12 @@
     <select name="numberOfNews">      
             <option  value="2">2</option>
             <option <?php
-                if ((int)$_POST['numberOfNews'] == 5) {
+                if ($_POST['numberOfNews'] == 5) {
                     echo 'selected';
                 }
                 ?> value="5">5</option>
             <option  <?php
-                if ((int)$_POST['numberOfNews'] == 10) {
+                if ($_POST['numberOfNews'] == 10) {
                     echo 'selected';
                 }
                 ?> value="10">10</option>
