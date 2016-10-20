@@ -1,6 +1,16 @@
 <?php
 
 class View {
+//    public $template;
+//    public $title;
+//    public $metaTags;
+//    public $links;
+//    public $js;
+//
+//    public $header;
+//    public $body;
+//    public $footer;
+
     public function displayPage($view = null, $title = 'Главная', $data = null) {
         $this->getHeader($title);
         $this->getBody($view, $data);
@@ -21,5 +31,9 @@ class View {
 
     public function displayAccessPage($view = null, $data = null) {
         $this->getBody($view, $data);
+    }
+
+    private function renderDataByTemplate($template) {
+
     }
 }

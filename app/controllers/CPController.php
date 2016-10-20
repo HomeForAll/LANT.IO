@@ -10,6 +10,7 @@ class CPController extends Controller {
         if (!isset($_SESSION['authorized'])) {
             header('Location: http://' . $_SERVER['HTTP_HOST']);
         } else {
+
             $this->view->displayPage($this->viewName, $this->title);
         }
     }
