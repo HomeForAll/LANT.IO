@@ -19,8 +19,9 @@ class CPController extends Controller {
         $this->view->displayPage($this->viewName, $this->title);
     }
 
-    public function actionKey() {
-        $key = $this->model->generateKey();
-        $this->view->displayPage($this->viewName, $this->title, $key);
+    public function actionGenerator() {
+        $this->model->generate();
+        $this->model->handleKeys();
+        $this->view->displayPage($this->viewName, $this->title);
     }
 }

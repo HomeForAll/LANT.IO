@@ -11,6 +11,7 @@ return array(
 
     'cp' => 'Личный кабинет/CP/CP',
     'cp/chat' => 'Чат/CP/chat',
+    'cp/generator' => 'Генератор ключей/CP/generator',
 
     'auth/vk' => 'Вконтакте/auth/vk',
     'auth/ok' => 'Одноклассники/auth/ok',
