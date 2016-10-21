@@ -275,14 +275,14 @@ if (isset($_SESSION['service'])) {
                     </tr>
 
                     <?php if (!empty($_SESSION['ya_birthday'])) { ?>
-                    <tr>
-                        <td>
-                        </td>
-                        <td>
-                            <input name="birthday" id="birthday" type="text"
-                                   value="<?php echo $_SESSION['ya_birthday']; ?>" hidden>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                                <input name="birthday" id="birthday" type="text"
+                                       value="<?php echo $_SESSION['ya_birthday']; ?>" hidden>
+                            </td>
+                        </tr>
                     <?php } else { ?>
                         <tr>
                             <td>
@@ -466,7 +466,7 @@ if (isset($_SESSION['service'])) {
                         </td>
                     </tr>
 
-                    <?php if (!empty($_SESSION['goo_birthday'])) { ?>
+                    <?php if (!empty($_SESSION['fb_birthday'])) { ?>
                         <tr>
                             <td>
                             </td>
@@ -529,6 +529,116 @@ if (isset($_SESSION['service'])) {
                 </table>
             </form>
             <a href="auth/unset">Отвязать Facebook</a><br><br>
+            <?php
+            break;
+        case 'steam':
+            ?>
+            <div style="height: 50px; padding: 15px 0">
+                <h3>Ваш профиль Steam авторизован:</h3>
+                NickName: <?php echo $_SESSION['s_nickName']; ?><br>
+                <?php if (!empty($_SESSION['s_firstName'])) {
+                    echo 'Имя: ' . $_SESSION['s_firstName'];
+                } ?>
+            </div>
+            <form action="" method="post">
+                <table>
+                    <?php if (!empty($_SESSION['s_firstName'])) { ?>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                                <input name="firstName" id="firstName" type="text"
+                                       value="<?php echo $_SESSION['s_firstName']; ?>" hidden>
+                            </td>
+                        </tr>
+                    <?php } else { ?>
+                        <tr>
+                            <td>
+                                <label for="firstName">
+                                    Имя:
+                                </label>
+                            </td>
+                            <td>
+                                <input name="firstName" id="firstName" type="text"
+                                       value="<?php echo (!empty($_POST['firstName'])) ? $_POST['firstName'] : ''; ?>">
+                            </td>
+                        </tr>
+                    <?php } ?>
+
+
+                    <tr>
+                        <td>
+                            <label for="lastName">Фамилия:</label>
+                        </td>
+                        <td>
+                            <input name="lastName" id="lastName" type="text"
+                                   value="<?php echo (!empty($_POST['lastName'])) ? $_POST['lastName'] : ''; ?>">
+                        </td>
+                    </tr>
+
+                    <?php if (!empty($_SESSION['s_birthday'])) { ?>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                                <input name="birthday" id="birthday" type="text"
+                                       value="<?php echo $_SESSION['s_birthday']; ?>" hidden>
+                            </td>
+                        </tr>
+                    <?php } else { ?>
+                        <tr>
+                            <td>
+                                <label for="birthday">
+                                    Дата рождения:
+                                </label>
+                            </td>
+                            <td>
+                                <input name="birthday" id="birthday" type="text"
+                                       value="<?php echo (!empty($_POST['birthday'])) ? $_POST['birthday'] : ''; ?>">
+                            </td>
+                        </tr>
+                    <?php } ?>
+                    <tr>
+                        <td>
+                            <label for="phoneNumber">
+                                Номер телефона:
+                            </label>
+                        </td>
+                        <td>
+                            <input name="phoneNumber" id="phoneNumber" type="text"
+                                   value="<?php echo (!empty($_POST['phoneNumber'])) ? $_POST['phoneNumber'] : ''; ?>">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="email">
+                                E-Mail:
+                            </label>
+                        </td>
+                        <td>
+                            <input name="email" id="email" type="text"
+                                   value="<?php echo (!empty($_POST['email'])) ? $_POST['email'] : ''; ?>">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="password">
+                                Пароль:
+                            </label>
+                        </td>
+                        <td>
+                            <input name="password" id="password" type="password">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="submit" name="submit" value="Зарегистрировать">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+            <a href="auth/unset">Отвязать Steam</a><br><br>
             <?php
             break;
     }
@@ -635,4 +745,5 @@ if (isset($_SESSION['service'])) {
     <a href="auth/ya">Авторизоваться через Yandex.ru</a><br>
     <a href="auth/goo">Авторизоваться через Google</a><br>
     <a href="auth/fb">Авторизоваться через Facebook</a><br>
+    <a href="auth/steam">Авторизоваться через Steam</a><br>
 <?php } ?>
