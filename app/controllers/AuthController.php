@@ -37,6 +37,11 @@ class AuthController extends Controller
         $this->model->getUserInfo('fb');
     }
 
+    public function actionSteam()
+    {
+        $this->model->getUserInfo('steam');
+    }
+
     public function actionUnset()
     {
         $this->model->unsetServices();

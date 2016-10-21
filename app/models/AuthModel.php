@@ -30,6 +30,9 @@ class AuthModel
             case 'fb':
                 $this->fb();
                 break;
+            case 'steam':
+                $this->steam();
+                break;
         }
     }
 
@@ -356,10 +359,16 @@ class AuthModel
         }
     }
 
+    public function steam() {
+        $steamAuth = new SteamAuth($this->settings['s_RedirectURL'], $this->settings['s_ApiKey']);
+        $steamAuth->login();
+    }
+
     public function unsetServices()
     {
         unset($_SESSION['service']);
 
+        // Вконтакте
         unset($_SESSION['vk_userID']);
         unset($_SESSION['vk_email']);
         unset($_SESSION['vk_firstName']);
@@ -367,11 +376,46 @@ class AuthModel
         unset($_SESSION['vk_birthday']);
         unset($_SESSION['vk_avatar']);
 
+        // Одноклассники
         unset($_SESSION['ok_userID']);
         unset($_SESSION['ok_avatar']);
         unset($_SESSION['ok_firstName']);
         unset($_SESSION['ok_lastName']);
         unset($_SESSION['ok_birthday']);
+
+        // Mail.ru
+        unset($_SESSION['mail_userID']);
+        unset($_SESSION['mail_avatar']);
+        unset($_SESSION['mail_firstName']);
+        unset($_SESSION['mail_lastName']);
+        unset($_SESSION['mail_birthday']);
+
+        // Yandex
+
+        unset($_SESSION['ya_userID']);
+        unset($_SESSION['ya_avatar']);
+        unset($_SESSION['ya_firstName']);
+        unset($_SESSION['ya_lastName']);
+        unset($_SESSION['ya_birthday']);
+
+        // Google
+        unset($_SESSION['goo_userID']);
+        unset($_SESSION['goo_avatar']);
+        unset($_SESSION['goo_firstName']);
+        unset($_SESSION['goo_lastName']);
+
+        // FaceBook
+        unset($_SESSION['fb_userID']);
+        unset($_SESSION['fb_avatar']);
+        unset($_SESSION['fb_firstName']);
+        unset($_SESSION['fb_lastName']);
+
+        // Steam
+        unset($_SESSION['s_userID']);
+        unset($_SESSION['s_nickName']);
+        unset($_SESSION['s_firstName']);
+        unset($_SESSION['s_avatar']);
+
 
         header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
     }

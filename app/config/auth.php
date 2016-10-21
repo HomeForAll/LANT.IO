@@ -31,4 +31,8 @@ return array(
     'fb_AppID' => '984356888360491',
     'fb_SecretKey' => '95c56ec6aa356e6962ea405d91303332',
     'fb_RedirectURL' => 'http://beta.lant.io/auth/fb',
+
+    // Steam
+    's_ApiKey' => '066AD567AC1DE1A5562DF7CF673DDFF9',
+    's_RedirectURL' => 'http://localhost'
 );

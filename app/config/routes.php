@@ -18,6 +18,7 @@ return array(
     'auth/ya' => 'Ya.ru/auth/ya',
     'auth/goo' => 'Google.com/auth/goo',
     'auth/fb' => 'Facebook.com/auth/fb',
+    'auth/steam' => 'Steam/auth/steam',
     'auth/unset' => 'Отключение сервиса/auth/unset',
 
     'news/page([0-9]+)' => 'Новости/news/news_list/$1',
