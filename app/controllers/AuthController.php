@@ -29,7 +29,7 @@ class AuthController extends Controller
     }
 
     public function actionGoo() {
-        // TODO: Реализовать авторизацию через Google
+        $this->model->getUserInfo('goo');
     }
 
     public function actionFb()

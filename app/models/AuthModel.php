@@ -125,7 +125,7 @@ class AuthModel
                 $_SESSION['ok_avatar'] = $userInfo['pic_3'];
                 $_SESSION['ok_firstName'] = $userInfo['first_name'];
                 $_SESSION['ok_lastName'] = $userInfo['last_name'];
-                $_SESSION['ok_birthday'] = preg_replace('~([0-9]+)-([0-9]+)-([0-9]+)~', '$3.$2.$1',$userInfo['birthday']);
+                $_SESSION['ok_birthday'] = preg_replace('~([0-9]+)-([0-9]+)-([0-9]+)~', '$3.$2.$1', $userInfo['birthday']);
 
                 header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
             }
@@ -149,11 +149,11 @@ class AuthModel
         if (isset($_GET['code'])) {
 
             $params = array(
-                'client_id'     => $this->settings['mail_AppID'],
+                'client_id' => $this->settings['mail_AppID'],
                 'client_secret' => $this->settings['mail_SecretKey'],
-                'grant_type'    => 'authorization_code',
-                'code'          => $_GET['code'],
-                'redirect_uri'  => $this->settings['mail_RedirectURL']
+                'grant_type' => 'authorization_code',
+                'code' => $_GET['code'],
+                'redirect_uri' => $this->settings['mail_RedirectURL']
             );
 
             $url = 'https://connect.mail.ru/oauth/token';
@@ -173,11 +173,11 @@ class AuthModel
                 $sign = md5("app_id={$this->settings['mail_AppID']}method=users.getInfosecure=1session_key={$token['access_token']}{$this->settings['mail_SecretKey']}");
 
                 $params = array(
-                    'method'       => 'users.getInfo',
-                    'secure'       => '1',
-                    'app_id'       => $this->settings['mail_AppID'],
-                    'session_key'  => $token['access_token'],
-                    'sig'          => $sign
+                    'method' => 'users.getInfo',
+                    'secure' => '1',
+                    'app_id' => $this->settings['mail_AppID'],
+                    'session_key' => $token['access_token'],
+                    'sig' => $sign
                 );
 
                 $userInfo = json_decode(file_get_contents('http://www.appsmail.ru/platform/api' . '?' . urldecode(http_build_query($params))), true);
@@ -197,9 +197,9 @@ class AuthModel
         } else {
             $url = 'https://connect.mail.ru/oauth/authorize';
             $params = array(
-                'client_id'     => $this->settings['mail_AppID'],
+                'client_id' => $this->settings['mail_AppID'],
                 'response_type' => 'code',
-                'redirect_uri'  => $this->settings['mail_RedirectURL']
+                'redirect_uri' => $this->settings['mail_RedirectURL']
             );
             $location = $url . '?' . urldecode(http_build_query($params));
 
@@ -211,9 +211,9 @@ class AuthModel
     {
         if (isset($_GET['code'])) {
             $params = array(
-                'grant_type'    => 'authorization_code',
-                'code'          => $_GET['code'],
-                'client_id'     => $this->settings['ya_AppID'],
+                'grant_type' => 'authorization_code',
+                'code' => $_GET['code'],
+                'client_id' => $this->settings['ya_AppID'],
                 'client_secret' => $this->settings['ya_SecretKey']
             );
 
@@ -232,8 +232,8 @@ class AuthModel
 
             if (isset($token['access_token'])) {
                 $params = array(
-                    'format'       => 'json',
-                    'oauth_token'  => $token['access_token']
+                    'format' => 'json',
+                    'oauth_token' => $token['access_token']
                 );
 
                 $userInfo = json_decode(file_get_contents('https://login.yandex.ru/info' . '?' . urldecode(http_build_query($params))), true);
@@ -252,8 +252,8 @@ class AuthModel
             $url = 'https://oauth.yandex.ru/authorize';
             $params = array(
                 'response_type' => 'code',
-                'client_id'     => $this->settings['ya_AppID'],
-                'display'       => 'popup'
+                'client_id' => $this->settings['ya_AppID'],
+                'display' => 'popup'
             );
             $location = $url . '?' . urldecode(http_build_query($params));
 
@@ -263,12 +263,97 @@ class AuthModel
 
     private function goo()
     {
+        if (isset($_GET['code'])) {
 
+            $params = array(
+                'client_id' => $this->settings['goo_AppID'],
+                'client_secret' => $this->settings['goo_SecretKey'],
+                'redirect_uri' => $this->settings['goo_RedirectURL'],
+                'grant_type' => 'authorization_code',
+                'code' => $_GET['code']
+            );
+
+            $url = 'https://accounts.google.com/o/oauth2/token';
+
+            $curl = curl_init();
+            curl_setopt($curl, CURLOPT_URL, $url);
+            curl_setopt($curl, CURLOPT_POST, 1);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, urldecode(http_build_query($params)));
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+            $result = curl_exec($curl);
+            curl_close($curl);
+            $tokenInfo = json_decode($result, true);
+
+            if (isset($tokenInfo['access_token'])) {
+                $params['access_token'] = $tokenInfo['access_token'];
+
+                $userInfo = json_decode(file_get_contents('https://www.googleapis.com/oauth2/v1/userinfo' . '?' . urldecode(http_build_query($params))), true);
+            }
+
+            if ($result) {
+                $_SESSION['service'] = 'goo';
+                $_SESSION['goo_userID'] = $userInfo['id'];
+                $_SESSION['goo_avatar'] = $userInfo['picture'];
+                $_SESSION['goo_firstName'] = $userInfo['given_name'];
+                $_SESSION['goo_lastName'] = $userInfo['family_name'];
+            }
+
+            header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
+
+        } else {
+            $url = 'https://accounts.google.com/o/oauth2/auth';
+            $params = array(
+                'redirect_uri' => $this->settings['goo_RedirectURL'],
+                'response_type' => 'code',
+                'client_id' => $this->settings['goo_AppID'],
+                'scope' => 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile'
+            );
+            $location = $url . '?' . urldecode(http_build_query($params));
+
+            header('Location: ' . $location);
+        }
     }
 
     private function fb()
     {
+        if (isset($_GET['code'])) {
+            $params = array(
+                'client_id' => $this->settings['fb_AppID'],
+                'redirect_uri' => $this->settings['fb_RedirectURL'],
+                'client_secret' => $this->settings['fb_SecretKey'],
+                'code' => $_GET['code']
+            );
 
+            $url = 'https://graph.facebook.com/v2.8/oauth/access_token';
+
+            $tokenInfo = json_decode(file_get_contents($url . '?' . urldecode(http_build_query($params))));
+
+            $params = array(
+                'fields' => 'id,first_name,last_name,picture',
+                'access_token' => $tokenInfo->access_token,
+            );
+
+            $userInfo = json_decode(file_get_contents('https://graph.facebook.com/v2.8/me/' . '?' . urldecode(http_build_query($params))), true);
+
+            $_SESSION['service'] = 'fb';
+            $_SESSION['fb_userID'] = $userInfo['id'];
+            $_SESSION['fb_avatar'] = $userInfo['picture']['data']['url'];
+            $_SESSION['fb_firstName'] = $userInfo['first_name'];
+            $_SESSION['fb_lastName'] = $userInfo['last_name'];
+
+            header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
+        } else {
+            $url = 'https://www.facebook.com/v2.8/dialog/oauth';
+            $params = array(
+                'client_id' => $this->settings['fb_AppID'],
+                'redirect_uri' => $this->settings['fb_RedirectURL'],
+                'response_type' => 'code',
+                'scope' => 'email,public_profile,user_friends'
+            );
+            $location = $url . '?' . urldecode(http_build_query($params));
+            header('Location: ' . $location);
+        }
     }
 
     public function unsetServices()

@@ -15,9 +15,9 @@ return array(
     'auth/vk' => 'Вконтакте/auth/vk',
     'auth/ok' => 'Одноклассники/auth/ok',
     'auth/mail' => 'Mail.ru/auth/mail',
-    'auth/ya' => 'Mail.ru/auth/ya',
-    'auth/goo' => 'Mail.ru/auth/goo',
-    'auth/fb' => 'Mail.ru/auth/fb',
+    'auth/ya' => 'Ya.ru/auth/ya',
+    'auth/goo' => 'Google.com/auth/goo',
+    'auth/fb' => 'Facebook.com/auth/fb',
     'auth/unset' => 'Отключение сервиса/auth/unset',
 
     'news/page([0-9]+)' => 'Новости/news/news_list/$1',

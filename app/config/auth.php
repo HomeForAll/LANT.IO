@@ -23,7 +23,12 @@ return array(
     'ya_RedirectURL' => 'http://beta.lant.io/auth/ya',
 
     // Google
-    'goo_AppID' => 'a7d9ade2dd2b47abad47abcfcf2fd9f4',
-    'goo_SecretKey' => '0b85adea76034d8b900daaf372208a34',
-    'goo_RedirectURL' => 'http://beta.lant.io/auth/ya',
+    'goo_AppID' => '934932805429-5gj1987qj9mq80q555guc6scscoofbrh.apps.googleusercontent.com',
+    'goo_SecretKey' => 'lhWh7YrPCQq5n0ikO8Iy7DEX',
+    'goo_RedirectURL' => 'http://beta.lant.io/auth/goo',
+
+    // Facebook
+    'fb_AppID' => '984356888360491',
+    'fb_SecretKey' => '95c56ec6aa356e6962ea405d91303332',
+    'fb_RedirectURL' => 'http://beta.lant.io/auth/fb',
 );
