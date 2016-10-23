@@ -16,13 +16,13 @@ class NewsController extends Controller {
 //             echo '<pre>';
 //             var_dump($data);
 //             echo '</pre>';
-        $this->view->displayPage($this->viewName, $this->title, $data);
+        $this->view->render($this->viewName, $this->title, $data);
     }
 
     public function actionNews_id($params) {
         $news_id = $params[0];
         $news = $this->model->getNewsById($news_id);
-        $this->view->displayPage($this->viewName, $this->title, $news);
+        $this->view->render($this->viewName, $this->title, $news);
     }
 
     public function actionNews_editor($params) {
@@ -93,7 +93,7 @@ class NewsController extends Controller {
         $data['error'] = $news_error;
         $data['categories'] = $this->categories;
 
-        $this->view->displayPage($this->viewName, $this->title, $data);
+        $this->view->render($this->viewName, $this->title, $data);
 
 
 //        if ($_POST) {

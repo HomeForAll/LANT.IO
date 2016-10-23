@@ -1,39 +1,33 @@
 <?php
 
 class View {
-//    public $template;
-//    public $title;
-//    public $metaTags;
-//    public $links;
-//    public $js;
-//
-//    public $header;
-//    public $body;
-//    public $footer;
+    private $title;
+    private $template;
+    private $name;
+    private $data;
 
-    public function displayPage($view = null, $title = 'Главная', $data = null) {
-        $this->getHeader($title);
-        $this->getBody($view, $data);
-        $this->getFooter();
+    public function __construct($template) {
+        $this->template = $template;
     }
 
-    protected function getHeader($title = null) {
-        include_once ROOT_DIR . '/template/layouts/header.php';
+    public function render($view, $data = null) {
+        $this->name = $view;
+        $this->data = $data;
+        include ROOT_DIR . '/templates/layouts/main.php';
     }
 
-    protected function getBody($viewFileName, $data = null){
-        include_once ROOT_DIR . '/app/views/' . $viewFileName . '.php';
+    private function renderHead() {
+        include ROOT_DIR . '/templates/' . $this->template . '/meta.php';
+        include ROOT_DIR . '/templates/' . $this->template . '/links.php';
+        include ROOT_DIR . '/templates/' . $this->template . '/css.php';
+        include ROOT_DIR . '/templates/' . $this->template . '/js.php';
     }
 
-    protected function getFooter() {
-        include_once ROOT_DIR . '/template/layouts/footer.php';
-    }
-
-    public function displayAccessPage($view = null, $data = null) {
-        $this->getBody($view, $data);
-    }
-
-    private function renderDataByTemplate($template) {
-
+    private function renderBody() {
+        include ROOT_DIR . '/templates/' . $this->template . '/begin.php';
+        include ROOT_DIR . '/templates/' . $this->template . '/header.php';
+        include ROOT_DIR . '/app/views/' . $this->name . '.php';
+        include ROOT_DIR . '/templates/' . $this->template . '/footer.php';
+        include ROOT_DIR . '/templates/' . $this->template . '/end.php';
     }
 }

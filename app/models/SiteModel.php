@@ -4,8 +4,7 @@ class SiteModel extends Model
 {
     public function __construct()
     {
-        parent::__construct();
-        $this->db = $this->getPGConnect();
+        $this->db = new DataBase();
     }
 
     public function ajaxHandler()

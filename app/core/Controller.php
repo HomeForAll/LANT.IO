@@ -1,14 +1,18 @@
 <?php
 
 class Controller {
-    protected $view;
-    protected $viewName;
     protected $model;
-    protected $title;
+    protected $view;
 
-    public function __construct($pageName, $view = null) {
-        $this->view = new View();
-        $this->title = $pageName;
-        $this->viewName = $view;
+    public function __construct($template, $model) {
+        $this->view = new View($template);
+        $this->model = $this->getModel($model);
+    }
+
+    private function getModel($model) {
+        if (file_exists(__DIR__ . '/../models/' . $model . '.php')) {
+            return new $model;
+        }
+        return false;
     }
 }

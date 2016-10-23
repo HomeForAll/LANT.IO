@@ -1,26 +1,26 @@
 <?php
 
 return array(
-    // 'URI' => 'pageTitle/controller/action'
-    '' => 'Главная/site/index',
-    'search' => 'Поиск/site/search',
+    // 'URI' => 'template/controller/action'
+    '' => 'main/site/index',
+    'search' => 'main/site/search',
 
-    'registration' => 'Регистрация/user/registration',
-    'login' => 'Вход/user/login',
-    'logout' => 'Выход/user/logout',
+    'registration' => 'main/user/registration',
+    'login' => 'main/user/login',
+    'logout' => 'main/user/logout',
 
-    'cp' => 'Личный кабинет/CP/CP',
-    'cp/chat' => 'Чат/CP/chat',
-    'cp/generator' => 'Генератор ключей/CP/generator',
+    'cp' => 'main/CP/CP',
+    'cp/chat' => 'main/CP/chat',
+    'cp/generator' => 'main/CP/generator',
 
-    'auth/vk' => 'Вконтакте/auth/vk',
-    'auth/ok' => 'Одноклассники/auth/ok',
-    'auth/mail' => 'Mail.ru/auth/mail',
-    'auth/ya' => 'Ya.ru/auth/ya',
-    'auth/goo' => 'Google.com/auth/goo',
-    'auth/fb' => 'Facebook.com/auth/fb',
-    'auth/steam' => 'Steam/auth/steam',
-    'auth/unset' => 'Отключение сервиса/auth/unset',
+    'auth/vk' => 'main/auth/vk',
+    'auth/ok' => 'main/auth/ok',
+    'auth/mail' => 'main/auth/mail',
+    'auth/ya' => 'main/auth/ya',
+    'auth/goo' => 'main/auth/goo',
+    'auth/fb' => 'main/auth/fb',
+    'auth/steam' => 'main/auth/steam',
+    'auth/unset' => 'main/auth/unset',
 
     'news/page([0-9]+)' => 'Новости/news/news_list/$1',
     'news/([0-9]+)' => 'Новости/news/news_id/$1', 

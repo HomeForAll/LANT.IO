@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title><?php echo $title; ?></title>
-    <link rel="stylesheet" href="/template/css/style.css">
+    <link rel="stylesheet" href="/templates/main/css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script>
         /*$(window).on('load', function () {
@@ -30,14 +30,14 @@
     <div id="navigation">
         <ul>
             <li><a href="/">Главная</a></li>
-            <li><a href="/search">Поиск</a></li>
-            <li><a href="/news">Новости</a></li>
+            <li><a href="../../index.php">Поиск</a></li>
+            <li><a href="../../index.php">Новости</a></li>
             <?php if (isset($_SESSION['authorized'])) { ?>
-                <li><a href="/cp">Личный кабинет</a></li>
-                <li><a href="/logout">Выход</a></li>
+                <li><a href="../../index.php">Личный кабинет</a></li>
+                <li><a href="../../index.php">Выход</a></li>
             <?php } else { ?>
-                <li><a href="/registration">Регистрация</a></li>
-                <li><a href="/login">Вход</a></li>
+                <li><a href="../../index.php">Регистрация</a></li>
+                <li><a href="../../index.php">Вход</a></li>
             <?php } ?>
         </ul>
     </div>

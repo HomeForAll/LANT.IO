@@ -5,8 +5,7 @@ class CPModel extends Model
     private $mailer;
     public function __construct()
     {
-        parent::__construct();
-        $this->db = $this->getPGConnect();
+        $this->db = new DataBase();
     }
 
     public function ajaxHandler()

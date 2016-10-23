@@ -1,6 +1,6 @@
 <h1>Регистрация</h1>
 <?php
-foreach ($data['info'] as $error) {
+foreach ($this->data['info'] as $error) {
     echo '<span style="color: red;">' . $error . '</span><br>';
 }
 
@@ -533,8 +533,10 @@ if (isset($_SESSION['service'])) {
             break;
         case 'steam':
             ?>
-            <div style="height: 50px; padding: 15px 0">
+            <div style="height: 90px; padding: 15px 0">
                 <h3>Ваш профиль Steam авторизован:</h3>
+                <img style="float: left; width: 70px; padding: 0 15px 0 0" src="<?php echo $_SESSION['s_avatar']; ?>"
+                     alt="Аватар">
                 NickName: <?php echo $_SESSION['s_nickName']; ?><br>
                 <?php if (!empty($_SESSION['s_firstName'])) {
                     echo 'Имя: ' . $_SESSION['s_firstName'];

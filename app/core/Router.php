@@ -1,11 +1,9 @@
 <?php
 
-class Router
-{
+class Router {
     private $routes;
 
-    public function __construct($page = null)
-    {
+    public function __construct() {
         $routesPath = ROOT_DIR . '/app/config/routes.php';
         $this->routes = require $routesPath;
     }
@@ -22,9 +20,9 @@ class Router
 
                 $options = $this->getOptions($uriPattern, $uri, $path);
 
-                if (file_exists(ROOT_DIR . '/app/controllers/' . $options['controllerName'] . '.php')) {
-                    $controllerObject = new $options['controllerName']($options['pageName'], $options['viewName'], $options['modelName']);
-                    $controllerObject->$options['actionName']($options['params']);
+                if (file_exists(ROOT_DIR . '/app/controllers/' . $options['controller'] . '.php')) {
+                    $controllerObject = new $options['controller']($options['template'], $options['model']);
+                    $controllerObject->$options['action']($options['params']);
                 }
             }
         }
@@ -49,40 +47,38 @@ class Router
 
     /*
      * Возвращает массив с такими параметрами:
-     * array['controllerName']
-     * array['actionName']
-     * array['viewName']
-     * array['modelName']
+     * array['template']
+     * array['controller']
+     * array['action']
+     * array['model']
      * array['params'][]
      */
-    private function getOptions($pattern, $uri, $path)
-    {
+    private function getOptions($pattern, $uri, $path) {
         $route = preg_replace("~^{$pattern}$~", $path, $uri);
         $segments = explode('/', $route);
+        $template = 'main';
 
-        if (STATUS == '1')
-        {
+        if (STATUS == '1') {
             if (isset($_SESSION['access'])) {
-                $pageName = array_shift($segments);
+                $template = strtolower(array_shift($segments));
                 $controller = array_shift($segments);
                 $action = array_shift($segments);
             } else {
-                $pageName = 'Проверка доступа';
+                $template = 'access';
                 $controller = 'site';
                 $action = 'access';
             }
         } else {
-            $pageName = array_shift($segments);
+            $template = strtolower(array_shift($segments));
             $controller = array_shift($segments);
             $action = array_shift($segments);
         }
 
         return array(
-            'pageName' => $pageName,
-            'controllerName' => ucfirst($controller) . 'Controller',
-            'actionName' => 'action' . ucfirst($action),
-            'viewName' => strtolower($action),
-            'modelName' => ucfirst($controller) . 'Model',
+            'template' => $template,
+            'controller' => ucfirst($controller) . 'Controller',
+            'action' => 'action' . ucfirst($action),
+            'model' => ucfirst($controller) . 'Model',
             'params' => $segments
         );
     }

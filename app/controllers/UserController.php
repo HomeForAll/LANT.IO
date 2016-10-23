@@ -2,12 +2,6 @@
 
 class UserController extends Controller
 {
-    public function __construct($pageName, $view, $modelName)
-    {
-        parent::__construct($pageName, $view);
-        $this->model = new $modelName();
-    }
-
     public function actionRegistration()
     {
         $data = array(
@@ -23,7 +17,7 @@ class UserController extends Controller
                 unset($_POST);
             }
         }
-        $this->view->displayPage($this->viewName, $this->title, $data);
+        $this->view->render('registration', $data);
     }
 
     public function actionLogin()
@@ -34,12 +28,12 @@ class UserController extends Controller
                 header('Location: http://' . $_SERVER['HTTP_HOST'] . '/cp');
             } else {
                 $data = '<span style="color: red;">Вы указали неверные сведения.</span><br>';
-                $this->view->displayPage($this->viewName, $this->title, $data);
+                $this->view->render('login', $data);
             }
         } elseif (isset($_SESSION['authorized'])) {
             header('Location: http://' . $_SERVER['HTTP_HOST'] . '/cp');
         } else {
-            $this->view->displayPage($this->viewName, $this->title);
+            $this->view->render('login');
         }
     }
 

@@ -1,4 +1,4 @@
-<?php if (isset($data)) echo $data; ?>
+<?php if (isset($this->data)) echo $this->data; ?>
 <form action="" method="post">
     <table>
         <tr>
