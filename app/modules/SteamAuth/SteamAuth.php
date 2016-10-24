@@ -28,7 +28,7 @@ class SteamAuth extends LightOpenID
                 $userData = $this->getUserData();
 
                 if ($userData) {
-                    $_SESSION['services'][] = 'steam';
+                    $_SESSION['services']['steam'] = true;
                     $_SESSION['steam_userID'] = $userData->steamid;
                     $_SESSION['steam_nickName'] = $userData->personaname;
                     $_SESSION['steam_firstName'] = $userData->realname;

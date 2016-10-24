@@ -52,7 +52,7 @@ class AuthModel {
                     $userInfo = $userInfo['response'][0];
                 }
 
-                $_SESSION['services'][] = 'vk';
+                $_SESSION['services']['vk'] = true;
                 $_SESSION['vk_avatar'] = $userInfo['photo_big'];
                 $_SESSION['vk_userID'] = $token['user_id'];
                 $_SESSION['vk_email'] = $token['email'];
@@ -101,7 +101,7 @@ class AuthModel {
 
                 $userInfo = json_decode(file_get_contents('http://api.odnoklassniki.ru/fb.do' . '?' . urldecode(http_build_query($params))), true);
 
-                $_SESSION['services'][] = 'ok';
+                $_SESSION['services']['ok'] = true;
                 $_SESSION['ok_userID'] = $userInfo['uid'];
                 $_SESSION['ok_avatar'] = $userInfo['pic_3'];
                 $_SESSION['ok_firstName'] = $userInfo['first_name'];
@@ -154,7 +154,7 @@ class AuthModel {
                 if (isset($userInfo[0]['uid'])) {
                     $userInfo = array_shift($userInfo);
 
-                    $_SESSION['services'][] = 'mail';
+                    $_SESSION['services']['mail'] = true;
                     $_SESSION['mail_userID'] = $userInfo['uid'];
                     $_SESSION['mail_avatar'] = $userInfo['pic_big'];
                     $_SESSION['mail_firstName'] = $userInfo['first_name'];
@@ -201,7 +201,7 @@ class AuthModel {
 
                 $userInfo = json_decode(file_get_contents('https://login.yandex.ru/info' . '?' . urldecode(http_build_query($params))), true);
                 if (isset($userInfo['id'])) {
-                    $_SESSION['services'][] = 'ya';
+                    $_SESSION['services']['ya'] = true;
                     $_SESSION['ya_userID'] = $userInfo['id'];
                     $_SESSION['ya_avatar'] = (isset($userInfo['is_avatar_empty'])) ? 'https://avatars.mds.yandex.net/get-yapic/0/0-0/islands-200' : 'https://avatars.yandex.net/get-yapic/' . $userInfo['default_avatar_id'] . '/islands-200';
                     $_SESSION['ya_firstName'] = $userInfo['first_name'];
@@ -248,7 +248,7 @@ class AuthModel {
             }
 
             if ($result) {
-                $_SESSION['services'][] = 'goo';
+                $_SESSION['services']['goo'] = true;
                 $_SESSION['goo_userID'] = $userInfo['id'];
                 $_SESSION['goo_avatar'] = $userInfo['picture'];
                 $_SESSION['goo_firstName'] = $userInfo['given_name'];
@@ -284,7 +284,7 @@ class AuthModel {
 
             $userInfo = json_decode(file_get_contents('https://graph.facebook.com/v2.8/me/' . '?' . urldecode(http_build_query($params))), true);
 
-            $_SESSION['services'][] = 'fb';
+            $_SESSION['services']['fb'] = true;
             $_SESSION['fb_userID'] = $userInfo['id'];
             $_SESSION['fb_avatar'] = $userInfo['picture']['data']['url'];
             $_SESSION['fb_firstName'] = $userInfo['first_name'];
@@ -307,12 +307,7 @@ class AuthModel {
     }
 
     public function unsetVk() {
-        foreach ($_SESSION['services'] as $key => $service) {
-            if ($service == 'vk') {
-                unset($_SESSION['services'][$key]);
-                sort($_SESSION['services']);
-            }
-        }
+        unset($_SESSION['services']['vk']);
         unset($_SESSION['vk_userID']);
         unset($_SESSION['vk_email']);
         unset($_SESSION['vk_firstName']);
@@ -323,12 +318,7 @@ class AuthModel {
     }
 
     public function unsetOk() {
-        foreach ($_SESSION['services'] as $key => $service) {
-            if ($service == 'ok') {
-                unset($_SESSION['services'][$key]);
-                sort($_SESSION['services']);
-            }
-        }
+        unset($_SESSION['services']['ok']);
         unset($_SESSION['ok_userID']);
         unset($_SESSION['ok_avatar']);
         unset($_SESSION['ok_firstName']);
@@ -338,12 +328,7 @@ class AuthModel {
     }
 
     public function unsetMail() {
-        foreach ($_SESSION['services'] as $key => $service) {
-            if ($service == 'mail') {
-                unset($_SESSION['services'][$key]);
-                sort($_SESSION['services']);
-            }
-        }
+        unset($_SESSION['services']['mail']);
         unset($_SESSION['mail_userID']);
         unset($_SESSION['mail_avatar']);
         unset($_SESSION['mail_firstName']);
@@ -353,12 +338,7 @@ class AuthModel {
     }
 
     public function unsetYa() {
-        foreach ($_SESSION['services'] as $key => $service) {
-            if ($service == 'ya') {
-                unset($_SESSION['services'][$key]);
-                sort($_SESSION['services']);
-            }
-        }
+        unset($_SESSION['services']['ya']);
         unset($_SESSION['ya_userID']);
         unset($_SESSION['ya_avatar']);
         unset($_SESSION['ya_firstName']);
@@ -368,12 +348,7 @@ class AuthModel {
     }
 
     public function unsetGoo() {
-        foreach ($_SESSION['services'] as $key => $service) {
-            if ($service == 'goo') {
-                unset($_SESSION['services'][$key]);
-                sort($_SESSION['services']);
-            }
-        }
+        unset($_SESSION['services']['goo']);
         unset($_SESSION['goo_userID']);
         unset($_SESSION['goo_avatar']);
         unset($_SESSION['goo_firstName']);
@@ -382,12 +357,7 @@ class AuthModel {
     }
 
     public function unsetFb() {
-        foreach ($_SESSION['services'] as $key => $service) {
-            if ($service == 'fb') {
-                unset($_SESSION['services'][$key]);
-                sort($_SESSION['services']);
-            }
-        }
+        unset($_SESSION['services']['fb']);
         unset($_SESSION['fb_userID']);
         unset($_SESSION['fb_avatar']);
         unset($_SESSION['fb_firstName']);
@@ -396,12 +366,7 @@ class AuthModel {
     }
 
     public function unsetSteam() {
-        foreach ($_SESSION['services'] as $key => $service) {
-            if ($service == 'steam') {
-                unset($_SESSION['services'][$key]);
-                sort($_SESSION['services']);
-            }
-        }
+        unset($_SESSION['services']['steam']);
         unset($_SESSION['steam_userID']);
         unset($_SESSION['steam_nickName']);
         unset($_SESSION['steam_firstName']);

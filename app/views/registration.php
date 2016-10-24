@@ -20,7 +20,7 @@ $goo_userID = (isset($_SESSION['goo_userID']) && !empty($_SESSION['goo_userID'])
 $steam_userID = (isset($_SESSION['steam_userID']) && !empty($_SESSION['steam_userID'])) ? $_SESSION['steam_userID'] : '';
 
 if (isset($_SESSION['services']) && !empty($_SESSION['services'])) {
-    foreach ($_SESSION['services'] as $service) {
+    foreach ($_SESSION['services'] as $service => $status) {
         if (isset($_SESSION[$service . '_firstName'])) {
             $firstName = $_SESSION[$service . '_firstName'];
         }
@@ -307,83 +307,129 @@ if (isset($_SESSION['services']) && !empty($_SESSION['services'])) {
 
 <?php
 if (isset($_SESSION['services']) && !empty($_SESSION['services'])) {
-    foreach ($_SESSION['services'] as $service) {
-        switch ($service) {
-            case 'vk':
-                ?>
-                Ваш профиль Вконтакте: <br>
-                <div style="height: 80px;">
-                    <img style="float: left; width: 50px; padding: 15px 15px 15px 0;" src="<?php echo $_SESSION['steam_avatar']; ?>" alt="Аватар">
-                    <div style="line-height: 80px"><?php echo $_SESSION['vk_firstName'] . ' ' . $_SESSION['vk_lastName']; ?></div>
-                </div>
-                <a href="auth/unset/vk">Отвязать Вконтакте</a><br>
-                <?php
-                break;
-            case 'ok':
-                ?>
-                Ваш профиль Одноклассники: <br>
-                <div style="height: 80px;">
-                    <img style="float: left; width: 50px; padding: 15px 15px 15px 0;" src="<?php echo $_SESSION['steam_avatar']; ?>" alt="Аватар">
-                    <div style="line-height: 80px"><?php echo $_SESSION['ok_firstName'] . ' ' . $_SESSION['ok_lastName']; ?></div>
-                </div>
-                <a href="auth/unset/ok">Отвязать Одноклассники</a><br>
-                <?php
-                break;
-            case 'mail':
-                ?>
-                Ваш профиль Mail.ru: <br>
-                <div style="height: 80px;">
-                    <img style="float: left; width: 50px; padding: 15px 15px 15px 0;" src="<?php echo $_SESSION['steam_avatar']; ?>" alt="Аватар">
-                    <div style="line-height: 80px"><?php echo $_SESSION['ok_firstName'] . ' ' . $_SESSION['ok_lastName']; ?></div>
-                </div>
-                <a href="auth/unset/mail">Отвязать Mail.ru</a><br>
-                <?php
-                break;
-            case 'ya':
-                ?>
-                Ваш профиль Yandex.ru: <br>
-                <div style="height: 80px;">
-                    <img style="float: left; width: 50px; padding: 15px 15px 15px 0;" src="<?php echo $_SESSION['steam_avatar']; ?>" alt="Аватар">
-                    <div style="line-height: 80px"><?php echo $_SESSION['ya_firstName'] . ' ' . $_SESSION['ya_lastName']; ?></div>
-                </div>
-                <a href="auth/unset/ya">Отвязать Yandex.ru</a><br>
-                <?php
-                break;
-            case 'goo':
-                ?>
-                Ваш профиль Google: <br>
-                <div style="height: 80px;">
-                    <img style="float: left; width: 50px; padding: 15px 15px 15px 0;" src="<?php echo $_SESSION['steam_avatar']; ?>" alt="Аватар">
-                    <div style="line-height: 80px"><?php echo $_SESSION['goo_firstName'] . ' ' . $_SESSION['goo_lastName']; ?></div>
-                </div>
-                <a href="auth/unset/goo">Отвязать Google</a><br>
-                <?php
-                break;
-            case 'fb':
-                ?>
-                Ваш профиль Facebook: <br>
-                <div style="height: 80px;">
-                    <img style="float: left; width: 50px; padding: 15px 15px 15px 0;" src="<?php echo $_SESSION['steam_avatar']; ?>" alt="Аватар">
-                    <div style="line-height: 80px"><?php echo $_SESSION['fb_firstName'] . ' ' . $_SESSION['fb_lastName']; ?></div>
-                </div>
-                <a href="auth/unset/fb">Отвязать Facebook</a><br>
-                <?php
-                break;
-            case 'steam':
-                ?>
-                Ваш профиль Steam: <br>
-                <div style="height: 80px;">
-                    <img style="float: left; width: 50px; padding: 15px 15px 15px 0;" src="<?php echo $_SESSION['steam_avatar']; ?>" alt="Аватар">
-                    <div style="line-height: 80px"><?php echo $_SESSION['steam_nickName']; ?></div>
-                </div>
-                <a href="auth/unset/steam">Отвязать Steam</a><br>
-                <?php
-                break;
-        }
+    if (isset($_SESSION['services']['vk'])) {
+        ?>
+        Ваш профиль Вконтакте: <br>
+        <div style="height: 80px;">
+            <img style="float: left; width: 50px; padding: 15px 15px 15px 0;"
+                 src="<?php echo $_SESSION['vk_avatar']; ?>"
+                 alt="Аватар">
+            <div
+                style="line-height: 80px"><?php echo $_SESSION['vk_firstName'] . ' ' . $_SESSION['vk_lastName']; ?></div>
+        </div>
+        <a href="auth/unset/vk">Отвязать Вконтакте</a><br><br>
+        <?php
     }
+    if (isset($_SESSION['services']['ok'])) {
+        ?>
+        Ваш профиль Одноклассники: <br>
+        <div style="height: 80px;">
+            <img style="float: left; width: 50px; padding: 15px 15px 15px 0;"
+                 src="<?php echo $_SESSION['ok_avatar']; ?>" alt="Аватар">
+            <div
+                style="line-height: 80px"><?php echo $_SESSION['ok_firstName'] . ' ' . $_SESSION['ok_lastName']; ?></div>
+        </div>
+        <a href="auth/unset/ok">Отвязать Одноклассники</a><br><br>
+        <?php
+    }
+    if (isset($_SESSION['services']['mail'])) {
+        ?>
+        Ваш профиль Mail.ru: <br>
+        <div style="height: 80px;">
+            <img style="float: left; width: 50px; padding: 15px 15px 15px 0;"
+                 src="<?php echo $_SESSION['mail_avatar']; ?>" alt="Аватар">
+            <div
+                style="line-height: 80px"><?php echo $_SESSION['ok_firstName'] . ' ' . $_SESSION['ok_lastName']; ?></div>
+        </div>
+        <a href="auth/unset/mail">Отвязать Mail.ru</a><br><br>
+        <?php
+    }
+    if (isset($_SESSION['services']['ya'])) {
+        ?>
+        Ваш профиль Yandex.ru: <br>
+        <div style="height: 80px;">
+            <img style="float: left; width: 50px; padding: 15px 15px 15px 0;"
+                 src="<?php echo $_SESSION['ya_avatar']; ?>" alt="Аватар">
+            <div
+                style="line-height: 80px"><?php echo $_SESSION['ya_firstName'] . ' ' . $_SESSION['ya_lastName']; ?></div>
+        </div>
+        <a href="auth/unset/ya">Отвязать Yandex.ru</a><br><br>
+        <?php
+    }
+    if (isset($_SESSION['services']['goo'])) {
+        ?>
+        Ваш профиль Google: <br>
+        <div style="height: 80px;">
+            <img style="float: left; width: 50px; padding: 15px 15px 15px 0;"
+                 src="<?php echo $_SESSION['goo_avatar']; ?>" alt="Аватар">
+            <div
+                style="line-height: 80px"><?php echo $_SESSION['goo_firstName'] . ' ' . $_SESSION['goo_lastName']; ?></div>
+        </div>
+        <a href="auth/unset/goo">Отвязать Google</a><br><br>
+        <?php
+    }
+    if (isset($_SESSION['services']['fb'])) {
+        ?>
+        Ваш профиль Facebook: <br>
+        <div style="height: 80px;">
+            <img style="float: left; width: 50px; padding: 15px 15px 15px 0;"
+                 src="<?php echo $_SESSION['fb_avatar']; ?>" alt="Аватар">
+            <div
+                style="line-height: 80px"><?php echo $_SESSION['fb_firstName'] . ' ' . $_SESSION['fb_lastName']; ?></div>
+        </div>
+        <a href="auth/unset/fb">Отвязать Facebook</a><br><br>
+        <?php
+    }
+    if (isset($_SESSION['services']['steam'])) {
+        ?>
+        Ваш профиль Steam: <br>
+        <div style="height: 80px;">
+            <img style="float: left; width: 50px; padding: 15px 15px 15px 0;"
+                 src="<?php echo $_SESSION['steam_avatar']; ?>" alt="Аватар">
+            <div style="line-height: 80px"><?php echo $_SESSION['steam_nickName']; ?></div>
+        </div>
+        <a href="auth/unset/steam">Отвязать Steam</a><br><br>
+        <?php
+    }
+
     ?>
-    <a href="auth/unset">Отвязать все сервисы</a><br>
+    <a href="auth/unset">Отвязать все сервисы</a><br><br>
     <?php
+        if (!isset($_SESSION['services']['vk'])) {
+            ?>
+            <a href="auth/vk">Авторизоваться через Вконтакте</a><br>
+            <?php
+        }
+        if (!isset($_SESSION['services']['ok'])) {
+            ?>
+            <a href="auth/ok">Авторизоваться через Одноклассники</a><br>
+            <?php
+        }
+        if (!isset($_SESSION['services']['mail'])) {
+            ?>
+            <a href="auth/mail">Авторизоваться через Mail.ru</a><br>
+            <?php
+        }
+        if (!isset($_SESSION['services']['ya'])) {
+            ?>
+            <a href="auth/ya">Авторизоваться через Yandex.ru</a><br>
+            <?php
+        }
+        if (!isset($_SESSION['services']['goo'])) {
+            ?>
+            <a href="auth/goo">Авторизоваться через Google</a><br>
+            <?php
+        }
+        if (!isset($_SESSION['services']['fb'])) {
+            ?>
+            <a href="auth/fb">Авторизоваться через Facebook</a><br>
+            <?php
+        }
+        if (!isset($_SESSION['services']['steam'])) {
+            ?>
+            <a href="auth/steam">Авторизоваться через Steam</a><br>
+            <?php
+        }
 } else {
     ?>
     <a href="auth/vk">Авторизоваться через Вконтакте</a><br>
