@@ -20,6 +20,13 @@ return array(
     'auth/goo' => 'main/auth/goo',
     'auth/fb' => 'main/auth/fb',
     'auth/steam' => 'main/auth/steam',
+    'auth/unset/vk' => 'main/auth/unsetVk',
+    'auth/unset/ok' => 'main/auth/unsetOk',
+    'auth/unset/mail' => 'main/auth/unsetMail',
+    'auth/unset/ya' => 'main/auth/unsetYa',
+    'auth/unset/goo' => 'main/auth/unsetGoo',
+    'auth/unset/fb' => 'main/auth/unsetFb',
+    'auth/unset/steam' => 'main/auth/unsetSteam',
     'auth/unset' => 'main/auth/unset',
 
     'news/page([0-9]+)' => 'Новости/news/news_list/$1',

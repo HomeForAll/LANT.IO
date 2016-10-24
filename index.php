@@ -11,5 +11,5 @@ require_once __DIR__ . '/app/core/Loader.php';
 
 spl_autoload_register(array('Loader', 'classLoad'));
 
-Loader::getPathsFromFile();
+Loader::getPaths();
 (new Router())->run();

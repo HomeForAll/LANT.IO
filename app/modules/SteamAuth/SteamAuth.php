@@ -28,11 +28,11 @@ class SteamAuth extends LightOpenID
                 $userData = $this->getUserData();
 
                 if ($userData) {
-                    $_SESSION['service'] = 'steam';
-                    $_SESSION['s_userID'] = $userData->steamid;
-                    $_SESSION['s_nickName'] = $userData->personaname;
-                    $_SESSION['s_firstName'] = $userData->realname;
-                    $_SESSION['s_avatar'] = $userData->avatarfull;
+                    $_SESSION['services'][] = 'steam';
+                    $_SESSION['steam_userID'] = $userData->steamid;
+                    $_SESSION['steam_nickName'] = $userData->personaname;
+                    $_SESSION['steam_firstName'] = $userData->realname;
+                    $_SESSION['steam_avatar'] = $userData->avatarfull;
 
                     header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
                 }

@@ -76,7 +76,7 @@ class Loader
         file_put_contents(ROOT_DIR . '/app/config/paths.php', serialize($array));
     }
 
-    public static function getPathsFromFile()
+    public static function getPaths()
     {
         static::$paths = unserialize(file_get_contents(ROOT_DIR . '/app/config/paths.php'));
     }

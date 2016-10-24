@@ -4,743 +4,388 @@ foreach ($this->data['info'] as $error) {
     echo '<span style="color: red;">' . $error . '</span><br>';
 }
 
-if (isset($_SESSION['service'])) {
-    switch ($_SESSION['service']) {
-        case 'vk':
-            ?>
-            <div style="height: 100px; padding: 15px 0">
-                <h3>Ваш профиль Вконтакте авторизован:</h3>
-                <img style="float: left; width: 70px; padding: 0 15px 0 0" src="<?php echo $_SESSION['vk_avatar']; ?>"
-                     alt="Аватар">
-                Имя: <?php echo $_SESSION['vk_firstName']; ?><br>
-                Фамилия: <?php echo $_SESSION['vk_lastName']; ?><br>
-                Дата рождения: <?php echo $_SESSION['vk_birthday']; ?>
-            </div>
-            <form action="" method="post">
-                <table>
-                    <tr>
-                        <td>
-                        </td>
-                        <td>
-                            <input name="firstName" id="firstName" type="text"
-                                   value="<?php echo $_SESSION['vk_firstName']; ?>" hidden>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                        </td>
-                        <td>
-                            <input name="lastName" id="lastName" type="text"
-                                   value="<?php echo $_SESSION['vk_lastName']; ?>" hidden>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                        </td>
-                        <td>
-                            <input name="birthday" id="birthday" type="text"
-                                   value="<?php echo $_SESSION['vk_birthday']; ?>" hidden>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="phoneNumber">
-                                Номер телефона:
-                            </label>
-                        </td>
-                        <td>
-                            <input name="phoneNumber" id="phoneNumber" type="text"
-                                   value="<?php echo (!empty($_POST['phoneNumber'])) ? $_POST['phoneNumber'] : ''; ?>">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="email">
-                                E-Mail:
-                            </label>
-                        </td>
-                        <td>
-                            <input name="email" id="email" type="text"
-                                   value="<?php echo (!empty($_POST['email'])) ? $_POST['email'] : ''; ?>">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="password">
-                                Пароль:
-                            </label>
-                        </td>
-                        <td>
-                            <input name="password" id="password" type="password">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <input type="submit" name="submit" value="Зарегистрировать">
-                        </td>
-                    </tr>
-                </table>
-            </form>
-            <a href="auth/unset">Отвязать Вконтакте</a><br><br>
-            <?php
-            break;
-        case 'ok':
-            ?>
-            <div style="height: 100px; padding: 15px 0">
-                <h3>Ваш профиль Одноклассники авторизован:</h3>
-                <img style="float: left; width: 70px; padding: 0 15px 0 0" src="<?php echo $_SESSION['ok_avatar']; ?>"
-                     alt="Аватар">
-                Имя: <?php echo $_SESSION['ok_firstName']; ?><br>
-                Фамилия: <?php echo $_SESSION['ok_lastName']; ?><br>
-                Дата рождения: <?php echo $_SESSION['ok_birthday']; ?>
-            </div>
-            <form action="" method="post">
-                <table>
-                    <tr>
-                        <td>
-                        </td>
-                        <td>
-                            <input name="firstName" id="firstName" type="text"
-                                   value="<?php echo $_SESSION['ok_firstName']; ?>" hidden>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                        </td>
-                        <td>
-                            <input name="lastName" id="lastName" type="text"
-                                   value="<?php echo $_SESSION['ok_lastName']; ?>" hidden>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                        </td>
-                        <td>
-                            <input name="birthday" id="birthday" type="text"
-                                   value="<?php echo $_SESSION['ok_birthday']; ?>" hidden>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="phoneNumber">
-                                Номер телефона:
-                            </label>
-                        </td>
-                        <td>
-                            <input name="phoneNumber" id="phoneNumber" type="text"
-                                   value="<?php echo (!empty($_POST['phoneNumber'])) ? $_POST['phoneNumber'] : ''; ?>">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="email">
-                                E-Mail:
-                            </label>
-                        </td>
-                        <td>
-                            <input name="email" id="email" type="text"
-                                   value="<?php echo (!empty($_POST['email'])) ? $_POST['email'] : ''; ?>">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="password">
-                                Пароль:
-                            </label>
-                        </td>
-                        <td>
-                            <input name="password" id="password" type="password">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <input type="submit" name="submit" value="Зарегистрировать">
-                        </td>
-                    </tr>
-                </table>
-            </form>
-            <a href="auth/unset">Отвязать Одноклассники</a><br><br>
-            <?php
-            break;
-        case 'mail':
-            ?>
-            <div style="height: 100px; padding: 15px 0">
-                <h3>Ваш профиль Mail.ru авторизован:</h3>
-                <img style="float: left; width: 70px; padding: 0 15px 0 0" src="<?php echo $_SESSION['mail_avatar']; ?>"
-                     alt="Аватар">
-                Имя: <?php echo $_SESSION['mail_firstName']; ?><br>
-                Фамилия: <?php echo $_SESSION['mail_lastName']; ?><br>
-                Дата рождения: <?php echo $_SESSION['mail_birthday']; ?>
-            </div>
-            <form action="" method="post">
-                <table>
-                    <tr>
-                        <td>
-                        </td>
-                        <td>
-                            <input name="firstName" id="firstName" type="text"
-                                   value="<?php echo $_SESSION['mail_firstName']; ?>" hidden>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                        </td>
-                        <td>
-                            <input name="lastName" id="lastName" type="text"
-                                   value="<?php echo $_SESSION['mail_lastName']; ?>" hidden>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                        </td>
-                        <td>
-                            <input name="birthday" id="birthday" type="text"
-                                   value="<?php echo $_SESSION['mail_birthday']; ?>" hidden>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="phoneNumber">
-                                Номер телефона:
-                            </label>
-                        </td>
-                        <td>
-                            <input name="phoneNumber" id="phoneNumber" type="text"
-                                   value="<?php echo (!empty($_POST['phoneNumber'])) ? $_POST['phoneNumber'] : ''; ?>">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="email">
-                                E-Mail:
-                            </label>
-                        </td>
-                        <td>
-                            <input name="email" id="email" type="text"
-                                   value="<?php echo (!empty($_POST['email'])) ? $_POST['email'] : ''; ?>">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="password">
-                                Пароль:
-                            </label>
-                        </td>
-                        <td>
-                            <input name="password" id="password" type="password">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <input type="submit" name="submit" value="Зарегистрировать">
-                        </td>
-                    </tr>
-                </table>
-            </form>
-            <a href="auth/unset">Отвязать Mail.ru</a><br><br>
-            <?php
-            break;
-        case 'ya':
-            ?>
-            <div style="height: 100px; padding: 15px 0">
-                <h3>Ваш профиль Yandex.ru авторизован:</h3>
-                <img style="float: left; width: 70px; padding: 0 15px 0 0" src="<?php echo $_SESSION['ya_avatar']; ?>"
-                     alt="Аватар">
-                Имя: <?php echo $_SESSION['ya_firstName']; ?><br>
-                Фамилия: <?php echo $_SESSION['ya_lastName']; ?><br>
-                <?php if (!empty($_SESSION['ya_birthday'])) {
-                    echo 'Дата рождения: ' . $_SESSION['ya_birthday'] . '<br>';
-                } ?>
-            </div>
-            <form action="" method="post">
-                <table>
-                    <tr>
-                        <td>
-                        </td>
-                        <td>
-                            <input name="firstName" id="firstName" type="text"
-                                   value="<?php echo $_SESSION['ya_firstName']; ?>" hidden>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                        </td>
-                        <td>
-                            <input name="lastName" id="lastName" type="text"
-                                   value="<?php echo $_SESSION['ya_lastName']; ?>" hidden>
-                        </td>
-                    </tr>
+$nickname = '';
+$firstName = (isset($_POST['firstName']) && !empty($_POST['firstName'])) ? $_POST['firstName'] : '';
+$lastName = (isset($_POST['lastName']) && !empty($_POST['lastName'])) ? $_POST['lastName'] : '';
+$patronymic = (isset($_POST['patronymic']) && !empty($_POST['patronymic'])) ? $_POST['patronymic'] : '';
+$birthday = (isset($_POST['birthday']) && !empty($_POST['birthday'])) ? $_POST['birthday'] : '';
+$phoneNumber = (isset($_POST['phoneNumber']) && !empty($_POST['phoneNumber'])) ? $_POST['phoneNumber'] : '';
+$email = (isset($_POST['email']) && !empty($_POST['email'])) ? $_POST['email'] : '';
 
-                    <?php if (!empty($_SESSION['ya_birthday'])) { ?>
-                        <tr>
-                            <td>
-                            </td>
-                            <td>
-                                <input name="birthday" id="birthday" type="text"
-                                       value="<?php echo $_SESSION['ya_birthday']; ?>" hidden>
-                            </td>
-                        </tr>
-                    <?php } else { ?>
-                        <tr>
-                            <td>
-                                <label for="birthday">
-                                    Дата рождения:
-                                </label>
-                            </td>
-                            <td>
-                                <input name="birthday" id="birthday" type="text"
-                                       value="<?php echo (!empty($_POST['birthday'])) ? $_POST['birthday'] : ''; ?>">
-                            </td>
-                        </tr>
-                    <?php } ?>
-                    <tr>
-                        <td>
-                            <label for="phoneNumber">
-                                Номер телефона:
-                            </label>
-                        </td>
-                        <td>
-                            <input name="phoneNumber" id="phoneNumber" type="text"
-                                   value="<?php echo (!empty($_POST['phoneNumber'])) ? $_POST['phoneNumber'] : ''; ?>">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="email">
-                                E-Mail:
-                            </label>
-                        </td>
-                        <td>
-                            <input name="email" id="email" type="text"
-                                   value="<?php echo (!empty($_POST['email'])) ? $_POST['email'] : ''; ?>">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="password">
-                                Пароль:
-                            </label>
-                        </td>
-                        <td>
-                            <input name="password" id="password" type="password">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <input type="submit" name="submit" value="Зарегистрировать">
-                        </td>
-                    </tr>
-                </table>
-            </form>
-            <a href="auth/unset">Отвязать Yandex.ru</a><br><br>
-            <?php
-            break;
-        case 'goo':
-            ?>
-            <div style="height: 100px; padding: 15px 0">
-                <h3>Ваш профиль Google.com авторизован:</h3>
-                <img style="float: left; width: 70px; padding: 0 15px 0 0" src="<?php echo $_SESSION['goo_avatar']; ?>"
-                     alt="Аватар">
-                Имя: <?php echo $_SESSION['goo_firstName']; ?><br>
-                Фамилия: <?php echo $_SESSION['goo_lastName']; ?><br>
-                <?php if (!empty($_SESSION['goo_birthday'])) {
-                    echo 'Дата рождения: ' . $_SESSION['goo_birthday'] . '<br>';
-                } ?>
-            </div>
-            <form action="" method="post">
-                <table>
-                    <tr>
-                        <td>
-                        </td>
-                        <td>
-                            <input name="firstName" id="firstName" type="text"
-                                   value="<?php echo $_SESSION['goo_firstName']; ?>" hidden>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                        </td>
-                        <td>
-                            <input name="lastName" id="lastName" type="text"
-                                   value="<?php echo $_SESSION['goo_lastName']; ?>" hidden>
-                        </td>
-                    </tr>
+$vk_userID = (isset($_SESSION['vk_userID']) && !empty($_SESSION['vk_userID'])) ? $_SESSION['vk_userID'] : '';
+$ok_userID = (isset($_SESSION['ok_userID']) && !empty($_SESSION['ok_userID'])) ? $_SESSION['ok_userID'] : '';
+$mail_userID = (isset($_SESSION['mail_userID']) && !empty($_SESSION['mail_userID'])) ? $_SESSION['mail_userID'] : '';
+$ya_userID = (isset($_SESSION['ya_userID']) && !empty($_SESSION['ya_userID'])) ? $_SESSION['ya_userID'] : '';
+$goo_userID = (isset($_SESSION['goo_userID']) && !empty($_SESSION['goo_userID'])) ? $_SESSION['goo_userID'] : '';
+$steam_userID = (isset($_SESSION['steam_userID']) && !empty($_SESSION['steam_userID'])) ? $_SESSION['steam_userID'] : '';
 
-                    <?php if (!empty($_SESSION['goo_birthday'])) { ?>
-                        <tr>
-                            <td>
-                            </td>
-                            <td>
-                                <input name="birthday" id="birthday" type="text"
-                                       value="<?php echo $_SESSION['goo_birthday']; ?>" hidden>
-                            </td>
-                        </tr>
-                    <?php } else { ?>
-                        <tr>
-                            <td>
-                                <label for="birthday">
-                                    Дата рождения:
-                                </label>
-                            </td>
-                            <td>
-                                <input name="birthday" id="birthday" type="text"
-                                       value="<?php echo (!empty($_POST['birthday'])) ? $_POST['birthday'] : ''; ?>">
-                            </td>
-                        </tr>
-                    <?php } ?>
-                    <tr>
-                        <td>
-                            <label for="phoneNumber">
-                                Номер телефона:
-                            </label>
-                        </td>
-                        <td>
-                            <input name="phoneNumber" id="phoneNumber" type="text"
-                                   value="<?php echo (!empty($_POST['phoneNumber'])) ? $_POST['phoneNumber'] : ''; ?>">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="email">
-                                E-Mail:
-                            </label>
-                        </td>
-                        <td>
-                            <input name="email" id="email" type="text"
-                                   value="<?php echo (!empty($_POST['email'])) ? $_POST['email'] : ''; ?>">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="password">
-                                Пароль:
-                            </label>
-                        </td>
-                        <td>
-                            <input name="password" id="password" type="password">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <input type="submit" name="submit" value="Зарегистрировать">
-                        </td>
-                    </tr>
-                </table>
-            </form>
-            <a href="auth/unset">Отвязать Google.com</a><br><br>
-            <?php
-            break;
-        case 'fb':
-            ?>
-            <div style="height: 100px; padding: 15px 0">
-                <h3>Ваш профиль Facebook авторизован:</h3>
-                <img style="float: left; width: 70px; padding: 0 15px 0 0" src="<?php echo $_SESSION['fb_avatar']; ?>"
-                     alt="Аватар">
-                Имя: <?php echo $_SESSION['fb_firstName']; ?><br>
-                Фамилия: <?php echo $_SESSION['fb_lastName']; ?><br>
-                <?php if (!empty($_SESSION['fb_birthday'])) {
-                    echo 'Дата рождения: ' . $_SESSION['fb_birthday'] . '<br>';
-                } ?>
-            </div>
-            <form action="" method="post">
-                <table>
-                    <tr>
-                        <td>
-                        </td>
-                        <td>
-                            <input name="firstName" id="firstName" type="text"
-                                   value="<?php echo $_SESSION['fb_firstName']; ?>" hidden>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                        </td>
-                        <td>
-                            <input name="lastName" id="lastName" type="text"
-                                   value="<?php echo $_SESSION['fb_lastName']; ?>" hidden>
-                        </td>
-                    </tr>
+if (isset($_SESSION['services']) && !empty($_SESSION['services'])) {
+    foreach ($_SESSION['services'] as $service) {
+        if (isset($_SESSION[$service . '_firstName'])) {
+            $firstName = $_SESSION[$service . '_firstName'];
+        }
 
-                    <?php if (!empty($_SESSION['fb_birthday'])) { ?>
-                        <tr>
-                            <td>
-                            </td>
-                            <td>
-                                <input name="birthday" id="birthday" type="text"
-                                       value="<?php echo $_SESSION['fb_birthday']; ?>" hidden>
-                            </td>
-                        </tr>
-                    <?php } else { ?>
-                        <tr>
-                            <td>
-                                <label for="birthday">
-                                    Дата рождения:
-                                </label>
-                            </td>
-                            <td>
-                                <input name="birthday" id="birthday" type="text"
-                                       value="<?php echo (!empty($_POST['birthday'])) ? $_POST['birthday'] : ''; ?>">
-                            </td>
-                        </tr>
-                    <?php } ?>
-                    <tr>
-                        <td>
-                            <label for="phoneNumber">
-                                Номер телефона:
-                            </label>
-                        </td>
-                        <td>
-                            <input name="phoneNumber" id="phoneNumber" type="text"
-                                   value="<?php echo (!empty($_POST['phoneNumber'])) ? $_POST['phoneNumber'] : ''; ?>">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="email">
-                                E-Mail:
-                            </label>
-                        </td>
-                        <td>
-                            <input name="email" id="email" type="text"
-                                   value="<?php echo (!empty($_POST['email'])) ? $_POST['email'] : ''; ?>">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="password">
-                                Пароль:
-                            </label>
-                        </td>
-                        <td>
-                            <input name="password" id="password" type="password">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <input type="submit" name="submit" value="Зарегистрировать">
-                        </td>
-                    </tr>
-                </table>
-            </form>
-            <a href="auth/unset">Отвязать Facebook</a><br><br>
-            <?php
-            break;
-        case 'steam':
-            ?>
-            <div style="height: 90px; padding: 15px 0">
-                <h3>Ваш профиль Steam авторизован:</h3>
-                <img style="float: left; width: 70px; padding: 0 15px 0 0" src="<?php echo $_SESSION['s_avatar']; ?>"
-                     alt="Аватар">
-                NickName: <?php echo $_SESSION['s_nickName']; ?><br>
-                <?php if (!empty($_SESSION['s_firstName'])) {
-                    echo 'Имя: ' . $_SESSION['s_firstName'];
-                } ?>
-            </div>
-            <form action="" method="post">
-                <table>
-                    <?php if (!empty($_SESSION['s_firstName'])) { ?>
-                        <tr>
-                            <td>
-                            </td>
-                            <td>
-                                <input name="firstName" id="firstName" type="text"
-                                       value="<?php echo $_SESSION['s_firstName']; ?>" hidden>
-                            </td>
-                        </tr>
-                    <?php } else { ?>
-                        <tr>
-                            <td>
-                                <label for="firstName">
-                                    Имя:
-                                </label>
-                            </td>
-                            <td>
-                                <input name="firstName" id="firstName" type="text"
-                                       value="<?php echo (!empty($_POST['firstName'])) ? $_POST['firstName'] : ''; ?>">
-                            </td>
-                        </tr>
-                    <?php } ?>
+        if (isset($_SESSION[$service . '_lastName'])) {
+            $lastName = $_SESSION[$service . '_lastName'];
+        }
 
+        if (isset($_SESSION[$service . '_patronymic'])) {
+            $patronymic = $_SESSION[$service . '_patronymic'];
+        }
 
-                    <tr>
-                        <td>
-                            <label for="lastName">Фамилия:</label>
-                        </td>
-                        <td>
-                            <input name="lastName" id="lastName" type="text"
-                                   value="<?php echo (!empty($_POST['lastName'])) ? $_POST['lastName'] : ''; ?>">
-                        </td>
-                    </tr>
+        if (isset($_SESSION[$service . '_birthday'])) {
+            $birthday = $_SESSION[$service . '_birthday'];
+        }
 
-                    <?php if (!empty($_SESSION['s_birthday'])) { ?>
-                        <tr>
-                            <td>
-                            </td>
-                            <td>
-                                <input name="birthday" id="birthday" type="text"
-                                       value="<?php echo $_SESSION['s_birthday']; ?>" hidden>
-                            </td>
-                        </tr>
-                    <?php } else { ?>
-                        <tr>
-                            <td>
-                                <label for="birthday">
-                                    Дата рождения:
-                                </label>
-                            </td>
-                            <td>
-                                <input name="birthday" id="birthday" type="text"
-                                       value="<?php echo (!empty($_POST['birthday'])) ? $_POST['birthday'] : ''; ?>">
-                            </td>
-                        </tr>
-                    <?php } ?>
-                    <tr>
-                        <td>
-                            <label for="phoneNumber">
-                                Номер телефона:
-                            </label>
-                        </td>
-                        <td>
-                            <input name="phoneNumber" id="phoneNumber" type="text"
-                                   value="<?php echo (!empty($_POST['phoneNumber'])) ? $_POST['phoneNumber'] : ''; ?>">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="email">
-                                E-Mail:
-                            </label>
-                        </td>
-                        <td>
-                            <input name="email" id="email" type="text"
-                                   value="<?php echo (!empty($_POST['email'])) ? $_POST['email'] : ''; ?>">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="password">
-                                Пароль:
-                            </label>
-                        </td>
-                        <td>
-                            <input name="password" id="password" type="password">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <input type="submit" name="submit" value="Зарегистрировать">
-                        </td>
-                    </tr>
-                </table>
-            </form>
-            <a href="auth/unset">Отвязать Steam</a><br><br>
-            <?php
-            break;
+        if (isset($_SESSION[$service . '_phoneNumber'])) {
+            $phoneNumber = $_SESSION[$service . '_phoneNumber'];
+        }
+        if (isset($_SESSION[$service . '_email'])) {
+            $email = $_SESSION[$service . '_email'];
+        }
+    }
+
+    //    switch ($_SESSION['service']) {
+    //        case 'vk':
+    //            if (isset($_SESSION['vk_firstName'])) {
+    //                $firstName = $_SESSION['vk_firstName'];
+    //            }
+    //
+    //            if (isset($_SESSION['vk_lastName'])) {
+    //                $lastName = $_SESSION['vk_lastName'];
+    //            }
+    //
+    //            if (isset($_SESSION['vk_patronymic'])) {
+    //                $patronymic = $_SESSION['vk_patronymic'];
+    //            }
+    //
+    //            if (isset($_SESSION['vk_birthday'])) {
+    //                $birthday = $_SESSION['vk_birthday'];
+    //            }
+    //
+    //            if (isset($_SESSION['vk_phoneNumber'])) {
+    //                $phoneNumber = $_SESSION['vk_phoneNumber'];
+    //            }
+    //            if (isset($_SESSION['vk_email'])) {
+    //                $email = $_SESSION['vk_email'];
+    //            }
+    //            break;
+    //        case 'ok':
+    //            if (isset($_SESSION['ok_firstName'])) {
+    //                $firstName = $_SESSION['ok_firstName'];
+    //            }
+    //
+    //            if (isset($_SESSION['ok_lastName'])) {
+    //                $lastName = $_SESSION['ok_lastName'];
+    //            }
+    //
+    //            if (isset($_SESSION['ok_patronymic'])) {
+    //                $patronymic = $_SESSION['ok_patronymic'];
+    //            }
+    //
+    //            if (isset($_SESSION['ok_birthday'])) {
+    //                $birthday = $_SESSION['ok_birthday'];
+    //            }
+    //
+    //            if (isset($_SESSION['ok_phoneNumber'])) {
+    //                $phoneNumber = $_SESSION['ok_phoneNumber'];
+    //            }
+    //            if (isset($_SESSION['ok_email'])) {
+    //                $email = $_SESSION['ok_email'];
+    //            }
+    //            break;
+    //        case 'mail':
+    //            if (isset($_SESSION['mail_firstName'])) {
+    //                $firstName = $_SESSION['mail_firstName'];
+    //            }
+    //
+    //            if (isset($_SESSION['mail_lastName'])) {
+    //                $lastName = $_SESSION['mail_lastName'];
+    //            }
+    //
+    //            if (isset($_SESSION['mail_patronymic'])) {
+    //                $patronymic = $_SESSION['mail_patronymic'];
+    //            }
+    //
+    //            if (isset($_SESSION['mail_birthday'])) {
+    //                $birthday = $_SESSION['mail_birthday'];
+    //            }
+    //
+    //            if (isset($_SESSION['mail_phoneNumber'])) {
+    //                $phoneNumber = $_SESSION['mail_phoneNumber'];
+    //            }
+    //            if (isset($_SESSION['mail_email'])) {
+    //                $email = $_SESSION['mail_email'];
+    //            }
+    //            break;
+    //        case 'ya':
+    //            if (isset($_SESSION['ya_firstName'])) {
+    //                $firstName = $_SESSION['ya_firstName'];
+    //            }
+    //
+    //            if (isset($_SESSION['ya_lastName'])) {
+    //                $lastName = $_SESSION['ya_lastName'];
+    //            }
+    //
+    //            if (isset($_SESSION['ya_patronymic'])) {
+    //                $patronymic = $_SESSION['ya_patronymic'];
+    //            }
+    //
+    //            if (isset($_SESSION['ya_birthday'])) {
+    //                $birthday = $_SESSION['ya_birthday'];
+    //            }
+    //
+    //            if (isset($_SESSION['ya_phoneNumber'])) {
+    //                $phoneNumber = $_SESSION['ya_phoneNumber'];
+    //            }
+    //            if (isset($_SESSION['ya_email'])) {
+    //                $email = $_SESSION['ya_email'];
+    //            }
+    //            break;
+    //        case 'goo':
+    //            if (isset($_SESSION['goo_firstName'])) {
+    //                $firstName = $_SESSION['goo_firstName'];
+    //            }
+    //
+    //            if (isset($_SESSION['goo_lastName'])) {
+    //                $lastName = $_SESSION['goo_lastName'];
+    //            }
+    //
+    //            if (isset($_SESSION['goo_patronymic'])) {
+    //                $patronymic = $_SESSION['goo_patronymic'];
+    //            }
+    //
+    //            if (isset($_SESSION['goo_birthday'])) {
+    //                $birthday = $_SESSION['goo_birthday'];
+    //            }
+    //
+    //            if (isset($_SESSION['goo_phoneNumber'])) {
+    //                $phoneNumber = $_SESSION['goo_phoneNumber'];
+    //            }
+    //            if (isset($_SESSION['goo_email'])) {
+    //                $email = $_SESSION['goo_email'];
+    //            }
+    //            break;
+    //        case 'fb':
+    //            if (isset($_SESSION['fb_firstName'])) {
+    //                $firstName = $_SESSION['fb_firstName'];
+    //            }
+    //
+    //            if (isset($_SESSION['fb_lastName'])) {
+    //                $lastName = $_SESSION['fb_lastName'];
+    //            }
+    //
+    //            if (isset($_SESSION['fb_patronymic'])) {
+    //                $patronymic = $_SESSION['fb_patronymic'];
+    //            }
+    //
+    //            if (isset($_SESSION['fb_birthday'])) {
+    //                $birthday = $_SESSION['fb_birthday'];
+    //            }
+    //
+    //            if (isset($_SESSION['fb_phoneNumber'])) {
+    //                $phoneNumber = $_SESSION['fb_phoneNumber'];
+    //            }
+    //            if (isset($_SESSION['fb_email'])) {
+    //                $email = $_SESSION['fb_email'];
+    //            }
+    //            break;
+    //        case 'steam':
+    //            if (isset($_SESSION['steam_firstName'])) {
+    //                $firstName = $_SESSION['steam_firstName'];
+    //            }
+    //
+    //            if (isset($_SESSION['steam_lastName'])) {
+    //                $lastName = $_SESSION['steam_lastName'];
+    //            }
+    //
+    //            if (isset($_SESSION['steam_patronymic'])) {
+    //                $patronymic = $_SESSION['steam_patronymic'];
+    //            }
+    //
+    //            if (isset($_SESSION['steam_birthday'])) {
+    //                $birthday = $_SESSION['steam_birthday'];
+    //            }
+    //
+    //            if (isset($_SESSION['steam_phoneNumber'])) {
+    //                $phoneNumber = $_SESSION['steam_phoneNumber'];
+    //            }
+    //            if (isset($_SESSION['steam_email'])) {
+    //                $email = $_SESSION['steam_email'];
+    //            }
+    //            break;
+    //    }
+}
+?>
+
+<form action="" method="post">
+    <table>
+        <tr>
+            <td>
+                <label for="firstName">
+                    Имя:
+                </label>
+            </td>
+            <td>
+                <input name="firstName" id="firstName" type="text"
+                       value="<?php echo $firstName; ?>">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="lastName">
+                    Фамилия:
+                </label>
+            </td>
+            <td>
+                <input name="lastName" id="lastName" type="text"
+                       value="<?php echo $lastName; ?>">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="patronymic">
+                    Отчество:
+                </label>
+            </td>
+            <td>
+                <input name="patronymic" id="patronymic" type="text"
+                       value="<?php echo $patronymic; ?>">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="birthday">
+                    Дата рождения:
+                </label>
+            </td>
+            <td>
+                <input name="birthday" id="birthday" type="text"
+                       value="<?php echo $birthday; ?>">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="phoneNumber">
+                    Номер телефона:
+                </label>
+            </td>
+            <td>
+                <input name="phoneNumber" id="phoneNumber" type="text"
+                       value="<?php echo $phoneNumber; ?>">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="email">
+                    E-Mail:
+                </label>
+            </td>
+            <td>
+                <input name="email" id="email" type="text"
+                       value="<?php echo $email; ?>">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="password">
+                    Пароль:
+                </label>
+            </td>
+            <td>
+                <input name="password" id="password" type="password">
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" name="submit" value="Зарегистрировать">
+            </td>
+        </tr>
+    </table>
+</form>
+
+<?php
+if (isset($_SESSION['services']) && !empty($_SESSION['services'])) {
+    foreach ($_SESSION['services'] as $service) {
+        switch ($service) {
+            case 'vk':
+                ?>
+                Ваш профиль Вконтакте: <br>
+                <div style="height: 80px;">
+                    <img style="float: left; width: 50px; padding: 15px 15px 15px 0;" src="<?php echo $_SESSION['steam_avatar']; ?>" alt="Аватар">
+                    <div style="line-height: 80px"><?php echo $_SESSION['vk_firstName'] . ' ' . $_SESSION['vk_lastName']; ?></div>
+                </div>
+                <a href="auth/unset/vk">Отвязать Вконтакте</a><br>
+                <?php
+                break;
+            case 'ok':
+                ?>
+                Ваш профиль Одноклассники: <br>
+                <div style="height: 80px;">
+                    <img style="float: left; width: 50px; padding: 15px 15px 15px 0;" src="<?php echo $_SESSION['steam_avatar']; ?>" alt="Аватар">
+                    <div style="line-height: 80px"><?php echo $_SESSION['ok_firstName'] . ' ' . $_SESSION['ok_lastName']; ?></div>
+                </div>
+                <a href="auth/unset/ok">Отвязать Одноклассники</a><br>
+                <?php
+                break;
+            case 'mail':
+                ?>
+                Ваш профиль Mail.ru: <br>
+                <div style="height: 80px;">
+                    <img style="float: left; width: 50px; padding: 15px 15px 15px 0;" src="<?php echo $_SESSION['steam_avatar']; ?>" alt="Аватар">
+                    <div style="line-height: 80px"><?php echo $_SESSION['ok_firstName'] . ' ' . $_SESSION['ok_lastName']; ?></div>
+                </div>
+                <a href="auth/unset/mail">Отвязать Mail.ru</a><br>
+                <?php
+                break;
+            case 'ya':
+                ?>
+                Ваш профиль Yandex.ru: <br>
+                <div style="height: 80px;">
+                    <img style="float: left; width: 50px; padding: 15px 15px 15px 0;" src="<?php echo $_SESSION['steam_avatar']; ?>" alt="Аватар">
+                    <div style="line-height: 80px"><?php echo $_SESSION['ya_firstName'] . ' ' . $_SESSION['ya_lastName']; ?></div>
+                </div>
+                <a href="auth/unset/ya">Отвязать Yandex.ru</a><br>
+                <?php
+                break;
+            case 'goo':
+                ?>
+                Ваш профиль Google: <br>
+                <div style="height: 80px;">
+                    <img style="float: left; width: 50px; padding: 15px 15px 15px 0;" src="<?php echo $_SESSION['steam_avatar']; ?>" alt="Аватар">
+                    <div style="line-height: 80px"><?php echo $_SESSION['goo_firstName'] . ' ' . $_SESSION['goo_lastName']; ?></div>
+                </div>
+                <a href="auth/unset/goo">Отвязать Google</a><br>
+                <?php
+                break;
+            case 'fb':
+                ?>
+                Ваш профиль Facebook: <br>
+                <div style="height: 80px;">
+                    <img style="float: left; width: 50px; padding: 15px 15px 15px 0;" src="<?php echo $_SESSION['steam_avatar']; ?>" alt="Аватар">
+                    <div style="line-height: 80px"><?php echo $_SESSION['fb_firstName'] . ' ' . $_SESSION['fb_lastName']; ?></div>
+                </div>
+                <a href="auth/unset/fb">Отвязать Facebook</a><br>
+                <?php
+                break;
+            case 'steam':
+                ?>
+                Ваш профиль Steam: <br>
+                <div style="height: 80px;">
+                    <img style="float: left; width: 50px; padding: 15px 15px 15px 0;" src="<?php echo $_SESSION['steam_avatar']; ?>" alt="Аватар">
+                    <div style="line-height: 80px"><?php echo $_SESSION['steam_nickName']; ?></div>
+                </div>
+                <a href="auth/unset/steam">Отвязать Steam</a><br>
+                <?php
+                break;
+        }
     }
     ?>
-
-<?php } else {
-    $firstName = (!empty($_POST['firstName'])) ? $_POST['firstName'] : '';
-    $lastName = (!empty($_POST['lastName'])) ? $_POST['lastName'] : '';
-    $patronymic = (!empty($_POST['patronymic'])) ? $_POST['patronymic'] : '';
-    $birthday = (!empty($_POST['birthday'])) ? $_POST['birthday'] : '';
-    $phoneNumber = (!empty($_POST['phoneNumber'])) ? $_POST['phoneNumber'] : '';
-    $email = (!empty($_POST['email'])) ? $_POST['email'] : '';
+    <a href="auth/unset">Отвязать все сервисы</a><br>
+    <?php
+} else {
     ?>
-
-    <form action="" method="post">
-        <table>
-            <tr>
-                <td>
-                    <label for="firstName">
-                        Имя:
-                    </label>
-                </td>
-                <td>
-                    <input name="firstName" id="firstName" type="text"
-                           value="<?php echo $firstName; ?>">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="lastName">
-                        Фамилия:
-                    </label>
-                </td>
-                <td>
-                    <input name="lastName" id="lastName" type="text"
-                           value="<?php echo $lastName; ?>">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="patronymic">
-                        Отчество:
-                    </label>
-                </td>
-                <td>
-                    <input name="patronymic" id="patronymic" type="text"
-                           value="<?php echo $patronymic; ?>">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="birthday">
-                        Дата рождения:
-                    </label>
-                </td>
-                <td>
-                    <input name="birthday" id="birthday" type="text"
-                           value="<?php echo $birthday; ?>">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="phoneNumber">
-                        Номер телефона:
-                    </label>
-                </td>
-                <td>
-                    <input name="phoneNumber" id="phoneNumber" type="text"
-                           value="<?php echo $phoneNumber; ?>">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="email">
-                        E-Mail:
-                    </label>
-                </td>
-                <td>
-                    <input name="email" id="email" type="text"
-                           value="<?php echo $email; ?>">
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="password">
-                        Пароль:
-                    </label>
-                </td>
-                <td>
-                    <input name="password" id="password" type="password">
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>
-                    <input type="submit" name="submit" value="Зарегистрировать">
-                </td>
-            </tr>
-        </table>
-    </form>
     <a href="auth/vk">Авторизоваться через Вконтакте</a><br>
     <a href="auth/ok">Авторизоваться через Одноклассники</a><br>
     <a href="auth/mail">Авторизоваться через Mail.ru</a><br>
@@ -748,4 +393,6 @@ if (isset($_SESSION['service'])) {
     <a href="auth/goo">Авторизоваться через Google</a><br>
     <a href="auth/fb">Авторизоваться через Facebook</a><br>
     <a href="auth/steam">Авторизоваться через Steam</a><br>
-<?php } ?>
+    <?php
+}
+?>

@@ -18,6 +18,7 @@ class CPModel extends Model
             if (isset($_POST['sendCheck'])) {
                 foreach ($_SESSION['keys'] as $email => $key) {
                     // TODO: Отправка ключей на почту
+                    mail ($email, "Альфа ебанутый ключ", "Принимай этот ключ: " . $key);
                 }
             }
             if (isset($_POST['dbCheck'])) {
