@@ -339,7 +339,7 @@ if (isset($_SESSION['services']) && !empty($_SESSION['services'])) {
             <img style="float: left; width: 50px; padding: 15px 15px 15px 0;"
                  src="<?php echo $_SESSION['mail_avatar']; ?>" alt="Аватар">
             <div
-                style="line-height: 80px"><?php echo $_SESSION['ok_firstName'] . ' ' . $_SESSION['ok_lastName']; ?></div>
+                style="line-height: 80px"><?php echo $_SESSION['mail_firstName'] . ' ' . $_SESSION['mail_lastName']; ?></div>
         </div>
         <a href="auth/unset/mail">Отвязать Mail.ru</a><br><br>
         <?php
