@@ -96,7 +96,7 @@ if (isset($_SESSION['services']) && !empty($_SESSION['services'])) {
         <tr>
             <td>
                 <label for="phoneNumber">
-                    Номер телефона:
+                    Номер телефона: +
                 </label>
             </td>
             <td>
