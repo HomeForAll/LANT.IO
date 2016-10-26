@@ -1,4 +1,6 @@
-<?php if (isset($this->data)) echo $this->data; ?>
+<?php if (isset($this->data)) echo $this->data;
+$this->title = 'Авторизация';
+?>
 <form action="" method="post">
     <table>
         <tr>

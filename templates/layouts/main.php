@@ -7,10 +7,8 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title><?php $this->title; ?></title>
-    <?php
-    $this->renderHead();
-    ?>
+    <title><?php echo $this->title; ?></title>
+    <?php $this->renderHead(); ?>
 </head>
 <body>
 <?php $this->renderBody(); ?>

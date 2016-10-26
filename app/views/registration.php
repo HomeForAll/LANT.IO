@@ -1,3 +1,6 @@
+<?php
+$this->title = 'Регистрация';
+?>
 <h1>Регистрация</h1>
 <?php
 foreach ($this->data['info'] as $error) {
