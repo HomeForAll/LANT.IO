@@ -25,13 +25,13 @@ class UserController extends Controller
         if (isset($_POST['submit'])) {
             if ($this->model->userVerify()) {
                 $_SESSION['authorized'] = true;
-                header('Location: http://' . $_SERVER['HTTP_HOST'] . '/cp');
+                header('Location: http://' . $_SERVER['HTTP_HOST'] . '/cabinet');
             } else {
                 $data = '<span style="color: red;">Вы указали неверные сведения.</span><br>';
                 $this->view->render('login', $data);
             }
         } elseif (isset($_SESSION['authorized'])) {
-            header('Location: http://' . $_SERVER['HTTP_HOST'] . '/cp');
+            header('Location: http://' . $_SERVER['HTTP_HOST'] . '/cabinet');
         } else {
             $this->view->render('login');
         }

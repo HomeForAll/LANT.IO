@@ -1,6 +1,6 @@
 <?php
 
-class CPModel extends Model
+class CabinetModel extends Model
 {
     private $mailer;
     public function __construct()
