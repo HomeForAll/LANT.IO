@@ -12,8 +12,4 @@ class SiteController extends Controller {
         }
         $this->view->render('access');
     }
-
-    public function actionSearch() {
-        $this->view->render('search');
-    }
 }

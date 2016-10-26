@@ -1,8 +1,12 @@
+<?php
+$this->title = 'Регистрация';
+?>
 <h1>Регистрация</h1>
 <?php
-foreach ($this->data['info'] as $error) {
-    echo '<span style="color: red;">' . $error . '</span><br>';
-}
+    foreach ($this->data['info'] as $error) {
+        echo '<span style="color: red;">' . $error . '</span><br>';
+    }
+
 
 $nickname = '';
 $firstName = (isset($_POST['firstName']) && !empty($_POST['firstName'])) ? $_POST['firstName'] : '';

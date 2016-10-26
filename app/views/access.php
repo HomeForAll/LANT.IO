@@ -3,7 +3,7 @@
 /***
  * @var object $this экземпляр класса /app/core/View
  */
-$this->title = 'Получение доступа аза';
+$this->title = 'Beta Access';
 ?>
 
 <div id="logo"><img src="/templates/main/images/access_logo_element.png" alt="access">lant.io</div>

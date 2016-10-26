@@ -3,15 +3,15 @@
 return array(
     // 'URI' => 'template/controller/action'
     '' => 'main/site/index',
-    'search' => 'main/site/search',
+    'search' => 'main/search/index',
 
     'registration' => 'main/user/registration',
     'login' => 'main/user/login',
     'logout' => 'main/user/logout',
 
-    'cp' => 'main/CP/CP',
-    'cp/chat' => 'main/CP/chat',
-    'cp/generator' => 'main/CP/generator',
+    'cabinet' => 'main/cabinet/cabinet',
+    'cabinet/chat' => 'main/cabinet/chat',
+    'cabinet/generator' => 'main/cabinet/generator',
 
     'auth/vk' => 'main/auth/vk',
     'auth/ok' => 'main/auth/ok',

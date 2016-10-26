@@ -1,11 +1,11 @@
 <?php
-class CPController extends Controller {
-    public function actionCP() {
+class CabinetController extends Controller {
+    public function actionCabinet() {
         if (!isset($_SESSION['authorized'])) {
             header('Location: http://' . $_SERVER['HTTP_HOST']);
         } else {
 
-            $this->view->render('cp');
+            $this->view->render('cabinet');
         }
     }
 

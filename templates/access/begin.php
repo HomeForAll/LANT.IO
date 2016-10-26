@@ -104,7 +104,7 @@
     </div>
     <div id="buttons">
         <a href="" id="agree">Принимаю условия</a>
-        <a href="" id="denial">Отказ, анулирует ключ</a>
+        <a href="" id="denial">Отказ, аннулирует ключ</a>
     </div>
 </div>
 
