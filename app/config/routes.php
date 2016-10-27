@@ -12,6 +12,7 @@ return array(
     'cabinet' => 'main/cabinet/cabinet',
     'cabinet/chat' => 'main/cabinet/chat',
     'cabinet/generator' => 'main/cabinet/generator',
+    'cabinet/keyeditor' => 'main/cabinet/keyeditor',
 
     'auth/vk' => 'main/auth/vk',
     'auth/ok' => 'main/auth/ok',
