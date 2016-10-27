@@ -19,7 +19,7 @@ class CabinetModel extends Model
         if (isset($_POST['handle'])) {
             if (isset($_POST['sendCheck'])) {
                 foreach ($_SESSION['keys'] as $email => $key) {
-                    $str = file_get_contents('email.html');
+                    $str = file_get_contents(ROOT_DIR . '/templates/layouts/email.php');
                     $phrase  = $str;
                     $old = array("KEY");
                     $new   = array($key);
