@@ -13,12 +13,18 @@ class CabinetModel extends Model
 
     }
 
-    public function handleKeys() {
+    public function handleKeys()
+    {
+
         if (isset($_POST['handle'])) {
             if (isset($_POST['sendCheck'])) {
                 foreach ($_SESSION['keys'] as $email => $key) {
-                    // TODO: Отправка ключей на почту
-                    mail ($email, "Альфа ебанутый ключ", "Принимай этот ключ: " . $key);
+                    $str = file_get_contents('email.html');
+                    $phrase  = $str;
+                    $old = array("KEY");
+                    $new   = array($key);
+                    $newphrase = str_replace($old, $new, $phrase);
+                    mail($email, "Альфа ключ", $newphrase);
                 }
             }
             if (isset($_POST['dbCheck'])) {
@@ -75,5 +81,129 @@ class CabinetModel extends Model
         $key .= $selectionMD5['15'] . $selectionMD5['6'] . $selectionMD5['9'] . $selectionMD5['11'] . '-';
         $key .= $selectionMD5['19'] . $selectionMD5['21'] . $selectionMD5['25'] . $selectionMD5['26'];
         return strtoupper($key);
+    }
+
+    public function showdb()
+    {
+        if (isset($_POST['showdb'])) {
+            unset($_SESSION['id_key_keyeditor']);
+            $stmt = $this->db->prepare("SELECT * FROM access");
+            $stmt->execute();
+            $result = $stmt->fetchAll();
+            $_SESSION['keys_keyeditor'] = $result;
+            $result = '';
+            $array = [];
+            $temp = [];
+
+            if (isset($_POST['showdb'])) {
+                foreach ($_SESSION['keys_keyeditor'] as $key) {
+                    $array[$key['id']] = $key;
+                }
+                for ($i = 1; $i < count($array); $i++) {
+                    $temp[$i] = $array[$i];
+                }
+                $array = $temp;
+
+                foreach ($array as $info) {
+                    $part = "ID - {$info['id']}" . '<br>' . "Key - {$info['key']}" . '<br>' . "Email - {$info['email']}" .
+                        '<br>' . "Rmail_sent - {$info['email_sent']}" . '<br>' . "Creation_date - {$info['creation_date']}" .
+                        '<br>' . "Inactive date - {$info['inactive_date']}" . '<br>' . "Status - {$info['status']}" . '<br>' . '<br>';
+                    $result .= $part;
+                }
+            }
+            return $result;
+        }
+        return false;
+    }
+
+    public function keyeditor()
+    {
+        if (isset($_POST['keyworkgo'])) {
+            $id_key = $_POST['id_key_keyeditor'];
+            $array = [];
+
+            foreach ($_SESSION['keys_keyeditor'] as $key) {
+                $array[$key['id']] = $key;
+            }
+            if (isset($array[$id_key])) {
+                $part = "ID - {$array[$id_key]['id']}" . '<br>' . "Key - {$array[$id_key]['key']}" . '<br>' . "Email - {$array[$id_key]['email']}" .
+                    '<br>' . "Rmail_sent - {$array[$id_key]['email_sent']}" . '<br>' . "Creation_date - {$array[$id_key]['creation_date']}" .
+                    '<br>' . "Inactive date - {$array[$id_key]['inactive_date']}" . '<br>' . "Status - {$array[$id_key]['status']}" . '<br>' . '<br>';
+                $result = $part;
+                $_SESSION['id_key_keyeditor'] = $id_key;
+                $_SESSION['array_keyeditor'] = $array[$id_key];
+                return $result;
+            } else {
+                $result = "ID = $id_key отсутсвует!";
+                return $result;
+            }
+        }
+        return false;
+    }
+
+    public function keylock()
+    {
+        if (isset($_POST['lock'])) {
+            $this->db->query("UPDATE access SET status = 2 WHERE id = {$_SESSION['id_key_keyeditor']}");
+            $result = "{$_SESSION['array_keyeditor']['key']} заблокирован!";
+            return $result;
+        }
+        return false;
+    }
+
+    public function keyunlock()
+    {
+        if (isset($_POST['unlock'])) {
+            $today = date("Ymd");
+            $arraytime = explode("-", $_SESSION['array_keyeditor']['inactive_date']);
+            $checkdate = $arraytime[0] . $arraytime[1] . $arraytime[2];
+            if ($checkdate > $today) {
+                $this->db->query("UPDATE access SET status = 3 WHERE id = {$_SESSION['id_key_keyeditor']}");
+                $result = "{$_SESSION['array_keyeditor']['key']} разблокирован!";
+                return $result;
+            } else
+                $result = "Ключ просрочен!";
+            return $result;
+        }
+    }
+
+    public function installdate()
+    {
+        if (isset($_POST['installdate'])) {
+            $day = $_POST['day'];
+            $month = $_POST['month'];
+            $year = $_POST['year'];
+            $flag = true;
+            if ($month == 1 || $month == 3 || $month == 5 || $month == 7 || $month == 8 || $month == 10 || $month == 12) {
+                if ($day > 31) {
+                    $flag = false;
+                }
+            }
+            echo $month;
+            if ($month == 4 || $month == 6 || $month == 9 || $month == 11) {
+                if ($day > 30) {
+                    $flag = false;
+                }
+            }
+            if ($month == 2) {
+                if ($day > 28) {
+                    $flag = false;
+                }
+            }
+            if ($month > 12) {
+                $flag = false;
+            }
+
+            if ($flag == true) {
+                $date = "{$year}-{$month}-{$day}";
+                $this->db->query("UPDATE access SET inactive_date = '{$date}' WHERE id = {$_SESSION['id_key_keyeditor']}");
+                $result = "Срок действия ключа {$_SESSION['array_keyeditor']['key']} истекает {$date}";
+                return $result;
+
+            } else {
+                $result = "Ошибка записи даты!";
+                return $result;
+            }
+        }
     }
 }
