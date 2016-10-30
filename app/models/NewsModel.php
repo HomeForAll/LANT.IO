@@ -1,18 +1,20 @@
 <?php
 
-class NewsModel extends Application {
-
+class NewsModel extends Model {
     public function __construct() {
-        parent::__construct();
-        $this->db = $this->getPGConnect();
+        $this->db = new DataBase;
+    }
+    
+        public function ajaxHandler() {
+
     }
 
     public function getNewsCategories() {
         $stmt = $this->db->prepare("SELECT category FROM news_category ORDER BY category");
         $stmt->execute();
         $coll = $stmt->fetchall(PDO::FETCH_NUM);
-        for ($i = 0; !empty($coll[$i][0]); $i++) {
-            $result[$i] = $coll[$i][0];
+        foreach ($coll as $key => $value) {
+            $result[$key] = $value[0];
         }
         return $result;
     }
@@ -30,8 +32,9 @@ class NewsModel extends Application {
                 . " WHERE id_news = :id");
         $stmt->bindParam(':id', $id);
         $stmt->execute();
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $result;
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        $data['preview_img'] = explode('|', $data['preview_img']);
+        return $data;
     }
 
     // Вход: страница новостей
@@ -85,8 +88,19 @@ class NewsModel extends Application {
         $stmt->bindParam(':from_page', $from_page);
         $stmt->execute();
         $data['news'] = $stmt->fetchAll();
+        //Строку файлов картинок преобразуем в массив $data['news'][number]['preview_img'][]
+        $data['news'] = $this->explodePreviewImg($data['news']);
         return $data;
     }
+    
+    public function explodePreviewImg($data_news) {
+        
+        foreach ($data_news as $k => $news_array) {
+            $data_news[$k]['preview_img'] = explode('|', $news_array['preview_img']);
+        }
+        return $data_news;
+    }
+ 
 
     public function getNewsForEditor() {
 
@@ -179,7 +193,7 @@ class NewsModel extends Application {
                         array_push($news_message, 'Изменён статус у новости c id = ' . $s_id);
                     } else {
                         array_push($news_error, 'Статус у новости с id = ' . $s_id . ' не удалось изменить');
-                    };
+                    }
                 }
             }
         }
@@ -187,55 +201,67 @@ class NewsModel extends Application {
         return;
     }
 
-    // Возвращает имя большой картинки 
+    // Возвращает строку имен (через '|') больших картинок 
     //(имя эскиза s_имя больш)
     public function saveNewsPictures() {
         global $news_error;
 
         $blacklistOfFile = array(".php", ".phtml", ".php3", ".php4"); // Запрещенный формат файлов
         $imgMaxSize = 3050000; // Максимальный размер картинок в байтах
-        $name_rand = time() . rand(100, 999); // Базовая часть
-        $name_big = 'news_' . $name_rand; // Новое имя для большой картинки
-        $name_small = 's_' . $name_big; // Новое имя для маленькой картинки
-        
-        if (!empty($_FILES['newsPicture']['name'])) {
-            //
-            // Загрузка картинки в директоритю и получение ссылки на нее
-            // Проверяем тип файла
-            // Допустимый формат файлов .jpeg .png .gif
-            if ($_FILES['newsPicture']['type'] == 'image/jpeg')
-                $type = '.jpg';
-            elseif ($_FILES['newsPicture']['type'] == 'image/png')
-                $type = '.png';
-            elseif ($_FILES['newsPicture']['type'] == 'image/gif')
-                $type = '.gif';
-            else {
-                array_push($news_error, 'Можно загружать только картинки с расширением jpeg, png, gif.');
-                return;
-            }
-            // Расширения новых имен:
-            $name_big = $name_big . $type;
-            $name_small = $name_small . $type;
+        $return_image_names = ''; // Возвращаемая строка имен картинок 
 
-            // Проверка на недопустимые форматы
-            foreach ($blacklistOfFile as $item) {
-                if (preg_match("/$item\$/i", $_FILES['newsPicture']['name'])) {
-                    array_push($news_error, 'PHP файлы не разрешены для загрузки.');
-                    return;
+        if (!empty($_FILES)) {
+            //Получаем имена полей "image_name_?" ввода картинок переданных POST
+            $image_name_keys = preg_grep("/^image_name_/", array_keys($_FILES));
+            
+            foreach ($image_name_keys as $image_name_key) {
+
+                //Генерируем случайное имя картинки
+                $name_rand = md5(time() . rand(100, 999)); // Базовая часть
+                $name_big = 'news_' . $name_rand; // Новое имя для большой картинки
+                $name_small = 's_' . $name_big; // Новое имя для маленькой картинки
+                // Загрузка картинки в директоритю и получение ссылки на нее
+                // Проверяем тип файла
+                // Допустимый формат файлов .jpeg .png .gif
+                if ($_FILES[$image_name_key]['type'] == 'image/jpeg') {
+                    $type = '.jpg';
+                } elseif ($_FILES[$image_name_key]['type'] == 'image/png') {
+                    $type = '.png';
+                } elseif ($_FILES[$image_name_key]['type'] == 'image/gif') {
+                    $type = '.gif';
+                } else {
+                    array_push($news_error, 'Файл:"' . $_FILES[$image_name_key]['name'] . '" не загружен. Можно загружать только картинки с расширением jpeg, png, gif.');
+                    continue;
+                }
+                // Расширения новых имен:
+                $name_big = $name_big . $type;
+                $name_small = $name_small . $type;
+
+                // Проверка на недопустимые форматы
+                foreach ($blacklistOfFile as $item) {
+                    if (preg_match("/$item\$/i", $_FILES[$image_name_key]['name'])) {
+                        array_push($news_error, 'Файл:"' . $_FILES[$image_name_key]['name'] . '" не загружен. PHP файлы не разрешены для загрузки.');
+                        continue;
+                    }
+                }
+                // Проверяем размер файла
+                if ($_FILES[$image_name_key]['size'] > $imgMaxSize) {
+                    array_push($news_error, 'Файл:"' . $_FILES[$image_name_key]['name'] . '" не загружен. Слишком большой размер файла картинки.');
+                    continue;
+                }
+
+                //Изменение размеров и запись
+                $this->newsPicturesResize($_FILES[$image_name_key], 'big', $name_big);
+                $this->newsPicturesResize($_FILES[$image_name_key], 'small', $name_small);
+
+                if (empty($return_image_names)) {
+                    $return_image_names = $name_big;
+                } else {
+                    $return_image_names = $return_image_names . '|' . $name_big;
                 }
             }
-            // Проверяем размер файла
-            if ($_FILES['newsPicture']['size'] > $imgMaxSize) {
-                array_push($news_error, 'Слишком большой размер файла картинки.');
-                return;
-            }
-
-            //Изменение размеров и запись
-            $this->newsPicturesResize($_FILES['newsPicture'], 'big', $name_big);
-            $this->newsPicturesResize($_FILES['newsPicture'], 'small', $name_small);
-
-            return $name_big;
         }
+        return $return_image_names;
     }
 
     //Изменение размеров картинки на эскиз ($type = 'small') и нормальные ($type = 'big') 
@@ -249,16 +275,17 @@ class NewsModel extends Application {
 
         $h_max_big_size = 800; //Всота для большой картинки
         $h_max_small_size = 200; //Всота для эскиза
-        $quality = 75; // качество изображения (по умолчанию 75%)
+        $quality = 80; // качество изображения (по умолчанию 80%)
         // Создание исходного изображения на основе исходного файла
-        if ($file['type'] == 'image/jpeg')
+        if ($file['type'] == 'image/jpeg') {
             $src = imagecreatefromjpeg($file['tmp_name']);
-        elseif ($file['type'] == 'image/png')
+        } elseif ($file['type'] == 'image/png') {
             $src = imagecreatefrompng($file['tmp_name']);
-        elseif ($file['type'] == 'image/gif')
+        } elseif ($file['type'] == 'image/gif') {
             $src = imagecreatefromgif($file['tmp_name']);
-        else
+        } else {
             return false;
+        }
 
         //Определение размеров изображения
         $w_src = imagesx($src);
@@ -294,8 +321,8 @@ class NewsModel extends Application {
         if (!@copy($tmpPath . $new_name, $imgPath . $new_name)) {
             array_push($news_error, 'Произошла ошибка при загрузке картинки');
         }
-        // Удаляем временный файл
-        // unlink($tmpPath.$new_name);
+        //Удаляем временный файл
+        //unlink($tmpPath.$new_name);
     }
 
     // Вывод картинки во временную директорию
@@ -312,39 +339,5 @@ class NewsModel extends Application {
             return false;
     }
 
-//    
-//    function imageresize($infile,$outfile,$neww,$newh,$quality) {
-//    $im=imagecreatefromjpeg($infile);
-//    $k1=$neww/imagesx($im);
-//    $k2=$newh/imagesy($im);
-//    $k=$k1>$k2?$k2:$k1;
-// if($k>1)$k=1;
-//
-//    $w=intval(imagesx($im)*$k);
-//    $h=intval(imagesy($im)*$k);
-// 
-// $im1=imagecreatetruecolor($w,$h);
-// imagecopyresampled($im1,$im,0,0,0,0,$w,$h,imagesx($im),imagesy($im));
-// 
-//    imagejpeg($im1,$outfile,$quality);
-//    imagedestroy($im);
-//    imagedestroy($im1);
-//    }
-//
-//function imagebox($infile,$outfile,$xnew,$quality) {
-//    $im=imagecreatefromjpeg($infile);
-// $w=imagesx($im);
-// $h=imagesy($im);
-// if($w>=$h) {$x=$h; $dy=0; $dx=round(($w-$h)/2);}
-// else {$x=$w; $dx=0; $dy=round(($h-$w)/3);}
-// 
-//    $im1=imagecreatetruecolor($xnew,$xnew);
-//    imagecopyresampled($im1,$im,0,0,$dx,$dy,$xnew,$xnew,$x,$x);
-//
-//    imagejpeg($im1,$outfile,$quality);
-//    imagedestroy($im);
-//    imagedestroy($im1);
-//    }
 }
 
-?>

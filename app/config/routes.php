@@ -29,9 +29,9 @@ return array(
     'auth/unset/steam' => 'main/auth/unsetSteam',
     'auth/unset' => 'main/auth/unset',
 
-    'news/page([0-9]+)' => 'Новости/news/news_list/$1',
-    'news/([0-9]+)' => 'Новости/news/news_id/$1', 
-    'news/editor' => 'Новости/news/news_editor',
-    'news/editor/([0-9]+)' => 'Новости/news/news_editor/$1',
-    'news' => 'Новости/news/news_list'
+    'news/page([0-9]+)' => 'main/news/news_list/$1',
+    'news/([0-9]+)' => 'main/news/news_id/$1', 
+    'news/editor' => 'main/news/news_editor',
+    'news/editor/([0-9]+)' => 'main/news/news_editor/$1',
+    'news' => 'main/news/news_list'
 );

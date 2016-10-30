@@ -1,28 +1,22 @@
 <?php
 
 class NewsController extends Controller {
-    
-    
-    public function __construct($pageName, $view, $modelName) {
-        parent::__construct($pageName, $view);
-        $this->model = new $modelName();
-        $this->categories = $this->model->getNewsCategories();
-    }
+  
 
     //Функция выводит заданное количество новостей из базы данных
     public function actionNews_list($page) {
+        // Получаем категории из БД
+        $this->categories = $this->model->getNewsCategories();
+
     
         $data = $this->model->getNewsList($page);
-//             echo '<pre>';
-//             var_dump($data);
-//             echo '</pre>';
-        $this->view->render($this->viewName, $this->title, $data);
+        $this->view->render('news_list', $data);
     }
 
     public function actionNews_id($params) {
         $news_id = $params[0];
         $news = $this->model->getNewsById($news_id);
-        $this->view->render($this->viewName, $this->title, $news);
+        $this->view->render('news_id', $news);
     }
 
     public function actionNews_editor($params) {
@@ -31,18 +25,35 @@ class NewsController extends Controller {
         $news_error = [];
         $news_to_edit = [];
         $data = [];
+        // Получаем категории из БД
+        $this->categories = $this->model->getNewsCategories();
+        
+             
+//                echo '<pre>';
+//                echo var_dump($_POST);
+//                echo '</pre>';
+//                
+//                echo '<pre>';
+//                echo var_dump($_FILES);
+//                echo '</pre>'; 
+                
+               
         
 
 // Определяем режим изменения новости по наличию параметра в строке ввода
 // Если да, то определяем id        
-        $news_to_edit_id = $params[0];
-        if (!empty($news_to_edit_id)) {
+        
+        if (!empty($params[0])) {
+            $news_to_edit_id = $params[0];
             //           сообщение о редактировании $message[message][0]
             array_push($news_message,'Редактирование новости');
             
 // Если были посланны данные обновляем новость в БД
             if (!empty($_POST['newsTitle']) and !empty($_POST['newsContent'])) {
+                //Получает из $_FILE данные, отбирает ["image_name_?"], записывает картинки
+                //Возвращает строку имен картинок через '|'
                 $preview_img = $this->model->saveNewsPictures();
+                // Апдейт БД
                 if ($this->model->makeNewsUpdate($news_to_edit_id, $preview_img)) {
                     // Добавление сообщения
                     array_push($news_message, 'Новость: "' . $_POST['newsTitle'] . '" успешно отредактирована!');
@@ -56,7 +67,7 @@ class NewsController extends Controller {
 
 
 // Добавление новости в БД
-        if (empty($news_to_edit_id) and ! empty($_POST['submit_editor'])) {
+        if (empty($params[0]) and ! empty($_POST['submit_editor'])) {
 
             if (!empty($_POST['newsTitle']) and !empty($_POST['newsContent'])) {
                 //Записываем картинку
@@ -93,14 +104,10 @@ class NewsController extends Controller {
         $data['error'] = $news_error;
         $data['categories'] = $this->categories;
 
-        $this->view->render($this->viewName, $this->title, $data);
+        $this->view->render('news_editor', $data);
 
 
-//        if ($_POST) {
-//                echo '<pre>';
-//                echo htmlspecialchars(print_r($_POST, true));
-//                echo '</pre>';
-//            }
+
     }
 
 }
