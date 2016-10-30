@@ -69,7 +69,7 @@ class UserModel extends Model {
         $stmt->bindParam(':password', $passwordHash);
         $stmt->bindParam(':vk_userID', $vk_userID);
         $stmt->bindParam(':ok_userID', $ok_userID);
-        $stmt->bindParam(':mail_userID', $mail_userID);        $stmt->bindParam(':birthday', $_POST['birthday']);
+        $stmt->bindParam(':mail_userID', $mail_userID);
         $stmt->bindParam(':ya_userID', $ya_userID);
         $stmt->bindParam(':google_userID', $goo_userID);
         $stmt->bindParam(':steam_userID', $steam_userID);
