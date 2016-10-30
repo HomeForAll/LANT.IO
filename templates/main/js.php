@@ -5,4 +5,8 @@
      $("#loading").fadeOut(1000);
      });
      });*/
+
+    function subjectChange(obj) {
+
+    }
 </script>

@@ -1,16 +1,16 @@
 <?php if (isset($this->data)) echo $this->data;
 $this->title = 'Авторизация';
 ?>
-<form action="" method="post">
+<form action="" method="post" style="margin: 0 auto;">
     <table>
         <tr>
             <td>
-                <label for="email">
-                    E-Mail:
+                <label for="login">
+                    E-Mail или номер телефона:
                 </label>
             </td>
             <td>
-                <input name="email" id="email" type="text" value="<?php if (!empty($_POST['email'])) echo $_POST['email']; ?>">
+                <input name="login" id="login" type="text" value="<?php if (!empty($_POST['login'])) echo $_POST['login']; ?>">
             </td>
         </tr>
         <tr>
