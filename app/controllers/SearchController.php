@@ -6,6 +6,7 @@ class SearchController extends Controller {
             $this->model->ajaxHandler();
             exit;
         }
+
         $this->view->render('search');
     }
 }

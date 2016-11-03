@@ -30,7 +30,10 @@ $this->title = 'Поиск';
             </div>
             Расположение:
             <div style="padding-left: 30px">
-                Регион:
+                Начните вводить город:
+                <input type="text" name="address" oninput="getGeoData(this.value)">
+                <div id="cities"></div>
+                <!--Регион:
                 <select name="region" id="region">
                     <option value="" selected>---</option>
                 </select><br>
@@ -41,7 +44,7 @@ $this->title = 'Поиск';
                 Населенный пункт:
                 <select name="city" id="city">
                     <option value="" selected>---</option>
-                </select>
+                </select>-->
             </div>
         </div>
     </fieldset>

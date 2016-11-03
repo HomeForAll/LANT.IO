@@ -15,6 +15,7 @@ class CabinetModel extends Model
 
     public function handleKeys() {
         if (isset($_POST['handle'])) {
+            $date = date('Y-m-d');
             if (isset($_POST['sendCheck'])) {
                 foreach ($_SESSION['keys'] as $email => $key) {
                     // TODO: Отправка ключей на почту
@@ -23,9 +24,10 @@ class CabinetModel extends Model
             }
             if (isset($_POST['dbCheck'])) {
                 foreach ($_SESSION['keys'] as $email => $key) {
-                    $this->db->query("INSERT INTO access (email, key) VALUES (NULL, '$key')");
+                    $this->db->query("INSERT INTO access (email, key, id, email_sent, creation_date, inactive_date, status) VALUES (NULL, '{$key}', NULL, '{$email}', '{$date}', NULL, 0)");
                 }
             }
+//            print_r($this->db->errorInfo());
             unset($_SESSION['keys']);
         }
     }

@@ -44,4 +44,27 @@
             }
         });
     }
+
+    var timer;
+    function getTimeout(delay, callback) {
+        clearTimeout(timer);
+        timer = setTimeout(function () {
+            callback();
+        }, delay);
+    }
+
+    function getGeoData(address) {
+        var divCitiesCursor = $('#cities');
+
+        getTimeout(1000, function () {
+            $.ajax({
+                type: "POST",
+                url: "/search",
+                data: "type=getGeoData&address=" + address,
+                success: function (data) {
+                    divCitiesCursor.html(data);
+                }
+            });
+        });
+    }
 </script>

@@ -25,6 +25,19 @@ class SearchModel extends Model {
                 //echo "Время выполнения скрипта: ".(microtime(true) - $start);
 
                 break;
+            case 'getGeoData':
+                echo '<pre>';
+                print_r(self::getGeoDataByQuery());
+                echo '</pre>';
+                break;
         }
+    }
+
+    private function getGeoDataByQuery() {
+        $stmt = $this->db->prepare("SELECT * FROM cities WHERE title ~* '{$_POST['address']}' OR area ~* '{$_POST['address']}' OR region ~* '{$_POST['address']}' ORDER BY id LIMIT 10");
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+
+        return $result;
     }
 }
