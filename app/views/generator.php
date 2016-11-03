@@ -27,4 +27,5 @@ if (isset($_SESSION['keys'])) {
     <label for="dbCheck">Записать в базу данных? </label><input name="dbCheck" id="dbCheck" type="checkbox"><br>
     Не выбрав ни одного пункта, ключи будут стерты <br>
     <input name="handle" type="submit" value="Замести следы">
+    <a href="keyeditor"><input type = submit name = keyeditor value="Панель ключей"></a>
 </form>
