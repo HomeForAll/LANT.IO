@@ -2,6 +2,7 @@
 
 class CabinetModel extends Model
 {
+    const IDSPERPAGE = 5;
     private $mailer;
 
 
@@ -98,15 +99,16 @@ class CabinetModel extends Model
             $array[$key['id']] = $key;
         }
 
-        if (count($array) % $_SESSION['idsperpage'] == 0)
-            $result = count($array) / $_SESSION['idsperpage'];
+        if (count($array) % self::IDSPERPAGE == 0)
+            $result = count($array) / self::IDSPERPAGE;
         else
-            $result = (count($array) / $_SESSION['idsperpage']) + 1;
+            $result = (count($array) / self::IDSPERPAGE) + 1;
         $_SESSION['numberofpages'] = $result;
     }
 
     public function showdb()
     {
+        unset($_SESSION['sessioncheck']);
         $this->numberofpages();
         if (isset($_POST['showdb'])) {
             unset($_SESSION['id_key_keyeditor']);
@@ -183,6 +185,7 @@ class CabinetModel extends Model
                 $_SESSION['notice_id'] = $array[$id_key]['id'];
                 $_SESSION['id_key_keyeditor'] = $id_key;
                 $_SESSION['array_keyeditor'] = $array[$id_key];
+                $_SESSION['sessioncheck'] = 1;
                 return $result;
             } else {
                 $result = "ID = $id_key отсутсвует!";
@@ -341,9 +344,8 @@ class CabinetModel extends Model
 
     public function page()
     {
-        $_SESSION['idsperpage'] = 5; // id на страницу вывода
         $count = $_SESSION["numberofpages"];
-        $idsperpage = $_SESSION['idsperpage'];
+        $idsperpage = self::IDSPERPAGE;
 
         for ($i = 1; $i <= $count; $i++) {
             if (isset($_POST["page" . $i])) {

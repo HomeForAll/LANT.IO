@@ -82,15 +82,18 @@
         <br><br><br><br>
     </form>
 
+
     <?php
-    if (isset($_SESSION['id_key_keyeditor'])) {
+
+    if (isset($_SESSION['sessioncheck']) && !empty($_SESSION['sessioncheck'])) {
         ?>
 
         <hr>
         <form method="post">
             <h2>
             <?php
-            echo "Вы работаете с ключом, который имеет ID = " . $_SESSION['notice_id'];
+            if (isset($_SESSION['notice_id']))
+                echo "Вы работаете с ключом, который имеет ID = " . $_SESSION['notice_id'];
             ?>
                 </h2>
             <span class="text">
