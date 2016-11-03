@@ -25,7 +25,17 @@ class CabinetController extends Controller {
         $keylock = $this->model->keylock();
         $keyunlock = $this->model->keyunlock();
         $installdate = $this->model->installdate();
+        $page = $this->model->page();
         $viewkeyeditor = '';
+
+        for ($i = 1; $i <= $_SESSION['numberofpages']; $i++) {
+            if (isset($_POST["page" . $i]))
+                $viewkeyeditor = $page;
+        }
+        if (isset($_POST['updateinfo']))
+            $viewkeyeditor = $keyeditor;
+        if (isset($_POST['idworkgo']))
+            $viewkeyeditor = $keyeditor;
         if (isset($_POST['keyworkgo']))
             $viewkeyeditor = $keyeditor;
         if (isset($_POST['showdb']))
@@ -36,6 +46,9 @@ class CabinetController extends Controller {
             $viewkeyeditor = $keyunlock;
         if (isset($_POST['installdate']))
             $viewkeyeditor = $installdate;
+        if (isset($_POST['installemail']))
+            $viewkeyeditor = $installdate;
+
         $this->view->render('keyeditor', $viewkeyeditor);
     }
 }

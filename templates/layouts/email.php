@@ -1,6 +1,12 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+    <title>Alpha-test</title>
+</head>
+<body>
+
 <div id=":2jr" class="a3s aXjCH m158001c1aab07477"><u></u>
-    
-    
     
     
     
@@ -31,7 +37,7 @@
         </div>
       
       </div>
-      <div style="background-color:#131814;background-position:0px 0px;background-image:url(https://ci6.googleusercontent.com/proxy/xFFdsAKb4SFNO9QtZtUmARAlVANz3_hXvJxhfPs3MqWAnoPKihRIbO_dTqlJpAKf8pBbTKw-2h_iATfN6aNPC0cWUpOXgjZ4bCl9yC_bMuzIHGEnMuV_arVSTzP9CLBF=s0-d-e1-ft#http://i1.cmail20.com/ei/d/2F/E67/67E/192233/csfinal/image-beautiful-2.jpg);background-repeat:repeat">
+      <div style="background-color:#131814;background-position: center ;background-size:cover;background: url(http://dev2.lant.io/templates/layouts/email_image.jpg);background-repeat:repeat">
         <div class="m_6317060884218229271layout m_6317060884218229271one-col" style="Margin:0 auto;max-width:600px;min-width:320px;width:320px;width:calc(28000% - 173000px);word-wrap:break-word;word-break:break-word">
           <div class="m_6317060884218229271layout__inner" style="border-collapse:collapse;display:table;width:100%">
           
@@ -120,3 +126,5 @@
 
 
 </div></div>
+</body>
+</html>
