@@ -59,7 +59,7 @@ class SiteModel extends Model
 
     private function setUserAccess()
     {
-        $stmt = $this->db->prepare("UPDATE access SET email = :email WHERE key = :key");
+        $stmt = $this->db->prepare("UPDATE access SET email = :email, status = 1 WHERE key = :key");
         $stmt->bindParam(':email', $_POST['email']);
         $stmt->bindParam(':key', $_POST['key']);
         $stmt->execute();
