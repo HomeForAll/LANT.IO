@@ -35,7 +35,7 @@ class CabinetModel extends Model
             }
             if (isset($_POST['dbCheck'])) {
                 foreach ($_SESSION['keys'] as $email => $key) {
-                    $this->db->query("INSERT INTO access (email, key, id, email_sent, creation_date, inactive_date, status) VALUES (NULL, '{$key}', NULL, '{$email}', '{$date}', NULL, 0)");
+                    $this->db->query("INSERT INTO access (email, key, email_sent, creation_date, inactive_date, status) VALUES (NULL, '{$key}', '{$email}', '{$date}', NULL, 0)");
                 }
             }
 //            print_r($this->db->errorInfo());
