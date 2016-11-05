@@ -1,13 +1,18 @@
 <?php
 
-class AuthModel {
+class SocialAuth {
+
+    private $db;
+    private $userID;
     private $settings;
 
-    public function __construct() {
+    public function __construct($userID = null) {
+        $this->db = new DataBase();
+        $this->userID = $userID;
         $this->settings = require ROOT_DIR . '/app/config/auth.php';
     }
 
-    public function getUserInfo($service) {
+    public function setSessionData($service = null) {
         switch ($service) {
             case 'vk':
                 $this->vk();
@@ -30,6 +35,36 @@ class AuthModel {
             case 'steam':
                 $this->steam();
                 break;
+            default:
+                header('Location: http://' . $_SERVER['HTTP_HOST']);
+        }
+    }
+
+    public function destroySessionData($service = null) {
+        switch ($service) {
+            case 'vk':
+                $this->vkDestroySessionData();
+                break;
+            case 'ok':
+                $this->okDestroySessionData();
+                break;
+            case 'mail':
+                $this->mailDestroySessionData();
+                break;
+            case 'ya':
+                $this->yaDestroySessionData();
+                break;
+            case 'goo':
+                $this->gooDestroySessionData();
+                break;
+            case 'fb':
+                $this->fbDestroySessionData();
+                break;
+            case 'steam':
+                $this->steamDestroySessionData();
+                break;
+            default:
+                $this->destroyAllSessionData();
         }
     }
 
@@ -59,7 +94,6 @@ class AuthModel {
                 $_SESSION['vk_firstName'] = $userInfo['first_name'];
                 $_SESSION['vk_lastName'] = $userInfo['last_name'];
                 $_SESSION['vk_birthday'] = $userInfo['bdate'];
-
                 header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
             }
         } else {
@@ -107,9 +141,8 @@ class AuthModel {
                 $_SESSION['ok_firstName'] = $userInfo['first_name'];
                 $_SESSION['ok_lastName'] = $userInfo['last_name'];
                 $_SESSION['ok_birthday'] = preg_replace('~([0-9]+)-([0-9]+)-([0-9]+)~', '$3.$2.$1', $userInfo['birthday']);
-
                 header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
-            }
+                }
         } else {
             $url = 'http://www.odnoklassniki.ru/oauth/authorize';
 
@@ -160,7 +193,6 @@ class AuthModel {
                     $_SESSION['mail_firstName'] = $userInfo['first_name'];
                     $_SESSION['mail_lastName'] = $userInfo['last_name'];
                     $_SESSION['mail_birthday'] = $userInfo['birthday'];
-
                     header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
                 }
             }
@@ -207,7 +239,6 @@ class AuthModel {
                     $_SESSION['ya_firstName'] = $userInfo['first_name'];
                     $_SESSION['ya_lastName'] = $userInfo['last_name'];
                     $_SESSION['ya_birthday'] = $userInfo['birthday'];
-
                     header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
                 }
             }
@@ -253,10 +284,8 @@ class AuthModel {
                 $_SESSION['goo_avatar'] = $userInfo['picture'];
                 $_SESSION['goo_firstName'] = $userInfo['given_name'];
                 $_SESSION['goo_lastName'] = $userInfo['family_name'];
+                header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
             }
-
-            header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
-
         } else {
             $url = 'https://accounts.google.com/o/oauth2/auth';
             $params = array(
@@ -289,7 +318,6 @@ class AuthModel {
             $_SESSION['fb_avatar'] = $userInfo['picture']['data']['url'];
             $_SESSION['fb_firstName'] = $userInfo['first_name'];
             $_SESSION['fb_lastName'] = $userInfo['last_name'];
-
             header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
         } else {
             $url = 'https://www.facebook.com/v2.8/dialog/oauth';
@@ -301,12 +329,12 @@ class AuthModel {
         }
     }
 
-    public function steam() {
+    private function steam() {
         $steamAuth = new SteamAuth($this->settings['s_RedirectURL'], $this->settings['s_ApiKey']);
         $steamAuth->login();
     }
 
-    public function unsetVk() {
+    private function vkDestroySessionData() {
         unset($_SESSION['services']['vk']);
         unset($_SESSION['vk_userID']);
         unset($_SESSION['vk_email']);
@@ -314,67 +342,60 @@ class AuthModel {
         unset($_SESSION['vk_lastName']);
         unset($_SESSION['vk_birthday']);
         unset($_SESSION['vk_avatar']);
-        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
     }
 
-    public function unsetOk() {
+    private function okDestroySessionData() {
         unset($_SESSION['services']['ok']);
         unset($_SESSION['ok_userID']);
         unset($_SESSION['ok_avatar']);
         unset($_SESSION['ok_firstName']);
         unset($_SESSION['ok_lastName']);
         unset($_SESSION['ok_birthday']);
-        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
     }
 
-    public function unsetMail() {
+    private function mailDestroySessionData() {
         unset($_SESSION['services']['mail']);
         unset($_SESSION['mail_userID']);
         unset($_SESSION['mail_avatar']);
         unset($_SESSION['mail_firstName']);
         unset($_SESSION['mail_lastName']);
         unset($_SESSION['mail_birthday']);
-        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
     }
 
-    public function unsetYa() {
+    private function yaDestroySessionData() {
         unset($_SESSION['services']['ya']);
         unset($_SESSION['ya_userID']);
         unset($_SESSION['ya_avatar']);
         unset($_SESSION['ya_firstName']);
         unset($_SESSION['ya_lastName']);
         unset($_SESSION['ya_birthday']);
-        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
     }
 
-    public function unsetGoo() {
+    private function gooDestroySessionData() {
         unset($_SESSION['services']['goo']);
         unset($_SESSION['goo_userID']);
         unset($_SESSION['goo_avatar']);
         unset($_SESSION['goo_firstName']);
         unset($_SESSION['goo_lastName']);
-        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
     }
 
-    public function unsetFb() {
+    private function fbDestroySessionData() {
         unset($_SESSION['services']['fb']);
         unset($_SESSION['fb_userID']);
         unset($_SESSION['fb_avatar']);
         unset($_SESSION['fb_firstName']);
         unset($_SESSION['fb_lastName']);
-        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
     }
 
-    public function unsetSteam() {
+    private function steamDestroySessionData() {
         unset($_SESSION['services']['steam']);
         unset($_SESSION['steam_userID']);
         unset($_SESSION['steam_nickName']);
         unset($_SESSION['steam_firstName']);
         unset($_SESSION['steam_avatar']);
-        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
     }
 
-    public function unsetServices() {
+    private function destroyAllSessionData() {
         unset($_SESSION['services']);
 
         // Вконтакте
@@ -424,8 +445,5 @@ class AuthModel {
         unset($_SESSION['steam_nickName']);
         unset($_SESSION['steam_firstName']);
         unset($_SESSION['steam_avatar']);
-
-
-        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
     }
 }

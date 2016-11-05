@@ -1,8 +1,12 @@
 <?php
 
 class UserModel extends Model {
+
+    private $socialAuth;
+
     public function __construct() {
         $this->db = new DataBase;
+        $this->socialAuth = new SocialAuth();
     }
 
     public function ajaxHandler() {
@@ -94,5 +98,22 @@ class UserModel extends Model {
         }
 
         return false;
+    }
+
+    public function getSocialData($service) {
+        if (isset($service) && !empty($service)) {
+            $this->socialAuth->setSessionData($service[0]);
+        } else {
+            header('Location: http://' . $_SERVER['HTTP_HOST']);
+        }
+    }
+
+    public function destroySocialData($service) {
+        if (isset($service) && !empty($service)) {
+            $this->socialAuth->destroySessionData($service[0]);
+        } else {
+            $this->socialAuth->destroySessionData();
+        }
+        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
     }
 }

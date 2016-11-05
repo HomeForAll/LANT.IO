@@ -1,9 +1,8 @@
 <?php
 
-class UserController extends Controller
-{
-    public function actionRegistration()
-    {
+class UserController extends Controller {
+
+    public function actionRegistration() {
         $data = array(
             'info' => array()
         );
@@ -20,8 +19,7 @@ class UserController extends Controller
         $this->view->render('registration', $data);
     }
 
-    public function actionLogin()
-    {
+    public function actionLogin() {
         if (isset($_POST['submit'])) {
             if ($this->model->userVerify()) {
                 $_SESSION['authorized'] = true;
@@ -37,8 +35,15 @@ class UserController extends Controller
         }
     }
 
-    public function actionLogout()
-    {
+    public function actionOAuthInit($service = null) {
+        $this->model->getSocialData($service);
+    }
+
+    public function actionOAuthDestroySession($service = null) {
+        $this->model->destroySocialData($service);
+    }
+
+    public function actionLogout() {
         unset($_SESSION['authorized']);
         header('Location: http://' . $_SERVER['HTTP_HOST']);
     }
