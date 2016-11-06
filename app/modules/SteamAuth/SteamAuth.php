@@ -1,18 +1,15 @@
 <?php
 
-class SteamAuth extends LightOpenID
-{
+class SteamAuth extends LightOpenID {
     private $apiKey;
     public $steamID;
 
-    public function __construct($redirectURL, $apiKey)
-    {
+    public function __construct($redirectURL, $apiKey) {
         parent::__construct($redirectURL);
         $this->apiKey = $apiKey;
     }
 
-    public function login()
-    {
+    public function login() {
         if (!$this->mode) {
             $this->identity = 'http://steamcommunity.com/openid/?l=russian';
             header('Location: ' . $this->authUrl());
@@ -28,11 +25,20 @@ class SteamAuth extends LightOpenID
                 $userData = $this->getUserData();
 
                 if ($userData) {
-                    $_SESSION['services']['steam'] = true;
-                    $_SESSION['steam_userID'] = $userData->steamid;
-                    $_SESSION['steam_nickName'] = $userData->personaname;
-                    $_SESSION['steam_firstName'] = $userData->realname;
-                    $_SESSION['steam_avatar'] = $userData->avatarfull;
+                    $data = array(
+                        'service'  => 'steam',
+                        'userInfo' => array(
+                            'steam_userID'    => $userData->steamid,
+                            'steam_nickName'  => $userData->personaname,
+                            'steam_firstName' => $userData->realname,
+                            'steam_avatar'    => $userData->avatarfull,
+                        ),
+                    );
+
+                    $_SESSION['services'][$data['service']] = true;
+                    foreach ($data['userInfo'] as $key => $value) {
+                        $_SESSION[$key] = $value;
+                    }
 
                     header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
                 }
@@ -40,10 +46,11 @@ class SteamAuth extends LightOpenID
                 header('Location: http://' . $_SERVER['HTTP_HOST']);
             }
         }
+
+        return false;
     }
 
-    private function getUserData()
-    {
+    private function getUserData() {
         $url = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=" . $this->apiKey . "&steamids=" . $this->steamID;
         $userInfo = json_decode(file_get_contents($url));
 

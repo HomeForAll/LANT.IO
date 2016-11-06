@@ -14,9 +14,10 @@ return array(
     'cabinet/generator' => 'main/cabinet/generator',
     'cabinet/keyeditor' => 'main/cabinet/keyeditor',
 
-    'auth/unset' => 'empty/user/OAuthDestroySession',
-    'auth/unset/([A-Za-z]+)' => 'empty/user/OAuthDestroySession/$1',
-    'auth/([A-Za-z]+)' => 'empty/user/OAuthInit/$1',
+    'auth/login/([A-Za-z]+)' => 'empty/user/OAuthLogin/$1',
+    'auth/unset' => 'empty/user/DestroyRegOAuthData',
+    'auth/unset/([A-Za-z]+)' => 'empty/user/DestroyRegOAuthData/$1',
+    'auth/([A-Za-z]+)' => 'empty/user/GetOAuthRegData/$1',
 
     'news/page([0-9]+)' => 'main/news/news_list/$1',
     'news/([0-9]+)' => 'main/news/news_id/$1', 

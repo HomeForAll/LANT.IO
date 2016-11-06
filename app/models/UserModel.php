@@ -6,7 +6,7 @@ class UserModel extends Model {
 
     public function __construct() {
         $this->db = new DataBase;
-        $this->socialAuth = new SocialAuth();
+        $this->socialAuth = new SocialAuth(self::getUserID());
     }
 
     public function ajaxHandler() {
@@ -15,7 +15,7 @@ class UserModel extends Model {
 
     public function checkUserInformation() {
         $data = array(
-            'info' => array()
+            'info' => array(),
         );
 
         if (!$this->checkEmailValidationErrors($_POST['email'])) {
@@ -39,6 +39,7 @@ class UserModel extends Model {
         if ($_POST['password'] == '') {
             $data['info'][] = '- Вы не указали пароль.';
         }
+
         return $data;
     }
 
@@ -50,6 +51,7 @@ class UserModel extends Model {
         $stmt = $this->db->prepare("SELECT * FROM users WHERE email = :email");
         $stmt->bindParam(':email', $email);
         $stmt->execute();
+
         return $stmt->rowCount();
     }
 
@@ -94,26 +96,35 @@ class UserModel extends Model {
 
         if ($result) {
             $_SESSION['userID'] = $result['id'];
+
             return password_verify($_POST['password'], $result['password']);
         }
 
         return false;
     }
 
-    public function getSocialData($service) {
+//    public function getAccessBySocial() {
+//
+//    }
+
+    public function setOAuthSessionData($service) {
         if (isset($service) && !empty($service)) {
-            $this->socialAuth->setSessionData($service[0]);
+            $this->socialAuth->setServiceData($service[0]);
         } else {
             header('Location: http://' . $_SERVER['HTTP_HOST']);
         }
     }
 
-    public function destroySocialData($service) {
+    public function destroyOAuthSessionData($service) {
         if (isset($service) && !empty($service)) {
-            $this->socialAuth->destroySessionData($service[0]);
+            $this->socialAuth->destroyServiceData($service[0]);
         } else {
-            $this->socialAuth->destroySessionData();
+            $this->socialAuth->destroyServiceData();
         }
         header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
+    }
+
+    private function getUserID() {
+        return (isset($_SESSION['userID']) && !empty($_SESSION['userID'])) ? $_SESSION['userID'] : null;
     }
 }

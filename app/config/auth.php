@@ -34,5 +34,5 @@ return array(
 
     // Steam
     's_ApiKey' => '066AD567AC1DE1A5562DF7CF673DDFF9',
-    's_RedirectURL' => 'http://localhost/auth/steam'
+    's_RedirectURL' => 'http://beta.lant.io/auth/steam'
 );

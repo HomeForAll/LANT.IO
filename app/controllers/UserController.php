@@ -4,7 +4,7 @@ class UserController extends Controller {
 
     public function actionRegistration() {
         $data = array(
-            'info' => array()
+            'info' => array(),
         );
 
         if (isset($_POST['submit'])) {
@@ -23,24 +23,28 @@ class UserController extends Controller {
         if (isset($_POST['submit'])) {
             if ($this->model->userVerify()) {
                 $_SESSION['authorized'] = true;
-                header('Location: http://' . $_SERVER['HTTP_HOST'] . '/cabinet');
+                header('Location: http://' . $_SERVER['HTTP_HOST'] . '/cabinet/');
             } else {
                 $data = '<span style="color: red;">Вы указали неверные сведения.</span><br>';
                 $this->view->render('login', $data);
             }
         } elseif (isset($_SESSION['authorized'])) {
-            header('Location: http://' . $_SERVER['HTTP_HOST'] . '/cabinet');
+            header('Location: http://' . $_SERVER['HTTP_HOST'] . '/cabinet/');
         } else {
             $this->view->render('login');
         }
     }
 
-    public function actionOAuthInit($service = null) {
-        $this->model->getSocialData($service);
+    public function actionOAuthLogin($service = null) {
+
     }
 
-    public function actionOAuthDestroySession($service = null) {
-        $this->model->destroySocialData($service);
+    public function actionGetOAuthRegData($service = null) {
+        $this->model->setOAuthSessionData($service);
+    }
+
+    public function actionDestroyRegOAuthData($service = null) {
+        $this->model->destroyOAuthSessionData($service);
     }
 
     public function actionLogout() {

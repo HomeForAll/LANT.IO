@@ -12,7 +12,7 @@ class SocialAuth {
         $this->settings = require ROOT_DIR . '/app/config/auth.php';
     }
 
-    public function setSessionData($service = null) {
+    public function setServiceData($service = null) {
         switch ($service) {
             case 'vk':
                 $this->vk();
@@ -35,12 +35,10 @@ class SocialAuth {
             case 'steam':
                 $this->steam();
                 break;
-            default:
-                header('Location: http://' . $_SERVER['HTTP_HOST']);
         }
     }
 
-    public function destroySessionData($service = null) {
+    public function destroyServiceData($service = null) {
         switch ($service) {
             case 'vk':
                 $this->vkDestroySessionData();
@@ -71,14 +69,19 @@ class SocialAuth {
     private function vk() {
         if (isset($_GET['code'])) {
             $params = array(
-                'client_id' => $this->settings['vk_AppID'], 'client_secret' => $this->settings['vk_SecretKey'], 'code' => $_GET['code'], 'redirect_uri' => $this->settings['vk_RedirectURL']
+                'client_id'     => $this->settings['vk_AppID'],
+                'client_secret' => $this->settings['vk_SecretKey'],
+                'code'          => $_GET['code'],
+                'redirect_uri'  => $this->settings['vk_RedirectURL'],
             );
 
             $token = json_decode(file_get_contents('https://oauth.vk.com/access_token' . '?' . urldecode(http_build_query($params))), true);
 
             if (isset($token['access_token'])) {
                 $params = array(
-                    'uids' => $token['user_id'], 'fields' => 'uid,first_name,last_name,screen_name,sex,bdate,photo_big,country', 'access_token' => $token['access_token']
+                    'uids'         => $token['user_id'],
+                    'fields'       => 'uid,first_name,last_name,screen_name,sex,bdate,photo_big,country',
+                    'access_token' => $token['access_token'],
                 );
 
                 $userInfo = json_decode(file_get_contents('https://api.vk.com/method/users.get' . '?' . urldecode(http_build_query($params))), true);
@@ -87,19 +90,33 @@ class SocialAuth {
                     $userInfo = $userInfo['response'][0];
                 }
 
-                $_SESSION['services']['vk'] = true;
-                $_SESSION['vk_avatar'] = $userInfo['photo_big'];
-                $_SESSION['vk_userID'] = $token['user_id'];
-                $_SESSION['vk_email'] = $token['email'];
-                $_SESSION['vk_firstName'] = $userInfo['first_name'];
-                $_SESSION['vk_lastName'] = $userInfo['last_name'];
-                $_SESSION['vk_birthday'] = $userInfo['bdate'];
+                $data = array(
+                    'service'  => 'vk',
+                    'userInfo' => array(
+                        'vk_avatar'    => $userInfo['photo_big'],
+                        'vk_userID'    => $token['user_id'],
+                        'vk_email'     => $token['email'],
+                        'vk_firstName' => $userInfo['first_name'],
+                        'vk_lastName'  => $userInfo['last_name'],
+                        'vk_birthday'  => $userInfo['bdate'],
+                    ),
+                );
+
+                $_SESSION['services'][$data['service']] = true;
+                foreach ($data['userInfo'] as $key => $value) {
+                    $_SESSION[$key] = $value;
+                }
+
                 header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
             }
         } else {
             $url = 'http://oauth.vk.com/authorize';
             $params = array(
-                'client_id' => $this->settings['vk_AppID'], 'redirect_uri' => $this->settings['vk_RedirectURL'], 'display' => 'page', 'scope' => 'email', 'response_type' => 'code'
+                'client_id'     => $this->settings['vk_AppID'],
+                'redirect_uri'  => $this->settings['vk_RedirectURL'],
+                'display'       => 'page',
+                'scope'         => 'email',
+                'response_type' => 'code',
             );
             $location = $url . '?' . urldecode(http_build_query($params));
 
@@ -110,7 +127,11 @@ class SocialAuth {
     private function ok() {
         if (isset($_GET['code'])) {
             $params = array(
-                'code' => $_GET['code'], 'redirect_uri' => $this->settings['ok_RedirectURL'], 'grant_type' => 'authorization_code', 'client_id' => $this->settings['ok_AppID'], 'client_secret' => $this->settings['ok_SecretKey']
+                'code'          => $_GET['code'],
+                'redirect_uri'  => $this->settings['ok_RedirectURL'],
+                'grant_type'    => 'authorization_code',
+                'client_id'     => $this->settings['ok_AppID'],
+                'client_secret' => $this->settings['ok_SecretKey'],
             );
 
             $url = 'http://api.odnoklassniki.ru/oauth/token.do';
@@ -130,37 +151,59 @@ class SocialAuth {
                 $sign = md5("application_key={$this->settings['ok_PublicKey']}format=jsonmethod=users.getCurrentUser" . md5("{$token['access_token']}{$this->settings['ok_SecretKey']}"));
 
                 $params = array(
-                    'method' => 'users.getCurrentUser', 'access_token' => $token['access_token'], 'application_key' => $this->settings['ok_PublicKey'], 'format' => 'json', 'sig' => $sign
+                    'method'          => 'users.getCurrentUser',
+                    'access_token'    => $token['access_token'],
+                    'application_key' => $this->settings['ok_PublicKey'],
+                    'format'          => 'json',
+                    'sig'             => $sign,
                 );
 
                 $userInfo = json_decode(file_get_contents('http://api.odnoklassniki.ru/fb.do' . '?' . urldecode(http_build_query($params))), true);
 
-                $_SESSION['services']['ok'] = true;
-                $_SESSION['ok_userID'] = $userInfo['uid'];
-                $_SESSION['ok_avatar'] = $userInfo['pic_3'];
-                $_SESSION['ok_firstName'] = $userInfo['first_name'];
-                $_SESSION['ok_lastName'] = $userInfo['last_name'];
-                $_SESSION['ok_birthday'] = preg_replace('~([0-9]+)-([0-9]+)-([0-9]+)~', '$3.$2.$1', $userInfo['birthday']);
-                header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
+                $data = array(
+                    'service'  => 'ok',
+                    'userInfo' => array(
+                        'ok_userID'    => $userInfo['uid'],
+                        'ok_avatar'    => $userInfo['pic_3'],
+                        'ok_firstName' => $userInfo['first_name'],
+                        'ok_lastName'  => $userInfo['last_name'],
+                        'ok_birthday'  => preg_replace('~([0-9]+)-([0-9]+)-([0-9]+)~', '$3.$2.$1', $userInfo['birthday']),
+                    ),
+                );
+
+                $_SESSION['services'][$data['service']] = true;
+                foreach ($data['userInfo'] as $key => $value) {
+                    $_SESSION[$key] = $value;
                 }
+
+                header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
+            }
         } else {
             $url = 'http://www.odnoklassniki.ru/oauth/authorize';
 
             $params = array(
-                'client_id' => $this->settings['ok_AppID'], 'response_type' => 'code', 'redirect_uri' => $this->settings['ok_RedirectURL']
+                'client_id'     => $this->settings['ok_AppID'],
+                'response_type' => 'code',
+                'redirect_uri'  => $this->settings['ok_RedirectURL'],
             );
 
             $location = $url . '?' . urldecode(http_build_query($params));
 
             header('Location: ' . $location);
         }
+
+        return false;
     }
 
     private function mail() {
         if (isset($_GET['code'])) {
 
             $params = array(
-                'client_id' => $this->settings['mail_AppID'], 'client_secret' => $this->settings['mail_SecretKey'], 'grant_type' => 'authorization_code', 'code' => $_GET['code'], 'redirect_uri' => $this->settings['mail_RedirectURL']
+                'client_id'     => $this->settings['mail_AppID'],
+                'client_secret' => $this->settings['mail_SecretKey'],
+                'grant_type'    => 'authorization_code',
+                'code'          => $_GET['code'],
+                'redirect_uri'  => $this->settings['mail_RedirectURL'],
             );
 
             $url = 'https://connect.mail.ru/oauth/token';
@@ -180,37 +223,58 @@ class SocialAuth {
                 $sign = md5("app_id={$this->settings['mail_AppID']}method=users.getInfosecure=1session_key={$token['access_token']}{$this->settings['mail_SecretKey']}");
 
                 $params = array(
-                    'method' => 'users.getInfo', 'secure' => '1', 'app_id' => $this->settings['mail_AppID'], 'session_key' => $token['access_token'], 'sig' => $sign
+                    'method'      => 'users.getInfo',
+                    'secure'      => '1',
+                    'app_id'      => $this->settings['mail_AppID'],
+                    'session_key' => $token['access_token'],
+                    'sig'         => $sign,
                 );
 
                 $userInfo = json_decode(file_get_contents('http://www.appsmail.ru/platform/api' . '?' . urldecode(http_build_query($params))), true);
                 if (isset($userInfo[0]['uid'])) {
                     $userInfo = array_shift($userInfo);
 
-                    $_SESSION['services']['mail'] = true;
-                    $_SESSION['mail_userID'] = $userInfo['uid'];
-                    $_SESSION['mail_avatar'] = $userInfo['pic_big'];
-                    $_SESSION['mail_firstName'] = $userInfo['first_name'];
-                    $_SESSION['mail_lastName'] = $userInfo['last_name'];
-                    $_SESSION['mail_birthday'] = $userInfo['birthday'];
+                    $data = array(
+                        'service'  => 'mail',
+                        'userInfo' => array(
+                            'mail_userID'    => $userInfo['uid'],
+                            'mail_avatar'    => $userInfo['pic_big'],
+                            'mail_firstName' => $userInfo['first_name'],
+                            'mail_lastName'  => $userInfo['last_name'],
+                            'mail_birthday'  => $userInfo['birthday'],
+                        ),
+                    );
+
+                    $_SESSION['services'][$data['service']] = true;
+                    foreach ($data['userInfo'] as $key => $value) {
+                        $_SESSION[$key] = $value;
+                    }
+
                     header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
                 }
             }
         } else {
             $url = 'https://connect.mail.ru/oauth/authorize';
             $params = array(
-                'client_id' => $this->settings['mail_AppID'], 'response_type' => 'code', 'redirect_uri' => $this->settings['mail_RedirectURL']
+                'client_id'     => $this->settings['mail_AppID'],
+                'response_type' => 'code',
+                'redirect_uri'  => $this->settings['mail_RedirectURL'],
             );
             $location = $url . '?' . urldecode(http_build_query($params));
 
             header('Location: ' . $location);
         }
+
+        return false;
     }
 
     private function ya() {
         if (isset($_GET['code'])) {
             $params = array(
-                'grant_type' => 'authorization_code', 'code' => $_GET['code'], 'client_id' => $this->settings['ya_AppID'], 'client_secret' => $this->settings['ya_SecretKey']
+                'grant_type'    => 'authorization_code',
+                'code'          => $_GET['code'],
+                'client_id'     => $this->settings['ya_AppID'],
+                'client_secret' => $this->settings['ya_SecretKey'],
             );
 
             $url = 'https://oauth.yandex.ru/token';
@@ -228,36 +292,55 @@ class SocialAuth {
 
             if (isset($token['access_token'])) {
                 $params = array(
-                    'format' => 'json', 'oauth_token' => $token['access_token']
+                    'format'      => 'json',
+                    'oauth_token' => $token['access_token'],
                 );
 
                 $userInfo = json_decode(file_get_contents('https://login.yandex.ru/info' . '?' . urldecode(http_build_query($params))), true);
                 if (isset($userInfo['id'])) {
-                    $_SESSION['services']['ya'] = true;
-                    $_SESSION['ya_userID'] = $userInfo['id'];
-                    $_SESSION['ya_avatar'] = (isset($userInfo['is_avatar_empty'])) ? 'https://avatars.mds.yandex.net/get-yapic/0/0-0/islands-200' : 'https://avatars.yandex.net/get-yapic/' . $userInfo['default_avatar_id'] . '/islands-200';
-                    $_SESSION['ya_firstName'] = $userInfo['first_name'];
-                    $_SESSION['ya_lastName'] = $userInfo['last_name'];
-                    $_SESSION['ya_birthday'] = $userInfo['birthday'];
+                    $data = array(
+                        'service'  => 'ya',
+                        'userInfo' => array(
+                            'ya_userID'    => $userInfo['id'],
+                            'ya_avatar'    => (isset($userInfo['is_avatar_empty'])) ? 'https://avatars.mds.yandex.net/get-yapic/0/0-0/islands-200' : 'https://avatars.yandex.net/get-yapic/' . $userInfo['default_avatar_id'] . '/islands-200',
+                            'ya_firstName' => $userInfo['first_name'],
+                            'ya_lastName'  => $userInfo['last_name'],
+                            'ya_birthday'  => $userInfo['birthday'],
+                        ),
+                    );
+
+                    $_SESSION['services'][$data['service']] = true;
+                    foreach ($data['userInfo'] as $key => $value) {
+                        $_SESSION[$key] = $value;
+                    }
+
                     header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
                 }
             }
         } else {
             $url = 'https://oauth.yandex.ru/authorize';
             $params = array(
-                'response_type' => 'code', 'client_id' => $this->settings['ya_AppID'], 'display' => 'popup'
+                'response_type' => 'code',
+                'client_id'     => $this->settings['ya_AppID'],
+                'display'       => 'popup',
             );
             $location = $url . '?' . urldecode(http_build_query($params));
 
             header('Location: ' . $location);
         }
+
+        return false;
     }
 
     private function goo() {
         if (isset($_GET['code'])) {
 
             $params = array(
-                'client_id' => $this->settings['goo_AppID'], 'client_secret' => $this->settings['goo_SecretKey'], 'redirect_uri' => $this->settings['goo_RedirectURL'], 'grant_type' => 'authorization_code', 'code' => $_GET['code']
+                'client_id'     => $this->settings['goo_AppID'],
+                'client_secret' => $this->settings['goo_SecretKey'],
+                'redirect_uri'  => $this->settings['goo_RedirectURL'],
+                'grant_type'    => 'authorization_code',
+                'code'          => $_GET['code'],
             );
 
             $url = 'https://accounts.google.com/o/oauth2/token';
@@ -276,31 +359,48 @@ class SocialAuth {
                 $params['access_token'] = $tokenInfo['access_token'];
 
                 $userInfo = json_decode(file_get_contents('https://www.googleapis.com/oauth2/v1/userinfo' . '?' . urldecode(http_build_query($params))), true);
-            }
 
-            if ($result) {
-                $_SESSION['services']['goo'] = true;
-                $_SESSION['goo_userID'] = $userInfo['id'];
-                $_SESSION['goo_avatar'] = $userInfo['picture'];
-                $_SESSION['goo_firstName'] = $userInfo['given_name'];
-                $_SESSION['goo_lastName'] = $userInfo['family_name'];
+                $data = array(
+                    'service'  => 'goo',
+                    'userInfo' => array(
+                        'goo_userID'    => $userInfo['id'],
+                        'goo_avatar'    => $userInfo['picture'],
+                        'goo_firstName' => $userInfo['given_name'],
+                        'goo_lastName'  => $userInfo['family_name'],
+                    ),
+                );
+
+                $_SESSION['services'][$data['service']] = true;
+                foreach ($data['userInfo'] as $key => $value) {
+                    $_SESSION[$key] = $value;
+                }
+
                 header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
             }
+
         } else {
             $url = 'https://accounts.google.com/o/oauth2/auth';
             $params = array(
-                'redirect_uri' => $this->settings['goo_RedirectURL'], 'response_type' => 'code', 'client_id' => $this->settings['goo_AppID'], 'scope' => 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile'
+                'redirect_uri'  => $this->settings['goo_RedirectURL'],
+                'response_type' => 'code',
+                'client_id'     => $this->settings['goo_AppID'],
+                'scope'         => 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile',
             );
             $location = $url . '?' . urldecode(http_build_query($params));
 
             header('Location: ' . $location);
         }
+
+        return false;
     }
 
     private function fb() {
         if (isset($_GET['code'])) {
             $params = array(
-                'client_id' => $this->settings['fb_AppID'], 'redirect_uri' => $this->settings['fb_RedirectURL'], 'client_secret' => $this->settings['fb_SecretKey'], 'code' => $_GET['code']
+                'client_id'     => $this->settings['fb_AppID'],
+                'redirect_uri'  => $this->settings['fb_RedirectURL'],
+                'client_secret' => $this->settings['fb_SecretKey'],
+                'code'          => $_GET['code'],
             );
 
             $url = 'https://graph.facebook.com/v2.8/oauth/access_token';
@@ -308,25 +408,42 @@ class SocialAuth {
             $tokenInfo = json_decode(file_get_contents($url . '?' . urldecode(http_build_query($params))));
 
             $params = array(
-                'fields' => 'id,first_name,last_name,picture', 'access_token' => $tokenInfo->access_token,
+                'fields'       => 'id,first_name,last_name,picture',
+                'access_token' => $tokenInfo->access_token,
             );
 
             $userInfo = json_decode(file_get_contents('https://graph.facebook.com/v2.8/me/' . '?' . urldecode(http_build_query($params))), true);
 
-            $_SESSION['services']['fb'] = true;
-            $_SESSION['fb_userID'] = $userInfo['id'];
-            $_SESSION['fb_avatar'] = $userInfo['picture']['data']['url'];
-            $_SESSION['fb_firstName'] = $userInfo['first_name'];
-            $_SESSION['fb_lastName'] = $userInfo['last_name'];
+            $data = array(
+                'service'  => 'fb',
+                'userInfo' => array(
+                    'fb_userID'    => $userInfo['id'],
+                    'fb_avatar'    => $userInfo['picture']['data']['url'],
+                    'fb_firstName' => $userInfo['first_name'],
+                    'fb_lastName'  => $userInfo['last_name'],
+                ),
+            );
+
+            $_SESSION['services'][$data['service']] = true;
+            foreach ($data['userInfo'] as $key => $value) {
+                $_SESSION[$key] = $value;
+            }
+
             header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
+
         } else {
             $url = 'https://www.facebook.com/v2.8/dialog/oauth';
             $params = array(
-                'client_id' => $this->settings['fb_AppID'], 'redirect_uri' => $this->settings['fb_RedirectURL'], 'response_type' => 'code', 'scope' => 'email,public_profile,user_friends'
+                'client_id'     => $this->settings['fb_AppID'],
+                'redirect_uri'  => $this->settings['fb_RedirectURL'],
+                'response_type' => 'code',
+                'scope'         => 'email,public_profile,user_friends',
             );
             $location = $url . '?' . urldecode(http_build_query($params));
             header('Location: ' . $location);
         }
+
+        return false;
     }
 
     private function steam() {
@@ -396,6 +513,8 @@ class SocialAuth {
     }
 
     private function destroyAllSessionData() {
+        //print_r('Сработало');
+        unset($_SESSION['services'][0]);
         unset($_SESSION['services']);
 
         // Вконтакте
