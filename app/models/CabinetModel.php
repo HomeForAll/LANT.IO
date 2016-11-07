@@ -29,6 +29,8 @@ class CabinetModel extends Model
                     $newphrase = str_replace($old, $new, $phrase);
                     $headers = 'MIME-Version: 1.0' . "\r\n";
                     $headers .= 'Content-type: text/html; charset="utf-8"' . "\r\n";
+                    $headers .= "From: Lant.io <noreply@lant.io>";
+                    $headers .= "Reply-To: lant.io";
                     mail($email, "Альфа ключ", $newphrase, $headers);
                 }
             }
