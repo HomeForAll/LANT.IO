@@ -107,7 +107,11 @@ class SocialAuth {
                     $_SESSION[$key] = $value;
                 }
 
-                header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
+                if ($_SESSION['action'] == 'reg') {
+                    header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
+                } else {
+                    header('Location: http://' . $_SERVER['HTTP_HOST'] . '/login');
+                }
             }
         } else {
             $url = 'http://oauth.vk.com/authorize';
@@ -176,7 +180,11 @@ class SocialAuth {
                     $_SESSION[$key] = $value;
                 }
 
-                header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
+                if ($_SESSION['action'] == 'reg') {
+                    header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
+                } else {
+                    header('Location: http://' . $_SERVER['HTTP_HOST'] . '/login');
+                }
             }
         } else {
             $url = 'http://www.odnoklassniki.ru/oauth/authorize';
@@ -250,7 +258,11 @@ class SocialAuth {
                         $_SESSION[$key] = $value;
                     }
 
-                    header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
+                    if ($_SESSION['action'] == 'reg') {
+                        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
+                    } else {
+                        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/login');
+                    }
                 }
             }
         } else {
@@ -314,7 +326,11 @@ class SocialAuth {
                         $_SESSION[$key] = $value;
                     }
 
-                    header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
+                    if ($_SESSION['action'] == 'reg') {
+                        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
+                    } else {
+                        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/login');
+                    }
                 }
             }
         } else {
@@ -375,7 +391,11 @@ class SocialAuth {
                     $_SESSION[$key] = $value;
                 }
 
-                header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
+                if ($_SESSION['action'] == 'reg') {
+                    header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
+                } else {
+                    header('Location: http://' . $_SERVER['HTTP_HOST'] . '/login');
+                }
             }
 
         } else {
@@ -429,8 +449,11 @@ class SocialAuth {
                 $_SESSION[$key] = $value;
             }
 
-            header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
-
+            if ($_SESSION['action'] == 'reg') {
+                header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
+            } else {
+                header('Location: http://' . $_SERVER['HTTP_HOST'] . '/login');
+            }
         } else {
             $url = 'https://www.facebook.com/v2.8/dialog/oauth';
             $params = array(
@@ -452,6 +475,7 @@ class SocialAuth {
     }
 
     private function vkDestroySessionData() {
+        unset($_SESSION['action']);
         unset($_SESSION['services']['vk']);
         unset($_SESSION['vk_userID']);
         unset($_SESSION['vk_email']);
@@ -459,62 +483,80 @@ class SocialAuth {
         unset($_SESSION['vk_lastName']);
         unset($_SESSION['vk_birthday']);
         unset($_SESSION['vk_avatar']);
+
+        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
     }
 
     private function okDestroySessionData() {
+        unset($_SESSION['action']);
         unset($_SESSION['services']['ok']);
         unset($_SESSION['ok_userID']);
         unset($_SESSION['ok_avatar']);
         unset($_SESSION['ok_firstName']);
         unset($_SESSION['ok_lastName']);
         unset($_SESSION['ok_birthday']);
+
+        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
     }
 
     private function mailDestroySessionData() {
+        unset($_SESSION['action']);
         unset($_SESSION['services']['mail']);
         unset($_SESSION['mail_userID']);
         unset($_SESSION['mail_avatar']);
         unset($_SESSION['mail_firstName']);
         unset($_SESSION['mail_lastName']);
         unset($_SESSION['mail_birthday']);
+
+        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
     }
 
     private function yaDestroySessionData() {
+        unset($_SESSION['action']);
         unset($_SESSION['services']['ya']);
         unset($_SESSION['ya_userID']);
         unset($_SESSION['ya_avatar']);
         unset($_SESSION['ya_firstName']);
         unset($_SESSION['ya_lastName']);
         unset($_SESSION['ya_birthday']);
+
+        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
     }
 
     private function gooDestroySessionData() {
+        unset($_SESSION['action']);
         unset($_SESSION['services']['goo']);
         unset($_SESSION['goo_userID']);
         unset($_SESSION['goo_avatar']);
         unset($_SESSION['goo_firstName']);
         unset($_SESSION['goo_lastName']);
+
+        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
     }
 
     private function fbDestroySessionData() {
+        unset($_SESSION['action']);
         unset($_SESSION['services']['fb']);
         unset($_SESSION['fb_userID']);
         unset($_SESSION['fb_avatar']);
         unset($_SESSION['fb_firstName']);
         unset($_SESSION['fb_lastName']);
+
+        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
     }
 
     private function steamDestroySessionData() {
+        unset($_SESSION['action']);
         unset($_SESSION['services']['steam']);
         unset($_SESSION['steam_userID']);
         unset($_SESSION['steam_nickName']);
         unset($_SESSION['steam_firstName']);
         unset($_SESSION['steam_avatar']);
+
+        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
     }
 
     private function destroyAllSessionData() {
-        //print_r('Сработало');
-        unset($_SESSION['services'][0]);
         unset($_SESSION['services']);
 
         // Вконтакте
@@ -564,5 +606,9 @@ class SocialAuth {
         unset($_SESSION['steam_nickName']);
         unset($_SESSION['steam_firstName']);
         unset($_SESSION['steam_avatar']);
+
+        unset($_SESSION['action']);
+
+        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
     }
 }

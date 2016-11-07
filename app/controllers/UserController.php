@@ -35,15 +35,11 @@ class UserController extends Controller {
         }
     }
 
-    public function actionOAuthLogin($service = null) {
-
+    public function actionOAuthGetData($service = null) {
+        $this->model->getOAuthSessionData($service);
     }
 
-    public function actionGetOAuthRegData($service = null) {
-        $this->model->setOAuthSessionData($service);
-    }
-
-    public function actionDestroyRegOAuthData($service = null) {
+    public function actionOAuthDestroyData($service = null) {
         $this->model->destroyOAuthSessionData($service);
     }
 

@@ -31,3 +31,13 @@ $this->title = 'Авторизация';
         </tr>
     </table>
 </form>
+
+<div>
+    <a href="login/vk/in">Авторизоваться через Вконтакте</a><br>
+    <a href="login/ok/in">Авторизоваться через Одноклассники</a><br>
+    <a href="login/mail/in">Авторизоваться через Mail.ru</a><br>
+    <a href="login/ya/in">Авторизоваться через Yandex.ru</a><br>
+    <a href="login/goo/in">Авторизоваться через Google</a><br>
+    <a href="login/fb/in">Авторизоваться через Facebook</a><br>
+    <a href="login/steam/in">Авторизоваться через Steam</a><br>
+</div>

@@ -40,7 +40,11 @@ class SteamAuth extends LightOpenID {
                         $_SESSION[$key] = $value;
                     }
 
-                    header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
+                    if ($_SESSION['action'] == 'reg') {
+                        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
+                    } else {
+                        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/login');
+                    }
                 }
             } else {
                 header('Location: http://' . $_SERVER['HTTP_HOST']);

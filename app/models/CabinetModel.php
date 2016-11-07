@@ -22,13 +22,13 @@ class CabinetModel extends Model
         if (isset($_POST['handle'])) {
             if (isset($_POST['sendCheck'])) {
                 foreach ($_SESSION['keys'] as $email => $key) {
-                    $str = file_get_contents(ROOT_DIR . '/templates/layouts/email.php');
+                    $str = file_get_contents(ROOT_DIR . '/templates/layouts/mail.php');
                     $phrase = $str;
                     $old = array("KEY");
                     $new = array($key);
                     $newphrase = str_replace($old, $new, $phrase);
                     $headers = 'MIME-Version: 1.0' . "\r\n";
-                    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+                    $headers .= 'Content-type: text/html; charset="utf-8"' . "\r\n";
                     mail($email, "Альфа ключ", $newphrase, $headers);
                 }
             }

@@ -274,4 +274,7 @@ if (isset($_SESSION['services']) && !empty($_SESSION['services'])) {
     <a href="auth/steam">Авторизоваться через Steam</a><br>
     <?php
 }
+echo '<pre>';
+print_r($_SESSION);
+echo '</pre>';
 ?>

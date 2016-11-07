@@ -103,11 +103,21 @@ class UserModel extends Model {
         return false;
     }
 
-//    public function getAccessBySocial() {
-//
-//    }
+    public function getOAuthSessionData($service) {
+        if (!isset($_SESSION['action'])) {
+            if (isset($service[1]) && !empty($service[1]) && empty($_SESSION['services'])) {
+                $_SESSION['action'] = 'login';
+            } else {
+                $_SESSION['action'] = 'reg';
+            }
+        }
 
-    public function setOAuthSessionData($service) {
+//        echo '<pre>';
+//        print_r($_SESSION);
+//        echo '</pre>';
+//
+//        unset($_SESSION['action']);
+
         if (isset($service) && !empty($service)) {
             $this->socialAuth->setServiceData($service[0]);
         } else {
@@ -121,7 +131,6 @@ class UserModel extends Model {
         } else {
             $this->socialAuth->destroyServiceData();
         }
-        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
     }
 
     private function getUserID() {
