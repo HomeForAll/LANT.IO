@@ -121,12 +121,17 @@ class CabinetModel extends Model
             $temp = [];
 
             if (isset($_POST['showdb'])) {
+
+
                 foreach ($_SESSION['keys_keyeditor'] as $key) {
+
                     $array[$key['id']] = $key;
                 }
 
-                for ($i = 1; $i <= count($array); $i++) { // сортировка
-                    $temp[$i] = $array[$i];
+                for ($i = 1; $i <= $key['id']; $i++) { // сортировка
+                    if (isset($array[$i])) {
+                        $temp[$i] = $array[$i];
+                    }
                 }
                 $array = $temp;
 
@@ -259,7 +264,9 @@ class CabinetModel extends Model
                 $_SESSION['notice_id'] = $array[$id_key]['id'];
                 $_SESSION['id_key_keyeditor'] = $id_key;
                 $_SESSION['array_keyeditor'] = $array[$id_key];
+                $_SESSION['sessioncheck'] = 1;
                 return $result;
+
             }
         }
         return false;
@@ -270,6 +277,7 @@ class CabinetModel extends Model
         if (isset($_POST['lock'])) {
             $this->db->query("UPDATE access SET status = 2 WHERE id = {$_SESSION['id_key_keyeditor']}");
             $result = "{$_SESSION['array_keyeditor']['key']} заблокирован!";
+            $_SESSION['sessioncheck'] = 123;
             return $result;
         }
         return false;
@@ -287,6 +295,7 @@ class CabinetModel extends Model
                 return $result;
             } else
                 $result = "Ключ просрочен!";
+            $_SESSION['sessioncheck'] = 1;
             return $result;
         }
     }
@@ -298,6 +307,7 @@ class CabinetModel extends Model
             $month = $_POST['month'];
             $year = $_POST['year'];
             $flag = true;
+            $_SESSION['sessioncheck'] = 1;
             if ($month == 1 || $month == 3 || $month == 5 || $month == 7 || $month == 8 || $month == 10 || $month == 12) {
                 if ($day > 31) {
                     $flag = false;
@@ -326,6 +336,7 @@ class CabinetModel extends Model
 
             } else {
                 $result = "Ошибка записи даты!";
+
                 return $result;
             }
         }
@@ -337,6 +348,7 @@ class CabinetModel extends Model
             }
             else
                 $result = 'Email введ неверно!';
+            $_SESSION['sessioncheck'] = 1;
             return $result;
         }
         return false;
