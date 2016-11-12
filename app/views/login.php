@@ -1,4 +1,5 @@
-<?php if (isset($this->data)) echo $this->data;
+<?php
+if (isset($this->data)) echo $this->data;
 $this->title = 'Авторизация';
 ?>
 <form action="" method="post" style="margin: 0 auto;">
@@ -10,7 +11,8 @@ $this->title = 'Авторизация';
                 </label>
             </td>
             <td>
-                <input name="login" id="login" type="text" value="<?php if (!empty($_POST['login'])) echo $_POST['login']; ?>">
+                <input name="login" id="login" type="text"
+                       value="<?php if (!empty($_POST['login'])) echo $_POST['login']; ?>">
             </td>
         </tr>
         <tr>

@@ -106,12 +106,6 @@ class SocialAuth {
                 foreach ($data['userInfo'] as $key => $value) {
                     $_SESSION[$key] = $value;
                 }
-
-                if ($_SESSION['action'] == 'reg') {
-                    header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
-                } else {
-                    header('Location: http://' . $_SERVER['HTTP_HOST'] . '/login');
-                }
             }
         } else {
             $url = 'http://oauth.vk.com/authorize';
@@ -125,6 +119,7 @@ class SocialAuth {
             $location = $url . '?' . urldecode(http_build_query($params));
 
             header('Location: ' . $location);
+            exit;
         }
     }
 
@@ -179,12 +174,6 @@ class SocialAuth {
                 foreach ($data['userInfo'] as $key => $value) {
                     $_SESSION[$key] = $value;
                 }
-
-                if ($_SESSION['action'] == 'reg') {
-                    header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
-                } else {
-                    header('Location: http://' . $_SERVER['HTTP_HOST'] . '/login');
-                }
             }
         } else {
             $url = 'http://www.odnoklassniki.ru/oauth/authorize';
@@ -198,6 +187,7 @@ class SocialAuth {
             $location = $url . '?' . urldecode(http_build_query($params));
 
             header('Location: ' . $location);
+            exit;
         }
 
         return false;
@@ -257,12 +247,6 @@ class SocialAuth {
                     foreach ($data['userInfo'] as $key => $value) {
                         $_SESSION[$key] = $value;
                     }
-
-                    if ($_SESSION['action'] == 'reg') {
-                        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
-                    } else {
-                        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/login');
-                    }
                 }
             }
         } else {
@@ -275,6 +259,7 @@ class SocialAuth {
             $location = $url . '?' . urldecode(http_build_query($params));
 
             header('Location: ' . $location);
+            exit;
         }
 
         return false;
@@ -325,12 +310,6 @@ class SocialAuth {
                     foreach ($data['userInfo'] as $key => $value) {
                         $_SESSION[$key] = $value;
                     }
-
-                    if ($_SESSION['action'] == 'reg') {
-                        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
-                    } else {
-                        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/login');
-                    }
                 }
             }
         } else {
@@ -343,6 +322,7 @@ class SocialAuth {
             $location = $url . '?' . urldecode(http_build_query($params));
 
             header('Location: ' . $location);
+            exit;
         }
 
         return false;
@@ -390,12 +370,6 @@ class SocialAuth {
                 foreach ($data['userInfo'] as $key => $value) {
                     $_SESSION[$key] = $value;
                 }
-
-                if ($_SESSION['action'] == 'reg') {
-                    header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
-                } else {
-                    header('Location: http://' . $_SERVER['HTTP_HOST'] . '/login');
-                }
             }
 
         } else {
@@ -409,6 +383,7 @@ class SocialAuth {
             $location = $url . '?' . urldecode(http_build_query($params));
 
             header('Location: ' . $location);
+            exit;
         }
 
         return false;
@@ -448,12 +423,6 @@ class SocialAuth {
             foreach ($data['userInfo'] as $key => $value) {
                 $_SESSION[$key] = $value;
             }
-
-            if ($_SESSION['action'] == 'reg') {
-                header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
-            } else {
-                header('Location: http://' . $_SERVER['HTTP_HOST'] . '/login');
-            }
         } else {
             $url = 'https://www.facebook.com/v2.8/dialog/oauth';
             $params = array(
@@ -464,9 +433,8 @@ class SocialAuth {
             );
             $location = $url . '?' . urldecode(http_build_query($params));
             header('Location: ' . $location);
+            exit;
         }
-
-        return false;
     }
 
     private function steam() {
@@ -484,7 +452,9 @@ class SocialAuth {
         unset($_SESSION['vk_birthday']);
         unset($_SESSION['vk_avatar']);
 
-        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
+        if (empty($_SESSION['services'])) {
+            unset($_SESSION['services']);
+        }
     }
 
     private function okDestroySessionData() {
@@ -496,7 +466,9 @@ class SocialAuth {
         unset($_SESSION['ok_lastName']);
         unset($_SESSION['ok_birthday']);
 
-        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
+        if (empty($_SESSION['services'])) {
+            unset($_SESSION['services']);
+        }
     }
 
     private function mailDestroySessionData() {
@@ -508,7 +480,9 @@ class SocialAuth {
         unset($_SESSION['mail_lastName']);
         unset($_SESSION['mail_birthday']);
 
-        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
+        if (empty($_SESSION['services'])) {
+            unset($_SESSION['services']);
+        }
     }
 
     private function yaDestroySessionData() {
@@ -520,7 +494,9 @@ class SocialAuth {
         unset($_SESSION['ya_lastName']);
         unset($_SESSION['ya_birthday']);
 
-        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
+        if (empty($_SESSION['services'])) {
+            unset($_SESSION['services']);
+        }
     }
 
     private function gooDestroySessionData() {
@@ -531,7 +507,9 @@ class SocialAuth {
         unset($_SESSION['goo_firstName']);
         unset($_SESSION['goo_lastName']);
 
-        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
+        if (empty($_SESSION['services'])) {
+            unset($_SESSION['services']);
+        }
     }
 
     private function fbDestroySessionData() {
@@ -542,7 +520,9 @@ class SocialAuth {
         unset($_SESSION['fb_firstName']);
         unset($_SESSION['fb_lastName']);
 
-        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
+        if (empty($_SESSION['services'])) {
+            unset($_SESSION['services']);
+        }
     }
 
     private function steamDestroySessionData() {
@@ -553,7 +533,9 @@ class SocialAuth {
         unset($_SESSION['steam_firstName']);
         unset($_SESSION['steam_avatar']);
 
-        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
+        if (empty($_SESSION['services'])) {
+            unset($_SESSION['services']);
+        }
     }
 
     private function destroyAllSessionData() {
@@ -608,7 +590,5 @@ class SocialAuth {
         unset($_SESSION['steam_avatar']);
 
         unset($_SESSION['action']);
-
-        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
     }
 }

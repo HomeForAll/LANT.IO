@@ -3,6 +3,7 @@ class CabinetController extends Controller {
     public function actionCabinet() {
         if (!isset($_SESSION['authorized'])) {
             header('Location: http://' . $_SERVER['HTTP_HOST']);
+            exit;
         } else {
 
             $this->view->render('cabinet');

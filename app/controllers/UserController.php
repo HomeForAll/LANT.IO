@@ -3,6 +3,13 @@
 class UserController extends Controller {
 
     public function actionRegistration() {
+
+        if (isset($_SESSION['action'])) {
+            if ($_SESSION['action'] == 'login') {
+                $this->model->destroyOAuthSessionData();
+            }
+        }
+
         $data = array(
             'info' => array(),
         );
@@ -20,16 +27,49 @@ class UserController extends Controller {
     }
 
     public function actionLogin() {
+
+        if (isset($_SESSION['action'])) {
+            if ($_SESSION['action'] == 'login') {
+                foreach ($_SESSION['services'] as $service => $value) {
+                    switch ($service) {
+                        case 'vk':
+                            $this->model->checkService('vk', $_SESSION['vk_userID']);
+                            break;
+                        case 'ok':
+                            $this->model->checkService('ok', $_SESSION['ok_userID']);
+                            break;
+                        case 'mail':
+                            $this->model->checkService('mail', $_SESSION['mail_userID']);
+                            break;
+                        case 'ya':
+                            $this->model->checkService('ya', $_SESSION['ya_userID']);
+                            break;
+                        case 'goo':
+                            $this->model->checkService('goo', $_SESSION['goo_userID']);
+                            break;
+                        case 'fb':
+                            $this->model->checkService('fb', $_SESSION['fb_userID']);
+                            break;
+                        case 'steam':
+                            $this->model->checkService('steam', $_SESSION['steam_userID']);
+                            break;
+                    }
+                }
+            }
+        }
+
         if (isset($_POST['submit'])) {
             if ($this->model->userVerify()) {
                 $_SESSION['authorized'] = true;
-                header('Location: http://' . $_SERVER['HTTP_HOST'] . '/cabinet/');
+                header('Location: http://' . $_SERVER['HTTP_HOST'] . '/cabinet');
+                exit;
             } else {
                 $data = '<span style="color: red;">Вы указали неверные сведения.</span><br>';
                 $this->view->render('login', $data);
             }
         } elseif (isset($_SESSION['authorized'])) {
-            header('Location: http://' . $_SERVER['HTTP_HOST'] . '/cabinet/');
+            header('Location: http://' . $_SERVER['HTTP_HOST'] . '/cabinet');
+            exit;
         } else {
             $this->view->render('login');
         }
@@ -41,10 +81,14 @@ class UserController extends Controller {
 
     public function actionOAuthDestroyData($service = null) {
         $this->model->destroyOAuthSessionData($service);
+
+        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
+        exit;
     }
 
     public function actionLogout() {
         unset($_SESSION['authorized']);
         header('Location: http://' . $_SERVER['HTTP_HOST']);
+        exit;
     }
 }

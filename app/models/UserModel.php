@@ -112,16 +112,23 @@ class UserModel extends Model {
             }
         }
 
-//        echo '<pre>';
-//        print_r($_SESSION);
-//        echo '</pre>';
-//
-//        unset($_SESSION['action']);
+//                echo '<pre>';
+//                print_r($_SESSION);
+//                echo '</pre>';
 
         if (isset($service) && !empty($service)) {
             $this->socialAuth->setServiceData($service[0]);
+
+            if ($_SESSION['action'] == 'reg') {
+                header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
+                exit;
+            } else {
+                header('Location: http://' . $_SERVER['HTTP_HOST'] . '/login');
+                exit;
+            }
         } else {
             header('Location: http://' . $_SERVER['HTTP_HOST']);
+            exit;
         }
     }
 
@@ -135,5 +142,32 @@ class UserModel extends Model {
 
     private function getUserID() {
         return (isset($_SESSION['userID']) && !empty($_SESSION['userID'])) ? $_SESSION['userID'] : null;
+    }
+
+    public function checkService($service, $id) {
+        $services = array(
+            'vk'    => 'vk_id',
+            'ok'    => 'ok_id',
+            'mail'  => 'mail_id',
+            'ya'    => 'ya_id',
+            'goo'   => 'google_id',
+            'steam' => 'steam_id',
+        );
+
+        $stmt = $this->db->prepare("SELECT * FROM users WHERE " . $services[$service] . " = :id");
+        $stmt->bindParam(':id', trim($id));
+        $stmt->execute();
+        $result = $stmt->fetch();
+
+        if ($result) {
+            $_SESSION['authorized'] = true;
+            self::destroyOAuthSessionData($service);
+            header('Location: http://' . $_SERVER['HTTP_HOST'] . '/cabinet');
+            exit;
+        } else {
+            self::destroyOAuthSessionData($service);
+            header('Location: http://' . $_SERVER['HTTP_HOST'] . '/login');
+            exit;
+        }
     }
 }

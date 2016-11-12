@@ -13,6 +13,7 @@ class SteamAuth extends LightOpenID {
         if (!$this->mode) {
             $this->identity = 'http://steamcommunity.com/openid/?l=russian';
             header('Location: ' . $this->authUrl());
+            exit;
         } else {
             if ($this->validate()) {
 
@@ -39,15 +40,10 @@ class SteamAuth extends LightOpenID {
                     foreach ($data['userInfo'] as $key => $value) {
                         $_SESSION[$key] = $value;
                     }
-
-                    if ($_SESSION['action'] == 'reg') {
-                        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
-                    } else {
-                        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/login');
-                    }
                 }
             } else {
                 header('Location: http://' . $_SERVER['HTTP_HOST']);
+                exit;
             }
         }
 

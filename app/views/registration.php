@@ -1,11 +1,11 @@
 <?php
 $this->title = 'Регистрация';
 ?>
-<h1>Регистрация</h1>
+    <h1>Регистрация</h1>
 <?php
-    foreach ($this->data['info'] as $error) {
-        echo '<span style="color: red;">' . $error . '</span><br>';
-    }
+foreach ($this->data['info'] as $error) {
+    echo '<span style="color: red;">' . $error . '</span><br>';
+}
 
 
 $nickname = '';
@@ -51,92 +51,92 @@ if (isset($_SESSION['services']) && !empty($_SESSION['services'])) {
 }
 ?>
 
-<form action="" method="post">
-    <table>
-        <tr>
-            <td>
-                <label for="firstName">
-                    Имя:
-                </label>
-            </td>
-            <td>
-                <input name="firstName" id="firstName" type="text"
-                       value="<?php echo $firstName; ?>">
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label for="lastName">
-                    Фамилия:
-                </label>
-            </td>
-            <td>
-                <input name="lastName" id="lastName" type="text"
-                       value="<?php echo $lastName; ?>">
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label for="patronymic">
-                    Отчество:
-                </label>
-            </td>
-            <td>
-                <input name="patronymic" id="patronymic" type="text"
-                       value="<?php echo $patronymic; ?>">
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label for="birthday">
-                    Дата рождения:
-                </label>
-            </td>
-            <td>
-                <input name="birthday" id="birthday" type="text"
-                       value="<?php echo $birthday; ?>">
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label for="phoneNumber">
-                    Номер телефона: +
-                </label>
-            </td>
-            <td>
-                <input name="phoneNumber" id="phoneNumber" type="text"
-                       value="<?php echo $phoneNumber; ?>">
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label for="email">
-                    E-Mail:
-                </label>
-            </td>
-            <td>
-                <input name="email" id="email" type="text"
-                       value="<?php echo $email; ?>">
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label for="password">
-                    Пароль:
-                </label>
-            </td>
-            <td>
-                <input name="password" id="password" type="password">
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <input type="submit" name="submit" value="Зарегистрировать">
-            </td>
-        </tr>
-    </table>
-</form>
+    <form action="" method="post">
+        <table>
+            <tr>
+                <td>
+                    <label for="firstName">
+                        Имя:
+                    </label>
+                </td>
+                <td>
+                    <input name="firstName" id="firstName" type="text"
+                           value="<?php echo $firstName; ?>">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="lastName">
+                        Фамилия:
+                    </label>
+                </td>
+                <td>
+                    <input name="lastName" id="lastName" type="text"
+                           value="<?php echo $lastName; ?>">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="patronymic">
+                        Отчество:
+                    </label>
+                </td>
+                <td>
+                    <input name="patronymic" id="patronymic" type="text"
+                           value="<?php echo $patronymic; ?>">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="birthday">
+                        Дата рождения:
+                    </label>
+                </td>
+                <td>
+                    <input name="birthday" id="birthday" type="text"
+                           value="<?php echo $birthday; ?>">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="phoneNumber">
+                        Номер телефона: +
+                    </label>
+                </td>
+                <td>
+                    <input name="phoneNumber" id="phoneNumber" type="text"
+                           value="<?php echo $phoneNumber; ?>">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="email">
+                        E-Mail:
+                    </label>
+                </td>
+                <td>
+                    <input name="email" id="email" type="text"
+                           value="<?php echo $email; ?>">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="password">
+                        Пароль:
+                    </label>
+                </td>
+                <td>
+                    <input name="password" id="password" type="password">
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" name="submit" value="Зарегистрировать">
+                </td>
+            </tr>
+        </table>
+    </form>
 
 <?php
 if (isset($_SESSION['services']) && !empty($_SESSION['services'])) {
@@ -228,41 +228,41 @@ if (isset($_SESSION['services']) && !empty($_SESSION['services'])) {
     ?>
     <a href="auth/unset">Отвязать все сервисы</a><br><br>
     <?php
-        if (!isset($_SESSION['services']['vk'])) {
-            ?>
-            <a href="auth/vk">Авторизоваться через Вконтакте</a><br>
-            <?php
-        }
-        if (!isset($_SESSION['services']['ok'])) {
-            ?>
-            <a href="auth/ok">Авторизоваться через Одноклассники</a><br>
-            <?php
-        }
-        if (!isset($_SESSION['services']['mail'])) {
-            ?>
-            <a href="auth/mail">Авторизоваться через Mail.ru</a><br>
-            <?php
-        }
-        if (!isset($_SESSION['services']['ya'])) {
-            ?>
-            <a href="auth/ya">Авторизоваться через Yandex.ru</a><br>
-            <?php
-        }
-        if (!isset($_SESSION['services']['goo'])) {
-            ?>
-            <a href="auth/goo">Авторизоваться через Google</a><br>
-            <?php
-        }
-        if (!isset($_SESSION['services']['fb'])) {
-            ?>
-            <a href="auth/fb">Авторизоваться через Facebook</a><br>
-            <?php
-        }
-        if (!isset($_SESSION['services']['steam'])) {
-            ?>
-            <a href="auth/steam">Авторизоваться через Steam</a><br>
-            <?php
-        }
+    if (!isset($_SESSION['services']['vk'])) {
+        ?>
+        <a href="auth/vk">Авторизоваться через Вконтакте</a><br>
+        <?php
+    }
+    if (!isset($_SESSION['services']['ok'])) {
+        ?>
+        <a href="auth/ok">Авторизоваться через Одноклассники</a><br>
+        <?php
+    }
+    if (!isset($_SESSION['services']['mail'])) {
+        ?>
+        <a href="auth/mail">Авторизоваться через Mail.ru</a><br>
+        <?php
+    }
+    if (!isset($_SESSION['services']['ya'])) {
+        ?>
+        <a href="auth/ya">Авторизоваться через Yandex.ru</a><br>
+        <?php
+    }
+    if (!isset($_SESSION['services']['goo'])) {
+        ?>
+        <a href="auth/goo">Авторизоваться через Google</a><br>
+        <?php
+    }
+    if (!isset($_SESSION['services']['fb'])) {
+        ?>
+        <a href="auth/fb">Авторизоваться через Facebook</a><br>
+        <?php
+    }
+    if (!isset($_SESSION['services']['steam'])) {
+        ?>
+        <a href="auth/steam">Авторизоваться через Steam</a><br>
+        <?php
+    }
 } else {
     ?>
     <a href="auth/vk">Авторизоваться через Вконтакте</a><br>
