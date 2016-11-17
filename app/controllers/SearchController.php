@@ -2,9 +2,12 @@
 
 class SearchController extends Controller {
     public function actionIndex() {
-        if (isset($_POST['submit'])) {
-            $data = $this->model->getData();
+        $data = '';
+        if (isset($_POST['simple'])) {
+            $data = $this->model->getData('simple');
+        } elseif (isset($_POST['extended'])) {
+            $data = $this->model->getData('extended');
         }
-        $this->view->render('search');
+        $this->view->render('search', $data);
     }
 }
