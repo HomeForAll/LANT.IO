@@ -1,12 +1,24 @@
 <?php
 
 class NewsModel extends Model {
+
+    // Список всех таблиц новостей
+    const all_news_tables = 'news_base, news_rentapart';
+
     public function __construct() {
         $this->db = new DataBase;
     }
-    
-        public function ajaxHandler() {
 
+    public function ajaxHandler() {
+        
+    }
+
+    // Проверка строки на вредоносные элементы
+    public function checkingString($str) {
+        $str = trim($str);
+        $str = strip_tags($str);
+        $str = htmlspecialchars($str);
+        return $str;
     }
 
     public function getNewsCategories() {
@@ -19,27 +31,194 @@ class NewsModel extends Model {
         return $result;
     }
 
-    public function getNamberOfAllRows() {
-        $stmt = $this->db->query("SELECT COUNT(*) FROM news");
-        $result = $stmt->fetchColumn();
+    public function getNamberOfAllRows($table = 'base') {
+        if ($table == 'base') {
+            $table = 'news_base';
+        } else {
+            $table = 'news_' . $table;
+        }
+
+        $q = "SELECT COUNT(*) FROM " . $table;
+        if ($stmt = $this->db->query($q)) {
+            $result = $stmt->fetchColumn();
+        } else {
+            $this->getNamberOfAllRows();
+        }
         return $result;
     }
 
-    public function getNewsById($id) {
+    public function getNewsPageType($str) {
+        //Если это id
+        if (substr($str, 0, 2) == 'id') {
+            if (substr($str, 2, 1) == 'b') {
+                $editor_page_type = 'base';
+            } else {
+                if (substr($str, 2, 1) == 'r') {
+                    $editor_page_type = 'rent';
+                }
+                if (substr($str, 2, 1) == 's') {
+                    $editor_page_type = 'sale';
+                }
+                if (substr($str, 3, 1) == 'a') {
+                    $editor_page_type = $editor_page_type . 'apart';
+                }
+                if (substr($str, 3, 1) == 'h') {
+                    $editor_page_type = $editor_page_type . 'house';
+                }
+                if (substr($str, 3, 1) == 'r') {
+                    $editor_page_type = $editor_page_type . 'room';
+                }
+                if (substr($str, 3, 1) == 'l') {
+                    $editor_page_type = $editor_page_type . 'land';
+                }
+            }
+        } else {
+            if (!empty($str)) {
+                $editor_page_type = $str;
+            } else {
+                $editor_page_type = 'base';
+            }
+        }
+        return $editor_page_type;
+    }
 
-        $stmt = $this->db->prepare("SELECT id_news, date::date, title, short_content, content, author_name, preview_img, status, category, tags "
-                . "FROM news"
+    public function getNewsById($id) {
+        //определяем тип новости
+        $editor_page_type = $this->getNewsPageType($id);
+
+        // !!! определение имени таблицы по id
+        $news_table = 'news_' . $editor_page_type;
+
+        $stmt = $this->db->prepare("SELECT * "
+                . "FROM " . $news_table
                 . " WHERE id_news = :id");
         $stmt->bindParam(':id', $id);
         $stmt->execute();
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+// разбиваем имена и передаем их в массиве
         $data['preview_img'] = explode('|', $data['preview_img']);
         return $data;
+    }
+
+    public function prepareNewsView($news) {
+        //новый массив данных новости
+        $new_data = [];
+        //Удаление несуществующих параметров
+        foreach ($news as $key => $val) {
+            if (!empty($val)) {
+                $new_data[$key] = $news[$key];
+            }
+        }
+
+        //!!! Заголовки !!!
+        $header = array(
+            'address' => 'Точный адрес',
+            'armchair_num' => 'Кресло',
+            'author_name' => 'Автор',
+            'balcony' => 'Балкон',
+            'bargain_available' => 'Торг возможен',
+            'barn_num' => 'Сарай',
+            'basement_num' => 'Подвал',
+            'bathhouse_num' => 'Баня',
+            'bathroom_num' => 'Ванная',
+            'bed_num' => 'Кровать',
+            'bedroom_num' => 'Спальня',
+            'boiler_num' => 'Котельная',
+            'cabinet_num' => 'Рабочий кабинет',
+            'category' => 'Категория',
+            'ceiling_height' => 'Высота потолков',
+            'chair_num' => 'Стул',
+            'conditioning_num' => 'Кондиционер',
+            'content' => 'Основное содержание',
+            'cupboard_num' => 'Шкаф',
+            'devices_available' => 'Бытовая техника',
+            'dining_room_num' => 'Столовая',
+            'dishwasher_num' => 'Посудомойка',
+            'distance_from_city' => 'Удаленность от города',
+            'distance_from_metro' => 'Удаленность от метро',
+            'district' => 'Район',
+            'dressingroom_num' => 'Гардеробная',
+            'electricity_available' => 'Электричество',
+            'electronics_available' => 'Электроника для досуга',
+            'elevator_available' => 'Наличие лифта',
+            'equipment' => 'Комплектация',
+            'fencing' => 'Ограждение',
+            'flat_condition' => 'Состояние квартиры',
+            'floor' => 'Этаж',
+            'fridge_num' => 'Холодильник',
+            'furniture_available' => 'Мебель',
+            'garage_num' => 'Гараж',
+            'garbage_available' => 'Наличие мусоропровода',
+            'gas_available' => 'Газ',
+            'hall_num' => 'Зал',
+            'hallway_num' => 'Прихожая',
+            'hearth_num' => 'Камин',
+            'heating_available' => 'Отопление',
+            'home_series' => 'Серия дома',
+            'house_condition' => 'Состояние дома',
+            'kitchen_num' => 'Кухня',
+            'landscape' => 'Профиль/Ландшафт',
+            'living_room_num' => 'Гостиная',
+            'material_lining' => 'Материал облицовки',
+            'metro_station' => 'Станция метро',
+            'microwave_num' => 'СВЧ',
+            'mirror_num' => 'Зеркало',
+            'music_center_num' => 'Музыкальный центр',
+            'number_of_floors' => 'Количество этажей',
+            'number_of_inputs' => 'Количество входов',
+            'number_of_minutes_parkin' => 'кол-во минут',
+            'number_of_rooms' => 'Количество комнат',
+            'parking_space' => 'Место для автомобиля',
+            'parking_type' => 'Вид парковки',
+            'pavilion_num' => 'Беседка',
+            'play_room_num' => 'Детская',
+            'plumbing_available' => 'Водопровод',
+            'pool_num' => 'Бассейн',
+            'price' => 'Цена',
+            'range_num' => 'Плита',
+            'region' => 'Округ',
+            'sanitary_available' => 'Сантехника',
+            'seasonality' => 'Сезонность',
+            'security' => 'Безопасность',
+            'short_content' => 'Короткое содержание',
+            'sofa_num' => 'Диван',
+            'space' => 'Площадь',
+            'stairs_available' => 'Наличие лестницы',
+            'stand_num' => 'Тумба',
+            'stove_num' => 'Печь',
+            'style_of_house' => 'Стиль дома',
+            'table_num' => 'Стол',
+            'tags' => 'Теги',
+            'televisor_num' => 'Телевизор',
+            'toilet' => 'Санузел',
+            'tszh' => 'ТСЖ',
+            'type_of_house' => 'Тип дома',
+            'type_of_rent' => 'Тип аренды',
+            'veranda_num' => 'Виранда',
+            'village' => 'Деревня',
+            'rooms_for_sale' => 'Комнат в продажу (шт)',
+            'room_location' => 'Нахождение комнаты',
+            'number_of_minutes_parking' => 'кол-во минут',
+            'room_condition' => 'Состояние комнаты',
+            'flora' => 'Флора'
+        );
+
+
+        //Присваивание заголовков
+        foreach ($new_data as $key => $val) {
+            if (!empty($header[$key])) {
+                $new_data[$key . '_h'] = $header[$key];
+            }
+        }
+
+        return $new_data;
     }
 
     // Вход: страница новостей
     // Возвращает: выборку всех данных новостей в виде массива
     public function getNewsList($page) {
+
 
         $data = []; //выходные данные
         $numberOfNews = 10; // Количество выводимых новостей по умолчани
@@ -58,9 +237,19 @@ class NewsModel extends Model {
         } elseif (!empty($_SESSION['numberOfNews'])) {
             $numberOfNews = $_SESSION['numberOfNews'];
         }
+        // Таблица новостей
+        if (!empty($_POST['news_table_category'])) {
+            $data['news_table_category'] = $_POST['news_table_category'];
+            $_SESSION['news_table_category'] = $data['news_table_category'];
+        } elseif (!empty($_SESSION['news_table_category'])) {
+            $data['news_table_category'] = $_SESSION['news_table_category'];
+        } else {
+            $data['news_table_category'] = 'base';
+        }
+
 
         // Общее кол-во новостей
-        $data['namberofallrows'] = $this->getNamberOfAllRows();
+        $data['namberofallrows'] = $this->getNamberOfAllRows($data['news_table_category']);
         // Количество станиц и диапазон = $data['firstnews'],$data['lastnews'] 
         $total_pages = ceil($data['namberofallrows'] / $numberOfNews);
 
@@ -80,7 +269,7 @@ class NewsModel extends Model {
         $from_page = $data['firstnews'] - 1;
 
         $stmt = $this->db->prepare("SELECT id_news, date::date, title, short_content, content, author_name, preview_img, status, category, tags "
-                . "FROM news"
+                . "FROM news_" . $data['news_table_category']
                 . " ORDER BY id_news DESC"
                 . " LIMIT :numberofnews"
                 . " OFFSET :from_page");
@@ -92,69 +281,260 @@ class NewsModel extends Model {
         $data['news'] = $this->explodePreviewImg($data['news']);
         return $data;
     }
-    
+
     public function explodePreviewImg($data_news) {
-        
+
         foreach ($data_news as $k => $news_array) {
             $data_news[$k]['preview_img'] = explode('|', $news_array['preview_img']);
         }
         return $data_news;
     }
- 
 
-    public function getNewsForEditor() {
+//Получает список новостей из заданной табицы($table) или из всех таблиц новостей(по умолчанию)
+// отсортированный по дате    
+    public function getNewsForEditorByDate($table = 'all') {
+        $sql = 'SELECT id_news, date::date, title, author_name, status, category, tags ';
+        $sql = $sql . 'FROM ';
+        if ($table == 'all') {
+            $sql = $sql . 'news, news_rentapart ';
+        } else {
+            $sql = $sql . $table;
+        }
+        $sql = $sql . ' ORDER BY date DESC';
 
-        $stmt = $this->db->prepare("SELECT id_news, date::date, title, author_name, status, category, tags "
-                . "FROM news"
-                . " ORDER BY id_news DESC");
+        $stmt = $this->db->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll();
+
+
         return $result;
     }
 
-    public function makeNewsInsert($preview_img) {
-        $newId = $this->db->lastInsertId('name_id_news_seq');
+    public function getFormData($preview_img) {
 
-        $stmt = $this->db->prepare("INSERT INTO news("
-                . "date, title, short_content, content, author_name, preview_img, status, category, tags)"
-                . " VALUES ( "
-                . "CURRENT_TIMESTAMP(2), :title, :short_content, :content, :author_name, :preview_img, :status, :category, :tags)");
-        $stmt->bindParam(':title', $_POST['newsTitle'], PDO::PARAM_STR);
-        $stmt->bindParam(':short_content', $_POST['newsShortContent'], PDO::PARAM_STR);
-        $stmt->bindParam(':content', $_POST['newsContent'], PDO::PARAM_STR);
-        $stmt->bindParam(':author_name', $_POST['authorName'], PDO::PARAM_STR);
-        $stmt->bindParam(':preview_img', $preview_img);
-        $stmt->bindParam(':status', $_POST['statusForUpdate'], PDO::PARAM_INT);
-        $stmt->bindParam(':category', $_POST['newsCategory'], PDO::PARAM_STR);
-        $stmt->bindParam(':tags', $_POST['newsTags'], PDO::PARAM_STR);
+        //Удаление пробелов и переводов строк в начале и в конце строк 
+        function trim_value(&$value) {
+            $value = trim($value);
+        }
+
+        array_filter($_POST, 'trim_value');
+
+        $args = array(
+            'news_object' => FILTER_SANITIZE_STRING,
+            'author_name' => FILTER_SANITIZE_STRING,
+            'title' => FILTER_SANITIZE_STRING,
+            'short_content' => FILTER_SANITIZE_STRING,
+            'content' => FILTER_SANITIZE_STRING,
+            'status' => array(
+                'filter' => FILTER_VALIDATE_INT,
+                'flags' => FILTER_REQUIRE_SCALAR,
+                'flags' => FILTER_NULL_ON_FAILURE,
+            ),
+            'category' => FILTER_SANITIZE_STRING,
+            'tags' => FILTER_SANITIZE_STRING,
+            'price' => array(
+                'filter' => FILTER_VALIDATE_INT,
+                'flags' => FILTER_REQUIRE_SCALAR,
+                'flags' => FILTER_NULL_ON_FAILURE,
+                'options' => array('min_range' => 0)
+            ),
+            'bargain_available' => FILTER_SANITIZE_NUMBER_INT,
+            'type_of_rent' => FILTER_SANITIZE_STRING,
+            'region' => FILTER_SANITIZE_STRING,
+            'district' => FILTER_SANITIZE_STRING,
+            'address' => FILTER_SANITIZE_STRING,
+            'metro_station' => FILTER_SANITIZE_STRING,
+            'distance_from_metro' => array(
+                'filter' => FILTER_VALIDATE_INT,
+                'flags' => FILTER_REQUIRE_SCALAR,
+                'flags' => FILTER_NULL_ON_FAILURE,
+            ),
+            'number_of_rooms' => FILTER_SANITIZE_STRING,
+            'space' => FILTER_SANITIZE_STRING,
+            'floor' => FILTER_SANITIZE_STRING,
+            'equipment' => FILTER_SANITIZE_STRING,
+            'ceiling_height' => FILTER_SANITIZE_STRING,
+            'type_of_house' => FILTER_SANITIZE_STRING,
+            'home_series' => FILTER_SANITIZE_STRING,
+            'tszh' => FILTER_SANITIZE_STRING,
+            'tszh_other' => FILTER_SANITIZE_STRING,
+            'number_of_floors' => FILTER_SANITIZE_STRING,
+            'elevator_available' => FILTER_SANITIZE_NUMBER_INT,
+            'stairs_available' => FILTER_SANITIZE_NUMBER_INT,
+            'garbage_available' => FILTER_SANITIZE_NUMBER_INT,
+            'security' => FILTER_SANITIZE_STRING,
+            'parking_type' => FILTER_SANITIZE_STRING,
+            'number_of_minutes_parkin' => FILTER_SANITIZE_STRING,
+            'bedroom_num' => FILTER_SANITIZE_NUMBER_INT,
+            'kitchen_num' => FILTER_SANITIZE_NUMBER_INT,
+            'living_room_num' => FILTER_SANITIZE_NUMBER_INT,
+            'hallway_num' => FILTER_SANITIZE_NUMBER_INT,
+            'play_room_num' => FILTER_SANITIZE_NUMBER_INT,
+            'cabinet_num' => FILTER_SANITIZE_NUMBER_INT,
+            'dining_room_num' => FILTER_SANITIZE_NUMBER_INT,
+            'bathroom_num' => FILTER_SANITIZE_NUMBER_INT,
+            'flat_condition' => FILTER_SANITIZE_STRING,
+            'toilet' => FILTER_SANITIZE_STRING,
+            'televisor_num' => FILTER_SANITIZE_NUMBER_INT,
+            'music_center_num' => FILTER_SANITIZE_NUMBER_INT,
+            'conditioning_num' => FILTER_SANITIZE_NUMBER_INT,
+            'fridge_num' => FILTER_SANITIZE_NUMBER_INT,
+            'range_num' => FILTER_SANITIZE_NUMBER_INT,
+            'stove_num' => FILTER_SANITIZE_NUMBER_INT,
+            'microwave_num' => FILTER_SANITIZE_NUMBER_INT,
+            'dishwasher_num' => FILTER_SANITIZE_NUMBER_INT,
+            'table_num' => FILTER_SANITIZE_NUMBER_INT,
+            'bed_num' => FILTER_SANITIZE_NUMBER_INT,
+            'cupboard_num' => FILTER_SANITIZE_NUMBER_INT,
+            'chair_num' => FILTER_SANITIZE_NUMBER_INT,
+            'stand_num' => FILTER_SANITIZE_NUMBER_INT,
+            'mirror_num' => FILTER_SANITIZE_NUMBER_INT,
+            'armchair_num' => FILTER_SANITIZE_NUMBER_INT,
+            'sofa_num' => FILTER_SANITIZE_NUMBER_INT,
+            'balcony' => FILTER_SANITIZE_STRING,
+            'devices_available' => FILTER_SANITIZE_NUMBER_INT,
+            'electronics_available' => FILTER_SANITIZE_NUMBER_INT,
+            'furniture_available' => FILTER_SANITIZE_NUMBER_INT,
+            'sanitary_available' => FILTER_SANITIZE_NUMBER_INT,
+            'heating_available' => FILTER_SANITIZE_NUMBER_INT,
+            'gas_available' => FILTER_SANITIZE_NUMBER_INT,
+            'electricity_available' => FILTER_SANITIZE_NUMBER_INT,
+            'plumbing_available' => FILTER_SANITIZE_NUMBER_INT,
+            'seasonality' => FILTER_SANITIZE_STRING,
+            'village' => FILTER_SANITIZE_STRING,
+            'distance_from_city' => FILTER_SANITIZE_NUMBER_INT,
+            'style_of_house' => FILTER_SANITIZE_STRING,
+            'material_lining' => FILTER_SANITIZE_STRING,
+            'parking_space' => FILTER_SANITIZE_STRING,
+            'fencing' => FILTER_SANITIZE_STRING,
+            'landscape' => FILTER_SANITIZE_STRING,
+            'bathhouse_num' => FILTER_SANITIZE_NUMBER_INT,
+            'garage_num' => FILTER_SANITIZE_NUMBER_INT,
+            'barn_num' => FILTER_SANITIZE_NUMBER_INT,
+            'pool_num' => FILTER_SANITIZE_NUMBER_INT,
+            'pavilion_num' => FILTER_SANITIZE_NUMBER_INT,
+            'hall_num' => FILTER_SANITIZE_NUMBER_INT,
+            'basement_num' => FILTER_SANITIZE_NUMBER_INT,
+            'boiler_num' => FILTER_SANITIZE_NUMBER_INT,
+            'veranda_num' => FILTER_SANITIZE_NUMBER_INT,
+            'dressingroom_num' => FILTER_SANITIZE_NUMBER_INT,
+            'house_condition' => FILTER_SANITIZE_STRING,
+            'number_of_inputs' => FILTER_SANITIZE_NUMBER_INT,
+            'hearth_num' => FILTER_SANITIZE_NUMBER_INT,
+            'rooms_for_sale' => FILTER_SANITIZE_STRING,
+            'room_location' => FILTER_SANITIZE_STRING,
+            'number_of_minutes_parking' => FILTER_SANITIZE_NUMBER_INT,
+            'room_condition' => FILTER_SANITIZE_STRING,
+            'flora' => FILTER_SANITIZE_STRING
+        );
+
+        $new_form_data = filter_input_array(INPUT_POST, $args);
+
+        //Присваивание 0 для не существующих чекбоксов и значения int для существующих
+        foreach ($new_form_data as $key => $value) {
+            if (preg_match('/_num/', $key) == 1) {
+                $check = strstr($key, '_num', true) . '_checkbox';
+
+                if (empty($_POST[$check])) {
+                    $new_form_data[$key] = NULL;
+                }
+            }
+        }
+
+        //Переписывание параметров в 'Другое' если есть _other
+        foreach ($new_form_data as $key => $value) {
+            $oth = $key . '_other';
+            if (isset($new_form_data[$oth])) {
+                if ($value == 'Другое') {
+                    $new_form_data[$key] = $new_form_data[$oth];
+                }
+                unset($new_form_data[$oth]);
+            }
+        }
+        //Удаление несуществующих параметров
+        //С присваиванием значения 0 для чекбоксов _available, нужно для Update       
+        foreach ($new_form_data as $key => $value) {
+            if (!empty($value)) {
+                $form_data[$key] = $new_form_data[$key];
+            } elseif (preg_match('/_available/', $key) == 1 && isset($_POST[$key])) {
+                $form_data[$key] = '0';
+            }
+        }
+
+        // записываем строку с адресами картинок для добавления в БД
+        if (!empty($preview_img)) {
+            $form_data['preview_img'] = $preview_img;
+        }
+
+        return $form_data;
+    }
+
+    public function makeNewsInsert($form_data) {
+        // новый ключ id для новости
+        //    $newId = $this->db->lastInsertId('name_id_news_seq');
+        // !!!! тк. пока не занаю как делать выборку из нескольких таблиц 
+        // имя таблицы в id
+        $name_tb = substr($form_data['news_object'], 0, 1) . substr($form_data['news_object'], 4, 1);
+        if ($name_tb == 'b') {
+            $name_tb = 'ba';
+        }
+        // !!!!
+        $this->id = 'id' . $name_tb . md5(microtime());
+        // определение таблицы записи
+        $table_name = 'news_' . $form_data['news_object'];
+
+        // формирование запроса для соответствующих таблиц
+        $sql = 'INSERT INTO ' . $table_name . '(id_news';
+        foreach ($form_data as $key => $val) {
+            if ($key != 'news_object') {
+                $sql = $sql . ', ' . $key;
+            }
+        }
+
+        $sql = $sql . ') VALUES (:id_news';
+        foreach ($form_data as $key => $val) {
+            if ($key != 'news_object') {
+                $sql = $sql . ', :' . $key;
+            }
+        }
+
+        $sql = $sql . ')';
+
+        $stmt = $this->db->prepare($sql);
+
+        $stmt->bindParam(':id_news', $this->id);
+
+        foreach ($form_data as $key => $val) {
+            if ($key != 'news_object') {
+                $p = ':' . $key;
+                $stmt->bindParam($p, $form_data[$key]);
+            }
+        }
+
         return $stmt->execute();
     }
 
-    public function makeNewsUpdate($news_to_edit_id, $preview_img) {
+    public function makeNewsUpdate($news_to_edit_id, $form_data) {
 
-        $stmt = $this->db->prepare("UPDATE news SET"
-                . " date = CURRENT_TIMESTAMP(2),"
-                . " title = :title,"
-                . " short_content = :short_content,"
-                . " content = :content,"
-                . " author_name = :author_name,"
-                . " preview_img = :preview_img,"
-                . " status = :status,"
-                . " category = :category,"
-                . " tags = :tags"
-                . " WHERE id_news = :news_to_edit_id");
+        $sql = "UPDATE news_" . $form_data['news_object'] . " SET ";
+        foreach ($form_data as $key => $val) {
+            if ($key != 'news_object') {
+                $sql = $sql . $key . ' = :' . $key . ', ';
+            }
+        }
+        $sql = substr($sql, 0, -2);
+
+        $sql = $sql . " WHERE id_news = :news_to_edit_id";
+        $stmt = $this->db->prepare($sql);
 
         $stmt->bindParam(':news_to_edit_id', $news_to_edit_id);
-        $stmt->bindParam(':title', $_POST['newsTitle'], PDO::PARAM_STR);
-        $stmt->bindParam(':short_content', $_POST['newsShortContent'], PDO::PARAM_STR);
-        $stmt->bindParam(':content', $_POST['newsContent'], PDO::PARAM_STR);
-        $stmt->bindParam(':author_name', $_POST['authorName'], PDO::PARAM_STR);
-        $stmt->bindParam(':preview_img', $preview_img);
-        $stmt->bindParam(':status', $_POST['statusForUpdate'], PDO::PARAM_INT);
-        $stmt->bindParam(':category', $_POST['newsCategory'], PDO::PARAM_STR);
-        $stmt->bindParam(':tags', $_POST['newsTags'], PDO::PARAM_STR);
 
-
+        foreach ($form_data as $key => $val) {
+            if ($key != 'news_object') {
+                $p = ':' . $key;
+                $stmt->bindParam($p, $form_data[$key]);
+            }
+        }
         return $stmt->execute();
     }
 
@@ -208,16 +588,34 @@ class NewsModel extends Model {
 
         $blacklistOfFile = array(".php", ".phtml", ".php3", ".php4"); // Запрещенный формат файлов
         $imgMaxSize = 3050000; // Максимальный размер картинок в байтах
+        $return_image_arr = []; //подготовительный массив для сохранения порядка следования
         $return_image_names = ''; // Возвращаемая строка имен картинок 
 
         if (!empty($_FILES)) {
             //Получаем имена полей "image_name_?" ввода картинок переданных POST
             $image_name_keys = preg_grep("/^image_name_/", array_keys($_FILES));
-            
+
+            //отсееваем и записываем уже существующие картинки
+            foreach ($image_name_keys as $k => $v) {
+                if (preg_match("/_news_/", $v)) {
+                    // определяеи номер
+                    $i = (int) substr($v, 11, 2);
+                    // определяем имя файла
+                    $f_name = strstr($v, 'news_');
+                    //переделываем 4 знак с конца в точку
+                    $f_name = substr_replace($f_name, '.', -4, 1);
+                    // добавляем в подготовительный массив под номером
+                    $return_image_arr[$i] = $f_name;
+                    //удаляем ссылку на поле ввода, что бы исключить обработку
+                    unset($image_name_keys[$k]);
+                }
+            }
+
+
             foreach ($image_name_keys as $image_name_key) {
 
                 //Генерируем случайное имя картинки
-                $name_rand = md5(time() . rand(100, 999)); // Базовая часть
+                $name_rand = md5(time()) . rand(10, 99); // Базовая часть
                 $name_big = 'news_' . $name_rand; // Новое имя для большой картинки
                 $name_small = 's_' . $name_big; // Новое имя для маленькой картинки
                 // Загрузка картинки в директоритю и получение ссылки на нее
@@ -254,13 +652,28 @@ class NewsModel extends Model {
                 $this->newsPicturesResize($_FILES[$image_name_key], 'big', $name_big);
                 $this->newsPicturesResize($_FILES[$image_name_key], 'small', $name_small);
 
+                //Запись в подгот. массив под номером ключа соотв. имени
+                // Определяем номер
+                $i = (int) substr($image_name_key, 11, 2);
+
+                $return_image_arr[$i] = $name_big;
+//                if (empty($return_image_names)) {
+//                    $return_image_names = $name_big;
+//                } else {
+//                    $return_image_names = $return_image_names . '|' . $name_big;
+//                }
+            }
+
+            // Получаем строку имен файлов из массива
+            foreach ($return_image_arr as $value) {
                 if (empty($return_image_names)) {
-                    $return_image_names = $name_big;
+                    $return_image_names = $value;
                 } else {
-                    $return_image_names = $return_image_names . '|' . $name_big;
+                    $return_image_names = $return_image_names . '|' . $value;
                 }
             }
         }
+
         return $return_image_names;
     }
 
@@ -340,4 +753,3 @@ class NewsModel extends Model {
     }
 
 }
-
