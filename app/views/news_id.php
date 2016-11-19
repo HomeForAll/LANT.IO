@@ -1,14 +1,33 @@
-<div class="news">
+<div class="news">   
 <h2><?php  if (!empty($this->data['title'])){ echo $this->data['title']; } ?></h2>
     <?php if (!empty($data['preview_img'])) { ?> 
     <img src="/uploads/images/s_<?php echo $this->data['preview_img'][0]; ?>">
     <?php } ?>
-<p> <?php if (!empty($this->data['short_content'])){  echo $this->data['short_content']; } ?></p>
-<p> <?php if (!empty($this->data['content'])){ echo $this->data['content']; } ?></p>
-<div class="news_date"><?php if (!empty($this->data['date'])){ echo "Дата: ".$this->data['date']; } ?></div>
-<div class="news_author"><?php if (!empty($this->data['author_name'])){ echo "Автор: ".$this->data['author_name']; } ?></div>
-<div class="news_category"><?php if (!empty($this->data['category'])){ echo "Категория: ".$this->data['category']; } ?></div>
-<div class="news_tags"><?php if (!empty($this->data['tags'])){ echo "Теги: ".$this->data['tags']; } ?></div>
+
+    <?php
+    
+            echo'<br>____$data_____<br>';
+        echo'<pre>';
+        var_dump($this->data);
+         echo'</pre>';
+        echo'<br>_________<br>';
+    
+    //Вывод новостей с hederами см. в Моделях function prepareNewsView($news)
+    foreach ($this->data as $key => $val) {
+        if (substr($key,-2,2) == '_h') {
+            // ключ данных
+            $key_i = substr($key, 0, -2);
+         echo'<div class="'.$key_i.'">';
+         echo '<b>'.$this->data[$key].': </b> '.$this->data[$key_i];
+         echo "</div>\r\n";
+        }
+        
+        
+    }
+    ?>
+
+
+
 <div class="news_gallery">
     <?php 
     foreach ($this->data['preview_img'] as $img){
@@ -16,11 +35,7 @@
         
     <?php
     }
-    
-    
     ?>
-    
-    
 </div>
 <a href="/news">Обратно</a>
 </div>
