@@ -20,8 +20,17 @@ return array(
     'auth/([A-Za-z]+)' => 'empty/user/OAuthGetData/$1',
 
     'news/page([0-9]+)' => 'main/news/news_list/$1',
-    'news/([0-9]+)' => 'main/news/news_id/$1', 
+    'news/(id[b,r,s][a,h,r,l]?[0-9a-f]+)' => 'main/news/news_id/$1', 
     'news/editor' => 'main/news/news_editor',
-    'news/editor/([0-9]+)' => 'main/news/news_editor/$1',
+    'news/editor/(id[b,r,s][a,h,r,l]?[0-9a-f]+)' => 'main/news/news_editor/$1',
+    'news/editor/(saleapart)' => 'main/news/news_editor/$1',
+    'news/editor/(salehouse)' => 'main/news/news_editor/$1',
+    'news/editor/(saleroom)' => 'main/news/news_editor/$1',
+    'news/editor/(salepart)' => 'main/news/news_editor/$1',
+    'news/editor/(saleland)' => 'main/news/news_editor/$1',
+    'news/editor/(rentapart)' => 'main/news/news_editor/$1',
+    'news/editor/(renthouse)' => 'main/news/news_editor/$1',
+    'news/editor/(rentroom)' => 'main/news/news_editor/$1',
+    'news/editor/(rentland)' => 'main/news/news_editor/$1',
     'news' => 'main/news/news_list'
 );
