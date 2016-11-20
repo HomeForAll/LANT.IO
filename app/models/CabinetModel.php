@@ -22,21 +22,61 @@ class CabinetModel extends Model
         if (isset($_POST['handle'])) {
             if (isset($_POST['sendCheck'])) {
                 foreach ($_SESSION['keys'] as $email => $key) {
-                    $str = file_get_contents(ROOT_DIR . '/templates/layouts/email.php');
+
+                    $str = file_get_contents(ROOT_DIR . '/templates/layouts/mail.php');
+                    $str_text = file_get_contents(ROOT_DIR . '/templates/layouts/mail_text.php');
                     $phrase = $str;
                     $old = array("KEY");
                     $new = array($key);
                     $newphrase = str_replace($old, $new, $phrase);
+                    $newphrase = base64_encode($newphrase);
+
+                    $phrase = $str_text;
+                    $old = array("KEY");
+                    $new = array($key);
+                    $newphrase_text = str_replace($old, $new, $phrase);
+                    $newphrase_text = base64_encode($newphrase_text);
+
+                    $subject = 'Alpha KEY';
+                    $boundary = uniqid('np');
+
                     $headers = 'MIME-Version: 1.0' . "\r\n";
-                    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-                    mail($email, "Альфа ключ", $newphrase, $headers);
+                    $headers .= "From: Lant.io <noreply@lant.io>\r\n";
+                    $headers .= "To: ".$email."\r\n";
+                    $headers .= "Content-Type: multipart/alternative;boundary=" . $boundary . "\r\n";
+
+                    $message = "This is a MIME encoded message.";
+                    $message .= "\r\n\r\n--" . $boundary . "\r\n";
+                    $message .= "Content-type: text/plain;charset=utf-8\r\n\r\n";
+                    $message .= "Content-Transfer-Encoding: base64\r\n";
+                    //Plain text body
+                    $message .= $newphrase_text;
+                    $message .= "\r\n\r\n--" . $boundary . "\r\n";
+                    $message .= "Content-type: text/html;charset=utf-8\r\n";
+                    $message .= "Content-Transfer-Encoding: base64\r\n";
+
+                    //Html body
+                    $message .= $newphrase;
+                    $message .= "\r\n\r\n--" . $boundary . "--";
+
+                    mail('', $subject, $message, $headers, "-fnoreply@lant.io");
+
+//                    $text_header =
+//                        "Content-Type: text/plain; charset=UTF-8\r\n" .
+//                        "Content-Transfer-Encoding: base64\r\n";
+
+                    //mail($email, "Альфа ключ", $newphrase, $headers, "-fnoreply@lant.io");
                 }
             }
             if (isset($_POST['dbCheck'])) {
                 foreach ($_SESSION['keys'] as $email => $key) {
-                    $this->db->query("INSERT INTO access (email, key) VALUES (NULL, '$key')");
+                    $date = new DateTime();
+                    $inactiveDate = new DateTime();
+                    $inactiveDate->add(new DateInterval('P1M'));
+                    $this->db->query("INSERT INTO access (email, key, email_sent, creation_date, inactive_date, status) VALUES (NULL, '{$key}', '{$email}', '{$date->format('Y-m-d')}', '{$inactiveDate->format('Y-m-d')}', 0)");
                 }
             }
+//            print_r($this->db->errorInfo());
             unset($_SESSION['keys']);
         }
     }
@@ -121,17 +161,12 @@ class CabinetModel extends Model
             $temp = [];
 
             if (isset($_POST['showdb'])) {
-
-
                 foreach ($_SESSION['keys_keyeditor'] as $key) {
-
                     $array[$key['id']] = $key;
                 }
 
-                for ($i = 1; $i <= $key['id']; $i++) { // сортировка
-                    if (isset($array[$i])) {
-                        $temp[$i] = $array[$i];
-                    }
+                for ($i = 1; $i <= count($array); $i++) { // сортировка
+                    $temp[$i] = $array[$i];
                 }
                 $array = $temp;
 
@@ -264,9 +299,7 @@ class CabinetModel extends Model
                 $_SESSION['notice_id'] = $array[$id_key]['id'];
                 $_SESSION['id_key_keyeditor'] = $id_key;
                 $_SESSION['array_keyeditor'] = $array[$id_key];
-                $_SESSION['sessioncheck'] = 1;
                 return $result;
-
             }
         }
         return false;
@@ -277,7 +310,6 @@ class CabinetModel extends Model
         if (isset($_POST['lock'])) {
             $this->db->query("UPDATE access SET status = 2 WHERE id = {$_SESSION['id_key_keyeditor']}");
             $result = "{$_SESSION['array_keyeditor']['key']} заблокирован!";
-            $_SESSION['sessioncheck'] = 123;
             return $result;
         }
         return false;
@@ -295,7 +327,6 @@ class CabinetModel extends Model
                 return $result;
             } else
                 $result = "Ключ просрочен!";
-            $_SESSION['sessioncheck'] = 1;
             return $result;
         }
     }
@@ -307,7 +338,6 @@ class CabinetModel extends Model
             $month = $_POST['month'];
             $year = $_POST['year'];
             $flag = true;
-            $_SESSION['sessioncheck'] = 1;
             if ($month == 1 || $month == 3 || $month == 5 || $month == 7 || $month == 8 || $month == 10 || $month == 12) {
                 if ($day > 31) {
                     $flag = false;
@@ -336,7 +366,6 @@ class CabinetModel extends Model
 
             } else {
                 $result = "Ошибка записи даты!";
-
                 return $result;
             }
         }
@@ -348,7 +377,6 @@ class CabinetModel extends Model
             }
             else
                 $result = 'Email введ неверно!';
-            $_SESSION['sessioncheck'] = 1;
             return $result;
         }
         return false;
