@@ -18,67 +18,8 @@ class SearchModel extends Model
         echo '<pre>';
         print_r($_POST);
         echo '</pre>';
-        if ($searchType == 'simple') {
-            if ($_POST['subject'] == 'apartment') {
-                $minPrice = (!empty($_POST['minPrice'])) ? (integer)$_POST['minPrice'] : 0;
-                $maxPrice = (!empty($_POST['maxPrice'])) ? (integer)$_POST['maxPrice'] : 100000000;
-                $bargain = (!empty($_POST['bargain'])) ? 1 : 0;
-                $rooms = ($_POST['rooms'] == 'more') ? 1 : $_POST['rooms'];
-                $minArea = (!empty($_POST['minPrice'])) ? (integer)$_POST['minPrice'] : 0;
-                $maxArea = (!empty($_POST['maxPrice'])) ? (integer)$_POST['maxPrice'] : 100000000;
-                $equipment = (bool)$_POST['equipment'];
 
-            } elseif ($_POST['subject'] == 'house') {
 
-            } elseif ($_POST['subject'] == 'ground') {
-
-            } elseif ($_POST['subject'] == 'room') {
-
-            } else {
-
-            }
-        } elseif ($searchType == 'extended') {
-            if ($_POST['subject'] == 'apartment') {
-                $minPrice = 0;
-                $maxPrice = 0;
-                $bargain = 0;
-                $rentType = 0;
-                $region = 0;
-                $city = 0;
-                $district = 0;
-                $area = 0;
-                $address = 0;
-                $metroMin = 0;
-                $metroMax = 0;
-                $roomsNumber = 0;
-                $spaceMin = 0;
-                $spaceMax = 0;
-                $floorMin = 0;
-                $floorMax = 0;
-                $equipment = 0;
-                $ceilingHeight = 0;
-                $houseType = 0;
-                $houseFloorNumber = 0;
-                $lift = 0;
-                $parking = 0;
-                $chute = 0;
-                $decoration = 0;
-                $decorationValue = 0;
-                $lavatory = 0;
-                $plan = 0;
-                $_3d = 0;
-                $video = 0;
-
-            } elseif ($_POST['subject'] == 'house') {
-
-            } elseif ($_POST['subject'] == 'ground') {
-
-            } elseif ($_POST['subject'] == 'room') {
-
-            } else {
-
-            }
-        }
 
 //        if ($_POST['rooms'] == 'more') {
 //            $stmt = $this->db->prepare("SELECT * FROM apartments WHERE price >= :minPrice AND price <= :maxPrice AND bargain = :bargain AND rooms > 3 AND area >= :minArea AND area <= :maxArea AND equipment <= :equipment");
@@ -97,5 +38,103 @@ class SearchModel extends Model
 //        $stmt->execute();
 //
 //        $result = $stmt->fetchAll();
+    }
+
+    private function getOptions($searchType)
+    {
+        if ($_POST['operation'] == 'rent') {
+            switch ($_POST['subject']) {
+                case 'apartment':
+                    if ($searchType == 'simple') {
+
+                    } elseif ($searchType == 'extended') {
+                        $minPrice = $_POST['minPrice'];
+                        $maxPrice = $_POST['maxPrice'];
+                        $bargain = (bool)$_POST['bargain'];
+                        $rentType = $_POST['rentType'];
+
+                        $region = $_POST['region'];
+                        $city = $_POST['city'];
+                        $district = $_POST['district'];
+                        $area = $_POST['area'];
+                        $address = $_POST['address'];
+
+                        $metroMin = $_POST['metroMin'];
+                        $metroMax = $_POST['metroMax'];
+                        $roomsNumber = $_POST['roomsNumber'];
+                        $spaceMin = $_POST['spaceMin'];
+                        $spaceMax = $_POST['spaceMax'];
+                        $floorMin = $_POST['floorMin'];
+                        $floorMax = $_POST['floorMax'];
+                        $equipment = (bool)$_POST['equipment'];
+                        $ceilingHeight = $_POST['ceilingHeight'];
+                        $houseType = $_POST['houseType'];
+                        $houseFloorNumber = $_POST['houseFloorNumber'];
+                        $lift = $_POST['lift'];
+                        $parking = $_POST['parking'];
+                        $chute = $_POST['chute'];
+                        $decoration = $_POST['decoration'];
+                        $decorationValue = $_POST['decorationValue'];
+                        $lavatory = $_POST['lavatory'];
+                        $plan = $_POST['plan'];
+                        $_3d = $_POST['_3d'];
+                        $video = $_POST['video'];
+                    }
+                    break;
+                case 'house':
+                    if ($searchType == 'simple') {
+
+                    } elseif ($searchType == 'extended') {
+
+                    }
+                    break;
+                case 'ground':
+                    if ($searchType == 'simple') {
+
+                    } elseif ($searchType == 'extended') {
+
+                    }
+                    break;
+                case 'room':
+                    if ($searchType == 'simple') {
+
+                    } elseif ($searchType == 'extended') {
+
+                    }
+                    break;
+            }
+        } elseif ($_POST['operation'] == 'buy') {
+            switch ($_POST['subject']) {
+                case 'apartment':
+                    if ($searchType == 'simple') {
+
+                    } elseif ($searchType == 'extended') {
+
+                    }
+                    break;
+                case 'house':
+                    if ($searchType == 'simple') {
+
+                    } elseif ($searchType == 'extended') {
+
+                    }
+                    break;
+                case 'ground':
+                    if ($searchType == 'simple') {
+
+                    } elseif ($searchType == 'extended') {
+
+                    }
+                    break;
+                case 'room':
+                    if ($searchType == 'simple') {
+
+                    } elseif ($searchType == 'extended') {
+
+                    }
+                    break;
+            }
+        }
+        return false;
     }
 }
