@@ -1,10 +1,37 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+<script src="/templates/main/js/mapController.js"></script>
 <script>
     /*$(window).on('load', function () {
      $("#loading-center").fadeOut(800, function () {
      $("#loading").fadeOut(1000);
      });
      });*/
+
+
+    var map = new MapController('map', [55.753559, 37.609218], 'search', {
+        country: '#country',
+        area: '#area',
+        city: '#city',
+        region: '#region',
+        street: '#street',
+        house: '#house'
+    });
+
+    $(document).ready(function () {
+        $('form').on('submit', function (event) {
+            event.preventDefault();
+            var inputVal = inputCur.val();
+            map.get(inputVal);
+        });
+
+        var inputCur = $('input');
+
+        inputCur.on('change', function () {
+            var inputVal = inputCur.val();
+            map.get(inputVal);
+        });
+    });
 
     function displayOperation() {
         var subjectVal = $('#subject').val();
