@@ -89,6 +89,7 @@ class UserModel extends Model {
         $phone = str_replace(')', '', $phone);
         $phone = str_replace('-', '', $phone);
         $phone = str_replace('+', '', $phone);
+        $phone = str_replace(' ', '', $phone);
 
         if (filter_var($_POST['login'], FILTER_VALIDATE_EMAIL)) {
             $stmt = $this->db->prepare("SELECT * FROM users WHERE email = :email");

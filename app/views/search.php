@@ -18,18 +18,6 @@ echo '</pre>';
         margin: 15px 0 15px 30px;
     }
 </style>
-<form action="/" id="mapForm">
-    <input type="text" id="search" placeholder="Адрес ..." style="padding: 10px; width: 477px; position: relative; left: 50%; margin: 0 0 0 -250px;">
-</form>
-<div style="width: 500px; position: relative; left: 50%; margin: 20px 0 0 -250px;">
-    Страна: <span id="country"></span><br>
-    Регион: <span id="area"></span><br>
-    Город: <span id="city"></span><br>
-    Район: <span id="region"></span><br>
-    Улица: <span id="street"></span><br>
-    Дом: <span id="house"></span><br>
-</div>
-<div id="map" style="position: relative; left: 50%; margin: 20px 0 0 -250px; width: 500px; height: 500px"></div>
 <!--
 <h2>Простой поиск:</h2>
 <form action="/search" method="post">
@@ -168,7 +156,7 @@ echo '</pre>';
             <label for="equipment">Комплектация:</label>
             <select name="equipment" id="equipment">
                 <option value="">---</option>
-                <option value="1">Укомплектована</option>
+                <option value="1">Укомплектованая</option>
                 <option value="">Пустая</option>
             </select><br>
         </div>
@@ -204,6 +192,7 @@ echo '</pre>';
         <option value="buy">Покупка</option>
     </select><br><br>
 
+    Квартира
     <fieldset>
         <legend>Базовые параметры</legend>
         <div style="margin: 15px"> Цена:
@@ -258,7 +247,7 @@ echo '</pre>';
                                                                                   placeholder="До"><br> <label
                     for="equipment">Комплектация:</label> <select name="equipment" id="equipment">
                     <option value="">---</option>
-                    <option value="1">Укомплектована</option>
+                    <option value="1">Укомплектованая</option>
                     <option value="">Пустая</option>
                 </select><br> <label for="ceilingHeight">Высота потолков:</label> <input type="text"
                                                                                          name="ceilingHeight"
@@ -407,11 +396,17 @@ echo '</pre>';
                     <option value="">---</option>
                     <option value="1">Есть</option>
                     <option value="2">Нет</option>
+                </select><br>
+                <label
+                    for="foto">Фото:</label> <select name="foto" id="foto" onchange="">
+                    <option value="">---</option>
+                    <option value="1">Есть</option>
+                    <option
+                        value="2">Нет
+                    </option>
                 </select><br></div>
         </div>
     </fieldset>
-    <input
-        style="margin-top: 20px" type="submit" name="extended" value="Найти">
 
     <div id="formOptions">
         <!--        <fieldset>-->
@@ -488,7 +483,7 @@ echo '</pre>';
         <!--                    <label for="equipment">Комплектация:</label>-->
         <!--                    <select name="equipment" id="equipment">-->
         <!--                        <option value="">---</option>-->
-        <!--                        <option value="1">Укомплектована</option>-->
+        <!--                        <option value="1">Укомплектованая</option>-->
         <!--                        <option value="">Пустая</option>-->
         <!--                    </select><br>-->
         <!---->
@@ -678,5 +673,4 @@ echo '</pre>';
         <!--        <input style="margin-top: 20px" type="submit" name="extended" value="Найти">-->
     </div>
 </form>
-
 
