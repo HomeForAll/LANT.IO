@@ -18,7 +18,7 @@ echo '</pre>';
         margin: 15px 0 15px 30px;
     }
 </style>
-<form action="/">
+<form action="/" id="mapForm">
     <input type="text" id="search" placeholder="Адрес ..." style="padding: 10px; width: 477px; position: relative; left: 50%; margin: 0 0 0 -250px;">
 </form>
 <div style="width: 500px; position: relative; left: 50%; margin: 20px 0 0 -250px;">

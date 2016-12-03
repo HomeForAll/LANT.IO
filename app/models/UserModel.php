@@ -84,13 +84,20 @@ class UserModel extends Model {
     }
 
     public function userVerify() {
+        $phone = trim($_POST['login']);
+        $phone = str_replace('(', '', $phone);
+        $phone = str_replace(')', '', $phone);
+        $phone = str_replace('-', '', $phone);
+        $phone = str_replace('+', '', $phone);
+
         if (filter_var($_POST['login'], FILTER_VALIDATE_EMAIL)) {
             $stmt = $this->db->prepare("SELECT * FROM users WHERE email = :email");
             $stmt->bindParam(':email', $_POST['login']);
         } else {
             $stmt = $this->db->prepare("SELECT * FROM users WHERE phone_number = :phone");
-            $stmt->bindParam(':phone', trim($_POST['login'], '+'));
+            $stmt->bindParam(':phone', $phone);
         }
+
         $stmt->execute();
         $result = $stmt->fetch();
 
