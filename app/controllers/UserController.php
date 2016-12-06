@@ -1,22 +1,24 @@
 <?php
 
-class UserController extends Controller {
-
-    public function actionRegistration() {
-
+class UserController extends Controller
+{
+    
+    public function actionRegistration()
+    {
+        
         if (isset($_SESSION['action'])) {
             if ($_SESSION['action'] == 'login') {
                 $this->model->destroyOAuthSessionData();
             }
         }
-
+        
         $data = array(
             'info' => array(),
         );
-
+        
         if (isset($_POST['submit'])) {
             $data = $this->model->checkUserInformation();
-
+            
             if (empty($data['info'])) {
                 $data['info'][] = 'Благодарим вас за регистрацию!';
                 $this->model->registerUser();
@@ -25,9 +27,10 @@ class UserController extends Controller {
         }
         $this->view->render('registration', $data);
     }
-
-    public function actionLogin() {
-
+    
+    public function actionLogin()
+    {
+        
         if (isset($_SESSION['action'])) {
             if ($_SESSION['action'] == 'login') {
                 foreach ($_SESSION['services'] as $service => $value) {
@@ -57,7 +60,7 @@ class UserController extends Controller {
                 }
             }
         }
-
+        
         if (isset($_POST['submit'])) {
             if ($this->model->userVerify()) {
                 $_SESSION['authorized'] = true;
@@ -74,19 +77,22 @@ class UserController extends Controller {
             $this->view->render('login');
         }
     }
-
-    public function actionOAuthGetData($service = null) {
+    
+    public function actionOAuthGetData($service = null)
+    {
         $this->model->getOAuthSessionData($service);
     }
-
-    public function actionOAuthDestroyData($service = null) {
+    
+    public function actionOAuthDestroyData($service = null)
+    {
         $this->model->destroyOAuthSessionData($service);
-
+        
         header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
         exit;
     }
-
-    public function actionLogout() {
+    
+    public function actionLogout()
+    {
         unset($_SESSION['authorized']);
         header('Location: http://' . $_SERVER['HTTP_HOST']);
         exit;

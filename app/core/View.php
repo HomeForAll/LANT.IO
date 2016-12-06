@@ -1,44 +1,52 @@
 <?php
 
-class View {
+class View
+{
     private $title;
     private $template;
     private $content;
     public $data;
-
-    public function __construct($template) {
+    
+    public function __construct($template)
+    {
         $this->template = $template;
     }
-
-    public function render($view, $data = null) {
-        $this->data = $data;
+    
+    public function render($view, $data = null)
+    {
+        $this->data    = $data;
         $this->content = self::getContent($view);
         self::renderLayout();
     }
-
-    private function renderHead() {
+    
+    private function renderHead()
+    {
         include(ROOT_DIR . '/templates/' . $this->template . '/meta.php');
         include(ROOT_DIR . '/templates/' . $this->template . '/links.php');
         include(ROOT_DIR . '/templates/' . $this->template . '/css.php');
         include(ROOT_DIR . '/templates/' . $this->template . '/js.php');
     }
-
-    private function renderBody() {
+    
+    private function renderBody()
+    {
         include(ROOT_DIR . '/templates/' . $this->template . '/begin.php');
         include(ROOT_DIR . '/templates/' . $this->template . '/header.php');
         echo $this->content;
         include(ROOT_DIR . '/templates/' . $this->template . '/footer.php');
         include(ROOT_DIR . '/templates/' . $this->template . '/end.php');
     }
-
-    private function getContent($view) {
+    
+    private function getContent($view)
+    {
         ob_start();
         ob_implicit_flush(false);
         include(ROOT_DIR . '/app/views/' . $view . '.php');
+        
         return ob_get_clean();
     }
-
-    private function renderLayout() {
+    
+    private function renderLayout()
+    {
         include(ROOT_DIR . '/templates/layouts/main.php');
     }
 }

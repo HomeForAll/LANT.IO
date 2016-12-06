@@ -14,8 +14,8 @@
         area: '#area',
         city: '#city',
         region: '#region',
-        street: '#street',
-        house: '#house'
+        street: '#street'
+//        house: '#house'
     });
 
     $(document).ready(function () {
@@ -152,6 +152,12 @@
                     divCitiesCursor.html(data);
                 }
             });
+        });
+    }
+
+    function getGeoCoderData(address) {
+        getTimeout(1000, function () {
+            map.get(address);
         });
     }
 </script>
