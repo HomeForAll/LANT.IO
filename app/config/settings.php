@@ -15,4 +15,6 @@ return array(
     'SMTP_auth' => true,
     'SMTP_username' => '',
     'SMTP_password' => '',
+
+    // Sphinx
 );
