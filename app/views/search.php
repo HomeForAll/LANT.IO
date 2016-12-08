@@ -69,7 +69,6 @@ echo '</pre>';
                 <br>
                 <label for="street">Улица:</label> <span id="street"></span>
                 <br>
-                <br>
                 Станция метро:
                 <br>
                 <div class="indent">
@@ -431,6 +430,7 @@ echo '</pre>';
                 <label for="region">Район:</label> <span id="region"></span>
                 <br>
                 <label for="street">Улица:</label> <span id="street"></span>
+                <br>
                 <div class="indent">
                     Удаленность от города:
                     <input type="text" name="metroMin" placeholder="Мин.">
@@ -797,5 +797,154 @@ echo '</pre>';
                     <br>
                 </div>
             </div>
+    </fieldset>
+</form>
+
+<span style="font-size: 15pt;">
+    <strong>Аренда участка</strong>
+</span>
+<form action="/search" method="post">
+    
+    <input type="hidden" name="subject" value="ground">
+    <input type="hidden" name="operation" value="rent">
+    
+    <fieldset>
+        <legend>Базовые параметры</legend>
+        <div style="margin: 15px">
+            Цена:
+            <div class="indent">
+                Стоимость:
+                <input name="minPrice" type="text" placeholder="Мин.">
+                <input name="maxPrice" type="text" placeholder="Макс.">
+                <br>
+                <label for="bargain">Торг:</label>
+                <select name="bargain" id="bargain">
+                    <option value="">---</option>
+                    <option value="1">Возможен</option>
+                    <option value="2">Не возможен</option>
+                </select>
+                <br>
+                <label for="rentType">Тип аренды:</label>
+                <select name="rentType" id="rentType">
+                    <option value="">---</option>
+                    <option value="1">Часовая</option>
+                    <option value="2">Посуточная</option>
+                    <option value="3">Долгосрочная</option>
+                </select>
+            </div>
+    
+            Расположение:
+            <br>
+    
+            <input type="text" id="search" placeholder="Адрес ..." style="padding: 10px; width: 477px; position: relative; left: 50%; margin: 0 0 0 -250px;" oninput="getGeoCoderData(this.value)" onkeyup="return false;">
+            <div id="map" style="position: relative; left: 50%; margin: 20px 0 0 -250px; width: 500px; height: 500px"></div>
+    
+            <div class="indent">
+                <label for="country">Страна:</label> <span id="country"></span>
+                <br>
+                <label for="area">Область:</label> <span id="area"></span>
+                <br>
+                <label for="city">Город:</label> <span id="city"></span>
+                <br>
+                <label for="region">Район:</label> <span id="region"></span>
+                <br>
+                <label for="street">Улица:</label> <span id="street"></span>
+                <br>
+                <div class="indent">
+                    Удаленность от города:
+                    <input type="text" name="metroMin" placeholder="Мин.">
+                    <input type="text" name="metroMax" placeholder="Макс.">
+                    <br>
+                </div>
+            </div>
+            
+            <label for="landscape">Профиль/ландшафт:</label>
+            <select name="landscape" id="landscape">
+                <option value="">---</option>
+                <option value="1">Ровный</option>
+                <option value="2">Не ровный</option>
+            </select>
+            <br>
+            <br>
+        </div>
+    </fieldset>
+    
+    <br>
+    <br>
+    
+    <fieldset>
+        <legend>Описание объекта</legend>
+        <div style="margin: 15px">
+            <strong>Основное:</strong>
+            <div style="margin: 15px">
+                <strong>Описание участка:</strong>
+                <div class="indent">
+                    <label for="TSJ">ТСЖ:</label>
+                    <select name="TSJ" id="TSJ">
+                        <option value="">---</option>
+                        <option value="1">Кооператив</option>
+                        <option value="2">Кондоминиум</option>
+                        <option value="3">Частный дом</option>
+                        <option value="4">Другое</option>
+                    </select>
+                    <br>
+                    
+                    <label for="fencing">Ограждение</label>
+                    <input type="checkbox" name="fencing" id="fencing">
+                    <br>
+                    
+                    <label for="fencing">Ограждение:</label>
+                    <select name="fencing" id="fencing">
+                        <option value="">---</option>
+                        <option value="1">Профнастил</option>
+                        <option value="2">Забор из дерева</option>
+                        <option value="3">Евроштакетник</option>
+                        <option value="4">Сетка рабица</option>
+                        <option value="5">Монолитный</option>
+                    </select>
+                    <br>
+                    
+                    <label for="Flora">Флора:</label>
+                    <select name="Flora" id="Flora">
+                        <option value="">---</option>
+                        <option value="1">Лесные деревья</option>
+                        <option value="2">Садовые растения</option>
+                    </select>
+                    <br>
+                </div>
+            </div>
+            
+            <strong>Вложения:</strong>
+            <div class="indent">
+                <label for="plan">План участка:</label>
+                <select name="plan" id="plan" onchange="">
+                    <option value="">---</option>
+                    <option value="1">Есть</option>
+                    <option value="2">Нет</option>
+                </select>
+                <br>
+                <label for="3d">3D проект:</label>
+                <select name="3d" id="3d" onchange="">
+                    <option value="">---</option>
+                    <option value="1">Есть</option>
+                    <option value="2">Нет</option>
+                </select>
+                <br>
+                <label for="video">Видео:</label>
+                <select name="video" id="video" onchange="">
+                    <option value="">---</option>
+                    <option value="1">Есть</option>
+                    <option value="2">Нет</option>
+                </select>
+                <br>
+                <label for="photo">Фото:</label>
+                <select name="foto" id="foto" onchange="">
+                    <option value="">---</option>
+                    <option value="1">Есть</option>
+                    <option value="2">Нет</option>
+                </select>
+                <br>
+            </div>
+        </div>
     </fieldset>
 </form>
