@@ -1,6 +1,6 @@
 <?php
 
-class View
+class View extends Application
 {
     private $title;
     private $template;

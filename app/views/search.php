@@ -40,8 +40,8 @@ echo '</pre>';
                 <label for="bargain">Торг:</label>
                 <select name="bargain" id="bargain">
                     <option value="">---</option>
-                    <option value="yes">Возможен</option>
-                    <option value="">Не возможен</option>
+                    <option value="1">Возможен</option>
+                    <option value="2">Не возможен</option>
                 </select>
                 <br>
                 <label for="rentType">Тип аренды:</label>
@@ -69,6 +69,13 @@ echo '</pre>';
                 <br>
                 <label for="street">Улица:</label> <span id="street"></span>
                 <br>
+    
+                <input id="rentApartCountry" type="hidden" name="country" value="">
+                <input id="rentApartArea" type="hidden" name="area" value="">
+                <input id="rentApartCity" type="hidden" name="city" value="">
+                <input id="rentApartRegion" type="hidden" name="region" value="">
+                <input id="rentApartStreet" type="hidden" name="street" value="">
+                
                 Станция метро:
                 <br>
                 <div class="indent">
@@ -431,6 +438,13 @@ echo '</pre>';
                 <br>
                 <label for="street">Улица:</label> <span id="street"></span>
                 <br>
+    
+                <input id="rentHouseCountry" type="hidden" name="country" value="">
+                <input id="rentHouseArea" type="hidden" name="area" value="">
+                <input id="rentHouseCity" type="hidden" name="city" value="">
+                <input id="rentHouseRegion" type="hidden" name="region" value="">
+                <input id="rentHouseStreet" type="hidden" name="street" value="">
+                
                 <div class="indent">
                     Удаленность от города:
                     <input type="text" name="metroMin" placeholder="Мин.">
@@ -852,6 +866,13 @@ echo '</pre>';
                 <br>
                 <label for="street">Улица:</label> <span id="street"></span>
                 <br>
+    
+                <input id="rentGroundCountry" type="hidden" name="country" value="">
+                <input id="rentGroundArea" type="hidden" name="area" value="">
+                <input id="rentGroundCity" type="hidden" name="city" value="">
+                <input id="rentGroundRegion" type="hidden" name="region" value="">
+                <input id="rentGroundStreet" type="hidden" name="street" value="">
+                
                 <div class="indent">
                     Удаленность от города:
                     <input type="text" name="metroMin" placeholder="Мин.">
@@ -1013,6 +1034,13 @@ echo '</pre>';
                 <br>
                 <label for="street">Улица:</label> <span id="street"></span>
                 <br>
+    
+                <input id="rentRoomCountry" type="hidden" name="country" value="">
+                <input id="rentRoomArea" type="hidden" name="area" value="">
+                <input id="rentRoomCity" type="hidden" name="city" value="">
+                <input id="rentRoomRegion" type="hidden" name="region" value="">
+                <input id="rentRoomStreet" type="hidden" name="street" value="">
+                
                 Станция метро:
                 <br>
                 <div class="indent">
@@ -1362,6 +1390,13 @@ echo '</pre>';
                 <br>
                 <label for="street">Улица:</label> <span id="street"></span>
                 <br>
+    
+                <input id="sellApartCountry" type="hidden" name="country" value="">
+                <input id="sellApartArea" type="hidden" name="area" value="">
+                <input id="sellApartCity" type="hidden" name="city" value="">
+                <input id="sellApartRegion" type="hidden" name="region" value="">
+                <input id="sellApartStreet" type="hidden" name="street" value="">
+                
                 Станция метро:
                 <br>
                 <div class="indent">
@@ -1717,6 +1752,13 @@ echo '</pre>';
                 <br>
                 <label for="street">Улица:</label> <span id="street"></span>
                 <br>
+    
+                <input id="sellHouseCountry" type="hidden" name="country" value="">
+                <input id="sellHouseArea" type="hidden" name="area" value="">
+                <input id="sellHouseCity" type="hidden" name="city" value="">
+                <input id="sellHouseRegion" type="hidden" name="region" value="">
+                <input id="sellHouseStreet" type="hidden" name="street" value="">
+                
                 <div class="indent">
                     Удаленность от города:
                     <input type="text" name="metroMin" placeholder="Мин.">
@@ -2131,6 +2173,13 @@ echo '</pre>';
                 <br>
                 <label for="street">Улица:</label> <span id="street"></span>
                 <br>
+    
+                <input id="sellGroundCountry" type="hidden" name="country" value="">
+                <input id="sellGroundArea" type="hidden" name="area" value="">
+                <input id="sellGroundCity" type="hidden" name="city" value="">
+                <input id="sellGroundRegion" type="hidden" name="region" value="">
+                <input id="sellGroundStreet" type="hidden" name="street" value="">
+                
                 <div class="indent">
                     Удаленность от города:
                     <input type="text" name="metroMin" placeholder="Мин.">
@@ -2285,6 +2334,13 @@ echo '</pre>';
                 <br>
                 <label for="street">Улица:</label> <span id="street"></span>
                 <br>
+    
+                <input id="sellRoomCountry" type="hidden" name="country" value="">
+                <input id="sellRoomArea" type="hidden" name="area" value="">
+                <input id="sellRoomCity" type="hidden" name="city" value="">
+                <input id="sellRoomRegion" type="hidden" name="region" value="">
+                <input id="sellRoomStreet" type="hidden" name="street" value="">
+                
                 Станция метро:
                 <br>
                 <div class="indent">

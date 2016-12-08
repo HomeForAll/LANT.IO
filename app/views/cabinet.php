@@ -1,4 +1,5 @@
 <?php
+$this->printData($_SESSION);
 $this->title = 'Личный кабинет';
 ?>
 <h1>Личный кабинет!</h1>
