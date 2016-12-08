@@ -31,7 +31,8 @@ echo '</pre>';
     
     <fieldset>
         <legend>Базовые параметры</legend>
-        <div style="margin: 15px"> Цена:
+        <div style="margin: 15px">
+            Цена:
             <div class="indent">
                 Стоимость:
                 <input name="minPrice" type="text" placeholder="Мин.">
@@ -109,11 +110,12 @@ echo '</pre>';
                 <select name="equipment" id="equipment">
                     <option value="">---</option>
                     <option value="1">Укомплектованая</option>
-                    <option value="">Пустая</option>
+                    <option value="2">Пустая</option>
                 </select>
                 <br>
                 <label for="ceilingHeight">Высота потолков:</label>
-                <input type="text" name="ceilingHeight" id="ceilingHeight"></div>
+                <input type="text" name="ceilingHeight" id="ceilingHeight">
+            </div>
         </div>
         <div style="margin: 15px">
             <strong>Дом квартиры:</strong>
@@ -151,7 +153,7 @@ echo '</pre>';
                     <option value="">---</option>
                     <option value="1">Подземная</option>
                     <option value="2">Во дворе</option>
-                    <option value="2">Платная (неподалеку)</option>
+                    <option value="3">Платная (неподалеку)</option>
                 </select>
                 <br>
                 
@@ -215,14 +217,12 @@ echo '</pre>';
                     <select name="decoration" id="decoration">
                         <option value="">---</option>
                         <option value="1">Да</option>
-                        <option value="2">Нет
-                        </option>
+                        <option value="2">Нет</option>
                     </select>
                     
                     <select name="decorationValue">
                         <option value="1">Люкс</option>
-                        <option value="2">Косметическая
-                        </option>
+                        <option value="2">Косметическая</option>
                     </select>
                     <br>
                 </div>
@@ -337,8 +337,8 @@ echo '</pre>';
                     <option value="2">Нет</option>
                 </select>
                 <br>
-                <label for="foto">Фото:</label>
-                <select name="foto" id="foto" onchange="">
+                <label for="photo">Фото:</label>
+                <select name="photo" id="photo" onchange="">
                     <option value="">---</option>
                     <option value="1">Есть</option>
                     <option value="2">Нет</option>
@@ -371,16 +371,16 @@ echo '</pre>';
                 <label for="bargain">Торг:</label>
                 <select name="bargain" id="bargain">
                     <option value="">---</option>
-                    <option value="yes">Возможен</option>
-                    <option value="">Не возможен</option>
+                    <option value="1">Возможен</option>
+                    <option value="2">Не возможен</option>
                 </select>
                 <br>
                 <label for="rentType">Тип аренды:</label>
                 <select name="rentType" id="rentType">
                     <option value="">---</option>
-                    <option value="hourRent">Часовая</option>
-                    <option value="dailyRent">Посуточная</option>
-                    <option value="longRent">Долгосрочная</option>
+                    <option value="1">Часовая</option>
+                    <option value="2">Посуточная</option>
+                    <option value="3">Долгосрочная</option>
                 </select>
             </div>
             
@@ -390,8 +390,8 @@ echo '</pre>';
                     <option value="">---</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
-                    <option value="more">3+</option>
-                    <option value="any">Любое</option>
+                    <option value="3">3+</option>
+                    <option value="">Любое</option>
                 </select>
             </div>
             
@@ -400,8 +400,8 @@ echo '</pre>';
                 <select name="parking" id="parking" onchange="">
                     <option value="">---</option>
                     <option value="1">1</option>
-                    <option value="more">2+</option>
-                    <option value="absent">Отсутсвует</option>
+                    <option value="2">2+</option>
+                    <option value="3">Отсутсвует</option>
                 </select>
             </div>
             
@@ -411,33 +411,26 @@ echo '</pre>';
                     <option value="">---</option>
                     <option value="1">Круглый год</option>
                     <option value="2">Весна/лето</option>
-                    <option value="any">Любая</option>
+                    <option value="">Любая</option>
                 </select>
             </div>
             
             Расположение:
             <br>
+    
+            <input type="text" id="search" placeholder="Адрес ..." style="padding: 10px; width: 477px; position: relative; left: 50%; margin: 0 0 0 -250px;" oninput="getGeoCoderData(this.value)" onkeyup="return false;">
+            <div id="map" style="position: relative; left: 50%; margin: 20px 0 0 -250px; width: 500px; height: 500px"></div>
+    
             <div class="indent">
-                <label for="region">Область:</label>
-                <input type="text" name="region" id="region">
+                <label for="country">Страна:</label> <span id="country"></span>
                 <br>
-                <label for="city">Город:</label>
-                <input type="text" name="city" id="city">
+                <label for="area">Область:</label> <span id="area"></span>
                 <br>
-                <div class="indent">
-                    <label for="district">Округ:</label>
-                    <input type="text" name="district" id="district">
-                    <br>
-                    <label for="area">Район: </label>
-                    <input type="text" name="area" id="area">
-                    <br>
-                    <label for="village">Деревня:</label>
-                    <input type="text" name="village" id="village">
-                    <br>
-                    <label for="address">Адрес: </label>
-                    <input type="text" name="address" id="address">
-                    <br>
-                </div>
+                <label for="city">Город:</label> <span id="city"></span>
+                <br>
+                <label for="region">Район:</label> <span id="region"></span>
+                <br>
+                <label for="street">Улица:</label> <span id="street"></span>
                 <div class="indent">
                     Удаленность от города:
                     <input type="text" name="metroMin" placeholder="Мин.">
@@ -462,7 +455,7 @@ echo '</pre>';
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
-                        <option value="more">4+</option>
+                        <option value="4">4+</option>
                     </select>
                     <br>
                     Площадь:
@@ -473,7 +466,7 @@ echo '</pre>';
                     <select name="equipment" id="equipment">
                         <option value="">---</option>
                         <option value="1">Укомплектован</option>
-                        <option value="">Пустой</option>
+                        <option value="2">Пустой</option>
                     </select>
                     <br>
                     
@@ -658,7 +651,7 @@ echo '</pre>';
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3+</option>
-                        <option value="no">Нет</option>
+                        <option value="4">Нет</option>
                     </select>
                     <br>
                     <br>
@@ -679,12 +672,12 @@ echo '</pre>';
                         <select name="decoration" id="decoration">
                             <option value="">---</option>
                             <option value="1">Да</option>
-                            <option value="0">Нет</option>
+                            <option value="2">Нет</option>
                         </select>
                         <select name="decorationValue">
                             <option value="">---</option>
                             <option value="1">Премиум</option>
-                            <option value="0">Стандартная</option>
+                            <option value="2">Стандартная</option>
                         </select>
                         <br>
                     </div>
@@ -692,7 +685,7 @@ echo '</pre>';
                     <select name="lavatory" id="lavatory">
                         <option value="">---</option>
                         <option value="1">Совмещенный</option>
-                        <option value="0">Раздельный</option>
+                        <option value="2">Раздельный</option>
                     </select>
                     <br>
                     
@@ -795,8 +788,8 @@ echo '</pre>';
                         <option value="2">Нет</option>
                     </select>
                     <br>
-                    <label for="foto">Фото:</label>
-                    <select name="foto" id="foto" onchange="">
+                    <label for="photo">Фото:</label>
+                    <select name="photo" id="photo" onchange="">
                         <option value="">---</option>
                         <option value="1">Есть</option>
                         <option value="2">Нет</option>
