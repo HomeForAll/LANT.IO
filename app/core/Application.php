@@ -19,4 +19,10 @@ class Application
     //            die("Не удалось подключиться к базе данных:<br>" . $e->getMessage());
     //        }
     //    }
+    
+    protected function printData($data) {
+        echo '<pre>';
+        print_r($data);
+        echo '</pre>';
+    }
 }

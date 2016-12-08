@@ -15,12 +15,12 @@ class SearchController extends Controller
         //        print_r($_POST);
         //        echo '</pre>';
         
-        //        foreach ($_POST as $name => $value) {
-        //            echo "$" . "{$name} = (\$_POST['{$name}'] ? \$_POST['{$name}'] : '');<br>";
-        //        }
+//        foreach ($_POST as $name => $value) {
+//            echo "$" . "{$name} = isset(\$_POST['{$name}']) ? (\$_POST['{$name}'] ? \$_POST['{$name}'] : '') : '';<br>";
+//        }
         
         if (isset($_POST['apartRent'])) {
-            $data = $this->model->getFiltersData();
+            $data = $this->model->getRentApartData();
         }
         
         $this->view->render('search', $data);

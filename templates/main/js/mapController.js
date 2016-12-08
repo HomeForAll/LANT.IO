@@ -58,25 +58,25 @@ MapController.prototype.get = function (address) {
             MapController.prototype.house = object.getPremiseNumber();
 
             if ('country' in MapController.options) {
-                $(MapController.options.country).text('');
-                $(MapController.options.country).text(object.getCountry());
+                $(MapController.options.country).html('');
+                $(MapController.options.country).html(object.getCountry() + '<input type="hidden" name="country" value="' + object.getCountry() + '">');
             }
             if ('area' in MapController.options) {
                 console.log(object.getAdministrativeAreas()[0]);
-                $(MapController.options.area).text('');
-                $(MapController.options.area).text(object.getAdministrativeAreas()[0]);
+                $(MapController.options.area).html('');
+                $(MapController.options.area).html(object.getAdministrativeAreas()[0] + '<input type="hidden" name="area" value="' + object.getAdministrativeAreas()[0] + '">');
             }
             if ('city' in MapController.options) {
-                $(MapController.options.city).text('');
-                $(MapController.options.city).text(object.getLocalities());
+                $(MapController.options.city).html('');
+                $(MapController.options.city).html(object.getLocalities() + '<input type="hidden" name="city" value="' + object.getLocalities() + '">');
             }
             if ('street' in MapController.options) {
-                $(MapController.options.street).text('');
-                $(MapController.options.street).text(object.getThoroughfare());
+                $(MapController.options.street).html('');
+                $(MapController.options.street).html(object.getThoroughfare() + '<input type="hidden" name="street" value="' + object.getThoroughfare() + '">');
             }
             if ('house' in MapController.options) {
-                $(MapController.options.house).text('');
-                $(MapController.options.house).text(object.getPremiseNumber());
+                $(MapController.options.house).html('');
+                $(MapController.options.house).html(object.getPremiseNumber() + '<input type="hidden" name="house" value="' + object.getPremiseNumber() + '">');
             }
 
             // console.log(' --- Начало --- ');
@@ -111,7 +111,7 @@ MapController.prototype.get = function (address) {
                             $(MapController.options.region).text('');
                         }
                         {
-                            $(MapController.options.region).text(object.properties.getAll().name);
+                            $(MapController.options.region).html(object.properties.getAll().name + '<input type="hidden" name="region" value="' + object.properties.getAll().name + '">');
                         }
                     }
 
