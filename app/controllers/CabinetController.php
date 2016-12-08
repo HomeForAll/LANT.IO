@@ -20,6 +20,11 @@ class CabinetController extends Controller {
         $this->view->render('generator');
     }
 
+    public function actionProfileEdit(){
+        $this->model->savePersonalInfo();
+        $this->view->render('profileEdit', $this->model->getinfo());
+    }
+
     public function actionKeyeditor() {
         $showdb = $this->model->showdb();
         $keyeditor = $this->model->keyeditor();

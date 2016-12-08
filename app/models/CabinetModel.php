@@ -13,7 +13,116 @@ class CabinetModel extends Model
 
     public function ajaxHandler()
     {
+    }
 
+    public function getinfo()
+    {
+        $_SESSION['userID'] = 1;
+        $profile_id = $_SESSION['userID'];
+
+        $stmt = $this->db->prepare("SELECT * FROM users WHERE id = $profile_id");
+        $stmt->execute();
+        $info = $stmt->fetchAll();
+        return $info;
+    }
+
+    public function savePersonalInfo()
+    {
+        $_SESSION['userID'] = 1;
+        $profile_id = $_SESSION['userID'];
+
+        if (isset($_POST['save_1']))
+        {
+            $this->db->query("UPDATE users SET first_name = '{$_POST['name']}' WHERE id = $profile_id");
+            $this->db->query("UPDATE users SET last_name = '{$_POST['surname']}' WHERE id = $profile_id");
+            $this->db->query("UPDATE users SET patronymic = '{$_POST['patronymic']}' WHERE id = $profile_id");
+            $this->db->query("UPDATE users SET birthday = '{$_POST['date']}' WHERE id = $profile_id");
+            $this->db->query("UPDATE users SET phone_number = '{$_POST['phonenumber']}' WHERE id = $profile_id");
+        }
+
+        if (isset($_POST['save_2']))
+        {
+            $this->db->query("UPDATE users SET email = '{$_POST['email']}' WHERE id = $profile_id");
+            $this->db->query("UPDATE users SET vk_id = '{$_POST['vkcom']}' WHERE id = $profile_id");
+            $this->db->query("UPDATE users SET ok_id = '{$_POST['classmates']}' WHERE id = $profile_id");
+            $this->db->query("UPDATE users SET mail_id = '{$_POST['mailru']}' WHERE id = $profile_id");
+            $this->db->query("UPDATE users SET ya_id = '{$_POST['yandexru']}' WHERE id = $profile_id");
+            $this->db->query("UPDATE users SET google_id = '{$_POST['google']}' WHERE id = $profile_id");
+            $this->db->query("UPDATE users SET facebook_id = '{$_POST['facebook']}' WHERE id = $profile_id");
+            $this->db->query("UPDATE users SET steam_id = '{$_POST['steam']}' WHERE id = $profile_id");
+            $this->db->query("UPDATE users SET profile_foto_id = '{$_POST['profile_foto']}' WHERE id = $profile_id");
+        }
+
+        if (isset($_POST['save_3']))
+        {
+            $stmt = $this->db->prepare("SELECT password FROM users WHERE id = $profile_id");
+            $stmt->execute();
+            $result = $stmt->fetchAll();
+
+           $new_result = $result[0]['password'];
+
+            if (password_verify($_POST['old_pass'], $new_result)) {
+                $passwordHash = password_hash($_POST['new_pass'], PASSWORD_DEFAULT);
+                $this->db->query("UPDATE users SET password = '{$passwordHash}' WHERE id = $profile_id");
+            } else {
+                $_SESSION['password_error'] = 1;
+            }
+        }
+
+        if (isset($_POST['save_aboutme']))
+        {
+            $aboutme = $_POST['aboutme'];
+            $this->db->query("UPDATE users SET about_me = '{$aboutme}' WHERE id = $profile_id");
+        }
+
+        if (isset($_POST['save_4']))
+        {
+            if (isset($_POST['phone_only']))
+            {
+                $this->db->query("UPDATE users SET phone_only = 1 WHERE id = $profile_id");
+            }
+            if (isset($_POST['site_only']))
+            {
+                $this->db->query("UPDATE users SET site_only = 1 WHERE id = $profile_id");
+            }
+            if (!isset($_POST['phone_only']))
+            {
+                $this->db->query("UPDATE users SET phone_only = 0 WHERE id = $profile_id");
+            }
+            if (!isset($_POST['site_only']))
+            {
+                $this->db->query("UPDATE users SET site_only = 0 WHERE id = $profile_id");
+            }
+        }
+
+        if (isset($_POST['save_5']))
+        {
+            echo 123;
+            if (isset($_POST['new_dialog']))
+            {
+                $this->db->query("UPDATE users SET new_dialog = 1 WHERE id = $profile_id");
+            }
+            if (isset($_POST['close_ad']))
+            {
+                $this->db->query("UPDATE users SET close_ad = 1 WHERE id = $profile_id");
+            }
+            if (isset($_POST['prom_offers']))
+            {
+                $this->db->query("UPDATE users SET prom_offers = 1 WHERE id = $profile_id");
+            }
+            if (!isset($_POST['new_dialog']))
+            {
+                $this->db->query("UPDATE users SET new_dialog = 0 WHERE id = $profile_id");
+            }
+            if (!isset($_POST['close_ad']))
+            {
+                $this->db->query("UPDATE users SET close_ad = 0 WHERE id = $profile_id");
+            }
+            if (!isset($_POST['prom_offers']))
+            {
+                $this->db->query("UPDATE users SET prom_offers = 0 WHERE id = $profile_id");
+            }
+        }
     }
 
     public function handleKeys()
