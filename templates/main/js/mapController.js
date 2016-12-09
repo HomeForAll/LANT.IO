@@ -8,24 +8,28 @@
  * @param options - Объект с такими параметрами: country, area, city, region, street, house.
  *        Значениями являются индитификаторы элементов, в которые поместиться соответствующая инфомация.
  */
+
 function MapController(mapID, center, suggest, options) {
     MapController.options = options;
     MapController.initMap(mapID, center, suggest);
 }
 
+window.maps = {};
+window.suggests = {};
+
 MapController.initMap = function (mapID, center, suggest) {
     ymaps.ready(function () {
-        MapController.prototype.map = new ymaps.Map(mapID, {
+        window.maps[mapID] = new ymaps.Map(mapID, {
             center: center,
             zoom: 10,
             controls: ['fullscreenControl', 'typeSelector', 'geolocationControl', 'zoomControl']
         });
-        window.suggestWiew = new ymaps.SuggestView(suggest, {width: 300, offset: [0, 4], results: 20});
+        window.suggests[suggest] = new ymaps.SuggestView(suggest, {width: 300, offset: [0, 4], results: 20});
     });
 };
 
-MapController.moveTo = function (bounds) {
-    return MapController.prototype.map.setBounds(bounds, {
+MapController.moveTo = function (bounds, mapID) {
+    return window.maps[mapID].setBounds(bounds, {
         checkZoomRange: true
     });
     // return MapController.prototype.map.panTo(coordinates, {
@@ -37,18 +41,20 @@ MapController.moveTo = function (bounds) {
 /**
  * Метод получает и обрабатывает необходимую информацию о расположении объекта.
  * @param address
+ * @param mapID
  */
-MapController.prototype.get = function (address) {
+MapController.prototype.get = function (address, mapID) {
+    //console.log(window.maps);
     ymaps.geocode(address).then(
         function (res) {
             var object = res.geoObjects.get(0);
 
-            MapController.prototype.map.geoObjects.removeAll();
-            MapController.prototype.map.geoObjects.add(object);
+            window.maps[mapID].geoObjects.removeAll();
+            window.maps[mapID].geoObjects.add(object);
 
             var bounds = object.properties.get('boundedBy');
 
-            MapController.moveTo(bounds);
+            MapController.moveTo(bounds, mapID);
 
             MapController.prototype.coordinates = object.geometry.getCoordinates();
             MapController.prototype.country = object.getCountry();

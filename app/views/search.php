@@ -55,19 +55,19 @@ echo '</pre>';
             
             Расположение:
             <br>
-            <input type="text" id="search" placeholder="Адрес ..." style="padding: 10px; width: 477px; position: relative; left: 50%; margin: 0 0 0 -250px;" oninput="getGeoCoderData(this.value)" onkeyup="return false;">
-            <div id="map" style="position: relative; left: 50%; margin: 20px 0 0 -250px; width: 500px; height: 500px"></div>
+            <input type="text" id="rentApartSuggest" placeholder="Адрес ..." style="padding: 10px; width: 477px; position: relative; left: 50%; margin: 0 0 0 -250px;" oninput="getGeoCoderData(this.value, 'rentApartMap')" onkeypress="pressEnter();">
+            <div id="rentApartMap" style="position: relative; left: 50%; margin: 20px 0 0 -250px; width: 500px; height: 500px"></div>
             
             <div class="indent">
-                <label for="country">Страна:</label> <span id="country"></span>
+                <label for="rentApartSpanCountry">Страна:</label> <span id="rentApartSpanCountry"></span>
                 <br>
-                <label for="area">Область:</label> <span id="area"></span>
+                <label for="rentApartSpanArea">Область:</label> <span id="rentApartSpanArea"></span>
                 <br>
-                <label for="city">Город:</label> <span id="city"></span>
+                <label for="rentApartSpanCity">Город:</label> <span id="rentApartSpanCity"></span>
                 <br>
-                <label for="region">Район:</label> <span id="region"></span>
+                <label for="rentApartSpanRegion">Район:</label> <span id="rentApartSpanRegion"></span>
                 <br>
-                <label for="street">Улица:</label> <span id="street"></span>
+                <label for="rentApartSpanStreet">Улица:</label> <span id="rentApartSpanStreet"></span>
                 <br>
     
                 <input id="rentApartCountry" type="hidden" name="country" value="">
@@ -424,8 +424,8 @@ echo '</pre>';
             Расположение:
             <br>
     
-            <input type="text" id="search" placeholder="Адрес ..." style="padding: 10px; width: 477px; position: relative; left: 50%; margin: 0 0 0 -250px;" oninput="getGeoCoderData(this.value)" onkeyup="return false;">
-            <div id="map" style="position: relative; left: 50%; margin: 20px 0 0 -250px; width: 500px; height: 500px"></div>
+            <input type="text" id="rentHouseSuggest" placeholder="Адрес ..." style="padding: 10px; width: 477px; position: relative; left: 50%; margin: 0 0 0 -250px;" oninput="getGeoCoderData(this.value)" onkeyup="return false;">
+            <div id="rentHouseMap" style="position: relative; left: 50%; margin: 20px 0 0 -250px; width: 500px; height: 500px"></div>
     
             <div class="indent">
                 <label for="country">Страна:</label> <span id="country"></span>
@@ -852,8 +852,8 @@ echo '</pre>';
             Расположение:
             <br>
     
-            <input type="text" id="search" placeholder="Адрес ..." style="padding: 10px; width: 477px; position: relative; left: 50%; margin: 0 0 0 -250px;" oninput="getGeoCoderData(this.value)" onkeyup="return false;">
-            <div id="map" style="position: relative; left: 50%; margin: 20px 0 0 -250px; width: 500px; height: 500px"></div>
+            <input type="text" id="rentGroundSuggest" placeholder="Адрес ..." style="padding: 10px; width: 477px; position: relative; left: 50%; margin: 0 0 0 -250px;" oninput="getGeoCoderData(this.value)" onkeyup="return false;">
+            <div id="rentGroundMap" style="position: relative; left: 50%; margin: 20px 0 0 -250px; width: 500px; height: 500px"></div>
     
             <div class="indent">
                 <label for="country">Страна:</label> <span id="country"></span>
@@ -1020,8 +1020,8 @@ echo '</pre>';
     
             Расположение:
             <br>
-            <input type="text" id="search" placeholder="Адрес ..." style="padding: 10px; width: 477px; position: relative; left: 50%; margin: 0 0 0 -250px;" oninput="getGeoCoderData(this.value)" onkeyup="return false;">
-            <div id="map" style="position: relative; left: 50%; margin: 20px 0 0 -250px; width: 500px; height: 500px"></div>
+            <input type="text" id="rentRoomSuggest" placeholder="Адрес ..." style="padding: 10px; width: 477px; position: relative; left: 50%; margin: 0 0 0 -250px;" oninput="getGeoCoderData(this.value)" onkeyup="return false;">
+            <div id="rentRoomMap" style="position: relative; left: 50%; margin: 20px 0 0 -250px; width: 500px; height: 500px"></div>
     
             <div class="indent">
                 <label for="country">Страна:</label> <span id="country"></span>
@@ -1376,8 +1376,8 @@ echo '</pre>';
             
             Расположение:
             <br>
-            <input type="text" id="search" placeholder="Адрес ..." style="padding: 10px; width: 477px; position: relative; left: 50%; margin: 0 0 0 -250px;" oninput="getGeoCoderData(this.value)" onkeyup="return false;">
-            <div id="map" style="position: relative; left: 50%; margin: 20px 0 0 -250px; width: 500px; height: 500px"></div>
+            <input type="text" id="sellApartSuggest" placeholder="Адрес ..." style="padding: 10px; width: 477px; position: relative; left: 50%; margin: 0 0 0 -250px;" oninput="getGeoCoderData(this.value)" onkeyup="return false;">
+            <div id="sellApartMap" style="position: relative; left: 50%; margin: 20px 0 0 -250px; width: 500px; height: 500px"></div>
             
             <div class="indent">
                 <label for="country">Страна:</label> <span id="country"></span>
@@ -1738,8 +1738,8 @@ echo '</pre>';
             Расположение:
             <br>
             
-            <input type="text" id="search" placeholder="Адрес ..." style="padding: 10px; width: 477px; position: relative; left: 50%; margin: 0 0 0 -250px;" oninput="getGeoCoderData(this.value)" onkeyup="return false;">
-            <div id="map" style="position: relative; left: 50%; margin: 20px 0 0 -250px; width: 500px; height: 500px"></div>
+            <input type="text" id="sellHouseSuggest" placeholder="Адрес ..." style="padding: 10px; width: 477px; position: relative; left: 50%; margin: 0 0 0 -250px;" oninput="getGeoCoderData(this.value)" onkeyup="return false;">
+            <div id="sellHouseMap" style="position: relative; left: 50%; margin: 20px 0 0 -250px; width: 500px; height: 500px"></div>
             
             <div class="indent">
                 <label for="country">Страна:</label> <span id="country"></span>
@@ -2159,8 +2159,8 @@ echo '</pre>';
             Расположение:
             <br>
             
-            <input type="text" id="search" placeholder="Адрес ..." style="padding: 10px; width: 477px; position: relative; left: 50%; margin: 0 0 0 -250px;" oninput="getGeoCoderData(this.value)" onkeyup="return false;">
-            <div id="map" style="position: relative; left: 50%; margin: 20px 0 0 -250px; width: 500px; height: 500px"></div>
+            <input type="text" id="sellGroundSuggest" placeholder="Адрес ..." style="padding: 10px; width: 477px; position: relative; left: 50%; margin: 0 0 0 -250px;" oninput="getGeoCoderData(this.value)" onkeyup="return false;">
+            <div id="sellGroundMap" style="position: relative; left: 50%; margin: 20px 0 0 -250px; width: 500px; height: 500px"></div>
             
             <div class="indent">
                 <label for="country">Страна:</label> <span id="country"></span>
@@ -2320,8 +2320,8 @@ echo '</pre>';
             
             Расположение:
             <br>
-            <input type="text" id="search" placeholder="Адрес ..." style="padding: 10px; width: 477px; position: relative; left: 50%; margin: 0 0 0 -250px;" oninput="getGeoCoderData(this.value)" onkeyup="return false;">
-            <div id="map" style="position: relative; left: 50%; margin: 20px 0 0 -250px; width: 500px; height: 500px"></div>
+            <input type="text" id="sellRoomSuggest" placeholder="Адрес ..." style="padding: 10px; width: 477px; position: relative; left: 50%; margin: 0 0 0 -250px;" oninput="getGeoCoderData(this.value)" onkeyup="return false;">
+            <div id="sellRoomMap" style="position: relative; left: 50%; margin: 20px 0 0 -250px; width: 500px; height: 500px"></div>
             
             <div class="indent">
                 <label for="country">Страна:</label> <span id="country"></span>
