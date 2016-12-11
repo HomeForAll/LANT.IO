@@ -59,8 +59,8 @@ class SearchModel extends Model
         
         // $query->where('first_name', '=', 'Robin');
         
-        $subject          = isset($_POST['subject']) ? $_POST['subject'] : '';
-        $operation        = isset($_POST['operation']) ? $_POST['operation'] : '';
+//        $subject          = isset($_POST['subject']) ? $_POST['subject'] : '';
+//        $operation        = isset($_POST['operation']) ? $_POST['operation'] : '';
         $minPrice         = isset($_POST['minPrice']) ? $_POST['minPrice'] : '';
         $maxPrice         = isset($_POST['maxPrice']) ? $_POST['maxPrice'] : '';
         $bargain          = isset($_POST['bargain']) ? $_POST['bargain'] : '';
@@ -226,10 +226,9 @@ class SearchModel extends Model
         if ($parking || $parking !== '') {
             $query->where('parking_type', '=', (int)$parking);
         }
-    
-        // TODO: Доделать вписав названия колонок в таблице
+        
         if ($concierge || $concierge !== '') {
-            $query->where('concierge', '=', 1); //TODO: Не нашел
+            $query->where('concierge', '=', 1);
         }
     
         if ($security || $security !== '') {
@@ -237,17 +236,17 @@ class SearchModel extends Model
         }
         
         if ($intercom || $intercom !== '') {
-            $query->where('intercom', '=', 1); //TODO: Не нашел (Домофон)
+            $query->where('intercom', '=', 1);
         }
         
         if ($CCTV || $CCTV !== '') {
-            $query->where('CCTV', '=', 1); //TODO: Не нашел (Видеонаблюдение)
+            $query->where('CCTV', '=', 1);
         }
     
         if ($chute || $chute !== '') {
-            $query->where('garbage_available', '=', (int)$chute); //TODO: Возможно другое (Мусоропровод)
+            $query->where('garbage_available', '=', (int)$chute);
         }
-    
+        
         /**
          * Состав квартиры
          */
@@ -268,29 +267,29 @@ class SearchModel extends Model
         }
     
         if ($nursery || $nursery !== '') {
-            $query->where('play_room_num', '=', 1); //TODO: Возможно другое (Детская)
+            $query->where('play_room_num', '=', 1);
         }
     
         if ($study || $study !== '') {
             $query->where('cabinet_num', '=', 1);
         }
     
-        if ($canteen || $canteen !== '') { //TODO: Не нашел (Столовая)
-            $query->where('CCTV', '=', 1);
+        if ($canteen || $canteen !== '') {
+            $query->where('dining_room_num', '=', 1);
         }
     
         if ($bathroom || $bathroom !== '') {
-            $query->where('bathhouse_num', '=', 1); //TODO: Возможно другое (ванная)
+            $query->where('bathroom_num', '=', 1);
         }
     
         if ($decoration || $decoration !== '') {
             if ($decorationValue || $decorationValue !== '') {
-                $query->where('flat_condition', '=', (int)$decorationValue); //TODO: Возможно другое (отделка)
+                $query->where('room_condition', '=', (int)$decorationValue);
             }
         }
     
         if ($lavatory || $lavatory !== '') {
-            $query->where('неизвестно', '=', (int)$lavatory); //TODO: Не нашел (Санузел [совмещен или нет])
+            $query->where('toilet', '=', (int)$lavatory);
         }
     
         if ($balcony || $balcony !== '') {
@@ -309,7 +308,7 @@ class SearchModel extends Model
             $query->where('electricity_available', '=', 1);
         }
         
-        if ($water || $water !== '') { //TODO: Возможно другое (Водопровод)
+        if ($water || $water !== '') {
             $query->where('plumbing_available', '=', 1);
         }
     
@@ -330,11 +329,11 @@ class SearchModel extends Model
         }
         
         if ($plate || $plate !== '') {
-            $query->where('stove_num', '>=', 1);
+            $query->where('plate_num', '>=', 1);
         }
         
         if ($bake || $bake !== '') {
-            $query->where('hearth_num', '>=', 1); //TODO: Возможно другое (Печь)
+            $query->where('stove_num', '>=', 1);
         }
         
         if ($microwave || $microwave !== '') {
