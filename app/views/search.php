@@ -1,9 +1,12 @@
 <?php
 $this->title = 'Поиск';
 
-echo '<pre>';
-print_r($this->data);
-echo '</pre>';
+foreach ($this->data as $key => $value) {
+    echo '<pre>';
+    print_r("ID Новости: " . $value['id_news']);
+    echo '</pre>';
+}
+
 ?>
 <style>
     #operation, label[for=operation] {
