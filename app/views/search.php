@@ -41,7 +41,7 @@ echo '</pre>';
                 <select name="bargain" id="bargain">
                     <option value="">---</option>
                     <option value="1">Возможен</option>
-                    <option value="2">Не возможен</option>
+                    <option value="0">Не возможен</option>
                 </select>
                 <br>
                 <label for="rentType">Тип аренды:</label>
@@ -116,7 +116,7 @@ echo '</pre>';
                 <select name="equipment" id="equipment">
                     <option value="">---</option>
                     <option value="1">Укомплектованая</option>
-                    <option value="2">Пустая</option>
+                    <option value="0">Пустая</option>
                 </select>
                 <br>
                 <label for="ceilingHeight">Высота потолков:</label>
@@ -150,7 +150,7 @@ echo '</pre>';
                 <select name="lift" id="lift" onchange="">
                     <option value="">---</option>
                     <option value="1">Есть</option>
-                    <option value="2">Нет</option>
+                    <option value="0">Нет</option>
                 </select>
                 <br>
                 
@@ -183,7 +183,7 @@ echo '</pre>';
                 <select name="chute" id="chute" onchange="">
                     <option value="">---</option>
                     <option value="1">Да</option>
-                    <option value="2">Нет</option>
+                    <option value="0">Нет</option>
                 </select>
                 <br>
             </div>
@@ -223,7 +223,7 @@ echo '</pre>';
                     <select name="decoration" id="decoration">
                         <option value="">---</option>
                         <option value="1">Да</option>
-                        <option value="2">Нет</option>
+                        <option value="0">Нет</option>
                     </select>
                     
                     <select name="decorationValue">
@@ -326,28 +326,28 @@ echo '</pre>';
                 <select name="plan" id="plan" onchange="">
                     <option value="">---</option>
                     <option value="1">Есть</option>
-                    <option value="2">Нет</option>
+                    <option value="0">Нет</option>
                 </select>
                 <br>
                 <label for="3d">3D проект:</label>
                 <select name="3d" id="3d" onchange="">
                     <option value="">---</option>
                     <option value="1">Есть</option>
-                    <option value="2">Нет</option>
+                    <option value="0">Нет</option>
                 </select>
                 <br>
                 <label for="video">Видео:</label>
                 <select name="video" id="video" onchange="">
                     <option value="">---</option>
                     <option value="1">Есть</option>
-                    <option value="2">Нет</option>
+                    <option value="0">Нет</option>
                 </select>
                 <br>
                 <label for="photo">Фото:</label>
                 <select name="photo" id="photo" onchange="">
                     <option value="">---</option>
                     <option value="1">Есть</option>
-                    <option value="2">Нет</option>
+                    <option value="0">Нет</option>
                 </select>
                 <br>
             </div>
@@ -378,7 +378,7 @@ echo '</pre>';
                 <select name="bargain" id="bargain">
                     <option value="">---</option>
                     <option value="1">Возможен</option>
-                    <option value="2">Не возможен</option>
+                    <option value="0">Не возможен</option>
                 </select>
                 <br>
                 <label for="rentType">Тип аренды:</label>
@@ -480,7 +480,7 @@ echo '</pre>';
                     <select name="equipment" id="equipment">
                         <option value="">---</option>
                         <option value="1">Укомплектован</option>
-                        <option value="2">Пустой</option>
+                        <option value="0">Пустой</option>
                     </select>
                     <br>
                     
@@ -686,7 +686,7 @@ echo '</pre>';
                         <select name="decoration" id="decoration">
                             <option value="">---</option>
                             <option value="1">Да</option>
-                            <option value="2">Нет</option>
+                            <option value="0">Нет</option>
                         </select>
                         <select name="decorationValue">
                             <option value="">---</option>
@@ -785,28 +785,28 @@ echo '</pre>';
                     <select name="plan" id="plan" onchange="">
                         <option value="">---</option>
                         <option value="1">Есть</option>
-                        <option value="2">Нет</option>
+                        <option value="0">Нет</option>
                     </select>
                     <br>
                     <label for="3d">3D проект:</label>
                     <select name="3d" id="3d" onchange="">
                         <option value="">---</option>
                         <option value="1">Есть</option>
-                        <option value="2">Нет</option>
+                        <option value="0">Нет</option>
                     </select>
                     <br>
                     <label for="video">Видео:</label>
                     <select name="video" id="video" onchange="">
                         <option value="">---</option>
                         <option value="1">Есть</option>
-                        <option value="2">Нет</option>
+                        <option value="0">Нет</option>
                     </select>
                     <br>
                     <label for="photo">Фото:</label>
                     <select name="photo" id="photo" onchange="">
                         <option value="">---</option>
                         <option value="1">Есть</option>
-                        <option value="2">Нет</option>
+                        <option value="0">Нет</option>
                     </select>
                     <br>
                 </div>

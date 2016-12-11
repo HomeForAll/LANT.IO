@@ -1,0 +1,6 @@
+{
+    "require": {
+        "foolz/sphinxql-query-builder": "^1.1",
+        "neutron/sphinxsearch-api": "^2.0"
+    }
+}

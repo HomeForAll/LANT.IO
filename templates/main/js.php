@@ -14,7 +14,6 @@
         if (a.keyCode == 13 || a.which == 13)
             a.preventDefault ? a.preventDefault() : a.returnValue = false
     }
-    ;
     
     var rentApartMap = new MapController('rentApartMap', [55.753559, 37.609218], 'rentApartSuggest', {
         country: '#rentApartSpanCountry',
