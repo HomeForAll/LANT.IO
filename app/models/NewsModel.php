@@ -296,7 +296,7 @@ class NewsModel extends Model
                     $category_list[$k] = (int)$v;
                 }
             }
-            var_dump($_POST);
+        
         }
         // общее кол-во новостей
         $namber_of_all_rows = $this->getNamber_of_all_rows($category_list);
