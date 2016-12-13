@@ -8,8 +8,12 @@ defined('SERVER') or define('SERVER', 'nginx'); // 'apache' or 'nginx'
 defined('STATUS') or define('STATUS', '1'); // NORMAL: 0; DEV: 1;
 
 require_once __DIR__ . '/app/core/Loader.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
-spl_autoload_register(array('Loader', 'classLoad'));
+spl_autoload_register(array(
+    'Loader',
+    'classLoad',
+));
 
 Loader::getPaths();
 (new Router())->run();

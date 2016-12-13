@@ -8,7 +8,7 @@ $this->title = 'Beta Access';
 
 <div id="logo"><img src="/templates/main/images/access_logo_element.png" alt="access">lant.io</div>
 
-<form action="" method="post" autocomplete="off">
+<form action="/" method="post" autocomplete="off">
     <input id="email" name="email" type="text" placeholder="Ваш email"><br>
     <div class="keyVisible">
         <input id="key" name="key" type="text" placeholder="Ключ доступа"><br>

@@ -1,13 +1,33 @@
-<div class="news">
-<h2><?php echo $data['title']; ?></h2>
+<div class="news">   
+<h2><?php  if (!empty($this->data['title'])){ echo $this->data['title']; } ?></h2>
     <?php if (!empty($data['preview_img'])) { ?> 
-    <img src="/uploads/images/<?php echo $data['preview_img']; ?>">
+    <img src="/uploads/images/s_<?php echo $this->data['preview_img'][0]; ?>">
     <?php } ?>
-<p> <?php echo $data['short_content']; ?></p>
-<p> <?php echo $data['content']; ?></p>
-<div class="news_date"><?php echo "Дата: ".$data['date']; ?></div>
-<div class="news_author"><?php echo "Автор: ".$data['author_name']; ?></div>
-<div class="news_category"><?php echo "Категория: ".$data['category']; ?></div>
-<div class="news_tags"><?php echo "Теги: ".$data['tags']; ?></div>
+
+    <?php
+
+    //Вывод новостей с hederами см. в Моделях function prepareNewsView($news)
+    foreach ($this->data as $key => $val) {
+        if (substr($key,-2,2) == '_h') {
+        // ключ данных
+            $key_i = substr($key, 0, -2);
+         echo'<div class="'.$key_i.'">';
+         echo '<b>'.$this->data[$key].': </b> '.$this->data[$key_i];
+         echo "</div>\r\n";
+        }
+    }
+    ?>
+
+
+
+<div class="news_gallery">
+    <?php 
+    foreach ($this->data['preview_img'] as $img){
+     ?> <a href="/uploads/images/<?php echo $img;?>"><img src="/uploads/images/s_<?php echo $img;?>"></a>
+        
+    <?php
+    }
+    ?>
+</div>
 <a href="/news">Обратно</a>
 </div>

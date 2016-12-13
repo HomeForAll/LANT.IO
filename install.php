@@ -1,2 +1,2 @@
 <?php
-echo 'test1123';
+echo 'test';

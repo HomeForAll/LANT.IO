@@ -5,14 +5,16 @@ return array(
     'db_username' => 'postgres',
     'db_password' => 'ZSH1wb88',
     'db' => 'site',
-
+    
     // SMTP
-    'email'=> '',
+    'email' => '',
     'senderName' => '',
-    'SMTP_host'=> '',
+    'SMTP_host' => '',
     'SMTP_secure' => '',
     'SMTP_port' => '',
     'SMTP_auth' => true,
     'SMTP_username' => '',
     'SMTP_password' => '',
+    
+    // Sphinx
 );

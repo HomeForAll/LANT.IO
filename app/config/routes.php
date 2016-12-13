@@ -4,34 +4,34 @@ return array(
     // 'URI' => 'template/controller/action'
     '' => 'main/site/index',
     'search' => 'main/search/index',
-
+    
     'registration' => 'main/user/registration',
     'login' => 'main/user/login',
+    'login/([A-Za-z]+)/([A-Za-z]+)' => 'main/user/OAuthGetData/$1/$2',
     'logout' => 'main/user/logout',
-
+    
     'cabinet' => 'main/cabinet/cabinet',
     'cabinet/chat' => 'main/cabinet/chat',
+    'cabinet/profile/edit' => 'main/cabinet/profileEdit',
     'cabinet/generator' => 'main/cabinet/generator',
+    'cabinet/keyeditor' => 'main/cabinet/keyeditor',
+    
+    'auth/unset' => 'empty/user/OAuthDestroyData',
+    'auth/unset/([A-Za-z]+)' => 'empty/user/OAuthDestroyData/$1',
+    'auth/([A-Za-z]+)' => 'empty/user/OAuthGetData/$1',
 
-    'auth/vk' => 'main/auth/vk',
-    'auth/ok' => 'main/auth/ok',
-    'auth/mail' => 'main/auth/mail',
-    'auth/ya' => 'main/auth/ya',
-    'auth/goo' => 'main/auth/goo',
-    'auth/fb' => 'main/auth/fb',
-    'auth/steam' => 'main/auth/steam',
-    'auth/unset/vk' => 'main/auth/unsetVk',
-    'auth/unset/ok' => 'main/auth/unsetOk',
-    'auth/unset/mail' => 'main/auth/unsetMail',
-    'auth/unset/ya' => 'main/auth/unsetYa',
-    'auth/unset/goo' => 'main/auth/unsetGoo',
-    'auth/unset/fb' => 'main/auth/unsetFb',
-    'auth/unset/steam' => 'main/auth/unsetSteam',
-    'auth/unset' => 'main/auth/unset',
-
-    'news/page([0-9]+)' => 'Новости/news/news_list/$1',
-    'news/([0-9]+)' => 'Новости/news/news_id/$1', 
-    'news/editor' => 'Новости/news/news_editor',
-    'news/editor/([0-9]+)' => 'Новости/news/news_editor/$1',
-    'news' => 'Новости/news/news_list'
+    'news/page([0-9]+)' => 'main/news/news_list/$1',
+    'news/([0-9]+)' => 'main/news/news_id/$1',
+    'news/editor' => 'main/news/news_editor',
+    'news/editor/([0-9]+)' => 'main/news/news_editor/$1',
+    'news/editor/(saleapart)' => 'main/news/news_editor/$1',
+    'news/editor/(salehouse)' => 'main/news/news_editor/$1',
+    'news/editor/(saleroom)' => 'main/news/news_editor/$1',
+    'news/editor/(salepart)' => 'main/news/news_editor/$1',
+    'news/editor/(saleland)' => 'main/news/news_editor/$1',
+    'news/editor/(rentapart)' => 'main/news/news_editor/$1',
+    'news/editor/(renthouse)' => 'main/news/news_editor/$1',
+    'news/editor/(rentroom)' => 'main/news/news_editor/$1',
+    'news/editor/(rentland)' => 'main/news/news_editor/$1',
+    'news' => 'main/news/news_list'
 );
