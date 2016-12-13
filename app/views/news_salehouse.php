@@ -1,5 +1,5 @@
 <h3>Продать дом</h3>
-<input type="hidden" name="news_object" value="salehouse">
+<input type="hidden" name="category" value="13">
 
 
         
@@ -14,7 +14,7 @@
         <label>
         <span>Торг возможен:</span>
         <input type="hidden" name="bargain_available" value="">
-        <input type="checkbox" name="bargain_available" value="1" <?php inputToCheckbox('bargain_available'); ?>>
+        <input type="checkbox" name="bargain_available" value="true" <?php inputToCheckbox('bargain_available'); ?>>
         </label>
              <!-- Разница с арендой (вставка) -->
         <label>
@@ -24,29 +24,38 @@
                         <label>
         <span>Сезонность: </span>
         <span>
-            Круглый год <input type="radio" name="seasonality" value="Круглый год" <?php inputToRadio('seasonality','Круглый год'); ?> >
-            Весна-лето <input type="radio" name="seasonality" value="Весна-лето" <?php inputToRadio('seasonality','Весна-лето'); ?> >
+            Круглый год <input type="radio" name="seasonality" value="1" <?php inputToRadio('seasonality','1'); ?> >
+            Весна-лето <input type="radio" name="seasonality" value="2" <?php inputToRadio('seasonality','2'); ?> >
         </span>
                 </label>
         
          <fieldset>
         <legend>Расположение</legend>
         <label>
-        <span>Округ: </span>
-        <input type="text" name="region" <?php inputToInput('region'); ?>/>
+        <span>Страна: </span>
+        <input type="text" name="country" <?php inputToInput('country'); ?>/>
+        </label>
+        <label>
+        <span>Область: </span>
+        <input type="text" name="area"  <?php inputToInput('area'); ?>/>
+        </label>
+        <label>
+        <span>Город (посёлок): </span>
+        <input type="text" name="city" <?php inputToInput('city'); ?>/>
         </label>
         <label>
         <span>Район: </span>
-        <input type="text" name="district"  <?php inputToInput('district'); ?>/>
+        <input type="text" name="region"  <?php inputToInput('region'); ?>/>
         </label>
         <label>
-        <span>Деревня: </span>
-        <input type="text" name="village" <?php inputToInput('village'); ?>/>
+        <span>Улица: </span>
+        <input type="text" name="street" <?php inputToInput('street'); ?>/>
         </label>
         <label>
-        <span>Точный адрес: </span>
-        <input type="text" name="address"  <?php inputToInput('address'); ?>/>
+        <span>Номер дома: </span>
+        <input type="text" name="house_number"  <?php inputToInput('house_number'); ?>/>
         </label>
+
         
         <span>Выбрать область на карте</span>
         
@@ -74,61 +83,62 @@
         <span>Площадь: </span>
         <input type="text" name="space" <?php inputToInput('number_of_rooms'); ?>/>
         </label>
+        <label>
         <span>Комплектация: </span>
         <span>
-            Укомплектованная <input type="radio" name="equipment" value="Укомплектованная" <?php inputToRadio('equipment','Укомплектованная'); ?> >
-            Пустая <input type="radio" name="equipment" value="Пустая" <?php inputToRadio('equipment','Пустая'); ?> >
+            Укомплектованная <input type="radio" name="equipment" value="1" <?php inputToRadio('equipment','1'); ?> >
+            Пустая <input type="radio" name="equipment" value="2" <?php inputToRadio('equipment','2'); ?> >
         </span>
         </label>
                 <label>
         <span>Тип дома: </span>
         <select name="type_of_house">
-        <option value="Частный" <?php inputToSelect('type_of_house', 'Частный'); ?> >Частный</option>
-        <option value="Многоквартирный" <?php inputToSelect('type_of_house', 'Многоквартирный'); ?> >Многоквартирный</option>
-        <option value="Таунхаус" <?php inputToSelect('type_of_house', 'Таунхаус'); ?> >Таунхаус</option>
-        <option value="Усадьба" <?php inputToSelect('type_of_house', 'Усадьба'); ?> >Усадьба</option>
+        <option value="11" <?php inputToSelect('type_of_house', '11'); ?> >Частный</option>
+        <option value="12" <?php inputToSelect('type_of_house', '12'); ?> >Многоквартирный</option>
+        <option value="13" <?php inputToSelect('type_of_house', '13'); ?> >Таунхаус</option>
+        <option value="14" <?php inputToSelect('type_of_house', '14'); ?> >Усадьба</option>
         </select>
                 </label>
                         <label>
         <span>Стиль дома: </span>
         <select name="style_of_house">
-        <option value="Классический" <?php inputToSelect('style_of_house', 'Классический'); ?> >Классический</option>
-        <option value="Русский" <?php inputToSelect('style_of_house', 'Русский'); ?> >Русский</option>
-        <option value="Русская усадьба" <?php inputToSelect('style_of_house', 'Русская усадьба'); ?> >Русская усадьба</option>
-        <option value="Замковый" <?php inputToSelect('style_of_house', 'Замковый'); ?> >Замковый</option>
-        <option value="Ренессанс" <?php inputToSelect('style_of_house', 'Ренессанс'); ?> >Ренессанс</option>
-        <option value="Готический" <?php inputToSelect('style_of_house', 'Готический'); ?> >Готический</option>
-        <option value="Барокко" <?php inputToSelect('style_of_house', 'Барокко'); ?> >Барокко</option>
-        <option value="Рококо" <?php inputToSelect('style_of_house', 'Рококо'); ?> >Рококо</option>
-        <option value="Классицизм" <?php inputToSelect('style_of_house', 'Классицизм'); ?> >Классицизм</option>
-        <option value="Ампир" <?php inputToSelect('style_of_house', 'Ампир'); ?> >Ампир</option>
-        <option value="Эклектика" <?php inputToSelect('style_of_house', 'Эклектика'); ?> >Эклектика</option>
-        <option value="Модерн" <?php inputToSelect('style_of_house', 'Модерн'); ?> >Модерн</option>
-        <option value="Органическая архитектура" <?php inputToSelect('style_of_house', 'Органическая архитектура'); ?> >Органическая архитектура</option>
-        <option value="Конструктивизм" <?php inputToSelect('style_of_house', 'Конструктивизм'); ?> >Конструктивизм</option>
-        <option value="Ар-деко" <?php inputToSelect('style_of_house', 'Ар-деко'); ?> >Ар-деко</option>
-        <option value="Минимализм" <?php inputToSelect('style_of_house', 'Минимализм'); ?> >Минимализм</option>
-        <option value="High tech" <?php inputToSelect('style_of_house', 'High tech'); ?> >High tech</option>
-        <option value="Финский минимализм" <?php inputToSelect('style_of_house', 'Финский минимализм'); ?> >Финский минимализм</option>
-        <option value="Шале" <?php inputToSelect('style_of_house', 'Шале'); ?> >Шале</option>
-        <option value="Фахверк" <?php inputToSelect('style_of_house', 'Фахверк'); ?> >Фахверк</option>
-        <option value="Скандинавский" <?php inputToSelect('style_of_house', 'Скандинавский'); ?> >Скандинавский</option>
-        <option value="Восточный" <?php inputToSelect('style_of_house', 'Восточный'); ?> >Восточный</option>
-        <option value="Американский кантри" <?php inputToSelect('style_of_house', 'Американский кантри'); ?> >Американский кантри</option>
-        <option value="Шато" <?php inputToSelect('style_of_house', 'Шато'); ?> >Шато</option>
-        <option value="Адирондак" <?php inputToSelect('style_of_house', 'Адирондак'); ?> >Адирондак</option>
-        <option value="Стильпрерий" <?php inputToSelect('style_of_house', 'Стильпрерий'); ?> >Стильпрерий</option>
+        <option value="1" <?php inputToSelect('style_of_house', '1'); ?> >Классический</option>
+        <option value="2" <?php inputToSelect('style_of_house', '2'); ?> >Русский</option>
+        <option value="3" <?php inputToSelect('style_of_house', '3'); ?> >Русская усадьба</option>
+        <option value="4" <?php inputToSelect('style_of_house', '4'); ?> >Замковый</option>
+        <option value="5" <?php inputToSelect('style_of_house', '5'); ?> >Ренессанс</option>
+        <option value="6" <?php inputToSelect('style_of_house', '6'); ?> >Готический</option>
+        <option value="7" <?php inputToSelect('style_of_house', '7'); ?> >Барокко</option>
+        <option value="8" <?php inputToSelect('style_of_house', '8'); ?> >Рококо</option>
+        <option value="9" <?php inputToSelect('style_of_house', '9'); ?> >Классицизм</option>
+        <option value="10" <?php inputToSelect('style_of_house', '10'); ?> >Ампир</option>
+        <option value="11" <?php inputToSelect('style_of_house', '11'); ?> >Эклектика</option>
+        <option value="12" <?php inputToSelect('style_of_house', '12'); ?> >Модерн</option>
+        <option value="13" <?php inputToSelect('style_of_house', '13'); ?> >Органическая архитектура</option>
+        <option value="14" <?php inputToSelect('style_of_house', '14'); ?> >Конструктивизм</option>
+        <option value="15" <?php inputToSelect('style_of_house', '15'); ?> >Ар-деко</option>
+        <option value="16" <?php inputToSelect('style_of_house', '16'); ?> >Минимализм</option>
+        <option value="17" <?php inputToSelect('style_of_house', '17'); ?> >High tech</option>
+        <option value="18" <?php inputToSelect('style_of_house', '18'); ?> >Финский минимализм</option>
+        <option value="19" <?php inputToSelect('style_of_house', '19'); ?> >Шале</option>
+        <option value="20" <?php inputToSelect('style_of_house', '20'); ?> >Фахверк</option>
+        <option value="21" <?php inputToSelect('style_of_house', '21'); ?> >Скандинавский</option>
+        <option value="22" <?php inputToSelect('style_of_house', '22'); ?> >Восточный</option>
+        <option value="23" <?php inputToSelect('style_of_house', '23'); ?> >Американский кантри</option>
+        <option value="24" <?php inputToSelect('style_of_house', '24'); ?> >Шато</option>
+        <option value="25" <?php inputToSelect('style_of_house', '25'); ?> >Адирондак</option>
+        <option value="26" <?php inputToSelect('style_of_house', '26'); ?> >Стильпрерий</option>
         </select>
                 </label>
                         <label>
         <span>Материал облицовки: </span>
         <select name="material_lining">
-        <option value="Кирпич" <?php inputToSelect('material_lining', 'Кирпич'); ?> >Кирпич</option>
-        <option value="Камень" <?php inputToSelect('material_lining', 'Камень'); ?> >Камень</option>
-        <option value="Фасадная плитка" <?php inputToSelect('material_lining', 'Фасадная плитка'); ?> >Фасадная плитка</option>
-        <option value="Фасадная панель" <?php inputToSelect('material_lining', 'Фасадная панель'); ?> >Фасадная панель</option>
-        <option value="Деревянная панель" <?php inputToSelect('material_lining', 'Деревянная панель'); ?> >Деревянная панель</option>
-        <option value="Штукатурка" <?php inputToSelect('material_lining', 'Штукатурка'); ?> >Штукатурка</option>
+        <option value="1" <?php inputToSelect('material_lining', '1'); ?> >Кирпич</option>
+        <option value="2" <?php inputToSelect('material_lining', '2'); ?> >Камень</option>
+        <option value="3" <?php inputToSelect('material_lining', '3'); ?> >Фасадная плитка</option>
+        <option value="4" <?php inputToSelect('material_lining', '4'); ?> >Фасадная панель</option>
+        <option value="5" <?php inputToSelect('material_lining', '5'); ?> >Деревянная панель</option>
+        <option value="6" <?php inputToSelect('material_lining', '6'); ?> >Штукатурка</option>
         </select>
                 </label>
                 <label>
@@ -144,43 +154,39 @@
         <label>
         <span>ТСЖ: </span>
         <select name="tszh"  class="showOtherButton">
-        <option value="Кооператив" <?php inputToSelect('tszh', 'Кооператив'); ?> >Кооператив</option>
-        <option value="Кондоминиум" <?php inputToSelect('tszh', 'Кондоминиум'); ?> >Кондоминиум</option>
-        <option value="Частный дом" <?php inputToSelect('tszh', 'Частный дом'); ?> >Частный дом</option>
-        <option value="Другое" <?php inputOtherSelect('tszh',  array('Кооператив','Кондоминиум','Частный дом')); ?> >Другое...</option>
+        <option value="1" <?php inputToSelect('tszh', '1'); ?> >Нет</option>
+        <option value="2" <?php inputToSelect('tszh', '2'); ?> >Кооператив</option>
+        <option value="3" <?php inputToSelect('tszh', '3'); ?> >Кондоминиум</option>
+        <option value="4" <?php inputToSelect('tszh', '4'); ?> >Частный дом</option>
+        <option value="5" <?php inputToSelect('tszh', '5'); ?> >Другое...</option>
         </select>
-        <!-- блок для вывода информации ДРУГОЕ... см. javascript 
-        Должно присутствовать value="Другое" -->
-        <div class="showOtherInput <?php addClassOtherInput('tszh', array('Кооператив','Кондоминиум','Частный дом')); ?>">
-        <input type="text" name="tszh_other" <?php inputToInput('tszh'); ?>/>
-        </div>
         </label>
          <!-- отличие от аренды  конец --> 
         
         <label>
         <span>Место для автомобиля: </span>
         <select name="parking_space">
-        <option value="Парковочное место" <?php inputToSelect('Место для автомобиля', 'Парковочное место'); ?> >Парковочное место</option>
-        <option value="Закрытый гараж" <?php inputToSelect('Место для автомобиля', 'Закрытый гараж'); ?> >Закрытый гараж</option>
-        <option value="За пределами участка" <?php inputToSelect('Место для автомобиля', 'За пределами участка'); ?> >За пределами участка</option>
+        <option value="1" <?php inputToSelect('parking_space', '1'); ?> >Парковочное место</option>
+        <option value="2" <?php inputToSelect('parking_space', '2'); ?> >Закрытый гараж</option>
+        <option value="3" <?php inputToSelect('parking_space', '3'); ?> >За пределами участка</option>
         </select>
         </label>
         <label>
         <span>Ограждение: </span>
         <select name="fencing">
-        <option value="Нет" <?php inputToSelect('fencing', 'Нет'); ?> >Нет</option>
-        <option value="Профнастил" <?php inputToSelect('fencing', 'Профнастил'); ?> >Профнастил</option>
-        <option value="Забор из дерева" <?php inputToSelect('fencing', 'Забор из дерева'); ?> >Забор из дерева</option>
-        <option value="Евроштакетник" <?php inputToSelect('fencing', 'Евроштакетник'); ?> >Евроштакетник</option>
-        <option value="Сетка рабица" <?php inputToSelect('fencing', 'Сетка рабица'); ?> >Сетка рабица</option>
-        <option value="Монолитный" <?php inputToSelect('fencing', 'Монолитный'); ?> >Монолитный</option>
+        <option value="1" <?php inputToSelect('fencing', '1'); ?> >Нет</option>
+        <option value="2" <?php inputToSelect('fencing', '2'); ?> >Профнастил</option>
+        <option value="3" <?php inputToSelect('fencing', '3'); ?> >Забор из дерева</option>
+        <option value="4" <?php inputToSelect('fencing', '4'); ?> >Евроштакетник</option>
+        <option value="5" <?php inputToSelect('fencing', '5'); ?> >Сетка рабица</option>
+        <option value="6" <?php inputToSelect('fencing', '6'); ?> >Монолитный</option>
         </select>
         </label>
         <label>
         <span>Профиль/Ландшафт: </span>
         <span>
-            Ровный <input type="radio" name="landscape" value="Ровный" <?php inputToRadio('landscape','Ровный'); ?> >
-            Не ровный <input type="radio" name="landscape" value="Не ровный" <?php inputToRadio('landscape','Не ровный'); ?> >
+            Ровный <input type="radio" name="landscape" value="1" <?php inputToRadio('landscape','1'); ?> >
+            Не ровный <input type="radio" name="landscape" value="2" <?php inputToRadio('landscape','2'); ?> >
         </span>
         </label>
         
@@ -331,18 +337,18 @@
                 <label>
         <span>Состояние дома: </span>
         <select name="house_condition">
-        <option value="Отделки нет" <?php inputToSelect('house_condition', 'Отделки нет'); ?> >Отделки нет</option>
-        <option value="Стандартная отделка" <?php inputToSelect('house_condition', 'Стандартная отделка'); ?> >Стандартная отделка</option>
-        <option value="Премиум отделка" <?php inputToSelect('house_condition', 'Премиум отделка'); ?> >Премиум отделка</option>
+        <option value="1" <?php inputToSelect('house_condition', '1'); ?> >Отделки нет</option>
+        <option value="2" <?php inputToSelect('house_condition', '2'); ?> >Стандартная отделка</option>
+        <option value="3" <?php inputToSelect('house_condition', '3'); ?> >Премиум отделка</option>
         </select>
         </label>
         
         <label>
         <span>Балкон: </span>
         <span>
-            Отсутствует <input type="radio" name="balcony" value="Отсутствует" <?php inputToRadio('balcony','Отсутствует'); ?> >
-            Незастеклённый <input type="radio" name="balcony" value="Незастеклённый" <?php inputToRadio('balcony','Незастеклённый'); ?> >
-            Лоджия <input type="radio" name="balcony" value="Лоджия" <?php inputToRadio('balcony','Лоджия'); ?> >
+            Отсутствует <input type="radio" name="balcony" value="1" <?php inputToRadio('balcony','1'); ?> >
+            Незастеклённый <input type="radio" name="balcony" value="2" <?php inputToRadio('balcony','2'); ?> >
+            Лоджия <input type="radio" name="balcony" value="3" <?php inputToRadio('balcony','3'); ?> >
         </span>
         </label>
         
@@ -357,19 +363,23 @@
         <!-- в отличие от аренды, более кратко прописано -->
         <label>
         <span>Бытовая техника:</span>
-        <input type="checkbox" name="devices_available" value="1" <?php inputToCheckbox('devices_available'); ?> >
+        <input type="hidden" name="devices_available" value="">
+        <input type="checkbox" name="devices_available" value="true" <?php inputToCheckbox('devices_available'); ?> >
         </label>
         <label>
         <span>Электроника для досуга:</span>
-        <input type="checkbox" name="electronics_available" value="1" <?php inputToCheckbox('electronics_available'); ?> >
+        <input type="hidden" name="electronics_available" value="">
+        <input type="checkbox" name="electronics_available" value="true" <?php inputToCheckbox('electronics_available'); ?> >
         </label>
         <label>
         <span>Мебель:</span>
-        <input type="checkbox" name="furniture_available" value="1" <?php inputToCheckbox('furniture_available'); ?> >
+        <input type="hidden" name="furniture_available" value="">
+        <input type="checkbox" name="furniture_available" value="true" <?php inputToCheckbox('furniture_available'); ?> >
         </label>
         <label>
         <span>Сантехника:</span>
-        <input type="checkbox" name="sanitary_available" value="1" <?php inputToCheckbox('sanitary_available'); ?> >
+        <input type="hidden" name="sanitary_available" value="">
+        <input type="checkbox" name="sanitary_available" value="true" <?php inputToCheckbox('sanitary_available'); ?> >
         </label>
         
         </fieldset> <!-- Наполнение квартиры -->
@@ -381,22 +391,22 @@
         <label>
         <span>Отопление:</span>
         <input type="hidden" name="heating_available" value="">
-        <input type="checkbox" name="heating_available" value="1" <?php inputToCheckbox('heating_available'); ?> >
+        <input type="checkbox" name="heating_available" value="true" <?php inputToCheckbox('heating_available'); ?> >
         </label>
         <label>
         <span>Газ:</span>
         <input type="hidden" name="gas_available" value="">
-        <input type="checkbox" name="gas_available" value="1" <?php inputToCheckbox('gas_available'); ?> >
+        <input type="checkbox" name="gas_available" value="true" <?php inputToCheckbox('gas_available'); ?> >
         </label>
         <label>
         <span>Электричество:</span>
         <input type="hidden" name="electricity_available" value="">
-        <input type="checkbox" name="electricity_available" value="1" <?php inputToCheckbox('electricity_available'); ?> >
+        <input type="checkbox" name="electricity_available" value="true" <?php inputToCheckbox('electricity_available'); ?> >
         </label>
         <label>
         <span>Водопровод:</span>
         <input type="hidden" name="plumbing_available" value="">
-        <input type="checkbox" name="plumbing_available" value="1" <?php inputToCheckbox('plumbing_available'); ?> >
+        <input type="checkbox" name="plumbing_available" value="true" <?php inputToCheckbox('plumbing_available'); ?> >
         </label>
   
                     
