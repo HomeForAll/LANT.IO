@@ -22,12 +22,13 @@ class NewsModel extends Model
         return $str;
     }
 
-    public function getNamber_of_all_rows($category_list = array(0))
+    public function getNamber_of_all_rows($category_list = [])
     {
+
 // Составление запроса
         $sql = "SELECT COUNT(*) FROM news_base";
 // Условия поиска по категориям
-        if (!empty($category_list[0])) {
+        if (!empty($category_list)) {
             $sql = $sql.' WHERE ';
             foreach ($category_list as $value) {
                 $sql = $sql.' category = '.$value.' OR ';
@@ -35,6 +36,7 @@ class NewsModel extends Model
             // удаление последнего OR
             $sql = substr($sql, 0, -4);
         }
+
 
         $stmt   = $this->db->prepare($sql);
         $stmt->execute();
@@ -222,7 +224,11 @@ class NewsModel extends Model
         // Количество выводимых новостей
         $number_of_news              = (int) $_SESSION['news_list']['number_of_news'];
         // Таблица новостей
-        $data['news_table_category'] = $_SESSION['news_list']['category'];
+        if (!empty($_SESSION['news_list']['category'])){
+        foreach ($_SESSION['news_list']['category'] as $key => $value) {
+         $data['news_table_category'][(int)$key]  = (int)$value;
+        }
+        }
         // Общее кол-во новостей
         $data['namber_of_all_rows']  = (int) $_SESSION['news_list']['namber_of_all_rows'];
 
@@ -245,11 +251,22 @@ class NewsModel extends Model
         // Запрос БД      
         $from_page = $data['firstnews'] - 1;
 
-        $stmt         = $this->db->prepare("SELECT id_news, date::date, title, short_content, content, author_name, preview_img, status, category, tags "
-            ."FROM news_base"
-            ." ORDER BY date DESC"
+        $sql = "SELECT id_news, date::date, title, short_content, content, author_name, preview_img, status, category, tags "
+            ."FROM news_base";
+        if (!empty($data['news_table_category'])){
+            $sql = $sql.' WHERE';
+            foreach ($data['news_table_category'] as $value) {
+            $sql = $sql.' category = '.$value.' OR ';
+            }
+             // удаление последнего OR
+            $sql = substr($sql, 0, -4);
+        }
+
+        $sql = $sql." ORDER BY date DESC"
             ." LIMIT :number_of_news"
-            ." OFFSET :from_page");
+            ." OFFSET :from_page";
+
+        $stmt         = $this->db->prepare($sql);
         $stmt->bindParam(':number_of_news', $number_of_news);
         $stmt->bindParam(':from_page', $from_page);
         $stmt->execute();
@@ -264,15 +281,22 @@ class NewsModel extends Model
     // общее кол-во новостей, кол-во нов. на странице, категории, сортировка
     public function setSessionForNewsList()
     {
-        if (!empty($_POST['watch_news_list'])) {
-            // Если нажата кнопка выбора режима просмотра
-            $number_of_news = (int) $_POST['number_of_news'];
-        } else {
-            // По умолчанию
-            $category_list  = array(0);
+                    // По умолчанию
+            $category_list = [];
             $sort           = 'data';
             $sort_dir       = 'DESC';
             $number_of_news = 10;
+
+        if (!empty($_POST['watch_news_list'])) {
+            // Если нажата кнопка выбора режима просмотра
+            $number_of_news = (int) $_POST['number_of_news'];
+
+            if(!empty($_POST['news_table_category']) && is_array($_POST['news_table_category'])){
+                foreach ($_POST['news_table_category'] as $k => $v){
+                    $category_list[$k] = (int)$v;
+                }
+            }
+            var_dump($_POST);
         }
         // общее кол-во новостей
         $namber_of_all_rows = $this->getNamber_of_all_rows($category_list);
