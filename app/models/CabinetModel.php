@@ -132,14 +132,53 @@ class CabinetModel extends Model
             if (isset($_POST['sendCheck'])) {
                 foreach ($_SESSION['keys'] as $email => $key) {
                     $str = file_get_contents(ROOT_DIR . '/templates/layouts/mail.php');
+
+                    $str = file_get_contents(ROOT_DIR . '/templates/layouts/mail.php');
+                    $str_text = file_get_contents(ROOT_DIR . '/templates/layouts/mail_text.php');
                     $phrase = $str;
                     $old = array("KEY");
                     $new = array($key);
                     $newphrase = str_replace($old, $new, $phrase);
+                    $newphrase = base64_encode($newphrase);
+
+                    $phrase = $str_text;
+                    $old = array("KEY");
+                    $new = array($key);
+                    $newphrase_text = str_replace($old, $new, $phrase);
+                    $newphrase_text = base64_encode($newphrase_text);
+
+                    $subject = 'Alpha KEY';
+                    $boundary = uniqid('np');
+
                     $headers = 'MIME-Version: 1.0' . "\r\n";
                     $headers .= 'Content-type: text/html; charset="utf-8"' . "\r\n";
                     $headers .= "From: Lant.io <noreply@lant.io>\r\n";
                     mail($email, "Альфа ключ", $newphrase, $headers);
+                    $headers .= "From: Lant.io <noreply@lant.io>\r\n";
+                    $headers .= "To: ".$email."\r\n";
+                    $headers .= "Content-Type: multipart/alternative;boundary=" . $boundary . "\r\n";
+
+                    $message = "This is a MIME encoded message.";
+                    $message .= "\r\n\r\n--" . $boundary . "\r\n";
+                    $message .= "Content-type: text/plain;charset=utf-8\r\n\r\n";
+                    $message .= "Content-Transfer-Encoding: base64\r\n";
+                    //Plain text body
+                    $message .= $newphrase_text;
+                    $message .= "\r\n\r\n--" . $boundary . "\r\n";
+                    $message .= "Content-type: text/html;charset=utf-8\r\n";
+                    $message .= "Content-Transfer-Encoding: base64\r\n";
+
+                    //Html body
+                    $message .= $newphrase;
+                    $message .= "\r\n\r\n--" . $boundary . "--";
+
+                    mail('', $subject, $message, $headers, "-fnoreply@lant.io");
+
+//                    $text_header =
+//                        "Content-Type: text/plain; charset=UTF-8\r\n" .
+//                        "Content-Transfer-Encoding: base64\r\n";
+
+                    //mail($email, "Альфа ключ", $newphrase, $headers, "-fnoreply@lant.io");
                 }
             }
             if (isset($_POST['dbCheck'])) {
