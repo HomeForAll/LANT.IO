@@ -90,30 +90,50 @@ class UserModel extends Model
         print_r($stmt->errorInfo());
     }
     
-    public function userVerify()
+    public function doLogin()
     {
-        $phone = trim($_POST['login']);
-        $phone = str_replace('(', '', $phone);
-        $phone = str_replace(')', '', $phone);
-        $phone = str_replace('-', '', $phone);
-        $phone = str_replace('+', '', $phone);
-        $phone = str_replace(' ', '', $phone);
+        $data = $this->getUserData($_POST['login'], $_POST['password']);
         
-        if (filter_var($_POST['login'], FILTER_VALIDATE_EMAIL)) {
-            $stmt = $this->db->prepare("SELECT * FROM users WHERE email = :email");
-            $stmt->bindParam(':email', $_POST['login']);
+        if ($data) {
+            $_SESSION['authorized']    = true;
+            $_SESSION['userID']        = $data['userID'];
+            $_SESSION['accountStatus'] = $data['status'];
+            
+            header('Location: http://' . $_SERVER['HTTP_HOST'] . '/cabinet');
+            exit;
         } else {
-            $stmt = $this->db->prepare("SELECT * FROM users WHERE phone_number = :phone");
-            $stmt->bindParam(':phone', $phone);
+            $messages = '<span style="color: red;">Вы указали неверные сведения или пользователь не существует.</span><br>';
+            
+            return $messages;
+        }
+    }
+    
+    private function getUserData($login, $password)
+    {
+        $login = trim($login);
+        $login = str_replace(' ', '', $login);
+        
+        if (filter_var($login, FILTER_VALIDATE_EMAIL)) {
+            $query = $this->db->prepare("SELECT * FROM users WHERE email = :login");
+        } else {
+            $query = $this->db->prepare("SELECT * FROM users WHERE phone_number = :login");
+            
+            $login = str_replace('(', '', $login);
+            $login = str_replace(')', '', $login);
+            $login = str_replace('-', '', $login);
+            $login = str_replace('+', '', $login);
         }
         
-        $stmt->execute();
-        $result = $stmt->fetch();
+        $query->execute(array(':login' => $login));
+        $result = $query->fetch();
         
         if ($result) {
-            $_SESSION['userID'] = $result['id'];
-            
-            return password_verify($_POST['password'], $result['password']);
+            if (password_verify($password, $result['password'])) {
+                return array(
+                    'userID' => $result['id'],
+                    'status' => $result['status'],
+                );
+            }
         }
         
         return false;
