@@ -30,8 +30,9 @@ class UserController extends Controller
     
     public function actionLogin()
     {
-        
-        if (isset($_SESSION['action'])) {
+        if (isset($_POST['submit'])) {
+            $this->view->render('login', $this->model->doLogin());
+        } elseif (isset($_SESSION['action'])) {
             if ($_SESSION['action'] == 'login') {
                 foreach ($_SESSION['services'] as $service => $value) {
                     switch ($service) {
@@ -58,17 +59,6 @@ class UserController extends Controller
                             break;
                     }
                 }
-            }
-        }
-        
-        if (isset($_POST['submit'])) {
-            if ($this->model->userVerify()) {
-                $_SESSION['authorized'] = true;
-                header('Location: http://' . $_SERVER['HTTP_HOST'] . '/cabinet');
-                exit;
-            } else {
-                $data = '<span style="color: red;">Вы указали неверные сведения.</span><br>';
-                $this->view->render('login', $data);
             }
         } elseif (isset($_SESSION['authorized'])) {
             header('Location: http://' . $_SERVER['HTTP_HOST'] . '/cabinet');
