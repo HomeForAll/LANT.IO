@@ -1,5 +1,5 @@
 <h3>Продать участок</h3>
-<input type="hidden" name="news_object" value="saleland">
+<input type="hidden" name="category" value="14">
 
  
         <fieldset>
@@ -13,27 +13,32 @@
         <label>
         <span>Торг возможен:</span>
         <input type="hidden" name="bargain_available" value="">
-        <input type="checkbox" name="bargain_available" value="1" <?php inputToCheckbox('bargain_available'); ?>>
+        <input type="checkbox" name="bargain_available" value="true" <?php inputToCheckbox('bargain_available'); ?>>
         </label>
        
          <fieldset>
         <legend>Расположение</legend>
         <label>
-        <span>Округ: </span>
-        <input type="text" name="region" <?php inputToInput('region'); ?>/>
+        <span>Страна: </span>
+        <input type="text" name="country" <?php inputToInput('country'); ?>/>
+        </label>
+        <label>
+        <span>Область: </span>
+        <input type="text" name="area"  <?php inputToInput('area'); ?>/>
+        </label>
+        <label>
+        <span>Город (посёлок): </span>
+        <input type="text" name="city" <?php inputToInput('city'); ?>/>
         </label>
         <label>
         <span>Район: </span>
-        <input type="text" name="district"  <?php inputToInput('district'); ?>/>
+        <input type="text" name="region"  <?php inputToInput('region'); ?>/>
         </label>
         <label>
-        <span>Деревня: </span>
-        <input type="text" name="village" <?php inputToInput('village'); ?>/>
+        <span>Улица (точный адрес): </span>
+        <input type="text" name="street" <?php inputToInput('street'); ?>/>
         </label>
-        <label>
-        <span>Точный адрес: </span>
-        <input type="text" name="address"  <?php inputToInput('address'); ?>/>
-        </label>
+
         
         <span>Выбрать область на карте</span>
         
@@ -44,8 +49,8 @@
         <label>
         <span>Профиль/Ландшафт: </span>
         <span>
-            Ровный <input type="radio" name="landscape" value="Ровный" <?php inputToRadio('landscape','Ровный'); ?> >
-            Не ровный <input type="radio" name="landscape" value="Не ровный" <?php inputToRadio('landscape','Не ровный'); ?> >
+            Ровный <input type="radio" name="landscape" value="1" <?php inputToRadio('landscape','1'); ?> >
+            Не ровный <input type="radio" name="landscape" value="2" <?php inputToRadio('landscape','2'); ?> >
         </span>
         </label>
         
@@ -69,34 +74,30 @@
         <label>
         <span>ТСЖ: </span>
         <select name="tszh"  class="showOtherButton">
-        <option value="Кооператив" <?php inputToSelect('tszh', 'Кооператив'); ?> >Кооператив</option>
-        <option value="Кондоминиум" <?php inputToSelect('tszh', 'Кондоминиум'); ?> >Кондоминиум</option>
-        <option value="Частный дом" <?php inputToSelect('tszh', 'Частный дом'); ?> >Частный дом</option>
-        <option value="Другое" <?php inputOtherSelect('tszh',  array('Кооператив','Кондоминиум','Частный дом')); ?> >Другое...</option>
+        <option value="1" <?php inputToSelect('tszh', '1'); ?> >Нет</option>
+        <option value="2" <?php inputToSelect('tszh', '2'); ?> >Кооператив</option>
+        <option value="3" <?php inputToSelect('tszh', '3'); ?> >Кондоминиум</option>
+        <option value="4" <?php inputToSelect('tszh', '4'); ?> >Частный дом</option>
+        <option value="5" <?php inputToSelect('tszh', '5'); ?> >Другое...</option>
         </select>
-        <!-- блок для вывода информации ДРУГОЕ... см. javascript 
-        Должно присутствовать value="Другое" -->
-        <div class="showOtherInput <?php addClassOtherInput('tszh', array('Кооператив','Кондоминиум','Частный дом')); ?>">
-        <input type="text" name="tszh_other" <?php inputToInput('tszh'); ?>/>
-        </div>
-        </label> 
+        </label>
         <!-- отличие от аренды  конец --> 
         <label>
         <span>Ограждение: </span>
         <select name="fencing">
-        <option value="Нет" <?php inputToSelect('fencing', 'Нет'); ?> >Нет</option>
-        <option value="Профнастил" <?php inputToSelect('fencing', 'Профнастил'); ?> >Профнастил</option>
-        <option value="Забор из дерева" <?php inputToSelect('fencing', 'Забор из дерева'); ?> >Забор из дерева</option>
-        <option value="Евроштакетник" <?php inputToSelect('fencing', 'Евроштакетник'); ?> >Евроштакетник</option>
-        <option value="Сетка рабица" <?php inputToSelect('fencing', 'Сетка рабица'); ?> >Сетка рабица</option>
-        <option value="Монолитный" <?php inputToSelect('fencing', 'Монолитный'); ?> >Монолитный</option>
+        <option value="1" <?php inputToSelect('fencing', '1'); ?> >Нет</option>
+        <option value="2" <?php inputToSelect('fencing', '2'); ?> >Профнастил</option>
+        <option value="3" <?php inputToSelect('fencing', '3'); ?> >Забор из дерева</option>
+        <option value="4" <?php inputToSelect('fencing', '4'); ?> >Евроштакетник</option>
+        <option value="5" <?php inputToSelect('fencing', '5'); ?> >Сетка рабица</option>
+        <option value="6" <?php inputToSelect('fencing', '6'); ?> >Монолитный</option>
         </select>
         </label>
         <label>
         <span>Флора </span>
         <span>
-            Лесные деревья <input type="radio" name="flora" value="Лесные деревья" <?php inputToRadio('flora','Лесные деревья'); ?> >
-            Садовые растения <input type="radio" name="flora" value="Садовые растения" <?php inputToRadio('flora','Садовые растения'); ?> >
+            Лесные деревья <input type="radio" name="flora" value="1" <?php inputToRadio('flora','1'); ?> >
+            Садовые растения <input type="radio" name="flora" value="2" <?php inputToRadio('flora','2'); ?> >
         </span>
         </label>
         </div>         
