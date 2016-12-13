@@ -1,6 +1,6 @@
 <?php
 $this->title = 'Редактор новостей';
-
+//var_dump($this->data);
 
 global $data_for_news;
 $data_for_news = $this->data;
@@ -102,7 +102,7 @@ if (!empty($this->data['message'])) {
 ?>
 
 <form  id="editor_form" class="main_editor_form" enctype="multipart/form-data" action="" method="post">
-
+<input type="hidden" name="category" value="<?php echo $this->data['category']; ?>">
     <fieldset>
         <legend>Выбор категории для создания нового объявления</legend>
         <p> Продажа :
@@ -126,7 +126,7 @@ if (!empty($this->data['message'])) {
     <fieldset>
         <legend>Название</legend>
         <section>
-            <label>Название новости:
+            <label>Название новости*:
                 <input name="title" type="text" <?php inputToInput('title'); ?>>
             </label>
 
@@ -136,15 +136,14 @@ if (!empty($this->data['message'])) {
 
     <!-- Вставляемые блоки -->
     <?php
-    if (!empty($this->data['editor_page_type'])) {
-        if ($this->data['editor_page_type'] != 'base') {
-            include_once 'app/views/news_' . $this->data['editor_page_type'] . '.php';
+    if (!empty($this->data['category'])) {
+        if ($this->data['category'] != 'base') {
+            include_once 'app/views/news_' . $this->data['category'] . '.php';
         } else {
-            ?>
-            <!-- По умолчанию базовый тип новостей -->
-            <input type="hidden" name="news_object" value="base">
-    <?php }
-} ?>
+            echo '<input type="hidden" name="category" value="1">';
+        }
+    }
+    ?>
 
 
 
@@ -164,28 +163,14 @@ if (!empty($this->data['message'])) {
         </section>
         <section>
             <label >Основное содержание: 
-                <textarea name="content" type="text"><?php
+                <textarea id="news_content" name="content" type="text"><?php
                     if (!empty($this->data['content'])) {
                         echo $this->data['content'];
                     }
                     ?></textarea>
             </label>
         </section>
-        <section>
-            <label>Категория:
-                <select name="category" >
-                    <?php for ($i = 0; (!empty($this->data['categories'][$i])); $i++) { ?>
-                        <option <?php
-                        if (!empty($this->data['category'])) {
-                            if ($this->data['category'] == $this->data['categories'][$i]) {
-                                echo 'selected';
-                            }
-                        }
-                        ?> value="<?php echo $this->data['categories'][$i] ?>"><?php echo $this->data['categories'][$i] ?></option>
-<?php } ?> 
-                </select>
-            </label>
-        </section>
+
         <section>
             <label>Теги (через запятую):
                 <input name="tags" type="text" value="<?php
@@ -233,11 +218,11 @@ if (!empty($this->data['message'])) {
             if (!empty($this->data["preview_img"][0])) {
             foreach ($this->data["preview_img"] as $k => $img) {
                $i = $k+1; ?>
-               <div class="fileInput_<?php echo $i; ?>">
+               <div class="imgInput imgInput_<?php echo $i; ?>">
                     <label>Выберите  фотографию: <?php echo $i; ?></label>
                 <br>
                 <img id="img-preview_<?php echo $i; ?>" src="/uploads/images/s_<?php echo $img; ?>">
-                <input type="file" id="image_input_<?php echo $i; ?>" name="image_name_<?php echo $i.'_'.$img; ?>" class="inputfile" onchange="{document.getElementById(&quot;img-preview_<?php echo $i; ?>&quot;).src = window.URL.createObjectURL(this.files[0]);document.getElementById(&quot;image_input_<?php echo $i; ?>&quot;).setAttribute('name', &quot;image_name_<?php echo $i; ?>&quot;);}">
+                <input type="file" id="image_input_<?php echo $i; ?>" name="image_name_<?php echo $i.'_saved_'; ?>" class="inputfile" onchange="{document.getElementById(&quot;img-preview_<?php echo $i; ?>&quot;).src = window.URL.createObjectURL(this.files[0]);document.getElementById(&quot;image_input_<?php echo $i; ?>&quot;).setAttribute('name', &quot;image_name_<?php echo $i; ?>&quot;);}">
                 <br>
                 <input value="Удаление" type="button" class="DeleteField">
             </div>
@@ -311,7 +296,6 @@ if (empty($this->data['id_news'])) {
 <?php } ?>  
 </form>
 
-
-
-
+<script type="text/javascript" src="/templates/main/js/jquery.validate.js"></script>
 <script type="text/javascript" src="/templates/main/js/news_javascript.js"></script> 
+
