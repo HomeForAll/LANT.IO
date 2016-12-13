@@ -5,24 +5,16 @@
     <?php } ?>
 
     <?php
-    
-            echo'<br>____$data_____<br>';
-        echo'<pre>';
-        var_dump($this->data);
-         echo'</pre>';
-        echo'<br>_________<br>';
-    
+
     //Вывод новостей с hederами см. в Моделях function prepareNewsView($news)
     foreach ($this->data as $key => $val) {
         if (substr($key,-2,2) == '_h') {
-            // ключ данных
+        // ключ данных
             $key_i = substr($key, 0, -2);
          echo'<div class="'.$key_i.'">';
          echo '<b>'.$this->data[$key].': </b> '.$this->data[$key_i];
          echo "</div>\r\n";
         }
-        
-        
     }
     ?>
 
