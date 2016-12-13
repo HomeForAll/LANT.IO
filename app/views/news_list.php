@@ -6,54 +6,52 @@ $this->title = 'Новости';
 
 <!-- Выбор количества выводимых новостей -->
 <form action="" method="post">
-    <label for="numberOfNews">Количество выводимых новостей:</label>
-    <select name="numberOfNews">      
+    <label for="number_of_news">Количество выводимых новостей:</label>
+    <select name="number_of_news">
             <option  value="2">2</option>
             <option <?php
-            if (!empty($_POST['numberOfNews'])){
-                if ($_POST['numberOfNews'] == 5) {
+            if (!empty($_POST['number_of_news'])){
+                if ($_POST['number_of_news'] == 5) {
                     echo 'selected';
                 }
             }
                 ?> value="5">5</option>
             <option  <?php
-            if (!empty($_POST['numberOfNews'])){
-                if ($_POST['numberOfNews'] == 10) {
+            if (!empty($_POST['number_of_news'])){
+                if ($_POST['number_of_news'] == 10) {
                     echo 'selected';
                 }
             }
                 ?> value="10">10</option>
     </select>
     <br>
-    <label>
+    <label class="news_table_category">
         <h3>Категория новостей: </h3>
         <span>
-            Общие новости<input type="radio" name="news_table_category" value="base" <?php if ($this->data['news_table_category'] == "base") { echo 'checked';} ?> >
-            <br>
-            <b>Продажа:</b> квартир <input type="radio" name="news_table_category" value="saleapart" <?php if ($this->data['news_table_category'] == "saleapart") { echo 'checked';} ?> >
-            домов <input type="radio" name="news_table_category" value="salehouse" <?php if ($this->data['news_table_category'] == "salehouse") { echo 'checked';} ?> >
-            комнат <input type="radio" name="news_table_category" value="saleroom" <?php if ($this->data['news_table_category'] == "saleroom") { echo 'checked';} ?> >
-            участков <input type="radio" name="news_table_category" value="saleland" <?php if ($this->data['news_table_category'] == "saleland") { echo 'checked';} ?> >
-            <br>
-            <b>Аренда:</b> квартир <input type="radio" name="news_table_category" value="rentapart" <?php if ($this->data['news_table_category'] == "rentapart") { echo 'checked';} ?> >
-            домов <input type="radio" name="news_table_category" value="renthouse" <?php if ($this->data['news_table_category'] == "renthouse") { echo 'checked';} ?> >
-            комнат <input type="radio" name="news_table_category" value="rentroom" <?php if ($this->data['news_table_category'] == "rentroom") { echo 'checked';} ?> >
-            участков <input type="radio" name="news_table_category" value="rentland" <?php if ($this->data['news_table_category'] == "rentland") { echo 'checked';} ?> >
+            Общие новости<input type="checkbox" name="news_table_category[1]" value="1" <?php if (!empty($this->data['news_table_category[1]'])) { echo 'checked';} ?> >
+            Продажа комнат <input type="checkbox" name="news_table_category[11]" value="11" <?php if (!empty($this->data['news_table_category[11]'])) { echo 'checked';} ?> >
+            Продажа квартир <input type="checkbox" name="news_table_category[12]" value="12" <?php if (!empty($this->data['news_table_category[12]'])) { echo 'checked';} ?> >
+            Продажа домов <input type="checkbox" name="news_table_category[13]" value="13" <?php if (!empty($this->data['news_table_category[13]'])) { echo 'checked';} ?> >
+            Продажа участков <input type="checkbox" name="news_table_category[14]" value="14" <?php if (!empty($this->data['news_table_category[14]'])) { echo 'checked';} ?> >
+            Аренда комнат <input type="checkbox" name="news_table_category[21]" value="21" <?php if (!empty($this->data['news_table_category[21]'])) { echo 'checked';} ?> >
+            Аренда квартир <input type="checkbox" name="news_table_category[22]" value="22" <?php if (!empty($this->data['news_table_category[22]'])) { echo 'checked';} ?> >
+            Аренда домов <input type="checkbox" name="news_table_category[23]" value="23" <?php if (!empty($this->data['news_table_category[23]'])) { echo 'checked';} ?> >
+            Аренда участков <input type="checkbox" name="news_table_category[24]" value="24" <?php if (!empty($this->data['news_table_category[24]'])) { echo 'checked';} ?> >
         </span>
         </label>
     <br>
-     <input type="submit" name="submit" value="Смотреть">
+     <input type="submit" name="watch_news_list" value="Смотреть">
 </form>
 
 <!-- Навигация -->
 <DIV>
-    <?php echo $this->data['firstnews']; ?> - <?php echo $this->data['lastnews']; ?> из: <?php echo $this->data['namberofallrows']; ?>
+    <?php echo $this->data['firstnews']; ?> - <?php echo $this->data['lastnews']; ?> из: <?php echo $this->data['namber_of_all_rows']; ?>
     <?php if($this->data['firstnews'] != 1){ 
         echo '<a href="/news/page'.($this->data['page']-1).'"><<</a> '; 
     } else {
       echo '<< ';  
     }
-    if($this->data['lastnews'] != $this->data['namberofallrows']){ 
+    if($this->data['lastnews'] != $this->data['namber_of_all_rows']){ 
         echo ' <a href="/news/page'.($this->data['page']+1).'">>></a>'; 
     } else {
       echo ' >>';  
@@ -85,3 +83,6 @@ foreach ($this->data['news'] as $news) {
     }
 
 unset($value);
+
+
+
