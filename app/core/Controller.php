@@ -13,7 +13,7 @@ class Controller
     
     private function getModel($model)
     {
-        if (file_exists(ROOT_DIR . '/../models/' . $model . '.php')) {
+        if (file_exists(ROOT_DIR . '/app/models/' . $model . '.php')) {
             return new $model;
         }
         
