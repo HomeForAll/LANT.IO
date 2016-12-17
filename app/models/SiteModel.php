@@ -37,6 +37,7 @@ class SiteModel extends Model
                 
                 if (isset($result['email']) && !empty($result['email'])) {
                     $_SESSION['access'] = true;
+                    $_SESSION['key'] = $result['key'];
                     echo 'accessGranted';
                 } else {
                     echo 'keyRequest';
@@ -66,6 +67,7 @@ class SiteModel extends Model
         
         if ($stmt->rowCount()) {
             $_SESSION['access'] = true;
+            $_SESSION['key'] = $_POST['key'];
             echo 'accessGranted';
         }
     }
