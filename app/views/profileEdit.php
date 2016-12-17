@@ -1,5 +1,10 @@
 <?php
 $this->title = 'Редактирование профиля';
+
+//$n = 4; // kol-vo post dlia proverki
+//for ($i=0;$i<=$n-1;$i++){
+//    $_SESSION['error'][$i] = 0;
+//}
 ?>
 <style>
     .buttons {
@@ -84,6 +89,11 @@ $this->title = 'Редактирование профиля';
             <td>
                 <input name="name" type="text" id="name" value="<?php if (isset($this->data[0]['first_name'])) echo $this->data[0]['first_name'] ?>">
             </td>
+            <td>
+                <?php
+                if ($_SESSION['error'][0] == 1)
+                    echo "Некорректно!" ?>
+            </td>
         </tr>
         <tr>
             <td>
@@ -92,6 +102,10 @@ $this->title = 'Редактирование профиля';
             <td>
                 <input name="surname" type="text" id="surname" value="<?php if (isset($this->data[0]['last_name'])) echo $this->data[0]['last_name'] ?>">
             </td>
+            <td>
+                <?php if ($_SESSION['error'][1] == 1)
+                    echo "Некорректно!" ?>
+            </td>
         </tr>
         <tr>
             <td>
@@ -99,6 +113,10 @@ $this->title = 'Редактирование профиля';
             </td>
             <td>
                 <input name="patronymic" type="text" id="patronymic" value="<?php if (isset($this->data[0]['patronymic'])) echo $this->data[0]['patronymic'] ?>">
+            </td>
+            <td>
+                <?php if ($_SESSION['error'][2] == 1)
+                    echo "Некорректно!" ?>
             </td>
         </tr>
         <tr>
@@ -115,6 +133,10 @@ $this->title = 'Редактирование профиля';
             </td>
             <td>
                 <input name="phonenumber" type="text" id="phonenumber" value="<?php if (isset($this->data[0]['phone_number'])) echo $this->data[0]['phone_number'] ?>">
+            </td>
+            <td>
+                <?php if ($_SESSION['error'][3] == 1)
+                    echo "Некорректно!" ?>
             </td>
         </tr>
         <tr>
@@ -246,6 +268,7 @@ $this->title = 'Редактирование профиля';
             </td>
             <td>
                 <?php
+                $_SESSION['password_error'] = 0;
                 if (($_SESSION['password_error'] == 1)) {
                     echo 'Пароль неверен!';
                     $_SESSION['password_error'] = 0;
