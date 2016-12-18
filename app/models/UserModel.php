@@ -58,6 +58,15 @@ class UserModel extends Model
         return false;
     }
     
+    private function atLogin($userID, $userStatus)
+    {
+        $_SESSION['authorized']    = true;
+        $_SESSION['userID']        = $userID;
+        $_SESSION['accountStatus'] = $userStatus;
+        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/cabinet');
+        exit;
+    }
+    
     public function doRegistration()
     {
         $errors = $this->getDataErrors();
@@ -171,12 +180,16 @@ class UserModel extends Model
     
     public function getOAuthData($service)
     {
-        $_SESSION['redirectURL'] = $_SERVER['HTTP_REFERER'];
+        if (isset($_SERVER['HTTP_REFERER'])) {
+            $_SESSION['redirectURL'] = $_SERVER['HTTP_REFERER'];
+        }
         
         if (isset($service) && !empty($service)) {
             $this->socialAuth->getServiceData($service[0]);
             
-            header('Location: ' . $_SESSION['redirectURL']);
+            $url = $this->handleOAuthUrl();
+            
+            header('Location: ' . $url);
             exit;
         } else {
             header('Location: http://' . $_SERVER['HTTP_HOST']);
@@ -191,11 +204,6 @@ class UserModel extends Model
         } else {
             $this->socialAuth->destroyServiceData();
         }
-    }
-    
-    private function getUserID()
-    {
-        return (isset($_SESSION['userID']) && !empty($_SESSION['userID'])) ? $_SESSION['userID'] : null;
     }
     
     private function getDataByOAuthUserID($service, $id)
@@ -221,80 +229,77 @@ class UserModel extends Model
         return false;
     }
     
-    public function choiceAction()
+    private function handleOAuthUrl()
     {
         $path = parse_url($_SESSION['redirectURL'], PHP_URL_PATH);
+        $path = trim($path, '/');
+        $url  = $_SESSION['redirectURL'];
         
-        switch ($path) {
-            case 'login':
-                foreach ($_SESSION['services'] as $service => $value) {
-                    switch ($service) {
-                        case 'vk':
-                            $data = $this->getDataByOAuthUserID('vk', $_SESSION['vk_userID']);
-                            if ($data) {
-                                $this->atLogin($data['id'], $data['status']);
-                            }
-                            $this->destroyOAuthData($service);
-                            break;
-                        case 'ok':
-                            $data = $this->getDataByOAuthUserID('ok', $_SESSION['ok_userID']);
-                            if ($data) {
-                                $this->atLogin($data['id'], $data['status']);
-                            }
-                            $this->destroyOAuthData($service);
-                            break;
-                        case 'mail':
-                            $data = $this->getDataByOAuthUserID('mail', $_SESSION['mail_userID']);
-                            if ($data) {
-                                $this->atLogin($data['id'], $data['status']);
-                            }
-                            $this->destroyOAuthData($service);
-                            break;
-                        case 'ya':
-                            $data = $this->getDataByOAuthUserID('ya', $_SESSION['ya_userID']);
-                            if ($data) {
-                                $this->atLogin($data['id'], $data['status']);
-                            }
-                            $this->destroyOAuthData($service);
-                            break;
-                        case 'goo':
-                            $data = $this->getDataByOAuthUserID('goo', $_SESSION['goo_userID']);
-                            if ($data) {
-                                $this->atLogin($data['id'], $data['status']);
-                            }
-                            $this->destroyOAuthData($service);
-                            break;
-                        case 'fb':
-                            $data = $this->getDataByOAuthUserID('fb', $_SESSION['fb_userID']);
-                            if ($data) {
-                                $this->atLogin($data['id'], $data['status']);
-                            }
-                            $this->destroyOAuthData($service);
-                            break;
-                        case 'steam':
-                            $data = $this->getDataByOAuthUserID('steam', $_SESSION['steam_userID']);
-                            if ($data) {
-                                $this->atLogin($data['id'], $data['status']);
-                            }
-                            $this->destroyOAuthData($service);
-                            break;
-                    }
-                }
-                break;
-            case 'registration':
-                break;
-            default:
-                // TODO: Придумать действие когда URL не подходит
+        if ($path == 'registration') {
+            unset($_SESSION['redirectURL']);
         }
+        
+        return $url;
     }
     
-    
-    private function atLogin($userID, $userStatus)
+    public function loginThroughOAuth()
     {
-        $_SESSION['authorized']    = true;
-        $_SESSION['userID']        = $userID;
-        $_SESSION['accountStatus'] = $userStatus;
-        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/cabinet');
-        exit;
+        if (isset($_SESSION['services']['vk'])) {
+            echo 'Я есть Вконтакте!';
+            $data = $this->getDataByOAuthUserID('vk', $_SESSION['vk_userID']);
+            $this->destroyOAuthData('vk');
+            unset($_SESSION['redirectURL']);
+            if ($data) {
+                $this->atLogin($data['id'], $data['status']);
+            }
+        } elseif (isset($_SESSION['services']['ok'])) {
+            $data = $this->getDataByOAuthUserID('ok', $_SESSION['ok_userID']);
+            $this->destroyOAuthData('ok');
+            unset($_SESSION['redirectURL']);
+            if ($data) {
+                $this->atLogin($data['id'], $data['status']);
+            }
+        } elseif (isset($_SESSION['services']['mail'])) {
+            $data = $this->getDataByOAuthUserID('mail', $_SESSION['mail_userID']);
+            $this->destroyOAuthData('mail');
+            unset($_SESSION['redirectURL']);
+            if ($data) {
+                $this->atLogin($data['id'], $data['status']);
+            }
+        } elseif (isset($_SESSION['services']['ya'])) {
+            $data = $this->getDataByOAuthUserID('ya', $_SESSION['ya_userID']);
+            $this->destroyOAuthData('ya');
+            unset($_SESSION['redirectURL']);
+            if ($data) {
+                $this->atLogin($data['id'], $data['status']);
+            }
+        } elseif (isset($_SESSION['services']['goo'])) {
+            $data = $this->getDataByOAuthUserID('goo', $_SESSION['goo_userID']);
+            $this->destroyOAuthData('goo');
+            unset($_SESSION['redirectURL']);
+            if ($data) {
+                $this->atLogin($data['id'], $data['status']);
+            }
+        } elseif (isset($_SESSION['services']['fb'])) {
+            $data = $this->getDataByOAuthUserID('fb', $_SESSION['fb_userID']);
+            $this->destroyOAuthData('fb');
+            unset($_SESSION['redirectURL']);
+            if ($data) {
+                $this->atLogin($data['id'], $data['status']);
+            }
+        } elseif (isset($_SESSION['services']['steam'])) {
+            $data = $this->getDataByOAuthUserID('steam', $_SESSION['steam_userID']);
+            $this->destroyOAuthData('steam');
+            unset($_SESSION['redirectURL']);
+            if ($data) {
+                $this->atLogin($data['id'], $data['status']);
+            }
+        }
+        $this->destroyOAuthData(null);
+    }
+    
+    private function getUserID()
+    {
+        return (isset($_SESSION['userID']) && !empty($_SESSION['userID'])) ? $_SESSION['userID'] : null;
     }
 }
