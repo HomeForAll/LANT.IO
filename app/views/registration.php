@@ -58,6 +58,11 @@ if (isset($_SESSION['services']) && !empty($_SESSION['services'])) {
         vertical-align: top;
     }
 
+    #soc_net {
+        margin: 10px 0 0 0;
+        width: 300px;
+    }
+    
     #soc_net a {
         display: block;
         float: left;
@@ -166,6 +171,47 @@ if (isset($_SESSION['services']) && !empty($_SESSION['services'])) {
     </table>
 </form>
 
+<div id="soc_net">
+    <?php
+    if (!isset($_SESSION['services']['vk'])) {
+        ?>
+        <a href="auth/vk"><img src="/templates/main/images/soc_net/vk_2.png" alt="VK"></a>
+        <?php
+    }
+    if (!isset($_SESSION['services']['ok'])) {
+        ?>
+        <a href="auth/ok"><img src="/templates/main/images/soc_net/ok.png" alt="OK"></a>
+        <?php
+    }
+    if (!isset($_SESSION['services']['mail'])) {
+        ?>
+        <a href="auth/mail"><img src="/templates/main/images/soc_net/mail_ru.png" alt="Mail"></a>
+        <?php
+    }
+    if (!isset($_SESSION['services']['ya'])) {
+        ?>
+        <a href="auth/ya"><img src="/templates/main/images/soc_net/yandex_2.png" alt="YA"></a>
+        <?php
+    }
+    if (!isset($_SESSION['services']['goo'])) {
+        ?>
+        <a href="auth/goo"><img src="/templates/main/images/soc_net/google.png" alt="Google"></a>
+        <?php
+    }
+    if (!isset($_SESSION['services']['fb'])) {
+        ?>
+        <a href="auth/fb"><img src="/templates/main/images/soc_net/facebook_2.png" alt="FaceBook"></a>
+        <?php
+    }
+    if (!isset($_SESSION['services']['steam'])) {
+        ?>
+        <a href="auth/steam"><img src="/templates/main/images/soc_net/steam.png" alt="Steam"></a>
+        <?php
+    }
+    ?>
+    <div style="clear: both"></div>
+</div>
+
 <?php
 if (isset($_SESSION['services']) && !empty($_SESSION['services'])) {
     if (isset($_SESSION['services']['vk'])) {
@@ -252,63 +298,8 @@ if (isset($_SESSION['services']) && !empty($_SESSION['services'])) {
         <a href="auth/unset/steam">Отвязать Steam</a><br><br>
         <?php
     }
-    
     ?>
     <a href="auth/unset">Отвязать все сервисы</a><br><br>
     <?php
-    if (!isset($_SESSION['services']['vk'])) {
-        ?>
-        <a href="auth/vk">Авторизоваться через Вконтакте</a><br>
-        <?php
-    }
-    if (!isset($_SESSION['services']['ok'])) {
-        ?>
-        <a href="auth/ok">Авторизоваться через Одноклассники</a><br>
-        <?php
-    }
-    if (!isset($_SESSION['services']['mail'])) {
-        ?>
-        <a href="auth/mail">Авторизоваться через Mail.ru</a><br>
-        <?php
-    }
-    if (!isset($_SESSION['services']['ya'])) {
-        ?>
-        <a href="auth/ya">Авторизоваться через Yandex.ru</a><br>
-        <?php
-    }
-    if (!isset($_SESSION['services']['goo'])) {
-        ?>
-        <a href="auth/goo">Авторизоваться через Google</a><br>
-        <?php
-    }
-    if (!isset($_SESSION['services']['fb'])) {
-        ?>
-        <a href="auth/fb">Авторизоваться через Facebook</a><br>
-        <?php
-    }
-    if (!isset($_SESSION['services']['steam'])) {
-        ?>
-        <a href="auth/steam">Авторизоваться через Steam</a><br>
-        <?php
-    }
-} else {
-    ?>
-    <a href="auth/vk">Авторизоваться через Вконтакте</a><br>
-    <a href="auth/ok">Авторизоваться через Одноклассники</a><br>
-    <a href="auth/mail">Авторизоваться через Mail.ru</a><br>
-    <a href="auth/ya">Авторизоваться через Yandex.ru</a><br>
-    <a href="auth/goo">Авторизоваться через Google</a><br>
-    <a href="auth/fb">Авторизоваться через Facebook</a><br>
-    <a href="auth/steam">Авторизоваться через Steam</a><br>
-    <?php
 }
 ?>
-<div id="soc_net">
-    <a href="auth/vk"><img src="/templates/main/images/soc_net/vk_2.png" alt="VK"></a>
-    <a href="auth/ok"><img src="/templates/main/images/soc_net/ok.png" alt="OK"></a>
-    <a href="auth/mail"><img src="/templates/main/images/soc_net/mail_ru.png" alt="Mail"></a>
-    <a href="auth/ya"><img src="/templates/main/images/soc_net/yandex_2.png" alt="YA"></a>
-    <a href="auth/goo"><img src="/templates/main/images/soc_net/google.png" alt="Google"></a>
-    <a href="auth/fb"><img src="/templates/main/images/soc_net/facebook_2.png" alt="FaceBook"></a>
-    <a href="auth/steam"><img src="/templates/main/images/soc_net/steam.png" alt="Steam"></a>
-</div>
