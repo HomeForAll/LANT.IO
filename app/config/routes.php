@@ -17,8 +17,8 @@ return array(
     'cabinet/keyeditor' => 'main/cabinet/keyeditor',
     
     'auth/unset' => 'empty/user/OAuthDestroyData',
-    'auth/unset/([A-Za-z]+)' => 'empty/user/OAuthDestroyData/$1',
-    'auth/([A-Za-z]+)' => 'empty/user/OAuthGetData/$1',
+    'auth/unset/([A-Za-z]+)' => 'empty/user/OAuthDestroy/$1',
+    'auth/([A-Za-z]+)' => 'empty/user/OAuthInit/$1',
 
     'news/page([0-9]+)' => 'main/news/news_list/$1',
     'news/([0-9]+)' => 'main/news/news_id/$1',
