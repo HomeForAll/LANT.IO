@@ -7,7 +7,7 @@ return array(
     
     'registration' => 'main/user/registration',
     'login' => 'main/user/login',
-    'login/([A-Za-z]+)/([A-Za-z]+)' => 'main/user/OAuthInit/$1/$2',
+    'login/([A-Za-z]+)' => 'main/user/OAuthInit/$1',
     'logout' => 'main/user/logout',
     
     'cabinet' => 'main/cabinet/cabinet',
