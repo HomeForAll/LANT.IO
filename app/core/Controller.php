@@ -1,6 +1,6 @@
 <?php
 
-class Controller
+class Controller extends Application
 {
     protected $model;
     protected $view;

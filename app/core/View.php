@@ -49,4 +49,11 @@ class View extends Application
     {
         include(ROOT_DIR . '/templates/layouts/main.php');
     }
+    
+    private function printFormError($errorsArr)
+    {
+        foreach ($errorsArr as $error) {
+            echo "<br><span style='margin-left: 5px; font-family: Arial sans-serif; font-size: 10pt; color: #942a25'>{$error}</span>";
+        }
+    }
 }

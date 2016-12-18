@@ -14,7 +14,7 @@ class SocialAuth
         $this->settings = require ROOT_DIR . '/app/config/auth.php';
     }
     
-    public function setServiceData($service = null)
+    public function getServiceData($service = null)
     {
         switch ($service) {
             case 'vk':
