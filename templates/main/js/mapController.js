@@ -57,32 +57,65 @@ MapController.prototype.get = function (address, mapID) {
             MapController.moveTo(bounds, mapID);
 
             MapController.prototype.coordinates = object.geometry.getCoordinates();
-            MapController.prototype.country = object.getCountry();
-            MapController.prototype.area = object.getAdministrativeAreas()[0];
-            MapController.prototype.city = object.getLocalities();
-            MapController.prototype.street = object.getThoroughfare();
-            MapController.prototype.house = object.getPremiseNumber();
+            var country = object.getCountry();
+            var area = object.getAdministrativeAreas()[0];
+            var city = object.getLocalities();
+            var street = object.getThoroughfare();
+            var house = object.getPremiseNumber();
 
             if ('country' in MapController.options) {
-                $(MapController.options.country).text('');
-                $(MapController.options.country).text(object.getCountry());
+                var countrySpan = $(MapController.options.country);
+                var countryInput = $('#country');
+
+                countrySpan.text('');
+                countrySpan.text(country);
+
+                countryInput.val('');
+                countryInput.val(country);
             }
+
             if ('area' in MapController.options) {
-                console.log(object.getAdministrativeAreas()[0]);
-                $(MapController.options.area).text('');
-                $(MapController.options.area).text(object.getAdministrativeAreas()[0]);
+                var areaSpan = $(MapController.options.area);
+                var areaInput = $('#area');
+
+                areaSpan.text('');
+                areaSpan.text(area);
+
+                areaInput.val('');
+                areaInput.val(area);
             }
+
             if ('city' in MapController.options) {
-                $(MapController.options.city).text('');
-                $(MapController.options.city).text(object.getLocalities());
+                var citySpan = $(MapController.options.city);
+                var cityInput = $('#city');
+
+                citySpan.text('');
+                citySpan.text(city);
+
+                cityInput.val('');
+                cityInput.val(city);
             }
+
             if ('street' in MapController.options) {
-                $(MapController.options.street).text('');
-                $(MapController.options.street).text(object.getThoroughfare());
+                var streetSpan = $(MapController.options.street);
+                var streetInput = $('#street');
+
+                streetSpan.text('');
+                streetSpan.text(street);
+
+                streetInput.val('');
+                streetInput.val(street);
             }
+
             if ('house' in MapController.options) {
-                $(MapController.options.house).text('');
-                $(MapController.options.house).text(object.getPremiseNumber());
+                var houseSpan = $(MapController.options.house);
+                var houseInput = $('#house');
+
+                houseSpan.text('');
+                houseSpan.text(house);
+
+                houseInput.val('');
+                houseInput.val(house);
             }
 
             // console.log(' --- Начало --- ');
@@ -112,9 +145,17 @@ MapController.prototype.get = function (address, mapID) {
                         region = object.properties.getAll().name;
                     }
 
+                    var region = object.properties.getAll().name;
+
                     if ('region' in MapController.options) {
-                        $(MapController.options.region).text('');
-                        $(MapController.options.region).text(object.properties.getAll().name);
+                        var regionSpan = $(MapController.options.region);
+                        var regionInput = $('#region');
+
+                        regionSpan.text('');
+                        regionSpan.text(region);
+
+                        regionInput.val('');
+                        regionInput.val(region);
                     }
                 }
             );

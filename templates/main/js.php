@@ -21,72 +21,71 @@
         city: '#rentApartSpanCity',
         region: '#rentApartSpanRegion',
         street: '#rentApartSpanStreet'
-//        house: '#house'
     });
     
-    var map1 = new MapController('rentHouseMap', [55.753559, 37.609218], 'rentHouseSuggest', {
-        country: '#rentApartSpanCountry',
-        area: '#rentApartSpanArea',
-        city: '#rentApartSpanCity',
-        region: '#rentApartSpanRegion',
-        street: '#rentApartSpanStreet'
-//        house: '#house'
-    });
-    
-    var map2 = new MapController('rentGroundMap', [55.753559, 37.609218], 'rentGroundSuggest', {
-        country: '#rentApartSpanCountry',
-        area: '#rentApartSpanArea',
-        city: '#rentApartSpanCity',
-        region: '#rentApartSpanRegion',
-        street: '#rentApartSpanStreet'
-//        house: '#house'
-    });
-    
-    var map3 = new MapController('rentRoomMap', [55.753559, 37.609218], 'rentRoomSuggest', {
-        country: '#rentApartSpanCountry',
-        area: '#rentApartSpanArea',
-        city: '#rentApartSpanCity',
-        region: '#rentApartSpanRegion',
-        street: '#rentApartSpanStreet'
-//        house: '#house'
-    });
-    
-    var map4 = new MapController('sellApartMap', [55.753559, 37.609218], 'sellApartSuggest', {
-        country: '#rentApartSpanCountry',
-        area: '#rentApartSpanArea',
-        city: '#rentApartSpanCity',
-        region: '#rentApartSpanRegion',
-        street: '#rentApartSpanStreet'
-//        house: '#house'
-    });
-    
-    var map5 = new MapController('sellHouseMap', [55.753559, 37.609218], 'sellHouseSuggest', {
-        country: '#rentApartSpanCountry',
-        area: '#rentApartSpanArea',
-        city: '#rentApartSpanCity',
-        region: '#rentApartSpanRegion',
-        street: '#rentApartSpanStreet'
-//        house: '#house'
-    });
-    
-    var map6 = new MapController('sellGroundMap', [55.753559, 37.609218], 'sellGroundSuggest', {
-        country: '#rentApartSpanCountry',
-        area: '#rentApartSpanArea',
-        city: '#rentApartSpanCity',
-        region: '#rentApartSpanRegion',
-        street: '#rentApartSpanStreet'
-//        house: '#house'
-    });
-    
-    var map7 = new MapController('sellRoomMap', [55.753559, 37.609218], 'sellRoomSuggest', {
-        country: '#rentApartSpanCountry',
-        area: '#rentApartSpanArea',
-        city: '#rentApartSpanCity',
-        region: '#rentApartSpanRegion',
-        street: '#rentApartSpanStreet'
-//        house: '#house'
-    });
-    
+//    var map1 = new MapController('rentHouseMap', [55.753559, 37.609218], 'rentHouseSuggest', {
+//        country: '#rentApartSpanCountry',
+//        area: '#rentApartSpanArea',
+//        city: '#rentApartSpanCity',
+//        region: '#rentApartSpanRegion',
+//        street: '#rentApartSpanStreet'
+////        house: '#house'
+//    });
+//
+//    var map2 = new MapController('rentGroundMap', [55.753559, 37.609218], 'rentGroundSuggest', {
+//        country: '#rentApartSpanCountry',
+//        area: '#rentApartSpanArea',
+//        city: '#rentApartSpanCity',
+//        region: '#rentApartSpanRegion',
+//        street: '#rentApartSpanStreet'
+////        house: '#house'
+//    });
+//
+//    var map3 = new MapController('rentRoomMap', [55.753559, 37.609218], 'rentRoomSuggest', {
+//        country: '#rentApartSpanCountry',
+//        area: '#rentApartSpanArea',
+//        city: '#rentApartSpanCity',
+//        region: '#rentApartSpanRegion',
+//        street: '#rentApartSpanStreet'
+////        house: '#house'
+//    });
+//
+//    var map4 = new MapController('sellApartMap', [55.753559, 37.609218], 'sellApartSuggest', {
+//        country: '#rentApartSpanCountry',
+//        area: '#rentApartSpanArea',
+//        city: '#rentApartSpanCity',
+//        region: '#rentApartSpanRegion',
+//        street: '#rentApartSpanStreet'
+////        house: '#house'
+//    });
+//
+//    var map5 = new MapController('sellHouseMap', [55.753559, 37.609218], 'sellHouseSuggest', {
+//        country: '#rentApartSpanCountry',
+//        area: '#rentApartSpanArea',
+//        city: '#rentApartSpanCity',
+//        region: '#rentApartSpanRegion',
+//        street: '#rentApartSpanStreet'
+////        house: '#house'
+//    });
+//
+//    var map6 = new MapController('sellGroundMap', [55.753559, 37.609218], 'sellGroundSuggest', {
+//        country: '#rentApartSpanCountry',
+//        area: '#rentApartSpanArea',
+//        city: '#rentApartSpanCity',
+//        region: '#rentApartSpanRegion',
+//        street: '#rentApartSpanStreet'
+////        house: '#house'
+//    });
+//
+//    var map7 = new MapController('sellRoomMap', [55.753559, 37.609218], 'sellRoomSuggest', {
+//        country: '#rentApartSpanCountry',
+//        area: '#rentApartSpanArea',
+//        city: '#rentApartSpanCity',
+//        region: '#rentApartSpanRegion',
+//        street: '#rentApartSpanStreet'
+////        house: '#house'
+//    });
+//
     //    var map = new MapController('map', [55.753559, 37.609218], 'search', {
     //        country: '#country',
     //        area: '#area',

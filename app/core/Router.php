@@ -65,10 +65,25 @@ class Router
         $template = 'main';
         
         if (STATUS == '1') {
+            $db = new DataBase();
+            $stmt = $db->prepare("SELECT * FROM access WHERE key = :key");
+            $stmt->bindParam(':key', $_SESSION['key']);
+            $stmt->execute();
+            $result = $stmt->fetch();
+
+
             if (isset($_SESSION['access'])) {
-                $template   = strtolower(array_shift($segments));
-                $controller = array_shift($segments);
-                $action     = array_shift($segments);
+                if ($result['status'] == 1) {
+                    $template = strtolower(array_shift($segments));
+                    $controller = array_shift($segments);
+                    $action = array_shift($segments);
+                } else {
+                    unset($_SESSION['access']);
+                    unset($_SESSION['key']);
+                    $template = 'access';
+                    $controller = 'site';
+                    $action = 'access';
+                }
             } else {
                 $template   = 'access';
                 $controller = 'site';

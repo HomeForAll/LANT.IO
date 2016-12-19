@@ -1,6 +1,6 @@
 <?php
 
-class Controller
+class Controller extends Application
 {
     protected $model;
     protected $view;
@@ -13,7 +13,7 @@ class Controller
     
     private function getModel($model)
     {
-        if (file_exists(__DIR__ . '/../models/' . $model . '.php')) {
+        if (file_exists(ROOT_DIR . '/app/models/' . $model . '.php')) {
             return new $model;
         }
         

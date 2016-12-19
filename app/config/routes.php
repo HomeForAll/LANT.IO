@@ -7,7 +7,7 @@ return array(
     
     'registration' => 'main/user/registration',
     'login' => 'main/user/login',
-    'login/([A-Za-z]+)/([A-Za-z]+)' => 'main/user/OAuthGetData/$1/$2',
+    'login/([A-Za-z]+)' => 'main/user/OAuthInit/$1',
     'logout' => 'main/user/logout',
     
     'cabinet' => 'main/cabinet/cabinet',
@@ -16,9 +16,9 @@ return array(
     'cabinet/generator' => 'main/cabinet/generator',
     'cabinet/keyeditor' => 'main/cabinet/keyeditor',
     
-    'auth/unset' => 'empty/user/OAuthDestroyData',
-    'auth/unset/([A-Za-z]+)' => 'empty/user/OAuthDestroyData/$1',
-    'auth/([A-Za-z]+)' => 'empty/user/OAuthGetData/$1',
+    'auth/unset' => 'empty/user/OAuthDestroy',
+    'auth/unset/([A-Za-z]+)' => 'empty/user/OAuthDestroy/$1',
+    'auth/([A-Za-z]+)' => 'empty/user/OAuthInit/$1',
 
     'news/page([0-9]+)' => 'main/news/news_list/$1',
     'news/([0-9]+)' => 'main/news/news_id/$1',
