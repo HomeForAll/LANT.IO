@@ -22,6 +22,7 @@ class NewsController extends Controller
         }
 
         $data = $this->model->getNewsList($params);
+        $data['last_viewed_news'] = $this->model->getLastViewedNews();
 
         $this->view->render('news_list', $data);
     }
@@ -123,7 +124,7 @@ class NewsController extends Controller
 
 // Изменение статуса новостей и удаление для определенной таблицы $table
             if (!empty($_POST['submit_status'])) {
-                $this->model->makeNewsStatus($table);
+                $this->model->makeNewsStatus();
             }
 
 // Загружаем из БД список всех новостей и формируем проверочный массив статуса stat_arr[id_news] => [status]
