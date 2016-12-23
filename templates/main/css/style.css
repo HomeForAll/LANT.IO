@@ -282,6 +282,32 @@ label.valid {
 }
 
 
+/* Просмотренные новости  */
+
+.last_viewed_news{
+    width: 100%;
+    height: 150px;
+}
+.last_viewed_news span a {
+    width: 100px;
+    height: 150px;
+    padding: 5px;
+    margin: 5px;
+    background-color: #e1e1e1;
+    border-radius: 10px;
+    display: inline-block;
+    float: left;
+}
+
+.last_viewed_news span a:hover {
+    background-color: #c1c1c1;
+}
+
+.last_viewed_news span a img {
+    width:100px;
+    height: 67px;
+    border-radius: 10px;
+}
 /* 
 *
 *
