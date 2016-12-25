@@ -79,9 +79,40 @@ foreach ($this->data['news'] as $news) {
     <?php } ?>
 </div>  
     <?php
- 
     }
+    ?>
 
+
+<div class="last_viewed_news">
+<?php
+foreach ($this->data['last_viewed_news'] as $value) {
+?> <span>
+    <a href="/news/<?php if (!empty($value['id_news'])){ echo $value['id_news']; } ?>">
+
+        <?php
+//    echo"<br> title =  ".$value['title'];
+//    echo"<br> id_news =  ".$value['id_news'];
+//    echo"<br> preview_img =  ".$value['preview_img']."<br>";
+
+
+    ?>
+    
+<?php if (!empty($value['preview_img'])){ ?><img src="/uploads/images/s_<?php echo $value['preview_img']; ?>">
+
+<?php }
+    if (!empty($value['title'])){ echo $value['title']; }
+
+ ?>
+
+    </a>
+</span>
+
+<?php
+}
+?>
+</div>
+
+<?php
 unset($value);
 
 

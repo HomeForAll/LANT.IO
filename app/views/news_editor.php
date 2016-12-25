@@ -134,6 +134,54 @@ if (!empty($this->data['message'])) {
     </fieldset>
 
 
+<!--    <fieldset>
+        <legend>Проба карты</legend>
+        <div id="map" style="position: relative; width: 500px; height: 500px;"></div>
+    </fieldset>-->
+
+<!--<fieldset>
+                Расположение:
+            <br>
+            <input type="text" id="rentApartSuggest" placeholder="Адрес ..." style="padding: 10px; width: 477px; position: relative; left: 50%; margin: 0 0 0 -250px;" oninput="getGeoCoderData(this.value, 'rentApartMap')" onkeypress="pressEnter();">
+            <div id="rentApartMap" style="position: relative; left: 50%; margin: 20px 0 0 -250px; width: 500px; height: 500px"></div>
+            
+
+            <div class="indent">
+                <label for="rentApartSpanCountry">Страна:</label> <span id="rentApartSpanCountry"></span>
+                <br>
+                <label for="rentApartSpanArea">Область:</label> <span id="rentApartSpanArea"></span>
+                <br>
+                <label for="rentApartSpanCity">Город:</label> <span id="rentApartSpanCity"></span>
+                <br>
+                <label for="rentApartSpanRegion">Район:</label> <span id="rentApartSpanRegion"></span>
+                <br>
+                <label for="rentApartSpanStreet">Улица:</label> <span id="rentApartSpanStreet"></span>
+                <br>
+
+                <input id="rentApartCountry" type="hidden" name="country" value="">
+                <input id="rentApartArea" type="hidden" name="area" value="">
+                <input id="rentApartCity" type="hidden" name="city" value="">
+                <input id="rentApartRegion" type="hidden" name="region" value="">
+                <input id="rentApartStreet" type="hidden" name="street" value="">
+
+                Станция метро:
+                <br>
+                <div class="indent">
+                    Удаленность от метро:
+                    <input type="text" name="metroMin" placeholder="Мин.">
+                    <input type="text" name="metroMax" placeholder="Макс.">
+                    <br>
+                </div>
+            </div>
+
+
+</fieldset>-->
+
+
+
+
+
+
     <!-- Вставляемые блоки -->
     <?php
     if (!empty($this->data['category'])) {
