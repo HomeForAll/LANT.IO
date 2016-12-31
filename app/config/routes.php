@@ -15,6 +15,7 @@ return array(
     'cabinet/profile/edit' => 'main/cabinet/profileEdit',
     'cabinet/generator' => 'main/cabinet/generator',
     'cabinet/keyeditor' => 'main/cabinet/keyeditor',
+    'cabinet/forms_editor' => 'main/cabinet/formsEditor',
     
     'auth/unset' => 'empty/user/OAuthDestroy',
     'auth/unset/([A-Za-z]+)' => 'empty/user/OAuthDestroy/$1',

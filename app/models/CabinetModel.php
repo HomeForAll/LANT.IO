@@ -556,4 +556,8 @@ class CabinetModel extends Model
             }
         }
     }
+
+    public function getForms() {
+        return json_decode(file_get_contents(ROOT_DIR . '/app/config/forms.json'), true);
+    }
 }

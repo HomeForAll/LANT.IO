@@ -1,6 +1,9 @@
 <?php
-class CabinetController extends Controller {
-    public function actionCabinet() {
+
+class CabinetController extends Controller
+{
+    public function actionCabinet()
+    {
         if (!isset($_SESSION['authorized'])) {
             header('Location: http://' . $_SERVER['HTTP_HOST']);
             exit;
@@ -10,22 +13,26 @@ class CabinetController extends Controller {
         }
     }
 
-    public function actionChat() {
+    public function actionChat()
+    {
         $this->view->render('chat');
     }
 
-    public function actionGenerator() {
+    public function actionGenerator()
+    {
         $this->model->generate();
         $this->model->handleKeys();
         $this->view->render('generator');
     }
 
-    public function actionProfileEdit(){
+    public function actionProfileEdit()
+    {
         $this->model->savePersonalInfo();
         $this->view->render('profileEdit', $this->model->getinfo());
     }
 
-    public function actionKeyeditor() {
+    public function actionKeyeditor()
+    {
         $showdb = $this->model->showdb();
         $keyeditor = $this->model->keyeditor();
         $keylock = $this->model->keylock();
@@ -56,5 +63,9 @@ class CabinetController extends Controller {
             $viewkeyeditor = $installdate;
 
         $this->view->render('keyeditor', $viewkeyeditor);
+    }
+
+    public function actionFormsEditor(){
+        $this->view->render('forms_editor', $this->model->getForms());
     }
 }
