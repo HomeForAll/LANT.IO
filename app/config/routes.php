@@ -4,19 +4,23 @@ return array(
     // 'URI' => 'template/controller/action'
     '' => 'main/site/index',
     'search' => 'main/search/index',
-    
+
     'registration' => 'main/user/registration',
     'login' => 'main/user/login',
     'login/([A-Za-z]+)' => 'main/user/OAuthInit/$1',
     'logout' => 'main/user/logout',
-    
+
     'cabinet' => 'main/cabinet/cabinet',
     'cabinet/chat' => 'main/cabinet/chat',
     'cabinet/profile/edit' => 'main/cabinet/profileEdit',
     'cabinet/generator' => 'main/cabinet/generator',
     'cabinet/keyeditor' => 'main/cabinet/keyeditor',
     'cabinet/forms_editor' => 'main/cabinet/formsEditor',
-    
+
+    'support' => 'main/support/index',
+    'support/tickets' => 'main/support/tickets',
+    'support/new' => 'main/support/new',
+
     'auth/unset' => 'empty/user/OAuthDestroy',
     'auth/unset/([A-Za-z]+)' => 'empty/user/OAuthDestroy/$1',
     'auth/([A-Za-z]+)' => 'empty/user/OAuthInit/$1',
