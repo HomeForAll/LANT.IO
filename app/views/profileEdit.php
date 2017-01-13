@@ -58,6 +58,7 @@ $this->title = 'Редактирование профиля';
         border-radius: 10px;
         cursor: pointer;
         border: solid 1px grey;
+        height: 30px;
     }
 
     .real_buttons:hover {
@@ -121,18 +122,80 @@ $this->title = 'Редактирование профиля';
         </tr>
         <tr>
             <td>
-                <label for="date">Дата рождения:</label>
-            </td>
-            <td>
-                <input name="date" type="text" id="date" value="<?php if (isset($this->data[0]['birthday'])) echo $this->data[0]['birthday'] ?>">
-            </td>
-        </tr>
-        <tr>
-            <td>
                 <label for="phonenumber">Номер телефона:</label>
             </td>
             <td>
                 <input name="phonenumber" type="text" id="phonenumber" value="<?php if (isset($this->data[0]['phone_number'])) echo $this->data[0]['phone_number'] ?>">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="date">Дата рождения:</label>
+            </td>
+            <td>
+                <?php
+                $str  = $this->data[0]['birthday'];
+                $pieces = explode(".", $str);
+                $day = $pieces[0];
+                $month_num = $pieces[1] - 1;
+                $year = $pieces[2];
+                $month = array(
+                    "Январь",
+                    "Февраль",
+                    "Март",
+                    "Апрель",
+                    "Май",
+                    "Июнь",
+                    "Июль",
+                    "Август",
+                    "Сентябрь",
+                    "Октябрь",
+                    "Ноябрь",
+                    "Декабрь"
+                );
+
+                // Число
+                echo "<select name='sel_date' id='sel_date'>";
+                echo "<option value='" . $day . "'>$day</option>";
+
+                $i = 1;
+                while ($i < $day) {
+                    echo "<option value='" . $i . "'>$i</option>";
+                    $i++;
+                }
+                $i = $day + 1;
+                while ($i <= 31) {
+                    echo "<option value='" . $i . "'>$i</option>";
+                    $i++;
+                }
+                echo "</select>";
+
+                // Месяц
+                echo "<select name='sel_month' id='sel_month'>";
+                echo "<option value='" . $month[$month_num] . "'>$month[$month_num]</option>";
+
+                foreach ($month as $key=>$m) {
+                    if ($key == $month_num)
+                        continue;
+                    echo "<option value='" . $m . "'>$m</option>";
+                }
+                echo "</select>";
+
+                // Год
+                echo "<select name='sel_year' id='sel_year'>";
+                echo "<option value='" . $year . "'>$year</option>";
+                $j = 1920;
+                while ($j < $year) {
+                    echo "<option value='" . $j . "'>$j</option>";
+                    $j++;
+                }
+                $j = $year + 1;
+                while ($j <= date('Y')) {
+                    echo "<option value='" . $j . "'>$j</option>";
+                    $j++;
+                }
+                echo "</select>";
+                ?>
             </td>
             <td>
                 <?php if ($_SESSION['error'][3] == 1)
@@ -169,6 +232,11 @@ $this->title = 'Редактирование профиля';
             </td>
             <td>
                 <input name="email" type="text" id="email"  value="<?php if (isset($this->data[0]['email'])) echo $this->data[0]['email'] ?>">
+            </td>
+            <td>
+                <?php if (isset($_SESSION['email_error']))
+                    if ($_SESSION['email_error'] == 1)
+                        echo "Некорректно!" ?>
             </td>
         </tr>
         <tr>
@@ -369,8 +437,7 @@ $this->title = 'Редактирование профиля';
     <table>
         <tr>
             <td>
-                <input class="real_buttons" style="float: left; width: 300px" type=submit name=show_active
-                       value="Показать активность">
+                <a class="real_buttons" style="line-height: 30px" href="/cabinet/profile/activity">Показать активность</a>
             </td>
             <td>
                 <input class="real_buttons" style="float: left; width: 300px" type=submit name=show_all_gadgets

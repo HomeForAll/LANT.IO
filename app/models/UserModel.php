@@ -15,7 +15,7 @@ class UserModel extends Model
     {
         
     }
-    
+
     public function checkUserInformation()
     {
         $data = array(

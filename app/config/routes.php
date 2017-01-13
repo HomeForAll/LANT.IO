@@ -13,6 +13,7 @@ return array(
     'cabinet' => 'main/cabinet/cabinet',
     'cabinet/chat' => 'main/cabinet/chat',
     'cabinet/profile/edit' => 'main/cabinet/profileEdit',
+    'cabinet/profile/activity' => 'main/cabinet/showactivity',
     'cabinet/generator' => 'main/cabinet/generator',
     'cabinet/keyeditor' => 'main/cabinet/keyeditor',
     

@@ -26,6 +26,11 @@ class CabinetModel extends Model
         return $info;
     }
 
+    public function showActivity()
+    {
+
+    }
+
     public function savePersonalInfo()
     {
         $_SESSION['userID'] = 1;
@@ -46,54 +51,110 @@ class CabinetModel extends Model
             $pattern = "/([a-z0-9])+/i";
             if(preg_match($pattern, $str, $matches))
                 $error_array[0] = 1;
+            if($str == '')
+                $error_array[0] = 1;
             $_POST['name'] = $str;
+            if ($error_array[0] == 0)
+                $this->db->query("UPDATE users SET first_name = '{$_POST['name']}' WHERE id = $profile_id");
 
             $str = $_POST['surname'];
             $str = trim($str);
             $pattern = "/([a-z0-9])+/i";
             if(preg_match($pattern, $str, $matches))
                 $error_array[1] = 1;
+            if($str == '')
+                $error_array[1] = 1;
             $_POST['surname'] = $str;
+            if ($error_array[1] == 0)
+                $this->db->query("UPDATE users SET last_name = '{$_POST['surname']}' WHERE id = $profile_id");
 
             $str = $_POST['patronymic'];
             $str = trim($str);
             $pattern = "/([a-z0-9])+/i";
             if(preg_match($pattern, $str, $matches))
                 $error_array[2] = 1;
+            if($str == '')
+                $error_array[2] = 1;
             $_POST['patronymic'] = $str;
+            if ($error_array[2] == 0)
+                $this->db->query("UPDATE users SET patronymic = '{$_POST['patronymic']}' WHERE id = $profile_id");
 
             $str = $_POST['phonenumber'];
             $str = trim($str);
-            $pattern = "/([a-zA-Z])/";
-            if (preg_match($pattern, $str, $matches)) {
-                echo 'eqwe';
-                $error_array[3] = 1;
-            }
+            $str = preg_replace("/[^0-9]/", '', $str);
             $_POST['phonenumber'] = $str;
+            $this->db->query("UPDATE users SET phone_number = '{$_POST['phonenumber']}' WHERE id = $profile_id");
 
-            print_r($error_array);
+            $month = array(
+                "Январь",
+                "Февраль",
+                "Март",
+                "Апрель",
+                "Май",
+                "Июнь",
+                "Июль",
+                "Август",
+                "Сентябрь",
+                "Октябрь",
+                "Ноябрь",
+                "Декабрь");
+
+            $_POST['sel_date'] = preg_replace("/[^0-9]/", '', $_POST['sel_date']);
+            $day = $_POST['sel_date'];
+            if (($_POST['sel_date'] > 31) || ($_POST['sel_date'] < 1))
+                $error_array[3] = 1;
+
+            $_POST['sel_year'] = preg_replace("/[^0-9]/", '', $_POST['sel_year']);
+            if (($_POST['sel_year'] > date('Y')) || ($_POST['sel_year'] < 1920))
+                $error_array[3] = 1;
+
+            $month_num = 0;
+            for ($i = 0; $i < 12; $i++) {
+                $var1 = $_POST['sel_month'];
+                $var2 = $month[$i];
+                if (strcasecmp($var1, $var2) == 0) {
+                    $_POST['sel_month'] = $i + 1;
+                    $month_num = $i + 1;
+                    break;
+                }
+                else {
+                    if ($i == 12) {
+                        echo $var1;
+                        echo $var2;
+                        $error_array[3] = 1;
+                    }
+                }
+            }
+
+
+            if ($month_num == 4 || $month_num == 6 || $month_num == 9 || $month_num == 11) {
+                if ($day > 30) {
+                    $error_array[3] = 1;
+                }
+            }
+            if ($month_num == 2) {
+                if ($day > 28) {
+                    $error_array[3] = 1;
+                }
+            }
+
+            if ($error_array[3] == 0)
+                $this->db->query("UPDATE users SET birthday = '{$_POST['sel_date']}.{$_POST['sel_month']}.{$_POST['sel_year']}' WHERE id = $profile_id");
 
             $_SESSION['error'] = $error_array;
-
-            $error_flag = false;
-
-            for ($i = 0; $i < 3; $i++) {
-                if ($_SESSION['error'][$i] == 1)
-                    $error_flag = true;
-            }
-
-            if ($error_flag == false) {
-                $this->db->query("UPDATE users SET first_name = '{$_POST['name']}' WHERE id = $profile_id");
-                $this->db->query("UPDATE users SET last_name = '{$_POST['surname']}' WHERE id = $profile_id");
-                $this->db->query("UPDATE users SET patronymic = '{$_POST['patronymic']}' WHERE id = $profile_id");
-                $this->db->query("UPDATE users SET birthday = '{$_POST['date']}' WHERE id = $profile_id");
-                $this->db->query("UPDATE users SET phone_number = '{$_POST['phonenumber']}' WHERE id = $profile_id");
-            }
         }
 
         if (isset($_POST['save_2']))
         {
-            $this->db->query("UPDATE users SET email = '{$_POST['email']}' WHERE id = $profile_id");
+            $_SESSION['email_error'] = 0;
+            if (filter_var(trim($_POST['email']), FILTER_VALIDATE_EMAIL)) {
+                $this->db->query("UPDATE users SET email = '{$_POST['email']}' WHERE id = $profile_id");
+            }
+            else {
+                $_SESSION['email_error'] = 1;
+            }
+
+
             $this->db->query("UPDATE users SET vk_id = '{$_POST['vkcom']}' WHERE id = $profile_id");
             $this->db->query("UPDATE users SET ok_id = '{$_POST['classmates']}' WHERE id = $profile_id");
             $this->db->query("UPDATE users SET mail_id = '{$_POST['mailru']}' WHERE id = $profile_id");
@@ -174,6 +235,106 @@ class CabinetModel extends Model
                 $this->db->query("UPDATE users SET prom_offers = 0 WHERE id = $profile_id");
             }
         }
+
+        if (isset($_POST['show_all_gadgets'])) {
+            $user_agent = $_SERVER["HTTP_USER_AGENT"];
+            if (strpos($user_agent, "Firefox") !== false) $browser = "Firefox";
+            elseif (strpos($user_agent, "Opera") !== false) $browser = "Opera";
+            elseif (strpos($user_agent, "Chrome") !== false) $browser = "Chrome";
+            elseif (strpos($user_agent, "MSIE") !== false) $browser = "Internet Explorer";
+            elseif (strpos($user_agent, "Safari") !== false) $browser = "Safari";
+            else $browser = "Неизвестный";
+
+            if (!empty($_SERVER['HTTP_CLIENT_IP']))
+            {
+                $ip=$_SERVER['HTTP_CLIENT_IP'];
+            }
+            elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
+            {
+                $ip=$_SERVER['HTTP_X_FORWARDED_FOR'];
+            }
+            else
+            {
+                $ip=$_SERVER['REMOTE_ADDR'];
+            }
+
+            $stmt = $this->db->prepare("SELECT active_text FROM users WHERE id = $profile_id");
+            $stmt->execute();
+            $info = $stmt->fetchAll();
+
+$found_match = "Unknown";
+ if($curl = curl_init() ) {
+     curl_setopt($curl, CURLOPT_URL, 'http://www.ip2location.com/demo?ip=' . $ip);
+     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+     curl_setopt($curl, CURLOPT_POST, true);
+     curl_setopt($curl, CURLOPT_POSTFIELDS, "ipaddress=$ip");
+     $out = curl_exec($curl);
+     $matches = array();
+     preg_match_all("~td.*</td>~i", $out, $matches);
+     $found_match = $matches[0][4];
+     preg_match_all("~>.*<~i", $found_match, $matches);
+     $found_match = $matches[0][0];
+     $found_match = ltrim($found_match, ">");
+     $found_match = rtrim($found_match, "<");
+     preg_match("~flags/.*.png~", $found_match, $flag_country);
+     $found_match = preg_replace("~\/images\/flags~", "http://www.ip2location.com/images/flags", $found_match);
+     curl_close($curl);
+ }
+
+            $geo = $found_match;
+            $str_for_active = $browser . "," . date('d F \в H:i:s') . "," . $ip . "," . $geo . ";";
+            $str_for_active = $str_for_active . $info[0][0];
+            $str_for_active = trim($str_for_active, ';');
+            $query = $this->db->prepare("UPDATE users SET active_text = :active WHERE id = :id");
+            $query->execute(array(":active"=>$str_for_active, ":id"=>$profile_id));
+            print_r($this->db->errorInfo());
+        }
+    }
+
+    private function geoip_client($ip, $opt, $sid)
+    {
+// Делаем запрос к серверу
+        if ($xml = file_get_contents('http://geoip.top/cgi-bin/getdata.pl?ip=' . $ip . '&hex=' . $opt . '&sid=' . $sid)) {
+            $xmlObj = new XmlToArray($xml); // преобразуем xml в массив
+            $arrayData = $xmlObj->createArray();
+
+// если есть ошибки выбрасываем исключения
+            if (isset($arrayData['GeoIP']['GeoAddr'][0]['Error'])) {
+                switch ($arrayData['GeoIP']['GeoAddr'][0]['Error']) {
+                    case 0:
+                        ;
+                        break;
+                    case 10:
+                        throw new Exception('Geo_IP: Неверная длина указанного адреса');
+                        break;
+                    case 11:
+                        throw new Exception('Geo_IP: Неверный формат адреса');
+                        break;
+                    case 150:
+                        throw new Exception('Geo_IP: Внутренняя ошибка сервера');
+                        break;
+                    case 162:
+                        throw new Exception('Geo_IP: Идентификатор сайта не указан');
+                        break;
+                    case 163:
+                        throw new Exception('Geo_IP: Идентификатор сайта содержит ошибку или не зарегистрирован');
+                        break;
+                    case 200:
+                        throw new Exception('Geo_IP: Ошибка соединения с сервером');
+                        break;
+                    case 205:
+                        throw new Exception('Geo_IP: Нет данных по запросу');
+                        break;
+                }
+            }
+// возвращаем полученные данные в виде массива
+            return $arrayData['GeoIP']['GeoAddr'][0];
+
+        } else {
+// если ответа от сервера не дождались вбрасываем исключение
+            throw new Exception('Geo_IP: Нет связи с сервером');
+        }
+
     }
 
     public function handleKeys()
