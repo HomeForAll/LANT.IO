@@ -5,4 +5,4 @@
 $this->title = 'Редактор форм';
 ?>
 
-<a href="/cabinet">Назад в личный кабинет</a>
+<a class="button" href="/cabinet">Назад</a>

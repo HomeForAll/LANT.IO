@@ -13,11 +13,6 @@ class CabinetController extends Controller
         }
     }
 
-    public function actionChat()
-    {
-        $this->view->render('chat');
-    }
-
     public function actionGenerator()
     {
         $this->model->generate();

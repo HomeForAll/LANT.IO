@@ -1,9 +1,9 @@
 <?php
 return array(
     // DataBase
-    'db_host' => '91.202.180.160',
+    'db_host' => 'localhost',
     'db_username' => 'postgres',
-    'db_password' => 'ZSH1wb88',
+    'db_password' => '',
     'db' => 'site',
     
     // SMTP

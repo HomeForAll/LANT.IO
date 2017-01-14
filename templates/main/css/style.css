@@ -54,6 +54,7 @@ pre {
 }
 
 #content {
+    position: relative;
     width: 860px;
     padding: 20px;
     min-height: 500px;
@@ -172,8 +173,59 @@ input[type=submit] {
 
 }
 
+.button {
+    display: inline-block;
+    color: #FFFFFF;
+    line-height: 40px;
+    padding: 0 20px 0 20px;
+    margin-bottom: 15px;
+    background: gray;
+    text-decoration: none;
+    border-radius: 4px;
+    text-align: center;
+    border: solid 1px gray;
+}
 
+.button:hover {
+    color: gray;
+    background: #FFFFFF;
+}
 
+h1 {
+    margin-bottom: 15px;
+}
+
+.ticket {
+    position: relative;
+    padding: 15px 15px 0 15px;
+    border: dotted 1px black;
+    margin-bottom: 15px;
+}
+
+.ticket_answer {
+    background: rgba(24, 97, 20, 0.3);;
+}
+
+.ticket_close {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.ticketName {
+    width: 80%;
+    font-weight: bold;
+    font-size: 14pt;
+    margin-bottom: 15px;
+}
+
+.ticketContent {
+    margin-bottom: 15px;
+}
+
+.createDate {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
 
 /* 
 *

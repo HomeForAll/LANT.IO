@@ -11,7 +11,6 @@ return array(
     'logout' => 'main/user/logout',
 
     'cabinet' => 'main/cabinet/cabinet',
-    'cabinet/chat' => 'main/cabinet/chat',
     'cabinet/profile/edit' => 'main/cabinet/profileEdit',
     'cabinet/generator' => 'main/cabinet/generator',
     'cabinet/keyeditor' => 'main/cabinet/keyeditor',
@@ -19,6 +18,8 @@ return array(
 
     'support' => 'main/support/index',
     'support/tickets' => 'main/support/tickets',
+    'support/dialog/id/([0-9]+)' => 'main/support/dialog/$1',
+    'support/dialog/close/id/([0-9]+)' => 'main/support/close/$1',
     'support/new' => 'main/support/new',
 
     'auth/unset' => 'empty/user/OAuthDestroy',

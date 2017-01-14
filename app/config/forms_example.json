@@ -41,8 +41,7 @@
                 {
                   "id": "suggest",
                   "name": "Адрес",
-                  "type": "text",
-                  "value": "россия"
+                  "type": "text"
                 },
                 {
                   "id": "country",

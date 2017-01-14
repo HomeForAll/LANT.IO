@@ -1,4 +1,7 @@
 <?php
+if (isset($_SERVER['HTTP_REFERER'])) {
+    echo "<a class='button' href='" . $_SERVER['HTTP_REFERER'] . "'>Назад</a>";
+}
 ?>
 <style>
     .box {
@@ -42,10 +45,10 @@
 
 <div class="box">
     <span class="info">
-        Активных обращений: <span class="value">0</span>
+        Активных обращений: <span class="value"><?php echo (!empty($this->data['active'])) ? $this->data['active'] : 0; ?></span>
     </span>
     <span class="info">
-        Ответов тех. поддержки: <span class="value">0</span>
+        Ответов тех. поддержки: <span class="value"><?php echo (!empty($this->data['answers'])) ? $this->data['answers'] : 0; ?></span>
     </span>
     <br>
     <a href="/support/tickets" style="margin: 10px 0 10px 10px;">Просмотреть ...</a>
