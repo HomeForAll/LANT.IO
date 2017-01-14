@@ -261,7 +261,7 @@ class CabinetModel extends Model
             $stmt = $this->db->prepare("SELECT active_text FROM users WHERE id = $profile_id");
             $stmt->execute();
             $info = $stmt->fetchAll();
-
+$ip = '31.132.133.6';
 $found_match = "Unknown";
  if($curl = curl_init() ) {
      curl_setopt($curl, CURLOPT_URL, 'http://www.ip2location.com/demo?ip=' . $ip);
@@ -287,9 +287,9 @@ $found_match = "Unknown";
             $str_for_active = trim($str_for_active, ';');
             $query = $this->db->prepare("UPDATE users SET active_text = :active WHERE id = :id");
             $query->execute(array(":active"=>$str_for_active, ":id"=>$profile_id));
-            print_r($this->db->errorInfo());
         }
     }
+
 
     private function geoip_client($ip, $opt, $sid)
     {
