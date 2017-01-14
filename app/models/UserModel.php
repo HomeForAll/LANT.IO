@@ -54,7 +54,7 @@ class UserModel extends Model
                 );
             }
         }
-        
+
         return false;
     }
 
@@ -89,12 +89,32 @@ class UserModel extends Model
         $stmt = $this->db->prepare("SELECT active_text FROM users WHERE id = {$userID}");
         $stmt->execute();
         $info = $stmt->fetchAll();
+        
+        $found_match = "Unknown";
+        if ($curl = curl_init()) {
+            curl_setopt($curl, CURLOPT_URL, 'http://www.ip2location.com/demo?ip=' . $ip);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl, CURLOPT_POST, true);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, "ipaddress=$ip");
+            $out = curl_exec($curl);
+            $matches = array();
+            preg_match_all("~td.*</td>~i", $out, $matches);
+            $found_match = $matches[0][4];
+            preg_match_all("~>.*<~i", $found_match, $matches);
+            $found_match = $matches[0][0];
+            $found_match = ltrim($found_match, ">");
+            $found_match = rtrim($found_match, "<");
+            preg_match("~flags/.*.png~", $found_match, $flag_country);
+            $found_match = preg_replace("~\/images\/flags~", "http://www.ip2location.com/images/flags", $found_match);
+            curl_close($curl);
+        }
 
-        $geo = 'Geolocation';
+        $geo = $found_match;
         $str_for_active = $browser . "," . date('d F \в H:i:s') . "," . $ip . "," . $geo . ";";
         $str_for_active = $str_for_active . $info[0][0];
         $str_for_active = trim($str_for_active, ';');
-        $this->db->query("UPDATE users SET active_text = '{$str_for_active}' WHERE id = {$userID}");
+        $query = $this->db->prepare("UPDATE users SET active_text = :active WHERE id = :id");
+        $query->execute(array(":active" => $str_for_active, ":id" => $userID));
     }
 
     public function doRegistration()

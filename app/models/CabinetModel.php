@@ -39,19 +39,18 @@ class CabinetModel extends Model
 
 
         $n = 4; // kol-vo post dlia proverki
-        for ($i=0;$i<=$n-1;$i++){
+        for ($i = 0; $i <= $n - 1; $i++) {
             $error_array[$i] = "";
             $_SESSION['error'][$i] = 0;
         }
 
-        if (isset($_POST['save_1']))
-        {
+        if (isset($_POST['save_1'])) {
             $str = $_POST['name'];
             $str = trim($str);
             $pattern = "/([a-z0-9])+/i";
-            if(preg_match($pattern, $str, $matches))
+            if (preg_match($pattern, $str, $matches))
                 $error_array[0] = 1;
-            if($str == '')
+            if ($str == '')
                 $error_array[0] = 1;
             $_POST['name'] = $str;
             if ($error_array[0] == 0)
@@ -60,9 +59,9 @@ class CabinetModel extends Model
             $str = $_POST['surname'];
             $str = trim($str);
             $pattern = "/([a-z0-9])+/i";
-            if(preg_match($pattern, $str, $matches))
+            if (preg_match($pattern, $str, $matches))
                 $error_array[1] = 1;
-            if($str == '')
+            if ($str == '')
                 $error_array[1] = 1;
             $_POST['surname'] = $str;
             if ($error_array[1] == 0)
@@ -71,9 +70,9 @@ class CabinetModel extends Model
             $str = $_POST['patronymic'];
             $str = trim($str);
             $pattern = "/([a-z0-9])+/i";
-            if(preg_match($pattern, $str, $matches))
+            if (preg_match($pattern, $str, $matches))
                 $error_array[2] = 1;
-            if($str == '')
+            if ($str == '')
                 $error_array[2] = 1;
             $_POST['patronymic'] = $str;
             if ($error_array[2] == 0)
@@ -116,8 +115,7 @@ class CabinetModel extends Model
                     $_POST['sel_month'] = $i + 1;
                     $month_num = $i + 1;
                     break;
-                }
-                else {
+                } else {
                     if ($i == 12) {
                         echo $var1;
                         echo $var2;
@@ -144,13 +142,11 @@ class CabinetModel extends Model
             $_SESSION['error'] = $error_array;
         }
 
-        if (isset($_POST['save_2']))
-        {
+        if (isset($_POST['save_2'])) {
             $_SESSION['email_error'] = 0;
             if (filter_var(trim($_POST['email']), FILTER_VALIDATE_EMAIL)) {
                 $this->db->query("UPDATE users SET email = '{$_POST['email']}' WHERE id = $profile_id");
-            }
-            else {
+            } else {
                 $_SESSION['email_error'] = 1;
             }
 
@@ -165,8 +161,7 @@ class CabinetModel extends Model
             $this->db->query("UPDATE users SET profile_foto_id = '{$_POST['profile_foto']}' WHERE id = $profile_id");
         }
 
-        if (isset($_POST['save_3']))
-        {
+        if (isset($_POST['save_3'])) {
             $stmt = $this->db->prepare("SELECT password FROM users WHERE id = $profile_id");
             $stmt->execute();
             $result = $stmt->fetchAll();
@@ -181,112 +176,46 @@ class CabinetModel extends Model
             }
         }
 
-        if (isset($_POST['save_aboutme']))
-        {
+        if (isset($_POST['save_aboutme'])) {
             $aboutme = $_POST['aboutme'];
             $this->db->query("UPDATE users SET about_me = '{$aboutme}' WHERE id = $profile_id");
         }
 
-        if (isset($_POST['save_4']))
-        {
-            if (isset($_POST['phone_only']))
-            {
+        if (isset($_POST['save_4'])) {
+            if (isset($_POST['phone_only'])) {
                 $this->db->query("UPDATE users SET phone_only = 1 WHERE id = $profile_id");
             }
-            if (isset($_POST['site_only']))
-            {
+            if (isset($_POST['site_only'])) {
                 $this->db->query("UPDATE users SET site_only = 1 WHERE id = $profile_id");
             }
-            if (!isset($_POST['phone_only']))
-            {
+            if (!isset($_POST['phone_only'])) {
                 $this->db->query("UPDATE users SET phone_only = 0 WHERE id = $profile_id");
             }
-            if (!isset($_POST['site_only']))
-            {
+            if (!isset($_POST['site_only'])) {
                 $this->db->query("UPDATE users SET site_only = 0 WHERE id = $profile_id");
             }
         }
 
-        if (isset($_POST['save_5']))
-        {
+        if (isset($_POST['save_5'])) {
             echo 123;
-            if (isset($_POST['new_dialog']))
-            {
+            if (isset($_POST['new_dialog'])) {
                 $this->db->query("UPDATE users SET new_dialog = 1 WHERE id = $profile_id");
             }
-            if (isset($_POST['close_ad']))
-            {
+            if (isset($_POST['close_ad'])) {
                 $this->db->query("UPDATE users SET close_ad = 1 WHERE id = $profile_id");
             }
-            if (isset($_POST['prom_offers']))
-            {
+            if (isset($_POST['prom_offers'])) {
                 $this->db->query("UPDATE users SET prom_offers = 1 WHERE id = $profile_id");
             }
-            if (!isset($_POST['new_dialog']))
-            {
+            if (!isset($_POST['new_dialog'])) {
                 $this->db->query("UPDATE users SET new_dialog = 0 WHERE id = $profile_id");
             }
-            if (!isset($_POST['close_ad']))
-            {
+            if (!isset($_POST['close_ad'])) {
                 $this->db->query("UPDATE users SET close_ad = 0 WHERE id = $profile_id");
             }
-            if (!isset($_POST['prom_offers']))
-            {
+            if (!isset($_POST['prom_offers'])) {
                 $this->db->query("UPDATE users SET prom_offers = 0 WHERE id = $profile_id");
             }
-        }
-
-        if (isset($_POST['show_all_gadgets'])) {
-            $user_agent = $_SERVER["HTTP_USER_AGENT"];
-            if (strpos($user_agent, "Firefox") !== false) $browser = "Firefox";
-            elseif (strpos($user_agent, "Opera") !== false) $browser = "Opera";
-            elseif (strpos($user_agent, "Chrome") !== false) $browser = "Chrome";
-            elseif (strpos($user_agent, "MSIE") !== false) $browser = "Internet Explorer";
-            elseif (strpos($user_agent, "Safari") !== false) $browser = "Safari";
-            else $browser = "Неизвестный";
-
-            if (!empty($_SERVER['HTTP_CLIENT_IP']))
-            {
-                $ip=$_SERVER['HTTP_CLIENT_IP'];
-            }
-            elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
-            {
-                $ip=$_SERVER['HTTP_X_FORWARDED_FOR'];
-            }
-            else
-            {
-                $ip=$_SERVER['REMOTE_ADDR'];
-            }
-
-            $stmt = $this->db->prepare("SELECT active_text FROM users WHERE id = $profile_id");
-            $stmt->execute();
-            $info = $stmt->fetchAll();
-$ip = '31.132.133.6';
-$found_match = "Unknown";
- if($curl = curl_init() ) {
-     curl_setopt($curl, CURLOPT_URL, 'http://www.ip2location.com/demo?ip=' . $ip);
-     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-     curl_setopt($curl, CURLOPT_POST, true);
-     curl_setopt($curl, CURLOPT_POSTFIELDS, "ipaddress=$ip");
-     $out = curl_exec($curl);
-     $matches = array();
-     preg_match_all("~td.*</td>~i", $out, $matches);
-     $found_match = $matches[0][4];
-     preg_match_all("~>.*<~i", $found_match, $matches);
-     $found_match = $matches[0][0];
-     $found_match = ltrim($found_match, ">");
-     $found_match = rtrim($found_match, "<");
-     preg_match("~flags/.*.png~", $found_match, $flag_country);
-     $found_match = preg_replace("~\/images\/flags~", "http://www.ip2location.com/images/flags", $found_match);
-     curl_close($curl);
- }
-
-            $geo = $found_match;
-            $str_for_active = $browser . "," . date('d F \в H:i:s') . "," . $ip . "," . $geo . ";";
-            $str_for_active = $str_for_active . $info[0][0];
-            $str_for_active = trim($str_for_active, ';');
-            $query = $this->db->prepare("UPDATE users SET active_text = :active WHERE id = :id");
-            $query->execute(array(":active"=>$str_for_active, ":id"=>$profile_id));
         }
     }
 
@@ -660,8 +589,7 @@ $found_match = "Unknown";
             if (filter_var(trim($email), FILTER_VALIDATE_EMAIL)) {
                 $this->db->query("UPDATE access SET email = '{$email}' WHERE id = {$_SESSION['id_key_keyeditor']}");
                 $result = "Email ключа {$_SESSION['array_keyeditor']['key']} изменен на {$email}";
-            }
-            else
+            } else
                 $result = 'Email введ неверно!';
             return $result;
         }
@@ -690,7 +618,7 @@ $found_match = "Unknown";
 
                 $a = count($array);
 
-                for ($j = ((($i-1) * $idsperpage) + 1); $j <= ((($i-1) * $idsperpage) + 1) + $a - 1; $j++) { // сортировка
+                for ($j = ((($i - 1) * $idsperpage) + 1); $j <= ((($i - 1) * $idsperpage) + 1) + $a - 1; $j++) { // сортировка
                     $temp[$j] = $array[$j];
                 }
                 $array = $temp;
@@ -718,7 +646,8 @@ $found_match = "Unknown";
         }
     }
 
-    public function getForms() {
+    public function getForms()
+    {
         return json_decode(file_get_contents(ROOT_DIR . '/app/config/forms.json'), true);
     }
 }
