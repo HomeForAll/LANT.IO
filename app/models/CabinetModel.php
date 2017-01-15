@@ -17,7 +17,7 @@ class CabinetModel extends Model
 
     public function getinfo()
     {
-        $_SESSION['userID'] = 1;
+        //$_SESSION['userID'] = 1;
         $profile_id = $_SESSION['userID'];
 
         $stmt = $this->db->prepare("SELECT * FROM users WHERE id = $profile_id");
@@ -33,7 +33,7 @@ class CabinetModel extends Model
 
     public function savePersonalInfo()
     {
-        $_SESSION['userID'] = 1;
+        //$_SESSION['userID'] = 1;
         $_SESSION['error'] = [];
         $profile_id = $_SESSION['userID'];
 

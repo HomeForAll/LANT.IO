@@ -13,9 +13,9 @@ class SupportModel extends Model
 
         if ($userID) {
 
-            //            $firstName = $this->getUserFirstName($this->db, $userID);
-//            $lastName = $this->getUserLastName($this->db, $userID);
-            $userName = "Дима" . "Бадаранча";
+            $firstName = $this->getUserFirstName($this->db, $userID);
+            $lastName = $this->getUserLastName($this->db, $userID);
+            $userName = $firstName . " " . $lastName;
             $question = $_POST['question'];
             $description = $_POST['description'];
 
@@ -50,7 +50,44 @@ class SupportModel extends Model
         }
     }
 
-    public function getTickets($page = 0) {
+    public function addMessage($ticketID) {
+        $userID = isset($_SESSION['userID']) ? $_SESSION['userID'] : 0;
+
+        if ($userID) {
+
+            $firstName = $this->getUserFirstName($this->db, $userID);
+            $lastName = $this->getUserLastName($this->db, $userID);
+            $userName = $firstName . " " . $lastName;
+            $message = $_POST['msg'];
+            $date = date("Y-m-d H:i:s");
+
+            if (!$message) {
+                return 'Сообщение пустое.';
+            }
+
+            $query = $this->db->prepare("INSERT INTO ticket_answers (ticket_id, answerer_user_id, answerer_user_name, answer, answer_date, status) VALUES (:ticketID, :userID, :userName, :answer, :answerDate, true)");
+
+            $query->execute(array(
+                ':ticketID' => $ticketID[0],
+                ':userID' => $userID,
+                ':userName' => $userName,
+                ':answer' => $message,
+                ':answerDate' => $date,
+            ));
+
+            if (!$query->errorInfo()[1]) {
+                unset($_POST);
+                return "Сообщение отправлено, ожидайте ответа.";
+            } else {
+                return "Неизвестная ошибка.";
+            }
+        } else {
+            return "Вы не авторизованы!";
+        }
+    }
+
+    public function getTickets($page = 0)
+    {
         $offset = $page * 10;
 
         $cursor = $this->db->query("SELECT * FROM tickets WHERE user_id = {$_SESSION["userID"]} LIMIT 10 OFFSET {$offset}");
@@ -59,49 +96,56 @@ class SupportModel extends Model
         return $result;
     }
 
-    public function getDialog($ticketID) {
+    public function getDialog($ticketID)
+    {
         return array(
-            'ticket'=> $this->getTicket($ticketID),
+            'ticket' => $this->getTicket($ticketID),
             'messages' => $this->getMessages($ticketID),
         );
     }
 
-    private function getMessages($ticketID) {
+    private function getMessages($ticketID)
+    {
         $cursor = $this->db->query("SELECT * FROM ticket_answers WHERE ticket_id = {$ticketID}");
         $result = $cursor->fetchAll();
 
         return $result;
     }
 
-    private function getTicket($ticketID) {
+    private function getTicket($ticketID)
+    {
         $cursor = $this->db->query("SELECT * FROM tickets WHERE id = {$ticketID}");
         $result = $cursor->fetchAll();
 
         return $result;
     }
 
-    public function getStatistic() {
+    public function getStatistic()
+    {
         return array(
-            'active'=> $this->countActiveTicketsQuantity(),
-            'answers'=> $this->countNumberOfAnswers(),
+            'active' => $this->countActiveTicketsQuantity(),
+            'answers' => $this->countNumberOfAnswers(),
         );
     }
 
-    private function countNumberOfAnswers() {
-        $cursor = $this->db->query("SELECT count(*) FROM tickets WHERE user_id = {$_SESSION["userID"]} AND new_answer = true");
+    private function countNumberOfAnswers()
+    {
+        $cursor = $this->db->query("SELECT count(*) FROM tickets WHERE user_id = {$_SESSION["userID"]} AND new_answer = true AND status = true");
         $result = $cursor->fetch()[0];
 
         return $result;
     }
 
-    private function countActiveTicketsQuantity() {
+    private function countActiveTicketsQuantity()
+    {
         $cursor = $this->db->query("SELECT count(*) FROM tickets WHERE user_id = {$_SESSION["userID"]} AND status = true");
         $result = $cursor->fetch()[0];
 
         return $result;
     }
 
-    public function closeTicket($ticketID) {
+    public function closeTicket($ticketID)
+    {
         $cursor = $this->db->query("UPDATE tickets SET status = false WHERE id = {$ticketID}");
         $result = $cursor->rowCount();
 

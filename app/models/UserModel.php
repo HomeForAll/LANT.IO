@@ -89,7 +89,7 @@ class UserModel extends Model
         $stmt = $this->db->prepare("SELECT active_text FROM users WHERE id = {$userID}");
         $stmt->execute();
         $info = $stmt->fetchAll();
-        
+
         $found_match = "Unknown";
         if ($curl = curl_init()) {
             curl_setopt($curl, CURLOPT_URL, 'http://www.ip2location.com/demo?ip=' . $ip);
@@ -110,7 +110,7 @@ class UserModel extends Model
         }
 
         $geo = $found_match;
-        $str_for_active = $browser . "," . date('d F \в H:i:s') . "," . $ip . "," . $geo . ";";
+        $str_for_active = $browser . "," . date('d F \в H:i:s e') . "," . $ip . "," . $geo . ";";
         $str_for_active = $str_for_active . $info[0][0];
         $str_for_active = trim($str_for_active, ';');
         $query = $this->db->prepare("UPDATE users SET active_text = :active WHERE id = :id");

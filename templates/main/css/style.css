@@ -219,12 +219,80 @@ h1 {
 
 .ticketContent {
     margin-bottom: 15px;
+    width: 600px;
 }
 
 .createDate {
     position: absolute;
     top: 15px;
     right: 15px;
+}
+
+.ticketStatus {
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+}
+
+.answer_message {
+    color: #942a25;
+    position: absolute;
+    right: 15px;
+    bottom: 35px;
+    font-weight: bold;
+}
+
+.dialogInfo {
+    box-sizing: border-box;
+    padding: 15px 15px 0 15px;
+    width: 100%;
+    border: solid 1px black;
+    margin-bottom: 15px;
+}
+
+.box {
+    margin-bottom: 15px;
+    padding: 15px;
+    border: dotted 1px gray;
+}
+
+.dialog {
+    box-sizing: border-box;
+    overflow-y: scroll;
+    padding: 15px;
+    width: 100%;
+    height: 500px;
+    margin-bottom: 15px;
+    background: #f1f1f1;
+    border: solid 1px #f1f1f1;
+}
+
+.dialog_msg {
+    position: relative;
+    padding: 15px;
+    margin-bottom: 15px;
+    width: 100%;
+    box-sizing: border-box;
+    background: #FFFFFF;
+}
+
+.dialog_msg_name {
+    font-weight: bold;
+    font-size: 12pt;
+    padding-bottom: 15px;
+}
+
+.dialog_msg_date {
+    margin-bottom: 15px;
+}
+
+textarea {
+    padding: 15px;
+    width: 100%;
+    box-sizing: border-box;
+    resize: vertical;
+    border-radius: 4px;
+    margin-bottom: 15px;
 }
 
 /* 
@@ -235,13 +303,9 @@ h1 {
 *
 */
 
-
-
 #inputImageContainer img {
     width: 200px;
 }
-
-
 
 form.main_editor_form {
     font-family: tahoma, verdana, "sans-serif";
@@ -253,9 +317,8 @@ form.main_editor_form {
 
 .main_editor_form fieldset {
     margin-top: 20px;
-    padding : 15px 5px 10px 5px;
+    padding: 15px 5px 10px 5px;
     border: 1px solid #B5B8C8;
-    
 
 }
 
@@ -273,7 +336,7 @@ form.main_editor_form {
 
 .main_editor_form label {
     color: #000;
-    display : block;
+    display: block;
     margin: 5px;
 }
 
@@ -281,13 +344,14 @@ form.main_editor_form {
     color: #000066;
     margin-bottom: 5px;
 }
+
 .main_editor_form label span {
     color: #000;
 }
 
 .main_editor_form textarea {
     width: 250px;
-    height:70px;
+    height: 70px;
     color: #555;
     padding: 4px;
     border: 1px solid #B5B8C8;
@@ -297,19 +361,18 @@ form.main_editor_form {
 
 }
 
-.spoiler_button{
+.spoiler_button {
     cursor: pointer;
     color: #FF6816;
 }
 
-.spoiler_body
-{
+.spoiler_body {
     border-top: 1px solid #C3CBD1;
 }
 
 #addDynamicField {
     width: 100%;
-    float:none;
+    float: none;
 }
 
 .imgInput {
@@ -317,44 +380,45 @@ form.main_editor_form {
     float: left;
     width: 220px;
     height: 300px;
-    
+
     margin: 0;
     padding: 0;
-    
+
 }
 
 .imgInput_1 {
-    
+
 }
 
 .inputfile {
-    
+
 }
 
 .DeleteField {
-    
+
 }
 
-label.error{
+label.error {
     background: url(../images/unchecked.gif) no-repeat;
     padding-left: 16px;
     margin-left: .3em;
     color: red;
 }
+
 label.valid {
     background: url(../images/checked.gif) no-repeat;
     display: block;
     width: 16px;
-    height: 16px;   
+    height: 16px;
 }
-
 
 /* Просмотренные новости  */
 
-.last_viewed_news{
+.last_viewed_news {
     width: 100%;
     height: 150px;
 }
+
 .last_viewed_news span a {
     width: 100px;
     height: 150px;
@@ -371,11 +435,12 @@ label.valid {
 }
 
 .last_viewed_news span a img {
-    width:100px;
+    width: 100px;
     height: 67px;
     border-radius: 10px;
 }
-/* 
+
+/*
 *
 *
                 Новости   Конец

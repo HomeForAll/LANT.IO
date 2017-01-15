@@ -15,11 +15,7 @@ class Model extends Application
         $query->execute(array(':userID' => $userID));
         $result = $query->fetch();
 
-        if ($query->errorCode()) {
-            return $query->errorInfo();
-        }
-
-        return $result;
+        return $result[0];
     }
 
     protected function getUserLastName(PDO $PDO, $userID)
@@ -28,10 +24,6 @@ class Model extends Application
         $query->execute(array(':userID' => $userID));
         $result = $query->fetch();
 
-        if ($query->errorCode()) {
-            return $query->errorInfo();
-        }
-
-        return $result;
+        return $result[0];
     }
 }

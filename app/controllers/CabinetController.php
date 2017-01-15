@@ -23,6 +23,7 @@ class CabinetController extends Controller
     public function actionShowActivity(){
         $this->view->render('activity_page', $this->model->getinfo());
     }
+
     public function actionProfileEdit(){
         $this->model->savePersonalInfo();
         $this->view->render('profileEdit', $this->model->getinfo());
@@ -60,5 +61,9 @@ class CabinetController extends Controller
             $viewkeyeditor = $installdate;
 
         $this->view->render('keyeditor', $viewkeyeditor);
+    }
+
+    public function actionFormsEditor(){
+        $this->view->render('forms_editor');
     }
 }

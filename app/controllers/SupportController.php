@@ -20,6 +20,10 @@ class SupportController extends Controller
 
     public function actionDialog($ticketID)
     {
+        if(isset($_POST['submit'])) {
+            $this->model->addMessage($ticketID);
+        }
+
         $this->view->render('ticket_dialog', $this->model->getDialog($ticketID[0]));
     }
 
