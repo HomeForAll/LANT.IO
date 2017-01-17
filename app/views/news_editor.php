@@ -1,6 +1,5 @@
 <?php
 $this->title = 'Редактор новостей';
-//var_dump($this->data);
 
 global $data_for_news;
 $data_for_news = $this->data;
@@ -103,24 +102,10 @@ if (!empty($this->data['message'])) {
 
 <form  id="editor_form" class="main_editor_form" enctype="multipart/form-data" action="" method="post">
 <input type="hidden" name="category" value="<?php echo $this->data['category']; ?>">
-    <fieldset>
-        <legend>Выбор категории для создания нового объявления</legend>
-        <p> Продажа :
-            <a href="/news/editor/saleapart">Квартира</a>
-            <a href="/news/editor/salehouse">Дом</a>
-            <a href="/news/editor/saleroom">Комната</a>
-            <a href="/news/editor/saleland">Участок</a>
-            <!--<a href="/news/editor/salepart">Доля</a>-->
-        </p>
 
-        <p> Сдать в аренду :
-            <a href="/news/editor/rentapart">Квартира</a>
-            <a href="/news/editor/renthouse">Дом</a>
-            <a href="/news/editor/rentroom">Комната</a>
-            <a href="/news/editor/rentland">Участок</a>
-        </p>
 
-    </fieldset>
+
+    
 
 
     <fieldset>
@@ -292,57 +277,7 @@ if (!empty($this->data['message'])) {
 
 
 
-<!-- Список новостей для редактирования, изменения статуса или удаления -->
-<form  id="status_frm" action="" method="post">
-<?php
-if (empty($this->data['id_news'])) {
-    ?>
 
-        <table border="1", cellspacing="0">
-
-            <tr>
-
-                <td> Дата </td>
-                <td> Заголовок <br>(нажмите для редактирования новости) </td>
-                <td> Автор </td>
-                <td> Статус</td>
-            </tr>
-
-    <?php for ($i = 0; (!empty($this->data[$i])); $i++) { ?>   
-                <tr>
-
-                    <td><i> <?php echo $this->data[$i]['date']; ?></i> </td>
-                    <td><a href="/news/editor/<?php echo $this->data[$i]['id_news']; ?>"> <?php echo $this->data[$i]['title']; ?> </a>
-                        <p><b>Категория:</b> <?php echo $this->data[$i]['category']; ?> ; <b>Метки:</b>  <?php echo $this->data[$i]['tags']; ?> </p>
-                    </td>
-                    <td> <?php echo $this->data[$i]['author_name']; ?> </td>
-                    <td>  
-                        <input type="radio" name="status_<?php echo $this->data[$i]['id_news']; ?>" value="1" <?php
-                               if ($this->data[$i]['status'] == 1) {
-                                   echo "checked";
-                               }
-                               ?> > Видна 
-                        <input type="radio" name="status_<?php echo $this->data[$i]['id_news']; ?>" value="0" <?php
-                               if ($this->data[$i]['status'] == 0) {
-                                   echo "checked";
-                               }
-                               ?> > Скрыта 
-                        <input type="radio" name="status_<?php echo $this->data[$i]['id_news']; ?>" value="3"> Удаление 
-                    </td>
-
-
-                </tr>
-
-               <?php } ?>  
-        </table>
-        <input type="hidden" id="stat_arr" name="stat_arr" value= "<?php
-               if (!empty($this->data['stat_arr'])) {
-                   echo $this->data['stat_arr'];
-               }
-               ?>" />
-        <input type="submit" name="submit_status" value="Изменить статус"> <a href="/news/editor">Отмена</a>
-<?php } ?>  
-</form>
 
 <script type="text/javascript" src="/templates/main/js/jquery.validate.js"></script>
 <script type="text/javascript" src="/templates/main/js/news_javascript.js"></script> 

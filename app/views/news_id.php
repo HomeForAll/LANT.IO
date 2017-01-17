@@ -48,7 +48,7 @@ foreach ($last_viewed_news_array as $key => $value) {
 
 ?>
 
-<div class="news">   
+<div class="news_view"> 
 <h2><?php  if (!empty($this->data['title'])){ echo $this->data['title']; } ?></h2>
     <?php if (!empty($data['preview_img'])) { ?> 
     <img src="/uploads/images/s_<?php echo $this->data['preview_img'][0]; ?>">

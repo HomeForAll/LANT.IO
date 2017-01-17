@@ -2,8 +2,6 @@
 $this->title = 'Новости';
 ?>
 <h2>Новости</h2>
-<a href="/news/editor">Редактор новостей</a>
-
 <!-- Выбор количества выводимых новостей -->
 <form action="" method="post">
     <label for="number_of_news">Количество выводимых новостей:</label>
@@ -59,20 +57,51 @@ $this->title = 'Новости';
 ?>
 </DIV>
 
+<!-- Последние новости -->
+<div class="last_news clearfix">
+    <h3>Последние новости</h3>
 
 <!-- Вывод листинга новостей -->
 <?php 
 foreach ($this->data['news'] as $news) {
  ?>
 <div class="news">
-    <h3><a href="<?php echo "/news/".$news['id_news'].""; ?>"><?php echo $news['title']; ?></a></h3>
-    <?php if (!empty($news['preview_img'][0])) { ?> 
-    <a href="<?php echo "/news/".$news['id_news'].""; ?>"><img src="/uploads/images/s_<?php echo $news['preview_img'][0]; ?>"></a>
-    <?php } ?>
-    <?php echo $news['short_content'] . '<br>' . $news['content']; ?>
+    <a href="<?php echo "/news/".$news['id_news'].""; ?>"
+       style="background-image: url(<?php
+       if (!empty($news['preview_img'][0])) { ?>
+        /uploads/images/s_<?php echo $news['preview_img'][0]; ?>
+        <?php } ?>);">
+        <span>
+        <h3><?php echo $news['title']; ?></h3>
+        </span>
+    </a>
+     
+    
+    <div class="news_content">
+    <?php 
+    // Поиск конца ('_') короткого контента и обрезка
+    $short_len = 60; // длина предпросмотра (short_content) в символах
+
+    if (!empty($news['content'])) {
+    if (strlen($news['content'])>$short_len) {
+        if($short_content_position = strpos($news['content'], ' ', $short_len)){
+        $short_content = substr($news['content'], 0, $short_content_position);
+        } else{
+          $short_content = $news['content'];
+        }
+    } else {
+        $short_content = $news['content'];
+    }
+    echo $short_content.'...';
+
+    } ?>
+    </div>
     <div class="news_date"><?php echo " Дата :".$news['date']; ?></div>
+    <?php if (!empty($news['author_name'])) { ?>
+    <div class="news_author_name"><?php echo " Автор :".$news['author_name']; ?></div>
+    <?php } ?>
     <?php if (!empty($news['category'])) { ?>
-    <div class="news_category"><?php echo 'Категория : <a href="/news/?category='.$news['category'].'"> '.$news['category'].' </a>'; ?></div>
+    <div class="news_category"><?php echo 'Категория : <a href="/news/?category='.$news['category'].'"> '.$news['category_rus'].' </a>'; ?></div>
     <?php } ?>
     <?php if (!empty($news['tags'])) { ?>
     <div class="news_tags"><?php echo " Метки :". $news['tags']; ?></div>
@@ -81,9 +110,11 @@ foreach ($this->data['news'] as $news) {
     <?php
     }
     ?>
+</div>
+<!-- Последние новости - конец -->
 
-
-<div class="last_viewed_news">
+<!-- Просмотренные новости -->
+<div class="last_viewed_news clearfix">
 <?php
 foreach ($this->data['last_viewed_news'] as $value) {
 ?> <span>
@@ -111,6 +142,7 @@ foreach ($this->data['last_viewed_news'] as $value) {
 }
 ?>
 </div>
+<!-- Просмотренные новости - конец-->
 
 <?php
 unset($value);
