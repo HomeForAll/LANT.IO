@@ -26,15 +26,16 @@ class NewsModel extends Model
     {
 
 // Составление запроса
-        $sql = "SELECT COUNT(*) FROM news_base";
+        $sql = "SELECT COUNT(*) FROM news_base WHERE status = 1";
 // Условия поиска по категориям
         if (!empty($category_list)) {
-            $sql = $sql.' WHERE ';
+            $sql = $sql." AND (";
             foreach ($category_list as $value) {
                 $sql = $sql.' category = '.$value.' OR ';
             }
             // удаление последнего OR
             $sql = substr($sql, 0, -4);
+            $sql = $sql.' )';
         }
 
 
@@ -273,6 +274,11 @@ class NewsModel extends Model
         $data['news'] = $stmt->fetchAll();
         //Строку файлов картинок преобразуем в массив $data['news'][number]['preview_img'][]
         $data['news'] = $this->explodePreviewImg($data['news']);
+        // Получение имен категорий
+        foreach ($data['news'] as $key => $value) {
+            $data['news'][$key]['category_rus'] = $this->translateIndex($data['news'][$key]['category'], 'category');
+        }
+
         return $data;
     }
 
@@ -287,8 +293,17 @@ class NewsModel extends Model
             $sort_dir       = 'DESC';
             $number_of_news = 10;
 
+        // Если переход по ссылке - категория => $_GET
+            if(!empty($_GET['category'])){
+                $i = (int)$_GET['category'];
+               if(preg_match('/[1,11,12,13,14,21,22,23,24]/',$i)){
+                   $category_list[$i] = $i;
+               }
+            }
+ 
+
+        // Если нажата кнопка выбора режима просмотра
         if (!empty($_POST['watch_news_list'])) {
-            // Если нажата кнопка выбора режима просмотра
             $number_of_news = (int) $_POST['number_of_news'];
 
             if(!empty($_POST['news_table_category']) && is_array($_POST['news_table_category'])){
@@ -301,6 +316,8 @@ class NewsModel extends Model
         // общее кол-во новостей
         $namber_of_all_rows = $this->getNamber_of_all_rows($category_list);
 
+
+
         // Запись в SESSION
         $_SESSION['news_list']['category']           = $category_list;
         $_SESSION['news_list']['sort']               = $sort;
@@ -308,6 +325,7 @@ class NewsModel extends Model
         $_SESSION['news_list']['number_of_news']     = $number_of_news;
         $_SESSION['news_list']['namber_of_all_rows'] = $namber_of_all_rows;
     }
+
 
     public function explodePreviewImg($data_news)
     {
@@ -321,18 +339,33 @@ class NewsModel extends Model
 
 //Получает список новостей из заданной табицы($table) или из всех таблиц новостей(по умолчанию)
 // отсортированный по дате    
-    public function getNewsListForEditor()
+    public function getMyNewsList($author_name = NULL)
     {
-        $sql = 'SELECT id_news, date::date, title, author_name, status, category, tags '
-            .'FROM news_base ORDER BY date DESC';
+        if (!empty($author_name)){
+        $sql = 'SELECT id_news, date::date, title, content, author_name, preview_img, status, category, tags '
+            .'FROM news_base';
+        if ($author_name !== 'admin'){
+           $sql = $sql.' WHERE author_name = :author_name';
+        }
+
+        $sql = $sql.' ORDER BY date DESC';
 
         $stmt   = $this->db->prepare($sql);
+        if ($author_name !== 'admin'){
+            $stmt->bindParam(':author_name', $author_name);
+        }
         $stmt->execute();
-        $result = $stmt->fetchAll();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         // преобразуем категории в слова
         foreach ($result as &$news) {
         $news['category'] = $this->translateIndex($news['category'], 'category');
         }
+        } else {
+            return FALSE;
+        }
+        //преобразование картинок в массив
+        $result = $this->explodePreviewImg($result);
+
         return $result;
     }
 
@@ -844,6 +877,7 @@ class NewsModel extends Model
         
     static $test_array = array(
                 'category_eng' => array(
+                    1  => 'base',
                     11 => 'saleroom',
                     12 => 'saleapart',
                     13 => 'salehouse',
