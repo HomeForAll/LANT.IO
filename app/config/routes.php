@@ -30,6 +30,7 @@ return array(
     'news/page([0-9]+)' => 'main/news/news_list/$1',
     'news/([0-9]+)' => 'main/news/news_id/$1',
     'news/editor' => 'main/news/news_editor',
+    'news/myad' => 'main/news/news_myad',
     'news/editor/([0-9]+)' => 'main/news/news_editor/$1',
     'news/editor/(saleapart)' => 'main/news/news_editor/$1',
     'news/editor/(salehouse)' => 'main/news/news_editor/$1',
