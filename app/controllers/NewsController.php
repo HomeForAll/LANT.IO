@@ -55,7 +55,6 @@ class NewsController extends Controller
         $news_message = [];
         $news_error   = [];
         $news_to_edit = [];
-        $news_list    = [];
         $data         = [];
 
 // Определяем: Если есть id новости => update или вывод формы для редактирования
@@ -89,6 +88,7 @@ class NewsController extends Controller
             $news_to_edit = $this->model->getNewsById($news_to_edit_id);
             $this->model->setSessionForEditor($news_to_edit);
             $category     = $this->model->translateIndex($news_to_edit['category'], 'category_eng');
+
         } else {
             //
             //Если это не конкретная новость:
@@ -122,14 +122,39 @@ class NewsController extends Controller
                 }
             }
 
-// Изменение статуса новостей и удаление для определенной таблицы $table
+
+        } // окончание else (если в строке ввода не id новости
+
+// Объеденяем массивы данных в один для передачи data[] = параметры новости (если редактирование новости) + массив-лист всех новостей + массив сообщений
+        $data             = $news_to_edit;
+        $data['message']  = $news_message;
+        $data['error']    = $news_error;
+        $data['category'] = $category;
+
+        $this->view->render('news_editor', $data);
+    }
+
+
+    public function actionNews_myad($params)
+        {
+        global $news_error, $news_message;
+        $news_message = [];
+        $news_error   = [];
+        $data = [];
+
+        
+        if(!empty($_SESSION['userID'])) {
+
+        $data['author_name'] = $_SESSION['userID'];
+                $news_list    = [];
+     // Изменение статуса новостей и удаление для определенной таблицы $table
             if (!empty($_POST['submit_status'])) {
                 $this->model->makeNewsStatus();
             }
 
 // Загружаем из БД список всех новостей и формируем проверочный массив статуса stat_arr[id_news] => [status]
-// Сессия  $_SESSION['stat_arr'] - статус пока еще не отредактированных новостей 
-            $news_list = $this->model->getNewsListForEditor();
+// Сессия  $_SESSION['stat_arr'] - статус пока еще не отредактированных новостей
+            $news_list = $this->model->getMyNewsList($data['author_name']);
 
 
 // записываем в SESSION массив(stat_arr) из id=>status для сравнения изменений статуса
@@ -138,14 +163,18 @@ class NewsController extends Controller
                 $stat_arr += array($i['id_news'] => $i['status']);
             }
             $_SESSION['stat_arr'] = $stat_arr;
-        } // окончание else (если в строке ввода не id новости
 
-// Объеденяем массивы данных в один для передачи data[] = параметры новости (если редактирование новости) + массив-лист всех новостей + массив сообщений
-        $data             = array_merge($news_to_edit, $news_list);
+
+        } else {
+
+        array_push($news_error, 'Ошибка! Вы не авторизованы!');
+
+        }
+        $data['news']             = $news_list;
         $data['message']  = $news_message;
         $data['error']    = $news_error;
-        $data['category'] = $category;
 
-        $this->view->render('news_editor', $data);
+        $this->view->render('news_myad', $data);
     }
+
 }
