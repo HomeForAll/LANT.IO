@@ -218,6 +218,21 @@ $.validator.addMethod( "letterswithbasicpunc", function( value, element ) {
 
 
 
+
+
+//$(function() {
+//    $('.add_news_menu_body').hide();
+//    $('.add_news_menu_button').click(function(){
+//        $(this).next().toggle('slow', function(){
+//            if($(this).is(":visible")){
+//            $(this).prev().html('-'); }
+//        else { $(this).prev().html('+'); };
+//        });
+//    });
+//});
+
+
+
     //
     //
     // Раскрытие и скрытие элементов
@@ -287,3 +302,24 @@ $(function() {
 
 });
 
+$(document).ready(function () {
+    //
+    //
+    // Меню добавить объявление
+    //
+    //
+
+
+$(function() {
+    $('#add_news_menu_body').hide();
+    $('#add_news_menu_button').click(function(){
+        $(this).next().toggle('slow', function(){
+            if($(this).is(":visible")){
+            $(this).prev().removeClass('add_news_menu_plus');
+            $(this).prev().addClass('add_news_menu_minus');}
+        else { $(this).prev().removeClass('add_news_menu_minus');
+                $(this).prev().addClass('add_news_menu_plus'); };
+        });
+    });
+});    
+});
