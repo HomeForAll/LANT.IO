@@ -15,7 +15,11 @@ return array(
     'cabinet/profile/activity' => 'main/cabinet/showactivity',
     'cabinet/generator' => 'main/cabinet/generator',
     'cabinet/keyeditor' => 'main/cabinet/keyeditor',
-    'cabinet/forms_editor' => 'main/cabinet/formsEditor',
+    'cabinet/forms' => 'main/cabinet/forms',
+    'cabinet/form/new' => 'main/cabinet/createForm',
+    'cabinet/form/edit/id/([0-9]+)' => 'main/cabinet/editForm/$1',
+    'cabinet/form/delete/id/([0-9]+)' => 'main/cabinet/deleteForm/$1',
+    'cabinet/form/success' => 'main/cabinet/createSuccess',
 
     'support' => 'main/support/index',
     'support/tickets' => 'main/support/tickets',

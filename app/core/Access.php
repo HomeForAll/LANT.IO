@@ -11,4 +11,8 @@ class Access
         header('Location: http://' . $_SERVER['HTTP_HOST'] . '/login');
         exit;
     }
+
+    public function getAccessLevel() {
+        return (integer)$_SESSION['status'];
+    }
 }

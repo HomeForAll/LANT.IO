@@ -2,15 +2,15 @@
 
 class CabinetController extends Controller
 {
+    public function __construct($template, $model)
+    {
+        parent::__construct($template, $model);
+        $this->checkAuth();
+    }
+
     public function actionCabinet()
     {
-        if (!isset($_SESSION['authorized'])) {
-            header('Location: http://' . $_SERVER['HTTP_HOST']);
-            exit;
-        } else {
-
-            $this->view->render('cabinet');
-        }
+        $this->view->render('cabinet');
     }
 
     public function actionGenerator()
@@ -20,11 +20,13 @@ class CabinetController extends Controller
         $this->view->render('generator');
     }
 
-    public function actionShowActivity(){
+    public function actionShowActivity()
+    {
         $this->view->render('activity_page', $this->model->getinfo());
     }
 
-    public function actionProfileEdit(){
+    public function actionProfileEdit()
+    {
         $this->model->savePersonalInfo();
         $this->view->render('profileEdit', $this->model->getinfo());
     }
@@ -63,7 +65,41 @@ class CabinetController extends Controller
         $this->view->render('keyeditor', $viewkeyeditor);
     }
 
-    public function actionFormsEditor(){
-        $this->view->render('forms_editor');
+    public function actionForms()
+    {
+        $this->view->render('forms', $this->model->getForms());
+    }
+
+    public function actionEditForm($id)
+    {
+        $this->view->render('edit_form', $id);
+    }
+
+    public function actionCreateForm()
+    {
+        $this->ifAJAX(function () {
+            $this->model->createFormParams();
+        });
+
+        if (isset($_POST['submit'])) {
+            $this->view->render('messages', $this->model->createForm());
+            exit;
+        }
+
+        $this->view->render('new_form', $this->model->getFormParams());
+    }
+
+    public function actionDeleteForm($id)
+    {
+        if ($this->model->deleteForm($id[0])) {
+            $this->view->render('messages', 'Форма успешно удалена.');
+        } else {
+            $this->view->render('messages', 'Произошла ошибка при удалении.');
+        }
+    }
+
+    public function actionCreateSuccess()
+    {
+        $this->view->render('messages', 'Форма успешно создана.');
     }
 }

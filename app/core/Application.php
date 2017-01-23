@@ -1,6 +1,6 @@
 <?php
 
-class Application
+class Application extends Access
 {
     //    private $settings;
     //    protected $db;
@@ -19,10 +19,22 @@ class Application
     //            die("Не удалось подключиться к базе данных:<br>" . $e->getMessage());
     //        }
     //    }
-    
-    protected function printData($data) {
+
+    protected function printData($data)
+    {
         echo '<pre>';
         print_r($data);
         echo '</pre>';
+    }
+
+    protected function ifAJAX(callable $callback)
+    {
+        if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+            call_user_func($callback);
+            exit;
+        }
+//        return isset($_SERVER['HTTP_X_REQUESTED_WITH'])
+//            && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
+        return false;
     }
 }

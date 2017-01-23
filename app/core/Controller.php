@@ -1,6 +1,6 @@
 <?php
 
-class Controller extends Access
+class Controller extends Application
 {
     protected $model;
     protected $view;
