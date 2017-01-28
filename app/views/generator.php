@@ -10,7 +10,7 @@ $this->title = 'Генератор ключей';
 </form>
 
 <?php
-if (isset($_SESSION['keys'])) {
+if (!empty($_SESSION['keys'])) {
 ?>
 <br><br><br>
 <h3>Ключи:</h3>
@@ -27,5 +27,5 @@ if (isset($_SESSION['keys'])) {
     <label for="dbCheck">Записать в базу данных? </label><input name="dbCheck" id="dbCheck" type="checkbox"><br>
     Не выбрав ни одного пункта, ключи будут стерты <br>
     <input name="handle" type="submit" value="Замести следы">
-    <a href="keyeditor"><input type = submit name = keyeditor value="Панель ключей"></a>
+    <a href="/cabinet/keyeditor"><input name="handle" type="submit" value="Панель ключей"></a>
 </form>

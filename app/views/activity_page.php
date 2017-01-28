@@ -10,7 +10,10 @@ if (isset($this->data[0]['active_text']) && ($this->data[0]['active_text']) != '
         $matrix[$arrays_num][0] = $short_str[0];
         $matrix[$arrays_num][1] = $short_str[1];
         $matrix[$arrays_num][2] = $short_str[2];
-        $matrix[$arrays_num][3] = $short_str[3] . '<br>' . $short_str[4] . '<br>' . $short_str[5];
+        if ($short_str[3] != 'Unknown')
+            $matrix[$arrays_num][3] = $short_str[3] . '<br>' . $short_str[4] . '<br>' . $short_str[5];
+        else
+            $matrix[$arrays_num][3] = $short_str[3];
         $arrays_num++;
     }
 }

@@ -25,6 +25,21 @@ class CabinetController extends Controller
         $this->view->render('activity_page', $this->model->getinfo());
     }
 
+    public function actionShowGadgets()
+    {
+        $gadgets_page_default = $this->model->getgadgets();
+        $delete_gadget = $this->model->delete_gadget();
+
+        $viewgadgets = $gadgets_page_default;
+
+        for ($i = 0; $i <= $_SESSION['count_of_delete_buttons_for_gadgets']; $i++) {
+            if (isset($_POST["delete" . $i]))
+                $viewgadgets = $delete_gadget;
+        }
+        $this->view->render('gadgets', $viewgadgets);
+    }
+
+
     public function actionProfileEdit()
     {
         $this->model->savePersonalInfo();
