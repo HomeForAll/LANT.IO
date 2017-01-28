@@ -127,6 +127,9 @@ $this->title = 'Редактирование профиля';
             <td>
                 <input name="phonenumber" type="text" id="phonenumber" value="<?php if (isset($this->data[0]['phone_number'])) echo $this->data[0]['phone_number'] ?>">
             </td>
+            <td>
+                <?php if(!empty($_SESSION['phone_error'])) echo '<span style="color: red">Проверь!</span>' ?>
+            </td>
         </tr>
         <tr>
             <td>
@@ -440,8 +443,7 @@ $this->title = 'Редактирование профиля';
                 <a class="real_buttons" style="line-height: 30px" href="/cabinet/profile/activity">Показать активность</a>
             </td>
             <td>
-                <input class="real_buttons" style="float: left; width: 300px" type=submit name=show_all_gadgets
-                       value="Просмотр подключенных устройств">
+                <a class="real_buttons" style="line-height: 30px" href="/cabinet/profile/gadgets">Просмотр подключенных устройств</a>
             </td>
         </tr>
         <tr>

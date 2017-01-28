@@ -11,6 +11,52 @@ class CabinetModel extends Model
         $this->db = new DataBase();
     }
 
+    public function getgadgets()
+    {
+        //$_SESSION['userID'] = 1;
+        $profile_id = $_SESSION['userID'];
+
+        $stmt = $this->db->prepare("SELECT * FROM sessions WHERE id_user = $profile_id");
+        $stmt->execute();
+        $gadgets = $stmt->fetchAll();
+        $arrays_num = 0;
+        $i_max = 0;
+
+        foreach ($gadgets as $value) {
+            $i_max++;
+        }
+        $_SESSION['count_of_delete_buttons_for_gadgets'] = $i_max;
+
+        foreach ($gadgets as $key=>$value) {
+            $matrix[$key][0] = $value[3];
+            $matrix[$key][1] = $value[1];
+            $arrays_num++;
+        }
+
+        if (isset($matrix)) {
+            $_SESSION['matrix_for_gadgets'] = $matrix;
+            return $matrix;
+        }
+    }
+
+    public function delete_gadget()
+    {
+        $profile_id = $_SESSION['userID'];
+        for ($i = 0; $i <= $_SESSION['count_of_delete_buttons_for_gadgets']; $i++) {
+            if (isset($_POST["delete" . $i])) {
+                $matrix = $_SESSION['matrix_for_gadgets'][$i];
+                $stmt = $this->db->prepare("DELETE FROM sessions WHERE name_session = '{$matrix[1]}' and id_user = $profile_id");
+                $stmt->execute();
+                if ($_SESSION['matrix_for_gadgets'][$i][1] == session_id())
+                {
+                    session_destroy();
+                    header('Location: http://' . $_SERVER['HTTP_HOST']);
+                    exit;
+                }
+            }
+        }
+        return $this->getgadgets();
+    }
     public function ajaxHandler()
     {
     }
@@ -28,7 +74,6 @@ class CabinetModel extends Model
 
     public function showActivity()
     {
-
     }
 
     public function savePersonalInfo()
@@ -78,10 +123,14 @@ class CabinetModel extends Model
             if ($error_array[2] == 0)
                 $this->db->query("UPDATE users SET patronymic = '{$_POST['patronymic']}' WHERE id = $profile_id");
 
+            $_SESSION['phone_error'] = 0;
             $str = $_POST['phonenumber'];
+            $old_str = $str;
             $str = trim($str);
             $str = preg_replace("/[^0-9]/", '', $str);
             $_POST['phonenumber'] = $str;
+            if ($old_str != $str)
+                $_SESSION['phone_error'] = 1;
             $this->db->query("UPDATE users SET phone_number = '{$_POST['phonenumber']}' WHERE id = $profile_id");
 
             $month = array(
@@ -319,8 +368,18 @@ class CabinetModel extends Model
         $explodedEmails = explode("\n", $_POST['emails']);
         $emails = array();
 
+        $query = $this->db->prepare("SELECT * FROM access WHERE email_sent = :email");
         foreach ($explodedEmails as $email) {
             if (filter_var(trim($email), FILTER_VALIDATE_EMAIL)) {
+                $query->execute([
+                    ':email' => $email,
+                ]);
+
+                $result = $query->fetch();
+
+                if ($result) {
+                    continue;
+                }
                 array_push($emails, trim($email));
             } else {
                 continue;
@@ -423,6 +482,7 @@ class CabinetModel extends Model
                 $part = "ID - {$array[$id_key]['id']}" . '<br>' . "Key - {$array[$id_key]['key']}" . '<br>' . "Email - {$array[$id_key]['email']}" .
                     '<br>' . "Email_sent - {$array[$id_key]['email_sent']}" . '<br>' . "Creation_date - {$array[$id_key]['creation_date']}" .
                     '<br>' . "Inactive date - {$array[$id_key]['inactive_date']}" . '<br>';
+                $_SESSION['inactive_day'] = $array[$id_key]['inactive_date'];
 
                 $var0 = "0";
                 $var1 = "1";
@@ -467,11 +527,11 @@ class CabinetModel extends Model
                 $var = $array[$id_key]['status'];
 
                 if (strcasecmp($var, $var0) == 0)
-                    $part .= "Status - Inactive" . '<br>' . '<br>';
+                    $part .= "Status - " . '<font color=grey>' . "Inactive" . '</font>' . '<br>' . '<br>';
                 if (strcasecmp($var, $var1) == 0)
-                    $part .= "Status - Active" . '<br>' . '<br>';
+                    $part .= "Status - " . '<font color=#00FF00>' . "Active" . '</font>' . '<br>' . '<br>';
                 if (strcasecmp($var, $var2) == 0)
-                    $part .= "Status - Banned" . '<br>' . '<br>';
+                    $part .= "Status - " . '<font color=red>' . "Banned" . '</font>' . '<br>' . '<br>';
 
                 $result = $part;
                 $_SESSION['notice_id'] = $array[$id_key]['id'];
@@ -504,11 +564,11 @@ class CabinetModel extends Model
                 $var = $array[$id_key]['status'];
 
                 if (strcasecmp($var, $var0) == 0)
-                    $part .= "Status - Inactive" . '<br>' . '<br>';
+                    $part .= "Status - " . '<font color=grey>' . "Inactive" . '</font>' . '<br>' . '<br>';
                 if (strcasecmp($var, $var1) == 0)
-                    $part .= "Status - Active" . '<br>' . '<br>';
+                    $part .= "Status - " . '<font color=#00FF00>' . "Active" . '</font>' . '<br>' . '<br>';
                 if (strcasecmp($var, $var2) == 0)
-                    $part .= "Status - Banned" . '<br>' . '<br>';
+                    $part .= "Status - " . '<font color=red>' . "Banned" . '</font>' . '<br>' . '<br>';
 
                 $result = $part;
                 $_SESSION['notice_id'] = $array[$id_key]['id'];
@@ -549,32 +609,74 @@ class CabinetModel extends Model
     public function installdate()
     {
         if (isset($_POST['installdate'])) {
-            $day = $_POST['day'];
-            $month = $_POST['month'];
-            $year = $_POST['year'];
+            $day = $_POST['sel_date'];
+            $month = $_POST['sel_month'];
+            $year = $_POST['sel_year'];
             $flag = true;
-            if ($month == 1 || $month == 3 || $month == 5 || $month == 7 || $month == 8 || $month == 10 || $month == 12) {
+
+            $month = array(
+                "Январь",
+                "Февраль",
+                "Март",
+                "Апрель",
+                "Май",
+                "Июнь",
+                "Июль",
+                "Август",
+                "Сентябрь",
+                "Октябрь",
+                "Ноябрь",
+                "Декабрь");
+
+            $_POST['sel_date'] = preg_replace("/[^0-9]/", '', $_POST['sel_date']);
+            $day = $_POST['sel_date'];
+            if (($_POST['sel_date'] > 31) || ($_POST['sel_date'] < 1))
+                $flag = false;
+
+            $_POST['sel_year'] = preg_replace("/[^0-9]/", '', $_POST['sel_year']);
+            $date_year = date('Y');
+            $date_year += 10;
+            if (($_POST['sel_year'] < date('Y')) || ($_POST['sel_year'] > $date_year))
+                $flag = false;
+
+            $month_num = 0;
+            for ($i = 0; $i < 12; $i++) {
+                $var1 = $_POST['sel_month'];
+                $var2 = $month[$i];
+                if (strcasecmp($var1, $var2) == 0) {
+                    $_POST['sel_month'] = $i + 1;
+                    $month_num = $i + 1;
+                    break;
+                } else {
+                    if ($i == 12) {
+                        $flag = false;
+                    }
+                }
+            }
+
+
+            if ($month_num == 1 || $month_num == 3 || $month_num == 5 || $month_num == 7 || $month_num == 8 || $month_num == 10 || $month_num == 12) {
                 if ($day > 31) {
                     $flag = false;
                 }
             }
 
-            if ($month == 4 || $month == 6 || $month == 9 || $month == 11) {
+            if ($month_num == 4 || $month_num == 6 || $month_num == 9 || $month_num == 11) {
                 if ($day > 30) {
                     $flag = false;
                 }
             }
-            if ($month == 2) {
+            if ($month_num == 2) {
                 if ($day > 28) {
                     $flag = false;
                 }
             }
-            if ($month > 12) {
+            if ($month_num > 12) {
                 $flag = false;
             }
 
             if ($flag == true) {
-                $date = "{$year}-{$month}-{$day}";
+                $date = "{$year}-{$month_num}-{$day}";
                 $this->db->query("UPDATE access SET inactive_date = '{$date}' WHERE id = {$_SESSION['id_key_keyeditor']}");
                 $result = "Срок действия ключа {$_SESSION['array_keyeditor']['key']} истекает {$date}";
                 return $result;
@@ -634,11 +736,11 @@ class CabinetModel extends Model
                     $var = $info['status'];
 
                     if (strcasecmp($var, $var0) == 0)
-                        $part .= "Status - Inactive" . '<br>' . '<br>';
+                        $part .= "Status - " . '<font color=grey>' . "Inactive" . '</font>' . '<br>' . '<br>';
                     if (strcasecmp($var, $var1) == 0)
-                        $part .= "Status - Active" . '<br>' . '<br>';
+                        $part .= "Status - " . '<font color=#00FF00>' . "Active" . '</font>' . '<br>' . '<br>';
                     if (strcasecmp($var, $var2) == 0)
-                        $part .= "Status - Banned" . '<br>' . '<br>';
+                        $part .= "Status - " . '<font color=red>' . "Banned" . '</font>' . '<br>' . '<br>';
                     $result .= $part;
                 }
                 return $result;
