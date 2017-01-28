@@ -181,13 +181,15 @@ $(document).ready(function () {
 
                 if (data.message == 'Ошибка, не все поля заполнены.') {
                     error.prepend('<pre>' + data.message + '</pre>');
-                } else {
+                } else if (data.message == 'Параметры сохранены.') {
                     error.html('<pre>' + data.message + '</pre>');
                     container.html('');
                     save_btn.css({
                         display: 'none'
                     });
                     updateFormParams(data.data);
+                } else {
+                    error.html('<pre>' + data.message + '</pre>');
                 }
             },
             error: function (xhr, str) {
@@ -330,13 +332,29 @@ $(document).ready(function () {
             success: function (data) {
                 data = JSON.parse(data);
 
+                categoriesJSON = data.categories;
+
+                $('#subcategories select').each(function (index, el) {
+                    el.innerHTML = '';
+
+                    categoriesJSON.forEach(function (category) {
+                        var option = document.createElement('option');
+
+                        option.setAttribute('value', category['id']);
+                        option.innerHTML = category['r_name'];
+
+                        el.append(option);
+                    });
+                });
+
                 if (data.message == 'Категории сохранены.') {
                     messages.html('<pre>' + data.message + '</pre>');
+
                     form.html('');
                 } else if (data.message == 'Ошибка, не все поля заполнены.') {
                     messages.html('<pre>' + data.message + '</pre>');
                 } else {
-                    messages.html('<pre>Ошибка, информация в консоли.</pre>');
+                    messages.html('<pre>' + data.message + '</pre>');
                 }
 
             },
@@ -357,23 +375,46 @@ $(document).ready(function () {
             eng_input = document.createElement('input'),
             hidden_input = document.createElement('input'),
             messages = $('.messages'),
-            id = 'id' + Math.floor(Date.now());
+            deleteBtn = document.createElement('a'),
+            id = 'id' + Math.floor(Date.now()),
+            categorySelect = document.createElement('select'),
+            categoryLabel = document.createElement('label');
+
+
+        categoryLabel.setAttribute('for', id + 2);
+        categoryLabel.innerHTML = 'В какой категории (блоке) находиться:';
+        categorySelect.setAttribute('name', 'parentCategory[]');
+        categorySelect.setAttribute('id', id + 2);
+
+        categoriesJSON.forEach(function (category, key) {
+            var option = document.createElement('option');
+
+            option.setAttribute('value', category['id']);
+            option.innerHTML = category['r_name'];
+
+            categorySelect.append(option);
+        });
+
+        deleteBtn.setAttribute('href', '#');
+        deleteBtn.setAttribute('class', 'deleteSubcategory button');
+        deleteBtn.setAttribute('style', 'position: absolute; top: 10px; right: 10px;');
+        deleteBtn.innerHTML = "Удалить";
 
         messages.html('');
 
         ru_label.setAttribute('for', id);
         eng_label.setAttribute('for', id + 1);
 
-        ru_label.innerHTML = 'Название категории на русском:';
-        eng_label.innerHTML = 'Название категории на английском:';
+        ru_label.innerHTML = 'Название подкатегории на русском:';
+        eng_label.innerHTML = 'Название подкатегории на английском:';
 
         ru_input.setAttribute('type', 'text');
         ru_input.setAttribute('id', id);
-        ru_input.setAttribute('name', 'categoriesRu[]');
+        ru_input.setAttribute('name', 'subcategoriesRu[]');
 
         eng_input.setAttribute('type', 'text');
         eng_input.setAttribute('id', id + 1);
-        eng_input.setAttribute('name', 'categoriesEng[]');
+        eng_input.setAttribute('name', 'subcategoriesEng[]');
 
         hidden_input.setAttribute('type', 'hidden');
         hidden_input.setAttribute('name', 'formID');
@@ -383,9 +424,9 @@ $(document).ready(function () {
             var a = document.createElement('a');
 
             a.setAttribute('href', '#');
-            a.setAttribute('id', 'saveCategories');
+            a.setAttribute('id', 'saveSubcategories');
             a.setAttribute('class', 'button');
-            a.innerHTML = 'Сохранить категории';
+            a.innerHTML = 'Сохранить подкатегории';
 
             form.append(hidden_input);
             form.append(a);
@@ -393,17 +434,105 @@ $(document).ready(function () {
 
         box.setAttribute('class', 'box');
 
+        box.append(deleteBtn);
         box.append(ru_label);
         box.append(ru_input);
         box.append(eng_label);
         box.append(eng_input);
+        box.append(categoryLabel);
+        box.append(categorySelect);
 
         form.prepend(box);
 
         event.preventDefault();
     });
+
+    var subcategories = $('#subcategories');
+
+    subcategories.on('click', '.deleteSubcategory', function (event) {
+
+        $('.messages').html('');
+
+        $(this).parent().remove();
+
+        if ($('#subcategories .box').length == 0) {
+            subcategories.html('');
+        }
+
+        event.preventDefault();
+    });
+
+    subcategories.on('click', '#saveSubcategories', function (event) {
+        var form = $('#subcategories'),
+            formData = form.serialize(),
+            messages = $('.messages');
+
+        $.ajax({
+            type: 'POST',
+            url: '/cabinet/form/edit/id/' + formId,
+            data: formData + '&action=saveSubcategories',
+            success: function (data) {
+                data = JSON.parse(data);
+
+                if (data.message == 'Подкатегории сохранены.') {
+                    messages.html('<pre>' + data.message + '</pre>');
+                    form.html('');
+                } else if (data.message == 'Ошибка, не все поля заполнены.') {
+                    messages.html('<pre>' + data.message + '</pre>');
+                } else {
+                    messages.html('<pre>' + data.message + '</pre>');
+                }
+
+            },
+            error: function (xhr, str) {
+                console.log(xhr);
+            }
+        });
+
+        event.preventDefault();
+    });
+
+    $('table').on('click', '.categoryDelButton', function (event) {
+        var button = this.id,
+            form = $('#subcategories'),
+            formData = form.serialize(),
+            messages = $('.messages');
+
+        $.ajax({
+            type: 'POST',
+            url: '/cabinet/form/edit/id/' + formId,
+            data: 'action=delCategory&id=' + button + '&formID=' + formId,
+            success: function (data) {
+                data = JSON.parse(data);
+
+                if (data.message == 'Удаление прошло успешно.') {
+                    messages.html('<pre>' + data.message + '</pre>');
+                    updateCategory();
+                    form.html('');
+                } else if (data.message == 'Возникла ошибка при удалении.') {
+                    messages.html('<pre>' + data.message + '</pre>');
+                } else {
+                    messages.html('<pre>' + data.message + '</pre>');
+                }
+            },
+            error: function (xhr, str) {
+                console.log(xhr);
+            }
+        });
+
+        event.preventDefault();
+    });
 });
 
+function updateCategory() {
+    $('#categoriesTable tr').each(function (index, el) {
+        if (!(this.id == 'need')){
+            el.remove();
+        }
+    });
+
+    // TODO: Дописать обновление категорий
+}
 
 function updateFormParams(data) {
     var spaceTypes = $('#spaceType'),

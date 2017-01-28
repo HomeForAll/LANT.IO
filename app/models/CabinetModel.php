@@ -27,7 +27,7 @@ class CabinetModel extends Model
         }
         $_SESSION['count_of_delete_buttons_for_gadgets'] = $i_max;
 
-        foreach ($gadgets as $key=>$value) {
+        foreach ($gadgets as $key => $value) {
             $matrix[$key][0] = $value[3];
             $matrix[$key][1] = $value[1];
             $arrays_num++;
@@ -47,8 +47,7 @@ class CabinetModel extends Model
                 $matrix = $_SESSION['matrix_for_gadgets'][$i];
                 $stmt = $this->db->prepare("DELETE FROM sessions WHERE name_session = '{$matrix[1]}' and id_user = $profile_id");
                 $stmt->execute();
-                if ($_SESSION['matrix_for_gadgets'][$i][1] == session_id())
-                {
+                if ($_SESSION['matrix_for_gadgets'][$i][1] == session_id()) {
                     session_destroy();
                     header('Location: http://' . $_SERVER['HTTP_HOST']);
                     exit;
@@ -57,6 +56,7 @@ class CabinetModel extends Model
         }
         return $this->getgadgets();
     }
+
     public function ajaxHandler()
     {
     }
@@ -832,26 +832,98 @@ class CabinetModel extends Model
                     $operationTypesQuery = $this->db->prepare("INSERT INTO form_operation_types (r_name, e_name) VALUES (:r_name, :e_name)");
                     $objectTypesQuery = $this->db->prepare("INSERT INTO form_object_types (r_name, e_name) VALUES (:r_name, :e_name)");
 
+                    $answer['data'] = $this->getFormParams();
+
+                    $messages = '';
+
                     if (isset($_POST['inputSpaceTypeRu'])) {
                         foreach ($_POST['inputSpaceTypeRu'] as $key => $value) {
-                            $spaceTypesQuery->execute([':r_name' => $value, ':e_name' => $_POST['inputSpaceTypeEng'][$key]]);
+                            $data = array(
+                                'ru' => $value,
+                                'eng' => $_POST['inputSpaceTypeEng'][$key],
+                                'messages' => &$messages,
+                            );
+
+                            array_walk($answer['data']['spaceTypes'], function ($spaceType, $k, $data) {
+                                if ($spaceType['r_name'] == $data['ru']) {
+                                    $data['messages'] .= "Тип площади: <span style='color: red;'>'" . $data['ru'] . "'</span> уже существует. \n";
+                                }
+
+                                if ($spaceType['e_name'] == $data['eng']) {
+                                    $data['messages'] .= "Тип площади: <span style='color: red;'>'" . $data['eng'] . "'</span> уже существует. \n";
+                                }
+                            }, $data);
+
+                            $messages = $data['messages'];
                         }
                     }
 
                     if (isset($_POST['inputOperationTypeRu'])) {
                         foreach ($_POST['inputOperationTypeRu'] as $key => $value) {
-                            $operationTypesQuery->execute([':r_name' => $value, ':e_name' => $_POST['inputOperationTypeEng'][$key]]);
+                            $data = array(
+                                'ru' => $value,
+                                'eng' => $_POST['inputOperationTypeEng'][$key],
+                                'messages' => &$messages,
+                            );
+
+                            array_walk($answer['data']['operationTypes'], function ($operationType, $k, $data) {
+                                if ($operationType['r_name'] == $data['ru']) {
+                                    $data['messages'] .= "Тип операции: <span style='color: red;'>'" . $data['ru'] . "'</span> уже существует. \n";
+                                }
+
+                                if ($operationType['e_name'] == $data['eng']) {
+                                    $data['messages'] .= "Тип операции: <span style='color: red;'>'" . $data['eng'] . "'</span> уже существует. \n";
+                                }
+                            }, $data);
+
+                            $messages = $data['messages'];
                         }
                     }
 
                     if (isset($_POST['inputObjectTypeRu'])) {
                         foreach ($_POST['inputObjectTypeRu'] as $key => $value) {
-                            $objectTypesQuery->execute([':r_name' => $value, ':e_name' => $_POST['inputObjectTypeEng'][$key]]);
+                            $data = array(
+                                'ru' => $value,
+                                'eng' => $_POST['inputObjectTypeEng'][$key],
+                                'messages' => &$messages,
+                            );
+
+                            array_walk($answer['data']['objectTypes'], function ($objectType, $k, $data) {
+                                if ($objectType['r_name'] == $data['ru']) {
+                                    $data['messages'] .= "Тип площади: <span style='color: red;'>'" . $data['ru'] . "'</span> уже существует. \n";
+                                }
+
+                                if ($objectType['e_name'] == $data['eng']) {
+                                    $data['messages'] .= "Тип площади: <span style='color: red;'>'" . $data['eng'] . "'</span> уже существует. \n";
+                                }
+                            }, $data);
+
+                            $messages = $data['messages'];
                         }
                     }
 
-                    $answer['data'] = $this->getFormParams();
-                    $answer['message'] = 'Параметры сохранены.';
+                    if ($messages) {
+                        $answer['message'] = $messages;
+                    } else {
+                        if (isset($_POST['inputSpaceTypeRu'])) {
+                            foreach ($_POST['inputSpaceTypeRu'] as $key => $value) {
+                                $spaceTypesQuery->execute([':r_name' => $value, ':e_name' => $_POST['inputSpaceTypeEng'][$key]]);
+                            }
+                        }
+
+                        if (isset($_POST['inputOperationTypeRu'])) {
+                            foreach ($_POST['inputOperationTypeRu'] as $key => $value) {
+                                $operationTypesQuery->execute([':r_name' => $value, ':e_name' => $_POST['inputOperationTypeEng'][$key]]);
+                            }
+                        }
+
+                        if (isset($_POST['inputObjectTypeRu'])) {
+                            foreach ($_POST['inputObjectTypeRu'] as $key => $value) {
+                                $objectTypesQuery->execute([':r_name' => $value, ':e_name' => $_POST['inputObjectTypeEng'][$key]]);
+                            }
+                        }
+                        $answer['message'] = 'Параметры сохранены.';
+                    }
                 } else {
                     $answer['message'] = 'Ошибка, не все поля заполнены.';
                 }
@@ -889,21 +961,110 @@ class CabinetModel extends Model
                 if ($this->checkEmptyPOSTElements()) {
                     $query = $this->db->prepare("INSERT INTO form_categories (r_name, e_name, form_id) VALUES (:r_name, :e_name, :form_id)");
 
+                    $answer['categories'] = $this->getCategories($_POST['formID']);
+                    $messages = '';
+
                     if (isset($_POST['categoriesRu'])) {
                         foreach ($_POST['categoriesRu'] as $key => $value) {
-                            $query->execute([':r_name' => $value, ':e_name' => $_POST['categoriesEng'][$key], ':form_id' => $_POST['formID']]);
+                            $data = array(
+                                'ru' => $value,
+                                'eng' => $_POST['categoriesEng'][$key],
+                                'messages' => &$messages,
+                            );
+
+                            array_walk($answer['categories'], function ($category, $k, $data) {
+                                if ($category['r_name'] == $data['ru']) {
+                                    $data['messages'] .= "Категория: <span style='color: red;'>'" . $data['ru'] . "'</span> уже существует. \n";
+                                }
+
+                                if ($category['e_name'] == $data['eng']) {
+                                    $data['messages'] .= "Категория: <span style='color: red;'>'" . $data['eng'] . "'</span> уже существует. \n";
+                                }
+                            }, $data);
+
+                            $messages = $data['messages'];
                         }
                     }
 
+                    if ($messages) {
+                        $answer['message'] = $messages;
+                    } else {
+                        if (isset($_POST['categoriesRu'])) {
+                            foreach ($_POST['categoriesRu'] as $key => $value) {
+                                $query->execute([':r_name' => $value, ':e_name' => $_POST['categoriesEng'][$key], ':form_id' => $_POST['formID']]);
+                            }
+                        }
+                        $answer['message'] = 'Категории сохранены.';
+                    }
+
                     $answer['data'] = $this->getFormParams();
-                    $answer['message'] = 'Категории сохранены.';
+                    $answer['categories'] = $this->getCategories($_POST['formID']);
                 } else {
                     $answer['message'] = 'Ошибка, не все поля заполнены.';
                 }
                 break;
+            case 'saveSubcategories':
+                if ($this->checkEmptyPOSTElements()) {
+                    $query = $this->db->prepare("INSERT INTO form_subcategories (r_name, e_name, category_id, form_id) VALUES (:r_name, :e_name, :category_id, :form_id)");
+
+                    $answer['subcategories'] = $this->getSubcategories($_POST['formID']);
+                    $messages = '';
+
+                    if (isset($_POST['subcategoriesRu'])) {
+                        foreach ($_POST['subcategoriesRu'] as $key => $value) {
+                            $data = array(
+                                'ru' => $value,
+                                'eng' => $_POST['subcategoriesEng'][$key],
+                                'messages' => &$messages,
+                            );
+
+                            array_walk($answer['subcategories'], function ($subcategory, $k, $data) {
+                                if ($subcategory['r_name'] == $data['ru']) {
+                                    $data['messages'] .= "Подкатегория: <span style='color: red;'>'" . $data['ru'] . "'</span> уже существует. \n";
+                                }
+
+                                if ($subcategory['e_name'] == $data['eng']) {
+                                    $data['messages'] .= "Подкатегория: <span style='color: red;'>'" . $data['eng'] . "'</span> уже существует. \n";
+                                }
+                            }, $data);
+
+                            $messages = $data['messages'];
+                        }
+                    }
+
+                    if ($messages) {
+                        $answer['message'] = $messages;
+                    } else {
+                        if (isset($_POST['subcategoriesRu'])) {
+                            foreach ($_POST['subcategoriesRu'] as $key => $value) {
+                                $query->execute([':r_name' => $value, ':e_name' => $_POST['subcategoriesEng'][$key], ':category_id' => $_POST['parentCategory'][$key], ':form_id' => $_POST['formID']]);
+                            }
+                        }
+                        $answer['message'] = 'Категории сохранены.';
+                    }
+
+                    $answer['data'] = $this->getFormParams();
+                } else {
+                    $answer['message'] = 'Ошибка, не все поля заполнены.';
+                }
+                break;
+            case 'delCategory': // Удаление категорий
+                $data = explode('_', $_POST['id']);
+                $id = $data[1];
+
+                $query = $this->db->prepare("DELETE FROM form_categories WHERE id = :id");
+                $query->execute([':id' => $id]);
+
+                if ($query->rowCount()) {
+                    $answer['data'] = $this->getCategories($_POST['formID']);
+                    $answer['message'] = 'Удаление прошло успешно.';
+                } else {
+                    $answer['message'] = 'Возникла ошибка при удалении.';
+                }
+                break;
         }
 
-        echo json_encode($answer, JSON_UNESCAPED_UNICODE);;
+        echo json_encode($answer, JSON_UNESCAPED_UNICODE);
     }
 
     private function checkEmptyPOSTElements()
@@ -934,10 +1095,15 @@ class CabinetModel extends Model
 
     public function getFormData($id)
     {
+        $categories = $this->getCategories($id);
+
         return array(
             'id' => $id,
             'form' => $this->getForm($id),
             'formParams' => $this->getFormParams(),
+            'categories' => $categories,
+            'categoriesJSON' => json_encode($categories, JSON_UNESCAPED_UNICODE),
+            'subcategories' => $this->getSubcategories($id),
         );
     }
 
@@ -945,6 +1111,22 @@ class CabinetModel extends Model
     {
         $query = $this->db->prepare("SELECT * FROM form_space_types");
         $query->execute();
+
+        return $query->fetchAll();
+    }
+
+    private function getCategories($formID)
+    {
+        $query = $this->db->prepare("SELECT * FROM form_categories WHERE form_id = :form_id");
+        $query->execute([':form_id' => $formID]);
+
+        return $query->fetchAll();
+    }
+
+    private function getSubcategories($formID)
+    {
+        $query = $this->db->prepare("SELECT * FROM form_subcategories WHERE form_id = :form_id");
+        $query->execute([':form_id' => $formID]);
 
         return $query->fetchAll();
     }

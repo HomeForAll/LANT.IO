@@ -1,5 +1,6 @@
 <script>
     var formId = <?php echo $this->data['id']; ?>;
+    var categoriesJSON = <?php echo $this->data['categoriesJSON']; ?>;
 </script>
 
 <style>
@@ -89,3 +90,51 @@
 <div class="currentData">
 
 </div>
+
+<table id="categoriesTable">
+    <tr id="need">
+        <th colspan="3">Категории (блоки)</th>
+    </tr>
+    <tr id="need">
+        <th>Название на русском</th>
+        <th>Название на английском</th>
+        <th>Действие</th>
+    </tr>
+    <?php
+    foreach ($this->data['categories'] as $category) {
+        ?>
+        <tr>
+            <td><?php echo $category['r_name']; ?></td>
+            <td><?php echo $category['e_name']; ?></td>
+            <td>
+                <a id="#category_<?php echo $category['id']; ?>" style="margin: 0;" class="button categoryDelButton" href="#">Удалить</a>
+            </td>
+        </tr>
+        <?php
+    }
+    ?>
+</table>
+
+<table>
+    <tr>
+        <th colspan="3">Подкатегории</th>
+    </tr>
+    <tr>
+        <th>Название на русском</th>
+        <th>Название на английском</th>
+        <th>Действие</th>
+    </tr>
+    <?php
+    foreach ($this->data['subcategories'] as $subcategory) {
+        ?>
+        <tr>
+            <td><?php echo $subcategory['r_name']; ?></td>
+            <td><?php echo $subcategory['e_name']; ?></td>
+            <td>
+                <a id="#subcategory_<?php echo $subcategory['id']; ?>" style="margin: 0;" class="button subcategoryDelButton" href="#">Удалить</a>
+            </td>
+        </tr>
+        <?php
+    }
+    ?>
+</table>
