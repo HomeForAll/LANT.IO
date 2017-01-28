@@ -72,13 +72,17 @@ class CabinetController extends Controller
 
     public function actionEditForm($id)
     {
-        $this->view->render('edit_form', $id);
+        $this->ifAJAX(function () {
+            $this->model->handleFormParams();
+        });
+
+        $this->view->render('edit_form', $this->model->getFormData($id[0]));
     }
 
     public function actionCreateForm()
     {
         $this->ifAJAX(function () {
-            $this->model->createFormParams();
+            $this->model->handleFormParams();
         });
 
         if (isset($_POST['submit'])) {

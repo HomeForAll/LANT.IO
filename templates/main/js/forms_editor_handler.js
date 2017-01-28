@@ -170,15 +170,12 @@ $(document).ready(function () {
     save_btn.click(function (event) {
         var container = $('.params'),
             msg = $('form').serialize(),
-            error = $('.msg'),
-            spaceTypes = $('#spaceType'),
-            operationTypes = $('#operationType'),
-            objectTypes = $('#objectType');
+            error = $('.msg');
 
         $.ajax({
             type: 'POST',
             url: '/cabinet/form/new',
-            data: msg,
+            data: msg + '&action=saveParams',
             success: function (data) {
                 data = JSON.parse(data);
 
@@ -190,30 +187,7 @@ $(document).ready(function () {
                     save_btn.css({
                         display: 'none'
                     });
-
-                    spaceTypes.html('');
-                    data.data.spaceTypes.forEach(function (element) {
-                        var optionEl = document.createElement('option');
-                        optionEl.setAttribute('value', element.id);
-                        optionEl.innerHTML = element.r_name;
-                        spaceTypes.append(optionEl);
-                    });
-
-                    operationTypes.html('');
-                    data.data.operationTypes.forEach(function (element) {
-                        var optionEl = document.createElement('option');
-                        optionEl.setAttribute('value', element.id);
-                        optionEl.innerHTML = element.r_name;
-                        operationTypes.append(optionEl);
-                    });
-
-                    objectTypes.html('');
-                    data.data.objectTypes.forEach(function (element) {
-                        var optionEl = document.createElement('option');
-                        optionEl.setAttribute('value', element.id);
-                        optionEl.innerHTML = element.r_name;
-                        objectTypes.append(optionEl);
-                    });
+                    updateFormParams(data.data);
                 }
             },
             error: function (xhr, str) {
@@ -227,7 +201,9 @@ $(document).ready(function () {
     $('.params').on('click', '.deleteBtn', function (event) {
         var container = $('.params');
 
-        $(this).parent().remove()
+        $('.msg').html('');
+
+        $(this).parent().remove();
 
         if (container.html() === '') {
             save_btn.css({
@@ -237,4 +213,302 @@ $(document).ready(function () {
 
         event.preventDefault();
     });
+
+    $('#paramsTable').on('click', '.deleteParam', function (event) {
+        var button = $(this);
+
+        $.ajax({
+            type: 'POST',
+            url: '/cabinet/form/new',
+            data: 'action=deleteParam&id=' + button.attr('id'),
+            success: function (data) {
+                data = JSON.parse(data);
+
+                button.parent().parent().remove();
+                updateFormParams(data.data)
+            },
+            error: function (xhr, str) {
+                console.log(xhr);
+            }
+        });
+        event.preventDefault();
+    });
+
+    /**
+     * Создает label`ы, input`ы и помещает их в #categories, параллельно удаляет все из сообщений .messages
+     */
+    $('#addCategory').on('click', function (event) {
+        var form = $('#categories'),
+            box = document.createElement('div'),
+            ru_label = document.createElement('label'),
+            eng_label = document.createElement('label'),
+            ru_input = document.createElement('input'),
+            eng_input = document.createElement('input'),
+            hidden_input = document.createElement('input'),
+            messages = $('.messages'),
+            deleteBtn = document.createElement('a'),
+            id = 'id' + Math.floor(Date.now());
+
+        messages.html('');
+
+        deleteBtn.setAttribute('href', '#');
+        deleteBtn.setAttribute('class', 'deleteCategory button');
+        deleteBtn.setAttribute('style', 'position: absolute; top: 10px; right: 10px;');
+        deleteBtn.innerHTML = "Удалить";
+
+        box.append(deleteBtn);
+
+        ru_label.setAttribute('for', id);
+        eng_label.setAttribute('for', id + 1);
+
+        ru_label.innerHTML = 'Название категории на русском:';
+        eng_label.innerHTML = 'Название категории на английском:';
+
+        ru_input.setAttribute('type', 'text');
+        ru_input.setAttribute('id', id);
+        ru_input.setAttribute('name', 'categoriesRu[]');
+
+        eng_input.setAttribute('type', 'text');
+        eng_input.setAttribute('id', id + 1);
+        eng_input.setAttribute('name', 'categoriesEng[]');
+
+        hidden_input.setAttribute('type', 'hidden');
+        hidden_input.setAttribute('name', 'formID');
+        hidden_input.setAttribute('value', formId);
+
+        if (form.html() === '') {
+            var a = document.createElement('a');
+
+            a.setAttribute('href', '#');
+            a.setAttribute('id', 'saveCategories');
+            a.setAttribute('class', 'button');
+            a.innerHTML = 'Сохранить категории';
+
+            form.append(hidden_input);
+            form.append(a);
+        }
+
+        box.setAttribute('class', 'box');
+
+        box.append(ru_label);
+        box.append(ru_input);
+        box.append(eng_label);
+        box.append(eng_input);
+
+        form.prepend(box);
+
+        event.preventDefault();
+    });
+
+    var categories = $('#categories');
+
+    categories.on('click', '.deleteCategory', function (event) {
+
+        $('.messages').html('');
+
+        $(this).parent().remove();
+
+        if ($('#categories .box').length == 0) {
+            categories.html('');
+        }
+
+        event.preventDefault();
+    });
+
+    /**
+     * Выполняет AJAX запрос на /cabinet/form/edit/id/formID с данными формы категорий
+     */
+    categories.on('click', '#saveCategories', function (event) {
+        var form = $('#categories'),
+            formData = form.serialize(),
+            messages = $('.messages');
+
+        $.ajax({
+            type: 'POST',
+            url: '/cabinet/form/edit/id/' + formId,
+            data: formData + '&action=saveCategories',
+            success: function (data) {
+                data = JSON.parse(data);
+
+                if (data.message == 'Категории сохранены.') {
+                    messages.html('<pre>' + data.message + '</pre>');
+                    form.html('');
+                } else if (data.message == 'Ошибка, не все поля заполнены.') {
+                    messages.html('<pre>' + data.message + '</pre>');
+                } else {
+                    messages.html('<pre>Ошибка, информация в консоли.</pre>');
+                }
+
+            },
+            error: function (xhr, str) {
+                console.log(xhr);
+            }
+        });
+
+        event.preventDefault();
+    });
+
+    $('#addSubcategory').on('click', function (event) {
+        var form = $('#subcategories'),
+            box = document.createElement('div'),
+            ru_label = document.createElement('label'),
+            eng_label = document.createElement('label'),
+            ru_input = document.createElement('input'),
+            eng_input = document.createElement('input'),
+            hidden_input = document.createElement('input'),
+            messages = $('.messages'),
+            id = 'id' + Math.floor(Date.now());
+
+        messages.html('');
+
+        ru_label.setAttribute('for', id);
+        eng_label.setAttribute('for', id + 1);
+
+        ru_label.innerHTML = 'Название категории на русском:';
+        eng_label.innerHTML = 'Название категории на английском:';
+
+        ru_input.setAttribute('type', 'text');
+        ru_input.setAttribute('id', id);
+        ru_input.setAttribute('name', 'categoriesRu[]');
+
+        eng_input.setAttribute('type', 'text');
+        eng_input.setAttribute('id', id + 1);
+        eng_input.setAttribute('name', 'categoriesEng[]');
+
+        hidden_input.setAttribute('type', 'hidden');
+        hidden_input.setAttribute('name', 'formID');
+        hidden_input.setAttribute('value', formId);
+
+        if (form.html() === '') {
+            var a = document.createElement('a');
+
+            a.setAttribute('href', '#');
+            a.setAttribute('id', 'saveCategories');
+            a.setAttribute('class', 'button');
+            a.innerHTML = 'Сохранить категории';
+
+            form.append(hidden_input);
+            form.append(a);
+        }
+
+        box.setAttribute('class', 'box');
+
+        box.append(ru_label);
+        box.append(ru_input);
+        box.append(eng_label);
+        box.append(eng_input);
+
+        form.prepend(box);
+
+        event.preventDefault();
+    });
 });
+
+
+function updateFormParams(data) {
+    var spaceTypes = $('#spaceType'),
+        operationTypes = $('#operationType'),
+        objectTypes = $('#objectType');
+
+    $("tr").each(function () {
+        if (!(this.id == 'tableSpaceTypes') && !(this.id == 'tableOperationTypes') && !(this.id == 'tableObjectTypes')) {
+            $(this).remove();
+        }
+    });
+
+    spaceTypes.html('');
+    data.spaceTypes.forEach(function (element) {
+        var optionEl = document.createElement('option'),
+            tr = document.createElement('tr'),
+            td1 = document.createElement('td'),
+            td2 = document.createElement('td'),
+            td3 = document.createElement('td'),
+            a = document.createElement('a');
+
+        a.setAttribute('href', '#');
+        a.setAttribute('id', 'spaceType_' + element.id);
+        a.setAttribute('class', 'button deleteParam');
+        a.setAttribute('style', 'margin:0;');
+        a.innerHTML = 'Удалить';
+
+        td1.innerHTML = element.r_name;
+        td2.innerHTML = element.e_name;
+        td3.append(a);
+
+        tr.append(td1);
+        tr.append(td2);
+        tr.append(td3);
+
+        tr.setAttribute('id', 'param');
+
+        $('#tableSpaceTypes').after(tr);
+
+        optionEl.setAttribute('value', element.id);
+        optionEl.innerHTML = element.r_name;
+        spaceTypes.append(optionEl);
+    });
+
+    operationTypes.html('');
+    data.operationTypes.forEach(function (element) {
+        var optionEl = document.createElement('option'),
+            tr = document.createElement('tr'),
+            td1 = document.createElement('td'),
+            td2 = document.createElement('td'),
+            td3 = document.createElement('td'),
+            a = document.createElement('a');
+
+        a.setAttribute('href', '#');
+        a.setAttribute('id', 'operationType_' + element.id);
+        a.setAttribute('class', 'button deleteParam');
+        a.setAttribute('style', 'margin:0;');
+        a.innerHTML = 'Удалить';
+
+        td1.innerHTML = element.r_name;
+        td2.innerHTML = element.e_name;
+        td3.append(a);
+
+        tr.append(td1);
+        tr.append(td2);
+        tr.append(td3);
+
+        tr.setAttribute('id', 'param');
+
+        $('#tableOperationTypes').after(tr);
+
+        optionEl.setAttribute('value', element.id);
+        optionEl.innerHTML = element.r_name;
+        operationTypes.append(optionEl);
+    });
+
+    objectTypes.html('');
+    data.objectTypes.forEach(function (element) {
+        var optionEl = document.createElement('option'),
+            tr = document.createElement('tr'),
+            td1 = document.createElement('td'),
+            td2 = document.createElement('td'),
+            td3 = document.createElement('td'),
+            a = document.createElement('a');
+
+        a.setAttribute('href', '#');
+        a.setAttribute('id', 'objectType_' + element.id);
+        a.setAttribute('class', 'button deleteParam');
+        a.setAttribute('style', 'margin:0;');
+        a.innerHTML = 'Удалить';
+
+        td1.innerHTML = element.r_name;
+        td2.innerHTML = element.e_name;
+        td3.append(a);
+
+        tr.append(td1);
+        tr.append(td2);
+        tr.append(td3);
+
+        tr.setAttribute('id', 'param');
+
+        $('#tableObjectTypes').after(tr);
+
+        optionEl.setAttribute('value', element.id);
+        optionEl.innerHTML = element.r_name;
+        objectTypes.append(optionEl);
+    });
+}

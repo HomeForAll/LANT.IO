@@ -719,88 +719,105 @@ class CabinetModel extends Model
 
     }
 
-    public function createFormParams()
+    public function handleFormParams()
     {
         $answer = array();
 
-        if ($this->checkEmptyElements()) {
-            $spaceTypesQuery = $this->db->prepare("INSERT INTO form_space_types (r_name, e_name) VALUES (:r_name, :e_name)");
-            $operationTypesQuery = $this->db->prepare("INSERT INTO form_operation_types (r_name, e_name) VALUES (:r_name, :e_name)");
-            $objectTypesQuery = $this->db->prepare("INSERT INTO form_object_types (r_name, e_name) VALUES (:r_name, :e_name)");
+        switch ($_POST['action']) {
+            case 'saveParams':
+                if ($this->checkEmptyPOSTElements()) {
+                    $spaceTypesQuery = $this->db->prepare("INSERT INTO form_space_types (r_name, e_name) VALUES (:r_name, :e_name)");
+                    $operationTypesQuery = $this->db->prepare("INSERT INTO form_operation_types (r_name, e_name) VALUES (:r_name, :e_name)");
+                    $objectTypesQuery = $this->db->prepare("INSERT INTO form_object_types (r_name, e_name) VALUES (:r_name, :e_name)");
 
-            if (isset($_POST['inputSpaceTypeRu'])) {
-                foreach ($_POST['inputSpaceTypeRu'] as $key => $value) {
-                    $spaceTypesQuery->execute([':r_name' => $value, ':e_name' => $_POST['inputSpaceTypeEng'][$key]]);
+                    if (isset($_POST['inputSpaceTypeRu'])) {
+                        foreach ($_POST['inputSpaceTypeRu'] as $key => $value) {
+                            $spaceTypesQuery->execute([':r_name' => $value, ':e_name' => $_POST['inputSpaceTypeEng'][$key]]);
+                        }
+                    }
+
+                    if (isset($_POST['inputOperationTypeRu'])) {
+                        foreach ($_POST['inputOperationTypeRu'] as $key => $value) {
+                            $operationTypesQuery->execute([':r_name' => $value, ':e_name' => $_POST['inputOperationTypeEng'][$key]]);
+                        }
+                    }
+
+                    if (isset($_POST['inputObjectTypeRu'])) {
+                        foreach ($_POST['inputObjectTypeRu'] as $key => $value) {
+                            $objectTypesQuery->execute([':r_name' => $value, ':e_name' => $_POST['inputObjectTypeEng'][$key]]);
+                        }
+                    }
+
+                    $answer['data'] = $this->getFormParams();
+                    $answer['message'] = 'Параметры сохранены.';
+                } else {
+                    $answer['message'] = 'Ошибка, не все поля заполнены.';
                 }
-            }
 
-            if (isset($_POST['inputOperationTypeRu'])) {
-                foreach ($_POST['inputOperationTypeRu'] as $key => $value) {
-                    $operationTypesQuery->execute([':r_name' => $value, ':e_name' => $_POST['inputOperationTypeEng'][$key]]);
+                break;
+            case 'deleteParam':
+                $data = explode('_', $_POST['id']);
+                $type = $data[0];
+                $id = $data[1];
+
+                $spaceTypesQuery = $this->db->prepare("DELETE FROM form_space_types WHERE id = :id");
+                $operationTypesQuery = $this->db->prepare("DELETE FROM form_operation_types WHERE id = :id");
+                $objectTypesQuery = $this->db->prepare("DELETE FROM form_object_types WHERE id = :id");
+
+                if ($type == 'spaceType') {
+                    $spaceTypesQuery->execute([':id' => $id]);
                 }
-            }
 
-            if (isset($_POST['inputObjectTypeRu'])) {
-                foreach ($_POST['inputObjectTypeRu'] as $key => $value) {
-                    $objectTypesQuery->execute([':r_name' => $value, ':e_name' => $_POST['inputObjectTypeEng'][$key]]);
+                if ($type == 'operationType') {
+                    $operationTypesQuery->execute([':id' => $id]);
                 }
-            }
 
-            $answer['data'] = $this->getFormParams();
-            $answer['message'] = 'Параметры сохранены.';
-        } else {
-            $answer['message'] = 'Ошибка, не все поля заполнены.';
+                if ($type == 'objectType') {
+                    $objectTypesQuery->execute([':id' => $id]);
+                }
+
+                if ($spaceTypesQuery->rowCount() || $operationTypesQuery->rowCount() || $objectTypesQuery->rowCount()) {
+                    $answer['data'] = $this->getFormParams();
+                    $answer['message'] = 'Удаление прошло успешно.';
+                } else {
+                    $answer['message'] = 'Возникла ошибка при удалении.';
+                }
+                break;
+            case 'saveCategories':
+                if ($this->checkEmptyPOSTElements()) {
+                    $query = $this->db->prepare("INSERT INTO form_categories (r_name, e_name, form_id) VALUES (:r_name, :e_name, :form_id)");
+
+                    if (isset($_POST['categoriesRu'])) {
+                        foreach ($_POST['categoriesRu'] as $key => $value) {
+                            $query->execute([':r_name' => $value, ':e_name' => $_POST['categoriesEng'][$key], ':form_id' => $_POST['formID']]);
+                        }
+                    }
+
+                    $answer['data'] = $this->getFormParams();
+                    $answer['message'] = 'Категории сохранены.';
+                } else {
+                    $answer['message'] = 'Ошибка, не все поля заполнены.';
+                }
+                break;
         }
 
-        $answer = json_encode($answer, JSON_UNESCAPED_UNICODE);
-
-        echo $answer;
+        echo json_encode($answer, JSON_UNESCAPED_UNICODE);;
     }
 
-    private function checkEmptyElements()
+    private function checkEmptyPOSTElements()
     {
-        if (isset($_POST['inputSpaceTypeRu'])) {
-            foreach ($_POST['inputSpaceTypeRu'] as $value) {
-                if (empty($value)) {
+        foreach ($_POST as $value) {
+            if (!(gettype($value) == 'array')) {
+                continue;
+            }
+
+            foreach ($value as $element) {
+                if (empty($element)) {
                     return false;
                 }
             }
         }
-        if (isset($_POST['inputSpaceTypeEng'])) {
-            foreach ($_POST['inputSpaceTypeEng'] as $value) {
-                if (empty($value)) {
-                    return false;
-                }
-            }
-        }
-        if (isset($_POST['inputOperationTypeRu'])) {
-            foreach ($_POST['inputOperationTypeRu'] as $value) {
-                if (empty($value)) {
-                    return false;
-                }
-            }
-        }
-        if (isset($_POST['inputOperationTypeEng'])) {
-            foreach ($_POST['inputOperationTypeEng'] as $value) {
-                if (empty($value)) {
-                    return false;
-                }
-            }
-        }
-        if (isset($_POST['inputObjectTypeRu'])) {
-            foreach ($_POST['inputObjectTypeRu'] as $value) {
-                if (empty($value)) {
-                    return false;
-                }
-            }
-        }
-        if (isset($_POST['inputObjectTypeEng'])) {
-            foreach ($_POST['inputObjectTypeEng'] as $value) {
-                if (empty($value)) {
-                    return false;
-                }
-            }
-        }
+
         return true;
     }
 
@@ -813,12 +830,29 @@ class CabinetModel extends Model
         );
     }
 
+    public function getFormData($id)
+    {
+        return array(
+            'id' => $id,
+            'form' => $this->getForm($id),
+            'formParams' => $this->getFormParams(),
+        );
+    }
+
     private function getSpaceTypes()
     {
         $query = $this->db->prepare("SELECT * FROM form_space_types");
         $query->execute();
 
         return $query->fetchAll();
+    }
+
+    private function getSpaceType($id)
+    {
+        $query = $this->db->prepare("SELECT * FROM form_space_types WHERE id = :id");
+        $query->execute([':id' => $id]);
+
+        return $query->fetch();
     }
 
     private function getOperationTypes()
@@ -829,11 +863,27 @@ class CabinetModel extends Model
         return $query->fetchAll();
     }
 
+    private function getOperationType($id)
+    {
+        $query = $this->db->prepare("SELECT * FROM form_operation_types WHERE id = :id");
+        $query->execute([':id' => $id]);
+
+        return $query->fetch();
+    }
+
     private function getObjectTypes()
     {
         $query = $this->db->prepare("SELECT * FROM form_object_types");
         $query->execute();
 
         return $query->fetchAll();
+    }
+
+    private function getObjectType($id)
+    {
+        $query = $this->db->prepare("SELECT * FROM form_object_types WHERE id = :id");
+        $query->execute([':id' => $id]);
+
+        return $query->fetch();
     }
 }

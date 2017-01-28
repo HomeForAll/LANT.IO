@@ -50,6 +50,23 @@
     .dNone {
         display: none;
     }
+
+    table {
+        width: 100%;
+        margin: 0 0 15px 0;
+        border: solid 1px black;
+        border-collapse: collapse;
+    }
+
+    th {
+        background: #C3CBD1;
+    }
+
+    th, td {
+        padding: 10px 15px 10px 15px;
+        border: solid 1px black;
+        text-align: center;
+    }
 </style>
 <div style="border: dotted 1px gray; padding: 15px;">
     Если нужно добавить новый параметр формы следуйте инструкции: <br><br>
@@ -113,37 +130,71 @@
     <a href="#" class="deleteBtn button" style="display: none; position: absolute; top: 10px; right: 10px;">Удалить</a>
 </form>
 
-<!--<form id="formData" action="" method="post">-->
-<!--    <label for="spaceType">Тип площади:</label>-->
-<!--    <select name="spaceTipe" id="spaceType">-->
-<!--        <option value="residential">Жилая</option>-->
-<!--        <option value="commercial">Коммерческая</option>-->
-<!--    </select>-->
-<!--    <label for="operationType">Операция:</label>-->
-<!--    <select name="operationType" id="operationType">-->
-<!--        <option value="sell">Продажа</option>-->
-<!--        <option value="rent">Аренда</option>-->
-<!--    </select>-->
-<!--    <label for="objectType">Объект:</label>-->
-<!--    <select name="objectType" id="objectType">-->
-<!--        <option value="apart">Квартира</option>-->
-<!--        <option value="room">Комната</option>-->
-<!--        <option value="house">Дом</option>-->
-<!--        <option value="garage_or_parking_place">Гараж/машиноместо</option>-->
-<!--        <option value="land">Земельный участок</option>-->
-<!--        <option value="office">Офисная площадь</option>-->
-<!--        <option value="osz">ОСЗ</option>-->
-<!--        <option value="complex_osz">Комплекс ОСЗ</option>-->
-<!--        <option value="market_or_fair">Рынок/ярмарка</option>-->
-<!--        <option value="production_and_storage_space">Производственно-складские помещения</option>-->
-<!--        <option value="production_and_storage_buildings">Производственно-складские здания</option>-->
-<!--        <option value="tour_buildings">Недвижимость для туризма и отдыха</option>-->
-<!--    </select>-->
-<!--    <a class="button" id="space_type_btn" href="#">Добавить тип площади</a>-->
-<!--    <a class="button" id="operation_type_btn" href="#">Добавить операцию</a>-->
-<!--    <a class="button" id="object_type_btn" href="#">Добавить объект</a>-->
-<!--    <input class="save_btn" type="submit" name="submit" value="Создать">-->
-<!--    <div class="msg"></div>-->
-<!--    <div class="params"></div>-->
-<!--    <a href="#" id="save_params" class="button dNone">Сохранить параметры</a>-->
-<!--</form>-->
+<table id="paramsTable">
+    <tr>
+        <th colspan="3">Текущие параметры</th>
+    </tr>
+    <tr id="tableSpaceTypes">
+        <th>Тип площади (по русски)</th>
+        <th>Тип площади (по английски)</th>
+        <th>Действие</th>
+    </tr>
+    <?php
+    if (isset($this->data['spaceTypes'])) {
+        foreach ($this->data['spaceTypes'] as $spaceType) {
+            ?>
+            <tr id="param">
+                <td><?php echo $spaceType['r_name']; ?></td>
+                <td><?php echo $spaceType['e_name']; ?></td>
+                <td>
+                    <a href="#" id="spaceType_<?php echo $spaceType['id']; ?>" class="button deleteParam"
+                       style="margin: 0;">Удалить</a>
+                </td>
+            </tr>
+            <?php
+        }
+    }
+    ?>
+    <tr id="tableOperationTypes">
+        <th>Тип операции (по русски)</th>
+        <th>Тип операции (по английски)</th>
+        <th>Действие</th>
+    </tr>
+    <?php
+    if (isset($this->data['operationTypes'])) {
+        foreach ($this->data['operationTypes'] as $operationType) {
+            ?>
+            <tr id="param">
+                <td><?php echo $operationType['r_name']; ?></td>
+                <td><?php echo $operationType['e_name']; ?></td>
+                <td>
+                    <a href="#" id="operationType_<?php echo $operationType['id']; ?>" class="button deleteParam"
+                       style="margin: 0;">Удалить</a>
+                </td>
+            </tr>
+            <?php
+        }
+    }
+    ?>
+    <tr id="tableObjectTypes">
+        <th>Тип объекта (по русски)</th>
+        <th>Тип объекта (по английски)</th>
+        <th>Действие</th>
+    </tr>
+    <?php
+    if (isset($this->data['objectTypes'])) {
+        foreach ($this->data['objectTypes'] as $objectType) {
+            ?>
+            <tr id="param">
+                <td><?php echo $objectType['r_name']; ?></td>
+                <td><?php echo $objectType['e_name']; ?></td>
+                <td>
+                    <a href="#" id="objectType_<?php echo $objectType['id']; ?>" class="button deleteParam"
+                       style="margin: 0;">Удалить</a>
+                </td>
+            </tr>
+            <?php
+        }
+    }
+    ?>
+</table>
