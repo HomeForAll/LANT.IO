@@ -251,6 +251,112 @@ class UserModel extends Model
         $str_for_active = trim($str_for_active, ';');
         $query = $this->db->prepare("UPDATE users SET active_text = :active WHERE id = :id");
         $query->execute(array(":active" => $str_for_active, ":id" => $userID));
+
+        $device = new MobileDetect;
+        $device_name = 'PC';
+
+        if ($device->isiPhone() ) {
+            $device_name = 'Iphone';
+        }
+        if ($device->isBlackBerry() ) {
+            $device_name = 'BlackBerry';
+        }
+        if ($device->isHTC() ) {
+            $device_name = 'HTC';
+        }
+        if ($device->isNexus() ) {
+            $device_name = 'Nexus';
+        }
+        if ($device->isMotorola() ) {
+            $device_name = 'Motorola';
+        }
+        if ($device->isSamsung() ) {
+            $device_name = 'Samsung';
+        }
+        if ($device->isSony() ) {
+            $device_name = 'Sony';
+        }
+        if ($device->isAsus() ) {
+            $device_name = 'Asus';
+        }
+        if ($device->isPalm() ) {
+            $device_name = 'Palm';
+        }
+        if ($device->isGenericPhone() ) {
+            $device_name = 'GenericPhone';
+        }
+        if ($device->isBlackBerryTablet() ) {
+            $device_name = 'BlackBerryTablet';
+        }
+        if ($device->isiPad() ) {
+            $device_name = 'iPad';
+        }
+        if ($device->isKindle() ) {
+            $device_name = 'Kindle';
+        }
+        if ($device->isSamsungTablet() ) {
+            $device_name = 'SamsungTablet';
+        }
+        if ($device->isHTCtablet() ) {
+            $device_name = 'HTCtablet';
+        }
+        if ($device->isMotorolaTablet() ) {
+            $device_name = 'MotorolaTablet';
+        }
+        if ($device->isAsusTablet() ) {
+            $device_name = 'AsusTablet';
+        }
+        if ($device->isNookTablet() ) {
+            $device_name = 'NookTablet';
+        }
+        if ($device->isAcerTablet() ) {
+            $device_name = 'AcerTablet';
+        }
+        if ($device->isYarvikTablet() ) {
+            $device_name = 'YarvikTablet';
+        }
+        if ($device->isGenericTablet() ) {
+            $device_name = 'GenericTablet';
+        }
+
+        $stmt = $this->db->prepare("SELECT name_session FROM sessions WHERE id_user = {$userID}");
+        $stmt->execute();
+
+        $info = $stmt->fetchAll();
+
+        if (!isset($info[0])) {
+            $name_session = session_id();
+            $stmt = $this->db->prepare("INSERT INTO sessions (name_session, id_user, device_name) VALUES (:name_session, :id_user, :device_name)");
+            $stmt->bindParam(':name_session', $name_session);
+            $stmt->bindParam(':id_user', $userID);
+            $stmt->bindParam(':device_name', $device_name);
+            $stmt->execute();
+        }
+        else
+        {
+            $i_max = 0;
+            $massiv = [];
+            foreach ($info as $value) {
+                $i_max++;
+            }
+            for ($i = 0; $i < $i_max; $i++) {
+                $massiv[$i] = $info[$i][0];
+            }
+            $flag_exist = 0;
+            $name_session = session_id();
+
+            foreach ($massiv as $value)
+                if (session_id() == $value)
+                    $flag_exist = 1;
+
+            if ($flag_exist == 0) {
+                $stmt = $this->db->prepare("INSERT INTO sessions (name_session, id_user, device_name) VALUES (:name_session, :id_user, :device_name)");
+                $stmt->bindParam(':name_session', $name_session);
+                $stmt->bindParam(':id_user', $userID);
+                $stmt->bindParam(':device_name', $device_name);
+                $stmt->execute();
+            }
+        }
     }
 
     public function saveUserData()
