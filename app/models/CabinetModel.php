@@ -1040,12 +1040,12 @@ class CabinetModel extends Model
                                 $query->execute([':r_name' => $value, ':e_name' => $_POST['subcategoriesEng'][$key], ':category_id' => $_POST['parentCategory'][$key], ':form_id' => $_POST['formID']]);
                             }
                         }
-                        $answer['message'] = 'Категории сохранены.';
+                        $answer['message'] = 'Подкатегории сохранены.';
                     }
 
                     $answer['data'] = $this->getFormParams();
                 } else {
-                    $answer['message'] = 'Ошибка, не все поля заполнены.';
+                    $answer['message'] = 'Ошибка, не все поля заполнены или не выбрана категория.';
                 }
                 break;
             case 'delCategory': // Удаление категорий

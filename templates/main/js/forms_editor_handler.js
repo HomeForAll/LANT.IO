@@ -386,14 +386,16 @@ $(document).ready(function () {
         categorySelect.setAttribute('name', 'parentCategory[]');
         categorySelect.setAttribute('id', id + 2);
 
-        categoriesJSON.forEach(function (category, key) {
-            var option = document.createElement('option');
+        if (!(typeof categoriesJSON == "undefined")) {
+            categoriesJSON.forEach(function (category, key) {
+                var option = document.createElement('option');
 
-            option.setAttribute('value', category['id']);
-            option.innerHTML = category['r_name'];
+                option.setAttribute('value', category['id']);
+                option.innerHTML = category['r_name'];
 
-            categorySelect.append(option);
-        });
+                categorySelect.append(option);
+            });
+        }
 
         deleteBtn.setAttribute('href', '#');
         deleteBtn.setAttribute('class', 'deleteSubcategory button');
@@ -507,7 +509,8 @@ $(document).ready(function () {
 
                 if (data.message == 'Удаление прошло успешно.') {
                     messages.html('<pre>' + data.message + '</pre>');
-                    updateCategory();
+                    console.log(data);
+                    updateCategory(data.data);
                     form.html('');
                 } else if (data.message == 'Возникла ошибка при удалении.') {
                     messages.html('<pre>' + data.message + '</pre>');
@@ -524,14 +527,35 @@ $(document).ready(function () {
     });
 });
 
-function updateCategory() {
+function updateCategory(categories) {
+    categoriesJSON = categories;
+
     $('#categoriesTable tr').each(function (index, el) {
         if (!(this.id == 'need')){
             el.remove();
         }
     });
 
-    // TODO: Дописать обновление категорий
+    var lastTr = $('#categoriesTable tr:last-child');
+
+    if (!(typeof categoriesJSON == "undefined")) {
+        categoriesJSON.forEach(function (category, key) {
+            var tr = document.createElement('tr'),
+                td1 = document.createElement('td'),
+                td2 = document.createElement('td'),
+                td3 = document.createElement('td');
+
+            td1.innerHTML = category.r_name;
+            td2.innerHTML = category.e_name;
+            td3.innerHTML = '123';
+
+            tr.append(td1);
+            tr.append(td2);
+            tr.append(td3);
+
+            lastTr.after(tr);
+        });
+    }
 }
 
 function updateFormParams(data) {
