@@ -165,35 +165,35 @@ $(document).ready(function () {
         container.prepend(box);
     });
 
-    var save_btn = $("#save_params");
+    var saveFormParamsBtn = $("#save_params");
 
-    save_btn.click(function (event) {
+    saveFormParamsBtn.click(function (event) {
         var container = $('.params'),
-            msg = $('form').serialize(),
-            error = $('.msg');
+            formData = $('form').serialize(),
+            message = $('.msg');
 
         $.ajax({
             type: 'POST',
             url: '/cabinet/form/new',
-            data: msg + '&action=saveParams',
+            data: formData + '&action=saveParams',
             success: function (data) {
                 data = JSON.parse(data);
 
                 if (data.message == 'Ошибка, не все поля заполнены.') {
-                    error.prepend('<pre>' + data.message + '</pre>');
+                    message.prepend('<pre>' + data.message + '</pre>');
                 } else if (data.message == 'Параметры сохранены.') {
-                    error.html('<pre>' + data.message + '</pre>');
+                    message.html('<pre>' + data.message + '</pre>');
                     container.html('');
-                    save_btn.css({
+                    saveFormParamsBtn.css({
                         display: 'none'
                     });
                     updateFormParams(data.data);
                 } else {
-                    error.html('<pre>' + data.message + '</pre>');
+                    message.html('<pre>' + data.message + '</pre>');
                 }
             },
-            error: function (xhr, str) {
-                container.html('Возникла ошибка: ' + xhr.responseCode);
+            error: function (xhr) {
+                console.log(xhr);
             }
         });
 
@@ -208,7 +208,7 @@ $(document).ready(function () {
         $(this).parent().remove();
 
         if (container.html() === '') {
-            save_btn.css({
+            saveFormParamsBtn.css({
                 display: 'none'
             });
         }
@@ -229,12 +229,15 @@ $(document).ready(function () {
                 button.parent().parent().remove();
                 updateFormParams(data.data)
             },
-            error: function (xhr, str) {
+            error: function (xhr) {
                 console.log(xhr);
             }
         });
         event.preventDefault();
     });
+
+    var categories = $('#categories');
+    var subcategories = $('#subcategories');
 
     /**
      * Создает label`ы, input`ы и помещает их в #categories, параллельно удаляет все из сообщений .messages
@@ -302,15 +305,16 @@ $(document).ready(function () {
         event.preventDefault();
     });
 
-    var categories = $('#categories');
-
+    /**
+     * Удаляет блок КАТЕГОРИИ из DOM
+     */
     categories.on('click', '.deleteCategory', function (event) {
 
         $('.messages').html('');
 
         $(this).parent().remove();
 
-        if ($('#categories .box').length == 0) {
+        if ($('#categories').find('.box').length == 0) {
             categories.html('');
         }
 
@@ -318,7 +322,7 @@ $(document).ready(function () {
     });
 
     /**
-     * Выполняет AJAX запрос на /cabinet/form/edit/id/formID с данными формы категорий
+     * Выполняет AJAX запрос на /cabinet/form/edit/id/formID с данными формы КАТЕГОРИЙ
      */
     categories.on('click', '#saveCategories', function (event) {
         var form = $('#categories'),
@@ -334,23 +338,24 @@ $(document).ready(function () {
 
                 categoriesJSON = data.categories;
 
-                $('#subcategories select').each(function (index, el) {
-                    el.innerHTML = '';
-
-                    categoriesJSON.forEach(function (category) {
-                        var option = document.createElement('option');
-
-                        option.setAttribute('value', category['id']);
-                        option.innerHTML = category['r_name'];
-
-                        el.append(option);
-                    });
-                });
-
                 if (data.message == 'Категории сохранены.') {
                     messages.html('<pre>' + data.message + '</pre>');
-
                     form.html('');
+
+                    $('#subcategories').find('select').each(function (index, el) {
+                        el.innerHTML = '';
+
+                        categoriesJSON.forEach(function (category) {
+                            var option = document.createElement('option');
+
+                            option.setAttribute('value', category['id']);
+                            option.innerHTML = category['r_name'];
+
+                            el.append(option);
+                        });
+                    });
+
+                    updateCategories(data.categories);
                 } else if (data.message == 'Ошибка, не все поля заполнены.') {
                     messages.html('<pre>' + data.message + '</pre>');
                 } else {
@@ -358,7 +363,7 @@ $(document).ready(function () {
                 }
 
             },
-            error: function (xhr, str) {
+            error: function (xhr) {
                 console.log(xhr);
             }
         });
@@ -366,6 +371,40 @@ $(document).ready(function () {
         event.preventDefault();
     });
 
+    /**
+     * Отправляем AJAX запрос на удаление КАТЕГОРИИ id="category_ID"
+     */
+    $('table').on('click', '.categoryDelButton', function (event) {
+        var categoryID = this.id,
+            messages = $('.messages');
+
+        $.ajax({
+            type: 'POST',
+            url: '/cabinet/form/edit/id/' + formId,
+            data: 'action=delCategory&id=' + categoryID + '&formID=' + formId,
+            success: function (data) {
+                data = JSON.parse(data);
+
+                if (data.message == 'Удаление прошло успешно.') {
+                    messages.html('<pre>' + data.message + '</pre>');
+                    updateCategories(data.data);
+                } else if (data.message == 'Возникла ошибка при удалении.') {
+                    messages.html('<pre>' + data.message + '</pre>');
+                } else {
+                    messages.html('<pre>' + data.message + '</pre>');
+                }
+            },
+            error: function (xhr) {
+                console.log(xhr);
+            }
+        });
+
+        event.preventDefault();
+    });
+
+    /**
+     * Добавляет блок ПОДКАТЕГОРИЯ
+     */
     $('#addSubcategory').on('click', function (event) {
         var form = $('#subcategories'),
             box = document.createElement('div'),
@@ -387,7 +426,7 @@ $(document).ready(function () {
         categorySelect.setAttribute('id', id + 2);
 
         if (!(typeof categoriesJSON == "undefined")) {
-            categoriesJSON.forEach(function (category, key) {
+            categoriesJSON.forEach(function (category) {
                 var option = document.createElement('option');
 
                 option.setAttribute('value', category['id']);
@@ -449,21 +488,25 @@ $(document).ready(function () {
         event.preventDefault();
     });
 
-    var subcategories = $('#subcategories');
-
+    /**
+     * Удаляет текущий блок ПОДКАТЕГОРИЮ
+     */
     subcategories.on('click', '.deleteSubcategory', function (event) {
 
         $('.messages').html('');
 
         $(this).parent().remove();
 
-        if ($('#subcategories .box').length == 0) {
+        if ($('#subcategories').find('.box').length == 0) {
             subcategories.html('');
         }
 
         event.preventDefault();
     });
 
+    /**
+     * Сохраняет ПОДКАТЕГОРИИ отправляя AJAX запрос
+     */
     subcategories.on('click', '#saveSubcategories', function (event) {
         var form = $('#subcategories'),
             formData = form.serialize(),
@@ -479,6 +522,7 @@ $(document).ready(function () {
                 if (data.message == 'Подкатегории сохранены.') {
                     messages.html('<pre>' + data.message + '</pre>');
                     form.html('');
+                    updateSubcategories(data.subcategories);
                 } else if (data.message == 'Ошибка, не все поля заполнены.') {
                     messages.html('<pre>' + data.message + '</pre>');
                 } else {
@@ -486,7 +530,7 @@ $(document).ready(function () {
                 }
 
             },
-            error: function (xhr, str) {
+            error: function (xhr) {
                 console.log(xhr);
             }
         });
@@ -494,60 +538,602 @@ $(document).ready(function () {
         event.preventDefault();
     });
 
-    $('table').on('click', '.categoryDelButton', function (event) {
-        var button = this.id,
-            form = $('#subcategories'),
-            formData = form.serialize(),
+    var subcategoriesTable = $('#subcategoriesTable');
+
+    /**
+     * Отправляем AJAX запрос на удаление ПОДКАТЕГОРИИ id="subcategory_ID"
+     */
+    subcategoriesTable.on('click', '.subcategoryDelButton', function (event) {
+        var subcategoryID = this.id,
             messages = $('.messages');
 
         $.ajax({
             type: 'POST',
             url: '/cabinet/form/edit/id/' + formId,
-            data: 'action=delCategory&id=' + button + '&formID=' + formId,
+            data: 'action=delSubcategory&id=' + subcategoryID + '&formID=' + formId,
             success: function (data) {
                 data = JSON.parse(data);
 
                 if (data.message == 'Удаление прошло успешно.') {
                     messages.html('<pre>' + data.message + '</pre>');
-                    console.log(data);
-                    updateCategory(data.data);
-                    form.html('');
+                    updateSubcategories(data.data);
                 } else if (data.message == 'Возникла ошибка при удалении.') {
                     messages.html('<pre>' + data.message + '</pre>');
                 } else {
                     messages.html('<pre>' + data.message + '</pre>');
                 }
             },
-            error: function (xhr, str) {
+            error: function (xhr) {
                 console.log(xhr);
             }
         });
 
         event.preventDefault();
     });
+
+    var elements = $('#elements');
+
+    /**
+     * Добавляет блок ЭЛЕМЕНТ
+     */
+    $('#addRangeElement').on('click', function (event) {
+        addRangeEl(elements);
+        event.preventDefault();
+    });
+
+    $('#addYORNElement').on('click', function (event) {
+        addYOrNEL(elements);
+        event.preventDefault();
+    });
+
+    $('#addListElement').on('click', function (event) {
+        addListEl(elements);
+        event.preventDefault();
+    });
+
+    /**
+     * Удаляем ЭЛЕМЕНТ
+     */
+    elements.on('click', '.deleteElement', function (event) {
+
+        $('.messages').html('');
+
+        $(this).parent().remove();
+
+        if (elements.find('.box').length == 0) {
+            elements.html('');
+        }
+
+        event.preventDefault();
+    });
+
+    /**
+     * Сохраняем ЭЛЕМЕНТЫ
+     */
+    elements.on('click', '#saveElems', function (event) {
+        var formData = elements.serialize(),
+            messages = $('.messages'),
+            listsOptions = [];
+
+        $('.list').each(function (i, el) {
+            listsOptions[i] = $(el).find('.options').find('.optionBox').length;
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: '/cabinet/form/edit/id/' + formId,
+            data: formData + '&action=saveElements&listOptions=' + listsOptions,
+            success: function (data) {
+                data = JSON.parse(data);
+
+                console.log(data);
+
+                // if (data.message == 'Подкатегории сохранены.') {
+                //     messages.html('<pre>' + data.message + '</pre>');
+                //     form.html('');
+                //     updateSubcategories(data.subcategories);
+                // } else if (data.message == 'Ошибка, не все поля заполнены.') {
+                //     messages.html('<pre>' + data.message + '</pre>');
+                // } else {
+                //     messages.html('<pre>' + data.message + '</pre>');
+                // }
+            },
+            error: function (xhr) {
+                console.log(xhr);
+            }
+        });
+
+        event.preventDefault();
+    });
+
+    elements.on('click', '.addOptionInBox', function (event) {
+        var options = $(this).parent().find('.options');
+        addOption(options);
+        event.preventDefault();
+    });
 });
 
-function updateCategory(categories) {
-    categoriesJSON = categories;
+/**
+ * Добавляет элемент Да/Нет
+ * @param elements
+ */
+function addYOrNEL(elements) {
+    var box = document.createElement('div'),
+        categoryLabel = document.createElement('label'),
+        category = document.createElement('select'),
 
-    $('#categoriesTable tr').each(function (index, el) {
-        if (!(this.id == 'need')){
+        subcategoryLabel = document.createElement('label'),
+        subcategory = document.createElement('select'),
+
+        ru_label = document.createElement('label'),
+        eng_label = document.createElement('label'),
+
+        ru_input = document.createElement('input'),
+        eng_input = document.createElement('input'),
+
+        yValueLabel = document.createElement('label'),
+        nValueLabel = document.createElement('label'),
+
+        yValue = document.createElement('input'),
+        nValue = document.createElement('input'),
+
+        hidden_input = document.createElement('input'),
+
+        messages = $('.messages'),
+        deleteBtn = document.createElement('a'),
+        id = 'id' + Math.floor(Date.now()),
+        h2 = document.createElement('h2');
+
+    h2.innerHTML = 'Элемент [Да/Нет]';
+    h2.setAttribute('style','padding-bottom: 15px;');
+
+    categoryLabel.setAttribute('for', id + 5);
+    categoryLabel.innerHTML = 'Категория (блок):';
+    category.setAttribute('name', 'YORNElementCategory[]');
+    category.setAttribute('id', id + 5);
+
+    yValueLabel.setAttribute('for', '1');
+    yValueLabel.innerHTML = 'Значение ДА на русском:';
+    yValue.setAttribute('type', 'text');
+    yValue.setAttribute('id', id + 1);
+    yValue.setAttribute('name', 'YORNElementYesValue[]');
+
+    nValueLabel.setAttribute('for', '1');
+    nValueLabel.innerHTML = 'Значение НЕТ на русском:';
+    nValue.setAttribute('type', 'text');
+    nValue.setAttribute('id', id + 1);
+    nValue.setAttribute('name', 'YORNElementNoValue[]');
+
+    box.setAttribute('class', 'box');
+
+    subcategoryLabel.setAttribute('for', id + 2);
+    subcategoryLabel.innerHTML = 'Подкатегория (если поле пустое, будет использоваться Категория [блок])::';
+    subcategory.setAttribute('name', 'YORNElementSubcategory[]');
+    subcategory.setAttribute('id', id + 2);
+
+    if (!(typeof categoriesJSON == "undefined")) {
+        categoriesJSON.forEach(function (categoryEl) {
+            var option = document.createElement('option');
+
+            option.setAttribute('value', categoryEl['id']);
+            option.innerHTML = categoryEl['r_name'];
+
+            category.append(option);
+        });
+    }
+
+    if (!(typeof subcategoriesJSON == "undefined")) {
+        subcategoriesJSON.forEach(function (subcategoryEl) {
+            var option = document.createElement('option');
+
+            option.setAttribute('value', subcategoryEl['id']);
+            option.innerHTML = subcategoryEl['r_name'];
+
+            subcategory.append(option);
+        });
+    }
+
+    ru_label.setAttribute('for', id + 3);
+    ru_label.innerHTML = 'Название элемента на русском:';
+    ru_input.setAttribute('type', 'text');
+    ru_input.setAttribute('id', id + 3);
+    ru_input.setAttribute('name', 'YORNRName[]');
+
+    eng_label.setAttribute('for', id + 4);
+    eng_label.innerHTML = 'Название элемента на английском:';
+    eng_input.setAttribute('type', 'text');
+    eng_input.setAttribute('id', id + 4);
+    eng_input.setAttribute('name', 'YORNEName[]');
+
+    hidden_input.setAttribute('type', 'hidden');
+    hidden_input.setAttribute('name', 'formID');
+    hidden_input.setAttribute('value', formId);
+
+    deleteBtn.setAttribute('href', '#');
+    deleteBtn.setAttribute('class', 'deleteElement button');
+    deleteBtn.setAttribute('style', 'position: absolute; top: 10px; right: 10px;');
+    deleteBtn.innerHTML = "Удалить";
+
+    messages.html('');
+
+    if (elements.html() === '') {
+        var a = document.createElement('a');
+
+        a.setAttribute('href', '#');
+        a.setAttribute('id', 'saveElems');
+        a.setAttribute('class', 'button');
+        a.innerHTML = 'Сохранить элементы';
+
+        elements.append(hidden_input);
+        elements.append(a);
+    }
+
+    box.append(deleteBtn);
+    box.append(h2);
+    box.append(categoryLabel);
+    box.append(category);
+    box.append(subcategoryLabel);
+    box.append(subcategory);
+    box.append(ru_label);
+    box.append(ru_input);
+    box.append(eng_label);
+    box.append(eng_input);
+    box.append(yValueLabel);
+    box.append(yValue);
+    box.append(nValueLabel);
+    box.append(nValue);
+
+    elements.prepend(box);
+}
+
+/**
+ * Добавляет элемент От - До
+ * @param elements
+ */
+function addRangeEl(elements) {
+    var box = document.createElement('div'),
+
+        categoryLabel = document.createElement('label'),
+        category = document.createElement('select'),
+
+        subcategoryLabel = document.createElement('label'),
+        subcategory = document.createElement('select'),
+
+        ru_label = document.createElement('label'),
+        eng_label = document.createElement('label'),
+
+        ru_input = document.createElement('input'),
+        eng_input = document.createElement('input'),
+
+        hidden_input = document.createElement('input'),
+        messages = $('.messages'),
+
+        deleteBtn = document.createElement('a'),
+        id = 'id' + Math.floor(Date.now()),
+        h2 = document.createElement('h2');
+
+    box.setAttribute('class', 'box');
+
+    h2.innerHTML = 'Элемент [От-До]';
+    h2.setAttribute('style','padding-bottom: 15px;');
+
+    categoryLabel.setAttribute('for', id + 5);
+    categoryLabel.innerHTML = 'Категория (блок):';
+    category.setAttribute('name', 'rangeElementCategory[]');
+    category.setAttribute('id', id + 5);
+
+    subcategoryLabel.setAttribute('for', id + 2);
+    subcategoryLabel.innerHTML = 'Подкатегория (если поле пустое, будет использоваться Категория [блок])::';
+    subcategory.setAttribute('name', 'rangeElementSubcategory[]');
+    subcategory.setAttribute('id', id + 2);
+
+    if (!(typeof categoriesJSON == "undefined")) {
+        categoriesJSON.forEach(function (categoryEl) {
+            var option = document.createElement('option');
+
+            option.setAttribute('value', categoryEl['id']);
+            option.innerHTML = categoryEl['r_name'];
+
+            category.append(option);
+        });
+    }
+
+    if (!(typeof subcategoriesJSON == "undefined")) {
+        subcategoriesJSON.forEach(function (subcategoryEl) {
+            var option = document.createElement('option');
+
+            option.setAttribute('value', subcategoryEl['id']);
+            option.innerHTML = subcategoryEl['r_name'];
+
+            subcategory.append(option);
+        });
+    }
+
+    ru_label.setAttribute('for', id + 3);
+    ru_label.innerHTML = 'Название элемента на русском:';
+    ru_input.setAttribute('type', 'text');
+    ru_input.setAttribute('id', id + 3);
+    ru_input.setAttribute('name', 'rangeRName[]');
+
+    eng_label.setAttribute('for', id + 4);
+    eng_label.innerHTML = 'Название элемента на английском:';
+    eng_input.setAttribute('type', 'text');
+    eng_input.setAttribute('id', id + 4);
+    eng_input.setAttribute('name', 'rangeEName[]');
+
+    hidden_input.setAttribute('type', 'hidden');
+    hidden_input.setAttribute('name', 'formID');
+    hidden_input.setAttribute('value', formId);
+
+    deleteBtn.setAttribute('href', '#');
+    deleteBtn.setAttribute('class', 'deleteElement button');
+    deleteBtn.setAttribute('style', 'position: absolute; top: 10px; right: 10px;');
+    deleteBtn.innerHTML = "Удалить";
+
+    messages.html('');
+
+    if (elements.html() === '') {
+        var a = document.createElement('a');
+
+        a.setAttribute('href', '#');
+        a.setAttribute('id', 'saveElems');
+        a.setAttribute('class', 'button');
+        a.innerHTML = 'Сохранить элементы';
+
+        elements.append(hidden_input);
+        elements.append(a);
+    }
+
+
+    box.append(deleteBtn);
+    box.append(h2);
+    box.append(categoryLabel);
+    box.append(category);
+    box.append(subcategoryLabel);
+    box.append(subcategory);
+    box.append(ru_label);
+    box.append(ru_input);
+    box.append(eng_label);
+    box.append(eng_input);
+
+    elements.prepend(box);
+}
+
+/**
+ * Добавляет элемент Список
+ * @param elements
+ */
+function addListEl(elements) {
+    var box = document.createElement('div'),
+        optionsBox = document.createElement('div'),
+
+        categoryLabel = document.createElement('label'),
+        category = document.createElement('select'),
+
+        subcategoryLabel = document.createElement('label'),
+        subcategory = document.createElement('select'),
+
+        ru_label = document.createElement('label'),
+        eng_label = document.createElement('label'),
+
+        ru_input = document.createElement('input'),
+        eng_input = document.createElement('input'),
+
+        hidden_input = document.createElement('input'),
+        messages = $('.messages'),
+
+        addOptionBtn = document.createElement('a'),
+        deleteBtn = document.createElement('a'),
+        id = 'id' + Math.floor(Date.now()),
+        h2 = document.createElement('h2');
+
+    optionsBox.setAttribute('class','options');
+
+    box.setAttribute('class', 'box list');
+
+    h2.innerHTML = 'Элемент [Список]';
+    h2.setAttribute('style','padding-bottom: 15px;');
+
+    categoryLabel.setAttribute('for', id + 5);
+    categoryLabel.innerHTML = 'Категория (блок):';
+    category.setAttribute('name', 'listElementCategory[]');
+    category.setAttribute('id', id + 5);
+
+    subcategoryLabel.setAttribute('for', id + 2);
+    subcategoryLabel.innerHTML = 'Подкатегория (если поле пустое, будет использоваться Категория [блок]):';
+    subcategory.setAttribute('name', 'listElementSubcategory[]');
+    subcategory.setAttribute('id', id + 2);
+
+    if (!(typeof categoriesJSON == "undefined")) {
+        categoriesJSON.forEach(function (categoryEl) {
+            var option = document.createElement('option');
+
+            option.setAttribute('value', categoryEl['id']);
+            option.innerHTML = categoryEl['r_name'];
+
+            category.append(option);
+        });
+    }
+
+    if (!(typeof subcategoriesJSON == "undefined")) {
+        subcategoriesJSON.forEach(function (subcategoryEl) {
+            var option = document.createElement('option');
+
+            option.setAttribute('value', subcategoryEl['id']);
+            option.innerHTML = subcategoryEl['r_name'];
+
+            subcategory.append(option);
+        });
+    }
+
+    ru_label.setAttribute('for', id + 3);
+    ru_label.innerHTML = 'Название элемента на русском:';
+    ru_input.setAttribute('type', 'text');
+    ru_input.setAttribute('id', id + 3);
+    ru_input.setAttribute('name', 'listRName[]');
+
+    eng_label.setAttribute('for', id + 4);
+    eng_label.innerHTML = 'Название элемента на английском:';
+    eng_input.setAttribute('type', 'text');
+    eng_input.setAttribute('id', id + 4);
+    eng_input.setAttribute('name', 'listEName[]');
+
+    hidden_input.setAttribute('type', 'hidden');
+    hidden_input.setAttribute('name', 'formID');
+    hidden_input.setAttribute('value', formId);
+
+    deleteBtn.setAttribute('href', '#');
+    deleteBtn.setAttribute('class', 'deleteElement button');
+    deleteBtn.setAttribute('style', 'position: absolute; top: 10px; right: 10px;');
+    deleteBtn.innerHTML = "Удалить";
+
+    addOptionBtn.setAttribute('href', '#');
+    addOptionBtn.setAttribute('class', 'addOptionInBox button');
+    addOptionBtn.innerHTML = "Добавить элемент списка";
+
+    messages.html('');
+
+    if (elements.html() === '') {
+        var a = document.createElement('a');
+
+        a.setAttribute('href', '#');
+        a.setAttribute('id', 'saveElems');
+        a.setAttribute('class', 'button');
+        a.innerHTML = 'Сохранить элементы';
+
+        elements.append(hidden_input);
+        elements.append(a);
+    }
+
+    box.append(deleteBtn);
+    box.append(h2);
+    box.append(categoryLabel);
+    box.append(category);
+    box.append(subcategoryLabel);
+    box.append(subcategory);
+    box.append(ru_label);
+    box.append(ru_input);
+    box.append(eng_label);
+    box.append(eng_input);
+    box.append(addOptionBtn);
+    box.append(optionsBox);
+
+    elements.prepend(box);
+}
+
+/**
+ * Добавляет значение списка в бокс элемента
+ * @param elBox
+ */
+function addOption(elBox) {
+    var box = document.createElement('div'),
+        id = 'id' + Math.floor(Date.now()),
+        r_label = document.createElement('label'),
+        e_label = document.createElement('label'),
+        r_input = document.createElement('input'),
+        e_input = document.createElement('input'),
+        deleteBtn = document.createElement('a');
+
+    r_label.setAttribute('for', id + 1);
+    r_label.innerHTML = 'Значение списка на русском:';
+    r_input.setAttribute('type', 'text');
+    r_input.setAttribute('id', id + 1);
+    r_input.setAttribute('name', 'optionRName[]');
+
+    e_label.setAttribute('for', id + 2);
+    e_label.innerHTML = 'Значение списка на английском:';
+    e_input.setAttribute('type', 'text');
+    e_input.setAttribute('id', id + 2);
+    e_input.setAttribute('name', 'optionEName[]');
+
+    deleteBtn.setAttribute('href', '#');
+    deleteBtn.setAttribute('class', 'deleteElement button');
+    deleteBtn.setAttribute('style', 'position: absolute; top: 10px; right: 10px;');
+    deleteBtn.innerHTML = "Удалить";
+
+    box.setAttribute('class', 'box optionBox');
+    box.setAttribute('style', 'border: solid 1px black;');
+
+    box.append(deleteBtn);
+    box.append(r_label);
+    box.append(r_input);
+    box.append(e_label);
+    box.append(e_input);
+
+    elBox.prepend(box);
+}
+
+function updateSubcategories(subcategories) {
+    subcategoriesJSON = subcategories;
+
+    var subcategoriesTable = $('#subcategoriesTable');
+
+    subcategoriesTable.find('tr').each(function (index, el) {
+        if (!(this.id == 'need')) {
             el.remove();
         }
     });
 
-    var lastTr = $('#categoriesTable tr:last-child');
+    var lastTr = subcategoriesTable.find('tr:last-child');
 
-    if (!(typeof categoriesJSON == "undefined")) {
-        categoriesJSON.forEach(function (category, key) {
+    if (!(typeof subcategoriesJSON == "undefined")) {
+        subcategoriesJSON.forEach(function (subcategory) {
             var tr = document.createElement('tr'),
                 td1 = document.createElement('td'),
                 td2 = document.createElement('td'),
-                td3 = document.createElement('td');
+                td3 = document.createElement('td'),
+                a = document.createElement('a');
+
+            a.setAttribute('id', 'subcategory_' + subcategory.id);
+            a.setAttribute('style', 'margin: 0;');
+            a.setAttribute('class', 'button subcategoryDelButton');
+            a.setAttribute('href', '#');
+            a.innerHTML = 'Удалить';
+
+            td1.innerHTML = subcategory.r_name;
+            td2.innerHTML = subcategory.e_name;
+            td3.append(a);
+
+            tr.append(td1);
+            tr.append(td2);
+            tr.append(td3);
+
+            lastTr.after(tr);
+            console.log('Выполняется!');
+        });
+    }
+}
+
+function updateCategories(categories) {
+    categoriesJSON = categories;
+
+    var categoriesTable = $('#categoriesTable');
+
+    categoriesTable.find('tr').each(function (index, el) {
+        if (!(this.id == 'need')) {
+            el.remove();
+        }
+    });
+
+    var lastTr = categoriesTable.find('tr:last-child');
+
+    if (!(typeof categoriesJSON == "undefined")) {
+        categoriesJSON.forEach(function (category) {
+            var tr = document.createElement('tr'),
+                td1 = document.createElement('td'),
+                td2 = document.createElement('td'),
+                td3 = document.createElement('td'),
+                a = document.createElement('a');
+
+            a.setAttribute('id', 'category_' + category.id);
+            a.setAttribute('style', 'margin: 0;');
+            a.setAttribute('class', 'button categoryDelButton');
+            a.setAttribute('href', '#');
+            a.innerHTML = 'Удалить';
 
             td1.innerHTML = category.r_name;
             td2.innerHTML = category.e_name;
-            td3.innerHTML = '123';
+            td3.append(a);
 
             tr.append(td1);
             tr.append(td2);
@@ -556,6 +1142,19 @@ function updateCategory(categories) {
             lastTr.after(tr);
         });
     }
+
+    $('#subcategories').find('select').each(function (index, el) {
+        el.innerHTML = '';
+
+        categoriesJSON.forEach(function (category) {
+            var option = document.createElement('option');
+
+            option.setAttribute('value', category['id']);
+            option.innerHTML = category['r_name'];
+
+            el.append(option);
+        });
+    });
 }
 
 function updateFormParams(data) {

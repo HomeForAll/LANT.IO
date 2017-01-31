@@ -1040,6 +1040,8 @@ class CabinetModel extends Model
                                 $query->execute([':r_name' => $value, ':e_name' => $_POST['subcategoriesEng'][$key], ':category_id' => $_POST['parentCategory'][$key], ':form_id' => $_POST['formID']]);
                             }
                         }
+
+                        $answer['subcategories'] = $this->getSubcategories($_POST['formID']);
                         $answer['message'] = 'Подкатегории сохранены.';
                     }
 
@@ -1062,21 +1064,46 @@ class CabinetModel extends Model
                     $answer['message'] = 'Возникла ошибка при удалении.';
                 }
                 break;
+            case 'delSubcategory': // Удаление подкатегорий
+                $data = explode('_', $_POST['id']);
+                $id = $data[1];
+
+                $query = $this->db->prepare("DELETE FROM form_subcategories WHERE id = :id");
+                $query->execute([':id' => $id]);
+
+                if ($query->rowCount()) {
+                    $answer['data'] = $this->getSubcategories($_POST['formID']);
+                    $answer['message'] = 'Удаление прошло успешно.';
+                } else {
+                    $answer['message'] = 'Возникла ошибка при удалении.';
+                }
+                break;
+            case 'saveElements':
+                $answer = $_POST;
+                break;
         }
 
         echo json_encode($answer, JSON_UNESCAPED_UNICODE);
     }
 
-    private function checkEmptyPOSTElements()
+    private function checkEmptyPOSTElements($key = null)
     {
-        foreach ($_POST as $value) {
-            if (!(gettype($value) == 'array')) {
-                continue;
-            }
-
-            foreach ($value as $element) {
+        if (!empty($key)) {
+            foreach ($_POST[$key] as $element) {
                 if (empty($element)) {
                     return false;
+                }
+            }
+        } else {
+            foreach ($_POST as $value) {
+                if (!(gettype($value) == 'array')) {
+                    continue;
+                }
+
+                foreach ($value as $element) {
+                    if (empty($element)) {
+                        return false;
+                    }
                 }
             }
         }
@@ -1096,6 +1123,7 @@ class CabinetModel extends Model
     public function getFormData($id)
     {
         $categories = $this->getCategories($id);
+        $subcategories = $this->getSubcategories($id);
 
         return array(
             'id' => $id,
@@ -1103,7 +1131,8 @@ class CabinetModel extends Model
             'formParams' => $this->getFormParams(),
             'categories' => $categories,
             'categoriesJSON' => json_encode($categories, JSON_UNESCAPED_UNICODE),
-            'subcategories' => $this->getSubcategories($id),
+            'subcategories' => $subcategories,
+            'subcategoriesJSON' => json_encode($subcategories, JSON_UNESCAPED_UNICODE),
         );
     }
 
