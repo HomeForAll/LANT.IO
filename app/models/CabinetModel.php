@@ -1079,11 +1079,168 @@ class CabinetModel extends Model
                 }
                 break;
             case 'saveElements':
-                $answer = $_POST;
+                if ($this->checkEmptyPOSTElements()) {
+
+                    $answer['elements'] = $this->getElements($_POST['formID']);
+                    $messages = '';
+
+                    if (isset($_POST['rangeElementCategory'])) {
+                        foreach ($_POST['rangeRName'] as $key => $value) {
+                            $data = array(
+                                'ru' => $value,
+                                'eng' => $_POST['rangeEName'][$key],
+                                'messages' => &$messages,
+                            );
+
+                            array_walk($answer['elements'], function ($element, $k, $data) {
+                                if ($element['r_name'] == $data['ru']) {
+                                    $data['messages'] .= "Элемент: <span style='color: red;'>'" . $data['ru'] . "'</span> уже существует. \n";
+                                }
+
+                                if ($element['e_name'] == $data['eng']) {
+                                    $data['messages'] .= "Элемент: <span style='color: red;'>'" . $data['eng'] . "'</span> уже существует. \n";
+                                }
+                            }, $data);
+
+                            $messages = $data['messages'];
+                        }
+                    }
+
+                    if (isset($_POST['YORNElementCategory'])) {
+                        foreach ($_POST['YORNRName'] as $key => $value) {
+                            $data = array(
+                                'ru' => $value,
+                                'eng' => $_POST['YORNEName'][$key],
+                                'messages' => &$messages,
+                            );
+
+                            array_walk($answer['elements'], function ($element, $k, $data) {
+                                if ($element['r_name'] == $data['ru']) {
+                                    $data['messages'] .= "Элемент: <span style='color: red;'>'" . $data['ru'] . "'</span> уже существует. \n";
+                                }
+
+                                if ($element['e_name'] == $data['eng']) {
+                                    $data['messages'] .= "Элемент: <span style='color: red;'>'" . $data['eng'] . "'</span> уже существует. \n";
+                                }
+                            }, $data);
+
+                            $messages = $data['messages'];
+                        }
+                    }
+
+                    if (isset($_POST['listElementCategory'])) {
+                        foreach ($_POST['listRName'] as $key => $value) {
+                            $data = array(
+                                'ru' => $value,
+                                'eng' => $_POST['listEName'][$key],
+                                'messages' => &$messages,
+                            );
+
+                            array_walk($answer['elements'], function ($element, $k, $data) {
+                                if ($element['r_name'] == $data['ru']) {
+                                    $data['messages'] .= "Элемент: <span style='color: red;'>'" . $data['ru'] . "'</span> уже существует. \n";
+                                }
+
+                                if ($element['e_name'] == $data['eng']) {
+                                    $data['messages'] .= "Элемент: <span style='color: red;'>'" . $data['eng'] . "'</span> уже существует. \n";
+                                }
+                            }, $data);
+
+                            $messages = $data['messages'];
+                        }
+                    }
+
+                    if ($messages) {
+                        $answer['message'] = $messages;
+                    } else {
+
+                        if (isset($_POST['rangeElementCategory'])) {
+                            $type = 1;
+                            $query1 = $this->db->prepare('INSERT INTO form_elements (r_name, e_name, subcategory, type, form_id) VALUES (:r_name, :e_name, :subcategory, :type, :form_id)');
+                            $query2 = $this->db->prepare('INSERT INTO form_elements (r_name, e_name, type, category, form_id) VALUES (:r_name, :e_name, :type, :category, :form_id)');
+
+                            foreach ($_POST['rangeRName'] as $key => $value) {
+                                if (empty($_POST['rangeElementSubcategory'][$key])) {
+                                    $query2->execute([':r_name' => $value, ':e_name' => $_POST['rangeEName'][$key], ':type' => $type, ':category' => $_POST['rangeElementCategory'][$key], ':form_id' => $_POST['formID']]);
+
+                                } else {
+                                    $query1->execute([':r_name' => $value, ':e_name' => $_POST['rangeEName'][$key], ':subcategory' => $_POST['rangeElementSubcategory'][$key], ':type' => $type, ':form_id' => $_POST['formID']]);
+                                }
+                            }
+                        }
+
+                        if (isset($_POST['YORNElementCategory'])) {
+                            $type = 2;
+                            $query1 = $this->db->prepare('INSERT INTO form_elements (r_name, e_name, subcategory, type, form_id) VALUES (:r_name, :e_name, :subcategory, :type, :form_id)');
+                            $query2 = $this->db->prepare('INSERT INTO form_elements (r_name, e_name, type, category, form_id) VALUES (:r_name, :e_name, :type, :category, :form_id)');
+
+                            foreach ($_POST['YORNRName'] as $key => $value) {
+                                if (empty($_POST['YORNElementSubcategory'][$key])) {
+                                    $query2->execute([':r_name' => $value, ':e_name' => $_POST['YORNEName'][$key], ':type' => $type, ':category' => $_POST['YORNElementCategory'][$key], ':form_id' => $_POST['formID']]);
+
+                                } else {
+                                    $query1->execute([':r_name' => $value, ':e_name' => $_POST['YORNEName'][$key], ':subcategory' => $_POST['YORNElementSubcategory'][$key], ':type' => $type, ':form_id' => $_POST['formID']]);
+                                }
+                            }
+                        }
+
+                        if (isset($_POST['listElementCategory'])) {
+                            $type = 3;
+                            $query1 = $this->db->prepare('INSERT INTO form_elements (r_name, e_name, subcategory, type, form_id) VALUES (:r_name, :e_name, :subcategory, :type, :form_id) RETURNING id');
+                            $query2 = $this->db->prepare('INSERT INTO form_elements (r_name, e_name, type, category, form_id) VALUES (:r_name, :e_name, :type, :category, :form_id) RETURNING id');
+
+                            $selectOptions = explode(',', $_POST['listOptions']);
+                            $count = 0;
+
+                            foreach ($_POST['listRName'] as $key => $value) {
+                                if (empty($_POST['listElementSubcategory'][$key])) {
+                                    $query2->execute([':r_name' => $value, ':e_name' => $_POST['listEName'][$key], ':type' => $type, ':category' => $_POST['listElementCategory'][$key], ':form_id' => $_POST['formID']]);
+                                    $result = $query2->fetch();
+
+                                    $optionQuery = $this->db->prepare('INSERT INTO form_select_options (r_name, e_name, value, element_id) VALUES (:r_name, :e_name, :value, :element_id)');;
+
+                                    for ($i = $count; $i < $count + $selectOptions[$key]; $i++) {
+                                        $optionQuery->execute([':r_name' => $_POST['optionRName'][$i], ':e_name' => $_POST['optionEName'][$i], ':value' => $_POST['optionEName'][$i], ':element_id' => $result[0]]);
+                                    }
+                                    
+                                    $count += $selectOptions[$key];
+                                } else {
+                                    $query1->execute([':r_name' => $value, ':e_name' => $_POST['listEName'][$key], ':subcategory' => $_POST['listElementSubcategory'][$key], ':type' => $type, ':form_id' => $_POST['formID']]);
+                                    $result = $query1->fetch();
+
+                                    $optionQuery = $this->db->prepare('INSERT INTO form_select_options (r_name, e_name, value, element_id) VALUES (:r_name, :e_name, :value, :element_id)');;
+
+
+                                    for ($i = $count; $i < $count + $selectOptions[$key]; $i++) {
+                                        $optionQuery->execute([':r_name' => $_POST['optionRName'][$i], ':e_name' => $_POST['optionEName'][$i], ':value' => $_POST['optionEName'][$i], ':element_id' => $result[0]]);
+                                        $this->printData('Выполнено: ' . $i . ' раз.');
+                                    }
+
+                                    $count += $selectOptions[$key];
+                                }
+                            }
+                        }
+
+                        $answer['elements'] = $this->getElements($_POST['formID']);
+                        $answer['message'] = 'Элементы сохранены.';
+                    }
+
+                    $answer['data'] = $this->getFormParams();
+                } else {
+                    $answer['message'] = 'Ошибка, не все поля заполнены.';
+                }
                 break;
         }
 
         echo json_encode($answer, JSON_UNESCAPED_UNICODE);
+    }
+
+    private function getElements($formID)
+    {
+        $query = $this->db->prepare("SELECT * FROM form_elements WHERE form_id = :form_id");
+        $query->execute([':form_id' => $formID]);
+
+        return $query->fetchAll();
     }
 
     private function checkEmptyPOSTElements($key = null)
@@ -1095,14 +1252,16 @@ class CabinetModel extends Model
                 }
             }
         } else {
-            foreach ($_POST as $value) {
-                if (!(gettype($value) == 'array')) {
-                    continue;
-                }
+            foreach ($_POST as $key => $value) {
+                if ($key !== 'rangeElementSubcategory' && $key !== 'listElementSubcategory' && $key !== 'YORNElementSubcategory') {
+                    if (!(gettype($value) == 'array')) {
+                        continue;
+                    }
 
-                foreach ($value as $element) {
-                    if (empty($element)) {
-                        return false;
+                    foreach ($value as $element) {
+                        if (empty($element)) {
+                            return false;
+                        }
                     }
                 }
             }

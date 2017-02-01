@@ -622,21 +622,16 @@ $(document).ready(function () {
         $.ajax({
             type: 'POST',
             url: '/cabinet/form/edit/id/' + formId,
-            data: formData + '&action=saveElements&listOptions=' + listsOptions,
+            data: formData + '&action=saveElements&listOptions=' + listsOptions + '&formID=' + formId,
             success: function (data) {
+                console.log(data);
                 data = JSON.parse(data);
 
-                console.log(data);
+                messages.html('<pre>' + data.message + '</pre>');
 
-                // if (data.message == 'Подкатегории сохранены.') {
-                //     messages.html('<pre>' + data.message + '</pre>');
-                //     form.html('');
-                //     updateSubcategories(data.subcategories);
-                // } else if (data.message == 'Ошибка, не все поля заполнены.') {
-                //     messages.html('<pre>' + data.message + '</pre>');
-                // } else {
-                //     messages.html('<pre>' + data.message + '</pre>');
-                // }
+                if (data.message == 'Элементы сохранены.') {
+                    elements.html('');
+                }
             },
             error: function (xhr) {
                 console.log(xhr);
@@ -685,7 +680,7 @@ function addYOrNEL(elements) {
         h2 = document.createElement('h2');
 
     h2.innerHTML = 'Элемент [Да/Нет]';
-    h2.setAttribute('style','padding-bottom: 15px;');
+    h2.setAttribute('style', 'padding-bottom: 15px;');
 
     categoryLabel.setAttribute('for', id + 5);
     categoryLabel.innerHTML = 'Категория (блок):';
@@ -710,6 +705,11 @@ function addYOrNEL(elements) {
     subcategoryLabel.innerHTML = 'Подкатегория (если поле пустое, будет использоваться Категория [блок])::';
     subcategory.setAttribute('name', 'YORNElementSubcategory[]');
     subcategory.setAttribute('id', id + 2);
+
+    var option = document.createElement('option');
+    option.setAttribute('value', '');
+    option.innerHTML = '---';
+    subcategory.append(option);
 
     if (!(typeof categoriesJSON == "undefined")) {
         categoriesJSON.forEach(function (categoryEl) {
@@ -815,7 +815,7 @@ function addRangeEl(elements) {
     box.setAttribute('class', 'box');
 
     h2.innerHTML = 'Элемент [От-До]';
-    h2.setAttribute('style','padding-bottom: 15px;');
+    h2.setAttribute('style', 'padding-bottom: 15px;');
 
     categoryLabel.setAttribute('for', id + 5);
     categoryLabel.innerHTML = 'Категория (блок):';
@@ -826,6 +826,11 @@ function addRangeEl(elements) {
     subcategoryLabel.innerHTML = 'Подкатегория (если поле пустое, будет использоваться Категория [блок])::';
     subcategory.setAttribute('name', 'rangeElementSubcategory[]');
     subcategory.setAttribute('id', id + 2);
+
+    var option = document.createElement('option');
+    option.setAttribute('value', '');
+    option.innerHTML = '---';
+    subcategory.append(option);
 
     if (!(typeof categoriesJSON == "undefined")) {
         categoriesJSON.forEach(function (categoryEl) {
@@ -927,12 +932,12 @@ function addListEl(elements) {
         id = 'id' + Math.floor(Date.now()),
         h2 = document.createElement('h2');
 
-    optionsBox.setAttribute('class','options');
+    optionsBox.setAttribute('class', 'options');
 
     box.setAttribute('class', 'box list');
 
     h2.innerHTML = 'Элемент [Список]';
-    h2.setAttribute('style','padding-bottom: 15px;');
+    h2.setAttribute('style', 'padding-bottom: 15px;');
 
     categoryLabel.setAttribute('for', id + 5);
     categoryLabel.innerHTML = 'Категория (блок):';
@@ -943,6 +948,11 @@ function addListEl(elements) {
     subcategoryLabel.innerHTML = 'Подкатегория (если поле пустое, будет использоваться Категория [блок]):';
     subcategory.setAttribute('name', 'listElementSubcategory[]');
     subcategory.setAttribute('id', id + 2);
+
+    var option = document.createElement('option');
+    option.setAttribute('value', '');
+    option.innerHTML = '---';
+    subcategory.append(option);
 
     if (!(typeof categoriesJSON == "undefined")) {
         categoriesJSON.forEach(function (categoryEl) {
