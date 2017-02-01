@@ -1202,7 +1202,7 @@ class CabinetModel extends Model
                                     for ($i = $count; $i < $count + $selectOptions[$key]; $i++) {
                                         $optionQuery->execute([':r_name' => $_POST['optionRName'][$i], ':e_name' => $_POST['optionEName'][$i], ':value' => $_POST['optionEName'][$i], ':element_id' => $result[0]]);
                                     }
-                                    
+
                                     $count += $selectOptions[$key];
                                 } else {
                                     $query1->execute([':r_name' => $value, ':e_name' => $_POST['listEName'][$key], ':subcategory' => $_POST['listElementSubcategory'][$key], ':type' => $type, ':form_id' => $_POST['formID']]);
