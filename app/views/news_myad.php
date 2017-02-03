@@ -1,5 +1,9 @@
 <!-- Последние новости -->
-
+<?php
+if(empty($this->data['author_name'])){
+    $this->data['author_name'] = 'Aноним';
+}
+?>
 
 <div class="my_news clearfix">
     <h3>Мои объявления</h3>
