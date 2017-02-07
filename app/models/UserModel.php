@@ -2,13 +2,12 @@
 
 class UserModel extends Model
 {
-
-    private $socialAuth;
+    private $socialNets;
 
     public function __construct()
     {
         $this->db = new DataBase;
-        $this->socialAuth = new SocialAuth(self::getUserID());
+        $this->socialNets = new SocialNets(self::getUserID());
     }
 
     public function ajaxHandler()
@@ -63,7 +62,7 @@ class UserModel extends Model
         $_SESSION['authorized'] = true;
         $_SESSION['userID'] = $userID;
         $this->activityWrite($userID);
-        $_SESSION['accountStatus'] = $userStatus;
+        $_SESSION['status'] = $userStatus;
         header('Location: http://' . $_SERVER['HTTP_HOST'] . '/cabinet');
         exit;
     }
@@ -121,7 +120,7 @@ class UserModel extends Model
     {
         $errors = $this->getDataErrors();
         if (!$errors) {
-            $this->recordUserData();
+            $this->saveUserData();
         } else {
             return $errors;
         }
@@ -179,7 +178,7 @@ class UserModel extends Model
         return $errors;
     }
 
-    public function recordUserData()
+    public function saveUserData()
     {
         $email = $_POST['email'];
         $firstName = $_POST['firstName'];
@@ -235,7 +234,7 @@ class UserModel extends Model
         }
 
         if (isset($service) && !empty($service)) {
-            $this->socialAuth->getServiceData($service[0]);
+            $this->socialNets->getServiceData($service[0]);
 
             $url = $this->handleOAuthUrl();
 
@@ -250,9 +249,9 @@ class UserModel extends Model
     public function destroyOAuthData($service)
     {
         if (isset($service) && !empty($service)) {
-            $this->socialAuth->destroyServiceData($service[0]);
+            $this->socialNets->destroyServiceData($service[0]);
         } else {
-            $this->socialAuth->destroyServiceData();
+            $this->socialNets->destroyServiceData();
         }
     }
 

@@ -2,6 +2,7 @@
     var formId = <?php echo $this->data['id']; ?>;
     var categoriesJSON = <?php echo $this->data['categoriesJSON']; ?>;
     var subcategoriesJSON = <?php echo $this->data['subcategoriesJSON']; ?>;
+    var elementsJSON = <?php echo $this->data['elementsJSON']; ?>;
 </script>
 
 <style>
@@ -221,7 +222,7 @@
     ?>
 </table>
 
-<table id="subcategoriesTable">
+<table id="elementsTable">
     <tr id="need">
         <th colspan="4">Элементы</th>
     </tr>
@@ -232,15 +233,29 @@
         <th>Действие</th>
     </tr>
     <?php
-    foreach ($this->data['subcategories'] as $subcategory) {
+    foreach ($this->data['elements'] as $element) {
         ?>
         <tr>
-            <td><?php echo $subcategory['r_name']; ?></td>
-            <td><?php echo $subcategory['e_name']; ?></td>
-            <td>Значение Да/Нет</td>
+            <td><?php echo $element['r_name']; ?></td>
+            <td><?php echo $element['e_name']; ?></td>
             <td>
-                <a id="#subcategory_<?php echo $subcategory['id']; ?>" style="margin: 0;"
-                   class="button subcategoryDelButton" href="#">Удалить</a>
+                <?php
+                switch ($element['type']) {
+                    case 1:
+                        echo 'Элемент [От-До]';
+                        break;
+                    case 2:
+                        echo 'Элемент [Да/Нет]';
+                        break;
+                    case 3:
+                        echo 'Элемент [Список]';
+                        break;
+                }
+                ?>
+            </td>
+            <td>
+                <a id="element_<?php echo $element['id']; ?>" style="margin: 0;"
+                   class="button elDelButton" href="#">Удалить</a>
             </td>
         </tr>
         <?php

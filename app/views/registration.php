@@ -1,3 +1,35 @@
+<style>
+    form {
+        margin-bottom: 15px;
+    }
+
+    fieldset {
+        margin-bottom: 15px;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    input[type=text], input[type=date], input[type=password], select {
+        font-family: Arial, sans-serif;
+        font-size: 10pt;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 10px 15px 10px 15px;
+        margin-bottom: 15px;
+        border: solid 1px gray;
+        border-radius: 3px;
+    }
+
+    input[type=checkbox] {
+        margin-right: 10px;
+    }
+
+    input[type=submit] {
+        width: 200px;
+    }
+</style>
 <?php
 $this->title = 'Регистрация';
 
@@ -122,9 +154,8 @@ if (isset($_SESSION['services']) && !empty($_SESSION['services'])) {
                 </label>
             </td>
             <td>
-                <input name="birthday" id="birthday" type="text"
-                       value="<?php echo $birthday; ?>">
                 <?php $this->printFormError($birthdayErr) ?>
+                <input name="birthday" id="birthday" type="date" value="<?php echo $birthday; ?>">
             </td>
         </tr>
         <tr>
@@ -165,7 +196,7 @@ if (isset($_SESSION['services']) && !empty($_SESSION['services'])) {
         <tr>
             <td></td>
             <td>
-                <input type="submit" name="submit" value="Зарегистрировать">
+                <input type="submit" name="submit" value="Создать аккаунт">
             </td>
         </tr>
     </table>

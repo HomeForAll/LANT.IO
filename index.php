@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-ini_set('display_errors', 1);
+ini_set('display_errors', 0);
 defined('ROOT_DIR') or define('ROOT_DIR', __DIR__);
 defined('CONFIG_DIR') or define('CONFIG_DIR', ROOT_DIR . '/app/config/');
 defined('SERVER') or define('SERVER', 'nginx'); // 'apache' or 'nginx'

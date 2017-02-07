@@ -188,6 +188,7 @@ $(document).ready(function () {
                         display: 'none'
                     });
                     updateFormParams(data.data);
+                    console.log(data.data); // TODO : Delete
                 } else {
                     message.html('<pre>' + data.message + '</pre>');
                 }
@@ -571,6 +572,36 @@ $(document).ready(function () {
         event.preventDefault();
     });
 
+    var elementsTable = $('#elementsTable');
+
+    elementsTable.on('click', '.elDelButton', function (event) {
+        var elementID = this.id,
+            messages = $('.messages');
+
+        $.ajax({
+            type: 'POST',
+            url: '/cabinet/form/edit/id/' + formId,
+            data: 'action=delElement&id=' + elementID + '&formID=' + formId,
+            success: function (data) {
+                data = JSON.parse(data);
+
+                if (data.message == 'Удаление прошло успешно.') {
+                    messages.html('<pre>' + data.message + '</pre>');
+                    updateElements(data.data);
+                } else if (data.message == 'Возникла ошибка при удалении.') {
+                    messages.html('<pre>' + data.message + '</pre>');
+                } else {
+                    messages.html('<pre>' + data.message + '</pre>');
+                }
+            },
+            error: function (xhr) {
+                console.log(xhr);
+            }
+        });
+
+        event.preventDefault();
+    });
+
     var elements = $('#elements');
 
     /**
@@ -619,12 +650,13 @@ $(document).ready(function () {
             listsOptions[i] = $(el).find('.options').find('.optionBox').length;
         });
 
+        listsOptions[listsOptions.length] = 0;
+
         $.ajax({
             type: 'POST',
             url: '/cabinet/form/edit/id/' + formId,
             data: formData + '&action=saveElements&listOptions=' + listsOptions + '&formID=' + formId,
             success: function (data) {
-                console.log(data);
                 data = JSON.parse(data);
 
                 messages.html('<pre>' + data.message + '</pre>');
@@ -686,6 +718,7 @@ function addYOrNEL(elements) {
     categoryLabel.innerHTML = 'Категория (блок):';
     category.setAttribute('name', 'YORNElementCategory[]');
     category.setAttribute('id', id + 5);
+    category.setAttribute('class', 'categoryValues');
 
     yValueLabel.setAttribute('for', '1');
     yValueLabel.innerHTML = 'Значение ДА на русском:';
@@ -705,6 +738,7 @@ function addYOrNEL(elements) {
     subcategoryLabel.innerHTML = 'Подкатегория (если поле пустое, будет использоваться Категория [блок])::';
     subcategory.setAttribute('name', 'YORNElementSubcategory[]');
     subcategory.setAttribute('id', id + 2);
+    subcategory.setAttribute('class', 'subcategoryValues');
 
     var option = document.createElement('option');
     option.setAttribute('value', '');
@@ -821,11 +855,13 @@ function addRangeEl(elements) {
     categoryLabel.innerHTML = 'Категория (блок):';
     category.setAttribute('name', 'rangeElementCategory[]');
     category.setAttribute('id', id + 5);
+    category.setAttribute('class', 'categoryValues');
 
     subcategoryLabel.setAttribute('for', id + 2);
     subcategoryLabel.innerHTML = 'Подкатегория (если поле пустое, будет использоваться Категория [блок])::';
     subcategory.setAttribute('name', 'rangeElementSubcategory[]');
     subcategory.setAttribute('id', id + 2);
+    subcategory.setAttribute('class', 'subcategoryValues');
 
     var option = document.createElement('option');
     option.setAttribute('value', '');
@@ -943,11 +979,13 @@ function addListEl(elements) {
     categoryLabel.innerHTML = 'Категория (блок):';
     category.setAttribute('name', 'listElementCategory[]');
     category.setAttribute('id', id + 5);
+    category.setAttribute('class', 'categoryValues');
 
     subcategoryLabel.setAttribute('for', id + 2);
     subcategoryLabel.innerHTML = 'Подкатегория (если поле пустое, будет использоваться Категория [блок]):';
     subcategory.setAttribute('name', 'listElementSubcategory[]');
     subcategory.setAttribute('id', id + 2);
+    subcategory.setAttribute('class', 'subcategoryValues');
 
     var option = document.createElement('option');
     option.setAttribute('value', '');
@@ -1073,6 +1111,65 @@ function addOption(elBox) {
     elBox.prepend(box);
 }
 
+function updateElements(elements) {
+    elementsJSON = elements;
+
+    var elTable = $('#elementsTable');
+
+    elTable.find('tr').each(function (index, el) {
+        if (!(this.id == 'need')) {
+            el.remove();
+        }
+    });
+
+    var lastTr = elTable.find('tr:last-child');
+
+    if (!(typeof elementsJSON == "undefined")) {
+        elementsJSON.forEach(function (element) {
+            var tr = document.createElement('tr'),
+                td1 = document.createElement('td'),
+                td2 = document.createElement('td'),
+                td3 = document.createElement('td'),
+                td4 = document.createElement('td'),
+                a = document.createElement('a');
+
+            a.setAttribute('id', 'element_' + element.id);
+            a.setAttribute('style', 'margin: 0;');
+            a.setAttribute('class', 'button elDelButton');
+            a.setAttribute('href', '#');
+            a.innerHTML = 'Удалить';
+
+            var type;
+
+            console.log(element);
+
+            switch (element['type']) {
+                case "1":
+                    type = 'Элемент [От-До]';
+                    break;
+                case "2":
+                    type = 'Элемент [Да/Нет]';
+                    break;
+                case "3":
+                    type = 'Элемент [Список]';
+                    break;
+            }
+
+            td1.innerHTML = element.r_name;
+            td2.innerHTML = element.e_name;
+            td3.innerHTML = type;
+            td4.append(a);
+
+            tr.append(td1);
+            tr.append(td2);
+            tr.append(td3);
+            tr.append(td4);
+
+            lastTr.after(tr);
+        });
+    }
+}
+
 function updateSubcategories(subcategories) {
     subcategoriesJSON = subcategories;
 
@@ -1110,6 +1207,19 @@ function updateSubcategories(subcategories) {
 
             lastTr.after(tr);
             console.log('Выполняется!');
+        });
+
+        $('#elements').find('.subcategoryValues').each(function (index, el) {
+            el.innerHTML = '';
+
+            subcategoriesJSON.forEach(function (category) {
+                var option = document.createElement('option');
+
+                option.setAttribute('value', category['id']);
+                option.innerHTML = category['r_name'];
+
+                el.append(option);
+            });
         });
     }
 }
@@ -1154,6 +1264,19 @@ function updateCategories(categories) {
     }
 
     $('#subcategories').find('select').each(function (index, el) {
+        el.innerHTML = '';
+
+        categoriesJSON.forEach(function (category) {
+            var option = document.createElement('option');
+
+            option.setAttribute('value', category['id']);
+            option.innerHTML = category['r_name'];
+
+            el.append(option);
+        });
+    });
+
+    $('#elements').find('.categoryValues').each(function (index, el) {
         el.innerHTML = '';
 
         categoriesJSON.forEach(function (category) {

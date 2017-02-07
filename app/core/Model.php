@@ -1,7 +1,9 @@
 <?php
 
-class Model extends Application
+class Model
 {
+    use PrintHelper;
+
     protected $db;
 
     /*

@@ -1,7 +1,9 @@
 <?php
 
-class View extends Application
+class View extends Access
 {
+    use PrintHelper;
+
     private $title;
     private $template;
     private $content;

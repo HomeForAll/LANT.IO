@@ -3,6 +3,11 @@
 class Access
 {
 
+    /**
+     * Проверяет авторизован ли пользователь
+     * @see UserModel::atLogin()
+     * @return bool - возвращает true, если авторизован
+     */
     public function checkAuth()
     {
         if (isset($_SESSION['authorized']) && $_SESSION['authorized']) {
@@ -13,6 +18,11 @@ class Access
         exit;
     }
 
+    /**
+     * Возвращает уровень доступа пользователя
+     *
+     * @return int - Колонка status в таблице users
+     */
     public function getAccessLevel()
     {
         return (integer) $_SESSION['status'];

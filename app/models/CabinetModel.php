@@ -821,6 +821,10 @@ class CabinetModel extends Model
 
     }
 
+    /**
+     * Редактор форм поиска
+     */
+
     public function handleFormParams()
     {
         $answer = array();
@@ -923,6 +927,7 @@ class CabinetModel extends Model
                             }
                         }
                         $answer['message'] = 'Параметры сохранены.';
+                        $answer['data'] = $this->getFormParams();
                     }
                 } else {
                     $answer['message'] = 'Ошибка, не все поля заполнены.';
@@ -1078,6 +1083,20 @@ class CabinetModel extends Model
                     $answer['message'] = 'Возникла ошибка при удалении.';
                 }
                 break;
+            case 'delElement': // Удаление подкатегорий
+                $data = explode('_', $_POST['id']);
+                $id = $data[1];
+
+                $query = $this->db->prepare("DELETE FROM form_elements WHERE id = :id");
+                $query->execute([':id' => $id]);
+
+                if ($query->rowCount()) {
+                    $answer['data'] = $this->getElements($_POST['formID']);
+                    $answer['message'] = 'Удаление прошло успешно.';
+                } else {
+                    $answer['message'] = 'Возникла ошибка при удалении.';
+                }
+                break;
             case 'saveElements':
                 if ($this->checkEmptyPOSTElements()) {
 
@@ -1171,15 +1190,15 @@ class CabinetModel extends Model
 
                         if (isset($_POST['YORNElementCategory'])) {
                             $type = 2;
-                            $query1 = $this->db->prepare('INSERT INTO form_elements (r_name, e_name, subcategory, type, form_id) VALUES (:r_name, :e_name, :subcategory, :type, :form_id)');
-                            $query2 = $this->db->prepare('INSERT INTO form_elements (r_name, e_name, type, category, form_id) VALUES (:r_name, :e_name, :type, :category, :form_id)');
+                            $query1 = $this->db->prepare('INSERT INTO form_elements (r_name, e_name, subcategory, type, yes_value, no_value, form_id) VALUES (:r_name, :e_name, :subcategory, :type, :yes_value, :no_value, :form_id)');
+                            $query2 = $this->db->prepare('INSERT INTO form_elements (r_name, e_name, type, yes_value, no_value, category, form_id) VALUES (:r_name, :e_name, :type, :yes_value, :no_value, :category, :form_id)');
 
                             foreach ($_POST['YORNRName'] as $key => $value) {
                                 if (empty($_POST['YORNElementSubcategory'][$key])) {
-                                    $query2->execute([':r_name' => $value, ':e_name' => $_POST['YORNEName'][$key], ':type' => $type, ':category' => $_POST['YORNElementCategory'][$key], ':form_id' => $_POST['formID']]);
+                                    $query2->execute([':r_name' => $value, ':e_name' => $_POST['YORNEName'][$key], ':type' => $type, ':yes_value' => $_POST['YORNElementYesValue'][$key], ':no_value' => $_POST['YORNElementNoValue'][$key], ':category' => $_POST['YORNElementCategory'][$key], ':form_id' => $_POST['formID']]);
 
                                 } else {
-                                    $query1->execute([':r_name' => $value, ':e_name' => $_POST['YORNEName'][$key], ':subcategory' => $_POST['YORNElementSubcategory'][$key], ':type' => $type, ':form_id' => $_POST['formID']]);
+                                    $query1->execute([':r_name' => $value, ':e_name' => $_POST['YORNEName'][$key], ':subcategory' => $_POST['YORNElementSubcategory'][$key], ':type' => $type, ':yes_value' => $_POST['YORNElementYesValue'][$key], ':no_value' => $_POST['YORNElementNoValue'][$key], ':form_id' => $_POST['formID']]);
                                 }
                             }
                         }
@@ -1191,6 +1210,8 @@ class CabinetModel extends Model
 
                             $selectOptions = explode(',', $_POST['listOptions']);
                             $count = 0;
+
+                            //$this->printInPre($_POST);
 
                             foreach ($_POST['listRName'] as $key => $value) {
                                 if (empty($_POST['listElementSubcategory'][$key])) {
@@ -1213,7 +1234,6 @@ class CabinetModel extends Model
 
                                     for ($i = $count; $i < $count + $selectOptions[$key]; $i++) {
                                         $optionQuery->execute([':r_name' => $_POST['optionRName'][$i], ':e_name' => $_POST['optionEName'][$i], ':value' => $_POST['optionEName'][$i], ':element_id' => $result[0]]);
-                                        $this->printData('Выполнено: ' . $i . ' раз.');
                                     }
 
                                     $count += $selectOptions[$key];
@@ -1292,6 +1312,8 @@ class CabinetModel extends Model
             'categoriesJSON' => json_encode($categories, JSON_UNESCAPED_UNICODE),
             'subcategories' => $subcategories,
             'subcategoriesJSON' => json_encode($subcategories, JSON_UNESCAPED_UNICODE),
+            'elements' => $this->getElements($id),
+            'elementsJSON' => json_encode($this->getElements($id), JSON_UNESCAPED_UNICODE),
         );
     }
 
@@ -1358,4 +1380,9 @@ class CabinetModel extends Model
 
         return $query->fetch();
     }
+
+    /**
+     * Привязка социальных сетей
+     */
+
 }

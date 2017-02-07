@@ -1,2 +1,2 @@
 <?php
-$this->printData("<h3>" . $this->data . "</h3>");
+$this->printInPre("<h3>" . $this->data . "</h3>");
