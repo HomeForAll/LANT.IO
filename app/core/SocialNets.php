@@ -462,12 +462,22 @@ class SocialNets extends LightOpenID
             if ($userInfo->response) {
                 $user = $userInfo->response->players[0];
 
-                return array(
-                    'userID' => $user->steamid,
-                    'nickName' => $user->personaname,
-                    'firstName' => $user->realname,
+                $this->setData([
+                    'user_id' => $user->steamid,
                     'avatar' => $user->avatarfull,
-                );
+                    'first_name' => $user->realname,
+                    'last_name' => $user->personaname,
+                    'service' => 'steam',
+                    'state' => $this->getState(),
+                ]);
+
+                if ($this->getState() == self::STATE_LOGIN) {
+                    header('Location: ' . $this->settings['login_url']);
+                    exit;
+                } elseif ($this->getState() == self::STATE_REGISTRATION) {
+                    header('Location: ' . $this->settings['registration_url']);
+                    exit;
+                }
             }
         }
 
