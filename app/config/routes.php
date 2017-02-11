@@ -6,6 +6,7 @@ return array(
     'search' => 'main/search/index',
 
     'registration' => 'main/user/registration',
+    'registration/([a-z]+)' => 'main/user/registration/$1',
     'login' => 'main/user/login',
     'login/([A-Za-z]+)' => 'main/user/OAuthInit/$1',
     'logout' => 'main/user/logout',
@@ -27,9 +28,12 @@ return array(
     'support/dialog/close/id/([0-9]+)' => 'main/support/close/$1',
     'support/new' => 'main/support/new',
 
-    'auth/unset' => 'empty/user/OAuthDestroy',
-    'auth/unset/([A-Za-z]+)' => 'empty/user/OAuthDestroy/$1',
-    'auth/([A-Za-z]+)' => 'empty/user/OAuthInit/$1',
+    'oauth/([A-Za-z]+)/state/([0-9]+)' => 'empty/user/OAuth/$1/$2',
+    'oauth/([A-Za-z]+)' => 'empty/user/OAuth/$1',
+
+//    'auth/unset' => 'empty/user/OAuthDestroy',
+//    'auth/unset/([A-Za-z]+)' => 'empty/user/OAuthDestroy/$1',
+//    'auth/([A-Za-z]+)' => 'empty/user/OAuthInit/$1',
 
     'news/page([0-9]+)' => 'main/news/news_list/$1',
     'news/([0-9]+)' => 'main/news/news_id/$1',

@@ -5,29 +5,65 @@ class SocialNets extends LightOpenID
     private $steamID;
     private $steamApiKey;
     private $settings;
-    private $redirectURL;
+    private $currentURL;
+    private $state;
 
-    public function __construct($redirectURL)
+    const STATE_LOGIN = 1;
+    const STATE_REGISTRATION = 2;
+
+    public function __construct($currentURL)
     {
-        parent::__construct($redirectURL);
+//        $row = strpos($redirectURL, "?");
+//        if ($row) {
+//            $redirectURL = substr($redirectURL, 0, $row);
+//        }
+
+        parent::__construct($currentURL);
+
         $this->settings = require ROOT_DIR . '/app/config/auth.php';
-        $this->redirectURL = $redirectURL;
-        $this->steamApiKey = $this->settings['s_ApiKey'];
+        $this->currentURL = $currentURL;
+        $this->steamApiKey = $this->settings['steam_api_key'];
     }
 
-    public function getVkData()
+    public function setState($state)
+    {
+        $this->state = $state;
+    }
+
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    private function setData(array $data)
+    {
+        $_SESSION['OAuth_user_id'] = $data['user_id'];
+        $_SESSION['OAuth_avatar'] = $data['avatar'];
+        $_SESSION['OAuth_first_name'] = $data['first_name'];
+        $_SESSION['OAuth_last_name'] = $data['last_name'];
+        $_SESSION['OAuth_service'] = $data['service'];
+        $_SESSION['OAuth_state'] = $data['state'];
+    }
+
+    public function vk()
     {
         if (isset($_GET['code'])) {
             $params = array(
-                'client_id' => $this->settings['vk_AppID'],
-                'client_secret' => $this->settings['vk_SecretKey'],
+                'client_id' => $this->settings['vk_app_id'],
+                'client_secret' => $this->settings['vk_secret_key'],
                 'code' => $_GET['code'],
-                'redirect_uri' => $this->redirectURL,
+                'redirect_uri' => $this->settings['vk_redirect_url'],
             );
 
-            $token = json_decode(file_get_contents('https://oauth.vk.com/access_token' . '?' . urldecode(http_build_query($params))), true);
+            $curl = curl_init();
+            curl_setopt($curl, CURLOPT_URL, 'https://oauth.vk.com/access_token' . '?' . urldecode(http_build_query($params)));
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            $out = curl_exec($curl);
+            $token = json_decode($out, true);
+            curl_close($curl);
 
             if (isset($token['access_token'])) {
+
                 $params = array(
                     'uids' => $token['user_id'],
                     'fields' => 'uid,first_name,last_name,screen_name,sex,bdate,photo_big,country',
@@ -39,43 +75,50 @@ class SocialNets extends LightOpenID
                 if (isset($userInfo['response'][0]['uid'])) {
                     $user = $userInfo['response'][0];
 
-                    return array(
+                    $this->setData([
+                        'user_id' => $token['user_id'],
                         'avatar' => $user['photo_big'],
-                        'userID' => $token['user_id'],
-                        'email' => $token['email'],
-                        'firstName' => $user['first_name'],
-                        'lastName' => $user['last_name'],
-                        'birthday' => $user['bdate'],
-                    );
+                        'first_name' => $user['first_name'],
+                        'last_name' => $user['last_name'],
+                        'service' => 'vk',
+                        'state' => $this->getState(),
+                    ]);
+
+                    if ($this->getState() == self::STATE_LOGIN) {
+                        header('Location: ' . $this->settings['login_url']);
+                        exit;
+                    } elseif ($this->getState() == self::STATE_REGISTRATION) {
+                        header('Location: ' . $this->settings['registration_url']);
+                        exit;
+                    }
                 }
             }
         } else {
             $url = 'http://oauth.vk.com/authorize';
             $params = array(
-                'client_id' => $this->settings['vk_AppID'],
-                'redirect_uri' => $this->redirectURL,
+                'client_id' => $this->settings['vk_app_id'],
+                'redirect_uri' => $this->settings['vk_redirect_url'],
                 'display' => 'page',
                 'scope' => 'email',
                 'response_type' => 'code',
+                'state' => $this->getState(),
             );
             $location = $url . '?' . urldecode(http_build_query($params));
 
             header('Location: ' . $location);
             exit;
         }
-
-        return false;
     }
 
-    public function getOkData()
+    public function ok()
     {
         if (isset($_GET['code'])) {
             $params = array(
                 'code' => $_GET['code'],
-                'redirect_uri' => $this->redirectURL,
+                'redirect_uri' => $this->settings['ok_redirect_url'],
                 'grant_type' => 'authorization_code',
-                'client_id' => $this->settings['ok_AppID'],
-                'client_secret' => $this->settings['ok_SecretKey'],
+                'client_id' => $this->settings['ok_app_id'],
+                'client_secret' => $this->settings['ok_secret_key'],
             );
 
             $url = 'http://api.odnoklassniki.ru/oauth/token.do';
@@ -92,12 +135,12 @@ class SocialNets extends LightOpenID
             $token = json_decode($result, true);
 
             if (isset($token['access_token'])) {
-                $sign = md5("application_key={$this->settings['ok_PublicKey']}format=jsonmethod=users.getCurrentUser" . md5("{$token['access_token']}{$this->settings['ok_SecretKey']}"));
+                $sign = md5("application_key={$this->settings['ok_public_key']}format=jsonmethod=users.getCurrentUser" . md5("{$token['access_token']}{$this->settings['ok_secret_key']}"));
 
                 $params = array(
                     'method' => 'users.getCurrentUser',
                     'access_token' => $token['access_token'],
-                    'application_key' => $this->settings['ok_PublicKey'],
+                    'application_key' => $this->settings['ok_public_key'],
                     'format' => 'json',
                     'sig' => $sign,
                 );
@@ -105,22 +148,32 @@ class SocialNets extends LightOpenID
                 $userInfo = json_decode(file_get_contents('http://api.odnoklassniki.ru/fb.do' . '?' . urldecode(http_build_query($params))), true);
 
                 if ($userInfo) {
-                    return array(
-                        'userID' => $userInfo['uid'],
+                    $this->setData([
+                        'user_id' => $userInfo['uid'],
                         'avatar' => $userInfo['pic_3'],
-                        'firstName' => $userInfo['first_name'],
-                        'lastName' => $userInfo['last_name'],
-                        'birthday' => preg_replace('~([0-9]+)-([0-9]+)-([0-9]+)~', '$3.$2.$1', $userInfo['birthday']),
-                    );
+                        'first_name' => $userInfo['first_name'],
+                        'last_name' => $userInfo['last_name'],
+                        'service' => 'ok',
+                        'state' => $this->getState(),
+                    ]);
+
+                    if ($this->getState() == self::STATE_LOGIN) {
+                        header('Location: ' . $this->settings['login_url']);
+                        exit;
+                    } elseif ($this->getState() == self::STATE_REGISTRATION) {
+                        header('Location: ' . $this->settings['registration_url']);
+                        exit;
+                    }
                 }
             }
         } else {
             $url = 'http://www.odnoklassniki.ru/oauth/authorize';
 
             $params = array(
-                'client_id' => $this->settings['ok_AppID'],
+                'client_id' => $this->settings['ok_app_id'],
                 'response_type' => 'code',
-                'redirect_uri' => $this->redirectURL,
+                'redirect_uri' => $this->settings['ok_redirect_url'],
+                'state' => $this->getState(),
             );
 
             $location = $url . '?' . urldecode(http_build_query($params));
@@ -132,16 +185,16 @@ class SocialNets extends LightOpenID
         return false;
     }
 
-    public function getMailData()
+    public function mail()
     {
         if (isset($_GET['code'])) {
 
             $params = array(
-                'client_id' => $this->settings['mail_AppID'],
-                'client_secret' => $this->settings['mail_SecretKey'],
+                'client_id' => $this->settings['mail_app_id'],
+                'client_secret' => $this->settings['mail_secret_key'],
                 'grant_type' => 'authorization_code',
                 'code' => $_GET['code'],
-                'redirect_uri' => $this->redirectURL,
+                'redirect_uri' => $this->settings['mail_redirect_url'],
             );
 
             $url = 'https://connect.mail.ru/oauth/token';
@@ -158,12 +211,12 @@ class SocialNets extends LightOpenID
             $token = json_decode($result, true);
 
             if (isset($token['access_token'])) {
-                $sign = md5("app_id={$this->settings['mail_AppID']}method=users.getInfosecure=1session_key={$token['access_token']}{$this->settings['mail_SecretKey']}");
+                $sign = md5("app_id={$this->settings['mail_app_id']}method=users.getInfosecure=1session_key={$token['access_token']}{$this->settings['mail_secret_key']}");
 
                 $params = array(
                     'method' => 'users.getInfo',
                     'secure' => '1',
-                    'app_id' => $this->settings['mail_AppID'],
+                    'app_id' => $this->settings['mail_app_id'],
                     'session_key' => $token['access_token'],
                     'sig' => $sign,
                 );
@@ -172,21 +225,31 @@ class SocialNets extends LightOpenID
                 if (isset($userInfo[0]['uid'])) {
                     $userInfo = array_shift($userInfo);
 
-                    return array(
-                        'userID' => $userInfo['uid'],
+                    $this->setData([
+                        'user_id' => $userInfo['uid'],
                         'avatar' => $userInfo['pic_big'],
-                        'firstName' => $userInfo['first_name'],
-                        'lastName' => $userInfo['last_name'],
-                        'birthday' => $userInfo['birthday'],
-                    );
+                        'first_name' => $userInfo['first_name'],
+                        'last_name' => $userInfo['last_name'],
+                        'service' => 'mail',
+                        'state' => $this->getState(),
+                    ]);
+
+                    if ($this->getState() == self::STATE_LOGIN) {
+                        header('Location: ' . $this->settings['login_url']);
+                        exit;
+                    } elseif ($this->getState() == self::STATE_REGISTRATION) {
+                        header('Location: ' . $this->settings['registration_url']);
+                        exit;
+                    }
                 }
             }
         } else {
             $url = 'https://connect.mail.ru/oauth/authorize';
             $params = array(
-                'client_id' => $this->settings['mail_AppID'],
+                'client_id' => $this->settings['mail_app_id'],
                 'response_type' => 'code',
-                'redirect_uri' => $this->redirectURL,
+                'redirect_uri' => $this->settings['mail_redirect_url'],
+                'state' => $this->getState(),
             );
             $location = $url . '?' . urldecode(http_build_query($params));
 
@@ -197,14 +260,14 @@ class SocialNets extends LightOpenID
         return false;
     }
 
-    public function getYaData()
+    public function ya()
     {
         if (isset($_GET['code'])) {
             $params = array(
                 'grant_type' => 'authorization_code',
                 'code' => $_GET['code'],
-                'client_id' => $this->settings['ya_AppID'],
-                'client_secret' => $this->settings['ya_SecretKey'],
+                'client_id' => $this->settings['ya_app_id'],
+                'client_secret' => $this->settings['ya_secret_key'],
             );
 
             $url = 'https://oauth.yandex.ru/token';
@@ -229,39 +292,47 @@ class SocialNets extends LightOpenID
                 $userInfo = json_decode(file_get_contents('https://login.yandex.ru/info' . '?' . urldecode(http_build_query($params))), true);
 
                 if (isset($userInfo['id'])) {
-                    return array(
-                        'userID' => $userInfo['id'],
+                    $this->setData([
+                        'user_id' => $userInfo['id'],
                         'avatar' => (isset($userInfo['is_avatar_empty'])) ? 'https://avatars.mds.yandex.net/get-yapic/0/0-0/islands-200' : 'https://avatars.yandex.net/get-yapic/' . $userInfo['default_avatar_id'] . '/islands-200',
-                        'firstName' => $userInfo['first_name'],
-                        'lastName' => $userInfo['last_name'],
-                        'birthday' => $userInfo['birthday'],
-                    );
+                        'first_name' => $userInfo['first_name'],
+                        'last_name' => $userInfo['last_name'],
+                        'service' => 'ya',
+                        'state' => $this->getState(),
+                    ]);
+
+                    if ($this->getState() == self::STATE_LOGIN) {
+                        header('Location: ' . $this->settings['login_url']);
+                        exit;
+                    } elseif ($this->getState() == self::STATE_REGISTRATION) {
+                        header('Location: ' . $this->settings['registration_url']);
+                        exit;
+                    }
                 }
             }
         } else {
             $url = 'https://oauth.yandex.ru/authorize';
             $params = array(
                 'response_type' => 'code',
-                'client_id' => $this->settings['ya_AppID'],
+                'client_id' => $this->settings['ya_app_id'],
                 'display' => 'popup',
+                'state' => $this->getState(),
             );
             $location = $url . '?' . urldecode(http_build_query($params));
 
             header('Location: ' . $location);
             exit;
         }
-
-        return false;
     }
 
-    public function getGooData()
+    public function google()
     {
         if (isset($_GET['code'])) {
 
             $params = array(
-                'client_id' => $this->settings['goo_AppID'],
-                'client_secret' => $this->settings['goo_SecretKey'],
-                'redirect_uri' => $this->redirectURL,
+                'client_id' => $this->settings['google_app_id'],
+                'client_secret' => $this->settings['google_secret_key'],
+                'redirect_uri' => $this->settings['google_redirect_url'],
                 'grant_type' => 'authorization_code',
                 'code' => $_GET['code'],
             );
@@ -283,20 +354,33 @@ class SocialNets extends LightOpenID
 
                 $userInfo = json_decode(file_get_contents('https://www.googleapis.com/oauth2/v1/userinfo' . '?' . urldecode(http_build_query($params))), true);
 
-                return array(
-                    'userID' => $userInfo['id'],
-                    'avatar' => $userInfo['picture'],
-                    'firstName' => $userInfo['given_name'],
-                    'lastName' => $userInfo['family_name'],
-                );
+                if ($userInfo) {
+                    $this->setData([
+                        'user_id' => $userInfo['id'],
+                        'avatar' => $userInfo['picture'],
+                        'first_name' => $userInfo['given_name'],
+                        'last_name' => $userInfo['family_name'],
+                        'service' => 'google',
+                        'state' => $this->getState(),
+                    ]);
+
+                    if ($this->getState() == self::STATE_LOGIN) {
+                        header('Location: ' . $this->settings['login_url']);
+                        exit;
+                    } elseif ($this->getState() == self::STATE_REGISTRATION) {
+                        header('Location: ' . $this->settings['registration_url']);
+                        exit;
+                    }
+                }
             }
         } else {
             $url = 'https://accounts.google.com/o/oauth2/auth';
             $params = array(
-                'redirect_uri' => $this->redirectURL,
+                'redirect_uri' => $this->settings['google_redirect_url'],
                 'response_type' => 'code',
-                'client_id' => $this->settings['goo_AppID'],
+                'client_id' => $this->settings['google_app_id'],
                 'scope' => 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile',
+                'state' => $this->getState(),
             );
             $location = $url . '?' . urldecode(http_build_query($params));
 
@@ -307,13 +391,13 @@ class SocialNets extends LightOpenID
         return false;
     }
 
-    public function getFbData()
+    public function fb()
     {
         if (isset($_GET['code'])) {
             $params = array(
-                'client_id' => $this->settings['fb_AppID'],
-                'redirect_uri' => $this->redirectURL,
-                'client_secret' => $this->settings['fb_SecretKey'],
+                'client_id' => $this->settings['fb_app_id'],
+                'redirect_uri' => $this->settings['fb_redirect_url'],
+                'client_secret' => $this->settings['fb_secret_key'],
                 'code' => $_GET['code'],
             );
 
@@ -329,20 +413,31 @@ class SocialNets extends LightOpenID
             $userInfo = json_decode(file_get_contents('https://graph.facebook.com/v2.8/me/' . '?' . urldecode(http_build_query($params))), true);
 
             if ($userInfo) {
-                return array(
-                    'userID' => $userInfo['id'],
+                $this->setData([
+                    'user_id' => $userInfo['id'],
                     'avatar' => $userInfo['picture']['data']['url'],
-                    'firstName' => $userInfo['first_name'],
-                    'lastName' => $userInfo['last_name'],
-                );
+                    'first_name' => $userInfo['first_name'],
+                    'last_name' => $userInfo['last_name'],
+                    'service' => 'fb',
+                    'state' => $this->getState(),
+                ]);
+
+                if ($this->getState() == self::STATE_LOGIN) {
+                    header('Location: ' . $this->settings['login_url']);
+                    exit;
+                } elseif ($this->getState() == self::STATE_REGISTRATION) {
+                    header('Location: ' . $this->settings['registration_url']);
+                    exit;
+                }
             }
         } else {
             $url = 'https://www.facebook.com/v2.8/dialog/oauth';
             $params = array(
-                'client_id' => $this->settings['fb_AppID'],
-                'redirect_uri' => $this->redirectURL,
+                'client_id' => $this->settings['fb_app_id'],
+                'redirect_uri' => $this->settings['fb_redirect_url'],
                 'response_type' => 'code',
                 'scope' => 'email,public_profile,user_friends',
+                'state' => $this->getState(),
             );
             $location = $url . '?' . urldecode(http_build_query($params));
             header('Location: ' . $location);
@@ -358,7 +453,7 @@ class SocialNets extends LightOpenID
      * @see https://developer.valvesoftware.com/wiki/Steam_Web_API#GetPlayerSummaries_.28v0002.29
      * @return bool|array
      */
-    public function getSteamData()
+    public function steam()
     {
         if ($this->getSteamID()) {
             $url = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=" . $this->steamApiKey . "&steamids=" . $this->steamID;

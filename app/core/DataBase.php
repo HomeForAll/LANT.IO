@@ -83,13 +83,14 @@ class DataBase extends PDO
 
                 // Если это первый ключ массива добавляем WHERE вначале, вместо AND
                 if ($key == 0) {
-                    $query .= ' WHERE ' . $where['column'] . ' ' . $where['operator'] . ' ' . $where['value'];
+                    $query .= ' WHERE ' . $where['column'] . ' ' . $where['operator'] . ' \'' . $where['value']. '\'';
                 } else {
                     $query .= ' AND ' . $where['column'] . ' ' . $where['operator'] . ' ' . $where['value'];
                 }
             }
         }
 
-        return $this->query($query)->fetchAll();
+        $result = $this->query($query)->fetchAll();
+        return $result;
     }
 }

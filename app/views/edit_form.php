@@ -63,6 +63,18 @@
 
 <h1>Редактирование формы ID: <?php echo $this->data['id']; ?></h1>
 
+<?php
+function searchParam($params, $need)
+{
+    foreach ($params as $key => $param) {
+        if ($param[0] == $need) {
+            return $param;
+        }
+    }
+    return false;
+}
+?>
+
 <table>
     <tr>
         <th colspan="3">Параметры</th>
@@ -73,9 +85,9 @@
         <th>Тип объекта</th>
     </tr>
     <tr style="height: 70px">
-        <td><?php echo $this->data['formParams']['spaceTypes'][$this->data['form'][0]['space_type'] - 1]['r_name']; ?></td>
-        <td><?php echo $this->data['formParams']['operationTypes'][$this->data['form'][0]['operation'] - 1]['r_name']; ?></td>
-        <td><?php echo $this->data['formParams']['objectTypes'][$this->data['form'][0]['object_type'] - 1]['r_name']; ?></td>
+        <td><?php echo searchParam($this->data['formParams']['spaceTypes'], $this->data['form'][0]['space_type'])['r_name']; ?></td>
+        <td><?php echo searchParam($this->data['formParams']['operationTypes'], $this->data['form'][0]['operation'])['r_name']; ?></td>
+        <td><?php echo searchParam($this->data['formParams']['objectTypes'], $this->data['form'][0]['object_type'])['r_name']; ?></td>
     </tr>
 </table>
 

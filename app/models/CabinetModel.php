@@ -750,10 +750,10 @@ class CabinetModel extends Model
 
     public function getForms()
     {
-        $query = $this->db->prepare("SELECT * FROM forms");
-        $query->execute();
+        //$_SESSION['userID'] = 12;
+        $query = $this->db->prepare("SELECT * FROM forms WHERE user_id = :user_id");
+        $query->execute([':user_id' => $_SESSION['userID']]);
         $forms = $query->fetchAll();
-
 
         return array(
             'forms' => $forms,
@@ -789,11 +789,12 @@ class CabinetModel extends Model
             return 'Ошибка, такая форма уже существует.';
         }
 
-        $query = $this->db->prepare("INSERT INTO forms (space_type, object_type, operation) VALUES (:space_type, :object_type, :operation)");
+        $query = $this->db->prepare("INSERT INTO forms (space_type, object_type, operation, user_id) VALUES (:space_type, :object_type, :operation, :user_id)");
         $query->execute([
             ':space_type' => $spaceType,
             ':object_type' => $objectType,
             ':operation' => $operationType,
+            ':user_id' => $_SESSION['userID'],
         ]);
 
         if ($query->rowCount()) {
@@ -1293,6 +1294,7 @@ class CabinetModel extends Model
     public function getFormParams()
     {
         return array(
+            'userID'=>$_SESSION['userID'],
             'spaceTypes' => $this->getSpaceTypes(),
             'operationTypes' => $this->getOperationTypes(),
             'objectTypes' => $this->getObjectTypes(),

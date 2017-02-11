@@ -68,6 +68,9 @@
         text-align: center;
     }
 </style>
+<script>
+    var userID =  <?php echo $this->data['userID']; ?>;
+</script>
 <div style="border: dotted 1px gray; padding: 15px;">
     Если нужно добавить новый параметр формы следуйте инструкции: <br><br>
     1. Ткнуть кнопку с "Добавить (нужный элемент)".<br>

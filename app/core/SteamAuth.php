@@ -5,9 +5,9 @@ class SteamAuth extends LightOpenID
     private $apiKey;
     public $steamID;
     
-    public function __construct($redirectURL, $apiKey)
+    public function __construct($currentURL, $apiKey)
     {
-        parent::__construct($redirectURL);
+        parent::__construct($currentURL);
         $this->apiKey = $apiKey;
     }
 
