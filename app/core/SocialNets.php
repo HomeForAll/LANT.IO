@@ -13,14 +13,11 @@ class SocialNets extends LightOpenID
 
     public function __construct($currentURL)
     {
-//        $row = strpos($redirectURL, "?");
-//        if ($row) {
-//            $redirectURL = substr($redirectURL, 0, $row);
-//        }
-
         parent::__construct($currentURL);
 
+        // Поучаем параметры соц. сетей: secret_key, redirect_url ...
         $this->settings = require ROOT_DIR . '/app/config/auth.php';
+        // Запоминаем URL на котором сейчас находимся
         $this->currentURL = $currentURL;
         $this->steamApiKey = $this->settings['steam_api_key'];
     }
@@ -35,6 +32,11 @@ class SocialNets extends LightOpenID
         return $this->state;
     }
 
+    /**
+     * Записывает необходимые денные в сессию
+     *
+     * @param array $data - массив данных пользователя
+     */
     private function setData(array $data)
     {
         $_SESSION['OAuth_user_id'] = $data['user_id'];
@@ -45,9 +47,15 @@ class SocialNets extends LightOpenID
         $_SESSION['OAuth_state'] = $data['state'];
     }
 
+    /**
+     * Получает данные пользователя используя token или перенаправляет пользователя на страницу авторизации VK.COM
+     * если отсутствует код для получения токена
+     */
     public function vk()
     {
+        // Если сервер в ответ прислал GET запрос с параметром "code"
         if (isset($_GET['code'])) {
+            // Вбиваем в массив данные которые хотим отправить в GET запросе
             $params = array(
                 'client_id' => $this->settings['vk_app_id'],
                 'client_secret' => $this->settings['vk_secret_key'],
@@ -55,15 +63,17 @@ class SocialNets extends LightOpenID
                 'redirect_uri' => $this->settings['vk_redirect_url'],
             );
 
+            // Инициализируем cURL
             $curl = curl_init();
+            // Указываем URL, предварительно скомпилировав параметры из массива $params
             curl_setopt($curl, CURLOPT_URL, 'https://oauth.vk.com/access_token' . '?' . urldecode(http_build_query($params)));
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            // Получаем токен закдированный в JSON формате
             $out = curl_exec($curl);
             $token = json_decode($out, true);
             curl_close($curl);
 
             if (isset($token['access_token'])) {
-
+                // Указываем параметры полученые из token и данные которые мы хотим получить
                 $params = array(
                     'uids' => $token['user_id'],
                     'fields' => 'uid,first_name,last_name,screen_name,sex,bdate,photo_big,country',
@@ -75,6 +85,7 @@ class SocialNets extends LightOpenID
                 if (isset($userInfo['response'][0]['uid'])) {
                     $user = $userInfo['response'][0];
 
+                    // Записываем полученные данные в сессию
                     $this->setData([
                         'user_id' => $token['user_id'],
                         'avatar' => $user['photo_big'],
@@ -84,6 +95,8 @@ class SocialNets extends LightOpenID
                         'state' => $this->getState(),
                     ]);
 
+                    // Исходя из установленного статуса запроса, перенаправляем человека либо на регистрацию
+                    // или на авторизацию
                     if ($this->getState() == self::STATE_LOGIN) {
                         header('Location: ' . $this->settings['login_url']);
                         exit;
@@ -94,6 +107,7 @@ class SocialNets extends LightOpenID
                 }
             }
         } else {
+            // Составляем параметры для получения $_GET['code'] и перенарпавляем пользователя на авторизацию в соц. сети
             $url = 'http://oauth.vk.com/authorize';
             $params = array(
                 'client_id' => $this->settings['vk_app_id'],
@@ -110,9 +124,14 @@ class SocialNets extends LightOpenID
         }
     }
 
+    /**
+     * Получает данные пользователя используя token или перенаправляет пользователя на страницу авторизации OK.RU
+     * если отсутствует код для получения токена
+     */
     public function ok()
     {
         if (isset($_GET['code'])) {
+            // Составляем параметры дл получения token
             $params = array(
                 'code' => $_GET['code'],
                 'redirect_uri' => $this->settings['ok_redirect_url'],
@@ -122,7 +141,7 @@ class SocialNets extends LightOpenID
             );
 
             $url = 'http://api.odnoklassniki.ru/oauth/token.do';
-
+            // Компилируем параметры и делаем POST запрос, для получения token
             $curl = curl_init();
             curl_setopt($curl, CURLOPT_URL, $url);
             curl_setopt($curl, CURLOPT_POST, 1);
@@ -132,6 +151,7 @@ class SocialNets extends LightOpenID
             $result = curl_exec($curl);
             curl_close($curl);
 
+            // Декодируем реультат из JSON в массив
             $token = json_decode($result, true);
 
             if (isset($token['access_token'])) {
@@ -145,9 +165,11 @@ class SocialNets extends LightOpenID
                     'sig' => $sign,
                 );
 
+                // Получаем данные пользователя используя токен
                 $userInfo = json_decode(file_get_contents('http://api.odnoklassniki.ru/fb.do' . '?' . urldecode(http_build_query($params))), true);
 
                 if ($userInfo) {
+                    // Записываем данные в сессию
                     $this->setData([
                         'user_id' => $userInfo['uid'],
                         'avatar' => $userInfo['pic_3'],
@@ -157,6 +179,7 @@ class SocialNets extends LightOpenID
                         'state' => $this->getState(),
                     ]);
 
+                    // Перенапрвялем пользователя на страницу, соттветствующую статусу запроса
                     if ($this->getState() == self::STATE_LOGIN) {
                         header('Location: ' . $this->settings['login_url']);
                         exit;
@@ -167,6 +190,7 @@ class SocialNets extends LightOpenID
                 }
             }
         } else {
+            // Получаем $_GET['code'], перенаправляя пользователя на страницу авторизации OK.RU
             $url = 'http://www.odnoklassniki.ru/oauth/authorize';
 
             $params = array(
@@ -185,6 +209,12 @@ class SocialNets extends LightOpenID
         return false;
     }
 
+    /**
+     * Получает данные пользователя используя token или перенаправляет пользователя на страницу авторизации MAIL.RU
+     * если отсутствует код для получения токена, операции схожи с авторизацией OK.RU
+     *
+     * @see SocialNets::ok()
+     */
     public function mail()
     {
         if (isset($_GET['code'])) {
@@ -260,6 +290,12 @@ class SocialNets extends LightOpenID
         return false;
     }
 
+    /**
+     * Получает данные пользователя используя token или перенаправляет пользователя на страницу авторизации YANDEX.RU
+     * если отсутствует код для получения токена, операции схожи с авторизацией VK.COM
+     *
+     * @see SocialNets::vk()
+     */
     public function ya()
     {
         if (isset($_GET['code'])) {
@@ -325,6 +361,12 @@ class SocialNets extends LightOpenID
         }
     }
 
+    /**
+     * Получает данные пользователя используя token или перенаправляет пользователя на страницу авторизации GOOGLE.COM
+     * если отсутствует код для получения токена, операции схожи с авторизацией VK.COM
+     *
+     * @see SocialNets::vk()
+     */
     public function google()
     {
         if (isset($_GET['code'])) {
@@ -391,6 +433,12 @@ class SocialNets extends LightOpenID
         return false;
     }
 
+    /**
+     * Получает данные пользователя используя token или перенаправляет пользователя на страницу авторизации FACEBOOK.COM
+     * если отсутствует код для получения токена, операции схожи с авторизацией VK.COM
+     *
+     * @see SocialNets::vk()
+     */
     public function fb()
     {
         if (isset($_GET['code'])) {
@@ -451,7 +499,6 @@ class SocialNets extends LightOpenID
      * Возвращает информацию о SteamID используя SteamAPI, если не удалось получить информацию, вернет false
      *
      * @see https://developer.valvesoftware.com/wiki/Steam_Web_API#GetPlayerSummaries_.28v0002.29
-     * @return bool|array
      */
     public function steam()
     {
@@ -480,8 +527,6 @@ class SocialNets extends LightOpenID
                 }
             }
         }
-
-        return false;
     }
 
     /**
