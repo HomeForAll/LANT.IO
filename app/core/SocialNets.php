@@ -10,6 +10,7 @@ class SocialNets extends LightOpenID
 
     const STATE_LOGIN = 1;
     const STATE_REGISTRATION = 2;
+    const STATE_UPDATE_SERVICE = 3;
 
     public function __construct($currentURL)
     {
@@ -67,6 +68,7 @@ class SocialNets extends LightOpenID
             $curl = curl_init();
             // Указываем URL, предварительно скомпилировав параметры из массива $params
             curl_setopt($curl, CURLOPT_URL, 'https://oauth.vk.com/access_token' . '?' . urldecode(http_build_query($params)));
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
             // Получаем токен закдированный в JSON формате
             $out = curl_exec($curl);
             $token = json_decode($out, true);
@@ -97,13 +99,7 @@ class SocialNets extends LightOpenID
 
                     // Исходя из установленного статуса запроса, перенаправляем человека либо на регистрацию
                     // или на авторизацию
-                    if ($this->getState() == self::STATE_LOGIN) {
-                        header('Location: ' . $this->settings['login_url']);
-                        exit;
-                    } elseif ($this->getState() == self::STATE_REGISTRATION) {
-                        header('Location: ' . $this->settings['registration_url']);
-                        exit;
-                    }
+                    $this->redirect();
                 }
             }
         } else {
@@ -180,13 +176,7 @@ class SocialNets extends LightOpenID
                     ]);
 
                     // Перенапрвялем пользователя на страницу, соттветствующую статусу запроса
-                    if ($this->getState() == self::STATE_LOGIN) {
-                        header('Location: ' . $this->settings['login_url']);
-                        exit;
-                    } elseif ($this->getState() == self::STATE_REGISTRATION) {
-                        header('Location: ' . $this->settings['registration_url']);
-                        exit;
-                    }
+                    $this->redirect();
                 }
             }
         } else {
@@ -264,13 +254,7 @@ class SocialNets extends LightOpenID
                         'state' => $this->getState(),
                     ]);
 
-                    if ($this->getState() == self::STATE_LOGIN) {
-                        header('Location: ' . $this->settings['login_url']);
-                        exit;
-                    } elseif ($this->getState() == self::STATE_REGISTRATION) {
-                        header('Location: ' . $this->settings['registration_url']);
-                        exit;
-                    }
+                    $this->redirect();
                 }
             }
         } else {
@@ -337,13 +321,7 @@ class SocialNets extends LightOpenID
                         'state' => $this->getState(),
                     ]);
 
-                    if ($this->getState() == self::STATE_LOGIN) {
-                        header('Location: ' . $this->settings['login_url']);
-                        exit;
-                    } elseif ($this->getState() == self::STATE_REGISTRATION) {
-                        header('Location: ' . $this->settings['registration_url']);
-                        exit;
-                    }
+                    $this->redirect();
                 }
             }
         } else {
@@ -406,13 +384,7 @@ class SocialNets extends LightOpenID
                         'state' => $this->getState(),
                     ]);
 
-                    if ($this->getState() == self::STATE_LOGIN) {
-                        header('Location: ' . $this->settings['login_url']);
-                        exit;
-                    } elseif ($this->getState() == self::STATE_REGISTRATION) {
-                        header('Location: ' . $this->settings['registration_url']);
-                        exit;
-                    }
+                    $this->redirect();
                 }
             }
         } else {
@@ -470,13 +442,7 @@ class SocialNets extends LightOpenID
                     'state' => $this->getState(),
                 ]);
 
-                if ($this->getState() == self::STATE_LOGIN) {
-                    header('Location: ' . $this->settings['login_url']);
-                    exit;
-                } elseif ($this->getState() == self::STATE_REGISTRATION) {
-                    header('Location: ' . $this->settings['registration_url']);
-                    exit;
-                }
+                $this->redirect();
             }
         } else {
             $url = 'https://www.facebook.com/v2.8/dialog/oauth';
@@ -518,13 +484,7 @@ class SocialNets extends LightOpenID
                     'state' => $this->getState(),
                 ]);
 
-                if ($this->getState() == self::STATE_LOGIN) {
-                    header('Location: ' . $this->settings['login_url']);
-                    exit;
-                } elseif ($this->getState() == self::STATE_REGISTRATION) {
-                    header('Location: ' . $this->settings['registration_url']);
-                    exit;
-                }
+                $this->redirect();
             }
         }
     }
@@ -554,5 +514,18 @@ class SocialNets extends LightOpenID
         }
 
         return false;
+    }
+
+    private function redirect(){
+        if ($this->getState() == self::STATE_LOGIN) {
+            header('Location: ' . $this->settings['login_url']);
+            exit;
+        } elseif ($this->getState() == self::STATE_REGISTRATION) {
+            header('Location: ' . $this->settings['registration_url']);
+            exit;
+        } elseif ($this->getState() == self::STATE_UPDATE_SERVICE) {
+            header('Location: ' . $this->settings['update_service_url']);
+            exit;
+        }
     }
 }

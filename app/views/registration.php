@@ -206,37 +206,37 @@ if (isset($_SESSION['services']) && !empty($_SESSION['services'])) {
     <?php
     if (!isset($_SESSION['services']['vk'])) {
         ?>
-        <a href="registration/vk"><img src="/templates/main/images/soc_net/vk_2.png" alt="VK"></a>
+        <a href="oauth/vk/state/2"><img src="/templates/main/images/soc_net/vk_2.png" alt="VK"></a>
         <?php
     }
     if (!isset($_SESSION['services']['ok'])) {
         ?>
-        <a href="registration/ok"><img src="/templates/main/images/soc_net/ok.png" alt="OK"></a>
+        <a href="oauth/ok/state/2"><img src="/templates/main/images/soc_net/ok.png" alt="OK"></a>
         <?php
     }
     if (!isset($_SESSION['services']['mail'])) {
         ?>
-        <a href="registration/mail"><img src="/templates/main/images/soc_net/mail_ru.png" alt="Mail"></a>
+        <a href="oauth/mail/state/2"><img src="/templates/main/images/soc_net/mail_ru.png" alt="Mail"></a>
         <?php
     }
     if (!isset($_SESSION['services']['ya'])) {
         ?>
-        <a href="registration/ya"><img src="/templates/main/images/soc_net/yandex_2.png" alt="YA"></a>
+        <a href="oauth/ya/state/2"><img src="/templates/main/images/soc_net/yandex_2.png" alt="YA"></a>
         <?php
     }
     if (!isset($_SESSION['services']['goo'])) {
         ?>
-        <a href="registration/goo"><img src="/templates/main/images/soc_net/google.png" alt="Google"></a>
+        <a href="oauth/google/state/2"><img src="/templates/main/images/soc_net/google.png" alt="Google"></a>
         <?php
     }
     if (!isset($_SESSION['services']['fb'])) {
         ?>
-        <a href="registration/fb"><img src="/templates/main/images/soc_net/facebook_2.png" alt="FaceBook"></a>
+        <a href="oauth/fb/state/2"><img src="/templates/main/images/soc_net/facebook_2.png" alt="FaceBook"></a>
         <?php
     }
     if (!isset($_SESSION['services']['steam'])) {
         ?>
-        <a href="registration/steam"><img src="/templates/main/images/soc_net/steam.png" alt="Steam"></a>
+        <a href="oauth/steam/state/2"><img src="/templates/main/images/soc_net/steam.png" alt="Steam"></a>
         <?php
     }
     ?>

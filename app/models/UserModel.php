@@ -46,7 +46,7 @@ class UserModel extends Model
     {
         $errors = [];
 
-        if (!empty($_SESSION['social_data']['service_name'])) {
+        if (!empty($_SESSION['OAuth_state'])) {
             $email = $_POST['email'];
             $phone = $this->extractPhoneNumber($_POST['phone']);
             $password = $_POST['password'];
@@ -66,7 +66,6 @@ class UserModel extends Model
             if ($password_errors) {
                 $errors['password'] = $password_errors;
             }
-
         } else {
             $email = $_POST['email'];
             $first_name = $_POST['firstName'];
@@ -258,17 +257,17 @@ class UserModel extends Model
 
     public function saveUserData()
     {
-        if (!empty($_SESSION['social_data']['service_name'])) {
+        if (!empty($_SESSION['OAuth_state']) && $_SESSION['OAuth_state'] == 2) {
             $email = $_POST['email'];
-            $first_name = $_SESSION['social_data']['firstName'];
-            $last_name = $_SESSION['social_data']['lastName'];
+            $first_name = $_SESSION['OAuth_first_name'];
+            $last_name = $_SESSION['OAuth_last_name'];
             $phone_number = $_POST['phone'];
             $password = $_POST['password'];
-            $service_id = $_SESSION['social_data']['userID'];
+            $service_id = $_SESSION['OAuth_user_id'];
 
             $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
-            switch ($_SESSION['social_data']['service_name']) {
+            switch ($_SESSION['OAuth_service']) {
                 case 'vk':
                     $query = $this->db->prepare("INSERT INTO users (first_name, last_name, phone_number, email, password, vk_id) VALUES (:firstName, :lastName, :phoneNumber, :email, :password, :serviceID)");
                     break;
@@ -281,14 +280,17 @@ class UserModel extends Model
                 case 'ya':
                     $query = $this->db->prepare("INSERT INTO users (first_name, last_name, phone_number, email, password, ya_id) VALUES (:firstName, :lastName, :phoneNumber, :email, :password, :serviceID)");
                     break;
-                case 'goo':
+                case 'google':
                     $query = $this->db->prepare("INSERT INTO users (first_name, last_name, phone_number, email, password, google_id) VALUES (:firstName, :lastName, :phoneNumber, :email, :password, :serviceID)");
+                    break;
+                case 'fb':
+                    $query = $this->db->prepare("INSERT INTO users (first_name, last_name, phone_number, email, password, facebook_id) VALUES (:firstName, :lastName, :phoneNumber, :email, :password, :serviceID)");
                     break;
                 case 'steam':
                     $query = $this->db->prepare("INSERT INTO users (first_name, last_name, phone_number, email, password, steam_id) VALUES (:firstName, :lastName, :phoneNumber, :email, :password, :serviceID)");
                     break;
                 default:
-                    $query = $this->db->prepare("INSERT INTO users (first_name, last_name, phone_number, email, password) VALUES (:firstName, :lastName, :patronymic, :email, :password)");
+                    $query = $this->db->prepare("INSERT INTO users (first_name, last_name, phone_number, email, password) VALUES (:firstName, :lastName, :phoneNumber, :email, :password)");
             }
 
             $query->execute([
@@ -301,10 +303,9 @@ class UserModel extends Model
             ]);
 
             if ($query->rowCount()) {
-                unset($_SESSION['social_data']);
+                $this->clearOAuth();
                 return array('result'=> true);
             }
-            //$query = $this->db->prepare("INSERT INTO users (first_name, last_name, patronymic, birthday, phone_number, email, password, vk_id, ok_id, mail_id, ya_id, google_id, steam_id) VALUES (:firstName, :lastName, :patronymic, :birthday, :phoneNumber, :email, :password, :vk_userID, :ok_userID, :mail_userID, :ya_userID, :google_userID, :steam_userID)");
         } else {
             $email = $_POST['email'];
             $first_name = $_POST['firstName'];

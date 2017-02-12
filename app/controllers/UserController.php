@@ -2,59 +2,35 @@
 
 class UserController extends Controller
 {
+    use Cleaner;
 
-    public function actionRegistration($socialServiceName = null)
+    public function actionRegistration()
     {
-        if (!empty($socialServiceName || isset($_SESSION['social_data']))) {
-            if (isset($_POST['cancel_social_registration'])) {
-                unset($_SESSION['social_data']);
-                header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
-                exit;
-            } elseif (isset($_SESSION['social_data'])) {
-                $data = $_SESSION['social_data'];
-
+        if (isset($_SESSION['OAuth_state'])) {
+            if ($_SESSION['OAuth_state'] == 2) {
                 if (isset($_POST['submit'])) {
                     $this->view->render('social_registration', array(
-                        'user_id' => $data['userID'],
-                        'avatar' => $data['avatar'],
-                        'first_name' => $data['firstName'],
-                        'last_name' => $data['lastName'],
-                        'service_name' => $data['service_name'],
+                        'user_id' => $_SESSION['OAuth_user_id'],
+                        'avatar' => $_SESSION['OAuth_avatar'],
+                        'first_name' => $_SESSION['OAuth_first_name'],
+                        'last_name' => $_SESSION['OAuth_last_name'],
+                        'service_name' => $_SESSION['OAuth_service'],
                         'errors' => $this->model->doRegistration(),
                     ));
+                } elseif (isset($_POST['cancel_social_registration'])) {
+                    $this->clearOAuth();
+                    header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
                 } else {
                     $this->view->render('social_registration', array(
-                        'user_id' => $data['userID'],
-                        'avatar' => $data['avatar'],
-                        'first_name' => $data['firstName'],
-                        'last_name' => $data['lastName'],
-                        'service_name' => $data['service_name'],
+                        'user_id' => $_SESSION['OAuth_user_id'],
+                        'avatar' => $_SESSION['OAuth_avatar'],
+                        'first_name' => $_SESSION['OAuth_first_name'],
+                        'last_name' => $_SESSION['OAuth_last_name'],
+                        'service_name' => $_SESSION['OAuth_service'],
                     ));
                 }
             } else {
-                $socialNets = new SocialNets('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
-                $result = $socialNets->router($socialServiceName[0]);
-                $result['service_name'] = $socialServiceName[0];
-                $_SESSION['social_data'] = $result;
-
-                if (isset($_POST['submit'])) {
-                    $this->view->render('social_registration', array(
-                        'user_id' => $result['userID'],
-                        'avatar' => $result['avatar'],
-                        'first_name' => $result['firstName'],
-                        'last_name' => $result['lastName'],
-                        'service_name' => $result['service_name'],
-                        'errors' => $this->model->doRegistration(),
-                    ));
-                } else {
-                    $this->view->render('social_registration', array(
-                        'user_id' => $result['userID'],
-                        'avatar' => $result['avatar'],
-                        'first_name' => $result['firstName'],
-                        'last_name' => $result['lastName'],
-                        'service_name' => $result['service_name'],
-                    ));
-                }
+                $this->view->render('registration');
             }
         } elseif (isset($_POST['submit'])) {
             $this->view->render('registration', $this->model->doRegistration());
@@ -68,7 +44,9 @@ class UserController extends Controller
         if (isset($_POST['submit'])) {
             $this->view->render('login', $this->model->doLogin());
         } elseif (isset($_SESSION['OAuth_state'])) {
-            $this->model->OAuthLogin($_SESSION['OAuth_service'], $_SESSION['OAuth_user_id']);
+            if ($_SESSION['OAuth_state'] == 1) {
+                $this->model->OAuthLogin($_SESSION['OAuth_service'], $_SESSION['OAuth_user_id']);
+            }
             $this->view->render('login');
         } elseif (isset($_SESSION['authorized'])) {
             header('Location: http://' . $_SERVER['HTTP_HOST'] . '/cabinet');

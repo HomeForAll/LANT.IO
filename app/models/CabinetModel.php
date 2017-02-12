@@ -199,7 +199,6 @@ class CabinetModel extends Model
                 $_SESSION['email_error'] = 1;
             }
 
-
             $this->db->query("UPDATE users SET vk_id = '{$_POST['vkcom']}' WHERE id = $profile_id");
             $this->db->query("UPDATE users SET ok_id = '{$_POST['classmates']}' WHERE id = $profile_id");
             $this->db->query("UPDATE users SET mail_id = '{$_POST['mailru']}' WHERE id = $profile_id");
@@ -1294,7 +1293,7 @@ class CabinetModel extends Model
     public function getFormParams()
     {
         return array(
-            'userID'=>$_SESSION['userID'],
+            'userID' => $_SESSION['userID'],
             'spaceTypes' => $this->getSpaceTypes(),
             'operationTypes' => $this->getOperationTypes(),
             'objectTypes' => $this->getObjectTypes(),
@@ -1387,4 +1386,57 @@ class CabinetModel extends Model
      * Привязка социальных сетей
      */
 
+    public function getCabinetData()
+    {
+        if (isset($_SESSION['OAuth_state']) && $_SESSION['OAuth_state'] == 3) {
+            $result = $this->setSocialNet($_SESSION['OAuth_service'], $_SESSION['OAuth_user_id'], $_SESSION['userID']);
+
+            return array(
+                'social_nets' => $this->getSocialNets(),
+                'set_result' => $result,
+            );
+        }
+
+        return array(
+            'social_nets' => $this->getSocialNets(),
+        );
+    }
+
+    private function getSocialNets()
+    {
+        return $this->db->select('vk_id, ok_id, mail_id, ya_id, google_id, steam_id, facebook_id')->from('users')->where('id', '=', $_SESSION['userID'])->execute();
+    }
+
+    private function setSocialNet($service, $service_id, $user_id)
+    {
+        $query = '';
+
+        switch ($service) {
+            case 'vk':
+                $query = $this->db->prepare('UPDATE users SET vk_id = :service_id WHERE id = :user_id');
+                break;
+            case 'ok':
+                $query = $this->db->prepare('UPDATE users SET ok_id = :service_id WHERE id = :user_id');
+                break;
+            case 'mail':
+                $query = $this->db->prepare('UPDATE users SET mail_id = :service_id WHERE id = :user_id');
+                break;
+            case 'ya':
+                $query = $this->db->prepare('UPDATE users SET ya_id = :service_id WHERE id = :user_id');
+                break;
+            case 'google':
+                $query = $this->db->prepare('UPDATE users SET google_id = :service_id WHERE id = :user_id');
+                break;
+            case 'fb':
+                $query = $this->db->prepare('UPDATE users SET facebook_id = :service_id WHERE id = :user_id');
+                break;
+            case 'steam':
+                $query = $this->db->prepare('UPDATE users SET steam_id = :service_id WHERE id = :user_id');
+                break;
+        }
+
+        $query->execute([':service_id' => $service_id, ':user_id' => $user_id]);
+
+        return $query->rowCount();
+    }
 }

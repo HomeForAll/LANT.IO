@@ -10,7 +10,7 @@ class CabinetController extends Controller
 
     public function actionCabinet()
     {
-        $this->view->render('cabinet');
+        $this->view->render('cabinet', $this->model->getCabinetData());
     }
 
     public function actionGenerator()

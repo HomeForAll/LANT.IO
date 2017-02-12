@@ -1,9 +1,8 @@
 <?php
 return array(
-    'redirect_url' => '',
-
     'registration_url' => 'http://localhost/registration',
     'login_url' => 'http://localhost/login',
+    'update_service_url' => 'http://localhost/cabinet',
 
     // Вконтакте
     'vk_app_id' => '5661216',
