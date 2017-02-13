@@ -44,7 +44,7 @@
     }
 
     table {
-        width: 100%;
+        width: 860px;
         margin: 0 0 15px 0;
         border: solid 1px black;
         border-collapse: collapse;
@@ -211,11 +211,12 @@ function searchParam($params, $need)
 
 <table id="subcategoriesTable">
     <tr id="need">
-        <th colspan="3">Подкатегории</th>
+        <th colspan="4">Подкатегории</th>
     </tr>
     <tr id="need">
         <th>Название на русском</th>
         <th>Название на английском</th>
+        <th>Катгория(блок)</th>
         <th>Действие</th>
     </tr>
     <?php
@@ -224,6 +225,7 @@ function searchParam($params, $need)
         <tr>
             <td><?php echo $subcategory['r_name']; ?></td>
             <td><?php echo $subcategory['e_name']; ?></td>
+            <td><?php echo searchParam($this->data['categories'], $subcategory['category_id'])['r_name']; ?></td>
             <td>
                 <a id="#subcategory_<?php echo $subcategory['id']; ?>" style="margin: 0;"
                    class="button subcategoryDelButton" href="#">Удалить</a>
@@ -234,13 +236,16 @@ function searchParam($params, $need)
     ?>
 </table>
 
-<table id="elementsTable">
+<table id="elementsTable" style="width: 860px;">
     <tr id="need">
-        <th colspan="4">Элементы</th>
+        <th colspan="7">Элементы</th>
     </tr>
     <tr id="need">
         <th>Название на русском</th>
         <th>Название на английском</th>
+        <th>Категория (Блок)</th>
+        <th>Подкатегория</th>
+        <th>Родительский элемент</th>
         <th>Тип</th>
         <th>Действие</th>
     </tr>
@@ -250,6 +255,9 @@ function searchParam($params, $need)
         <tr>
             <td><?php echo $element['r_name']; ?></td>
             <td><?php echo $element['e_name']; ?></td>
+            <td><?php echo searchParam($this->data['categories'], $element['category'])['r_name']; ?></td>
+            <td><?php echo searchParam($this->data['subcategories'], $element['subcategory'])['r_name']; ?></td>
+            <td><?php echo searchParam($this->data['elements'], $element['parent_el'])['r_name']; ?></td>
             <td>
                 <?php
                 switch ($element['type']) {

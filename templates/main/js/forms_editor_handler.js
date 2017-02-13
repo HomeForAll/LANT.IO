@@ -657,11 +657,13 @@ $(document).ready(function () {
             url: '/cabinet/form/edit/id/' + formId,
             data: formData + '&action=saveElements&listOptions=' + listsOptions + '&formID=' + formId,
             success: function (data) {
+                console.log(data);
                 data = JSON.parse(data);
 
                 messages.html('<pre>' + data.message + '</pre>');
 
                 if (data.message == 'Элементы сохранены.') {
+                    updateElements(data.elements);
                     elements.html('');
                 }
             },
@@ -679,146 +681,6 @@ $(document).ready(function () {
         event.preventDefault();
     });
 });
-
-/**
- * Добавляет элемент Да/Нет
- * @param elements
- */
-function addYOrNEL(elements) {
-    var box = document.createElement('div'),
-        categoryLabel = document.createElement('label'),
-        category = document.createElement('select'),
-
-        subcategoryLabel = document.createElement('label'),
-        subcategory = document.createElement('select'),
-
-        ru_label = document.createElement('label'),
-        eng_label = document.createElement('label'),
-
-        ru_input = document.createElement('input'),
-        eng_input = document.createElement('input'),
-
-        yValueLabel = document.createElement('label'),
-        nValueLabel = document.createElement('label'),
-
-        yValue = document.createElement('input'),
-        nValue = document.createElement('input'),
-
-        hidden_input = document.createElement('input'),
-
-        messages = $('.messages'),
-        deleteBtn = document.createElement('a'),
-        id = 'id' + Math.floor(Date.now()),
-        h2 = document.createElement('h2');
-
-    h2.innerHTML = 'Элемент [Да/Нет]';
-    h2.setAttribute('style', 'padding-bottom: 15px;');
-
-    categoryLabel.setAttribute('for', id + 5);
-    categoryLabel.innerHTML = 'Категория (блок):';
-    category.setAttribute('name', 'YORNElementCategory[]');
-    category.setAttribute('id', id + 5);
-    category.setAttribute('class', 'categoryValues');
-
-    yValueLabel.setAttribute('for', '1');
-    yValueLabel.innerHTML = 'Значение ДА на русском:';
-    yValue.setAttribute('type', 'text');
-    yValue.setAttribute('id', id + 1);
-    yValue.setAttribute('name', 'YORNElementYesValue[]');
-
-    nValueLabel.setAttribute('for', '1');
-    nValueLabel.innerHTML = 'Значение НЕТ на русском:';
-    nValue.setAttribute('type', 'text');
-    nValue.setAttribute('id', id + 1);
-    nValue.setAttribute('name', 'YORNElementNoValue[]');
-
-    box.setAttribute('class', 'box');
-
-    subcategoryLabel.setAttribute('for', id + 2);
-    subcategoryLabel.innerHTML = 'Подкатегория (если поле пустое, будет использоваться Категория [блок])::';
-    subcategory.setAttribute('name', 'YORNElementSubcategory[]');
-    subcategory.setAttribute('id', id + 2);
-    subcategory.setAttribute('class', 'subcategoryValues');
-
-    var option = document.createElement('option');
-    option.setAttribute('value', '');
-    option.innerHTML = '---';
-    subcategory.append(option);
-
-    if (!(typeof categoriesJSON == "undefined")) {
-        categoriesJSON.forEach(function (categoryEl) {
-            var option = document.createElement('option');
-
-            option.setAttribute('value', categoryEl['id']);
-            option.innerHTML = categoryEl['r_name'];
-
-            category.append(option);
-        });
-    }
-
-    if (!(typeof subcategoriesJSON == "undefined")) {
-        subcategoriesJSON.forEach(function (subcategoryEl) {
-            var option = document.createElement('option');
-
-            option.setAttribute('value', subcategoryEl['id']);
-            option.innerHTML = subcategoryEl['r_name'];
-
-            subcategory.append(option);
-        });
-    }
-
-    ru_label.setAttribute('for', id + 3);
-    ru_label.innerHTML = 'Название элемента на русском:';
-    ru_input.setAttribute('type', 'text');
-    ru_input.setAttribute('id', id + 3);
-    ru_input.setAttribute('name', 'YORNRName[]');
-
-    eng_label.setAttribute('for', id + 4);
-    eng_label.innerHTML = 'Название элемента на английском:';
-    eng_input.setAttribute('type', 'text');
-    eng_input.setAttribute('id', id + 4);
-    eng_input.setAttribute('name', 'YORNEName[]');
-
-    hidden_input.setAttribute('type', 'hidden');
-    hidden_input.setAttribute('name', 'formID');
-    hidden_input.setAttribute('value', formId);
-
-    deleteBtn.setAttribute('href', '#');
-    deleteBtn.setAttribute('class', 'deleteElement button');
-    deleteBtn.setAttribute('style', 'position: absolute; top: 10px; right: 10px;');
-    deleteBtn.innerHTML = "Удалить";
-
-    messages.html('');
-
-    if (elements.html() === '') {
-        var a = document.createElement('a');
-
-        a.setAttribute('href', '#');
-        a.setAttribute('id', 'saveElems');
-        a.setAttribute('class', 'button');
-        a.innerHTML = 'Сохранить элементы';
-
-        elements.append(hidden_input);
-        elements.append(a);
-    }
-
-    box.append(deleteBtn);
-    box.append(h2);
-    box.append(categoryLabel);
-    box.append(category);
-    box.append(subcategoryLabel);
-    box.append(subcategory);
-    box.append(ru_label);
-    box.append(ru_input);
-    box.append(eng_label);
-    box.append(eng_input);
-    box.append(yValueLabel);
-    box.append(yValue);
-    box.append(nValueLabel);
-    box.append(nValue);
-
-    elements.prepend(box);
-}
 
 /**
  * Добавляет элемент От - До
@@ -844,7 +706,16 @@ function addRangeEl(elements) {
 
         deleteBtn = document.createElement('a'),
         id = 'id' + Math.floor(Date.now()),
-        h2 = document.createElement('h2');
+        h2 = document.createElement('h2'),
+
+        parentElementLabel = document.createElement('label'),
+        parentElement = document.createElement('select');
+
+    parentElementLabel.setAttribute('for', id + 5);
+    parentElementLabel.innerHTML = 'Родительский элемент, если не указан, будет использоваться "Подкатегория" или "Категория (Блок)":';
+    parentElement.setAttribute('name', 'rangeParentElement[]');
+    parentElement.setAttribute('id', id + 6);
+    parentElement.setAttribute('class', 'parentElementValues');
 
     box.setAttribute('class', 'box');
 
@@ -866,7 +737,13 @@ function addRangeEl(elements) {
     var option = document.createElement('option');
     option.setAttribute('value', '');
     option.innerHTML = '---';
+
+    var option2 = document.createElement('option');
+    option2.setAttribute('value', '');
+    option2.innerHTML = '---';
+
     subcategory.append(option);
+    parentElement.append(option2);
 
     if (!(typeof categoriesJSON == "undefined")) {
         categoriesJSON.forEach(function (categoryEl) {
@@ -887,6 +764,17 @@ function addRangeEl(elements) {
             option.innerHTML = subcategoryEl['r_name'];
 
             subcategory.append(option);
+        });
+    }
+
+    if (!(typeof elementsJSON == "undefined")) {
+        elementsJSON.forEach(function (el) {
+            var option = document.createElement('option');
+
+            option.setAttribute('value', el['id']);
+            option.innerHTML = el['r_name'];
+
+            parentElement.append(option);
         });
     }
 
@@ -932,10 +820,180 @@ function addRangeEl(elements) {
     box.append(category);
     box.append(subcategoryLabel);
     box.append(subcategory);
+    box.append(parentElementLabel);
+    box.append(parentElement);
     box.append(ru_label);
     box.append(ru_input);
     box.append(eng_label);
     box.append(eng_input);
+
+    elements.prepend(box);
+}
+
+/**
+ * Добавляет элемент Да/Нет
+ * @param elements
+ */
+function addYOrNEL(elements) {
+    var box = document.createElement('div'),
+        categoryLabel = document.createElement('label'),
+        category = document.createElement('select'),
+
+        subcategoryLabel = document.createElement('label'),
+        subcategory = document.createElement('select'),
+
+        ru_label = document.createElement('label'),
+        eng_label = document.createElement('label'),
+
+        ru_input = document.createElement('input'),
+        eng_input = document.createElement('input'),
+
+        yValueLabel = document.createElement('label'),
+        nValueLabel = document.createElement('label'),
+
+        yValue = document.createElement('input'),
+        nValue = document.createElement('input'),
+
+        hidden_input = document.createElement('input'),
+
+        messages = $('.messages'),
+        deleteBtn = document.createElement('a'),
+        id = 'id' + Math.floor(Date.now()),
+        h2 = document.createElement('h2'),
+
+        parentElementLabel = document.createElement('label'),
+        parentElement = document.createElement('select');
+
+    parentElementLabel.setAttribute('for', id + 5);
+    parentElementLabel.innerHTML = 'Родительский элемент, если не указан, будет использоваться "Подкатегория" или "Категория (Блок)":';
+    parentElement.setAttribute('name', 'YORNParentElement[]');
+    parentElement.setAttribute('id', id + 6);
+    parentElement.setAttribute('class', 'parentElementValues');
+
+    h2.innerHTML = 'Элемент [Да/Нет]';
+    h2.setAttribute('style', 'padding-bottom: 15px;');
+
+    categoryLabel.setAttribute('for', id + 5);
+    categoryLabel.innerHTML = 'Категория (блок):';
+    category.setAttribute('name', 'YORNElementCategory[]');
+    category.setAttribute('id', id + 5);
+    category.setAttribute('class', 'categoryValues');
+
+    yValueLabel.setAttribute('for', '1');
+    yValueLabel.innerHTML = 'Значение ДА на русском:';
+    yValue.setAttribute('type', 'text');
+    yValue.setAttribute('id', id + 1);
+    yValue.setAttribute('name', 'YORNElementYesValue[]');
+
+    nValueLabel.setAttribute('for', '1');
+    nValueLabel.innerHTML = 'Значение НЕТ на русском:';
+    nValue.setAttribute('type', 'text');
+    nValue.setAttribute('id', id + 1);
+    nValue.setAttribute('name', 'YORNElementNoValue[]');
+
+    box.setAttribute('class', 'box');
+
+    subcategoryLabel.setAttribute('for', id + 2);
+    subcategoryLabel.innerHTML = 'Подкатегория (если поле пустое, будет использоваться Категория [блок])::';
+    subcategory.setAttribute('name', 'YORNElementSubcategory[]');
+    subcategory.setAttribute('id', id + 2);
+    subcategory.setAttribute('class', 'subcategoryValues');
+
+    var option = document.createElement('option');
+    option.setAttribute('value', '');
+    option.innerHTML = '---';
+
+    var option2 = document.createElement('option');
+    option2.setAttribute('value', '');
+    option2.innerHTML = '---';
+
+    subcategory.append(option);
+    parentElement.append(option2);
+
+    if (!(typeof categoriesJSON == "undefined")) {
+        categoriesJSON.forEach(function (categoryEl) {
+            var option = document.createElement('option');
+
+            option.setAttribute('value', categoryEl['id']);
+            option.innerHTML = categoryEl['r_name'];
+
+            category.append(option);
+        });
+    }
+
+    if (!(typeof subcategoriesJSON == "undefined")) {
+        subcategoriesJSON.forEach(function (subcategoryEl) {
+            var option = document.createElement('option');
+
+            option.setAttribute('value', subcategoryEl['id']);
+            option.innerHTML = subcategoryEl['r_name'];
+
+            subcategory.append(option);
+        });
+    }
+
+    if (!(typeof elementsJSON == "undefined")) {
+        elementsJSON.forEach(function (el) {
+            var option = document.createElement('option');
+
+            option.setAttribute('value', el['id']);
+            option.innerHTML = el['r_name'];
+
+            parentElement.append(option);
+        });
+    }
+
+    ru_label.setAttribute('for', id + 3);
+    ru_label.innerHTML = 'Название элемента на русском:';
+    ru_input.setAttribute('type', 'text');
+    ru_input.setAttribute('id', id + 3);
+    ru_input.setAttribute('name', 'YORNRName[]');
+
+    eng_label.setAttribute('for', id + 4);
+    eng_label.innerHTML = 'Название элемента на английском:';
+    eng_input.setAttribute('type', 'text');
+    eng_input.setAttribute('id', id + 4);
+    eng_input.setAttribute('name', 'YORNEName[]');
+
+    hidden_input.setAttribute('type', 'hidden');
+    hidden_input.setAttribute('name', 'formID');
+    hidden_input.setAttribute('value', formId);
+
+    deleteBtn.setAttribute('href', '#');
+    deleteBtn.setAttribute('class', 'deleteElement button');
+    deleteBtn.setAttribute('style', 'position: absolute; top: 10px; right: 10px;');
+    deleteBtn.innerHTML = "Удалить";
+
+    messages.html('');
+
+    if (elements.html() === '') {
+        var a = document.createElement('a');
+
+        a.setAttribute('href', '#');
+        a.setAttribute('id', 'saveElems');
+        a.setAttribute('class', 'button');
+        a.innerHTML = 'Сохранить элементы';
+
+        elements.append(hidden_input);
+        elements.append(a);
+    }
+
+    box.append(deleteBtn);
+    box.append(h2);
+    box.append(categoryLabel);
+    box.append(category);
+    box.append(subcategoryLabel);
+    box.append(subcategory);
+    box.append(parentElementLabel);
+    box.append(parentElement);
+    box.append(ru_label);
+    box.append(ru_input);
+    box.append(eng_label);
+    box.append(eng_input);
+    box.append(yValueLabel);
+    box.append(yValue);
+    box.append(nValueLabel);
+    box.append(nValue);
 
     elements.prepend(box);
 }
@@ -966,7 +1024,16 @@ function addListEl(elements) {
         addOptionBtn = document.createElement('a'),
         deleteBtn = document.createElement('a'),
         id = 'id' + Math.floor(Date.now()),
-        h2 = document.createElement('h2');
+        h2 = document.createElement('h2'),
+
+        parentElementLabel = document.createElement('label'),
+        parentElement = document.createElement('select');
+
+    parentElementLabel.setAttribute('for', id + 5);
+    parentElementLabel.innerHTML = 'Родительский элемент, если не указан, будет использоваться "Подкатегория" или "Категория (Блок)":';
+    parentElement.setAttribute('name', 'listParentElement[]');
+    parentElement.setAttribute('id', id + 6);
+    parentElement.setAttribute('class', 'parentElementValues');
 
     optionsBox.setAttribute('class', 'options');
 
@@ -990,7 +1057,13 @@ function addListEl(elements) {
     var option = document.createElement('option');
     option.setAttribute('value', '');
     option.innerHTML = '---';
+
+    var option2 = document.createElement('option');
+    option2.setAttribute('value', '');
+    option2.innerHTML = '---';
+
     subcategory.append(option);
+    parentElement.append(option2);
 
     if (!(typeof categoriesJSON == "undefined")) {
         categoriesJSON.forEach(function (categoryEl) {
@@ -1011,6 +1084,17 @@ function addListEl(elements) {
             option.innerHTML = subcategoryEl['r_name'];
 
             subcategory.append(option);
+        });
+    }
+
+    if (!(typeof elementsJSON == "undefined")) {
+        elementsJSON.forEach(function (el) {
+            var option = document.createElement('option');
+
+            option.setAttribute('value', el['id']);
+            option.innerHTML = el['r_name'];
+
+            parentElement.append(option);
         });
     }
 
@@ -1059,6 +1143,8 @@ function addListEl(elements) {
     box.append(category);
     box.append(subcategoryLabel);
     box.append(subcategory);
+    box.append(parentElementLabel);
+    box.append(parentElement);
     box.append(ru_label);
     box.append(ru_input);
     box.append(eng_label);
@@ -1114,6 +1200,8 @@ function addOption(elBox) {
 function updateElements(elements) {
     elementsJSON = elements;
 
+    console.log(elementsJSON);
+
     var elTable = $('#elementsTable');
 
     elTable.find('tr').each(function (index, el) {
@@ -1122,15 +1210,17 @@ function updateElements(elements) {
         }
     });
 
-    var lastTr = elTable.find('tr:last-child');
-
     if (!(typeof elementsJSON == "undefined")) {
         elementsJSON.forEach(function (element) {
+            var lastTr = elTable.find('tr:last-child');
             var tr = document.createElement('tr'),
                 td1 = document.createElement('td'),
                 td2 = document.createElement('td'),
                 td3 = document.createElement('td'),
                 td4 = document.createElement('td'),
+                td5 = document.createElement('td'),
+                td6 = document.createElement('td'),
+                td7 = document.createElement('td'),
                 a = document.createElement('a');
 
             a.setAttribute('id', 'element_' + element.id);
@@ -1155,19 +1245,56 @@ function updateElements(elements) {
                     break;
             }
 
+            var category = searchParam(categoriesJSON, element.category)['r_name'],
+                subcategoy = searchParam(subcategoriesJSON, element.subcategory)['r_name'],
+                parent = searchParam(elementsJSON, element.parent_el)['r_name'];
+
             td1.innerHTML = element.r_name;
             td2.innerHTML = element.e_name;
-            td3.innerHTML = type;
-            td4.append(a);
+            td3.innerHTML = category ? category : '';
+            td4.innerHTML = subcategoy ? subcategoy : '';
+            td5.innerHTML = parent ? parent : '';
+            td6.innerHTML = type;
+            td7.append(a);
 
             tr.append(td1);
             tr.append(td2);
             tr.append(td3);
             tr.append(td4);
+            tr.append(td5);
+            tr.append(td6);
+            tr.append(td7);
 
             lastTr.after(tr);
         });
+
+        $('#elements').find('.parentElementValues').each(function (index, el) {
+            el.innerHTML = '';
+
+            elementsJSON.forEach(function (element) {
+                var option = document.createElement('option');
+
+                option.setAttribute('value', element['id']);
+                option.innerHTML = element['r_name'];
+
+                el.append(option);
+            });
+        });
     }
+}
+
+function searchParam(params, need)
+{
+    var result = '';
+
+    params.forEach(function (param) {
+        console.log(param[0]);
+        if (param[0] == need) {
+            result = param;
+        }
+    });
+
+    return result ? result : '';
 }
 
 function updateSubcategories(subcategories) {
@@ -1189,6 +1316,7 @@ function updateSubcategories(subcategories) {
                 td1 = document.createElement('td'),
                 td2 = document.createElement('td'),
                 td3 = document.createElement('td'),
+                td4 = document.createElement('td'),
                 a = document.createElement('a');
 
             a.setAttribute('id', 'subcategory_' + subcategory.id);
@@ -1199,14 +1327,16 @@ function updateSubcategories(subcategories) {
 
             td1.innerHTML = subcategory.r_name;
             td2.innerHTML = subcategory.e_name;
-            td3.append(a);
+            //console.log(categoriesJSON);
+            td3.innerHTML = searchParam(categoriesJSON, subcategory.category_id)['r_name'];
+            td4.append(a);
 
             tr.append(td1);
             tr.append(td2);
             tr.append(td3);
+            tr.append(td4);
 
             lastTr.after(tr);
-            console.log('Выполняется!');
         });
 
         $('#elements').find('.subcategoryValues').each(function (index, el) {

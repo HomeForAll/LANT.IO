@@ -258,10 +258,10 @@ class UserModel extends Model
     public function saveUserData()
     {
         if (!empty($_SESSION['OAuth_state']) && $_SESSION['OAuth_state'] == 2) {
-            $email = $_POST['email'];
-            $first_name = $_SESSION['OAuth_first_name'];
-            $last_name = $_SESSION['OAuth_last_name'];
-            $phone_number = $_POST['phone'];
+            $email = trim($_POST['email']);
+            $first_name = trim($_SESSION['OAuth_first_name']);
+            $last_name = trim($_SESSION['OAuth_last_name']);
+            $phone_number = trim($_POST['phone']);
             $password = $_POST['password'];
             $service_id = $_SESSION['OAuth_user_id'];
 
@@ -307,12 +307,12 @@ class UserModel extends Model
                 return array('result'=> true);
             }
         } else {
-            $email = $_POST['email'];
-            $first_name = $_POST['firstName'];
-            $last_name = $_POST['lastName'];
-            $patronymic = $_POST['patronymic'];
+            $email = trim($_POST['email']);
+            $first_name = trim($_POST['firstName']);
+            $last_name = trim($_POST['lastName']);
+            $patronymic = trim($_POST['patronymic']);
             $birthday = $_POST['birthday'];
-            $phone_number = $_POST['phoneNumber'];
+            $phone_number = trim($_POST['phoneNumber']);
             $password = $_POST['password'];
             $password_hash = password_hash($password, PASSWORD_DEFAULT);
 

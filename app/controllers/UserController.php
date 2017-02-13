@@ -20,6 +20,7 @@ class UserController extends Controller
                 } elseif (isset($_POST['cancel_social_registration'])) {
                     $this->clearOAuth();
                     header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
+                    exit;
                 } else {
                     $this->view->render('social_registration', array(
                         'user_id' => $_SESSION['OAuth_user_id'],

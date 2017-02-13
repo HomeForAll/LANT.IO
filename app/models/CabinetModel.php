@@ -2,6 +2,8 @@
 
 class CabinetModel extends Model
 {
+    use Cleaner;
+
     const IDSPERPAGE = 5;
     private $mailer;
 
@@ -1177,11 +1179,13 @@ class CabinetModel extends Model
                             $type = 1;
                             $query1 = $this->db->prepare('INSERT INTO form_elements (r_name, e_name, subcategory, type, form_id) VALUES (:r_name, :e_name, :subcategory, :type, :form_id)');
                             $query2 = $this->db->prepare('INSERT INTO form_elements (r_name, e_name, type, category, form_id) VALUES (:r_name, :e_name, :type, :category, :form_id)');
+                            $query3 = $this->db->prepare('INSERT INTO form_elements (r_name, e_name, type, form_id, parent_el) VALUES (:r_name, :e_name, :type, :form_id, :parent_el)');
 
                             foreach ($_POST['rangeRName'] as $key => $value) {
-                                if (empty($_POST['rangeElementSubcategory'][$key])) {
+                                if (!empty($_POST['rangeParentElement'][$key])) {
+                                    $query3->execute([':r_name' => $value, ':e_name' => $_POST['rangeEName'][$key], ':type' => $type, ':form_id' => $_POST['formID'], ':parent_el' => $_POST['rangeParentElement'][$key],]);
+                                } elseif (empty($_POST['rangeElementSubcategory'][$key])) {
                                     $query2->execute([':r_name' => $value, ':e_name' => $_POST['rangeEName'][$key], ':type' => $type, ':category' => $_POST['rangeElementCategory'][$key], ':form_id' => $_POST['formID']]);
-
                                 } else {
                                     $query1->execute([':r_name' => $value, ':e_name' => $_POST['rangeEName'][$key], ':subcategory' => $_POST['rangeElementSubcategory'][$key], ':type' => $type, ':form_id' => $_POST['formID']]);
                                 }
@@ -1192,11 +1196,13 @@ class CabinetModel extends Model
                             $type = 2;
                             $query1 = $this->db->prepare('INSERT INTO form_elements (r_name, e_name, subcategory, type, yes_value, no_value, form_id) VALUES (:r_name, :e_name, :subcategory, :type, :yes_value, :no_value, :form_id)');
                             $query2 = $this->db->prepare('INSERT INTO form_elements (r_name, e_name, type, yes_value, no_value, category, form_id) VALUES (:r_name, :e_name, :type, :yes_value, :no_value, :category, :form_id)');
+                            $query3 = $this->db->prepare('INSERT INTO form_elements (r_name, e_name, type, yes_value, no_value, form_id, parent_el) VALUES (:r_name, :e_name, :type, :yes_value, :no_value, :form_id, :parent_el)');
 
                             foreach ($_POST['YORNRName'] as $key => $value) {
-                                if (empty($_POST['YORNElementSubcategory'][$key])) {
+                                if (!empty($_POST['YORNParentElement'][$key])) {
+                                    $query3->execute([':r_name' => $value, ':e_name' => $_POST['YORNEName'][$key], ':type' => $type, ':yes_value' => $_POST['YORNElementYesValue'][$key], ':no_value' => $_POST['YORNElementNoValue'][$key], ':form_id' => $_POST['formID'], ':parent_el' => $_POST['YORNParentElement'][$key],]);
+                                } elseif (empty($_POST['YORNElementSubcategory'][$key])) {
                                     $query2->execute([':r_name' => $value, ':e_name' => $_POST['YORNEName'][$key], ':type' => $type, ':yes_value' => $_POST['YORNElementYesValue'][$key], ':no_value' => $_POST['YORNElementNoValue'][$key], ':category' => $_POST['YORNElementCategory'][$key], ':form_id' => $_POST['formID']]);
-
                                 } else {
                                     $query1->execute([':r_name' => $value, ':e_name' => $_POST['YORNEName'][$key], ':subcategory' => $_POST['YORNElementSubcategory'][$key], ':type' => $type, ':yes_value' => $_POST['YORNElementYesValue'][$key], ':no_value' => $_POST['YORNElementNoValue'][$key], ':form_id' => $_POST['formID']]);
                                 }
@@ -1207,6 +1213,7 @@ class CabinetModel extends Model
                             $type = 3;
                             $query1 = $this->db->prepare('INSERT INTO form_elements (r_name, e_name, subcategory, type, form_id) VALUES (:r_name, :e_name, :subcategory, :type, :form_id) RETURNING id');
                             $query2 = $this->db->prepare('INSERT INTO form_elements (r_name, e_name, type, category, form_id) VALUES (:r_name, :e_name, :type, :category, :form_id) RETURNING id');
+                            $query3 = $this->db->prepare('INSERT INTO form_elements (r_name, e_name, type, form_id, parent_el) VALUES (:r_name, :e_name, :type, :form_id, :parent_el) RETURNING id');
 
                             $selectOptions = explode(',', $_POST['listOptions']);
                             $count = 0;
@@ -1214,7 +1221,18 @@ class CabinetModel extends Model
                             //$this->printInPre($_POST);
 
                             foreach ($_POST['listRName'] as $key => $value) {
-                                if (empty($_POST['listElementSubcategory'][$key])) {
+                                if (!empty($_POST['listParentElement'][$key])) {
+                                    $query3->execute([':r_name' => $value, ':e_name' => $_POST['listEName'][$key], ':type' => $type, ':form_id' => $_POST['formID'], ':parent_el' => $_POST['listParentElement'][$key]]);
+                                    $result = $query3->fetch();
+
+                                    $optionQuery = $this->db->prepare('INSERT INTO form_select_options (r_name, e_name, value, element_id) VALUES (:r_name, :e_name, :value, :element_id)');;
+
+                                    for ($i = $count; $i < $count + $selectOptions[$key]; $i++) {
+                                        $optionQuery->execute([':r_name' => $_POST['optionRName'][$i], ':e_name' => $_POST['optionEName'][$i], ':value' => $_POST['optionEName'][$i], ':element_id' => $result[0]]);
+                                    }
+
+                                    $count += $selectOptions[$key];
+                                } elseif (empty($_POST['listElementSubcategory'][$key])) {
                                     $query2->execute([':r_name' => $value, ':e_name' => $_POST['listEName'][$key], ':type' => $type, ':category' => $_POST['listElementCategory'][$key], ':form_id' => $_POST['formID']]);
                                     $result = $query2->fetch();
 
@@ -1273,7 +1291,9 @@ class CabinetModel extends Model
             }
         } else {
             foreach ($_POST as $key => $value) {
-                if ($key !== 'rangeElementSubcategory' && $key !== 'listElementSubcategory' && $key !== 'YORNElementSubcategory') {
+                if ($key !== 'rangeElementSubcategory' && $key !== 'listElementSubcategory' && $key !== 'YORNElementSubcategory' &&
+                    $key !== 'rangeParentElement' && $key !== 'YORNParentElement' && $key !== 'listParentElement'
+                ) {
                     if (!(gettype($value) == 'array')) {
                         continue;
                     }
@@ -1390,11 +1410,6 @@ class CabinetModel extends Model
     {
         if (isset($_SESSION['OAuth_state']) && $_SESSION['OAuth_state'] == 3) {
             $result = $this->setSocialNet($_SESSION['OAuth_service'], $_SESSION['OAuth_user_id'], $_SESSION['userID']);
-
-            return array(
-                'social_nets' => $this->getSocialNets(),
-                'set_result' => $result,
-            );
         }
 
         return array(
@@ -1436,6 +1451,8 @@ class CabinetModel extends Model
         }
 
         $query->execute([':service_id' => $service_id, ':user_id' => $user_id]);
+
+        $this->clearOAuth();
 
         return $query->rowCount();
     }
