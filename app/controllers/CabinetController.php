@@ -10,7 +10,9 @@ class CabinetController extends Controller
 
     public function actionCabinet()
     {
-        $this->view->render('cabinet', $this->model->getCabinetData());
+       $data = array_merge($this->model->getCabinetData(), $this->model->getinfo());
+       $data['access'] = $this->checkAccessLevel($_SESSION['status']);
+        $this->view->render('cabinet', $data);
     }
 
     public function actionGenerator()
@@ -120,5 +122,27 @@ class CabinetController extends Controller
     public function actionCreateSuccess()
     {
         $this->view->render('messages', 'Форма успешно создана.');
+    }
+    
+        public function actionBalance()
+    {
+        $data = $this->model-> getinfo();
+       $access =  $this->checkAccessLevel($_SESSION['status']);
+       $data['access'] = $access;
+        $this->view->render('balance', $data);
+    }
+
+    public function actionBalanceHistory()
+    {
+      // Если отправлен запрос на поиск истории балланса
+      if(!empty($_POST["view_balance_history"])){
+       $data['balance_history'] = $this->model->getBalanceHistory();
+
+      }
+       $access =  $this->checkAccessLevel($_SESSION['status']);
+       $data['access'] = $access;
+       $data['script'][0] = 'pickmeup.js';
+       $data['css'][0] = 'calendar.css';
+       $this->view->render('balancehistory', $data);
     }
 }
