@@ -16,6 +16,11 @@ if ($this->checkAccessLevel($_SESSION['status'], 'profile')) {
     <div style="position: absolute; top: 5px; right: 5px;">
         <a href="/support" class="button">Тех. поддержка</a>
     </div>
+
+    <p>Ваш балланс:  <?php if(isset($this->data['balance'])) { echo $this->data['balance']; }?> коинов </p>
+ <a class="button" href="cabinet/balance">Услуги и платежи</a>
+ 
+
 <?php
 function checkEmpty($array) {
     $i = 0;

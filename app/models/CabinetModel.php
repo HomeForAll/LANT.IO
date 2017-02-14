@@ -70,7 +70,7 @@ class CabinetModel extends Model
 
         $stmt = $this->db->prepare("SELECT * FROM users WHERE id = $profile_id");
         $stmt->execute();
-        $info = $stmt->fetchAll();
+        $info = $stmt->fetch(PDO::FETCH_ASSOC);
         return $info;
     }
 
@@ -1455,5 +1455,36 @@ class CabinetModel extends Model
         $this->clearOAuth();
 
         return $query->rowCount();
+    }
+
+        public function getBalanceHistory()
+    {
+            $user_id = (int)$_SESSION['userID'];
+                  // Преобразование данных формы в дату
+          $calendar_start = $_POST["calendar_start"];
+          $calendar_end= $_POST["calendar_end"];
+
+         if (preg_match("/^(0[1-9]|[1-2][0-9]|3[0-1])-(0[1-9]|1[0-2])-[0-9]{4}$/",$calendar_start ) && preg_match("/^(0[1-9]|[1-2][0-9]|3[0-1])-(0[1-9]|1[0-2])-[0-9]{4}$/",$calendar_end))
+    {
+          $calendar_start_arr = explode("-", $calendar_start);
+          $calendar_end_arr = explode("-", $calendar_end);
+          $start = $calendar_start_arr[2].'-'.$calendar_start_arr[1].'-'.$calendar_start_arr[0];
+          $end = $calendar_end_arr[2].'-'.$calendar_end_arr[1].'-'.$calendar_end_arr[0];
+          $sql                 = "SELECT to_char(date::date,'DD-MM-YYYY'), operation, value, rest_balance FROM balance_history ";
+           $sql .= "WHERE user_id = :user_id AND date::date >=  :start::date AND date::date <=  :end::date ";
+          $sql  .= 'ORDER BY date DESC';
+          $stmt                = $this->db->prepare($sql);
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->bindParam(':start', $start);
+        $stmt->bindParam(':end', $end);
+        $stmt->execute();
+        $data                = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $data['calendar_start'] = $calendar_start;
+        $data['calendar_end'] = $calendar_end;
+    }else{
+        return;
+    }
+
+        return $data;
     }
 }
