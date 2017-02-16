@@ -751,7 +751,7 @@ class CabinetModel extends Model
 
     public function getForms()
     {
-        //$_SESSION['userID'] = 12;
+        //$_SESSION['userID'] = 11;
         $query = $this->db->prepare("SELECT * FROM forms WHERE user_id = :user_id");
         $query->execute([':user_id' => $_SESSION['userID']]);
         $forms = $query->fetchAll();
@@ -1424,33 +1424,39 @@ class CabinetModel extends Model
 
     private function setSocialNet($service, $service_id, $user_id)
     {
+        $first_name = trim($_SESSION['OAuth_first_name']);
+        $last_name = trim($_SESSION['OAuth_last_name']);
+
+        $avatar = $_SESSION['OAuth_avatar'];
+        $name = $first_name . ' ' . $last_name;
+
         $query = '';
 
         switch ($service) {
             case 'vk':
-                $query = $this->db->prepare('UPDATE users SET vk_id = :service_id WHERE id = :user_id');
+                $query = $this->db->prepare('UPDATE users SET vk_id = :service_id, vk_name = :serviceName, vk_avatar = :serviceAvatar WHERE id = :user_id');
                 break;
             case 'ok':
-                $query = $this->db->prepare('UPDATE users SET ok_id = :service_id WHERE id = :user_id');
+                $query = $this->db->prepare('UPDATE users SET ok_id = :service_id, ok_name = :serviceName, ok_avatar = :serviceAvatar WHERE id = :user_id');
                 break;
             case 'mail':
-                $query = $this->db->prepare('UPDATE users SET mail_id = :service_id WHERE id = :user_id');
+                $query = $this->db->prepare('UPDATE users SET mail_id = :service_id, mail_name = :serviceName, mail_avatar = :serviceAvatar WHERE id = :user_id');
                 break;
             case 'ya':
-                $query = $this->db->prepare('UPDATE users SET ya_id = :service_id WHERE id = :user_id');
+                $query = $this->db->prepare('UPDATE users SET ya_id = :service_id, ya_name = :serviceName, ya_avatar = :serviceAvatar WHERE id = :user_id');
                 break;
             case 'google':
-                $query = $this->db->prepare('UPDATE users SET google_id = :service_id WHERE id = :user_id');
+                $query = $this->db->prepare('UPDATE users SET google_id = :service_id, google_name = :serviceName, google_avatar = :serviceAvatar WHERE id = :user_id');
                 break;
             case 'fb':
-                $query = $this->db->prepare('UPDATE users SET facebook_id = :service_id WHERE id = :user_id');
+                $query = $this->db->prepare('UPDATE users SET facebook_id = :service_id, facebook_name = :serviceName, facebook_avatar = :serviceAvatar WHERE id = :user_id');
                 break;
             case 'steam':
-                $query = $this->db->prepare('UPDATE users SET steam_id = :service_id WHERE id = :user_id');
+                $query = $this->db->prepare('UPDATE users SET steam_id = :service_id, steam_name = :serviceName, steam_avatar = :serviceAvatar WHERE id = :user_id');
                 break;
         }
 
-        $query->execute([':service_id' => $service_id, ':user_id' => $user_id]);
+        $query->execute([':service_id' => $service_id, ':user_id' => $user_id, ':serviceName' => $name, ':serviceAvatar' => $avatar]);
 
         $this->clearOAuth();
 

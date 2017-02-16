@@ -27,8 +27,6 @@ class UserModel extends Model
         return false;
     }
 
-    // TODO: Дописать обработку регистрация с помощью соц сети
-
     public function doRegistration()
     {
         $errors = $this->checkDataErrors();
@@ -261,37 +259,41 @@ class UserModel extends Model
             $email = trim($_POST['email']);
             $first_name = trim($_SESSION['OAuth_first_name']);
             $last_name = trim($_SESSION['OAuth_last_name']);
+            $avatar = $_SESSION['OAuth_avatar'];
             $phone_number = trim($_POST['phone']);
             $password = $_POST['password'];
             $service_id = $_SESSION['OAuth_user_id'];
 
+            $name = $first_name . ' ' . $last_name;
+
+
             $password_hash = password_hash($password, PASSWORD_DEFAULT);
+
+            $query = '';
 
             switch ($_SESSION['OAuth_service']) {
                 case 'vk':
-                    $query = $this->db->prepare("INSERT INTO users (first_name, last_name, phone_number, email, password, vk_id) VALUES (:firstName, :lastName, :phoneNumber, :email, :password, :serviceID)");
+                    $query = $this->db->prepare("INSERT INTO users (first_name, last_name, phone_number, email, password, vk_id, vk_name, vk_avatar) VALUES (:firstName, :lastName, :phoneNumber, :email, :password, :serviceID, :serviceName, :serviceAvatar)");
                     break;
                 case 'ok':
-                    $query = $this->db->prepare("INSERT INTO users (first_name, last_name, phone_number, email, password, ok_id) VALUES (:firstName, :lastName, :phoneNumber, :email, :password, :serviceID)");
+                    $query = $this->db->prepare("INSERT INTO users (first_name, last_name, phone_number, email, password, ok_id, ok_name, ok_avatar) VALUES (:firstName, :lastName, :phoneNumber, :email, :password, :serviceID, :serviceName, :serviceAvatar)");
                     break;
                 case 'mail':
-                    $query = $this->db->prepare("INSERT INTO users (first_name, last_name, phone_number, email, password, mail_id) VALUES (:firstName, :lastName, :phoneNumber, :email, :password, :serviceID)");
+                    $query = $this->db->prepare("INSERT INTO users (first_name, last_name, phone_number, email, password, mail_id, mail_name, mail_avatar) VALUES (:firstName, :lastName, :phoneNumber, :email, :password, :serviceID, :serviceName, :serviceAvatar)");
                     break;
                 case 'ya':
-                    $query = $this->db->prepare("INSERT INTO users (first_name, last_name, phone_number, email, password, ya_id) VALUES (:firstName, :lastName, :phoneNumber, :email, :password, :serviceID)");
+                    $query = $this->db->prepare("INSERT INTO users (first_name, last_name, phone_number, email, password, ya_id, ya_name, ya_avatar) VALUES (:firstName, :lastName, :phoneNumber, :email, :password, :serviceID, :serviceName, :serviceAvatar)");
                     break;
                 case 'google':
-                    $query = $this->db->prepare("INSERT INTO users (first_name, last_name, phone_number, email, password, google_id) VALUES (:firstName, :lastName, :phoneNumber, :email, :password, :serviceID)");
+                    $query = $this->db->prepare("INSERT INTO users (first_name, last_name, phone_number, email, password, google_id, google_name, google_avatar) VALUES (:firstName, :lastName, :phoneNumber, :email, :password, :serviceID, :serviceName, :serviceAvatar)");
                     break;
                 case 'fb':
-                    $query = $this->db->prepare("INSERT INTO users (first_name, last_name, phone_number, email, password, facebook_id) VALUES (:firstName, :lastName, :phoneNumber, :email, :password, :serviceID)");
+                    $query = $this->db->prepare("INSERT INTO users (first_name, last_name, phone_number, email, password, facebook_id, facebook_name, facebook_avatar) VALUES (:firstName, :lastName, :phoneNumber, :email, :password, :serviceID, :serviceName, :serviceAvatar)");
                     break;
                 case 'steam':
-                    $query = $this->db->prepare("INSERT INTO users (first_name, last_name, phone_number, email, password, steam_id) VALUES (:firstName, :lastName, :phoneNumber, :email, :password, :serviceID)");
+                    $query = $this->db->prepare("INSERT INTO users (first_name, last_name, phone_number, email, password, steam_id, steam_name, steam_avatar) VALUES (:firstName, :lastName, :phoneNumber, :email, :password, :serviceID, :serviceName, :serviceAvatar)");
                     break;
-                default:
-                    $query = $this->db->prepare("INSERT INTO users (first_name, last_name, phone_number, email, password) VALUES (:firstName, :lastName, :phoneNumber, :email, :password)");
-            }
+                }
 
             $query->execute([
                 ':firstName' => $first_name,
@@ -300,11 +302,13 @@ class UserModel extends Model
                 ':email' => $email,
                 ':password' => $password_hash,
                 ':serviceID' => $service_id,
+                ':serviceName' => $name,
+                ':serviceAvatar' => $avatar,
             ]);
 
             if ($query->rowCount()) {
                 $this->clearOAuth();
-                return array('result'=> true);
+                return array('result' => true);
             }
         } else {
             $email = trim($_POST['email']);
@@ -328,7 +332,7 @@ class UserModel extends Model
             ]);
 
             if ($query->rowCount()) {
-                return array('result'=> true);
+                return array('result' => true);
             }
         }
 
@@ -345,8 +349,6 @@ class UserModel extends Model
 
         return $phone;
     }
-
-    // TODO: Доделать OAuth авторизацию для остальных сервисов: ок,фейсбук и так далее...
 
     public function getOAuthData($data)
     {
