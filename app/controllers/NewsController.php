@@ -55,12 +55,13 @@ class NewsController extends Controller
         $news_to_edit = [];
         $data         = [];
 
-        // Определение пользователя
+        // Проверка доступа
         if (!empty($_SESSION['userID'])) {
-
+            if (!$this->checkAccessLevel($_SESSION['status'])['add_news']) {
+                $this->view->render('no_access') or die();
+            }
         } else {
-            array_push($news_error,
-                'Ошибка! Вы не авторизованы! <br> <a href="/registration">Регистрация</a> <a href="/login">Вход</a>');
+            $this->view->render('login') or die();
         }
 // Определяем: Если есть id новости => update или вывод формы для редактирования
 
