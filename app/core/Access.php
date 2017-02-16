@@ -29,14 +29,13 @@ class Access
     }
 
 
-    /**
+     /**
      * Проверка уровня доступа
      *
      * @param type $status - статус пользователя
-     * @param type $function - функция нуждающаяся в доступе
-     * @return boolean
+     * @return array - ассоциативный массив допусков TRUE/FALSE
      */
-    public function checkAccessLevel($status = 0, $function = 0)
+    public function checkAccessLevel($status = 0)
     {
 
         //статус пользователя в Базе Данных
@@ -47,17 +46,18 @@ class Access
         $user4        = 4; // ?
         $admin        = 5; //АДМИН
         //Указание доступа для функций сайта
-        $access_array = array(
-            // Код функции  $function => [  Гость, Пользователь, Пользователь+,  ЭКСПЕРТ, ?, АДМИН ]
-            1 =>
-            [0, 1, 1, 1, 1, 1], //Добавлять объявления
-            2 =>
-            [0, 1, 1, 1, 1, 1], //Добавлять пользовательские отзывы
-            'profile' =>
-            [0, 1, 1, 1, 1, 1], //Редактировать профиль
-        );
+        $access_array = [
+            'add_announces' =>// Добавлять объявления
+            [0, 1, 1, 1, 1, 1],
+            'add_review' =>// Добавлять пользовательские отзывы
+            [0, 1, 1, 1, 1, 1],
+            'add_services' =>// Подключать к сервисы
+            [0, 1, 1, 1, 1, 1],
+            'edit_profile' =>// Редактировать профиль
+            [0, 1, 1, 1, 1, 1]
+            ];
 
-        // Приведение статуса в БД к позиции в массиве
+        // Приведение статуса в БД к позиции в массиве (см. соответствие выше)
         switch ($status) {
             case $guest:
                 $status = 0;
@@ -80,13 +80,11 @@ class Access
             default: $status = 0;
         }
 
-        if (isset($access_array[$function][$status])) {
-            if ($access_array[$function][$status] === 1) {
-                return TRUE;
-            } else {
-                return FALSE;
-            }
+//Получение массива допусков для данного статуса пользователя
+        $access=[];
+        foreach ($access_array as $key => $value){
+            $access[$key] = (boolean)$value[$status];
         }
-        return FALSE;
+        return  $access;
     }
 }
