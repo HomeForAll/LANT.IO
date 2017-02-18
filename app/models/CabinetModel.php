@@ -11,7 +11,450 @@ class CabinetModel extends Model
         $this->db = new DataBase();
     }
 
-    public function getgadgets()
+    public function open_chat()
+    {
+    }
+
+    public function delete_all_dialogs()
+    {
+        $profile_id = $_SESSION['userID'];
+        $this->db->query("UPDATE dialogs SET show = 0 WHERE user_id= $profile_id");
+        return $this->getdialogs();
+    }
+
+    public function return_dialog()
+    {
+        $profile_id = $_SESSION['userID'];
+
+        $stmt = $this->db->prepare("SELECT * FROM dialogs WHERE user_id= $profile_id AND show= 0");
+        $stmt->execute();
+        $dialogs = $stmt->fetchAll();
+
+        $i_max = 0;
+
+        foreach ($dialogs as $value) {
+            $i_max++;
+        }
+        $_SESSION['count_of_dialogs'] = $i_max;
+//$_SESSION['count_of_users'] = $i_max;   // CRITICAL MISTAKE EXPERCTED!!!!!!!!!!!!!!!!
+
+        foreach ($dialogs as $key => $value) {
+            $matrix[$key][0] = $value[0];
+            $this->db->query("UPDATE dialogs_properties SET date_of_delete = NULL WHERE id = {$matrix[$key][0]}");
+
+            $stmt = $this->db->prepare("SELECT name FROM dialogs_properties WHERE id = {$matrix[$key][0]}");
+            $stmt->execute();
+            $name = $stmt->fetchAll();
+
+            $matrix[$key][1] = $name[0][0];
+        }
+
+        if (isset($matrix)) {
+            $_SESSION['matrix_for_dialogs'] = $matrix;
+        }
+
+        for ($i = 0; $i <= $_SESSION['count_of_dialogs']; $i++) {
+            if (isset($_POST["return" . $i])) {
+                if (($_SESSION['matrix_for_dialogs'][$i][0])) {
+                    $this->db->query("UPDATE dialogs SET show = 1 WHERE id = {$_SESSION['matrix_for_dialogs'][$i][0]} AND user_id = {$profile_id}");
+                }
+            }
+        }
+        return $this->getdialogs();
+    }
+
+    public function turn_back_dialog()
+    {
+        $profile_id = $_SESSION['userID'];
+        if (isset($_SESSION['last_deleted_dialog'])) {
+            $this->db->query("UPDATE dialogs SET show = 1 WHERE id = {$_SESSION['last_deleted_dialog']} AND user_id= $profile_id");
+            $this->db->query("UPDATE dialogs_properties SET date_of_delete = NULL WHERE id = {$_SESSION['last_deleted_dialog']}");
+            unset($_SESSION['last_deleted_dialog']);
+            unset($_SESSION['last_deleted_dialog_name']);
+        }
+        return $this->getdialogs();
+    }
+
+    public function getdialogs()
+    {
+        unset($_SESSION['deleted_dialogs_button']);
+        $_SESSION['count_of_dialogs'] = 0;
+        $profile_id = $_SESSION['userID'];
+
+        $stmt = $this->db->prepare("SELECT * FROM dialogs WHERE user_id= $profile_id AND show= 0");
+        $stmt->execute();
+        $dialogs = $stmt->fetchAll();
+        $i_max = 0;
+        foreach ($dialogs as $value) {
+            $i_max++;
+        }
+        $count_of_dialogs_deleted = $i_max;
+        $_SESSION['count_of_dialogs_deleted'] = $count_of_dialogs_deleted;
+        
+        if (!isset($_POST['deleted_dialogs'])) {
+            $stmt = $this->db->prepare("SELECT * FROM dialogs WHERE user_id= $profile_id AND show= 1");
+            $stmt->execute();
+            $dialogs = $stmt->fetchAll();
+        } else {
+            $stmt = $this->db->prepare("SELECT * FROM dialogs WHERE user_id= $profile_id AND show= 0");
+            $stmt->execute();
+            $dialogs = $stmt->fetchAll();
+        }
+        $i_max = 0;
+        foreach ($dialogs as $value) {
+            $i_max++;
+        }
+        $_SESSION['count_of_dialogs'] = $i_max;
+        //$_SESSION['count_of_users'] = $i_max;   // CRITICAL MISTAKE EXPERCTED!!!!!!!!!!!!!!!!
+
+        foreach ($dialogs as $key => $value) {
+            $matrix[$key][0] = $value[0];
+
+            if (isset($_POST['deleted_dialogs'])) {
+                $_SESSION['deleted_dialogs_button'] = 1;
+                $stmt = $this->db->prepare("SELECT date_of_delete FROM dialogs_properties WHERE id = {$matrix[$key][0]}");
+                $stmt->execute();
+                $date_of_delete = $stmt->fetchAll();
+
+                if (($date_of_delete[0]['date_of_delete'])) {
+
+                    $today = date('Y-m-d');
+
+                    $result = ($today < $date_of_delete[0]['date_of_delete']);
+                    if ($result == true) {
+                        $matrix[$key][2] = $date_of_delete[0]['date_of_delete'];
+                    } else {
+                        // DELETE DIALOG
+                    }
+                } else {
+                    $stmt = $this->db->prepare("SELECT owners FROM dialogs_properties WHERE id = {$matrix[$key][0]}");
+                    $stmt->execute();
+                    $owners = $stmt->fetchAll();
+
+                    $massiv_owners = $owners[0]['owners'];
+                    $massiv_owners = explode(",", $massiv_owners);
+
+                    $full_delete_dialog_flag = true;
+                    foreach ($massiv_owners as $value) {
+                        $stmt = $this->db->prepare("SELECT show FROM dialogs WHERE id = {$matrix[$key][0]} AND user_id = $value");
+                        $stmt->execute();
+                        $show = $stmt->fetchAll();
+
+                        if ($show[0]['show'] == 1) {
+                            $full_delete_dialog_flag = false;
+                        }
+                    }
+                    if ($full_delete_dialog_flag == true) {
+                        $inactiveDate = new DateTime();
+                        $inactiveDate->add(new DateInterval('P3M'));
+                        $date_of_delete = $inactiveDate->format('Y-m-d');
+                        $this->db->query("UPDATE dialogs_properties SET date_of_delete = '{$date_of_delete}' WHERE id = {$matrix[$key][0]}");
+                    }
+                }
+            }
+
+            $stmt = $this->db->prepare("SELECT name FROM dialogs_properties WHERE id = {$matrix[$key][0]}");
+            $stmt->execute();
+            $name = $stmt->fetchAll();
+
+            $stmt = $this->db->prepare("SELECT owners FROM dialogs_properties WHERE id = {$matrix[$key][0]}");
+            $stmt->execute();
+            $owners = $stmt->fetchAll();
+            $massiv_owners = $owners[0]['owners'];
+            $massiv_owners = explode(",", $massiv_owners);
+
+            if (isset($massiv_owners[2]))
+                $matrix[$key][1] = $name[0][0];
+            else
+            {
+                foreach ($massiv_owners as $k => $z)
+                {
+                    if ($z != $profile_id)
+                    {
+                        $stmt = $this->db->prepare("SELECT first_name FROM users WHERE id = {$z}");
+                        $stmt->execute();
+                        $name = $stmt->fetchAll();
+                        $matrix[$key][1] = $name[0][0];
+                        $matrix[$key][1] .= ' ';
+                        $stmt = $this->db->prepare("SELECT last_name FROM users WHERE id = {$z}");
+                        $stmt->execute();
+                        $name = $stmt->fetchAll();
+                        $matrix[$key][1] .= $name[0][0];
+                    }
+                }
+            }
+        }
+
+        if (isset($matrix)) {
+            $_SESSION['matrix_for_dialogs'] = $matrix;
+            return $matrix;
+        }
+    }
+
+    public function delete_dialog($i)
+    {
+        $profile_id = $_SESSION['userID'];
+
+        if (!isset($_SESSION['last_deleted_dialog'])) {
+            if (($_SESSION['matrix_for_dialogs'][$i][0])) {
+                $matrix = $_SESSION['matrix_for_dialogs'][$i];
+
+                $this->db->query("UPDATE dialogs SET show = 0 WHERE id = {$matrix[0]} AND user_id = {$profile_id}");
+
+                $_SESSION['last_deleted_dialog'] = $matrix[0];
+                $_SESSION['last_deleted_dialog_name'] = $matrix[1];
+            }
+        }
+        return $this->getdialogs();
+    }
+
+    public function create_new_dialog()
+    {
+        $admin_status = 5;
+        $profile_id = $_SESSION['userID'];
+        if (isset($_POST['add_user']) || (isset($_POST['add_admin']))) {
+            $matrix = $_SESSION['matrix_for_dialogs'][$_SESSION['chat']];
+            $matrix = $matrix[0];
+            $stmt = $this->db->prepare("SELECT owners FROM dialogs_properties WHERE id = {$matrix}");
+            $stmt->execute();
+            $chat_owner = $stmt->fetchAll();
+
+            $chat_owners = explode(",", $chat_owner[0]['owners']);
+
+            $query = 'SELECT * FROM users WHERE id != ';
+            foreach ($chat_owners as $value => $key) {
+                if ($value == 0)
+                    $query .= $key;
+                else
+                    $query .= ' AND id != ' . $key;
+            }
+
+            if (isset($_POST['add_admin']))
+                $query .= ' AND status = ' . $admin_status;
+            else
+                $query .= ' AND status != ' . $admin_status;
+
+            $stmt = $this->db->prepare($query);
+        } else {
+            $stmt = $this->db->prepare("SELECT * FROM users WHERE id != {$profile_id} AND status != " . $admin_status);
+        }
+        $stmt->execute();
+        $users = $stmt->fetchAll();
+        $arrays_num = 0;
+        $i_max = 0;
+
+        foreach ($users as $value) {
+            $i_max++;
+        }
+
+        $matrix = [];
+
+        $_SESSION['count_of_users'] = $i_max;
+
+        foreach ($users as $key => $value) {
+            $matrix[$key][1] = $value[1];
+            $matrix[$key][2] = $value[2];
+            $arrays_num++;
+        }
+
+        if (isset($matrix)) {
+            $_SESSION['matrix_for_users'] = $matrix;
+            return $matrix;
+        }
+    }
+
+    public function add_dialog()
+    {
+        $profile_id = $_SESSION['userID'];
+        $count_of_owners = 0;
+        $massiv = [];
+        $flag_user_selected = false;
+        $count_of_dialogs = 0;
+        $massiv_dialogs = [];
+        $new_owners = '';
+
+        if (isset($_POST['add_user_yes'])) {
+            for ($i = 0; $i < $_SESSION['count_of_users']; $i++) {
+                $name = "add_user" . $i;
+
+                if (isset($_POST[$name])) {
+                    $stmt = $this->db->prepare("SELECT id FROM users WHERE first_name = '{$_SESSION['matrix_for_users'][$i][1]}' AND last_name = '{$_SESSION['matrix_for_users'][$i][2]}'");
+                    $stmt->execute();
+                    $user_dialog = $stmt->fetchAll();
+                    $names_of_users[$count_of_owners] = $_SESSION['matrix_for_users'][$i][1];
+                    $massiv[$count_of_owners] = $user_dialog[0][0];
+                    $count_of_owners++;
+                    $flag_user_selected = true;
+                }
+            }
+
+
+            if ($flag_user_selected == true) {
+                $matrix = $_SESSION['matrix_for_dialogs'][$_SESSION['chat']];
+                $matrix = $matrix[0];
+
+                $stmt = $this->db->prepare("SELECT owners FROM dialogs_properties WHERE id = {$matrix}");
+                $stmt->execute();
+                $users_dialog = $stmt->fetchAll();
+                $stmt = $this->db->prepare("SELECT name FROM dialogs_properties WHERE id = {$matrix}");
+                $stmt->execute();
+                $names_dialog = $stmt->fetchAll();
+
+                $array_users = explode(",", $users_dialog[0][0]);
+                $array_names = explode(",", $names_dialog[0][0]);
+
+                $count = 0;
+                $new_owners_names = '';
+
+                foreach ($array_users as $value => $key)
+                    $massiv[$count_of_owners + $value] = $key;
+
+                foreach ($array_names as $value => $key) {
+                    if (count($array_users) == 2) {
+                        $matrix = ($_SESSION['matrix_for_dialogs'][$_SESSION['chat']]);
+                        $matrix = $matrix[1];
+                        $name_parts = explode(' ', $matrix);
+                        $names_of_users[$count_of_owners + $value] = $name_parts[0];
+
+                        $stmt = $this->db->prepare("SELECT first_name FROM users WHERE id = {$profile_id}");
+                        $stmt->execute();
+                        $name = $stmt->fetchAll();
+
+                        $names_of_users[$count_of_owners + $value + 1] = $name[0]['first_name'];
+                    } else {
+                        $names_of_users[$count_of_owners + $value] = $key;
+                    }
+                }
+
+
+                sort($massiv);
+                foreach ($massiv as $value)
+                    $count++;
+
+                for ($j = 0; $j < $count; $j++) {
+                    if ($j == 0) {
+                        $new_owners = $massiv[$j];
+                        $new_owners_names = $names_of_users[$j];
+                    } else {
+                        $new_owners .= ',' . $massiv[$j];
+                        $new_owners_names .= ',' . $names_of_users[$j];
+                    }
+                }
+            } else {
+                echo 'ne vibral';
+                $_POST['add_user'] = 1;
+                return $this->create_new_dialog();
+            }
+        }
+
+
+        if (isset($_POST["add_users"])) {
+            for ($i = 0; $i < $_SESSION['count_of_users']; $i++) {
+                $name = "add" . $i;
+
+                if (isset($_POST[$name])) {
+                    $stmt = $this->db->prepare("SELECT id FROM users WHERE first_name = '{$_SESSION['matrix_for_users'][$i][1]}' AND last_name = '{$_SESSION['matrix_for_users'][$i][2]}'");
+                    $stmt->execute();
+                    $user_dialog = $stmt->fetchAll();
+                    $names_of_users[$count_of_owners] = $_SESSION['matrix_for_users'][$i][1];
+                    $massiv[$count_of_owners] = $user_dialog[0][0];
+                    $count_of_owners++;
+                    $massiv[$count_of_owners] = $profile_id;
+                    $flag_user_selected = true;
+                    $number_for_solo_dialog = $i;
+                }
+            }
+
+
+            if ($flag_user_selected == true) {
+                $stmt = $this->db->prepare("SELECT * FROM users WHERE id = $profile_id");
+                $stmt->execute();
+                $user_owner = $stmt->fetchAll();
+                $names_of_users[$count_of_owners] = ($user_owner[0]['first_name']);
+
+                sort($massiv);
+
+                $count = 0;
+                $new_owners_names = '';
+                foreach ($massiv as $value)
+                    $count++;
+                for ($j = 0; $j < $count; $j++) {
+                    if ($j == 0) {
+                        $new_owners = $massiv[$j];
+                        $new_owners_names = $names_of_users[$j];
+                    } else {
+                        $new_owners .= ',' . $massiv[$j];
+                        $new_owners_names .= ',' . $names_of_users[$j];
+                    }
+                }
+
+                if ($count_of_owners == 1)
+                    $new_owners_names = $_SESSION['matrix_for_users'][$number_for_solo_dialog][1] . ' ' . $_SESSION['matrix_for_users'][$number_for_solo_dialog][2];
+
+                $query = "SELECT id FROM dialogs WHERE ";
+                $query .= "user_id = ";
+                $query .= $profile_id;
+                $stmt = $this->db->prepare($query);
+                $stmt->execute();
+                $dialog = $stmt->fetchAll();
+
+                foreach ($dialog as $value)
+                    $count_of_dialogs++;
+
+                for ($j = 0; $j < $count_of_dialogs; $j++) {
+                    $query = "SELECT owners FROM dialogs_properties WHERE id = {$dialog[$j][0]}";
+                    $stmt = $this->db->prepare($query);
+                    $stmt->execute();
+                    $flag_dialog_exist = $stmt->fetchAll();
+                    $massiv_dialogs[$j] = $flag_dialog_exist[0][0];
+                }
+
+                $flag = false;
+                for ($j = 0; $j < $count_of_dialogs; $j++) {
+                    if ($new_owners == $massiv_dialogs[$j]) {
+                        $query = "SELECT id FROM dialogs_properties WHERE owners = '{$new_owners}'";
+                        $stmt = $this->db->prepare($query);
+                        $stmt->execute();
+                        $id = $stmt->fetchAll();
+                        foreach ($_SESSION['matrix_for_dialogs'] as $key => $value) {
+                            if ($value[0] == $id[0]['id'])
+                            {
+                                $_SESSION['chat'] = $key;
+                                header('Location: http://' . $_SERVER['HTTP_HOST'] . '/cabinet/chat');
+                                exit;
+                            }
+                        }
+                    }
+                }
+
+                if ($flag == false) {
+                    $query = $this->db->prepare("INSERT INTO dialogs_properties (name, owners) VALUES (:name, :owners) RETURNING id");
+                    $query->execute([
+                        ':name' => $new_owners_names,
+                        ':owners' => $new_owners,
+                    ]);
+                    $result = $query->fetch();
+
+                    $query = $this->db->prepare("INSERT INTO dialogs (id, user_id, show) VALUES (:id, :user_id, :show)");
+                    foreach ($massiv as $key => $value) {
+                        $query->execute([
+                            ':id' => $result[0],
+                            ':user_id' => $massiv[$key],
+                            ':show' => 1,
+                        ]);
+                    }
+                    return $this->getdialogs();
+                }
+            } else {
+                echo 'Не выбран!';
+                $_POST['create_new_dialog'] = 1;
+                return $this->create_new_dialog();
+            }
+        }
+    }
+
+    public
+    function getgadgets()
     {
         //$_SESSION['userID'] = 1;
         $profile_id = $_SESSION['userID'];
@@ -39,7 +482,8 @@ class CabinetModel extends Model
         }
     }
 
-    public function delete_gadget()
+    public
+    function delete_gadget()
     {
         $profile_id = $_SESSION['userID'];
         for ($i = 0; $i <= $_SESSION['count_of_delete_buttons_for_gadgets']; $i++) {
@@ -57,11 +501,13 @@ class CabinetModel extends Model
         return $this->getgadgets();
     }
 
-    public function ajaxHandler()
+    public
+    function ajaxHandler()
     {
     }
 
-    public function getinfo()
+    public
+    function getinfo()
     {
         //$_SESSION['userID'] = 1;
         $profile_id = $_SESSION['userID'];
@@ -72,13 +518,15 @@ class CabinetModel extends Model
         return $info;
     }
 
-    public function showActivity()
+    public
+    function showActivity()
     {
     }
 
-    public function savePersonalInfo()
+    public
+    function savePersonalInfo()
     {
-        //$_SESSION['userID'] = 1;
+        //$_SESSION['userID'] = 3;
         $_SESSION['error'] = [];
         $profile_id = $_SESSION['userID'];
 
@@ -188,10 +636,6 @@ class CabinetModel extends Model
             if ($error_array[3] == 0)
                 $this->db->query("UPDATE users SET birthday = '{$_POST['sel_date']}.{$_POST['sel_month']}.{$_POST['sel_year']}' WHERE id = $profile_id");
 
-            $_SESSION['error'] = $error_array;
-        }
-
-        if (isset($_POST['save_2'])) {
             $_SESSION['email_error'] = 0;
             if (filter_var(trim($_POST['email']), FILTER_VALIDATE_EMAIL)) {
                 $this->db->query("UPDATE users SET email = '{$_POST['email']}' WHERE id = $profile_id");
@@ -199,17 +643,30 @@ class CabinetModel extends Model
                 $_SESSION['email_error'] = 1;
             }
 
-
-            $this->db->query("UPDATE users SET vk_id = '{$_POST['vkcom']}' WHERE id = $profile_id");
-            $this->db->query("UPDATE users SET ok_id = '{$_POST['classmates']}' WHERE id = $profile_id");
-            $this->db->query("UPDATE users SET mail_id = '{$_POST['mailru']}' WHERE id = $profile_id");
-            $this->db->query("UPDATE users SET ya_id = '{$_POST['yandexru']}' WHERE id = $profile_id");
-            $this->db->query("UPDATE users SET google_id = '{$_POST['google']}' WHERE id = $profile_id");
-            $this->db->query("UPDATE users SET facebook_id = '{$_POST['facebook']}' WHERE id = $profile_id");
-            $this->db->query("UPDATE users SET steam_id = '{$_POST['steam']}' WHERE id = $profile_id");
+            $_SESSION['error'] = $error_array;
             $this->db->query("UPDATE users SET profile_foto_id = '{$_POST['profile_foto']}' WHERE id = $profile_id");
         }
 
+        if (isset($_POST['delete_vk']) || (isset($_POST['delete_steam'])) || (isset($_POST['delete_ok'])) || (isset($_POST['delete_ya'])) || (isset($_POST['delete_mail'])) || (isset($_POST['delete_facebook'])) || (isset($_POST['delete_google'])))
+        {
+            foreach ($_POST as $key => $value) {
+                if ($value == 'Отвязать')
+                {
+                    $social_net = explode("_", $key);
+                    if (isset($social_net[1])) {
+                        $id = $social_net[1] . "_id";
+                        $name = $social_net[1] . "_name";
+                        $avatar = $social_net[1] . "_avatar";
+                        $this->db->query("UPDATE users SET {$id} = NULL WHERE id = $profile_id");
+                        $this->db->query("UPDATE users SET {$name} = NULL WHERE id = $profile_id");
+                        $this->db->query("UPDATE users SET {$avatar} = NULL WHERE id = $profile_id");
+                    }
+                }
+            }
+        }
+
+
+        // save_2 отсутсвует! Удалена по ненадобности.
         if (isset($_POST['save_3'])) {
             $stmt = $this->db->prepare("SELECT password FROM users WHERE id = $profile_id");
             $stmt->execute();
@@ -269,7 +726,8 @@ class CabinetModel extends Model
     }
 
 
-    private function geoip_client($ip, $opt, $sid)
+    private
+    function geoip_client($ip, $opt, $sid)
     {
 // Делаем запрос к серверу
         if ($xml = file_get_contents('http://geoip.top/cgi-bin/getdata.pl?ip=' . $ip . '&hex=' . $opt . '&sid=' . $sid)) {
@@ -315,7 +773,8 @@ class CabinetModel extends Model
 
     }
 
-    public function handleKeys()
+    public
+    function handleKeys()
     {
 
         if (isset($_POST['handle'])) {
@@ -345,14 +804,16 @@ class CabinetModel extends Model
         }
     }
 
-    public function generate()
+    public
+    function generate()
     {
         if (isset($_POST['generate'])) {
             $_SESSION['keys'] = $this->composeKeysData($this->handleEmails());
         }
     }
 
-    private function composeKeysData($emails)
+    private
+    function composeKeysData($emails)
     {
         $keys = array();
 
@@ -363,7 +824,8 @@ class CabinetModel extends Model
         return $keys;
     }
 
-    private function handleEmails()
+    private
+    function handleEmails()
     {
         $explodedEmails = explode("\n", $_POST['emails']);
         $emails = array();
@@ -389,7 +851,8 @@ class CabinetModel extends Model
         return $emails;
     }
 
-    private function getKey($string)
+    private
+    function getKey($string)
     {
         $emailSHA = sha1($string);
         $selection = $emailSHA['35'] . $emailSHA['22'] . $emailSHA['1'] . $emailSHA['3'] . $emailSHA['4'] . $emailSHA['8'] . $emailSHA['12'] . $emailSHA['15'] . $emailSHA['17'] . $emailSHA['29'];
@@ -402,7 +865,8 @@ class CabinetModel extends Model
         return strtoupper($key);
     }
 
-    public function numberofpages()
+    public
+    function numberofpages()
     {
         $array = [];
         $stmt = $this->db->prepare("SELECT * FROM access");
@@ -420,7 +884,8 @@ class CabinetModel extends Model
         $_SESSION['numberofpages'] = $result;
     }
 
-    public function showdb()
+    public
+    function showdb()
     {
         unset($_SESSION['sessioncheck']);
         $this->numberofpages();
@@ -469,7 +934,8 @@ class CabinetModel extends Model
         return false;
     }
 
-    public function keyeditor()
+    public
+    function keyeditor()
     {
         if (isset($_POST['idworkgo'])) {
             $id_key = $_POST['id_key_keyeditor'];
@@ -580,7 +1046,8 @@ class CabinetModel extends Model
         return false;
     }
 
-    public function keylock()
+    public
+    function keylock()
     {
         if (isset($_POST['lock'])) {
             $this->db->query("UPDATE access SET status = 2 WHERE id = {$_SESSION['id_key_keyeditor']}");
@@ -590,7 +1057,8 @@ class CabinetModel extends Model
         return false;
     }
 
-    public function keyunlock()
+    public
+    function keyunlock()
     {
         if (isset($_POST['unlock'])) {
             $today = date("Ymd");
@@ -606,7 +1074,8 @@ class CabinetModel extends Model
         }
     }
 
-    public function installdate()
+    public
+    function installdate()
     {
         if (isset($_POST['installdate'])) {
             $day = $_POST['sel_date'];
@@ -698,7 +1167,8 @@ class CabinetModel extends Model
         return false;
     }
 
-    public function page()
+    public
+    function page()
     {
         $count = $_SESSION["numberofpages"];
         $idsperpage = self::IDSPERPAGE;
@@ -748,7 +1218,8 @@ class CabinetModel extends Model
         }
     }
 
-    public function getForms()
+    public
+    function getForms()
     {
         $query = $this->db->prepare("SELECT * FROM forms");
         $query->execute();
@@ -761,7 +1232,8 @@ class CabinetModel extends Model
         );
     }
 
-    public function getForm($id)
+    public
+    function getForm($id)
     {
         $query = $this->db->prepare("SELECT * FROM forms WHERE id = :id");
         $query->execute([':id' => $id]);
@@ -770,7 +1242,8 @@ class CabinetModel extends Model
         return $form;
     }
 
-    public function createForm()
+    public
+    function createForm()
     {
         $spaceType = $_POST['spaceType'];
         $operationType = $_POST['operationType'];
@@ -803,12 +1276,14 @@ class CabinetModel extends Model
         }
     }
 
-    public function editForm($id)
+    public
+    function editForm($id)
     {
 
     }
 
-    public function deleteForm($id)
+    public
+    function deleteForm($id)
     {
         $query = $this->db->prepare("DELETE FROM forms WHERE id = :id");
         $query->execute([':id' => $id]);
@@ -816,12 +1291,14 @@ class CabinetModel extends Model
         return $query->rowCount();
     }
 
-    public function getCabinetElements()
+    public
+    function getCabinetElements()
     {
 
     }
 
-    public function handleFormParams()
+    public
+    function handleFormParams()
     {
         $answer = array();
 
@@ -1067,7 +1544,8 @@ class CabinetModel extends Model
         echo json_encode($answer, JSON_UNESCAPED_UNICODE);
     }
 
-    private function checkEmptyPOSTElements()
+    private
+    function checkEmptyPOSTElements()
     {
         foreach ($_POST as $value) {
             if (!(gettype($value) == 'array')) {
@@ -1084,7 +1562,8 @@ class CabinetModel extends Model
         return true;
     }
 
-    public function getFormParams()
+    public
+    function getFormParams()
     {
         return array(
             'spaceTypes' => $this->getSpaceTypes(),
@@ -1093,7 +1572,8 @@ class CabinetModel extends Model
         );
     }
 
-    public function getFormData($id)
+    public
+    function getFormData($id)
     {
         $categories = $this->getCategories($id);
 
@@ -1107,7 +1587,8 @@ class CabinetModel extends Model
         );
     }
 
-    private function getSpaceTypes()
+    private
+    function getSpaceTypes()
     {
         $query = $this->db->prepare("SELECT * FROM form_space_types");
         $query->execute();
@@ -1115,7 +1596,8 @@ class CabinetModel extends Model
         return $query->fetchAll();
     }
 
-    private function getCategories($formID)
+    private
+    function getCategories($formID)
     {
         $query = $this->db->prepare("SELECT * FROM form_categories WHERE form_id = :form_id");
         $query->execute([':form_id' => $formID]);
@@ -1123,7 +1605,8 @@ class CabinetModel extends Model
         return $query->fetchAll();
     }
 
-    private function getSubcategories($formID)
+    private
+    function getSubcategories($formID)
     {
         $query = $this->db->prepare("SELECT * FROM form_subcategories WHERE form_id = :form_id");
         $query->execute([':form_id' => $formID]);
@@ -1131,7 +1614,8 @@ class CabinetModel extends Model
         return $query->fetchAll();
     }
 
-    private function getSpaceType($id)
+    private
+    function getSpaceType($id)
     {
         $query = $this->db->prepare("SELECT * FROM form_space_types WHERE id = :id");
         $query->execute([':id' => $id]);
@@ -1139,7 +1623,8 @@ class CabinetModel extends Model
         return $query->fetch();
     }
 
-    private function getOperationTypes()
+    private
+    function getOperationTypes()
     {
         $query = $this->db->prepare("SELECT * FROM form_operation_types");
         $query->execute();
@@ -1147,7 +1632,8 @@ class CabinetModel extends Model
         return $query->fetchAll();
     }
 
-    private function getOperationType($id)
+    private
+    function getOperationType($id)
     {
         $query = $this->db->prepare("SELECT * FROM form_operation_types WHERE id = :id");
         $query->execute([':id' => $id]);
@@ -1155,7 +1641,8 @@ class CabinetModel extends Model
         return $query->fetch();
     }
 
-    private function getObjectTypes()
+    private
+    function getObjectTypes()
     {
         $query = $this->db->prepare("SELECT * FROM form_object_types");
         $query->execute();
@@ -1163,7 +1650,8 @@ class CabinetModel extends Model
         return $query->fetchAll();
     }
 
-    private function getObjectType($id)
+    private
+    function getObjectType($id)
     {
         $query = $this->db->prepare("SELECT * FROM form_object_types WHERE id = :id");
         $query->execute([':id' => $id]);

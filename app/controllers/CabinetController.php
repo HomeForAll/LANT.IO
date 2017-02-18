@@ -13,6 +13,83 @@ class CabinetController extends Controller
         $this->view->render('cabinet');
     }
 
+    public function actionChat()
+    {
+        $viewchat = $this->model->open_chat();
+
+        if (isset($_POST['add_admin'])) {
+            $viewchat = $this->model->create_new_dialog();
+        }
+
+        if(isset($_POST['add_user'])) {
+            $viewchat = $this->model->create_new_dialog();
+        }
+
+        if (isset($_POST['add_user_yes'])) {
+            $viewchat = $this->model->add_dialog();
+        }
+
+        $this->view->render('chat', $viewchat);
+    }
+
+    public function actionDialogs()
+    {
+        $dialogs_page_defualt = $this->model->getdialogs();
+        $viewdialogs = $dialogs_page_defualt;
+
+        for ($i = 0; $i <= $_SESSION['count_of_dialogs']; $i++) {
+            if (isset($_POST["delete" . $i])) {
+                $viewdialogs = $this->model->delete_dialog($i);;
+            }
+        }
+
+        for ($i = 0; $i < $_SESSION['count_of_dialogs_deleted']; $i++) {
+            if (isset($_POST["return" . $i])) {
+                $viewdialogs = $this->model->return_dialog($i);
+            }
+        }
+
+            for ($i = 0; $i < $_SESSION['count_of_dialogs']; $i++)
+            {
+                if (!isset($_SESSION['deleted_dialogs_button'])) {
+                    if (isset($_POST['chat' . $i])) {
+                        $_SESSION['chat'] = $i;
+                        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/cabinet/chat');
+                        exit;
+                    }
+                }
+            }
+
+            if (isset($_POST['dialogs']))
+            {
+                unset($_SESSION['deleted_dialogs_button']);
+                $viewdialogs = $this->model->getdialogs();
+            }
+
+        if (isset($_POST['add_users'])) {
+            $viewdialogs = $this->model->add_dialog();
+        }
+
+        if (isset($_POST['delete_all_dialogs_yes']))
+            $viewdialogs = $this->model->delete_all_dialogs();
+
+        if (isset($_POST["turn_back_dialog"]))
+            $viewdialogs = $this->model->turn_back_dialog();
+
+        if (isset($_POST["create_new_dialog"])) {
+            $viewdialogs = $this->model->create_new_dialog();
+            unset($_SESSION['last_deleted_dialog']);
+            unset($_SESSION['last_deleted_dialog_name']);
+        }
+
+        if ($viewdialogs == $dialogs_page_defualt) {
+            unset($_SESSION['last_deleted_dialog']);
+            unset($_SESSION['last_deleted_dialog_name']);
+        }
+
+        $this->view->render('dialogs', $viewdialogs);
+    }
+
     public function actionGenerator()
     {
         $this->model->generate();
