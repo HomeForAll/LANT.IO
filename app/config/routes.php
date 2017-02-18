@@ -17,6 +17,8 @@ return array(
     'cabinet/generator' => 'main/cabinet/generator',
     'cabinet/keyeditor' => 'main/cabinet/keyeditor',
     'cabinet/forms' => 'main/cabinet/forms',
+    'cabinet/dialogs' => 'main/cabinet/dialogs',
+    'cabinet/chat' => 'main/cabinet/chat',
     'cabinet/form/new' => 'main/cabinet/createForm',
     'cabinet/form/edit/id/([0-9]+)' => 'main/cabinet/editForm/$1',
     'cabinet/form/delete/id/([0-9]+)' => 'main/cabinet/deleteForm/$1',

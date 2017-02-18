@@ -1,6 +1,5 @@
 <?php
 $this->title = 'Личный кабинет';
-// $this->printInPre($_SESSION);
 ?>
     <h1>Личный кабинет!</h1>
     <a class="button" href="cabinet/profile/edit">Редактировать профиль</a>
