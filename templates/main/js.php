@@ -4,6 +4,14 @@
 <script src="/templates/main/js/searchFormBuilder.js"></script>
 <script src="/templates/main/js/mapController.js"></script>
 <script src="/templates/main/js/forms_editor_handler.js"></script>
+<?php
+// Подключение скрипта в контроллере
+if (isset($this->data['script'])) {
+foreach ($this->data['script'] as $key => $value) {
+    echo '<script src="/templates/main/js/'.$value.'"></script>'."\r\n";
+}
+}
+?>
 <script>
     /*$(window).on('load', function () {
      $("#loading-center").fadeOut(800, function () {

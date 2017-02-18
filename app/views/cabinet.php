@@ -1,12 +1,88 @@
 <?php
 $this->title = 'Личный кабинет';
 ?>
-<h1>Личный кабинет!</h1>
-<a class="button" href="cabinet/profile/edit">Редактировать профиль</a>
-<a class="button" href="cabinet/generator">Генератор ключей</a>
-<a class="button" href="cabinet/keyeditor">Редактор ключей</a>
-<a class="button" href="cabinet/forms">Редактор форм</a>
-<a class="button" href="cabinet/dialogs">Мои диалоги</a>
-<div style="position: absolute; top: 5px; right: 5px;">
-    <a href="/support" class="button">Тех. поддержка</a>
-</div>
+    <h1>Личный кабинет!</h1>
+    <a class="button" href="cabinet/profile/edit">Редактировать профиль</a>
+<?php
+if ($this->checkAccessLevel($_SESSION['status'], 'profile')) {
+    ?>
+    <a class="button" href="cabinet/generator">Генератор ключей</a>
+    <a class="button" href="cabinet/keyeditor">Редактор ключей</a>
+    <?php
+}
+?>
+    <a class="button" href="cabinet/forms">Редактор форм</a>
+    <div style="position: absolute; top: 5px; right: 5px;">
+        <a href="/support" class="button">Тех. поддержка</a>
+    </div>
+
+     <a class="button" href="/news/myad">Мои объявления</a>
+     
+    <p>Ваш балланс:  <?php if(isset($this->data['balance'])) { echo $this->data['balance']; }?> коинов </p>
+ <a class="button" href="cabinet/balance">Услуги и платежи</a>
+
+ 
+<?php
+function checkEmpty($array) {
+    $i = 0;
+    foreach($array as $item){
+        if(empty($item)){
+            $i++;
+        }
+    }
+
+    return $i;
+}
+
+if (checkEmpty($this->data['social_nets'][0]) > 0) {
+    ?>
+    <h3>Привязать социальную сеть:</h3>
+    <div id="soc_net">
+        <?php
+        if ($this->data['social_nets'][0]['vk_id'] == '') {
+            ?>
+            <a href="oauth/vk/state/3"><img src="/templates/main/images/soc_net/vk_2.png" alt="VK"></a>
+            <?php
+        }
+
+        if ($this->data['social_nets'][0]['ok_id'] == '') {
+            ?>
+            <a href="oauth/ok/state/3"><img src="/templates/main/images/soc_net/ok.png" alt="OK"></a>
+            <?php
+        }
+
+        if ($this->data['social_nets'][0]['mail_id'] == '') {
+            ?>
+            <a href="oauth/mail/state/3"><img src="/templates/main/images/soc_net/mail_ru.png" alt="Mail"></a>
+            <?php
+        }
+
+        if ($this->data['social_nets'][0]['ya_id'] == '') {
+            ?>
+            <a href="oauth/ya/state/3"><img src="/templates/main/images/soc_net/yandex_2.png" alt="YA"></a>
+            <?php
+        }
+
+        if ($this->data['social_nets'][0]['google_id'] == '') {
+            ?>
+            <a href="oauth/google/state/3"><img src="/templates/main/images/soc_net/google.png" alt="Google"></a>
+            <?php
+        }
+
+        if ($this->data['social_nets'][0]['facebook_id'] == '') {
+            ?>
+            <a href="oauth/fb/state/3"><img src="/templates/main/images/soc_net/facebook_2.png" alt="FaceBook"></a>
+            <?php
+        }
+
+        if ($this->data['social_nets'][0]['steam_id'] == '') {
+            ?>
+            <a href="oauth/steam/state/3"><img src="/templates/main/images/soc_net/steam.png" alt="Steam"></a>
+            <?php
+        }
+        ?>
+        <div style="clear: both"></div>
+    </div>
+    <?php
+}
+?>

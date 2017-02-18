@@ -2,18 +2,14 @@
 
 class UserModel extends Model
 {
+    use Cleaner;
 
-    private $socialAuth;
+    private $socialNets;
 
     public function __construct()
     {
         $this->db = new DataBase;
-        $this->socialAuth = new SocialAuth(self::getUserID());
-    }
-
-    public function ajaxHandler()
-    {
-
+        $this->socialNets = new SocialNets('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
     }
 
     public function doLogin()
@@ -29,6 +25,146 @@ class UserModel extends Model
         }
 
         return false;
+    }
+
+    public function doRegistration()
+    {
+        $errors = $this->checkDataErrors();
+        if (!$errors) {
+            return $this->saveUserData();
+        } else {
+            return $errors;
+        }
+    }
+
+    /**
+     * @return array|bool
+     */
+    private function checkDataErrors()
+    {
+        $errors = [];
+
+        if (!empty($_SESSION['OAuth_state'])) {
+            $email = $_POST['email'];
+            $phone = $this->extractPhoneNumber($_POST['phone']);
+            $password = $_POST['password'];
+
+            $email_errors = $this->checkEmail($email);
+            $phone_errors = $this->checkPhone($phone);
+            $password_errors = $this->checkPassword($password);
+
+            if ($email_errors) {
+                $errors['email'] = $email_errors;
+            }
+
+            if ($phone_errors) {
+                $errors['phone'] = $phone_errors;
+            }
+
+            if ($password_errors) {
+                $errors['password'] = $password_errors;
+            }
+        } else {
+            $email = $_POST['email'];
+            $first_name = $_POST['firstName'];
+            $last_name = $_POST['lastName'];
+            $patronymic = $_POST['patronymic'];
+            $birthday = $_POST['birthday'];
+            $phone = $this->extractPhoneNumber($_POST['phoneNumber']);
+            $password = $_POST['password'];
+
+            $errors['first_name'] = $this->checkFirstName($first_name);
+            $errors['last_name'] = $this->checkLastName($last_name);
+            $errors['patronymic'] = $this->checkPatronymic($patronymic);
+            $errors['email'] = $this->checkEmail($email);
+            $errors['birthday'] = $this->checkBirthday($birthday);
+            $errors['phone'] = $this->checkPhone($phone);
+            $errors['password'] = $this->checkPassword($password);
+        }
+
+        return !empty($errors) ? $errors : false;
+    }
+
+    private function checkFirstName($first_name)
+    {
+        $errors = array();
+
+        if ($first_name == '') {
+            $errors[] = 'Вы должны указать имя.';
+        }
+        return !empty($errors) ? $errors : false;
+    }
+
+    private function checkLastName($last_name)
+    {
+        $errors = array();
+
+        if ($last_name == '') {
+            $errors[] = 'Вы должны указать фамилию.';
+        }
+
+        return !empty($errors) ? $errors : false;
+    }
+
+    private function checkPatronymic($patronymic)
+    {
+        $errors = array();
+
+        if ($patronymic == '') {
+            $errors[] = 'Вы должны указать отчество.';
+        }
+        return !empty($errors) ? $errors : false;
+
+    }
+
+    private function checkBirthday($birthday)
+    {
+        $errors = array();
+
+        if ($birthday == '') {
+            $errors[] = 'Укажите дату рождения.';
+        }
+        return !empty($errors) ? $errors : false;
+    }
+
+    private function checkPhone($phone)
+    {
+        $errors = array();
+
+        if ($phone == '') {
+            $errors[] = 'Телефон не может быть пустым.';
+        }
+        return !empty($errors) ? $errors : false;
+    }
+
+    private function checkEmail($email)
+    {
+        $errors = array();
+
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $stmt = $this->db->prepare("SELECT * FROM users WHERE email = :email");
+            $stmt->execute([':email' => $email]);
+            $result = $stmt->fetch();
+
+            if ($result) {
+                $errors[] = 'Такой E-mail уже зарегистрирован.';
+            }
+        } else {
+            $errors[] = 'Укажите корректный E-mail.';
+        }
+
+        return !empty($errors) ? $errors : false;
+    }
+
+    private function checkPassword($password)
+    {
+        $errors = array();
+
+        if ($password == '') {
+            $errors['password'][] = 'Вы не указали пароль.';
+        }
+
+        return !empty($errors) ? $errors : false;
     }
 
     private function getUserData($login, $password)
@@ -63,7 +199,7 @@ class UserModel extends Model
         $_SESSION['authorized'] = true;
         $_SESSION['userID'] = $userID;
         $this->activityWrite($userID);
-        $_SESSION['accountStatus'] = $userStatus;
+        $_SESSION['status'] = $userStatus;
         header('Location: http://' . $_SERVER['HTTP_HOST'] . '/cabinet');
         exit;
     }
@@ -117,104 +253,90 @@ class UserModel extends Model
         $query->execute(array(":active" => $str_for_active, ":id" => $userID));
     }
 
-    public function doRegistration()
+    public function saveUserData()
     {
-        $errors = $this->getDataErrors();
-        if (!$errors) {
-            $this->recordUserData();
+        if (!empty($_SESSION['OAuth_state']) && $_SESSION['OAuth_state'] == 2) {
+            $email = trim($_POST['email']);
+            $first_name = trim($_SESSION['OAuth_first_name']);
+            $last_name = trim($_SESSION['OAuth_last_name']);
+            $avatar = $_SESSION['OAuth_avatar'];
+            $phone_number = trim($_POST['phone']);
+            $password = $_POST['password'];
+            $service_id = $_SESSION['OAuth_user_id'];
+
+            $name = $first_name . ' ' . $last_name;
+
+
+            $password_hash = password_hash($password, PASSWORD_DEFAULT);
+
+            $query = '';
+
+            switch ($_SESSION['OAuth_service']) {
+                case 'vk':
+                    $query = $this->db->prepare("INSERT INTO users (first_name, last_name, phone_number, email, password, vk_id, vk_name, vk_avatar) VALUES (:firstName, :lastName, :phoneNumber, :email, :password, :serviceID, :serviceName, :serviceAvatar)");
+                    break;
+                case 'ok':
+                    $query = $this->db->prepare("INSERT INTO users (first_name, last_name, phone_number, email, password, ok_id, ok_name, ok_avatar) VALUES (:firstName, :lastName, :phoneNumber, :email, :password, :serviceID, :serviceName, :serviceAvatar)");
+                    break;
+                case 'mail':
+                    $query = $this->db->prepare("INSERT INTO users (first_name, last_name, phone_number, email, password, mail_id, mail_name, mail_avatar) VALUES (:firstName, :lastName, :phoneNumber, :email, :password, :serviceID, :serviceName, :serviceAvatar)");
+                    break;
+                case 'ya':
+                    $query = $this->db->prepare("INSERT INTO users (first_name, last_name, phone_number, email, password, ya_id, ya_name, ya_avatar) VALUES (:firstName, :lastName, :phoneNumber, :email, :password, :serviceID, :serviceName, :serviceAvatar)");
+                    break;
+                case 'google':
+                    $query = $this->db->prepare("INSERT INTO users (first_name, last_name, phone_number, email, password, google_id, google_name, google_avatar) VALUES (:firstName, :lastName, :phoneNumber, :email, :password, :serviceID, :serviceName, :serviceAvatar)");
+                    break;
+                case 'fb':
+                    $query = $this->db->prepare("INSERT INTO users (first_name, last_name, phone_number, email, password, facebook_id, facebook_name, facebook_avatar) VALUES (:firstName, :lastName, :phoneNumber, :email, :password, :serviceID, :serviceName, :serviceAvatar)");
+                    break;
+                case 'steam':
+                    $query = $this->db->prepare("INSERT INTO users (first_name, last_name, phone_number, email, password, steam_id, steam_name, steam_avatar) VALUES (:firstName, :lastName, :phoneNumber, :email, :password, :serviceID, :serviceName, :serviceAvatar)");
+                    break;
+                }
+
+            $query->execute([
+                ':firstName' => $first_name,
+                ':lastName' => $last_name,
+                ':phoneNumber' => $phone_number,
+                ':email' => $email,
+                ':password' => $password_hash,
+                ':serviceID' => $service_id,
+                ':serviceName' => $name,
+                ':serviceAvatar' => $avatar,
+            ]);
+
+            if ($query->rowCount()) {
+                $this->clearOAuth();
+                return array('result' => true);
+            }
         } else {
-            return $errors;
+            $email = trim($_POST['email']);
+            $first_name = trim($_POST['firstName']);
+            $last_name = trim($_POST['lastName']);
+            $patronymic = trim($_POST['patronymic']);
+            $birthday = $_POST['birthday'];
+            $phone_number = trim($_POST['phoneNumber']);
+            $password = $_POST['password'];
+            $password_hash = password_hash($password, PASSWORD_DEFAULT);
+
+            $query = $this->db->prepare("INSERT INTO users (first_name, last_name, patronymic, birthday, phone_number, email, password) VALUES (:firstName, :lastName, :patronymic, :birthday, :phoneNumber, :email, :password)");
+            $query->execute([
+                ':firstName' => $first_name,
+                ':lastName' => $last_name,
+                ':patronymic' => $patronymic,
+                ':birthday' => $birthday,
+                ':phoneNumber' => $phone_number,
+                ':email' => $email,
+                ':password' => $password_hash,
+            ]);
+
+            if ($query->rowCount()) {
+                return array('result' => true);
+            }
         }
 
         return false;
-    }
-
-    private function getDataErrors()
-    {
-        $errors = [];
-        $email = $_POST['email'];
-        $firstName = $_POST['firstName'];
-        $lastName = $_POST['lastName'];
-        $patronymic = $_POST['patronymic'];
-        $birthday = $_POST['birthday'];
-        $phoneNumber = $this->extractPhoneNumber($_POST['phoneNumber']);;
-        $password = $_POST['password'];
-
-        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $stmt = $this->db->prepare("SELECT * FROM users WHERE email = :email");
-            $stmt->execute([':email' => $email]);
-            $result = $stmt->fetch();
-
-            if ($result) {
-                $errors['email'][] = 'Такой E-mail уже зарегистрирован.';
-            }
-        } else {
-            $errors['email'][] = 'Укажите корректный E-mail.';
-        }
-
-        if ($firstName == '') {
-            $errors['firstName'][] = 'Укажите имя.';
-        }
-
-        if ($lastName == '') {
-            $errors['lastName'][] = 'Укажите фамилию.';
-        }
-
-        if ($patronymic == '') {
-            $errors['patronymic'][] = 'Укажите отчество.';
-        }
-
-        if ($birthday == '') {
-            $errors['birthday'][] = 'Укажите дату рождения.';
-        }
-
-        if ($phoneNumber == '') {
-            $errors['phoneNumber'][] = 'Укажите телефон.';
-        }
-
-        if ($password == '') {
-            $errors['password'][] = 'Вы не указали пароль.';
-        }
-
-        return $errors;
-    }
-
-    public function recordUserData()
-    {
-        $email = $_POST['email'];
-        $firstName = $_POST['firstName'];
-        $lastName = $_POST['lastName'];
-        $patronymic = $_POST['patronymic'];
-        $birthday = $_POST['birthday'];
-        $phoneNumber = $_POST['phoneNumber'];
-        $password = $_POST['password'];
-        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-
-        $vk_userID = (isset($_SESSION['vk_userID']) && !empty($_SESSION['vk_userID'])) ? $_SESSION['vk_userID'] : null;
-        $ok_userID = (isset($_SESSION['ok_userID']) && !empty($_SESSION['ok_userID'])) ? $_SESSION['ok_userID'] : null;
-        $mail_userID = (isset($_SESSION['mail_userID']) && !empty($_SESSION['mail_userID'])) ? $_SESSION['mail_userID'] : null;
-        $ya_userID = (isset($_SESSION['ya_userID']) && !empty($_SESSION['ya_userID'])) ? $_SESSION['ya_userID'] : null;
-        $goo_userID = (isset($_SESSION['goo_userID']) && !empty($_SESSION['goo_userID'])) ? $_SESSION['goo_userID'] : null;
-        $steam_userID = (isset($_SESSION['steam_userID']) && !empty($_SESSION['steam_userID'])) ? $_SESSION['steam_userID'] : null;
-
-        $stmt = $this->db->prepare("INSERT INTO users (first_name, last_name, patronymic, birthday, phone_number, email, password, vk_id, ok_id, mail_id, ya_id, google_id, steam_id) VALUES (:firstName, :lastName, :patronymic, :birthday, :phoneNumber, :email, :password, :vk_userID, :ok_userID, :mail_userID, :ya_userID, :google_userID, :steam_userID)");
-        $stmt->execute([
-            ':firstName' => $firstName,
-            ':lastName' => $lastName,
-            ':patronymic' => $patronymic,
-            ':birthday' => $birthday,
-            ':phoneNumber' => $phoneNumber,
-            ':email' => $email,
-            ':password' => $passwordHash,
-            ':vk_userID' => $vk_userID,
-            ':ok_userID' => $ok_userID,
-            ':mail_userID' => $mail_userID,
-            ':ya_userID' => $ya_userID,
-            ':google_userID' => $goo_userID,
-            ':steam_userID' => $steam_userID,
-        ]);
-
-        print_r($stmt->errorInfo());
     }
 
     private function extractPhoneNumber($phone)
@@ -228,128 +350,53 @@ class UserModel extends Model
         return $phone;
     }
 
-    public function getOAuthData($service)
+    public function getOAuthData($data)
     {
-        if (isset($_SERVER['HTTP_REFERER'])) {
-            $_SESSION['redirectURL'] = $_SERVER['HTTP_REFERER'];
-        }
+        $this->socialNets->setState(isset($_GET['state']) ? $_GET['state'] : $data[1]); // Если в GET запросе присутствует параметр "state", тогда используем его
 
-        if (isset($service) && !empty($service)) {
-            $this->socialAuth->getServiceData($service[0]);
-
-            $url = $this->handleOAuthUrl();
-
-            header('Location: ' . $url);
-            exit;
-        } else {
-            header('Location: http://' . $_SERVER['HTTP_HOST']);
-            exit;
+        switch ($data[0]) {
+            case 'vk':
+                $this->socialNets->vk();
+                break;
+            case 'ok':
+                $this->socialNets->ok();
+                break;
+            case 'mail':
+                $this->socialNets->mail();
+                break;
+            case 'ya':
+                $this->socialNets->ya();
+                break;
+            case 'google':
+                $this->socialNets->google();
+                break;
+            case 'fb':
+                $this->socialNets->fb();
+                break;
+            case 'steam':
+                $this->socialNets->steam();
+                break;
         }
     }
 
-    public function destroyOAuthData($service)
-    {
-        if (isset($service) && !empty($service)) {
-            $this->socialAuth->destroyServiceData($service[0]);
-        } else {
-            $this->socialAuth->destroyServiceData();
-        }
-    }
-
-    private function getDataByOAuthUserID($service, $id)
+    public function OAuthLogin($service, $id)
     {
         $services = array(
             'vk' => 'vk_id',
             'ok' => 'ok_id',
             'mail' => 'mail_id',
             'ya' => 'ya_id',
-            'goo' => 'google_id',
+            'google' => 'google_id',
+            'fb' => 'facebook_id',
             'steam' => 'steam_id',
         );
 
-        $query = $this->db->prepare("SELECT * FROM users WHERE " . $services[$service] . " = :id");
-        $query->execute([':id' => trim($id)]);
-        $result = $query->fetch();
+        $result = $this->db->select('*')->from('users')->where($services[$service], '=', trim($id))->execute();
 
+        $this->clearOAuth();
 
         if ($result) {
-            return $result;
+            $this->atLogin($result[0]['id'], $result[0]['status']);
         }
-
-        return false;
-    }
-
-    private function handleOAuthUrl()
-    {
-        $path = parse_url($_SESSION['redirectURL'], PHP_URL_PATH);
-        $path = trim($path, '/');
-        $url = $_SESSION['redirectURL'];
-
-        if ($path == 'registration') {
-            unset($_SESSION['redirectURL']);
-        }
-
-        return $url;
-    }
-
-    public function loginThroughOAuth()
-    {
-        if (isset($_SESSION['services']['vk'])) {
-            echo 'Я есть Вконтакте!';
-            $data = $this->getDataByOAuthUserID('vk', $_SESSION['vk_userID']);
-            $this->destroyOAuthData('vk');
-            unset($_SESSION['redirectURL']);
-            if ($data) {
-                $this->atLogin($data['id'], $data['status']);
-            }
-        } elseif (isset($_SESSION['services']['ok'])) {
-            $data = $this->getDataByOAuthUserID('ok', $_SESSION['ok_userID']);
-            $this->destroyOAuthData('ok');
-            unset($_SESSION['redirectURL']);
-            if ($data) {
-                $this->atLogin($data['id'], $data['status']);
-            }
-        } elseif (isset($_SESSION['services']['mail'])) {
-            $data = $this->getDataByOAuthUserID('mail', $_SESSION['mail_userID']);
-            $this->destroyOAuthData('mail');
-            unset($_SESSION['redirectURL']);
-            if ($data) {
-                $this->atLogin($data['id'], $data['status']);
-            }
-        } elseif (isset($_SESSION['services']['ya'])) {
-            $data = $this->getDataByOAuthUserID('ya', $_SESSION['ya_userID']);
-            $this->destroyOAuthData('ya');
-            unset($_SESSION['redirectURL']);
-            if ($data) {
-                $this->atLogin($data['id'], $data['status']);
-            }
-        } elseif (isset($_SESSION['services']['goo'])) {
-            $data = $this->getDataByOAuthUserID('goo', $_SESSION['goo_userID']);
-            $this->destroyOAuthData('goo');
-            unset($_SESSION['redirectURL']);
-            if ($data) {
-                $this->atLogin($data['id'], $data['status']);
-            }
-        } elseif (isset($_SESSION['services']['fb'])) {
-            $data = $this->getDataByOAuthUserID('fb', $_SESSION['fb_userID']);
-            $this->destroyOAuthData('fb');
-            unset($_SESSION['redirectURL']);
-            if ($data) {
-                $this->atLogin($data['id'], $data['status']);
-            }
-        } elseif (isset($_SESSION['services']['steam'])) {
-            $data = $this->getDataByOAuthUserID('steam', $_SESSION['steam_userID']);
-            $this->destroyOAuthData('steam');
-            unset($_SESSION['redirectURL']);
-            if ($data) {
-                $this->atLogin($data['id'], $data['status']);
-            }
-        }
-        $this->destroyOAuthData(null);
-    }
-
-    private function getUserID()
-    {
-        return (isset($_SESSION['userID']) && !empty($_SESSION['userID'])) ? $_SESSION['userID'] : null;
     }
 }

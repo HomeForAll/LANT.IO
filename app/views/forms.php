@@ -51,6 +51,21 @@ $objectType = array(
 
 <?php
 if (!empty($this->data)) {
+    // Находит в параметрах указанный id и возвращает этот параметр
+    function searchParam($params, $need)
+    {
+        foreach ($params as $key => $param) {
+            if ($param[0] == $need) {
+                return $param;
+            }
+        }
+        return false;
+    }
+
+    // $this->data['data']['spaceTypes'][($form['space_type'] - 1)]['r_name'];
+//    $this->data['data']['operationTypes'][$form['operation'] - 1]['r_name'];
+//    $this->data['data']['objectTypes'][$form['object_type'] - 1]['r_name'];
+
     ?>
     <table>
         <tr>
@@ -64,13 +79,13 @@ if (!empty($this->data)) {
             ?>
             <tr>
                 <td>
-                    <?php echo $this->data['data']['spaceTypes'][$form['space_type'] - 1]['r_name']; ?>
+                    <?php echo searchParam($this->data['data']['spaceTypes'], $form['space_type'])['r_name']; ?>
                 </td>
                 <td>
-                    <?php echo $this->data['data']['operationTypes'][$form['operation'] - 1]['r_name']; ?>
+                    <?php echo searchParam($this->data['data']['operationTypes'], $form['operation'])['r_name']; ?>
                 </td>
                 <td>
-                    <?php echo $this->data['data']['objectTypes'][$form['object_type'] - 1]['r_name']; ?>
+                    <?php echo searchParam($this->data['data']['objectTypes'], $form['object_type'])['r_name']; ?>
                 </td>
                 <td>
                     <a class="button" style="margin: 0;" href="/cabinet/form/edit/id/<?php echo $form['id']; ?>">Редактировать</a>

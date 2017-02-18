@@ -1,7 +1,5 @@
 <?php
 
-
-
 class NewsController extends Controller
 {
 
@@ -9,7 +7,7 @@ class NewsController extends Controller
     public function actionNews_list($params)
     {
 
-    if (!empty($params)) {
+        if (!empty($params)) {
             $params = $params[0];
         } else {
             $params = '';
@@ -17,11 +15,11 @@ class NewsController extends Controller
 
         //Если это первый запуск или произошел выбор параметров просмотра
         //Установка начальных параметров и Запись в SESSION
-        if (!empty($_POST['watch_news_list']) || empty($params)){
+        if (!empty($_POST['watch_news_list']) || empty($params)) {
             $this->model->setSessionForNewsList();
         }
 
-        $data = $this->model->getNewsList($params);
+        $data                     = $this->model->getNewsList($params);
         $data['last_viewed_news'] = $this->model->getLastViewedNews();
 
         $this->view->render('news_list', $data);
@@ -45,7 +43,7 @@ class NewsController extends Controller
 
     public function actionNews_editor($params)
     {
-
+// Определение переменных
         if (!empty($params)) {
             $params = $params[0];
         } else {
@@ -57,6 +55,14 @@ class NewsController extends Controller
         $news_to_edit = [];
         $data         = [];
 
+        // Проверка доступа
+        if (!empty($_SESSION['userID'])) {
+            if (!$this->checkAccessLevel($_SESSION['status'])['add_news']) {
+                $this->view->render('no_access') or die();
+            }
+        } else {
+            $this->view->render('login') or die();
+        }
 // Определяем: Если есть id новости => update или вывод формы для редактирования
 
         if (!empty((int) $params)) {
@@ -87,8 +93,8 @@ class NewsController extends Controller
 // Загружаем новость для редактирования из БД в $news_to_edit 
             $news_to_edit = $this->model->getNewsById($news_to_edit_id);
             $this->model->setSessionForEditor($news_to_edit);
-            $category     = $this->model->translateIndex($news_to_edit['category'], 'category_eng');
-
+            $category     = $this->model->translateIndex($news_to_edit['category'],
+                'category_eng');
         } else {
             //
             //Если это не конкретная новость:
@@ -121,10 +127,7 @@ class NewsController extends Controller
                         'Новость: "'.$_POST['title'].'" не удалось добавить так как не заполнены все поля!');
                 }
             }
-
-
         } // окончание else (если в строке ввода не id новости
-
 // Объеденяем массивы данных в один для передачи data[] = параметры новости (если редактирование новости) + массив-лист всех новостей + массив сообщений
         $data             = $news_to_edit;
         $data['message']  = $news_message;
@@ -134,20 +137,19 @@ class NewsController extends Controller
         $this->view->render('news_editor', $data);
     }
 
-
     public function actionNews_myad($params)
-        {
+    {
         global $news_error, $news_message;
         $news_message = [];
         $news_error   = [];
-        $data = [];
+        $data         = [];
 
-        
-        if(!empty($_SESSION['userID'])) {
 
-        $data['author_name'] = $_SESSION['userID'];
-                $news_list    = [];
-     // Изменение статуса новостей и удаление для определенной таблицы $table
+        if (!empty($_SESSION['userID'])) {
+
+            $data['author_name'] = $_SESSION['userID'];
+            $news_list           = [];
+            // Изменение статуса новостей и удаление для определенной таблицы $table
             if (!empty($_POST['submit_status'])) {
                 $this->model->makeNewsStatus();
             }
@@ -163,18 +165,17 @@ class NewsController extends Controller
                 $stat_arr += array($i['id_news'] => $i['status']);
             }
             $_SESSION['stat_arr'] = $stat_arr;
-
-
         } else {
 
-        array_push($news_error, 'Ошибка! Вы не авторизованы!');
-
+            array_push($news_error,
+                'Ошибка! Вы не авторизованы! <br> <a href="/registration">Регистрация</a> <a href="/login">Вход</a>');
         }
-        $data['news']             = $news_list;
-        $data['message']  = $news_message;
-        $data['error']    = $news_error;
+        if (!empty($news_list)) {
+            $data['news'] = $news_list;
+        }
+        $data['message'] = $news_message;
+        $data['error']   = $news_error;
 
         $this->view->render('news_myad', $data);
     }
-
 }

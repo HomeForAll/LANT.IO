@@ -1,7 +1,9 @@
 <?php
 
-class Controller extends Application
+class Controller extends Access
 {
+    use PrintHelper;
+
     protected $model;
     protected $view;
     
@@ -17,6 +19,16 @@ class Controller extends Application
             return new $model;
         }
         
+        return false;
+    }
+
+    protected function ifAJAX(callable $callback)
+    {
+        if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+            call_user_func($callback);
+            exit;
+        }
+
         return false;
     }
 }

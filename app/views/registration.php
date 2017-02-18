@@ -1,3 +1,35 @@
+<style>
+    form {
+        margin-bottom: 15px;
+    }
+
+    fieldset {
+        margin-bottom: 15px;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    input[type=text], input[type=date], input[type=password], select {
+        font-family: Arial, sans-serif;
+        font-size: 10pt;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 10px 15px 10px 15px;
+        margin-bottom: 15px;
+        border: solid 1px gray;
+        border-radius: 3px;
+    }
+
+    input[type=checkbox] {
+        margin-right: 10px;
+    }
+
+    input[type=submit] {
+        width: 200px;
+    }
+</style>
 <?php
 $this->title = 'Регистрация';
 
@@ -122,9 +154,8 @@ if (isset($_SESSION['services']) && !empty($_SESSION['services'])) {
                 </label>
             </td>
             <td>
-                <input name="birthday" id="birthday" type="text"
-                       value="<?php echo $birthday; ?>">
                 <?php $this->printFormError($birthdayErr) ?>
+                <input name="birthday" id="birthday" type="date" value="<?php echo $birthday; ?>">
             </td>
         </tr>
         <tr>
@@ -165,7 +196,7 @@ if (isset($_SESSION['services']) && !empty($_SESSION['services'])) {
         <tr>
             <td></td>
             <td>
-                <input type="submit" name="submit" value="Зарегистрировать">
+                <input type="submit" name="submit" value="Создать аккаунт">
             </td>
         </tr>
     </table>
@@ -175,37 +206,37 @@ if (isset($_SESSION['services']) && !empty($_SESSION['services'])) {
     <?php
     if (!isset($_SESSION['services']['vk'])) {
         ?>
-        <a href="auth/vk"><img src="/templates/main/images/soc_net/vk_2.png" alt="VK"></a>
+        <a href="oauth/vk/state/2"><img src="/templates/main/images/soc_net/vk_2.png" alt="VK"></a>
         <?php
     }
     if (!isset($_SESSION['services']['ok'])) {
         ?>
-        <a href="auth/ok"><img src="/templates/main/images/soc_net/ok.png" alt="OK"></a>
+        <a href="oauth/ok/state/2"><img src="/templates/main/images/soc_net/ok.png" alt="OK"></a>
         <?php
     }
     if (!isset($_SESSION['services']['mail'])) {
         ?>
-        <a href="auth/mail"><img src="/templates/main/images/soc_net/mail_ru.png" alt="Mail"></a>
+        <a href="oauth/mail/state/2"><img src="/templates/main/images/soc_net/mail_ru.png" alt="Mail"></a>
         <?php
     }
     if (!isset($_SESSION['services']['ya'])) {
         ?>
-        <a href="auth/ya"><img src="/templates/main/images/soc_net/yandex_2.png" alt="YA"></a>
+        <a href="oauth/ya/state/2"><img src="/templates/main/images/soc_net/yandex_2.png" alt="YA"></a>
         <?php
     }
     if (!isset($_SESSION['services']['goo'])) {
         ?>
-        <a href="auth/goo"><img src="/templates/main/images/soc_net/google.png" alt="Google"></a>
+        <a href="oauth/google/state/2"><img src="/templates/main/images/soc_net/google.png" alt="Google"></a>
         <?php
     }
     if (!isset($_SESSION['services']['fb'])) {
         ?>
-        <a href="auth/fb"><img src="/templates/main/images/soc_net/facebook_2.png" alt="FaceBook"></a>
+        <a href="oauth/fb/state/2"><img src="/templates/main/images/soc_net/facebook_2.png" alt="FaceBook"></a>
         <?php
     }
     if (!isset($_SESSION['services']['steam'])) {
         ?>
-        <a href="auth/steam"><img src="/templates/main/images/soc_net/steam.png" alt="Steam"></a>
+        <a href="oauth/steam/state/2"><img src="/templates/main/images/soc_net/steam.png" alt="Steam"></a>
         <?php
     }
     ?>

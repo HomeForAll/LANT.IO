@@ -32,7 +32,7 @@
 
     .save_btn {
         cursor: pointer;
-        margin 0;
+        margin: 0;
         display: inline-block;
         padding: 0 15px 0 15px !important;
         border: solid 1px darkred;
@@ -68,6 +68,9 @@
         text-align: center;
     }
 </style>
+<script>
+    var userID =  <?php echo $this->data['userID']; ?>;
+</script>
 <div style="border: dotted 1px gray; padding: 15px;">
     Если нужно добавить новый параметр формы следуйте инструкции: <br><br>
     1. Ткнуть кнопку с "Добавить (нужный элемент)".<br>

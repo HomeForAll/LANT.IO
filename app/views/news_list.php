@@ -1,10 +1,10 @@
 <?php
-$this->title = 'Новости';
+$this->title = 'Объявления';
 ?>
-<h2>Новости</h2>
+<h2>Объявления</h2>
 <!-- Выбор количества выводимых новостей -->
 <form action="" method="post">
-    <label for="number_of_news">Количество выводимых новостей:</label>
+    <label for="number_of_news">Количество выводимых объявлений:</label>
     <select name="number_of_news">
             <option  value="2">2</option>
             <option <?php
@@ -24,7 +24,7 @@ $this->title = 'Новости';
     </select>
     <br>
     <label class="news_table_category">
-        <h3>Категория новостей: </h3>
+        <h3>Категория объявлений: </h3>
         <span>
             Общие новости<input type="checkbox" name="news_table_category[1]" value="1" <?php if (!empty($this->data['news_table_category[1]'])) { echo 'checked';} ?> >
             Продажа комнат <input type="checkbox" name="news_table_category[11]" value="11" <?php if (!empty($this->data['news_table_category[11]'])) { echo 'checked';} ?> >

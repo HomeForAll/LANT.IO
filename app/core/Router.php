@@ -16,6 +16,10 @@ class Router
      */
     public function run()
     {
+                        //Обработчик ошибок
+        if (ERROR_HANDLER_STATUS != '0') {
+            (new ErrorHandler())->register();
+        }
         $uri = $this->getURI();
         
         foreach ($this->routes as $uriPattern => $path) {

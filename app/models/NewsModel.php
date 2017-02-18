@@ -385,6 +385,14 @@ class NewsModel extends Model
 
     public function getFormData($preview_img)
     {
+        $new_form_data =[];
+
+        //Определение пользователя
+        if (!empty($_SESSION['userID'])) {
+        $author_name = (int)$_SESSION['userID'];
+        } else {
+            return false;
+        }
 
         //Удаление пробелов и переводов строк в начале и в конце строк 
         function trim_value(&$value)
@@ -395,7 +403,6 @@ class NewsModel extends Model
 
         static $args = array(
             'title' => FILTER_SANITIZE_STRING,
-            'author_name' => FILTER_SANITIZE_STRING,
             'short_content' => FILTER_SANITIZE_STRING,
             'content' => FILTER_SANITIZE_STRING,
             'status' => array(
@@ -514,6 +521,8 @@ class NewsModel extends Model
         );
 
         $new_form_data = filter_input_array(INPUT_POST, $args);
+        $new_form_data['author_name'] = $author_name;
+
 
         //Переписывание параметров в 'Другое' если есть _other
         foreach ($new_form_data as $key => $value) {

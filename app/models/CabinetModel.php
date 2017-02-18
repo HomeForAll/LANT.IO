@@ -2,6 +2,8 @@
 
 class CabinetModel extends Model
 {
+    use Cleaner;
+
     const IDSPERPAGE = 5;
     private $mailer;
 
@@ -482,8 +484,7 @@ class CabinetModel extends Model
         }
     }
 
-    public
-    function delete_gadget()
+    public function delete_gadget()
     {
         $profile_id = $_SESSION['userID'];
         for ($i = 0; $i <= $_SESSION['count_of_delete_buttons_for_gadgets']; $i++) {
@@ -501,13 +502,11 @@ class CabinetModel extends Model
         return $this->getgadgets();
     }
 
-    public
-    function ajaxHandler()
+    public function ajaxHandler()
     {
     }
 
-    public
-    function getinfo()
+    public function getinfo()
     {
         //$_SESSION['userID'] = 1;
         $profile_id = $_SESSION['userID'];
@@ -518,15 +517,13 @@ class CabinetModel extends Model
         return $info;
     }
 
-    public
-    function showActivity()
+    public function showActivity()
     {
     }
 
-    public
-    function savePersonalInfo()
+    public function savePersonalInfo()
     {
-        //$_SESSION['userID'] = 3;
+        //$_SESSION['userID'] = 1;
         $_SESSION['error'] = [];
         $profile_id = $_SESSION['userID'];
 
@@ -726,8 +723,7 @@ class CabinetModel extends Model
     }
 
 
-    private
-    function geoip_client($ip, $opt, $sid)
+    private function geoip_client($ip, $opt, $sid)
     {
 // Делаем запрос к серверу
         if ($xml = file_get_contents('http://geoip.top/cgi-bin/getdata.pl?ip=' . $ip . '&hex=' . $opt . '&sid=' . $sid)) {
@@ -773,8 +769,7 @@ class CabinetModel extends Model
 
     }
 
-    public
-    function handleKeys()
+    public function handleKeys()
     {
 
         if (isset($_POST['handle'])) {
@@ -804,16 +799,14 @@ class CabinetModel extends Model
         }
     }
 
-    public
-    function generate()
+    public function generate()
     {
         if (isset($_POST['generate'])) {
             $_SESSION['keys'] = $this->composeKeysData($this->handleEmails());
         }
     }
 
-    private
-    function composeKeysData($emails)
+    private function composeKeysData($emails)
     {
         $keys = array();
 
@@ -824,8 +817,7 @@ class CabinetModel extends Model
         return $keys;
     }
 
-    private
-    function handleEmails()
+    private function handleEmails()
     {
         $explodedEmails = explode("\n", $_POST['emails']);
         $emails = array();
@@ -851,8 +843,7 @@ class CabinetModel extends Model
         return $emails;
     }
 
-    private
-    function getKey($string)
+    private function getKey($string)
     {
         $emailSHA = sha1($string);
         $selection = $emailSHA['35'] . $emailSHA['22'] . $emailSHA['1'] . $emailSHA['3'] . $emailSHA['4'] . $emailSHA['8'] . $emailSHA['12'] . $emailSHA['15'] . $emailSHA['17'] . $emailSHA['29'];
@@ -865,8 +856,7 @@ class CabinetModel extends Model
         return strtoupper($key);
     }
 
-    public
-    function numberofpages()
+    public function numberofpages()
     {
         $array = [];
         $stmt = $this->db->prepare("SELECT * FROM access");
@@ -884,8 +874,7 @@ class CabinetModel extends Model
         $_SESSION['numberofpages'] = $result;
     }
 
-    public
-    function showdb()
+    public function showdb()
     {
         unset($_SESSION['sessioncheck']);
         $this->numberofpages();
@@ -934,8 +923,7 @@ class CabinetModel extends Model
         return false;
     }
 
-    public
-    function keyeditor()
+    public function keyeditor()
     {
         if (isset($_POST['idworkgo'])) {
             $id_key = $_POST['id_key_keyeditor'];
@@ -1046,8 +1034,7 @@ class CabinetModel extends Model
         return false;
     }
 
-    public
-    function keylock()
+    public function keylock()
     {
         if (isset($_POST['lock'])) {
             $this->db->query("UPDATE access SET status = 2 WHERE id = {$_SESSION['id_key_keyeditor']}");
@@ -1057,8 +1044,7 @@ class CabinetModel extends Model
         return false;
     }
 
-    public
-    function keyunlock()
+    public function keyunlock()
     {
         if (isset($_POST['unlock'])) {
             $today = date("Ymd");
@@ -1074,8 +1060,7 @@ class CabinetModel extends Model
         }
     }
 
-    public
-    function installdate()
+    public function installdate()
     {
         if (isset($_POST['installdate'])) {
             $day = $_POST['sel_date'];
@@ -1167,8 +1152,7 @@ class CabinetModel extends Model
         return false;
     }
 
-    public
-    function page()
+    public function page()
     {
         $count = $_SESSION["numberofpages"];
         $idsperpage = self::IDSPERPAGE;
@@ -1218,13 +1202,12 @@ class CabinetModel extends Model
         }
     }
 
-    public
-    function getForms()
+    public function getForms()
     {
-        $query = $this->db->prepare("SELECT * FROM forms");
-        $query->execute();
+        //$_SESSION['userID'] = 11;
+        $query = $this->db->prepare("SELECT * FROM forms WHERE user_id = :user_id");
+        $query->execute([':user_id' => $_SESSION['userID']]);
         $forms = $query->fetchAll();
-
 
         return array(
             'forms' => $forms,
@@ -1232,8 +1215,7 @@ class CabinetModel extends Model
         );
     }
 
-    public
-    function getForm($id)
+    public function getForm($id)
     {
         $query = $this->db->prepare("SELECT * FROM forms WHERE id = :id");
         $query->execute([':id' => $id]);
@@ -1242,8 +1224,7 @@ class CabinetModel extends Model
         return $form;
     }
 
-    public
-    function createForm()
+    public function createForm()
     {
         $spaceType = $_POST['spaceType'];
         $operationType = $_POST['operationType'];
@@ -1262,11 +1243,12 @@ class CabinetModel extends Model
             return 'Ошибка, такая форма уже существует.';
         }
 
-        $query = $this->db->prepare("INSERT INTO forms (space_type, object_type, operation) VALUES (:space_type, :object_type, :operation)");
+        $query = $this->db->prepare("INSERT INTO forms (space_type, object_type, operation, user_id) VALUES (:space_type, :object_type, :operation, :user_id)");
         $query->execute([
             ':space_type' => $spaceType,
             ':object_type' => $objectType,
             ':operation' => $operationType,
+            ':user_id' => $_SESSION['userID'],
         ]);
 
         if ($query->rowCount()) {
@@ -1276,14 +1258,12 @@ class CabinetModel extends Model
         }
     }
 
-    public
-    function editForm($id)
+    public function editForm($id)
     {
 
     }
 
-    public
-    function deleteForm($id)
+    public function deleteForm($id)
     {
         $query = $this->db->prepare("DELETE FROM forms WHERE id = :id");
         $query->execute([':id' => $id]);
@@ -1291,14 +1271,16 @@ class CabinetModel extends Model
         return $query->rowCount();
     }
 
-    public
-    function getCabinetElements()
+    public function getCabinetElements()
     {
 
     }
 
-    public
-    function handleFormParams()
+    /**
+     * Редактор форм поиска
+     */
+
+    public function handleFormParams()
     {
         $answer = array();
 
@@ -1400,6 +1382,7 @@ class CabinetModel extends Model
                             }
                         }
                         $answer['message'] = 'Параметры сохранены.';
+                        $answer['data'] = $this->getFormParams();
                     }
                 } else {
                     $answer['message'] = 'Ошибка, не все поля заполнены.';
@@ -1517,6 +1500,8 @@ class CabinetModel extends Model
                                 $query->execute([':r_name' => $value, ':e_name' => $_POST['subcategoriesEng'][$key], ':category_id' => $_POST['parentCategory'][$key], ':form_id' => $_POST['formID']]);
                             }
                         }
+
+                        $answer['subcategories'] = $this->getSubcategories($_POST['formID']);
                         $answer['message'] = 'Подкатегории сохранены.';
                     }
 
@@ -1539,22 +1524,238 @@ class CabinetModel extends Model
                     $answer['message'] = 'Возникла ошибка при удалении.';
                 }
                 break;
+            case 'delSubcategory': // Удаление подкатегорий
+                $data = explode('_', $_POST['id']);
+                $id = $data[1];
+
+                $query = $this->db->prepare("DELETE FROM form_subcategories WHERE id = :id");
+                $query->execute([':id' => $id]);
+
+                if ($query->rowCount()) {
+                    $answer['data'] = $this->getSubcategories($_POST['formID']);
+                    $answer['message'] = 'Удаление прошло успешно.';
+                } else {
+                    $answer['message'] = 'Возникла ошибка при удалении.';
+                }
+                break;
+            case 'delElement': // Удаление подкатегорий
+                $data = explode('_', $_POST['id']);
+                $id = $data[1];
+
+                $query = $this->db->prepare("DELETE FROM form_elements WHERE id = :id");
+                $query->execute([':id' => $id]);
+
+                if ($query->rowCount()) {
+                    $answer['data'] = $this->getElements($_POST['formID']);
+                    $answer['message'] = 'Удаление прошло успешно.';
+                } else {
+                    $answer['message'] = 'Возникла ошибка при удалении.';
+                }
+                break;
+            case 'saveElements':
+                if ($this->checkEmptyPOSTElements()) {
+
+                    $answer['elements'] = $this->getElements($_POST['formID']);
+                    $messages = '';
+
+                    if (isset($_POST['rangeElementCategory'])) {
+                        foreach ($_POST['rangeRName'] as $key => $value) {
+                            $data = array(
+                                'ru' => $value,
+                                'eng' => $_POST['rangeEName'][$key],
+                                'messages' => &$messages,
+                            );
+
+                            array_walk($answer['elements'], function ($element, $k, $data) {
+                                if ($element['r_name'] == $data['ru']) {
+                                    $data['messages'] .= "Элемент: <span style='color: red;'>'" . $data['ru'] . "'</span> уже существует. \n";
+                                }
+
+                                if ($element['e_name'] == $data['eng']) {
+                                    $data['messages'] .= "Элемент: <span style='color: red;'>'" . $data['eng'] . "'</span> уже существует. \n";
+                                }
+                            }, $data);
+
+                            $messages = $data['messages'];
+                        }
+                    }
+
+                    if (isset($_POST['YORNElementCategory'])) {
+                        foreach ($_POST['YORNRName'] as $key => $value) {
+                            $data = array(
+                                'ru' => $value,
+                                'eng' => $_POST['YORNEName'][$key],
+                                'messages' => &$messages,
+                            );
+
+                            array_walk($answer['elements'], function ($element, $k, $data) {
+                                if ($element['r_name'] == $data['ru']) {
+                                    $data['messages'] .= "Элемент: <span style='color: red;'>'" . $data['ru'] . "'</span> уже существует. \n";
+                                }
+
+                                if ($element['e_name'] == $data['eng']) {
+                                    $data['messages'] .= "Элемент: <span style='color: red;'>'" . $data['eng'] . "'</span> уже существует. \n";
+                                }
+                            }, $data);
+
+                            $messages = $data['messages'];
+                        }
+                    }
+
+                    if (isset($_POST['listElementCategory'])) {
+                        foreach ($_POST['listRName'] as $key => $value) {
+                            $data = array(
+                                'ru' => $value,
+                                'eng' => $_POST['listEName'][$key],
+                                'messages' => &$messages,
+                            );
+
+                            array_walk($answer['elements'], function ($element, $k, $data) {
+                                if ($element['r_name'] == $data['ru']) {
+                                    $data['messages'] .= "Элемент: <span style='color: red;'>'" . $data['ru'] . "'</span> уже существует. \n";
+                                }
+
+                                if ($element['e_name'] == $data['eng']) {
+                                    $data['messages'] .= "Элемент: <span style='color: red;'>'" . $data['eng'] . "'</span> уже существует. \n";
+                                }
+                            }, $data);
+
+                            $messages = $data['messages'];
+                        }
+                    }
+
+                    if ($messages) {
+                        $answer['message'] = $messages;
+                    } else {
+
+                        if (isset($_POST['rangeElementCategory'])) {
+                            $type = 1;
+                            $query1 = $this->db->prepare('INSERT INTO form_elements (r_name, e_name, subcategory, type, form_id) VALUES (:r_name, :e_name, :subcategory, :type, :form_id)');
+                            $query2 = $this->db->prepare('INSERT INTO form_elements (r_name, e_name, type, category, form_id) VALUES (:r_name, :e_name, :type, :category, :form_id)');
+                            $query3 = $this->db->prepare('INSERT INTO form_elements (r_name, e_name, type, form_id, parent_el) VALUES (:r_name, :e_name, :type, :form_id, :parent_el)');
+
+                            foreach ($_POST['rangeRName'] as $key => $value) {
+                                if (!empty($_POST['rangeParentElement'][$key])) {
+                                    $query3->execute([':r_name' => $value, ':e_name' => $_POST['rangeEName'][$key], ':type' => $type, ':form_id' => $_POST['formID'], ':parent_el' => $_POST['rangeParentElement'][$key],]);
+                                } elseif (empty($_POST['rangeElementSubcategory'][$key])) {
+                                    $query2->execute([':r_name' => $value, ':e_name' => $_POST['rangeEName'][$key], ':type' => $type, ':category' => $_POST['rangeElementCategory'][$key], ':form_id' => $_POST['formID']]);
+                                } else {
+                                    $query1->execute([':r_name' => $value, ':e_name' => $_POST['rangeEName'][$key], ':subcategory' => $_POST['rangeElementSubcategory'][$key], ':type' => $type, ':form_id' => $_POST['formID']]);
+                                }
+                            }
+                        }
+
+                        if (isset($_POST['YORNElementCategory'])) {
+                            $type = 2;
+                            $query1 = $this->db->prepare('INSERT INTO form_elements (r_name, e_name, subcategory, type, yes_value, no_value, form_id) VALUES (:r_name, :e_name, :subcategory, :type, :yes_value, :no_value, :form_id)');
+                            $query2 = $this->db->prepare('INSERT INTO form_elements (r_name, e_name, type, yes_value, no_value, category, form_id) VALUES (:r_name, :e_name, :type, :yes_value, :no_value, :category, :form_id)');
+                            $query3 = $this->db->prepare('INSERT INTO form_elements (r_name, e_name, type, yes_value, no_value, form_id, parent_el) VALUES (:r_name, :e_name, :type, :yes_value, :no_value, :form_id, :parent_el)');
+
+                            foreach ($_POST['YORNRName'] as $key => $value) {
+                                if (!empty($_POST['YORNParentElement'][$key])) {
+                                    $query3->execute([':r_name' => $value, ':e_name' => $_POST['YORNEName'][$key], ':type' => $type, ':yes_value' => $_POST['YORNElementYesValue'][$key], ':no_value' => $_POST['YORNElementNoValue'][$key], ':form_id' => $_POST['formID'], ':parent_el' => $_POST['YORNParentElement'][$key],]);
+                                } elseif (empty($_POST['YORNElementSubcategory'][$key])) {
+                                    $query2->execute([':r_name' => $value, ':e_name' => $_POST['YORNEName'][$key], ':type' => $type, ':yes_value' => $_POST['YORNElementYesValue'][$key], ':no_value' => $_POST['YORNElementNoValue'][$key], ':category' => $_POST['YORNElementCategory'][$key], ':form_id' => $_POST['formID']]);
+                                } else {
+                                    $query1->execute([':r_name' => $value, ':e_name' => $_POST['YORNEName'][$key], ':subcategory' => $_POST['YORNElementSubcategory'][$key], ':type' => $type, ':yes_value' => $_POST['YORNElementYesValue'][$key], ':no_value' => $_POST['YORNElementNoValue'][$key], ':form_id' => $_POST['formID']]);
+                                }
+                            }
+                        }
+
+                        if (isset($_POST['listElementCategory'])) {
+                            $type = 3;
+                            $query1 = $this->db->prepare('INSERT INTO form_elements (r_name, e_name, subcategory, type, form_id) VALUES (:r_name, :e_name, :subcategory, :type, :form_id) RETURNING id');
+                            $query2 = $this->db->prepare('INSERT INTO form_elements (r_name, e_name, type, category, form_id) VALUES (:r_name, :e_name, :type, :category, :form_id) RETURNING id');
+                            $query3 = $this->db->prepare('INSERT INTO form_elements (r_name, e_name, type, form_id, parent_el) VALUES (:r_name, :e_name, :type, :form_id, :parent_el) RETURNING id');
+
+                            $selectOptions = explode(',', $_POST['listOptions']);
+                            $count = 0;
+
+                            //$this->printInPre($_POST);
+
+                            foreach ($_POST['listRName'] as $key => $value) {
+                                if (!empty($_POST['listParentElement'][$key])) {
+                                    $query3->execute([':r_name' => $value, ':e_name' => $_POST['listEName'][$key], ':type' => $type, ':form_id' => $_POST['formID'], ':parent_el' => $_POST['listParentElement'][$key]]);
+                                    $result = $query3->fetch();
+
+                                    $optionQuery = $this->db->prepare('INSERT INTO form_select_options (r_name, e_name, value, element_id) VALUES (:r_name, :e_name, :value, :element_id)');;
+
+                                    for ($i = $count; $i < $count + $selectOptions[$key]; $i++) {
+                                        $optionQuery->execute([':r_name' => $_POST['optionRName'][$i], ':e_name' => $_POST['optionEName'][$i], ':value' => $_POST['optionEName'][$i], ':element_id' => $result[0]]);
+                                    }
+
+                                    $count += $selectOptions[$key];
+                                } elseif (empty($_POST['listElementSubcategory'][$key])) {
+                                    $query2->execute([':r_name' => $value, ':e_name' => $_POST['listEName'][$key], ':type' => $type, ':category' => $_POST['listElementCategory'][$key], ':form_id' => $_POST['formID']]);
+                                    $result = $query2->fetch();
+
+                                    $optionQuery = $this->db->prepare('INSERT INTO form_select_options (r_name, e_name, value, element_id) VALUES (:r_name, :e_name, :value, :element_id)');;
+
+                                    for ($i = $count; $i < $count + $selectOptions[$key]; $i++) {
+                                        $optionQuery->execute([':r_name' => $_POST['optionRName'][$i], ':e_name' => $_POST['optionEName'][$i], ':value' => $_POST['optionEName'][$i], ':element_id' => $result[0]]);
+                                    }
+
+                                    $count += $selectOptions[$key];
+                                } else {
+                                    $query1->execute([':r_name' => $value, ':e_name' => $_POST['listEName'][$key], ':subcategory' => $_POST['listElementSubcategory'][$key], ':type' => $type, ':form_id' => $_POST['formID']]);
+                                    $result = $query1->fetch();
+
+                                    $optionQuery = $this->db->prepare('INSERT INTO form_select_options (r_name, e_name, value, element_id) VALUES (:r_name, :e_name, :value, :element_id)');;
+
+
+                                    for ($i = $count; $i < $count + $selectOptions[$key]; $i++) {
+                                        $optionQuery->execute([':r_name' => $_POST['optionRName'][$i], ':e_name' => $_POST['optionEName'][$i], ':value' => $_POST['optionEName'][$i], ':element_id' => $result[0]]);
+                                    }
+
+                                    $count += $selectOptions[$key];
+                                }
+                            }
+                        }
+
+                        $answer['elements'] = $this->getElements($_POST['formID']);
+                        $answer['message'] = 'Элементы сохранены.';
+                    }
+
+                    $answer['data'] = $this->getFormParams();
+                } else {
+                    $answer['message'] = 'Ошибка, не все поля заполнены.';
+                }
+                break;
         }
 
         echo json_encode($answer, JSON_UNESCAPED_UNICODE);
     }
 
-    private
-    function checkEmptyPOSTElements()
+    private function getElements($formID)
     {
-        foreach ($_POST as $value) {
-            if (!(gettype($value) == 'array')) {
-                continue;
-            }
+        $query = $this->db->prepare("SELECT * FROM form_elements WHERE form_id = :form_id");
+        $query->execute([':form_id' => $formID]);
 
-            foreach ($value as $element) {
+        return $query->fetchAll();
+    }
+
+    private function checkEmptyPOSTElements($key = null)
+    {
+        if (!empty($key)) {
+            foreach ($_POST[$key] as $element) {
                 if (empty($element)) {
                     return false;
+                }
+            }
+        } else {
+            foreach ($_POST as $key => $value) {
+                if ($key !== 'rangeElementSubcategory' && $key !== 'listElementSubcategory' && $key !== 'YORNElementSubcategory' &&
+                    $key !== 'rangeParentElement' && $key !== 'YORNParentElement' && $key !== 'listParentElement'
+                ) {
+                    if (!(gettype($value) == 'array')) {
+                        continue;
+                    }
+
+                    foreach ($value as $element) {
+                        if (empty($element)) {
+                            return false;
+                        }
+                    }
                 }
             }
         }
@@ -1562,20 +1763,20 @@ class CabinetModel extends Model
         return true;
     }
 
-    public
-    function getFormParams()
+    public function getFormParams()
     {
         return array(
+            'userID' => $_SESSION['userID'],
             'spaceTypes' => $this->getSpaceTypes(),
             'operationTypes' => $this->getOperationTypes(),
             'objectTypes' => $this->getObjectTypes(),
         );
     }
 
-    public
-    function getFormData($id)
+    public function getFormData($id)
     {
         $categories = $this->getCategories($id);
+        $subcategories = $this->getSubcategories($id);
 
         return array(
             'id' => $id,
@@ -1583,12 +1784,14 @@ class CabinetModel extends Model
             'formParams' => $this->getFormParams(),
             'categories' => $categories,
             'categoriesJSON' => json_encode($categories, JSON_UNESCAPED_UNICODE),
-            'subcategories' => $this->getSubcategories($id),
+            'subcategories' => $subcategories,
+            'subcategoriesJSON' => json_encode($subcategories, JSON_UNESCAPED_UNICODE),
+            'elements' => $this->getElements($id),
+            'elementsJSON' => json_encode($this->getElements($id), JSON_UNESCAPED_UNICODE),
         );
     }
 
-    private
-    function getSpaceTypes()
+    private function getSpaceTypes()
     {
         $query = $this->db->prepare("SELECT * FROM form_space_types");
         $query->execute();
@@ -1596,8 +1799,7 @@ class CabinetModel extends Model
         return $query->fetchAll();
     }
 
-    private
-    function getCategories($formID)
+    private function getCategories($formID)
     {
         $query = $this->db->prepare("SELECT * FROM form_categories WHERE form_id = :form_id");
         $query->execute([':form_id' => $formID]);
@@ -1605,8 +1807,7 @@ class CabinetModel extends Model
         return $query->fetchAll();
     }
 
-    private
-    function getSubcategories($formID)
+    private function getSubcategories($formID)
     {
         $query = $this->db->prepare("SELECT * FROM form_subcategories WHERE form_id = :form_id");
         $query->execute([':form_id' => $formID]);
@@ -1614,8 +1815,7 @@ class CabinetModel extends Model
         return $query->fetchAll();
     }
 
-    private
-    function getSpaceType($id)
+    private function getSpaceType($id)
     {
         $query = $this->db->prepare("SELECT * FROM form_space_types WHERE id = :id");
         $query->execute([':id' => $id]);
@@ -1623,8 +1823,7 @@ class CabinetModel extends Model
         return $query->fetch();
     }
 
-    private
-    function getOperationTypes()
+    private function getOperationTypes()
     {
         $query = $this->db->prepare("SELECT * FROM form_operation_types");
         $query->execute();
@@ -1632,8 +1831,7 @@ class CabinetModel extends Model
         return $query->fetchAll();
     }
 
-    private
-    function getOperationType($id)
+    private function getOperationType($id)
     {
         $query = $this->db->prepare("SELECT * FROM form_operation_types WHERE id = :id");
         $query->execute([':id' => $id]);
@@ -1641,8 +1839,7 @@ class CabinetModel extends Model
         return $query->fetch();
     }
 
-    private
-    function getObjectTypes()
+    private function getObjectTypes()
     {
         $query = $this->db->prepare("SELECT * FROM form_object_types");
         $query->execute();
@@ -1650,12 +1847,103 @@ class CabinetModel extends Model
         return $query->fetchAll();
     }
 
-    private
-    function getObjectType($id)
+    private function getObjectType($id)
     {
         $query = $this->db->prepare("SELECT * FROM form_object_types WHERE id = :id");
         $query->execute([':id' => $id]);
 
         return $query->fetch();
+    }
+
+    /**
+     * Привязка социальных сетей
+     */
+
+    public function getCabinetData()
+    {
+        if (isset($_SESSION['OAuth_state']) && $_SESSION['OAuth_state'] == 3) {
+            $result = $this->setSocialNet($_SESSION['OAuth_service'], $_SESSION['OAuth_user_id'], $_SESSION['userID']);
+        }
+
+        return array(
+            'social_nets' => $this->getSocialNets(),
+        );
+    }
+
+    private function getSocialNets()
+    {
+        return $this->db->select('vk_id, ok_id, mail_id, ya_id, google_id, steam_id, facebook_id')->from('users')->where('id', '=', $_SESSION['userID'])->execute();
+    }
+
+    private function setSocialNet($service, $service_id, $user_id)
+    {
+        $first_name = trim($_SESSION['OAuth_first_name']);
+        $last_name = trim($_SESSION['OAuth_last_name']);
+
+        $avatar = $_SESSION['OAuth_avatar'];
+        $name = $first_name . ' ' . $last_name;
+
+        $query = '';
+
+        switch ($service) {
+            case 'vk':
+                $query = $this->db->prepare('UPDATE users SET vk_id = :service_id, vk_name = :serviceName, vk_avatar = :serviceAvatar WHERE id = :user_id');
+                break;
+            case 'ok':
+                $query = $this->db->prepare('UPDATE users SET ok_id = :service_id, ok_name = :serviceName, ok_avatar = :serviceAvatar WHERE id = :user_id');
+                break;
+            case 'mail':
+                $query = $this->db->prepare('UPDATE users SET mail_id = :service_id, mail_name = :serviceName, mail_avatar = :serviceAvatar WHERE id = :user_id');
+                break;
+            case 'ya':
+                $query = $this->db->prepare('UPDATE users SET ya_id = :service_id, ya_name = :serviceName, ya_avatar = :serviceAvatar WHERE id = :user_id');
+                break;
+            case 'google':
+                $query = $this->db->prepare('UPDATE users SET google_id = :service_id, google_name = :serviceName, google_avatar = :serviceAvatar WHERE id = :user_id');
+                break;
+            case 'fb':
+                $query = $this->db->prepare('UPDATE users SET facebook_id = :service_id, facebook_name = :serviceName, facebook_avatar = :serviceAvatar WHERE id = :user_id');
+                break;
+            case 'steam':
+                $query = $this->db->prepare('UPDATE users SET steam_id = :service_id, steam_name = :serviceName, steam_avatar = :serviceAvatar WHERE id = :user_id');
+                break;
+        }
+
+        $query->execute([':service_id' => $service_id, ':user_id' => $user_id, ':serviceName' => $name, ':serviceAvatar' => $avatar]);
+
+        $this->clearOAuth();
+
+        return $query->rowCount();
+    }
+
+        public function getBalanceHistory()
+    {
+            $user_id = (int)$_SESSION['userID'];
+                  // Преобразование данных формы в дату
+          $calendar_start = $_POST["calendar_start"];
+          $calendar_end= $_POST["calendar_end"];
+
+         if (preg_match("/^(0[1-9]|[1-2][0-9]|3[0-1])-(0[1-9]|1[0-2])-[0-9]{4}$/",$calendar_start ) && preg_match("/^(0[1-9]|[1-2][0-9]|3[0-1])-(0[1-9]|1[0-2])-[0-9]{4}$/",$calendar_end))
+    {
+          $calendar_start_arr = explode("-", $calendar_start);
+          $calendar_end_arr = explode("-", $calendar_end);
+          $start = $calendar_start_arr[2].'-'.$calendar_start_arr[1].'-'.$calendar_start_arr[0];
+          $end = $calendar_end_arr[2].'-'.$calendar_end_arr[1].'-'.$calendar_end_arr[0];
+          $sql                 = "SELECT to_char(date::date,'DD-MM-YYYY'), operation, value, rest_balance FROM balance_history ";
+           $sql .= "WHERE user_id = :user_id AND date::date >=  :start::date AND date::date <=  :end::date ";
+          $sql  .= 'ORDER BY date DESC';
+          $stmt                = $this->db->prepare($sql);
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $stmt->bindParam(':start', $start);
+        $stmt->bindParam(':end', $end);
+        $stmt->execute();
+        $data                = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $data['calendar_start'] = $calendar_start;
+        $data['calendar_end'] = $calendar_end;
+    }else{
+        return;
+    }
+
+        return $data;
     }
 }

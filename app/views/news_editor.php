@@ -1,5 +1,5 @@
 <?php
-$this->title = 'Редактор новостей';
+$this->title = 'Редактор объявлений';
 
 global $data_for_news;
 $data_for_news = $this->data;
@@ -171,7 +171,7 @@ if (!empty($this->data['message'])) {
     <?php
     if (!empty($this->data['category'])) {
         if ($this->data['category'] != 'base') {
-            include_once 'app/views/news_' . $this->data['category'] . '.php';
+            include_once 'app/views/news_'.$this->data['category'].'.php';
         } else {
             echo '<input type="hidden" name="category" value="1">';
         }
