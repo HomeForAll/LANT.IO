@@ -92,7 +92,7 @@ class CabinetModel extends Model
         }
         $count_of_dialogs_deleted = $i_max;
         $_SESSION['count_of_dialogs_deleted'] = $count_of_dialogs_deleted;
-        
+
         if (!isset($_POST['deleted_dialogs'])) {
             $stmt = $this->db->prepare("SELECT * FROM dialogs WHERE user_id= $profile_id AND show= 1");
             $stmt->execute();
@@ -167,12 +167,9 @@ class CabinetModel extends Model
 
             if (isset($massiv_owners[2]))
                 $matrix[$key][1] = $name[0][0];
-            else
-            {
-                foreach ($massiv_owners as $k => $z)
-                {
-                    if ($z != $profile_id)
-                    {
+            else {
+                foreach ($massiv_owners as $k => $z) {
+                    if ($z != $profile_id) {
                         $stmt = $this->db->prepare("SELECT first_name FROM users WHERE id = {$z}");
                         $stmt->execute();
                         $name = $stmt->fetchAll();
@@ -419,8 +416,7 @@ class CabinetModel extends Model
                         $stmt->execute();
                         $id = $stmt->fetchAll();
                         foreach ($_SESSION['matrix_for_dialogs'] as $key => $value) {
-                            if ($value[0] == $id[0]['id'])
-                            {
+                            if ($value[0] == $id[0]['id']) {
                                 $_SESSION['chat'] = $key;
                                 header('Location: http://' . $_SERVER['HTTP_HOST'] . '/cabinet/chat');
                                 exit;
@@ -455,8 +451,7 @@ class CabinetModel extends Model
         }
     }
 
-    public
-    function getgadgets()
+    public function getgadgets()
     {
         //$_SESSION['userID'] = 1;
         $profile_id = $_SESSION['userID'];
@@ -500,10 +495,6 @@ class CabinetModel extends Model
             }
         }
         return $this->getgadgets();
-    }
-
-    public function ajaxHandler()
-    {
     }
 
     public function getinfo()
@@ -644,11 +635,9 @@ class CabinetModel extends Model
             $this->db->query("UPDATE users SET profile_foto_id = '{$_POST['profile_foto']}' WHERE id = $profile_id");
         }
 
-        if (isset($_POST['delete_vk']) || (isset($_POST['delete_steam'])) || (isset($_POST['delete_ok'])) || (isset($_POST['delete_ya'])) || (isset($_POST['delete_mail'])) || (isset($_POST['delete_facebook'])) || (isset($_POST['delete_google'])))
-        {
+        if (isset($_POST['delete_vk']) || (isset($_POST['delete_steam'])) || (isset($_POST['delete_ok'])) || (isset($_POST['delete_ya'])) || (isset($_POST['delete_mail'])) || (isset($_POST['delete_facebook'])) || (isset($_POST['delete_google']))) {
             foreach ($_POST as $key => $value) {
-                if ($value == 'Отвязать')
-                {
+                if ($value == 'Отвязать') {
                     $social_net = explode("_", $key);
                     if (isset($social_net[1])) {
                         $id = $social_net[1] . "_id";
@@ -771,7 +760,6 @@ class CabinetModel extends Model
 
     public function handleKeys()
     {
-
         if (isset($_POST['handle'])) {
             if (isset($_POST['sendCheck'])) {
                 foreach ($_SESSION['keys'] as $email => $key) {
@@ -788,15 +776,27 @@ class CabinetModel extends Model
             }
             if (isset($_POST['dbCheck'])) {
                 foreach ($_SESSION['keys'] as $email => $key) {
-                    $date = new DateTime();
-                    $inactiveDate = new DateTime();
-                    $inactiveDate->add(new DateInterval('P1M'));
-                    $this->db->query("INSERT INTO access (email, key, email_sent, creation_date, inactive_date, status) VALUES (NULL, '{$key}', '{$email}', '{$date->format('Y-m-d')}', '{$inactiveDate->format('Y-m-d')}', 0)");
+                    if (!$this->getEmailAvailability($email)) {
+                        $date = new DateTime();
+                        $inactiveDate = new DateTime();
+                        $inactiveDate->add(new DateInterval('P1M'));
+                        $this->db->query("INSERT INTO access (email, key, email_sent, creation_date, inactive_date, status) VALUES (NULL, '{$key}', '{$email}', '{$date->format('Y-m-d')}', '{$inactiveDate->format('Y-m-d')}', 0)");
+                    }
                 }
             }
 //            print_r($this->db->errorInfo());
             unset($_SESSION['keys']);
         }
+    }
+
+    private function getEmailAvailability($email)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM access WHERE email_sent = :email");
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        $result = $stmt->fetch();
+
+        return $result ? true : false;
     }
 
     public function generate()
