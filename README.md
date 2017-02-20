@@ -6,8 +6,8 @@ git pull origin dev
 ```
 Создаем новую ветку из **DEV**, в названии должно присутствовать несколько слов указывающих с чем ведется работа: 
 ```
-bug-login
-implement_payment_system
+git checkout -b bug-login
+git checkout -b implement_payment_system
 ```
 Или другие подобные имена.
 
