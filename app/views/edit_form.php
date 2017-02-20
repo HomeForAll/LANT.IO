@@ -64,6 +64,8 @@
 <h1>Редактирование формы ID: <?php echo $this->data['id']; ?></h1>
 
 <?php
+
+//$this->printInPre($this->data['user']);
 function searchParam($params, $need)
 {
     foreach ($params as $key => $param) {
@@ -77,17 +79,32 @@ function searchParam($params, $need)
 
 <table>
     <tr>
-        <th colspan="3">Параметры</th>
+        <th colspan="4">Параметры</th>
     </tr>
     <tr>
         <th>Тип площади</th>
         <th>Тип операции</th>
-        <th>Тип объекта</th>
+        <th colspan="2">Тип объекта</th>
     </tr>
     <tr style="height: 70px">
         <td><?php echo searchParam($this->data['formParams']['spaceTypes'], $this->data['form'][0]['space_type'])['r_name']; ?></td>
         <td><?php echo searchParam($this->data['formParams']['operationTypes'], $this->data['form'][0]['operation'])['r_name']; ?></td>
-        <td><?php echo searchParam($this->data['formParams']['objectTypes'], $this->data['form'][0]['object_type'])['r_name']; ?></td>
+        <td colspan="2"><?php echo searchParam($this->data['formParams']['objectTypes'], $this->data['form'][0]['object_type'])['r_name']; ?></td>
+    </tr>
+    <tr>
+        <th colspan="4">Пользователь</th>
+    </tr>
+    <tr>
+        <th>UserID</th>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Отчество</th>
+    </tr>
+    <tr>
+        <td><?php echo $this->data['user'][0]['id']; ?></td>
+        <td><?php echo $this->data['user'][0]['first_name']; ?></td>
+        <td><?php echo $this->data['user'][0]['last_name']; ?></td>
+        <td><?php echo $this->data['user'][0]['patronymic']; ?></td>
     </tr>
 </table>
 

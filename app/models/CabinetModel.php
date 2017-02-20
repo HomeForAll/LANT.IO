@@ -1205,8 +1205,14 @@ class CabinetModel extends Model
     public function getForms()
     {
         //$_SESSION['userID'] = 11;
-        $query = $this->db->prepare("SELECT * FROM forms WHERE user_id = :user_id");
-        $query->execute([':user_id' => $_SESSION['userID']]);
+        if ($_SESSION['status'] > 4) {
+            $query = $this->db->prepare("SELECT * FROM forms");
+            $query->execute();
+        } else {
+            $query = $this->db->prepare("SELECT * FROM forms WHERE user_id = :user_id");
+            $query->execute([':user_id' => $_SESSION['userID']]);
+        }
+
         $forms = $query->fetchAll();
 
         return array(
@@ -1777,10 +1783,13 @@ class CabinetModel extends Model
     {
         $categories = $this->getCategories($id);
         $subcategories = $this->getSubcategories($id);
+        $form = $this->getForm($id);
+        $user_id = $form[0]['user_id'];
 
         return array(
             'id' => $id,
-            'form' => $this->getForm($id),
+            'form' => $form,
+            'user' => $this->getUser($user_id),
             'formParams' => $this->getFormParams(),
             'categories' => $categories,
             'categoriesJSON' => json_encode($categories, JSON_UNESCAPED_UNICODE),
@@ -1789,6 +1798,14 @@ class CabinetModel extends Model
             'elements' => $this->getElements($id),
             'elementsJSON' => json_encode($this->getElements($id), JSON_UNESCAPED_UNICODE),
         );
+    }
+
+    private function getUser($user_id)
+    {
+        $query = $this->db->prepare("SELECT * FROM users WHERE id = :user_id");
+        $query->execute([':user_id' => $user_id]);
+
+        return $query->fetchAll();
     }
 
     private function getSpaceTypes()
@@ -1916,33 +1933,32 @@ class CabinetModel extends Model
         return $query->rowCount();
     }
 
-        public function getBalanceHistory()
+    public function getBalanceHistory()
     {
-            $user_id = (int)$_SESSION['userID'];
-                  // Преобразование данных формы в дату
-          $calendar_start = $_POST["calendar_start"];
-          $calendar_end= $_POST["calendar_end"];
+        $user_id = (int)$_SESSION['userID'];
+        // Преобразование данных формы в дату
+        $calendar_start = $_POST["calendar_start"];
+        $calendar_end = $_POST["calendar_end"];
 
-         if (preg_match("/^(0[1-9]|[1-2][0-9]|3[0-1])-(0[1-9]|1[0-2])-[0-9]{4}$/",$calendar_start ) && preg_match("/^(0[1-9]|[1-2][0-9]|3[0-1])-(0[1-9]|1[0-2])-[0-9]{4}$/",$calendar_end))
-    {
-          $calendar_start_arr = explode("-", $calendar_start);
-          $calendar_end_arr = explode("-", $calendar_end);
-          $start = $calendar_start_arr[2].'-'.$calendar_start_arr[1].'-'.$calendar_start_arr[0];
-          $end = $calendar_end_arr[2].'-'.$calendar_end_arr[1].'-'.$calendar_end_arr[0];
-          $sql                 = "SELECT to_char(date::date,'DD-MM-YYYY'), operation, value, rest_balance FROM balance_history ";
-           $sql .= "WHERE user_id = :user_id AND date::date >=  :start::date AND date::date <=  :end::date ";
-          $sql  .= 'ORDER BY date DESC';
-          $stmt                = $this->db->prepare($sql);
-        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-        $stmt->bindParam(':start', $start);
-        $stmt->bindParam(':end', $end);
-        $stmt->execute();
-        $data                = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $data['calendar_start'] = $calendar_start;
-        $data['calendar_end'] = $calendar_end;
-    }else{
-        return;
-    }
+        if (preg_match("/^(0[1-9]|[1-2][0-9]|3[0-1])-(0[1-9]|1[0-2])-[0-9]{4}$/", $calendar_start) && preg_match("/^(0[1-9]|[1-2][0-9]|3[0-1])-(0[1-9]|1[0-2])-[0-9]{4}$/", $calendar_end)) {
+            $calendar_start_arr = explode("-", $calendar_start);
+            $calendar_end_arr = explode("-", $calendar_end);
+            $start = $calendar_start_arr[2] . '-' . $calendar_start_arr[1] . '-' . $calendar_start_arr[0];
+            $end = $calendar_end_arr[2] . '-' . $calendar_end_arr[1] . '-' . $calendar_end_arr[0];
+            $sql = "SELECT to_char(date::date,'DD-MM-YYYY'), operation, value, rest_balance FROM balance_history ";
+            $sql .= "WHERE user_id = :user_id AND date::date >=  :start::date AND date::date <=  :end::date ";
+            $sql .= 'ORDER BY date DESC';
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $stmt->bindParam(':start', $start);
+            $stmt->bindParam(':end', $end);
+            $stmt->execute();
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $data['calendar_start'] = $calendar_start;
+            $data['calendar_end'] = $calendar_end;
+        } else {
+            return;
+        }
 
         return $data;
     }

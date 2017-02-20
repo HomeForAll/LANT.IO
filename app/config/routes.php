@@ -14,9 +14,13 @@ return array(
     'cabinet' => 'main/cabinet/cabinet',
     'cabinet/profile/edit' => 'main/cabinet/profileEdit',
     'cabinet/profile/activity' => 'main/cabinet/showactivity',
+    'cabinet/profile/gadgets' => 'main/cabinet/showgadgets',
     'cabinet/generator' => 'main/cabinet/generator',
     'cabinet/keyeditor' => 'main/cabinet/keyeditor',
     'cabinet/forms' => 'main/cabinet/forms',
+
+    'cabinet/forms/new' => 'main/cabinet/formsNew',
+
     'cabinet/dialogs' => 'main/cabinet/dialogs',
     'cabinet/chat' => 'main/cabinet/chat',
     'cabinet/form/new' => 'main/cabinet/createForm',

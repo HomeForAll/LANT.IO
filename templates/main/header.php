@@ -1,9 +1,8 @@
 <div id="wrapper">
     <div id="navigation">
         <ul>
-            <li><a href="/">Главная</a></li>
-            <li><a href="/search">Поиск</a></li>
             <li><a href="/news">Объявления</a></li>
+            <li><a href="/search">Поиск</a></li>
             <?php if (isset($_SESSION['authorized'])) { ?>
                 <li><a href="/cabinet">Личный кабинет</a></li>
                 <li><a href="/logout">Выход</a></li>
