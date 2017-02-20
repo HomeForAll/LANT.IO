@@ -20,7 +20,7 @@ if ($this->checkAccessLevel($_SESSION['status'], 'profile')) {
      <a class="button" href="/news/myad">Мои объявления</a>
      
     <p>Ваш балланс:  <?php if(isset($this->data['balance'])) { echo $this->data['balance']; }?> коинов </p>
- <a class="button" href="cabinet/balance">Услуги и платежи</a>
+  <a class="button" href="cabinet/payment">Услуги и платежи</a>
 
  
 <?php

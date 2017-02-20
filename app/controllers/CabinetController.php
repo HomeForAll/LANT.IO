@@ -206,15 +206,15 @@ class CabinetController extends Controller
         $this->view->render('messages', 'Форма успешно создана.');
     }
 
-    public function actionBalance()
+    public function actionPayment()
     {
-        $data = $this->model->getinfo();
+        $data = $this->model->getinfo()[0];
         $access = $this->checkAccessLevel($_SESSION['status']);
         $data['access'] = $access;
-        $this->view->render('balance', $data);
+        $this->view->render('payment', $data);
     }
 
-    public function actionBalanceHistory()
+    public function actionBalance()
     {
         // Если отправлен запрос на поиск истории балланса
         if (!empty($_POST["view_balance_history"])) {
@@ -225,6 +225,6 @@ class CabinetController extends Controller
         $data['access'] = $access;
         $data['script'][0] = 'pickmeup.js';
         $data['css'][0] = 'calendar.css';
-        $this->view->render('balancehistory', $data);
+        $this->view->render('balance', $data);
     }
 }

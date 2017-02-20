@@ -28,7 +28,7 @@ return array(
     'cabinet/form/delete/id/([0-9]+)' => 'main/cabinet/deleteForm/$1',
     'cabinet/form/success' => 'main/cabinet/createSuccess',
     'cabinet/balance' => 'main/cabinet/balance',
-    'cabinet/balancehistory' => 'main/cabinet/balanceHistory',
+    'cabinet/payment' => 'main/cabinet/payment',
 
     'support' => 'main/support/index',
     'support/tickets' => 'main/support/tickets',
