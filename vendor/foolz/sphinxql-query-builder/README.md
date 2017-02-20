@@ -1,6 +1,11 @@
 Query Builder for SphinxQL
 ==========================
 
+[![Build Status](https://travis-ci.org/FoolCode/SphinxQL-Query-Builder.png)](https://travis-ci.org/FoolCode/SphinxQL-Query-Builder)
+[![Latest Stable Version](https://poser.pugx.org/foolz/sphinxql-query-builder/v/stable)](https://packagist.org/packages/foolz/sphinxql-query-builder)
+[![Latest Unstable Version](https://poser.pugx.org/foolz/sphinxql-query-builder/v/unstable)](https://packagist.org/packages/foolz/sphinxql-query-builder)
+[![Total Downloads](https://poser.pugx.org/foolz/sphinxql-query-builder/downloads)](https://packagist.org/packages/foolz/sphinxql-query-builder)
+
 ## About
 
 This is a SphinxQL Query Builder used to work with SphinxQL, a SQL dialect used with the Sphinx search engine. It maps most of the functions listed in the [SphinxQL reference](http://sphinxsearch.com/docs/current.html#SphinxQL-reference) and is generally [faster](http://sphinxsearch.com/blog/2010/04/25/sphinxapi-vs-SphinxQL-benchmark/) than the available Sphinx API.
@@ -22,10 +27,6 @@ If any feature is unreachable through this library, open a new issue or send a p
 The majority of the methods in the package have been unit tested. The unit tests are run both in PHP and HHVM.
 
 The only methods that have not been fully tested are the Helpers, which are mostly simple shorthands for SQL strings.
-
-We test our package locally and remotely with Travis-CI:
-
-[![Build Status](https://travis-ci.org/FoolCode/SphinxQL-Query-Builder.png)](https://travis-ci.org/FoolCode/SphinxQL-Query-Builder)
 
 ## How to Contribute
 
@@ -384,7 +385,7 @@ $result = SphinxQL::create($this->conn)
 * `Helper::create($conn)->showMeta() => 'SHOW META'`
 * `Helper::create($conn)->showWarnings() => 'SHOW WARNINGS'`
 * `Helper::create($conn)->showStatus() => 'SHOW STATUS'`
-* `Helper::create($conn)->shotTables() => 'SHOW TABLES'`
+* `Helper::create($conn)->showTables() => 'SHOW TABLES'`
 * `Helper::create($conn)->showVariables() => 'SHOW VARIABLES'`
 * `Helper::create($conn)->setVariable($name, $value, $global = false)`
 * `Helper::create($conn)->callSnippets($data, $index, $query, $options = array())`

@@ -252,7 +252,7 @@ class UserModel extends Model
         $query = $this->db->prepare("UPDATE users SET active_text = :active WHERE id = :id");
         $query->execute(array(":active" => $str_for_active, ":id" => $userID));
 
-        $device = new MobileDetect;
+        $device = new Detection\MobileDetect();
         $device_name = 'PC';
 
         if ($device->isiPhone() ) {
