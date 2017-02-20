@@ -29,62 +29,52 @@ class Access
     }
 
 
-     /**
+   /**
      * Проверка уровня доступа
      *
-     * @param type $status - статус пользователя
+     * @param type $user_st - статус пользователя
      * @return array - ассоциативный массив допусков TRUE/FALSE
      */
-    public function checkAccessLevel($status = 0)
+    public function checkAccessLevel($user_st = 0)
     {
 
         //статус пользователя в Базе Данных
-        $guest        = 0; // Гость
-        $user1        = 1; // Пользователь
-        $user2        = 2; // Пользователь +
-        $user3        = 3; // ЭКСПЕРТ
-        $user4        = 4; // ?
-        $admin        = 5; //АДМИН
+        $user         = [];
+        $user[0]      = 0; // Гость
+        $user[1]      = 1; // Пользователь
+        $user[2]      = 2; // Профессиональный участник рынка недвижимости USER2
+        $user[3]      = 3; // Предоставляющий услуги - (USER3)
+        $user[4]      = 4; // Премиум Пользователь+ (USER4)
+        $user[5]      = 5; //Модератор
+        $user[6]      = 6; //Старший Модератор - (USER6)
+        $user[7]      = 7; //Администратор - (USER7)
+        $user[8]      = 8; //ПАХАН - (USER8)
         //Указание доступа для функций сайта
         $access_array = [
-            'add_news' =>// Добавлять объявления
-            [0, 1, 1, 1, 1, 1],
-            'add_review' =>// Добавлять пользовательские отзывы
-            [0, 1, 1, 1, 1, 1],
-            'add_services' =>// Подключать к сервисы
-            [0, 1, 1, 1, 1, 1],
-            'edit_profile' =>// Редактировать профиль
-            [0, 1, 1, 1, 1, 1]
-            ];
+            'add_news' => // Добавлять объявления
+            [0, 1, 1, 1, 1, 1, 1, 1, 1],
+            'add_review' => // Добавлять пользовательские отзывы
+            [0, 1, 1, 1, 1, 1, 1, 1, 1],
+            'add_services' => // Подключать к сервисы
+            [0, 1, 1, 1, 1, 1, 1, 1, 1],
+            'edit_profile' => // Редактировать профиль
+            [0, 1, 1, 1, 1, 1, 1, 1, 1]
+        ];
 
         // Приведение статуса в БД к позиции в массиве (см. соответствие выше)
-        switch ($status) {
-            case $guest:
-                $status = 0;
+         $status = 0;
+        foreach ($user as $kay => $value) {
+            if ($user_st == $value) {
+                $status = $kay;
                 break;
-            case $user1:
-                $status = 1;
-                break;
-            case $user2:
-                $status = 2;
-                break;
-            case $user3:
-                $status = 3;
-                break;
-            case $user4:
-                $status = 4;
-                break;
-            case $admin:
-                $status = 5;
-                break;
-            default: $status = 0;
+            }
         }
 
 //Получение массива допусков для данного статуса пользователя
-        $access=[];
-        foreach ($access_array as $key => $value){
-            $access[$key] = (boolean)$value[$status];
+        $access = [];
+        foreach ($access_array as $key => $value) {
+            $access[$key] = (boolean) $value[$status];
         }
-        return  $access;
+        return $access;
     }
 }
