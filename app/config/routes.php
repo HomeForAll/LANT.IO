@@ -14,6 +14,7 @@ return array(
     'cabinet' => 'main/cabinet/cabinet',
     'cabinet/profile/edit' => 'main/cabinet/profileEdit',
     'cabinet/profile/activity' => 'main/cabinet/showactivity',
+    'cabinet/profile/gadgets' => 'main/cabinet/showgadgets',
     'cabinet/generator' => 'main/cabinet/generator',
     'cabinet/keyeditor' => 'main/cabinet/keyeditor',
     'cabinet/forms' => 'main/cabinet/forms',
