@@ -17,6 +17,9 @@ return array(
     'cabinet/generator' => 'main/cabinet/generator',
     'cabinet/keyeditor' => 'main/cabinet/keyeditor',
     'cabinet/forms' => 'main/cabinet/forms',
+
+    'cabinet/forms/new' => 'main/cabinet/formsNew',
+
     'cabinet/dialogs' => 'main/cabinet/dialogs',
     'cabinet/chat' => 'main/cabinet/chat',
     'cabinet/form/new' => 'main/cabinet/createForm',
