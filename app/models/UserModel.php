@@ -196,8 +196,11 @@ class UserModel extends Model
 
     private function atLogin($userID, $userStatus)
     {
+        $secret_key = 'secret';
+
         $_SESSION['authorized'] = true;
         $_SESSION['userID'] = $userID;
+        $_SESSION['user_hash'] = hash('sha512', 'user_id=' . $userID . 'secret_key=' . $secret_key);
         $this->activityWrite($userID);
         $_SESSION['status'] = $userStatus;
         header('Location: http://' . $_SERVER['HTTP_HOST'] . '/cabinet');

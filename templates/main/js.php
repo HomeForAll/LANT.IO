@@ -3,7 +3,29 @@
 <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
 <script src="/templates/main/js/searchFormBuilder.js"></script>
 <script src="/templates/main/js/mapController.js"></script>
-<script src="/templates/main/js/forms_editor_handler.js"></script>
+<script src="/templates/main/js/forms.editor.handler.js"></script>
+
+<script src="/templates/main/js/socket.io.min.js"></script>
+<?php
+$hash = isset($_SESSION['user_hash']) ? $_SESSION['user_hash'] : '';
+$user_id = isset($_SESSION['userID']) ? $_SESSION['userID'] : '';
+$email = isset($_SESSION['email']) ? $_SESSION['email'] : '';
+?>
+<script>
+    var socket = io('http://localhost:3000?user_id=<?php echo $user_id; ?>&hash=<?php echo $hash; ?>');
+
+    socket.on('connect', function(){
+        console.log('connected!');
+    });
+    socket.on('event', function(data){});
+    socket.on('error', function(data){
+        console.log(data);
+    });
+    socket.on('disconnect', function(){
+        console.log('disconnect');
+    });
+</script>
+
 <?php
 // Подключение скрипта в контроллере
 if (isset($this->data['script'])) {
