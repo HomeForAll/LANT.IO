@@ -15,14 +15,23 @@ $email = isset($_SESSION['email']) ? $_SESSION['email'] : '';
     var socket = io('http://localhost:3000?user_id=<?php echo $user_id; ?>&hash=<?php echo $hash; ?>');
 
     socket.on('connect', function(){
-        console.log('connected!');
+        console.log('Соединение установлено.');
     });
-    socket.on('event', function(data){});
+
+    socket.on('message', function(data){
+        console.log('****************');
+        console.log('* Принято собщение: ');
+        console.log('*');
+        console.log('* ' + data.message);
+        console.log('****************');
+    });
+
     socket.on('error', function(data){
         console.log(data);
     });
+
     socket.on('disconnect', function(){
-        console.log('disconnect');
+        console.log('Разрыв соединения.');
     });
 </script>
 
