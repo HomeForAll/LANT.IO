@@ -12,7 +12,7 @@ $user_id = isset($_SESSION['userID']) ? $_SESSION['userID'] : '';
 $email = isset($_SESSION['email']) ? $_SESSION['email'] : '';
 ?>
 <script>
-    var socket = io('http://lant.io:8089?user_id=<?php echo $user_id; ?>&hash=<?php echo $hash; ?>');
+    var socket = io('http://91.202.180.160:8089?user_id=<?php echo $user_id; ?>&hash=<?php echo $hash; ?>');
 
     socket.on('connect', function(){
         console.log('Соединение установлено.');
