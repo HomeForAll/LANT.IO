@@ -43,6 +43,8 @@ if (isset($_POST['add_user']) || (isset($_POST['add_admin']))) {
             messageDiv.appendChild(content);
             messages.appendChild(messageDiv);
 
+            messages.scrollTop = 999999;
+
             message.val('');
         });
     });
@@ -65,6 +67,8 @@ if (isset($_POST['add_user']) || (isset($_POST['add_admin']))) {
             messageDiv.appendChild(b);
             messageDiv.appendChild(content);
             messages.appendChild(messageDiv);
+
+            messages.scrollTop = 999999;
         }
     });
 </script>
