@@ -136,20 +136,20 @@ foreach ($this->data['script'] as $key => $value) {
     ////        house: '#house'
     //    });
 
-    $(document).ready(function () {
-        $('#mapForm').on('submit', function (event) {
-            event.preventDefault();
-            var inputVal = inputCur.val();
-            map.get(inputVal);
-        });
-
-        var inputCur = $('input');
-
-        inputCur.on('change', function () {
-            var inputVal = inputCur.val();
-            rentApartMap.get(inputVal);
-        });
-    });
+//    $(document).ready(function () {
+//        $('#mapForm').on('submit', function (event) {
+//            event.preventDefault();
+//            var inputVal = inputCur.val();
+//            map.get(inputVal);
+//        });
+//
+//        var inputCur = $('input');
+//
+//        inputCur.on('change', function () {
+//            var inputVal = inputCur.val();
+//            rentApartMap.get(inputVal);
+//        });
+//    });
 
     function displayOperation() {
         var subjectVal = $('#subject').val();

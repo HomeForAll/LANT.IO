@@ -17,7 +17,7 @@ class UserModel extends Model
         $data = $this->getUserData($_POST['login'], $_POST['password']);
 
         if ($data) {
-            $this->atLogin($data['userID'], $data['status']);
+            $this->atLogin($data['userID'], $data['status'], $data['personaName']);
         } else {
             $errors = '<span style="color: red;">Вы указали неверные сведения или пользователь не существует.</span><br>';
 
@@ -187,6 +187,7 @@ class UserModel extends Model
                 return array(
                     'userID' => $result['id'],
                     'status' => $result['status'],
+                    'personaName' => $result['first_name'] . ' ' . $result['last_name']
                 );
             }
         }
@@ -194,12 +195,13 @@ class UserModel extends Model
         return false;
     }
 
-    private function atLogin($userID, $userStatus)
+    private function atLogin($userID, $userStatus, $personaName)
     {
         $secret_key = 'secret';
 
         $_SESSION['authorized'] = true;
         $_SESSION['userID'] = $userID;
+        $_SESSION['personaName'] = $personaName;
         $_SESSION['user_hash'] = hash('sha512', 'user_id=' . $userID . 'secret_key=' . $secret_key);
         $this->activityWrite($userID);
         $_SESSION['status'] = $userStatus;
@@ -505,7 +507,7 @@ class UserModel extends Model
         $this->clearOAuth();
 
         if ($result) {
-            $this->atLogin($result[0]['id'], $result[0]['status']);
+            $this->atLogin($result[0]['id'], $result[0]['status'], $result[0]['first_name'] . ' ' . $result[0]['last_name']);
         }
     }
 }
