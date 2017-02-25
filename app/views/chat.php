@@ -2,12 +2,72 @@
 $this->title = 'Чат';
 $matrix = $this->data;
 $name_of_dialog = $_SESSION['matrix_for_dialogs'][$_SESSION['chat']];
+$dialog_id  = $name_of_dialog[0];
+$persona_name = $_SESSION['personaName'];
 $name_of_dialog = $name_of_dialog[1];
 $i_max = $_SESSION['count_of_dialogs'];
 if (isset($_POST['add_user']) || (isset($_POST['add_admin']))) {
     $i_max = $_SESSION['count_of_users'];
 }
 ?>
+<script>
+    var dialog = <?php echo $dialog_id; ?>,
+        name = '<?php echo $persona_name; ?>';
+
+    $(document).ready(function () {
+        var message = $('#message');
+
+        message.parent().on('submit', function (event) {
+            event.preventDefault();
+
+            socket.emit('message', {
+                "dialog": dialog,
+                "name": name,
+                "message": message.val()
+            });
+
+            var messages = $('#messages'),
+                messageDiv = document.createElement('div'),
+                b = document.createElement('b'),
+                userName = document.createElement('span'),
+                content = document.createElement('p');
+
+            messageDiv.setAttribute('class', 'message');
+            content.setAttribute('style', 'margin-top: 10px;')
+            b.innerHTML = 'Имя отправителя: ';
+
+            userName.append(b);
+            userName.append(name);
+            content.append(message.val());
+            messageDiv.append(userName);
+            messageDiv.append(content);
+            messages.append(messageDiv);
+
+            message.val('');
+        });
+    });
+
+    socket.on('message', function(data){
+        if (+data.dialog == +dialog) {
+            var messages = $('#messages'),
+                message = document.createElement('div'),
+                b = document.createElement('b'),
+                userName = document.createElement('span'),
+                content = document.createElement('p');
+
+            message.setAttribute('class', 'message');
+            content.setAttribute('style', 'margin-top: 10px;')
+            b.innerHTML = 'Имя отправителя: ';
+
+            userName.append(b);
+            userName.append(data.name);
+            content.append(data.message);
+            message.append(userName);
+            message.append(content);
+            messages.append(message);
+        }
+    });
+</script>
 <style>
     .buttons {
         float: left;
@@ -77,6 +137,34 @@ if (isset($_POST['add_user']) || (isset($_POST['add_admin']))) {
         text-align: center; /* Выравниваем текст по центру ячейки */
         width: 200px;
     }
+
+    input[type=text] {
+        font-family: Arial, sans-serif;
+        font-size: 10pt;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 10px 15px 10px 15px;
+        margin: 15px 0 0 0;
+        border: solid 1px gray;
+        border-radius: 3px;
+    }
+
+    #messages {
+        box-sizing: border-box;
+        padding: 15px;
+        width: 100%;
+        height: 500px;
+        background: #C3CBD1;
+        overflow-y: scroll;
+    }
+
+    .message {
+        box-sizing: border-box;
+        padding: 10px;
+        margin-bottom: 15px;
+        width: 100%;
+        background: #FFFFFF;
+    }
 </style>
 
 <h4><?php print_r($name_of_dialog) ?></h4>
@@ -116,4 +204,17 @@ if (isset($_POST['add_user']) || (isset($_POST['add_admin']))) {
         </tr>
         <?php } ?>
     </table>
+</form>
+
+<div id="messages">
+<!--    <div class="message">-->
+<!--        <span><b>Имя отправителя:</b> Dmitry</span>-->
+<!--        <p style="margin-top: 10px;">-->
+<!--            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet laboriosam neque numquam perspiciatis-->
+<!--            voluptatum! Dicta excepturi nobis possimus quia repudiandae!-->
+<!--        </p>-->
+<!--    </div>-->
+</div>
+<form action="">
+    <input id="message" type="text" placeholder="Сообщение ...">
 </form>

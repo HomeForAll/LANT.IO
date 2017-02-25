@@ -742,6 +742,11 @@ function addRangeEl(elements) {
     option2.setAttribute('value', '');
     option2.innerHTML = '---';
 
+    var option3 = document.createElement('option');
+    option3.setAttribute('value', '');
+    option3.innerHTML = '---';
+
+    category.append(option3);
     subcategory.append(option);
     parentElement.append(option2);
 
@@ -816,6 +821,19 @@ function addRangeEl(elements) {
 
     box.append(deleteBtn);
     box.append(h2);
+
+    var checkboxLabel = document.createElement('label'),
+        checkbox = document.createElement('input'),
+        br = document.createElement('br');
+
+    checkbox.setAttribute('name', 'rangeCheckbox[]');
+    checkbox.setAttribute('type', 'checkbox');
+    checkbox.setAttribute('checked', '');
+    checkboxLabel.innerHTML = 'Блок находиться только в объекте ';
+    checkboxLabel.append(checkbox);
+    box.append(checkboxLabel);
+    box.append(br);
+
     box.append(categoryLabel);
     box.append(category);
     box.append(subcategoryLabel);
@@ -907,6 +925,11 @@ function addYOrNEL(elements) {
     option2.setAttribute('value', '');
     option2.innerHTML = '---';
 
+    var option3 = document.createElement('option');
+    option3.setAttribute('value', '');
+    option3.innerHTML = '---';
+
+    category.append(option3);
     subcategory.append(option);
     parentElement.append(option2);
 
@@ -980,6 +1003,19 @@ function addYOrNEL(elements) {
 
     box.append(deleteBtn);
     box.append(h2);
+
+    var checkboxLabel = document.createElement('label'),
+        checkbox = document.createElement('input'),
+        br = document.createElement('br');
+
+    checkbox.setAttribute('name', 'YORNCheckbox[]');
+    checkbox.setAttribute('type', 'checkbox');
+    checkbox.setAttribute('checked', '');
+    checkboxLabel.innerHTML = 'Блок находиться только в объекте ';
+    checkboxLabel.append(checkbox);
+    box.append(checkboxLabel);
+    box.append(br);
+
     box.append(categoryLabel);
     box.append(category);
     box.append(subcategoryLabel);
@@ -1005,6 +1041,9 @@ function addYOrNEL(elements) {
 function addListEl(elements) {
     var box = document.createElement('div'),
         optionsBox = document.createElement('div'),
+
+        objectLabel = document.createElement('label'),
+        object = document.createElement('select'),
 
         categoryLabel = document.createElement('label'),
         category = document.createElement('select'),
@@ -1062,6 +1101,11 @@ function addListEl(elements) {
     option2.setAttribute('value', '');
     option2.innerHTML = '---';
 
+    var option3 = document.createElement('option');
+    option3.setAttribute('value', '');
+    option3.innerHTML = '---';
+
+    category.append(option3);
     subcategory.append(option);
     parentElement.append(option2);
 
@@ -1139,6 +1183,19 @@ function addListEl(elements) {
 
     box.append(deleteBtn);
     box.append(h2);
+
+    var checkboxLabel = document.createElement('label'),
+        checkbox = document.createElement('input'),
+        br = document.createElement('br');
+
+    checkbox.setAttribute('name', 'listCheckbox[]');
+    checkbox.setAttribute('type', 'checkbox');
+    checkbox.setAttribute('checked', '');
+    checkboxLabel.innerHTML = 'Блок находиться только в объекте ';
+    checkboxLabel.append(checkbox);
+    box.append(checkboxLabel);
+    box.append(br);
+
     box.append(categoryLabel);
     box.append(category);
     box.append(subcategoryLabel);
@@ -1199,8 +1256,6 @@ function addOption(elBox) {
 
 function updateElements(elements) {
     elementsJSON = elements;
-
-    console.log(elementsJSON);
 
     var elTable = $('#elementsTable');
 
@@ -1283,8 +1338,7 @@ function updateElements(elements) {
     }
 }
 
-function searchParam(params, need)
-{
+function searchParam(params, need) {
     var result = '';
 
     params.forEach(function (param) {
@@ -1342,6 +1396,12 @@ function updateSubcategories(subcategories) {
         $('#elements').find('.subcategoryValues').each(function (index, el) {
             el.innerHTML = '';
 
+            var option = document.createElement('option');
+            option.setAttribute('value', '');
+            option.innerHTML = '---';
+
+            el.append(option);
+
             subcategoriesJSON.forEach(function (category) {
                 var option = document.createElement('option');
 
@@ -1393,7 +1453,9 @@ function updateCategories(categories) {
         });
     }
 
-    $('#subcategories').find('select').each(function (index, el) {
+    var select = $('#subcategories').find('select');
+
+    select.each(function (index, el) {
         el.innerHTML = '';
 
         categoriesJSON.forEach(function (category) {
@@ -1406,8 +1468,16 @@ function updateCategories(categories) {
         });
     });
 
-    $('#elements').find('.categoryValues').each(function (index, el) {
+    var elOptions = $('#elements').find('.categoryValues');
+
+    elOptions.each(function (index, el) {
         el.innerHTML = '';
+
+        var option = document.createElement('option');
+        option.setAttribute('value', '');
+        option.innerHTML = '---';
+
+        el.append(option);
 
         categoriesJSON.forEach(function (category) {
             var option = document.createElement('option');
