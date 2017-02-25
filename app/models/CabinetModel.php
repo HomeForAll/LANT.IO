@@ -15,6 +15,7 @@ class CabinetModel extends Model
 
     public function open_chat()
     {
+
     }
 
     public function delete_all_dialogs()
@@ -418,6 +419,7 @@ class CabinetModel extends Model
                         foreach ($_SESSION['matrix_for_dialogs'] as $key => $value) {
                             if ($value[0] == $id[0]['id']) {
                                 $_SESSION['chat'] = $key;
+                                $_SESSION['dialog_id']  = $id[0]['id'];
                                 header('Location: http://' . $_SERVER['HTTP_HOST'] . '/cabinet/chat');
                                 exit;
                             }

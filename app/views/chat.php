@@ -14,8 +14,10 @@ if (isset($_POST['add_user']) || (isset($_POST['add_admin']))) {
     var dialog = <?php echo $dialog_id; ?>,
         name = '<?php echo $persona_name; ?>';
 
+
     $(document).ready(function () {
-        var message = $('#message');
+        var message = $('#message'),
+            messages = document.getElementById('messages');
 
         message.parent().on('submit', function (event) {
             event.preventDefault();
@@ -26,45 +28,43 @@ if (isset($_POST['add_user']) || (isset($_POST['add_admin']))) {
                 "message": message.val()
             });
 
-            var messages = $('#messages'),
-                messageDiv = document.createElement('div'),
+            var messageDiv = document.createElement('div'),
                 b = document.createElement('b'),
-                userName = document.createElement('span'),
+                user = document.createTextNode(name),
+                msg = document.createTextNode(message.val()),
                 content = document.createElement('p');
 
             messageDiv.setAttribute('class', 'message');
-            content.setAttribute('style', 'margin-top: 10px;')
-            b.innerHTML = 'Имя отправителя: ';
+            content.setAttribute('style', 'margin-top: 10px;');
 
-            userName.append(b);
-            userName.append(name);
-            content.append(message.val());
-            messageDiv.append(userName);
-            messageDiv.append(content);
-            messages.append(messageDiv);
+            b.appendChild(user);
+            content.appendChild(msg);
+            messageDiv.appendChild(b);
+            messageDiv.appendChild(content);
+            messages.appendChild(messageDiv);
 
             message.val('');
         });
     });
 
     socket.on('message', function(data){
+        var messages = document.getElementById('messages');
+
         if (+data.dialog == +dialog) {
-            var messages = $('#messages'),
-                message = document.createElement('div'),
+            var messageDiv = document.createElement('div'),
                 b = document.createElement('b'),
-                userName = document.createElement('span'),
+                user = document.createTextNode(data.name),
+                msg = document.createTextNode(data.message),
                 content = document.createElement('p');
 
-            message.setAttribute('class', 'message');
-            content.setAttribute('style', 'margin-top: 10px;')
-            b.innerHTML = 'Имя отправителя: ';
+            messageDiv.setAttribute('class', 'message');
+            content.setAttribute('style', 'margin-top: 10px;');
 
-            userName.append(b);
-            userName.append(data.name);
-            content.append(data.message);
-            message.append(userName);
-            message.append(content);
-            messages.append(message);
+            b.appendChild(user);
+            content.appendChild(msg);
+            messageDiv.appendChild(b);
+            messageDiv.appendChild(content);
+            messages.appendChild(messageDiv);
         }
     });
 </script>

@@ -26,10 +26,11 @@ class Router
             if (preg_match("~^{$uriPattern}$~", $uri)) {
                 
                 $options = $this->getOptions($uriPattern, $uri, $path);
+                $action = $options['action'];
                 
                 if (file_exists(ROOT_DIR . '/app/controllers/' . $options['controller'] . '.php')) {
                     $controllerObject = new $options['controller']($options['template'], $options['model']);
-                    $controllerObject->$options['action']($options['params']);
+                    $controllerObject->$action($options['params']);
                 }
             }
         }
