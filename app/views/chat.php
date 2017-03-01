@@ -197,7 +197,7 @@ if (isset($_POST['add_user']) || (isset($_POST['add_admin']))) {
             <td>
                 <?php
                 $new_value = '';
-                $value = $matrix[$n][1];
+                $value = isset($matrix[$n][1]) ? $matrix[$n][1] : array();
                 if (isset($_POST['add_user']) || (isset($_POST['add_admin']))) {
                     $value = $matrix[$n][1] . ' ' . $matrix[$n][2];
                     $name = "add_user" . $n;
