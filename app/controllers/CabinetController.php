@@ -56,6 +56,7 @@ class CabinetController extends Controller
                 if (!isset($_SESSION['deleted_dialogs_button'])) {
                     if (isset($_POST['chat' . $i])) {
                         $_SESSION['chat'] = $i;
+                        $_SESSION['dialog_id'] = (integer)$_SESSION['matrix_for_dialogs'][$_SESSION['chat']][0];
                         header('Location: http://' . $_SERVER['HTTP_HOST'] . '/cabinet/chat');
                         exit;
                     }

@@ -15,7 +15,12 @@ class CabinetModel extends Model
 
     public function open_chat()
     {
-
+        $redis = new Redis();
+        $redis->connect('127.0.0.1');
+        $start = round(microtime(true) * 1000);
+        $end = $start - 1000000;
+        $dialog = 'dialog-' . $_SESSION['dialog_id'];
+        return $redis->zRangeByScore($dialog, $end, $start);
     }
 
     public function delete_all_dialogs()
@@ -419,7 +424,6 @@ class CabinetModel extends Model
                         foreach ($_SESSION['matrix_for_dialogs'] as $key => $value) {
                             if ($value[0] == $id[0]['id']) {
                                 $_SESSION['chat'] = $key;
-                                $_SESSION['dialog_id']  = $id[0]['id'];
                                 header('Location: http://' . $_SERVER['HTTP_HOST'] . '/cabinet/chat');
                                 exit;
                             }

@@ -2,7 +2,7 @@
 $this->title = 'Чат';
 $matrix = $this->data;
 $name_of_dialog = $_SESSION['matrix_for_dialogs'][$_SESSION['chat']];
-$dialog_id  = $name_of_dialog[0];
+$dialog_id = $name_of_dialog[0];
 $persona_name = $_SESSION['personaName'];
 $name_of_dialog = $name_of_dialog[1];
 $i_max = $_SESSION['count_of_dialogs'];
@@ -18,6 +18,8 @@ if (isset($_POST['add_user']) || (isset($_POST['add_admin']))) {
     $(document).ready(function () {
         var message = $('#message'),
             messages = document.getElementById('messages');
+
+        messages.scrollTop = 9999999;
 
         message.parent().on('submit', function (event) {
             event.preventDefault();
@@ -49,7 +51,7 @@ if (isset($_POST['add_user']) || (isset($_POST['add_admin']))) {
         });
     });
 
-    socket.on('message', function(data){
+    socket.on('message', function (data) {
         var messages = document.getElementById('messages');
 
         if (+data.dialog == +dialog) {
@@ -211,13 +213,31 @@ if (isset($_POST['add_user']) || (isset($_POST['add_admin']))) {
 </form>
 
 <div id="messages">
-<!--    <div class="message">-->
-<!--        <span><b>Имя отправителя:</b> Dmitry</span>-->
-<!--        <p style="margin-top: 10px;">-->
-<!--            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet laboriosam neque numquam perspiciatis-->
-<!--            voluptatum! Dicta excepturi nobis possimus quia repudiandae!-->
-<!--        </p>-->
-<!--    </div>-->
+    <?php
+    foreach ($this->data as $message) {
+        $message = json_decode($message);
+        ?>
+            <div class="message">
+                <span><b><?php echo $message->name; ?></b></span>
+                <p style="margin-top: 10px;">
+                    <?php echo $message->message; ?>
+                </p>
+            </div>
+        <?php
+//        print_r($message->name);
+//        print_r('<br>');
+//        print_r($message->message);
+//        print_r('<br>');
+    }
+    ?>
+
+    <!--    <div class="message">-->
+    <!--        <span><b>Имя отправителя:</b> Dmitry</span>-->
+    <!--        <p style="margin-top: 10px;">-->
+    <!--            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet laboriosam neque numquam perspiciatis-->
+    <!--            voluptatum! Dicta excepturi nobis possimus quia repudiandae!-->
+    <!--        </p>-->
+    <!--    </div>-->
 </div>
 <form action="">
     <input id="message" type="text" placeholder="Сообщение ...">
