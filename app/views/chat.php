@@ -23,31 +23,32 @@ if (isset($_POST['add_user']) || (isset($_POST['add_admin']))) {
 
         message.parent().on('submit', function (event) {
             event.preventDefault();
+            if (message.val() != '') {
+                socket.emit('message', {
+                    "dialog": dialog,
+                    "name": name,
+                    "message": message.val()
+                });
 
-            socket.emit('message', {
-                "dialog": dialog,
-                "name": name,
-                "message": message.val()
-            });
+                var messageDiv = document.createElement('div'),
+                    b = document.createElement('b'),
+                    user = document.createTextNode(name),
+                    msg = document.createTextNode(message.val()),
+                    content = document.createElement('p');
 
-            var messageDiv = document.createElement('div'),
-                b = document.createElement('b'),
-                user = document.createTextNode(name),
-                msg = document.createTextNode(message.val()),
-                content = document.createElement('p');
+                messageDiv.setAttribute('class', 'message');
+                content.setAttribute('style', 'margin-top: 10px;');
 
-            messageDiv.setAttribute('class', 'message');
-            content.setAttribute('style', 'margin-top: 10px;');
+                b.appendChild(user);
+                content.appendChild(msg);
+                messageDiv.appendChild(b);
+                messageDiv.appendChild(content);
+                messages.appendChild(messageDiv);
 
-            b.appendChild(user);
-            content.appendChild(msg);
-            messageDiv.appendChild(b);
-            messageDiv.appendChild(content);
-            messages.appendChild(messageDiv);
+                messages.scrollTop = 999999;
 
-            messages.scrollTop = 999999;
-
-            message.val('');
+                message.val('');
+            }
         });
     });
 
@@ -217,12 +218,12 @@ if (isset($_POST['add_user']) || (isset($_POST['add_admin']))) {
     foreach ($this->data as $message) {
         $message = json_decode($message);
         ?>
-            <div class="message">
-                <span><b><?php echo $message->name; ?></b></span>
-                <p style="margin-top: 10px;">
-                    <?php echo $message->message; ?>
-                </p>
-            </div>
+        <div class="message">
+            <span><b><?php echo $message->name; ?></b></span>
+            <p style="margin-top: 10px;">
+                <?php echo $message->message; ?>
+            </p>
+        </div>
         <?php
 //        print_r($message->name);
 //        print_r('<br>');
