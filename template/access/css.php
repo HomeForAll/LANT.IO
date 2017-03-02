@@ -5,7 +5,7 @@
     }
 
     body {
-        background: url("/templates/main/images/access_background.jpg") center center fixed no-repeat;
+        background: url("/template/main/images/access_background.jpg") center center fixed no-repeat;
         background-size: cover;
     }
 
@@ -59,7 +59,7 @@
     }
 
     #email {
-        background: url("/templates/main/images/msg.png") 33px 23px no-repeat #ffffff;
+        background: url("/template/main/images/msg.png") 33px 23px no-repeat #ffffff;
     }
 
     #emailError {
@@ -68,7 +68,7 @@
         height: 10px;
         padding: 22px 16px 22px 86px;
         margin: 0 0 25px -230px;
-        background: url("/templates/main/images/msg.png") 29px 19px no-repeat #ffffff;
+        background: url("/template/main/images/msg.png") 29px 19px no-repeat #ffffff;
     }
 
     #key {
@@ -76,7 +76,7 @@
         padding: 26px 20px 26px 90px;
         margin: 0 0 0 -230px;
         height: 10px;
-        background: url("/templates/main/images/key.png") 30px 19px no-repeat #ffffff;
+        background: url("/template/main/images/key.png") 30px 19px no-repeat #ffffff;
     }
 
     #keyError {
@@ -85,7 +85,7 @@
         height: 10px;
         padding: 22px 16px 22px 86px;
         margin: 0 0 25px -230px;
-        background: url("/templates/main/images/key.png") 26px 15px no-repeat #ffffff;
+        background: url("/template/main/images/key.png") 26px 15px no-repeat #ffffff;
     }
 
     .keyVisible {

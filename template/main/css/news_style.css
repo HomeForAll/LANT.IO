@@ -78,7 +78,7 @@
   width: 40px;
   height: 40px;
   margin: 0 5px 0 0;
-  background: url('/templates/main/images/icon02.png'); /* картинка спрайта */
+  background: url('/template/main/images/icon02.png'); /* картинка спрайта */
 }
 
 .add_news_menu_minus:before { background-position: -50px -50px; }

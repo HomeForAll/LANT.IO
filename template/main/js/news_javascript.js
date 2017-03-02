@@ -127,7 +127,7 @@ $.validator.addMethod( "letterswithbasicpunc", function( value, element ) {
         // картинка предпросмотра
         var imgpreview = $('<img/>', {
             'id': 'img-preview_' + fileInputID,
-            'src': '/templates/main/images/default-preview.jpg'
+            'src': '/template/main/images/default-preview.jpg'
         }).appendTo(div);
         // Вставка Поля ввода
         var inputfile = $('<input/>', {

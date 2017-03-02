@@ -1,6 +1,6 @@
 <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
-<script src="/templates/main/js/jquery.min.js"></script>
-<script src="/templates/main/js/jquery.scrollbar.min.js"></script>
+<script src="/template/main/js/jquery.min.js"></script>
+<script src="/template/main/js/jquery.scrollbar.min.js"></script>
 <script>
     $(window).on('load', function () {
         $("#loading-center").fadeOut(800, function () {
