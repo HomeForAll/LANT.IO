@@ -746,7 +746,7 @@ function addRangeEl(elements) {
     option3.setAttribute('value', '');
     option3.innerHTML = '---';
 
-    category.append(option3);
+    //category.append(option3);
     subcategory.append(option);
     parentElement.append(option2);
 
@@ -831,8 +831,8 @@ function addRangeEl(elements) {
     checkbox.setAttribute('checked', '');
     checkboxLabel.innerHTML = 'Блок находиться только в объекте ';
     checkboxLabel.append(checkbox);
-    box.append(checkboxLabel);
-    box.append(br);
+    //box.append(checkboxLabel);
+    //box.append(br);
 
     box.append(categoryLabel);
     box.append(category);
@@ -929,7 +929,7 @@ function addYOrNEL(elements) {
     option3.setAttribute('value', '');
     option3.innerHTML = '---';
 
-    category.append(option3);
+    //category.append(option3);
     subcategory.append(option);
     parentElement.append(option2);
 
@@ -1013,8 +1013,8 @@ function addYOrNEL(elements) {
     checkbox.setAttribute('checked', '');
     checkboxLabel.innerHTML = 'Блок находиться только в объекте ';
     checkboxLabel.append(checkbox);
-    box.append(checkboxLabel);
-    box.append(br);
+    //box.append(checkboxLabel);
+    //box.append(br);
 
     box.append(categoryLabel);
     box.append(category);
@@ -1105,7 +1105,7 @@ function addListEl(elements) {
     option3.setAttribute('value', '');
     option3.innerHTML = '---';
 
-    category.append(option3);
+    //category.append(option3);
     subcategory.append(option);
     parentElement.append(option2);
 
@@ -1193,8 +1193,8 @@ function addListEl(elements) {
     checkbox.setAttribute('checked', '');
     checkboxLabel.innerHTML = 'Блок находиться только в объекте ';
     checkboxLabel.append(checkbox);
-    box.append(checkboxLabel);
-    box.append(br);
+    //box.append(checkboxLabel);
+    //box.append(br);
 
     box.append(categoryLabel);
     box.append(category);

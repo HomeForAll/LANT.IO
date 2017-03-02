@@ -23,19 +23,19 @@ class View extends Access
     
     private function renderHead()
     {
-        include(ROOT_DIR . '/templates/' . $this->template . '/meta.php');
-        include(ROOT_DIR . '/templates/' . $this->template . '/links.php');
-        include(ROOT_DIR . '/templates/' . $this->template . '/css.php');
-        include(ROOT_DIR . '/templates/' . $this->template . '/js.php');
+        include(ROOT_DIR . '/template/' . $this->template . '/meta.php');
+        include(ROOT_DIR . '/template/' . $this->template . '/links.php');
+        include(ROOT_DIR . '/template/' . $this->template . '/css.php');
+        include(ROOT_DIR . '/template/' . $this->template . '/js.php');
     }
     
     private function renderBody()
     {
-        include(ROOT_DIR . '/templates/' . $this->template . '/begin.php');
-        include(ROOT_DIR . '/templates/' . $this->template . '/header.php');
+        include(ROOT_DIR . '/template/' . $this->template . '/begin.php');
+        include(ROOT_DIR . '/template/' . $this->template . '/header.php');
         echo $this->content;
-        include(ROOT_DIR . '/templates/' . $this->template . '/footer.php');
-        include(ROOT_DIR . '/templates/' . $this->template . '/end.php');
+        include(ROOT_DIR . '/template/' . $this->template . '/footer.php');
+        include(ROOT_DIR . '/template/' . $this->template . '/end.php');
     }
     
     private function getContent($view)
@@ -49,7 +49,7 @@ class View extends Access
     
     private function renderLayout()
     {
-        include(ROOT_DIR . '/templates/layouts/main.php');
+        include(ROOT_DIR . '/template/layouts/main.php');
     }
     
     private function printFormError($errorsArr)

@@ -1,11 +1,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <!-- jquery -->
 <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
-<script src="/templates/main/js/searchFormBuilder.js"></script>
-<script src="/templates/main/js/mapController.js"></script>
-<script src="/templates/main/js/forms.editor.handler.js"></script>
+<script src="/template/main/js/searchFormBuilder.js"></script>
+<script src="/template/main/js/mapController.js"></script>
+<script src="/template/main/js/forms.editor.handler.js"></script>
 
-<script src="/templates/main/js/socket.io.min.js"></script>
+<script src="/template/main/js/socket.io.min.js"></script>
 <?php
 $hash = isset($_SESSION['user_hash']) ? $_SESSION['user_hash'] : '';
 $user_id = isset($_SESSION['userID']) ? $_SESSION['userID'] : '';
