@@ -82,7 +82,7 @@ class UserModel extends Model
             $errors['password'] = $this->checkPassword($password);
         }
 
-        return !empty($errors) ? $errors : false;
+        return $errors['first_name'] || $errors['last_name'] || $errors['patronymic'] || $errors['email'] || $errors['birthday'] || $errors['phone'] || $errors['password'] ? $errors : false;
     }
 
     private function checkFirstName($first_name)
@@ -161,7 +161,7 @@ class UserModel extends Model
         $errors = array();
 
         if ($password == '') {
-            $errors['password'][] = 'Вы не указали пароль.';
+            $errors[] = 'Вы не указали пароль.';
         }
 
         return !empty($errors) ? $errors : false;
@@ -260,67 +260,67 @@ class UserModel extends Model
         $device = new Detection\MobileDetect();
         $device_name = 'PC';
 
-        if ($device->isiPhone() ) {
+        if ($device->isiPhone()) {
             $device_name = 'Iphone';
         }
-        if ($device->isBlackBerry() ) {
+        if ($device->isBlackBerry()) {
             $device_name = 'BlackBerry';
         }
-        if ($device->isHTC() ) {
+        if ($device->isHTC()) {
             $device_name = 'HTC';
         }
-        if ($device->isNexus() ) {
+        if ($device->isNexus()) {
             $device_name = 'Nexus';
         }
-        if ($device->isMotorola() ) {
+        if ($device->isMotorola()) {
             $device_name = 'Motorola';
         }
-        if ($device->isSamsung() ) {
+        if ($device->isSamsung()) {
             $device_name = 'Samsung';
         }
-        if ($device->isSony() ) {
+        if ($device->isSony()) {
             $device_name = 'Sony';
         }
-        if ($device->isAsus() ) {
+        if ($device->isAsus()) {
             $device_name = 'Asus';
         }
-        if ($device->isPalm() ) {
+        if ($device->isPalm()) {
             $device_name = 'Palm';
         }
-        if ($device->isGenericPhone() ) {
+        if ($device->isGenericPhone()) {
             $device_name = 'GenericPhone';
         }
-        if ($device->isBlackBerryTablet() ) {
+        if ($device->isBlackBerryTablet()) {
             $device_name = 'BlackBerryTablet';
         }
-        if ($device->isiPad() ) {
+        if ($device->isiPad()) {
             $device_name = 'iPad';
         }
-        if ($device->isKindle() ) {
+        if ($device->isKindle()) {
             $device_name = 'Kindle';
         }
-        if ($device->isSamsungTablet() ) {
+        if ($device->isSamsungTablet()) {
             $device_name = 'SamsungTablet';
         }
-        if ($device->isHTCtablet() ) {
+        if ($device->isHTCtablet()) {
             $device_name = 'HTCtablet';
         }
-        if ($device->isMotorolaTablet() ) {
+        if ($device->isMotorolaTablet()) {
             $device_name = 'MotorolaTablet';
         }
-        if ($device->isAsusTablet() ) {
+        if ($device->isAsusTablet()) {
             $device_name = 'AsusTablet';
         }
-        if ($device->isNookTablet() ) {
+        if ($device->isNookTablet()) {
             $device_name = 'NookTablet';
         }
-        if ($device->isAcerTablet() ) {
+        if ($device->isAcerTablet()) {
             $device_name = 'AcerTablet';
         }
-        if ($device->isYarvikTablet() ) {
+        if ($device->isYarvikTablet()) {
             $device_name = 'YarvikTablet';
         }
-        if ($device->isGenericTablet() ) {
+        if ($device->isGenericTablet()) {
             $device_name = 'GenericTablet';
         }
 
@@ -336,9 +336,7 @@ class UserModel extends Model
             $stmt->bindParam(':id_user', $userID);
             $stmt->bindParam(':device_name', $device_name);
             $stmt->execute();
-        }
-        else
-        {
+        } else {
             $i_max = 0;
             $massiv = [];
             foreach ($info as $value) {
@@ -404,7 +402,7 @@ class UserModel extends Model
                 case 'steam':
                     $query = $this->db->prepare("INSERT INTO users (first_name, last_name, phone_number, email, password, steam_id, steam_name, steam_avatar) VALUES (:firstName, :lastName, :phoneNumber, :email, :password, :serviceID, :serviceName, :serviceAvatar)");
                     break;
-                }
+            }
 
             $query->execute([
                 ':firstName' => $first_name,
