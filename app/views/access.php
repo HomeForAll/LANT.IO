@@ -6,7 +6,7 @@
 $this->title = 'Beta Access';
 ?>
 
-<div id="logo"><img src="/template/main/images/access_logo_element.png" alt="access">lant.io</div>
+<div id="logo"><img src="/template/images/access_logo_element.png" alt="access">lant.io</div>
 
 <form action="/" method="post" autocomplete="off">
     <input id="email" name="email" type="text" placeholder="Ваш email"><br>

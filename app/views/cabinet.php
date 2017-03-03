@@ -42,43 +42,43 @@ if (checkEmpty($this->data['social_nets'][0]) > 0) {
         <?php
         if ($this->data['social_nets'][0]['vk_id'] == '') {
             ?>
-            <a href="oauth/vk/state/3"><img src="/template/main/images/soc_net/vk_2.png" alt="VK"></a>
+            <a href="oauth/vk/state/3"><img src="/template/images/soc_net/vk_2.png" alt="VK"></a>
             <?php
         }
 
         if ($this->data['social_nets'][0]['ok_id'] == '') {
             ?>
-            <a href="oauth/ok/state/3"><img src="/template/main/images/soc_net/ok.png" alt="OK"></a>
+            <a href="oauth/ok/state/3"><img src="/template/images/soc_net/ok.png" alt="OK"></a>
             <?php
         }
 
         if ($this->data['social_nets'][0]['mail_id'] == '') {
             ?>
-            <a href="oauth/mail/state/3"><img src="/template/main/images/soc_net/mail_ru.png" alt="Mail"></a>
+            <a href="oauth/mail/state/3"><img src="/template/images/soc_net/mail_ru.png" alt="Mail"></a>
             <?php
         }
 
         if ($this->data['social_nets'][0]['ya_id'] == '') {
             ?>
-            <a href="oauth/ya/state/3"><img src="/template/main/images/soc_net/yandex_2.png" alt="YA"></a>
+            <a href="oauth/ya/state/3"><img src="/template/images/soc_net/yandex_2.png" alt="YA"></a>
             <?php
         }
 
         if ($this->data['social_nets'][0]['google_id'] == '') {
             ?>
-            <a href="oauth/google/state/3"><img src="/template/main/images/soc_net/google.png" alt="Google"></a>
+            <a href="oauth/google/state/3"><img src="/template/images/soc_net/google.png" alt="Google"></a>
             <?php
         }
 
         if ($this->data['social_nets'][0]['facebook_id'] == '') {
             ?>
-            <a href="oauth/fb/state/3"><img src="/template/main/images/soc_net/facebook_2.png" alt="FaceBook"></a>
+            <a href="oauth/fb/state/3"><img src="/template/images/soc_net/facebook_2.png" alt="FaceBook"></a>
             <?php
         }
 
         if ($this->data['social_nets'][0]['steam_id'] == '') {
             ?>
-            <a href="oauth/steam/state/3"><img src="/template/main/images/soc_net/steam.png" alt="Steam"></a>
+            <a href="oauth/steam/state/3"><img src="/template/images/soc_net/steam.png" alt="Steam"></a>
             <?php
         }
         ?>

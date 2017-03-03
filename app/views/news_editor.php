@@ -279,6 +279,6 @@ if (!empty($this->data['message'])) {
 
 
 
-<script type="text/javascript" src="/template/main/js/jquery.validate.js"></script>
-<script type="text/javascript" src="/template/main/js/news_javascript.js"></script>
+<script type="text/javascript" src="/template/js/jquery.validate.js"></script>
+<script type="text/javascript" src="/template/js/news_javascript.js"></script>
 
