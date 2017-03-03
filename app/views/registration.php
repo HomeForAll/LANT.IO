@@ -33,7 +33,6 @@
 <?php
 $this->title = 'Регистрация';
 
-$nickname = '';
 $firstName = (isset($_POST['firstName']) && !empty($_POST['firstName'])) ? $_POST['firstName'] : '';
 $lastName = (isset($_POST['lastName']) && !empty($_POST['lastName'])) ? $_POST['lastName'] : '';
 $patronymic = (isset($_POST['patronymic']) && !empty($_POST['patronymic'])) ? $_POST['patronymic'] : '';
@@ -43,47 +42,14 @@ $email = (isset($_POST['email']) && !empty($_POST['email'])) ? $_POST['email'] :
 
 // Записываем ошибки если они есть
 
-$firstNameErr = isset($this->data['firstName']) ? $this->data['firstName'] : [];
-$lastNameErr = isset($this->data['lastName']) ? $this->data['lastName'] : [];
-$patronymicErr = isset($this->data['patronymic']) ? $this->data['patronymic'] : [];
-$birthdayErr = isset($this->data['birthday']) ? $this->data['birthday'] : [];
-$phoneNumberErr = isset($this->data['phoneNumber']) ? $this->data['phoneNumber'] : [];
-$emailErr = isset($this->data['email']) ? $this->data['email'] : [];
-$passwordErr = isset($this->data['password']) ? $this->data['password'] : [];
+$firstNameErr = isset($this->data['first_name']) && $this->data['first_name'] ? $this->data['first_name'] : [];
+$lastNameErr = isset($this->data['last_name']) && $this->data['last_name'] ? $this->data['last_name'] : [];
+$patronymicErr = isset($this->data['patronymic']) && $this->data['patronymic'] ? $this->data['patronymic'] : [];
+$birthdayErr = isset($this->data['birthday']) && $this->data['birthday'] ? $this->data['birthday'] : [];
+$phoneNumberErr = isset($this->data['phone']) && $this->data['phone'] ? $this->data['phone'] : [];
+$emailErr = isset($this->data['email']) && $this->data['email'] ? $this->data['email'] : [];
+$passwordErr = isset($this->data['password']) && $this->data['password'] ? $this->data['password'] : [];
 
-$vk_userID = (isset($_SESSION['vk_userID']) && !empty($_SESSION['vk_userID'])) ? $_SESSION['vk_userID'] : '';
-$ok_userID = (isset($_SESSION['ok_userID']) && !empty($_SESSION['ok_userID'])) ? $_SESSION['ok_userID'] : '';
-$mail_userID = (isset($_SESSION['mail_userID']) && !empty($_SESSION['mail_userID'])) ? $_SESSION['mail_userID'] : '';
-$ya_userID = (isset($_SESSION['ya_userID']) && !empty($_SESSION['ya_userID'])) ? $_SESSION['ya_userID'] : '';
-$goo_userID = (isset($_SESSION['goo_userID']) && !empty($_SESSION['goo_userID'])) ? $_SESSION['goo_userID'] : '';
-$steam_userID = (isset($_SESSION['steam_userID']) && !empty($_SESSION['steam_userID'])) ? $_SESSION['steam_userID'] : '';
-
-if (isset($_SESSION['services']) && !empty($_SESSION['services'])) {
-    foreach ($_SESSION['services'] as $service => $status) {
-        if (isset($_SESSION[$service . '_firstName'])) {
-            $firstName = $_SESSION[$service . '_firstName'];
-        }
-
-        if (isset($_SESSION[$service . '_lastName'])) {
-            $lastName = $_SESSION[$service . '_lastName'];
-        }
-
-        if (isset($_SESSION[$service . '_patronymic'])) {
-            $patronymic = $_SESSION[$service . '_patronymic'];
-        }
-
-        if (isset($_SESSION[$service . '_birthday'])) {
-            $birthday = $_SESSION[$service . '_birthday'];
-        }
-
-        if (isset($_SESSION[$service . '_phoneNumber'])) {
-            $phoneNumber = $_SESSION[$service . '_phoneNumber'];
-        }
-        if (isset($_SESSION[$service . '_email'])) {
-            $email = $_SESSION[$service . '_email'];
-        }
-    }
-}
 ?>
 <style>
     table td {
@@ -107,108 +73,51 @@ if (isset($_SESSION['services']) && !empty($_SESSION['services'])) {
     }
 </style>
 
-<h1>Регистрация</h1>
+<?php if (isset($this->data['result']) && $this->data['result']) { ?>
+    <h1>Регистрация успешно завершена!</h1>
+<?php } else { ?>
+    <h1>Регистрация</h1>
 
-<form action="" method="post">
-    <table>
-        <tr>
-            <td>
-                <label for="firstName">
-                    Имя:
-                </label>
-            </td>
-            <td>
-                <input name="firstName" id="firstName" type="text"
-                       value="<?php echo $firstName; ?>">
-                <?php $this->printFormError($firstNameErr) ?>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label for="lastName">
-                    Фамилия:
-                </label>
-            </td>
-            <td>
-                <input name="lastName" id="lastName" type="text"
-                       value="<?php echo $lastName; ?>">
-                <?php $this->printFormError($lastNameErr) ?>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label for="patronymic">
-                    Отчество:
-                </label>
-            </td>
-            <td>
-                <input name="patronymic" id="patronymic" type="text"
-                       value="<?php echo $patronymic; ?>">
-                <?php $this->printFormError($patronymicErr) ?>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label for="birthday">
-                    Дата рождения:
-                </label>
-            </td>
-            <td>
-                <?php $this->printFormError($birthdayErr) ?>
-                <input name="birthday" id="birthday" type="date" value="<?php echo $birthday; ?>">
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label for="phoneNumber">
-                    Номер телефона:
-                </label>
-            </td>
-            <td>
-                <input name="phoneNumber" id="phoneNumber" type="text"
-                       value="<?php echo $phoneNumber; ?>">
-                <?php $this->printFormError($phoneNumberErr) ?>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label for="email">
-                    E-Mail:
-                </label>
-            </td>
-            <td>
-                <input name="email" id="email" type="text"
-                       value="<?php echo $email; ?>">
-                <?php $this->printFormError($emailErr) ?>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label for="password">
-                    Пароль:
-                </label>
-            </td>
-            <td>
-                <input name="password" id="password" type="password">
-                <?php $this->printFormError($passwordErr) ?>
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <input type="submit" name="submit" value="Создать аккаунт">
-            </td>
-        </tr>
-    </table>
-</form>
+    <form action="" method="post">
+        <label for="firstName">Имя:</label>
+        <?php $this->printFormError($firstNameErr) ?>
+        <input name="firstName" id="firstName" type="text" value="<?php echo $firstName; ?>">
 
-<div id="soc_net">
-    <a href="oauth/vk/state/2"><img src="/template/main/images/soc_net/vk_2.png" alt="VK"></a>
-    <a href="oauth/ok/state/2"><img src="/template/main/images/soc_net/ok.png" alt="OK"></a>
-    <a href="oauth/mail/state/2"><img src="/template/main/images/soc_net/mail_ru.png" alt="Mail"></a>
-    <a href="oauth/ya/state/2"><img src="/template/main/images/soc_net/yandex_2.png" alt="YA"></a>
-    <a href="oauth/google/state/2"><img src="/template/main/images/soc_net/google.png" alt="Google"></a>
-    <a href="oauth/fb/state/2"><img src="/template/main/images/soc_net/facebook_2.png" alt="FaceBook"></a>
-    <a href="oauth/steam/state/2"><img src="/template/main/images/soc_net/steam.png" alt="Steam"></a>
-    <div style="clear: both"></div>
-</div>
+        <label for="lastName">Фамилия:</label>
+        <?php $this->printFormError($lastNameErr) ?>
+        <input name="lastName" id="lastName" type="text" value="<?php echo $lastName; ?>">
+
+        <label for="patronymic">Отчество:</label>
+        <?php $this->printFormError($patronymicErr) ?>
+        <input name="patronymic" id="patronymic" type="text" value="<?php echo $patronymic; ?>">
+
+        <label for="birthday">Дата рождения:</label>
+        <?php $this->printFormError($birthdayErr) ?>
+        <input name="birthday" id="birthday" type="date" value="<?php echo $birthday; ?>">
+
+        <label for="phoneNumber">Номер телефона:</label>
+        <?php $this->printFormError($phoneNumberErr) ?>
+        <input name="phoneNumber" id="phoneNumber" type="text" value="<?php echo $phoneNumber; ?>">
+
+        <label for="email">E-Mail:</label>
+        <?php $this->printFormError($emailErr) ?>
+        <input name="email" id="email" type="text" value="<?php echo $email; ?>">
+
+        <label for="password">Пароль:</label>
+        <?php $this->printFormError($passwordErr) ?>
+        <input name="password" id="password" type="password">
+
+        <input type="submit" name="submit" value="Создать аккаунт">
+    </form>
+
+    <div id="soc_net">
+        <a href="oauth/vk/state/2"><img src="/template/main/images/soc_net/vk_2.png" alt="VK"></a>
+        <a href="oauth/ok/state/2"><img src="/template/main/images/soc_net/ok.png" alt="OK"></a>
+        <a href="oauth/mail/state/2"><img src="/template/main/images/soc_net/mail_ru.png" alt="Mail"></a>
+        <a href="oauth/ya/state/2"><img src="/template/main/images/soc_net/yandex_2.png" alt="YA"></a>
+        <a href="oauth/google/state/2"><img src="/template/main/images/soc_net/google.png" alt="Google"></a>
+        <a href="oauth/fb/state/2"><img src="/template/main/images/soc_net/facebook_2.png" alt="FaceBook"></a>
+        <a href="oauth/steam/state/2"><img src="/template/main/images/soc_net/steam.png" alt="Steam"></a>
+        <div style="clear: both"></div>
+    </div>
+<?php } ?>
