@@ -49,7 +49,6 @@ $birthdayErr = isset($this->data['birthday']) && $this->data['birthday'] ? $this
 $phoneNumberErr = isset($this->data['phone']) && $this->data['phone'] ? $this->data['phone'] : [];
 $emailErr = isset($this->data['email']) && $this->data['email'] ? $this->data['email'] : [];
 $passwordErr = isset($this->data['password']) && $this->data['password'] ? $this->data['password'] : [];
-
 ?>
 <style>
     table td {
@@ -111,13 +110,13 @@ $passwordErr = isset($this->data['password']) && $this->data['password'] ? $this
     </form>
 
     <div id="soc_net">
-        <a href="oauth/vk/state/2"><img src="/template/main/images/soc_net/vk_2.png" alt="VK"></a>
-        <a href="oauth/ok/state/2"><img src="/template/main/images/soc_net/ok.png" alt="OK"></a>
-        <a href="oauth/mail/state/2"><img src="/template/main/images/soc_net/mail_ru.png" alt="Mail"></a>
-        <a href="oauth/ya/state/2"><img src="/template/main/images/soc_net/yandex_2.png" alt="YA"></a>
-        <a href="oauth/google/state/2"><img src="/template/main/images/soc_net/google.png" alt="Google"></a>
-        <a href="oauth/fb/state/2"><img src="/template/main/images/soc_net/facebook_2.png" alt="FaceBook"></a>
-        <a href="oauth/steam/state/2"><img src="/template/main/images/soc_net/steam.png" alt="Steam"></a>
+        <a href="oauth/vk/state/2"><img src="/template/images/soc_net/vk_2.png" alt="VK"></a>
+        <a href="oauth/ok/state/2"><img src="/template/images/soc_net/ok.png" alt="OK"></a>
+        <a href="oauth/mail/state/2"><img src="/template/images/soc_net/mail_ru.png" alt="Mail"></a>
+        <a href="oauth/ya/state/2"><img src="/template/images/soc_net/yandex_2.png" alt="YA"></a>
+        <a href="oauth/google/state/2"><img src="/template/images/soc_net/google.png" alt="Google"></a>
+        <a href="oauth/fb/state/2"><img src="/template/images/soc_net/facebook_2.png" alt="FaceBook"></a>
+        <a href="oauth/steam/state/2"><img src="/template/images/soc_net/steam.png" alt="Steam"></a>
         <div style="clear: both"></div>
     </div>
 <?php } ?>
