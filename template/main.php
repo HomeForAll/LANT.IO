@@ -5,6 +5,14 @@
     <title><?php $this->title(); ?></title>
     <link rel="stylesheet" href="/template/css/style.css">
     <link rel="stylesheet" href="/template/css/news_style.css">
+    <?php
+        // Подключение стилей в контроллере
+if (isset($this->data['css'])) {
+foreach ($this->data['css'] as $key => $value) {
+    echo '<link rel="stylesheet"  href="/template/css/'.$value.'">'."\r\n";
+}
+}
+    ?>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <!-- jquery -->
     <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
@@ -18,6 +26,14 @@
     $user_id = isset($_SESSION['userID']) ? $_SESSION['userID'] : '';
     $email = isset($_SESSION['email']) ? $_SESSION['email'] : '';
     ?>
+    <?php
+// Подключение скрипта в контроллере
+if (isset($this->data['script'])) {
+foreach ($this->data['script'] as $key => $value) {
+    echo '<script src="/template/js/'.$value.'"></script>'."\r\n";
+}
+}
+?>
     <script>
         var socket = io('http://91.202.180.160:8089?user_id=<?php echo $user_id; ?>&hash=<?php echo $hash; ?>');
 
@@ -308,5 +324,13 @@
     <?php $this->content(); ?>
     </div>
 </div>
+    <?php
+// Подключение скрипта в контроллере для футера
+if (isset($this->data['script_footer'])) {
+    foreach ($this->data['script_footer'] as $key => $value) {
+        echo '<script src="/template/js/'.$value.'"></script>'."\r\n";
+    }
+}
+?>
 </body>
 </html>

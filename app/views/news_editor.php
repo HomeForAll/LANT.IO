@@ -185,17 +185,17 @@ if (!empty($this->data['message'])) {
     <!-- Долнительная информация -->
     <fieldset>
         <legend>Долнительная информация</legend>
+<!--        <section>-->
+<!--            <label>Короткое содержание: -->
+<!--                <textarea name="short_content" type="text">--><?php
+//                    if (!empty($this->data['short_content'])) {
+//                        echo $this->data['short_content'];
+//                    }
+//                    ?><!--</textarea>-->
+<!--            </label>-->
+<!--        </section>-->
         <section>
-            <label>Короткое содержание: 
-                <textarea name="short_content" type="text"><?php
-                    if (!empty($this->data['short_content'])) {
-                        echo $this->data['short_content'];
-                    }
-                    ?></textarea>
-            </label>
-        </section>
-        <section>
-            <label >Основное содержание: 
+            <label >Cодержание:
                 <textarea id="news_content" name="content" type="text"><?php
                     if (!empty($this->data['content'])) {
                         echo $this->data['content'];
