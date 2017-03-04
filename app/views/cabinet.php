@@ -19,10 +19,12 @@ if ($this->checkAccessLevel($_SESSION['status'], 'profile')) {
 
      <a class="button" href="/news/myad">Мои объявления</a>
      
-    <p>Ваш балланс:  <?php if(isset($this->data['balance'])) { echo $this->data['balance']; }?> коинов </p>
-  <a class="button" href="cabinet/payment">Услуги и платежи</a>
+    <p>Ваш балланс:  <?php if(isset($this->data[0]['balance'])) { echo $this->data[0]['balance']; }else{echo '0';}?> коинов </p>
+  <a class="button" href="cabinet/payment">Платежи</a>
+  
+ <a class="button" href="service">Услуги</a>
+  <a class="button" href="service/admin">Добавление\Редактирование услуг</a>
 
- 
 <?php
 function checkEmpty($array) {
     $i = 0;
