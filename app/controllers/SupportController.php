@@ -8,9 +8,35 @@ class SupportController extends Controller
         $this->checkAuth();
     }
 
+    public function actionTicketsEditor()
+    {
+        $this->view->render('tickets_editor', $this->model->get_tickets());
+    }
+
     public function actionIndex()
     {
-        $this->view->render('support', $this->model->getStatistic());
+        $support_button = '';
+        if (isset($_GET['article'])) {
+            $this->view->render('article', $this->model->article_id($_GET['article']));
+        }
+        else {
+            if (isset($_POST['account'])) {
+                $support_button = 'account';
+            }
+            if (isset($_POST['pay'])) {
+                $support_button = 'pay';
+            }
+            if (isset($_POST['tech_help'])) {
+                $support_button = 'tech_help';
+            }
+            if (isset($_POST['other'])) {
+                $support_button = 'other';
+            }
+                $this->view->render('support', array(
+                    'statistic' => $this->model->getStatistic(),
+                    'articles' => $this->model->support_articles($support_button)
+                ));
+                }
     }
 
     public function actionTickets()
@@ -40,4 +66,6 @@ class SupportController extends Controller
             $this->view->render('new_ticket');
         }
     }
+
+
 }

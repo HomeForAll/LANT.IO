@@ -101,6 +101,15 @@ if ($i_max != 0) {
             <tr><td><br></td></tr>
         <?php } ?>
     </table>
+    <form action="" method="post">
+        <table>
+            <tr>
+                <td align="center">
+                    <input class="real_buttons" style="width: 300px; " type=submit name=close_all_sessions value="Отключить все устройства"
+                </td>
+            </tr>
+        </table>
+    </form>
 <?php }
 else {
     ?>

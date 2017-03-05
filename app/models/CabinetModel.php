@@ -209,6 +209,7 @@ class CabinetModel extends Model
 
     public function create_new_dialog()
     {
+        unset($_SESSION['add_admin_button']);
         $admin_status = 5;
         $profile_id = $_SESSION['userID'];
         if (isset($_POST['add_user']) || (isset($_POST['add_admin']))) {
@@ -228,8 +229,10 @@ class CabinetModel extends Model
                     $query .= ' AND id != ' . $key;
             }
 
-            if (isset($_POST['add_admin']))
+            if (isset($_POST['add_admin'])) {
                 $query .= ' AND status = ' . $admin_status;
+                $_SESSION['add_admin_button'] = 1;
+            }
             else
                 $query .= ' AND status != ' . $admin_status;
 
@@ -264,6 +267,7 @@ class CabinetModel extends Model
 
     public function add_dialog()
     {
+        unset($_SESSION['add_user_error']);
         $profile_id = $_SESSION['userID'];
         $count_of_owners = 0;
         $massiv = [];
@@ -339,9 +343,14 @@ class CabinetModel extends Model
                         $new_owners_names .= ',' . $names_of_users[$j];
                     }
                 }
+
+                // Добавить запись в базу.
             } else {
-                echo 'ne vibral';
-                $_POST['add_user'] = 1;
+                $_SESSION['add_user_error'] = 1;
+                if (isset($_SESSION['add_admin_button']))
+                    $_POST['add_admin'] = 1;
+                else
+                    $_POST['add_user'] = 1;
                 return $this->create_new_dialog();
             }
         }
@@ -444,7 +453,7 @@ class CabinetModel extends Model
                     return $this->getdialogs();
                 }
             } else {
-                echo 'Не выбран!';
+                $_SESSION['add_user_error'] = 1;
                 $_POST['create_new_dialog'] = 1;
                 return $this->create_new_dialog();
             }
@@ -477,6 +486,15 @@ class CabinetModel extends Model
             $_SESSION['matrix_for_gadgets'] = $matrix;
             return $matrix;
         }
+    }
+
+    public function close_all_sessions() {
+        $profile_id = $_SESSION['userID'];
+        $stmt = $this->db->prepare("DELETE FROM sessions WHERE id_user = $profile_id");
+        $stmt->execute();
+        session_destroy();
+        header('Location: http://' . $_SERVER['HTTP_HOST']);
+        exit;
     }
 
     public function delete_gadget()
@@ -622,7 +640,7 @@ class CabinetModel extends Model
             }
 
             if ($error_array[3] == 0)
-                $this->db->query("UPDATE users SET birthday = '{$_POST['sel_date']}.{$_POST['sel_month']}.{$_POST['sel_year']}' WHERE id = $profile_id");
+                $this->db->query("UPDATE users SET birthday = '{$_POST['sel_year']}-{$_POST['sel_month']}-{$_POST['sel_date']}' WHERE id = $profile_id");
 
             $_SESSION['email_error'] = 0;
             if (filter_var(trim($_POST['email']), FILTER_VALIDATE_EMAIL)) {

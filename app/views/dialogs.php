@@ -71,6 +71,10 @@ if (isset($_POST['create_new_dialog'])) {
         font-family: Arial;
     }
 
+    table {
+        width: 100%;
+    }
+
     td {
         text-align: center; /* Выравниваем текст по центру ячейки */
         width: 200px;
@@ -97,6 +101,11 @@ if ($i_max != 0) {
                     <input type=submit class="real_buttons" name=add_users value="Создать">
                 <?php } ?>
             </td>
+            <?php if (isset($_SESSION['add_user_error'])) { ?>
+            <td>
+                <span style="color: red">Не выбран!</span>
+            </td>
+            <?php } ?>
         </tr>
         <?php if(isset($_POST['create_new_dialog'])) { ?>
         <h3>Вся история сообщений сохраняется и даже после удаления лично у вас, она всё равно хранится на сайте.
