@@ -179,11 +179,15 @@ if (isset($_POST['add_user']) || (isset($_POST['add_admin']))) {
     <?php if (!isset($_POST['add_user']) && (!isset($_POST['add_admin']))) { ?>
         <input type=submit class="" name=add_user value="Добавить пользователя">
         <input type=submit class="" name=delete_dialog_instantly value="Удалить диалог досрочно">
-        <input type=submit class="" style="width: 300px; background: red" name=add_admin
-               value="Призвать Царя-Админа">
+        <input type=submit class="" name=add_admin value="Добавить администратора">
     <?php } else { ?>
         <input type=submit class="" name=add_user_yes value="Добавить">
         <input type=submit class="" name=add_user_no value="Отмена">
+        <?php if (isset($_SESSION['add_user_error'])) { ?>
+            <td>
+                <span style="color: red">Не выбран!</span>
+            </td>
+        <?php } ?>
     <?php }
     if ($i_max != 0) {
     ?>

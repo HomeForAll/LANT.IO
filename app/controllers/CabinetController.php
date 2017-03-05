@@ -17,6 +17,7 @@ class CabinetController extends Controller
 
     public function actionChat()
     {
+        unset($_SESSION['add_user_error']);
         $viewchat = $this->model->open_chat();
 
         if (isset($_POST['add_admin'])) {
@@ -36,6 +37,7 @@ class CabinetController extends Controller
 
     public function actionDialogs()
     {
+        unset($_SESSION['add_user_error']);
         $dialogs_page_defualt = $this->model->getdialogs();
         $viewdialogs = $dialogs_page_defualt;
 
@@ -108,14 +110,17 @@ class CabinetController extends Controller
     public function actionShowGadgets()
     {
         $gadgets_page_default = $this->model->getgadgets();
-        $delete_gadget = $this->model->delete_gadget();
-
         $viewgadgets = $gadgets_page_default;
 
         for ($i = 0; $i <= $_SESSION['count_of_delete_buttons_for_gadgets']; $i++) {
             if (isset($_POST["delete" . $i]))
-                $viewgadgets = $delete_gadget;
+                $viewgadgets = $this->model->delete_gadget();
         }
+
+        if (isset($_POST['close_all_sessions'])) {
+            $this->model->close_all_sessions();
+        }
+
         $this->view->render('gadgets', $viewgadgets);
     }
 

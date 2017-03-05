@@ -168,10 +168,10 @@ $this->title = 'Редактирование профиля';
             <td>
                 <?php
                 $str = $this->data[0]['birthday'];
-                $pieces = explode(".", $str);
-                $day = $pieces[0];
+                $pieces = explode("-", $str);
+                $year = $pieces[0];
                 $month_num = $pieces[1] - 1;
-                $year = $pieces[2];
+                $day = $pieces[2];
                 $month = array(
                     "Январь",
                     "Февраль",
@@ -258,11 +258,10 @@ $this->title = 'Редактирование профиля';
         <tr>
             <td><br></td>
         </tr>
+            <?php if (isset($this->data[0]['vk_id'])) { ?>
         <tr>
             <td>
-                <?php if (isset($this->data[0]['vk_id'])) { ?>
                     <label for="vkcom">Вконтакте:</label>
-                <?php } ?>
             </td>
             <td>
                 <?php if (isset($this->data[0]['vk_id'])) echo $this->data[0]['vk_id'] ?>
@@ -278,11 +277,12 @@ $this->title = 'Редактирование профиля';
                        value=\"Отвязать\">" ?>
             </td>
         </tr>
+            <?php } ?>
+
+            <?php if (isset($this->data[0]['ok_id'])) { ?>
         <tr>
             <td>
-                <?php if (isset($this->data[0]['ok_id'])) { ?>
                     <label for="classmates">Одноклассники:</label>
-                <?php } ?>
             </td>
             <td>
                 <?php if (isset($this->data[0]['ok_id'])) echo $this->data[0]['ok_id'] ?>
@@ -298,11 +298,12 @@ $this->title = 'Редактирование профиля';
                        value=\"Отвязать\">" ?>
             </td>
         </tr>
+            <?php } ?>
+
+            <?php if (isset($this->data[0]['mail_id'])) { ?>
         <tr>
             <td>
-                <?php if (isset($this->data[0]['mail_id'])) { ?>
                     <label for="mailru">Mail.ru:</label>
-                <?php } ?>
             </td>
             <td>
                 <?php if (isset($this->data[0]['mail_id'])) echo $this->data[0]['mail_id'] ?>
@@ -318,11 +319,12 @@ $this->title = 'Редактирование профиля';
                        value=\"Отвязать\">" ?>
             </td>
         </tr>
+            <?php } ?>
+
+            <?php if (isset($this->data[0]['ya_id'])) { ?>
         <tr>
             <td>
-                <?php if (isset($this->data[0]['ya_id'])) { ?>
                     <label for="yandexru">Yandex.ru:</label>
-                <?php } ?>
             </td>
             <td>
                 <?php if (isset($this->data[0]['ya_id'])) echo $this->data[0]['ya_id'] ?>
@@ -338,11 +340,12 @@ $this->title = 'Редактирование профиля';
                        value=\"Отвязать\">" ?>
             </td>
         </tr>
+            <?php } ?>
+
+            <?php if (isset($this->data[0]['google_id'])) { ?>
         <tr>
             <td>
-                <?php if (isset($this->data[0]['google_id'])) { ?>
                     <label for="google">Google:</label>
-                <?php } ?>
             </td>
             <td>
                 <?php if (isset($this->data[0]['google_id'])) echo $this->data[0]['google_id'] ?>
@@ -358,11 +361,12 @@ $this->title = 'Редактирование профиля';
                        value=\"Отвязать\">" ?>
             </td>
         </tr>
+            <?php } ?>
+
+            <?php if (isset($this->data[0]['facebook_id'])) { ?>
         <tr>
             <td>
-                <?php if (isset($this->data[0]['facebook_id'])) { ?>
                     <label for="facebook">Facebook:</label>
-                <?php } ?>
             </td>
             <td>
                 <?php if (isset($this->data[0]['facebook_id'])) echo $this->data[0]['facebook_id'] ?>
@@ -378,11 +382,13 @@ $this->title = 'Редактирование профиля';
                        value=\"Отвязать\">" ?>
             </td>
         </tr>
+            <?php } ?>
+
+            <?php if (isset($this->data[0]['steam_id'])) { ?>
         <tr>
             <td>
-                <?php if (isset($this->data[0]['steam_id'])) { ?>
                     <label for="steam">Steam:</label>
-                <?php } ?>
+
             </td>
             <td>
                 <?php if (isset($this->data[0]['steam_id'])) echo $this->data[0]['steam_id'] ?>
@@ -398,6 +404,7 @@ $this->title = 'Редактирование профиля';
                        value=\"Отвязать\">" ?>
             </td>
         </tr>
+            <?php } ?>
         <?php } ?>
         <tr>
             <td>
@@ -539,16 +546,6 @@ $this->title = 'Редактирование профиля';
             <td>
                 <a class="real_buttons" style="line-height: 30px" href="/cabinet/profile/gadgets">Просмотр подключенных
                     устройств</a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input class="real_buttons" style="float: left; width: 300px" type=submit name=close_all_sessions
-                       value="Завершить все сеансы">
-            </td>
-            <td>
-                <input class="real_buttons" style="float: left; width: 300px" type=submit name=close_all_sessions
-                       value="Отключить устройство">
             </td>
         </tr>
     </table>

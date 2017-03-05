@@ -1,9 +1,3 @@
-<?php
-if (!empty($this->data)) {
-    $this->printData($this->data);
-}
-?>
-
 <style>
     .title {
         margin-bottom: 15px;

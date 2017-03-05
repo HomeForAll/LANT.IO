@@ -30,6 +30,8 @@ return array(
     'cabinet/balance' => 'main/cabinet/balance',
     'cabinet/payment' => 'main/cabinet/payment',
 
+    'cabinet/tickets_editor' => 'main/support/ticketsEditor',
+
     'support' => 'main/support/index',
     'support/tickets' => 'main/support/tickets',
     'support/dialog/id/([0-9]+)' => 'main/support/dialog/$1',
