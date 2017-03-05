@@ -57,12 +57,12 @@ $this->title = 'Авторизация';
 </form>
 
 <div id="soc_net">
-    <a href="oauth/vk/state/1"><img src="/templates/main/images/soc_net/vk_2.png" alt="VK"></a>
-    <a href="oauth/ok/state/1"><img src="/templates/main/images/soc_net/ok.png" alt="OK"></a>
-    <a href="oauth/mail/state/1"><img src="/templates/main/images/soc_net/mail_ru.png" alt="Mail"></a>
-    <a href="oauth/ya/state/1"><img src="/templates/main/images/soc_net/yandex_2.png" alt="YA"></a>
-    <a href="oauth/google/state/1"><img src="/templates/main/images/soc_net/google.png" alt="Google"></a>
-    <a href="oauth/fb/state/1"><img src="/templates/main/images/soc_net/facebook_2.png" alt="FaceBook"></a>
-    <a href="oauth/steam/state/1"><img src="/templates/main/images/soc_net/steam.png" alt="Steam"></a>
+    <a href="oauth/vk/state/1"><img src="/template/images/soc_net/vk_2.png" alt="VK"></a>
+    <a href="oauth/ok/state/1"><img src="/template/images/soc_net/ok.png" alt="OK"></a>
+    <a href="oauth/mail/state/1"><img src="/template/images/soc_net/mail_ru.png" alt="Mail"></a>
+    <a href="oauth/ya/state/1"><img src="/template/images/soc_net/yandex_2.png" alt="YA"></a>
+    <a href="oauth/google/state/1"><img src="/template/images/soc_net/google.png" alt="Google"></a>
+    <a href="oauth/fb/state/1"><img src="/template/images/soc_net/facebook_2.png" alt="FaceBook"></a>
+    <a href="oauth/steam/state/1"><img src="/template/images/soc_net/steam.png" alt="Steam"></a>
     <div style="clear: both"></div>
 </div>

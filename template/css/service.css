@@ -1,0 +1,135 @@
+
+/* 
+*
+*
+                Сервисы
+*
+*
+*/
+
+
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* таблица  */
+.service_header {
+    width: 500px;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    padding:5px;
+    text-align: center;
+    color: #656665;
+    border: 2px solid #cccccc;
+}
+.service_header::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+.service_name {
+    width: 300px;
+    min-height: 30px;
+    float: left;
+    padding: 10px;
+    border: 2px solid #cccccc;
+    vertical-align: middle;
+}
+
+.service_name:hover {
+    cursor: pointer;
+    border: 2px solid #000;
+    background: #656665;
+    color: white;
+}
+
+.service_parameters {
+    width: 90%;
+    min-height: 30px;
+    margin: 10px;
+    margin-top: 0;
+    padding: 10px;
+    background: #F5D7BF;
+
+}
+
+
+table {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    text-align: center;
+    border-collapse: separate;
+    border-spacing: 5px;
+    background: #ECE9E0;
+    color: #656665;
+    border: 16px solid #ECE9E0;
+    border-radius: 20px;
+}
+th {
+    font-size: 18px;
+    padding: 5px;
+
+}
+td {
+    background: #F5D7BF;
+    padding: 5px;
+    width: 100px;
+
+}
+
+table .button {
+    margin-bottom: 0;
+}
+
+
+/* Базовые стили формы */
+.services_editor_form form{
+    margin:0 auto;
+    max-width:95%;
+    box-sizing:border-box;
+    padding:40px;
+    border-radius:5px;
+    background:RGBA(255,255,255,1);
+    -webkit-box-shadow:  0px 0px 15px 0px rgba(0, 0, 0, .45);
+    box-shadow:  0px 0px 15px 0px rgba(0, 0, 0, .45);
+}
+
+
+
+ /*Стили полей ввода*/
+.services_editor_form fieldset {
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.services_editor_form input[type='text'] {
+    width: 200px;
+    font-size: 13px;
+    padding: 6px 0 4px 10px;
+    border: 1px solid #cecece;
+    background: #F6F6f6;
+    border-radius: 4px;
+    margin: 5px;
+}
+
+.services_editor_form textarea {
+    width: 500px;
+    display: block;
+    background: #f6f6f6;
+    border: 1px solid #cecece;
+    border-radius: 8px 0 0 0;
+    padding: 8px 0 8px 10px;
+}
+
+
+
+
+/* 
+*
+*
+                Сервисы  Конец !
+*
+*
+*/

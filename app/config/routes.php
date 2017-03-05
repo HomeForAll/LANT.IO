@@ -59,5 +59,8 @@ return array(
     'news/editor/(renthouse)' => 'main/news/news_editor/$1',
     'news/editor/(rentroom)' => 'main/news/news_editor/$1',
     'news/editor/(rentland)' => 'main/news/news_editor/$1',
-    'news' => 'main/news/news_list'
+    'news' => 'main/news/news_list',
+
+    'service' => 'main/service/serviceSub',
+    'service/admin' => 'main/service/serviceAdmin'
 );
