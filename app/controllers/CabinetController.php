@@ -97,6 +97,11 @@ class CabinetController extends Controller
 
     public function actionGenerator()
     {
+        if (!$this->access['key_generator']) {
+            $this->view->render('no_access');
+            return;
+        }
+
         $this->model->generate();
         $this->model->handleKeys();
         $this->view->render('generator');
@@ -133,6 +138,11 @@ class CabinetController extends Controller
 
     public function actionKeyeditor()
     {
+        if (!$this->access['key_editor']) {
+            $this->view->render('no_access');
+            return;
+        }
+
         $showdb = $this->model->showdb();
         $keyeditor = $this->model->keyeditor();
         $keylock = $this->model->keylock();
