@@ -1,38 +1,65 @@
 <?php
 $this->title = 'Личный кабинет';
+
+$access = $this->checkAccessLevel($_SESSION['status']);
 ?>
     <h1>Личный кабинет!</h1>
+
+    <br>
 <?php
-if ($this->checkAccessLevel($_SESSION['status'], 'profile')) {
+if ($access['key_generator']) {
     ?>
-    <br>
     <a class="button" href="cabinet/generator">Генератор ключей</a>
+    <?php
+}
+
+if ($access['key_editor']) {
+    ?>
     <a class="button" href="cabinet/keyeditor">Редактор ключей</a>
+    <?php
+}
+
+if ($access['admin_tickets']) {
+    ?>
     <a class="button" href="cabinet/tickets_editor">Редактор тикетов</a>
+<?php }
+?>
     <br>
+    <a class="button" href="cabinet/profile/edit">Редактировать профиль</a>
+<?php
+if ($access['forms_editor']) {
+    ?>
+    <a class="button" href="cabinet/forms">Редактор форм</a>
     <?php
 }
 ?>
-    <a class="button" href="cabinet/profile/edit">Редактировать профиль</a>
-    <a class="button" href="cabinet/forms">Редактор форм</a>
     <a class="button" href="cabinet/dialogs">Мои диалоги</a>
     <div style="position: absolute; top: 5px; right: 5px;">
         <a href="/support" class="button">Тех. поддержка</a>
     </div>
 
-     <a class="button" href="/news/myad">Мои объявления</a>
-     
-    <p>Ваш балланс:  <?php if(isset($this->data[0]['balance'])) { echo $this->data[0]['balance']; }else{echo '0';}?> коинов </p>
-  <a class="button" href="cabinet/payment">Платежи</a>
-  
- <a class="button" href="service">Услуги</a>
-  <a class="button" href="service/admin">Добавление\Редактирование услуг</a>
+    <a class="button" href="/news/myad">Мои объявления</a>
 
+    <p>Ваш балланс: <?php if (isset($this->data[0]['balance'])) {
+            echo $this->data[0]['balance'];
+        } else {
+            echo '0';
+        } ?> коинов </p>
+    <a class="button" href="cabinet/payment">Платежи</a>
+
+    <a class="button" href="service">Услуги</a>
 <?php
-function checkEmpty($array) {
+if ($access['admin_service']) {
+    ?>
+    <a class="button" href="service/admin">Добавление\Редактирование услуг</a>
+    <?php
+}
+
+function checkEmpty($array)
+{
     $i = 0;
-    foreach($array as $item){
-        if(empty($item)){
+    foreach ($array as $item) {
+        if (empty($item)) {
             $i++;
         }
     }

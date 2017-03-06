@@ -10,6 +10,11 @@ class SupportController extends Controller
 
     public function actionTicketsEditor()
     {
+        if (!$this->access['admin_tickets']) {
+            $this->view->render('no_access');
+            return;
+        }
+
         $this->view->render('tickets_editor', $this->model->get_tickets());
     }
 

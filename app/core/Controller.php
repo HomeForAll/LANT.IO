@@ -6,11 +6,16 @@ class Controller extends Access
 
     protected $model;
     protected $view;
+    protected $access;
     
     public function __construct($template, $model)
     {
         $this->view  = new View($template);
         $this->model = $this->getModel($model);
+
+        if (isset($_SESSION['userID']) ){
+            $this->access = $this->checkAccessLevel($_SESSION['status']);
+        }
     }
     
     private function getModel($model)
