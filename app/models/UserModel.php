@@ -8,7 +8,7 @@ class UserModel extends Model
 
     public function __construct()
     {
-        $this->db = new DataBase;
+        $this->db = new DataBase();
         $this->socialNets = new SocialNets('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
     }
 

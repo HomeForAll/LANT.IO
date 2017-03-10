@@ -309,14 +309,14 @@ foreach ($this->data['script'] as $key => $value) {
 <div id="wrapper">
     <div id="navigation">
         <ul>
-            <li><a href="/news">Объявления</a></li>
-            <li><a href="/search">Поиск</a></li>
+            <li><a href="../../index.php">Объявления</a></li>
+            <li><a href="../../index.php">Поиск</a></li>
             <?php if (isset($_SESSION['authorized'])) { ?>
-                <li><a href="/cabinet">Личный кабинет</a></li>
-                <li><a href="/logout">Выход</a></li>
+                <li><a href="../../index.php">Личный кабинет</a></li>
+                <li><a href="../../index.php">Выход</a></li>
             <?php } else { ?>
-                <li><a href="/registration">Регистрация</a></li>
-                <li><a href="/login">Вход</a></li>
+                <li><a href="../../index.php">Регистрация</a></li>
+                <li><a href="../../index.php">Вход</a></li>
             <?php } ?>
         </ul>
     </div>
