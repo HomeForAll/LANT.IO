@@ -96,7 +96,7 @@ class View extends Access implements ViewInterface
 
     private function renderLayout()
     {
-        include(ROOT_DIR . '/template/' . $this->layout . '.php');
+        include(ROOT_DIR . '/template/layouts/' . $this->layout . '.php');
     }
 
     private function printFormError($errorsArr)
