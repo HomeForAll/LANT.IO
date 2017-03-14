@@ -389,10 +389,10 @@ foreach ($this->data['script'] as $key => $value) {
             <li>Удобный поиск по карте
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia iusto architecto quia!</p>
             </li>
-            <li>Обширный список юридических услуг
+            <li>Обширный список<br> юридических услуг
                 <p>Lorem ipsum dolor sit amet, consectetur.</p>
             </li>
-            <li>Обширный список юридических услуг
+            <li>Обширный список критериев
                 <p>Для поиска и составления объявлений</p>
             </li>
             <li>Онлайн-чат 
@@ -412,6 +412,240 @@ foreach ($this->data['script'] as $key => $value) {
             </li>
             <li>Профессионалы недвижимости
                 <p>На сайте работают профессиональные участники рынка недвижимости</p>
+            </li>
+        </ul>
+    </div>
+    <div class="section-3">
+        <div class="scroll-decoration">
+         <h2>Только что опубликованные<span>live</span></h2>
+            <div class="list-of-all-apartments">
+            <!-- Основной блок всех апартаментов -->
+                <div class="all-apartments">
+                    <!-- Информация одного апартамента -->
+                    <div class="block-apartments">
+                        <img src="../../template/images/apertaments/1.png" alt="apartments">
+                        <span>2-комн. кв. 134м<sup>2</sup></span>
+                            <div class="price-of-apartments-and-show-apartments">
+                                <div class="price-of-apartments">
+                                    <span>25 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</    sub></span>
+                                    <div class="location">
+                                        <p><img src="../../template/images/m.png" alt="img">Рижская</p>
+                                        <span><img src="../../template/images/people.png" alt="img">2   мин</span>
+                                    </div>
+                                </div>
+                                <div class="show-apartments">
+                                    <a href="#"></a><img src="../../template/images/show.png" alt=" <   show></show>">
+                                </div>
+                            </div>
+                        <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
+                    </div>
+                    <!-- Закончился первый блок -->
+                    <div class="block-apartments">
+                        <img src="../../template/images/apertaments/2.png" alt="apartments">
+                        <span>2-комн. кв. 134м<sup>2</sup></span>
+                            <div class="price-of-apartments-and-show-apartments">
+                                <div class="price-of-apartments">
+                                    <span>34 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</    sub></span>
+                                    <div class="location">
+                                        <p><img src="../../template/images/m.png" alt="img">Свиблово</p>
+                                        <span><img src="../../template/images/people.png" alt="img">2   мин</span>
+                                    </div>
+                                </div>
+                                <div class="show-apartments">
+                                    <a href="#"></a><img src="../../template/images/show.png" alt=" <show>  </show>">
+                                </div>
+                            </div>
+                        <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
+                    </div>
+                    <div class="block-apartments">
+                        <img src="../../template/images/apertaments/3.png" alt="apartments">
+                        <span>2-комн. кв. 134м<sup>2</sup></span>
+                            <div class="price-of-apartments-and-show-apartments">
+                                <div class="price-of-apartments">
+                                    <span>34 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</    sub></span>
+                                    <div class="location">
+                                        <p><img src="../../template/images/m.png" alt="img">Медведково</    p>
+                                        <span><img src="../../template/images/people.png" alt="img">2   мин</span>
+                                    </div>
+                                </div>
+                                <div class="show-apartments">
+                                    <a href="#"></a><img src="../../template/images/show.png" alt=" <show>  </show>">
+                                </div>
+                            </div>
+                        <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
+                    </div>
+                    <div class="block-apartments">
+                        <img src="../../template/images/apertaments/4.png" alt="apartments">
+                        <span>2-комн. кв. 134м<sup>2</sup></span>
+                            <div class="price-of-apartments-and-show-apartments">
+                                <div class="price-of-apartments">
+                                    <span>34 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</    sub></span>
+                                    <div class="location">
+                                        <p><img src="../../template/images/m.png" alt="img">Медведково</    p>
+                                        <span><img src="../../template/images/people.png" alt="img">2   мин</span>
+                                    </div>
+                                </div>
+                                <div class="show-apartments">
+                                    <a href="#"></a><img src="../../template/images/show.png" alt=" <show>  </show>">
+                                </div>
+                            </div>
+                        <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
+                    </div>
+                    <div class="block-apartments">
+                        <img src="../../template/images/apertaments/5.png" alt="apartments">
+                        <span>2-комн. кв. 134м<sup>2</sup></span>
+                            <div class="price-of-apartments-and-show-apartments">
+                                <div class="price-of-apartments">
+                                    <span>25 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</    sub></span>
+                                    <div class="location">
+                                        <p><img src="../../template/images/m.png" alt="img">Рижская</p>
+                                        <span><img src="../../template/images/people.png" alt="img">2   мин</span>
+                                    </div>
+                                </div>
+                                <div class="show-apartments">
+                                    <a href="#"></a><img src="../../template/images/show.png" alt=" <show>  </show>">
+                                </div>
+                            </div>
+                        <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
+                    </div>
+                    <div class="block-apartments">
+                        <img src="../../template/images/apertaments/6.png" alt="apartments">
+                        <span>2-комн. кв. 134м<sup>2</sup></span>
+                            <div class="price-of-apartments-and-show-apartments">
+                                <div class="price-of-apartments">
+                                    <span>34 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</    sub></span>
+                                    <div class="location">
+                                        <p><img src="../../template/images/m.png" alt="img">Свиблово</p>
+                                        <span><img src="../../template/images/people.png" alt="img">2   мин</span>
+                                    </div>
+                                </div>
+                                <div class="show-apartments">
+                                    <a href="#"></a><img src="../../template/images/show.png" alt=" <show>  </show>">
+                                </div>
+                            </div>
+                        <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
+                    </div>
+                    <div class="block-apartments">
+                        <img src="../../template/images/apertaments/7.png" alt="apartments">
+                        <span>2-комн. кв. 134м<sup>2</sup></span>
+                            <div class="price-of-apartments-and-show-apartments">
+                                <div class="price-of-apartments">
+                                    <span>34 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</    sub></span>
+                                    <div class="location">
+                                        <p><img src="../../template/images/m.png" alt="img">Медведково</    p>
+                                        <span><img src="../../template/images/people.png" alt="img">2   мин</span>
+                                    </div>
+                                </div>
+                                <div class="show-apartments">
+                                    <a href="#"></a><img src="../../template/images/show.png" alt=" <show>  </show>">
+                                </div>
+                            </div>
+                        <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
+                    </div>
+                    <div class="block-apartments">
+                        <img src="../../template/images/apertaments/8.png" alt="apartments">
+                        <span>2-комн. кв. 134м<sup>2</sup></span>
+                            <div class="price-of-apartments-and-show-apartments">
+                                <div class="price-of-apartments">
+                                    <span>34 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</    sub></span>
+                                    <div class="location">
+                                        <p><img src="../../template/images/m.png" alt="img">Медведково</    p>
+                                        <span><img src="../../template/images/people.png" alt="img">2   мин</span>
+                                    </div>
+                                </div>
+                                <div class="show-apartments">
+                                    <a href="#"></a><img src="../../template/images/show.png" alt=" <show>  </show>">
+                                </div>
+                            </div>
+                        <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
+                    </div>
+                    <div class="block-apartments">
+                        <img src="../../template/images/apertaments/1.png" alt="apartments">
+                        <span>2-комн. кв. 134м<sup>2</sup></span>
+                            <div class="price-of-apartments-and-show-apartments">
+                                <div class="price-of-apartments">
+                                    <span>25 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</    sub></span>
+                                    <div class="location">
+                                        <p><img src="../../template/images/m.png" alt="img">Рижская</p>
+                                        <span><img src="../../template/images/people.png" alt="img">2   мин</span>
+                                    </div>
+                                </div>
+                                <div class="show-apartments">
+                                    <a href="#"></a><img src="../../template/images/show.png" alt=" <show>  </show>">
+                                </div>
+                            </div>
+                        <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
+                    </div>
+                    <div class="block-apartments">
+                        <img src="../../template/images/apertaments/2.png" alt="apartments">
+                        <span>2-комн. кв. 134м<sup>2</sup></span>
+                            <div class="price-of-apartments-and-show-apartments">
+                                <div class="price-of-apartments">
+                                    <span>34 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</    sub></span>
+                                    <div class="location">
+                                        <p><img src="../../template/images/m.png" alt="img">Свиблово</p>
+                                        <span><img src="../../template/images/people.png" alt="img">2   мин</span>
+                                    </div>
+                                </div>
+                                <div class="show-apartments">
+                                    <a href="#"></a><img src="../../template/images/show.png" alt=" <show>  </show>">
+                                </div>
+                            </div>
+                        <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
+                    </div>
+                    <div class="block-apartments">
+                        <img src="../../template/images/apertaments/3.png" alt="apartments">
+                        <span>2-комн. кв. 134м<sup>2</sup></span>
+                            <div class="price-of-apartments-and-show-apartments">
+                                <div class="price-of-apartments">
+                                    <span>34 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</    sub></span>
+                                    <div class="location">
+                                        <p><img src="../../template/images/m.png" alt="img">Медведково</    p>
+                                        <span><img src="../../template/images/people.png" alt="img">2   мин</span>
+                                    </div>
+                                </div>
+                                <div class="show-apartments">
+                                    <a href="#"></a><img src="../../template/images/show.png" alt=" <show>  </show>">
+                                </div>
+                            </div>
+                        <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
+                    </div>
+                    <div class="block-apartments">
+                        <img src="../../template/images/apertaments/4.png" alt="apartments">
+                        <span>2-комн. кв. 134м<sup>2</sup></span>
+                            <div class="price-of-apartments-and-show-apartments">
+                                <div class="price-of-apartments">
+                                    <span>34 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</    sub></span>
+                                    <div class="location">
+                                        <p><img src="../../template/images/m.png" alt="img">Медведково</    p>
+                                        <span><img src="../../template/images/people.png" alt="img">2   мин</span>
+                                    </div>
+                                </div>
+                                <div class="show-apartments">
+                                    <a href="#"></a><img src="../../template/images/show.png" alt=" <show>  </show>">
+                                </div>
+                            </div>
+                        <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
+                    </div>
+                </div>
+                <!-- Закончились все блоки -->
+            </div>
+        </div>
+    </div>
+    <div class="section-4">
+        <p>Сегодня вы и еще<span>143 645</span>человек сейчас с нами, а так же:</p>
+        <ul>
+            <li><img src="../../template/images/sec-4-1.png" alt="icon">645 644
+                <p>Людей зашло сегодня</p>
+            </li>
+            <li><img src="../../template/images/sec-4-2.png" alt="icon">23 635 773
+                <p>объявлений выложено</p>
+            </li>
+            <li><img src="../../template/images/sec-4-3.png" alt="icon">11 345
+                <p>объявлений в вашем городе</p>
+            </li>
+            <li><img src="../../template/images/sec-4-4.png" alt="icon">342 244
+                <p>активных сделак сейчас</p>
             </li>
         </ul>
     </div>
