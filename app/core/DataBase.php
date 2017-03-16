@@ -85,7 +85,7 @@ class DataBase extends PDO
                 if ($key == 0) {
                     $query .= ' WHERE ' . $where['column'] . ' ' . $where['operator'] . ' \'' . $where['value']. '\'';
                 } else {
-                    $query .= ' AND ' . $where['column'] . ' ' . $where['operator'] . ' ' . $where['value'];
+                    $query .= ' AND ' . $where['column'] . ' ' . $where['operator'] . ' \'' . $where['value']. '\'';
                 }
             }
         }

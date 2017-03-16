@@ -1,5 +1,4 @@
 <?php
-
 /***
  * @var object $this экземпляр класса /app/core/View
  */

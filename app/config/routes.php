@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    // 'URI' => 'template/controller/action'
+    // 'URI' => 'layout/controller/action'
     '' => 'main/site/index',
     'search' => 'main/search/index',
 
@@ -62,5 +62,7 @@ return array(
     'news' => 'main/news/news_list',
 
     'service' => 'main/service/serviceSub',
-    'service/admin' => 'main/service/serviceAdmin'
+    'service/admin' => 'main/service/serviceAdmin',
+
+    'forms_gen' => 'main/search/GenSearchForm',
 );

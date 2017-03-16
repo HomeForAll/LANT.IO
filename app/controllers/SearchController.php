@@ -29,4 +29,22 @@ class SearchController extends Controller
 
         $this->view->render('search', $data);
     }
+
+    public function actionGenSearchForm()
+    {
+        $forms = array();
+
+        if (isset($_POST['submit'])) {
+            $forms = $this->model->getFormData($_POST['space_type'], $_POST['operation_type'], $_POST['object_type']);
+        }
+
+        $this->view->render('gen_search_form', array(
+            'forms' => $forms,
+            'types' => $this->model->getFormTypes(),
+            'categories' => $this->model->getFormCategories(),
+            'subcategories' => $this->model->getFormSubcategories(),
+            'elements' => $this->model->getFormElements(),
+            'lists' => $this->model->getFormSelectOptions(),
+        ));
+    }
 }

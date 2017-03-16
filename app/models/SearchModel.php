@@ -641,4 +641,56 @@ class SearchModel extends Model
     //
     //        return implode(',', $IDs);
     //    }
+
+    public function getFormTypes()
+    {
+        $space = $this->db->query('SELECT * FROM form_space_types ORDER BY id');
+        $operation = $this->db->query('SELECT * FROM form_operation_types ORDER BY id');
+        $object = $this->db->query('SELECT * FROM form_object_types ORDER BY id');
+
+        $space_types = $space->fetchAll();
+        $operation_types = $operation->fetchAll();
+        $object_types = $object->fetchAll();
+
+        return array(
+            'space_types' => $space_types,
+            'operation_types' => $operation_types,
+            'object_types' => $object_types,
+        );
+    }
+
+    public function getFormData($space_type, $operation_type = null, $object_type = null)
+    {
+        $query = $this->db->select('*')->from('forms')->where('space_type', '=', $space_type);
+
+        if ($object_type) {
+            $query->where('object_type', '=', $object_type);
+        }
+
+        if ($operation_type) {
+            $query->where('operation', '=', $operation_type);
+        }
+
+        return $query->execute();
+    }
+
+    public function getFormCategories() {
+        $query = $this->db->query('SELECT * FROM form_categories ORDER BY id');
+        return $query->fetchAll();
+    }
+
+    public function getFormSubcategories() {
+        $query = $this->db->query('SELECT * FROM form_subcategories ORDER BY id');
+        return $query->fetchAll();
+    }
+
+    public function getFormElements() {
+        $query = $this->db->query('SELECT * FROM form_elements ORDER BY id');
+        return $query->fetchAll();
+    }
+
+    public function getFormSelectOptions() {
+        $query = $this->db->query('SELECT * FROM form_select_options ORDER BY id');
+        return $query->fetchAll();
+    }
 }

@@ -1,4 +1,5 @@
 <?php
+xdebug_start_trace('C:\OpenServer\domains\localhost\trace.log', XDEBUG_TRACE_APPEND);
 session_start();
 
 ini_set('display_errors', 0);

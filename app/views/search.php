@@ -14,6 +14,10 @@ if (!empty($this->data['objects'])) {
 <script>
     // Forms data
     var formData = <?php echo $this->data['formData']; ?>;
+
+//    localStorage.setItem("username", "dfsd");
+//    console.log(localStorage.getItem("username"));
+//    localStorage.removeItem("username");
 </script>
 
 <style>
