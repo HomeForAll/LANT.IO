@@ -1,6 +1,5 @@
 <?php
-$this->title = 'Редактор новостей';
-//var_dump($this->data);
+$this->title = 'Редактор объявлений';
 
 global $data_for_news;
 $data_for_news = $this->data;
@@ -103,24 +102,10 @@ if (!empty($this->data['message'])) {
 
 <form  id="editor_form" class="main_editor_form" enctype="multipart/form-data" action="" method="post">
 <input type="hidden" name="category" value="<?php echo $this->data['category']; ?>">
-    <fieldset>
-        <legend>Выбор категории для создания нового объявления</legend>
-        <p> Продажа :
-            <a href="/news/editor/saleapart">Квартира</a>
-            <a href="/news/editor/salehouse">Дом</a>
-            <a href="/news/editor/saleroom">Комната</a>
-            <a href="/news/editor/saleland">Участок</a>
-            <!--<a href="/news/editor/salepart">Доля</a>-->
-        </p>
 
-        <p> Сдать в аренду :
-            <a href="/news/editor/rentapart">Квартира</a>
-            <a href="/news/editor/renthouse">Дом</a>
-            <a href="/news/editor/rentroom">Комната</a>
-            <a href="/news/editor/rentland">Участок</a>
-        </p>
 
-    </fieldset>
+
+    
 
 
     <fieldset>
@@ -134,11 +119,59 @@ if (!empty($this->data['message'])) {
     </fieldset>
 
 
+<!--    <fieldset>
+        <legend>Проба карты</legend>
+        <div id="map" style="position: relative; width: 500px; height: 500px;"></div>
+    </fieldset>-->
+
+<!--<fieldset>
+                Расположение:
+            <br>
+            <input type="text" id="rentApartSuggest" placeholder="Адрес ..." style="padding: 10px; width: 477px; position: relative; left: 50%; margin: 0 0 0 -250px;" oninput="getGeoCoderData(this.value, 'rentApartMap')" onkeypress="pressEnter();">
+            <div id="rentApartMap" style="position: relative; left: 50%; margin: 20px 0 0 -250px; width: 500px; height: 500px"></div>
+            
+
+            <div class="indent">
+                <label for="rentApartSpanCountry">Страна:</label> <span id="rentApartSpanCountry"></span>
+                <br>
+                <label for="rentApartSpanArea">Область:</label> <span id="rentApartSpanArea"></span>
+                <br>
+                <label for="rentApartSpanCity">Город:</label> <span id="rentApartSpanCity"></span>
+                <br>
+                <label for="rentApartSpanRegion">Район:</label> <span id="rentApartSpanRegion"></span>
+                <br>
+                <label for="rentApartSpanStreet">Улица:</label> <span id="rentApartSpanStreet"></span>
+                <br>
+
+                <input id="rentApartCountry" type="hidden" name="country" value="">
+                <input id="rentApartArea" type="hidden" name="area" value="">
+                <input id="rentApartCity" type="hidden" name="city" value="">
+                <input id="rentApartRegion" type="hidden" name="region" value="">
+                <input id="rentApartStreet" type="hidden" name="street" value="">
+
+                Станция метро:
+                <br>
+                <div class="indent">
+                    Удаленность от метро:
+                    <input type="text" name="metroMin" placeholder="Мин.">
+                    <input type="text" name="metroMax" placeholder="Макс.">
+                    <br>
+                </div>
+            </div>
+
+
+</fieldset>-->
+
+
+
+
+
+
     <!-- Вставляемые блоки -->
     <?php
     if (!empty($this->data['category'])) {
         if ($this->data['category'] != 'base') {
-            include_once 'app/views/news_' . $this->data['category'] . '.php';
+            include_once 'app/views/news_'.$this->data['category'].'.php';
         } else {
             echo '<input type="hidden" name="category" value="1">';
         }
@@ -152,17 +185,17 @@ if (!empty($this->data['message'])) {
     <!-- Долнительная информация -->
     <fieldset>
         <legend>Долнительная информация</legend>
+<!--        <section>-->
+<!--            <label>Короткое содержание: -->
+<!--                <textarea name="short_content" type="text">--><?php
+//                    if (!empty($this->data['short_content'])) {
+//                        echo $this->data['short_content'];
+//                    }
+//                    ?><!--</textarea>-->
+<!--            </label>-->
+<!--        </section>-->
         <section>
-            <label>Короткое содержание: 
-                <textarea name="short_content" type="text"><?php
-                    if (!empty($this->data['short_content'])) {
-                        echo $this->data['short_content'];
-                    }
-                    ?></textarea>
-            </label>
-        </section>
-        <section>
-            <label >Основное содержание: 
+            <label >Cодержание:
                 <textarea id="news_content" name="content" type="text"><?php
                     if (!empty($this->data['content'])) {
                         echo $this->data['content'];
@@ -244,58 +277,8 @@ if (!empty($this->data['message'])) {
 
 
 
-<!-- Список новостей для редактирования, изменения статуса или удаления -->
-<form  id="status_frm" action="" method="post">
-<?php
-if (empty($this->data['id_news'])) {
-    ?>
-
-        <table border="1", cellspacing="0">
-
-            <tr>
-
-                <td> Дата </td>
-                <td> Заголовок <br>(нажмите для редактирования новости) </td>
-                <td> Автор </td>
-                <td> Статус</td>
-            </tr>
-
-    <?php for ($i = 0; (!empty($this->data[$i])); $i++) { ?>   
-                <tr>
-
-                    <td><i> <?php echo $this->data[$i]['date']; ?></i> </td>
-                    <td><a href="/news/editor/<?php echo $this->data[$i]['id_news']; ?>"> <?php echo $this->data[$i]['title']; ?> </a>
-                        <p><b>Категория:</b> <?php echo $this->data[$i]['category']; ?> ; <b>Метки:</b>  <?php echo $this->data[$i]['tags']; ?> </p>
-                    </td>
-                    <td> <?php echo $this->data[$i]['author_name']; ?> </td>
-                    <td>  
-                        <input type="radio" name="status_<?php echo $this->data[$i]['id_news']; ?>" value="1" <?php
-                               if ($this->data[$i]['status'] == 1) {
-                                   echo "checked";
-                               }
-                               ?> > Видна 
-                        <input type="radio" name="status_<?php echo $this->data[$i]['id_news']; ?>" value="0" <?php
-                               if ($this->data[$i]['status'] == 0) {
-                                   echo "checked";
-                               }
-                               ?> > Скрыта 
-                        <input type="radio" name="status_<?php echo $this->data[$i]['id_news']; ?>" value="3"> Удаление 
-                    </td>
 
 
-                </tr>
-
-               <?php } ?>  
-        </table>
-        <input type="hidden" id="stat_arr" name="stat_arr" value= "<?php
-               if (!empty($this->data['stat_arr'])) {
-                   echo $this->data['stat_arr'];
-               }
-               ?>" />
-        <input type="submit" name="submit_status" value="Изменить статус"> <a href="/news/editor">Отмена</a>
-<?php } ?>  
-</form>
-
-<script type="text/javascript" src="/templates/main/js/jquery.validate.js"></script>
-<script type="text/javascript" src="/templates/main/js/news_javascript.js"></script> 
+<script type="text/javascript" src="/template/js/jquery.validate.js"></script>
+<script type="text/javascript" src="/template/js/news_javascript.js"></script>
 

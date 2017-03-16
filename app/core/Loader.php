@@ -74,12 +74,15 @@ class Loader
     
     private static function putPathsToFile(Array $array)
     {
-        file_put_contents(ROOT_DIR . '/app/config/paths.php', serialize($array));
+        $file = fopen(ROOT_DIR . '/app/config/paths.conf', 'w+');
+        chmod(ROOT_DIR . '/app/config/paths.conf', 0777);
+        fwrite($file, serialize($array));
+        fclose ($file);
     }
     
     public static function getPaths()
     {
-        static::$paths = unserialize(file_get_contents(ROOT_DIR . '/app/config/paths.php'));
+        static::$paths = unserialize(file_get_contents(ROOT_DIR . '/app/config/paths.conf'));
     }
 }
 

@@ -460,7 +460,9 @@ class SphinxQL
                     $pre .= $this->escapeMatch($match['value']);
                 }
 
-                $matched[] = '('.$pre.')';
+                if ($pre !== '') {
+                    $matched[] = '('.$pre.')';
+                }
             }
 
             $matched = implode(' ', $matched);
@@ -685,7 +687,7 @@ class SphinxQL
 
         if (!empty($this->values)) {
             $query .= 'VALUES ';
-            $query_sub = '';
+            $query_sub = array();
 
             foreach ($this->values as $value) {
                 $query_sub[] = '('.implode(', ', $this->getConnection()->quoteArr($value)).')';

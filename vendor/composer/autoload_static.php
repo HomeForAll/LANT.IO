@@ -20,7 +20,18 @@ class ComposerStaticInitcfb7b422eed57f5af675a7889d3e5600
         ),
     );
 
+    public static $prefixesPsr0 = array (
+        'D' => 
+        array (
+            'Detection' => 
+            array (
+                0 => __DIR__ . '/..' . '/mobiledetect/mobiledetectlib/namespaced',
+            ),
+        ),
+    );
+
     public static $classMap = array (
+        'Mobile_Detect' => __DIR__ . '/..' . '/mobiledetect/mobiledetectlib/Mobile_Detect.php',
         'SphinxClient' => __DIR__ . '/..' . '/neutron/sphinxsearch-api/sphinxapi.php',
     );
 
@@ -29,6 +40,7 @@ class ComposerStaticInitcfb7b422eed57f5af675a7889d3e5600
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitcfb7b422eed57f5af675a7889d3e5600::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitcfb7b422eed57f5af675a7889d3e5600::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitcfb7b422eed57f5af675a7889d3e5600::$prefixesPsr0;
             $loader->classMap = ComposerStaticInitcfb7b422eed57f5af675a7889d3e5600::$classMap;
 
         }, null, ClassLoader::class);

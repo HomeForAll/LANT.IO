@@ -16,16 +16,21 @@ class Router
      */
     public function run()
     {
+                        //Обработчик ошибок
+        if (ERROR_HANDLER_STATUS != '0') {
+            (new ErrorHandler())->register();
+        }
         $uri = $this->getURI();
         
         foreach ($this->routes as $uriPattern => $path) {
             if (preg_match("~^{$uriPattern}$~", $uri)) {
                 
                 $options = $this->getOptions($uriPattern, $uri, $path);
+                $action = $options['action'];
                 
                 if (file_exists(ROOT_DIR . '/app/controllers/' . $options['controller'] . '.php')) {
                     $controllerObject = new $options['controller']($options['template'], $options['model']);
-                    $controllerObject->$options['action']($options['params']);
+                    $controllerObject->$action($options['params']);
                 }
             }
         }

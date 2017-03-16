@@ -1,1 +1,0 @@
-<link rel="stylesheet" href="/templates/main/css/style.css">

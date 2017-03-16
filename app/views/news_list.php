@@ -1,12 +1,10 @@
 <?php
-$this->title = 'Новости';
+$this->title = 'Объявления';
 ?>
-<h2>Новости</h2>
-<a href="/news/editor">Редактор новостей</a>
-
+<h2>Объявления</h2>
 <!-- Выбор количества выводимых новостей -->
 <form action="" method="post">
-    <label for="number_of_news">Количество выводимых новостей:</label>
+    <label for="number_of_news">Количество выводимых объявлений:</label>
     <select name="number_of_news">
             <option  value="2">2</option>
             <option <?php
@@ -26,7 +24,7 @@ $this->title = 'Новости';
     </select>
     <br>
     <label class="news_table_category">
-        <h3>Категория новостей: </h3>
+        <h3>Категория объявлений: </h3>
         <span>
             Общие новости<input type="checkbox" name="news_table_category[1]" value="1" <?php if (!empty($this->data['news_table_category[1]'])) { echo 'checked';} ?> >
             Продажа комнат <input type="checkbox" name="news_table_category[11]" value="11" <?php if (!empty($this->data['news_table_category[11]'])) { echo 'checked';} ?> >
@@ -59,29 +57,94 @@ $this->title = 'Новости';
 ?>
 </DIV>
 
+<!-- Последние новости -->
+<div class="last_news clearfix">
+    <h3>Последние новости</h3>
 
 <!-- Вывод листинга новостей -->
 <?php 
 foreach ($this->data['news'] as $news) {
  ?>
 <div class="news">
-    <h3><a href="<?php echo "/news/".$news['id_news'].""; ?>"><?php echo $news['title']; ?></a></h3>
-    <?php if (!empty($news['preview_img'][0])) { ?> 
-    <a href="<?php echo "/news/".$news['id_news'].""; ?>"><img src="/uploads/images/s_<?php echo $news['preview_img'][0]; ?>"></a>
-    <?php } ?>
-    <?php echo $news['short_content'] . '<br>' . $news['content']; ?>
+    <a href="<?php echo "/news/".$news['id_news'].""; ?>"
+       style="background-image: url(<?php
+       if (!empty($news['preview_img'][0])) { ?>
+        /uploads/images/s_<?php echo $news['preview_img'][0]; ?>
+        <?php } ?>);">
+        <span>
+        <h3><?php echo $news['title']; ?></h3>
+        </span>
+    </a>
+     
+    
+    <div class="news_content">
+    <?php 
+    // Поиск конца ('_') короткого контента и обрезка
+    $short_len = 60; // длина предпросмотра (short_content) в символах
+
+    if (!empty($news['content'])) {
+    if (strlen($news['content'])>$short_len) {
+        if($short_content_position = strpos($news['content'], ' ', $short_len)){
+        $short_content = substr($news['content'], 0, $short_content_position);
+        } else{
+          $short_content = $news['content'];
+        }
+    } else {
+        $short_content = $news['content'];
+    }
+    echo $short_content.'...';
+
+    } ?>
+    </div>
     <div class="news_date"><?php echo " Дата :".$news['date']; ?></div>
+    <?php if (!empty($news['author_name'])) { ?>
+    <div class="news_author_name"><?php echo " Автор :".$news['author_name']; ?></div>
+    <?php } ?>
     <?php if (!empty($news['category'])) { ?>
-    <div class="news_category"><?php echo 'Категория : <a href="/news/?category='.$news['category'].'"> '.$news['category'].' </a>'; ?></div>
+    <div class="news_category"><?php echo 'Категория : <a href="/news/?category='.$news['category'].'"> '.$news['category_rus'].' </a>'; ?></div>
     <?php } ?>
     <?php if (!empty($news['tags'])) { ?>
     <div class="news_tags"><?php echo " Метки :". $news['tags']; ?></div>
     <?php } ?>
 </div>  
     <?php
- 
     }
+    ?>
+</div>
+<!-- Последние новости - конец -->
 
+<!-- Просмотренные новости -->
+<div class="last_viewed_news clearfix">
+<?php
+foreach ($this->data['last_viewed_news'] as $value) {
+?> <span>
+    <a href="/news/<?php if (!empty($value['id_news'])){ echo $value['id_news']; } ?>">
+
+        <?php
+//    echo"<br> title =  ".$value['title'];
+//    echo"<br> id_news =  ".$value['id_news'];
+//    echo"<br> preview_img =  ".$value['preview_img']."<br>";
+
+
+    ?>
+    
+<?php if (!empty($value['preview_img'])){ ?><img src="/uploads/images/s_<?php echo $value['preview_img']; ?>">
+
+<?php }
+    if (!empty($value['title'])){ echo $value['title']; }
+
+ ?>
+
+    </a>
+</span>
+
+<?php
+}
+?>
+</div>
+<!-- Просмотренные новости - конец-->
+
+<?php
 unset($value);
 
 

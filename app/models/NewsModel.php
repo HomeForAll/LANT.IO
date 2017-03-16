@@ -26,15 +26,16 @@ class NewsModel extends Model
     {
 
 // Составление запроса
-        $sql = "SELECT COUNT(*) FROM news_base";
+        $sql = "SELECT COUNT(*) FROM news_base WHERE status = 1";
 // Условия поиска по категориям
         if (!empty($category_list)) {
-            $sql = $sql.' WHERE ';
+            $sql = $sql." AND (";
             foreach ($category_list as $value) {
                 $sql = $sql.' category = '.$value.' OR ';
             }
             // удаление последнего OR
             $sql = substr($sql, 0, -4);
+            $sql = $sql.' )';
         }
 
 
@@ -211,7 +212,6 @@ class NewsModel extends Model
     // Возвращает: выборку всех данных новостей в виде массива
     public function getNewsList($page = 0)
     {
-
         $data = []; //выходные данные
         // Определение номера страницы выводимых новостей
         if (empty($page)) {
@@ -252,14 +252,15 @@ class NewsModel extends Model
         $from_page = $data['firstnews'] - 1;
 
         $sql = "SELECT id_news, date::date, title, short_content, content, author_name, preview_img, status, category, tags "
-            ."FROM news_base";
+            ."FROM news_base WHERE status = 1 ";
         if (!empty($data['news_table_category'])){
-            $sql = $sql.' WHERE';
+            $sql = $sql." AND (";
             foreach ($data['news_table_category'] as $value) {
             $sql = $sql.' category = '.$value.' OR ';
             }
              // удаление последнего OR
             $sql = substr($sql, 0, -4);
+            $sql = $sql.')';
         }
 
         $sql = $sql." ORDER BY date DESC"
@@ -273,6 +274,11 @@ class NewsModel extends Model
         $data['news'] = $stmt->fetchAll();
         //Строку файлов картинок преобразуем в массив $data['news'][number]['preview_img'][]
         $data['news'] = $this->explodePreviewImg($data['news']);
+        // Получение имен категорий
+        foreach ($data['news'] as $key => $value) {
+            $data['news'][$key]['category_rus'] = $this->translateIndex($data['news'][$key]['category'], 'category');
+        }
+
         return $data;
     }
 
@@ -281,14 +287,23 @@ class NewsModel extends Model
     // общее кол-во новостей, кол-во нов. на странице, категории, сортировка
     public function setSessionForNewsList()
     {
-                    // По умолчанию
+            // По умолчанию
             $category_list = [];
             $sort           = 'data';
             $sort_dir       = 'DESC';
             $number_of_news = 10;
 
+        // Если переход по ссылке - категория => $_GET
+            if(!empty($_GET['category'])){
+                $i = (int)$_GET['category'];
+               if(preg_match('/[1,11,12,13,14,21,22,23,24]/',$i)){
+                   $category_list[$i] = $i;
+               }
+            }
+ 
+
+        // Если нажата кнопка выбора режима просмотра
         if (!empty($_POST['watch_news_list'])) {
-            // Если нажата кнопка выбора режима просмотра
             $number_of_news = (int) $_POST['number_of_news'];
 
             if(!empty($_POST['news_table_category']) && is_array($_POST['news_table_category'])){
@@ -301,6 +316,8 @@ class NewsModel extends Model
         // общее кол-во новостей
         $namber_of_all_rows = $this->getNamber_of_all_rows($category_list);
 
+
+
         // Запись в SESSION
         $_SESSION['news_list']['category']           = $category_list;
         $_SESSION['news_list']['sort']               = $sort;
@@ -309,30 +326,46 @@ class NewsModel extends Model
         $_SESSION['news_list']['namber_of_all_rows'] = $namber_of_all_rows;
     }
 
+
     public function explodePreviewImg($data_news)
     {
 
         foreach ($data_news as $k => $news_array) {
             $data_news[$k]['preview_img'] = explode('|',
-                $news_array['preview_img']);
+            $news_array['preview_img']);
         }
         return $data_news;
     }
 
 //Получает список новостей из заданной табицы($table) или из всех таблиц новостей(по умолчанию)
 // отсортированный по дате    
-    public function getNewsListForEditor()
+    public function getMyNewsList($author_name = NULL)
     {
-        $sql = 'SELECT id_news, date::date, title, author_name, status, category, tags '
-            .'FROM news_base ORDER BY date DESC';
+        if (!empty($author_name)){
+        $sql = 'SELECT id_news, date::date, title, content, author_name, preview_img, status, category, tags '
+            .'FROM news_base';
+        if ($author_name !== 'admin'){
+           $sql = $sql.' WHERE author_name = :author_name';
+        }
+
+        $sql = $sql.' ORDER BY date DESC';
 
         $stmt   = $this->db->prepare($sql);
+        if ($author_name !== 'admin'){
+            $stmt->bindParam(':author_name', $author_name);
+        }
         $stmt->execute();
-        $result = $stmt->fetchAll();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         // преобразуем категории в слова
         foreach ($result as &$news) {
         $news['category'] = $this->translateIndex($news['category'], 'category');
         }
+        } else {
+            return FALSE;
+        }
+        //преобразование картинок в массив
+        $result = $this->explodePreviewImg($result);
+
         return $result;
     }
 
@@ -352,6 +385,14 @@ class NewsModel extends Model
 
     public function getFormData($preview_img)
     {
+        $new_form_data =[];
+
+        //Определение пользователя
+        if (!empty($_SESSION['userID'])) {
+        $author_name = (int)$_SESSION['userID'];
+        } else {
+            return false;
+        }
 
         //Удаление пробелов и переводов строк в начале и в конце строк 
         function trim_value(&$value)
@@ -362,7 +403,6 @@ class NewsModel extends Model
 
         static $args = array(
             'title' => FILTER_SANITIZE_STRING,
-            'author_name' => FILTER_SANITIZE_STRING,
             'short_content' => FILTER_SANITIZE_STRING,
             'content' => FILTER_SANITIZE_STRING,
             'status' => array(
@@ -481,6 +521,8 @@ class NewsModel extends Model
         );
 
         $new_form_data = filter_input_array(INPUT_POST, $args);
+        $new_form_data['author_name'] = $author_name;
+
 
         //Переписывание параметров в 'Другое' если есть _other
         foreach ($new_form_data as $key => $value) {
@@ -587,11 +629,17 @@ class NewsModel extends Model
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
         $data                = $stmt->fetch(PDO::FETCH_ASSOC);
+        if(!empty($data['preview_img'])){
         // разбиваем имена в массив
         $data['preview_img'] = explode('|', $data['preview_img']);
         foreach ($data['preview_img'] as $key => $value) {
-            unlink('uploads/images/'.$value);
-            unlink('uploads/images/s_'.$value);
+            if(file_exists('/uploads/images/'.$value)){
+            unlink('/uploads/images/'.$value);
+            unlink('/uploads/images/s_'.$value);
+            } else {
+                array_push($news_error, 'Картинка '.$value.' не существует, невозможно удалить.');
+            }
+        }
         }
 
 
@@ -618,7 +666,7 @@ class NewsModel extends Model
                 if ($_POST[$j] == 3) {
                     $this->makeNewsDelete($s_id);
                 } else {
-                    $sql  = "UPDATE ".$table." SET status = :status  WHERE id_news = :id";
+                    $sql  = "UPDATE news_base SET status = :status  WHERE id_news = :id";
                     $stmt = $this->db->prepare($sql);
                     $stmt->bindParam(':id', $s_id);
                     $stmt->bindParam(':status', $_POST[$j], PDO::PARAM_INT);
@@ -838,6 +886,7 @@ class NewsModel extends Model
         
     static $test_array = array(
                 'category_eng' => array(
+                    1  => 'base',
                     11 => 'saleroom',
                     12 => 'saleapart',
                     13 => 'salehouse',
@@ -1008,9 +1057,63 @@ class NewsModel extends Model
         return $index;
     }
 
+public function getLastViewedNews(){
+
+    $cook_last_v =[];
+    $result =[];
+    // Последние новости из COOKIE
+    if (isset($_COOKIE['last_viewed_news'])) {
+        foreach ($_COOKIE['last_viewed_news'] as $key => $value) {
+            $key = (int)$key;
+            $value = (int)$value;
+            if (!empty($value)){
+                $cook_last_v_news[$key] = $value;
+            }
+        }
+    //запрос в бд
+    $sql = 'SELECT id_news, title, preview_img '
+            .'FROM news_base WHERE ';
 
 
+    foreach ($cook_last_v_news as $key => $value) {
+     $sql = $sql.'id_news = :id'.$key.' OR ';
+}
+//              удаление последнего OR
+            $sql = substr($sql, 0, -4);
 
+             $stmt     = $this->db->prepare($sql);
+             foreach ($cook_last_v_news as $key => $value) {
+                 $name = ':id'.$key;
+     $stmt->bindParam($name, $cook_last_v_news[$key]);
+
+}
+          $stmt->execute();
+        $res     = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        // нахождение первой картинки в preview_img
+        foreach ($res as $key => $value) {
+            if (!empty($value['preview_img'])){
+ //               $p = strpos($value['preview_img'], '|');
+ //               $res[$key]['preview_img'] = substr($value['preview_img'], $p);
+               if(!($res[$key]['preview_img'] = strstr($value['preview_img'],'|',TRUE))){
+                    $res[$key]['preview_img'] = $value['preview_img'];
+                }
+
+            }
+        }
+        //сортировка массива в соответствии с COOKIE
+
+        foreach ($cook_last_v_news as $key => $value){
+            foreach ($res as $news){
+                if($value == $news['id_news']){
+                 $result[$key]  = $news;
+                }
+                }
+        }
+    }else {
+        $result[0]['title'] = 'За последнее время вы ни чего не просматривали';
+    }
+    return $result;
+}
 
 
 
