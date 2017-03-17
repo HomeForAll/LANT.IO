@@ -3,25 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title><?php $this->title(); ?></title>
-    <link rel="stylesheet" href="/template/css/style.css">
-    <link rel="stylesheet" href="/template/css/news_style.css">
-    <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css">
     <?php
         // Подключение стилей в контроллере
-if (isset($this->data['css'])) {
-foreach ($this->data['css'] as $key => $value) {
-    echo '<link rel="stylesheet"  href="/template/css/'.$value.'">'."\r\n";
-}
-}
+    if (isset($this->data['css'])) {
+        foreach ($this->data['css'] as $key => $value) {
+            echo '<link rel="stylesheet"  href="/template/css/'.$value.'">'."\r\n";
+        }
+    }
     ?>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <!-- jquery -->
-    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
-    <script src="/template/js/searchFormBuilder.js"></script>
-    <script src="/template/js/mapController.js"></script>
-    <script src="/template/js/forms.editor.handler.js"></script>
-
-    <script src="/template/js/socket.io.min.js"></script>
     <?php
     $hash = isset($_SESSION['user_hash']) ? $_SESSION['user_hash'] : '';
     $user_id = isset($_SESSION['userID']) ? $_SESSION['userID'] : '';
@@ -308,7 +297,7 @@ foreach ($this->data['script'] as $key => $value) {
 </div> -->
 <?php if (isset($_SESSION['authorized'])) { ?>
 <div id="navigation">
-    <div class="logo-img"><img src="../../template/images/logo.png" alt="logo"></div>
+    <div class="logo-img"><a href="#"><img src="../../template/images/logo.png" alt="logo"></a></div>
     <div class="registration-users">
         <div class="place-an-ad">
             <a href="../../index.php"><img src="../../template/images/add-blue.png" alt="add">Дать объявление</a>
@@ -331,15 +320,18 @@ foreach ($this->data['script'] as $key => $value) {
                 <li><a href="/login">Вход</a></li>
             <?php } ?>
         </ul>
+        <button class="show-and-hide-menu"><i class="fa fa-bars" aria-hidden="true"></i></button>
+    </div>
+</div>
 <?php } else { ?>
 <div id="navigation-true">
-    <div class="logo-img"><img src="../../template/images/logo-true.png" alt="logo-true"></div>
+    <div class="logo-img"><a href="#"><img src="../../template/images/logo-mob.png" alt="logo-true"></a></div>
     <div class="registration-users">
         <div class="place-an-ad">
             <a href="../../index.php"><img src="../../template/images/add-blue.png" alt="add">Дать объявление</a>
         </div>
         <div class="registration">
-            <div class="message"><img src="../../template/images/message.png" alt="message"></div>
+            <div class="message"><img src="../../template/images/notification.png" alt="notification"></div>
             <div class="user">
                 <div class="users-information">
                     <p>Александр Никулин</p>
@@ -355,6 +347,7 @@ foreach ($this->data['script'] as $key => $value) {
                 </ul>
             </div>
         </div>
+        <button class="show-and-hide-menu"><i class="fa fa-bars" aria-hidden="true"></i></button>
     </div>
 </div>
 <?php } ?>
@@ -633,28 +626,30 @@ foreach ($this->data['script'] as $key => $value) {
         </div>
     </div>
     <div class="section-4">
-        <p>Сегодня вы и еще<span>143 645</span>человек сейчас с нами, а так же:</p>
-        <ul>
-            <li><img src="../../template/images/sec-4-1.png" alt="icon">645 644
-                <p>Людей зашло сегодня</p>
-            </li>
-            <li><img src="../../template/images/sec-4-2.png" alt="icon">23 635 773
-                <p>объявлений выложено</p>
-            </li>
-            <li><img src="../../template/images/sec-4-3.png" alt="icon">11 345
-                <p>объявлений в вашем городе</p>
-            </li>
-            <li><img src="../../template/images/sec-4-4.png" alt="icon">342 244
-                <p>активных сделак сейчас</p>
-            </li>
-        </ul>
-        <div class="schedule">
-            <div class="schedule-interface">
-                <div class="year-schedule-interface"></div>
+        <div class="container-w-2">
+            <p>Сегодня вы и еще<span>143 645</span>человек сейчас с нами, а так же:</p>
+            <ul>
+                <li><img src="../../template/images/sec-4-1.png" alt="icon">645 644
+                    <p>Людей зашло сегодня</p>
+                </li>
+                <li><img src="../../template/images/sec-4-2.png" alt="icon">23 635 773
+                    <p>объявлений выложено</p>
+                </li>
+                <li><img src="../../template/images/sec-4-3.png" alt="icon">11 345
+                    <p>объявлений в вашем городе</p>
+                </li>
+                <li><img src="../../template/images/sec-4-4.png" alt="icon">342 244
+                    <p>активных сделак сейчас</p>
+                </li>
+            </ul>
+            <div class="schedule">
+                <div class="schedule-interface">
+                    <div class="year-schedule-interface"></div>
+                </div>
+                <a href="#"><span id="yellowe"></span>Октябрь</a>
+                <a href="#"><span id="green"></span>Ноябрь</a>
+                <a href="#"><span id="blue"></span>Декабрь</a>
             </div>
-            <a href="#"><span id="yellowe"></span>Октябрь</a>
-            <a href="#"><span id="green"></span>Ноябрь</a>
-            <a href="#"><span id="blue"></span>Декабрь</a>
         </div>
     </div>
     <div class="section-5">
@@ -989,5 +984,24 @@ if (isset($this->data['script_footer'])) {
         echo '<script src="/template/js/'.$value.'"></script>'."\r\n";
     }}
 ?>
+<!-- Load CSS -->
+<script>
+    function loadCSS(hf) {var ms=document.createElement("link");
+        ms.rel="stylesheet";ms.href=hf;document.getElementsByTagName("head")[0].appendChild(ms);}
+    loadCSS("/bower_components/font-awesome/css/font-awesome.min.css");
+    loadCSS("template/css/style.css");
+    loadCSS("/template/css/news_style.css");
+</script>
+<!-- Load Scripts -->
+<script>
+    var scr = {"scripts":[
+        {"src" : "//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js", "async" : false},
+        {"src" : "//api-maps.yandex.ru/2.1/?lang=ru_RU", "async" : false},
+        {"src" : "/template/js/mapController.js", "async" : false},
+        {"src" : "/template/js/forms.editor.handler.js", "async" : false},
+        {"src" : "/template/js/socket.io.min.js", "async" : false},
+        {"src" : "/template/js/main.js", "async" : false}
+]};!function(t,n,r){"use strict";var c=function(t){if("[object Array]"!==Object.prototype.toString.call(t))return!1;for(var r=0;r<t.length;r++){var c=n.createElement("script"),e=t[r];c.src=e.src,c.async=e.async,n.body.appendChild(c)}return!0};t.addEventListener?t.addEventListener("load",function(){c(r.scripts);},!1):t.attachEvent?t.attachEvent("onload",function(){c(r.scripts)}):t.onload=function(){c(r.scripts)}}(window,document,scr);
+</script>
 </body>
 </html>
