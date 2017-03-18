@@ -1,8 +1,13 @@
 <?php
 
 return array(
+<<<<<<< HEAD
     // 'URI' => 'layout/controller/action'
     '' => 'main/site/index',
+=======
+    // 'URI' => 'template/controller/action'
+    '' => 'web_build/site/index',
+>>>>>>> create section-2
     'search' => 'main/search/index',
 
     'registration' => 'main/user/registration',
