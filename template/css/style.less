@@ -203,9 +203,12 @@
   }
   span {
     font-size: 10px;
-    padding: 3px 10px 4px;
+    padding: 3px 8px 4px;
     border-radius: 8px;
     background: #ca8b58;
+    & img {
+      margin-right: 4px;
+    }
   }
 }
 
@@ -373,7 +376,7 @@
     flex-shrink: 3;
     margin: auto;
     justify-content: center;
-    padding: 48px 8px 50px 0;
+    padding: 46px 0 48px 0;
     width: 1395px;
   }
   li {
@@ -381,12 +384,12 @@
     list-style: none;
     box-shadow: 0 0 1px #fff;
     font-size: 18px;
-    padding: 48px 10px 10px 128px;
+    padding: 47px 10px 10px 128px;
     line-height: 23px;
     text-align: left;
-    height: 113px;
-    width: 23.3%;
-    margin: 1px;
+    height: 169px;
+    width: 33%;
+    margin: 2px;
     &:nth-child(1) {
       background: url('../../template/images/sec-2-1.png') left 25px top 55px no-repeat, url('../../template/images/sec-2-b-1.png') top center no-repeat;
       background-size: auto, cover;
@@ -1037,7 +1040,7 @@
 .container-w {
   margin: auto;
   width: 1438px;
-  background: url("../../template/images/iphone.png") no-repeat center right 11%;
+  background: url("../../template/images/iphone.png") no-repeat bottom right 11%;
   background-size: 36%;
   text-align: left;
 }
@@ -1516,7 +1519,185 @@
 }
 
 /** Адаптивность **/
-@media(max-width: 980px) {
+@media(max-width: 2500px) {
+  .registration-users {
+    padding: 0;
+  }
+  #navigation-true {
+    padding: 10px 260px;
+  }
+  .section-2 ul {
+    width: 1100px;
+    & li {
+      width: 32%;
+      padding: 45px 10px 10px 100px;
+      &:nth-child(-n+999) {
+        background-position: left 5px center;
+        background-size: 85px, cover;
+      }
+    }
+  }
+  .user li> a {
+    font-size: 12px;
+  }
+  .scroll-decoration, .container-w-2, 
+  .top-appertaments, .container-w {
+    width: 1100px;
+  }
+  .scroll-decoration {
+    padding-top: 5px;
+  }
+  .section-4 ul {
+    width: 1100px;
+    & li {
+      vertical-align: middle;
+      font-size: 28px;
+      width: 240px;
+      margin: 0;
+      &:nth-child(1) {
+        font-size: 40px;
+        & > img {
+          width: 45px;
+        }
+      }
+    }
+    p {
+      padding: 0;
+      text-align: center;
+    }
+    img {
+      width: 20px;
+    }
+  }
+  .schedule, .schedule-interface,
+   .partners, .container-w-2 {
+    width: 1000px;
+  }
+  .app-store {
+    padding: 92px 45px 0;
+    a {
+      width: 235px;
+      height: auto;
+      margin: auto 8px 5px 5px;
+      padding: 8px 20px;
+    }
+  }
+  .main-block {
+    width: 900px;
+    li {
+      width: 480px;
+      padding: 0;
+    & img {
+      display: inline-block;
+      vertical-align: middle;
+      width: 140px;
+      height: 215px;
+      }
+    }
+  }
+  .left-button, .right-button {
+    padding: 0 10px;
+  }
+  .admins {
+    display: inline-block;
+    vertical-align: middle;
+    width: 365px;
+    height: auto;
+    padding: 30px 10px 10px 72px;
+    span {
+      text-align: left;
+    }
+  }
+  .container-w {
+    padding-bottom: 40px;
+  }
+  .main-block-2 ul {
+    padding: 0;
+  }
+  .policy, .footer ul {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0;
+    margin: auto;
+    & li {
+      margin: auto 5px;
+      width: 80px;
+    }
+    & i {
+      font-size: 30px;
+    }
+    & img {
+      width: 50px;
+    }
+  }
+  .footer ul {
+    display: inline-block;
+    vertical-align: middle;
+    width: auto;
+    margin: auto;
+  }
+  .lant-io {
+    display: inline-block;
+    vertical-align: middle;
+    width: 160px;
+    margin: auto;
+  }
+  .policy-io {
+    display: inline-block;
+    vertical-align: middle;
+    width: 240px;
+    margin: auto;
+  }
+  .all-apartments-top {
+    padding: 0;
+  }
+  .top-block {
+    width: 345px;
+    height: auto;
+    min-width: 250px;
+    margin: 13px 10px;
+  }
+  .left-wallpaper {
+    width: 150px;
+    &:before {
+      margin-left: 80px;
+      width: 60px;
+    }
+    p {
+      font-size: 12px;
+    }
+  }
+  .right-information-block {
+    padding: 25px 5px;
+    width: 195px;
+    p {
+      text-align: left;
+    }
+    span {
+      font-size: 14px !important;
+    }
+  }
+  .view-the-apartment {
+    margin-right: 0;
+    img {
+      width: 30px;
+    }
+  }
+  .decorate-number span {
+    font-size: 22px !important;
+  }
+  .price {
+    text-align: left;
+    margin-right: 0;
+    p {
+      font-size: 12px;
+    }
+    span {
+      margin: auto 2px auto 7px !important;
+    }
+  }
+}
+@media(max-width: 1100px) {
   .registration-users, .place-an-ad,
   .logo-img, .message {
     display: inline-block;
@@ -1527,14 +1708,17 @@
     display: initial;
   }
   #navigation-true, .navigation {
-    padding: 10px 20px;
+    padding: 10px 30px;
     text-align: center;
   }
   .logo-img {
     float: left;
     img {
-      width: 75px;
+      width: 48px;
     }
+  }
+  .users-information p {
+    font-size: 11px;
   }
   .place-an-ad, .registration,
   .message {
@@ -1553,7 +1737,7 @@
       display: block;
     }
     img{
-      width: 35px;
+      width: 25px;
       margin: 0;
     }
   }
@@ -1589,22 +1773,25 @@
     text-align: center;
     background: none;
     padding: 0;
+    clear: left;
     select {
+      float: left;
       background: #fff;
-      margin: 0 5px 5px;
-      padding: 18px 6px 18px 67px !important;
-      &:nth-child(1) {
-        width: 94%;
-      }
-      &:nth-child(n+2) {
-        width: 45%;
+      margin: 0;
+      text-align: center;
+      font-size: 12px;
+      padding: 20px 5px 20px 40px!important;
+      margin-bottom: 10px;
+      &:nth-child(-n+3) {
+        width: 30%;
+        background-position: right 10px center, center left 10px;
       }
     }
     button {
       display: inline-block;
       margin: auto;
-      padding: 15px;
-      width: 94%;
+      padding: 15px 5px;
+      width: 260px;
       font-size: 22px;
       border-radius: 10px;
       float: none;
@@ -1621,14 +1808,11 @@
       padding: 0;
     }
     li {
-      font-size: 16px;
-      padding: 20px 10px 10px 105px;
-      height: auto;
-      width: 100%;
-      margin: 1px;
+      padding: 10px 10px 10px 60px;
+      width: 48%;
       &:nth-child(-n+999) {
-        background-position: left 15px center, center;
-        background-size: 75px, cover;
+        background-position: left 5px center, center;
+        background-size: 50px, cover;
       }
     }
   }
@@ -1678,6 +1862,7 @@
       display: none;
     }
     ul {
+      display: block;
       width: auto;
       padding: 0;
       margin: 40px auto 20px;
@@ -1685,16 +1870,398 @@
     li {
       display: block;
       width: auto;
+      text-align: center;
       margin: 0;
       &:nth-child(-n+3) {
         display: none;
       }
     }
     p {
+      text-align: center;
       margin: 0;
       font-size: 14px;
     }
     span {
+      display: block;
+      margin: auto 18px;
+    }
+    a > span {
+      margin: auto 5px;
+    }
+  }
+  .container-w-2 {
+    display: block;
+    width: auto;
+    padding: 35px 10px;
+  }
+  .schedule, .schedule-interface  {
+    width: auto;
+    padding: 0;
+  }
+  .year-schedule-interface {
+    margin: 0;
+  }
+  .schedule a {
+    font-size: 12px;
+    width: 105px;
+    margin: 5px 0 0 4px;
+  }
+  .top-appertaments {
+    width: auto;
+    padding: 0;
+    h2 {
+      padding: 15px 5px;
+      font-size: 16px;
+      text-align: center;
+    }
+  }
+  .filter-and-top-blocks {
+    margin: auto;
+  }
+  .filter-apartament {
+    display: none;
+  }
+  .top-block, .left-wallpaper,
+  .right-information-block {
+    width:  auto;
+    display: block;
+    text-align: center;
+    width: 100%;
+    max-width: 315px;
+  }
+  .top-block {
+    height: auto;
+  }
+  .left-wallpaper {
+    height: 215px;
+    &:before {
+      top: 15px;
+      right: 15px;
+      margin: 0;
+    }
+    p {
+      position: relative;
+      z-index: 2;
+      display: block;
+      top: -45px;
+      padding: 8px 40px;
+      text-align: left;
+      color: #fff;
+      bottom: 0;
+    }
+  }
+  .right-information-block {
+    padding: 15px;
+    text-align: left;
+  }
+  .container-w {
+    width: auto;
+  }
+  .app-store {
+    width: auto;
+    padding: 15px;
+    text-align: center;
+    h5 {
+      font-weight: 500;
+      text-align: left;
+    }
+    p {
+    text-align: left;
+    }
+    a {
+      display: inline-block;
+      vertical-align: middle;
+      width: 230px;
+      height: auto;
+      margin: 5px auto;
+      padding: 7px;
+      border-radius: 8px;
+      background: #000;
+      text-align: left;
+      & img {
+        margin: auto 10px;
+      }
+    }
+  }
+  #decor-img {
+    margin: auto 10px;
+  }
+  .section-7 {
+    padding: 0;
+    h2 {
+      font-size: 16px;
+    }
+  }
+  .main-block {
+    width: 450px;
+    li {
+      width: 450px;
+      padding: 0;
+      & img {
+        width: 110px;
+        height: 155px;
+      }
+    } 
+  }
+  .admins {
+    overflow: hidden;
+    width: 62%;
+    margin: 0;
+    padding: 5px;
+    span {
+      text-align: left;
+    }
+  }
+  .main-block-2 {
+    width: 80%;
+    ul {
+      padding: 0;
+    }
+  }
+  .section-8 {
+    padding: 0;
+  }
+  .partners {
+    width: auto;
+  }
+  .carousel-2 {
+    margin: 0;
+  }
+  .footer {
+    padding: 0;
+    ul {
+      display: block;
+      float: none;
+      width: auto;
+      margin: auto;
+      text-align: center;
+    }
+    li {
+      width: auto;
+      margin: auto 20px;
+      padding: 20px 2px;
+    }
+    i {
+      font-size: 25px;
+    }
+  }
+  .container-w-2 {
+    padding: 10px;
+  }
+  .lant-io, .policy {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+    padding: 10px 15px;
+    width: 260px;
+    margin: auto;
+  }
+  .schedule {
+    width: 530px;
+    a {
+      margin: 15px 0 0 5px;
+      & > span {
+        display: inline-block;
+        vertical-align: middle;
+      }
+    }
+  }
+  .left-button, .right-button {
+    width: 10%;
+    padding: 0 10px;
+  }
+}
+//------------------------------
+
+@media(max-width: 640px) {
+  .registration-users, .place-an-ad,
+  .logo-img, .message {
+    display: inline-block;
+    vertical-align: middle;
+    width: auto;
+  }
+  .show-and-hide-menu {
+    display: initial;
+  }
+  #navigation-true, .navigation {
+    padding: 10px;
+    text-align: center;
+  }
+  .logo-img {
+    float: left;
+    img {
+      width: 48px;
+    }
+  }
+  .users-information p {
+    font-size: 11px;
+  }
+  .place-an-ad, .registration,
+  .message {
+    margin: 0;
+  }
+  .place-an-ad {
+    display: none;
+    span {
+      font-size: 13px;
+    }
+  }
+  .registration-users {
+    padding: 0;
+    float: right;
+    &:hover ul {
+      display: block;
+    }
+    img{
+      width: 25px;
+      margin: 0;
+    }
+  }
+  .users-information {
+    text-align: right;
+  }
+  .user li {
+    width: 100%;
+  }
+  .user li img {
+    display: inline-block;
+    margin: -2px 7px 0 0;
+  }
+  .user img {
+    display: none;
+  }
+  .user span > img {
+    display: inline-block;
+    width: auto;
+  }
+  .section-1 {
+    padding-top: 145px;
+    padding-bottom: 100px;
+  }
+  .apartment-search, .scroll-decoration {
+    display: block;
+    width: auto;
+  }
+  .apartment-search ul {
+    margin-left: 15px;
+  }
+  .search-menu-apartment {
+    text-align: center;
+    background: none;
+    padding: 0;
+    select {
+      background: #fff;
+      text-align: center;
+      margin: 0 5px 5px;
+      padding: 15px 5px 15px 35px!important;
+      &:nth-child(1) {
+        width: 94%;
+        background-position: right 10px center, center left 6px;
+      }
+      &:nth-child(n+2) {
+        width: 45%;
+        background-position: right 10px center, center left 6px;
+      }
+    }
+    button {
+      display: inline-block;
+      margin: auto;
+      padding: 15px;
+      width: 94%;
+      font-size: 22px;
+      border-radius: 10px;
+      float: none;
+    }
+  }
+  .big-search {
+    margin-top: 80px;
+  }
+  .section-2 {
+    padding: 15px 10px;
+    ul {
+      display: block;
+      width: auto;
+      padding: 0;
+    }
+    li {
+      font-size: 16px;
+      padding: 10px 10px 10px 75px;
+      height: auto;
+      width: 100%;
+      margin: 1px;
+      &:nth-child(-n+999) {
+        background-position: left 15px center, center;
+        background-size: 60px, cover;
+      }
+    }
+  }
+  .scroll-decoration {
+    padding: 15px 10px;
+    h2 {
+      padding: 0;
+      font-size: 14px;
+      margin-left: 12px;
+    }
+  }
+  .list-of-all-apartments {
+    margin-top: 15px;
+  }
+  .section-3 {
+    padding: 0;
+    h2 {
+    font-size: 16px;
+    text-align: center;
+    & span {
+      font-size: 14px;
+      margin-left: 14px;
+      vertical-align: middle;
+      }
+    }
+  }
+  .block-apartments {
+    margin: 7px;
+    padding-bottom: 10px;
+    background: #fff;
+    width: 100%;
+    max-width: 315px;
+    p {
+    font-size: 14px;
+    margin-left: 14px;
+    vertical-align: middle;
+    text-align: left;
+    margin-left: 0;
+    }
+  }
+  .location span {
+    margin: 0 0 0 8px;
+  }
+  .section-4 {
+    padding: 0;
+    &:before {
+      display: none;
+    }
+    ul {
+      display: block;
+      width: auto;
+      padding: 0;
+      margin: 40px auto 20px;
+    }
+    li {
+      display: block;
+      width: auto;
+      text-align: center;
+      margin: 0;
+      &:nth-child(-n+3) {
+        display: none;
+      }
+    }
+    p {
+      text-align: center;
+      margin: 0;
+      font-size: 14px;
+    }
+    span {
+      display: block;
       margin: auto 18px;
     }
     a > span {
@@ -1784,7 +2351,7 @@
     a {
       display: inline-block;
       vertical-align: middle;
-      width: 285px;
+      width: 230px;
       height: auto;
       margin: 5px auto;
       padding: 7px;
@@ -1792,12 +2359,12 @@
       background: #000;
       text-align: left;
       & img {
-        margin: auto 30px;
+        margin: auto 10px;
       }
     }
   }
   #decor-img {
-    margin: auto 30px;
+    margin: auto 10px;
   }
   .section-7 {
     padding: 0;
@@ -1805,18 +2372,28 @@
       font-size: 16px;
     }
   }
-  .main-block li {
-    width: 290px;
-    padding: 0;
-    & img {
-      width: 100px;
-      height: 165px;
-    }
+  .main-block {
+    width: 80%;
+    li {
+      width: 290px;
+      padding: 0;
+      & img {
+        width: 80px;
+        height: 120px;
+      }
+    } 
   }
   .admins {
+    overflow: hidden;
     width: 62%;
     margin: 0;
     padding: 5px;
+  }
+  .main-block-2 {
+    width: 80%;
+    ul {
+      padding: 0;
+    }
   }
   .section-8 {
     padding: 0;
