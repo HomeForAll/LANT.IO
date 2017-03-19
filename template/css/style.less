@@ -1277,6 +1277,9 @@
     &:hover i {
       color: #41c0f5;
     }
+    &:hover span {
+      color: #fff;
+    }
     & img:hover {
       background: url("../../template/images/work-true.png") no-repeat;
       background-size: auto;
@@ -1532,7 +1535,7 @@
       width: 32%;
       padding: 45px 10px 10px 100px;
       &:nth-child(-n+999) {
-        background-position: left 5px center;
+        background-position: left center;
         background-size: 85px, cover;
       }
     }
@@ -1585,7 +1588,7 @@
   .main-block {
     width: 900px;
     li {
-      width: 480px;
+      width: 450px;
       padding: 0;
     & img {
       display: inline-block;
@@ -1808,11 +1811,11 @@
       padding: 0;
     }
     li {
-      padding: 10px 10px 10px 60px;
-      width: 48%;
+      padding: 10px 10px 10px 60px !important;
+      width: 48% !important;
       &:nth-child(-n+999) {
-        background-position: left 5px center, center;
-        background-size: 50px, cover;
+        background-position: left 5px center, center !important;
+        background-size: 50px, cover !important;
       }
     }
   }
@@ -2184,14 +2187,19 @@
       padding: 0;
     }
     li {
+      display: block;
       font-size: 16px;
-      padding: 10px 10px 10px 75px;
+      padding: 10px 10px 10px 80px!important;
       height: auto;
-      width: 100%;
+      width: 100% !important;
       margin: 1px;
       &:nth-child(-n+999) {
         background-position: left 15px center, center;
-        background-size: 60px, cover;
+        background-size: 60px, cover !important;
+      }
+      &:nth-child(3) {
+        background: url("../../template/images/sec-2-3.png") no-repeat center;
+        background-size: cover !important;
       }
     }
   }
@@ -2247,9 +2255,9 @@
       margin: 40px auto 20px;
     }
     li {
-      display: block;
-      width: auto;
-      text-align: center;
+      display: block !important;
+      width: auto !important;
+      text-align: center !important;
       margin: 0;
       &:nth-child(-n+3) {
         display: none;
