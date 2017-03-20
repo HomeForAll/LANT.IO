@@ -285,16 +285,6 @@ foreach ($this->data['script'] as $key => $value) {
     <?php $this->head() ?>
 </head>
 <body>
-<!--<div id="loading">
-    <div id="loading-center">
-        <div id="loading-center-absolute">
-            <div class="object" id="object_four"></div>
-            <div class="object" id="object_three"></div>
-            <div class="object" id="object_two"></div>
-            <div class="object" id="object_one"></div>
-        </div>
-    </div>
-</div> -->
 <?php if (isset($_SESSION['authorized'])) { ?>
 <div id="navigation">
     <div class="logo-img"><a href="#"><img src="../../template/images/logo.png" alt="logo"></a></div>
@@ -360,21 +350,12 @@ foreach ($this->data['script'] as $key => $value) {
                 <li><a href="#">Продажа</a></li>
             </ul>
             <div class="search-menu-apartment">
-                <select>
-                    <option value="1">Москва и область</option>
-                    <option value="2">Москва и область</option>
-                </select>
-                <select>
-                    <option value="3">Офис</option>
-                    <option value="4">Офис</option>
-                </select>
-                <select>
-                    <option value="5">Цена</option>
-                    <option value="6">Цена</option>
-                </select>
+                <select class="js-example-data-array region"></select>
+                <select class="js-example-data-array-selected offices"></select>
+                <select class="js-example-data-array-selected price"></select>
                 <button>Найти</button>
             </div>
-            <div class="big-search"><a href="#">Расширенный поиск</a><i class="fa fa-angle-right" aria-hidden="true"></i></div>
+            <div class="big-search" onclick="showBigSearch()"><a>Расширенный поиск</a><i class="fa fa-angle-right" aria-hidden="true"></i></div>
         </div>
     </div>
     <div class="section-2">
@@ -989,7 +970,8 @@ if (isset($this->data['script_footer'])) {
     function loadCSS(hf) {var ms=document.createElement("link");
         ms.rel="stylesheet";ms.href=hf;document.getElementsByTagName("head")[0].appendChild(ms);}
     loadCSS("/bower_components/font-awesome/css/font-awesome.min.css");
-    loadCSS("template/css/style.css");
+    loadCSS("/bower_components/select2/dist/css/select2.min.css");
+    loadCSS("/template/css/style.css");
     loadCSS("/template/css/news_style.css");
 </script>
 <!-- Load Scripts -->
@@ -1000,6 +982,7 @@ if (isset($this->data['script_footer'])) {
         {"src" : "/template/js/mapController.js", "async" : false},
         {"src" : "/template/js/forms.editor.handler.js", "async" : false},
         {"src" : "/template/js/socket.io.min.js", "async" : false},
+        {"src" : "/bower_components/select2/dist/js/select2.min.js", "async" : false},
         {"src" : "/template/js/main.js", "async" : false}
 ]};!function(t,n,r){"use strict";var c=function(t){if("[object Array]"!==Object.prototype.toString.call(t))return!1;for(var r=0;r<t.length;r++){var c=n.createElement("script"),e=t[r];c.src=e.src,c.async=e.async,n.body.appendChild(c)}return!0};t.addEventListener?t.addEventListener("load",function(){c(r.scripts);},!1):t.attachEvent?t.attachEvent("onload",function(){c(r.scripts)}):t.onload=function(){c(r.scripts)}}(window,document,scr);
 </script>
