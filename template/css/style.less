@@ -49,11 +49,16 @@
   z-index: 2;
 }
 
+.container-w-0 {
+  width: 1400px;
+  margin: auto;
+}
+
 .logo-img {
   display: inline-block;
   float: left;
   img {
-    width: 75px;
+    width: auto;
   }
 }
 
@@ -106,9 +111,7 @@
 .user {
   display: inline-block;
   vertical-align: middle;
-  &:hover ul {
-    display: block;
-  }
+  cursor: pointer;
   img {
     display: inline-block;
     margin: auto;
@@ -119,7 +122,7 @@
   }
   ul {
     display: none;
-    width: 204px;
+    width: 230px;
     position: absolute;
     border: 1px solid #9f9e9b;
     padding: 9px 14px;
@@ -127,22 +130,6 @@
     background: #f9f9f9;
     z-index: 11;
     border-radius: 4px;
-    &:hover {
-      display: block;
-    }
-    &:after {
-      content: '';
-      position: absolute;
-      display: block;
-      margin-left: -15px;
-      margin-top: calc(-130%);
-      width: 100%;
-      height: 100px;
-      z-index: -1;
-      &:hover .user ul {
-        display: block;
-      }
-    }
     &:before {
       content: '';
       position: absolute;
@@ -152,15 +139,16 @@
       border-right: 10px solid transparent;
       border-bottom: 8px solid #f9f9f9;
       z-index: 3;
-      margin-left: 155px;
+      margin-left: -38px;
       margin-top: -16px;
     }
   }
   li {
+    display: block;
     text-align: left;
     list-style: none;
     cursor: pointer;
-    width: 100%;
+    width: auto;
     font-size: 14px;
     & img {
       width: auto;
@@ -223,9 +211,6 @@
   i {
     color: #fff;
     font-size: 25px;
-    &:hover .user ul {
-      display: block;
-    }
   }
 }
 
@@ -282,10 +267,14 @@
 }
 
 .search-menu-apartment {
+  position: relative;
+  display: none;
   margin: auto;
   background: #fff;
+  z-index: 5;
   overflow: hidden;
   border-radius: 5px;
+  margin-top: -3px;
   button {
     float: right;
     background: #71cb6f;
@@ -299,6 +288,192 @@
     &:hover {
       background: #21a71e;
       transition: 1.5s;
+    }
+  }
+}
+
+.big-search-menu {
+  position: relative;
+  margin: auto;
+  background: #fff;
+  z-index: 5;
+  overflow: hidden;
+  border-radius: 5px;
+  margin-top: -3px;
+  button {
+    position: relative;
+    float: right;
+    background: #71cb6f;
+    color: #f7fcf7;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    padding: 28px 10px;
+    width: 15%;
+    text-align: center;
+    &:hover {
+      background: #21a71e;
+      transition: 1.5s;
+    }
+  }
+}
+
+.search-more-precisely-search {
+  display: inline-block;
+  vertical-align: top;
+  border-bottom: 1px solid #e9e9e9; 
+  margin-left: 20px;
+  width: 80%;
+  clear: both;
+   button {
+    position: relative;
+    float: right;
+    background: none;
+    padding: 25px 0;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 14px;
+    color: #bbbaba;
+    text-transform: capitalize;
+    &:hover {
+      background: none;
+    }
+  }
+}
+
+.filter-block-big-menu {
+  display: block;
+  background: #fff !important;
+  li {
+    background: #fff;
+    color: #000;
+    font-size: 14px;
+    padding: 15px 0;
+    border-radius: 0;
+    &:nth-child(3) {
+      border-right: 1px dotted #e0e0e0;
+      padding-right: 15px;
+    }
+    &:hover {
+      color: #000 !important;
+      background: none;
+    }
+    &:nth-child(4) {
+      border: none;
+    }
+  }
+  input[type="checkbox"] {
+    width: 17px;
+    height: 17px;
+    color: #444;
+    cursor: pointer;
+    vertical-align: middle;
+  }
+  span {
+    color: #000 !important;
+  }
+  & .select2-container{
+    width: 90%!important;
+    margin: 10px auto;
+    padding: 0 30px 0!important;
+  }
+  & .select2-hidden-accessible {
+    margin: -6px -35px 0 0!important;
+  }
+  & .select2-selection__rendered {
+    text-align: left !important;
+  }
+}
+
+.advanced-search-options {
+  text-align: center;
+  background: #f6f8f6;
+  p {
+    text-align: center;
+    padding: 15px 10px;
+    color: #8e8e8e;
+    font-size: 14px;
+  }
+  ul {
+    background: none;
+  }
+  li {
+    background: #fff;
+    overflow: hidden;
+    clear: both;
+    width: 23%;
+    font-weight: 500;
+    text-align: left;
+    color: #4d4d4d;
+    font-size: 14px;
+    border-radius: 0;
+    padding: 15px 30px 15px 20px;
+    margin: 10px 4px;
+    & img {
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 15px;
+      float: left;
+    }
+    &:hover {
+      background: #fff;
+      color: #4d4d4d;
+    }
+  }
+  select {
+    background: none;
+    border: none;
+  }
+  a {
+    display: inline-block;
+    width: auto;
+    margin: 30px auto;
+    color: #959595;
+    border-radius: 50px;
+    border: 1px solid #d7d7d7;
+    background: #f6f8f6;
+    cursor: pointer;
+    padding: 10px 20px;
+    &:hover {
+      transition: 1.5s;
+      background: #d2d2d2;
+    }
+    & i {
+      vertical-align: middle;
+      color: #bcb8b8;
+      margin-right: 10px;
+      font-size: 20px;
+    }
+  }
+}
+
+.metro-people {
+  margin-left: -32px !important;
+}
+
+.exact-area, .the-exact-address {
+  display: inline-block;
+  vertical-align: middle;
+  & .select2-selection--single {
+    background: none !important;
+  }
+  & .select2-container {
+    width: 80%!important;
+    border-right: none!important;
+    padding: 10px 30px 0 25px!important;
+  }
+  & .select2-selection__arrow {
+    display: none;
+  }
+  & .select2-hidden-accessible {
+    margin: -8px -34px 0 0!important;
+  }
+  & span {
+    display: inline-block;
+    color: #b0b0b0;
+    font-size: 13px;
+    & > img {
+      margin-right: 5px;
     }
   }
 }
@@ -330,9 +505,21 @@
   background: url('../../template/images/s2.png') left 10px center no-repeat !important;
   background-size: auto !important; 
 }
-.price {
+.product-price {
   background: url('../../template/images/s3.png') left 10px center no-repeat !important;
   background-size: auto !important;
+}
+.location-metro {
+  background: url('../../template/images/m.png') left 10px center no-repeat !important;
+  background-size: auto !important;
+}
+.location-apartments {
+  background: url('../../template/images/apartaments.png') left 10px center no-repeat !important;
+  background-size: auto !important;
+}
+.owner {
+  background: url('../../template/images/sec-4-1.png') left 10px center no-repeat !important;
+  background-size: 20px !important;
 }
 .select2-container .select2-selection__rendered {
   display: block!important;
@@ -364,6 +551,7 @@
 .big-search {
   text-align: center;
   margin-top: 160px;
+  & > .region
   &:after {
     content: '';
     position: absolute;
@@ -599,9 +787,10 @@
     margin: auto;
   }
   p {
+    text-align: left;
     font-size: 13px;
     color: #928787;
-    padding: 0 60px 0 24px;
+    padding: 0 25px;
     margin: auto;
     height: 65px;
     line-height: 18px;
@@ -632,13 +821,13 @@
 
 .price-of-apartments {
   display: inline-block;
-  width: 70%;
+  width: 73%;
   span {
     position: relative;
     text-align: left;
     color: #565656;
     padding: 0;
-    margin: 16px 0 16px 22px;
+    margin: 16px 0 16px 10px;
     font-weight: bold;
     font-size: 25px;
   }
@@ -651,7 +840,7 @@
 .show-apartments {
   display: inline-block;
   vertical-align: top;
-  width: 25%;
+  width: 20%;
   img {
     cursor: pointer;
     margin-top: 18px;
@@ -663,7 +852,7 @@
 .location {
   display: block;
   text-align: left;
-  padding-left: 22px;
+  padding-left: 2px;
   p {
     display: inline-block;
     vertical-align: middle;
@@ -679,10 +868,10 @@
     vertical-align: middle;
     color: #bcbcbc;
     font-size: 13px;
-    margin: 0 0 0 14px;
+    margin: 0 0 0 5px;
   }
   img {
-    margin-right: 12px;
+    margin-right: 5px;
     width: auto;
     height: auto;
     vertical-align: middle;
@@ -712,7 +901,7 @@
     vertical-align: middle;
     font-size: 40px;
     font-weight: 300;
-    width: 335px;
+    width: 320px;
     margin: auto 1px;
     &:nth-child(1) {
       font-size: 60px;
@@ -726,6 +915,7 @@
       margin-top: 5px;
       font-weight: 300;
       padding-left: 43px;
+      text-align: center;
     }
   }
   img {
@@ -851,36 +1041,15 @@
     font-weight: 300;
     color: #a8a8a8;
   }
-  select {
-    -webkit-appearance: none;
-    cursor: pointer;
-    vertical-align: middle;
-    font-size: 14px;
-    font-weight: 200;
-    width: 230px;
-    padding-left: 20px;
-    height: 50px;
-    color: #222;
-    border: none;
-    border-right: 2px dotted #e0e0e0;
-    background: url('../../template/images/pointer_bottom.png') right 31px center no-repeat;
-    background-size: auto;
-    &:nth-child(2) {
-      width: 186px;
-      padding-left: 29px;
-    }
-    &:nth-child(3) {
-      background: url('../../template/images/pointer_bottom.png') right 15px center no-repeat, url('../../template/images/s3.png') left center no-repeat;
-      background-size: auto;
-      width: 173px;
-      padding-top: 5px;
-      padding-left: 28px;
-      margin-left: 35px;
-      margin-right: 30px;
-    }
-    &:nth-child(5) {
-      width: 195px;
-    }
+  & > .select2-hidden-accessible {
+    background: none;
+  }
+  & > .select2-container {
+    border: none !important;
+  }
+  & > .select2-container--default 
+      .select2-selection--single {
+    background: none !important;
   }
 }
 
@@ -899,7 +1068,7 @@
   align-content: center;
   border-radius: 8px;
   background: #fff;
-  width: 452px;
+  width: 450px;
   height: 236px;
   min-width: 250px;
   margin: 9px 9px 13px;
@@ -910,6 +1079,7 @@
   overflow: hidden;
    &:before {
     content: 'Новое';
+    overflow: hidden;
     display: block;
     position: absolute;
     text-align: center;
@@ -928,10 +1098,10 @@
     display: block;
     position: relative;
     width: 100%;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.43), rgba(255, 255, 255, 0));
-    height: 95px;
+    background: linear-gradient(to top,rgba(0,0,0,.43),rgba(255,255,255,0));
+    height: 75px;
     z-index: 1;
-    bottom: 95px;
+    margin-top: -70px;
   }
   img {
     width: 130%;
@@ -952,13 +1122,13 @@
 .right-information-block {
   width: 228px;
   text-align: left;
-  padding: 28px 20px;
+  padding: 18px 5px;
   p {
     font-size: 13px;
     color: #aba3a3;
     word-wrap: break-word;
     line-height: 20px;
-    margin-top: 18px;
+    margin-top: 15px;
   }
   span {
     font-size: 16px;
@@ -1095,8 +1265,7 @@
   a {
     display: inline-block;
     vertical-align: middle;
-    width: 194px;
-    height: 44px;
+    width: 225px;
     margin: auto 17px 5px 5px;
     padding: 4px 20px 8px;
     border-radius: 8px;
@@ -1106,7 +1275,7 @@
   img {
     vertical-align: middle;
     float: left;
-    margin: 2px 15px 2px 5px;
+    margin: 2px 10px 2px 0;
   }
   span {
     display: block;
@@ -1116,7 +1285,7 @@
 }
 
 #decor-img {
-  margin-right: 22px;
+  margin-right: 10px;
 }  
 
 .decoration-text {
@@ -1558,8 +1727,12 @@
   .registration-users {
     padding: 0;
   }
+  .container-w-0 {
+    width: auto;
+    max-width: 1200px;
+  }
   #navigation-true {
-    padding: 10px 260px;
+    padding: 10px 200px;
   }
   .section-2 ul {
     width: 1100px;
@@ -1707,7 +1880,7 @@
     }
   }
   .right-information-block {
-    padding: 25px 5px;
+    padding: 18px 5px;
     width: 195px;
     p {
       text-align: left;
@@ -1743,6 +1916,9 @@
     vertical-align: middle;
     width: auto;
   }
+  .container-w-0 {
+    width: auto;
+  }
   .show-and-hide-menu {
     display: initial;
   }
@@ -1753,7 +1929,7 @@
   .logo-img {
     float: left;
     img {
-      width: 48px;
+      width: 110px;
     }
   }
   .users-information p {
@@ -1772,10 +1948,7 @@
   .registration-users {
     padding: 0;
     float: right;
-    &:hover ul {
-      display: block;
-    }
-    img{
+    img {
       width: 25px;
       margin: 0;
     }
@@ -1785,6 +1958,9 @@
   }
   .message:after {
     left: -12px;
+  }
+  .user ul:before {
+    margin-left: 45px;
   }
   .user li {
     width: 100%;
@@ -1800,6 +1976,7 @@
     display: inline-block;
     width: auto;
   }
+
   .section-1 {
     padding-top: 145px;
     padding-bottom: 100px;
@@ -1825,6 +2002,20 @@
       border-radius: 10px;
     }
   }
+  .big-search-menu {
+    text-align: center;
+    background: none;
+    padding: 0;
+    button {
+      display: inline-block;
+      float: none;
+      margin: 15px auto;
+      padding: 15px 5px;
+      width: 260px;
+      font-size: 22px;
+      border-radius: 10px;
+    }
+  }
   .select2-container {
     border: none!important;
     vertical-align: middle;
@@ -1833,7 +2024,7 @@
     text-align: left;
     border-right: none !important;
   }
-  .region .offices .price {
+  .region .offices .product-price {
     background-position: left 5px center;
     z-index: 5 !important;
   }
@@ -1905,11 +2096,11 @@
     width: 100%;
     max-width: 315px;
     p {
-    font-size: 14px;
-    margin-left: 14px;
-    vertical-align: middle;
-    text-align: left;
-    margin-left: 0;
+      text-align: left;
+      font-size: 14px;
+      margin-left: 14px;
+      vertical-align: middle;
+      margin-left: 0;
     }
   }
   .location span {
@@ -2139,16 +2330,14 @@
     vertical-align: middle;
     width: auto;
   }
+  .container-w-0 {
+    width: auto;
+  }
   .show-and-hide-menu {
     display: initial;
-    &:hover .user ul:after:hover .user ul {
-      background: red !important;
-      display: block !important;
-    }
   }
-  .user ul:after {
-    width: 90%;
-    margin-left: 10%;
+  .user ul:before {
+    margin-left: 45px;
   }
   #navigation-true, .navigation {
     padding: 10px;
@@ -2156,12 +2345,11 @@
   }
   .logo-img {
     float: left;
+    overflow: hidden;
+    width: 45px;
     img {
-      width: 48px;
+      width: 95px;
     }
-  }
-  .user:hover ul {
-     display: none !important;
   }
   .users-information p {
     font-size: 11px;
@@ -2179,10 +2367,7 @@
   .registration-users {
     padding: 0;
     float: right;
-    &:hover ul {
-      display: block;
-    }
-    img{
+    img {
       width: 25px;
       margin: 0;
     }
@@ -2194,7 +2379,7 @@
     text-align: left;
     border-right: none !important;
   }
-  .region .offices .price {
+  .region .offices .product-price {
     background-position: left 5px center;
     z-index: 5 !important;
   }
@@ -2241,6 +2426,20 @@
     margin-left: 15px;
   }
   .search-menu-apartment {
+    text-align: center;
+    background: none;
+    padding: 0;
+    button {
+      display: inline-block;
+      margin: 10px auto;
+      padding: 15px;
+      width: 85%;
+      float: none;
+      font-size: 22px;
+      border-radius: 10px;
+    }
+  }
+  .big-search-menu {
     text-align: center;
     background: none;
     padding: 0;
@@ -2312,11 +2511,10 @@
     width: 100%;
     max-width: 315px;
     p {
-    font-size: 14px;
-    margin-left: 14px;
-    vertical-align: middle;
-    text-align: left;
-    margin-left: 0;
+      font-size: 14px;
+      margin-left: 14px;
+      vertical-align: middle;
+      margin-left: 0;
     }
   }
   .location span {

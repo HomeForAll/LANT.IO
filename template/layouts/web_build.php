@@ -315,29 +315,31 @@ foreach ($this->data['script'] as $key => $value) {
 </div>
 <?php } else { ?>
 <div id="navigation-true">
-    <div class="logo-img"><a href="#"><img src="../../template/images/logo-mob.png" alt="logo-true"></a></div>
-    <div class="registration-users">
-        <div class="place-an-ad">
-            <a href="../../index.php"><img src="../../template/images/add-blue.png" alt="add">Дать объявление</a>
-        </div>
-        <div class="registration">
-            <div class="message"><img src="../../template/images/notification.png" alt="notification"></div>
-            <div class="user">
-                <div class="users-information">
-                    <p>Александр Никулин</p>
-                    <span><img src="../../template/images/crown.png" alt="user">Пользователь +</span>
-                </div>
-                <img src="../../template/images/user.png" alt="user">
-                <ul>
-                    <li><a href="#"><img src="../../template/images/m1.png" alt="menu">Мои объявления</a></li>
-                    <li><a href="#"><img src="../../template/images/m2.png" alt="menu">Избранное</a></li>
-                    <li><a href="#"><img src="../../template/images/m3.png" alt="menu">Тех поддержка</a></li>
-                    <li><a href="#"><img src="../../template/images/m4.png" alt="menu">Настройка профиля</a></li>
-                    <li><a href="#"><img src="../../template/images/m5.png" alt="menu">Выйти из системы</a></li>
-                </ul>
+    <div class="container-w-0">
+        <div class="logo-img"><a href="#"><img src="../../template/images/logo-true.png" alt="  logo-true"></a></div>
+        <div class="registration-users">
+            <div class="place-an-ad">
+                <a href="../../index.php"><img src="../../template/images/add-blue.png" alt="add">Дать объявление</a>
             </div>
+            <div class="registration">
+                <div class="message"><img src="../../template/images/notification.png" alt="    notification"></div>
+                <div class="user" onclick="showTopMenuAndSearch()">
+                    <div class="users-information">
+                        <p>Александр Никулин</p>
+                        <span><img src="../../template/images/crown.png" alt="user">Пользователь + </span>
+                    </div>
+                    <img src="../../template/images/user.png" alt="user">
+                    <ul>
+                        <li><a href="#"><img src="../../template/images/m1.png" alt="menu">Мои объявления</a></li>
+                        <li><a href="#"><img src="../../template/images/m2.png" alt="menu"> Избранное</a></li>
+                        <li><a href="#"><img src="../../template/images/m3.png" alt="menu">Тех поддержка</a></li>
+                        <li><a href="#"><img src="../../template/images/m4.png" alt="menu"> Настройка профиля</a></li>
+                        <li><a href="#"><img src="../../template/images/m5.png" alt="menu">Выйти  из системы</a></li>
+                    </ul>
+                </div>
+            </div>
+            <button class="show-and-hide-menu" onclick="showTopMenuAndSearch()"><i class="fa fa-bars" aria-hidden="true"></i></button>
         </div>
-        <button class="show-and-hide-menu"><i class="fa fa-bars" aria-hidden="true"></i></button>
     </div>
 </div>
 <?php } ?>
@@ -352,10 +354,59 @@ foreach ($this->data['script'] as $key => $value) {
             <div class="search-menu-apartment">
                 <select class="js-example-data-array region"></select>
                 <select class="js-example-data-array-selected offices"></select>
-                <select class="js-example-data-array-selected price"></select>
+                <select class="js-example-data-array-selected product-price"></select>
                 <button>Найти</button>
             </div>
-            <div class="big-search" onclick="showBigSearch()"><a>Расширенный поиск</a><i class="fa fa-angle-right" aria-hidden="true"></i></div>
+            <div class="big-search-menu">
+                <div class="search-more-precisely-search">
+                    <div class="exact-area">
+                        <select class="js-example-data-array region"></select>
+                    </div>
+                    <div class="the-exact-address">
+                        <select class="js-example-data-array-selected location-metro"></select>
+                        <span class="metro-people"><img src="../../template/images/people.png" alt="people">2мин.</span>
+                    </div>
+                    <button>Задать точнее</button>
+                </div>
+                <button>Найти</button>
+                <ul class="filter-block-big-menu">
+                    <li><select class="js-example-data-array-selected location-apartments"></select></li>
+                    <li><select class="js-example-data-array-selected product-price"></select></li>
+                    <li>
+                        <input id="clast" type="checkbox">
+                        <label for="clast">Торг возможен</label></li>
+                    <li><select class="js-example-data-array-selected owner"></select></li>
+                </ul>
+                <div class="advanced-search-options">
+                    <p>Заполните параметры ниже, для более точного поиска</p>
+                    <ul class="building-parameters">
+                        <li><img src="../../template/images/search-1.png" alt="search">Параметры квартиры</li>
+                        <li><img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры</li>
+                        <li><img src="../../template/images/search-3.png" alt="search">Параметры здания</li>
+                        <li><img src="../../template/images/search-4.png" alt="search">Внешний вид здания</li>
+                        <li><img src="../../template/images/search-5.png" alt="search">Безопасность</li>
+                        <li><img src="../../template/images/search-1.png" alt="search">Документы
+                            <select>
+                                <option>Выберите</option>
+                                <option>Выберите</option>
+                                <option>Выберите</option>
+                            </select>
+                        </li>
+                        <li><img src="../../template/images/search-1.png" alt="search">Вложения
+                            <select>
+                                <option>Выберано</option>
+                                <option>Выберано</option>
+                                <option>Выберано</option>
+                            </select>
+                        </li>
+                    </ul>
+                    <a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i>Поиск по карте</a>
+                </div>
+            </div>
+            <div class="big-search" onclick="showBigSearch()">
+                <a>Расширенный поиск</a>
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+            </div>
         </div>
     </div>
     <div class="section-2">
@@ -638,20 +689,11 @@ foreach ($this->data['script'] as $key => $value) {
         <h2>Лучшие объявления за 24 часа</h2>
             <div class="filter-and-top-blocks">
                 <div class="filter-apartament">
-                    <a><p>тип недвижемости</p>
-                    <select>
-                        <option value="1">Квартира</option>
-                        <option value="2">Квартира</option>
-                    </select></a>
-                    <select>
-                        <option value="3">от 20 000...</option>
-                        <option value="4">от 20 000...</option>
-                    </select>
+                    <p>тип недвижемости</p>
+                    <select class="js-example-data-array"></select>
+                    <select class="js-example-data-array"></select>
                     <p id="style">Площадь</p>
-                    <select>
-                        <option value="5">от 120 м2 до 230 м2</option>
-                        <option value="6">от 120 м2 до 230 м2</option>
-                    </select>
+                    <select class="js-example-data-array"></select>
                 </div>
                 <!-- Основной блок TOP апартаментов -->
                 <div class="all-apartments-top">
