@@ -380,24 +380,44 @@ foreach ($this->data['script'] as $key => $value) {
                 <div class="advanced-search-options">
                     <p>Заполните параметры ниже, для более точного поиска</p>
                     <ul class="building-parameters">
-                        <li><img src="../../template/images/search-1.png" alt="search">Параметры квартиры</li>
-                        <li><img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры</li>
-                        <li><img src="../../template/images/search-3.png" alt="search">Параметры здания</li>
-                        <li><img src="../../template/images/search-4.png" alt="search">Внешний вид здания</li>
-                        <li><img src="../../template/images/search-5.png" alt="search">Безопасность</li>
-                        <li><img src="../../template/images/search-1.png" alt="search">Документы
+                        <li><img src="../../template/images/search-1.png" alt="search">Параметры квартиры
+                        <div class="progress-bar blue stripes">
+                            <span style="width:0%"></span>
+                        </div>
+                        </li>
+                        <li><img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
+                        <div class="progress-bar blue stripes">
+                            <span style="width:40%"></span>
+                        </div>
+                        </li>
+                        <li><img src="../../template/images/search-3.png" alt="search">Параметры здания
+                        <div class="progress-bar blue stripes">
+                            <span style="width:40%"></span>
+                        </div>
+                        </li>
+                        <li><img src="../../template/images/search-4.png" alt="search">Внешний вид здания
+                        <div class="progress-bar blue stripes">
+                            <span style="width:0%"></span>
+                        </div>
+                        </li>
+                        <li><img src="../../template/images/search-5.png" alt="search">Безопасность
                             <select>
                                 <option>Выберите</option>
-                                <option>Выберите</option>
-                                <option>Выберите</option>
+                                <option>Выберите2</option>
+                                <option>Выберите3</option>
+                            </select>
+                        </li>
+                        <li><img src="../../template/images/search-1.png" alt="search">Документы
+                            <select>
+                                <option>Выбрано</option>
+                                <option>Выбрано2</option>
+                                <option>Выбрано3</option>
                             </select>
                         </li>
                         <li><img src="../../template/images/search-1.png" alt="search">Вложения
-                            <select>
-                                <option>Выберано</option>
-                                <option>Выберано</option>
-                                <option>Выберано</option>
-                            </select>
+                        <div class="progress-bar blue stripes">
+                            <span style="width:0%"></span>
+                        </div>
                         </li>
                     </ul>
                     <a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i>Поиск по карте</a>
