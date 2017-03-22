@@ -1,4 +1,5 @@
-var logicBoolean = false,
+'use strict';
+var productSearch = false,
 	showAndHideTopMenu = false;
 /** Хранение данных в библиотеках **/
 var data = [
@@ -24,24 +25,24 @@ var data = [
 	],
 	locationMetro = [
 	{ id: 0, text: 'Третьяковская'},
-	 { id: 1, text: 'Третьяковская' },
-	  { id: 2, text: 'Третьяковская' },
-	  { id: 3, text: 'Третьяковская' },
-	   { id: 4, text: 'Третьяковская' }
+	 { id: 1, text: 'Третьяковская2' },
+	  { id: 2, text: 'Третьяковская3' },
+	  { id: 3, text: 'Третьяковская4' },
+	   { id: 4, text: 'Третьяковская5' }
 	],
 	locationApartaments = [
 	{ id: 0, text: 'Квартира'},
-	 { id: 1, text: 'Квартира' },
-	  { id: 2, text: 'Квартира' },
-	  { id: 3, text: 'Квартира' },
-	   { id: 4, text: 'Квартира' }
+	 { id: 1, text: 'Квартира2' },
+	  { id: 2, text: 'Квартира3' },
+	  { id: 3, text: 'Квартира4' },
+	   { id: 4, text: 'Квартира5' }
 	],
 	owner = [
 	{ id: 0, text: 'Собственник'},
-	 { id: 1, text: 'Собственник' },
-	  { id: 2, text: 'Собственник' },
-	  { id: 3, text: 'Собственник' },
-	   { id: 4, text: 'Собственник' }
+	 { id: 1, text: 'Собственник2' },
+	  { id: 2, text: 'Собственник3' },
+	  { id: 3, text: 'Собственник4' },
+	   { id: 4, text: 'Собственник5' }
 	];
 //---------------------------------------------------------
 
@@ -86,15 +87,26 @@ $(".js-example-data-array-selected, .owner").select2({
 //---------------------------------------------------------
 
 function showBigSearch() {
+	//var searchOptions = $('.big-search');
 
-	logicBoolean = !logicBoolean;
-
-	if (!logicBoolean) {
-		console.log(logicBoolean);
-		return logicBoolean = false;
+	productSearch = !productSearch;
+	
+	if (!productSearch) {
+		$('.search-menu-apartment').css({'display':'inline-block'});
+		$('.big-search-menu').css({'display':'none'});
+		setTimeout(function () {
+			return productSearch = false;
+		}, 900);
+		$('.big-search a i').remove();
+		$('.big-search').html('<i class="fa fa-angle-right" aria-hidden="true"></i>' + '<a>Расширенный поиск</a>');
 	} else {
-		console.log(logicBoolean);
-		return logicBoolean = true;
+		$('.search-menu-apartment').css({'display':'none'});
+		$('.big-search-menu').css({'display':'inline-block'});
+		setTimeout(function () {
+			return productSearch = true;
+		}, 900);
+		$('.big-search a i').remove();
+		$('.big-search').html('<i class="fa fa-angle-left" aria-hidden="true"></i>' + '<a>Простой поиск</a>');
 	}
 }
 
@@ -103,9 +115,13 @@ function showTopMenuAndSearch() {
 
 	if (!showAndHideTopMenu) {
 		$('.user ul').css({'display':'none'});
-		return showAndHideTopMenu = false;
+		setTimeout(function () {
+			return showAndHideTopMenu = false;
+		}, 900);
 	} else {
 		$('.user ul').css({'display':'block'});
-		return showAndHideTopMenu = true;
+		setTimeout(function () {
+			return showAndHideTopMenu = true;
+		}, 900);
 	}
 }
