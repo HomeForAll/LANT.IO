@@ -2128,16 +2128,21 @@
   }
   .filter-block-big-menu {
     margin: auto !important;
-    text-align: center;
+    text-align: center !important;
+    float: none !important;
     li {
       width: 45%;
       padding: 8px 5px;
+      border-right: 1px dotted #e0e0e0;
       vertical-align: top;
       text-align: left;
       &:nth-child(3) {
         padding: 28px 5px;
         font-size: 12px;
         text-align: center;
+      }
+      &:nth-child(4) {
+        border-right: 1px dotted #e0e0e0;
       }
     }
     & .select2-selection__rendered {
@@ -2461,6 +2466,9 @@
       border-radius: 10px;
     }
   }
+  .filter-block-big-menu li {
+    width: 212px;
+  }
   .metro-people {
     margin: auto!important;
   }
@@ -2509,6 +2517,7 @@
   .exact-area, 
   .the-exact-address {
     padding: 8px 0;
+    width: 230px;
   }
   .exact-area .select2-container,
   .the-exact-address .select2-container {
@@ -2522,6 +2531,9 @@
   }
   .select2-container .select2-selection--single {
     height: auto!important;
+  }
+  .search-menu-apartment .select2-selection--single {
+        box-shadow: 0 0 2px 1px rgba(236, 233, 233, 0.73);
   }
   .exact-area .select2-hidden-accessible {
     display: inline-block !important;
@@ -2614,12 +2626,13 @@
     }
   }
   .advanced-search-options {
+    clear: both;
     li {
       display: block;
       background: #fff;
       overflow: hidden;
       clear: both;
-      width: 215px;
+      width: 230px
     }
     p {
       padding: 10px 4px 0;
@@ -2630,14 +2643,19 @@
     }
   } 
   .filter-block-big-menu {
+    float: none !important;
+    margin: auto !important;
+    clear: both;
     input {
-      margin: auto;
+      float: left;
     }
     li {
       padding: 0;
+      width: 310px;
       &:nth-child(3) {
         display: block;
-        width:  90%;
+        margin: auto;
+        width: 310px;
         text-align: center;
         padding: 15px 10px!important;
       } 
@@ -2652,6 +2670,7 @@
   }
   .building-parameters {
     margin-left: 0 !important;
+    float: none !important;
   }
   .big-search-menu {
     display: none;
@@ -2666,6 +2685,12 @@
       float: none;
       font-size: 22px;
       border-radius: 10px;
+    }
+    & .select2-container {
+      width: 75%!important;
+    }
+    & .select2-hidden-accessible {
+      float: left !important;
     }
   }
   .big-search {

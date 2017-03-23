@@ -98,7 +98,7 @@ function showBigSearch() {
 			return productSearch = false;
 		}, 900);
 		$('.big-search a i').remove();
-		$('.big-search').html('<i class="fa fa-angle-right" aria-hidden="true"></i>' + '<a>Расширенный поиск</a>');
+		$('.big-search').html('<a>Расширенный поиск</a>' + '<i class="fa fa-angle-right" aria-hidden="true"></i>');
 	} else {
 		$('.search-menu-apartment').css({'display':'none'});
 		$('.big-search-menu').css({'display':'inline-block'});
