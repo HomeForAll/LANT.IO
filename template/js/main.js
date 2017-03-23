@@ -123,5 +123,8 @@ function showTopMenuAndSearch() {
 		setTimeout(function () {
 			return showAndHideTopMenu = true;
 		}, 900);
+		setTimeout(function () {
+			showTopMenuAndSearch();
+		}, 6500);
 	}
 }
