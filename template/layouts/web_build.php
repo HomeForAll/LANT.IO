@@ -316,14 +316,14 @@ foreach ($this->data['script'] as $key => $value) {
 <?php } else { ?>
 <div id="navigation-true">
     <div class="container-w-0">
-        <div class="logo-img"><a href="#"><img src="../../template/images/logo-true.png" alt="  logo-true"></a></div>
+        <div class="logo-img"><a href="#"><img src="../../template/images/logo-true.png" alt=" logo-true"></a></div>
         <div class="registration-users">
             <div class="place-an-ad">
                 <a href="../../index.php"><img src="../../template/images/add-blue.png" alt="add">Дать объявление</a>
             </div>
             <div class="registration">
-                <div class="message"><img src="../../template/images/notification.png" alt="    notification"></div>
-                <div class="user" onclick="showTopMenuAndSearch()">
+                <div class="message"><img src="../../template/images/notification.png" alt="  notification"></div>
+                <div class="user" onclick="showTopMenuAndSearch();">
                     <div class="users-information">
                         <p>Александр Никулин</p>
                         <span><img src="../../template/images/crown.png" alt="user">Пользователь + </span>
@@ -331,14 +331,14 @@ foreach ($this->data['script'] as $key => $value) {
                     <img src="../../template/images/user.png" alt="user">
                     <ul>
                         <li><a href="#"><img src="../../template/images/m1.png" alt="menu">Мои объявления</a></li>
-                        <li><a href="#"><img src="../../template/images/m2.png" alt="menu"> Избранное</a></li>
+                        <li><a href="#"><img src="../../template/images/m2.png" alt="menu">Избранное</a></li>
                         <li><a href="#"><img src="../../template/images/m3.png" alt="menu">Тех поддержка</a></li>
-                        <li><a href="#"><img src="../../template/images/m4.png" alt="menu"> Настройка профиля</a></li>
-                        <li><a href="#"><img src="../../template/images/m5.png" alt="menu">Выйти  из системы</a></li>
+                        <li><a href="#"><img src="../../template/images/m4.png" alt="menu">Настройка профиля</a></li>
+                        <li><a href="#"><img src="../../template/images/m5.png" alt="menu">Выйти из системы</a></li>
                     </ul>
                 </div>
             </div>
-            <button class="show-and-hide-menu" onclick="showTopMenuAndSearch()"><i class="fa fa-bars" aria-hidden="true"></i></button>
+            <button class="show-and-hide-menu" onclick="showTopMenuAndSearch();"><i class="fa fa-bars" aria-hidden="true"></i></button>
         </div>
     </div>
 </div>
@@ -370,8 +370,22 @@ foreach ($this->data['script'] as $key => $value) {
                 </div>
                 <button>Найти</button>
                 <ul class="filter-block-big-menu">
-                    <li><select class="js-example-data-array-selected location-apartments"></select></li>
-                    <li><select class="js-example-data-array-selected product-price"></select></li>
+                    <li>
+                    <select class="js-example-data-array-selected location-apartments"></select></li>
+                    <li onclick="filterOptions();"><label for="amount">Цена</label>
+                        <div class="showBigOptions">
+                            <p>От<input type="text" id="amountBefore" readonly disabled></p>
+                            <p>До<input type="text" id="amountAfter" readonly disabled></p>
+                            <div id="slider-range"></div>
+                            <div class="currency">
+                                <p>Валюта</p>
+                                <button><i class="fa fa-rub" aria-hidden="true"></i>рубли</button>
+                                <button><i class="fa fa-usd" aria-hidden="true"></i>доллары</button>
+                                <button><i class="fa fa-eur" aria-hidden="true"></i>евро</button>
+                            </div>
+                        </div>
+                        <div class="decorativeShadowBlock"></div>
+                    </li>
                     <li>
                         <input id="clast" type="checkbox">
                         <label for="clast">Торг возможен</label></li>
@@ -382,7 +396,7 @@ foreach ($this->data['script'] as $key => $value) {
                     <ul class="building-parameters">
                         <li><img src="../../template/images/search-1.png" alt="search">Параметры квартиры
                         <div class="progress-bar blue stripes">
-                            <span style="width:0%"></span>
+                            <span style="width:0"></span>
                         </div>
                         </li>
                         <li><img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
@@ -397,7 +411,7 @@ foreach ($this->data['script'] as $key => $value) {
                         </li>
                         <li><img src="../../template/images/search-4.png" alt="search">Внешний вид здания
                         <div class="progress-bar blue stripes">
-                            <span style="width:0%"></span>
+                            <span style="width:0"></span>
                         </div>
                         </li>
                         <li><img src="../../template/images/search-5.png" alt="search">Безопасность
@@ -416,14 +430,14 @@ foreach ($this->data['script'] as $key => $value) {
                         </li>
                         <li><img src="../../template/images/search-1.png" alt="search">Вложения
                         <div class="progress-bar blue stripes">
-                            <span style="width:0%"></span>
+                            <span style="width:0"></span>
                         </div>
                         </li>
                     </ul>
                     <a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i>Поиск по карте</a>
                 </div>
             </div>
-            <div class="big-search" onclick="showBigSearch()">
+            <div class="big-search" onclick="showBigSearch();">
                 <a>Расширенный поиск</a>
                 <i class="fa fa-angle-right" aria-hidden="true"></i>
             </div>
@@ -468,7 +482,7 @@ foreach ($this->data['script'] as $key => $value) {
                 <div class="all-apartments">
                     <!-- Информация одного апартамента -->
                     <div class="block-apartments">
-                        <img src="../../template/images/apartaments/1.png" alt="apartments">
+                        <img src="../../template/images/apartments/1.png" alt="apartments">
                         <span>2-комн. кв. 134м<sup>2</sup></span>
                             <div class="price-of-apartments-and-show-apartments">
                                 <div class="price-of-apartments">
@@ -486,7 +500,7 @@ foreach ($this->data['script'] as $key => $value) {
                     </div>
                     <!-- Закончился первый блок -->
                     <div class="block-apartments">
-                        <img src="../../template/images/apartaments/2.png" alt="apartments">
+                        <img src="../../template/images/apartments/2.png" alt="apartments">
                         <span>2-комн. кв. 134м<sup>2</sup></span>
                             <div class="price-of-apartments-and-show-apartments">
                                 <div class="price-of-apartments">
@@ -503,7 +517,7 @@ foreach ($this->data['script'] as $key => $value) {
                         <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
                     </div>
                     <div class="block-apartments">
-                        <img src="../../template/images/apartaments/3.png" alt="apartments">
+                        <img src="../../template/images/apartments/3.png" alt="apartments">
                         <span>2-комн. кв. 134м<sup>2</sup></span>
                             <div class="price-of-apartments-and-show-apartments">
                                 <div class="price-of-apartments">
@@ -520,7 +534,7 @@ foreach ($this->data['script'] as $key => $value) {
                         <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
                     </div>
                     <div class="block-apartments">
-                        <img src="../../template/images/apartaments/4.png" alt="apartments">
+                        <img src="../../template/images/apartments/4.png" alt="apartments">
                         <span>2-комн. кв. 134м<sup>2</sup></span>
                             <div class="price-of-apartments-and-show-apartments">
                                 <div class="price-of-apartments">
@@ -537,7 +551,7 @@ foreach ($this->data['script'] as $key => $value) {
                         <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
                     </div>
                     <div class="block-apartments">
-                        <img src="../../template/images/apartaments/5.png" alt="apartments">
+                        <img src="../../template/images/apartments/5.png" alt="apartments">
                         <span>2-комн. кв. 134м<sup>2</sup></span>
                             <div class="price-of-apartments-and-show-apartments">
                                 <div class="price-of-apartments">
@@ -554,7 +568,7 @@ foreach ($this->data['script'] as $key => $value) {
                         <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
                     </div>
                     <div class="block-apartments">
-                        <img src="../../template/images/apartaments/6.png" alt="apartments">
+                        <img src="../../template/images/apartments/6.png" alt="apartments">
                         <span>2-комн. кв. 134м<sup>2</sup></span>
                             <div class="price-of-apartments-and-show-apartments">
                                 <div class="price-of-apartments">
@@ -571,7 +585,7 @@ foreach ($this->data['script'] as $key => $value) {
                         <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
                     </div>
                     <div class="block-apartments">
-                        <img src="../../template/images/apartaments/7.png" alt="apartments">
+                        <img src="../../template/images/apartments/7.png" alt="apartments">
                         <span>2-комн. кв. 134м<sup>2</sup></span>
                             <div class="price-of-apartments-and-show-apartments">
                                 <div class="price-of-apartments">
@@ -588,7 +602,7 @@ foreach ($this->data['script'] as $key => $value) {
                         <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
                     </div>
                     <div class="block-apartments">
-                        <img src="../../template/images/apartaments/8.png" alt="apartments">
+                        <img src="../../template/images/apartments/8.png" alt="apartments">
                         <span>2-комн. кв. 134м<sup>2</sup></span>
                             <div class="price-of-apartments-and-show-apartments">
                                 <div class="price-of-apartments">
@@ -605,7 +619,7 @@ foreach ($this->data['script'] as $key => $value) {
                         <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
                     </div>
                     <div class="block-apartments">
-                        <img src="../../template/images/apartaments/1.png" alt="apartments">
+                        <img src="../../template/images/apartments/1.png" alt="apartments">
                         <span>2-комн. кв. 134м<sup>2</sup></span>
                             <div class="price-of-apartments-and-show-apartments">
                                 <div class="price-of-apartments">
@@ -622,7 +636,7 @@ foreach ($this->data['script'] as $key => $value) {
                         <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
                     </div>
                     <div class="block-apartments">
-                        <img src="../../template/images/apartaments/2.png" alt="apartments">
+                        <img src="../../template/images/apartments/2.png" alt="apartments">
                         <span>2-комн. кв. 134м<sup>2</sup></span>
                             <div class="price-of-apartments-and-show-apartments">
                                 <div class="price-of-apartments">
@@ -639,7 +653,7 @@ foreach ($this->data['script'] as $key => $value) {
                         <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
                     </div>
                     <div class="block-apartments">
-                        <img src="../../template/images/apartaments/3.png" alt="apartments">
+                        <img src="../../template/images/apartments/3.png" alt="apartments">
                         <span>2-комн. кв. 134м<sup>2</sup></span>
                             <div class="price-of-apartments-and-show-apartments">
                                 <div class="price-of-apartments">
@@ -656,7 +670,7 @@ foreach ($this->data['script'] as $key => $value) {
                         <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
                     </div>
                     <div class="block-apartments">
-                        <img src="../../template/images/apartaments/4.png" alt="apartments">
+                        <img src="../../template/images/apartments/4.png" alt="apartments">
                         <span>2-комн. кв. 134м<sup>2</sup></span>
                             <div class="price-of-apartments-and-show-apartments">
                                 <div class="price-of-apartments">
@@ -708,7 +722,7 @@ foreach ($this->data['script'] as $key => $value) {
         <div class="top-appertaments">
         <h2>Лучшие объявления за 24 часа</h2>
             <div class="filter-and-top-blocks">
-                <div class="filter-apartament">
+                <div class="filter-apartment">
                     <p>тип недвижемости</p>
                     <select class="js-example-data-array"></select>
                     <select class="js-example-data-array"></select>
@@ -720,7 +734,7 @@ foreach ($this->data['script'] as $key => $value) {
                     <!-- Информация одного TOP апартамента -->
                     <div class="top-block">
                         <div class="left-wallpaper">
-                            <a href="#"><img src="../../template/images/apartaments/1.png" alt="apartments"></a>
+                            <a href="#"><img src="../../template/images/apartments/1.png" alt="apartments"></a>
                             <p>2-комн. кв. 134м<sup>2</sup></p>
                         </div>
                         <div class="right-information-block">
@@ -740,7 +754,7 @@ foreach ($this->data['script'] as $key => $value) {
                     <!-- Закончился первый блок -->
                     <div class="top-block">
                         <div class="left-wallpaper">
-                            <a href="#"><img src="../../template/images/apartaments/2.png" alt="apartments"></a>
+                            <a href="#"><img src="../../template/images/apartments/2.png" alt="apartments"></a>
                             <p>2-комн. кв. 134м<sup>2</sup></p>
                         </div>
                         <div class="right-information-block">
@@ -759,7 +773,7 @@ foreach ($this->data['script'] as $key => $value) {
                     </div>
                     <div class="top-block">
                         <div class="left-wallpaper">
-                            <a href="#"><img src="../../template/images/apartaments/3.png" alt="apartments"></a>
+                            <a href="#"><img src="../../template/images/apartments/3.png" alt="apartments"></a>
                             <p>2-комн. кв. 134м<sup>2</sup></p>
                         </div>
                         <div class="right-information-block">
@@ -778,7 +792,7 @@ foreach ($this->data['script'] as $key => $value) {
                     </div>
                     <div class="top-block">
                         <div class="left-wallpaper">
-                            <a href="#"><img src="../../template/images/apartaments/4.png" alt="apartments"></a>
+                            <a href="#"><img src="../../template/images/apartments/4.png" alt="apartments"></a>
                             <p>2-комн. кв. 134м<sup>2</sup></p>
                         </div>
                         <div class="right-information-block">
@@ -797,7 +811,7 @@ foreach ($this->data['script'] as $key => $value) {
                     </div>
                     <div class="top-block">
                         <div class="left-wallpaper">
-                            <a href="#"><img src="../../template/images/apartaments/5.png" alt="apartments"></a>
+                            <a href="#"><img src="../../template/images/apartments/5.png" alt="apartments"></a>
                             <p>2-комн. кв. 134м<sup>2</sup></p>
                         </div>
                         <div class="right-information-block">
@@ -816,7 +830,7 @@ foreach ($this->data['script'] as $key => $value) {
                     </div>
                     <div class="top-block">
                         <div class="left-wallpaper">
-                            <a href="#"><img src="../../template/images/apartaments/6.png" alt="apartments"></a>
+                            <a href="#"><img src="../../template/images/apartments/6.png" alt="apartments"></a>
                             <p>2-комн. кв. 134м<sup>2</sup></p>
                         </div>
                         <div class="right-information-block">
@@ -835,7 +849,7 @@ foreach ($this->data['script'] as $key => $value) {
                     </div>
                     <div class="top-block">
                         <div class="left-wallpaper">
-                            <a href="#"><img src="../../template/images/apartaments/7.png" alt="apartments"></a>
+                            <a href="#"><img src="../../template/images/apartments/7.png" alt="apartments"></a>
                             <p>2-комн. кв. 134м<sup>2</sup></p>
                         </div>
                         <div class="right-information-block">
@@ -854,7 +868,7 @@ foreach ($this->data['script'] as $key => $value) {
                     </div>
                     <div class="top-block">
                         <div class="left-wallpaper">
-                            <a href="#"><img src="../../template/images/apartaments/8.png" alt="apartments"></a>
+                            <a href="#"><img src="../../template/images/apartments/8.png" alt="apartments"></a>
                             <p>2-комн. кв. 134м<sup>2</sup></p>
                         </div>
                         <div class="right-information-block">
@@ -873,7 +887,7 @@ foreach ($this->data['script'] as $key => $value) {
                     </div>
                     <div class="top-block">
                         <div class="left-wallpaper">
-                            <a href="#"><img src="../../template/images/apartaments/2.png" alt="apartments"></a>
+                            <a href="#"><img src="../../template/images/apartments/2.png" alt="apartments"></a>
                             <p>2-комн. кв. 134м<sup>2</sup></p>
                         </div>
                         <div class="right-information-block">
@@ -1038,6 +1052,7 @@ if (isset($this->data['script_footer'])) {
         ms.rel="stylesheet";ms.href=hf;document.getElementsByTagName("head")[0].appendChild(ms);}
     loadCSS("/bower_components/font-awesome/css/font-awesome.min.css");
     loadCSS("/bower_components/select2/dist/css/select2.min.css");
+    loadCSS("//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css");
     loadCSS("/template/css/style.css");
     loadCSS("/template/css/news_style.css");
 </script>
@@ -1045,6 +1060,7 @@ if (isset($this->data['script_footer'])) {
 <script>
     var scr = {"scripts":[
         {"src" : "//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js", "async" : false},
+        {"src" : "//code.jquery.com/ui/1.12.1/jquery-ui.js", "async" : false},
         {"src" : "//api-maps.yandex.ru/2.1/?lang=ru_RU", "async" : false},
         {"src" : "/template/js/mapController.js", "async" : false},
         {"src" : "/template/js/forms.editor.handler.js", "async" : false},
