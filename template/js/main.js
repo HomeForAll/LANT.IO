@@ -2,6 +2,7 @@
 var productSearch = false,
     filterOptionsBoolean = false,
 	showAndHideTopMenu = false,
+	pointer = false,
 /** Фильтры бибилотек **/
 	data = [
 	{ id: 0, text: 'Москва и область' },
@@ -115,17 +116,13 @@ function showBigSearch() {
 	if (!productSearch) {
 		$('.search-menu-apartment').css({'display':'inline-block'});
 		$('.big-search-menu').css({'display':'none'});
-		setTimeout(function () {
-			return productSearch = false;
-		}, 900);
+		return productSearch = false;
 		$('.big-search a i').remove();
 		$('.big-search').html('<a>Расширенный поиск</a>' + '<i class="fa fa-angle-right" aria-hidden="true"></i>');
 	} else {
 		$('.search-menu-apartment').css({'display':'none'});
 		$('.big-search-menu').css({'display':'inline-block'});
-		setTimeout(function () {
-			return productSearch = true;
-		}, 900);
+		return productSearch = true;
 		$('.big-search a i').remove();
 		$('.big-search').html('<i class="fa fa-angle-left" aria-hidden="true"></i>' + '<a>Простой поиск</a>');
 	}
@@ -148,17 +145,51 @@ function filterOptions() {
 
     filterOptionsBoolean = !filterOptionsBoolean;
 
-	console.log('Работает', filterOptionsBoolean + ' --------------------');
-
 	if (!filterOptionsBoolean) {
 		$('.showBigOptions').css({'display':'none'});
 		$('.decorativeShadowBlock').css({'display':'none'});
-        console.log('false - ', filterOptionsBoolean);
         return filterOptionsBoolean = false;
 	} else {
 		$('.showBigOptions').css({'display':'block'});
 		$('.decorativeShadowBlock').css({'display':'block'});
-        console.log('true - ', filterOptionsBoolean);
         return filterOptionsBoolean = true;
 	}
 }
+
+$('.select2-selection--single').on('click', function () {
+
+    pointer = !pointer;
+
+    if(pointer) {
+        $(this).css({
+            'background':'url("../../template/images/pointer_top.png") right center no-repeat',
+            'background-size': 'auto'
+        });
+        return pointer = true;
+    } else {
+        $(this).css({
+            'background':'url("../../template/images/pointer_bottom.png") right center no-repeat',
+            'background-size': 'auto'
+        });
+        return pointer = false;
+    }
+});
+
+$('.filter-block-big-menu label').on('click', function () {
+
+    pointer = !pointer;
+
+    if(pointer) {
+        $(this).css({
+            'background':'url("../../template/images/pointer_top.png") right 15px center no-repeat',
+            'background-size': 'auto'
+        });
+        return pointer = true;
+    } else {
+        $(this).css({
+            'background':'url("../../template/images/pointer_bottom.png") right 15px center no-repeat',
+            'background-size': 'auto'
+        });
+        return pointer = false;
+    }
+});

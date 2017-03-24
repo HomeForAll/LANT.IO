@@ -270,12 +270,11 @@
 .search-menu-apartment {
   position: relative;
   display: inline-block;
-  margin: auto;
+  margin: -3px auto 0;
   background: #fff;
   z-index: 5;
   overflow: hidden;
   border-radius: 5px;
-  margin-top: -3px;
   button {
     float: right;
     background: #71cb6f;
@@ -296,12 +295,10 @@
 .big-search-menu {
   position: relative;
   display: none;
-  margin: auto;
+  margin: -3px auto 0;
   background: #fff;
   z-index: 5;
-  overflow: hidden;
   border-radius: 5px;
-  margin-top: -3px;
   button {
     position: relative;
     float: right;
@@ -350,6 +347,12 @@
 .filter-block-big-menu {
   display: block;
   background: #fff !important;
+  margin: 0 !important;
+  label {
+    width: 75%!important;
+    margin: 10px auto;
+    padding: 0 30px 0!important;
+  }
   li {
     background: #fff;
     color: #000;
@@ -357,15 +360,11 @@
     padding: 15px 0;
     border-radius: 0;
     &:nth-child(2) {
-      border-right: 2px dotted #e0e0e0;
-      padding: 15px 30px;
-      cursor: pointer;
-      background: url('../../template/images/s3.png') left 10px center no-repeat, url('../../template/images/pointer_bottom.png') right 10px center no-repeat;
-      background-size: auto, auto;
-      min-width: 180px;
+      background: url('../../template/images/s3.png') left 10px center no-repeat;
+      background-size: auto;
       &:hover {
-        background: url('../../template/images/s3.png') left 10px center no-repeat, url('../../template/images/pointer_bottom.png') right 10px center no-repeat;
-        background-size: auto, auto;
+        background: url('../../template/images/s3.png') left 10px center no-repeat;
+        background-size: auto;
       }
     }
     &:nth-child(3) {
@@ -380,7 +379,18 @@
       border: none;
     }
   }
+  label {
+    display: inline-block;
+    border-right: 2px dotted #e0e0e0;
+    background: url('../../template/images/pointer_bottom.png') right 15px center no-repeat;
+    background-size: auto;
+    cursor: pointer;
+    padding: 15px 0 !important;
+    margin-right: 20px;
+    min-width: 180px !important;
+  }
   input[type="checkbox"] {
+    display: inline-block;
     width: 17px;
     height: 17px;
     color: #444;
@@ -401,6 +411,43 @@
   & .select2-selection__rendered {
     text-align: left !important;
     padding: 8px 20px 8px 5px!important;
+  }
+}
+
+.property-type-apartment-settings {
+  position: absolute;
+  width: 500px;
+  display: inline-block;
+  z-index: 12;
+  ul {
+    position: relative;
+    display: inline-block;
+    width: 45%;
+    vertical-align: top;
+    padding: 5px;
+    margin: 5px;
+    background: red;
+    border: none;
+    border-radius: 0;
+  }
+  li {
+    display: block;
+    cursor: pointer;
+    text-align: left;
+    padding: 5px;
+    &:nth-child(2) {
+      background: #fff;
+      &:hover {
+        background: blue;
+      }
+    }
+    &:hover {
+      background: blue;
+    }
+    &:active {
+      background: blue;
+      color: orange;
+    }
   }
 }
 
@@ -429,11 +476,10 @@
     text-align: right;
     width: 70%;
     padding: 8px 10px;
-    margin: auto 5px;
+    margin: auto 5px auto 10px;
     background: #f7f7f7;
     border-radius: 3px;
     border: none;
-    margin-left: 10px;
   }
   label {
     cursor: pointer;

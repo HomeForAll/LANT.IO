@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title><?php $this->title(); ?></title>
     <?php
-        // Подключение стилей в контроллере
+    // Подключение стилей в контроллере
     if (isset($this->data['css'])) {
         foreach ($this->data['css'] as $key => $value) {
             echo '<link rel="stylesheet"  href="/template/css/'.$value.'">'."\r\n";
@@ -326,7 +326,7 @@ foreach ($this->data['script'] as $key => $value) {
                 <div class="user" onclick="showTopMenuAndSearch();">
                     <div class="users-information">
                         <p>Александр Никулин</p>
-                        <span><img src="../../template/images/crown.png" alt="user">Пользователь + </span>
+                        <span><img src="../../template/images/crown.png" alt="user">Пользователь +</span>
                     </div>
                     <img src="../../template/images/user.png" alt="user">
                     <ul>
@@ -371,7 +371,27 @@ foreach ($this->data['script'] as $key => $value) {
                 <button>Найти</button>
                 <ul class="filter-block-big-menu">
                     <li>
-                    <select class="js-example-data-array-selected location-apartments"></select></li>
+                        <div class="property-type-apartment-settings">
+                            <ul>
+                                <li>Жилая</li>
+                                <li>Квартира</li>
+                                <li>Дом</li>
+                                <li>Комната</li>
+                                <li>Земельный участок</li>
+                                <li>Гараж/машиноместо</li>
+                            </ul>
+                            <ul>
+                                <li>Коммерческая</li>
+                                <li>Офисная площадь</li>
+                                <li>Отдельно стоящее здание</li>
+                                <li>Комплекс ОСЗ</li>
+                                <li>Рынок/Ярмарка</li>
+                                <li>Производственно-складские помещения</li>
+                                <li>Производственно-складские здания</li>
+                                <li>Недвижимость для туризма и отдыха</li>
+                            </ul>
+                        </div>
+                    </li>
                     <li onclick="filterOptions();"><label for="amount">Цена</label>
                         <div class="showBigOptions">
                             <p>От<input type="text" id="amountBefore" readonly disabled></p>
@@ -1035,10 +1055,10 @@ foreach ($this->data['script'] as $key => $value) {
     </div>
 </div>
 <!-- Preloader -->
-<style type="text/css">#hellopreloader>#hellopreloader_preload{position:fixed;z-index:99999;top:0;left:0;right:0;bottom:0;width:100vw;height:100vh;
+<!--<style type="text/css">#hellopreloader>#hellopreloader_preload{position:fixed;z-index:99999;top:0;left:0;right:0;bottom:0;width:100vw;height:100vh;
     background: url('../../template/images/puff.svg') center no-repeat, url('../../template/images/access_background.jpg') center no-repeat;background-size:123px,cover;}</style>
 <div id="hellopreloader"><div id="hellopreloader_preload"></div></div>
-<script type="text/javascript">var hellopreloader = document.getElementById("hellopreloader_preload");function fadeOutnojquery(el){el.style.opacity = 1;var interhellopreloader = setInterval(function(){el.style.opacity = el.style.opacity - 0.05;if (el.style.opacity <=0.05){ clearInterval(interhellopreloader);hellopreloader.style.display = "none";}},16);}window.onload = function(){setTimeout(function(){fadeOutnojquery(hellopreloader);},1000);};</script>
+<script type="text/javascript">var hellopreloader = document.getElementById("hellopreloader_preload");function fadeOutnojquery(el){el.style.opacity = 1;var interhellopreloader = setInterval(function(){el.style.opacity = el.style.opacity - 0.05;if (el.style.opacity <=0.05){ clearInterval(interhellopreloader);hellopreloader.style.display = "none";}},16);}window.onload = function(){setTimeout(function(){fadeOutnojquery(hellopreloader);},1000);};</script>-->
     <?php
 // Подключение скрипта в контролле../../template/images/1.pngре для футера
 if (isset($this->data['script_footer'])) {
