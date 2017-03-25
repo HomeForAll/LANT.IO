@@ -370,29 +370,30 @@ foreach ($this->data['script'] as $key => $value) {
                 </div>
                 <button>Найти</button>
                 <ul class="filter-block-big-menu">
-                    <li>
+                    <li onclick="filterOptionsApartments();"><img src="../../template/images/apartments.png" alt="apartments">Тип недвижимости
                         <div class="property-type-apartment-settings">
                             <ul>
                                 <li>Жилая</li>
-                                <li>Квартира</li>
-                                <li>Дом</li>
-                                <li>Комната</li>
-                                <li>Земельный участок</li>
-                                <li>Гараж/машиноместо</li>
+                                <li><img src="../../template/images/b-s-1.png" alt="icon">Квартира</li>
+                                <li><img src="../../template/images/b-s-2.png" alt="icon">Дом</li>
+                                <li><img src="../../template/images/b-s-3.png" alt="icon">Комната</li>
+                                <li><img src="../../template/images/b-s-4.png" alt="icon">Земельный участок</li>
+                                <li><img src="../../template/images/b-s-5.png" alt="icon">Гараж/машиноместо</li>
                             </ul>
                             <ul>
                                 <li>Коммерческая</li>
-                                <li>Офисная площадь</li>
-                                <li>Отдельно стоящее здание</li>
-                                <li>Комплекс ОСЗ</li>
-                                <li>Рынок/Ярмарка</li>
-                                <li>Производственно-складские помещения</li>
-                                <li>Производственно-складские здания</li>
-                                <li>Недвижимость для туризма и отдыха</li>
+                                <li><img src="../../template/images/b-s-6.png" alt="icon">Офисная площадь</li>
+                                <li><img src="../../template/images/b-s-1.png" alt="icon">Отдельно стоящее здание</li>
+                                <li><img src="../../template/images/b-s-7.png" alt="icon">Комплекс ОСЗ</li>
+                                <li><img src="../../template/images/b-s-8.png" alt="icon">Рынок/Ярмарка</li>
+                                <li><img src="../../template/images/b-s-9.png" alt="icon">Производственно-складские помещения</li>
+                                <li><img src="../../template/images/b-s-10.png" alt="icon">Производственно-складские здания</li>
+                                <li><img src="../../template/images/b-s-11.png" alt="icon">Недвижимость для туризма и отдыха</li>
                             </ul>
                         </div>
+                        <div class="decorativeShadowBlock"></div>
                     </li>
-                    <li onclick="filterOptions();"><label for="amount">Цена</label>
+                    <li onclick="filterOptions();"><label for="amount" class="js-example-templating">Цена</label>
                         <div class="showBigOptions">
                             <p>От<input type="text" id="amountBefore" readonly disabled></p>
                             <p>До<input type="text" id="amountAfter" readonly disabled></p>
