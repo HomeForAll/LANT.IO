@@ -221,8 +221,8 @@
 }
 
 .section-1 {
-  padding-top: 410px;
-  padding-bottom: 372px;
+  padding-top: 210px;
+  padding-bottom: 100px;
   background: url("../../template/images/background-1.png") no-repeat top center;
   background-size: cover;
   text-align: center;
@@ -564,7 +564,7 @@
     border-radius: 30px;
     border: 1px solid #e0e0e0;
     font-size: 13px;
-    margin: 5px;
+    margin: 5px 3px;
     background: 0;
     float: none;
     width: initial;
@@ -611,6 +611,7 @@
     background: #fff;
     overflow: hidden;
     clear: both;
+    cursor: pointer;
     width: 23%;
     font-weight: 500;
     text-align: left;
@@ -662,6 +663,119 @@
 
 .building-parameters li {
   vertical-align: top;
+}
+
+.apartment-settings {
+  position: absolute;
+  display: none;
+  width: 800px;
+  z-index: 60;
+  margin: 15px auto;
+  background: #f9f9f9;
+  text-align: center !important;
+  h2 {
+    font-size: 20px;
+    padding: 15px 0;
+    font-weight: 300;
+    background: #efefef;
+  }
+  ul {
+    display: inline-block;
+    vertical-align: top;
+    width: 49.5%;
+    margin: 0;
+  }
+  li {
+    display: block;
+    width: auto;
+    text-align: right;
+    margin: auto;
+    color: #474747;
+    clear: both;
+    padding: 15px;
+  }
+  p {
+    display: inline-block;
+    vertical-align: top;
+    text-align: left;
+    padding: 0;
+    width: 60%;
+    & span {
+      display: inline-block;
+      vertical-align: middle;
+      cursor: pointer;
+      color: #252525;
+      width: 35px;
+      height: 35px;
+      line-height: 35px;
+      border-radius: 100%;
+      &:hover {
+        background: #71cb6f;
+        color: #fff;
+      }
+    }
+  }
+  a {
+    background: none;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    margin: auto;
+    &:hover {
+      background: none;
+    }
+  }
+  input {
+    color: #000;
+    padding: 10px;
+    margin: auto 7px;
+    width: 75px;
+    height: auto;
+    border: none;
+    background: #fff;
+    box-shadow: 0 5px 15px 1px #ebebeb;
+    border-radius: 4px;
+    &:valid {
+      border: 1px solid green;
+    }
+    &:invalid {
+      border: none;
+    }
+  }
+  select {
+    display: none !important;
+  }
+  button {
+    display: block;
+    text-align: center;
+    padding: 15px;
+    border-radius: 50px;
+    border: 1px solid #d0d0d0;
+    background: #71cb6f;
+    color: #fff;
+    cursor: pointer;
+    width: 220px;
+    margin: 20px auto;
+  }
+  & .select2-container {
+    display: inline-block;
+    vertical-align: middle;
+    border: none!important;
+    box-shadow: 0 5px 15px 1px #ebebeb;
+    width: 60%!important;
+    margin: 0;
+    padding: 0 20px 0!important;
+  }
+  & .select2-selection__rendered {
+    text-align: left;
+  }
+}
+
+.names-parametrs {
+  display: inline-block;
+  width: 95px;
+  text-align: left;
+  float: left;
 }
 
 .metro-people {
@@ -1252,8 +1366,8 @@
   p {
     display: inline-block;
     vertical-align: middle;
-    margin-right: 49px;
     font-size: 13px;
+    margin-top: 8px;
     font-weight: 300;
     color: #a8a8a8;
   }
@@ -2164,15 +2278,57 @@
     border-right: none!important;
     padding: 0 10px 0 25px!important;
   }
-  .search-more-precisely-search {
-    width: 57%;
-  }
   .users-information p {
     font-size: 11px;
   }
   .place-an-ad, .registration,
   .message {
     margin: 0;
+  }
+  .apartment-settings {
+    width: auto;
+    left: 10vw;
+    right: 10vw;
+    ul {
+      margin: auto !important;
+      float: none !important;
+      width: 48% !important;
+    }
+    li {
+      display: block;
+      padding: 20px 10px;
+      width: auto !important;
+    }
+    input {
+      margin: 8px 12px;
+      width: 75%;
+    }
+    p {
+      display: block;
+      width: auto;
+      text-align: center;
+      & span {
+        width: 25px;
+        height: 25px;
+        font-size: 11px;
+        line-height: 25px;
+      }
+    }
+    select {
+      display: none !important;
+    }
+    & .select2-selection__rendered {
+      width: auto !important;
+    }
+    & .select2-container {
+       width: 100% !important;
+    }
+  }
+  .names-parametrs {
+    display: block;
+    width: auto;
+    float: none;
+    text-align: center;
   }
   .place-an-ad {
     display: none;
@@ -2249,23 +2405,35 @@
       border-radius: 10px;
     }
   }
-  .search-more-precisely-search {
-    display: block;
-    margin-left: 0;
-    width: auto!important;
-  }
   .big-search-menu {
     text-align: center;
     padding: 0;
     width: 95%;
     button {
       display: inline-block;
-      float: none;
+      float: none !important;
       margin: 15px auto;
       padding: 15px 5px;
       width: 260px;
       font-size: 22px;
       border-radius: 10px;
+    }
+    select {
+      display: inline-block;
+      margin: auto;
+    }
+    & .select2-selection__rendered {
+      display: block!important;
+      padding: 5px 10px 0 30px!important;
+      width: 155px!important;
+      font-size: 12px;
+    }
+    & .select2-selection--single {
+      height: 30px!important;
+    }
+    & .select2-container {
+      width: 80%!important;
+      padding: 0!important;
     }
   }
   .select2-container {
@@ -2298,37 +2466,23 @@
     z-index: 50 !important;
     float: none;
   }
-  .big-search-menu {
-    select {
-      display: inline-block !important;
-      margin: auto !important;
-    }
-    & .select2-selection__rendered {
-      display: block!important;
-      padding: 5px 10px 0 30px!important;
-      width: 155px!important;
-      font-size: 12px;
-    }
-    & .select2-selection--single {
-      height: 30px!important;
-    }
-    & .select2-container {
-      width: 80%!important;
-      padding: 0!important;
-    }
-  }
   .exact-area, .the-exact-address {
     display: inline-block;
     vertical-align: top;
-    padding: 20px 10px 0;
+    padding: 15px 10px 0;
   }
-  .search-more-precisely-search button {
-    display: inline-block;
-    float: right;
-    margin: 17px auto 0;
-    padding: 15px 5px;
-    width: 165px;
-    font-size: 14px;
+  .search-more-precisely-search {
+    display: block;
+    margin-left: 0;
+    width: auto!important;
+    button {
+      display: inline-block;
+      float: left;
+      margin: 22px auto 0;
+      padding: 15px 5px;
+      width: 165px;
+      font-size: 14px;
+    }
   }
   .filter-block-big-menu .select2-hidden-accessible {
     margin: auto !important;
@@ -2496,6 +2650,15 @@
     display: block;
     width: auto;
     padding: 35px 10px;
+  }
+  .filter-apartment {
+    p {
+      margin: 0;
+    }
+    & .select2-container {
+      width: 24%!important;
+      line-height: 30px;
+    }
   }
   .schedule, .schedule-interface  {
     width: auto;
@@ -2692,7 +2855,7 @@
       margin: 10px auto;
       padding: 15px;
       width: 210px;
-      float: none;
+      float: none !important;
       font-size: 22px;
       border-radius: 10px;
     }
@@ -2766,6 +2929,19 @@
       float: none !important;
     }
     p {
+      text-align: center;
+    }
+  }
+  .apartment-settings {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: auto;
+    ul {
+      width: auto !important;
+      display: block;
+    }
+    li {
       text-align: center;
     }
   }
@@ -2947,6 +3123,12 @@
     margin-left: 0 !important;
     float: none !important;
   }
+  .decorate-number sub {
+    margin-top: 3px;
+  }
+  .view-the-apartment {
+    margin: auto;
+  }
   .big-search-menu {
     display: none;
     width: 100%;
@@ -2954,10 +3136,10 @@
     text-align: center;
     button {
       display: block;
-      margin: 10px auto;
+      float: none !important;
+      margin: 15px auto;
       padding: 15px;
       width: 210px;
-      float: none;
       font-size: 22px;
       border-radius: 10px;
     }

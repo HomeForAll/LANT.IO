@@ -1,6 +1,7 @@
 'use strict';
 var productSearch = false,
     showAndHideTopMenu = false,
+    logicBooleanSpan = false,
     /** Фильтры бибилотек **/
     data = [
         {id: 0, text: 'Москва и область'},
@@ -43,6 +44,20 @@ var productSearch = false,
         {id: 2, text: 'Собственник3'},
         {id: 3, text: 'Собственник4'},
         {id: 4, text: 'Собственник5'}
+    ],
+    floor = [
+    	{id: 0, text: 'Любой'},
+    	{id: 1, text: 'Любой2'},
+    	{id: 2, text: 'Любой3'},
+    	{id: 3, text: 'Любой4'},
+    	{id: 4, text: 'Любой5'}
+    ],
+    equipment = [
+    	{id: 0, text: 'Комплектация'},
+    	{id: 1, text: 'Комплектация2'},
+    	{id: 2, text: 'Комплектация3'},
+    	{id: 3, text: 'Комплектация4'},
+    	{id: 4, text: 'Комплектация5'}
     ];
 //---------------------------------------------------------
 
@@ -85,6 +100,12 @@ $('.js-example-data-array, .location-apartments').select2({
 $('.js-example-data-array, .owner').select2({
     data: owner
 });
+$('.js-example-data-array, .floor').select2({
+    data: floor
+});
+$('.js-example-data-array, .equipment').select2({
+    data: equipment
+});
 //---------------------------------------------------------
 $('.js-example-data-array-selected, .region').select2({
     data: data
@@ -104,8 +125,15 @@ $('.js-example-data-array-selected, .location-apartments').select2({
 $('.js-example-data-array-selected, .owner').select2({
     data: owner
 });
+$('.js-example-data-array-selected, .floor').select2({
+    data: floor
+});
+$('.js-example-data-array-selected, .equipment').select2({
+    data: equipment
+});
 //---------------------------------------------------------
 
+/** Отслежка и изменение расширенного и простого блока **/
 function showBigSearch() {
     var searchTeg = $('.big-search a i'),
         bigSearch = $('.big-search');
@@ -125,8 +153,9 @@ function showBigSearch() {
         bigSearch.html('<i class="fa fa-angle-left" aria-hidden="true"></i>' + '<a>Простой поиск</a>');
         return productSearch = true;
     }
-}
+};
 
+/** Header меню **/
 function showTopMenuAndSearch() {
     var user = $('.user ul');
 
@@ -140,34 +169,53 @@ function showTopMenuAndSearch() {
         showAndHideTopMenu = true;
     }
 }
-
-function filterOptions() {
-    var showBigOptions = $('.showBigOptions, .decorativeShadowBlock');
-
-    showBigOptions.css({'display': 'block'});
-    setTimeout(function () {
-        showBigOptions.css({'display': 'none'});
-    }, 6500);
-}
-
+//---------------------------------------------------------
+/** Блоки с фильтрами **/
 function filterOptionsApartments() {
     var propertyTypeApartmentSettings = $('.property-type-apartment-settings, .decorativeShadowBlock');
+    console.log('Работает первая функция');
 
     propertyTypeApartmentSettings.css({'display': 'block'});
     setTimeout(function () {
         propertyTypeApartmentSettings.css({'display': 'none'});
-    }, 6500);
+    }, 5000);
+}
+
+function filterOptions() {
+    var showBigOptions = $('.showBigOptions, .decorativeShadowBlock');
+    console.log('Работает вторая функция');
+
+    showBigOptions.css({'display': 'block'});
+    setTimeout(function () {
+        showBigOptions.css({'display': 'none'});
+    }, 5000);
+}
+
+function apartmentSettings() {
+	var apartmentSettings = $('.apartment-settings, .decorativeShadowBlock');
+    console.log('Работает третья функция');
+
+    apartmentSettings.css({'display': 'block'});
+    setTimeout(function () {
+        apartmentSettings.css({'display': 'none'});
+    }, 5000);
 }
 
 $('.select2-selection--single').on('click', function () {
-    $(this).css({
-        'background': 'url("../../template/images/pointer_bottom.png") right 5px center no-repeat #fff',
-        'background-size': 'auto'
-    });
-    setTimeout(function () {
-        $(this).css({
-            'background': 'url("../../template/images/pointer_top.png") right 5px center no-repeat #fff',
+	logicBooleanSpan = !logicBooleanSpan;
+
+	if(!logicBooleanSpan) {
+		$(this).css({
+            'background': 'url("../../template/images/pointer_bottom.png") right 5px center no-repeat #fff',
             'background-size': 'auto'
         });
-    }, 6500);
-});
+		return logicBooleanSpan = false;
+	} else {
+		$(this).css({
+        	'background': 'url("../../template/images/pointer_top.png") right 5px center no-repeat #fff',
+        	'background-size': 'auto'
+   		});
+		return logicBooleanSpan = true;
+	}
+})
+//---------------------------------------------------------
