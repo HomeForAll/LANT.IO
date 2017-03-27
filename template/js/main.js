@@ -2,6 +2,17 @@
 var productSearch = false,
     showAndHideTopMenu = false,
     logicBooleanSpan = false,
+    imagesWidth = 130,
+    valueButton = {
+        'more': (function () {
+            imagesWidth += 10;
+            return imagesWidth;
+        }),
+        'less': (function () {
+            imagesWidth -= 10;
+            return imagesWidth;
+        })
+    },
     /** Фильтры бибилотек **/
     data = [
         {id: 0, text: 'Москва и область'},
@@ -23,13 +34,6 @@ var productSearch = false,
         {id: 2, text: 'Цена3'},
         {id: 3, text: 'Цена4'},
         {id: 4, text: 'Цена5'}
-    ],
-    locationMetro = [
-        {id: 0, text: 'Третьяковская'},
-        {id: 1, text: 'Третьяковская2'},
-        {id: 2, text: 'Третьяковская3'},
-        {id: 3, text: 'Третьяковская4'},
-        {id: 4, text: 'Третьяковская5'}
     ],
     locationApartments = [
         {id: 0, text: 'Квартира'},
@@ -91,9 +95,6 @@ $('.js-example-data-array, .offices').select2({
 $('.js-example-data-array, .product-price').select2({
     data: productPrice
 });
-$('.js-example-data-array, .location-metro').select2({
-    data: locationMetro
-});
 $('.js-example-data-array, .location-apartments').select2({
     data: locationApartments
 });
@@ -115,9 +116,6 @@ $('.js-example-data-array-selected, .offices').select2({
 });
 $('.js-example-data-array-selected, .product-price').select2({
     data: productPrice
-});
-$('.js-example-data-array-selected, .location-metro').select2({
-    data: locationMetro
 });
 $('.js-example-data-array-selected, .location-apartments').select2({
     data: locationApartments
@@ -153,7 +151,7 @@ function showBigSearch() {
         bigSearch.html('<i class="fa fa-angle-left" aria-hidden="true"></i>' + '<a>Простой поиск</a>');
         return productSearch = true;
     }
-};
+}
 
 /** Header меню **/
 function showTopMenuAndSearch() {
@@ -173,7 +171,6 @@ function showTopMenuAndSearch() {
 /** Блоки с фильтрами **/
 function filterOptionsApartments() {
     var propertyTypeApartmentSettings = $('.property-type-apartment-settings, .decorativeShadowBlock');
-    console.log('Работает первая функция');
 
     propertyTypeApartmentSettings.css({'display': 'block'});
     setTimeout(function () {
@@ -183,7 +180,6 @@ function filterOptionsApartments() {
 
 function filterOptions() {
     var showBigOptions = $('.showBigOptions, .decorativeShadowBlock');
-    console.log('Работает вторая функция');
 
     showBigOptions.css({'display': 'block'});
     setTimeout(function () {
@@ -193,12 +189,20 @@ function filterOptions() {
 
 function apartmentSettings() {
 	var apartmentSettings = $('.apartment-settings, .decorativeShadowBlock');
-    console.log('Работает третья функция');
 
     apartmentSettings.css({'display': 'block'});
     setTimeout(function () {
         apartmentSettings.css({'display': 'none'});
     }, 5000);
+}
+
+function searchMetroMainBlock() {
+    var searchMetro = $('.search-metro-main-block, .decorativeShadowBlock');
+
+    searchMetro.css({'display': 'block'});
+    setTimeout(function () {
+        searchMetro.css({'display': 'none'});
+    }, 10000);
 }
 
 $('.select2-selection--single').on('click', function () {
@@ -217,5 +221,20 @@ $('.select2-selection--single').on('click', function () {
    		});
 		return logicBooleanSpan = true;
 	}
-})
+});
 //---------------------------------------------------------
+
+function moreAndLess(sizeImage) {
+   var img = $('.metro-location img');
+
+    valueButton[sizeImage]();
+
+    if (imagesWidth > 150) {
+        return imagesWidth = 150;
+    }
+    if (imagesWidth < 100) {
+        return imagesWidth = 100;
+    }
+
+    img.css({'width': + imagesWidth + '%'});
+}

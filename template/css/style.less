@@ -303,6 +303,7 @@
     position: relative;
     float: right;
     background: #71cb6f;
+    border-radius: 0 5px 0 0;
     color: #f7fcf7;
     border: none;
     cursor: pointer;
@@ -371,10 +372,10 @@
       background-size: auto;
     }
     &:nth-child(2) {
-      background: url('../../template/images/s3.png') left 10px center no-repeat;
+      background: url('../../template/images/s3.png') left 5px center no-repeat;
       background-size: auto;
       &:hover {
-        background: url('../../template/images/s3.png') left 10px center no-repeat;
+        background: url('../../template/images/s3.png') left 5px center no-repeat;
         background-size: auto;
       }
     }
@@ -771,6 +772,17 @@
   }
 }
 
+.location-metro-map {
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+  padding: 15px 25px;
+  color: #444 !important;
+  width: 110%;
+  background: url("../../template/images/m.png") no-repeat left 5px center;
+  background-size: auto;
+}
+
 .names-parametrs {
   display: inline-block;
   width: 95px;
@@ -779,17 +791,22 @@
 }
 
 .metro-people {
-  margin-left: -32px !important;
+  margin-left: 10px;
+}
+
+.the-exact-address {
+  margin-top: -8px;
 }
 
 .exact-area, .the-exact-address {
   display: inline-block;
   vertical-align: middle;
+  padding-top: 4px;
   & .select2-selection--single {
     background: none !important;
   }
   & .select2-container {
-    width: 80%!important;
+    width: 60%!important;
     border-right: none!important;
     padding: 10px 30px 0 25px!important;
   }
@@ -808,6 +825,147 @@
     }
   }
 }
+
+.search-metro-main-block {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 830px;
+  border-radius: 6px 0 0 0;
+  z-index: 60;
+  background: #e8e8e8;
+  span {
+    background: #f7f7f7;
+    color: #828282;
+    vertical-align: middle;
+    border-radius: 4px;
+  }
+  i {
+    color: #7e7e7e;
+    font-size: 10px;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+}
+
+.top-search-results {
+  padding: 17px 40px 11px;
+  border-radius: 6px 0 0 0;
+  background: #fff;
+  text-align: left;
+  span {
+    padding: 10px;
+    margin-right: 10px; 
+  }
+}
+
+.metro-location-and-travel-information {
+  display: block;
+  position: relative;
+  &:before {
+    content: '';
+    position: absolute;
+    width: 70%;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: linear-gradient(to top, rgba(255, 255, 255, 0.45), rgba(0, 0, 0, 0.30));
+  }
+}
+
+.metro-location {
+  display: inline-block;
+  position: relative;
+  vertical-align: top;
+  overflow: hidden;
+  text-align: center;
+  width: 70%;
+  img {
+    z-index: 9;
+    width: 130%;
+    height: 100%;
+    margin-top: calc(-63px);
+  }
+}
+
+.travel-information {
+  display: inline-block;
+  position: relative;
+  padding: 10px 5px;
+  vertical-align: top;
+  text-align: center;
+  width: 29.5%;
+  background: #e8e8e8;
+  img {
+    vertical-align: middle;
+    margin-right: 10px;
+  }
+  p {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+    font-size: 14px;
+    color: #b9b9b9;
+    width: 48%;
+  }
+  input {
+    border: none;
+    font-size: 33px;
+    text-align: center;
+    color: #828282;
+    background: #e8e8e8;
+  }
+  button {
+    margin: 15px auto;
+    background: #71cb6f;
+    color: #fff;
+    width: 120px;
+    border-radius: 30px;
+    padding: 10px;
+    float: none;
+    display: inline-block;
+    &:hover {
+      background: #41b43f;
+    }
+  }
+}
+
+.panel-move {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100px;
+  z-index: 10;
+  span {
+    display: block;
+    background: #9ebfe9;
+    cursor: pointer;
+    text-align: center;
+    line-height: 45px;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    margin: 15px auto;
+  }
+  i {
+    margin: 0;
+    font-size: 17px;
+    color: #e8f0fa;
+  }
+}
+
+.distance-on-foot, .distance-on-transport {
+  padding: 10px 0;
+}
+
+.timer {
+  display: block !important;
+  color: #828282 !important;
+  font-size: 12px !important;
+  background: #e8e8e8 !important;
+}
+
 /** Замена стилей бибилотеки select2 **/
 .select2-results__option {
   width: 100% !important;
@@ -1335,7 +1493,7 @@
   }
 }
 
-.top-appertaments {
+.top-apartments {
   width: 1438px;
   padding-right: 5px;
   margin: auto;
@@ -2088,7 +2246,7 @@
     font-size: 12px;
   }
   .scroll-decoration, .container-w-2, 
-  .top-appertaments, .container-w {
+  .top-apartments, .container-w {
     width: 1100px;
   }
   .scroll-decoration {
@@ -2265,6 +2423,26 @@
     float: left;
     img {
       width: 110px;
+    }
+  }
+  .search-metro-main-block {
+    left: 0;
+    right: 0;
+    width: auto;
+  }
+  .metro-location {
+    width: 60%;
+  }
+  .travel-information {
+    width: 38%;
+    button {
+      border-radius: 40px;
+    }
+  }
+  .panel-move {
+    width: 65px;
+    span {
+      margin: 5px auto;
     }
   }
   .select2-container .select2-selection__rendered {
@@ -2470,6 +2648,7 @@
     display: inline-block;
     vertical-align: top;
     padding: 15px 10px 0;
+    margin: 0;
   }
   .search-more-precisely-search {
     display: block;
@@ -2478,7 +2657,7 @@
     button {
       display: inline-block;
       float: left;
-      margin: 22px auto 0;
+      margin: 16px auto 0;
       padding: 15px 5px;
       width: 165px;
       font-size: 14px;
@@ -2545,7 +2724,7 @@
     padding: 0!important;
   }
   .metro-people {
-    margin-left: -13px!important;
+    display: block;
   }
   .big-search {
     margin-top: 80px;
@@ -2672,7 +2851,7 @@
     width: 105px;
     margin: 5px 0 0 4px;
   }
-  .top-appertaments {
+  .top-apartments {
     width: auto;
     padding: 0;
     h2 {
@@ -2881,7 +3060,7 @@
     }
   }
   .metro-people {
-    margin: auto!important;
+    margin-left: 10px;
   }
   .container-w-0 {
     width: auto;
@@ -2903,6 +3082,9 @@
     img {
       width: 95px;
     }
+  }
+  .metro-location, .travel-information {
+    width: auto;
   }
   .users-information p {
     font-size: 11px;
@@ -3265,7 +3447,7 @@
     width: 105px;
     margin: 5px 0 0 4px;
   }
-  .top-appertaments {
+  .top-apartments {
     width: auto;
     padding: 0;
     h2 {

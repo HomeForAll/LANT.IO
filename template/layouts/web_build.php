@@ -363,8 +363,38 @@ foreach ($this->data['script'] as $key => $value) {
                         <select class="js-example-data-array region"></select>
                     </div>
                     <div class="the-exact-address">
-                        <select class="js-example-data-array-selected location-metro"></select>
-                        <span class="metro-people"><img src="../../template/images/people.png" alt="people">2мин.</span>
+                        <!--<select class="js-example-data-array-selected location-metro"></select> -->
+                        <span onclick="searchMetroMainBlock();" class="location-metro-map">Третьяковская<span class="metro-people"><img src="../../template/images/people.png" alt="people">2мин.</span>
+                            <form>
+                                <div class="search-metro-main-block">
+                                    <div class="top-search-results">
+                                        <span>Свиблово<i class="fa fa-times" aria-hidden="true"></i></span>
+                                    </div>
+                                    <div class="metro-location-and-travel-information">
+                                        <div class="metro-location">
+                                            <div class="panel-move">
+                                                <span onclick="moreAndLess('more')"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                                                <span onclick="moreAndLess('less')"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                                            </div>
+                                            <img src="../../template/images/map-location-metro.png" alt="map">
+                                        </div>
+                                        <div class="travel-information">
+                                            <div class="distance-on-foot">
+                                                <img src="../../template/images/people-2.png" alt="icon"><p>Уделенность пекшом не более</p>
+                                                <span><input placeholder="" type="number" name="foot" value="5" min="5" max="60" step="5">
+                                                <span class="timer">Минут</span></span>
+                                            </div>
+                                            <div class="distance-on-transport">
+                                                <img src="../../template/images/avto.png" alt="icon"><p>Уделенность пекшом не более</p>
+                                                <span><input placeholder="" type="number" name="transport" value="5" min="5" max="60" step="5">
+                                                <span class="timer">Минут</span></span>
+                                            </div>
+                                            <button>Готово</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </span>
                     </div>
                     <button>Задать точнее</button>
                 </div>
@@ -391,12 +421,11 @@ foreach ($this->data['script'] as $key => $value) {
                                 <li><img src="../../template/images/b-s-11.png" alt="icon">Недвижимость для туризма и отдыха</li>
                             </ul>
                         </div>
-                        <div class="decorativeShadowBlock"></div>
                     </li>
                     <li onclick="filterOptions();"><label for="amount" class="js-example-templating">Цена</label>
                         <div class="showBigOptions">
-                            <p>От<input type="text" id="amountBefore" readonly disabled></p>
-                            <p>До<input type="text" id="amountAfter" readonly disabled></p>
+                            <p>От<input placeholder="" type="text" id="amountBefore" readonly disabled></p>
+                            <p>До<input placeholder="" type="text" id="amountAfter" readonly disabled></p>
                             <div id="slider-range"></div>
                             <div class="currency">
                                 <p>Валюта</p>
@@ -416,47 +445,46 @@ foreach ($this->data['script'] as $key => $value) {
                     <p>Заполните параметры ниже, для более точного поиска</p>
                     <ul class="building-parameters">
                         <li onclick="apartmentSettings();"><img src="../../template/images/search-1.png" alt="search">Параметры квартиры
-                        <div class="apartment-settings">
                         <form>
-                        <h2>Параметры квартиры</h2>
-                            <ul>
-                                <li><span class="names-parametrs">Кол-во комнат</span>
-                                    <p>
-                                        <span>1</span>
-                                        <span>2</span>
-                                        <span>3</span>
-                                        <span>4</span>
-                                        <span>4+</span>
-                                    </p>
-                                </li>
-                                <li><span class="names-parametrs">Общая площадь м<sup>2</span></sup>
-                                    <p>От<input type="text" placeholder="0" pattern="^[0-9]+$" required>До<input type="text" placeholder="0" pattern="^[0-9]+$" required></p>
-                                </li>
-                                <li><span class="names-parametrs">Нежилая площадь м<sup>2</span></sup>
-                                    <p>От<input type="text" placeholder="0" pattern="^[0-9]+$" required>До<input type="text" placeholder="0" pattern="^[0-9]+$" required></p>
-                                </li>
-                                <li><span class="names-parametrs">Жилая площадь м<sup>2</sup></span>
-                                    <p>От<input type="text" placeholder="0" pattern="^[0-9]+$" required>До<input type="text" placeholder="0" pattern="^[0-9]+$" required></p>
-                                </li>
-                                <li><span class="names-parametrs">Балкон м2</span>
-                                    <p>От<input type="text" placeholder="0" pattern="^[0-9]+$" required>До<input type="text" placeholder="0" pattern="^[0-9]+$" required></p>
-                                </li>
-                            </ul>
-                            <ul>
-                                <li><span class="names-parametrs">Этаж</span>
-                                    <select class="js-example-data-array-selected floor"></select>
-                                </li>
-                                <li><span class="names-parametrs">Комплектация </span>
-                                    <select class="js-example-data-array-selected equipment"></select>
-                                </li>
-                                <li><span class="names-parametrs">Высота потолков м</span>
-                                    <p>От<input type="text" placeholder="0" pattern="^[0-9]+$" required>До<input type="text" placeholder="0" pattern="^[0-9]+$" required></p>
-                                </li>
-                            </ul>
-                            <a><button>Готово</button></a>
-                        </div>
+                            <div class="apartment-settings">
+                                <h2>Параметры квартиры</h2>
+                                <ul>
+                                    <li><span class="names-parametrs">Кол-во комнат</span>
+                                        <p>
+                                            <span>1</span>
+                                            <span>2</span>
+                                            <span>3</span>
+                                            <span>4</span>
+                                            <span>4+</span>
+                                        </p>
+                                    </li>
+                                    <li><span class="names-parametrs">Общая площадь м<sup>2</sup></span>
+                                        <p>От<input type="text" placeholder="0" pattern="^[0-9]+$" required>До<input type="text" placeholder="0" pattern="^[0-9]+$" required></p>
+                                    </li>
+                                    <li><span class="names-parametrs">Нежилая площадь м<sup>2</sup></span>
+                                        <p>От<input type="text" placeholder="0" pattern="^[0-9]+$" required>До<input type="text" placeholder="0" pattern="^[0-9]+$" required></p>
+                                    </li>
+                                    <li><span class="names-parametrs">Жилая площадь м<sup>2</sup></span>
+                                        <p>От<input type="text" placeholder="0" pattern="^[0-9]+$" required>До<input type="text" placeholder="0" pattern="^[0-9]+$" required></p>
+                                    </li>
+                                    <li><span class="names-parametrs">Балкон м2</span>
+                                        <p>От<input type="text" placeholder="0" pattern="^[0-9]+$" required>До<input type="text" placeholder="0" pattern="^[0-9]+$" required></p>
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li><span class="names-parametrs">Этаж</span>
+                                        <select class="js-example-data-array-selected floor"></select>
+                                    </li>
+                                    <li><span class="names-parametrs">Комплектация </span>
+                                        <select class="js-example-data-array-selected equipment"></select>
+                                    </li>
+                                    <li><span class="names-parametrs">Высота потолков м</span>
+                                        <p>От<input type="text" placeholder="0" pattern="^[0-9]+$" required>До<input type="text" placeholder="0" pattern="^[0-9]+$" required></p>
+                                    </li>
+                                </ul>
+                                <a><button>Готово</button></a>
+                            </div>
                         </form>
-                        <div class="decorativeShadowBlock"></div>
                         <div class="progress-bar blue stripes">
                             <span style="width:0"></span>
                         </div>
@@ -781,7 +809,7 @@ foreach ($this->data['script'] as $key => $value) {
         </div>
     </div>
     <div class="section-5">
-        <div class="top-appertaments">
+        <div class="top-apartments">
         <h2>Лучшие объявления за 24 часа</h2>
             <div class="filter-and-top-blocks">
                 <div class="filter-apartment">
