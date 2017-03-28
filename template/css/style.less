@@ -782,7 +782,7 @@
     vertical-align: middle;
     text-align: left;
     padding: 0;
-    width: 60%;
+    width: 30%;
     & span {
       display: inline-block;
       vertical-align: middle;
@@ -855,6 +855,10 @@
   & .select2-container {
     width: 70% !important;
   }
+}
+
+.number-apartments {
+  width: 70% !important;
 }
 
 .location-metro-map {
@@ -2538,6 +2542,9 @@
       margin: 5px auto;
     }
   }
+  .number-apartments {
+    width: 60% !important;
+  }
   .exact-area .select2-container,
   .the-exact-address .select2-container {
     width: auto!important;
@@ -2553,8 +2560,8 @@
   }
   .apartment-settings {
     width: auto;
-    left: 10vw;
-    right: 10vw;
+    left: 5vw;
+    right: 5vw;
     ul {
       margin: auto !important;
       float: none !important;
@@ -2567,16 +2574,18 @@
     }
     input {
       margin: 8px 12px;
-      width: 75%;
+      width: 60%;
     }
     p {
       display: inline-block;
-      vertical-align: middle;
+      vertical-align: top;
       text-align: right;
       padding: 0;
-      width: 65%;
-      margin-left: 5%;
+      width: 63%;
+      margin: auto;
       & span {
+        display: inline-block;
+        text-align: center;
         width: 25px;
         height: 25px;
         font-size: 11px;
@@ -2616,9 +2625,10 @@
     }
   }
   .names-parametrs {
-    display: block;
-    width: auto;
-    text-align: center;
+    display: inline-block;
+    float: left;
+    width: 80px;
+    text-align: left;
   }
   .place-an-ad {
     display: none;
@@ -3154,6 +3164,7 @@
   }
   .names-parametrs {
     display: block;
+    float: none;
   }
   .property-type-apartment-settings {
     position: relative;
@@ -3243,12 +3254,12 @@
       text-align: center;
     }
     p {
-      width: auto;
+      width: 100%;
       margin: 0;
       padding: 10px 20% 0;
     }
     input {
-      width: 80%;
+      width: 75%;
     }
     & .select2-container {
       width: 70%!important;
@@ -3280,7 +3291,7 @@
     }
     & .select2-container {
       text-align: left !important;
-      width: auto!important;
+      width: 60%!important;
     }
     button {
       padding: 10px;
@@ -3303,7 +3314,7 @@
   .the-exact-address {
     padding: 8px 0;
     text-align: left;
-    width: 300px;
+    width: 215px;
   }
   .exact-area .select2-container,
   .the-exact-address .select2-container {

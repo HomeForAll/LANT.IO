@@ -450,7 +450,7 @@ foreach ($this->data['script'] as $key => $value) {
                                 <h2>Параметры квартиры</h2>
                                 <ul>
                                     <li><span class="names-parametrs">Кол-во комнат</span>
-                                        <p>
+                                        <p class="number-apartments">
                                             <span>1</span>
                                             <span>2</span>
                                             <span>3</span>
@@ -459,16 +459,20 @@ foreach ($this->data['script'] as $key => $value) {
                                         </p>
                                     </li>
                                     <li><span class="names-parametrs">Общая площадь м<sup>2</sup></span>
-                                        <p>От<input type="text" placeholder="0" pattern="^[0-9]+$" required>До<input type="text" placeholder="0" pattern="^[0-9]+$" required></p>
+                                        <p>От<input type="text" placeholder="0" pattern="^[0-9]+$" required></p>
+                                        <p>До<input type="text" placeholder="0" pattern="^[0-9]+$" required></p>
                                     </li>
                                     <li><span class="names-parametrs">Нежилая площадь м<sup>2</sup></span>
-                                        <p>От<input type="text" placeholder="0" pattern="^[0-9]+$" required>До<input type="text" placeholder="0" pattern="^[0-9]+$" required></p>
+                                        <p>От<input type="text" placeholder="0" pattern="^[0-9]+$" required></p>
+                                        <p>До<input type="text" placeholder="0" pattern="^[0-9]+$" required></p>
                                     </li>
                                     <li><span class="names-parametrs">Жилая площадь м<sup>2</sup></span>
-                                        <p>От<input type="text" placeholder="0" pattern="^[0-9]+$" required>До<input type="text" placeholder="0" pattern="^[0-9]+$" required></p>
+                                        <p>От<input type="text" placeholder="0" pattern="^[0-9]+$" required></p>
+                                        <p>До<input type="text" placeholder="0" pattern="^[0-9]+$" required></p>
                                     </li>
                                     <li><span class="names-parametrs">Балкон м2</span>
-                                        <p>От<input type="text" placeholder="0" pattern="^[0-9]+$" required>До<input type="text" placeholder="0" pattern="^[0-9]+$" required></p>
+                                        <p>От<input type="text" placeholder="0" pattern="^[0-9]+$" required></p>
+                                        <p>До<input type="text" placeholder="0" pattern="^[0-9]+$" required></p>
                                     </li>
                                 </ul>
                                 <ul>
@@ -479,7 +483,8 @@ foreach ($this->data['script'] as $key => $value) {
                                         <select class="js-example-data-array-selected equipment"></select>
                                     </li>
                                     <li><span class="names-parametrs">Высота потолков м</span>
-                                        <p>От<input type="text" placeholder="0" pattern="^[0-9]+$" required>До<input type="text" placeholder="0" pattern="^[0-9]+$" required></p>
+                                        <p>От<input type="text" placeholder="0" pattern="^[0-9]+$" required></p>
+                                        <p>До<input type="text" placeholder="0" pattern="^[0-9]+$" required></p>
                                     </li>
                                 </ul>
                                 <a><button>Готово</button></a>
