@@ -352,9 +352,9 @@ foreach ($this->data['script'] as $key => $value) {
                 <li><a href="#">Продажа</a></li>
             </ul>
             <div class="search-menu-apartment">
-                <select class="js-example-data-array region"></select>
-                <select class="js-example-data-array-selected offices"></select>
-                <select class="js-example-data-array-selected product-price"></select>
+                <select class="js-example-data-array region main-filter"></select>
+                <select class="js-example-data-array-selected offices main-filter"></select>
+                <select class="js-example-data-array-selected product-price main-filter"></select>
                 <button>Найти</button>
             </div>
             <div class="big-search-menu">
@@ -518,7 +518,31 @@ foreach ($this->data['script'] as $key => $value) {
                                 <option>Выбрано3</option>
                             </select>
                         </li>
-                        <li><img src="../../template/images/search-1.png" alt="search">Вложения
+                        <li onclick="attachment();"><img src="../../template/images/search-1.png" alt="search">Вложения
+                            <form>
+                                <div class="attachments">
+                                    <h2>Вложения</h2>
+                                    <ul>
+                                        <li>
+                                            <p>Проект планировки</p>
+                                            <img src="../../template/images/at-1.png" alt="icons1">
+                                            <select class="js-example-data-array-selected design-plan"></select>
+                                        </li>
+                                        <li>
+                                            <p>3D проект</p>
+                                            <img src="../../template/images/at-2.png" alt="icons2">
+                                            <select class="js-example-data-array-selected project"></select>
+                                        </li>
+                                        <li>
+                                            <p>Видео</p>
+                                            <img src="../../template/images/at-3.png" alt="icons3">
+                                            <select class="js-example-data-array-selected video"></select>
+                                        </li>
+                                    </ul>
+                                    <button>Готово</button>
+                                </div>
+                                <div class="decorativeShadowBlock"></div>
+                            </form>
                         <div class="progress-bar blue stripes">
                             <span style="width:0"></span>
                         </div>

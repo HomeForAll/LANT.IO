@@ -62,6 +62,27 @@ var productSearch = false,
     	{id: 2, text: 'Комплектация3'},
     	{id: 3, text: 'Комплектация4'},
     	{id: 4, text: 'Комплектация5'}
+    ],
+    designPlan = [
+        {id: 0, text: 'Прилагается'},
+        {id: 1, text: 'Прилагается2'},
+        {id: 2, text: 'Прилагается3'},
+        {id: 3, text: 'Прилагается4'},
+        {id: 4, text: 'Прилагается5'}
+    ],
+    project = [
+        {id: 0, text: 'Не важно'},
+        {id: 1, text: 'Не важно2'},
+        {id: 2, text: 'Не важно3'},
+        {id: 3, text: 'Не важно4'},
+        {id: 4, text: 'Не важно5'}
+    ],
+    video = [
+        {id: 0, text: 'Прилагается'},
+        {id: 1, text: 'Прилагается2'},
+        {id: 2, text: 'Прилагается3'},
+        {id: 3, text: 'Прилагается4'},
+        {id: 4, text: 'Прилагается5'}
     ];
 //---------------------------------------------------------
 
@@ -107,6 +128,15 @@ $('.js-example-data-array, .floor').select2({
 $('.js-example-data-array, .equipment').select2({
     data: equipment
 });
+$('.js-example-data-array, .design-plan').select2({
+    data: designPlan
+});
+$('.js-example-data-array, .project').select2({
+    data: project
+});
+$('.js-example-data-array, .video').select2({
+    data: video
+});
 //---------------------------------------------------------
 $('.js-example-data-array-selected, .region').select2({
     data: data
@@ -129,6 +159,15 @@ $('.js-example-data-array-selected, .floor').select2({
 $('.js-example-data-array-selected, .equipment').select2({
     data: equipment
 });
+$('.js-example-data-array-selected, .design-plan').select2({
+    data: designPlan
+});
+$('.js-example-data-array-selected, .project').select2({
+    data: project
+});
+$('.js-example-data-array-selected, .video').select2({
+    data: video
+});
 //---------------------------------------------------------
 
 /** Отслежка и изменение расширенного и простого блока **/
@@ -139,7 +178,7 @@ function showBigSearch() {
     productSearch = !productSearch;
 
     if (!productSearch) {
-        $('.search-menu-apartment').css({'display': 'inline-block'});
+        $('.search-menu-apartment').css({'display': 'block'});
         $('.big-search-menu').css({'display': 'none'});
         searchTeg.remove();
         bigSearch.html('<a>Расширенный поиск</a>' + '<i class="fa fa-angle-right" aria-hidden="true"></i>');
@@ -203,6 +242,15 @@ function searchMetroMainBlock() {
     setTimeout(function () {
         searchMetro.css({'display': 'none'});
     }, 10000);
+}
+
+function attachment() {
+    var attachmentsBlock = $('.attachments, .decorativeShadowBlock');
+
+    attachmentsBlock.css({'display': 'block'});
+    setTimeout(function () {
+        attachmentsBlock.css({'display': 'none'});
+    }, 5000);
 }
 
 $('.select2-selection--single').on('click', function () {
