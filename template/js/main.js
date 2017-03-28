@@ -83,6 +83,27 @@ var productSearch = false,
         {id: 2, text: 'Прилагается3'},
         {id: 3, text: 'Прилагается4'},
         {id: 4, text: 'Прилагается5'}
+    ],
+    rooms = [
+        {id: 0, text: 'Выбрано'},
+        {id: 1, text: 'Выбрано2'},
+        {id: 2, text: 'Выбрано3'},
+        {id: 3, text: 'Выбрано4'},
+        {id: 4, text: 'Выбрано5'}
+    ],
+    aBathroom = [
+        {id: 0, text: 'Выберите тип'},
+        {id: 1, text: 'Выберите тип2'},
+        {id: 2, text: 'Выберите тип3'},
+        {id: 3, text: 'Выберите тип4'},
+        {id: 4, text: 'Выберите тип5'}
+    ],
+    decoration = [
+        {id: 0, text: 'Эксклюзивного качества'},
+        {id: 1, text: 'Эксклюзивного качества2'},
+        {id: 2, text: 'Эксклюзивного качества3'},
+        {id: 3, text: 'Эксклюзивного качества4'},
+        {id: 4, text: 'Эксклюзивного качества5'}
     ];
 //---------------------------------------------------------
 
@@ -137,6 +158,15 @@ $('.js-example-data-array, .project').select2({
 $('.js-example-data-array, .video').select2({
     data: video
 });
+$('.js-example-data-array, .rooms').select2({
+    data: rooms
+});
+$('.js-example-data-array, .a-bathroom').select2({
+    data: aBathroom
+});
+$('.js-example-data-array, .decoration').select2({
+    data: decoration
+});
 //---------------------------------------------------------
 $('.js-example-data-array-selected, .region').select2({
     data: data
@@ -167,6 +197,15 @@ $('.js-example-data-array-selected, .project').select2({
 });
 $('.js-example-data-array-selected, .video').select2({
     data: video
+});
+$('.js-example-data-array-selected, .rooms').select2({
+    data: rooms
+});
+$('.js-example-data-array-selected, .a-bathroom').select2({
+    data: aBathroom
+});
+$('.js-example-data-array-selected, .decoration').select2({
+    data: decoration
 });
 //---------------------------------------------------------
 
@@ -232,6 +271,16 @@ function apartmentSettings() {
     apartmentSettings.css({'display': 'block'});
     setTimeout(function () {
         apartmentSettings.css({'display': 'none'});
+    }, 5000);
+}
+
+function appearanceofTheApartment() {
+	console.log('Рабоатет');
+	var appearanceOfTheApartments = $('.appearance-of-the-apartment, .decorativeShadowBlock');
+
+    appearanceOfTheApartments.css({'display': 'block'});
+    setTimeout(function () {
+        appearanceOfTheApartments.css({'display': 'none'});
     }, 5000);
 }
 

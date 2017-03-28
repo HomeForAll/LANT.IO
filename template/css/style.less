@@ -588,8 +588,80 @@
     text-align: left;
   }
   & .select2-container {
-    width: auto!important;
-    padding: 0!important;
+    width: 60%!important;
+    float: right;
+    padding: 0 0 0 20px!important;
+    border: none !important;
+    border-radius: 6px;
+    box-shadow: 0 5px 15px 1px #ebebeb;
+  }
+}
+
+.appearance-of-the-apartment {
+  display: none;
+  position: absolute;
+  left: 5vw;
+  right: 5vw;
+  width: auto;
+  z-index: 60;
+  background: #f9f9f9;
+  text-align: center;
+  h2 {
+    font-size: 20px;
+    padding: 15px 5px;
+    font-weight: 300;
+    color: #454545;
+    background: #efefef;
+  }
+  ul {
+    display: inline-block;
+    width: 450px;
+    list-style: none;
+    text-align: center;
+    margin: auto;
+  }
+  li {
+    display: block;
+    width: auto !important;
+    background: red;
+    padding: 10px !important;
+    margin: auto !important;
+  }
+  p {
+    display: inline-block !important;
+    vertical-align: middle;
+    text-align: left;
+    width: 85px;
+  }
+  img {
+    float: none !important;
+    margin: auto 15px;
+  }
+  button {
+    display: block !important;
+    width: 220px;
+    margin: 25px auto;
+    padding: 15px;
+    float: none!important;
+    background: #71cb6f;
+    color: #fff;
+    border: 1px solid #d0d0d0;
+    border-radius: 30px;
+    cursor: pointer;
+  }
+  & .select2-hidden-accessible {
+    display: none !important;
+  }
+  & .select2-selection__arrow {
+    display: none;
+  }
+  & .select2-selection__rendered {
+    text-align: left;
+  }
+  & .select2-container {
+    width: 60%!important;
+    float: right;
+    padding: 0 0 0 20px!important;
     border: none !important;
     border-radius: 6px;
     box-shadow: 0 5px 15px 1px #ebebeb;
@@ -2635,6 +2707,51 @@
        width: auto!important;
     }
   }
+  .appearance-of-the-apartment {
+    width: auto;
+    left: 5vw;
+    right: 5vw;
+    ul {
+      margin: auto !important;
+      float: none !important;
+      width: 70% !important;
+    }
+    li {
+      display: block;
+      text-align: center;
+      padding: 20px 10px;
+      width: auto !important;
+    }
+    input {
+      margin: 8px 12px;
+      width: 60%;
+    }
+    p {
+      display: inline-block;
+      vertical-align: middle;
+      text-align: center;
+      padding: 0;
+      width: 100px;
+      margin: auto;
+      & span {
+        display: inline-block;
+        text-align: center;
+        width: 25px;
+        height: 25px;
+        font-size: 11px;
+        line-height: 25px;
+      }
+    }
+    select {
+      display: none !important;
+    }
+    & .select2-selection__rendered {
+      width: auto !important;
+    }
+    & .select2-container {
+       width: auto!important;
+    }
+  }
   .attachments {
     ul {
       display: block;
@@ -3307,6 +3424,30 @@
       width: 70%!important;
     }
   }
+  .appearance-of-the-apartment {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: auto;
+    ul {
+      width: auto !important;
+      display: block;
+    }
+    li {
+      text-align: center;
+    }
+    p {
+      width: 100%;
+      margin: 0;
+      padding: 10px 20% 0;
+    }
+    input {
+      width: 75%;
+    }
+    & .select2-container {
+      width: 70%!important;
+    }
+  }
   .attachments {
     left: 5vw;
     right: 5vw;
@@ -3471,6 +3612,7 @@
       width: 230px
     }
     p {
+      text-align: center;
       padding: 10px 4px 0;
     }
     a {

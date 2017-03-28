@@ -499,7 +499,31 @@ foreach ($this->data['script'] as $key => $value) {
                             <span style="width:0"></span>
                         </div>
                         </li>
-                        <li><img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
+                        <li onclick="appearanceofTheApartment();"><img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
+                            <form>
+                                <div class="appearance-of-the-apartment">
+                                    <h2>Внешний вид квартиры</h2>
+                                    <ul>
+                                        <li>
+                                            <p>Команты</p>
+                                            <img src="../../template/images/r-d-1.png" alt="icons1">
+                                            <select class="js-example-data-array-selected rooms"></select>
+                                        </li>
+                                        <li>
+                                            <p>Санузел</p>
+                                            <img src="../../template/images/r-d-2.png" alt="icons2">
+                                            <select class="js-example-data-array-selected a-bathroom"></select>
+                                        </li>
+                                        <li>
+                                            <p>Отделка</p>
+                                            <img src="../../template/images/r-d-3.png" alt="icons3">
+                                            <select class="js-example-data-array-selected decoration"></select>
+                                        </li>
+                                    </ul>
+                                    <button>Готово</button>
+                                </div>
+                                <div class="decorativeShadowBlock"></div>
+                            </form>
                         <div class="progress-bar blue stripes">
                             <span style="width:40%"></span>
                         </div>
