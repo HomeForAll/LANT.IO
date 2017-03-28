@@ -286,3 +286,7 @@ function moreAndLess(sizeImage) {
 
     img.css({'width': + imagesWidth + '%'});
 }
+
+function closeFixedBlock() {
+	$('.warning').css({'display':'none'})
+}

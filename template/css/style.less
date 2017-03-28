@@ -320,6 +320,39 @@
   }
 }
 
+.warning {
+  display: none;
+  position: fixed;
+  top: 30vh;
+  left: 0;
+  right: 0;
+  z-index: 60;
+  padding: 30px 50px;
+  margin: auto;
+  background: url("../../template/images/left-home.png") left -40px center no-repeat, url("../../template/images/right-home.png") right -40px center no-repeat, #fff;
+  background-size: 100px 65%, 100px 65%;
+  text-align: center;
+  width: 400px;
+  p {
+    font-size: 21.5px;
+    color: #323232;
+    margin-bottom: 12px;
+  }
+  span {
+    font-size: 15px;
+    color: #999;
+  }
+  button {
+    float: none;
+    display: block;
+    width:  122px;
+    cursor: pointer;
+    padding: 10px;
+    margin: 25px auto;
+    border-radius: 30px;
+  }
+}
+
 .search-more-precisely-search {
   display: inline-block;
   vertical-align: top;
@@ -3138,6 +3171,15 @@
 //------------------------------
 
 @media(max-width: 640px) {
+  .warning {
+    width:  auto;
+    left: 5vw;
+    right: 5vw;
+    button {
+      padding: 10px !important;
+      width: auto !important;
+    }
+  }
   .registration-users, .place-an-ad,
   .logo-img, .message {
     display: inline-block;

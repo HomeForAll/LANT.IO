@@ -358,6 +358,11 @@ foreach ($this->data['script'] as $key => $value) {
                 <button>Найти</button>
             </div>
             <div class="big-search-menu">
+                <div class="warning">
+                    <p>Выберите<br>тип недвижимости</p> 
+                    <span>Чтобы перейти к заполнению подробных настроек</span>
+                    <button onclick="closeFixedBlock();">Закрыть</button>
+                </div>
                 <div class="search-more-precisely-search">
                     <div class="exact-area">
                         <select class="js-example-data-array region"></select>
