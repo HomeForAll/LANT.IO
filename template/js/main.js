@@ -104,6 +104,55 @@ var productSearch = false,
         {id: 2, text: 'Эксклюзивного качества3'},
         {id: 3, text: 'Эксклюзивного качества4'},
         {id: 4, text: 'Эксклюзивного качества5'}
+    ],
+    wallMaterial = [
+        {id: 0, text: 'Выбрано'},
+        {id: 1, text: 'Выбрано2'},
+        {id: 2, text: 'Выбрано3'},
+        {id: 3, text: 'Выбрано4'},
+        {id: 4, text: 'Выбрано5'}
+    ],
+    roof = [
+        {id: 0, text: 'Выбрано'},
+        {id: 1, text: 'Выбрано2'},
+        {id: 2, text: 'Выбрано3'},
+        {id: 3, text: 'Выбрано4'},
+        {id: 4, text: 'Выбрано5'}
+    ],
+    foundation = [
+        {id: 0, text: 'Без фундамента'},
+        {id: 1, text: 'Без фундамента2'},
+        {id: 2, text: 'Без фундамента3'},
+        {id: 3, text: 'Без фундамента4'},
+        {id: 4, text: 'Без фундамента5'}
+    ],
+    thePresenceOfAnElevator = [
+        {id: 0, text: 'Выбрано'},
+        {id: 1, text: 'Выбрано2'},
+        {id: 2, text: 'Выбрано3'},
+        {id: 3, text: 'Выбрано4'},
+        {id: 4, text: 'Выбрано5'}
+    ],
+    nurseryServices = [
+        {id: 0, text: 'Выбрано'},
+        {id: 1, text: 'Выбрано2'},
+        {id: 2, text: 'Выбрано3'},
+        {id: 3, text: 'Выбрано4'},
+        {id: 4, text: 'Выбрано5'}
+    ],
+    typeOfObject = [
+        {id: 0, text: 'Собственность более...'},
+        {id: 1, text: 'Собственность более...2'},
+        {id: 2, text: 'Собственность более...3'},
+        {id: 3, text: 'Собственность более...4'},
+        {id: 4, text: 'Собственность более...5'}
+    ],
+    parkingArea = [
+        {id: 0, text: 'Подземная парковка'},
+        {id: 1, text: 'Подземная парковка2'},
+        {id: 2, text: 'Подземная парковка3'},
+        {id: 3, text: 'Подземная парковка4'},
+        {id: 4, text: 'Подземная парковка5'}
     ];
 //---------------------------------------------------------
 
@@ -167,6 +216,27 @@ $('.js-example-data-array, .a-bathroom').select2({
 $('.js-example-data-array, .decoration').select2({
     data: decoration
 });
+$('.js-example-data-array, .wall-material').select2({
+    data: wallMaterial
+});
+$('.js-example-data-array, .roof').select2({
+    data: roof
+});
+$('.js-example-data-array, .foundation').select2({
+    data: foundation
+});
+$('.js-example-data-array, .the-presence-of-an-elevator').select2({
+    data: thePresenceOfAnElevator
+});
+$('.js-example-data-array, .nursery-services').select2({
+    data: nurseryServices
+});
+$('.js-example-data-array, .type-of-object').select2({
+    data: typeOfObject
+});
+$('.js-example-data-array, .parking-area').select2({
+    data: parkingArea
+});
 //---------------------------------------------------------
 $('.js-example-data-array-selected, .region').select2({
     data: data
@@ -206,6 +276,27 @@ $('.js-example-data-array-selected, .a-bathroom').select2({
 });
 $('.js-example-data-array-selected, .decoration').select2({
     data: decoration
+});
+$('.js-example-data-array-selected, .wall-material').select2({
+    data: wallMaterial
+});
+$('.js-example-data-array-selected, .roof').select2({
+    data: roof
+});
+$('.js-example-data-array-selected, .foundation').select2({
+    data: foundation
+});
+$('.js-example-data-array-selected, .the-presence-of-an-elevator').select2({
+    data: thePresenceOfAnElevator
+});
+$('.js-example-data-array-selected, .nursery-services').select2({
+    data: nurseryServices
+});
+$('.js-example-data-array-selected, .type-of-object').select2({
+    data: typeOfObject
+});
+$('.js-example-data-array-selected, .parking-area').select2({
+    data: parkingArea
 });
 //---------------------------------------------------------
 
@@ -248,7 +339,8 @@ function showTopMenuAndSearch() {
 //---------------------------------------------------------
 /** Блоки с фильтрами **/
 function filterOptionsApartments() {
-    var propertyTypeApartmentSettings = $('.property-type-apartment-settings, .decorativeShadowBlock');
+    var propertyTypeApartmentSettings = $('.property-type-apartment-settings');
+    shadowBlock();
 
     propertyTypeApartmentSettings.css({'display': 'block'});
     setTimeout(function () {
@@ -257,7 +349,8 @@ function filterOptionsApartments() {
 }
 
 function filterOptions() {
-    var showBigOptions = $('.showBigOptions, .decorativeShadowBlock');
+    var showBigOptions = $('.showBigOptions');
+    shadowBlock();
 
     showBigOptions.css({'display': 'block'});
     setTimeout(function () {
@@ -266,7 +359,8 @@ function filterOptions() {
 }
 
 function apartmentSettings() {
-	var apartmentSettings = $('.apartment-settings, .decorativeShadowBlock');
+	var apartmentSettings = $('.apartment-settings');
+	shadowBlock();
 
     apartmentSettings.css({'display': 'block'});
     setTimeout(function () {
@@ -275,8 +369,8 @@ function apartmentSettings() {
 }
 
 function appearanceofTheApartment() {
-	console.log('Рабоатет');
-	var appearanceOfTheApartments = $('.appearance-of-the-apartment, .decorativeShadowBlock');
+	var appearanceOfTheApartments = $('.appearance-of-the-apartment');
+	shadowBlock();
 
     appearanceOfTheApartments.css({'display': 'block'});
     setTimeout(function () {
@@ -284,8 +378,29 @@ function appearanceofTheApartment() {
     }, 5000);
 }
 
+function appearanceOfTheBuilding() {
+	var appearanceOfTheBuild = $('.appearance-of-the-build');
+	shadowBlock();
+
+    appearanceOfTheBuild.css({'display': 'block'});
+    setTimeout(function () {
+        appearanceOfTheBuild.css({'display': 'none'});
+    }, 5000);
+}
+
+function buildingParametersFilter() {
+    var buildingParameterFilter = $('.building-parameters-filter');
+    shadowBlock();
+
+    buildingParameterFilter.css({'display': 'block'});
+    setTimeout(function () {
+        buildingParameterFilter.css({'display': 'none'});
+    }, 5000);
+}
+
 function searchMetroMainBlock() {
-    var searchMetro = $('.search-metro-main-block, .decorativeShadowBlock');
+    var searchMetro = $('.search-metro-main-block');
+    shadowBlock();
 
     searchMetro.css({'display': 'block'});
     setTimeout(function () {
@@ -294,11 +409,22 @@ function searchMetroMainBlock() {
 }
 
 function attachment() {
-    var attachmentsBlock = $('.attachments, .decorativeShadowBlock');
+    var attachmentsBlock = $('.attachments');
+    shadowBlock();
 
     attachmentsBlock.css({'display': 'block'});
     setTimeout(function () {
         attachmentsBlock.css({'display': 'none'});
+    }, 5000);
+}
+
+/** Тени в открывшимся блоке **/
+function shadowBlock() {
+	var shadowBlocks = $('.decorativeShadowBlock');
+
+	shadowBlocks.css({'display': 'block'});
+    setTimeout(function () {
+        shadowBlocks.css({'display': 'none'});
     }, 5000);
 }
 

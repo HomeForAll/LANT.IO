@@ -521,19 +521,66 @@ foreach ($this->data['script'] as $key => $value) {
                                         </li>
                                     </ul>
                                     <button>Готово</button>
-                                </div>
-                                <div class="decorativeShadowBlock"></div>
+                                </div>                           
                             </form>
                         <div class="progress-bar blue stripes">
                             <span style="width:40%"></span>
                         </div>
                         </li>
-                        <li><img src="../../template/images/search-3.png" alt="search">Параметры здания
+                        <li onclick="buildingParametersFilter();"><img src="../../template/images/search-3.png" alt="search">Параметры здания
+                            <form>
+                                <div class="building-parameters-filter">
+                                    <h2>Параметры здания</h2>
+                                    <ul>
+                                        <li><span class="names-parametrs">Количество этажей</span>
+                                            <p>От<input type="text" placeholder="0" pattern="^[0-9]+$" required></p>
+                                            <p>До<input type="text" placeholder="0" pattern="^[0-9]+$" required></p>
+                                        </li>
+                                        <li><span class="names-parametrs">Год окончания строительства</span>
+                                            <p>От<input type="text" placeholder="0" pattern="^[0-9]+$" required></p>
+                                            <p>До<input type="text" placeholder="0" pattern="^[0-9]+$" required></p>
+                                        </li>
+                                        <li><span class="names-parametrs">Наличие лифта</span>
+                                            <select class="js-example-data-array-selected the-presence-of-an-elevator"></select>
+                                        </li>
+                                        <li><span class="names-parametrs">Обязеьельные услуги ЖКХ</span>
+                                            <select class="js-example-data-array-selected nursery-services"></select>
+                                        </li>
+                                        <li><span class="names-parametrs">Вид объекта</span>
+                                            <select class="js-example-data-array-selected type-of-object"></select>
+                                        </li>
+                                        <li><span class="names-parametrs">Парковка</span>
+                                            <select class="js-example-data-array-selected parking-area"></select>
+                                        </li>
+                                    </ul>
+                                    <button>Готово</button>
+                                </div>
+                            </form>
                         <div class="progress-bar blue stripes">
                             <span style="width:40%"></span>
                         </div>
                         </li>
-                        <li><img src="../../template/images/search-4.png" alt="search">Внешний вид здания
+                        <li onclick="appearanceOfTheBuilding();"><img src="../../template/images/search-4.png" alt="search">Внешний вид здания
+                            <form>
+                                <div class="appearance-of-the-build">
+                                    <h2>Внешний вид здания</h2>
+                                    <ul>
+                                        <li>
+                                            <p>Материал<br>стен</p>
+                                            <select class="js-example-data-array-selected wall-material"></select>
+                                        </li>
+                                        <li>
+                                            <p>Кровля</p>
+                                            <select class="js-example-data-array-selected roof"></select>
+                                        </li>
+                                        <li>
+                                            <p>Фундамент</p>
+                                            <select class="js-example-data-array-selected foundation"></select>
+                                        </li>
+                                    </ul>
+                                    <button>Поиск</button>
+                                </div>
+                            </form>
                         <div class="progress-bar blue stripes">
                             <span style="width:0"></span>
                         </div>
@@ -575,7 +622,6 @@ foreach ($this->data['script'] as $key => $value) {
                                     </ul>
                                     <button>Готово</button>
                                 </div>
-                                <div class="decorativeShadowBlock"></div>
                             </form>
                         <div class="progress-bar blue stripes">
                             <span style="width:0"></span>
