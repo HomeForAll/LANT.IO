@@ -2964,7 +2964,7 @@
       &:nth-child(3) {
         padding: 28px 5px;
         font-size: 12px;
-        text-align: center;
+        text-align: right;
       }
       &:nth-child(4) {
         border-right: 1px dotted #e0e0e0;
@@ -3287,7 +3287,7 @@
 }
 //------------------------------
 
-@media(max-width: 640px) {
+@media(max-width: 600px) {
   .warning {
     width:  auto;
     left: 5vw;
@@ -3326,9 +3326,14 @@
     float: none;
   }
   .property-type-apartment-settings {
-    position: relative;
+    position: absolute;
+    left: 5vw;
+    right: 5vw;
     width: auto !important;
     padding: 10px 0;
+    &:before {
+      display: none;
+    }
     ul {
       display: block;
       width: auto !important;
@@ -3370,7 +3375,9 @@
     }
   }
   .metro-location, .travel-information {
+    display: block;
     width: auto;
+    margin: auto;
   }
   .users-information p {
     font-size: 11px;
@@ -3386,7 +3393,9 @@
     }
   }
   .showBigOptions {
-    position: relative;
+    position: absolute;
+    left: 5vw;
+    right: 5vw;
     padding: 30px 5px;
     width: auto;
     margin: 20px auto 0;
@@ -3628,31 +3637,20 @@
     clear: both;
     label {
       border: none!important;
+      padding: 15px 10px 15px 35px!important;
     }
     input {
       float: left;
+      margin-right: -25px;
       margin-top: 0;
     }
     li {
       display: block;
-      text-align: left;
+      text-align: left !important;
       font-size: 10px!important;
       padding: 20px 0!important;
       width: auto;
       border-right: none!important;
-      background-position: left 20px center, center right !important;
-      &:hover {
-        background-position: left 20px center, center right !important;
-      }
-      &:nth-child(2) {
-        padding: 15px 10px 15px 48px!important;
-      }
-      &:nth-child(3) {
-        display: block;
-        margin: auto;
-        text-align: center;
-        padding: 15px 0!important;
-      } 
     }
     select {
       padding: 50px 0 0!important;
