@@ -365,10 +365,45 @@ foreach ($this->data['script'] as $key => $value) {
                 </div>
                 <div class="search-more-precisely-search">
                     <div class="exact-area">
-                        <select class="js-example-data-array region"></select>
+                        <span class="search-city" onclick="historySearch();">
+                            <img src="../../template/images/s1.png" alt="city">
+                            <input placeholder="Москва, ул, Малая Ордынка" disabled></input>
+                        </span>
+                        <div class="history-search">
+                            <span class="search-city active-search">
+                                <img src="../../template/images/s1.png" alt="city">
+                                <input placeholder="г. Москва Северное медведково" pattern="[A-Za-zА-Яа-я]"></input>
+                            </span>
+                            <h5>История</h5>
+                            <div class="all-history-search">
+                                <div class="history">
+                                    <img src="../../template/images/m-r.png" alt="metro">
+                                    <p>Красные ворота<span>не более 15 мин пешком</span></p>
+                                </div>
+                                <div class="history">
+                                    <img src="../../template/images/m-w.png" alt="metro">
+                                    <p>Свиблово, Бабушкинская<span>не более 5 мин пешком</span></p>
+                                </div>
+                                <div class="history">
+                                    <img src="../../template/images/m-w.png" alt="metro">
+                                    <p>Академичекий<span>не более 5 мин пешком</span></p>
+                                </div>
+                                <div class="history">
+                                    <img src="../../template/images/m-r.png" alt="metro">
+                                    <p>Красные ворота<span>не более 15 мин пешком</span></p>
+                                </div>
+                                <div class="history">
+                                    <img src="../../template/images/m-w.png" alt="metro">
+                                    <p>Свиблово, Бабушкинская<span>не более 5 мин пешком</span></p>
+                                </div>
+                                <div class="history">
+                                    <img src="../../template/images/m-w.png" alt="metro">
+                                    <p>Академичекий<span>не более 5 мин пешком</span></p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="the-exact-address">
-                        <!--<select class="js-example-data-array-selected location-metro"></select> -->
                         <span onclick="searchMetroMainBlock();" class="location-metro-map">Третьяковская<span class="metro-people"><img src="../../template/images/people.png" alt="people">2мин.</span>
                             <form>
                                 <div class="search-metro-main-block">

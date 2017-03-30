@@ -418,6 +418,16 @@ function attachment() {
     }, 5000);
 }
 
+function historySearch() {
+    var history = $('.history-search');
+    shadowBlock();
+
+    history.css({'display': 'block'});
+    setTimeout(function () {
+        history.css({'display': 'none'});
+    }, 5000);
+}
+
 /** Тени в открывшимся блоке **/
 function shadowBlock() {
 	var shadowBlocks = $('.decorativeShadowBlock');
@@ -429,6 +439,7 @@ function shadowBlock() {
 }
 
 $('.select2-selection--single').on('click', function () {
+
 	logicBooleanSpan = !logicBooleanSpan;
 
 	if(!logicBooleanSpan) {

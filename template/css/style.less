@@ -294,6 +294,96 @@
   }
 }
 
+.search-city {
+  display: block;
+  vertical-align: middle;
+  text-align: left;
+  font-size: 14px;
+  cursor: pointer;
+  color: #2e2e2e!important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  img {
+    vertical-align: middle;
+    margin: auto 10px;
+  }
+  input:disabled {
+    border: none;
+    background: none;
+  }
+}
+
+.history-search {
+  display: none;
+  position: absolute;
+  left: 0;
+  right: 100px;
+  top: 0;
+  bottom: 0;
+  background: #fff;
+  overflow: hidden;
+  border-radius: 6px 0 0 0;
+  z-index: 60;
+  padding: 24px;
+  h5 {
+    font-size: 14px;
+    color: #adadad;
+    text-align: left;
+    padding: 20px 40px;
+    font-weight: 100;
+  }
+  & .select2-hidden-accessible {
+    display: none !important;
+  }
+}
+
+.all-history-search {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-items: stretch;
+  img {
+    display: inline-block;
+    vertical-align: middle;
+    margin: auto;
+  }
+  p {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+    font-size: 14px;
+    text-align: left;
+    color: #3c3c3c;
+  }
+  span {
+    display: block !important;
+    font-size: 11px;
+    color: #a3a2a2;
+    margin-top: 5px;
+  }
+}
+
+.history {
+  width: 32%;
+  padding: 20px 5px;
+}
+
+.active-search {
+  display: block !important;
+  border-bottom: 1px solid #ebebeb;
+  transition: 1.5s;
+  padding-bottom: 15px;
+  input {
+    background: #fff;
+    padding: 12px 5px;
+    width: 250px;
+    font-size: 14px;
+    border: none;
+    color: #434343;
+  }
+}
+
 .big-search-menu {
   position: relative;
   display: none;
@@ -415,7 +505,7 @@
       }
     }
     &:nth-child(3) {
-      padding-right: 15px;
+      padding-right: 5px;
     }
     &:nth-child(4) {
       border: none;
@@ -949,8 +1039,9 @@
     background: #fff;
     overflow: hidden;
     clear: both;
+
     cursor: pointer;
-    width: 23%;
+    width: 23.5%;
     font-weight: 500;
     text-align: left;
     color: #4d4d4d;
@@ -1154,7 +1245,7 @@
 .exact-area, .the-exact-address {
   display: inline-block;
   vertical-align: middle;
-  padding-top: 4px;
+   padding: 20px 20px 10px 0;
   & .select2-selection--single {
     background: none !important;
   }
@@ -2770,6 +2861,15 @@
     vertical-align: middle;
     width: auto;
   }
+  .history-search {
+    right: 0;
+    bottom: auto;
+  }
+  .history {
+    width: 50% !important;
+    text-align: left;
+    padding: 20px 0 !important;
+  }
   .container-w-0 {
     width: auto;
   }
@@ -3552,6 +3652,15 @@
       padding: 10px !important;
       width: auto !important;
     }
+  }
+  .history-search {
+    right: 0;
+    bottom: auto;
+    padding: 15px 5px;
+  }
+  .history {
+    width: auto !important;
+    padding: 20px 0 !important;
   }
   .registration-users, .place-an-ad,
   .logo-img, .message {
