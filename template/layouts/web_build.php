@@ -437,6 +437,14 @@ foreach ($this->data['script'] as $key => $value) {
                         </span>
                     </div>
                     <button>Задать точнее</button>
+                    <form>
+                        <div class="quick-search">
+                            <h5><i class="fa fa-map-marker" aria-hidden="true"></i>Введите город, район, область или точный адрес <span><img src="../../template/images/location.png" alt="location">выделить область на карте</span></h5>
+                            <div class="quick-search-by-parameters">
+                                
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <button>Найти</button>
                 <ul class="filter-block-big-menu">
