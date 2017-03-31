@@ -153,27 +153,62 @@ var productSearch = false,
         {id: 2, text: 'Подземная парковка3'},
         {id: 3, text: 'Подземная парковка4'},
         {id: 4, text: 'Подземная парковка5'}
+    ],
+    okrug = [
+        {id: 0, text: 'Северо-западный'},
+        {id: 1, text: 'Северо-западный2'},
+        {id: 2, text: 'Северо-западный3'},
+        {id: 3, text: 'Северо-западный4'},
+        {id: 4, text: 'Северо-западный5'}
+    ],
+    area = [
+        {id: 0, text: 'Северное медведково'},
+        {id: 1, text: 'Северное медведково2'},
+        {id: 2, text: 'Северное медведково3'},
+        {id: 3, text: 'Северное медведково4'},
+        {id: 4, text: 'Северное медведково5'}
+    ],
+    street = [
+        {id: 0, text: 'Ениивмасейская'},
+        {id: 1, text: 'Ениивмасейская2'},
+        {id: 2, text: 'Ениивмасейская3'},
+        {id: 3, text: 'Ениивмасейская4'},
+        {id: 4, text: 'Ениивмасейская5'}
+    ],
+    distance = [
+        {id: 0, text: '5 мин пешком'},
+        {id: 1, text: '5 мин пешком2'},
+        {id: 2, text: '5 мин пешком3'},
+        {id: 3, text: '5 мин пешком4'},
+        {id: 4, text: '5 мин пешком5'}
+    ],
+    subwayLines = [
+       {id: 0, text: 'Выбрано(1)'},
+       {id: 1, text: 'Выбрано(2)'},
+       {id: 2, text: 'Выбрано(3)'},
+       {id: 3, text: 'Выбрано(4)'},
+       {id: 4, text: 'Выбрано(5)'}
     ];
 //---------------------------------------------------------
 
 $(function () {
-    var amountBefore = $('#amountBefore'),
-        amountAfter = $('#amountAfter');
+    var $amountBefore = $('#amountBefore'),
+        $amountAfter = $('#amountAfter');
 
     /** Фильтры в доп.параметрах **/
-    amountBefore.val('20000');
-    amountAfter.val('20000');
+    $amountBefore.val('20000');
+    $amountAfter.val('20000');
     $("#slider-range").slider({
         range: true,
         min: 20000,
         max: 20000000,
         values: [75, 300],
         slide: function (event, ui) {
-            $("#amountBefore").val(ui.values[0]);
-            $("#amountAfter").val(ui.values[1]);
+            $amountBefore.val(ui.values[0]);
+            $amountAfter.val(ui.values[1]);
         }
     });
-    $('#amount').val(amountBefore.slider("values", 0) + amountAfter.slider("values", 1));
+    $('#amount').val($amountBefore.slider('values', 0) + $amountAfter.slider('values', 1));
 });
 
 /** Библиотека select2(фильтры) **/
@@ -237,6 +272,18 @@ $('.js-example-data-array, .type-of-object').select2({
 $('.js-example-data-array, .parking-area').select2({
     data: parkingArea
 });
+$('.js-example-data-array, .okrug').select2({
+    data: okrug
+});
+$('.js-example-data-array, .area').select2({
+    data: area
+});
+$('.js-example-data-array, .street').select2({
+    data: street
+});
+$('.js-example-data-array, .distance').select2({
+    data: distance
+});
 //---------------------------------------------------------
 $('.js-example-data-array-selected, .region').select2({
     data: data
@@ -298,113 +345,175 @@ $('.js-example-data-array-selected, .type-of-object').select2({
 $('.js-example-data-array-selected, .parking-area').select2({
     data: parkingArea
 });
+$('.js-example-data-array-selected, .okrug').select2({
+    data: okrug
+});
+$('.js-example-data-array-selected, .area').select2({
+    data: area
+});
+$('.js-example-data-array-selected, .street').select2({
+    data: street
+});
+$('.js-example-data-array-selected, .distance').select2({
+    data: distance
+});
+$(".js-example-templating").select2({
+    templateResult: formatState,
+    data: subwayLines
+});
+//---------------------------------------------------------
+
+function formatState (state) {
+    var $state = $('<span><a class="branch-line"></a>' + state.text + '</span>'),
+    $a = $state.find('a');
+
+    switch (subwayLines.id) {
+        case 0:
+            console.log('0');
+            $a.css({'background':'orange'});
+            break;
+        case 1:
+            console.log('1');
+            $a.css({'background':'red'});
+            break;
+        case 2:
+            console.log('2');
+            $a.css({'background':'blue'});
+            break;
+        case 3:
+            console.log('3');
+            $a.css({'background':'red'});
+            break;
+        case 4:
+            console.log('4');
+            $a.css({'background':'yellowgreen'});
+            break;
+    }
+
+    if (!state.id) {
+        return state.text;
+    }
+
+    return $state;
+}
+
 //---------------------------------------------------------
 
 /** Отслежка и изменение расширенного и простого блока **/
 function showBigSearch() {
-    var searchTeg = $('.big-search a i'),
-        bigSearch = $('.big-search');
+    var $searchTeg = $('.big-search a i'),
+        $bigSearch = $('.big-search'),
+        $searchMenuApartment = $('.search-menu-apartment'),
+        $bigSearchMenu = $('.big-search-menu');
 
     productSearch = !productSearch;
 
     if (!productSearch) {
-        $('.search-menu-apartment').css({'display': 'block'});
-        $('.big-search-menu').css({'display': 'none'});
-        searchTeg.remove();
-        bigSearch.html('<a>Расширенный поиск</a>' + '<i class="fa fa-angle-right" aria-hidden="true"></i>');
+        $searchMenuApartment.css({
+            'display': 'block'
+        });
+        $bigSearchMenu.css({
+            'display': 'none'
+        });
+        $searchTeg.remove();
+        $bigSearch.html('<a>Расширенный поиск</a>' + '<i class="fa fa-angle-right" aria-hidden="true"></i>');
         return productSearch = false;
     } else {
-        $('.search-menu-apartment').css({'display': 'none'});
-        $('.big-search-menu').css({'display': 'inline-block'});
-        searchTeg.remove();
-        bigSearch.html('<i class="fa fa-angle-left" aria-hidden="true"></i>' + '<a>Простой поиск</a>');
+        $searchMenuApartment.css({
+            'display': 'none'
+        });
+        $bigSearchMenu.css({
+            'display': 'inline-block'
+        });
+        $searchTeg.remove();
+        $bigSearch.html('<i class="fa fa-angle-left" aria-hidden="true"></i>' + '<a>Простой поиск</a>');
         return productSearch = true;
     }
 }
 
 /** Header меню **/
 function showTopMenuAndSearch() {
-    var user = $('.user ul');
+    var $user = $('.user ul');
 
     showAndHideTopMenu = !showAndHideTopMenu;
 
     if (!showAndHideTopMenu) {
-        user.css({'display': 'none'});
+        $user.css({'display': 'none'});
         showAndHideTopMenu = false;
     } else {
-        user.css({'display': 'block'});
+        $user.css({'display': 'block'});
         showAndHideTopMenu = true;
     }
 }
 //---------------------------------------------------------
 /** Блоки с фильтрами **/
 function filterOptionsApartments() {
-    var propertyTypeApartmentSettings = $('.property-type-apartment-settings');
+    var $propertyTypeApartmentSettings = $('.property-type-apartment-settings');
     shadowBlock();
 
-    propertyTypeApartmentSettings.css({'display': 'block'});
+    $propertyTypeApartmentSettings.css({'display': 'block'});
     setTimeout(function () {
-        propertyTypeApartmentSettings.css({'display': 'none'});
+        $propertyTypeApartmentSettings.css({'display': 'none'});
     }, 5000);
 }
 
 function filterOptions() {
-    var showBigOptions = $('.showBigOptions');
+    var $showBigOptions = $('.showBigOptions');
     shadowBlock();
 
-    showBigOptions.css({'display': 'block'});
+    $showBigOptions.css({'display': 'block'});
     setTimeout(function () {
-        showBigOptions.css({'display': 'none'});
+        $showBigOptions.css({'display': 'none'});
     }, 5000);
 }
 
 function apartmentSettings() {
-	var apartmentSettings = $('.apartment-settings');
+	var $apartmentSettings = $('.apartment-settings');
 	shadowBlock();
 
-    apartmentSettings.css({'display': 'block'});
+    $apartmentSettings.css({'display': 'block'});
     setTimeout(function () {
-        apartmentSettings.css({'display': 'none'});
+        $apartmentSettings.css({'display': 'none'});
     }, 5000);
 }
 
 function appearanceofTheApartment() {
-	var appearanceOfTheApartments = $('.appearance-of-the-apartment');
+	var $appearanceOfTheApartments = $('.appearance-of-the-apartment');
 	shadowBlock();
 
-    appearanceOfTheApartments.css({'display': 'block'});
+    $appearanceOfTheApartments.css({'display': 'block'});
     setTimeout(function () {
-        appearanceOfTheApartments.css({'display': 'none'});
+        $appearanceOfTheApartments.css({'display': 'none'});
     }, 5000);
 }
 
 function appearanceOfTheBuilding() {
-	var appearanceOfTheBuild = $('.appearance-of-the-build');
+	var $appearanceOfTheBuild = $('.appearance-of-the-build');
 	shadowBlock();
 
-    appearanceOfTheBuild.css({'display': 'block'});
+    $appearanceOfTheBuild.css({'display': 'block'});
     setTimeout(function () {
-        appearanceOfTheBuild.css({'display': 'none'});
+        $appearanceOfTheBuild.css({'display': 'none'});
     }, 5000);
 }
 
 function buildingParametersFilter() {
-    var buildingParameterFilter = $('.building-parameters-filter');
+    var $buildingParameterFilter = $('.building-parameters-filter');
     shadowBlock();
 
-    buildingParameterFilter.css({'display': 'block'});
+    $buildingParameterFilter.css({'display': 'block'});
     setTimeout(function () {
-        buildingParameterFilter.css({'display': 'none'});
+        $buildingParameterFilter.css({'display': 'none'});
     }, 5000);
 }
 
 function searchMetroMainBlock() {
-    var searchMetro = $('.search-metro-main-block');
+    var $searchMetro = $('.search-metro-main-block');
     shadowBlock();
 
-    searchMetro.css({'display': 'block'});
+    $searchMetro.css({'display': 'block'});
     setTimeout(function () {
-        searchMetro.css({'display': 'none'});
+        $searchMetro.css({'display': 'none'});
     }, 10000);
 }
 
@@ -419,22 +528,22 @@ function attachment() {
 }
 
 function historySearch() {
-    var history = $('.history-search');
+    var $history = $('.history-search');
     shadowBlock();
 
-    history.css({'display': 'block'});
+    $history.css({'display': 'block'});
     setTimeout(function () {
-        history.css({'display': 'none'});
+        $history.css({'display': 'none'});
     }, 5000);
 }
 
 /** Тени в открывшимся блоке **/
 function shadowBlock() {
-	var shadowBlocks = $('.decorativeShadowBlock');
+	var $shadowBlocks = $('.decorativeShadowBlock');
 
-	shadowBlocks.css({'display': 'block'});
+    $shadowBlocks.css({'display': 'block'});
     setTimeout(function () {
-        shadowBlocks.css({'display': 'none'});
+        $shadowBlocks.css({'display': 'none'});
     }, 5000);
 }
 
@@ -459,7 +568,7 @@ $('.select2-selection--single').on('click', function () {
 //---------------------------------------------------------
 
 function moreAndLess(sizeImage) {
-   var img = $('.metro-location img');
+   var $img = $('.metro-location img');
 
     valueButton[sizeImage]();
 
@@ -470,7 +579,7 @@ function moreAndLess(sizeImage) {
         return imagesWidth = 100;
     }
 
-    img.css({'width': + imagesWidth + '%'});
+    $img.css({'width': + imagesWidth + '%'});
 }
 
 function closeFixedBlock() {

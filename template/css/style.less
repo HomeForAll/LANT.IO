@@ -379,7 +379,7 @@
     font-weight: 100;
     font-size: 14px;
     padding-bottom: 12px;
-    color: #dadada;
+    color: #c4c4c4;
     clear: both;
     border-bottom: 1px solid #ebebeb;
     & > span {
@@ -409,6 +409,89 @@
     margin-right: 10px;
     vertical-align: middle;
   }
+}
+
+.quick-search-by-parameters {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-items: stretch;
+  background: #fff !important;
+  margin: 0 !important;
+  li {
+    width: 32%;
+    text-align: left;
+    padding: 15px;
+    border-radius: 0;
+    background: none;
+    &:hover {
+      background: none;
+    }
+  }
+  label {
+    display: block;
+    color: #444;
+    font-size: 14px;
+  }
+  input {
+    display: block;
+    width: 100%;
+    background: #f5f5f5;
+    color: #1c1c1c;
+    padding: 15px;
+    margin-top: 8px;
+    border: none;
+    &::placeholder {
+      color: #1b1b1b;
+    }
+  }
+  button {
+    display: block!important;
+    margin: 25px auto 0!important;
+    width: 190px!important;
+    background: #7ade78!important;
+    color: #fff!important;
+    padding: 12px 0!important;
+    float: none!important;
+    font-size: 15px !important;
+    border: 1px solid #7ade78 !important;
+    border-radius: 30px !important;
+    &:hover {
+      background: #61d25f!important;
+      transition: 1.5s;
+    }
+  }
+  & .select2-hidden-accessible {
+    display: none !important;
+  }
+  & .select2-container {
+    display: block;
+    border: none!important;
+    background: #f5f5f5!important;
+    padding: 0 10px!important;
+    margin-top: 15px;
+  }
+  & .select2-selection--single {
+    background: url("../../template/images/pointer_bottom.png") no-repeat right 5px center #f5f5f5 !important;
+    background-size: auto;
+  }
+  & .select2-selection__rendered {
+    text-align: left;
+    padding: 8px 15px!important;
+  }
+}
+.select2-results ul span {
+  text-align: left !important;
+}
+
+.branch-line {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
 }
 
 .history {

@@ -367,12 +367,12 @@ foreach ($this->data['script'] as $key => $value) {
                     <div class="exact-area">
                         <span class="search-city" onclick="historySearch();">
                             <img src="../../template/images/s1.png" alt="city">
-                            <input placeholder="Москва, ул, Малая Ордынка" disabled></input>
+                            <input placeholder="Москва, ул, Малая Ордынка" disabled>
                         </span>
                         <div class="history-search">
                             <span class="search-city active-search">
                                 <img src="../../template/images/s1.png" alt="city">
-                                <input placeholder="г. Москва Северное медведково" pattern="[A-Za-zА-Яа-я]"></input>
+                                <input placeholder="г. Москва Северное медведково">
                             </span>
                             <h5>История</h5>
                             <div class="all-history-search">
@@ -439,10 +439,32 @@ foreach ($this->data['script'] as $key => $value) {
                     <button>Задать точнее</button>
                     <form>
                         <div class="quick-search">
-                            <h5><i class="fa fa-map-marker" aria-hidden="true"></i>Введите город, район, область или точный адрес <span><img src="../../template/images/location.png" alt="location">выделить область на карте</span></h5>
-                            <div class="quick-search-by-parameters">
-                                
-                            </div>
+                            <h5><i class="fa fa-map-marker" aria-hidden="true"></i>Введите город, район, область или точный адрес<span><img src="../../template/images/location.png" alt="location">выделить область на карте</span></h5>
+                            <ul class="quick-search-by-parameters">
+                                <li><label>Область
+                                        <input type="text" placeholder="Московская">
+                                    </label></li>
+                                <li><label>Город
+                                        <input type="text" placeholder="Москва">
+                                    </label></li>
+                                <li><label>Округ
+                                        <select class="js-example-data-array okrug"></select>
+                                    </label></li>
+                                <li><label>Район
+                                        <select class="js-example-data-array area"></select>
+                                    </label></li>
+                                <li><label>Улица
+                                        <select class="js-example-data-array street"></select>
+                                    </label></li>
+                                <li><label>Дом<input type="text" placeholder="16"></label></li>
+                                <li><label>Метро
+                                        <select class="js-example-templating metro-lines"></select>
+                                    </label></li>
+                                <li><label>Удаленность от метро не более
+                                        <select class="js-example-data-array distance"></select>
+                                    </label></li>
+                                <li><button>Готово</button></li>
+                            </ul>
                         </div>
                     </form>
                 </div>
