@@ -436,7 +436,7 @@ foreach ($this->data['script'] as $key => $value) {
                             </form>
                         </span>
                     </div>
-                    <button>Задать точнее</button>
+                    <button onclick="quickSearch()">Задать точнее</button>
                     <form>
                         <div class="quick-search">
                             <h5><i class="fa fa-map-marker" aria-hidden="true"></i>Введите город, район, область или точный адрес<span><img src="../../template/images/location.png" alt="location">выделить область на карте</span></h5>
@@ -492,7 +492,8 @@ foreach ($this->data['script'] as $key => $value) {
                             </ul>
                         </div>
                     </li>
-                    <li onclick="filterOptions();"><label for="amount" class="js-example-templating">Цена</label>
+                    <li onclick="filterOptions();">
+                        <label>Цена</label>
                         <div class="showBigOptions">
                             <p>От<input placeholder="" type="text" id="amountBefore" readonly disabled></p>
                             <p>До<input placeholder="" type="text" id="amountAfter" readonly disabled></p>

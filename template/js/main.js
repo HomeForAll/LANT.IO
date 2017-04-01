@@ -357,7 +357,7 @@ $('.js-example-data-array-selected, .street').select2({
 $('.js-example-data-array-selected, .distance').select2({
     data: distance
 });
-$(".js-example-templating").select2({
+$(".js-example-templating, .select-price-by-scrolling").select2({
     templateResult: formatState,
     data: subwayLines
 });
@@ -365,30 +365,47 @@ $(".js-example-templating").select2({
 
 function formatState (state) {
     var $state = $('<span><a class="branch-line"></a>' + state.text + '</span>'),
+    data = [],
     $a = $state.find('a');
 
-    switch (subwayLines.id) {
-        case 0:
-            console.log('0');
-            $a.css({'background':'orange'});
-            break;
-        case 1:
-            console.log('1');
-            $a.css({'background':'red'});
-            break;
-        case 2:
-            console.log('2');
-            $a.css({'background':'blue'});
-            break;
-        case 3:
-            console.log('3');
-            $a.css({'background':'red'});
-            break;
-        case 4:
-            console.log('4');
-            $a.css({'background':'yellowgreen'});
-            break;
-    }
+    data.push($a);
+
+    //$a.css({'background':'red'});
+    //console.log(subwayLines[2]);
+
+    //subwayLines[2].find('a').css({'background':'red'});
+
+    //console.log('Все найденные теги -', $a);
+    //console.log('Массив -', data);
+
+    $a.each(function (i) {
+        console.log('Each - ',i);
+        switch (i) {
+            case 0 :
+                console.log('0');
+                $a.css({'background':'red'});
+                break;
+            case 1 :
+                console.log('1');
+                $a.css({'background':'orange'});
+                break;
+            case 2 :
+                console.log('2');
+                $a.css({'background':'blue'});
+                break;
+            case 3 :
+                console.log('3');
+                $a.css({'background':'green'});
+                break;
+            case 4 :
+                console.log('4');
+                $a.css({'background':'yellowgreen'});
+                break;
+            default :
+                $a.css({'background':'silver'});
+                break;
+        }
+    });
 
     if (!state.id) {
         return state.text;
@@ -534,6 +551,16 @@ function historySearch() {
     $history.css({'display': 'block'});
     setTimeout(function () {
         $history.css({'display': 'none'});
+    }, 5000);
+}
+
+function quickSearch() {
+    var $quickSearchBlock = $('.quick-search');
+    shadowBlock();
+
+    $quickSearchBlock.css({'display': 'block'});
+    setTimeout(function () {
+        $quickSearchBlock.css({'display': 'none'});
     }, 5000);
 }
 

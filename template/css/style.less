@@ -365,7 +365,7 @@
 }
 
 .quick-search {
-  display: block;
+  display: none;
   position: absolute;
   left: 0;
   top: 0;
@@ -1343,7 +1343,7 @@
 }
 
 .number-apartments {
-  width: 70% !important;
+  width: 70%;
 }
 
 .location-metro-map {
@@ -1466,6 +1466,7 @@
 .travel-information {
   display: inline-block;
   position: relative;
+  margin-left: -5px;
   padding: 10px 5px;
   vertical-align: top;
   text-align: center;
@@ -2789,7 +2790,7 @@
 }
 
 /** Адаптивность **/
-@media(max-width: 2500px) {
+@media(min-width: 1101px) and (max-width: 2500px) {
   .search-menu-apartment {
     display: block;
     width: 100%;
@@ -2797,9 +2798,31 @@
   .registration-users {
     padding: 0;
   }
+  .apartment-settings {
+    li > p {
+      width: 35%;
+    }
+    p {
+      vertical-align: middle;
+      width: 65%;
+    }
+  }
+  .building-parameters-filter {
+    p {
+      width: 33%;
+    }
+  }
   .container-w-0 {
     width: auto;
     max-width: 1200px;
+  }
+  .names-parametrs {
+    overflow: hidden;
+    width: 30%;
+    margin-right: 5px;
+  }
+  .number-apartments {
+    width: 70%;
   }
   .filter-block-big-menu label {
     width: 55%!important;
@@ -2984,12 +3007,53 @@
     }
   }
 }
-@media(max-width: 1100px) {
+@media(min-width: 601px) and (max-width: 1100px) {
   .registration-users, .place-an-ad,
   .logo-img, .message {
     display: inline-block;
     vertical-align: middle;
     width: auto;
+  }
+  .quick-search {
+    left: 5vw;
+    right: 5vw;
+    bottom: auto;
+    padding: 15px 5px;
+    h5 {
+      font-size: 12px;
+      text-align: center;
+      & span {
+        display: block;
+        vertical-align: middle;
+        float: none;
+        font-size: 14px;
+      }
+    }
+    i {
+      width: 25px;
+      height: 25px;
+      font-size: 16px;
+      line-height: 24px;
+      margin: auto 5px;
+    }
+  }
+  .quick-search-by-parameters {
+    align-items: stretch;
+    justify-content: center;
+    float: none !important;
+    width: auto !important;
+    li {
+      width: 49%;
+      &:last-child {
+        width: 100%;
+      }
+    }
+    input {
+      padding: 15px 15px 15px 40px;
+    }
+    & .select2-container {
+      width: 100% !important;
+    }
   }
   .history-search {
     right: 0;
@@ -3037,7 +3101,7 @@
     }
   }
   .number-apartments {
-    width: 64% !important;
+    width: 65%;
   }
   .exact-area .select2-container,
   .the-exact-address .select2-container {
@@ -3076,7 +3140,7 @@
       vertical-align: top;
       text-align: left !important;
       padding: 0;
-      width: 63%;
+      width: 65%;
       margin: auto;
       & span {
         display: inline-block;
@@ -3094,7 +3158,8 @@
       width: auto !important;
     }
     & .select2-container {
-       width: auto!important;
+      width: auto!important;
+      float: none !important;
     }
   }
   .appearance-of-the-apartment {
@@ -3137,9 +3202,10 @@
     }
     & .select2-selection__rendered {
       width: auto !important;
+      float: none !important;
     }
     & .select2-container {
-       width: auto!important;
+       width: 50%!important;
     }
   }
   .building-parameters-filter {
@@ -3177,20 +3243,21 @@
         line-height: 25px;
       }
     }
+    select {
+      display: none !important;
+    }
     & .names-parametrs {
       display: inline-block;
       vertical-align: middle;
       width: 125px;
       margin-right: 15px;
     }
-    select {
-      display: none !important;
-    }
     & .select2-selection__rendered {
       width: auto !important;
     }
     & .select2-container {
-      width: auto!important;
+      width: 60%!important;
+      float: none !important;
     }
   }
    .appearance-of-the-build {
@@ -3232,10 +3299,11 @@
       display: none !important;
     }
     & .select2-selection__rendered {
-      width: auto !important;
+      width: 50% !important;
     }
     & .select2-container {
-       width: auto!important;
+      width: 55%!important;
+      float: none !important;
     }
   }
   .attachments {
@@ -3257,7 +3325,8 @@
     }
     & .select2-container {
       text-align: left !important;
-      width: auto!important;
+      width: 55%!important;
+      float: none !important;
     }
   }
   .names-parametrs {
@@ -3344,6 +3413,9 @@
     & .select2-container {
       width: 23.5% !important;
     }
+    & .select2-hidden-accessible {
+      display: none !important;
+    }
   }
   .big-search-menu {
     text-align: center;
@@ -3362,19 +3434,6 @@
       display: inline-block;
       margin: auto;
     }
-    & .select2-selection__rendered {
-      display: block!important;
-      padding: 5px 10px 0 30px!important;
-      width: 155px!important;
-      font-size: 12px;
-    }
-    & .select2-selection--single {
-      height: 30px!important;
-    }
-    & .select2-container {
-      width: 55%!important;
-      padding: 0!important;
-    }
   }
   .select2-container {
     border: none!important;
@@ -3390,10 +3449,11 @@
   }
   .select2-selection--single {
     background-position: right 5px center;
+    height: 45px!important;
   }
   .select2-container .select2-selection__rendered {
     display: block!important;
-    padding: 8px 25px!important;
+    padding: 9px 25px!important;
     width: auto!important;
     font-size: 12px;
   }
@@ -3402,7 +3462,7 @@
   }
   .exact-area, .the-exact-address {
     display: inline-block;
-    vertical-align: top;
+    vertical-align: middle;
     padding: 15px 10px 0;
     margin: 0;
   }
@@ -3431,8 +3491,8 @@
     li {
       width: 100% !important;
       text-align: left !important;
-      &:nth-child(1) {
-        text-align: center !important;
+      &:nth-child(3) {
+        padding: 5px !important;
       }
     }
   }
@@ -3448,13 +3508,27 @@
       vertical-align: middle;
       text-align: left;
       &:nth-child(3) {
-        padding: 28px 5px;
+        padding: 5px 5px 5px 30px;
         font-size: 12px;
-        text-align: right;
+        text-align: left;
       }
       &:nth-child(4) {
         border-right: 1px dotted #e0e0e0;
       }
+    }
+    label {
+      width: 70%!important;
+      border-right: none;
+      margin: auto 0 auto 25px;
+      min-width: 150px!important;
+      padding: 15px 0!important;
+    }
+    input {
+      float: none !important;
+      margin-top: 0;
+    }
+    & .select2-container {
+      padding: 0!important;
     }
     & .select2-selection__rendered {
       display: block!important;
@@ -3464,14 +3538,7 @@
     }
     & .select2-hidden-accessible {
       margin: auto !important;
-    }
-    label {
-      width: 70%!important;
-      border-right: none;
-    }
-    input {
-      float: none !important;
-      margin-top: 0;
+      padding-left: 40px!important;
     }
   }
   .exact-area .select2-container,
@@ -3773,14 +3840,54 @@
 }
 //------------------------------
 
-@media(max-width: 600px) {
+@media(min-width: 200px) and (max-width: 600px) {
   .warning {
     width:  auto;
-    left: 5vw;
-    right: 5vw;
+    left: 0;
+    right: 0;
     button {
       padding: 10px !important;
       width: auto !important;
+    }
+  }
+  .quick-search {
+    left: 0;
+    right: 0;
+    bottom: auto;
+    padding: 15px 5px;
+    h5 {
+      font-size: 12px;
+      text-align: center;
+      & span {
+        display: block;
+        float: none;
+        margin-top: 20px;
+        font-size: 14px;
+      }
+    }
+    i {
+      width: 25px;
+      height: 25px;
+      font-size: 16px;
+      line-height: 24px;
+      margin: auto 5px;
+    }
+  }
+  .search-metro-main-block {
+    width: auto;
+    left: 0;
+    right: 0;
+  }
+  .quick-search-by-parameters {
+    align-items: stretch;
+    justify-content: center;
+    float: none !important;
+    width: auto !important;
+    li {
+      width: 100%;
+    }
+    & .select2-container {
+      width: 100% !important;
     }
   }
   .history-search {
@@ -3789,7 +3896,8 @@
     padding: 15px 5px;
   }
   .history {
-    width: auto !important;
+    flex-grow: 1;
+    width: 250px!important;
     padding: 20px 0 !important;
   }
   .registration-users, .place-an-ad,
@@ -3818,6 +3926,8 @@
   }
   .names-parametrs {
     display: block;
+    text-align: center;
+    width: auto;
     float: none;
   }
   .property-type-apartment-settings {
@@ -3835,13 +3945,20 @@
       margin: auto !important;
       float: none !important;
     }
+    img {
+      margin-left: 10px !important;
+    }
     li {
       display: block !important;
       padding: 10px 5px !important;
+      font-size: 14px !important;
       width: auto !important;
       text-align: left !important;
       &:nth-child(1) {
         text-align: center !important;
+      }
+      &:nth-child(3) {
+        padding: 5px !important;
       }
     }
   }
@@ -3901,7 +4018,7 @@
       float: none !important;
     }
     p {
-      text-align: center;
+      text-align: center !important;
     }
   }
   .apartment-settings {
@@ -3925,7 +4042,7 @@
       width: 75%;
     }
     & .select2-container {
-      width: 70%!important;
+      width: 80%!important;
     }
   }
   .appearance-of-the-apartment {
@@ -4006,7 +4123,7 @@
     }
     & .select2-container {
       text-align: left!important;
-      width: 45%!important;
+      width: 65%!important;
       margin-right: 20%;
     }
   }
@@ -4024,6 +4141,7 @@
       width: auto !important;
     }
     li {
+      text-align: center;
       clear: none;
       padding: 10px 0 !important;
       width: auto !important;
@@ -4036,7 +4154,7 @@
     }
     & .select2-container {
       text-align: left!important;
-      width: 45%!important;
+      width: 50%!important;
       margin-right: 20%;
     }
     button {
@@ -4178,7 +4296,8 @@
       width: 230px
     }
     p {
-      text-align: center;
+      text-align: center !important;
+      margin-bottom: 10px;
       padding: 10px 4px 0;
     }
     a {
@@ -4194,17 +4313,21 @@
     clear: both;
     label {
       border: none!important;
-      padding: 15px 10px 15px 35px!important;
+      padding: 15px 10px 15px 15px!important;
+      font-size: 14px;
     }
     input {
       float: left;
       margin-right: -25px;
-      margin-top: 0;
+      margin-top: 15px !important;
+      & .select2-selection__rendered {
+        padding-left: 25px!important;
+      }
     }
     li {
       display: block;
       text-align: left !important;
-      font-size: 10px!important;
+      font-size: 14px!important;
       padding: 20px 0!important;
       width: auto;
       border-right: none!important;
@@ -4212,17 +4335,28 @@
     select {
       padding: 50px 0 0!important;
     }
+    img {
+      margin: auto 15px auto 0;
+    }
     span {
       margin: auto !important;
       padding: 0!important;
     }
     & .select2-container {
-      width: 80%!important;
+      width: 75%!important;
+      padding: 0!important;
+    }
+    & .select2-hidden-accessible {
+      display: inline-block !important;
+      margin: auto!important;
     }
   }
   .building-parameters {
     margin-left: 0 !important;
     float: none !important;
+  }
+  .number-apartments {
+    width: 100%;
   }
   .decorate-number sub {
     margin-top: 3px;
