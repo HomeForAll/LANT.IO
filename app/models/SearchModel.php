@@ -659,37 +659,31 @@ class SearchModel extends Model
         );
     }
 
-    public function getFormData($space_type, $operation_type = null, $object_type = null)
+    public function getForms()
     {
-        $query = $this->db->select('*')->from('forms')->where('space_type', '=', $space_type);
-
-        if ($object_type) {
-            $query->where('object_type', '=', $object_type);
-        }
-
-        if ($operation_type) {
-            $query->where('operation', '=', $operation_type);
-        }
-
-        return $query->execute();
+        return $this->db->select('*')->from('forms')->execute();
     }
 
-    public function getFormCategories() {
+    public function getFormCategories()
+    {
         $query = $this->db->query('SELECT * FROM form_categories ORDER BY id');
         return $query->fetchAll();
     }
 
-    public function getFormSubcategories() {
+    public function getFormSubcategories()
+    {
         $query = $this->db->query('SELECT * FROM form_subcategories ORDER BY id');
         return $query->fetchAll();
     }
 
-    public function getFormElements() {
+    public function getFormElements()
+    {
         $query = $this->db->query('SELECT * FROM form_elements ORDER BY id');
         return $query->fetchAll();
     }
 
-    public function getFormSelectOptions() {
+    public function getFormSelectOptions()
+    {
         $query = $this->db->query('SELECT * FROM form_select_options ORDER BY id');
         return $query->fetchAll();
     }

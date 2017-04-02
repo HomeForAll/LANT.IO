@@ -4,7 +4,7 @@ class ServiceController extends Controller
 {
     private $user;
     private $status;
-    private $access;
+    protected $access;
     private $service_message;
 
     public function __construct($template, $model)

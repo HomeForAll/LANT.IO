@@ -3,7 +3,7 @@ return array(
     // DataBase
     'db_host' => '127.0.0.1',
     'db_username' => 'postgres',
-    'db_password' => 'ZSH1wb88',
+    'db_password' => '',
     'db' => 'site',
     
     // SMTP
