@@ -66,4 +66,5 @@ return array(
     'admin/newsformgenerator' => 'main/admin/newsFormGenerator',
 
     'forms_gen' => 'main/search/GenSearchForm',
+    'forms_gen/([0-9]+)' => 'main/search/GenSearchForm/$1',
 );

@@ -18,6 +18,10 @@ class View extends Access implements ViewInterface
         $this->layout = $layout;
     }
 
+    public static function instance($layout) {
+        return new self($layout);
+    }
+
     public function render($view, $data = null)
     {
         $this->data = $data;
