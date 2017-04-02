@@ -191,6 +191,7 @@ var productSearch = false,
     ];
 //---------------------------------------------------------
 
+/** Фильтр - Цена **/
 $(function () {
     var $amountBefore = $('#amountBefore'),
         $amountAfter = $('#amountAfter');
@@ -361,6 +362,30 @@ $(".js-example-templating, .select-price-by-scrolling").select2({
     templateResult: formatState,
     data: subwayLines
 });
+//---------------------------------------------------------
+
+/** Слайдер **/
+$(document).ready(function(){
+  $('.bxslider').bxSlider({
+  		slideWidth: 500,
+   		minSlides: 1,
+   		maxSlides: 2,
+   		moveSlides: 2,
+   		slideMargin: 10,
+   		pager: false
+  });
+});
+$(document).ready(function(){
+  $('.bxslider-partners').bxSlider({
+  		slideWidth: 150,
+   		minSlides: 1,
+   		maxSlides: 5,
+   		moveSlides: 5,
+   		slideMargin: 50,
+   		pager: false
+  });
+});
+
 //---------------------------------------------------------
 
 function formatState (state) {

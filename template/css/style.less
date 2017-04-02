@@ -1239,6 +1239,7 @@
   width: 800px;
   z-index: 60;
   margin: 15px auto;
+  clear: both;
   background: #f9f9f9;
   text-align: center !important;
   h2 {
@@ -1343,7 +1344,7 @@
 }
 
 .number-apartments {
-  width: 70%;
+  width: 60% !important;
 }
 
 .location-metro-map {
@@ -2376,15 +2377,6 @@
   width: 1440px;
 }
 
-.carousel {
-  display: flex;
-  flex-flow: row wrap;
-  align-items: stretch;
-  flex-shrink: 2;
-  margin: 50px auto 0;
-  justify-content: center;
-}
-
 .left-button, .right-button {
   width: 5%;
   padding: 0 12px;
@@ -2426,14 +2418,17 @@
 }
 
 .admins {
+  position: absolute;
   display: inline-block;
-  vertical-align: top;
-  width: 365px;
-  height: 140px;
-  margin: 29px 0 0 -65px;
-  padding: 30px 10px 10px 72px;
-  z-index: 1;
+  vertical-align: middle;
+  top: 35px;
+  left: 85px;
   background: #fff;
+  width: 390px;
+  text-align: left;
+  z-index: -1;
+  height: auto;
+  padding: 30px 15px 30px 85px;
   h6 {
     font-size: 18px;
     color: #2c2c2c;
@@ -2468,15 +2463,6 @@
   }
 }
 
-.carousel-2 {
-  display: flex;
-  flex-flow: row wrap;
-  align-items: stretch;
-  flex-shrink: 2;
-  margin: 13px auto 0;
-  justify-content: center;
-}
-
 .left-button-2, .right-button-2 {
   width: 5%;
   padding: 0 12px;
@@ -2492,39 +2478,18 @@
   text-align: left !important;
 }
 
-.main-block-2 {
-  display: inline-block;
-  vertical-align: top;
-  width: 83.4%;
-  overflow: hidden;
-  ul {
-    display: block;
-    padding: 0 36px;
-    width: 99999px;
-    text-align: left;
-  }
-  li {
-    display: inline-block;
-    position: relative;
-    vertical-align: middle;
-    padding: 25px;
-    cursor: pointer;
-    margin: auto 12px;
-    z-index: 4;
-    &:hover:before {
-      background: #e5e5e5;
-      z-index: -1;
-    }
-    &:before {
-      content: '';
-      display: inline-block;
-      background: rgba(248, 248, 248, 0.85);
-      position: absolute;
-      margin: -25px;
-      width: calc(100%);
-      height: calc(100%);
-      z-index: 5;
-    }
+.main-block-2 li:before {
+  content: '';
+  display: block;
+  background: rgba(248,248,248,.85);
+  position: relative;
+  cursor: pointer;
+  margin-bottom: calc(-55%);
+  height: 120px;
+  z-index: 5;
+  &:hover {
+    background: #e5e5e5 !important;
+    z-index: -1;
   }
 }
 
@@ -2818,7 +2783,8 @@
   }
   .names-parametrs {
     overflow: hidden;
-    width: 30%;
+    float: left;
+    width: 25%;
     margin-right: 5px;
   }
   .number-apartments {
@@ -2911,18 +2877,18 @@
   .admins {
     display: inline-block;
     vertical-align: middle;
-    width: 365px;
+    width: 390px;
+    text-align: left;
+    left: 85px;
+    z-index: -1;
     height: auto;
-    padding: 30px 10px 10px 72px;
+    padding: 30px 15px 30px 90px;
     span {
       text-align: left;
     }
   }
   .container-w {
     padding-bottom: 40px;
-  }
-  .main-block-2 ul {
-    padding: 0;
   }
   .policy, .footer ul {
     display: inline-block;
@@ -3771,18 +3737,9 @@
     } 
   }
   .admins {
-    overflow: hidden;
-    width: 62%;
-    margin: 0;
-    padding: 5px;
+    padding: 15px 15px 15px 100px;
     span {
       text-align: left;
-    }
-  }
-  .main-block-2 {
-    width: 80%;
-    ul {
-      padding: 0;
     }
   }
   .section-8 {
@@ -3790,9 +3747,6 @@
   }
   .partners {
     width: auto;
-  }
-  .carousel-2 {
-    margin: 0;
   }
   .footer {
     padding: 0;
@@ -4591,15 +4545,9 @@
     } 
   }
   .admins {
-    overflow: hidden;
-    width: 62%;
-    margin: 0;
-    padding: 5px;
-  }
-  .main-block-2 {
-    width: 80%;
-    ul {
-      padding: 0;
+    padding: 15px 15px 15px 100px;
+    span {
+      text-align: left;
     }
   }
   .section-8 {
@@ -4607,9 +4555,6 @@
   }
   .partners {
     width: auto;
-  }
-  .carousel-2 {
-    margin: 0;
   }
   .footer {
     padding: 0;

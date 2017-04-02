@@ -1194,82 +1194,62 @@ foreach ($this->data['script'] as $key => $value) {
     <div class="section-7">
         <div class="container-w-2"> 
             <h2>Мы трудимся для Вас</h2>
-            <div class="carousel">
-                <div class="left-button">
-                    <img src="../../template/images/left-button.png" alt="left-button">
-                </div>
-                <div class="main-block">
-                    <ul>
-                        <li>
-                            <img src="../../template/images/daniil.png" alt="child">
-                            <div class="admins">
-                                <h6>Даниил Мельников</h6>
-                                <span>Гениральный директор</span>
-                                <p>Наш сервис не просто воплощение стараний нашей команды, это сервис обеспечивающий комфортное приобретение или аренду жилья</p>
-                            </div>
-                        </li>
-                        <li>
-                            <img src="../../template/images/aleksandr.png" alt="child">
-                            <div class="admins">
-                                <h6>Александр Никулин</h6>
-                                <span>Гениральный директор</span>
-                                <p>Наш сервис не просто воплощение стараний нашей команды, это сервис обеспечивающий комфортное приобретение или аренду жилья</p>
-                            </div>
-                        </li>
-                        <li>
-                            <img src="../../template/images/daniil.png" alt="child">
-                            <div class="admins">
-                                <h6>Даниил Мельников</h6>
-                                <span>Гениральный директор</span>
-                                <p>Наш сервис не просто воплощение стараний нашей команды, это сервис обеспечивающий комфортное приобретение или аренду жилья</p>
-                            </div>
-                        </li>
-                        <li>
-                            <img src="../../template/images/aleksandr.png" alt="child">
-                            <div class="admins">
-                                <h6>Александр Никулин</h6>
-                                <span>Гениральный директор</span>
-                                <p>Наш сервис не просто воплощение стараний нашей команды, это сервис обеспечивающий комфортное приобретение или аренду жилья</p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="right-button">
-                    <img src="../../template/images/right-button.png" alt="right-button">
-                </div>
-            </div>
+            <ul class="bxslider">
+                <li>
+                    <img src="../../template/images/daniil.png" />
+                    <div class="admins">
+                        <h6>Александр Никулин</h6>
+                        <span>Гениральный директор</span>
+                        <p>Наш сервис не просто воплощение стараний нашей команды, это сервис обеспечивающий комфортное приобретение или аренду жилья</p>
+                    </div>
+                </li>
+                <li>
+                    <img src="../../template/images/aleksandr.png" />
+                    <div class="admins">
+                        <h6>Александр Никулин</h6>
+                        <span>Гениральный директор</span>
+                        <p>Наш сервис не просто воплощение стараний нашей команды, это сервис обеспечивающий комфортное приобретение или аренду жилья</p>
+                    </div>
+                </li>
+                <li>
+                    <img src="../../template/images/daniil.png" />
+                    <div class="admins">
+                        <h6>Александр Никулин</h6>
+                        <span>Гениральный директор</span>
+                        <p>Наш сервис не просто воплощение стараний нашей команды, это сервис обеспечивающий комфортное приобретение или аренду жилья</p>
+                    </div>
+                </li>
+                <li>
+                    <img src="../../template/images/aleksandr.png" />
+                    <div class="admins">
+                        <h6>Александр Никулин</h6>
+                        <span>Гениральный директор</span>
+                        <p>Наш сервис не просто воплощение стараний нашей команды, это сервис обеспечивающий комфортное приобретение или аренду жилья</p>
+                    </div>
+                </li>
+            </ul>
         </div>
     </div>
     <div class="section-8">
         <div class="partners">
             <h2>Официальные партнеры</h2>
-            <div class="carousel-2">
-                <div class="left-button-2">
-                    <img src="../../template/images/left-button.png" alt="left-button">
-                </div>
-                <div class="main-block-2">
-                    <ul>
-                        <li>
-                            <a href="#"><img src="../../template/images/sec-6-1.png" alt="partners"></a>
-                        </li>
-                        <li>
-                            <a href="#"><img src="../../template/images/sec-6-2.png" alt="partners"></a>
-                        </li>
-                        <li>
-                            <a href="#"><img src="../../template/images/sec-6-3.png" alt="partners"></a>
-                        </li>
-                        <li>
-                            <a href="#"><img src="../../template/images/sec-6-4.png" alt="partners"></a>
-                        </li>
-                        <li>
-                            <a href="#"><img src="../../template/images/sec-6-5.png" alt="partners"></a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="right-button-2">
-                    <img src="../../template/images/right-button.png" alt="right-button">
-                </div>
-            </div>
+            <ul class="bxslider-partners main-block-2">
+                <li><a href="#">
+                    <img src="../../template/images/sec-6-1.png" alt="partners"></a>
+                </li>
+                <li><a href="#">
+                    <img src="../../template/images/sec-6-2.png" alt="partners"></a>
+                </li>
+                <li><a href="#">
+                    <img src="../../template/images/sec-6-3.png" alt="partners"></a>
+                </li>
+                <li><a href="#">
+                    <img src="../../template/images/sec-6-4.png" alt="partners"></a>
+                </li>
+                <li><a href="#">
+                    <img src="../../template/images/sec-6-5.png" alt="partners"></a>
+                </li>
+            </ul>
         </div>
     </div>
 </div>
@@ -1313,6 +1293,7 @@ if (isset($this->data['script_footer'])) {
     loadCSS("/bower_components/font-awesome/css/font-awesome.min.css");
     loadCSS("/bower_components/select2/dist/css/select2.min.css");
     loadCSS("//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css");
+    loadCSS("/template/css/jquery.bxslider.min.css");
     loadCSS("/template/css/style.css");
     loadCSS("/template/css/news_style.css");
 </script>
@@ -1323,6 +1304,7 @@ if (isset($this->data['script_footer'])) {
         {"src" : "//code.jquery.com/ui/1.12.1/jquery-ui.js", "async" : false},
         {"src" : "//api-maps.yandex.ru/2.1/?lang=ru_RU", "async" : false},
         {"src" : "/template/js/mapController.js", "async" : false},
+        {"src" : "/template/js/jquery.bxslider.min.js", "async" : false},
         {"src" : "/template/js/forms.editor.handler.js", "async" : false},
         {"src" : "/template/js/socket.io.min.js", "async" : false},
         {"src" : "/bower_components/select2/dist/js/select2.min.js", "async" : false},
