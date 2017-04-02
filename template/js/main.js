@@ -188,6 +188,20 @@ var productSearch = false,
        {id: 2, text: 'Выбрано(3)'},
        {id: 3, text: 'Выбрано(4)'},
        {id: 4, text: 'Выбрано(5)'}
+    ],
+    security = [
+       {id: 0, text: 'Выберите'},
+       {id: 1, text: 'Выберите2'},
+       {id: 2, text: 'Выберите3'},
+       {id: 2, text: 'Выберите4'},
+       {id: 2, text: 'Выберите5'}
+    ],
+    documents = [
+       {id: 0, text: 'Выберите'},
+       {id: 1, text: 'Выберите2'},
+       {id: 2, text: 'Выберите3'},
+       {id: 2, text: 'Выберите4'},
+       {id: 2, text: 'Выберите5'}
     ];
 //---------------------------------------------------------
 
@@ -285,6 +299,12 @@ $('.js-example-data-array, .street').select2({
 $('.js-example-data-array, .distance').select2({
     data: distance
 });
+$('.js-example-data-array, .security').select2({
+    data: security
+});
+$('.js-example-data-array, .documents').select2({
+    data: documents
+});
 //---------------------------------------------------------
 $('.js-example-data-array-selected, .region').select2({
     data: data
@@ -357,6 +377,12 @@ $('.js-example-data-array-selected, .street').select2({
 });
 $('.js-example-data-array-selected, .distance').select2({
     data: distance
+});
+$('.js-example-data-array-selected, .security').select2({
+    data: security
+});
+$('.js-example-data-array-selected, .documents').select2({
+    data: documents
 });
 $(".js-example-templating, .select-price-by-scrolling").select2({
     templateResult: formatState,
