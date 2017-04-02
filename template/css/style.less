@@ -2478,18 +2478,22 @@
   text-align: left !important;
 }
 
-.main-block-2 li:before {
-  content: '';
-  display: block;
-  background: rgba(248,248,248,.85);
-  position: relative;
-  cursor: pointer;
-  margin-bottom: calc(-55%);
-  height: 120px;
-  z-index: 5;
-  &:hover {
-    background: #e5e5e5 !important;
-    z-index: -1;
+.main-block-2 li {
+  display: inline-block;
+  vertical-align: middle;
+  &:before {
+    content: '';
+    display: block;
+    background: rgba(248,248,248,.85);
+    position: relative;
+    cursor: pointer;
+    margin-bottom: calc(-55%);
+    height: 115px;
+    z-index: 5;
+    &:hover {
+      background: #e5e5e5;
+      z-index: -1;
+    }
   }
 }
 
