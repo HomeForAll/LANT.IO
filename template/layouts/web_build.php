@@ -652,18 +652,10 @@ foreach ($this->data['script'] as $key => $value) {
                         </div>
                         </li>
                         <li><img src="../../template/images/search-5.png" alt="search">Безопасность
-                            <select>
-                                <option>Выберите</option>
-                                <option>Выберите2</option>
-                                <option>Выберите3</option>
-                            </select>
+                            <select class="js-example-data-array-selected security"></select>
                         </li>
                         <li><img src="../../template/images/search-1.png" alt="search">Документы
-                            <select>
-                                <option>Выбрано</option>
-                                <option>Выбрано2</option>
-                                <option>Выбрано3</option>
-                            </select>
+                            <select class="js-example-data-array-selected documents"></select>
                         </li>
                         <li onclick="attachment();"><img src="../../template/images/search-1.png" alt="search">Вложения
                             <form>

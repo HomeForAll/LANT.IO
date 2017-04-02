@@ -1169,7 +1169,6 @@
     background: #fff;
     overflow: hidden;
     clear: both;
-
     cursor: pointer;
     width: 23.5%;
     font-weight: 500;
@@ -1178,7 +1177,7 @@
     box-shadow: 0 0 5px 2px #eceeec;
     font-size: 14px;
     border-radius: 0;
-    padding: 15px 30px 15px 20px;
+    padding: 15px 20px;
     margin: 10px 4px;
     & img {
       display: inline-block;
@@ -1222,6 +1221,22 @@
 
 .building-parameters li {
   vertical-align: top;
+  &:nth-child(n+5):nth-child(-n+6) {
+    & .select2-hidden-accessible {
+      display: none !important;
+    }
+    & .select2-container {
+      border: none!important;
+      width: 60%!important;
+      padding: 0!important;
+    }
+    & .select2-selection__rendered {
+      padding: 1px 24px 0 20px!important;
+    }
+    & .select2-selection--single {
+      height: 30px!important;
+    }
+  }
 }
 
 .main-filter:after {
@@ -3072,6 +3087,7 @@
   }
   .number-apartments {
     width: 65%;
+    padding: 10px 0 0 !important;
   }
   .exact-area .select2-container,
   .the-exact-address .select2-container {
@@ -3097,7 +3113,7 @@
     }
     li {
       display: block;
-      padding: 20px 10px;
+      padding: 20px 0;
       text-align: center;
       width: auto !important;
     }
@@ -3107,7 +3123,7 @@
     }
     p {
       display: inline-block;
-      vertical-align: top;
+      vertical-align: middle;
       text-align: left !important;
       padding: 0;
       width: 65%;
@@ -3192,6 +3208,9 @@
       text-align: center;
       padding: 20px 10px;
       width: auto !important;
+      &:nth-child(n+5):nth-child(-n+6) .select2-selection__rendered {
+        padding: 1px 24px 0 20px !important;
+      }
     }
     input {
       margin: 8px 12px;
@@ -3215,12 +3234,6 @@
     }
     select {
       display: none !important;
-    }
-    & .names-parametrs {
-      display: inline-block;
-      vertical-align: middle;
-      width: 125px;
-      margin-right: 15px;
     }
     & .select2-selection__rendered {
       width: auto !important;
@@ -3300,10 +3313,10 @@
     }
   }
   .names-parametrs {
-    display: inline-block;
-    vertical-align: middle;
+    display: block;
+    text-align: center;
     width: auto;
-    margin-right: 15px;
+    margin: auto;
   }
   .place-an-ad {
     display: none;
@@ -4314,7 +4327,9 @@
     float: none !important;
   }
   .number-apartments {
-    width: 100%;
+    display: block;
+    padding: 10px 0 0 !important;
+    width: auto !important;
   }
   .decorate-number sub {
     margin-top: 3px;
