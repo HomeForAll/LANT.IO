@@ -414,54 +414,29 @@ $(document).ready(function(){
 //---------------------------------------------------------
 
 function formatState (state) {
-    var $state = $('<span><a class="branch-line"></a>' + state.text + '</span>'),
-    data = [],
-    $a = $state.find('a');
+    console.log('state', state);
+    var $allMetroLines = $('<span><a class="branch-line"></a>' + state.text + '</span>'),
+        $tagSearchByClass = $allMetroLines.find('a');
 
-    data.push($a);
-
-    //$a.css({'background':'red'});
-    //console.log(subwayLines[2]);
-
-    //subwayLines[2].find('a').css({'background':'red'});
-
-    //console.log('Все найденные теги -', $a);
-    //console.log('Массив -', data);
-
-    $a.each(function (i) {
-        console.log('Each - ',i);
-        switch (i) {
-            case 0 :
-                console.log('0');
-                $a.css({'background':'red'});
-                break;
-            case 1 :
-                console.log('1');
-                $a.css({'background':'orange'});
-                break;
-            case 2 :
-                console.log('2');
-                $a.css({'background':'blue'});
-                break;
-            case 3 :
-                console.log('3');
-                $a.css({'background':'green'});
-                break;
-            case 4 :
-                console.log('4');
-                $a.css({'background':'yellowgreen'});
-                break;
-            default :
-                $a.css({'background':'silver'});
-                break;
-        }
-    });
+    if (state.id === '0') {
+        $tagSearchByClass.css({'background': 'orange'});
+    }
+    if (state.id === '1') {
+        $tagSearchByClass.css({'background': 'red'});
+    }
+    if (state.id === '2') {
+        $tagSearchByClass.css({'background': 'blue'});
+    }
+    if (state.id === '3') {
+        $tagSearchByClass.css({'background': 'silver'});
+    }
+    if (state.id === '4') {
+        $tagSearchByClass.css({'background': 'yellowgreen'});
+    }
 
     if (!state.id) {
         return state.text;
-    }
-
-    return $state;
+    } else return $allMetroLines;
 }
 
 //---------------------------------------------------------
@@ -659,5 +634,5 @@ function moreAndLess(sizeImage) {
 }
 
 function closeFixedBlock() {
-	$('.warning').css({'display':'none'})
+	$('.warning').css({'display':'block'})
 }

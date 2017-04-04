@@ -515,12 +515,13 @@ foreach ($this->data['script'] as $key => $value) {
                 <div class="advanced-search-options">
                     <p>Заполните параметры ниже, для более точного поиска</p>
                     <ul class="building-parameters">
-                        <li onclick="apartmentSettings();"><img src="../../template/images/search-1.png" alt="search">Параметры квартиры
+                        <li onclick="apartmentSettings();">
+                            <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
                         <form>
                             <div class="apartment-settings">
                                 <h2>Параметры квартиры</h2>
                                 <ul>
-                                    <li><span class="names-parametrs">Кол-во комнат</span>
+                                    <li><span class="names-parameters">Кол-во комнат</span>
                                         <p class="number-apartments">
                                             <span>1</span>
                                             <span>2</span>
@@ -529,31 +530,31 @@ foreach ($this->data['script'] as $key => $value) {
                                             <span>4+</span>
                                         </p>
                                     </li>
-                                    <li><span class="names-parametrs">Общая площадь м<sup>2</sup></span>
+                                    <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
                                         <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
                                         <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
                                     </li>
-                                    <li><span class="names-parametrs">Нежилая площадь м<sup>2</sup></span>
+                                    <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
                                         <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
                                         <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
                                     </li>
-                                    <li><span class="names-parametrs">Жилая площадь м<sup>2</sup></span>
+                                    <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
                                         <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
                                         <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
                                     </li>
-                                    <li><span class="names-parametrs">Балкон м2</span>
+                                    <li><span class="names-parameters">Балкон м2</span>
                                         <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
                                         <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
                                     </li>
                                 </ul>
                                 <ul>
-                                    <li><span class="names-parametrs">Этаж</span>
+                                    <li><span class="names-parameters">Этаж</span>
                                         <select class="js-example-data-array-selected floor"></select>
                                     </li>
-                                    <li><span class="names-parametrs">Комплектация </span>
+                                    <li><span class="names-parameters">Комплектация </span>
                                         <select class="js-example-data-array-selected equipment"></select>
                                     </li>
-                                    <li><span class="names-parametrs">Высота потолков м</span>
+                                    <li><span class="names-parameters">Высота потолков м</span>
                                         <p>От<input type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
                                         <p>До<input type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
                                     </li>
@@ -598,24 +599,24 @@ foreach ($this->data['script'] as $key => $value) {
                                 <div class="building-parameters-filter">
                                     <h2>Параметры здания</h2>
                                     <ul>
-                                        <li><span class="names-parametrs">Количество этажей</span>
+                                        <li><span class="names-parameters">Количество этажей</span>
                                             <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
                                             <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
                                         </li>
-                                        <li><span class="names-parametrs">Год окончания строительства</span>
+                                        <li><span class="names-parameters">Год окончания строительства</span>
                                             <p>От<input type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}" required></p>
                                             <p>До<input type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}" required></p>
                                         </li>
-                                        <li><span class="names-parametrs">Наличие лифта</span>
+                                        <li><span class="names-parameters">Наличие лифта</span>
                                             <select class="js-example-data-array-selected the-presence-of-an-elevator"></select>
                                         </li>
-                                        <li><span class="names-parametrs">Обязеьельные услуги ЖКХ</span>
+                                        <li><span class="names-parameters">Обязеьельные услуги ЖКХ</span>
                                             <select class="js-example-data-array-selected nursery-services"></select>
                                         </li>
-                                        <li><span class="names-parametrs">Вид объекта</span>
+                                        <li><span class="names-parameters">Вид объекта</span>
                                             <select class="js-example-data-array-selected type-of-object"></select>
                                         </li>
-                                        <li><span class="names-parametrs">Парковка</span>
+                                        <li><span class="names-parameters">Парковка</span>
                                             <select class="js-example-data-array-selected parking-area"></select>
                                         </li>
                                     </ul>
