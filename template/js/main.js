@@ -1,7 +1,6 @@
 'use strict';
 var productSearch = false,
     showAndHideTopMenu = false,
-    logicBooleanSpan = false,
     imagesWidth = 130,
     valueButton = {
         'more': (function () {
@@ -625,24 +624,23 @@ function shadowBlock() {
     }, 5000);
 }
 
-$('.select2-selection--single').on('click', function () {
-
-	logicBooleanSpan = !logicBooleanSpan;
-
-	if(!logicBooleanSpan) {
-		$(this).css({
-            'background': 'url("../../template/images/pointer_bottom.png") right 5px center no-repeat #fff',
-            'background-size': 'auto'
-        });
-		return logicBooleanSpan = false;
-	} else {
-		$(this).css({
-        	'background': 'url("../../template/images/pointer_top.png") right 5px center no-repeat #fff',
-        	'background-size': 'auto'
-   		});
-		return logicBooleanSpan = true;
-	}
+$('.select2-selection--single, .pointer').on('click', function () {
+    $(this).css({
+        'background': 'url("../../template/images/pointer_top.png") right 5px center no-repeat',
+        'background-size': 'auto'
+    });
+    setTimeout(function () {
+        closePointer();
+    }, 4500);
 });
+
+function closePointer() {
+    var el = $('.select2-selection--single, .pointer');
+    el.css({
+        'background': 'url("../../template/images/pointer_bottom.png") right 5px center no-repeat',
+        'background-size': 'auto'
+    });
+}
 //---------------------------------------------------------
 
 function moreAndLess(sizeImage) {

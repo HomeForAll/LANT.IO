@@ -470,25 +470,25 @@ foreach ($this->data['script'] as $key => $value) {
                 </div>
                 <button>Найти</button>
                 <ul class="filter-block-big-menu">
-                    <li onclick="filterOptionsApartments();"><img src="../../template/images/apartments.png" alt="apartments">Тип недвижимости
+                    <li class="pointer" onclick="filterOptionsApartments();"><img src="../../template/images/apartments.png" alt="apartments">Тип недвижимости
                         <div class="property-type-apartment-settings">
                             <ul>
                                 <li>Жилая</li>
-                                <li><img src="../../template/images/b-s-1.png" alt="icon">Квартира</li>
-                                <li><img src="../../template/images/b-s-2.png" alt="icon">Дом</li>
-                                <li><img src="../../template/images/b-s-3.png" alt="icon">Комната</li>
-                                <li><img src="../../template/images/b-s-4.png" alt="icon">Земельный участок</li>
-                                <li><img src="../../template/images/b-s-5.png" alt="icon">Гараж/машиноместо</li>
+                                <li><img src="../../template/images/b-s-1.png" alt="icon"><p>Квартира</p></li>
+                                <li><img src="../../template/images/b-s-2.png" alt="icon"><p>Дом</p></li>
+                                <li><img src="../../template/images/b-s-3.png" alt="icon"><p>Комната</p></li>
+                                <li><img src="../../template/images/b-s-4.png" alt="icon"><p>Земельный участок</p></li>
+                                <li><img src="../../template/images/b-s-5.png" alt="icon"><p>Гараж/машиноместо</p></li>
                             </ul>
                             <ul>
                                 <li>Коммерческая</li>
-                                <li><img src="../../template/images/b-s-6.png" alt="icon">Офисная площадь</li>
-                                <li><img src="../../template/images/b-s-1.png" alt="icon">Отдельно стоящее здание</li>
-                                <li><img src="../../template/images/b-s-7.png" alt="icon">Комплекс ОСЗ</li>
-                                <li><img src="../../template/images/b-s-8.png" alt="icon">Рынок/Ярмарка</li>
-                                <li><img src="../../template/images/b-s-9.png" alt="icon">Производственно-складские помещения</li>
-                                <li><img src="../../template/images/b-s-10.png" alt="icon">Производственно-складские здания</li>
-                                <li><img src="../../template/images/b-s-11.png" alt="icon">Недвижимость для туризма и отдыха</li>
+                                <li><img src="../../template/images/b-s-6.png" alt="icon"><p>Офисная площадь</p></li>
+                                <li><img src="../../template/images/b-s-1.png" alt="icon"><p>Отдельно стоящее здание</p></li>
+                                <li><img src="../../template/images/b-s-7.png" alt="icon"><p>Комплекс ОСЗ</p></li>
+                                <li><img src="../../template/images/b-s-8.png" alt="icon"><p>Рынок/Ярмарка</p></li>
+                                <li><img src="../../template/images/b-s-9.png" alt="icon"><p>Производственно-складские помещения</p></li>
+                                <li><img src="../../template/images/b-s-10.png" alt="icon"><p>Производственно-складские здания</p></li>
+                                <li><img src="../../template/images/b-s-11.png" alt="icon"><p>Недвижимость для туризма и отдыха</p></li>
                             </ul>
                         </div>
                     </li>
@@ -1300,7 +1300,7 @@ if (isset($this->data['script_footer'])) {
         {"src" : "/template/js/forms.editor.handler.js", "async" : false},
         {"src" : "/template/js/socket.io.min.js", "async" : false},
         {"src" : "/bower_components/select2/dist/js/select2.min.js", "async" : false},
-        {"src" : "/template/js/main.js", "async" : false}
+        {"src" : "/template/js/main.min.js", "async" : false}
 ]};!function(t,n,r){"use strict";var c=function(t){if("[object Array]"!==Object.prototype.toString.call(t))return!1;for(var r=0;r<t.length;r++){var c=n.createElement("script"),e=t[r];c.src=e.src,c.async=e.async,n.body.appendChild(c)}return!0};t.addEventListener?t.addEventListener("load",function(){c(r.scripts);},!1):t.attachEvent?t.attachEvent("onload",function(){c(r.scripts)}):t.onload=function(){c(r.scripts)}}(window,document,scr);
 </script>
 </body>
