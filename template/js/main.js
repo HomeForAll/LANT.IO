@@ -397,7 +397,8 @@ $(document).ready(function(){
    		maxSlides: 2,
    		moveSlides: 2,
    		slideMargin: 10,
-   		pager: false
+   		pager: false,
+        infiniteLoop: false
   });
 });
 $(document).ready(function(){
@@ -407,14 +408,14 @@ $(document).ready(function(){
    		maxSlides: 5,
    		moveSlides: 5,
    		slideMargin: 50,
-   		pager: false
+   		pager: false,
+        infiniteLoop: false
   });
 });
 
 //---------------------------------------------------------
 
 function formatState (state) {
-    console.log('state', state);
     var $allMetroLines = $('<span><a class="branch-line"></a>' + state.text + '</span>'),
         $tagSearchByClass = $allMetroLines.find('a');
 
