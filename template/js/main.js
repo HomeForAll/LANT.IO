@@ -201,6 +201,13 @@ var productSearch = false,
        {id: 2, text: 'Выберите3'},
        {id: 2, text: 'Выберите4'},
        {id: 2, text: 'Выберите5'}
+    ],
+    propertyType = [
+        {id: 0, text: 'Тип недвижимости'},
+        {id: 1, text: 'Тип недвижимости2'},
+        {id: 2, text: 'Тип недвижимости3'},
+        {id: 2, text: 'Тип недвижимости4'},
+        {id: 2, text: 'Тип недвижимости5'}
     ];
 //---------------------------------------------------------
 
@@ -304,6 +311,9 @@ $('.js-example-data-array, .security').select2({
 $('.js-example-data-array, .documents').select2({
     data: documents
 });
+$('.js-example-data-array, .property-type').select2({
+    data: propertyType
+});
 //---------------------------------------------------------
 $('.js-example-data-array-selected, .region').select2({
     data: data
@@ -382,6 +392,9 @@ $('.js-example-data-array-selected, .security').select2({
 });
 $('.js-example-data-array-selected, .documents').select2({
     data: documents
+});
+$('.js-example-data-array-selected, .property-type').select2({
+    data: propertyType
 });
 $(".js-example-templating, .select-price-by-scrolling").select2({
     templateResult: formatState,

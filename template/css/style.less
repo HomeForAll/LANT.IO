@@ -220,7 +220,7 @@
   z-index: 1;
 }
 
-.section-1 {
+.section-home-with-filters {
   padding-top: 210px;
   padding-bottom: 100px;
   background: url("../../template/images/background-1.png") no-repeat top center;
@@ -365,7 +365,7 @@
 }
 
 .quick-search {
-  display: block;
+  display: none;
   position: absolute;
   left: 0;
   top: 0;
@@ -1671,7 +1671,7 @@
   }
 }
 
-.section-2 {
+.information-for-the-user {
   text-align: center;
   background: url('../../template/images/background-2.png') top center no-repeat;
   background-size: cover;
@@ -1744,7 +1744,7 @@
   }
 }
 
-.section-3 {
+.published-articles {
   text-align: center;
   background: url('../../template/images/background-3.png') top center no-repeat;
   background-size: cover;
@@ -1967,7 +1967,7 @@
   }
 }
 
-.section-4 {
+.visitor-statistics {
   text-align: center;
   background: #edecec;
   padding-bottom: 34px;
@@ -2069,7 +2069,7 @@
   background-size: 100% 100%;
 }
 
-#yellowe {
+#yellow {
   background:#ffe35f; 
 }
 #green {
@@ -2079,7 +2079,144 @@
   background:#a8cce6; 
 }
 
-.section-5 {
+.sales-evaluation {
+  text-align: left;
+  background: url("../../template/images/salesEvaluation.png") no-repeat center;
+  background-size: cover;
+  padding: 50px 0 100px;
+  h2 {
+    font-weight: bold;
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 50px;
+    color: #fff;
+  }
+}
+
+.appreciate-the-apartment {
+  text-align: left;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #fff;
+  clear: both;
+  ul {
+    display: inline-block;
+    vertical-align: middle;
+    width: 85%;
+  }
+  li {
+    vertical-align: middle;
+    width: 49%;
+    text-align: left;
+    padding: 7px 0;
+  }
+  i {
+    vertical-align: middle;
+    margin: auto 5px auto 20px;
+    color: #dedede;
+    font-size: 28px;
+  }
+  input {
+    width: 80%;
+    padding: 10px;
+    border: none;
+    color: #252525;
+    border-right: 2px dotted #e0e0e0; 
+    background: #fff;
+    &::placeholder {
+      color: #8a8686;
+    }
+  }
+  button {
+    padding: 25px 10px;
+    font-size: 15px;
+    width: 150px;
+    border: none;
+    cursor: pointer;
+    float: right;
+    color: #fff;
+    background: #71cb6f;
+    &:hover {
+      background: #60b35e;
+    }
+  }
+  & .select2-container {
+    border: none!important;
+    width: auto!important;
+    padding: 0!important;
+  }
+  & .select2-hidden-accessible {
+    margin-right: -57px!important;
+    margin-top: -5px !important;
+    padding-left: 95px!important;
+    z-index: 1;
+    background: url("../../template/images/apartments.png") no-repeat left center;
+    background-size: auto;
+  }
+  & .select2-selection__rendered {
+    padding: 8px 60px 8px 0!important;
+  }
+}
+
+.appreciate-the-rooms {
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  background: #f9f9f9;
+  overflow: hidden;
+  border-radius: 8px;
+  margin: 15px 15px 15px 0;
+  padding: 10px 25px;
+  p {
+    display: inline-block;
+    vertical-align: middle;
+    color: #595959;
+    font-size: 13px;
+  }
+  span {
+    display: inline-block;
+    border-radius: 100%;
+    text-align: center;
+    line-height: 35px;
+    background: none;
+    width: 35px;
+    height: 35px;
+    color: #000;
+    cursor: pointer;
+    &:hover {
+      color: #fff;
+      background: #71cb6f;
+    }
+  }
+}
+
+.estimate-the-area {
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  background: #f9f9f9;
+  overflow: hidden;
+  border-radius: 8px;
+  margin: 15px 15px 15px 0;
+  padding: 10px 25px;
+  label {
+    color: #474747;
+  }
+  input {
+    border: none;
+    box-shadow: 0 5px 5px 1px #f3f3f3;
+    background: #fff;
+    text-align: right;
+    padding: 10px 15px;
+    width: 95px;
+    margin-left: 15px;
+    &::placeholder {
+      color: #474747;
+    }
+  }
+}
+
+.best-ads-per-day {
   text-align: center;
   background: url('../../template/images/background-5.png') top center no-repeat;
   background-size: cover;
@@ -2317,7 +2454,7 @@
   }
 }
 
-.section-6 {
+.our-application {
   position: relative;
   display: block;
   background: url("../../template/images/background-6.png") no-repeat center;
@@ -2383,7 +2520,7 @@
   margin-bottom: 0 !important;
 }
 
-.section-7 {
+.our-work {
   text-align: center;
   background: #f3f3f3;
   padding-top: 52px;
@@ -2468,7 +2605,7 @@
   }
 }
 
-.section-8 {
+.official-partners {
   position: relative;
   background: #f8f8f8;
   padding: 42px 0 30px;
@@ -2823,7 +2960,7 @@
   #navigation-true {
     padding: 10px 200px;
   }
-  .section-2 ul {
+  .information-for-the-user ul {
     width: 1100px;
     & li {
       width: 32%;
@@ -2848,7 +2985,7 @@
   .scroll-decoration {
     padding-top: 5px;
   }
-  .section-4 ul {
+  .visitor-statistics ul {
     width: 1100px;
     & li {
       vertical-align: middle;
@@ -3004,6 +3141,41 @@
     display: inline-block;
     vertical-align: middle;
     width: auto;
+  }
+  .sales-evaluation {
+    text-align: center;
+    padding: 10px 5px;
+    h2 {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+  }
+  .appreciate-the-apartment {
+    ul {
+      display: block;
+      width: auto;
+    }
+    li {
+      display: inline-block;
+      vertical-align: middle;
+      width: 49%;
+      text-align: left;
+      padding: 10px 0;
+    }
+    i {
+      margin: auto 5px auto 15px;
+    }
+    input {
+      width: 75%;
+    }
+    button {
+      float: none;
+      border-radius: 6px;
+      padding: 10px;
+      display: block;
+      width: 150px;
+      margin: 10px auto;
+    }
   }
   .quick-search {
     left: 5vw;
@@ -3369,7 +3541,7 @@
     display: inline-block;
     width: auto;
   }
-  .section-1 {
+  .section-home-with-filters {
     padding-top: 145px;
     padding-bottom: 100px;
   }
@@ -3544,7 +3716,7 @@
   .big-search {
     margin-top: 80px;
   }
-  .section-2 {
+  .information-for-the-user {
     padding: 15px 10px;
     ul {
       display: block;
@@ -3579,7 +3751,7 @@
   .list-of-all-apartments {
     margin-top: 15px;
   }
-  .section-3 {
+  .published-articles {
     padding: 0;
     h2 {
     font-size: 16px;
@@ -3607,7 +3779,7 @@
   .location span {
     margin: 0 0 0 8px;
   }
-  .section-4 {
+  .visitor-statistics {
     padding: 0;
     &:before {
       display: none;
@@ -3646,13 +3818,7 @@
     padding: 35px 10px;
   }
   .filter-apartment {
-    p {
-      margin: 0;
-    }
-    & .select2-container {
-      width: auto!important;
-      line-height: 30px;
-    }
+    display: none!important;
   }
   .schedule, .schedule-interface  {
     width: auto;
@@ -3745,7 +3911,7 @@
   #decor-img {
     margin: auto 10px;
   }
-  .section-7 {
+  .our-work {
     padding: 0;
     h2 {
       font-size: 16px;
@@ -3768,7 +3934,7 @@
       text-align: left;
     }
   }
-  .section-8 {
+  .official-partners {
     padding: 0;
   }
   .partners {
@@ -3829,6 +3995,59 @@
       padding: 10px !important;
       width: auto !important;
     }
+  }
+  .sales-evaluation {
+    text-align: center;
+    padding: 10px 5px;
+    h2 {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+  }
+  .appreciate-the-apartment {
+    ul {
+      display: block;
+      width: auto;
+    }
+    li {
+      vertical-align: middle;
+      width: auto;
+      text-align: left;
+      padding: 8px 20px;
+      display: block;
+    }
+    i {
+      margin: auto 5px auto 15px;
+    }
+    input {
+      width: 75%;
+      border: none;
+    }
+    button {
+      float: none;
+      border-radius: 6px;
+      padding: 10px;
+      display: block;
+      width: 150px;
+      margin: 10px auto;
+    }
+    & .select2-selection__rendered {
+      padding-right: 25px !important;
+    }
+    & .select2-container {
+      width: 75% !important;
+    }
+  }
+  .appreciate-the-rooms, 
+  .estimate-the-area {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 0;
+  }
+  .appreciate-the-rooms p {
+    line-height: 30px;
+    width: 30px;
+    height: 30px;
   }
   .quick-search {
     left: 0;
@@ -4200,10 +4419,6 @@
   .select2-selection--single {
     background-position: right 5px center;
   }
-  .select2-container .select2-selection__rendered {
-    padding: 8px 10px!important;
-    width: auto !important;
-  }
   .users-information {
     text-align: right;
   }
@@ -4221,7 +4436,7 @@
     display: inline-block;
     width: auto;
   }
-  .section-1 {
+  .section-home-with-filters {
     padding-top: 110px;
     padding-bottom: 20px;
   }
@@ -4371,7 +4586,7 @@
   .big-search {
     margin-top: 10px;
   }
-  .section-2 {
+  .information-for-the-user {
     padding: 15px 10px;
     ul {
       display: block;
@@ -4406,7 +4621,7 @@
   .list-of-all-apartments {
     margin-top: 15px;
   }
-  .section-3 {
+  .published-articles {
     padding: 0;
     h2 {
     font-size: 16px;
@@ -4433,7 +4648,7 @@
   .location span {
     margin: 0 0 0 8px;
   }
-  .section-4 {
+  .visitor-statistics {
     padding: 0;
     &:before {
       display: none;
@@ -4472,6 +4687,7 @@
     padding: 35px 10px;
   }
   .schedule, .schedule-interface  {
+    display: block;
     width: auto;
     padding: 0;
   }
@@ -4480,8 +4696,13 @@
   }
   .schedule a {
     font-size: 12px;
-    width: 105px;
-    margin: 5px 0 0 4px;
+    width: 130px;
+    margin: 10px auto;
+    display: block;
+    & span {
+      display: inline-block;
+      vertical-align: middle;
+    }
   }
   .top-apartments {
     width: auto;
@@ -4562,7 +4783,7 @@
   #decor-img {
     margin: auto 10px;
   }
-  .section-7 {
+  .our-work {
     padding: 0;
     h2 {
       font-size: 16px;
@@ -4585,7 +4806,7 @@
       text-align: left;
     }
   }
-  .section-8 {
+  .official-partners {
     padding: 0;
   }
   .partners {
