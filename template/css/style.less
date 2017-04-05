@@ -221,7 +221,8 @@
 }
 
 .section-home-with-filters {
-  padding-top: 210px;
+  padding-top: 35vh;
+  min-height: 100vh;
   padding-bottom: 100px;
   background: url("../../template/images/background-1.png") no-repeat top center;
   background-size: cover;
@@ -249,12 +250,20 @@
     vertical-align: middle;
     background: #5d5d5d;
     border-radius: 5px;
+    &:nth-child(1) {
+      background: #5e9152;
+      & a {
+        color: #fff;
+      }
+    }
+    &:nth-child(2) {
+      margin-left: -3px;
+    }
     &:hover {
       background: #5e9152;
-      color: #fff;
-    }
-    &:hover a {
-      color: #fff;
+      & a {
+        color: #fff;
+      }
     }
   }
   a {
@@ -1690,11 +1699,11 @@
     list-style: none;
     box-shadow: 0 0 1px #fff;
     font-size: 18px;
-    padding: 47px 10px 10px 128px;
+    padding: 32px 10px 15px 100px;
     line-height: 23px;
     text-align: left;
     height: 169px;
-    width: 33%;
+    width: 32.5%;
     margin: 2px;
     &:nth-child(1) {
       background: url('../../template/images/sec-2-1.png') left 25px top 55px no-repeat, url('../../template/images/sec-2-b-1.png') top center no-repeat;
@@ -1785,10 +1794,9 @@
 }
 
 .list-of-all-apartments {
-  margin: auto;
+  margin: 30px auto 0;
   background: #f3f3f3;
-  margin-top: 30px;
-  padding: 18px 6px 0 0;
+  padding: 18px 6px 0;
   box-shadow: 0 0 120px 0 rgba(0,0,0,.5);
 }
 
@@ -1842,8 +1850,7 @@
   margin: 7px;
   padding-bottom: 10px;
   background: #fff;
-  width: 23.9%;
-  min-width: 250px;
+  width: 23%;
   &:before {
     content: 'Новое';
     display: block;
@@ -1929,7 +1936,8 @@
 .show-apartments {
   display: inline-block;
   vertical-align: top;
-  width: 20%;
+  width: 22%;
+  margin-left: -15px;
   img {
     cursor: pointer;
     margin-top: 18px;
@@ -2014,14 +2022,16 @@
   p {
     position: relative;
     font-size: 15px;
+    color: #353535;
     z-index: 1;
     margin-top: -36px;
   }
   span {
     font-size: 28px;
+    color: #353535;
     font-weight: 300;
     cursor: pointer;
-    text-decoration: underline; 
+    border-bottom: 1px solid #353535;
     margin: auto 25px;
   }
 }
@@ -2963,8 +2973,8 @@
   .information-for-the-user ul {
     width: 1100px;
     & li {
-      width: 32%;
-      padding: 45px 10px 10px 100px;
+      width: 32.5%;
+      padding: 32px 10px 15px 100px;
       &:nth-child(-n+999) {
         background-position: left center;
         background-size: 85px, cover;
