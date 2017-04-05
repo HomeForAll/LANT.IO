@@ -2,7 +2,7 @@
 
 return array(
     // 'URI' => 'layout/controller/action'
-    '' => 'main/site/index',
+    '' => 'web_build/site/index',
     'search' => 'main/search/index',
 
     'registration' => 'main/user/registration',
