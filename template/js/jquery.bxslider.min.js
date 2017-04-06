@@ -46,7 +46,7 @@
     keyboardEnabled: false,
 
     // PAGER
-    pager: false,
+    pager: true,
     pagerType: 'full',
     pagerShortSeparator: ' / ',
     pagerSelector: null,

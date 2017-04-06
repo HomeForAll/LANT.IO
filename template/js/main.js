@@ -1,6 +1,5 @@
 'use strict';
-var productSearch = false,
-    showAndHideTopMenu = false,
+var productSearch, showAndHideTopMenu, boolean = false,
     imagesWidth = 130,
     valueButton = {
         'more': (function () {
@@ -405,13 +404,14 @@ $(".js-example-templating, .select-price-by-scrolling").select2({
 /** Слайдер **/
 $(document).ready(function(){
   $('.bxslider').bxSlider({
-  		slideWidth: 500,
+  		slideWidth: 500, // ширина слайдера
    		minSlides: 1,
    		maxSlides: 2,
-   		moveSlides: 2,
+   		moveSlides: 2, // прокрутка по 2 блока
    		slideMargin: 10,
    		pager: false,
-        infiniteLoop: false
+        auto: true, // прокрутка
+        infiniteLoop: true // бесконечная прокрутка
   });
 });
 $(document).ready(function(){
@@ -419,10 +419,11 @@ $(document).ready(function(){
   		slideWidth: 150,
    		minSlides: 1,
    		maxSlides: 5,
-   		moveSlides: 5,
+   		moveSlides: 2,
    		slideMargin: 50,
    		pager: false,
-        infiniteLoop: false
+        auto: true,
+        infiniteLoop: true
   });
 });
 
@@ -565,12 +566,20 @@ function buildingParametersFilter() {
 
 function searchMetroMainBlock() {
     var $searchMetro = $('.search-metro-main-block');
+        //$closeBlock = $('.closeSearchMetro');
     shadowBlock();
 
     $searchMetro.css({'display': 'block'});
+
     setTimeout(function () {
         $searchMetro.css({'display': 'none'});
-    }, 10000);
+    }, 5000);
+
+    //$closeBlock.on('click', function () {
+    //    console.log('Работает');
+    //    $searchMetro.css({'display': 'none'});
+    //    shadowBlock();
+    //})
 }
 
 function attachment() {
@@ -608,9 +617,20 @@ function shadowBlock() {
 	var $shadowBlocks = $('.decorativeShadowBlock');
 
     $shadowBlocks.css({'display': 'block'});
-    setTimeout(function () {
+
+	setTimeout(function () {
         $shadowBlocks.css({'display': 'none'});
     }, 5000);
+
+    //boolean = !boolean;
+
+    //if (boolean) {
+    //    $shadowBlocks.css({'display': 'block'});
+    //    return boolean = false;
+    //} else {
+    //    $shadowBlocks.css({'display': 'none'});
+    //    return boolean = true;
+    //}
 }
 
 $('.select2-selection--single, .pointer').on('click', function () {
@@ -650,3 +670,15 @@ function moreAndLess(sizeImage) {
 function closeFixedBlock() {
 	$('.warning').css({'display':'block'})
 }
+
+/** Яндекс карты **/
+ymaps.ready(function () {
+    var map = new ymaps.Map("ymap", {
+        center: [55.451332, 37.369336],
+        zoom: 10,
+        controls: ['fullscreenControl', 'typeSelector', 'geolocationControl', 'zoomControl']
+    });
+
+    window.suggests = new ymaps.SuggestView("suggest", {width: 300, offset: [0, 4], results: 20});
+});
+//---------------------------------------------------------

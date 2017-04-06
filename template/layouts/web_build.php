@@ -344,959 +344,947 @@ foreach ($this->data['script'] as $key => $value) {
 </div>
 <?php } ?>
 <div id="content">
-<!--<?php $this->content(); ?> -->
-    <div class="section-home-with-filters">
-        <div class="apartment-search">
-            <ul>
-                <li><a href="#">Аренда</a></li>
-                <li><a href="#">Продажа</a></li>
-            </ul>
-            <div class="search-menu-apartment">
-                <select class="js-example-data-array region main-filter"></select>
-                <select class="js-example-data-array-selected offices main-filter"></select>
-                <select class="js-example-data-array-selected product-price main-filter"></select>
-                <button>Найти</button>
-            </div>
-            <div class="big-search-menu">
-                <div class="warning">
-                    <p>Выберите<br>тип недвижимости</p> 
-                    <span>Чтобы перейти к заполнению подробных настроек</span>
-                    <button onclick="closeFixedBlock();">Закрыть</button>
-                </div>
-                <div class="search-more-precisely-search">
-                    <div class="exact-area">
-                        <span class="search-city" onclick="historySearch();">
-                            <img src="../../template/images/s1.png" alt="city">
-                            <input placeholder="Москва, ул, Малая Ордынка" disabled>
-                        </span>
-                        <div class="history-search">
-                            <span class="search-city active-search">
-                                <img src="../../template/images/s1.png" alt="city">
-                                <input placeholder="г. Москва Северное медведково">
-                            </span>
-                            <h5>История</h5>
-                            <div class="all-history-search">
-                                <div class="history">
-                                    <img src="../../template/images/m-r.png" alt="metro">
-                                    <p>Красные ворота<span>не более 15 мин пешком</span></p>
-                                </div>
-                                <div class="history">
-                                    <img src="../../template/images/m-w.png" alt="metro">
-                                    <p>Свиблово, Бабушкинская<span>не более 5 мин пешком</span></p>
-                                </div>
-                                <div class="history">
-                                    <img src="../../template/images/m-w.png" alt="metro">
-                                    <p>Академичекий<span>не более 5 мин пешком</span></p>
-                                </div>
-                                <div class="history">
-                                    <img src="../../template/images/m-r.png" alt="metro">
-                                    <p>Красные ворота<span>не более 15 мин пешком</span></p>
-                                </div>
-                                <div class="history">
-                                    <img src="../../template/images/m-w.png" alt="metro">
-                                    <p>Свиблово, Бабушкинская<span>не более 5 мин пешком</span></p>
-                                </div>
-                                <div class="history">
-                                    <img src="../../template/images/m-w.png" alt="metro">
-                                    <p>Академичекий<span>не более 5 мин пешком</span></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="the-exact-address">
-                        <span onclick="searchMetroMainBlock();" class="location-metro-map">Третьяковская<span class="metro-people"><img src="../../template/images/people.png" alt="people">2мин.</span>
-                            <form>
-                                <div class="search-metro-main-block">
-                                    <div class="top-search-results">
-                                        <span>Свиблово<i class="fa fa-times" aria-hidden="true"></i></span>
-                                    </div>
-                                    <div class="metro-location-and-travel-information">
-                                        <div class="metro-location">
-                                            <div class="panel-move">
-                                                <span onclick="moreAndLess('more')"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                                                <span onclick="moreAndLess('less')"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                            </div>
-                                            <img src="../../template/images/map-location-metro.png" alt="map">
-                                        </div>
-                                        <div class="travel-information">
-                                            <div class="distance-on-foot">
-                                                <img src="../../template/images/people-2.png" alt="icon"><p>Уделенность пекшом не более</p>
-                                                <span><input placeholder="" type="number" name="foot" value="5" min="5" max="60" step="5">
-                                                <span class="timer">Минут</span></span>
-                                            </div>
-                                            <div class="distance-on-transport">
-                                                <img src="../../template/images/avto.png" alt="icon"><p>Уделенность пекшом не более</p>
-                                                <span><input placeholder="" type="number" name="transport" value="5" min="5" max="60" step="5">
-                                                <span class="timer">Минут</span></span>
-                                            </div>
-                                            <button>Готово</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </span>
-                    </div>
-                    <button onclick="quickSearch()">Задать точнее</button>
-                    <form>
-                        <div class="quick-search">
-                            <h5><i class="fa fa-map-marker" aria-hidden="true"></i>Введите город, район, область или точный адрес<span><img src="../../template/images/location.png" alt="location">выделить область на карте</span></h5>
-                            <ul class="quick-search-by-parameters">
-                                <li><label>Область
-                                        <input type="text" placeholder="Московская">
-                                    </label></li>
-                                <li><label>Город
-                                        <input type="text" placeholder="Москва">
-                                    </label></li>
-                                <li><label>Округ
-                                        <select class="js-example-data-array okrug"></select>
-                                    </label></li>
-                                <li><label>Район
-                                        <select class="js-example-data-array area"></select>
-                                    </label></li>
-                                <li><label>Улица
-                                        <select class="js-example-data-array street"></select>
-                                    </label></li>
-                                <li><label>Дом<input type="text" placeholder="16" maxlength="4" pattern="[0-9]{4}"></label></li>
-                                <li><label>Метро
-                                        <select class="js-example-templating metro-lines"></select>
-                                    </label></li>
-                                <li><label>Удаленность от метро не более
-                                        <select class="js-example-data-array distance"></select>
-                                    </label></li>
-                                <li><button>Готово</button></li>
-                            </ul>
-                        </div>
-                    </form>
-                </div>
-                <button>Найти</button>
-                <ul class="filter-block-big-menu">
-                    <li class="pointer" onclick="filterOptionsApartments();"><img src="../../template/images/apartments.png" alt="apartments">Тип недвижимости
-                        <div class="property-type-apartment-settings">
-                            <ul>
-                                <li>Жилая</li>
-                                <li><img src="../../template/images/b-s-1.png" alt="icon"><p>Квартира</p></li>
-                                <li><img src="../../template/images/b-s-2.png" alt="icon"><p>Дом</p></li>
-                                <li><img src="../../template/images/b-s-3.png" alt="icon"><p>Комната</p></li>
-                                <li><img src="../../template/images/b-s-4.png" alt="icon"><p>Земельный участок</p></li>
-                                <li><img src="../../template/images/b-s-5.png" alt="icon"><p>Гараж/машиноместо</p></li>
-                            </ul>
-                            <ul>
-                                <li>Коммерческая</li>
-                                <li><img src="../../template/images/b-s-6.png" alt="icon"><p>Офисная площадь</p></li>
-                                <li><img src="../../template/images/b-s-1.png" alt="icon"><p>Отдельно стоящее здание</p></li>
-                                <li><img src="../../template/images/b-s-7.png" alt="icon"><p>Комплекс ОСЗ</p></li>
-                                <li><img src="../../template/images/b-s-8.png" alt="icon"><p>Рынок/Ярмарка</p></li>
-                                <li><img src="../../template/images/b-s-9.png" alt="icon"><p>Производственно-складские помещения</p></li>
-                                <li><img src="../../template/images/b-s-10.png" alt="icon"><p>Производственно-складские здания</p></li>
-                                <li><img src="../../template/images/b-s-11.png" alt="icon"><p>Недвижимость для туризма и отдыха</p></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li onclick="filterOptions();">
-                        <label>Цена</label>
-                        <div class="showBigOptions">
-                            <p>От<input placeholder="" type="text" id="amountBefore" readonly disabled></p>
-                            <p>До<input placeholder="" type="text" id="amountAfter" readonly disabled></p>
-                            <div id="slider-range"></div>
-                            <div class="currency">
-                                <p>Валюта</p>
-                                <button><i class="fa fa-rub" aria-hidden="true"></i>рубли</button>
-                                <button><i class="fa fa-usd" aria-hidden="true"></i>доллары</button>
-                                <button><i class="fa fa-eur" aria-hidden="true"></i>евро</button>
-                            </div>
-                        </div>
-                        <div class="decorativeShadowBlock"></div>
-                    </li>
-                    <li>
-                        <input id="clast" type="checkbox">
-                        <label for="clast">Торг возможен</label></li>
-                    <li><select class="js-example-data-array-selected owner"></select></li>
+    <!--<form action="" method="post">-->
+        <!--<?php $this->content(); ?> -->
+        <div class="section-home-with-filters">
+            <div class="apartment-search">
+                <ul>
+                    <li><a href="#">Арендовать</a></li>
+                    <li><a href="#">Купить</a></li>
                 </ul>
-                <div class="advanced-search-options">
-                    <p>Заполните параметры ниже, для более точного поиска</p>
-                    <ul class="building-parameters">
-                        <li onclick="apartmentSettings();">
-                            <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
-                        <form>
-                            <div class="apartment-settings">
-                                <h2>Параметры квартиры</h2>
-                                <ul>
-                                    <li><span class="names-parameters">Кол-во комнат</span>
-                                        <p class="number-apartments">
-                                            <span>1</span>
-                                            <span>2</span>
-                                            <span>3</span>
-                                            <span>4</span>
-                                            <span>4+</span>
-                                        </p>
-                                    </li>
-                                    <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                                        <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                    </li>
-                                    <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                                        <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                    </li>
-                                    <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                                        <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                    </li>
-                                    <li><span class="names-parameters">Балкон м2</span>
-                                        <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                    </li>
-                                </ul>
-                                <ul>
-                                    <li><span class="names-parameters">Этаж</span>
-                                        <select class="js-example-data-array-selected floor"></select>
-                                    </li>
-                                    <li><span class="names-parameters">Комплектация </span>
-                                        <select class="js-example-data-array-selected equipment"></select>
-                                    </li>
-                                    <li><span class="names-parameters">Высота потолков м</span>
-                                        <p>От<input type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                                        <p>До<input type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                                    </li>
-                                </ul>
-                                <a><button>Готово</button></a>
+                <div class="search-menu-apartment">
+                    <select class="js-example-data-array region main-filter"></select>
+                    <select class="js-example-data-array-selected offices main-filter"></select>
+                    <select class="js-example-data-array-selected product-price main-filter"></select>
+                    <button>Найти</button>
+                </div>
+                <div class="big-search-menu">
+                    <div class="warning">
+                        <p>Выберите<br>тип недвижимости</p>
+                        <span>Чтобы перейти к заполнению подробных настроек</span>
+                        <button onclick="closeFixedBlock();">Закрыть</button>
+                    </div>
+                    <div class="search-more-precisely-search">
+                        <div class="exact-area">
+                            <span class="search-city" onclick="historySearch();">
+                                <img src="../../template/images/s1.png" alt="city">
+                                <input placeholder="Москва, ул, Малая Ордынка" disabled>
+                            </span>
+                            <div class="history-search">
+                                <span class="search-city active-search">
+                                    <img src="../../template/images/s1.png" alt="city">
+                                    <input placeholder="г. Москва Северное медведково">
+                                </span>
+                                <h5>История</h5>
+                                <div class="all-history-search">
+                                    <div class="history">
+                                        <img src="../../template/images/m-r.png" alt="metro">
+                                        <p>Красные ворота<span>не более 15 мин пешком</span></p>
+                                    </div>
+                                    <div class="history">
+                                        <img src="../../template/images/m-w.png" alt="metro">
+                                        <p>Свиблово, Бабушкинская<span>не более 5 мин пешком</span></p>
+                                    </div>
+                                    <div class="history">
+                                        <img src="../../template/images/m-w.png" alt="metro">
+                                        <p>Академичекий<span>не более 5 мин пешком</span></p>
+                                    </div>
+                                    <div class="history">
+                                        <img src="../../template/images/m-r.png" alt="metro">
+                                        <p>Красные ворота<span>не более 15 мин пешком</span></p>
+                                    </div>
+                                    <div class="history">
+                                        <img src="../../template/images/m-w.png" alt="metro">
+                                        <p>Свиблово, Бабушкинская<span>не более 5 мин пешком</span></p>
+                                    </div>
+                                    <div class="history">
+                                        <img src="../../template/images/m-w.png" alt="metro">
+                                        <p>Академичекий<span>не более 5 мин пешком</span></p>
+                                    </div>
+                                </div>
                             </div>
-                        </form>
-                        <div class="progress-bar blue stripes">
-                            <span style="width:0"></span>
                         </div>
-                        </li>
-                        <li onclick="appearanceofTheApartment();"><img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
-                            <form>
-                                <div class="appearance-of-the-apartment">
-                                    <h2>Внешний вид квартиры</h2>
-                                    <ul>
-                                        <li>
-                                            <p>Команты</p>
-                                            <img src="../../template/images/r-d-1.png" alt="icons1">
-                                            <select class="js-example-data-array-selected rooms"></select>
-                                        </li>
-                                        <li>
-                                            <p>Санузел</p>
-                                            <img src="../../template/images/r-d-2.png" alt="icons2">
-                                            <select class="js-example-data-array-selected a-bathroom"></select>
-                                        </li>
-                                        <li>
-                                            <p>Отделка</p>
-                                            <img src="../../template/images/r-d-3.png" alt="icons3">
-                                            <select class="js-example-data-array-selected decoration"></select>
-                                        </li>
-                                    </ul>
-                                    <button>Готово</button>
-                                </div>                           
-                            </form>
-                        <div class="progress-bar blue stripes">
-                            <span style="width:40%"></span>
+                        <div class="the-exact-address">
+                            <span onclick="searchMetroMainBlock();" class="location-metro-map">Третьяковская<span class="metro-people"><img src="../../template/images/people.png" alt="people">2мин.</span>
+                                    <div class="search-metro-main-block">
+                                        <div class="top-search-results">
+                                            <span>Свиблово<i class="fa fa-times" aria-hidden="true"></i></span>
+                                        </div>
+                                        <div class="metro-location-and-travel-information">
+                                            <div class="metro-location">
+                                                <div class="panel-move">
+                                                    <span onclick="moreAndLess('more')"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                                                    <span onclick="moreAndLess('less')"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                                                </div>
+                                                <img src="../../template/images/map-location-metro.png" alt="map">
+                                            </div>
+                                            <div class="travel-information">
+                                                <div class="distance-on-foot">
+                                                    <img src="../../template/images/people-2.png" alt="icon"><p>Уделенность пекшом не более</p>
+                                                    <span><input placeholder="" type="number" name="foot" value="5" min="5" max="60" step="5">
+                                                    <span class="timer">Минут</span></span>
+                                                </div>
+                                                <div class="distance-on-transport">
+                                                    <img src="../../template/images/avto.png" alt="icon"><p>Уделенность пекшом не более</p>
+                                                    <span><input placeholder="" type="number" name="transport" value="5" min="5" max="60" step="5">
+                                                    <span class="timer">Минут</span></span>
+                                                </div>
+                                                <button class="closeSearchMetro">Готово</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </span>
                         </div>
+                        <button onclick="quickSearch()">Задать точнее</button>
+                            <div class="quick-search">
+                                <h5><i class="fa fa-map-marker" aria-hidden="true"></i>Введите город, район, область или точный адрес<span><img src="../../template/images/location.png" alt="location">выделить область на карте</span></h5>
+                                <ul class="quick-search-by-parameters">
+                                    <li><label>Область
+                                            <input type="text" placeholder="Московская">
+                                        </label></li>
+                                    <li><label>Город
+                                            <input type="text" placeholder="Москва">
+                                        </label></li>
+                                    <li><label>Округ
+                                            <select class="js-example-data-array okrug"></select>
+                                        </label></li>
+                                    <li><label>Район
+                                            <select class="js-example-data-array area"></select>
+                                        </label></li>
+                                    <li><label>Улица
+                                            <select class="js-example-data-array street"></select>
+                                        </label></li>
+                                    <li><label>Дом<input type="text" placeholder="16" maxlength="4" pattern="[0-9]{4}"></label></li>
+                                    <li><label>Метро
+                                            <select class="js-example-templating metro-lines"></select>
+                                        </label></li>
+                                    <li><label>Удаленность от метро не более
+                                            <select class="js-example-data-array distance"></select>
+                                        </label></li>
+                                    <li><button>Готово</button></li>
+                                </ul>
+                            </div>
+                    </div>
+                    <button>Найти</button>
+                    <ul class="filter-block-big-menu">
+                        <li class="pointer" onclick="filterOptionsApartments();"><img src="../../template/images/apartments.png" alt="apartments">Тип недвижимости
+                            <div class="property-type-apartment-settings">
+                                <ul>
+                                    <li>Жилая</li>
+                                    <li><img src="../../template/images/b-s-1.png" alt="icon"><p>Квартира</p></li>
+                                    <li><img src="../../template/images/b-s-2.png" alt="icon"><p>Дом</p></li>
+                                    <li><img src="../../template/images/b-s-3.png" alt="icon"><p>Комната</p></li>
+                                    <li><img src="../../template/images/b-s-4.png" alt="icon"><p>Земельный участок</p></li>
+                                    <li><img src="../../template/images/b-s-5.png" alt="icon"><p>Гараж/машиноместо</p></li>
+                                </ul>
+                                <ul>
+                                    <li>Коммерческая</li>
+                                    <li><img src="../../template/images/b-s-6.png" alt="icon"><p>Офисная площадь</p></li>
+                                    <li><img src="../../template/images/b-s-1.png" alt="icon"><p>Отдельно стоящее здание</p></li>
+                                    <li><img src="../../template/images/b-s-7.png" alt="icon"><p>Комплекс ОСЗ</p></li>
+                                    <li><img src="../../template/images/b-s-8.png" alt="icon"><p>Рынок/Ярмарка</p></li>
+                                    <li><img src="../../template/images/b-s-9.png" alt="icon"><p>Производственно-складские помещения</p></li>
+                                    <li><img src="../../template/images/b-s-10.png" alt="icon"><p>Производственно-складские здания</p></li>
+                                    <li><img src="../../template/images/b-s-11.png" alt="icon"><p>Недвижимость для туризма и отдыха</p></li>
+                                </ul>
+                            </div>
                         </li>
-                        <li onclick="buildingParametersFilter();"><img src="../../template/images/search-3.png" alt="search">Параметры здания
-                            <form>
-                                <div class="building-parameters-filter">
-                                    <h2>Параметры здания</h2>
+                        <li onclick="filterOptions();">
+                            <label>Цена</label>
+                            <div class="showBigOptions">
+                                <p>От<input placeholder="" type="text" id="amountBefore" readonly disabled></p>
+                                <p>До<input placeholder="" type="text" id="amountAfter" readonly disabled></p>
+                                <div id="slider-range"></div>
+                                <div class="currency">
+                                    <p>Валюта</p>
+                                    <button><i class="fa fa-rub" aria-hidden="true"></i>рубли</button>
+                                    <button><i class="fa fa-usd" aria-hidden="true"></i>доллары</button>
+                                    <button><i class="fa fa-eur" aria-hidden="true"></i>евро</button>
+                                </div>
+                            </div>
+                            <div class="decorativeShadowBlock"></div>
+                        </li>
+                        <li>
+                            <input id="clast" type="checkbox">
+                            <label for="clast">Торг возможен</label></li>
+                        <li><select class="js-example-data-array-selected owner"></select></li>
+                    </ul>
+                    <div class="advanced-search-options">
+                        <p>Заполните параметры ниже, для более точного поиска</p>
+                        <ul class="building-parameters">
+                            <li onclick="apartmentSettings();">
+                                <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
+                                <div class="apartment-settings">
+                                    <h2>Параметры квартиры</h2>
                                     <ul>
-                                        <li><span class="names-parameters">Количество этажей</span>
+                                        <li><span class="names-parameters">Кол-во комнат</span>
+                                            <p class="number-apartments">
+                                                <span>1</span>
+                                                <span>2</span>
+                                                <span>3</span>
+                                                <span>4</span>
+                                                <span>4+</span>
+                                            </p>
+                                        </li>
+                                        <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
                                             <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
                                             <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
                                         </li>
-                                        <li><span class="names-parameters">Год окончания строительства</span>
-                                            <p>От<input type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}" required></p>
-                                            <p>До<input type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}" required></p>
+                                        <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
+                                            <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                            <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
                                         </li>
-                                        <li><span class="names-parameters">Наличие лифта</span>
-                                            <select class="js-example-data-array-selected the-presence-of-an-elevator"></select>
+                                        <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
+                                            <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                            <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
                                         </li>
-                                        <li><span class="names-parameters">Обязеьельные услуги ЖКХ</span>
-                                            <select class="js-example-data-array-selected nursery-services"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Вид объекта</span>
-                                            <select class="js-example-data-array-selected type-of-object"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Парковка</span>
-                                            <select class="js-example-data-array-selected parking-area"></select>
+                                        <li><span class="names-parameters">Балкон м2</span>
+                                            <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                            <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
                                         </li>
                                     </ul>
-                                    <button>Готово</button>
-                                </div>
-                            </form>
-                        <div class="progress-bar blue stripes">
-                            <span style="width:40%"></span>
-                        </div>
-                        </li>
-                        <li onclick="appearanceOfTheBuilding();"><img src="../../template/images/search-4.png" alt="search">Внешний вид здания
-                            <form>
-                                <div class="appearance-of-the-build">
-                                    <h2>Внешний вид здания</h2>
                                     <ul>
-                                        <li>
-                                            <p>Материал<br>стен</p>
-                                            <select class="js-example-data-array-selected wall-material"></select>
+                                        <li><span class="names-parameters">Этаж</span>
+                                            <select class="js-example-data-array-selected floor"></select>
                                         </li>
-                                        <li>
-                                            <p>Кровля</p>
-                                            <select class="js-example-data-array-selected roof"></select>
+                                        <li><span class="names-parameters">Комплектация </span>
+                                            <select class="js-example-data-array-selected equipment"></select>
                                         </li>
-                                        <li>
-                                            <p>Фундамент</p>
-                                            <select class="js-example-data-array-selected foundation"></select>
+                                        <li><span class="names-parameters">Высота потолков м</span>
+                                            <p>От<input type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
+                                            <p>До<input type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
                                         </li>
                                     </ul>
-                                    <button>Поиск</button>
+                                    <a><button>Готово</button></a>
                                 </div>
-                            </form>
-                        <div class="progress-bar blue stripes">
-                            <span style="width:0"></span>
-                        </div>
-                        </li>
-                        <li><img src="../../template/images/search-5.png" alt="search">Безопасность
-                            <select class="js-example-data-array-selected security"></select>
-                        </li>
-                        <li><img src="../../template/images/search-1.png" alt="search">Документы
-                            <select class="js-example-data-array-selected documents"></select>
-                        </li>
-                        <li onclick="attachment();"><img src="../../template/images/search-1.png" alt="search">Вложения
-                            <form>
-                                <div class="attachments">
-                                    <h2>Вложения</h2>
-                                    <ul>
-                                        <li>
-                                            <p>Проект планировки</p>
-                                            <img src="../../template/images/at-1.png" alt="icons1">
-                                            <select class="js-example-data-array-selected design-plan"></select>
-                                        </li>
-                                        <li>
-                                            <p>3D проект</p>
-                                            <img src="../../template/images/at-2.png" alt="icons2">
-                                            <select class="js-example-data-array-selected project"></select>
-                                        </li>
-                                        <li>
-                                            <p>Видео</p>
-                                            <img src="../../template/images/at-3.png" alt="icons3">
-                                            <select class="js-example-data-array-selected video"></select>
-                                        </li>
-                                    </ul>
-                                    <button>Готово</button>
-                                </div>
-                            </form>
-                        <div class="progress-bar blue stripes">
-                            <span style="width:0"></span>
-                        </div>
-                        </li>
-                    </ul>
-                    <a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i>Поиск по карте</a>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                            </li>
+                            <li onclick="appearanceofTheApartment();"><img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
+                                    <div class="appearance-of-the-apartment">
+                                        <h2>Внешний вид квартиры</h2>
+                                        <ul>
+                                            <li>
+                                                <p>Команты</p>
+                                                <img src="../../template/images/r-d-1.png" alt="icons1">
+                                                <select class="js-example-data-array-selected rooms"></select>
+                                            </li>
+                                            <li>
+                                                <p>Санузел</p>
+                                                <img src="../../template/images/r-d-2.png" alt="icons2">
+                                                <select class="js-example-data-array-selected a-bathroom"></select>
+                                            </li>
+                                            <li>
+                                                <p>Отделка</p>
+                                                <img src="../../template/images/r-d-3.png" alt="icons3">
+                                                <select class="js-example-data-array-selected decoration"></select>
+                                            </li>
+                                        </ul>
+                                        <button>Готово</button>
+                                    </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                            </li>
+                            <li onclick="buildingParametersFilter();"><img src="../../template/images/search-3.png" alt="search">Параметры здания
+                                    <div class="building-parameters-filter">
+                                        <h2>Параметры здания</h2>
+                                        <ul>
+                                            <li><span class="names-parameters">Количество этажей</span>
+                                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                            </li>
+                                            <li><span class="names-parameters">Год окончания строительства</span>
+                                                <p>От<input type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}" required></p>
+                                                <p>До<input type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}" required></p>
+                                            </li>
+                                            <li><span class="names-parameters">Наличие лифта</span>
+                                                <select class="js-example-data-array-selected the-presence-of-an-elevator"></select>
+                                            </li>
+                                            <li><span class="names-parameters">Обязеьельные услуги ЖКХ</span>
+                                                <select class="js-example-data-array-selected nursery-services"></select>
+                                            </li>
+                                            <li><span class="names-parameters">Вид объекта</span>
+                                                <select class="js-example-data-array-selected type-of-object"></select>
+                                            </li>
+                                            <li><span class="names-parameters">Парковка</span>
+                                                <select class="js-example-data-array-selected parking-area"></select>
+                                            </li>
+                                        </ul>
+                                        <button>Готово</button>
+                                    </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                            </li>
+                            <li onclick="appearanceOfTheBuilding();"><img src="../../template/images/search-4.png" alt="search">Внешний вид здания
+                                    <div class="appearance-of-the-build">
+                                        <h2>Внешний вид здания</h2>
+                                        <ul>
+                                            <li>
+                                                <p>Материал<br>стен</p>
+                                                <select class="js-example-data-array-selected wall-material"></select>
+                                            </li>
+                                            <li>
+                                                <p>Кровля</p>
+                                                <select class="js-example-data-array-selected roof"></select>
+                                            </li>
+                                            <li>
+                                                <p>Фундамент</p>
+                                                <select class="js-example-data-array-selected foundation"></select>
+                                            </li>
+                                        </ul>
+                                        <button>Поиск</button>
+                                    </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                            </li>
+                            <li><img src="../../template/images/search-5.png" alt="search">Безопасность
+                                <select class="js-example-data-array-selected security"></select>
+                            </li>
+                            <li><img src="../../template/images/search-1.png" alt="search">Документы
+                                <select class="js-example-data-array-selected documents"></select>
+                            </li>
+                            <li onclick="attachment();"><img src="../../template/images/search-1.png" alt="search">Вложения
+                                    <div class="attachments">
+                                        <h2>Вложения</h2>
+                                        <ul>
+                                            <li>
+                                                <p>Проект планировки</p>
+                                                <img src="../../template/images/at-1.png" alt="icons1">
+                                                <select class="js-example-data-array-selected design-plan"></select>
+                                            </li>
+                                            <li>
+                                                <p>3D проект</p>
+                                                <img src="../../template/images/at-2.png" alt="icons2">
+                                                <select class="js-example-data-array-selected project"></select>
+                                            </li>
+                                            <li>
+                                                <p>Видео</p>
+                                                <img src="../../template/images/at-3.png" alt="icons3">
+                                                <select class="js-example-data-array-selected video"></select>
+                                            </li>
+                                        </ul>
+                                        <button>Готово</button>
+                                    </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                            </li>
+                        </ul>
+                        <a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i>Поиск по карте</a>
+                    </div>
+                </div>
+                <div class="big-search" onclick="showBigSearch();">
+                    <a>Расширенный поиск</a>
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
                 </div>
             </div>
-            <div class="big-search" onclick="showBigSearch();">
-                <a>Расширенный поиск</a>
-                <i class="fa fa-angle-right" aria-hidden="true"></i>
-            </div>
         </div>
-    </div>
-    <div class="information-for-the-user">
-        <ul>
-            <li>Удобный поиск по карте
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia iusto architecto quia!</p>
-            </li>
-            <li>Обширный список<br> юридических услуг
-                <p>Lorem ipsum dolor sit amet, consectetur.</p>
-            </li>
-            <li>Обширный список критериев
-                <p>Для поиска и составления объявлений</p>
-            </li>
-            <li>Онлайн-чат 
-                <p>Онлайн-чат со службой поддержки, которая всегда решает ваши вопросы</p>
-            </li>
-            <li>Постоянная модерация объявлений
-                <p>Мы гарантируем только самые реальные и честные объявления</p>
-            </li>
-            <li>Удобный быстрый поиск
-                <p>Мы гарантируем только самые реальные и честные объявления</p>
-            </li>
-            <li>Информативная страница объявлений
-                <p>Мы гарантируем только самые реальные и честные объявления</p>
-            </li>
-            <li>Бонусы для премиум клиентов
-                <p>Мы гарантируем только самые реальные и честные объявления</p>
-            </li>
-            <li>Профессионалы недвижимости
-                <p>На сайте работают профессиональные участники рынка недвижимости</p>
-            </li>
-        </ul>
-    </div>
-    <div class="published-articles">
-        <div class="scroll-decoration">
-        <h2>Только что опубликованные<span>live</span></h2>
-        <div class="list-of-all-apartments">
-        <!-- Основной блок всех апартаментов -->
-            <div class="all-apartments">
-                <!-- Информация одного апартамента -->
-                <div class="block-apartments">
-                    <img src="../../template/images/apartments/1.png" alt="apartments">
-                    <span>2-комн. кв. 134м<sup>2</sup></span>
-                        <div class="price-of-apartments-and-show-apartments">
-                            <div class="price-of-apartments">
-                                <span>25 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
-                                <div class="location">
-                                    <p><img src="../../template/images/m.png" alt="img">Рижская</p>
-                                    <span><img src="../../template/images/people.png" alt="img">2 мин</span>
-                                </div>
-                            </div>
-                            <div class="show-apartments">
-                                <a href="#"><img src="../../template/images/show.png" alt="show"></a>
-                            </div>
-                        </div>
-                    <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
-                </div>
-                <!-- Закончился первый блок -->
-                <div class="block-apartments">
-                    <img src="../../template/images/apartments/2.png" alt="apartments">
-                    <span>2-комн. кв. 134м<sup>2</sup></span>
-                        <div class="price-of-apartments-and-show-apartments">
-                            <div class="price-of-apartments">
-                                <span>34 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
-                                <div class="location">
-                                    <p><img src="../../template/images/m.png" alt="img">Свиблово</p>
-                                    <span><img src="../../template/images/people.png" alt="img">2 мин</span>
-                                </div>
-                            </div>
-                            <div class="show-apartments">
-                                <a href="#"><img src="../../template/images/show.png" alt="show"></a>
-                            </div>
-                        </div>
-                    <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
-                </div>
-                <div class="block-apartments">
-                    <img src="../../template/images/apartments/3.png" alt="apartments">
-                    <span>2-комн. кв. 134м<sup>2</sup></span>
-                        <div class="price-of-apartments-and-show-apartments">
-                            <div class="price-of-apartments">
-                                <span>34 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
-                                <div class="location">
-                                    <p><img src="../../template/images/m.png" alt="img">Медведково</p>
-                                    <span><img src="../../template/images/people.png" alt="img">2 мин</span>
-                                </div>
-                            </div>
-                            <div class="show-apartments">
-                                <a href="#"><img src="../../template/images/show.png" alt="show"></a>
-                            </div>
-                        </div>
-                    <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
-                </div>
-                <div class="block-apartments">
-                    <img src="../../template/images/apartments/4.png" alt="apartments">
-                    <span>2-комн. кв. 134м<sup>2</sup></span>
-                        <div class="price-of-apartments-and-show-apartments">
-                            <div class="price-of-apartments">
-                                <span>34 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
-                                <div class="location">
-                                    <p><img src="../../template/images/m.png" alt="img">Медведково</p>
-                                    <span><img src="../../template/images/people.png" alt="img">2 мин</span>
-                                </div>
-                            </div>
-                            <div class="show-apartments">
-                                <a href="#"><img src="../../template/images/show.png" alt="show"></a>
-                            </div>
-                        </div>
-                    <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
-                </div>
-                <div class="block-apartments">
-                    <img src="../../template/images/apartments/5.png" alt="apartments">
-                    <span>2-комн. кв. 134м<sup>2</sup></span>
-                        <div class="price-of-apartments-and-show-apartments">
-                            <div class="price-of-apartments">
-                                <span>25 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
-                                <div class="location">
-                                    <p><img src="../../template/images/m.png" alt="img">Рижская</p>
-                                    <span><img src="../../template/images/people.png" alt="img">2 мин</span>
-                                </div>
-                            </div>
-                            <div class="show-apartments">
-                                <a href="#"><img src="../../template/images/show.png" alt="show"></a>
-                            </div>
-                        </div>
-                    <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
-                </div>
-                <div class="block-apartments">
-                    <img src="../../template/images/apartments/6.png" alt="apartments">
-                    <span>2-комн. кв. 134м<sup>2</sup></span>
-                        <div class="price-of-apartments-and-show-apartments">
-                            <div class="price-of-apartments">
-                                <span>34 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
-                                <div class="location">
-                                    <p><img src="../../template/images/m.png" alt="img">Свиблово</p>
-                                    <span><img src="../../template/images/people.png" alt="img">2 мин</span>
-                                </div>
-                            </div>
-                            <div class="show-apartments">
-                                <a href="#"><img src="../../template/images/show.png" alt="show"></a>
-                            </div>
-                        </div>
-                    <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
-                </div>
-                <div class="block-apartments">
-                    <img src="../../template/images/apartments/7.png" alt="apartments">
-                    <span>2-комн. кв. 134м<sup>2</sup></span>
-                        <div class="price-of-apartments-and-show-apartments">
-                            <div class="price-of-apartments">
-                                <span>34 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
-                                <div class="location">
-                                    <p><img src="../../template/images/m.png" alt="img">Медведково</p>
-                                    <span><img src="../../template/images/people.png" alt="img">2 мин</span>
-                                </div>
-                            </div>
-                            <div class="show-apartments">
-                                <a href="#"><img src="../../template/images/show.png" alt="show"></a>
-                            </div>
-                        </div>
-                    <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
-                </div>
-                <div class="block-apartments">
-                    <img src="../../template/images/apartments/8.png" alt="apartments">
-                    <span>2-комн. кв. 134м<sup>2</sup></span>
-                        <div class="price-of-apartments-and-show-apartments">
-                            <div class="price-of-apartments">
-                                <span>34 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
-                                <div class="location">
-                                    <p><img src="../../template/images/m.png" alt="img">Медведково</p>
-                                    <span><img src="../../template/images/people.png" alt="img">2 мин</span>
-                                </div>
-                            </div>
-                            <div class="show-apartments">
-                                <a href="#"><img src="../../template/images/show.png" alt="show"></a>
-                            </div>
-                        </div>
-                    <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
-                </div>
-                <div class="block-apartments">
-                    <img src="../../template/images/apartments/1.png" alt="apartments">
-                    <span>2-комн. кв. 134м<sup>2</sup></span>
-                        <div class="price-of-apartments-and-show-apartments">
-                            <div class="price-of-apartments">
-                                <span>25 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
-                                <div class="location">
-                                    <p><img src="../../template/images/m.png" alt="img">Рижская</p>
-                                    <span><img src="../../template/images/people.png" alt="img">2 мин</span>
-                                </div>
-                            </div>
-                            <div class="show-apartments">
-                                <a href="#"><img src="../../template/images/show.png" alt="show"></a>
-                            </div>
-                        </div>
-                    <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
-                </div>
-                <div class="block-apartments">
-                    <img src="../../template/images/apartments/2.png" alt="apartments">
-                    <span>2-комн. кв. 134м<sup>2</sup></span>
-                        <div class="price-of-apartments-and-show-apartments">
-                            <div class="price-of-apartments">
-                                <span>34 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
-                                <div class="location">
-                                    <p><img src="../../template/images/m.png" alt="img">Свиблово</p>
-                                    <span><img src="../../template/images/people.png" alt="img">2 мин</span>
-                                </div>
-                            </div>
-                            <div class="show-apartments">
-                                <a href="#"><img src="../../template/images/show.png" alt="show"></a>
-                            </div>
-                        </div>
-                    <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
-                </div>
-                <div class="block-apartments">
-                    <img src="../../template/images/apartments/3.png" alt="apartments">
-                    <span>2-комн. кв. 134м<sup>2</sup></span>
-                        <div class="price-of-apartments-and-show-apartments">
-                            <div class="price-of-apartments">
-                                <span>34 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
-                                <div class="location">
-                                    <p><img src="../../template/images/m.png" alt="img">Медведково</p>
-                                    <span><img src="../../template/images/people.png" alt="img">2 мин</span>
-                                </div>
-                            </div>
-                            <div class="show-apartments">
-                                <a href="#"><img src="../../template/images/show.png" alt="show"></a>
-                            </div>
-                        </div>
-                    <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
-                </div>
-                <div class="block-apartments">
-                    <img src="../../template/images/apartments/4.png" alt="apartments">
-                    <span>2-комн. кв. 134м<sup>2</sup></span>
-                        <div class="price-of-apartments-and-show-apartments">
-                            <div class="price-of-apartments">
-                                <span>34 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
-                                <div class="location">
-                                    <p><img src="../../template/images/m.png" alt="img">Медведково</p>
-                                    <span><img src="../../template/images/people.png" alt="img">2 мин</span>
-                                </div>
-                            </div>
-                            <div class="show-apartments">
-                                <a href="#"><img src="../../template/images/show.png" alt="show"></a>
-                            </div>
-                        </div>
-                    <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
-                </div>
-            </div>
-            <!-- Закончились все блоки -->
-        </div>
-        </div>
-    </div>
-    <div class="visitor-statistics">
-        <div class="container-w-2">
-            <p>Сегодня вы и еще<span>143 645</span>человек сейчас с нами, а так же:</p>
+        <div class="information-for-the-user">
             <ul>
-                <li><img src="../../template/images/sec-4-1.png" alt="icon">645 644
-                    <p>Людей зашло сегодня</p>
+                <li>Удобный поиск по карте
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia iusto architecto quia!</p>
                 </li>
-                <li><img src="../../template/images/sec-4-2.png" alt="icon">23 635 773
-                    <p>объявлений выложено</p>
+                <li>Обширный список<br> юридических услуг
+                    <p>Lorem ipsum dolor sit amet, consectetur.</p>
                 </li>
-                <li><img src="../../template/images/sec-4-3.png" alt="icon">11 345
-                    <p>объявлений в вашем городе</p>
+                <li>Обширный список критериев
+                    <p>Для поиска и составления объявлений</p>
                 </li>
-                <li><img src="../../template/images/sec-4-4.png" alt="icon">342 244
-                    <p>активных сделак сейчас</p>
+                <li>Онлайн-чат
+                    <p>Онлайн-чат со службой поддержки, которая всегда решает ваши вопросы</p>
+                </li>
+                <li>Постоянная модерация объявлений
+                    <p>Мы гарантируем только самые реальные и честные объявления</p>
+                </li>
+                <li>Удобный быстрый поиск
+                    <p>Мы гарантируем только самые реальные и честные объявления</p>
+                </li>
+                <li>Информативная страница объявлений
+                    <p>Мы гарантируем только самые реальные и честные объявления</p>
+                </li>
+                <li>Бонусы для премиум клиентов
+                    <p>Мы гарантируем только самые реальные и честные объявления</p>
+                </li>
+                <li>Профессионалы недвижимости
+                    <p>На сайте работают профессиональные участники рынка недвижимости</p>
                 </li>
             </ul>
-            <div class="schedule">
-                <div class="schedule-interface">
-                    <div class="year-schedule-interface"></div>
-                </div>
-                <a href="#"><span id="yellow"></span>Октябрь</a>
-                <a href="#"><span id="green"></span>Ноябрь</a>
-                <a href="#"><span id="blue"></span>Декабрь</a>
-            </div>
         </div>
-    </div>
-    <div class="sales-evaluation">
-        <div class="container-w-2">
-            <h2>Оценка продажи и аренды недвижимости<br>в Москве и области</h2>
-            <div class="appreciate-the-apartment">
-                <ul>
-                    <li><i class="fa fa-map-marker" aria-hidden="true"></i>
-                        <input placeholder="например: Москва, ул. Большого Голушкина, 17">
-                    </li>
-                    <li>
-                        <select class="js-example-data-array-selected property-type"></select>
-                    </li>
-                </ul>
-                <button>Оценить</button>
-            </div>
-            <div class="appreciate-the-rooms">
-                <p>Кол-во<br>комнат</p>
-                <span>1</span>
-                <span>2</span>
-                <span>3</span>
-                <span>4</span>
-                <span>4+</span>
-            </div>
-            <div class="estimate-the-area">
-                <label>Площадь м2
-                    <input type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}">
-                </label>
-            </div>
-        </div>
-    </div>
-    <div class="best-ads-per-day">
-        <div class="top-apartments">
-        <h2>Лучшие объявления за 24 часа</h2>
-            <div class="filter-and-top-blocks">
-                <div class="filter-apartment">
-                    <p>тип недвижемости</p>
-                    <select class="js-example-data-array"></select>
-                    <select class="js-example-data-array"></select>
-                    <p id="style">Площадь</p>
-                    <select class="js-example-data-array"></select>
-                </div>
-                <!-- Основной блок TOP апартаментов -->
-                <div class="all-apartments-top">
-                    <!-- Информация одного TOP апартамента -->
-                    <div class="top-block">
-                        <div class="left-wallpaper">
-                            <a href="#"><img src="../../template/images/apartments/1.png" alt="apartments"></a>
-                            <p>2-комн. кв. 134м<sup>2</sup></p>
-                        </div>
-                        <div class="right-information-block">
-                            <span>Шикардосная двушка в самом центре столицы</span>
-                            <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
-                            <div class="price-and-view-the-apartment">
-                                <div class="price">
-                                    <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img src="../../template/images/people.png" alt="">2 мин</span></p>
-                                    <span class="decorate-number">25 000<i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
+        <div class="published-articles">
+            <div class="scroll-decoration">
+            <h2>Только что опубликованные<span>live</span></h2>
+            <div class="list-of-all-apartments">
+            <!-- Основной блок всех апартаментов -->
+                <div class="all-apartments">
+                    <!-- Информация одного апартамента -->
+                    <div class="block-apartments">
+                        <img src="../../template/images/apartments/1.png" alt="apartments">
+                        <span>2-комн. кв. 134м<sup>2</sup></span>
+                            <div class="price-of-apartments-and-show-apartments">
+                                <div class="price-of-apartments">
+                                    <span>25 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
+                                    <div class="location">
+                                        <p><img src="../../template/images/m.png" alt="img">Рижская</p>
+                                        <span><img src="../../template/images/people.png" alt="img">2 мин</span>
+                                    </div>
                                 </div>
-                                <div class="view-the-apartment">
+                                <div class="show-apartments">
                                     <a href="#"><img src="../../template/images/show.png" alt="show"></a>
                                 </div>
                             </div>
-                        </div>
+                        <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
                     </div>
                     <!-- Закончился первый блок -->
-                    <div class="top-block">
-                        <div class="left-wallpaper">
-                            <a href="#"><img src="../../template/images/apartments/2.png" alt="apartments"></a>
-                            <p>2-комн. кв. 134м<sup>2</sup></p>
-                        </div>
-                        <div class="right-information-block">
-                            <span>Шикардосная двушка в самом центре столицы</span>
-                            <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
-                            <div class="price-and-view-the-apartment">
-                                <div class="price">
-                                    <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img src="../../template/images/people.png" alt="">2 мин</span></p>
-                                    <span class="decorate-number">25 000<i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
+                    <div class="block-apartments">
+                        <img src="../../template/images/apartments/2.png" alt="apartments">
+                        <span>2-комн. кв. 134м<sup>2</sup></span>
+                            <div class="price-of-apartments-and-show-apartments">
+                                <div class="price-of-apartments">
+                                    <span>34 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
+                                    <div class="location">
+                                        <p><img src="../../template/images/m.png" alt="img">Свиблово</p>
+                                        <span><img src="../../template/images/people.png" alt="img">2 мин</span>
+                                    </div>
                                 </div>
-                                <div class="view-the-apartment">
+                                <div class="show-apartments">
                                     <a href="#"><img src="../../template/images/show.png" alt="show"></a>
                                 </div>
                             </div>
-                        </div>
+                        <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
                     </div>
-                    <div class="top-block">
-                        <div class="left-wallpaper">
-                            <a href="#"><img src="../../template/images/apartments/3.png" alt="apartments"></a>
-                            <p>2-комн. кв. 134м<sup>2</sup></p>
-                        </div>
-                        <div class="right-information-block">
-                            <span>Шикардосная двушка в самом центре столицы</span>
-                            <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
-                            <div class="price-and-view-the-apartment">
-                                <div class="price">
-                                    <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img src="../../template/images/people.png" alt="">2 мин</span></p>
-                                    <span class="decorate-number">25 000<i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
+                    <div class="block-apartments">
+                        <img src="../../template/images/apartments/3.png" alt="apartments">
+                        <span>2-комн. кв. 134м<sup>2</sup></span>
+                            <div class="price-of-apartments-and-show-apartments">
+                                <div class="price-of-apartments">
+                                    <span>34 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
+                                    <div class="location">
+                                        <p><img src="../../template/images/m.png" alt="img">Медведково</p>
+                                        <span><img src="../../template/images/people.png" alt="img">2 мин</span>
+                                    </div>
                                 </div>
-                                <div class="view-the-apartment">
+                                <div class="show-apartments">
                                     <a href="#"><img src="../../template/images/show.png" alt="show"></a>
                                 </div>
                             </div>
-                        </div>
+                        <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
                     </div>
-                    <div class="top-block">
-                        <div class="left-wallpaper">
-                            <a href="#"><img src="../../template/images/apartments/4.png" alt="apartments"></a>
-                            <p>2-комн. кв. 134м<sup>2</sup></p>
-                        </div>
-                        <div class="right-information-block">
-                            <span>Шикардосная двушка в самом центре столицы</span>
-                            <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
-                            <div class="price-and-view-the-apartment">
-                                <div class="price">
-                                    <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img src="../../template/images/people.png" alt="">2 мин</span></p>
-                                    <span class="decorate-number">25 000<i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
+                    <div class="block-apartments">
+                        <img src="../../template/images/apartments/4.png" alt="apartments">
+                        <span>2-комн. кв. 134м<sup>2</sup></span>
+                            <div class="price-of-apartments-and-show-apartments">
+                                <div class="price-of-apartments">
+                                    <span>34 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
+                                    <div class="location">
+                                        <p><img src="../../template/images/m.png" alt="img">Медведково</p>
+                                        <span><img src="../../template/images/people.png" alt="img">2 мин</span>
+                                    </div>
                                 </div>
-                                <div class="view-the-apartment">
+                                <div class="show-apartments">
                                     <a href="#"><img src="../../template/images/show.png" alt="show"></a>
                                 </div>
                             </div>
-                        </div>
+                        <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
                     </div>
-                    <div class="top-block">
-                        <div class="left-wallpaper">
-                            <a href="#"><img src="../../template/images/apartments/5.png" alt="apartments"></a>
-                            <p>2-комн. кв. 134м<sup>2</sup></p>
-                        </div>
-                        <div class="right-information-block">
-                            <span>Шикардосная двушка в самом центре столицы</span>
-                            <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
-                            <div class="price-and-view-the-apartment">
-                                <div class="price">
-                                    <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img src="../../template/images/people.png" alt="">2 мин</span></p>
-                                    <span class="decorate-number">25 000<i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
+                    <div class="block-apartments">
+                        <img src="../../template/images/apartments/5.png" alt="apartments">
+                        <span>2-комн. кв. 134м<sup>2</sup></span>
+                            <div class="price-of-apartments-and-show-apartments">
+                                <div class="price-of-apartments">
+                                    <span>25 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
+                                    <div class="location">
+                                        <p><img src="../../template/images/m.png" alt="img">Рижская</p>
+                                        <span><img src="../../template/images/people.png" alt="img">2 мин</span>
+                                    </div>
                                 </div>
-                                <div class="view-the-apartment">
+                                <div class="show-apartments">
                                     <a href="#"><img src="../../template/images/show.png" alt="show"></a>
                                 </div>
                             </div>
-                        </div>
+                        <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
                     </div>
-                    <div class="top-block">
-                        <div class="left-wallpaper">
-                            <a href="#"><img src="../../template/images/apartments/6.png" alt="apartments"></a>
-                            <p>2-комн. кв. 134м<sup>2</sup></p>
-                        </div>
-                        <div class="right-information-block">
-                            <span>Шикардосная двушка в самом центре столицы</span>
-                            <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
-                            <div class="price-and-view-the-apartment">
-                                <div class="price">
-                                    <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img src="../../template/images/people.png" alt="">2 мин</span></p>
-                                    <span class="decorate-number">25 000<i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
+                    <div class="block-apartments">
+                        <img src="../../template/images/apartments/6.png" alt="apartments">
+                        <span>2-комн. кв. 134м<sup>2</sup></span>
+                            <div class="price-of-apartments-and-show-apartments">
+                                <div class="price-of-apartments">
+                                    <span>34 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
+                                    <div class="location">
+                                        <p><img src="../../template/images/m.png" alt="img">Свиблово</p>
+                                        <span><img src="../../template/images/people.png" alt="img">2 мин</span>
+                                    </div>
                                 </div>
-                                <div class="view-the-apartment">
+                                <div class="show-apartments">
                                     <a href="#"><img src="../../template/images/show.png" alt="show"></a>
                                 </div>
                             </div>
-                        </div>
+                        <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
                     </div>
-                    <div class="top-block">
-                        <div class="left-wallpaper">
-                            <a href="#"><img src="../../template/images/apartments/7.png" alt="apartments"></a>
-                            <p>2-комн. кв. 134м<sup>2</sup></p>
-                        </div>
-                        <div class="right-information-block">
-                            <span>Шикардосная двушка в самом центре столицы</span>
-                            <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
-                            <div class="price-and-view-the-apartment">
-                                <div class="price">
-                                    <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img src="../../template/images/people.png" alt="">2 мин</span></p>
-                                    <span class="decorate-number">25 000<i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
+                    <div class="block-apartments">
+                        <img src="../../template/images/apartments/7.png" alt="apartments">
+                        <span>2-комн. кв. 134м<sup>2</sup></span>
+                            <div class="price-of-apartments-and-show-apartments">
+                                <div class="price-of-apartments">
+                                    <span>34 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
+                                    <div class="location">
+                                        <p><img src="../../template/images/m.png" alt="img">Медведково</p>
+                                        <span><img src="../../template/images/people.png" alt="img">2 мин</span>
+                                    </div>
                                 </div>
-                                <div class="view-the-apartment">
+                                <div class="show-apartments">
                                     <a href="#"><img src="../../template/images/show.png" alt="show"></a>
                                 </div>
                             </div>
-                        </div>
+                        <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
                     </div>
-                    <div class="top-block">
-                        <div class="left-wallpaper">
-                            <a href="#"><img src="../../template/images/apartments/8.png" alt="apartments"></a>
-                            <p>2-комн. кв. 134м<sup>2</sup></p>
-                        </div>
-                        <div class="right-information-block">
-                            <span>Шикардосная двушка в самом центре столицы</span>
-                            <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
-                            <div class="price-and-view-the-apartment">
-                                <div class="price">
-                                    <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img src="../../template/images/people.png" alt="">2 мин</span></p>
-                                    <span class="decorate-number">25 000<i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
+                    <div class="block-apartments">
+                        <img src="../../template/images/apartments/8.png" alt="apartments">
+                        <span>2-комн. кв. 134м<sup>2</sup></span>
+                            <div class="price-of-apartments-and-show-apartments">
+                                <div class="price-of-apartments">
+                                    <span>34 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
+                                    <div class="location">
+                                        <p><img src="../../template/images/m.png" alt="img">Медведково</p>
+                                        <span><img src="../../template/images/people.png" alt="img">2 мин</span>
+                                    </div>
                                 </div>
-                                <div class="view-the-apartment">
+                                <div class="show-apartments">
                                     <a href="#"><img src="../../template/images/show.png" alt="show"></a>
                                 </div>
                             </div>
-                        </div>
+                        <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
                     </div>
-                    <div class="top-block">
-                        <div class="left-wallpaper">
-                            <a href="#"><img src="../../template/images/apartments/2.png" alt="apartments"></a>
-                            <p>2-комн. кв. 134м<sup>2</sup></p>
-                        </div>
-                        <div class="right-information-block">
-                            <span>Шикардосная двушка в самом центре столицы</span>
-                            <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
-                            <div class="price-and-view-the-apartment">
-                                <div class="price">
-                                    <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img src="../../template/images/people.png" alt="">2 мин</span></p>
-                                    <span class="decorate-number">25 000<i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
+                    <div class="block-apartments">
+                        <img src="../../template/images/apartments/1.png" alt="apartments">
+                        <span>2-комн. кв. 134м<sup>2</sup></span>
+                            <div class="price-of-apartments-and-show-apartments">
+                                <div class="price-of-apartments">
+                                    <span>25 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
+                                    <div class="location">
+                                        <p><img src="../../template/images/m.png" alt="img">Рижская</p>
+                                        <span><img src="../../template/images/people.png" alt="img">2 мин</span>
+                                    </div>
                                 </div>
-                                <div class="view-the-apartment">
+                                <div class="show-apartments">
                                     <a href="#"><img src="../../template/images/show.png" alt="show"></a>
                                 </div>
                             </div>
-                        </div>
+                        <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
+                    </div>
+                    <div class="block-apartments">
+                        <img src="../../template/images/apartments/2.png" alt="apartments">
+                        <span>2-комн. кв. 134м<sup>2</sup></span>
+                            <div class="price-of-apartments-and-show-apartments">
+                                <div class="price-of-apartments">
+                                    <span>34 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
+                                    <div class="location">
+                                        <p><img src="../../template/images/m.png" alt="img">Свиблово</p>
+                                        <span><img src="../../template/images/people.png" alt="img">2 мин</span>
+                                    </div>
+                                </div>
+                                <div class="show-apartments">
+                                    <a href="#"><img src="../../template/images/show.png" alt="show"></a>
+                                </div>
+                            </div>
+                        <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
+                    </div>
+                    <div class="block-apartments">
+                        <img src="../../template/images/apartments/3.png" alt="apartments">
+                        <span>2-комн. кв. 134м<sup>2</sup></span>
+                            <div class="price-of-apartments-and-show-apartments">
+                                <div class="price-of-apartments">
+                                    <span>34 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
+                                    <div class="location">
+                                        <p><img src="../../template/images/m.png" alt="img">Медведково</p>
+                                        <span><img src="../../template/images/people.png" alt="img">2 мин</span>
+                                    </div>
+                                </div>
+                                <div class="show-apartments">
+                                    <a href="#"><img src="../../template/images/show.png" alt="show"></a>
+                                </div>
+                            </div>
+                        <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
+                    </div>
+                    <div class="block-apartments">
+                        <img src="../../template/images/apartments/4.png" alt="apartments">
+                        <span>2-комн. кв. 134м<sup>2</sup></span>
+                            <div class="price-of-apartments-and-show-apartments">
+                                <div class="price-of-apartments">
+                                    <span>34 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
+                                    <div class="location">
+                                        <p><img src="../../template/images/m.png" alt="img">Медведково</p>
+                                        <span><img src="../../template/images/people.png" alt="img">2 мин</span>
+                                    </div>
+                                </div>
+                                <div class="show-apartments">
+                                    <a href="#"><img src="../../template/images/show.png" alt="show"></a>
+                                </div>
+                            </div>
+                        <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
                     </div>
                 </div>
                 <!-- Закончились все блоки -->
-                <div class="see-more">
-                    <p>Еще<span>23 423</span>объявления</p>
-                    <a href="#">Смотреть все</a>
+            </div>
+            </div>
+        </div>
+        <div class="visitor-statistics">
+            <div class="container-w-2">
+                <p>Сегодня вы и еще<span>143 645</span>человек сейчас с нами, а так же:</p>
+                <ul>
+                    <li><img src="../../template/images/sec-4-1.png" alt="icon">645 644
+                        <p>Людей зашло сегодня</p>
+                    </li>
+                    <li><img src="../../template/images/sec-4-2.png" alt="icon">23 635 773
+                        <p>объявлений выложено</p>
+                    </li>
+                    <li><img src="../../template/images/sec-4-3.png" alt="icon">11 345
+                        <p>объявлений в вашем городе</p>
+                    </li>
+                    <li><img src="../../template/images/sec-4-4.png" alt="icon">342 244
+                        <p>активных сделак сейчас</p>
+                    </li>
+                </ul>
+                <div class="schedule">
+                    <div class="schedule-interface">
+                        <div class="year-schedule-interface"></div>
+                    </div>
+                    <a href="#"><span id="yellow"></span>Октябрь</a>
+                    <a href="#"><span id="green"></span>Ноябрь</a>
+                    <a href="#"><span id="blue"></span>Декабрь</a>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="our-application">
-        <div class="container-w">
-             <div class="app-store">
-                <h5>Поиск удобнее в приложении</h5>
-                <p>Доступно для любых операционных систем, скачивайте и пользуйтесь удобным приложением по подбору недвижемости прямо сейчас.</p>
-                <a href="#">
-                    <img src="../../template/images/apple.png" alt="logo" id="decor-img">
-                    <span>Загрузите</span>
-                    <p class="decoration-text">App Store</p>
-                </a>
-                <a href="#">
-                    <img src="../../template/images/gp.png" alt="logo">
-                    <span>Загрузите</span>
-                    <p class="decoration-text">Google Play</p>
-                </a>
+        <div class="sales-evaluation">
+            <div class="container-w-2">
+                <h2>Оценка продажи и аренды недвижимости<br>в Москве и области</h2>
+                <div class="appreciate-the-apartment">
+                    <ul>
+                        <li><i class="fa fa-map-marker" aria-hidden="true"></i>
+                            <input placeholder="например: Москва, ул. Большого Голушкина, 17">
+                        </li>
+                        <li>
+                            <select class="js-example-data-array-selected property-type"></select>
+                        </li>
+                    </ul>
+                    <button>Оценить</button>
+                </div>
+                <div class="appreciate-the-rooms">
+                    <p>Кол-во<br>комнат</p>
+                    <span>1</span>
+                    <span>2</span>
+                    <span>3</span>
+                    <span>4</span>
+                    <span>4+</span>
+                </div>
+                <div class="estimate-the-area">
+                    <label>Площадь м2
+                        <input type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}">
+                    </label>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="our-work">
-        <div class="container-w-2"> 
-            <h2>Мы трудимся для Вас</h2>
-            <ul class="bxslider">
-                <li>
-                    <img src="../../template/images/daniil.png" />
-                    <div class="admins">
-                        <h6>Александр Никулин</h6>
-                        <span>Гениральный директор</span>
-                        <p>Наш сервис не просто воплощение стараний нашей команды, это сервис обеспечивающий комфортное приобретение или аренду жилья</p>
+        <div class="best-ads-per-day">
+            <div class="top-apartments">
+            <h2>Лучшие объявления за 24 часа</h2>
+                <div class="filter-and-top-blocks">
+                    <div class="filter-apartment">
+                        <p>тип недвижемости</p>
+                        <select class="js-example-data-array"></select>
+                        <select class="js-example-data-array"></select>
+                        <p id="style">Площадь</p>
+                        <select class="js-example-data-array"></select>
                     </div>
-                </li>
-                <li>
-                    <img src="../../template/images/aleksandr.png" />
-                    <div class="admins">
-                        <h6>Александр Никулин</h6>
-                        <span>Гениральный директор</span>
-                        <p>Наш сервис не просто воплощение стараний нашей команды, это сервис обеспечивающий комфортное приобретение или аренду жилья</p>
+                    <!-- Основной блок TOP апартаментов -->
+                    <div class="all-apartments-top">
+                        <!-- Информация одного TOP апартамента -->
+                        <div class="top-block">
+                            <div class="left-wallpaper">
+                                <a href="#"><img src="../../template/images/apartments/1.png" alt="apartments"></a>
+                                <p>2-комн. кв. 134м<sup>2</sup></p>
+                            </div>
+                            <div class="right-information-block">
+                                <span>Шикардосная двушка в самом центре столицы</span>
+                                <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
+                                <div class="price-and-view-the-apartment">
+                                    <div class="price">
+                                        <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img src="../../template/images/people.png" alt="">2 мин</span></p>
+                                        <span class="decorate-number">25 000<i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
+                                    </div>
+                                    <div class="view-the-apartment">
+                                        <a href="#"><img src="../../template/images/show.png" alt="show"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Закончился первый блок -->
+                        <div class="top-block">
+                            <div class="left-wallpaper">
+                                <a href="#"><img src="../../template/images/apartments/2.png" alt="apartments"></a>
+                                <p>2-комн. кв. 134м<sup>2</sup></p>
+                            </div>
+                            <div class="right-information-block">
+                                <span>Шикардосная двушка в самом центре столицы</span>
+                                <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
+                                <div class="price-and-view-the-apartment">
+                                    <div class="price">
+                                        <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img src="../../template/images/people.png" alt="">2 мин</span></p>
+                                        <span class="decorate-number">25 000<i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
+                                    </div>
+                                    <div class="view-the-apartment">
+                                        <a href="#"><img src="../../template/images/show.png" alt="show"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="top-block">
+                            <div class="left-wallpaper">
+                                <a href="#"><img src="../../template/images/apartments/3.png" alt="apartments"></a>
+                                <p>2-комн. кв. 134м<sup>2</sup></p>
+                            </div>
+                            <div class="right-information-block">
+                                <span>Шикардосная двушка в самом центре столицы</span>
+                                <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
+                                <div class="price-and-view-the-apartment">
+                                    <div class="price">
+                                        <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img src="../../template/images/people.png" alt="">2 мин</span></p>
+                                        <span class="decorate-number">25 000<i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
+                                    </div>
+                                    <div class="view-the-apartment">
+                                        <a href="#"><img src="../../template/images/show.png" alt="show"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="top-block">
+                            <div class="left-wallpaper">
+                                <a href="#"><img src="../../template/images/apartments/4.png" alt="apartments"></a>
+                                <p>2-комн. кв. 134м<sup>2</sup></p>
+                            </div>
+                            <div class="right-information-block">
+                                <span>Шикардосная двушка в самом центре столицы</span>
+                                <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
+                                <div class="price-and-view-the-apartment">
+                                    <div class="price">
+                                        <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img src="../../template/images/people.png" alt="">2 мин</span></p>
+                                        <span class="decorate-number">25 000<i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
+                                    </div>
+                                    <div class="view-the-apartment">
+                                        <a href="#"><img src="../../template/images/show.png" alt="show"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="top-block">
+                            <div class="left-wallpaper">
+                                <a href="#"><img src="../../template/images/apartments/5.png" alt="apartments"></a>
+                                <p>2-комн. кв. 134м<sup>2</sup></p>
+                            </div>
+                            <div class="right-information-block">
+                                <span>Шикардосная двушка в самом центре столицы</span>
+                                <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
+                                <div class="price-and-view-the-apartment">
+                                    <div class="price">
+                                        <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img src="../../template/images/people.png" alt="">2 мин</span></p>
+                                        <span class="decorate-number">25 000<i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
+                                    </div>
+                                    <div class="view-the-apartment">
+                                        <a href="#"><img src="../../template/images/show.png" alt="show"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="top-block">
+                            <div class="left-wallpaper">
+                                <a href="#"><img src="../../template/images/apartments/6.png" alt="apartments"></a>
+                                <p>2-комн. кв. 134м<sup>2</sup></p>
+                            </div>
+                            <div class="right-information-block">
+                                <span>Шикардосная двушка в самом центре столицы</span>
+                                <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
+                                <div class="price-and-view-the-apartment">
+                                    <div class="price">
+                                        <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img src="../../template/images/people.png" alt="">2 мин</span></p>
+                                        <span class="decorate-number">25 000<i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
+                                    </div>
+                                    <div class="view-the-apartment">
+                                        <a href="#"><img src="../../template/images/show.png" alt="show"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="top-block">
+                            <div class="left-wallpaper">
+                                <a href="#"><img src="../../template/images/apartments/7.png" alt="apartments"></a>
+                                <p>2-комн. кв. 134м<sup>2</sup></p>
+                            </div>
+                            <div class="right-information-block">
+                                <span>Шикардосная двушка в самом центре столицы</span>
+                                <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
+                                <div class="price-and-view-the-apartment">
+                                    <div class="price">
+                                        <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img src="../../template/images/people.png" alt="">2 мин</span></p>
+                                        <span class="decorate-number">25 000<i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
+                                    </div>
+                                    <div class="view-the-apartment">
+                                        <a href="#"><img src="../../template/images/show.png" alt="show"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="top-block">
+                            <div class="left-wallpaper">
+                                <a href="#"><img src="../../template/images/apartments/8.png" alt="apartments"></a>
+                                <p>2-комн. кв. 134м<sup>2</sup></p>
+                            </div>
+                            <div class="right-information-block">
+                                <span>Шикардосная двушка в самом центре столицы</span>
+                                <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
+                                <div class="price-and-view-the-apartment">
+                                    <div class="price">
+                                        <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img src="../../template/images/people.png" alt="">2 мин</span></p>
+                                        <span class="decorate-number">25 000<i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
+                                    </div>
+                                    <div class="view-the-apartment">
+                                        <a href="#"><img src="../../template/images/show.png" alt="show"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="top-block">
+                            <div class="left-wallpaper">
+                                <a href="#"><img src="../../template/images/apartments/2.png" alt="apartments"></a>
+                                <p>2-комн. кв. 134м<sup>2</sup></p>
+                            </div>
+                            <div class="right-information-block">
+                                <span>Шикардосная двушка в самом центре столицы</span>
+                                <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
+                                <div class="price-and-view-the-apartment">
+                                    <div class="price">
+                                        <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img src="../../template/images/people.png" alt="">2 мин</span></p>
+                                        <span class="decorate-number">25 000<i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
+                                    </div>
+                                    <div class="view-the-apartment">
+                                        <a href="#"><img src="../../template/images/show.png" alt="show"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </li>
-                <li>
-                    <img src="../../template/images/daniil.png" />
-                    <div class="admins">
-                        <h6>Александр Никулин</h6>
-                        <span>Гениральный директор</span>
-                        <p>Наш сервис не просто воплощение стараний нашей команды, это сервис обеспечивающий комфортное приобретение или аренду жилья</p>
+                    <!-- Закончились все блоки -->
+                    <div class="see-more">
+                        <p>Еще<span>23 423</span>объявления</p>
+                        <a href="#">Смотреть все</a>
                     </div>
-                </li>
-                <li>
-                    <img src="../../template/images/aleksandr.png" />
-                    <div class="admins">
-                        <h6>Александр Никулин</h6>
-                        <span>Гениральный директор</span>
-                        <p>Наш сервис не просто воплощение стараний нашей команды, это сервис обеспечивающий комфортное приобретение или аренду жилья</p>
-                    </div>
-                </li>
-            </ul>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="official-partners">
-        <div class="partners">
-            <h2>Официальные партнеры</h2>
-            <ul class="bxslider-partners main-block-2">
-                <li><a href="#">
-                    <img src="../../template/images/sec-6-1.png" alt="partners"></a>
-                </li>
-                <li><a href="#">
-                    <img src="../../template/images/sec-6-2.png" alt="partners"></a>
-                </li>
-                <li><a href="#">
-                    <img src="../../template/images/sec-6-3.png" alt="partners"></a>
-                </li>
-                <li><a href="#">
-                    <img src="../../template/images/sec-6-4.png" alt="partners"></a>
-                </li>
-                <li><a href="#">
-                    <img src="../../template/images/sec-6-5.png" alt="partners"></a>
-                </li>
-            </ul>
+        <div class="our-application">
+            <div class="container-w">
+                 <div class="app-store">
+                    <h5>Поиск удобнее в приложении</h5>
+                    <p>Доступно для любых операционных систем, скачивайте и пользуйтесь удобным приложением по подбору недвижемости прямо сейчас.</p>
+                    <a href="#">
+                        <img src="../../template/images/apple.png" alt="logo" id="decor-img">
+                        <span>Загрузите</span>
+                        <p class="decoration-text">App Store</p>
+                    </a>
+                    <a href="#">
+                        <img src="../../template/images/gp.png" alt="logo">
+                        <span>Загрузите</span>
+                        <p class="decoration-text">Google Play</p>
+                    </a>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-<div class="footer">
-    <div class="container-w-2">
-        <div class="lant-io">
-            <p>© 2016-2017 Lant.io</p>
-            <p>ООО «ЛЭНТИО»</p>
+        <div class="our-work">
+            <div class="container-w-2">
+                <h2>Мы трудимся для Вас</h2>
+                <ul class="bxslider">
+                    <li>
+                        <img src="../../template/images/daniil.png" />
+                        <div class="admins">
+                            <h6>Александр Никулин</h6>
+                            <span>Гениральный директор</span>
+                            <p>Наш сервис не просто воплощение стараний нашей команды, это сервис обеспечивающий комфортное приобретение или аренду жилья</p>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="../../template/images/aleksandr.png" />
+                        <div class="admins">
+                            <h6>Александр Никулин</h6>
+                            <span>Гениральный директор</span>
+                            <p>Наш сервис не просто воплощение стараний нашей команды, это сервис обеспечивающий комфортное приобретение или аренду жилья</p>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="../../template/images/daniil.png" />
+                        <div class="admins">
+                            <h6>Александр Никулин</h6>
+                            <span>Гениральный директор</span>
+                            <p>Наш сервис не просто воплощение стараний нашей команды, это сервис обеспечивающий комфортное приобретение или аренду жилья</p>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="../../template/images/aleksandr.png" />
+                        <div class="admins">
+                            <h6>Александр Никулин</h6>
+                            <span>Гениральный директор</span>
+                            <p>Наш сервис не просто воплощение стараний нашей команды, это сервис обеспечивающий комфортное приобретение или аренду жилья</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div class="policy">
-            <p><a href="#">Техническая поддержка</a></p>
-            <p><a href="#">Пользовательское соглашение</a></p>
-            <p><a href="#">Политика конфиденциальности</a></p>
-            <p><a href="#">Команда проекта</a></p>
+        <div class="official-partners">
+            <div class="partners">
+                <h2>Официальные партнеры</h2>
+                <ul class="bxslider-partners main-block-2">
+                    <li><a href="#">
+                        <img src="../../template/images/sec-6-1.png" alt="partners"></a>
+                    </li>
+                    <li><a href="#">
+                        <img src="../../template/images/sec-6-2.png" alt="partners"></a>
+                    </li>
+                    <li><a href="#">
+                        <img src="../../template/images/sec-6-3.png" alt="partners"></a>
+                    </li>
+                    <li><a href="#">
+                        <img src="../../template/images/sec-6-4.png" alt="partners"></a>
+                    </li>
+                    <li><a href="#">
+                        <img src="../../template/images/sec-6-5.png" alt="partners"></a>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <ul>
-            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i><span>Читай</span></a></li>
-            <li><a href="#"><i class="fa fa-vk" aria-hidden="true"></i><span>Вступай</span></a></li>
-            <li><a href="#"><i class="fa fa-youtube" aria-hidden="true"></i><span>Смотри</span></a></li>
-            <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i><span>Подписывайся</span></a></li>
-            <li><a href="#"><img src="../../template/images/work.png" alt="work"><span>У нас</span></a></li>
-        </ul>
-    </div>
-</div>
-<!-- Preloader -->
+    <!-- </form>-->
+ </div>
+ <div class="footer">
+     <div class="container-w-2">
+         <div class="lant-io">
+             <p>© 2016-2017 Lant.io</p>
+             <p>ООО «ЛЭНТИО»</p>
+         </div>
+         <div class="policy">
+             <p><a href="#">Техническая поддержка</a></p>
+             <p><a href="#">Пользовательское соглашение</a></p>
+             <p><a href="#">Политика конфиденциальности</a></p>
+             <p><a href="#">Команда проекта</a></p>
+         </div>
+         <ul>
+             <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i><span>Читай</span></a></li>
+             <li><a href="#"><i class="fa fa-vk" aria-hidden="true"></i><span>Вступай</span></a></li>
+             <li><a href="#"><i class="fa fa-youtube" aria-hidden="true"></i><span>Смотри</span></a></li>
+             <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i><span>Подписывайся</span></a></li>
+             <li><a href="#"><img src="../../template/images/work.png" alt="work"><span>У нас</span></a></li>
+         </ul>
+     </div>
+ </div>
+ <!-- Preloader -->
 <!--<style type="text/css">#hellopreloader>#hellopreloader_preload{position:fixed;z-index:99999;top:0;left:0;right:0;bottom:0;width:100vw;height:100vh;
     background: url('../../template/images/puff.svg') center no-repeat, url('../../template/images/access_background.jpg') center no-repeat;background-size:123px,cover;}</style>
 <div id="hellopreloader"><div id="hellopreloader_preload"></div></div>

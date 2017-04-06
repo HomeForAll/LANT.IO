@@ -5,7 +5,6 @@
     <title><?php $this->title(); ?></title>
     <link rel="stylesheet" href="/template/css/style.css">
     <link rel="stylesheet" href="/template/css/news_style.css">
-    <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css">
     <?php
         // Подключение стилей в контроллере
 if (isset($this->data['css'])) {
@@ -296,7 +295,7 @@ foreach ($this->data['script'] as $key => $value) {
     <?php $this->head() ?>
 </head>
 <body>
-<!--<div id="loading">
+<div id="loading">
     <div id="loading-center">
         <div id="loading-center-absolute">
             <div class="object" id="object_four"></div>
@@ -305,19 +304,8 @@ foreach ($this->data['script'] as $key => $value) {
             <div class="object" id="object_one"></div>
         </div>
     </div>
-</div> -->
-<?php if (isset($_SESSION['authorized'])) { ?>
-<div id="navigation">
-    <div class="logo-img"><img src="../../template/images/logo.png" alt="logo"></div>
-    <div class="registration-users">
-        <div class="place-an-ad">
-            <a href="../../index.php"><img src="../../template/images/add-blue.png" alt="add">Дать объявление</a>
-        </div>
-        <div class="registration">
-            <a href="../../index.php"><img src="../../template/images/add-green.png" alt="add">Войти</a>
-        </div>
-    </div>
 </div>
+
 <div id="wrapper">
     <div id="navigation">
         <ul>
@@ -331,61 +319,9 @@ foreach ($this->data['script'] as $key => $value) {
                 <li><a href="/login">Вход</a></li>
             <?php } ?>
         </ul>
-<?php } else { ?>
-<div id="navigation-true">
-    <div class="logo-img"><img src="../../template/images/logo-true.png" alt="logo-true"></div>
-    <div class="registration-users">
-        <div class="place-an-ad">
-            <a href="../../index.php"><img src="../../template/images/add-blue.png" alt="add">Дать объявление</a>
-        </div>
-        <div class="registration">
-            <div class="message"><img src="../../template/images/message.png" alt="message"></div>
-            <div class="user">
-                <div class="users-information">
-                    <p>Александр Никулин</p>
-                    <span><img src="../../template/images/crown.png" alt="user">Пользователь +</span>
-                </div>
-                <img src="../../template/images/user.png" alt="user">
-                <ul>
-                    <li><a href="#"><img src="../../template/images/m1.png" alt="menu">Мои объявления</a></li>
-                    <li><a href="#"><img src="../../template/images/m2.png" alt="menu">Избранное</a></li>
-                    <li><a href="#"><img src="../../template/images/m3.png" alt="menu">Тех поддержка</a></li>
-                    <li><a href="#"><img src="../../template/images/m4.png" alt="menu">Настройка профиля</a></li>
-                    <li><a href="#"><img src="../../template/images/m5.png" alt="menu">Выйти из системы</a></li>
-                </ul>
-            </div>
-        </div>
     </div>
-</div>
-<?php } ?>
-<div id="content">
-<!--<?php $this->content(); ?> -->
-    <div class="section-1">
-        <div class="apartment-search">
-            <ul>
-                <li><a href="#">Аренда</a></li>
-                <li><a href="#">Продажа</a></li>
-            </ul>
-            <div class="search-menu-apartment">
-                <select>
-                    <option value="1">Москва и область</option>
-                    <option value="2">Москва и область</option>
-                </select>
-                <select>
-                    <option value="3">Офис</option>
-                    <option value="4">Офис</option>
-                </select>
-                <select>
-                    <option value="5">Цена</option>
-                    <option value="6">Цена</option>
-                </select>
-                <button>Найти</button>
-            </div>
-            <div class="big-search"><a href="#">Расширенный поиск</a><i class="fa fa-angle-right" aria-hidden="true"></i></div>
-        </div>
-    </div>
-    <div class="section-2">
-        
+    <div id="content">
+    <?php $this->content(); ?>
     </div>
 </div>
     <?php
@@ -393,7 +329,8 @@ foreach ($this->data['script'] as $key => $value) {
 if (isset($this->data['script_footer'])) {
     foreach ($this->data['script_footer'] as $key => $value) {
         echo '<script src="/template/js/'.$value.'"></script>'."\r\n";
-    }}
+    }
+}
 ?>
 </body>
 </html>

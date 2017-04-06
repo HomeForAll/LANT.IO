@@ -268,7 +268,7 @@
   }
   a {
     display: block;
-    width: 112px;
+    width: 120px;
     text-align: center;
     padding: 13px 16px;
     cursor: pointer;
@@ -433,6 +433,9 @@
     padding: 15px;
     border-radius: 0;
     background: none;
+    &:nth-child(1) {
+      background: none !important;
+    }
     &:hover {
       background: none;
     }
@@ -636,10 +639,10 @@
       background-size: auto;
     }
     &:nth-child(2) {
-      background: url('../../template/images/s3.png') left 5px center no-repeat;
+      background: url('../../template/images/s3.png') left 15px center no-repeat;
       background-size: auto;
       &:hover {
-        background: url('../../template/images/s3.png') left 5px center no-repeat;
+        background: url('../../template/images/s3.png') left 15px center no-repeat;
         background-size: auto;
       }
     }
@@ -661,11 +664,12 @@
   }
   input[type="checkbox"] {
     display: inline-block;
+    vertical-align: middle;
+    margin-right: -8px;
     width: 17px;
     height: 17px;
     color: #444;
     cursor: pointer;
-    vertical-align: middle;
   }
   img {
     display: inline-block;
@@ -747,6 +751,7 @@
     }
     &:nth-child(2) {
       background: #fff;
+      padding: 10px !important;
       &:hover {
         background: rgba(192, 192, 192, 0.25);
       }
@@ -1236,6 +1241,9 @@
 
 .building-parameters li {
   vertical-align: top;
+  &:nth-child(1) {
+    background: #fff;
+  }
   &:nth-child(n+5):nth-child(-n+6) {
     & .select2-hidden-accessible {
       display: none !important;
@@ -1869,7 +1877,7 @@
     content: '';
     display: block;
     position: absolute;
-    top: 180px;
+    top: 155px;
     height: 55px;
     width: 100%;
     z-index: 0;
@@ -1879,7 +1887,7 @@
   }
   img {
     width: 100%;
-    height: 240px;
+    height: 215px;
     margin: auto;
   }
   p {
@@ -2962,10 +2970,17 @@
   .number-apartments {
     width: 70%;
   }
-  .filter-block-big-menu label {
-    width: 55%!important;
-    min-width: 155px!important;
-    margin: auto 15px auto 25px !important;
+  .filter-block-big-menu {
+    li {
+      &:nth-child(2) {
+        padding-left: 30px;
+      }
+    }
+    label {
+      width: 55%!important;
+      min-width: 155px!important;
+      margin: auto 15px auto 25px !important;
+    }
   }
   #navigation-true {
     padding: 10px 200px;
@@ -3681,6 +3696,10 @@
       border: none !important;
       vertical-align: middle;
       text-align: left;
+      &:nth-child(2) {
+        margin-left: 0;
+        padding-left: 20px !important;
+      }
       &:nth-child(3) {
         padding: 5px 5px 5px 30px;
         font-size: 12px;
@@ -4458,7 +4477,7 @@
     padding: 0 5px;
   }
   .apartment-search ul {
-    width: 230px;
+    width: 242px;
     margin: auto;
     text-align: center;
   }
@@ -4529,9 +4548,12 @@
       font-size: 14px;
     }
     input {
-      float: left;
       margin-right: -25px;
       margin-top: 15px !important;
+      &[type=checkbox] {
+        position: absolute;
+        margin-left: 7px;
+      }
       & .select2-selection__rendered {
         padding-left: 25px!important;
       }
