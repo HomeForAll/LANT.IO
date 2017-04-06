@@ -344,7 +344,7 @@ foreach ($this->data['script'] as $key => $value) {
 </div>
 <?php } ?>
 <div id="content">
-    <!--<form action="" method="post">-->
+    <form action="" method="post" id="dataUsers">
         <!--<?php $this->content(); ?> -->
         <div class="section-home-with-filters">
             <div class="apartment-search">
@@ -364,6 +364,264 @@ foreach ($this->data['script'] as $key => $value) {
                     <button onclick="closeFixedBlock();">Закрыть</button>
                 </div>
                 <div class="big-search-menu">
+                    <div class="apartment-settings-apartment">
+                        <h2>Параметры квартиры</h2>
+                        <ul>
+                            <li><span class="names-parameters">Кол-во комнат</span>
+                                <p class="number-apartments">
+                                    <span>1</span>
+                                    <span>2</span>
+                                    <span>3</span>
+                                    <span>4</span>
+                                    <span>4+</span>
+                                </p>
+                            </li>
+                            <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                            <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                            <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                            <li><span class="names-parameters">Балкон м2</span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li><span class="names-parameters">Этаж</span>
+                                <select class="js-example-data-array-selected floor"></select>
+                            </li>
+                            <li><span class="names-parameters">Комплектация </span>
+                                <select class="js-example-data-array-selected equipment"></select>
+                            </li>
+                            <li><span class="names-parameters">Высота потолков м</span>
+                                <p>От<input type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
+                            </li>
+                        </ul>
+                        <a><button>Готово</button></a>
+                    </div>
+                    <div class="apartment-settings-home">
+                        <h2>Параметры дома</h2>
+                        <ul>
+                            <li><span class="names-parameters">Кол-во комнат</span>
+                                <p class="number-apartments">
+                                    <span>1</span>
+                                    <span>2</span>
+                                    <span>3</span>
+                                    <span>4</span>
+                                    <span>4+</span>
+                                </p>
+                            </li>
+                            <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                            <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                            <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                            <li><span class="names-parameters">Балкон м2</span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li><span class="names-parameters">Этаж</span>
+                                <select class="js-example-data-array-selected floor"></select>
+                            </li>
+                            <li><span class="names-parameters">Комплектация </span>
+                                <select class="js-example-data-array-selected equipment"></select>
+                            </li>
+                            <li><span class="names-parameters">Высота потолков м</span>
+                                <p>От<input type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
+                            </li>
+                        </ul>
+                        <a><button>Готово</button></a>
+                    </div>
+                    <div class="apartment-settings-room">
+                        <h2>Параметры комнаты</h2>
+                        <ul>
+                            <li><span class="names-parameters">Кол-во комнат</span>
+                                <p class="number-apartments">
+                                    <span>1</span>
+                                    <span>2</span>
+                                    <span>3</span>
+                                    <span>4</span>
+                                    <span>4+</span>
+                                </p>
+                            </li>
+                            <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                            <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                            <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                            <li><span class="names-parameters">Балкон м2</span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li><span class="names-parameters">Этаж</span>
+                                <select class="js-example-data-array-selected floor"></select>
+                            </li>
+                            <li><span class="names-parameters">Комплектация </span>
+                                <select class="js-example-data-array-selected equipment"></select>
+                            </li>
+                            <li><span class="names-parameters">Высота потолков м</span>
+                                <p>От<input type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
+                            </li>
+                        </ul>
+                        <a><button>Готово</button></a>
+                    </div>
+                    <div class="apartment-settings-office-area">
+                        <h2>Офисная площадь</h2>
+                        <ul>
+                            <li><span class="names-parameters">Кол-во комнат</span>
+                                <p class="number-apartments">
+                                    <span>1</span>
+                                    <span>2</span>
+                                    <span>3</span>
+                                    <span>4</span>
+                                    <span>4+</span>
+                                </p>
+                            </li>
+                            <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                            <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                            <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                            <li><span class="names-parameters">Балкон м2</span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li><span class="names-parameters">Этаж</span>
+                                <select class="js-example-data-array-selected floor"></select>
+                            </li>
+                            <li><span class="names-parameters">Комплектация </span>
+                                <select class="js-example-data-array-selected equipment"></select>
+                            </li>
+                            <li><span class="names-parameters">Высота потолков м</span>
+                                <p>От<input type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
+                            </li>
+                        </ul>
+                        <a><button>Готово</button></a>
+                    </div>
+                    <div class="apartment-settings-separate-building">
+                        <h2>Отдельное стоящее здание</h2>
+                        <ul>
+                            <li><span class="names-parameters">Кол-во комнат</span>
+                                <p class="number-apartments">
+                                    <span>1</span>
+                                    <span>2</span>
+                                    <span>3</span>
+                                    <span>4</span>
+                                    <span>4+</span>
+                                </p>
+                            </li>
+                            <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                            <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                            <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                            <li><span class="names-parameters">Балкон м2</span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li><span class="names-parameters">Этаж</span>
+                                <select class="js-example-data-array-selected floor"></select>
+                            </li>
+                            <li><span class="names-parameters">Комплектация </span>
+                                <select class="js-example-data-array-selected equipment"></select>
+                            </li>
+                            <li><span class="names-parameters">Высота потолков м</span>
+                                <p>От<input type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
+                            </li>
+                        </ul>
+                        <a><button>Готово</button></a>
+                    </div>
+                    <div class="apartment-settings-ozs-сomplex">
+                        <h2>Комплекс ОЗС</h2>
+                        <ul>
+                            <li><span class="names-parameters">Кол-во комнат</span>
+                                <p class="number-apartments">
+                                    <span>1</span>
+                                    <span>2</span>
+                                    <span>3</span>
+                                    <span>4</span>
+                                    <span>4+</span>
+                                </p>
+                            </li>
+                            <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                            <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                            <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                            <li><span class="names-parameters">Балкон м2</span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li><span class="names-parameters">Этаж</span>
+                                <select class="js-example-data-array-selected floor"></select>
+                            </li>
+                            <li><span class="names-parameters">Комплектация </span>
+                                <select class="js-example-data-array-selected equipment"></select>
+                            </li>
+                            <li><span class="names-parameters">Высота потолков м</span>
+                                <p>От<input type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
+                            </li>
+                        </ul>
+                        <a><button>Готово</button></a>
+                    </div>
                     <div class="search-more-precisely-search">
                         <div class="exact-area">
                             <span class="search-city" onclick="historySearch();">
@@ -471,17 +729,17 @@ foreach ($this->data['script'] as $key => $value) {
                             <div class="property-type-apartment-settings">
                                 <ul>
                                     <li>Жилая</li>
-                                    <li><img src="../../template/images/b-s-1.png" alt="icon"><p>Квартира</p></li>
-                                    <li><img src="../../template/images/b-s-2.png" alt="icon"><p>Дом</p></li>
-                                    <li><img src="../../template/images/b-s-3.png" alt="icon"><p>Комната</p></li>
+                                    <li onclick="filter1()"><img src="../../template/images/b-s-1.png" alt="icon"><p>Квартира</p></li>
+                                    <li onclick="filter2()"><img src="../../template/images/b-s-2.png" alt="icon"><p>Дом</p></li>
+                                    <li onclick="filter3()"><img src="../../template/images/b-s-3.png" alt="icon"><p>Комната</p></li>
                                     <li><img src="../../template/images/b-s-4.png" alt="icon"><p>Земельный участок</p></li>
                                     <li><img src="../../template/images/b-s-5.png" alt="icon"><p>Гараж/машиноместо</p></li>
                                 </ul>
                                 <ul>
                                     <li>Коммерческая</li>
-                                    <li><img src="../../template/images/b-s-6.png" alt="icon"><p>Офисная площадь</p></li>
-                                    <li><img src="../../template/images/b-s-1.png" alt="icon"><p>Отдельно стоящее здание</p></li>
-                                    <li><img src="../../template/images/b-s-7.png" alt="icon"><p>Комплекс ОСЗ</p></li>
+                                    <li onclick="filter4()"><img src="../../template/images/b-s-6.png" alt="icon"><p>Офисная площадь</p></li>
+                                    <li onclick="filter5()"><img src="../../template/images/b-s-1.png" alt="icon"><p>Отдельно стоящее здание</p></li>
+                                    <li onclick="filter6()"><img src="../../template/images/b-s-7.png" alt="icon"><p>Комплекс ОСЗ</p></li>
                                     <li><img src="../../template/images/b-s-8.png" alt="icon"><p>Рынок/Ярмарка</p></li>
                                     <li><img src="../../template/images/b-s-9.png" alt="icon"><p>Производственно-складские помещения</p></li>
                                     <li><img src="../../template/images/b-s-10.png" alt="icon"><p>Производственно-складские здания</p></li>
@@ -679,6 +937,264 @@ foreach ($this->data['script'] as $key => $value) {
                     </div>
                 </div>
                 <div class="big-search-menu-tenancy">
+                    <div class="apartment-settings-apartment">
+                        <h2>Параметры квартиры</h2>
+                        <ul>
+                            <li><span class="names-parameters">Кол-во комнат</span>
+                                <p class="number-apartments">
+                                    <span>1</span>
+                                    <span>2</span>
+                                    <span>3</span>
+                                    <span>4</span>
+                                    <span>4+</span>
+                                </p>
+                            </li>
+                            <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                            <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                            <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                            <li><span class="names-parameters">Балкон м2</span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li><span class="names-parameters">Этаж</span>
+                                <select class="js-example-data-array-selected floor"></select>
+                            </li>
+                            <li><span class="names-parameters">Комплектация </span>
+                                <select class="js-example-data-array-selected equipment"></select>
+                            </li>
+                            <li><span class="names-parameters">Высота потолков м</span>
+                                <p>От<input type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
+                            </li>
+                        </ul>
+                        <a><button>Готово</button></a>
+                    </div>
+                    <div class="apartment-settings-home">
+                        <h2>Параметры дома</h2>
+                        <ul>
+                            <li><span class="names-parameters">Кол-во комнат</span>
+                                <p class="number-apartments">
+                                    <span>1</span>
+                                    <span>2</span>
+                                    <span>3</span>
+                                    <span>4</span>
+                                    <span>4+</span>
+                                </p>
+                            </li>
+                            <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                            <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                            <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                            <li><span class="names-parameters">Балкон м2</span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li><span class="names-parameters">Этаж</span>
+                                <select class="js-example-data-array-selected floor"></select>
+                            </li>
+                            <li><span class="names-parameters">Комплектация </span>
+                                <select class="js-example-data-array-selected equipment"></select>
+                            </li>
+                            <li><span class="names-parameters">Высота потолков м</span>
+                                <p>От<input type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
+                            </li>
+                        </ul>
+                        <a><button>Готово</button></a>
+                    </div>
+                    <div class="apartment-settings-room">
+                        <h2>Параметры комнаты</h2>
+                        <ul>
+                            <li><span class="names-parameters">Кол-во комнат</span>
+                                <p class="number-apartments">
+                                    <span>1</span>
+                                    <span>2</span>
+                                    <span>3</span>
+                                    <span>4</span>
+                                    <span>4+</span>
+                                </p>
+                            </li>
+                            <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                            <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                            <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                            <li><span class="names-parameters">Балкон м2</span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li><span class="names-parameters">Этаж</span>
+                                <select class="js-example-data-array-selected floor"></select>
+                            </li>
+                            <li><span class="names-parameters">Комплектация </span>
+                                <select class="js-example-data-array-selected equipment"></select>
+                            </li>
+                            <li><span class="names-parameters">Высота потолков м</span>
+                                <p>От<input type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
+                            </li>
+                        </ul>
+                        <a><button>Готово</button></a>
+                    </div>
+                    <div class="apartment-settings-office-area">
+                        <h2>Офисная площадь</h2>
+                        <ul>
+                            <li><span class="names-parameters">Кол-во комнат</span>
+                                <p class="number-apartments">
+                                    <span>1</span>
+                                    <span>2</span>
+                                    <span>3</span>
+                                    <span>4</span>
+                                    <span>4+</span>
+                                </p>
+                            </li>
+                            <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                            <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                            <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                            <li><span class="names-parameters">Балкон м2</span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li><span class="names-parameters">Этаж</span>
+                                <select class="js-example-data-array-selected floor"></select>
+                            </li>
+                            <li><span class="names-parameters">Комплектация </span>
+                                <select class="js-example-data-array-selected equipment"></select>
+                            </li>
+                            <li><span class="names-parameters">Высота потолков м</span>
+                                <p>От<input type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
+                            </li>
+                        </ul>
+                        <a><button>Готово</button></a>
+                    </div>
+                    <div class="apartment-settings-separate-building">
+                        <h2>Отдельное стоящее здание</h2>
+                        <ul>
+                            <li><span class="names-parameters">Кол-во комнат</span>
+                                <p class="number-apartments">
+                                    <span>1</span>
+                                    <span>2</span>
+                                    <span>3</span>
+                                    <span>4</span>
+                                    <span>4+</span>
+                                </p>
+                            </li>
+                            <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                            <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                            <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                            <li><span class="names-parameters">Балкон м2</span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li><span class="names-parameters">Этаж</span>
+                                <select class="js-example-data-array-selected floor"></select>
+                            </li>
+                            <li><span class="names-parameters">Комплектация </span>
+                                <select class="js-example-data-array-selected equipment"></select>
+                            </li>
+                            <li><span class="names-parameters">Высота потолков м</span>
+                                <p>От<input type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
+                            </li>
+                        </ul>
+                        <a><button>Готово</button></a>
+                    </div>
+                    <div class="apartment-settings-ozs-сomplex">
+                        <h2>Комплекс ОЗС</h2>
+                        <ul>
+                            <li><span class="names-parameters">Кол-во комнат</span>
+                                <p class="number-apartments">
+                                    <span>1</span>
+                                    <span>2</span>
+                                    <span>3</span>
+                                    <span>4</span>
+                                    <span>4+</span>
+                                </p>
+                            </li>
+                            <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                            <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                            <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                            <li><span class="names-parameters">Балкон м2</span>
+                                <p>От<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li><span class="names-parameters">Этаж</span>
+                                <select class="js-example-data-array-selected floor"></select>
+                            </li>
+                            <li><span class="names-parameters">Комплектация </span>
+                                <select class="js-example-data-array-selected equipment"></select>
+                            </li>
+                            <li><span class="names-parameters">Высота потолков м</span>
+                                <p>От<input type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
+                                <p>До<input type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
+                            </li>
+                        </ul>
+                        <a><button>Готово</button></a>
+                    </div>
                     <div class="search-more-precisely-search">
                         <div class="exact-area">
                             <span class="search-city" onclick="historySearch();">
@@ -807,9 +1323,9 @@ foreach ($this->data['script'] as $key => $value) {
                         <li onclick="filterOptions();">
                             <label>Цена</label>
                             <div class="showBigOptions">
-                                <p>От<input placeholder="" type="text" id="amountBefore" readonly disabled></p>
-                                <p>До<input placeholder="" type="text" id="amountAfter" readonly disabled></p>
-                                <div id="slider-range"></div>
+                                <p>От<input placeholder="" type="text" id="amountBefore-buy" readonly disabled></p>
+                                <p>До<input placeholder="" type="text" id="amountAfter-buy" readonly disabled></p>
+                                <div id="slider-range-buy"></div>
                                 <div class="currency">
                                     <p>Валюта</p>
                                     <button><i class="fa fa-rub" aria-hidden="true"></i>рубли</button>
@@ -1576,7 +2092,7 @@ foreach ($this->data['script'] as $key => $value) {
                 </ul>
             </div>
         </div>
-    <!-- </form>-->
+    </form>
  </div>
  <div class="footer">
      <div class="container-w-2">

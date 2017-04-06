@@ -220,7 +220,9 @@ var productSearch, showAndHideTopMenu, boolean = false,
 /** Фильтр - Цена **/
 $(function () {
     var $amountBefore = $('#amountBefore'),
-        $amountAfter = $('#amountAfter');
+        $amountAfter = $('#amountAfter'),
+        $amountBeforeBuy = $('#amountBefore-buy'),
+        $amountAfterBuy = $('#amountAfter-buy');
 
     /** Фильтры в доп.параметрах **/
     $amountBefore.val('20000');
@@ -235,7 +237,18 @@ $(function () {
             $amountAfter.val(ui.values[1]);
         }
     });
+    $("#slider-range-buy").slider({
+        range: true,
+        min: 20000,
+        max: 20000000,
+        values: [75, 300],
+        slide: function (event, ui) {
+            $amountBefore.val(ui.values[0]);
+            $amountAfter.val(ui.values[1]);
+        }
+    });
     $('#amount').val($amountBefore.slider('values', 0) + $amountAfter.slider('values', 1));
+    $('#amount-buy').val($amountBeforeBuy.slider('values', 0) + $amountAfterBuy.slider('values', 1));
 });
 
 /** Библиотека select2(фильтры) **/
@@ -483,7 +496,6 @@ function showBigSearch(showBlock) {
         $bigSearchMenuTenancy = $('.big-search-menu-tenancy');
 
     if (showBlock !== 'rootShowBlock') {
-        console.log('Остановили');
         return false;
     }
 
@@ -497,7 +509,6 @@ function showBigSearch(showBlock) {
         $searchMenuApartment.css({'display':'block'});
         $bigSearchMenu.css({'display':'none'});
         $bigSearchMenuTenancy.css({'display':'none'});
-        console.log('Простой поиск');
         return productSearch = false;
     } else {
         $searchTeg.remove();
@@ -505,7 +516,6 @@ function showBigSearch(showBlock) {
         $bigSearchMenu.css({'display':'block'});
         $bigSearchMenuTenancy.css({'display':'none'});
         $searchMenuApartment.css({'display':'none'});
-        console.log('Расширенный поиск');
         return productSearch = true;
     }
 }
@@ -517,21 +527,17 @@ function choiceBlock(allBlock) {
         $b = $('#Buy'),
         $searchMenu = $('.search-menu-apartment');
 
-        console.log('Запустити 2 функцию', allBlock);
-
     if (allBlock === 'toRent') {
         $a.css({'background': '#5e9152'}).find('a').css({'color':'#fff'});
         $b.css({'background': 'none'}).find('a').css({'color':'#898989'});
         $bigSearchMenu.css({'display':'block'});
         $bigSearchMenuTenancy.css({'display':'none'});
-        console.log('bigSearchMenu');
     } else {
         $a.css({'background': 'none'}).find('a').css({'color':'#898989'});
         $b.css({'background': '#5e9152'}).find('a').css({'color':'#fff'});
         $searchMenu.css({'display':'none'});
         $bigSearchMenu.css({'display':'none'});
         $bigSearchMenuTenancy.css({'display':'block'});
-        console.log('bigSearchMenuTenancy');
     }
 }
 
@@ -558,7 +564,7 @@ function filterOptionsApartments() {
     $propertyTypeApartmentSettings.css({'display': 'block'});
     setTimeout(function () {
         $propertyTypeApartmentSettings.css({'display': 'none'});
-    }, 5000);
+    }, 15000);
 }
 
 function filterOptions() {
@@ -627,6 +633,66 @@ function searchMetroMainBlock() {
     //    $searchMetro.css({'display': 'none'});
     //    shadowBlock();
     //})
+}
+
+function filter1() {
+    var $showBigOptions = $('.apartment-settings-apartment');
+    shadowBlock();
+
+    $showBigOptions.css({'display': 'block'});
+    setTimeout(function () {
+        $showBigOptions.css({'display': 'none'});
+    }, 5000);
+}
+
+function filter2() {
+    var $showBigOptions = $('.apartment-settings-home');
+    shadowBlock();
+
+    $showBigOptions.css({'display': 'block'});
+    setTimeout(function () {
+        $showBigOptions.css({'display': 'none'});
+    }, 5000);
+}
+
+function filter3() {
+    var $showBigOptions = $('.apartment-settings-room');
+    shadowBlock();
+
+    $showBigOptions.css({'display': 'block'});
+    setTimeout(function () {
+        $showBigOptions.css({'display': 'none'});
+    }, 5000);
+}
+
+function filter4() {
+    var $showBigOptions = $('.apartment-settings-office-area');
+    shadowBlock();
+
+    $showBigOptions.css({'display': 'block'});
+    setTimeout(function () {
+        $showBigOptions.css({'display': 'none'});
+    }, 5000);
+}
+
+function filter5() {
+    var $showBigOptions = $('.apartment-settings-separate-building');
+    shadowBlock();
+
+    $showBigOptions.css({'display': 'block'});
+    setTimeout(function () {
+        $showBigOptions.css({'display': 'none'});
+    }, 5000);
+}
+
+function filter6() {
+    var $showBigOptions = $('.apartment-settings-ozs-сomplex');
+    shadowBlock();
+
+    $showBigOptions.css({'display': 'block'});
+    setTimeout(function () {
+        $showBigOptions.css({'display': 'none'});
+    }, 5000);
 }
 
 function attachment() {
@@ -727,5 +793,23 @@ ymaps.ready(function () {
     });
 
     window.suggests = new ymaps.SuggestView("suggest", {width: 300, offset: [0, 4], results: 20});
+});
+//---------------------------------------------------------
+/** Получение данных через Ajax и отправка данных**/
+
+$.ajax({
+    url: url, //Адрес подгружаемой страницы
+    type: "POST", //Тип запроса
+    dataType: "json", //Тип данных
+    data: $('#dataUsers').serialize(),
+    beforeSend: function () {
+        console.log('Отправка данных');
+    },
+    success: function(result) { //Если все нормально
+        console.log('Отправлено: <br>', result);
+    },
+    error: function () {
+        alert('Данные не отправлены');
+    }
 });
 //---------------------------------------------------------
