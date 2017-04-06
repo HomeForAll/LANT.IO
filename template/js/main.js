@@ -207,6 +207,13 @@ var productSearch, showAndHideTopMenu, boolean = false,
         {id: 2, text: 'Тип недвижимости3'},
         {id: 2, text: 'Тип недвижимости4'},
         {id: 2, text: 'Тип недвижимости5'}
+    ],
+    leaseTerm = [
+        {id: 0, text: 'Срок аренды'},
+        {id: 1, text: 'Срок аренды1'},
+        {id: 2, text: 'Срок аренды2'},
+        {id: 3, text: 'Срок аренды3'},
+        {id: 4, text: 'Срок аренды4'}
     ];
 //---------------------------------------------------------
 
@@ -245,7 +252,8 @@ $('.js-example-data-array, .location-apartments').select2({
     data: locationApartments
 });
 $('.js-example-data-array, .owner').select2({
-    data: owner
+    data: owner,
+    maximumInputLength: 2
 });
 $('.js-example-data-array, .floor').select2({
     data: floor
@@ -313,6 +321,10 @@ $('.js-example-data-array, .documents').select2({
 $('.js-example-data-array, .property-type').select2({
     data: propertyType
 });
+$('.js-example-data-array, .lease-term').select2({
+    data: leaseTerm,
+    maximumInputLength: 2
+});
 //---------------------------------------------------------
 $('.js-example-data-array-selected, .region').select2({
     data: data
@@ -327,7 +339,8 @@ $('.js-example-data-array-selected, .location-apartments').select2({
     data: locationApartments
 });
 $('.js-example-data-array-selected, .owner').select2({
-    data: owner
+    data: owner,
+    maximumInputLength: 2
 });
 $('.js-example-data-array-selected, .floor').select2({
     data: floor
@@ -395,6 +408,10 @@ $('.js-example-data-array-selected, .documents').select2({
 $('.js-example-data-array-selected, .property-type').select2({
     data: propertyType
 });
+$('.js-example-data-array-selected, .lease-term').select2({
+    data: leaseTerm,
+    maximumInputLength: 2
+});
 $(".js-example-templating, .select-price-by-scrolling").select2({
     templateResult: formatState,
     data: subwayLines
@@ -423,6 +440,7 @@ $(document).ready(function(){
    		slideMargin: 50,
    		pager: false,
         auto: true,
+        pause: 15000,
         infiniteLoop: true
   });
 });
@@ -457,34 +475,63 @@ function formatState (state) {
 //---------------------------------------------------------
 
 /** Отслежка и изменение расширенного и простого блока **/
-function showBigSearch() {
+function showBigSearch(showBlock) {
     var $searchTeg = $('.big-search a i'),
         $bigSearch = $('.big-search'),
         $searchMenuApartment = $('.search-menu-apartment'),
-        $bigSearchMenu = $('.big-search-menu');
+        $bigSearchMenu = $('.big-search-menu'),
+        $bigSearchMenuTenancy = $('.big-search-menu-tenancy');
+
+    if (showBlock !== 'rootShowBlock') {
+        console.log('Остановили');
+        return false;
+    }
+
+    $searchMenuApartment.css({'display':'none'});
 
     productSearch = !productSearch;
 
-    if (!productSearch) {
-        $searchMenuApartment.css({
-            'display': 'block'
-        });
-        $bigSearchMenu.css({
-            'display': 'none'
-        });
+     if (!productSearch) {
         $searchTeg.remove();
         $bigSearch.html('<a>Расширенный поиск</a>' + '<i class="fa fa-angle-right" aria-hidden="true"></i>');
+        $searchMenuApartment.css({'display':'block'});
+        $bigSearchMenu.css({'display':'none'});
+        $bigSearchMenuTenancy.css({'display':'none'});
+        console.log('Простой поиск');
         return productSearch = false;
     } else {
-        $searchMenuApartment.css({
-            'display': 'none'
-        });
-        $bigSearchMenu.css({
-            'display': 'inline-block'
-        });
         $searchTeg.remove();
         $bigSearch.html('<i class="fa fa-angle-left" aria-hidden="true"></i>' + '<a>Простой поиск</a>');
+        $bigSearchMenu.css({'display':'block'});
+        $bigSearchMenuTenancy.css({'display':'none'});
+        $searchMenuApartment.css({'display':'none'});
+        console.log('Расширенный поиск');
         return productSearch = true;
+    }
+}
+
+function choiceBlock(allBlock) {
+    var $bigSearchMenu = $('.big-search-menu'),
+        $bigSearchMenuTenancy = $('.big-search-menu-tenancy'),
+        $a = $('#blockToRent'),
+        $b = $('#Buy'),
+        $searchMenu = $('.search-menu-apartment');
+
+        console.log('Запустити 2 функцию', allBlock);
+
+    if (allBlock === 'toRent') {
+        $a.css({'background': '#5e9152'}).find('a').css({'color':'#fff'});
+        $b.css({'background': 'none'}).find('a').css({'color':'#898989'});
+        $bigSearchMenu.css({'display':'block'});
+        $bigSearchMenuTenancy.css({'display':'none'});
+        console.log('bigSearchMenu');
+    } else {
+        $a.css({'background': 'none'}).find('a').css({'color':'#898989'});
+        $b.css({'background': '#5e9152'}).find('a').css({'color':'#fff'});
+        $searchMenu.css({'display':'none'});
+        $bigSearchMenu.css({'display':'none'});
+        $bigSearchMenuTenancy.css({'display':'block'});
+        console.log('bigSearchMenuTenancy');
     }
 }
 
