@@ -221,12 +221,14 @@ var productSearch, showAndHideTopMenu, boolean = false,
 $(function () {
     var $amountBefore = $('#amountBefore'),
         $amountAfter = $('#amountAfter'),
-        $amountBeforeBuy = $('#amountBefore-buy'),
-        $amountAfterBuy = $('#amountAfter-buy');
+        $amountBeforeBuy = $('#amountBeforeBuy'),
+        $amountAfterBuy = $('#amountAfterBuy');
 
     /** Фильтры в доп.параметрах **/
     $amountBefore.val('20000');
     $amountAfter.val('20000');
+    $amountBeforeBuy.val('20000');
+    $amountAfterBuy.val('20000');
     $("#slider-range").slider({
         range: true,
         min: 20000,
@@ -243,8 +245,8 @@ $(function () {
         max: 20000000,
         values: [75, 300],
         slide: function (event, ui) {
-            $amountBefore.val(ui.values[0]);
-            $amountAfter.val(ui.values[1]);
+            $amountBeforeBuy.val(ui.values[0]);
+            $amountAfterBuy.val(ui.values[1]);
         }
     });
     $('#amount').val($amountBefore.slider('values', 0) + $amountAfter.slider('values', 1));

@@ -344,7 +344,7 @@ foreach ($this->data['script'] as $key => $value) {
 </div>
 <?php } ?>
 <div id="content">
-    <form action="" method="post" id="dataUsers">
+        <form action="" method="post" id="dataUsers">
         <!--<?php $this->content(); ?> -->
         <div class="section-home-with-filters">
             <div class="apartment-search">
@@ -749,7 +749,7 @@ foreach ($this->data['script'] as $key => $value) {
                         </li>
                         <li onclick="filterOptions();">
                             <label>Цена</label>
-                            <div class="showBigOptions">
+                            <div class="showBigOptions" for="#amount">
                                 <p>От<input placeholder="" type="text" id="amountBefore" readonly disabled></p>
                                 <p>До<input placeholder="" type="text" id="amountAfter" readonly disabled></p>
                                 <div id="slider-range"></div>
@@ -1322,9 +1322,9 @@ foreach ($this->data['script'] as $key => $value) {
                         </li>
                         <li onclick="filterOptions();">
                             <label>Цена</label>
-                            <div class="showBigOptions">
-                                <p>От<input placeholder="" type="text" id="amountBefore-buy" readonly disabled></p>
-                                <p>До<input placeholder="" type="text" id="amountAfter-buy" readonly disabled></p>
+                            <div class="showBigOptions" for="#amount-buy">
+                                <p>От<input placeholder="" type="text" id="amountBeforeBuy" readonly disabled></p>
+                                <p>До<input placeholder="" type="text" id="amountAfterBuy" readonly disabled></p>
                                 <div id="slider-range-buy"></div>
                                 <div class="currency">
                                     <p>Валюта</p>
@@ -1514,6 +1514,7 @@ foreach ($this->data['script'] as $key => $value) {
                 </div>
             </div>
         </div>
+        </form>
         <div class="information-for-the-user">
             <ul>
                 <li>Удобный поиск по карте
@@ -2092,7 +2093,6 @@ foreach ($this->data['script'] as $key => $value) {
                 </ul>
             </div>
         </div>
-    </form>
  </div>
  <div class="footer">
      <div class="container-w-2">
