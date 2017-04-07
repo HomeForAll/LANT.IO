@@ -644,7 +644,7 @@ function filter1() {
     $showBigOptions.css({'display': 'block'});
     setTimeout(function () {
         $showBigOptions.css({'display': 'none'});
-    }, 5000);
+    }, 10000);
 }
 
 function filter2() {
@@ -654,7 +654,7 @@ function filter2() {
     $showBigOptions.css({'display': 'block'});
     setTimeout(function () {
         $showBigOptions.css({'display': 'none'});
-    }, 5000);
+    }, 10000);
 }
 
 function filter3() {
@@ -664,7 +664,7 @@ function filter3() {
     $showBigOptions.css({'display': 'block'});
     setTimeout(function () {
         $showBigOptions.css({'display': 'none'});
-    }, 5000);
+    }, 10000);
 }
 
 function filter4() {
@@ -674,7 +674,7 @@ function filter4() {
     $showBigOptions.css({'display': 'block'});
     setTimeout(function () {
         $showBigOptions.css({'display': 'none'});
-    }, 5000);
+    }, 10000);
 }
 
 function filter5() {
@@ -684,7 +684,7 @@ function filter5() {
     $showBigOptions.css({'display': 'block'});
     setTimeout(function () {
         $showBigOptions.css({'display': 'none'});
-    }, 5000);
+    }, 10000);
 }
 
 function filter6() {
@@ -694,7 +694,7 @@ function filter6() {
     $showBigOptions.css({'display': 'block'});
     setTimeout(function () {
         $showBigOptions.css({'display': 'none'});
-    }, 5000);
+    }, 10000);
 }
 
 function attachment() {

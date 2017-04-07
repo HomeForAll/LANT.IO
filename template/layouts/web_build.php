@@ -344,7 +344,7 @@ foreach ($this->data['script'] as $key => $value) {
 </div>
 <?php } ?>
 <div id="content">
-        <form action="" method="post" id="dataUsers">
+    <form action="" method="post" id="dataUsers">
         <!--<?php $this->content(); ?> -->
         <div class="section-home-with-filters">
             <div class="apartment-search">
@@ -1302,17 +1302,17 @@ foreach ($this->data['script'] as $key => $value) {
                             <div class="property-type-apartment-settings">
                                 <ul>
                                     <li>Жилая</li>
-                                    <li><img src="../../template/images/b-s-1.png" alt="icon"><p>Квартира</p></li>
-                                    <li><img src="../../template/images/b-s-2.png" alt="icon"><p>Дом</p></li>
-                                    <li><img src="../../template/images/b-s-3.png" alt="icon"><p>Комната</p></li>
+                                    <li onclick="filter1();"><img src="../../template/images/b-s-1.png" alt="icon"><p>Квартира</p></li>
+                                    <li onclick="filter2();"><img src="../../template/images/b-s-2.png" alt="icon"><p>Дом</p></li>
+                                    <li onclick="filter3();"><img src="../../template/images/b-s-3.png" alt="icon"><p>Комната</p></li>
                                     <li><img src="../../template/images/b-s-4.png" alt="icon"><p>Земельный участок</p></li>
                                     <li><img src="../../template/images/b-s-5.png" alt="icon"><p>Гараж/машиноместо</p></li>
                                 </ul>
                                 <ul>
                                     <li>Коммерческая</li>
-                                    <li><img src="../../template/images/b-s-6.png" alt="icon"><p>Офисная площадь</p></li>
-                                    <li><img src="../../template/images/b-s-1.png" alt="icon"><p>Отдельно стоящее здание</p></li>
-                                    <li><img src="../../template/images/b-s-7.png" alt="icon"><p>Комплекс ОСЗ</p></li>
+                                    <li onclick="filter4();"><img src="../../template/images/b-s-6.png" alt="icon"><p>Офисная площадь</p></li>
+                                    <li onclick="filter5();"><img src="../../template/images/b-s-1.png" alt="icon"><p>Отдельно стоящее здание</p></li>
+                                    <li onclick="filter6();"><img src="../../template/images/b-s-7.png" alt="icon"><p>Комплекс ОСЗ</p></li>
                                     <li><img src="../../template/images/b-s-8.png" alt="icon"><p>Рынок/Ярмарка</p></li>
                                     <li><img src="../../template/images/b-s-9.png" alt="icon"><p>Производственно-складские помещения</p></li>
                                     <li><img src="../../template/images/b-s-10.png" alt="icon"><p>Производственно-складские здания</p></li>
@@ -1514,7 +1514,7 @@ foreach ($this->data['script'] as $key => $value) {
                 </div>
             </div>
         </div>
-        </form>
+    </form>
         <div class="information-for-the-user">
             <ul>
                 <li>Удобный поиск по карте
