@@ -690,7 +690,6 @@
     width: auto!important;
     min-width: 95px;
     margin: auto;
-    padding: 0 30px!important;
   }
   input[type="checkbox"] {
     display: inline-block;
@@ -1272,6 +1271,7 @@
 }
 
 .building-parameters li {
+  position: relative;
   vertical-align: top;
   &:nth-child(1) {
     background: #fff;
@@ -1286,21 +1286,12 @@
       padding: 0!important;
     }
     & .select2-selection__rendered {
-      padding: 1px 24px 0 20px!important;
+      padding: 1px 24px 0 0!important;
     }
     & .select2-selection--single {
       height: 30px!important;
     }
   }
-}
-
-.main-filter:after {
-  content: '';
-  position: relative;
-  width: 150px;
-  height: 150px;
-  background: red;
-  cursor: default;
 }
 
 .apartment-settings {
@@ -3713,11 +3704,10 @@
       border-right: 2px dotted #e0e0e0;
       cursor: pointer;
       text-align: left;
-      padding: 15px 20px 15px 6px!important;
+      padding: 15px 20px 15px 6px !important;
       width: auto!important;
       min-width: 95px;
       margin: auto;
-      padding: 18px!important;
     }
   }
   #navigation-true {
@@ -4150,7 +4140,7 @@
       padding: 20px 10px;
       width: auto !important;
       &:nth-child(n+5):nth-child(-n+6) .select2-selection__rendered {
-        padding: 1px 24px 0 20px !important;
+        padding: 1px 24px 0 0 !important;
       }
     }
     input {
@@ -5639,9 +5629,9 @@
   }
 }
 @keyframes animate-shine {
-    0% {opacity: 0; width: 0;}
-    50% {opacity: .5;}
-    100% {opacity: 0; width: 95%;}
+  0% {opacity: 0; width: 0;}
+  50% {opacity: .5;}
+  100% {opacity: 0; width: 95%;}
 }
 //------------------------------
 

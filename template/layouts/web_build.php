@@ -1508,7 +1508,7 @@ foreach ($this->data['script'] as $key => $value) {
                         <a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i>Поиск по карте</a>
                     </div>
                 </div>
-                <div class="big-search" onclick="showBigSearch('rootShowBlock');">
+                <div class="big-search" onclick="showBigSearch();">
                     <a>Расширенный поиск</a>
                     <i class="fa fa-angle-right" aria-hidden="true"></i>
                 </div>
@@ -2129,27 +2129,27 @@ if (isset($this->data['script_footer'])) {
 ?>
 <!-- Load CSS -->
 <script>
-    function loadCSS(hf) {var ms=document.createElement("link");
-        ms.rel="stylesheet";ms.href=hf;document.getElementsByTagName("head")[0].appendChild(ms);}
-    loadCSS("/bower_components/font-awesome/css/font-awesome.min.css");
-    loadCSS("/bower_components/select2/dist/css/select2.min.css");
-    loadCSS("//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css");
-    loadCSS("/template/css/jquery.bxslider.min.css");
-    loadCSS("/template/css/style.css");
-    loadCSS("/template/css/news_style.css");
+function loadCSS(hf) {var ms=document.createElement("link");
+    ms.rel="stylesheet";ms.href=hf;document.getElementsByTagName("head")[0].appendChild(ms);}
+loadCSS("/bower_components/font-awesome/css/font-awesome.min.css");
+loadCSS("/bower_components/select2/dist/css/select2.min.css");
+loadCSS("//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css");
+loadCSS("/template/css/jquery.bxslider.min.css");
+loadCSS("/template/css/style.css");
+loadCSS("/template/css/news_style.css");
 </script>
 <!-- Load Scripts -->
 <script>
-    var scr = {"scripts":[
-        {"src" : "//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js", "async" : false},
-        {"src" : "//code.jquery.com/ui/1.12.1/jquery-ui.js", "async" : false},
-        {"src" : "//api-maps.yandex.ru/2.1/?lang=ru_RU", "async" : false},
-        {"src" : "/template/js/mapController.js", "async" : false},
-        {"src" : "/template/js/jquery.bxslider.min.js", "async" : false},
-        {"src" : "/template/js/forms.editor.handler.js", "async" : false},
-        {"src" : "/template/js/socket.io.min.js", "async" : false},
-        {"src" : "/bower_components/select2/dist/js/select2.min.js", "async" : false},
-        {"src" : "/template/js/main.min.js", "async" : false}
+var scr = {"scripts":[
+    {"src" : "//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js", "async" : false},
+    {"src" : "//code.jquery.com/ui/1.12.1/jquery-ui.js", "async" : false},
+    {"src" : "//api-maps.yandex.ru/2.1/?lang=ru_RU", "async" : false},
+    {"src" : "/template/js/mapController.js", "async" : false},
+    {"src" : "/template/js/jquery.bxslider.min.js", "async" : false},
+    {"src" : "/template/js/forms.editor.handler.js", "async" : false},
+    {"src" : "/template/js/socket.io.min.js", "async" : false},
+    {"src" : "/bower_components/select2/dist/js/select2.min.js", "async" : false},
+    {"src" : "/template/js/main.min.js", "async" : false}
 ]};!function(t,n,r){"use strict";var c=function(t){if("[object Array]"!==Object.prototype.toString.call(t))return!1;for(var r=0;r<t.length;r++){var c=n.createElement("script"),e=t[r];c.src=e.src,c.async=e.async,n.body.appendChild(c)}return!0};t.addEventListener?t.addEventListener("load",function(){c(r.scripts);},!1):t.attachEvent?t.attachEvent("onload",function(){c(r.scripts)}):t.onload=function(){c(r.scripts)}}(window,document,scr);
 </script>
 </body>

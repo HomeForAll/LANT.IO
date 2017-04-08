@@ -1,5 +1,5 @@
 'use strict';
-var productSearch, showAndHideTopMenu, boolean = false,
+var productSearch, showAndHideTopMenu, boolean, rootBlock = false,
     imagesWidth = 130,
     valueButton = {
         'more': (function () {
@@ -191,22 +191,22 @@ var productSearch, showAndHideTopMenu, boolean = false,
        {id: 0, text: 'Выберите'},
        {id: 1, text: 'Выберите2'},
        {id: 2, text: 'Выберите3'},
-       {id: 2, text: 'Выберите4'},
-       {id: 2, text: 'Выберите5'}
+       {id: 3, text: 'Выберите4'},
+       {id: 4, text: 'Выберите5'}
     ],
     documents = [
        {id: 0, text: 'Выберите'},
        {id: 1, text: 'Выберите2'},
        {id: 2, text: 'Выберите3'},
-       {id: 2, text: 'Выберите4'},
-       {id: 2, text: 'Выберите5'}
+       {id: 3, text: 'Выберите4'},
+       {id: 4, text: 'Выберите5'}
     ],
     propertyType = [
         {id: 0, text: 'Тип недвижимости'},
         {id: 1, text: 'Тип недвижимости2'},
         {id: 2, text: 'Тип недвижимости3'},
-        {id: 2, text: 'Тип недвижимости4'},
-        {id: 2, text: 'Тип недвижимости5'}
+        {id: 3, text: 'Тип недвижимости4'},
+        {id: 4, text: 'Тип недвижимости5'}
     ],
     leaseTerm = [
         {id: 0, text: 'Срок аренды'},
@@ -334,7 +334,8 @@ $('.js-example-data-array, .documents').select2({
     data: documents
 });
 $('.js-example-data-array, .property-type').select2({
-    data: propertyType
+    data: propertyType,
+    maximumInputLength: 5
 });
 $('.js-example-data-array, .lease-term').select2({
     data: leaseTerm,
@@ -421,7 +422,8 @@ $('.js-example-data-array-selected, .documents').select2({
     data: documents
 });
 $('.js-example-data-array-selected, .property-type').select2({
-    data: propertyType
+    data: propertyType,
+    maximumInputLength: 5
 });
 $('.js-example-data-array-selected, .lease-term').select2({
     data: leaseTerm,
@@ -490,39 +492,8 @@ function formatState (state) {
 //---------------------------------------------------------
 
 /** Отслежка и изменение расширенного и простого блока **/
-function showBigSearch(showBlock) {
-    var $searchTeg = $('.big-search a i'),
-        $bigSearch = $('.big-search'),
-        $searchMenuApartment = $('.search-menu-apartment'),
-        $bigSearchMenu = $('.big-search-menu'),
-        $bigSearchMenuTenancy = $('.big-search-menu-tenancy');
-
-    if (showBlock !== 'rootShowBlock') {
-        return false;
-    }
-
-    $searchMenuApartment.css({'display':'none'});
-
-    productSearch = !productSearch;
-
-     if (!productSearch) {
-        $searchTeg.remove();
-        $bigSearch.html('<a>Расширенный поиск</a>' + '<i class="fa fa-angle-right" aria-hidden="true"></i>');
-        $searchMenuApartment.css({'display':'block'});
-        $bigSearchMenu.css({'display':'none'});
-        $bigSearchMenuTenancy.css({'display':'none'});
-        return productSearch = false;
-    } else {
-        $searchTeg.remove();
-        $bigSearch.html('<i class="fa fa-angle-left" aria-hidden="true"></i>' + '<a>Простой поиск</a>');
-        $bigSearchMenu.css({'display':'block'});
-        $bigSearchMenuTenancy.css({'display':'none'});
-        $searchMenuApartment.css({'display':'none'});
-        return productSearch = true;
-    }
-}
-
 function choiceBlock(allBlock) {
+    if (!rootBlock) {return false}
     var $bigSearchMenu = $('.big-search-menu'),
         $bigSearchMenuTenancy = $('.big-search-menu-tenancy'),
         $a = $('#blockToRent'),
@@ -542,6 +513,41 @@ function choiceBlock(allBlock) {
         $bigSearchMenuTenancy.css({'display':'block'});
     }
 }
+
+function showBigSearch() {
+    var $searchTeg = $('.big-search a i'),
+        $bigSearch = $('.big-search'),
+        $searchMenuApartment = $('.search-menu-apartment'),
+        $bigSearchMenu = $('.big-search-menu'),
+        $bigSearchMenuTenancy = $('.big-search-menu-tenancy');
+
+    rootBlock = true;
+    choiceBlock();
+
+    $searchMenuApartment.css({'display':'none'});
+
+    productSearch = !productSearch;
+
+    if (!productSearch) {
+        $searchTeg.remove();
+        $bigSearch.html('<a>Расширенный поиск</a>' + '<i class="fa fa-angle-right" aria-hidden="true"></i>');
+        $searchMenuApartment.css({'display':'block'});
+        $bigSearchMenu.css({'display':'none'});
+        $bigSearchMenuTenancy.css({'display':'none'});
+        rootBlock = false;
+        console.log('1');
+        return productSearch = false;
+    } else {
+        $searchTeg.remove();
+        $bigSearch.html('<i class="fa fa-angle-left" aria-hidden="true"></i>' + '<a>Простой поиск</a>');
+        $bigSearchMenu.css({'display':'block'});
+        $bigSearchMenuTenancy.css({'display':'none'});
+        $searchMenuApartment.css({'display':'none'});
+        rootBlock = true;
+        return productSearch = true;
+    }
+}
+//---------------------------------------------------------
 
 /** Header меню **/
 function showTopMenuAndSearch() {
@@ -785,7 +791,6 @@ function moreAndLess(sizeImage) {
 function closeFixedBlock() {
 	$('.warning').css({'display':'block'})
 }
-
 /** Яндекс карты **/
 ymaps.ready(function () {
     var map = new ymaps.Map("ymap", {
@@ -797,21 +802,21 @@ ymaps.ready(function () {
     window.suggests = new ymaps.SuggestView("suggest", {width: 300, offset: [0, 4], results: 20});
 });
 //---------------------------------------------------------
-/** Получение данных через Ajax и отправка данных**/
 
-$.ajax({
-    url: url, //Адрес подгружаемой страницы
-    type: "POST", //Тип запроса
-    dataType: "json", //Тип данных
-    data: $('#dataUsers').serialize(),
-    beforeSend: function () {
-        console.log('Отправка данных');
-    },
-    success: function(result) { //Если все нормально
-        console.log('Отправлено: <br>', result);
-    },
-    error: function () {
-        alert('Данные не отправлены');
-    }
-});
+/** Получение данных через Ajax и отправка данных**/
+//$.ajax({
+//    url: url, //Адрес подгружаемой страницы
+//    type: "POST", //Тип запроса
+//    dataType: "json", //Тип данных
+//    data: $('#dataUsers').serialize(),
+//    beforeSend: function () {
+//        console.log('Отправка данных');
+//    },
+//    success: function(result) { //Если все нормально
+//        console.log('Отправлено: <br>', result);
+//    },
+//    error: function () {
+//        alert('Данные не отправлены');
+//    }
+//});
 //---------------------------------------------------------
