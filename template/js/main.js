@@ -615,32 +615,47 @@ function appearanceOfTheBuilding() {
     }, 5000);
 }
 
-function buildingParametersFilter() {
-    var $buildingParameterFilter = $('.building-parameters-filter');
+function allFilterBlocks(filters) {
+
     shadowBlock();
 
-    $buildingParameterFilter.css({'display': 'block'});
-    setTimeout(function () {
-        $buildingParameterFilter.css({'display': 'none'});
-    }, 5000);
-}
+    switch (filters) {
+        case 'searchMetroMainBlock':
+            var $searchMetro = $('.search-metro-main-block');
+            $searchMetro.css({'display': 'block'});
 
-function searchMetroMainBlock() {
-    var $searchMetro = $('.search-metro-main-block');
-        //$closeBlock = $('.closeSearchMetro');
-    shadowBlock();
+            $('.closeSearchMetro').on('click', function () {
+                $searchMetro.hide('slow', function () {
+                    $(this).css({'display':'none'});
+                    $('.decorativeShadowBlock').css({'display':'none'})
+                });
+                event.preventDefault();
+            });
+            break;
+        case 'buildingParametersFilter' :
+            var $a = $('.building-parameters-filter');
+            $a.css({'display': 'block'});
 
-    $searchMetro.css({'display': 'block'});
+            $('.close-building-parameters-filter').on('click', function () {
+                $searchMetro.hide('slow', function () {
+                    $(this).css({'display':'none'});
+                    $('.decorativeShadowBlock').css({'display':'none'})
+                });
+                event.preventDefault();
+            });
+            break;
+        case 'historySearch':
+            var $history = $('.history-search');
 
-    setTimeout(function () {
-        $searchMetro.css({'display': 'none'});
-    }, 5000);
+            $history.css({'display': 'block'});
 
-    //$closeBlock.on('click', function () {
-    //    console.log('Работает');
-    //    $searchMetro.css({'display': 'none'});
-    //    shadowBlock();
-    //})
+            setTimeout(function () {
+                $history.css({'display': 'none'});
+                $('.decorativeShadowBlock').css({'display':'none'})
+            }, 10000);
+            break;
+        default : console.log('Фильтр не найден');
+    }
 }
 
 function filter1() {
@@ -713,16 +728,6 @@ function attachment() {
     }, 5000);
 }
 
-function historySearch() {
-    var $history = $('.history-search');
-    shadowBlock();
-
-    $history.css({'display': 'block'});
-    setTimeout(function () {
-        $history.css({'display': 'none'});
-    }, 5000);
-}
-
 function quickSearch() {
     var $quickSearchBlock = $('.quick-search');
     shadowBlock();
@@ -735,23 +740,9 @@ function quickSearch() {
 
 /** Тени в открывшимся блоке **/
 function shadowBlock() {
-	var $shadowBlocks = $('.decorativeShadowBlock');
+    var $shadowBlocks = $('.decorativeShadowBlock');
 
     $shadowBlocks.css({'display': 'block'});
-
-	setTimeout(function () {
-        $shadowBlocks.css({'display': 'none'});
-    }, 5000);
-
-    //boolean = !boolean;
-
-    //if (boolean) {
-    //    $shadowBlocks.css({'display': 'block'});
-    //    return boolean = false;
-    //} else {
-    //    $shadowBlocks.css({'display': 'none'});
-    //    return boolean = true;
-    //}
 }
 
 $('.select2-selection--single, .pointer').on('click', function () {
@@ -804,19 +795,19 @@ ymaps.ready(function () {
 //---------------------------------------------------------
 
 /** Получение данных через Ajax и отправка данных**/
-//$.ajax({
-//    url: url, //Адрес подгружаемой страницы
-//    type: "POST", //Тип запроса
-//    dataType: "json", //Тип данных
-//    data: $('#dataUsers').serialize(),
-//    beforeSend: function () {
-//        console.log('Отправка данных');
-//    },
-//    success: function(result) { //Если все нормально
-//        console.log('Отправлено: <br>', result);
-//    },
-//    error: function () {
-//        alert('Данные не отправлены');
-//    }
-//});
+$.ajax({
+    url: url, //Адрес подгружаемой страницы
+    type: "POST", //Тип запроса
+    dataType: "json", //Тип данных
+    data: $('#dataUsers').serialize(),
+    beforeSend: function () {
+        console.log('Отправка данных');
+    },
+    success: function(result) { //Если все нормально
+        console.log('Отправлено: <br>', result);
+    },
+    error: function () {
+        alert('Данные не отправлены');
+    }
+});
 //---------------------------------------------------------

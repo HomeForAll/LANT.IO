@@ -363,6 +363,7 @@ foreach ($this->data['script'] as $key => $value) {
                     <span>Чтобы перейти к заполнению подробных настроек</span>
                     <button onclick="closeFixedBlock();">Закрыть</button>
                 </div>
+                <!-- Блок Арендовать -->
                 <div class="big-search-menu">
                     <div class="apartment-settings-apartment">
                         <h2>Параметры квартиры</h2>
@@ -663,34 +664,34 @@ foreach ($this->data['script'] as $key => $value) {
                             </div>
                         </div>
                         <div class="the-exact-address">
-                            <span onclick="searchMetroMainBlock();" class="location-metro-map">Третьяковская<span class="metro-people"><img src="../../template/images/people.png" alt="people">2мин.</span>
-                                    <div class="search-metro-main-block">
-                                        <div class="top-search-results">
-                                            <span>Свиблово<i class="fa fa-times" aria-hidden="true"></i></span>
+                            <span onclick="allFilterBlocks('searchMetroMainBlock')" class="location-metro-map">Третьяковская<span class="metro-people"><img src="../../template/images/people.png" alt="people">2мин.</span>
+                                <div class="search-metro-main-block">
+                                    <div class="top-search-results">
+                                        <span>Свиблово<i class="fa fa-times" aria-hidden="true"></i></span>
+                                    </div>
+                                    <div class="metro-location-and-travel-information">
+                                        <div class="metro-location">
+                                            <div class="panel-move">
+                                                <span onclick="moreAndLess('more')"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                                                <span onclick="moreAndLess('less')"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                                            </div>
+                                            <img src="../../template/images/map-location-metro.png" alt="map">
                                         </div>
-                                        <div class="metro-location-and-travel-information">
-                                            <div class="metro-location">
-                                                <div class="panel-move">
-                                                    <span onclick="moreAndLess('more')"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                                                    <span onclick="moreAndLess('less')"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                                </div>
-                                                <img src="../../template/images/map-location-metro.png" alt="map">
+                                        <div class="travel-information">
+                                            <div class="distance-on-foot">
+                                                <img src="../../template/images/people-2.png" alt="icon"><p>Уделенность пекшом не более</p>
+                                                <span><input placeholder="" type="number" name="foot" value="5" min="5" max="60" step="5">
+                                                <span class="timer">Минут</span></span>
                                             </div>
-                                            <div class="travel-information">
-                                                <div class="distance-on-foot">
-                                                    <img src="../../template/images/people-2.png" alt="icon"><p>Уделенность пекшом не более</p>
-                                                    <span><input placeholder="" type="number" name="foot" value="5" min="5" max="60" step="5">
-                                                    <span class="timer">Минут</span></span>
-                                                </div>
-                                                <div class="distance-on-transport">
-                                                    <img src="../../template/images/avto.png" alt="icon"><p>Уделенность пекшом не более</p>
-                                                    <span><input placeholder="" type="number" name="transport" value="5" min="5" max="60" step="5">
-                                                    <span class="timer">Минут</span></span>
-                                                </div>
-                                                <button class="closeSearchMetro">Готово</button>
+                                            <div class="distance-on-transport">
+                                                <img src="../../template/images/avto.png" alt="icon"><p>Уделенность пекшом не более</p>
+                                                <span><input placeholder="" type="number" name="transport" value="5" min="5" max="60" step="5">
+                                                <span class="timer">Минут</span></span>
                                             </div>
+                                            <button class="closeSearchMetro">Готово</button>
                                         </div>
                                     </div>
+                                </div>
                             </span>
                         </div>
                         <button onclick="quickSearch()">Задать точнее</button>
@@ -846,7 +847,7 @@ foreach ($this->data['script'] as $key => $value) {
                                 <span style="width:40%"></span>
                             </div>
                             </li>
-                            <li onclick="buildingParametersFilter();"><img src="../../template/images/search-3.png" alt="search">Параметры здания
+                            <li onclick="test('buildingParametersFilter')"><img src="../../template/images/search-3.png" alt="search">Параметры здания
                                     <div class="building-parameters-filter">
                                         <h2>Параметры здания</h2>
                                         <ul>
@@ -871,7 +872,7 @@ foreach ($this->data['script'] as $key => $value) {
                                                 <select class="js-example-data-array-selected parking-area"></select>
                                             </li>
                                         </ul>
-                                        <button>Готово</button>
+                                        <button class="close-building-parameters-filter">Готово</button>
                                     </div>
                             <div class="progress-bar blue stripes">
                                 <span style="width:40%"></span>
@@ -936,6 +937,7 @@ foreach ($this->data['script'] as $key => $value) {
                         <a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i>Поиск по карте</a>
                     </div>
                 </div>
+                <!-- Блок Купить -->
                 <div class="big-search-menu-tenancy">
                     <div class="apartment-settings-apartment">
                         <h2>Параметры квартиры</h2>
@@ -1197,7 +1199,7 @@ foreach ($this->data['script'] as $key => $value) {
                     </div>
                     <div class="search-more-precisely-search">
                         <div class="exact-area">
-                            <span class="search-city" onclick="historySearch();">
+                            <span class="search-city" onclick="allFilterBlocks('historySearch')">
                                 <img src="../../template/images/s1.png" alt="city">
                                 <input placeholder="Москва, ул, Малая Ордынка" disabled>
                             </span>
@@ -1237,33 +1239,31 @@ foreach ($this->data['script'] as $key => $value) {
                         </div>
                         <div class="the-exact-address">
                             <span onclick="searchMetroMainBlock();" class="location-metro-map">Третьяковская<span class="metro-people"><img src="../../template/images/people.png" alt="people">2мин.</span>
-                                    <div class="search-metro-main-block">
-                                        <div class="top-search-results">
-                                            <span>Свиблово<i class="fa fa-times" aria-hidden="true"></i></span>
+                                <div class="search-metro-main-block">
+                                    <div class="top-search-results">
+                                        <span>Свиблово<i class="fa fa-times" aria-hidden="true"></i></span>
+                                    </div>
+                                    <div class="metro-location-and-travel-information">
+                                        <div class="metro-location">
+                                            <div class="panel-move">
+                                                <span onclick="moreAndLess('more')"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                                                <span onclick="moreAndLess('less')"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                                            </div>
+                                            <img src="../../template/images/map-location-metro.png" alt="map">
                                         </div>
-                                        <div class="metro-location-and-travel-information">
-                                            <div class="metro-location">
-                                                <div class="panel-move">
-                                                    <span onclick="moreAndLess('more')"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                                                    <span onclick="moreAndLess('less')"><i class="fa fa-minus" aria-hidden="true"></i></span>
-                                                </div>
-                                                <img src="../../template/images/map-location-metro.png" alt="map">
+                                        <div class="travel-information">
+                                            <div class="distance-on-foot">
+                                                <img src="../../template/images/people-2.png" alt="icon"><p>Уделенность пекшом не более</p>
+                                                <span><input placeholder="" type="number" name="foot" value="5" min="5" max="60" step="5"><span class="timer">Минут</span></span>
                                             </div>
-                                            <div class="travel-information">
-                                                <div class="distance-on-foot">
-                                                    <img src="../../template/images/people-2.png" alt="icon"><p>Уделенность пекшом не более</p>
-                                                    <span><input placeholder="" type="number" name="foot" value="5" min="5" max="60" step="5">
-                                                    <span class="timer">Минут</span></span>
-                                                </div>
-                                                <div class="distance-on-transport">
-                                                    <img src="../../template/images/avto.png" alt="icon"><p>Уделенность пекшом не более</p>
-                                                    <span><input placeholder="" type="number" name="transport" value="5" min="5" max="60" step="5">
-                                                    <span class="timer">Минут</span></span>
-                                                </div>
-                                                <button class="closeSearchMetro">Готово</button>
+                                            <div class="distance-on-transport">
+                                                <img src="../../template/images/avto.png" alt="icon"><p>Уделенность пекшом не более</p>
+                                                <span><input placeholder="" type="number" name="transport" value="5" min="5" max="60" step="5"><span class="timer">Минут</span></span>
                                             </div>
+                                            <button class="closeSearchMetro">Готово</button>
                                         </div>
                                     </div>
+                                </div>
                             </span>
                         </div>
                         <button onclick="quickSearch()">Задать точнее</button>
