@@ -1166,7 +1166,7 @@
   text-align: center;
   p {
     display: block;
-    text-align: center;
+    text-align: center !important;
     width: auto;
     margin: 30px auto 10px;
     font-size: 14px;
@@ -1336,9 +1336,12 @@
       display: none !important;
     }
     & .select2-container {
+      display: block;
       border: none!important;
-      width: 60%!important;
       padding: 0!important;
+      width: 70% !important;
+      min-width: 150px;
+      margin: 10px auto !important;
     }
     & .select2-selection__rendered {
       padding: 0 24px 0 0!important;
@@ -1346,21 +1349,39 @@
     & .select2-selection--single {
       height: 28px!important;
     }
+    & .select2-selection__arrow {
+      display: none !important;
+    }
   }
   p {
     display: block !important;
-    width: auto;
+    width: auto !important;
     text-align: center !important;
   }
   label {
     display: inline-block;
     width: 48% !important;
+    margin-bottom: 5px !important;
     cursor: pointer;
     padding: 10px;
     text-align: left;
   }
+  input {
+    margin: auto !important;
+    width: 70% !important;
+    &[type="checkbox"] {
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
   span {
-    margin: 0 !important;
+    display: block;
+    text-align: center;
+    width: auto;
+    margin: 0 0 10px !important;
+  }
+  .names-parameters {
+    float: none;
   }
 }
 
@@ -3145,6 +3166,29 @@
     vertical-align: middle;
     display: table-cell;
     width: 150px;
+  }
+}
+
+/** Яндекс карта **/
+#map {
+  display: none;
+  position: relative;
+  text-align: center;
+  height: 500px;
+  min-height: 100px;
+  z-index: 1;
+  & input {
+    position: absolute;
+    padding: 10px;
+    text-align: left;
+    border: 1px solid silver;
+    width: 80%;
+    top: 15px;
+    left: 10vw;
+    right: 10vw;
+    z-index: 2;
+    background: #fff;
+    border-radius: 6px;
   }
 }
 
