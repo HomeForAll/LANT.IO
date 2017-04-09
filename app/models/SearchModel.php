@@ -378,6 +378,26 @@ class SearchModel extends Model
             $query->where('address', '=', $address);
         }
 
+        $country = isset($_POST['country']) ? $_POST['country'] : '';
+        if ($country || $country !== '') {
+            $query->where('country', '=', $country);
+        }
+
+        $area = isset($_POST['area']) ? $_POST['area'] : '';
+        if ($area || $area !== '') {
+            $query->where('area', '=', $area);
+        }
+
+        $city = isset($_POST['city']) ? $_POST['city'] : '';
+        if ($city || $city !== '') {
+            $query->where('city', '=', $city);
+        }
+
+        $region = isset($_POST['region']) ? $_POST['region'] : '';
+        if ($city || $region !== '') {
+            $query->where('region', '=', $region);
+        }
+
         $object_located = isset($_POST['object_located']) ? $_POST['object_located'] : '';
         if ($object_located || $object_located !== '') {
             $query->where('object_located', '=', (int)$object_located);
@@ -447,6 +467,118 @@ class SearchModel extends Model
         if ($three_d_project || $three_d_project !== '') {
             $query->where('three_d_project', '=', (int)$three_d_project);
         }
+
+        $type_of_construction = isset($_POST['type_of_construction']) ? $_POST['type_of_construction'] : '';
+        if ($type_of_construction || $type_of_construction !== '') {
+            $query->where('type_of_construction', '=', $type_of_construction);
+        }
+
+        $building_type = isset($_POST['building_type']) ? $_POST['building_type'] : '';
+        if ($building_type || $building_type !== '') {
+            $query->where('building_type', '=', $building_type);
+        }
+
+        $roofing = isset($_POST['roofing']) ? $_POST['roofing'] : '';
+        if ($roofing || $roofing !== '') {
+            $query->where('roofing', '=', $roofing);
+        }
+
+        $foundation = isset($_POST['foundation']) ? $_POST['foundation'] : '';
+        if ($foundation || $foundation !== '') {
+            $query->where('foundation', '=', $foundation);
+        }
+
+        $material = isset($_POST['material']) ? $_POST['material'] : '';
+        if ($material || $material !== '') {
+            $query->where('material', '=', $material);
+        }
+
+
+        $municipal = isset($_POST['municipal']) ? $_POST['municipal'] : '';
+        if ($municipal || $municipal !== '') {
+            $query->where('municipal', '=', $municipal);
+        }
+
+        $sanitation = isset($_POST['sanitation']) ? $_POST['sanitation'] : '';
+        if ($sanitation || $sanitation !== '') {
+            $query->where('sanitation', '=', $sanitation);
+        }
+
+        $bathroom_location = isset($_POST['bathroom_location']) ? $_POST['bathroom_location'] : '';
+        if ($bathroom_location || $bathroom_location !== '') {
+            $query->where('bathroom_location', '=', $bathroom_location);
+        }
+
+        $fencing = isset($_POST['fencing']) ? $_POST['fencing'] : '';
+        if ($fencing || $fencing !== '') {
+            $query->where('fencing', '=', 1);
+        };
+
+        $possible_to_post = isset($_POST['possible_to_post']) ? $_POST['possible_to_post'] : '';
+        if ($possible_to_post || $possible_to_post !== '') {
+            $query->where('possible_to_post', '=', 1);
+        };
+
+        $sanitation_description = isset($_POST['sanitation_description']) ? $_POST['sanitation_description'] : '';
+        if ($sanitation_description || $sanitation_description !== '') {
+            $query->where('sanitation_description', '=', 1);
+        };
+
+        $bathroom_description = isset($_POST['bathroom_description']) ? $_POST['bathroom_description'] : '';
+        if ($bathroom_description || $bathroom_description !== '') {
+            $query->where('bathroom_description', '=', 1);
+        };
+
+        $documents_on_ownership = isset($_POST['documents_on_ownership']) ? $_POST['documents_on_ownership'] : '';
+        if ($documents_on_ownership || $documents_on_ownership !== '') {
+            $query->where('documents_on_ownership', '=', 1);
+        };
+
+        $lease_contract = isset($_POST['lease_contract']) ? $_POST['lease_contract'] : '';
+        if ($lease_contract || $lease_contract !== '') {
+            $query->where('lease_contract', '=', 1);
+        };
+        
+        $distance_from_mkad_or_metro_min = isset($_POST['distance_from_mkad_or_metro']) ? $_POST['distance_from_mkad_or_metro'] : '';
+        $distance_from_mkad_or_metro_max = isset($_POST['distance_from_mkad_or_metro']) ? $_POST['distance_from_mkad_or_metro'] : '';
+        if ($distance_from_mkad_or_metro_min && $distance_from_mkad_or_metro_max) {
+            $query->where('distance_from_mkad_or_metro', 'between', array((int)$distance_from_mkad_or_metro_min, (int)$distance_from_mkad_or_metro_max));
+        } elseif ($distance_from_mkad_or_metro_min) {
+            $query->where('distance_from_mkad_or_metro', '>=', (int)$distance_from_mkad_or_metro_min);
+        } elseif ($distance_from_mkad_or_metro_max) {
+            $query->where('distance_from_mkad_or_metro', '<=', (int)$distance_from_mkad_or_metro_max);
+        }
+
+        $space_min = isset($_POST['space']) ? $_POST['space'] : '';
+        $space_max = isset($_POST['space']) ? $_POST['space'] : '';
+        if ($space_min && $space_max) {
+            $query->where('space', 'between', array((int)$space_min, (int)$space_max));
+        } elseif ($space_min) {
+            $query->where('space', '>=', (int)$space_min);
+        } elseif ($space_max) {
+            $query->where('space', '<=', (int)$space_max);
+        }
+
+        $electricity_min = isset($_POST['electricity']) ? $_POST['electricity'] : '';
+        $electricity_max = isset($_POST['electricity']) ? $_POST['electricity'] : '';
+        if ($electricity_min && $electricity_max) {
+            $query->where('electricity', 'between', array((int)$electricity_min, (int)$electricity_max));
+        } elseif ($electricity_min) {
+            $query->where('electricity', '>=', (int)$electricity_min);
+        } elseif ($electricity_max) {
+            $query->where('electricity', '<=', (int)$electricity_max);
+        }
+
+        $bathroom_number_min = isset($_POST['bathroom_number']) ? $_POST['bathroom_number'] : '';
+        $bathroom_number_max = isset($_POST['bathroom_number']) ? $_POST['bathroom_number'] : '';
+        if ($bathroom_number_min && $bathroom_number_max) {
+            $query->where('bathroom_number', 'between', array((int)$bathroom_number_min, (int)$bathroom_number_max));
+        } elseif ($bathroom_number_min) {
+            $query->where('bathroom_number', '>=', (int)$bathroom_number_min);
+        } elseif ($bathroom_number_max) {
+            $query->where('bathroom_number', '<=', (int)$bathroom_number_max);
+        }
+
 
         $result = $query->execute();
 
