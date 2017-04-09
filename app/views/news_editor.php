@@ -1,6 +1,12 @@
 <?php
 $this->title = 'Редактор объявлений';
 
+echo'---- $this->data ----';
+echo'<br>';
+var_dump($this->data);
+echo'<br>';
+echo'_____________';
+
 global $data_for_news;
 $data_for_news = $this->data;
 
@@ -101,8 +107,10 @@ if (!empty($this->data['message'])) {
 ?>
 
 <form  id="editor_form" class="main_editor_form" enctype="multipart/form-data" action="" method="post">
-<input type="hidden" name="category" value="<?php echo $this->data['category']; ?>">
-
+<input type="hidden" name="form_name" value="<?php echo $this->data['form_name']; ?>">
+<input type="hidden" name="space_type" value="<?php echo $this->data['space_type']; ?>">
+<input type="hidden" name="operation_type" value="<?php echo $this->data['operation_type']; ?>">
+<input type="hidden" name="object_type" value="<?php echo $this->data['object_type']; ?>">
 
 
     
@@ -129,7 +137,7 @@ if (!empty($this->data['message'])) {
             <br>
             <input type="text" id="rentApartSuggest" placeholder="Адрес ..." style="padding: 10px; width: 477px; position: relative; left: 50%; margin: 0 0 0 -250px;" oninput="getGeoCoderData(this.value, 'rentApartMap')" onkeypress="pressEnter();">
             <div id="rentApartMap" style="position: relative; left: 50%; margin: 20px 0 0 -250px; width: 500px; height: 500px"></div>
-            
+
 
             <div class="indent">
                 <label for="rentApartSpanCountry">Страна:</label> <span id="rentApartSpanCountry"></span>
@@ -169,11 +177,11 @@ if (!empty($this->data['message'])) {
 
     <!-- Вставляемые блоки -->
     <?php
-    if (!empty($this->data['category'])) {
-        if ($this->data['category'] != 'base') {
-            include_once 'app/views/news_'.$this->data['category'].'.php';
+    if (!empty($this->data['form_path'])) {
+        if ($this->data['form_path'] != 'base') {
+            include_once $this->data['form_path'];
         } else {
-            echo '<input type="hidden" name="category" value="1">';
+            echo '<input type="hidden" name="form_name" value="1">';
         }
     }
     ?>
