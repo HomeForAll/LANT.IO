@@ -36,22 +36,23 @@
 //            alert(metro.text);
         });
     </script>
-    <script>
-        // Найдем ближайшую к точке (37.588162, 55.733797) станцию метро
-        // и покажем ее на карте.
-        var metro = new YMaps.Metro.Closest(new YMaps.GeoPoint.(37.588162,55.733797), { results: 1 });
-        YMaps.Events.observe(metro, metro.Events.Load, function () {
-            if (this.length()) {
-                map.addOverlay(this.get(0));
-                map.panTo(this.get(0).getGeoPoint())
-            } else {
-                alert("Ничего не найдено")
-            }
-        });
-        YMaps.Events.observe(metro, metro.Events.Fault, function (metro, errorMessage) {
-            alert("Произошла ошибка: " + errorMessage)
-        });
-    </script>
+    <div class="indent">
+        <label for="rentApartSpanCountry">Страна:</label> <span id="rentApartSpanCountry"></span>
+        <br>
+        <label for="rentApartSpanArea">Область:</label> <span id="rentApartSpanArea"></span>
+        <br>
+        <label for="rentApartSpanCity">Город:</label> <span id="rentApartSpanCity"></span>
+        <br>
+        <label for="rentApartSpanRegion">Район:</label> <span id="rentApartSpanRegion"></span>
+        <br>
+        <label for="rentApartSpanStreet">Улица:</label> <span id="rentApartSpanStreet"></span>
+        <br>
+
+        <input id="rentApartCountry" type="hidden" name="country" value="">
+        <input id="rentApartArea" type="hidden" name="area" value="">
+        <input id="rentApartCity" type="hidden" name="city" value="">
+        <input id="rentApartRegion" type="hidden" name="region" value="">
+        <input id="rentApartStreet" type="hidden" name="street" value="">
     <label for="cadastral_number">Кадастровый номер</label><br>
     <input id="cadastral_number" name="cadastral_number" <?php inputToInput("cadastral_number"); ?> type="text"><br>
     <label for="metro_station">Станция метро</label><br>
