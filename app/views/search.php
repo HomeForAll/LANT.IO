@@ -111,6 +111,7 @@ if (!empty($this->data['objects'])) {
                                                                                            name="cadastral_number"></label><br>
         <label style="margin-left: 40px; box-sizing: border-box;" for="metro_station">Станция метро</label><br>
         <select style="margin-left: 40px; box-sizing: border-box;" name="metro_station" id="metro_station">
+            <option value="">---</option>
         </select><br>
         <label style="margin-left: 60px; box-sizing: border-box;" for="distance_from_metro-min">Удаленность от
             метро:</label><br>
@@ -122,6 +123,7 @@ if (!empty($this->data['objects'])) {
                                                                               name="bargain"></label><br>
         <label style="margin-left: 20px; box-sizing: border-box;" for="object_located">Объект размещен</label><br>
         <select style="margin-left: 20px; box-sizing: border-box;" name="object_located" id="object_located">
+            <option value="">---</option>
             <option value="41">Не важно</option>
             <option value="22">Риэлтором</option>
             <option value="21">Собственником</option>
@@ -154,6 +156,7 @@ if (!empty($this->data['objects'])) {
                placeholder="до"><br>
         <label style="margin-left: 20px; box-sizing: border-box;" for="number_of_rooms">Количество комнат</label><br>
         <select style="margin-left: 20px; box-sizing: border-box;" name="number_of_rooms" id="number_of_rooms">
+            <option value="">---</option>
             <option value="4">4+</option>
             <option value="3">3</option>
             <option value="2">2</option>
@@ -171,6 +174,7 @@ if (!empty($this->data['objects'])) {
                placeholder="до"><br>
         <label style="margin-left: 20px; box-sizing: border-box;" for="lavatory">Санузел</label><br>
         <select style="margin-left: 20px; box-sizing: border-box;" name="lavatory" id="lavatory">
+            <option value="">---</option>
             <option value="41">Не важно</option>
             <option value="116">Раздельный</option>
             <option value="29">Совмещенный</option>
@@ -199,6 +203,8 @@ if (!empty($this->data['objects'])) {
                                                                                                       name="bedroom"></label><br>
         <label style="margin-left: 20px; box-sizing: border-box;" for="furnish">Отделка</label><br>
         <select style="margin-left: 20px; box-sizing: border-box;" name="furnish" id="furnish">
+            <option value="">---</option>
+            <option value="">---</option>
             <option value="141">Без ремонта</option>
             <option value="65">Незавершенный ремонт</option>
             <option value="107">Требуется ремонт</option>
@@ -209,6 +215,7 @@ if (!empty($this->data['objects'])) {
         </select><br>
         <label style="margin-left: 20px; box-sizing: border-box;" for="equipment">Комплектация</label><br>
         <select style="margin-left: 20px; box-sizing: border-box;" name="equipment" id="equipment">
+            <option value="">---</option>
             <option value="45">Укомплектованная</option>
             <option value="44">Пустая</option>
         </select><br>
@@ -219,10 +226,12 @@ if (!empty($this->data['objects'])) {
         <br>
         <b style='box-sizing: border-box; margin-left: 20px'>Наличие лифта</b><br>
         <select style="margin-left: 20px; box-sizing: border-box;" name="elevator" id="elevator">
+            <option value="">---</option>
             <option value="1">Да</option>
             <option value="0">Нет</option>
         </select><br>
         <select style="margin-left: 20px; box-sizing: border-box;" name="elevator_yes" id="elevator_yes">
+            <option value="">---</option>
             <option value="41">Не важно</option>
             <option value="95">Пассажирский</option>
             <option value="23">Грузовой</option>
@@ -239,6 +248,7 @@ if (!empty($this->data['objects'])) {
             объектов</label><br>
         <select style="margin-left: 20px; box-sizing: border-box;" name="clarification_of_the_object_type"
                 id="clarification_of_the_object_type">
+            <option value="">---</option>
             <option value="146">Год постройки\окончания строительства</option>
             <option value="92">Собственность менее 5 лет</option>
             <option value="93">Собственность более 5 лет</option>
@@ -248,6 +258,7 @@ if (!empty($this->data['objects'])) {
         </select><br>
         <label style="margin-left: 20px; box-sizing: border-box;" for="parking">Парковка</label><br>
         <select style="margin-left: 20px; box-sizing: border-box;" name="parking" id="parking">
+            <option value="">---</option>
             <option value="41">Не важно</option>
             <option value="5">Отсутствует</option>
             <option value="7">Придомовой гараж</option>
@@ -257,6 +268,7 @@ if (!empty($this->data['objects'])) {
         </select><br>
         <label style="margin-left: 20px; box-sizing: border-box;" for="wall_material">Материал стен</label><br>
         <select style="margin-left: 20px; box-sizing: border-box;" name="wall_material" id="wall_material">
+            <option value="">---</option>
             <option value="91">Другое</option>
             <option value="32">Железобетонные панели</option>
             <option value="78">Монолит</option>
@@ -265,6 +277,7 @@ if (!empty($this->data['objects'])) {
         <label style="margin-left: 20px; box-sizing: border-box;" for="stairwells_status">Состояние лестничных
             клеток</label><br>
         <select style="margin-left: 20px; box-sizing: border-box;" name="stairwells_status" id="stairwells_status">
+            <option value="">---</option>
             <option value="141">Без ремонта</option>
             <option value="107">Требуется ремонт</option>
             <option value="106">Требуется косметический ремонт</option>
@@ -304,16 +317,19 @@ if (!empty($this->data['objects'])) {
         <br>
         <label style="margin-left: 20px; box-sizing: border-box;" for="video">Видео</label><br>
         <select style="margin-left: 20px; box-sizing: border-box;" name="video" id="video">
+            <option value="">---</option>
             <option value="41">Не важно</option>
             <option value="11">Прилагается</option>
         </select><br>
         <label style="margin-left: 20px; box-sizing: border-box;" for="planning_project">Проект планировки</label><br>
         <select style="margin-left: 20px; box-sizing: border-box;" name="planning_project" id="planning_project">
+            <option value="">---</option>
             <option value="41">Не важно</option>
             <option value="11">Прилагается</option>
         </select><br>
         <label style="margin-left: 20px; box-sizing: border-box;" for="three_d_project">3d проект</label><br>
         <select style="margin-left: 20px; box-sizing: border-box;" name="three_d_project" id="three_d_project">
+            <option value="">---</option>
             <option value="41">Не важно</option>
             <option value="11">Прилагается</option>
         </select><br>
