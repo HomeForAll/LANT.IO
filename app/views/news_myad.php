@@ -1,33 +1,75 @@
-<!-- Последние новости -->
+<!-- Этот код генерируется из администратвной части создания форм объявлений-->
+<!-- Нельзя удалять эти переменные-->
 <?php
-if(empty($this->data['author_name'])){
-    $this->data['author_name'] = 'Aноним';
-}
+$form_options = [];
+$form_options['space_types'] = [1=>'Нежилая', 2=>'Жилая', ];
+$form_options['operation_types'] = [1=>'Арендовать', 2=>'Купить', ];
+$form_options['object_types'] = [1=>'Квартира', 2=>'Офисная площадь', 3=>'Торговая площадь', 4=>'Офисная площадь с землей', 5=>'Производственно-складские здания', 6=>'Производственно-складские помещения ', 7=>'Рынок/Ярмарка', 8=>'Комплекс ОСЗ', 9=>'ОСЗ', 10=>'Торговое здание', 11=>'Комната', 12=>'Дом', 13=>'Гараж/Машиноместо', 14=>'Земельный участок', ];
 ?>
-
+<script>
+var form_options_menu = {1:{1:{2:1, 3:1, 4:1, 5:1, 6:1, 7:1, 8:1, 9:1, 10:1}, 2:{2:1, 3:1, 4:1, 5:1, 6:1, 7:1, 8:1, 9:1, 10:1}}, 2:{1:{1:1, 11:1, 12:1, 13:1, 14:1}, 2:{1:1, 11:1, 12:1, 13:1, 14:1}}};
+</script>
+<!-- Конец генерируемого кода -->
 <div class="my_news clearfix">
     <h3>Мои объявления</h3>
-    <p> Вы вошли как: <?php echo $this->data['author_name']; ?></p>
+    <p> Вы вошли как: <?php
+        if(!empty($this->data['user_id'])){
+            echo $this->data['user_id'];
+        } else {
+            $this->data['user_id'] = 'Aноним';
+        }; ?></p>
 
-
-        <div  id="add_news_menu_button" class="clearfix icon add_news_menu_plus">Добавить новость</div>
-     <div id="add_news_menu_body" class="clearfix">
+    <br>
+    <form id="add_news" action="/news/editor" method="post">
         <legend>Выбор категории для создания нового объявления</legend>
+        <label for="space_type">Тип площади:</label>
+        <select name="space_type" id="space_type">
+            <?php foreach ($form_options['space_types'] as $k => $options) { ?>
+                <option value="<?php echo $k; ?>">
+                    <?php echo $options; ?>
+                </option>
+            <?php } ?>
+        </select>
+        <br>
+        <label for="operation_type">Операция:</label>
+        <select name="operation_type" id="operation_type">
+            <?php foreach ($form_options['operation_types'] as $k => $options) { ?>
+                <option value="<?php echo $k; ?>">
+                    <?php echo $options; ?>
+                </option>
+            <?php } ?>
+        </select>
+        <br>
+        <label for="object_type">Тип объекта:</label>
+        <select name="object_type" id="object_type">
+            <?php foreach ($form_options['object_types'] as $k => $options) { ?>
+                <option value="<?php echo $k; ?>">
+                    <?php echo $options; ?>
+                </option>
+            <?php } ?>
+        </select>
 
-            <a href="/news/editor/saleapart">Продажа Квартиры</a>
-            <a href="/news/editor/salehouse">Продажа Дома</a>
-            <a href="/news/editor/saleroom">Продажа Комнаты</a>
-            <a href="/news/editor/saleland">Продажа Участка</a>
-            <!--<a href="/news/editor/salepart">Доля</a>-->
+        <input type="submit" name="submit_add_news" value="Добавить новость">
+    </form>
 
+<!--        <div  id="add_news_menu_button" class="clearfix icon add_news_menu_plus">Добавить новость</div>-->
+<!--     <div id="add_news_menu_body" class="clearfix">-->
+<!--        <legend>Выбор категории для создания нового объявления</legend>-->
+<!---->
+<!--            <a href="/news/editor/saleapart">Продажа Квартиры</a>-->
+<!--            <a href="/news/editor/salehouse">Продажа Дома</a>-->
+<!--            <a href="/news/editor/saleroom">Продажа Комнаты</a>-->
+<!--            <a href="/news/editor/saleland">Продажа Участка</a>-->
 
-
-            <a href="/news/editor/rentapart">Аренда Квартиры</a>
-            <a href="/news/editor/renthouse">Аренда Дома</a>
-            <a href="/news/editor/rentroom">Аренда Комнаты</a>
-            <a href="/news/editor/rentland">Аренда Участка</a>
-
-     </div>
+<!---->
+<!---->
+<!---->
+<!--            <a href="/news/editor/rentapart">Аренда Квартиры</a>-->
+<!--            <a href="/news/editor/renthouse">Аренда Дома</a>-->
+<!--            <a href="/news/editor/rentroom">Аренда Комнаты</a>-->
+<!--            <a href="/news/editor/rentland">Аренда Участка</a>-->
+<!---->
+<!--     </div>-->
 
 
 
@@ -109,7 +151,7 @@ if (empty($this->data['news']['id_news'])) {
 
                 <td> Дата </td>
                 <td> Заголовок <br>(нажмите для редактирования новости) </td>
-                <?php if($this->data['author_name'] == 'admin'){ ?>
+                <?php if($this->data['user_id'] == 'admin'){ ?>
                 <td> Автор </td>
                 <?php } ?>
                 <td> Статус</td>
@@ -120,10 +162,12 @@ if (empty($this->data['news']['id_news'])) {
 
                     <td><i> <?php echo $this->data['news'][$i]['date']; ?></i> </td>
                     <td><a href="/news/editor/<?php echo $this->data['news'][$i]['id_news']; ?>"> <?php echo $this->data['news'][$i]['title']; ?> </a>
-                        <p><b>Категория:</b> <?php echo $this->data['news'][$i]['category']; ?> ; <b>Метки:</b>  <?php echo $this->data['news'][$i]['tags']; ?> </p>
+                        <p><b>Категория:</b> <?php echo $this->data['news'][$i]['space_type'].'-'
+                                .$this->data['news'][$i]['operation_type'].'-'
+                            .$this->data['news'][$i]['object_type']; ?> ; <b>Метки:</b>  <?php echo $this->data['news'][$i]['tags']; ?> </p>
                     </td>
-                    <?php if($this->data['author_name'] == 'admin'){ ?>
-                    <td> <?php echo $this->data['news'][$i]['author_name']; ?> </td>
+                    <?php if($this->data['user_id'] == 'admin'){ ?>
+                    <td> <?php echo $this->data['news'][$i]['user_id']; ?> </td>
                     <?php } ?>
                     <td>
                         <input type="radio" name="status_<?php echo $this->data['news'][$i]['id_news']; ?>" value="1" <?php
@@ -152,6 +196,23 @@ if (empty($this->data['news']['id_news'])) {
         <input type="submit" name="submit_status" value="Изменить статус"> <a href="/news">Отмена</a>
 <?php } ?>
 </form>
+
+<script>
+    $(document).ready(function () {
+
+        $(function() {
+            $('#add_news').change(function(){
+                var opt1 = $('#space_types').val();
+                var opt2 = $('#operation_types').val();
+                var opt3 = $('#object_types').val();
+                if (typeof form_options_menu[opt1][opt2][opt3] === "undefined"){
+                    alert('Данной опции не существует!');
+                }
+
+            });
+        });
+    });
+</script>
 
 
 <script type="text/javascript" src="/template/js/news_javascript.js"></script>
