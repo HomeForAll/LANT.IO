@@ -48,6 +48,9 @@ if ($access['forms_editor']) {
     <a class="button" href="cabinet/payment">Платежи</a>
 
     <a class="button" href="service">Услуги</a>
+    <a class="button" href="service/admin">Добавление\Редактирование услуг</a>
+    <a class="button" href="admin/newsformgenerator">News Form Generator</a>
+    
 <?php
 if ($access['admin_service']) {
     ?>

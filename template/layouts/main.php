@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title><?php $this->title(); ?></title>
-    <link rel="stylesheet" href="/template/css/style.css">
     <link rel="stylesheet" href="/template/css/news_style.css">
+    <link rel="stylesheet" href="/template/css/test_styles.css">
     <?php
         // Подключение стилей в контроллере
 if (isset($this->data['css'])) {

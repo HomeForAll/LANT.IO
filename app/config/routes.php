@@ -1,7 +1,6 @@
 <?php
 
 return array(
-    // 'URI' => 'layout/controller/action'
     '' => 'web_build/site/index',
     'search' => 'main/search/index',
 
@@ -63,6 +62,8 @@ return array(
 
     'service' => 'main/service/serviceSub',
     'service/admin' => 'main/service/serviceAdmin',
+
+    'admin/newsformgenerator' => 'main/admin/newsFormGenerator',
 
     'forms_gen' => 'main/search/GenSearchForm',
 );
