@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title><?php $this->title(); ?></title>
+    <script type="text/javascript" src="/template/js/socket.io.min.js"></script>
     <?php
     // Подключение стилей в контроллере
     if (isset($this->data['css'])) {
@@ -344,9 +345,9 @@ foreach ($this->data['script'] as $key => $value) {
 </div>
 <?php } ?>
 <div id="content">
-    <form action="" id="form" novalidate>
         <!--<?php $this->content(); ?> -->
         <div class="section-home-with-filters">
+        <form action="" id="form" novalidate>
             <div class="apartment-search">
                 <ul class="vkl">
                     <li id="blockToRent" onclick="choiceBlock('toRent')"><a>Арендовать</a></li>
@@ -2194,7 +2195,7 @@ foreach ($this->data['script'] as $key => $value) {
                                 </ul>
                             </div>
                     </div>
-                    <button>Найти</button>
+                    <button onclick="data()">Найти</button>
                     <ul class="filter-block-big-menu">
                         <li class="pointer value-text" onclick="filterOptionsApartments();"><img src="../../template/images/apartments.png" alt="apartments">Тип недвижимости
                             <div class="property-type-apartment-settings">
@@ -3893,7 +3894,6 @@ var scr = {"scripts":[
     {"src" : "/template/js/mapController.js", "async" : false},
     {"src" : "/template/js/jquery.bxslider.min.js", "async" : false},
     {"src" : "/template/js/forms.editor.handler.js", "async" : false},
-    {"src" : "/template/js/socket.io.min.js", "async" : false},
     {"src" : "/bower_components/select2/dist/js/select2.min.js", "async" : false},
     {"src" : "/template/js/main.min.js", "async" : false},
     {"src" : "/template/js/filterSelect_2.js", "async" : false}

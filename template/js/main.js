@@ -426,32 +426,24 @@ ymaps.ready(function () {
 //---------------------------------------------------------
 
 /** Получение данных через Ajax и отправка данных**/
-function data(e) {
-    e.preventDefault();
 
     $("#form").on('submit', function(e) { // устанавливаем событие отправки для формы с id=form
+        e.preventDefault();
 
         var form_data = $(this).serialize(); // собераем все данные из формы
 
-        if (data.value === undefined) {
-            return '';
-        }
-
         $.ajax({
             type: "POST",
-            url: "/search.php",
-            dataType: 'json',
+            url: "/search",
             data: form_data,
             success: function(form_data) {
-                alert("Ваше сообщение отправлено!");
                 console.log('Собрынные данные - ', form_data);
             },
-            error: function() {
-                console.log('Ошибка отправки');
+            error: function(form_data) {
+                console.log('Ошибка отправки', form_data);
             }
         });
     });
-}
 //---------------------------------------------------------
 
 /** Фильтр - Цена **/
