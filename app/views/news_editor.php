@@ -86,7 +86,7 @@ function addClassOtherInput($item = '', $arr =[]) {
 }
 
 ?>
-<h1>Редактор новостей</h1>
+<h1>Редактор объявлений</h1>
 <?php
 //Вывод сообщений
 if (!empty($this->data['error'])) {
