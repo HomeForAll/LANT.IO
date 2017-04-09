@@ -1,6 +1,5 @@
 'use strict';
-var productSearch = false,
-    showAndHideTopMenu = false,
+var productSearch, showAndHideTopMenu, boolean, rootBlock = false,
     imagesWidth = 130,
     valueButton = {
         'more': (function () {
@@ -41,12 +40,26 @@ var productSearch = false,
         {id: 3, text: 'Квартира4'},
         {id: 4, text: 'Квартира5'}
     ],
+    wall_material = [
+        {id: 0, text: 'Другое', value: 91},
+        {id: 1, text: 'Железобетонные панели', value: 32},
+        {id: 2, text: 'Монолит', value: 78},
+        {id: 3, text: 'Кирпич', value: 19}
+    ],
     owner = [
         {id: 0, text: 'Собственник'},
         {id: 1, text: 'Собственник2'},
         {id: 2, text: 'Собственник3'},
         {id: 3, text: 'Собственник4'},
         {id: 4, text: 'Собственник5'}
+    ],
+    parking = [
+        {id: 0, text: 'Не важно', value: 41},
+        {id: 1, text: 'Отсутствует', value: 5},
+        {id: 2, text: 'Придомовой гараж', value: 7},
+        {id: 3, text: 'Гаражный комплекс', value: 52},
+        {id: 4, text: 'Подземная парковка', value: 132},
+        {id: 5, text: 'Многоуровневый паркинг', value: 81}
     ],
     floor = [
     	{id: 0, text: 'Любой'},
@@ -56,11 +69,9 @@ var productSearch = false,
     	{id: 4, text: 'Любой5'}
     ],
     equipment = [
-    	{id: 0, text: 'Комплектация'},
-    	{id: 1, text: 'Комплектация2'},
-    	{id: 2, text: 'Комплектация3'},
-    	{id: 3, text: 'Комплектация4'},
-    	{id: 4, text: 'Комплектация5'}
+    	{id: 0, text: 'Не важно', value: 41},
+    	{id: 1, text: 'Раздельный', value: 16},
+    	{id: 2, text: 'Сомещенный', value: 29}
     ],
     designPlan = [
         {id: 0, text: 'Прилагается'},
@@ -153,6 +164,10 @@ var productSearch = false,
         {id: 3, text: 'Подземная парковка4'},
         {id: 4, text: 'Подземная парковка5'}
     ],
+    equipment = [
+        {id: 0, text: 'Укомплектованная', value:45},
+        {id: 1, text: 'Пустая', value:44}
+    ],
     okrug = [
         {id: 0, text: 'Северо-западный'},
         {id: 1, text: 'Северо-западный2'},
@@ -174,12 +189,28 @@ var productSearch = false,
         {id: 3, text: 'Ениивмасейская4'},
         {id: 4, text: 'Ениивмасейская5'}
     ],
+    stairwells_status = [
+        {id: 0, text: 'Без ремонта', value: 141},
+        {id: 1, text: 'Требуется ремонт', value: 107},
+        {id: 2, text: 'Требуется косметический ремонт', value: 106},
+        {id: 3, text: 'Обычная отделка', value: 134},
+        {id: 4, text: 'Высококачественная отделка', value: 64}
+    ],
     distance = [
         {id: 0, text: '5 мин пешком'},
         {id: 1, text: '5 мин пешком2'},
         {id: 2, text: '5 мин пешком3'},
         {id: 3, text: '5 мин пешком4'},
         {id: 4, text: '5 мин пешком5'}
+    ],
+    furnish = [
+        {id: 0, text: 'Без ремонта', value: 141},
+        {id: 1, text: 'Незавершенный ремонт', value: 65},
+        {id: 2, text: 'Требуется ремонт', value: 107},
+        {id: 3, text: 'Требуется косметический ремонт', value: 106},
+        {id: 4, text: 'Хорошая отделка', value: 57},
+        {id: 5, text: 'Высококачественная отделка', value: 64},
+        {id: 6, text: 'Эксклюзивного качества', value: 46}
     ],
     subwayLines = [
        {id: 0, text: 'Выбрано(1)'},
@@ -188,37 +219,77 @@ var productSearch = false,
        {id: 3, text: 'Выбрано(4)'},
        {id: 4, text: 'Выбрано(5)'}
     ],
+    yesAndNo = [
+        {id: 0, text: 'Да', value: 1},
+        {id: 0, text: 'Нет', value: 0}
+    ],   
     security = [
        {id: 0, text: 'Выберите'},
        {id: 1, text: 'Выберите2'},
        {id: 2, text: 'Выберите3'},
-       {id: 2, text: 'Выберите4'},
-       {id: 2, text: 'Выберите5'}
+       {id: 3, text: 'Выберите4'},
+       {id: 4, text: 'Выберите5'}
+    ],
+    clarification_of_the_object_type = [
+       {id: 0, text: 'Год постройки\окончания строительства', value: 146},
+       {id: 1, text: 'Собственность менее 5 лет', value: 92},
+       {id: 2, text: 'Собственность более 5 лет', value: 93},
+       {id: 3, text: 'Участок с подрядом', value: 70},
+       {id: 4, text: 'Незавершенное строительство', value: 33},
+       {id: 6, text: 'Новостройка', value: 83}
     ],
     documents = [
        {id: 0, text: 'Выберите'},
        {id: 1, text: 'Выберите2'},
        {id: 2, text: 'Выберите3'},
-       {id: 2, text: 'Выберите4'},
-       {id: 2, text: 'Выберите5'}
+       {id: 3, text: 'Выберите4'},
+       {id: 4, text: 'Выберите5'}
     ],
     propertyType = [
         {id: 0, text: 'Тип недвижимости'},
         {id: 1, text: 'Тип недвижимости2'},
         {id: 2, text: 'Тип недвижимости3'},
-        {id: 2, text: 'Тип недвижимости4'},
-        {id: 2, text: 'Тип недвижимости5'}
+        {id: 3, text: 'Тип недвижимости4'},
+        {id: 4, text: 'Тип недвижимости5'}
+    ],
+    video = [
+        {id: 0, text: 'Не важно', value: 41},
+        {id: 1, text: 'Прилагается', value: 11}
+    ],
+    planning_project = [
+        {id: 0, text: 'Не важно', value: 41},
+        {id: 1, text: 'Прилагается', value: 11}
+    ],
+    three_d_project = [
+        {id: 0, text: 'Не важно', value: 41},
+        {id: 1, text: 'Прилагается', value: 11}
+    ],
+    elevator_yes = [
+        {id: 0, text: 'Не важно', value: 41},
+        {id: 1, text: 'Пассажирский', value: 95},
+        {id: 2, text: 'Грузовой', value: 23}
+    ],
+    leaseTerm = [
+        {id: 0, text: 'Срок аренды'},
+        {id: 1, text: 'Срок аренды1'},
+        {id: 2, text: 'Срок аренды2'},
+        {id: 3, text: 'Срок аренды3'},
+        {id: 4, text: 'Срок аренды4'}
     ];
 //---------------------------------------------------------
 
 /** Фильтр - Цена **/
 $(function () {
     var $amountBefore = $('#amountBefore'),
-        $amountAfter = $('#amountAfter');
+        $amountAfter = $('#amountAfter'),
+        $amountBeforeBuy = $('#amountBeforeBuy'),
+        $amountAfterBuy = $('#amountAfterBuy');
 
     /** Фильтры в доп.параметрах **/
     $amountBefore.val('20000');
     $amountAfter.val('20000');
+    $amountBeforeBuy.val('20000');
+    $amountAfterBuy.val('20000');
     $("#slider-range").slider({
         range: true,
         min: 20000,
@@ -229,7 +300,18 @@ $(function () {
             $amountAfter.val(ui.values[1]);
         }
     });
+    $("#slider-range-buy").slider({
+        range: true,
+        min: 20000,
+        max: 20000000,
+        values: [75, 300],
+        slide: function (event, ui) {
+            $amountBeforeBuy.val(ui.values[0]);
+            $amountAfterBuy.val(ui.values[1]);
+        }
+    });
     $('#amount').val($amountBefore.slider('values', 0) + $amountAfter.slider('values', 1));
+    $('#amount-buy').val($amountBeforeBuy.slider('values', 0) + $amountAfterBuy.slider('values', 1));
 });
 
 /** Библиотека select2(фильтры) **/
@@ -246,7 +328,8 @@ $('.js-example-data-array, .location-apartments').select2({
     data: locationApartments
 });
 $('.js-example-data-array, .owner').select2({
-    data: owner
+    data: owner,
+    maximumInputLength: 2
 });
 $('.js-example-data-array, .floor').select2({
     data: floor
@@ -311,9 +394,49 @@ $('.js-example-data-array, .security').select2({
 $('.js-example-data-array, .documents').select2({
     data: documents
 });
-$('.js-example-data-array, .property-type').select2({
-    data: propertyType
+$('.js-example-data-array, .equipment').select2({
+    data: equipment
 });
+$('.js-example-data-array, .furnish').select2({
+    data: furnish
+});
+$('.js-example-data-array, .furnish').select2({
+    data: yesAndNo
+});
+$('.js-example-data-array, .elevator_yes').select2({
+    data: elevator_yes
+});
+$('.js-example-data-array, .clarification_of_the_object_type').select2({
+    data: clarification_of_the_object_type
+});
+$('.js-example-data-array, .parking').select2({
+    data: parking
+});
+$('.js-example-data-array, .wall_material').select2({
+    data: wall_material
+});
+$('.js-example-data-array, .video').select2({
+    data: video
+});
+$('.js-example-data-array, .planning_project').select2({
+    data: planning_project
+});
+$('.js-example-data-array, .three_d_project').select2({
+    data: three_d_project
+});
+
+$('.js-example-data-array, .stairwells_status').select2({
+    data: stairwells_status
+});
+$('.js-example-data-array, .property-type').select2({
+    data: propertyType,
+    maximumInputLength: 5
+});
+$('.js-example-data-array, .lease-term').select2({
+    data: leaseTerm,
+    maximumInputLength: 2
+});
+
 //---------------------------------------------------------
 $('.js-example-data-array-selected, .region').select2({
     data: data
@@ -328,7 +451,8 @@ $('.js-example-data-array-selected, .location-apartments').select2({
     data: locationApartments
 });
 $('.js-example-data-array-selected, .owner').select2({
-    data: owner
+    data: owner,
+    maximumInputLength: 2
 });
 $('.js-example-data-array-selected, .floor').select2({
     data: floor
@@ -393,8 +517,46 @@ $('.js-example-data-array-selected, .security').select2({
 $('.js-example-data-array-selected, .documents').select2({
     data: documents
 });
+$('.js-example-data-array-selected, .equipment').select2({
+    data: equipment
+});
+$('.js-example-data-array-selected, .furnish').select2({
+    data: furnish
+});
+$('.js-example-data-array-selected, .furnish').select2({
+    data: yesAndNo
+});
+$('.js-example-data-array-selected, .elevator_yes').select2({
+    data: elevator_yes
+});
+$('.js-example-data-array-selected, .parking').select2({
+    data: parking
+});
+$('.js-example-data-array-selected, .clarification_of_the_object_type').select2({
+    data: clarification_of_the_object_type
+});
+$('.js-example-data-array-selected, .wall_material').select2({
+    data: wall_material
+});
+$('.js-example-data-array-selected, .stairwells_status').select2({
+    data: stairwells_status
+});
+$('.js-example-data-array-selected, .video').select2({
+    data: video
+});
+$('.js-example-data-array-selected, .planning_project').select2({
+    data: planning_project
+});
+$('.js-example-data-array-selected, .three_d_project').select2({
+    data: three_d_project
+});
 $('.js-example-data-array-selected, .property-type').select2({
-    data: propertyType
+    data: propertyType,
+    maximumInputLength: 5
+});
+$('.js-example-data-array-selected, .lease-term').select2({
+    data: leaseTerm,
+    maximumInputLength: 2
 });
 $(".js-example-templating, .select-price-by-scrolling").select2({
     templateResult: formatState,
@@ -405,13 +567,14 @@ $(".js-example-templating, .select-price-by-scrolling").select2({
 /** Слайдер **/
 $(document).ready(function(){
   $('.bxslider').bxSlider({
-  		slideWidth: 500,
+  		slideWidth: 500, // ширина слайдера
    		minSlides: 1,
    		maxSlides: 2,
-   		moveSlides: 2,
+   		moveSlides: 2, // прокрутка по 2 блока
    		slideMargin: 10,
    		pager: false,
-        infiniteLoop: false
+        auto: true, // прокрутка
+        infiniteLoop: true // бесконечная прокрутка
   });
 });
 $(document).ready(function(){
@@ -419,10 +582,12 @@ $(document).ready(function(){
   		slideWidth: 150,
    		minSlides: 1,
    		maxSlides: 5,
-   		moveSlides: 5,
+   		moveSlides: 2,
    		slideMargin: 50,
    		pager: false,
-        infiniteLoop: false
+        auto: true,
+        pause: 15000,
+        infiniteLoop: true
   });
 });
 
@@ -456,36 +621,61 @@ function formatState (state) {
 //---------------------------------------------------------
 
 /** Отслежка и изменение расширенного и простого блока **/
+function choiceBlock(allBlock) {
+    if (!rootBlock) {return false}
+    var $bigSearchMenu = $('.big-search-menu'),
+        $bigSearchMenuTenancy = $('.big-search-menu-tenancy'),
+        $a = $('#blockToRent'),
+        $b = $('#Buy'),
+        $searchMenu = $('.search-menu-apartment');
+
+    if (allBlock === 'toRent') {
+        $a.css({'background': '#5e9152'}).find('a').css({'color':'#fff'});
+        $b.css({'background': 'none'}).find('a').css({'color':'#898989'});
+        $bigSearchMenu.css({'display':'block'});
+        $bigSearchMenuTenancy.css({'display':'none'});
+    } else {
+        $a.css({'background': 'none'}).find('a').css({'color':'#898989'});
+        $b.css({'background': '#5e9152'}).find('a').css({'color':'#fff'});
+        $searchMenu.css({'display':'none'});
+        $bigSearchMenu.css({'display':'none'});
+        $bigSearchMenuTenancy.css({'display':'block'});
+    }
+}
+
 function showBigSearch() {
     var $searchTeg = $('.big-search a i'),
         $bigSearch = $('.big-search'),
         $searchMenuApartment = $('.search-menu-apartment'),
-        $bigSearchMenu = $('.big-search-menu');
+        $bigSearchMenu = $('.big-search-menu'),
+        $bigSearchMenuTenancy = $('.big-search-menu-tenancy');
+
+    rootBlock = true;
+    choiceBlock();
+
+    $searchMenuApartment.css({'display':'none'});
 
     productSearch = !productSearch;
 
     if (!productSearch) {
-        $searchMenuApartment.css({
-            'display': 'block'
-        });
-        $bigSearchMenu.css({
-            'display': 'none'
-        });
         $searchTeg.remove();
         $bigSearch.html('<a>Расширенный поиск</a>' + '<i class="fa fa-angle-right" aria-hidden="true"></i>');
+        $searchMenuApartment.css({'display':'block'});
+        $bigSearchMenu.css({'display':'none'});
+        $bigSearchMenuTenancy.css({'display':'none'});
+        rootBlock = false;
         return productSearch = false;
     } else {
-        $searchMenuApartment.css({
-            'display': 'none'
-        });
-        $bigSearchMenu.css({
-            'display': 'inline-block'
-        });
         $searchTeg.remove();
         $bigSearch.html('<i class="fa fa-angle-left" aria-hidden="true"></i>' + '<a>Простой поиск</a>');
+        $bigSearchMenu.css({'display':'block'});
+        $bigSearchMenuTenancy.css({'display':'none'});
+        $searchMenuApartment.css({'display':'none'});
+        rootBlock = true;
         return productSearch = true;
     }
 }
+//---------------------------------------------------------
 
 /** Header меню **/
 function showTopMenuAndSearch() {
@@ -505,17 +695,17 @@ function showTopMenuAndSearch() {
 /** Блоки с фильтрами **/
 function filterOptionsApartments() {
     var $propertyTypeApartmentSettings = $('.property-type-apartment-settings');
-    shadowBlock();
+    //shadowBlock();
 
     $propertyTypeApartmentSettings.css({'display': 'block'});
     setTimeout(function () {
         $propertyTypeApartmentSettings.css({'display': 'none'});
-    }, 5000);
+    }, 4000);
 }
 
 function filterOptions() {
     var $showBigOptions = $('.showBigOptions');
-    shadowBlock();
+    //shadowBlock();
 
     $showBigOptions.css({'display': 'block'});
     setTimeout(function () {
@@ -525,7 +715,7 @@ function filterOptions() {
 
 function apartmentSettings() {
 	var $apartmentSettings = $('.apartment-settings');
-	shadowBlock();
+	//shadowBlock();
 
     $apartmentSettings.css({'display': 'block'});
     setTimeout(function () {
@@ -535,7 +725,7 @@ function apartmentSettings() {
 
 function appearanceofTheApartment() {
 	var $appearanceOfTheApartments = $('.appearance-of-the-apartment');
-	shadowBlock();
+	//shadowBlock();
 
     $appearanceOfTheApartments.css({'display': 'block'});
     setTimeout(function () {
@@ -545,7 +735,7 @@ function appearanceofTheApartment() {
 
 function appearanceOfTheBuilding() {
 	var $appearanceOfTheBuild = $('.appearance-of-the-build');
-	shadowBlock();
+	//shadowBlock();
 
     $appearanceOfTheBuild.css({'display': 'block'});
     setTimeout(function () {
@@ -553,23 +743,145 @@ function appearanceOfTheBuilding() {
     }, 5000);
 }
 
-function buildingParametersFilter() {
-    var $buildingParameterFilter = $('.building-parameters-filter');
-    shadowBlock();
+function allFilterBlocks(filters) {
 
-    $buildingParameterFilter.css({'display': 'block'});
-    setTimeout(function () {
-        $buildingParameterFilter.css({'display': 'none'});
-    }, 5000);
+   // shadowBlock();
+
+    switch (filters) {
+        case 'searchMetroMainBlock':
+            var $searchMetro = $('.search-metro-main-block');
+            $searchMetro.css({'display': 'block'});
+
+            $('.closeSearchMetro').on('click', function () {
+                $searchMetro.hide('slow', function () {
+                    $(this).css({'display':'none'});
+                    $('.decorativeShadowBlock').css({'display':'none'})
+                });
+                event.preventDefault();
+            });
+            break;
+        case 'buildingParametersFilter' :
+            var $a = $('.building-parameters-filter');
+            $a.css({'display': 'block'});
+
+            $('.close-building-parameters-filter').on('click', function () {
+                $searchMetro.hide('slow', function () {
+                    $(this).css({'display':'none'});
+                    $('.decorativeShadowBlock').css({'display':'none'})
+                });
+                event.preventDefault();
+            });
+            setTimeout(function () {
+                $a.hide();
+            }, 10000);
+            break;
+        case 'historySearch':
+            var $history = $('.history-search');
+
+            $history.css({'display': 'block'});
+
+            setTimeout(function () {
+                $history.css({'display': 'none'});
+                $('.decorativeShadowBlock').css({'display':'none'})
+            }, 10000);
+            break;
+        default : console.log('Фильтр не найден');
+    }
 }
 
-function searchMetroMainBlock() {
-    var $searchMetro = $('.search-metro-main-block');
+function filter1() {
+    var $showBigOptions = $('.building-parameters-apartment'),
+    mB = $('.property-type-apartment-settings');
+    mB.hide();
+    $('.building-parameters').css({'display':'none'});
+
+    //$('.value-text').text('квартира');
+
     shadowBlock();
 
-    $searchMetro.css({'display': 'block'});
+    $showBigOptions.show();
     setTimeout(function () {
-        $searchMetro.css({'display': 'none'});
+        $showBigOptions.css({'display': 'none'});
+    }, 10000);
+}
+
+function filter2() {
+    var $showBigOptions = $('.building-parameters-home'),
+    mB = $('.property-type-apartment-settings');
+    mB.hide();
+    $('.building-parameters').css({'display':'none'});
+
+    //$('.value-text').text('дом');
+
+    shadowBlock();
+
+    $showBigOptions.show();
+    setTimeout(function () {
+        $showBigOptions.css({'display': 'none'});
+    }, 10000);
+}
+
+function filter3() {
+    var $showBigOptions = $('.building-parameters-room'),
+    mB = $('.property-type-apartment-settings');
+    mB.hide();
+    $('.building-parameters').css({'display':'none'});
+
+    //$('.value-text').text('комната');
+
+    shadowBlock();
+
+    $showBigOptions.show();
+    setTimeout(function () {
+        $showBigOptions.css({'display': 'none'});
+    }, 10000);
+}
+
+function filter4() {
+    var $showBigOptions = $('.building-parameters-office-area'),
+    mB = $('.property-type-apartment-settings');
+    mB.hide();
+    $('.building-parameters').css({'display':'none'});
+
+    //$('.value-text').text('Офисная площадь');
+
+    shadowBlock();
+
+    $showBigOptions.show();
+    setTimeout(function () {
+        $showBigOptions.css({'display': 'none'});
+    }, 10000);
+}
+
+function filter5() {
+    var $showBigOptions = $('.building-parameters-separate-building'),
+    mB = $('.property-type-apartment-settings');
+    mB.hide();
+    $('.building-parameters').css({'display':'none'});
+
+    //$('.value-text').text('Отдельно стоящее здание');
+
+    shadowBlock();
+
+    $showBigOptions.show();
+    setTimeout(function () {
+        $showBigOptions.css({'display': 'none'});
+    }, 10000);
+}
+
+function filter6() {
+    var $showBigOptions = $('.building-parameters-ozs-сomplex'),
+    mB = $('.property-type-apartment-settings');
+    mB.hide();
+    $('.building-parameters').css({'display':'none'});
+
+    //$('.value-text').text('Комплекс ОСЗ');
+
+    shadowBlock();
+
+    $showBigOptions.show();
+    setTimeout(function () {
+        $showBigOptions.css({'display': 'none'});
     }, 10000);
 }
 
@@ -583,19 +895,9 @@ function attachment() {
     }, 5000);
 }
 
-function historySearch() {
-    var $history = $('.history-search');
-    shadowBlock();
-
-    $history.css({'display': 'block'});
-    setTimeout(function () {
-        $history.css({'display': 'none'});
-    }, 5000);
-}
-
 function quickSearch() {
     var $quickSearchBlock = $('.quick-search');
-    shadowBlock();
+   shadowBlock();
 
     $quickSearchBlock.css({'display': 'block'});
     setTimeout(function () {
@@ -605,12 +907,10 @@ function quickSearch() {
 
 /** Тени в открывшимся блоке **/
 function shadowBlock() {
-	var $shadowBlocks = $('.decorativeShadowBlock');
+    var $shadowBlocks = $('.decorativeShadowBlock');
 
-    $shadowBlocks.css({'display': 'block'});
-    setTimeout(function () {
-        $shadowBlocks.css({'display': 'none'});
-    }, 5000);
+    $shadowBlocks.css({'display': 'none'});
+    //$shadowBlocks.css({'display': 'block'});
 }
 
 $('.select2-selection--single, .pointer').on('click', function () {
@@ -650,3 +950,32 @@ function moreAndLess(sizeImage) {
 function closeFixedBlock() {
 	$('.warning').css({'display':'block'})
 }
+/** Яндекс карты **/
+ymaps.ready(function () {
+    var map = new ymaps.Map("ymap", {
+        center: [55.451332, 37.369336],
+        zoom: 10,
+        controls: ['fullscreenControl', 'typeSelector', 'geolocationControl', 'zoomControl']
+    });
+
+    window.suggests = new ymaps.SuggestView("suggest", {width: 300, offset: [0, 4], results: 20});
+});
+//---------------------------------------------------------
+
+/** Получение данных через Ajax и отправка данных**/
+$.ajax({
+    url: url, //Адрес подгружаемой страницы
+    type: "POST", //Тип запроса
+    dataType: "json", //Тип данных
+    data: $('#dataUsers').serialize(),
+    beforeSend: function () {
+        console.log('Отправка данных');
+    },
+    success: function(result) { //Если все нормально
+        console.log('Отправлено: <br>', result);
+    },
+    error: function () {
+        alert('Данные не отправлены');
+    }
+});
+//---------------------------------------------------------
