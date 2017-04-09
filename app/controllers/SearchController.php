@@ -21,7 +21,7 @@ class SearchController extends Controller
 //        $this->printData($_SESSION);
 //        $this->printData('Общее количество параметров: ' . count($_SESSION['forms']));
 
-        $data['formData'] = $this->model->getJSONData();
+        $data['formData'] = $this->model->getRentApartData();
 
 //        if (isset($_POST['apartRent'])) {
 //            $data['objects'] = $this->model->getRentApartData();
