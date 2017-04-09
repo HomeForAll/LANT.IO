@@ -1,11 +1,6 @@
 <?php
 $this->title = 'Редактор объявлений';
 
-echo'---- $this->data ----';
-echo'<br>';
-var_dump($this->data);
-echo'<br>';
-echo'_____________';
 
 global $data_for_news;
 $data_for_news = $this->data;
