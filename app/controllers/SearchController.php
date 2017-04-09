@@ -21,11 +21,20 @@ class SearchController extends Controller
 //        $this->printData($_SESSION);
 //        $this->printData('Общее количество параметров: ' . count($_SESSION['forms']));
 
-        $data['formData'] = $this->model->getRentApartData();
+        //$data['formData'] = $this->model->getRentApartData();
 
 //        if (isset($_POST['apartRent'])) {
 //            $data['objects'] = $this->model->getRentApartData();
 //        }
+
+        // var_dump($_POST);
+
+        foreach ($_POST as $key => $value) {
+            if (preg_match('~(on)~i', $value)) {
+                echo '$' . $key . ' = isset($_POST[\'' . $key . '\']) ? $_POST[\'' . $key . '\'] : \'\'; <br>';
+                echo 123;
+            }
+        }
 
         $this->view->render('search', $data);
     }

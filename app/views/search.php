@@ -13,7 +13,7 @@ if (!empty($this->data['objects'])) {
 
 <script>
     // Forms data
-    var formData = <?php echo $this->data['formData']; ?>;
+    //var formData = <?php //echo $this->data['formData']; ?>;
 
 //    localStorage.setItem("username", "dfsd");
 //    console.log(localStorage.getItem("username"));
@@ -321,7 +321,7 @@ if (!empty($this->data['objects'])) {
     <br><input type="submit" name="submit" value="Найти"><br></form>
 
 <?php
-    var_dump($this->data['formData']);
+    //var_dump($this->data);
 ?>
 
 <!--<label for="object">Объект:</label>-->
