@@ -161,20 +161,216 @@ class SearchModel extends Model
         $maxPrice = isset($_POST['maxPrice']) ? $_POST['maxPrice'] : '';
         $parking = isset($_POST['parking']) ? $_POST['parking'] : '';
 
+        $cadastral_number = isset($_POST['cadastral_number']) ? $_POST['cadastral_number'] : '';
+        if ($cadastral_number || $cadastral_number !== '') {
+            $query->where('cadastral_number', '=', 1);
+        };
 
-        /**
-         * Базовые параметры
-         */
-        if ($minPrice && $maxPrice) {
-            $query->where('price', 'between', array((int)$minPrice, (int)$maxPrice));
-        } elseif ($minPrice) {
-            $query->where('price', '>=', (int)$minPrice);
-        } elseif ($maxPrice) {
-            $query->where('price', '<=', (int)$maxPrice);
+        $bargain = isset($_POST['bargain']) ? $_POST['bargain'] : '';
+        if ($bargain || $bargain !== '') {
+            $query->where('bargain', '=', 1);
+        };
+
+        $bathroom = isset($_POST['bathroom']) ? $_POST['bathroom'] : '';
+        if ($bathroom || $bathroom !== '') {
+            $query->where('bathroom', '=', 1);
+        };
+
+        $dining_room = isset($_POST['dining_room']) ? $_POST['dining_room'] : '';
+        if ($dining_room || $dining_room !== '') {
+            $query->where('dining_room', '=', 1);
+        };
+
+        $study = isset($_POST['study']) ? $_POST['study'] : '';
+        if ($study || $study !== '') {
+            $query->where('study', '=', 1);
+        };
+
+        $playroom = isset($_POST['playroom']) ? $_POST['playroom'] : '';
+        if ($playroom || $playroom !== '') {
+            $query->where('playroom', '=', 1);
+        };
+
+        $hallway = isset($_POST['hallway']) ? $_POST['hallway'] : '';
+        if ($hallway || $hallway !== '') {
+            $query->where('hallway', '=', 1);
+        };
+
+        $living_room = isset($_POST['living_room']) ? $_POST['living_room'] : '';
+        if ($living_room || $living_room !== '') {
+            $query->where('living_room', '=', 1);
+        };
+
+        $kitchen = isset($_POST['kitchen']) ? $_POST['kitchen'] : '';
+        if ($kitchen || $kitchen !== '') {
+            $query->where('kitchen', '=', 1);
+        };
+
+        $bedroom = isset($_POST['bedroom']) ? $_POST['bedroom'] : '';
+        if ($bedroom || $bedroom !== '') {
+            $query->where('bedroom', '=', 1);
+        };
+
+        $availability_of_garbage_chute = isset($_POST['availability_of_garbage_chute']) ? $_POST['availability_of_garbage_chute'] : '';
+        if ($availability_of_garbage_chute || $availability_of_garbage_chute !== '') {
+            $query->where('availability_of_garbage_chute', '=', 1);
+        };
+
+        $signaling = isset($_POST['signaling']) ? $_POST['signaling'] : '';
+        if ($signaling || $signaling !== '') {
+            $query->where('signaling', '=', 1);
+        };
+
+        $cctv = isset($_POST['cctv']) ? $_POST['cctv'] : '';
+        if ($cctv || $cctv !== '') {
+            $query->where('cctv', '=', 1);
+        };
+
+        $intercom = isset($_POST['intercom']) ? $_POST['intercom'] : '';
+        if ($intercom || $intercom !== '') {
+            $query->where('intercom', '=', 1);
+        };
+
+        $security = isset($_POST['security']) ? $_POST['security'] : '';
+        if ($security || $security !== '') {
+            $query->where('security', '=', 1);
+        };
+
+        $concierge = isset($_POST['concierge']) ? $_POST['concierge'] : '';
+        if ($concierge || $concierge !== '') {
+            $query->where('concierge', '=', 1);
+        };
+
+        $water_pipes = isset($_POST['water_pipes']) ? $_POST['water_pipes'] : '';
+        if ($water_pipes || $water_pipes !== '') {
+            $query->where('water_pipes', '=', 1);
+        };
+
+        $electricity = isset($_POST['electricity']) ? $_POST['electricity'] : '';
+        if ($electricity || $electricity !== '') {
+            $query->where('electricity', '=', 1);
+        };
+
+        $gas = isset($_POST['gas']) ? $_POST['gas'] : '';
+        if ($gas || $gas !== '') {
+            $query->where('gas', '=', 1);
+        };
+
+        $heating = isset($_POST['heating']) ? $_POST['heating'] : '';
+        if ($heating || $heating !== '') {
+            $query->where('heating', '=', 1);
+        };
+
+//        if ($minPrice && $maxPrice) {
+//            $query->where('price', 'between', array((int)$minPrice, (int)$maxPrice));
+//        } elseif ($minPrice) {
+//            $query->where('price', '>=', (int)$minPrice);
+//        } elseif ($maxPrice) {
+//            $query->where('price', '<=', (int)$maxPrice);
+//        }
+//
+//        if ($parking || $parking !== '') {
+//            $query->where('parking', '=', (int)$parking);
+//        }
+
+        $price_min = isset($_POST['price-min']) ? $_POST['price-min'] : '';
+        $price_max = isset($_POST['price-max']) ? $_POST['price-max'] : '';
+        if ($price_min && $price_max) {
+            $query->where('price', 'between', array((int)$price_min, (int)$price_max));
+        } elseif ($price_min) {
+            $query->where('price', '>=', (int)$price_min);
+        } elseif ($price_max) {
+            $query->where('price', '<=', (int)$price_max);
         }
 
-        if ($parking || $parking !== '') {
-            $query->where('parking', '=', (int)$parking);
+        $distance_from_metro_min = isset($_POST['distance_from_metro-min']) ? $_POST['distance_from_metro-min'] : '';
+        $distance_from_metro_max = isset($_POST['distance_from_metro-max']) ? $_POST['distance_from_metro-max'] : '';
+        if ($distance_from_metro_min && $distance_from_metro_max) {
+            $query->where('distance_from_metro', 'between', array((int)$distance_from_metro_min, (int)$distance_from_metro_max));
+        } elseif ($distance_from_metro_min) {
+            $query->where('distance_from_metro', '>=', (int)$distance_from_metro_min);
+        } elseif ($distance_from_metro_max) {
+            $query->where('distance_from_metro', '<=', (int)$distance_from_metro_max);
+        }
+
+        $residential_min = isset($_POST['residential-min']) ? $_POST['residential-min'] : '';
+        $residential_max = isset($_POST['residential-max']) ? $_POST['residential-max'] : '';
+        if ($residential_min && $residential_max) {
+            $query->where('residential', 'between', array((int)$residential_min, (int)$residential_max));
+        } elseif ($residential_min) {
+            $query->where('residential', '>=', (int)$residential_min);
+        } elseif ($residential_max) {
+            $query->where('residential', '<=', (int)$residential_max);
+        }
+
+        $not_residential_min = isset($_POST['not_residential-min']) ? $_POST['not_residential-min'] : '';
+        $not_residential_max = isset($_POST['not_residential-max']) ? $_POST['not_residential-max'] : '';
+        if ($not_residential_min && $not_residential_max) {
+            $query->where('not_residential', 'between', array((int)$not_residential_min, (int)$not_residential_max));
+        } elseif ($not_residential_min) {
+            $query->where('not_residential', '>=', (int)$not_residential_min);
+        } elseif ($not_residential_max) {
+            $query->where('not_residential', '<=', (int)$not_residential_max);
+        }
+
+        $total_min = isset($_POST['total-min']) ? $_POST['total-min'] : '';
+        $total_max = isset($_POST['total-max']) ? $_POST['total-max'] : '';
+        if ($total_min && $total_max) {
+            $query->where('total', 'between', array((int)$total_min, (int)$total_max));
+        } elseif ($total_min) {
+            $query->where('total', '>=', (int)$total_min);
+        } elseif ($total_max) {
+            $query->where('total', '<=', (int)$total_max);
+        }
+
+        $balcony_min = isset($_POST['balcony-min']) ? $_POST['balcony-min'] : '';
+        $balcony_max = isset($_POST['balcony-max']) ? $_POST['balcony-max'] : '';
+        if ($balcony_min && $balcony_max) {
+            $query->where('balcony', 'between', array((int)$balcony_min, (int)$balcony_max));
+        } elseif ($balcony_min) {
+            $query->where('balcony', '>=', (int)$balcony_min);
+        } elseif ($balcony_max) {
+            $query->where('balcony', '<=', (int)$balcony_max);
+        }
+
+        $ceiling_height_min = isset($_POST['ceiling_height-min']) ? $_POST['ceiling_height-min'] : '';
+        $ceiling_height_max = isset($_POST['ceiling_height-max']) ? $_POST['ceiling_height-max'] : '';
+        if ($ceiling_height_min && $ceiling_height_max) {
+            $query->where('ceiling_height', 'between', array((int)$ceiling_height_min, (int)$ceiling_height_max));
+        } elseif ($ceiling_height_min) {
+            $query->where('ceiling_height', '>=', (int)$ceiling_height_min);
+        } elseif ($ceiling_height_max) {
+            $query->where('ceiling_height', '<=', (int)$ceiling_height_max);
+        }
+
+        $floor_min = isset($_POST['floor-min']) ? $_POST['floor-min'] : '';
+        $floor_max = isset($_POST['floor-max']) ? $_POST['floor-max'] : '';
+        if ($floor_min && $floor_max) {
+            $query->where('floor', 'between', array((int)$floor_min, (int)$floor_max));
+        } elseif ($floor_min) {
+            $query->where('floor', '>=', (int)$floor_min);
+        } elseif ($floor_max) {
+            $query->where('floor', '<=', (int)$floor_max);
+        }
+
+        $number_of_floors_min = isset($_POST['number_of_floors-min']) ? $_POST['number_of_floors-min'] : '';
+        $number_of_floors_max = isset($_POST['number_of_floors-max']) ? $_POST['number_of_floors-max'] : '';
+        if ($number_of_floors_min && $number_of_floors_max) {
+            $query->where('number_of_floors', 'between', array((int)$number_of_floors_min, (int)$number_of_floors_max));
+        } elseif ($number_of_floors_min) {
+            $query->where('number_of_floors', '>=', (int)$number_of_floors_min);
+        } elseif ($number_of_floors_max) {
+            $query->where('number_of_floors', '<=', (int)$number_of_floors_max);
+        }
+
+        $year_of_construction_min = isset($_POST['year_of_construction-min']) ? $_POST['year_of_construction-min'] : '';
+        $year_of_construction_max = isset($_POST['year_of_construction-max']) ? $_POST['year_of_construction-max'] : '';
+        if ($year_of_construction_min && $year_of_construction_max) {
+            $query->where('year_of_construction', 'between', array((int)$year_of_construction_min, (int)$year_of_construction_max));
+        } elseif ($year_of_construction_min) {
+            $query->where('year_of_construction', '>=', (int)$year_of_construction_min);
+        } elseif ($year_of_construction_max) {
+            $query->where('year_of_construction', '<=', (int)$year_of_construction_max);
         }
 
         $result = $query->execute();
@@ -237,22 +433,26 @@ class SearchModel extends Model
         return $query->execute();
     }
 
-    public function getFormCategories() {
+    public function getFormCategories()
+    {
         $query = $this->db->query('SELECT * FROM form_categories ORDER BY id');
         return $query->fetchAll();
     }
 
-    public function getFormSubcategories() {
+    public function getFormSubcategories()
+    {
         $query = $this->db->query('SELECT * FROM form_subcategories ORDER BY id');
         return $query->fetchAll();
     }
 
-    public function getFormElements() {
+    public function getFormElements()
+    {
         $query = $this->db->query('SELECT * FROM form_elements ORDER BY id');
         return $query->fetchAll();
     }
 
-    public function getFormSelectOptions() {
+    public function getFormSelectOptions()
+    {
         $query = $this->db->query('SELECT * FROM form_select_options ORDER BY id');
         return $query->fetchAll();
     }
