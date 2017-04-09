@@ -297,6 +297,9 @@
     width: 23% !important;
     padding: 10px 25px 12px 50px!important;
   }
+  & .select2-hidden-accessible {
+    margin-top: -4px !important;
+  }
 }
 
 .search-city {
@@ -1321,6 +1324,23 @@
         height: 30px!important;
       }
     }
+    & .select2-hidden-accessible {
+      display: none !important;
+    }
+    & .select2-container {
+      border: none!important;
+      width: 60%!important;
+      padding: 0!important;
+    }
+    & .select2-selection__rendered {
+      padding: 0 24px 0 0!important;
+    }
+    & .select2-selection--single {
+      height: 28px!important;
+    }
+  }
+  span {
+    margin: 0 !important;
   }
 }
 
@@ -1636,11 +1656,12 @@
 }
 
 .top-search-results {
-  padding: 17px 40px 11px;
+  padding: 17px 40px 20px;
   border-radius: 6px 0 0 0;
   background: #fff;
   text-align: left;
   span {
+    z-index: 1;
     padding: 10px;
     margin-right: 10px; 
   }
