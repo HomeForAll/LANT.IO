@@ -380,77 +380,72 @@ class SearchModel extends Model
 
         $object_located = isset($_POST['object_located']) ? $_POST['object_located'] : '';
         if ($object_located || $object_located !== '') {
-            $query->where('object_located', '=', $object_located);
+            $query->where('object_located', '=', (int)$object_located);
         }
 
         $number_of_rooms = isset($_POST['number_of_rooms']) ? $_POST['number_of_rooms'] : '';
         if ($number_of_rooms || $number_of_rooms !== '') {
-            $query->where('number_of_rooms', '=', $number_of_rooms);
+            $query->where('number_of_rooms', '=', (int)$number_of_rooms);
         }
 
         $lavatory = isset($_POST['lavatory']) ? $_POST['lavatory'] : '';
         if ($lavatory || $lavatory !== '') {
-            $query->where('lavatory', '=', $lavatory);
+            $query->where('lavatory', '=', (int)$lavatory);
         }
 
         $furnish = isset($_POST['furnish']) ? $_POST['furnish'] : '';
         if ($furnish || $furnish !== '') {
-            $query->where('furnish', '=', $furnish);
+            $query->where('furnish', '=', (int)$furnish);
         }
 
         $equipment = isset($_POST['equipment']) ? $_POST['equipment'] : '';
         if ($equipment || $equipment !== '') {
-            $query->where('equipment', '=', $equipment);
+            $query->where('equipment', '=', (int)$equipment);
         }
 
         $elevator = isset($_POST['elevator']) ? $_POST['elevator'] : '';
         if ($elevator || $elevator !== '') {
-            $query->where('elevator', '=', $elevator);
+            $query->where('elevator', '=', (int)$elevator);
         }
 
         $elevator_yes = isset($_POST['elevator_yes']) ? $_POST['elevator_yes'] : '';
         if ($elevator_yes || $elevator_yes !== '') {
-            $query->where('elevator_yes', '=', $elevator_yes);
+            $query->where('elevator_yes', '=', (int)$elevator_yes);
         }
 
         $clarification_of_the_object_type = isset($_POST['clarification_of_the_object_type']) ? $_POST['clarification_of_the_object_type'] : '';
         if ($clarification_of_the_object_type || $clarification_of_the_object_type !== '') {
-            $query->where('clarification_of_the_object_type', '=', $clarification_of_the_object_type);
+            $query->where('clarification_of_the_object_type', '=', (int)$clarification_of_the_object_type);
         }
 
         $parking = isset($_POST['parking']) ? $_POST['parking'] : '';
         if ($parking || $parking !== '') {
-            $query->where('parking', '=', $parking);
+            $query->where('parking', '=', (int)$parking);
         }
 
         $wall_material = isset($_POST['wall_material']) ? $_POST['wall_material'] : '';
         if ($wall_material || $wall_material !== '') {
-            $query->where('wall_material', '=', $wall_material);
+            $query->where('wall_material', '=', (int)$wall_material);
         }
 
         $stairwells_status = isset($_POST['stairwells_status']) ? $_POST['stairwells_status'] : '';
         if ($stairwells_status || $stairwells_status !== '') {
-            $query->where('stairwells_status', '=', $stairwells_status);
+            $query->where('stairwells_status', '=', (int)$stairwells_status);
         }
 
         $video = isset($_POST['video']) ? $_POST['video'] : '';
         if ($video || $video !== '') {
-            $query->where('video', '=', $video);
+            $query->where('video', '=', (int)$video);
         }
 
         $planning_project = isset($_POST['planning_project']) ? $_POST['planning_project'] : '';
         if ($planning_project || $planning_project !== '') {
-            $query->where('planning_project', '=', $planning_project);
+            $query->where('planning_project', '=', (int)$planning_project);
         }
 
         $three_d_project = isset($_POST['three_d_project']) ? $_POST['three_d_project'] : '';
         if ($three_d_project || $three_d_project !== '') {
-            $query->where('three_d_project', '=', $three_d_project);
-        }
-
-        $submit = isset($_POST['submit']) ? $_POST['submit'] : '';
-        if ($submit || $submit !== '') {
-            $query->where('submit', '=', $submit);
+            $query->where('three_d_project', '=', (int)$three_d_project);
         }
 
         $result = $query->execute();
