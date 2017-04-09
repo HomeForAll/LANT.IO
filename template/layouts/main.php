@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title><?php $this->title(); ?></title>
-    <link rel="stylesheet" href="/template/css/style.css">
     <link rel="stylesheet" href="/template/css/news_style.css">
+    <link rel="stylesheet" href="/template/css/test_styles.css">
     <?php
         // Подключение стилей в контроллере
 if (isset($this->data['css'])) {
@@ -13,7 +13,7 @@ foreach ($this->data['css'] as $key => $value) {
 }
 }
     ?>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <!-- jquery -->
     <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
     <script src="/template/js/searchFormBuilder.js"></script>
