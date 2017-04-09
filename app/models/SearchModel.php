@@ -470,43 +470,43 @@ class SearchModel extends Model
 
         $type_of_construction = isset($_POST['type_of_construction']) ? $_POST['type_of_construction'] : '';
         if ($type_of_construction || $type_of_construction !== '') {
-            $query->where('type_of_construction', '=', $type_of_construction);
+            $query->where('type_of_construction', '=', (int)$type_of_construction);
         }
 
         $building_type = isset($_POST['building_type']) ? $_POST['building_type'] : '';
         if ($building_type || $building_type !== '') {
-            $query->where('building_type', '=', $building_type);
+            $query->where('building_type', '=', (int)$building_type);
         }
 
         $roofing = isset($_POST['roofing']) ? $_POST['roofing'] : '';
         if ($roofing || $roofing !== '') {
-            $query->where('roofing', '=', $roofing);
+            $query->where('roofing', '=', (int)$roofing);
         }
 
         $foundation = isset($_POST['foundation']) ? $_POST['foundation'] : '';
         if ($foundation || $foundation !== '') {
-            $query->where('foundation', '=', $foundation);
+            $query->where('foundation', '=', (int)$foundation);
         }
 
         $material = isset($_POST['material']) ? $_POST['material'] : '';
         if ($material || $material !== '') {
-            $query->where('material', '=', $material);
+            $query->where('material', '=', (int)$material);
         }
 
 
         $municipal = isset($_POST['municipal']) ? $_POST['municipal'] : '';
         if ($municipal || $municipal !== '') {
-            $query->where('municipal', '=', $municipal);
+            $query->where('municipal', '=', (int)$municipal);
         }
 
         $sanitation = isset($_POST['sanitation']) ? $_POST['sanitation'] : '';
         if ($sanitation || $sanitation !== '') {
-            $query->where('sanitation', '=', $sanitation);
+            $query->where('sanitation', '=', (int)$sanitation);
         }
 
         $bathroom_location = isset($_POST['bathroom_location']) ? $_POST['bathroom_location'] : '';
         if ($bathroom_location || $bathroom_location !== '') {
-            $query->where('bathroom_location', '=', $bathroom_location);
+            $query->where('bathroom_location', '=', (int)$bathroom_location);
         }
 
         $fencing = isset($_POST['fencing']) ? $_POST['fencing'] : '';
@@ -538,7 +538,7 @@ class SearchModel extends Model
         if ($lease_contract || $lease_contract !== '') {
             $query->where('lease_contract', '=', 1);
         };
-        
+
         $distance_from_mkad_or_metro_min = isset($_POST['distance_from_mkad_or_metro']) ? $_POST['distance_from_mkad_or_metro'] : '';
         $distance_from_mkad_or_metro_max = isset($_POST['distance_from_mkad_or_metro']) ? $_POST['distance_from_mkad_or_metro'] : '';
         if ($distance_from_mkad_or_metro_min && $distance_from_mkad_or_metro_max) {
