@@ -21,7 +21,7 @@ class SearchController extends Controller
 //        $this->printData($_SESSION);
 //        $this->printData('Общее количество параметров: ' . count($_SESSION['forms']));
 
-        $data['formData'] = $this->model->getRentApartData();
+        //$data['formData'] = $this->model->getRentApartData();
 
 //        if (isset($_POST['apartRent'])) {
 //            $data['objects'] = $this->model->getRentApartData();
@@ -30,18 +30,11 @@ class SearchController extends Controller
          //var_dump($_POST);
 
 //        foreach ($_POST as $key => $value) {
-//            if (preg_match('~(-min)~', $key)) {
-//                $result = explode('-', $key);
+//            if (!preg_match('~(-min)~', $key) && !preg_match('~(-min)~', $key) && !preg_match('~(on)~i', $value)) {
+//                echo '$' . $key . ' = isset($_POST[\'' . $key . '\']) ? $_POST[\'' . $key . '\'] : \'\'; <br>';
 //
-//                echo '$' . $result[0] . '_min = isset($_POST[\'' . $result[0] . '-min\']) ? $_POST[\'' . $result[0] . '-min\'] : \'\'; <br>';
-//                echo '$' . $result[0] . '_max = isset($_POST[\'' . $result[0] . '-max\']) ? $_POST[\'' . $result[0] . '-max\'] : \'\'; <br>';
-//
-//                echo 'if ($' . $result[0] . '_min && $' . $result[0] . '_max) {<br>';
-//                echo '    $query->where(\'' . $result[0] . '\', \'between\', array((int)$' . $result[0] . '_min, (int)$' . $result[0] . '_max));<br>';
-//                echo '} elseif ($' . $result[0] . '_min) {<br>';
-//                echo     '$query->where(\'' . $result[0] . '\', \'>=\', (int)$' . $result[0] . '_min);<br>';
-//                echo '} elseif ($' . $result[0] . '_max) {<br>';
-//                echo    ' $query->where(\'' . $result[0] . '\', \'<=\', (int)$' . $result[0] . '_max);<br>';
+//                echo 'if ($' . $key . ' || $' . $key . ' !== \'\') {<br>';
+//                  echo '  $query->where(\'' . $key . '\', \'=\', $' . $key . ');<br>';
 //                echo '}<br><br>';
 //            }
 //        }
