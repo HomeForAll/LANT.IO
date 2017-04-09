@@ -39,24 +39,8 @@
         <option value="22" <?php inputToSelect('object_located','22'); ?> >Риэлтором</option>
         <option value="21" <?php inputToSelect('object_located','21'); ?> >Собственником</option>
     </select><br>
-    <br></fieldset><br><fieldset>
-    <legend>Вложения</legend><br>
-    <label for="planning_project">Проект планировки</label><br>
-    <select name="planning_project" id="planning_project">
-        <option value="0">---</option>
-        <option value="11" <?php inputToSelect('planning_project','11'); ?> >Прилагается</option>
-    </select><br>
-    <label for="three_d_project">3d проект</label><br>
-    <select name="three_d_project" id="three_d_project">
-        <option value="0">---</option>
-        <option value="11" <?php inputToSelect('three_d_project','11'); ?> >Прилагается</option>
-    </select><br>
-    <label for="video">Видео</label><br>
-    <select name="video" id="video">
-        <option value="0">---</option>
-        <option value="11" <?php inputToSelect('video','11'); ?> >Прилагается</option>
-    </select><br>
-    <br></fieldset><br><fieldset>
+    <br></fieldset><br>
+<fieldset>
     <legend> Ремонт и обустройство</legend><br>
     <b >Жилищно-коммунальные услуги</b><br>
     <label >Электричество <input type="hidden" name="electricity" value=""> <input type="checkbox" name="electricity" <?php inputToCheckbox("electricity"); ?> ></label><br>
@@ -73,7 +57,6 @@
     <label for="sanitation" >Наличие санузлов</label><br>
     <label for="">Количество:</label><br>
     <input name="bathroom_number" <?php inputToInput("bathroom_number"); ?> type="text" >
-    <input name="bathroom_number" <?php inputToInput("bathroom_number"); ?> type="text"><br>
     <label for="">Расположение:</label><br>
     <select name="bathroom_location" id="bathroom_location" >
         <option value="0">---</option>
@@ -203,3 +186,12 @@
     <input type="file" name="documents_on_tenure" multiple accept=""/>
     <br>
 </fieldset><br>
+<fieldset>
+    <legend> Вложения</legend>
+    <label for="planning_project">Проект планировки</label>
+    <input type="file" name="planning_project" multiple accept=""/>
+    <label for="three_d_project">3d проект</label>
+    <input type="file" name="three_d_project" multiple accept=""/>
+    <label for="video">Видео</label>
+    <input type="file" name="video" multiple accept=""/>
+</fieldset>
