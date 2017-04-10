@@ -239,6 +239,8 @@ class CabinetController extends Controller
         }
         $access = $this->checkAccessLevel($_SESSION['status']);
         $data['access'] = $access;
+        $this->view->addJSFile('pickmeup.js');
+
         $data['script'][0] = 'pickmeup.js';
         $data['css'][0] = 'calendar.css';
         $this->view->render('balance', $data);

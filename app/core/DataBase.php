@@ -90,7 +90,9 @@ class DataBase extends PDO
             }
         }
 
+
         $result = $this->query($query)->fetchAll();
+
         return $result;
     }
 }

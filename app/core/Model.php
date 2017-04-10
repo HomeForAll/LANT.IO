@@ -6,10 +6,13 @@ class Model
 
     protected $db;
 
-    /*
-     * Метод должен обрабатывать Ajax запросы
-     */
+    static function instance($model) {
+        if (file_exists(ROOT_DIR . '/app/models/' . $model . '.php')) {
+            return new $model;
+        }
 
+        return null;
+    }
 
     protected function getUserFirstName(PDO $PDO, $userID)
     {

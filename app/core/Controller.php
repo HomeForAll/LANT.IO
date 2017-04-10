@@ -4,14 +4,18 @@ class Controller extends Access
 {
     use PrintHelper;
 
-    protected $model;
     protected $view;
+
+    /**
+     * @var $model $model
+     */
+    protected $model;
     protected $access;
     
-    public function __construct($template, $model)
+    public function __construct($layout, $model)
     {
-        $this->view  = new View($template);
-        $this->model = $this->getModel($model);
+        $this->view  = View::instance($layout);
+        $this->model = Model::instance($model);
 
         if (isset($_SESSION['userID']) ){
             $this->access = $this->checkAccessLevel($_SESSION['status']);
