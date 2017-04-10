@@ -1,5 +1,5 @@
 'use strict';
-var productSearch, showAndHideTopMenu, boolean, rootBlock = false,
+var productSearch, showAndHideTopMenu, boolean, rootBlock, showFilter = false,
     imagesWidth = 130,
     valueButton = {
         'more': (function () {
@@ -14,31 +14,28 @@ var productSearch, showAndHideTopMenu, boolean, rootBlock = false,
 
 /** Слайдер **/
 $(document).ready(function(){
-  $('.bxslider').bxSlider({
-  		slideWidth: 500, // ширина слайдера
-   		minSlides: 1,
-   		maxSlides: 2,
-   		moveSlides: 2, // прокрутка по 2 блока
-   		slideMargin: 10,
-   		pager: false,
+    $('.bxslider').bxSlider({
+        slideWidth: 500, // ширина слайдера
+        minSlides: 1,
+        maxSlides: 2,
+        moveSlides: 2, // прокрутка по 2 блока
+        slideMargin: 10,
+        pager: false,
         auto: true, // прокрутка
         infiniteLoop: true // бесконечная прокрутка
-  });
-});
-$(document).ready(function(){
-  $('.bxslider-partners').bxSlider({
-  		slideWidth: 150,
-   		minSlides: 1,
-   		maxSlides: 5,
-   		moveSlides: 2,
-   		slideMargin: 50,
-   		pager: false,
+    });
+    $('.bxslider-partners').bxSlider({
+    	slideWidth: 150,
+     	minSlides: 1,
+     	maxSlides: 5,
+     	moveSlides: 2,
+     	slideMargin: 50,
+     	pager: false,
         auto: true,
         pause: 15000,
         infiniteLoop: true
-  });
+    });
 });
-
 //---------------------------------------------------------
 
 function formatState (state) {
@@ -142,58 +139,18 @@ function showTopMenuAndSearch() {
 //---------------------------------------------------------
 /** Блоки с фильтрами **/
 function filterOptionsApartments() {
-    var $propertyTypeApartmentSettings = $('.property-type-apartment-settings');
-    //shadowBlock();
+    showFilter = !showFilter;
 
-    $propertyTypeApartmentSettings.css({'display': 'block'});
-    setTimeout(function () {
-        $propertyTypeApartmentSettings.css({'display': 'none'});
-    }, 2500);
-}
-
-function filterOptions() {
-    var $showBigOptions = $('.showBigOptions');
-    //shadowBlock();
-
-    $showBigOptions.css({'display': 'block'});
-    setTimeout(function () {
-        $showBigOptions.css({'display': 'none'});
-    }, 5000);
-}
-
-function apartmentSettings() {
-	var $apartmentSettings = $('.apartment-settings');
-	//shadowBlock();
-
-    $apartmentSettings.css({'display': 'block'});
-    setTimeout(function () {
-        $apartmentSettings.css({'display': 'none'});
-    }, 10000);
-}
-
-function appearanceofTheApartment() {
-	var $appearanceOfTheApartments = $('.appearance-of-the-apartment');
-	//shadowBlock();
-
-    $appearanceOfTheApartments.css({'display': 'block'});
-    setTimeout(function () {
-        $appearanceOfTheApartments.css({'display': 'none'});
-    }, 10000);
-}
-
-function appearanceOfTheBuilding() {
-	var $appearanceOfTheBuild = $('.appearance-of-the-build');
-	//shadowBlock();
-
-    $appearanceOfTheBuild.css({'display': 'block'});
-    setTimeout(function () {
-        $appearanceOfTheBuild.css({'display': 'none'});
-    }, 10000);
+    if (!showFilter) {
+        return false;
+    }
+    $('.property-type-apartment-settings, .decorativeShadowBlock').fadeIn('slow');
 }
 
 function allFilterBlocks(filters) {
-
-   //shadowBlock();
+    $('.building-parameters-apartment, building-parameters-home,' +
+        '.building-parameters-room, .building-parameters-office-area,' +
+        '.building-parameters-separate-building, .building-parameters-ozs-сomplex').css({'display': 'none'});
 
     switch (filters) {
         case 'searchMetroMainBlock':
@@ -203,177 +160,67 @@ function allFilterBlocks(filters) {
             $('.closeSearchMetro').on('click', function () {
                 $searchMetro.hide('slow', function () {
                     $(this).css({'display':'none'});
-                    $('.decorativeShadowBlock').css({'display':'none'})
                 });
-                event.preventDefault();
             });
-            break;
+        break;
         case 'appearanceOfTheApartment' :
-            var $b = $('.appearance-of-the-apartment');
+            var $b = $('.appearance-of-the-apartment'),
+                search = $('.search');
+
             $b.css({'display': 'block'});
 
-           // $('.close-building-parameters-filter').on('click', function () {
-           //     $searchMetro.hide('slow', function () {
-           //         $(this).css({'display':'none'});
-           //         $('.decorativeShadowBlock').css({'display':'none'})
-           //     });
-           //     event.preventDefault();
-           // });
-            setTimeout(function () {
-                $b.hide();
-            }, 10000);
-            break;
+            search.on('click', function () {
+               $b.hide('slow', function () {
+                   $(this).css({'display':'none'});
+               });
+           });
+        break;
         case 'buildingParametersFilter' :
-            var $a = $('.building-parameters-filter');
+            var $a = $('.building-parameters-filter'),
+                searchClone = $('.close-building-parameters-filter');
+
             $a.css({'display': 'block'});
 
-            $('.close-building-parameters-filter').on('click', function () {
-                $searchMetro.hide('slow', function () {
+            searchClone.on('click', function () {
+                $a.hide('slow', function () {
                     $(this).css({'display':'none'});
-                    $('.decorativeShadowBlock').css({'display':'none'})
+                    $a.hide();
                 });
-                event.preventDefault();
             });
-            setTimeout(function () {
-                $a.hide();
-            }, 10000);
-            break;
+        break;
         case 'historySearch':
-            var $history = $('.history-search');
+            var $history = $('.history-search'),
+                historyInput = $('history');
+
+            if (historyInput === 0) {
+                setTimeout(function () {
+                    $history.css({'display': 'none'});
+                }, 7500);
+            }
 
             $history.css({'display': 'block'});
-
-            setTimeout(function () {
-                $history.css({'display': 'none'});
-                $('.decorativeShadowBlock').css({'display':'none'})
-            }, 10000);
             break;
-        default : console.log('Фильтр не найден');
+        case '1':
+            $('.building-parameters-apartment').css({'display': 'block'});
+            break;
+        case '2':
+            $('.building-parameters-home').css({'display': 'block'});
+            break;
+        case '3':
+            $('.building-parameters-room').css({'display': 'block'});
+            break;
+        case '4':
+            $('.building-parameters-office-area').css({'display': 'block'});
+            break;
+        case '5':
+            $('.building-parameters-separate-building').css({'display': 'block'});
+            break;
+        case '6':
+            $('.building-parameters-ozs-сomplex').css({'display': 'block'});
+            break;
+        default: console.log('Фильтр не настроен');
     }
-}
-
-function filter1() {
-    var $showBigOptions = $('.building-parameters-apartment'),
-    mB = $('.property-type-apartment-settings');
-    mB.hide();
-    $('.building-parameters').css({'display':'none'});
-
-    //$('.value-text').text('квартира');
-
-    //shadowBlock();
-
-    $showBigOptions.show();
-    setTimeout(function () {
-        $showBigOptions.css({'display': 'none'});
-    }, 15000);
-}
-
-function filter2() {
-    var $showBigOptions = $('.building-parameters-home'),
-    mB = $('.property-type-apartment-settings');
-    mB.hide();
-    $('.building-parameters').css({'display':'none'});
-
-    //$('.value-text').text('дом');
-
-    //shadowBlock();
-
-    $showBigOptions.show();
-    setTimeout(function () {
-        $showBigOptions.css({'display': 'none'});
-    }, 15000);
-}
-
-function filter3() {
-    var $showBigOptions = $('.building-parameters-room'),
-    mB = $('.property-type-apartment-settings');
-    mB.hide();
-    $('.building-parameters').css({'display':'none'});
-
-    //$('.value-text').text('комната');
-
-    //shadowBlock();
-
-    $showBigOptions.show();
-    setTimeout(function () {
-        $showBigOptions.css({'display': 'none'});
-    }, 15000);
-}
-
-function filter4() {
-    var $showBigOptions = $('.building-parameters-office-area'),
-    mB = $('.property-type-apartment-settings');
-    mB.hide();
-    $('.building-parameters').css({'display':'none'});
-
-    //$('.value-text').text('Офисная площадь');
-
-    //shadowBlock();
-
-    $showBigOptions.show();
-    setTimeout(function () {
-        $showBigOptions.css({'display': 'none'});
-    }, 15000);
-}
-
-function filter5() {
-    var $showBigOptions = $('.building-parameters-separate-building'),
-    mB = $('.property-type-apartment-settings');
-    mB.hide();
-    $('.building-parameters').css({'display':'none'});
-
-    //$('.value-text').text('Отдельно стоящее здание');
-
-    //shadowBlock();
-
-    $showBigOptions.show();
-    setTimeout(function () {
-        $showBigOptions.css({'display': 'none'});
-    }, 15000);
-}
-
-function filter6() {
-    var $showBigOptions = $('.building-parameters-ozs-сomplex'),
-    mB = $('.property-type-apartment-settings');
-    mB.hide();
-    $('.building-parameters').css({'display':'none'});
-
-    //$('.value-text').text('Комплекс ОСЗ');
-
-    //shadowBlock();
-
-    $showBigOptions.show();
-    setTimeout(function () {
-        $showBigOptions.css({'display': 'none'});
-    }, 15000);
-}
-
-function attachment() {
-    var attachmentsBlock = $('.attachments');
-    //shadowBlock();
-
-    attachmentsBlock.css({'display': 'block'});
-    setTimeout(function () {
-        attachmentsBlock.css({'display': 'none'});
-    }, 10000);
-}
-
-function quickSearch() {
-    var $quickSearchBlock = $('.quick-search');
-   //shadowBlock();
-
-    $quickSearchBlock.css({'display': 'block'});
-    setTimeout(function () {
-        $quickSearchBlock.css({'display': 'none'});
-    }, 10000);
-}
-
-/** Тени в открывшимся блоке **/
-function shadowBlock() {
-    var $shadowBlocks = $('.decorativeShadowBlock');
-
-    $shadowBlocks.css({'display': 'none'});
-    //$shadowBlocks.css({'display': 'block'});
+    $('.property-type-apartment-settings, .decorativeShadowBlock').fadeOut('slow');
 }
 
 $('.select2-selection--single, .pointer').on('click', function () {
@@ -413,16 +260,6 @@ function moreAndLess(sizeImage) {
 function closeFixedBlock() {
 	$('.warning').css({'display':'block'})
 }
-/** Яндекс карты **/
-ymaps.ready(function () {
-    var map = new ymaps.Map("ymap", {
-        center: [55.451332, 37.369336],
-        zoom: 10,
-        controls: ['fullscreenControl', 'typeSelector', 'geolocationControl', 'zoomControl']
-    });
-
-    window.suggests = new ymaps.SuggestView("suggest", {width: 300, offset: [0, 4], results: 20});
-});
 //---------------------------------------------------------
 
 /** Получение данных через Ajax и отправка данных**/
