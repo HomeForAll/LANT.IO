@@ -714,7 +714,7 @@
                                 </div>
                             </span>
                         </div>
-                        <button onclick="quickSearch()">Задать точнее</button>
+                        <button onclick="allParam('quickSearch')">Задать точнее</button>
                         <div class="quick-search">
                             <h5><i class="fa fa-map-marker" aria-hidden="true"></i>Введите город, район, область или
                                 точный адрес<span><img src="../../template/images/location.png" alt="location">выделить область на карте</span>
@@ -744,7 +744,7 @@
                                         <select class="js-example-data-array distance"></select>
                                     </label></li>
                                 <li>
-                                    <button>Готово</button>
+                                    <button class="closeQuickSearch">Готово</button>
                                 </li>
                             </ul>
                         </div>
@@ -812,7 +812,7 @@
                     <div class="advanced-search-options">
                         <p>Заполните параметры ниже, для более точного поиска</p>
                         <ul class="building-parameters">
-                            <li onclick="apartmentSettings();">
+                            <li onclick="allParam('apartment');">
                                 <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
                                 <div class="apartment-settings">
                                     <h2>Параметры квартиры</h2>
@@ -855,7 +855,7 @@
                                             <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
                                         </li>
                                     </ul>
-                                    <a><button>Готово</button></a>
+                                    <button class="closeBlock">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:0"></span>
@@ -888,22 +888,18 @@
                                     <span style="width:40%"></span>
                                 </div>
                             </li>
-                            <li onclick="allFilterBlocks('buildingParametersFilter')">
+                            <li onclick="allParam('buildingParametersFilter');">
                                 <img src="../../template/images/search-3.png" alt="search">Параметры здания
                                 <div class="building-parameters-filter">
                                     <h2>Параметры здания</h2>
                                     <ul>
                                         <li><span class="names-parameters">Количество этажей</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3"
-                                                        pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3"
-                                                        pattern="[0-9]{3}" required></p>
+                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
+                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
                                         </li>
                                         <li><span class="names-parameters">Год окончания строительства</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="4"
-                                                        pattern="[0-9]{4}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="4"
-                                                        pattern="[0-9]{4}" required></p>
+                                            <p>От<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}" required></p>
+                                            <p>До<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}" required></p>
                                         </li>
                                         <li><span class="names-parameters">Наличие лифта</span>
                                             <select class="js-example-data-array-selected the-presence-of-an-elevator"></select>
@@ -918,13 +914,13 @@
                                             <select class="js-example-data-array-selected parking-area"></select>
                                         </li>
                                     </ul>
-                                    <button class="close-building-parameters-filter">Готово</button>
+                                    <button class="close-building-parameter">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:40%"></span>
                                 </div>
                             </li>
-                            <li onclick="appearanceOfTheBuilding();">
+                            <li onclick="allParam('appearanceBuild')">
                                 <img src="../../template/images/search-4.png" alt="search">Внешний вид здания
                                 <div class="appearance-of-the-build">
                                     <h2>Внешний вид здания</h2>
@@ -942,7 +938,7 @@
                                             <select class="js-example-data-array-selected foundation"></select>
                                         </li>
                                     </ul>
-                                    <button>Поиск</button>
+                                    <button class="closeApparenceBuild">Поиск</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:0"></span>
@@ -954,7 +950,7 @@
                             <li><img src="../../template/images/search-1.png" alt="search">Документы
                                 <select class="js-example-data-array-selected documents"></select>
                             </li>
-                            <li onclick="attachment();"><img src="../../template/images/search-1.png" alt="search">Вложения
+                            <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png" alt="search">Вложения
                                 <div class="attachments">
                                     <h2>Вложения</h2>
                                     <ul>
@@ -974,7 +970,7 @@
                                             <select class="js-example-data-array-selected video"></select>
                                         </li>
                                     </ul>
-                                    <button>Готово</button>
+                                    <button class="closeAttachment">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:0"></span>
@@ -982,9 +978,8 @@
                             </li>
                         </ul>
                         <ul class="building-parameters-apartment">
-                            <li onclick="apartmentSettings();">
-                                <img src="../../template/images/search-1.png" alt="search">Исходные параметры
-                                квартиры
+                            <li onclick="allParam('apartment');">
+                                <img src="../../template/images/search-1.png" alt="search">Исходные параметры квартиры
                                 <div class="apartment-settings">
                                     <h2>Исходные параметры квартиры</h2>
                                     <ul>
@@ -1017,15 +1012,13 @@
                                             <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
                                         </li>
                                     </ul>
-                                    <a>
-                                        <button>Готово</button>
-                                    </a>
+                                    <button class="closeBlock">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:0"></span>
                                 </div>
                             </li>
-                            <li onclick="allFilterBlocks('appearanceOfTheApartment')">
+                            <li onclick="allParam('apperanceOfTheApartment')">
                                 <img src="../../template/images/search-2.png" alt="search">Ремонт и обустройства
                                 <div class="appearance-of-the-apartment">
                                     <h2>Внешний вид квартиры</h2>
@@ -1052,7 +1045,7 @@
                                     <span style="width:40%"></span>
                                 </div>
                             </li>
-                            <li><img src="../../template/images/search-3.png" alt="search">Параметры здания
+                            <li onclick="allParam('buildingParametersFilter');"><img src="../../template/images/search-3.png" alt="search">Параметры здания
                                 <div class="building-parameters-filter">
                                     <h2>Параметры здания</h2>
                                     <ul>
@@ -1077,13 +1070,13 @@
                                             <select class="js-example-data-array-selected parking-area"></select>
                                         </li>
                                     </ul>
-                                    <button>Готово</button>
+                                    <button class="close-building-parameter">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:40%"></span>
                                 </div>
                             </li>
-                            <li onclick="attachment();"><img src="../../template/images/search-1.png" alt="search">Вложения
+                            <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png" alt="search">Вложения
                                 <div class="attachments">
                                     <h2>Вложения</h2>
                                     <ul>
@@ -1103,7 +1096,7 @@
                                             <select class="js-example-data-array-selected video"></select>
                                         </li>
                                     </ul>
-                                    <button>Готово</button>
+                                    <button class="closeAttachment">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:0"></span>
@@ -1111,7 +1104,7 @@
                             </li>
                         </ul>
                         <ul class="building-parameters-home">
-                            <li onclick="apartmentSettings();">
+                            <li onclick="allParam('apartment');">
                                 <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
                                 <div class="apartment-settings">
                                     <h2>Параметры квартиры</h2>
@@ -1145,15 +1138,13 @@
                                             <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
                                         </li>
                                     </ul>
-                                    <a>
-                                        <button>Готово</button>
-                                    </a>
+                                    <button class="closeBlock">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:0"></span>
                                 </div>
                             </li>
-                            <li><img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
+                            <li onclick="allParam('apperanceOfTheApartment')"><img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
                                 <div class="appearance-of-the-apartment">
                                     <h2>Внешний вид квартиры</h2>
                                     <ul>
@@ -1173,13 +1164,13 @@
                                             <select class="js-example-data-array-selected decoration"></select>
                                         </li>
                                     </ul>
-                                    <button>Готово</button>
+                                    <button class="search">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:40%"></span>
                                 </div>
                             </li>
-                            <li onclick="allFilterBlocks('buildingParametersFilter');">
+                            <li onclick="allParam('buildingParametersFilter');">
                                 <img src="../../template/images/search-3.png" alt="search">Параметры здания
                                 <div class="building-parameters-filter">
                                     <h2>Параметры здания</h2>
@@ -1205,13 +1196,13 @@
                                             <select class="js-example-data-array-selected parking-area"></select>
                                         </li>
                                     </ul>
-                                    <button class="close-building-parameters-filter">Готово</button>
+                                    <button class="close-building-parameter">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:40%"></span>
                                 </div>
                             </li>
-                            <li><img src="../../template/images/search-4.png" alt="search">Внешний вид здания
+                            <li onclick="allParam('appearanceBuild')"><img src="../../template/images/search-4.png" alt="search">Внешний вид здания
                                 <div class="appearance-of-the-build">
                                     <h2>Внешний вид здания</h2>
                                     <ul>
@@ -1228,7 +1219,7 @@
                                             <select class="js-example-data-array-selected foundation"></select>
                                         </li>
                                     </ul>
-                                    <button>Поиск</button>
+                                    <button class="closeApparenceBuild">Поиск</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:0"></span>
@@ -1240,7 +1231,7 @@
                             <li><img src="../../template/images/search-1.png" alt="search">Документы
                                 <select class="js-example-data-array-selected documents"></select>
                             </li>
-                            <li onclick="attachment();"><img src="../../template/images/search-1.png" alt="search">Вложения
+                            <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png" alt="search">Вложения
                                 <div class="attachments">
                                     <h2>Вложения</h2>
                                     <ul>
@@ -1260,7 +1251,7 @@
                                             <select class="js-example-data-array-selected video"></select>
                                         </li>
                                     </ul>
-                                    <button>Готово</button>
+                                    <button class="closeAttachment">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:0"></span>
@@ -1268,7 +1259,7 @@
                             </li>
                         </ul>
                         <ul class="building-parameters-room">
-                            <li onclick="apartmentSettings();">
+                            <li onclick="allParam('apartment');">
                                 <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
                                 <div class="apartment-settings">
                                     <h2>Параметры квартиры</h2>
@@ -1302,15 +1293,13 @@
                                             <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
                                         </li>
                                     </ul>
-                                    <a>
-                                        <button>Готово</button>
-                                    </a>
+                                    <button class="closeBlock">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:0"></span>
                                 </div>
                             </li>
-                            <li><img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
+                            <li onclick="allParam('apperanceOfTheApartment')"><img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
                                 <div class="appearance-of-the-apartment">
                                     <h2>Внешний вид квартиры</h2>
                                     <ul>
@@ -1330,13 +1319,13 @@
                                             <select class="js-example-data-array-selected decoration"></select>
                                         </li>
                                     </ul>
-                                    <button>Готово</button>
+                                    <button class="search">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:40%"></span>
                                 </div>
                             </li>
-                            <li><img src="../../template/images/search-3.png" alt="search">Параметры здания
+                            <li onclick="allParam('buildingParametersFilter');"><img src="../../template/images/search-3.png" alt="search">Параметры здания
                                 <div class="building-parameters-filter">
                                     <h2>Параметры здания</h2>
                                     <ul>
@@ -1361,13 +1350,13 @@
                                             <select class="js-example-data-array-selected parking-area"></select>
                                         </li>
                                     </ul>
-                                    <button>Готово</button>
+                                    <button class="close-building-parameter">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:40%"></span>
                                 </div>
                             </li>
-                            <li><img src="../../template/images/search-4.png" alt="search">Внешний вид здания
+                            <li onclick="allParam('appearanceBuild')"><img src="../../template/images/search-4.png" alt="search">Внешний вид здания
                                 <div class="appearance-of-the-build">
                                     <h2>Внешний вид здания</h2>
                                     <ul>
@@ -1384,7 +1373,7 @@
                                             <select class="js-example-data-array-selected foundation"></select>
                                         </li>
                                     </ul>
-                                    <button>Поиск</button>
+                                    <button class="closeApparenceBuild">Поиск</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:0"></span>
@@ -1396,7 +1385,7 @@
                             <li><img src="../../template/images/search-1.png" alt="search">Документы
                                 <select class="js-example-data-array-selected documents"></select>
                             </li>
-                            <li onclick="attachment();"><img src="../../template/images/search-1.png" alt="search">Вложения
+                            <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png" alt="search">Вложения
                                 <div class="attachments">
                                     <h2>Вложения</h2>
                                     <ul>
@@ -1416,7 +1405,7 @@
                                             <select class="js-example-data-array-selected video"></select>
                                         </li>
                                     </ul>
-                                    <button>Готово</button>
+                                    <button class="closeAttachment">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:0"></span>
@@ -1424,7 +1413,7 @@
                             </li>
                         </ul>
                         <ul class="building-parameters-office-area">
-                            <li onclick="apartmentSettings();">
+                            <li onclick="allParam('apartment');">
                                 <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
                                 <div class="apartment-settings">
                                     <h2>Параметры квартиры</h2>
@@ -1458,15 +1447,13 @@
                                             <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
                                         </li>
                                     </ul>
-                                    <a>
-                                        <button>Готово</button>
-                                    </a>
+                                    <button class="closeBlock">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:0"></span>
                                 </div>
                             </li>
-                            <li><img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
+                            <li onclick="allParam('apperanceOfTheApartment')"><img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
                                 <div class="appearance-of-the-apartment">
                                     <h2>Внешний вид квартиры</h2>
                                     <ul>
@@ -1486,13 +1473,13 @@
                                             <select class="js-example-data-array-selected decoration"></select>
                                         </li>
                                     </ul>
-                                    <button>Готово</button>
+                                    <button class="search">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:40%"></span>
                                 </div>
                             </li>
-                            <li><img src="../../template/images/search-3.png" alt="search">Параметры здания
+                            <li onclick="allParam('buildingParametersFilter');"><img src="../../template/images/search-3.png" alt="search">Параметры здания
                                 <div class="building-parameters-filter">
                                     <h2>Параметры здания</h2>
                                     <ul>
@@ -1517,13 +1504,13 @@
                                             <select class="js-example-data-array-selected parking-area"></select>
                                         </li>
                                     </ul>
-                                    <button>Готово</button>
+                                    <button class="close-building-parameter">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:40%"></span>
                                 </div>
                             </li>
-                            <li><img src="../../template/images/search-4.png" alt="search">Внешний вид здания
+                            <li onclick="allParam('appearanceBuild')"><img src="../../template/images/search-4.png" alt="search">Внешний вид здания
                                 <div class="appearance-of-the-build">
                                     <h2>Внешний вид здания</h2>
                                     <ul>
@@ -1540,7 +1527,7 @@
                                             <select class="js-example-data-array-selected foundation"></select>
                                         </li>
                                     </ul>
-                                    <button>Поиск</button>
+                                    <button class="closeApparenceBuild">Поиск</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:0"></span>
@@ -1552,7 +1539,7 @@
                             <li><img src="../../template/images/search-1.png" alt="search">Документы
                                 <select class="js-example-data-array-selected documents"></select>
                             </li>
-                            <li onclick="attachment();"><img src="../../template/images/search-1.png" alt="search">Вложения
+                            <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png" alt="search">Вложения
                                 <div class="attachments">
                                     <h2>Вложения</h2>
                                     <ul>
@@ -1572,7 +1559,7 @@
                                             <select class="js-example-data-array-selected video"></select>
                                         </li>
                                     </ul>
-                                    <button>Готово</button>
+                                    <button class="closeAttachment">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:0"></span>
@@ -1580,7 +1567,7 @@
                             </li>
                         </ul>
                         <ul class="building-parameters-separate-building">
-                            <li onclick="apartmentSettings();">
+                            <li onclick="allParam('apartment');">
                                 <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
                                 <div class="apartment-settings">
                                     <h2>Параметры квартиры</h2>
@@ -1614,15 +1601,13 @@
                                             <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
                                         </li>
                                     </ul>
-                                    <a>
-                                        <button>Готово</button>
-                                    </a>
+                                    <button class="closeBlock">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:0"></span>
                                 </div>
                             </li>
-                            <li><img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
+                            <li onclick="allParam('apperanceOfTheApartment')"><img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
                                 <div class="appearance-of-the-apartment">
                                     <h2>Внешний вид квартиры</h2>
                                     <ul>
@@ -1642,13 +1627,13 @@
                                             <select class="js-example-data-array-selected decoration"></select>
                                         </li>
                                     </ul>
-                                    <button>Готово</button>
+                                    <button class="search">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:40%"></span>
                                 </div>
                             </li>
-                            <li><img src="../../template/images/search-3.png" alt="search">Параметры здания
+                            <li onclick="allParam('buildingParametersFilter');"><img src="../../template/images/search-3.png" alt="search">Параметры здания
                                 <div class="building-parameters-filter">
                                     <h2>Параметры здания</h2>
                                     <ul>
@@ -1673,13 +1658,13 @@
                                             <select class="js-example-data-array-selected parking-area"></select>
                                         </li>
                                     </ul>
-                                    <button>Готово</button>
+                                    <button class="close-building-parameter">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:40%"></span>
                                 </div>
                             </li>
-                            <li><img src="../../template/images/search-4.png" alt="search">Внешний вид здания
+                            <li onclick="allParam('appearanceBuild')"><img src="../../template/images/search-4.png" alt="search">Внешний вид здания
                                 <div class="appearance-of-the-build">
                                     <h2>Внешний вид здания</h2>
                                     <ul>
@@ -1696,7 +1681,7 @@
                                             <select class="js-example-data-array-selected foundation"></select>
                                         </li>
                                     </ul>
-                                    <button>Поиск</button>
+                                    <button class="closeApparenceBuild">Поиск</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:0"></span>
@@ -1708,7 +1693,7 @@
                             <li><img src="../../template/images/search-1.png" alt="search">Документы
                                 <select class="js-example-data-array-selected documents"></select>
                             </li>
-                            <li onclick="attachment();"><img src="../../template/images/search-1.png" alt="search">Вложения
+                            <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png" alt="search">Вложения
                                 <div class="attachments">
                                     <h2>Вложения</h2>
                                     <ul>
@@ -1728,7 +1713,7 @@
                                             <select class="js-example-data-array-selected video"></select>
                                         </li>
                                     </ul>
-                                    <button>Готово</button>
+                                    <button class="closeAttachment">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:0"></span>
@@ -1736,7 +1721,7 @@
                             </li>
                         </ul>
                         <ul class="building-parameters-ozs-сomplex">
-                            <li onclick="apartmentSettings();">
+                            <li onclick="allParam('apartment');">
                                 <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
                                 <div class="apartment-settings">
                                     <h2>Параметры квартиры</h2>
@@ -1770,15 +1755,13 @@
                                             <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
                                         </li>
                                     </ul>
-                                    <a>
-                                        <button>Готово</button>
-                                    </a>
+                                    <button class="closeBlock">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:0"></span>
                                 </div>
                             </li>
-                            <li><img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
+                            <li onclick="allParam('apperanceOfTheApartment')"><img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
                                 <div class="appearance-of-the-apartment">
                                     <h2>Внешний вид квартиры</h2>
                                     <ul>
@@ -1798,13 +1781,13 @@
                                             <select class="js-example-data-array-selected decoration"></select>
                                         </li>
                                     </ul>
-                                    <button>Готово</button>
+                                    <button class="search">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:40%"></span>
                                 </div>
                             </li>
-                            <li><img src="../../template/images/search-3.png" alt="search">Параметры здания
+                            <li onclick="allParam('buildingParametersFilter');"><img src="../../template/images/search-3.png" alt="search">Параметры здания
                                 <div class="building-parameters-filter">
                                     <h2>Параметры здания</h2>
                                     <ul>
@@ -1829,13 +1812,13 @@
                                             <select class="js-example-data-array-selected parking-area"></select>
                                         </li>
                                     </ul>
-                                    <button>Готово</button>
+                                    <button class="close-building-parameter">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:40%"></span>
                                 </div>
                             </li>
-                            <li><img src="../../template/images/search-4.png" alt="search">Внешний вид здания
+                            <li onclick="allParam('appearanceBuild')"><img src="../../template/images/search-4.png" alt="search">Внешний вид здания
                                 <div class="appearance-of-the-build">
                                     <h2>Внешний вид здания</h2>
                                     <ul>
@@ -1852,7 +1835,7 @@
                                             <select class="js-example-data-array-selected foundation"></select>
                                         </li>
                                     </ul>
-                                    <button>Поиск</button>
+                                    <button class="closeApparenceBuild">Поиск</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:0"></span>
@@ -1864,7 +1847,7 @@
                             <li><img src="../../template/images/search-1.png" alt="search">Документы
                                 <select class="js-example-data-array-selected documents"></select>
                             </li>
-                            <li onclick="attachment();"><img src="../../template/images/search-1.png" alt="search">Вложения
+                            <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png" alt="search">Вложения
                                 <div class="attachments">
                                     <h2>Вложения</h2>
                                     <ul>
@@ -1884,7 +1867,7 @@
                                             <select class="js-example-data-array-selected video"></select>
                                         </li>
                                     </ul>
-                                    <button>Готово</button>
+                                    <button class="closeAttachment">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:0"></span>
@@ -2230,7 +2213,7 @@
                                 </div>
                             </span>
                         </div>
-                        <button onclick="quickSearch()">Задать точнее</button>
+                        <button onclick="allParam('quickSearch')">Задать точнее</button>
                         <div class="quick-search">
                             <h5><i class="fa fa-map-marker" aria-hidden="true"></i>Введите город, район, область или
                                 точный адрес<span><img src="../../template/images/location.png" alt="location">выделить область на карте</span>
@@ -2259,8 +2242,10 @@
                                 <li><label>Удаленность от метро не более
                                         <select class="js-example-data-array distance"></select>
                                     </label></li>
+                                <li>
+                                    <button class="closeQuickSearch">Готово</button>
+                                </li>
                             </ul>
-                            <button>Готово</button>
                         </div>
                     </div>
                     <button onclick="data()">Найти</button>
@@ -2329,7 +2314,7 @@
                     <div class="advanced-search-options">
                         <p>Заполните параметры ниже, для более точного поиска</p>
                         <ul class="building-parameters">
-                            <li onclick="apartmentSettings();">
+                            <li onclick="allParam('apartment');">
                                 <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
                                 <div class="apartment-settings">
                                     <h2>Параметры квартиры</h2>
@@ -2372,14 +2357,14 @@
                                             <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
                                         </li>
                                     </ul>
-                                    <button>Готово</button>
+                                    <button class="closeBlock">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:0"></span>
                                 </div>
                             </li>
-                            <li onclick="allFilterBlocks('appearanceOfTheApartment')"><img
-                                        src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
+                            <li onclick="allParam('apperanceOfTheApartment')">
+                                <img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
                                 <div class="appearance-of-the-apartment">
                                     <h2>Внешний вид квартиры</h2>
                                     <ul>
@@ -2405,7 +2390,7 @@
                                     <span style="width:40%"></span>
                                 </div>
                             </li>
-                            <li onclick="allFilterBlocks('buildingParametersFilter');">
+                            <li onclick="allParam('buildingParametersFilter');">
                                 <img src="../../template/images/search-3.png" alt="search">Параметры здания
                                 <div class="building-parameters-filter">
                                     <h2>Параметры здания</h2>
@@ -2431,13 +2416,13 @@
                                             <select class="js-example-data-array-selected parking-area"></select>
                                         </li>
                                     </ul>
-                                    <button class="close-building-parameters-filter">Готово</button>
+                                    <button class="close-building-parameter">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:40%"></span>
                                 </div>
                             </li>
-                            <li onclick="appearanceOfTheBuilding();">
+                            <li onclick="allParam('appearanceBuild')">
                                 <img src="../../template/images/search-4.png" alt="search">Внешний вид здания
                                 <div class="appearance-of-the-build">
                                     <h2>Внешний вид здания</h2>
@@ -2455,7 +2440,7 @@
                                             <select class="js-example-data-array-selected foundation"></select>
                                         </li>
                                     </ul>
-                                    <button value="Найти">Поиск</button>
+                                    <button class="closeApparenceBuild">Поиск</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:0"></span>
@@ -2467,7 +2452,7 @@
                             <li><img src="../../template/images/search-1.png" alt="search">Документы
                                 <select class="js-example-data-array-selected documents"></select>
                             </li>
-                            <li onclick="attachment();"><img src="../../template/images/search-1.png" alt="search">Вложения
+                            <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png" alt="search">Вложения
                                 <div class="attachments">
                                     <h2>Вложения</h2>
                                     <ul>
@@ -2487,7 +2472,7 @@
                                             <select class="js-example-data-array-selected video"></select>
                                         </li>
                                     </ul>
-                                    <button value="Найти">Готово</button>
+                                    <button class="closeAttachment">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:0"></span>
@@ -2495,9 +2480,8 @@
                             </li>
                         </ul>
                         <ul class="building-parameters-apartment">
-                            <li onclick="apartmentSettings();">
-                                <img src="../../template/images/search-1.png" alt="search">Исходные параметры
-                                квартиры
+                            <li onclick="allParam('apartment');">
+                                <img src="../../template/images/search-1.png" alt="search">Исходные параметры квартиры
                                 <div class="apartment-settings">
                                     <h2>Исходные параметры квартиры</h2>
                                     <ul>
@@ -2542,15 +2526,13 @@
                                             <select class="js-example-data-array-selected foundation"></select></span>
                                         </li>
                                     </ul>
-                                    <a>
-                                        <button value="Найти">Готово</button>
-                                    </a>
+                                    <button class="closeBlock">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:0"></span>
                                 </div>
                             </li>
-                            <li onclick="allFilterBlocks('appearanceOfTheApartment');">
+                            <li onclick="allParam('apperanceOfTheApartment')">
                                 <img src="../../template/images/search-2.png" alt="search">Ремонт и обустройства
                                 <div class="appearance-of-the-apartment">
                                     <h2>Ремонт и обустройства</h2>
@@ -2613,7 +2595,7 @@
                                     <span style="width:40%"></span>
                                 </div>
                             </li>
-                            <li onclick="attachment();"><img src="../../template/images/search-1.png" alt="search">Документы
+                            <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png" alt="search">Документы
                                 <div class="attachments">
                                     <h2>Документы</h2>
                                     <ul>
@@ -2628,7 +2610,7 @@
                                     <span style="width:0"></span>
                                 </div>
                             </li>
-                            <li onclick="attachment();"><img src="../../template/images/search-1.png" alt="search">Вложения
+                            <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png" alt="search">Вложения
                                 <div class="attachments">
                                     <h2>Вложения</h2>
                                     <ul>
@@ -2638,7 +2620,7 @@
                                             <label>Видео<input type="checkbox" name="video"></label>
                                         </li>
                                     </ul>
-                                    <button value="Найти">Готово</button>
+                                    <button class="closeAttachment">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:0"></span>
@@ -2646,7 +2628,7 @@
                             </li>
                         </ul>
                         <ul class="building-parameters-home">
-                            <li onclick="apartmentSettings();">
+                            <li onclick="allParam('apartment');">
                                 <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
                                 <div class="apartment-settings">
                                     <h2>Параметры квартиры</h2>
@@ -2680,13 +2662,13 @@
                                             <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
                                         </li>
                                     </ul>
-                                    <a><button>Готово</button></a>
+                                    <button class="closeBlock">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:0"></span>
                                 </div>
                             </li>
-                            <li><img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
+                            <li onclick="allParam('apperanceOfTheApartment')"><img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
                                 <div class="appearance-of-the-apartment">
                                     <h2>Внешний вид квартиры</h2>
                                     <ul>
@@ -2706,13 +2688,13 @@
                                             <select class="js-example-data-array-selected decoration"></select>
                                         </li>
                                     </ul>
-                                    <button>Готово</button>
+                                    <button class="search">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:40%"></span>
                                 </div>
                             </li>
-                            <li><img src="../../template/images/search-3.png" alt="search">Параметры здания
+                            <li onclick="allParam('buildingParametersFilter');"><img src="../../template/images/search-3.png" alt="search">Параметры здания
                                 <div class="building-parameters-filter">
                                     <h2>Параметры здания</h2>
                                     <ul>
@@ -2737,13 +2719,13 @@
                                             <select class="js-example-data-array-selected parking-area"></select>
                                         </li>
                                     </ul>
-                                    <button>Готово</button>
+                                    <button class="close-building-parameter">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:40%"></span>
                                 </div>
                             </li>
-                            <li><img src="../../template/images/search-4.png" alt="search">Внешний вид здания
+                            <li onclick="allParam('appearanceBuild')"><img src="../../template/images/search-4.png" alt="search">Внешний вид здания
                                 <div class="appearance-of-the-build">
                                     <h2>Внешний вид здания</h2>
                                     <ul>
@@ -2760,7 +2742,7 @@
                                             <select class="js-example-data-array-selected foundation"></select>
                                         </li>
                                     </ul>
-                                    <button>Поиск</button>
+                                    <button class="closeApparenceBuild">Поиск</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:0"></span>
@@ -2772,7 +2754,7 @@
                             <li><img src="../../template/images/search-1.png" alt="search">Документы
                                 <select class="js-example-data-array-selected documents"></select>
                             </li>
-                            <li onclick="attachment();"><img src="../../template/images/search-1.png" alt="search">Вложения
+                            <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png" alt="search">Вложения
                                 <div class="attachments">
                                     <h2>Вложения</h2>
                                     <ul>
@@ -2792,7 +2774,7 @@
                                             <select class="js-example-data-array-selected video"></select>
                                         </li>
                                     </ul>
-                                    <button>Готово</button>
+                                    <button class="closeAttachment">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:0"></span>
@@ -2800,7 +2782,7 @@
                             </li>
                         </ul>
                         <ul class="building-parameters-room">
-                            <li onclick="apartmentSettings();">
+                            <li onclick="allParam('apartment');">
                                 <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
                                 <div class="apartment-settings">
                                     <h2>Параметры квартиры</h2>
@@ -2834,13 +2816,13 @@
                                             <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
                                         </li>
                                     </ul>
-                                    <a><button>Готово</button></a>
+                                    <button class="closeBlock">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:0"></span>
                                 </div>
                             </li>
-                            <li><img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
+                            <li onclick="allParam('apperanceOfTheApartment')"><img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
                                 <div class="appearance-of-the-apartment">
                                     <h2>Внешний вид квартиры</h2>
                                     <ul>
@@ -2860,13 +2842,13 @@
                                             <select class="js-example-data-array-selected decoration"></select>
                                         </li>
                                     </ul>
-                                    <button>Готово</button>
+                                    <button class="search">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:40%"></span>
                                 </div>
                             </li>
-                            <li><img src="../../template/images/search-3.png" alt="search">Параметры здания
+                            <li onclick="allParam('buildingParametersFilter');"><img src="../../template/images/search-3.png" alt="search">Параметры здания
                                 <div class="building-parameters-filter">
                                     <h2>Параметры здания</h2>
                                     <ul>
@@ -2891,13 +2873,13 @@
                                             <select class="js-example-data-array-selected parking-area"></select>
                                         </li>
                                     </ul>
-                                    <button>Готово</button>
+                                    <button class="close-building-parameter">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:40%"></span>
                                 </div>
                             </li>
-                            <li><img src="../../template/images/search-4.png" alt="search">Внешний вид здания
+                            <li onclick="allParam('appearanceBuild')"><img src="../../template/images/search-4.png" alt="search">Внешний вид здания
                                 <div class="appearance-of-the-build">
                                     <h2>Внешний вид здания</h2>
                                     <ul>
@@ -2914,7 +2896,7 @@
                                             <select class="js-example-data-array-selected foundation"></select>
                                         </li>
                                     </ul>
-                                    <button>Поиск</button>
+                                    <button class="closeApparenceBuild">Поиск</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:0"></span>
@@ -2926,7 +2908,7 @@
                             <li><img src="../../template/images/search-1.png" alt="search">Документы
                                 <select class="js-example-data-array-selected documents"></select>
                             </li>
-                            <li onclick="attachment();"><img src="../../template/images/search-1.png" alt="search">Вложения
+                            <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png" alt="search">Вложения
                                 <div class="attachments">
                                     <h2>Вложения</h2>
                                     <ul>
@@ -2946,7 +2928,7 @@
                                             <select class="js-example-data-array-selected video"></select>
                                         </li>
                                     </ul>
-                                    <button>Готово</button>
+                                    <button class="closeAttachment">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:0"></span>
@@ -2954,7 +2936,7 @@
                             </li>
                         </ul>
                         <ul class="building-parameters-office-area">
-                            <li onclick="apartmentSettings();">
+                            <li onclick="allParam('apartment');">
                                 <img src="../../template/images/search-1.png" alt="search">Исходные параметры
                                 <div class="apartment-settings">
                                     <h2>Исходные параметры</h2>
@@ -2988,15 +2970,13 @@
                                             <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
                                         </li>
                                     </ul>
-                                    <a>
-                                        <button>Готово</button>
-                                    </a>
+                                    <button class="closeBlock">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:0"></span>
                                 </div>
                             </li>
-                            <li onclick="allFilterBlocks('appearanceOfTheApartment')">
+                            <li onclick="allParam('apperanceOfTheApartment')">
                                 <img src="../../template/images/search-2.png" alt="search">Ремонт и обустройства
                                 <div class="appearance-of-the-apartment">
                                     <h2>Ремонт и обустройства</h2>
@@ -3017,7 +2997,7 @@
                                             <select class="js-example-data-array-selected decoration"></select>
                                         </li>
                                     </ul>
-                                    <button>Готово</button>
+                                    <button class="search">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:40%"></span>
@@ -3026,7 +3006,7 @@
                             <li><img src="../../template/images/search-1.png" alt="search">Документы
                                 <select class="js-example-data-array-selected documents"></select>
                             </li>
-                            <li onclick="attachment();"><img src="../../template/images/search-1.png" alt="search">Вложения
+                            <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png" alt="search">Вложения
                                 <div class="attachments">
                                     <h2>Вложения</h2>
                                     <ul>
@@ -3046,7 +3026,7 @@
                                             <select class="js-example-data-array-selected video"></select>
                                         </li>
                                     </ul>
-                                    <button>Готово</button>
+                                    <button class="closeAttachment">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:0"></span>
@@ -3054,7 +3034,7 @@
                             </li>
                         </ul>
                         <ul class="building-parameters-separate-building">
-                            <li onclick="apartmentSettings();">
+                            <li onclick="allParam('apartment');">
                                 <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
                                 <div class="apartment-settings">
                                     <h2>Параметры квартиры</h2>
@@ -3088,15 +3068,13 @@
                                             <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
                                         </li>
                                     </ul>
-                                    <a>
-                                        <button>Готово</button>
-                                    </a>
+                                    <button class="closeBlock">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:0"></span>
                                 </div>
                             </li>
-                            <li><img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
+                            <li onclick="allParam('apperanceOfTheApartment')"><img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
                                 <div class="appearance-of-the-apartment">
                                     <h2>Внешний вид квартиры</h2>
                                     <ul>
@@ -3116,14 +3094,14 @@
                                             <select class="js-example-data-array-selected decoration"></select>
                                         </li>
                                     </ul>
-                                    <button>Готово</button>
+                                    <button class="search">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:40%"></span>
                                 </div>
                             </li>
-                            <li onclick="allFilterBlocks('buildingParametersFilter');"><img
-                                        src="../../template/images/search-3.png" alt="search">Параметры здания
+                            <li onclick="allParam('buildingParametersFilter');">
+                                <img src="../../template/images/search-3.png" alt="search">Параметры здания
                                 <div class="building-parameters-filter">
                                     <h2>Параметры здания</h2>
                                     <ul>
@@ -3148,13 +3126,13 @@
                                             <select class="js-example-data-array-selected parking-area"></select>
                                         </li>
                                     </ul>
-                                    <button class="close-building-parameters-filter">Готово</button>
+                                    <button class="close-building-parameter">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:40%"></span>
                                 </div>
                             </li>
-                            <li onclick="appearanceOfTheBuilding();">
+                            <li onclick="allParam('appearanceBuild')">
                                 <img src="../../template/images/search-4.png" alt="search">Внешний вид здания
                                 <div class="appearance-of-the-build">
                                     <h2>Внешний вид здания</h2>
@@ -3172,7 +3150,7 @@
                                             <select class="js-example-data-array-selected foundation"></select>
                                         </li>
                                     </ul>
-                                    <button>Поиск</button>
+                                    <button class="closeApparenceBuild">Поиск</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:0"></span>
@@ -3184,7 +3162,7 @@
                             <li><img src="../../template/images/search-1.png" alt="search">Документы
                                 <select class="js-example-data-array-selected documents"></select>
                             </li>
-                            <li onclick="attachment();"><img src="../../template/images/search-1.png" alt="search">Вложения
+                            <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png" alt="search">Вложения
                                 <div class="attachments">
                                     <h2>Вложения</h2>
                                     <ul>
@@ -3204,7 +3182,7 @@
                                             <select class="js-example-data-array-selected video"></select>
                                         </li>
                                     </ul>
-                                    <button>Готово</button>
+                                    <button class="closeAttachment">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:0"></span>
@@ -3212,7 +3190,7 @@
                             </li>
                         </ul>
                         <ul class="building-parameters-ozs-сomplex">
-                            <li onclick="apartmentSettings();">
+                            <li onclick="allParam('apartment');">
                                 <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
                                 <div class="apartment-settings">
                                     <h2>Параметры квартиры</h2>
@@ -3246,15 +3224,13 @@
                                             <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
                                         </li>
                                     </ul>
-                                    <a>
-                                        <button>Готово</button>
-                                    </a>
+                                    <button class="closeBlock">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:0"></span>
                                 </div>
                             </li>
-                            <li><img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
+                            <li onclick="allParam('apperanceOfTheApartment')"><img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
                                 <div class="appearance-of-the-apartment">
                                     <h2>Внешний вид квартиры</h2>
                                     <ul>
@@ -3274,13 +3250,13 @@
                                             <select class="js-example-data-array-selected decoration"></select>
                                         </li>
                                     </ul>
-                                    <button>Готово</button>
+                                    <button class="search">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:40%"></span>
                                 </div>
                             </li>
-                            <li onclick="allFilterBlocks('buildingParametersFilter');"><img
+                            <li onclick="allParam('buildingParametersFilter');"><img
                                         src="../../template/images/search-3.png" alt="search">Параметры здания
                                 <div class="building-parameters-filter">
                                     <h2>Параметры здания</h2>
@@ -3306,13 +3282,13 @@
                                             <select class="js-example-data-array-selected parking-area"></select>
                                         </li>
                                     </ul>
-                                    <button class="close-building-parameters-filter">Готово</button>
+                                    <button class="close-building-parameter">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:40%"></span>
                                 </div>
                             </li>
-                            <li><img src="../../template/images/search-4.png" alt="search">Внешний вид здания
+                            <li onclick="allParam('appearanceBuild')"><img src="../../template/images/search-4.png" alt="search">Внешний вид здания
                                 <div class="appearance-of-the-build">
                                     <h2>Внешний вид здания</h2>
                                     <ul>
@@ -3329,7 +3305,7 @@
                                             <select class="js-example-data-array-selected foundation"></select>
                                         </li>
                                     </ul>
-                                    <button>Поиск</button>
+                                    <button class="closeApparenceBuild">Поиск</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:0"></span>
@@ -3341,7 +3317,7 @@
                             <li><img src="../../template/images/search-1.png" alt="search">Документы
                                 <select class="js-example-data-array-selected documents"></select>
                             </li>
-                            <li onclick="attachment();"><img src="../../template/images/search-1.png" alt="search">Вложения
+                            <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png" alt="search">Вложения
                                 <div class="attachments">
                                     <h2>Вложения</h2>
                                     <ul>
@@ -3361,7 +3337,7 @@
                                             <select class="js-example-data-array-selected video"></select>
                                         </li>
                                     </ul>
-                                    <button>Готово</button>
+                                    <button class="closeAttachment">Готово</button>
                                 </div>
                                 <div class="progress-bar blue stripes">
                                     <span style="width:0"></span>

@@ -147,6 +147,66 @@ function filterOptionsApartments() {
     $('.property-type-apartment-settings, .decorativeShadowBlock').fadeIn('slow');
 }
 
+function allParam(filterParam) {
+    switch (filterParam) {
+        case 'apartment':
+            var $apartmentSettings = $('.apartment-settings');
+            $apartmentSettings.css({'display': 'block'});
+
+            $('.closeBlock').on('click', function (e) {
+                e.preventDefault();
+                $apartmentSettings.fadeOut('slow');
+            });
+            break;
+        case 'apperanceOfTheApartment':
+            var $apartmentApartment = $('.appearance-of-the-apartment');
+            $apartmentApartment.css({'display': 'block'});
+
+            $('.search').on('click', function (e) {
+                e.preventDefault();
+                $apartmentApartment.fadeOut('slow');
+            });
+            break;
+        case 'appearanceBuild':
+            var $apparenceBuild = $('.appearance-of-the-build');
+            $apparenceBuild.css({'display': 'block'});
+
+            $('.closeApparenceBuild').on('click', function (e) {
+                e.preventDefault();
+                $apparenceBuild.fadeOut('slow');
+            });
+            break;
+        case 'attachment':
+            var $attachment = $('.attachments');
+            $attachment.css({'display': 'block'});
+
+            $('.closeAttachment').on('click', function (e) {
+                e.preventDefault();
+                $attachment.fadeOut('slow');
+            });
+            break;
+        case 'quickSearch':
+            var $quickSearch = $('.quick-search');
+            $quickSearch.css({'display': 'block'});
+
+            $('.closeQuickSearch').on('click', function (e) {
+                e.preventDefault();
+                $quickSearch.fadeOut('slow');
+            });
+            break;
+        case 'buildingParametersFilter':
+            var $parametrFilter = $('.building-parameters-filter');
+            $parametrFilter.css({'display': 'block'});
+
+            $('.close-building-parameter').on('click', function (e) {
+                e.preventDefault();
+                $parametrFilter.fadeOut('slow');
+            });
+            break;
+        default: console.log('Параметр не найден');
+    }
+}
+
 function allFilterBlocks(filters) {
     $('.building-parameters-apartment, building-parameters-home,' +
         '.building-parameters-room, .building-parameters-office-area,' +
@@ -162,32 +222,7 @@ function allFilterBlocks(filters) {
                     $(this).css({'display':'none'});
                 });
             });
-        break;
-        case 'appearanceOfTheApartment' :
-            var $b = $('.appearance-of-the-apartment'),
-                search = $('.search');
-
-            $b.css({'display': 'block'});
-
-            search.on('click', function () {
-               $b.hide('slow', function () {
-                   $(this).css({'display':'none'});
-               });
-           });
-        break;
-        case 'buildingParametersFilter' :
-            var $a = $('.building-parameters-filter'),
-                searchClone = $('.close-building-parameters-filter');
-
-            $a.css({'display': 'block'});
-
-            searchClone.on('click', function () {
-                $a.hide('slow', function () {
-                    $(this).css({'display':'none'});
-                    $a.hide();
-                });
-            });
-        break;
+            break;
         case 'historySearch':
             var $history = $('.history-search'),
                 historyInput = $('history');
@@ -197,7 +232,6 @@ function allFilterBlocks(filters) {
                     $history.css({'display': 'none'});
                 }, 7500);
             }
-
             $history.css({'display': 'block'});
             break;
         case '1':
@@ -263,24 +297,23 @@ function closeFixedBlock() {
 //---------------------------------------------------------
 
 /** Получение данных через Ajax и отправка данных**/
+$("#form").on('submit', function(e) { // устанавливаем событие отправки для формы с id=form
+    e.preventDefault();
 
-    $("#form").on('submit', function(e) { // устанавливаем событие отправки для формы с id=form
-        e.preventDefault();
+    var form_data = $(this).serialize(); // собераем все данные из формы
 
-        var form_data = $(this).serialize(); // собераем все данные из формы
-
-        $.ajax({
-            type: "POST",
-            url: "/search",
-            data: form_data,
-            success: function(form_data) {
-                console.log('Собрынные данные - ', form_data);
-            },
-            error: function(form_data) {
-                console.log('Ошибка отправки', form_data);
-            }
-        });
+    $.ajax({
+        type: "POST",
+        url: "/search",
+        data: form_data,
+        success: function(form_data) {
+            console.log('Собрынные данные - ', form_data);
+        },
+        error: function(form_data) {
+            console.log('Ошибка отправки', form_data);
+        }
     });
+});
 //---------------------------------------------------------
 
 /** Фильтр - Цена **/
