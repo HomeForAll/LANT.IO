@@ -322,301 +322,300 @@ var data = [
         {id: 3, text: 'Срок аренды3'},
         {id: 4, text: 'Срок аренды4'}
     ];
-//---------------------------------------------------------
-
 /** Библиотека select2(фильтры) **/
-$('.js-example-data-array, .region').select2({
-    data: data
-});
-$('.js-example-data-array, .offices').select2({
-    data: offices
-});
-$('.js-example-data-array, .product-price').select2({
-    data: productPrice
-});
-$('.js-example-data-array, .location-apartments').select2({
-    data: locationApartments
-});
-$('.js-example-data-array, .municipal').select2({
-    data: municipal
-});
-$('.js-example-data-array, .owner').select2({
-    data: owner,
-    maximumInputLength: 2
-});
-$('.js-example-data-array, .floor').select2({
-    data: floor
-});
-$('.js-example-data-array, .roofing').select2({
-    data: roofing
-});
-$('.js-example-data-array, .equipment').select2({
-    data: equipment
-});
-$('.js-example-data-array, .design-plan').select2({
-    data: designPlan
-});
-$('.js-example-data-array, .project').select2({
-    data: project
-});
-$('.js-example-data-array, .video').select2({
-    data: video
-});
-$('.js-example-data-array, .material').select2({
-    data: material
-});
-$('.js-example-data-array, .rooms').select2({
-    data: rooms
-});
-$('.js-example-data-array, .a-bathroom').select2({
-    data: aBathroom
-});
-$('.js-example-data-array, .decoration').select2({
-    data: decoration
-});
-$('.js-example-data-array, .wall_material').select2({
-    data: wallMaterial
-});
-$('.js-example-data-array, .roof').select2({
-    data: roof
-});
-$('.js-example-data-array, .foundation').select2({
-    data: foundation
-});
-$('.js-example-data-array, .wall_material').select2({
-    data: wall_material
-});
-$('.js-example-data-array, .the-presence-of-an-elevator').select2({
-    data: thePresenceOfAnElevator
-});
-$('.js-example-data-array, .nursery-services').select2({
-    data: nurseryServices
-});
-$('.js-example-data-array, .type-of-object').select2({
-    data: typeOfObject
-});
-$('.js-example-data-array, .parking-area').select2({
-    data: parkingArea
-});
-$('.js-example-data-array, .okrug').select2({
-    data: okrug
-});
-$('.js-example-data-array, .area').select2({
-    data: area
-});
-$('.js-example-data-array, .street').select2({
-    data: street
-});
-$('.js-example-data-array, .distance').select2({
-    data: distance
-});
-$('.js-example-data-array, .security').select2({
-    data: security
-});
-$('.js-example-data-array, .documents').select2({
-    data: documents
-});
-$('.js-example-data-array, .equipment').select2({
-    data: equipment
-});
-$('.js-example-data-array, .type_of_construction').select2({
-    data: type_of_construction
-});
-$('.js-example-data-array, .furnish').select2({
-    data: furnish
-});
-$('.js-example-data-array, .furnish').select2({
-    data: yesAndNo
-});
-$('.js-example-data-array, .foundation').select2({
-    data: foundation
-});
-$('.js-example-data-array, .elevator_yes').select2({
-    data: elevator_yes
-});
-$('.js-example-data-array, .clarification_of_the_object_type').select2({
-    data: clarification_of_the_object_type
-});
-$('.js-example-data-array, .parking').select2({
-    data: parking
-});
-$('.js-example-data-array, .wall_material').select2({
-    data: wall_material
-});
-$('.js-example-data-array, .video').select2({
-    data: video
-});
-$('.js-example-data-array, .planning_project').select2({
-    data: planning_project
-});
-$('.js-example-data-array, .three_d_project').select2({
-    data: three_d_project
-});
-$('.js-example-data-array, .sanitation').select2({
-    data: sanitation
-});
-$('.js-example-data-array, .building_type').select2({
-    data: building_type
-});
-$('.js-example-data-array, .stairwells_status').select2({
-    data: stairwells_status
-});
-$('.js-example-data-array, .property-type').select2({
-    data: propertyType,
-    maximumInputLength: 5
-});
-$('.js-example-data-array, .leaseTerm').select2({
-    data: leaseTerm,
-    maximumInputLength: 2
-});
+$(document).ready(function () {
+    $('.js-example-data-array, .region').select2({
+        data: data
+    });
+    $('.js-example-data-array, .offices').select2({
+        data: offices
+    });
+    $('.js-example-data-array, .product-price').select2({
+        data: productPrice
+    });
+    $('.js-example-data-array, .location-apartments').select2({
+        data: locationApartments
+    });
+    $('.js-example-data-array, .municipal').select2({
+        data: municipal
+    });
+    $('.js-example-data-array, .owner').select2({
+        data: owner,
+        maximumInputLength: 2
+    });
+    $('.js-example-data-array, .floor').select2({
+        data: floor
+    });
+    $('.js-example-data-array, .roofing').select2({
+        data: roofing
+    });
+    $('.js-example-data-array, .equipment').select2({
+        data: equipment
+    });
+    $('.js-example-data-array, .design-plan').select2({
+        data: designPlan
+    });
+    $('.js-example-data-array, .project').select2({
+        data: project
+    });
+    $('.js-example-data-array, .video').select2({
+        data: video
+    });
+    $('.js-example-data-array, .material').select2({
+        data: material
+    });
+    $('.js-example-data-array, .rooms').select2({
+        data: rooms
+    });
+    $('.js-example-data-array, .a-bathroom').select2({
+        data: aBathroom
+    });
+    $('.js-example-data-array, .decoration').select2({
+        data: decoration
+    });
+    $('.js-example-data-array, .wall_material').select2({
+        data: wallMaterial
+    });
+    $('.js-example-data-array, .roof').select2({
+        data: roof
+    });
+    $('.js-example-data-array, .foundation').select2({
+        data: foundation
+    });
+    $('.js-example-data-array, .wall_material').select2({
+        data: wall_material
+    });
+    $('.js-example-data-array, .the-presence-of-an-elevator').select2({
+        data: thePresenceOfAnElevator
+    });
+    $('.js-example-data-array, .nursery-services').select2({
+        data: nurseryServices
+    });
+    $('.js-example-data-array, .type-of-object').select2({
+        data: typeOfObject
+    });
+    $('.js-example-data-array, .parking-area').select2({
+        data: parkingArea
+    });
+    $('.js-example-data-array, .okrug').select2({
+        data: okrug
+    });
+    $('.js-example-data-array, .area').select2({
+        data: area
+    });
+    $('.js-example-data-array, .street').select2({
+        data: street
+    });
+    $('.js-example-data-array, .distance').select2({
+        data: distance
+    });
+    $('.js-example-data-array, .security').select2({
+        data: security
+    });
+    $('.js-example-data-array, .documents').select2({
+        data: documents
+    });
+    $('.js-example-data-array, .equipment').select2({
+        data: equipment
+    });
+    $('.js-example-data-array, .type_of_construction').select2({
+        data: type_of_construction
+    });
+    $('.js-example-data-array, .furnish').select2({
+        data: furnish
+    });
+    $('.js-example-data-array, .furnish').select2({
+        data: yesAndNo
+    });
+    $('.js-example-data-array, .foundation').select2({
+        data: foundation
+    });
+    $('.js-example-data-array, .elevator_yes').select2({
+        data: elevator_yes
+    });
+    $('.js-example-data-array, .clarification_of_the_object_type').select2({
+        data: clarification_of_the_object_type
+    });
+    $('.js-example-data-array, .parking').select2({
+        data: parking
+    });
+    $('.js-example-data-array, .wall_material').select2({
+        data: wall_material
+    });
+    $('.js-example-data-array, .video').select2({
+        data: video
+    });
+    $('.js-example-data-array, .planning_project').select2({
+        data: planning_project
+    });
+    $('.js-example-data-array, .three_d_project').select2({
+        data: three_d_project
+    });
+    $('.js-example-data-array, .sanitation').select2({
+        data: sanitation
+    });
+    $('.js-example-data-array, .building_type').select2({
+        data: building_type
+    });
+    $('.js-example-data-array, .stairwells_status').select2({
+        data: stairwells_status
+    });
+    $('.js-example-data-array, .property-type').select2({
+        data: propertyType,
+        maximumInputLength: 5
+    });
+    $('.js-example-data-array, .leaseTerm').select2({
+        data: leaseTerm,
+        maximumInputLength: 2
+    });
 
 //---------------------------------------------------------
-$('.js-example-data-array-selected, .region').select2({
-    data: data
+    $('.js-example-data-array-selected, .region').select2({
+        data: data
+    });
+    $('.js-example-data-array-selected, .offices').select2({
+        data: offices
+    });
+    $('.js-example-data-array-selected, .product-price').select2({
+        data: productPrice
+    });
+    $('.js-example-data-array-selected, .location-apartments').select2({
+        data: locationApartments
+    });
+    $('.js-example-data-array-selected, .roofing').select2({
+        data: roofing
+    });
+    $('.js-example-data-array-selected, .municipal').select2({
+        data: municipal
+    });
+    $('.js-example-data-array-selected, .wall_material').select2({
+        data: wall_material
+    });
+    $('.js-example-data-array-selected, .foundation').select2({
+        data: foundation
+    });
+    $('.js-example-data-array-selected, .material').select2({
+        data: material
+    });
+    $('.js-example-data-array-selected, .owner').select2({
+        data: owner,
+        maximumInputLength: 2
+    });
+    $('.js-example-data-array-selected, .floor').select2({
+        data: floor
+    });
+    $('.js-example-data-array-selected, .sanitation').select2({
+        data: sanitation
+    });
+    $('.js-example-data-array-selected, .equipment').select2({
+        data: equipment
+    });
+    $('.js-example-data-array-selected, .design-plan').select2({
+        data: designPlan
+    });
+    $('.js-example-data-array-selected, .project').select2({
+        data: project
+    });
+    $('.js-example-data-array-selected, .video').select2({
+        data: video
+    });
+    $('.js-example-data-array-selected, .building_type').select2({
+        data: building_type
+    });
+    $('.js-example-data-array-selected, .rooms').select2({
+        data: rooms
+    });
+    $('.js-example-data-array-selected, .a-bathroom').select2({
+        data: aBathroom
+    });
+    $('.js-example-data-array-selected, .decoration').select2({
+        data: decoration
+    });
+    $('.js-example-data-array-selected, .wall_material').select2({
+        data: wallMaterial
+    });
+    $('.js-example-data-array-selected, .roof').select2({
+        data: roof
+    });
+    $('.js-example-data-array-selected, .foundation').select2({
+        data: foundation
+    });
+    $('.js-example-data-array-selected, .the-presence-of-an-elevator').select2({
+        data: thePresenceOfAnElevator
+    });
+    $('.js-example-data-array-selected, .nursery-services').select2({
+        data: nurseryServices
+    });
+    $('.js-example-data-array-selected, .type-of-object').select2({
+        data: typeOfObject
+    });
+    $('.js-example-data-array-selected, .parking-area').select2({
+        data: parkingArea
+    });
+    $('.js-example-data-array-selected, .okrug').select2({
+        data: okrug
+    });
+    $('.js-example-data-array-selected, .area').select2({
+        data: area
+    });
+    $('.js-example-data-array-selected, .street').select2({
+        data: street
+    });
+    $('.js-example-data-array-selected, .distance').select2({
+        data: distance
+    });
+    $('.js-example-data-array-selected, .security').select2({
+        data: security
+    });
+    $('.js-example-data-array-selected, .documents').select2({
+        data: documents
+    });
+    $('.js-example-data-array-selected, .equipment').select2({
+        data: equipment
+    });
+    $('.js-example-data-array-selected, .furnish').select2({
+        data: furnish
+    });
+    $('.js-example-data-array-selected, .furnish').select2({
+        data: yesAndNo
+    });
+    $('.js-example-data-array-selected, .elevator_yes').select2({
+        data: elevator_yes
+    });
+    $('.js-example-data-array-selected, .parking').select2({
+        data: parking
+    });
+    $('.js-example-data-array-selected, .clarification_of_the_object_type').select2({
+        data: clarification_of_the_object_type
+    });
+    $('.js-example-data-array-selected, .wall_material').select2({
+        data: wall_material
+    });
+    $('.js-example-data-array-selected, .stairwells_status').select2({
+        data: stairwells_status
+    });
+    $('.js-example-data-array-selected, .video').select2({
+        data: video
+    });
+    $('.js-example-data-array-selected, .planning_project').select2({
+        data: planning_project
+    });
+    $('.js-example-data-array-selected, .type_of_construction').select2({
+        data: type_of_construction
+    });
+    $('.js-example-data-array-selected, .three_d_project').select2({
+        data: three_d_project
+    });
+    $('.js-example-data-array-selected, .property-type').select2({
+        data: propertyType,
+        maximumInputLength: 5
+    });
+    $('.js-example-data-array-selected, .leaseTerm').select2({
+        data: leaseTerm,
+        maximumInputLength: 2
+    });
+    $(".js-example-templating, .select-price-by-scrolling").select2({
+        templateResult: formatState,
+        data: subwayLines
+    });
 });
-$('.js-example-data-array-selected, .offices').select2({
-    data: offices
-});
-$('.js-example-data-array-selected, .product-price').select2({
-    data: productPrice
-});
-$('.js-example-data-array-selected, .location-apartments').select2({
-    data: locationApartments
-});
-$('.js-example-data-array-selected, .roofing').select2({
-    data: roofing
-});
-$('.js-example-data-array-selected, .municipal').select2({
-    data: municipal
-});
-$('.js-example-data-array-selected, .wall_material').select2({
-    data: wall_material
-});
-$('.js-example-data-array-selected, .foundation').select2({
-    data: foundation
-});
-$('.js-example-data-array-selected, .material').select2({
-    data: material
-});
-$('.js-example-data-array-selected, .owner').select2({
-    data: owner,
-    maximumInputLength: 2
-});
-$('.js-example-data-array-selected, .floor').select2({
-    data: floor
-});
-$('.js-example-data-array-selected, .sanitation').select2({
-    data: sanitation
-});
-$('.js-example-data-array-selected, .equipment').select2({
-    data: equipment
-});
-$('.js-example-data-array-selected, .design-plan').select2({
-    data: designPlan
-});
-$('.js-example-data-array-selected, .project').select2({
-    data: project
-});
-$('.js-example-data-array-selected, .video').select2({
-    data: video
-});
-$('.js-example-data-array-selected, .building_type').select2({
-    data: building_type
-});
-$('.js-example-data-array-selected, .rooms').select2({
-    data: rooms
-});
-$('.js-example-data-array-selected, .a-bathroom').select2({
-    data: aBathroom
-});
-$('.js-example-data-array-selected, .decoration').select2({
-    data: decoration
-});
-$('.js-example-data-array-selected, .wall_material').select2({
-    data: wallMaterial
-});
-$('.js-example-data-array-selected, .roof').select2({
-    data: roof
-});
-$('.js-example-data-array-selected, .foundation').select2({
-    data: foundation
-});
-$('.js-example-data-array-selected, .the-presence-of-an-elevator').select2({
-    data: thePresenceOfAnElevator
-});
-$('.js-example-data-array-selected, .nursery-services').select2({
-    data: nurseryServices
-});
-$('.js-example-data-array-selected, .type-of-object').select2({
-    data: typeOfObject
-});
-$('.js-example-data-array-selected, .parking-area').select2({
-    data: parkingArea
-});
-$('.js-example-data-array-selected, .okrug').select2({
-    data: okrug
-});
-$('.js-example-data-array-selected, .area').select2({
-    data: area
-});
-$('.js-example-data-array-selected, .street').select2({
-    data: street
-});
-$('.js-example-data-array-selected, .distance').select2({
-    data: distance
-});
-$('.js-example-data-array-selected, .security').select2({
-    data: security
-});
-$('.js-example-data-array-selected, .documents').select2({
-    data: documents
-});
-$('.js-example-data-array-selected, .equipment').select2({
-    data: equipment
-});
-$('.js-example-data-array-selected, .furnish').select2({
-    data: furnish
-});
-$('.js-example-data-array-selected, .furnish').select2({
-    data: yesAndNo
-});
-$('.js-example-data-array-selected, .elevator_yes').select2({
-    data: elevator_yes
-});
-$('.js-example-data-array-selected, .parking').select2({
-    data: parking
-});
-$('.js-example-data-array-selected, .clarification_of_the_object_type').select2({
-    data: clarification_of_the_object_type
-});
-$('.js-example-data-array-selected, .wall_material').select2({
-    data: wall_material
-});
-$('.js-example-data-array-selected, .stairwells_status').select2({
-    data: stairwells_status
-});
-$('.js-example-data-array-selected, .video').select2({
-    data: video
-});
-$('.js-example-data-array-selected, .planning_project').select2({
-    data: planning_project
-});
-$('.js-example-data-array-selected, .type_of_construction').select2({
-    data: type_of_construction
-});
-$('.js-example-data-array-selected, .three_d_project').select2({
-    data: three_d_project
-});
-$('.js-example-data-array-selected, .property-type').select2({
-    data: propertyType,
-    maximumInputLength: 5
-});
-$('.js-example-data-array-selected, .leaseTerm').select2({
-    data: leaseTerm,
-    maximumInputLength: 2
-});
-$(".js-example-templating, .select-price-by-scrolling").select2({
-    templateResult: formatState,
-    data: subwayLines
-});
-//---------------------------------------------------------
