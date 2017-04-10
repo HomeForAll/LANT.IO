@@ -185,6 +185,15 @@ function allParam(filterParam) {
                 $attachment.fadeOut('slow');
             });
             break;
+        case 'bigOption':
+            var $bigOption = $('.showBigOptions');
+            $bigOption.css({'display': 'block'});
+
+            $('.closeCurrency').on('click', function (e) {
+                e.preventDefault();
+                $bigOption.fadeOut('slow');
+            });
+            break;
         case 'quickSearch':
             var $quickSearch = $('.quick-search');
             $quickSearch.css({'display': 'block'});

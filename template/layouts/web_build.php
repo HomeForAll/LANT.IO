@@ -786,7 +786,7 @@
                                 </ul>
                             </div>
                         </li>
-                        <li onclick="filterOptions();">
+                        <li onclick="allParam('bigOption')">
                             <label for="#amount">Цена</label>
                             <div class="showBigOptions">
                                 <p>От<input name="" placeholder="" type="text" id="amountBefore" readonly disabled>
@@ -796,9 +796,9 @@
                                 <div id="slider-range"></div>
                                 <div class="currency">
                                     <p>Валюта</p>
-                                    <button><i class="fa fa-rub" aria-hidden="true"></i>рубли</button>
-                                    <button><i class="fa fa-usd" aria-hidden="true"></i>доллары</button>
-                                    <button><i class="fa fa-eur" aria-hidden="true"></i>евро</button>
+                                    <button class="closeCurrency"><i class="fa fa-rub" aria-hidden="true"></i>рубли</button>
+                                    <button class="closeCurrency"><i class="fa fa-usd" aria-hidden="true"></i>доллары</button>
+                                    <button class="closeCurrency"><i class="fa fa-eur" aria-hidden="true"></i>евро</button>
                                 </div>
                             </div>
                             <div class="decorativeShadowBlock"></div>
@@ -2251,7 +2251,7 @@
                     <button onclick="data()">Найти</button>
                     <ul class="filter-block-big-menu">
                         <li class="pointer value-text" onclick="filterOptionsApartments();">
-                            <img    src="../../template/images/apartments.png" alt="apartments">Тип недвижимости
+                            <img src="../../template/images/apartments.png" alt="apartments">Тип недвижимости
                             <div class="property-type-apartment-settings">
                                 <ul>
                                     <li>Жилая</li>
@@ -2291,7 +2291,7 @@
                                 </ul>
                             </div>
                         </li>
-                        <li onclick="filterOptions();">
+                        <li onclick="allParam('bigOption')">
                             <label for="#amount-buy">Цена</label>
                             <div class="showBigOptions">
                                 <p>От<input name="" placeholder="" type="text" id="amountBeforeBuy" readonly disabled></p>
@@ -2299,9 +2299,9 @@
                                 <div id="slider-range-buy"></div>
                                 <div class="currency">
                                     <p>Валюта</p>
-                                    <button><i class="fa fa-rub" aria-hidden="true"></i>рубли</button>
-                                    <button><i class="fa fa-usd" aria-hidden="true"></i>доллары</button>
-                                    <button><i class="fa fa-eur" aria-hidden="true"></i>евро</button>
+                                    <button class="closeCurrency"><i class="fa fa-rub" aria-hidden="true"></i>рубли</button>
+                                    <button class="closeCurrency"><i class="fa fa-usd" aria-hidden="true"></i>доллары</button>
+                                    <button class="closeCurrency"><i class="fa fa-eur" aria-hidden="true"></i>евро</button>
                                 </div>
                             </div>
                             <div class="decorativeShadowBlock"></div>
