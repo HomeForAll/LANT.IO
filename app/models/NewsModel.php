@@ -398,7 +398,7 @@ class NewsModel extends Model
         }
 
         // Количество выводимых новостей
-        $number_of_news = (int)$_SESSION['news_list']['number_of_news'];
+        $number_of_news = 20; //(int)$_SESSION['news_list']['number_of_news'];
         // Таблица новостей
         if (!empty($_SESSION['news_list']['category'])) {
             foreach ($_SESSION['news_list']['category'] as $key => $value) {
