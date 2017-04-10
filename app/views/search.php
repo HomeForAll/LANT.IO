@@ -414,7 +414,7 @@ if (!empty($this->data['objects'])) {
 <!--        <input type="text" name="address" style="margin: 10px 0 10px 40px;" placeholder="Адрес..."-->
 <!--               id="suggest"><br>-->
 <!---->
-<!--        <!-- Расположение -->-->
+<!--        <!-- Расположение 
 <!--        <input type="text" name="country" placeholder="Страна"><br>-->
 <!--        <input type="text" name="area" placeholder="Область"><br>-->
 <!--        <input type="text" name="city" placeholder="Город"><br>-->
