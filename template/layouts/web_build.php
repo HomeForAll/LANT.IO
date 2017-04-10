@@ -644,7 +644,7 @@
                         <div class="exact-area">
                             <span class="search-city" onclick="allFilterBlocks('historySearch');">
                                 <img src="../../template/images/s1.png" alt="city">
-                                <input id="historyInput" name="" placeholder="Москва, ул, Малая Ордынка" disabled>
+                                <input class="historyInput" name="" placeholder="Москва, ул, Малая Ордынка" disabled>
                             </span>
                             <div class="history-search">
                                 <span class="search-city active-search">
@@ -2147,7 +2147,7 @@
                         <div class="exact-area">
                             <span class="search-city" onclick="allFilterBlocks('historySearch')">
                                 <img src="../../template/images/s1.png" alt="city">
-                                <input name="" placeholder="Москва, ул, Малая Ордынка" disabled>
+                                <input class="historyInput" name="" placeholder="Москва, ул, Малая Ордынка" disabled>
                             </span>
                             <div class="history-search">
                                 <span class="search-city active-search">

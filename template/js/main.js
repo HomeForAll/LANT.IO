@@ -234,12 +234,17 @@ function allFilterBlocks(filters) {
             break;
         case 'historySearch':
             var $history = $('.history-search'),
-                historyInput = $('history');
+                historyInput = $('.historyInput');
+
+            console.log('История, работает');
 
             if (historyInput === 0) {
+                console.log('Запускаем, скрытие');
                 setTimeout(function () {
-                    $history.css({'display': 'none'});
-                }, 7500);
+                    console.log('Cкрытие запущенно');
+                    $history.fadeOut('slow');
+                    console.log('Cкрытие, завершено');
+                }, 10000);
             }
             $history.css({'display': 'block'});
             break;
