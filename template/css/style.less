@@ -224,7 +224,7 @@
   padding-top: 35vh;
   min-height: 100vh;
   padding-bottom: 100px;
-  background: url("../../template/images/background-1.png") no-repeat top center;
+  background: url("../../template/images/background-1.png") no-repeat center fixed;
   background-size: cover;
   text-align: center;
 }
@@ -266,6 +266,11 @@
     cursor: pointer;
     color: #898989;
   }
+}
+
+.select2-results__options {
+  display: inherit !important;
+  width: auto !important;
 }
 
 #blockToRent {
@@ -1161,7 +1166,7 @@
   text-align: center;
   p {
     display: block;
-    text-align: left;
+    text-align: center !important;
     width: auto;
     margin: 30px auto 10px;
     font-size: 14px;
@@ -1268,25 +1273,28 @@
   }
 }
 
-.building-parameters li {
-  vertical-align: top;
-  &:nth-child(1) {
-    background: #fff;
-  }
-  &:nth-child(n+5):nth-child(-n+6) {
-    & .select2-hidden-accessible {
-      display: none !important;
+.building-parameters {
+  display: none;
+  li {
+    vertical-align: top;
+    &:nth-child(1) {
+      background: #fff;
     }
-    & .select2-container {
-      border: none!important;
-      width: 60%!important;
-      padding: 0!important;
-    }
-    & .select2-selection__rendered {
-      padding: 1px 24px 0 0!important;
-    }
-    & .select2-selection--single {
-      height: 30px!important;
+    &:nth-child(n+5):nth-child(-n+6) {
+      & .select2-hidden-accessible {
+        display: none !important;
+      }
+      & .select2-container {
+        border: none!important;
+        width: 60%!important;
+        padding: 0!important;
+      }
+      & .select2-selection__rendered {
+        padding: 1px 24px 0 0!important;
+      }
+      & .select2-selection--single {
+        height: 30px!important;
+      }
     }
   }
 }
@@ -1328,9 +1336,12 @@
       display: none !important;
     }
     & .select2-container {
+      display: block;
       border: none!important;
-      width: 60%!important;
       padding: 0!important;
+      width: 70% !important;
+      min-width: 150px;
+      margin: 10px auto !important;
     }
     & .select2-selection__rendered {
       padding: 0 24px 0 0!important;
@@ -1338,9 +1349,39 @@
     & .select2-selection--single {
       height: 28px!important;
     }
+    & .select2-selection__arrow {
+      display: none !important;
+    }
+  }
+  p {
+    display: block !important;
+    width: auto !important;
+    text-align: center !important;
+  }
+  label {
+    display: inline-block;
+    width: 48% !important;
+    margin-bottom: 5px !important;
+    cursor: pointer;
+    padding: 10px;
+    text-align: left;
+  }
+  input {
+    margin: auto !important;
+    width: 70% !important;
+    &[type="checkbox"] {
+      display: inline-block;
+      vertical-align: middle;
+    }
   }
   span {
-    margin: 0 !important;
+    display: block;
+    text-align: center;
+    width: auto;
+    margin: 0 0 10px !important;
+  }
+  .names-parameters {
+    float: none;
   }
 }
 
@@ -1427,6 +1468,7 @@
   }
   button {
     display: block;
+    float: none !important;
     text-align: center;
     padding: 15px;
     border-radius: 50px;
@@ -1570,6 +1612,7 @@
     text-align: left;
   }
   & .select2-container {
+    float: none !important;
     width: 70% !important;
   }
 }
@@ -1661,6 +1704,7 @@
   background: #fff;
   text-align: left;
   span {
+    position: relative;
     z-index: 1;
     padding: 10px;
     margin-right: 10px; 
@@ -1683,6 +1727,7 @@
 
 .metro-location {
   display: inline-block;
+  overflow: hidden;
   position: relative;
   vertical-align: top;
   text-align: center;
@@ -3126,8 +3171,92 @@
   }
 }
 
+/** Яндекс карта **/
+#map {
+  display: none;
+  position: relative;
+  text-align: center;
+  height: 500px;
+  min-height: 100px;
+  z-index: 1;
+  & input {
+    position: absolute;
+    padding: 10px;
+    text-align: left;
+    border: 1px solid silver;
+    width: 80%;
+    top: 15px;
+    left: 10vw;
+    right: 10vw;
+    z-index: 2;
+    background: #fff;
+    border-radius: 6px;
+  }
+}
+
 /** Адаптивность **/
 @media(min-width: 1101px) and (max-width: 2500px) {
+  .building-parameters-apartment,
+  .building-parameters-home,
+  .building-parameters-room,
+  .building-parameters-office-area,
+  .building-parameters-separate-building,
+  .building-parameters-ozs-сomplex {
+    display: none;
+    margin: auto !important;
+    li {
+      vertical-align: top;
+      &:nth-child(1) {
+        background: #fff;
+      }
+      &:nth-child(n+5):nth-child(-n+6) {
+        & .select2-hidden-accessible {
+          display: none !important;
+        }
+        & .select2-container {
+          border: none!important;
+          width: 60%!important;
+          padding: 0!important;
+        }
+        & .select2-selection__rendered {
+          padding: 1px 24px 0 0!important;
+        }
+        & .select2-selection--single {
+          height: 30px!important;
+        }
+      }
+      & .select2-hidden-accessible {
+        display: none !important;
+      }
+      & .select2-container {
+        border: none!important;
+        width: 60%!important;
+        padding: 0!important;
+      }
+      & .select2-selection__rendered {
+        padding: 0 24px 0 0!important;
+      }
+      & .select2-selection--single {
+        height: 28px!important;
+      }
+    }
+    p {
+      display: block !important;
+      width: auto;
+      text-align: center !important;
+    }
+    label {
+      display: inline-block;
+      width: 48% !important;
+      cursor: pointer;
+      padding: 10px;
+      text-align: left;
+    }
+    span {
+      margin: 0 !important;
+    }
+  }
+
   .search-menu-apartment {
     display: block;
     width: 100%;
@@ -3743,6 +3872,7 @@
     }
   }
   .building-parameters {
+    display: none;
     text-align: center !important;
     margin-left: 0;
     float: none;
