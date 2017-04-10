@@ -164,7 +164,6 @@
         <input type="checkbox" name="electricity" <?php inputToCheckbox("electricity"); ?> ></label><br>
     <label for="electricity">Кол-во кВт:</label><br>
     <input name="electricity" <?php inputToInput("electricity"); ?> type="text">
-    <input name="electricity" <?php inputToInput("electricity"); ?> type="text" placeholder="до"><br>
     <label for="sanitation">Водопровод и канализация</label><br>
     <select name="sanitation" id="sanitation">
         <option value="0">---</option>
@@ -177,7 +176,6 @@
     <label for="sanitation">Наличие санузлов</label><br>
     <label for="">Количество:</label><br>
     <input name="bathroom_number" <?php inputToInput("bathroom_number"); ?> type="text">
-    <input name="bathroom_number" <?php inputToInput("bathroom_number"); ?> type="text" placeholder="до"><br>
     <label for="">Расположение:</label><br>
     <select name="bathroom_location" id="sanitation">
         <option value="0">---</option>
@@ -185,11 +183,6 @@
     </select><br>
     <label>Описание <input type="text"
                            name="bathroom_description" <?php inputToInput("bathroom_description"); ?> ></label><br><br>
-</fieldset><br>
-<fieldset>
-    <legend>Объект размещен</legend>
-    <br>
-    <br>
 </fieldset><br>
 <fieldset>
     <legend>Документы</legend>

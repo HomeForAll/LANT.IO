@@ -1,11 +1,6 @@
 <?php
 $this->title = 'Редактор объявлений';
 
-echo'---- $this->data ----';
-echo'<br>';
-var_dump($this->data);
-echo'<br>';
-echo'_____________';
 
 global $data_for_news;
 $data_for_news = $this->data;
@@ -91,7 +86,7 @@ function addClassOtherInput($item = '', $arr =[]) {
 }
 
 ?>
-<h1>Редактор новостей</h1>
+<h1>Редактор объявлений</h1>
 <?php
 //Вывод сообщений
 if (!empty($this->data['error'])) {

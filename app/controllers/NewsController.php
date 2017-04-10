@@ -114,7 +114,8 @@ class NewsController extends Controller
             }
 
             //Проверка на владельца новости и уровня доступа к редактированию
-            if (!$access['news_admin'] && ($news_to_edit["user_id"] != $_SESSION['userID'])) {
+           //!($access['news_admin'])
+            if (  ($news_to_edit["user_id"] != $_SESSION['userID'])) {
                 $this->view->render('no_access');
                 return;
             }
