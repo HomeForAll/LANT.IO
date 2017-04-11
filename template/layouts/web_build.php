@@ -644,12 +644,12 @@
                         <div class="exact-area">
                             <span class="search-city" onclick="allFilterBlocks('historySearch');">
                                 <img src="../../template/images/s1.png" alt="city">
-                                <input class="historyInput" name="" placeholder="Москва, ул, Малая Ордынка" disabled>
+                                <input id="inputOne" type="text" name="" placeholder="Москва, ул, Малая Ордынка" disabled>
                             </span>
                             <div class="history-search">
                                 <span class="search-city active-search">
                                     <img src="../../template/images/s1.png" alt="city">
-                                    <input id="history"  name="" placeholder="г. Москва Северное медведково">
+                                    <input type="text" name="" placeholder="г. Москва Северное медведково">
                                 </span>
                                 <h5>История</h5>
                                 <div class="all-history-search">
@@ -1876,8 +1876,9 @@
                         </ul>
                         <div id="map">
                             <input type="text" id="address" placeholder="Адрес ...">
+                            <button class="close-map">Закрыть карту</button>
                         </div>
-                        <a onclick="yandexMap();" id="searchYandexMap">
+                        <a onclick="allParam('map');" id="searchYandexMap">
                             <i class="fa fa-map-marker" aria-hidden="true"></i>Поиск по карте</a>
                     </div>
                 </div>
@@ -2147,7 +2148,7 @@
                         <div class="exact-area">
                             <span class="search-city" onclick="allFilterBlocks('historySearch')">
                                 <img src="../../template/images/s1.png" alt="city">
-                                <input class="historyInput" name="" placeholder="Москва, ул, Малая Ордынка" disabled>
+                                <input id="inputTwo" type="text" name="" placeholder="Москва, ул, Малая Ордынка" disabled>
                             </span>
                             <div class="history-search">
                                 <span class="search-city active-search">

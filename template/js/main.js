@@ -194,6 +194,19 @@ function allParam(filterParam) {
                 $bigOption.fadeOut('slow');
             });
             break;
+        case 'map':
+            var $map = $('#map');
+
+            $('#searchYandexMap').hide();
+            $map.css({'display': 'block'});
+
+            $('.close-map').on('click', function (e) {
+                e.preventDefault();
+                $('#searchYandexMap').show();
+                $map.fadeOut('slow');
+            });
+
+            break;
         case 'quickSearch':
             var $quickSearch = $('.quick-search');
             $quickSearch.css({'display': 'block'});
@@ -228,25 +241,17 @@ function allFilterBlocks(filters) {
 
             $('.closeSearchMetro').on('click', function () {
                 $searchMetro.hide('slow', function () {
-                    $(this).css({'display':'none'});
+                    $(this).css({'display': 'none'});
                 });
             });
             break;
         case 'historySearch':
-            var $history = $('.history-search'),
-                historyInput = $('.historyInput');
+            var $history = $('.history-search');
 
-            console.log('История, работает');
-
-            if (historyInput === 0) {
-                console.log('Запускаем, скрытие');
-                setTimeout(function () {
-                    console.log('Cкрытие запущенно');
-                    $history.fadeOut('slow');
-                    console.log('Cкрытие, завершено');
-                }, 10000);
-            }
             $history.css({'display': 'block'});
+            setTimeout(function () {
+                $history.css({'display': 'none'})
+            }, 10000);
             break;
         case '1':
             $('.building-parameters-apartment').css({'display': 'block'});
@@ -370,9 +375,6 @@ $(function () {
 /** Яндекс карты **/
 function yandexMap() {
     var element = $('#address');
-    $('#map').show();
-
-    $('#searchYandexMap').hide();
 
     ymaps.ready(function () {
         var map = new ymaps.Map("map", {
