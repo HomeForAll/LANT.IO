@@ -196,6 +196,7 @@ function allParam(filterParam) {
             break;
         case 'map':
             var $map = $('#map');
+            yandexMap();
 
             $('#searchYandexMap').hide();
             $map.css({'display': 'block'});
