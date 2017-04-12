@@ -62,7 +62,6 @@ function formatState (state) {
         return state.text;
     } else return $allMetroLines;
 }
-
 //---------------------------------------------------------
 
 /** Отслежка и изменение расширенного и простого блока **/
@@ -137,6 +136,7 @@ function showTopMenuAndSearch() {
     }
 }
 //---------------------------------------------------------
+
 /** Блоки с фильтрами **/
 function filterOptionsApartments() {
     showFilter = !showFilter;
