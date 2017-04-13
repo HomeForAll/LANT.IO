@@ -12,6 +12,12 @@ var productSearch, showAndHideTopMenu, boolean, rootBlock, showFilter = false,
         })
     };
 
+/** Select **/
+$('select').styler({
+    selectSearch: true
+});
+//---------------------------------------------------------
+
 /** Слайдер **/
 $(document).ready(function(){
     $('.bxslider').bxSlider({
@@ -231,6 +237,8 @@ function allParam(filterParam) {
 }
 
 function allFilterBlocks(filters) {
+    var blockFilterAndShadow = $('.property-type-apartment-settings, .decorativeShadowBlock');
+
     $('.building-parameters-apartment, building-parameters-home,' +
         '.building-parameters-room, .building-parameters-office-area,' +
         '.building-parameters-separate-building, .building-parameters-ozs-сomplex').css({'display': 'none'});
@@ -246,6 +254,18 @@ function allFilterBlocks(filters) {
                 });
             });
             break;
+        case 'showMenu' :
+            var $showMenu = $('.mainBlock');
+            $showMenu.css({'display': 'block'});
+
+            blockFilterAndShadow.fadeIn('slow');
+
+            $('.button').on('click', function () {
+                $showMenu.hide('slow', function () {
+                    $(this).css({'display': 'none'});
+                });
+            });
+            break;
         case 'historySearch':
             var $history = $('.history-search');
 
@@ -255,45 +275,50 @@ function allFilterBlocks(filters) {
             }, 10000);
             break;
         case '1':
-            $('.building-parameters-apartment').css({'display': 'block'});
+            $('.building-parameters-apartment').css({'display': 'flex'});
             break;
         case '2':
-            $('.building-parameters-home').css({'display': 'block'});
+            $('.building-parameters-home').css({'display': 'flex'});
             break;
         case '3':
-            $('.building-parameters-room').css({'display': 'block'});
+            $('.building-parameters-room').css({'display': 'flex'});
             break;
         case '4':
-            $('.building-parameters-office-area').css({'display': 'block'});
+            $('.building-parameters-office-area').css({'display': 'flex'});
             break;
         case '5':
-            $('.building-parameters-separate-building').css({'display': 'block'});
+            $('.building-parameters-separate-building').css({'display': 'flex'});
             break;
         case '6':
-            $('.building-parameters-ozs-сomplex').css({'display': 'block'});
+            $('.building-parameters-ozs-сomplex').css({'display': 'flex'});
             break;
         default: console.log('Фильтр не настроен');
     }
-    $('.property-type-apartment-settings, .decorativeShadowBlock').fadeOut('slow');
+    blockFilterAndShadow.fadeOut('slow');
 }
 
-$('.select2-selection--single, .pointer').on('click', function () {
-    $(this).css({
-        'background': 'url("../../template/images/pointer_top.png") right 5px center no-repeat',
+$(function () {
+    var clickSelect = $('.select') || false;
+
+    clickSelect.on('click', function () {
+        return clickSelect = true;
+    });
+
+    if (!clickSelect) {return false;}
+
+    clickSelect.css({
+        'background': 'url("../../template/images/pointer_bottom.png") center right 5px no-repeat',
         'background-size': 'auto'
     });
+
     setTimeout(function () {
-        closePointer();
-    }, 4500);
+        $('.jq-selectbox__trigger-arrow').css({
+            'background': 'url("../../template/images/pointer_bottom.png") center right 5px no-repeat',
+            'background-size': 'auto'
+        });
+        return clickSelect = false;
+    }, 5000);
 });
-
-function closePointer() {
-    var el = $('.select2-selection--single, .pointer');
-    el.css({
-        'background': 'url("../../template/images/pointer_bottom.png") right 5px center no-repeat',
-        'background-size': 'auto'
-    });
-}
 //---------------------------------------------------------
 
 function moreAndLess(sizeImage) {
