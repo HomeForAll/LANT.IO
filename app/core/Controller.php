@@ -20,6 +20,8 @@ class Controller extends Access
         if (isset($_SESSION['userID']) ){
             $this->access = $this->checkAccessLevel($_SESSION['status']);
         }
+
+        $this->countStatistic();
     }
     
     private function getModel($model)
@@ -39,5 +41,32 @@ class Controller extends Access
         }
 
         return false;
+    }
+
+    private function countStatistic()
+    {
+        $db = new DataBase();
+
+        $ip = $_SERVER["REMOTE_ADDR"];
+
+        $query = $db->prepare('SELECT * FROM ips WHERE ip = :ip');
+        $query->execute(array(':ip' => $ip));
+        $result = $query->fetch();
+
+        if ($result) {
+            $visits = $result['visits'] + 1;
+
+            $query = $db->prepare('UPDATE ips SET visits = :visits WHERE ip = :ip');
+            $query->execute(array(':ip' => $ip, ':visits' => $visits));
+
+            return $query->rowCount();
+        } else {
+            $visits = 1;
+
+            $query = $db->prepare('INSERT INTO ips (ip, visits) VALUES (:ip, :visits)');
+            $query->execute(array(':ip' => $ip, ':visits' => $visits));
+
+            return $query->rowCount();
+        }
     }
 }

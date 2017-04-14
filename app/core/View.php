@@ -4,6 +4,8 @@ class View extends Access implements ViewInterface
 {
     use PrintHelper;
 
+    public $data;
+    protected $model;
     private $title;
     private $css = "";
     private $js = "";
@@ -11,11 +13,11 @@ class View extends Access implements ViewInterface
     private $jsFiles = [];
     private $layout;
     private $content;
-    public $data;
 
     public function __construct($layout)
     {
         $this->layout = $layout;
+        $this->getStatistic();
     }
 
     public static function instance($layout) {
@@ -108,5 +110,18 @@ class View extends Access implements ViewInterface
         foreach ($errorsArr as $error) {
             echo "<br><span style='margin-left: 5px; font-family: Arial sans-serif; font-size: 10pt; color: #942a25'>{$error}</span>";
         }
+    }
+
+    private function getStatistic() {
+        $db = new DataBase();
+
+        $query = $db->prepare('SELECT count(*), sum(visits) FROM ips');
+        $query->execute();
+        $result = $query->fetch();
+
+        return [
+            'unique' => $result['count'],
+            'visits' => $result['sum'],
+        ];
     }
 }

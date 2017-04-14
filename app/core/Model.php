@@ -6,8 +6,15 @@ class Model
 
     protected $db;
 
-    static function instance($model) {
+    function __construct()
+    {
+        $this->db = new DataBase();
+    }
+
+    static function instance($model)
+    {
         if (file_exists(ROOT_DIR . '/app/models/' . $model . '.php')) {
+
             return new $model;
         }
 
