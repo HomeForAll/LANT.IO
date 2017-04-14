@@ -227,16 +227,16 @@
 }
 
 .jq-selectbox {
-	display: block !important;
+	display: inline-block !important;
 	position: relative !important;
 	z-index: 20 !important;
 	text-align: left;
-	width: auto;
+	width: 78%;
 	vertical-align: middle;
 	cursor: pointer;
 }
 .jq-selectbox__select {
-	padding: 0 45px 0 10px;
+	padding: 0 25px 0 10px;
 	border-radius: 4px;
 	font-size: 14px;
 	background: #fff;
@@ -249,10 +249,10 @@
 }
 .jq-selectbox__select:active {
 	background: #fff;
-	box-shadow: inset 1px 1px 3px #DDD;
+	box-shadow: none;
 }
 .jq-selectbox.focused .jq-selectbox__select {
-	border: 1px solid #fff;
+	border: none;
 }
 .jq-selectbox.disabled .jq-selectbox__select {
 	border-color: #CCC;
@@ -298,7 +298,7 @@
 }
 .jq-selectbox__dropdown {
 	box-sizing: border-box;
-	width: 100%;
+	width: 100% !important;
 	margin: 2px 0 0;
 	border: none;
 	padding: 0;

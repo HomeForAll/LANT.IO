@@ -298,7 +298,7 @@ function allFilterBlocks(filters) {
 }
 
 $(function () {
-    var clickSelect = $('.select') || false;
+    var clickSelect = $('.jq-selectbox__trigger-arrow') || false;
 
     clickSelect.on('click', function () {
         return clickSelect = true;
@@ -307,12 +307,12 @@ $(function () {
     if (!clickSelect) {return false;}
 
     clickSelect.css({
-        'background': 'url("../../template/images/pointer_bottom.png") center right 5px no-repeat',
+        'background': 'url("../../template/images/pointer_top.png") center right 5px no-repeat',
         'background-size': 'auto'
     });
 
     setTimeout(function () {
-        $('.jq-selectbox__trigger-arrow').css({
+        clickSelect.css({
             'background': 'url("../../template/images/pointer_bottom.png") center right 5px no-repeat',
             'background-size': 'auto'
         });

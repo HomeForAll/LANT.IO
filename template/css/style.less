@@ -323,6 +323,7 @@
   right: 100px;
   top: 0;
   bottom: 0;
+  height: 400px;
   background: #fff;
   border-radius: 6px 0 0 0;
   z-index: 60;
@@ -413,7 +414,7 @@
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
-  align-items: stretch;
+  align-items: center;
   background: #fff;
   margin: 0;
   li {
@@ -447,18 +448,19 @@
     }
   }
   button {
-    display: block;
-    margin: 25px auto 0;
-    width: 190px;
-    background: #7ade78;
-    color: #fff;
-    padding: 12px 0;
-    float: none;
-    font-size: 15px;
-    border: 1px solid #7ade78;
-    border-radius: 30px;
+    position: relative;
+    float: none !important;
+    background: #71cb6f !important;
+    width: 150px !important;
+    margin: auto !important;
+    border-radius: 50px !important;
+    padding: 15px 0 !important;
+    vertical-align: middle;
+    font-size: 14px;
+    color: #fff !important;
+    text-transform: capitalize;
     &:hover {
-      background: #61d25f;
+      background: #61d25f !important;
       transition: 1.5s;
     }
   }
@@ -617,10 +619,12 @@
     vertical-align: middle;
     color: #000;
     font-size: 14px;
+    border-right: 2px dotted #e0e0e0;
     text-align: center;
     cursor: pointer;
     width: 19.5%;
-    padding: 20px 0;
+    padding: 10px 0;
+    margin: 10px auto;
     border-radius: 0;
     &:hover {
       background: transparent;
@@ -630,7 +634,6 @@
   label {
     display: inline-block;
     vertical-align: middle;
-    border-right: 2px dotted #e0e0e0;
     cursor: pointer;
     text-align: center;
     padding: 0;
@@ -650,7 +653,7 @@
   img {
     display: inline-block;
     vertical-align: middle;
-    margin: auto 5px;
+    margin: auto 2px;
   }
   span {
     color: #000;
@@ -790,9 +793,8 @@
     margin: auto;
   }
   li {
-    display: block;
-    width: auto;
-    background: red;
+    display: block !important;
+    width: auto !important;
     padding: 10px;
     margin: auto;
   }
@@ -967,8 +969,8 @@
     margin: auto;
   }
   li {
-    display: block;
-    width: auto;
+    display: block !important;
+    width: auto !important;
     background: red;
     padding: 10px;
     margin: auto;
@@ -1196,9 +1198,6 @@
   justify-content: flex-start;
   li {
     vertical-align: top;
-    &:nth-child(1) {
-      background: #fff;
-    }
   }
   p {
     display: block;
@@ -1207,7 +1206,7 @@
   }
   label {
     display: inline-block;
-    width: 48%;
+    width: 85%;
     margin-bottom: 5px;
     cursor: pointer;
     padding: 10px;
@@ -2928,7 +2927,7 @@
     }
     label {
       display: inline-block;
-      width: 48%;
+      width: 85%;
       cursor: pointer;
       padding: 10px;
       text-align: left;
@@ -2981,16 +2980,17 @@
       background: #fff;
       color: #000;
       font-size: 14px;
+      border-right: 2px dotted #e0e0e0;
       text-align: center;
       cursor: pointer;
       width: 19.5%;
-      padding: 20px 0;
+      padding: 10px 0;
+      margin: 10px auto;
       border-radius: 0;
     }
     label {
       display: inline-block;
       vertical-align: middle;
-      border-right: 2px dotted #e0e0e0;
       cursor: pointer;
       text-align: center;
       padding: 0;
@@ -3243,7 +3243,7 @@
     }
   }
   .quick-search-by-parameters {
-    align-items: stretch;
+    align-items: center;
     justify-content: center;
     float: none;
     width: auto;

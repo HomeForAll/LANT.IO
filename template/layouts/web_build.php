@@ -373,11 +373,14 @@
                 <div class="search-menu-apartment">
                     <div class="main-filter">
                         <div class="select">
-                            <select>
-                                <option>Language of communication</option>
-                                <option>English</option>
-                                <option>Spanish</option>
-                            </select>
+                            <label for="">
+                                <img src="../../template/images/apartments.png" alt="icons">
+                                <select>
+                                    <option>Квартира</option>
+                                    <option>Квартира1</option>
+                                    <option>Квартира2</option>
+                                </select>
+                            </label>
                         </div>
                     </div>
                     <div class="main-filter" onclick="allFilterBlocks('showMenu');">
@@ -440,20 +443,24 @@
                     <ul>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li><span class="names-parameters">Высота потолков м</span>
@@ -507,20 +514,24 @@
                     <ul>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li><span class="names-parameters">Высота потолков м</span>
@@ -574,20 +585,24 @@
                     <ul>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li><span class="names-parameters">Высота потолков м</span>
@@ -641,20 +656,24 @@
                     <ul>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li><span class="names-parameters">Высота потолков м</span>
@@ -708,20 +727,24 @@
                     <ul>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li><span class="names-parameters">Высота потолков м</span>
@@ -775,20 +798,24 @@
                     <ul>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li><span class="names-parameters">Высота потолков м</span>
@@ -894,49 +921,59 @@
                                 </label></li>
                             <li>
                                 <div class="select">
-                                    <select>
-                                        <option>Language of communication</option>
-                                        <option>English</option>
-                                        <option>Spanish</option>
-                                    </select>
+                                    <label for="">
+                                        <select>
+                                            <option>Language of communication</option>
+                                            <option>English</option>
+                                            <option>Spanish</option>
+                                        </select>
+                                    </label>
                                 </div>
                             </li>
                             <li>
                                 <div class="select">
-                                    <select>
-                                        <option>Language of communication</option>
-                                        <option>English</option>
-                                        <option>Spanish</option>
-                                    </select>
+                                    <label for="">
+                                        <select>
+                                            <option>Language of communication</option>
+                                            <option>English</option>
+                                            <option>Spanish</option>
+                                        </select>
+                                    </label>
                                 </div>
                             </li>
                             <li>
                                 <div class="select">
-                                    <select>
-                                        <option>Language of communication</option>
-                                        <option>English</option>
-                                        <option>Spanish</option>
-                                    </select>
+                                    <label for="">
+                                        <select>
+                                            <option>Language of communication</option>
+                                            <option>English</option>
+                                            <option>Spanish</option>
+                                        </select>
+                                    </label>
                                 </div>
                             </li>
                             <li><label>Дом<input name="" type="text" placeholder="16" maxlength="4"
                                                  pattern="[0-9]{4}"></label></li>
                             <li>
                                 <div class="select">
-                                    <select>
-                                        <option>Language of communication</option>
-                                        <option>English</option>
-                                        <option>Spanish</option>
-                                    </select>
+                                    <label for="">
+                                        <select>
+                                            <option>Language of communication</option>
+                                            <option>English</option>
+                                            <option>Spanish</option>
+                                        </select>
+                                    </label>
                                 </div>
                             </li>
                             <li>
                                 <div class="select">
-                                    <select>
-                                        <option>Language of communication</option>
-                                        <option>English</option>
-                                        <option>Spanish</option>
-                                    </select>
+                                    <label for="">
+                                        <select>
+                                            <option>Language of communication</option>
+                                            <option>English</option>
+                                            <option>Spanish</option>
+                                        </select>
+                                    </label>
                                 </div>
                             </li>
                             <li>
@@ -1017,20 +1054,26 @@
                         <label for="clast">Торг возможен</label></li>
                     <li>
                         <div class="select">
-                            <select>
-                                <option><img src="../../template/images/sec-4-1.png" alt="icon">От собственника</option>
-                                <option><img src="../../template/images/sec-4-1.png" alt="icon">От собственника</option>
-                                <option><img src="../../template/images/sec-4-1.png" alt="icon">От собственника</option>
-                            </select>
+                            <label for="">
+                                <img src="../../template/images/ava.png" alt="icons">
+                                <select>
+                                    <option>От собственника</option>
+                                    <option>От собственника</option>
+                                    <option>От собственника</option>
+                                </select>
+                            </label>
                         </div>
                     </li>
                     <li>
                         <div class="select">
-                            <select>
-                                <option><img src="../../template/images/timer.png" alt="icon">Посуточно</option>
-                                <option><img src="../../template/images/timer.png" alt="icon">Посуточно</option>
-                                <option><img src="../../template/images/timer.png" alt="icon">Посуточно</option>
-                            </select>
+                            <label for="">
+                                <img src="../../template/images/timer.png" alt="icons">
+                                <select>
+                                    <option>Посуточно</option>
+                                    <option>Посуточно</option>
+                                    <option>Посуточно</option>
+                                </select>
+                            </label>
                         </div>
                     </li>
                 </ul>
@@ -1079,20 +1122,24 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li><span class="names-parameters">Высота потолков м</span>
@@ -1115,29 +1162,35 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -1166,38 +1219,46 @@
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -1214,29 +1275,35 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -1248,20 +1315,24 @@
                         </li>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png"
@@ -1271,29 +1342,34 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for=""><select>
+                                                    <option>Прилагается</option>
+                                                    <option>Прилагается1</option>
+                                                    <option>Прилагается2</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -1338,20 +1414,24 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li><span class="names-parameters">Высота потолков м</span>
@@ -1374,29 +1454,35 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -1425,38 +1511,46 @@
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -1473,29 +1567,34 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for=""><select>
+                                                    <option>Прилагается</option>
+                                                    <option>Прилагается1</option>
+                                                    <option>Прилагается2</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -1540,20 +1639,24 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li><span class="names-parameters">Высота потолков м</span>
@@ -1576,29 +1679,35 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -1627,38 +1736,46 @@
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -1675,29 +1792,35 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -1709,20 +1832,24 @@
                         </li>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png"
@@ -1732,29 +1859,34 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for=""><select>
+                                                    <option>Прилагается</option>
+                                                    <option>Прилагается1</option>
+                                                    <option>Прилагается2</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -1799,20 +1931,24 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li><span class="names-parameters">Высота потолков м</span>
@@ -1835,29 +1971,35 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -1886,38 +2028,46 @@
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -1934,29 +2084,35 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -1968,20 +2124,24 @@
                         </li>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png"
@@ -1991,29 +2151,34 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for=""><select>
+                                                    <option>Прилагается</option>
+                                                    <option>Прилагается1</option>
+                                                    <option>Прилагается2</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -2058,20 +2223,24 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li><span class="names-parameters">Высота потолков м</span>
@@ -2094,29 +2263,35 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -2145,38 +2320,46 @@
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -2193,29 +2376,35 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -2227,20 +2416,24 @@
                         </li>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png"
@@ -2250,29 +2443,34 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for=""><select>
+                                                    <option>Прилагается</option>
+                                                    <option>Прилагается1</option>
+                                                    <option>Прилагается2</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -2317,20 +2515,24 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li><span class="names-parameters">Высота потолков м</span>
@@ -2353,29 +2555,35 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -2404,38 +2612,46 @@
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -2452,29 +2668,35 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -2486,20 +2708,24 @@
                         </li>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png"
@@ -2509,29 +2735,34 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for=""><select>
+                                                    <option>Прилагается</option>
+                                                    <option>Прилагается1</option>
+                                                    <option>Прилагается2</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -2576,20 +2807,24 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li><span class="names-parameters">Высота потолков м</span>
@@ -2612,29 +2847,35 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -2663,38 +2904,46 @@
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -2711,29 +2960,35 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -2745,20 +3000,24 @@
                         </li>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png"
@@ -2768,29 +3027,34 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for=""><select>
+                                                    <option>Прилагается</option>
+                                                    <option>Прилагается1</option>
+                                                    <option>Прилагается2</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -2851,20 +3115,24 @@
                     <ul>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li><span class="names-parameters">Высота потолков м</span>
@@ -2918,20 +3186,24 @@
                     <ul>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li><span class="names-parameters">Высота потолков м</span>
@@ -2985,20 +3257,24 @@
                     <ul>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li><span class="names-parameters">Высота потолков м</span>
@@ -3052,20 +3328,24 @@
                     <ul>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li><span class="names-parameters">Высота потолков м</span>
@@ -3119,20 +3399,24 @@
                     <ul>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li><span class="names-parameters">Высота потолков м</span>
@@ -3186,20 +3470,24 @@
                     <ul>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li><span class="names-parameters">Высота потолков м</span>
@@ -3304,59 +3592,59 @@
                                 </label></li>
                             <li>
                                 <div class="select">
-                                    <div class="select">
+                                    <label for="">
                                         <select>
                                             <option>Language of communication</option>
                                             <option>English</option>
                                             <option>Spanish</option>
                                         </select>
-                                    </div>
+                                    </label>
                                 </div>
                             </li>
                             <li>
                                 <div class="select">
-                                    <div class="select">
+                                    <label for="">
                                         <select>
                                             <option>Language of communication</option>
                                             <option>English</option>
                                             <option>Spanish</option>
                                         </select>
-                                    </div>
+                                    </label>
                                 </div>
                             </li>
                             <li>
                                 <div class="select">
-                                    <div class="select">
+                                    <label for="">
                                         <select>
                                             <option>Language of communication</option>
                                             <option>English</option>
                                             <option>Spanish</option>
                                         </select>
-                                    </div>
+                                    </label>
                                 </div>
                             </li>
                             <li><label>Дом<input name="" type="text" placeholder="16" maxlength="4"
                                                  pattern="[0-9]{4}"></label></li>
                             <li>
                                 <div class="select">
-                                    <div class="select">
+                                    <label for="">
                                         <select>
                                             <option>Language of communication</option>
                                             <option>English</option>
                                             <option>Spanish</option>
                                         </select>
-                                    </div>
+                                    </label>
                                 </div>
                             </li>
                             <li>
                                 <div class="select">
-                                    <div class="select">
+                                    <label for="">
                                         <select>
                                             <option>Language of communication</option>
                                             <option>English</option>
                                             <option>Spanish</option>
                                         </select>
-                                    </div>
+                                    </label>
                                 </div>
                             </li>
                             <li>
@@ -3429,11 +3717,14 @@
                         <label for="clast">Торг возможен</label></li>
                     <li>
                         <div class="select">
-                            <select>
-                                <option><img src="../../template/images/sec-4-1.png" alt="icon">От собственника</option>
-                                <option><img src="../../template/images/sec-4-1.png" alt="icon">От собственника</option>
-                                <option><img src="../../template/images/sec-4-1.png" alt="icon">От собственника</option>
-                            </select>
+                            <label for="">
+                                <img src="../../template/images/ava.png" alt="icons">
+                                <select>
+                                    <option>От собственника</option>
+                                    <option>От собственника</option>
+                                    <option>От собственника</option>
+                                </select>
+                            </label>
                         </div>
                     </li>
                 </ul>
@@ -3482,20 +3773,24 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li><span class="names-parameters">Высота потолков м</span>
@@ -3518,29 +3813,35 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -3569,38 +3870,46 @@
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -3617,29 +3926,35 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -3651,20 +3966,24 @@
                         </li>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png"
@@ -3674,29 +3993,34 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for=""><select>
+                                                    <option>Прилагается</option>
+                                                    <option>Прилагается1</option>
+                                                    <option>Прилагается2</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -3736,11 +4060,13 @@
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li><span class="names-parameters">Количество комнат</span>
@@ -3758,38 +4084,46 @@
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -3820,29 +4154,35 @@
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
@@ -3879,44 +4219,28 @@
                                 <span style="width:40%"></span>
                             </div>
                         </li>
-                        <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png"
-                                                                   alt="search">Документы
+                        <li onclick="allParam('attachment');"></li>
+                        <li onclick="allParam('attachment');"></li>
+                    </ul>
+                    <ul class="building-parameters-home">
+                        <li onclick="allParam('apartment');">
+                            <img src="../../template/images/search-1.png" alt="search">Документы
                             <div class="attachments">
                                 <h2>Документы</h2>
-                                <ul>
-                                    <li>
-                                        <label>Документы на право владения<input type="checkbox"
-                                                                                 name="documents_on_ownership"></label><br>
-                                        <label>Договор аренды<input type="checkbox" name="lease_contract"></label>
-                                    </li>
-                                </ul>
+                                <ul>Прилагается2</ul>
                                 <button value="Найти">Готово</button>
                             </div>
                             <div class="progress-bar blue stripes">
                                 <span style="width:0"></span>
                             </div>
-                        </li>
-                        <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png"
-                                                                   alt="search">Вложения
                             <div class="attachments">
                                 <h2>Вложения</h2>
-                                <ul>
-                                    <li>
-                                        <label>Проект планировки<input type="checkbox" name="planning_project"></label>
-                                        <label>3d проект<input type="checkbox" name="three_d_project"></label>
-                                        <label>Видео<input type="checkbox" name="video"></label>
-                                    </li>
-                                </ul>
+                                <ul>ВидеоПрилагается2</ul>
                                 <button class="closeAttachment">Готово</button>
                             </div>
                             <div class="progress-bar blue stripes">
                                 <span style="width:0"></span>
                             </div>
-                        </li>
-                    </ul>
-                    <ul class="building-parameters-home">
-                        <li onclick="allParam('apartment');">
-                            <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
                             <div class="apartment-settings">
                                 <h2>Параметры квартиры</h2>
                                 <ul>
@@ -3948,20 +4272,24 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li><span class="names-parameters">Высота потолков м</span>
@@ -3984,29 +4312,35 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -4035,38 +4369,46 @@
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -4083,29 +4425,35 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -4117,20 +4465,24 @@
                         </li>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png"
@@ -4140,29 +4492,34 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for=""><select>
+                                                    <option>Прилагается</option>
+                                                    <option>Прилагается1</option>
+                                                    <option>Прилагается2</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -4207,20 +4564,24 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li><span class="names-parameters">Высота потолков м</span>
@@ -4243,29 +4604,35 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -4294,38 +4661,46 @@
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -4342,29 +4717,35 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -4374,22 +4755,26 @@
                                 <span style="width:0"></span>
                             </div>
                         </li>
-                        <li>
+                        <li><img src="../../template/images/search-5.png" alt="search">Безопасность
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
-                        <li>
+                        <li><img src="../../template/images/search-1.png" alt="search">Документы
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png"
@@ -4399,29 +4784,34 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for=""><select>
+                                                    <option>Прилагается</option>
+                                                    <option>Прилагается1</option>
+                                                    <option>Прилагается2</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -4466,20 +4856,24 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li><span class="names-parameters">Высота потолков м</span>
@@ -4502,29 +4896,35 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -4536,11 +4936,13 @@
                         </li>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png"
@@ -4550,29 +4952,34 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for=""><select>
+                                                    <option>Прилагается</option>
+                                                    <option>Прилагается1</option>
+                                                    <option>Прилагается2</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -4617,20 +5024,24 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li><span class="names-parameters">Высота потолков м</span>
@@ -4653,29 +5064,35 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -4704,38 +5121,46 @@
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -4752,29 +5177,35 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -4786,20 +5217,24 @@
                         </li>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png"
@@ -4809,29 +5244,34 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for=""><select>
+                                                    <option>Прилагается</option>
+                                                    <option>Прилагается1</option>
+                                                    <option>Прилагается2</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -4876,20 +5316,24 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li><span class="names-parameters">Высота потолков м</span>
@@ -4912,29 +5356,35 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -4963,38 +5413,46 @@
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -5011,29 +5469,35 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -5045,20 +5509,24 @@
                         </li>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                         <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png"
@@ -5068,29 +5536,34 @@
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for=""><select>
+                                                    <option>Прилагается</option>
+                                                    <option>Прилагается1</option>
+                                                    <option>Прилагается2</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select>
-                                                <option>Language of communication</option>
-                                                <option>English</option>
-                                                <option>Spanish</option>
-                                            </select>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
                                         </div>
                                     </li>
                                 </ul>
@@ -5179,11 +5652,13 @@
                         </li>
                         <li>
                             <div class="select">
-                                <select>
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
                             </div>
                         </li>
                     </ul>
@@ -5210,11 +5685,13 @@
                 <div class="filter-and-top-blocks">
                     <div class="filter-apartment">
                         <div class="select">
-                            <select>
-                                <option>Language of communication</option>
-                                <option>English</option>
-                                <option>Spanish</option>
-                            </select>
+                            <label for="">
+                                <select>
+                                    <option>Language of communication</option>
+                                    <option>English</option>
+                                    <option>Spanish</option>
+                                </select>
+                            </label>
                         </div>
                     </div>
                     <!-- Основной блок TOP апартаментов -->
