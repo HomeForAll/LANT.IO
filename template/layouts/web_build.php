@@ -366,6 +366,7 @@
     <div class="section-home-with-filters">
         <form action="" id="form" novalidate>
             <div class="apartment-search">
+                <a href="/template/layouts/searchBlock.php">Перейти</a>
                 <ul class="vkl">
                     <li id="blockToRent" onclick="choiceBlock('toRent')"><a>Арендовать</a></li>
                     <li id="Buy" onclick="choiceBlock('Buy')"><a>Купить</a></li>
@@ -1313,24 +1314,24 @@
                                 <span style="width:0"></span>
                             </div>
                         </li>
-                        <li>
-                            <div class="select">
+                        <li><img src="../../template/images/search-5.png" alt="search">Безопасность
+                            <div class="select main-filter-s">
                                 <label for="">
                                     <select>
-                                        <option>Language of communication</option>
-                                        <option>English</option>
-                                        <option>Spanish</option>
+                                        <option>Выберите</option>
+                                        <option>Выберите1</option>
+                                        <option>Выберите2</option>
                                     </select>
                                 </label>
                             </div>
                         </li>
-                        <li>
-                            <div class="select">
+                        <li><img src="../../template/images/search-1.png" alt="search">Документы
+                            <div class="select main-filter-s">
                                 <label for="">
                                     <select>
-                                        <option>Language of communication</option>
-                                        <option>English</option>
-                                        <option>Spanish</option>
+                                        <option>Выбрано</option>
+                                        <option>Выбрано1</option>
+                                        <option>Выбрано2</option>
                                     </select>
                                 </label>
                             </div>
@@ -1830,24 +1831,24 @@
                                 <span style="width:0"></span>
                             </div>
                         </li>
-                        <li>
-                            <div class="select">
+                        <li><img src="../../template/images/search-5.png" alt="search">Безопасность
+                            <div class="select main-filter-s">
                                 <label for="">
                                     <select>
-                                        <option>Language of communication</option>
-                                        <option>English</option>
-                                        <option>Spanish</option>
+                                        <option>Выберите</option>
+                                        <option>Выберите1</option>
+                                        <option>Выберите2</option>
                                     </select>
                                 </label>
                             </div>
                         </li>
-                        <li>
-                            <div class="select">
+                        <li><img src="../../template/images/search-1.png" alt="search">Документы
+                            <div class="select main-filter-s">
                                 <label for="">
                                     <select>
-                                        <option>Language of communication</option>
-                                        <option>English</option>
-                                        <option>Spanish</option>
+                                        <option>Выбрано</option>
+                                        <option>Выбрано1</option>
+                                        <option>Выбрано2</option>
                                     </select>
                                 </label>
                             </div>
@@ -2122,24 +2123,24 @@
                                 <span style="width:0"></span>
                             </div>
                         </li>
-                        <li>
-                            <div class="select">
+                        <li><img src="../../template/images/search-5.png" alt="search">Безопасность
+                            <div class="select main-filter-s">
                                 <label for="">
                                     <select>
-                                        <option>Language of communication</option>
-                                        <option>English</option>
-                                        <option>Spanish</option>
+                                        <option>Выберите</option>
+                                        <option>Выберите1</option>
+                                        <option>Выберите2</option>
                                     </select>
                                 </label>
                             </div>
                         </li>
-                        <li>
-                            <div class="select">
+                        <li><img src="../../template/images/search-1.png" alt="search">Документы
+                            <div class="select main-filter-s">
                                 <label for="">
                                     <select>
-                                        <option>Language of communication</option>
-                                        <option>English</option>
-                                        <option>Spanish</option>
+                                        <option>Выбрано</option>
+                                        <option>Выбрано1</option>
+                                        <option>Выбрано2</option>
                                     </select>
                                 </label>
                             </div>
@@ -2414,24 +2415,24 @@
                                 <span style="width:0"></span>
                             </div>
                         </li>
-                        <li>
-                            <div class="select">
+                        <li><img src="../../template/images/search-5.png" alt="search">Безопасность
+                            <div class="select main-filter-s">
                                 <label for="">
                                     <select>
-                                        <option>Language of communication</option>
-                                        <option>English</option>
-                                        <option>Spanish</option>
+                                        <option>Выберите</option>
+                                        <option>Выберите1</option>
+                                        <option>Выберите2</option>
                                     </select>
                                 </label>
                             </div>
                         </li>
-                        <li>
-                            <div class="select">
+                        <li><img src="../../template/images/search-1.png" alt="search">Документы
+                            <div class="select main-filter-s">
                                 <label for="">
                                     <select>
-                                        <option>Language of communication</option>
-                                        <option>English</option>
-                                        <option>Spanish</option>
+                                        <option>Выбрано</option>
+                                        <option>Выбрано1</option>
+                                        <option>Выбрано2</option>
                                     </select>
                                 </label>
                             </div>
@@ -2706,24 +2707,24 @@
                                 <span style="width:0"></span>
                             </div>
                         </li>
-                        <li>
-                            <div class="select">
+                        <li><img src="../../template/images/search-5.png" alt="search">Безопасность
+                            <div class="select main-filter-s">
                                 <label for="">
                                     <select>
-                                        <option>Language of communication</option>
-                                        <option>English</option>
-                                        <option>Spanish</option>
+                                        <option>Выберите</option>
+                                        <option>Выберите1</option>
+                                        <option>Выберите2</option>
                                     </select>
                                 </label>
                             </div>
                         </li>
-                        <li>
-                            <div class="select">
+                        <li><img src="../../template/images/search-1.png" alt="search">Документы
+                            <div class="select main-filter-s">
                                 <label for="">
                                     <select>
-                                        <option>Language of communication</option>
-                                        <option>English</option>
-                                        <option>Spanish</option>
+                                        <option>Выбрано</option>
+                                        <option>Выбрано1</option>
+                                        <option>Выбрано2</option>
                                     </select>
                                 </label>
                             </div>
@@ -2998,24 +2999,24 @@
                                 <span style="width:0"></span>
                             </div>
                         </li>
-                        <li>
-                            <div class="select">
+                        <li><img src="../../template/images/search-5.png" alt="search">Безопасность
+                            <div class="select main-filter-s">
                                 <label for="">
                                     <select>
-                                        <option>Language of communication</option>
-                                        <option>English</option>
-                                        <option>Spanish</option>
+                                        <option>Выберите</option>
+                                        <option>Выберите1</option>
+                                        <option>Выберите2</option>
                                     </select>
                                 </label>
                             </div>
                         </li>
-                        <li>
-                            <div class="select">
+                        <li><img src="../../template/images/search-1.png" alt="search">Документы
+                            <div class="select main-filter-s">
                                 <label for="">
                                     <select>
-                                        <option>Language of communication</option>
-                                        <option>English</option>
-                                        <option>Spanish</option>
+                                        <option>Выбрано</option>
+                                        <option>Выбрано1</option>
+                                        <option>Выбрано2</option>
                                     </select>
                                 </label>
                             </div>
@@ -3546,37 +3547,37 @@
                         <span onclick="allFilterBlocks('searchMetroMainBlock')" class="location-metro-map">Третьяковская
                             <span class="metro-people"><img src="../../template/images/people.png"
                                                             alt="people">2мин.</span>
-                            <div class="search-metro-main-block">
-                                <div class="top-search-results">
-                                    <span>Свиблово<i class="fa fa-times" aria-hidden="true"></i></span>
-                                </div>
-                                <div class="metro-location-and-travel-information">
-                                    <div class="metro-location">
-                                        <div class="panel-move">
+                        </span>
+                        <div class="search-metro-main-block">
+                            <div class="top-search-results">
+                                <span>Свиблово<i class="fa fa-times" aria-hidden="true"></i></span>
+                            </div>
+                            <div class="metro-location-and-travel-information">
+                                <div class="metro-location">
+                                    <div class="panel-move">
                                             <span onclick="moreAndLess('more')"><i class="fa fa-plus"
                                                                                    aria-hidden="true"></i></span>
-                                            <span onclick="moreAndLess('less')"><i class="fa fa-minus"
-                                                                                   aria-hidden="true"></i></span>
-                                        </div>
-                                        <img src="../../template/images/map-location-metro.png" alt="map">
+                                        <span onclick="moreAndLess('less')"><i class="fa fa-minus"
+                                                                               aria-hidden="true"></i></span>
                                     </div>
-                                    <div class="travel-information">
-                                        <div class="distance-on-foot">
-                                            <img src="../../template/images/people-2.png" alt="icon"><p>Уделенность пекшом не более</p>
-                                            <span><input placeholder="" type="number" name="foot" value="5" min="5"
-                                                         max="60" step="5"><span class="timer">Минут</span></span>
-                                        </div>
-                                        <div class="distance-on-transport">
-                                            <img src="../../template/images/avto.png" alt="icon"><p>Уделенность пекшом не более</p>
-                                            <span><input placeholder="" type="number" name="transport" value="5"
-                                                         min="5" max="60" step="5"><span
-                                                        class="timer">Минут</span></span>
-                                        </div>
-                                        <button class="closeSearchMetro">Готово</button>
+                                    <img src="../../template/images/map-location-metro.png" alt="map">
+                                </div>
+                                <div class="travel-information">
+                                    <div class="distance-on-foot">
+                                        <img src="../../template/images/people-2.png" alt="icon"><p>Уделенность пекшом не более</p>
+                                        <span><input placeholder="" type="number" name="foot" value="5" min="5"
+                                                     max="60" step="5"><span class="timer">Минут</span></span>
                                     </div>
+                                    <div class="distance-on-transport">
+                                        <img src="../../template/images/avto.png" alt="icon"><p>Уделенность пекшом не более</p>
+                                        <span><input placeholder="" type="number" name="transport" value="5"
+                                                     min="5" max="60" step="5"><span
+                                                    class="timer">Минут</span></span>
+                                    </div>
+                                    <button class="closeSearchMetro">Готово</button>
                                 </div>
                             </div>
-                        </span>
+                        </div>
                     </div>
                     <button onclick="allParam('quickSearch')">Задать точнее</button>
                     <div class="quick-search">
@@ -3964,24 +3965,24 @@
                                 <span style="width:0"></span>
                             </div>
                         </li>
-                        <li>
-                            <div class="select">
+                        <li><img src="../../template/images/search-5.png" alt="search">Безопасность
+                            <div class="select main-filter-s">
                                 <label for="">
                                     <select>
-                                        <option>Language of communication</option>
-                                        <option>English</option>
-                                        <option>Spanish</option>
+                                        <option>Выберите</option>
+                                        <option>Выберите1</option>
+                                        <option>Выберите2</option>
                                     </select>
                                 </label>
                             </div>
                         </li>
-                        <li>
-                            <div class="select">
+                        <li><img src="../../template/images/search-1.png" alt="search">Документы
+                            <div class="select main-filter-s">
                                 <label for="">
                                     <select>
-                                        <option>Language of communication</option>
-                                        <option>English</option>
-                                        <option>Spanish</option>
+                                        <option>Выбрано</option>
+                                        <option>Выбрано1</option>
+                                        <option>Выбрано2</option>
                                     </select>
                                 </label>
                             </div>
@@ -4463,24 +4464,24 @@
                                 <span style="width:0"></span>
                             </div>
                         </li>
-                        <li>
-                            <div class="select">
+                        <li><img src="../../template/images/search-5.png" alt="search">Безопасность
+                            <div class="select main-filter-s">
                                 <label for="">
                                     <select>
-                                        <option>Language of communication</option>
-                                        <option>English</option>
-                                        <option>Spanish</option>
+                                        <option>Выберите</option>
+                                        <option>Выберите1</option>
+                                        <option>Выберите2</option>
                                     </select>
                                 </label>
                             </div>
                         </li>
-                        <li>
-                            <div class="select">
+                        <li><img src="../../template/images/search-1.png" alt="search">Документы
+                            <div class="select main-filter-s">
                                 <label for="">
                                     <select>
-                                        <option>Language of communication</option>
-                                        <option>English</option>
-                                        <option>Spanish</option>
+                                        <option>Выбрано</option>
+                                        <option>Выбрано1</option>
+                                        <option>Выбрано2</option>
                                     </select>
                                 </label>
                             </div>
@@ -4756,7 +4757,7 @@
                             </div>
                         </li>
                         <li><img src="../../template/images/search-5.png" alt="search">Безопасность
-                            <div class="select">
+                            <div class="select main-filter-s">
                                 <label for="">
                                     <select>
                                         <option>Language of communication</option>
@@ -4767,7 +4768,7 @@
                             </div>
                         </li>
                         <li><img src="../../template/images/search-1.png" alt="search">Документы
-                            <div class="select">
+                            <div class="select main-filter-s">
                                 <label for="">
                                     <select>
                                         <option>Language of communication</option>
@@ -5215,24 +5216,24 @@
                                 <span style="width:0"></span>
                             </div>
                         </li>
-                        <li>
-                            <div class="select">
+                        <li><img src="../../template/images/search-5.png" alt="search">Безопасность
+                            <div class="select main-filter-s">
                                 <label for="">
                                     <select>
-                                        <option>Language of communication</option>
-                                        <option>English</option>
-                                        <option>Spanish</option>
+                                        <option>Выберите</option>
+                                        <option>Выберите1</option>
+                                        <option>Выберите2</option>
                                     </select>
                                 </label>
                             </div>
                         </li>
-                        <li>
-                            <div class="select">
+                        <li><img src="../../template/images/search-1.png" alt="search">Документы
+                            <div class="select main-filter-s">
                                 <label for="">
                                     <select>
-                                        <option>Language of communication</option>
-                                        <option>English</option>
-                                        <option>Spanish</option>
+                                        <option>Выбрано</option>
+                                        <option>Выбрано1</option>
+                                        <option>Выбрано2</option>
                                     </select>
                                 </label>
                             </div>
@@ -5507,24 +5508,24 @@
                                 <span style="width:0"></span>
                             </div>
                         </li>
-                        <li>
-                            <div class="select">
+                        <li><img src="../../template/images/search-5.png" alt="search">Безопасность
+                            <div class="select main-filter-s">
                                 <label for="">
                                     <select>
-                                        <option>Language of communication</option>
-                                        <option>English</option>
-                                        <option>Spanish</option>
+                                        <option>Выберите</option>
+                                        <option>Выберите1</option>
+                                        <option>Выберите2</option>
                                     </select>
                                 </label>
                             </div>
                         </li>
-                        <li>
-                            <div class="select">
+                        <li><img src="../../template/images/search-1.png" alt="search">Документы
+                            <div class="select main-filter-s">
                                 <label for="">
                                     <select>
-                                        <option>Language of communication</option>
-                                        <option>English</option>
-                                        <option>Spanish</option>
+                                        <option>Выбрано</option>
+                                        <option>Выбрано1</option>
+                                        <option>Выбрано2</option>
                                     </select>
                                 </label>
                             </div>

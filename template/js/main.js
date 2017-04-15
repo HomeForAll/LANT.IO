@@ -41,6 +41,17 @@ $(document).ready(function(){
         pause: 15000,
         infiniteLoop: true
     });
+    $('.apartments-wallpapers').bxSlider({
+        slideWidth: 85,
+        minSlides: 1,
+        maxSlides: 5,
+        moveSlides: 3,
+        slideMargin: 0,
+        pager: false,
+        pause: 20000,
+        auto: true,
+        infiniteLoop: true
+    });
 });
 //---------------------------------------------------------
 
