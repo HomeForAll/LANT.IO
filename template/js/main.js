@@ -42,7 +42,7 @@ $(document).ready(function(){
         infiniteLoop: true
     });
     $('.apartments-wallpapers').bxSlider({
-        slideWidth: 85,
+        slideWidth: 74,
         minSlides: 1,
         maxSlides: 5,
         moveSlides: 3,

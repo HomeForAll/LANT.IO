@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Filters</title>
     <link rel="stylesheet" href="/template/css/searchBlock/search.css">
+    <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css">
 </head>
 <body>
 <?php if (isset($_SESSION['authorized'])) { ?>
@@ -752,14 +753,15 @@
                     </div>
                     <div class="price-and-view-the-apartment">
                         <div class="price">
+                            <span class="decorate-number">25 000<i class="fa fa-rub"
+                                                                    aria-hidden="true"></i><sub>/мес</sub></span>
                             <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img
                                             src="../../template/images/people.png" alt="">2 мин</span></p>
-                            <span class="decorate-number">25 000<i class="fa fa-rub"
-                                                                   aria-hidden="true"></i><sub>/мес</sub></span>
                         </div>
-                        <div class="view-the-apartment">
-                            <a href="#"><img src="../../template/images/show.png" alt="show"></a>
-                        </div>
+                    </div>
+                    <div class="back-call">
+                        <button class="back-call-web"><i class="fa fa-phone" aria-hidden="true"></i>Звонок через сайт</button>
+                        <button class="back-call-message"><i class="fa fa-envelope" aria-hidden="true"></i>Написать сообщение</button>
                     </div>
                 </div>
                 <div class="right-information-block-apartment">
@@ -772,6 +774,16 @@
                     <p>Жилая<br>площадь<span>134м<sup>2</sup></span></p>
                     <p>Парковка<span>Нет</span></p>
                     <button>Смотреть полностью</button>
+                    <div class="private-person">
+                        <div class="person-user">
+                            <img src="../../template/images/user-test.png" alt="user">
+                            <span>Олег Герасимов</span>
+                            <p>Олег Герасимов</p>
+                        </div>
+                        <div class="ad-close">
+                            <p>Свернуть<a href="#"><img src="../../template/images/close.png" alt="clear"></a></p>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="top-block">
