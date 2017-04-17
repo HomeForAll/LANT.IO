@@ -318,7 +318,8 @@
 <?php } else { ?>
     <div id="navigation-true">
         <div class="container-w-0">
-            <div class="logo-img"><a href="#"><img src="../../template/images/logo-true.png" alt=" logo-true"></a>
+            <div class="logo-img">
+                <a href="#"><img src="../../template/images/logo-true.png" alt=" logo-true"></a>
             </div>
             <div class="registration-users">
                 <div class="place-an-ad">
@@ -364,323 +365,403 @@
                     <li id="Buy" onclick="choiceBlock('Buy')"><a>Купить</a></li>
                 </ul>
                 <div class="search-menu-apartment">
-                    <select class="js-example-data-array region main-filter"></select>
-                    <select class="js-example-data-array-selected offices main-filter"></select>
-                    <select class="js-example-data-array-selected product-price main-filter"></select>
+                    <div class="main-filter">
+                        <label for="id_label_multiple">
+                            <select class="js-example-placeholder-single pointer" id="id_label_multiple" multiple="multiple"></select>
+                        </label>
+                    </div>
+                    <div class="main-filter" onclick="filterOptionsApartments();">
+                        <span>
+                            <img src="../../template/images/apartments.png" alt="apartments">Тип недвижимости
+                        </span>
+                    </div>
+                    <div class="main-filter" onclick="allParam('bigOption')">
+                        <label for="#amount">
+                            <img src="../../template/images/s3.png" alt="price">Цена
+                        </label>
+                    </div>
                     <button>Найти</button>
                 </div>
-                <div class="warning">
-                    <p>Выберите<br>тип недвижимости</p>
-                    <span>Чтобы перейти к заполнению подробных настроек</span>
-                    <button onclick="closeFixedBlock();">Закрыть</button>
+            </div>
+            <div class="warning">
+                <p>Выберите<br>тип недвижимости</p>
+                <span>Чтобы перейти к заполнению подробных настроек</span>
+                <button onclick="closeFixedBlock();">Закрыть</button>
+            </div>
+            <!-- Блок Арендовать -->
+            <div class="big-search-menu">
+                <div class="apartment-settings-apartment">
+                    <h2>Параметры квартиры</h2>
+                    <ul>
+                        <li><span class="names-parameters">Кол-во комнат</span>
+                            <p class="number-apartments">
+                                <span>1</span>
+                                <span>2</span>
+                                <span>3</span>
+                                <span>4</span>
+                                <span>4+</span>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Балкон м2</span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li><span class="names-parameters">Этаж</span>
+                            <select class="js-example-data-array-selected floor"></select>
+                        </li>
+                        <li><span class="names-parameters">Комплектация </span>
+                            <select class="js-example-data-array-selected equipment"></select>
+                        </li>
+                        <li><span class="names-parameters">Высота потолков м</span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required>
+                            </p>
+                        </li>
+                    </ul>
+                    <a>
+                        <button>Готово</button>
+                    </a>
                 </div>
-                <!-- Блок Арендовать -->
-                <div class="big-search-menu">
-                    <div class="apartment-settings-apartment">
-                        <h2>Параметры квартиры</h2>
-                        <ul>
-                            <li><span class="names-parameters">Кол-во комнат</span>
-                                <p class="number-apartments">
-                                    <span>1</span>
-                                    <span>2</span>
-                                    <span>3</span>
-                                    <span>4</span>
-                                    <span>4+</span>
-                                </p>
-                            </li>
-                            <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                            <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                            <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                            <li><span class="names-parameters">Балкон м2</span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                        </ul>
-                        <ul>
-                            <li><span class="names-parameters">Этаж</span>
-                                <select class="js-example-data-array-selected floor"></select>
-                            </li>
-                            <li><span class="names-parameters">Комплектация </span>
-                                <select class="js-example-data-array-selected equipment"></select>
-                            </li>
-                            <li><span class="names-parameters">Высота потолков м</span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                            </li>
-                        </ul>
-                        <a>
-                            <button>Готово</button>
-                        </a>
-                    </div>
-                    <div class="apartment-settings-home">
-                        <h2>Параметры дома</h2>
-                        <ul>
-                            <li><span class="names-parameters">Кол-во комнат</span>
-                                <p class="number-apartments">
-                                    <span>1</span>
-                                    <span>2</span>
-                                    <span>3</span>
-                                    <span>4</span>
-                                    <span>4+</span>
-                                </p>
-                            </li>
-                            <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                            <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                            <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                            <li><span class="names-parameters">Балкон м2</span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                        </ul>
-                        <ul>
-                            <li><span class="names-parameters">Этаж</span>
-                                <select class="js-example-data-array-selected floor"></select>
-                            </li>
-                            <li><span class="names-parameters">Комплектация </span>
-                                <select class="js-example-data-array-selected equipment"></select>
-                            </li>
-                            <li><span class="names-parameters">Высота потолков м</span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                            </li>
-                        </ul>
-                        <a>
-                            <button>Готово</button>
-                        </a>
-                    </div>
-                    <div class="apartment-settings-room">
-                        <h2>Параметры комнаты</h2>
-                        <ul>
-                            <li><span class="names-parameters">Кол-во комнат</span>
-                                <p class="number-apartments">
-                                    <span>1</span>
-                                    <span>2</span>
-                                    <span>3</span>
-                                    <span>4</span>
-                                    <span>4+</span>
-                                </p>
-                            </li>
-                            <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                            <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                            <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                            <li><span class="names-parameters">Балкон м2</span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                        </ul>
-                        <ul>
-                            <li><span class="names-parameters">Этаж</span>
-                                <select class="js-example-data-array-selected floor"></select>
-                            </li>
-                            <li><span class="names-parameters">Комплектация </span>
-                                <select class="js-example-data-array-selected equipment"></select>
-                            </li>
-                            <li><span class="names-parameters">Высота потолков м</span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                            </li>
-                        </ul>
-                        <a><button>Готово</button></a>
-                    </div>
-                    <div class="apartment-settings-office-area">
-                        <h2>Офисная площадь</h2>
-                        <ul>
-                            <li><span class="names-parameters">Кол-во комнат</span>
-                                <p class="number-apartments">
-                                    <span>1</span>
-                                    <span>2</span>
-                                    <span>3</span>
-                                    <span>4</span>
-                                    <span>4+</span>
-                                </p>
-                            </li>
-                            <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                            <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                            <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                            <li><span class="names-parameters">Балкон м2</span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                        </ul>
-                        <ul>
-                            <li><span class="names-parameters">Этаж</span>
-                                <select class="js-example-data-array-selected floor"></select>
-                            </li>
-                            <li><span class="names-parameters">Комплектация </span>
-                                <select class="js-example-data-array-selected equipment"></select>
-                            </li>
-                            <li><span class="names-parameters">Высота потолков м</span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                            </li>
-                        </ul>
-                        <a>
-                            <button>Готово</button>
-                        </a>
-                    </div>
-                    <div class="apartment-settings-separate-building">
-                        <h2>Отдельное стоящее здание</h2>
-                        <ul>
-                            <li><span class="names-parameters">Кол-во комнат</span>
-                                <p class="number-apartments">
-                                    <span>1</span>
-                                    <span>2</span>
-                                    <span>3</span>
-                                    <span>4</span>
-                                    <span>4+</span>
-                                </p>
-                            </li>
-                            <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                            <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                            <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                            <li><span class="names-parameters">Балкон м2</span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                        </ul>
-                        <ul>
-                            <li><span class="names-parameters">Этаж</span>
-                                <select class="js-example-data-array-selected floor"></select>
-                            </li>
-                            <li><span class="names-parameters">Комплектация </span>
-                                <select class="js-example-data-array-selected equipment"></select>
-                            </li>
-                            <li><span class="names-parameters">Высота потолков м</span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                            </li>
-                        </ul>
-                        <a><button>Готово</button></a>
-                    </div>
-                    <div class="apartment-settings-ozs-сomplex">
-                        <h2>Комплекс ОЗС</h2>
-                        <ul>
-                            <li><span class="names-parameters">Кол-во комнат</span>
-                                <p class="number-apartments">
-                                    <span>1</span>
-                                    <span>2</span>
-                                    <span>3</span>
-                                    <span>4</span>
-                                    <span>4+</span>
-                                </p>
-                            </li>
-                            <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                            <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                            <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                            <li><span class="names-parameters">Балкон м2</span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                        </ul>
-                        <ul>
-                            <li><span class="names-parameters">Этаж</span>
-                                <select class="js-example-data-array-selected floor"></select>
-                            </li>
-                            <li><span class="names-parameters">Комплектация </span>
-                                <select class="js-example-data-array-selected equipment"></select>
-                            </li>
-                            <li><span class="names-parameters">Высота потолков м</span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                            </li>
-                        </ul>
-                        <a><button>Готово</button></a>
-                    </div>
-                    <div class="search-more-precisely-search">
-                        <div class="exact-area">
+                <div class="apartment-settings-home">
+                    <h2>Параметры дома</h2>
+                    <ul>
+                        <li><span class="names-parameters">Кол-во комнат</span>
+                            <p class="number-apartments">
+                                <span>1</span>
+                                <span>2</span>
+                                <span>3</span>
+                                <span>4</span>
+                                <span>4+</span>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Балкон м2</span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li><span class="names-parameters">Этаж</span>
+                            <select class="js-example-data-array-selected floor"></select>
+                        </li>
+                        <li><span class="names-parameters">Комплектация </span>
+                            <select class="js-example-data-array-selected equipment"></select>
+                        </li>
+                        <li><span class="names-parameters">Высота потолков м</span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required>
+                            </p>
+                        </li>
+                    </ul>
+                    <a>
+                        <button>Готово</button>
+                    </a>
+                </div>
+                <div class="apartment-settings-room">
+                    <h2>Параметры комнаты</h2>
+                    <ul>
+                        <li><span class="names-parameters">Кол-во комнат</span>
+                            <p class="number-apartments">
+                                <span>1</span>
+                                <span>2</span>
+                                <span>3</span>
+                                <span>4</span>
+                                <span>4+</span>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Балкон м2</span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li><span class="names-parameters">Этаж</span>
+                            <select class="js-example-data-array-selected floor"></select>
+                        </li>
+                        <li><span class="names-parameters">Комплектация </span>
+                            <select class="js-example-data-array-selected equipment"></select>
+                        </li>
+                        <li><span class="names-parameters">Высота потолков м</span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required>
+                            </p>
+                        </li>
+                    </ul>
+                    <a>
+                        <button>Готово</button>
+                    </a>
+                </div>
+                <div class="apartment-settings-office-area">
+                    <h2>Офисная площадь</h2>
+                    <ul>
+                        <li><span class="names-parameters">Кол-во комнат</span>
+                            <p class="number-apartments">
+                                <span>1</span>
+                                <span>2</span>
+                                <span>3</span>
+                                <span>4</span>
+                                <span>4+</span>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Балкон м2</span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li><span class="names-parameters">Этаж</span>
+                            <select class="js-example-data-array-selected floor"></select>
+                        </li>
+                        <li><span class="names-parameters">Комплектация </span>
+                            <select class="js-example-data-array-selected equipment"></select>
+                        </li>
+                        <li><span class="names-parameters">Высота потолков м</span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required>
+                            </p>
+                        </li>
+                    </ul>
+                    <a>
+                        <button>Готово</button>
+                    </a>
+                </div>
+                <div class="apartment-settings-separate-building">
+                    <h2>Отдельное стоящее здание</h2>
+                    <ul>
+                        <li><span class="names-parameters">Кол-во комнат</span>
+                            <p class="number-apartments">
+                                <span>1</span>
+                                <span>2</span>
+                                <span>3</span>
+                                <span>4</span>
+                                <span>4+</span>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Балкон м2</span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li><span class="names-parameters">Этаж</span>
+                            <select class="js-example-data-array-selected floor"></select>
+                        </li>
+                        <li><span class="names-parameters">Комплектация </span>
+                            <select class="js-example-data-array-selected equipment"></select>
+                        </li>
+                        <li><span class="names-parameters">Высота потолков м</span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required>
+                            </p>
+                        </li>
+                    </ul>
+                    <a>
+                        <button>Готово</button>
+                    </a>
+                </div>
+                <div class="apartment-settings-ozs-сomplex">
+                    <h2>Комплекс ОЗС</h2>
+                    <ul>
+                        <li><span class="names-parameters">Кол-во комнат</span>
+                            <p class="number-apartments">
+                                <span>1</span>
+                                <span>2</span>
+                                <span>3</span>
+                                <span>4</span>
+                                <span>4+</span>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Балкон м2</span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li><span class="names-parameters">Этаж</span>
+                            <select class="js-example-data-array-selected floor"></select>
+                        </li>
+                        <li><span class="names-parameters">Комплектация </span>
+                            <select class="js-example-data-array-selected equipment"></select>
+                        </li>
+                        <li><span class="names-parameters">Высота потолков м</span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required>
+                            </p>
+                        </li>
+                    </ul>
+                    <a>
+                        <button>Готово</button>
+                    </a>
+                </div>
+                <div class="search-more-precisely-search">
+                    <div class="exact-area">
                             <span class="search-city" onclick="allFilterBlocks('historySearch');">
                                 <img src="../../template/images/s1.png" alt="city">
-                                <input class="historyInput" name="" placeholder="Москва, ул, Малая Ордынка" disabled>
+                                <input id="inputOne" type="text" name="" placeholder="Москва, ул, Малая Ордынка"
+                                       disabled>
                             </span>
-                            <div class="history-search">
+                        <div class="history-search">
                                 <span class="search-city active-search">
                                     <img src="../../template/images/s1.png" alt="city">
-                                    <input id="history"  name="" placeholder="г. Москва Северное медведково">
+                                    <input type="text" name="" placeholder="г. Москва Северное медведково">
                                 </span>
-                                <h5>История</h5>
-                                <div class="all-history-search">
-                                    <div class="history">
-                                        <img src="../../template/images/m-r.png" alt="metro">
-                                        <p>Красные ворота<span>не более 15 мин пешком</span></p>
-                                    </div>
-                                    <div class="history">
-                                        <img src="../../template/images/m-w.png" alt="metro">
-                                        <p>Свиблово, Бабушкинская<span>не более 5 мин пешком</span></p>
-                                    </div>
-                                    <div class="history">
-                                        <img src="../../template/images/m-w.png" alt="metro">
-                                        <p>Академичекий<span>не более 5 мин пешком</span></p>
-                                    </div>
-                                    <div class="history">
-                                        <img src="../../template/images/m-r.png" alt="metro">
-                                        <p>Красные ворота<span>не более 15 мин пешком</span></p>
-                                    </div>
-                                    <div class="history">
-                                        <img src="../../template/images/m-w.png" alt="metro">
-                                        <p>Свиблово, Бабушкинская<span>не более 5 мин пешком</span></p>
-                                    </div>
-                                    <div class="history">
-                                        <img src="../../template/images/m-w.png" alt="metro">
-                                        <p>Академичекий<span>не более 5 мин пешком</span></p>
-                                    </div>
+                            <h5>История</h5>
+                            <div class="all-history-search">
+                                <div class="history">
+                                    <img src="../../template/images/m-r.png" alt="metro">
+                                    <p>Красные ворота<span>не более 15 мин пешком</span></p>
+                                </div>
+                                <div class="history">
+                                    <img src="../../template/images/m-w.png" alt="metro">
+                                    <p>Свиблово, Бабушкинская<span>не более 5 мин пешком</span></p>
+                                </div>
+                                <div class="history">
+                                    <img src="../../template/images/m-w.png" alt="metro">
+                                    <p>Академичекий<span>не более 5 мин пешком</span></p>
+                                </div>
+                                <div class="history">
+                                    <img src="../../template/images/m-r.png" alt="metro">
+                                    <p>Красные ворота<span>не более 15 мин пешком</span></p>
+                                </div>
+                                <div class="history">
+                                    <img src="../../template/images/m-w.png" alt="metro">
+                                    <p>Свиблово, Бабушкинская<span>не более 5 мин пешком</span></p>
+                                </div>
+                                <div class="history">
+                                    <img src="../../template/images/m-w.png" alt="metro">
+                                    <p>Академичекий<span>не более 5 мин пешком</span></p>
                                 </div>
                             </div>
                         </div>
-                        <div class="the-exact-address">
+                    </div>
+                    <div class="the-exact-address">
                             <span onclick="allFilterBlocks('searchMetroMainBlock')" class="location-metro-map">Третьяковская<span
                                         class="metro-people"><img src="../../template/images/people.png" alt="people">2мин.</span>
                                 <div class="search-metro-main-block">
@@ -700,12 +781,14 @@
                                         <div class="travel-information">
                                             <div class="distance-on-foot">
                                                 <img src="../../template/images/people-2.png" alt="icon"><p>Уделенность пекшом не более</p>
-                                                <span><input placeholder="" type="number" name="foot" value="5" min="5" max="60" step="5">
+                                                <span><input placeholder="" type="number" name="foot" value="5" min="5"
+                                                             max="60" step="5">
                                                 <span class="timer">Минут</span></span>
                                             </div>
                                             <div class="distance-on-transport">
                                                 <img src="../../template/images/avto.png" alt="icon"><p>Уделенность пекшом не более</p>
-                                                <span><input placeholder="" type="number" name="transport" value="5" min="5" max="60" step="5">
+                                                <span><input placeholder="" type="number" name="transport" value="5"
+                                                             min="5" max="60" step="5">
                                                 <span class="timer">Минут</span></span>
                                             </div>
                                             <button class="closeSearchMetro">Готово</button>
@@ -713,1477 +796,1682 @@
                                     </div>
                                 </div>
                             </span>
-                        </div>
-                        <button onclick="allParam('quickSearch')">Задать точнее</button>
-                        <div class="quick-search">
-                            <h5><i class="fa fa-map-marker" aria-hidden="true"></i>Введите город, район, область или
-                                точный адрес<span><img src="../../template/images/location.png" alt="location">выделить область на карте</span>
-                            </h5>
-                            <ul class="quick-search-by-parameters">
-                                <li><label>Область
-                                        <input name="" type="text" placeholder="Московская">
-                                    </label></li>
-                                <li><label>Город
-                                        <input name="" type="text" placeholder="Москва">
-                                    </label></li>
-                                <li><label>Округ
-                                        <select class="js-example-data-array okrug"></select>
-                                    </label></li>
-                                <li><label>Район
-                                        <select class="js-example-data-array area"></select>
-                                    </label></li>
-                                <li><label>Улица
-                                        <select class="js-example-data-array street"></select>
-                                    </label></li>
-                                <li><label>Дом<input name="" type="text" placeholder="16" maxlength="4"
-                                                     pattern="[0-9]{4}"></label></li>
-                                <li><label>Метро
-                                        <select class="js-example-templating metro-lines"></select>
-                                    </label></li>
-                                <li><label>Удаленность от метро не более
-                                        <select class="js-example-data-array distance"></select>
-                                    </label></li>
-                                <li>
-                                    <button class="closeQuickSearch">Готово</button>
-                                </li>
-                            </ul>
-                        </div>
                     </div>
-                    <button>Найти</button>
-                    <ul class="filter-block-big-menu">
-                        <li class="pointer value-text" onclick="filterOptionsApartments();">
-                            <img src="../../template/images/apartments.png" alt="apartments">Тип недвижимости
-                            <div class="property-type-apartment-settings">
-                                <ul>
-                                    <li>Жилая</li>
-                                    <li onclick="allFilterBlocks('1');"><img src="../../template/images/b-s-1.png" alt="icon">
-                                        <p>Квартира</p></li>
-                                    <li onclick="allFilterBlocks('2');"><img src="../../template/images/b-s-2.png" alt="icon">
-                                        <p>Дом</p></li>
-                                    <li onclick="allFilterBlocks('3');"><img src="../../template/images/b-s-3.png" alt="icon">
-                                        <p>Комната</p></li>
-                                    <li onclick="allFilterBlocks('7');"><img src="../../template/images/b-s-4.png" alt="icon">
-                                        <p>Земельный участок</p></li>
-                                    <li onclick="allFilterBlocks('8');"><img src="../../template/images/b-s-5.png" alt="icon">
-                                        <p>Гараж/машиноместо</p></li>
-                                </ul>
-                                <ul>
-                                    <li>Коммерческая</li>
-                                    <li onclick="allFilterBlocks('4');"><img src="../../template/images/b-s-6.png" alt="icon">
-                                        <p>Офисная площадь</p></li>
-                                    <li onclick="allFilterBlocks('5');"><img src="../../template/images/b-s-1.png" alt="icon">
-                                        <p>Отдельно стоящее здание</p></li>
-                                    <li onclick="allFilterBlocks('6');"><img src="../../template/images/b-s-7.png" alt="icon">
-                                        <p>Комплекс ОСЗ</p></li>
-                                    <li onclick="allFilterBlocks('9');"><img src="../../template/images/b-s-8.png" alt="icon">
-                                        <p>Рынок/Ярмарка</p></li>
-                                    <li onclick="allFilterBlocks('10');"><img src="../../template/images/b-s-9.png" alt="icon">
-                                        <p>Производственно-складские помещения</p></li>
-                                    <li onclick="allFilterBlocks('11');"><img src="../../template/images/b-s-10.png" alt="icon">
-                                        <p>Производственно-складские здания</p></li>
-                                    <li onclick="allFilterBlocks('12');"><img src="../../template/images/b-s-11.png" alt="icon">
-                                        <p>Недвижимость для туризма и отдыха</p></li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li onclick="allParam('bigOption')">
-                            <label for="#amount">Цена</label>
-                            <div class="showBigOptions">
-                                <p>От<input name="" placeholder="" type="text" id="amountBefore" readonly disabled>
-                                </p>
-                                <p>До<input name="" placeholder="" type="text" id="amountAfter" readonly disabled>
-                                </p>
-                                <div id="slider-range"></div>
-                                <div class="currency">
-                                    <p>Валюта</p>
-                                    <button class="closeCurrency"><i class="fa fa-rub" aria-hidden="true"></i>рубли</button>
-                                    <button class="closeCurrency"><i class="fa fa-usd" aria-hidden="true"></i>доллары</button>
-                                    <button class="closeCurrency"><i class="fa fa-eur" aria-hidden="true"></i>евро</button>
-                                </div>
-                            </div>
-                            <div class="decorativeShadowBlock"></div>
-                        </li>
-                        <li>
-                            <input name="" id="clast" type="checkbox">
-                            <label for="clast">Торг возможен</label></li>
-                        <li><select class="js-example-data-array-selected owner"></select></li>
-                        <li><select class="js-example-data-array-selected leaseTerm"></select></li>
-                    </ul>
-                    <div class="advanced-search-options">
-                        <p>Заполните параметры ниже, для более точного поиска</p>
-                        <ul class="building-parameters">
-                            <li onclick="allParam('apartment');">
-                                <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
-                                <div class="apartment-settings">
-                                    <h2>Параметры квартиры</h2>
-                                    <ul>
-                                        <li><span class="names-parameters">Кол-во комнат</span>
-                                            <p class="number-apartments">
-                                                <span>1</span>
-                                                <span>2</span>
-                                                <span>3</span>
-                                                <span>4</span>
-                                                <span>4+</span>
-                                            </p>
-                                        </li>
-                                        <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Балкон м2</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                    </ul>
-                                    <ul>
-                                        <li><span class="names-parameters">Этаж</span>
-                                            <select class="js-example-data-array-selected floor"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Комплектация </span>
-                                            <select class="js-example-data-array-selected equipment"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Высота потолков м</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                                        </li>
-                                    </ul>
-                                    <button class="closeBlock">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:0"></span>
-                                </div>
-                            </li>
-                            <li onclick="allFilterBlocks('appearanceOfTheApartment')">
-                                <img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
-                                <div class="appearance-of-the-apartment">
-                                    <h2>Внешний вид квартиры</h2>
-                                    <ul>
-                                        <li>
-                                            <p>Команты</p>
-                                            <img src="../../template/images/r-d-1.png" alt="icons1">
-                                            <select class="js-example-data-array-selected rooms"></select>
-                                        </li>
-                                        <li>
-                                            <p>Санузел</p>
-                                            <img src="../../template/images/r-d-2.png" alt="icons2">
-                                            <select class="js-example-data-array-selected a-bathroom"></select>
-                                        </li>
-                                        <li>
-                                            <p>Отделка</p>
-                                            <img src="../../template/images/r-d-3.png" alt="icons3">
-                                            <select class="js-example-data-array-selected decoration"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="search">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:40%"></span>
-                                </div>
-                            </li>
-                            <li onclick="allParam('buildingParametersFilter');">
-                                <img src="../../template/images/search-3.png" alt="search">Параметры здания
-                                <div class="building-parameters-filter">
-                                    <h2>Параметры здания</h2>
-                                    <ul>
-                                        <li><span class="names-parameters">Количество этажей</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Год окончания строительства</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Наличие лифта</span>
-                                            <select class="js-example-data-array-selected the-presence-of-an-elevator"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Обязеьельные услуги ЖКХ</span>
-                                            <select class="js-example-data-array-selected nursery-services"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Вид объекта</span>
-                                            <select class="js-example-data-array-selected type-of-object"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Парковка</span>
-                                            <select class="js-example-data-array-selected parking-area"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="close-building-parameter">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:40%"></span>
-                                </div>
-                            </li>
-                            <li onclick="allParam('appearanceBuild')">
-                                <img src="../../template/images/search-4.png" alt="search">Внешний вид здания
-                                <div class="appearance-of-the-build">
-                                    <h2>Внешний вид здания</h2>
-                                    <ul>
-                                        <li>
-                                            <p>Материал<br>стен</p>
-                                            <select class="js-example-data-array-selected wall_material"></select>
-                                        </li>
-                                        <li>
-                                            <p>Кровля</p>
-                                            <select class="js-example-data-array-selected roof"></select>
-                                        </li>
-                                        <li>
-                                            <p>Фундамент</p>
-                                            <select class="js-example-data-array-selected foundation"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="closeApparenceBuild">Поиск</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:0"></span>
-                                </div>
-                            </li>
-                            <li><img src="../../template/images/search-5.png" alt="search">Безопасность
-                                <select class="js-example-data-array-selected security"></select>
-                            </li>
-                            <li><img src="../../template/images/search-1.png" alt="search">Документы
-                                <select class="js-example-data-array-selected documents"></select>
-                            </li>
-                            <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png" alt="search">Вложения
-                                <div class="attachments">
-                                    <h2>Вложения</h2>
-                                    <ul>
-                                        <li>
-                                            <p>Проект планировки</p>
-                                            <img src="../../template/images/at-1.png" alt="icons1">
-                                            <select class="js-example-data-array-selected design-plan"></select>
-                                        </li>
-                                        <li>
-                                            <p>3D проект</p>
-                                            <img src="../../template/images/at-2.png" alt="icons2">
-                                            <select class="js-example-data-array-selected project"></select>
-                                        </li>
-                                        <li>
-                                            <p>Видео</p>
-                                            <img src="../../template/images/at-3.png" alt="icons3">
-                                            <select class="js-example-data-array-selected video"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="closeAttachment">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:0"></span>
-                                </div>
+                    <button onclick="allParam('quickSearch')">Задать точнее</button>
+                    <div class="quick-search">
+                        <h5><i class="fa fa-map-marker" aria-hidden="true"></i>Введите город, район, область или
+                            точный адрес<span><img src="../../template/images/location.png" alt="location">выделить область на карте</span>
+                        </h5>
+                        <ul class="quick-search-by-parameters">
+                            <li><label>Область
+                                    <input name="" type="text" placeholder="Московская">
+                                </label></li>
+                            <li><label>Город
+                                    <input name="" type="text" placeholder="Москва">
+                                </label></li>
+                            <li><label>Округ
+                                    <select class="js-example-data-array okrug"></select>
+                                </label></li>
+                            <li><label>Район
+                                    <select class="js-example-data-array area"></select>
+                                </label></li>
+                            <li><label>Улица
+                                    <select class="js-example-data-array street"></select>
+                                </label></li>
+                            <li><label>Дом<input name="" type="text" placeholder="16" maxlength="4"
+                                                 pattern="[0-9]{4}"></label></li>
+                            <li><label>Метро
+                                    <select class="js-example-templating metro-lines"></select>
+                                </label></li>
+                            <li><label>Удаленность от метро не более
+                                    <select class="js-example-data-array distance"></select>
+                                </label></li>
+                            <li>
+                                <button class="closeQuickSearch">Готово</button>
                             </li>
                         </ul>
-                        <ul class="building-parameters-apartment">
-                            <li onclick="allParam('apartment');">
-                                <img src="../../template/images/search-1.png" alt="search">Исходные параметры квартиры
-                                <div class="apartment-settings">
-                                    <h2>Исходные параметры квартиры</h2>
-                                    <ul>
-                                        <li><span class="names-parameters">Площадь м<sup>2</sup></span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Балкон м2</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                    </ul>
-                                    <ul>
-                                        <li><span class="names-parameters">Этаж</span>
-                                            <select class="js-example-data-array-selected floor"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Комплектация </span>
-                                            <select class="js-example-data-array-selected equipment"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Высота потолков м</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                                        </li>
-                                    </ul>
-                                    <button class="closeBlock">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:0"></span>
-                                </div>
-                            </li>
-                            <li onclick="allParam('apperanceOfTheApartment')">
-                                <img src="../../template/images/search-2.png" alt="search">Ремонт и обустройства
-                                <div class="appearance-of-the-apartment">
-                                    <h2>Внешний вид квартиры</h2>
-                                    <ul>
-                                        <li>
-                                            <p>Комнаты</p>
-                                            <img src="../../template/images/r-d-1.png" alt="icons1">
-                                            <select class="js-example-data-array-selected rooms"></select>
-                                        </li>
-                                        <li>
-                                            <p>Санузел</p>
-                                            <img src="../../template/images/r-d-2.png" alt="icons2">
-                                            <select class="js-example-data-array-selected a-bathroom"></select>
-                                        </li>
-                                        <li>
-                                            <p>Отделка</p>
-                                            <img src="../../template/images/r-d-3.png" alt="icons3">
-                                            <select class="js-example-data-array-selected decoration"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="search">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:40%"></span>
-                                </div>
-                            </li>
-                            <li onclick="allParam('buildingParametersFilter');"><img src="../../template/images/search-3.png" alt="search">Параметры здания
-                                <div class="building-parameters-filter">
-                                    <h2>Параметры здания</h2>
-                                    <ul>
-                                        <li><span class="names-parameters">Количество этажей</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Год окончания строительства</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Наличие лифта</span>
-                                            <select class="js-example-data-array-selected the-presence-of-an-elevator"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Обязеьельные услуги ЖКХ</span>
-                                            <select class="js-example-data-array-selected nursery-services"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Вид объекта</span>
-                                            <select class="js-example-data-array-selected type-of-object"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Парковка</span>
-                                            <select class="js-example-data-array-selected parking-area"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="close-building-parameter">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:40%"></span>
-                                </div>
-                            </li>
-                            <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png" alt="search">Вложения
-                                <div class="attachments">
-                                    <h2>Вложения</h2>
-                                    <ul>
-                                        <li>
-                                            <p>Проект планировки</p>
-                                            <img src="../../template/images/at-1.png" alt="icons1">
-                                            <select class="js-example-data-array-selected design-plan"></select>
-                                        </li>
-                                        <li>
-                                            <p>3D проект</p>
-                                            <img src="../../template/images/at-2.png" alt="icons2">
-                                            <select class="js-example-data-array-selected project"></select>
-                                        </li>
-                                        <li>
-                                            <p>Видео</p>
-                                            <img src="../../template/images/at-3.png" alt="icons3">
-                                            <select class="js-example-data-array-selected video"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="closeAttachment">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:0"></span>
-                                </div>
-                            </li>
-                        </ul>
-                        <ul class="building-parameters-home">
-                            <li onclick="allParam('apartment');">
-                                <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
-                                <div class="apartment-settings">
-                                    <h2>Параметры квартиры</h2>
-                                    <ul>
-                                        <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Балкон м2</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                    </ul>
-                                    <ul>
-                                        <li><span class="names-parameters">Этаж</span>
-                                            <select class="js-example-data-array-selected floor"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Комплектация </span>
-                                            <select class="js-example-data-array-selected equipment"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Высота потолков м</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                                        </li>
-                                    </ul>
-                                    <button class="closeBlock">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:0"></span>
-                                </div>
-                            </li>
-                            <li onclick="allParam('apperanceOfTheApartment')"><img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
-                                <div class="appearance-of-the-apartment">
-                                    <h2>Внешний вид квартиры</h2>
-                                    <ul>
-                                        <li>
-                                            <p>Команты</p>
-                                            <img src="../../template/images/r-d-1.png" alt="icons1">
-                                            <select class="js-example-data-array-selected rooms"></select>
-                                        </li>
-                                        <li>
-                                            <p>Санузел</p>
-                                            <img src="../../template/images/r-d-2.png" alt="icons2">
-                                            <select class="js-example-data-array-selected a-bathroom"></select>
-                                        </li>
-                                        <li>
-                                            <p>Отделка</p>
-                                            <img src="../../template/images/r-d-3.png" alt="icons3">
-                                            <select class="js-example-data-array-selected decoration"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="search">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:40%"></span>
-                                </div>
-                            </li>
-                            <li onclick="allParam('buildingParametersFilter');">
-                                <img src="../../template/images/search-3.png" alt="search">Параметры здания
-                                <div class="building-parameters-filter">
-                                    <h2>Параметры здания</h2>
-                                    <ul>
-                                        <li><span class="names-parameters">Количество этажей</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Год окончания строительства</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Наличие лифта</span>
-                                            <select class="js-example-data-array-selected the-presence-of-an-elevator"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Обязеьельные услуги ЖКХ</span>
-                                            <select class="js-example-data-array-selected nursery-services"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Вид объекта</span>
-                                            <select class="js-example-data-array-selected type-of-object"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Парковка</span>
-                                            <select class="js-example-data-array-selected parking-area"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="close-building-parameter">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:40%"></span>
-                                </div>
-                            </li>
-                            <li onclick="allParam('appearanceBuild')"><img src="../../template/images/search-4.png" alt="search">Внешний вид здания
-                                <div class="appearance-of-the-build">
-                                    <h2>Внешний вид здания</h2>
-                                    <ul>
-                                        <li>
-                                            <p>Материал<br>стен</p>
-                                            <select class="js-example-data-array-selected wall_material"></select>
-                                        </li>
-                                        <li>
-                                            <p>Кровля</p>
-                                            <select class="js-example-data-array-selected roof"></select>
-                                        </li>
-                                        <li>
-                                            <p>Фундамент</p>
-                                            <select class="js-example-data-array-selected foundation"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="closeApparenceBuild">Поиск</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:0"></span>
-                                </div>
-                            </li>
-                            <li><img src="../../template/images/search-5.png" alt="search">Безопасность
-                                <select class="js-example-data-array-selected security"></select>
-                            </li>
-                            <li><img src="../../template/images/search-1.png" alt="search">Документы
-                                <select class="js-example-data-array-selected documents"></select>
-                            </li>
-                            <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png" alt="search">Вложения
-                                <div class="attachments">
-                                    <h2>Вложения</h2>
-                                    <ul>
-                                        <li>
-                                            <p>Проект планировки</p>
-                                            <img src="../../template/images/at-1.png" alt="icons1">
-                                            <select class="js-example-data-array-selected design-plan"></select>
-                                        </li>
-                                        <li>
-                                            <p>3D проект</p>
-                                            <img src="../../template/images/at-2.png" alt="icons2">
-                                            <select class="js-example-data-array-selected project"></select>
-                                        </li>
-                                        <li>
-                                            <p>Видео</p>
-                                            <img src="../../template/images/at-3.png" alt="icons3">
-                                            <select class="js-example-data-array-selected video"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="closeAttachment">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:0"></span>
-                                </div>
-                            </li>
-                        </ul>
-                        <ul class="building-parameters-room">
-                            <li onclick="allParam('apartment');">
-                                <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
-                                <div class="apartment-settings">
-                                    <h2>Параметры квартиры</h2>
-                                    <ul>
-                                        <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Балкон м2</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                    </ul>
-                                    <ul>
-                                        <li><span class="names-parameters">Этаж</span>
-                                            <select class="js-example-data-array-selected floor"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Комплектация </span>
-                                            <select class="js-example-data-array-selected equipment"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Высота потолков м</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                                        </li>
-                                    </ul>
-                                    <button class="closeBlock">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:0"></span>
-                                </div>
-                            </li>
-                            <li onclick="allParam('apperanceOfTheApartment')"><img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
-                                <div class="appearance-of-the-apartment">
-                                    <h2>Внешний вид квартиры</h2>
-                                    <ul>
-                                        <li>
-                                            <p>Команты</p>
-                                            <img src="../../template/images/r-d-1.png" alt="icons1">
-                                            <select class="js-example-data-array-selected rooms"></select>
-                                        </li>
-                                        <li>
-                                            <p>Санузел</p>
-                                            <img src="../../template/images/r-d-2.png" alt="icons2">
-                                            <select class="js-example-data-array-selected a-bathroom"></select>
-                                        </li>
-                                        <li>
-                                            <p>Отделка</p>
-                                            <img src="../../template/images/r-d-3.png" alt="icons3">
-                                            <select class="js-example-data-array-selected decoration"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="search">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:40%"></span>
-                                </div>
-                            </li>
-                            <li onclick="allParam('buildingParametersFilter');"><img src="../../template/images/search-3.png" alt="search">Параметры здания
-                                <div class="building-parameters-filter">
-                                    <h2>Параметры здания</h2>
-                                    <ul>
-                                        <li><span class="names-parameters">Количество этажей</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Год окончания строительства</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Наличие лифта</span>
-                                            <select class="js-example-data-array-selected the-presence-of-an-elevator"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Обязеьельные услуги ЖКХ</span>
-                                            <select class="js-example-data-array-selected nursery-services"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Вид объекта</span>
-                                            <select class="js-example-data-array-selected type-of-object"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Парковка</span>
-                                            <select class="js-example-data-array-selected parking-area"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="close-building-parameter">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:40%"></span>
-                                </div>
-                            </li>
-                            <li onclick="allParam('appearanceBuild')"><img src="../../template/images/search-4.png" alt="search">Внешний вид здания
-                                <div class="appearance-of-the-build">
-                                    <h2>Внешний вид здания</h2>
-                                    <ul>
-                                        <li>
-                                            <p>Материал<br>стен</p>
-                                            <select class="js-example-data-array-selected wall_material"></select>
-                                        </li>
-                                        <li>
-                                            <p>Кровля</p>
-                                            <select class="js-example-data-array-selected roof"></select>
-                                        </li>
-                                        <li>
-                                            <p>Фундамент</p>
-                                            <select class="js-example-data-array-selected foundation"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="closeApparenceBuild">Поиск</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:0"></span>
-                                </div>
-                            </li>
-                            <li><img src="../../template/images/search-5.png" alt="search">Безопасность
-                                <select class="js-example-data-array-selected security"></select>
-                            </li>
-                            <li><img src="../../template/images/search-1.png" alt="search">Документы
-                                <select class="js-example-data-array-selected documents"></select>
-                            </li>
-                            <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png" alt="search">Вложения
-                                <div class="attachments">
-                                    <h2>Вложения</h2>
-                                    <ul>
-                                        <li>
-                                            <p>Проект планировки</p>
-                                            <img src="../../template/images/at-1.png" alt="icons1">
-                                            <select class="js-example-data-array-selected design-plan"></select>
-                                        </li>
-                                        <li>
-                                            <p>3D проект</p>
-                                            <img src="../../template/images/at-2.png" alt="icons2">
-                                            <select class="js-example-data-array-selected project"></select>
-                                        </li>
-                                        <li>
-                                            <p>Видео</p>
-                                            <img src="../../template/images/at-3.png" alt="icons3">
-                                            <select class="js-example-data-array-selected video"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="closeAttachment">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:0"></span>
-                                </div>
-                            </li>
-                        </ul>
-                        <ul class="building-parameters-office-area">
-                            <li onclick="allParam('apartment');">
-                                <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
-                                <div class="apartment-settings">
-                                    <h2>Параметры квартиры</h2>
-                                    <ul>
-                                        <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Балкон м2</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                    </ul>
-                                    <ul>
-                                        <li><span class="names-parameters">Этаж</span>
-                                            <select class="js-example-data-array-selected floor"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Комплектация </span>
-                                            <select class="js-example-data-array-selected equipment"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Высота потолков м</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                                        </li>
-                                    </ul>
-                                    <button class="closeBlock">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:0"></span>
-                                </div>
-                            </li>
-                            <li onclick="allParam('apperanceOfTheApartment')"><img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
-                                <div class="appearance-of-the-apartment">
-                                    <h2>Внешний вид квартиры</h2>
-                                    <ul>
-                                        <li>
-                                            <p>Команты</p>
-                                            <img src="../../template/images/r-d-1.png" alt="icons1">
-                                            <select class="js-example-data-array-selected rooms"></select>
-                                        </li>
-                                        <li>
-                                            <p>Санузел</p>
-                                            <img src="../../template/images/r-d-2.png" alt="icons2">
-                                            <select class="js-example-data-array-selected a-bathroom"></select>
-                                        </li>
-                                        <li>
-                                            <p>Отделка</p>
-                                            <img src="../../template/images/r-d-3.png" alt="icons3">
-                                            <select class="js-example-data-array-selected decoration"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="search">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:40%"></span>
-                                </div>
-                            </li>
-                            <li onclick="allParam('buildingParametersFilter');"><img src="../../template/images/search-3.png" alt="search">Параметры здания
-                                <div class="building-parameters-filter">
-                                    <h2>Параметры здания</h2>
-                                    <ul>
-                                        <li><span class="names-parameters">Количество этажей</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Год окончания строительства</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Наличие лифта</span>
-                                            <select class="js-example-data-array-selected the-presence-of-an-elevator"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Обязеьельные услуги ЖКХ</span>
-                                            <select class="js-example-data-array-selected nursery-services"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Вид объекта</span>
-                                            <select class="js-example-data-array-selected type-of-object"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Парковка</span>
-                                            <select class="js-example-data-array-selected parking-area"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="close-building-parameter">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:40%"></span>
-                                </div>
-                            </li>
-                            <li onclick="allParam('appearanceBuild')"><img src="../../template/images/search-4.png" alt="search">Внешний вид здания
-                                <div class="appearance-of-the-build">
-                                    <h2>Внешний вид здания</h2>
-                                    <ul>
-                                        <li>
-                                            <p>Материал<br>стен</p>
-                                            <select class="js-example-data-array-selected wall_material"></select>
-                                        </li>
-                                        <li>
-                                            <p>Кровля</p>
-                                            <select class="js-example-data-array-selected roof"></select>
-                                        </li>
-                                        <li>
-                                            <p>Фундамент</p>
-                                            <select class="js-example-data-array-selected foundation"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="closeApparenceBuild">Поиск</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:0"></span>
-                                </div>
-                            </li>
-                            <li><img src="../../template/images/search-5.png" alt="search">Безопасность
-                                <select class="js-example-data-array-selected security"></select>
-                            </li>
-                            <li><img src="../../template/images/search-1.png" alt="search">Документы
-                                <select class="js-example-data-array-selected documents"></select>
-                            </li>
-                            <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png" alt="search">Вложения
-                                <div class="attachments">
-                                    <h2>Вложения</h2>
-                                    <ul>
-                                        <li>
-                                            <p>Проект планировки</p>
-                                            <img src="../../template/images/at-1.png" alt="icons1">
-                                            <select class="js-example-data-array-selected design-plan"></select>
-                                        </li>
-                                        <li>
-                                            <p>3D проект</p>
-                                            <img src="../../template/images/at-2.png" alt="icons2">
-                                            <select class="js-example-data-array-selected project"></select>
-                                        </li>
-                                        <li>
-                                            <p>Видео</p>
-                                            <img src="../../template/images/at-3.png" alt="icons3">
-                                            <select class="js-example-data-array-selected video"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="closeAttachment">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:0"></span>
-                                </div>
-                            </li>
-                        </ul>
-                        <ul class="building-parameters-separate-building">
-                            <li onclick="allParam('apartment');">
-                                <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
-                                <div class="apartment-settings">
-                                    <h2>Параметры квартиры</h2>
-                                    <ul>
-                                        <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Балкон м2</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                    </ul>
-                                    <ul>
-                                        <li><span class="names-parameters">Этаж</span>
-                                            <select class="js-example-data-array-selected floor"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Комплектация </span>
-                                            <select class="js-example-data-array-selected equipment"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Высота потолков м</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                                        </li>
-                                    </ul>
-                                    <button class="closeBlock">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:0"></span>
-                                </div>
-                            </li>
-                            <li onclick="allParam('apperanceOfTheApartment')"><img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
-                                <div class="appearance-of-the-apartment">
-                                    <h2>Внешний вид квартиры</h2>
-                                    <ul>
-                                        <li>
-                                            <p>Команты</p>
-                                            <img src="../../template/images/r-d-1.png" alt="icons1">
-                                            <select class="js-example-data-array-selected rooms"></select>
-                                        </li>
-                                        <li>
-                                            <p>Санузел</p>
-                                            <img src="../../template/images/r-d-2.png" alt="icons2">
-                                            <select class="js-example-data-array-selected a-bathroom"></select>
-                                        </li>
-                                        <li>
-                                            <p>Отделка</p>
-                                            <img src="../../template/images/r-d-3.png" alt="icons3">
-                                            <select class="js-example-data-array-selected decoration"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="search">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:40%"></span>
-                                </div>
-                            </li>
-                            <li onclick="allParam('buildingParametersFilter');"><img src="../../template/images/search-3.png" alt="search">Параметры здания
-                                <div class="building-parameters-filter">
-                                    <h2>Параметры здания</h2>
-                                    <ul>
-                                        <li><span class="names-parameters">Количество этажей</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Год окончания строительства</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Наличие лифта</span>
-                                            <select class="js-example-data-array-selected the-presence-of-an-elevator"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Обязеьельные услуги ЖКХ</span>
-                                            <select class="js-example-data-array-selected nursery-services"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Вид объекта</span>
-                                            <select class="js-example-data-array-selected type-of-object"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Парковка</span>
-                                            <select class="js-example-data-array-selected parking-area"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="close-building-parameter">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:40%"></span>
-                                </div>
-                            </li>
-                            <li onclick="allParam('appearanceBuild')"><img src="../../template/images/search-4.png" alt="search">Внешний вид здания
-                                <div class="appearance-of-the-build">
-                                    <h2>Внешний вид здания</h2>
-                                    <ul>
-                                        <li>
-                                            <p>Материал<br>стен</p>
-                                            <select class="js-example-data-array-selected wall_material"></select>
-                                        </li>
-                                        <li>
-                                            <p>Кровля</p>
-                                            <select class="js-example-data-array-selected roof"></select>
-                                        </li>
-                                        <li>
-                                            <p>Фундамент</p>
-                                            <select class="js-example-data-array-selected foundation"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="closeApparenceBuild">Поиск</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:0"></span>
-                                </div>
-                            </li>
-                            <li><img src="../../template/images/search-5.png" alt="search">Безопасность
-                                <select class="js-example-data-array-selected security"></select>
-                            </li>
-                            <li><img src="../../template/images/search-1.png" alt="search">Документы
-                                <select class="js-example-data-array-selected documents"></select>
-                            </li>
-                            <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png" alt="search">Вложения
-                                <div class="attachments">
-                                    <h2>Вложения</h2>
-                                    <ul>
-                                        <li>
-                                            <p>Проект планировки</p>
-                                            <img src="../../template/images/at-1.png" alt="icons1">
-                                            <select class="js-example-data-array-selected design-plan"></select>
-                                        </li>
-                                        <li>
-                                            <p>3D проект</p>
-                                            <img src="../../template/images/at-2.png" alt="icons2">
-                                            <select class="js-example-data-array-selected project"></select>
-                                        </li>
-                                        <li>
-                                            <p>Видео</p>
-                                            <img src="../../template/images/at-3.png" alt="icons3">
-                                            <select class="js-example-data-array-selected video"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="closeAttachment">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:0"></span>
-                                </div>
-                            </li>
-                        </ul>
-                        <ul class="building-parameters-ozs-сomplex">
-                            <li onclick="allParam('apartment');">
-                                <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
-                                <div class="apartment-settings">
-                                    <h2>Параметры квартиры</h2>
-                                    <ul>
-                                        <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Балкон м2</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                    </ul>
-                                    <ul>
-                                        <li><span class="names-parameters">Этаж</span>
-                                            <select class="js-example-data-array-selected floor"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Комплектация </span>
-                                            <select class="js-example-data-array-selected equipment"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Высота потолков м</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                                        </li>
-                                    </ul>
-                                    <button class="closeBlock">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:0"></span>
-                                </div>
-                            </li>
-                            <li onclick="allParam('apperanceOfTheApartment')"><img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
-                                <div class="appearance-of-the-apartment">
-                                    <h2>Внешний вид квартиры</h2>
-                                    <ul>
-                                        <li>
-                                            <p>Команты</p>
-                                            <img src="../../template/images/r-d-1.png" alt="icons1">
-                                            <select class="js-example-data-array-selected rooms"></select>
-                                        </li>
-                                        <li>
-                                            <p>Санузел</p>
-                                            <img src="../../template/images/r-d-2.png" alt="icons2">
-                                            <select class="js-example-data-array-selected a-bathroom"></select>
-                                        </li>
-                                        <li>
-                                            <p>Отделка</p>
-                                            <img src="../../template/images/r-d-3.png" alt="icons3">
-                                            <select class="js-example-data-array-selected decoration"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="search">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:40%"></span>
-                                </div>
-                            </li>
-                            <li onclick="allParam('buildingParametersFilter');"><img src="../../template/images/search-3.png" alt="search">Параметры здания
-                                <div class="building-parameters-filter">
-                                    <h2>Параметры здания</h2>
-                                    <ul>
-                                        <li><span class="names-parameters">Количество этажей</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Год окончания строительства</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Наличие лифта</span>
-                                            <select class="js-example-data-array-selected the-presence-of-an-elevator"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Обязеьельные услуги ЖКХ</span>
-                                            <select class="js-example-data-array-selected nursery-services"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Вид объекта</span>
-                                            <select class="js-example-data-array-selected type-of-object"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Парковка</span>
-                                            <select class="js-example-data-array-selected parking-area"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="close-building-parameter">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:40%"></span>
-                                </div>
-                            </li>
-                            <li onclick="allParam('appearanceBuild')"><img src="../../template/images/search-4.png" alt="search">Внешний вид здания
-                                <div class="appearance-of-the-build">
-                                    <h2>Внешний вид здания</h2>
-                                    <ul>
-                                        <li>
-                                            <p>Материал<br>стен</p>
-                                            <select class="js-example-data-array-selected wall_material"></select>
-                                        </li>
-                                        <li>
-                                            <p>Кровля</p>
-                                            <select class="js-example-data-array-selected roof"></select>
-                                        </li>
-                                        <li>
-                                            <p>Фундамент</p>
-                                            <select class="js-example-data-array-selected foundation"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="closeApparenceBuild">Поиск</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:0"></span>
-                                </div>
-                            </li>
-                            <li><img src="../../template/images/search-5.png" alt="search">Безопасность
-                                <select class="js-example-data-array-selected security"></select>
-                            </li>
-                            <li><img src="../../template/images/search-1.png" alt="search">Документы
-                                <select class="js-example-data-array-selected documents"></select>
-                            </li>
-                            <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png" alt="search">Вложения
-                                <div class="attachments">
-                                    <h2>Вложения</h2>
-                                    <ul>
-                                        <li>
-                                            <p>Проект планировки</p>
-                                            <img src="../../template/images/at-1.png" alt="icons1">
-                                            <select class="js-example-data-array-selected design-plan"></select>
-                                        </li>
-                                        <li>
-                                            <p>3D проект</p>
-                                            <img src="../../template/images/at-2.png" alt="icons2">
-                                            <select class="js-example-data-array-selected project"></select>
-                                        </li>
-                                        <li>
-                                            <p>Видео</p>
-                                            <img src="../../template/images/at-3.png" alt="icons3">
-                                            <select class="js-example-data-array-selected video"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="closeAttachment">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:0"></span>
-                                </div>
-                            </li>
-                        </ul>
-                        <div id="map">
-                            <input type="text" id="address" placeholder="Адрес ...">
-                        </div>
-                        <a onclick="yandexMap();" id="searchYandexMap">
-                            <i class="fa fa-map-marker" aria-hidden="true"></i>Поиск по карте</a>
                     </div>
                 </div>
-                <!-- Блок Купить -->
-                <div class="big-search-menu-tenancy">
-                    <div class="apartment-settings-apartment">
-                        <h2>Параметры квартиры</h2>
-                        <ul>
-                            <li><span class="names-parameters">Кол-во комнат</span>
-                                <p class="number-apartments">
-                                    <span>1</span>
-                                    <span>2</span>
-                                    <span>3</span>
-                                    <span>4</span>
-                                    <span>4+</span>
-                                </p>
-                            </li>
-                            <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                            <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                            <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                            <li><span class="names-parameters">Балкон м2</span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                        </ul>
-                        <ul>
-                            <li><span class="names-parameters">Этаж</span>
-                                <select class="js-example-data-array-selected floor"></select>
-                            </li>
-                            <li><span class="names-parameters">Комплектация </span>
-                                <select class="js-example-data-array-selected equipment"></select>
-                            </li>
-                            <li><span class="names-parameters">Высота потолков м</span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                            </li>
-                        </ul>
-                        <a>
-                            <button>Готово</button>
-                        </a>
+                <button>Найти</button>
+                <ul class="filter-block-big-menu">
+                    <li class="pointer value-text" onclick="filterOptionsApartments();">
+                        <img src="../../template/images/apartments.png" alt="apartments">Тип недвижимости
+                        <div class="property-type-apartment-settings">
+                            <ul>
+                                <li>Жилая</li>
+                                <li onclick="allFilterBlocks('1');"><img src="../../template/images/b-s-1.png"
+                                                                         alt="icon">
+                                    <p>Квартира</p></li>
+                                <li onclick="allFilterBlocks('2');"><img src="../../template/images/b-s-2.png"
+                                                                         alt="icon">
+                                    <p>Дом</p></li>
+                                <li onclick="allFilterBlocks('3');"><img src="../../template/images/b-s-3.png"
+                                                                         alt="icon">
+                                    <p>Комната</p></li>
+                                <li onclick="allFilterBlocks('7');"><img src="../../template/images/b-s-4.png"
+                                                                         alt="icon">
+                                    <p>Земельный участок</p></li>
+                                <li onclick="allFilterBlocks('8');"><img src="../../template/images/b-s-5.png"
+                                                                         alt="icon">
+                                    <p>Гараж/машиноместо</p></li>
+                            </ul>
+                            <ul>
+                                <li>Коммерческая</li>
+                                <li onclick="allFilterBlocks('4');"><img src="../../template/images/b-s-6.png"
+                                                                         alt="icon">
+                                    <p>Офисная площадь</p></li>
+                                <li onclick="allFilterBlocks('5');"><img src="../../template/images/b-s-1.png"
+                                                                         alt="icon">
+                                    <p>Отдельно стоящее здание</p></li>
+                                <li onclick="allFilterBlocks('6');"><img src="../../template/images/b-s-7.png"
+                                                                         alt="icon">
+                                    <p>Комплекс ОСЗ</p></li>
+                                <li onclick="allFilterBlocks('9');"><img src="../../template/images/b-s-8.png"
+                                                                         alt="icon">
+                                    <p>Рынок/Ярмарка</p></li>
+                                <li onclick="allFilterBlocks('10');"><img src="../../template/images/b-s-9.png"
+                                                                          alt="icon">
+                                    <p>Производственно-складские помещения</p></li>
+                                <li onclick="allFilterBlocks('11');"><img src="../../template/images/b-s-10.png"
+                                                                          alt="icon">
+                                    <p>Производственно-складские здания</p></li>
+                                <li onclick="allFilterBlocks('12');"><img src="../../template/images/b-s-11.png"
+                                                                          alt="icon">
+                                    <p>Недвижимость для туризма и отдыха</p></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li onclick="allParam('bigOption')">
+                        <label for="#amount">Цена</label>
+                        <div class="showBigOptions">
+                            <p>От<input name="" placeholder="" type="text" id="amountBefore" readonly disabled>
+                            </p>
+                            <p>До<input name="" placeholder="" type="text" id="amountAfter" readonly disabled>
+                            </p>
+                            <div id="slider-range"></div>
+                            <div class="currency">
+                                <p>Валюта</p>
+                                <button class="closeCurrency"><i class="fa fa-rub" aria-hidden="true"></i>рубли</button>
+                                <button class="closeCurrency"><i class="fa fa-usd" aria-hidden="true"></i>доллары
+                                </button>
+                                <button class="closeCurrency"><i class="fa fa-eur" aria-hidden="true"></i>евро</button>
+                            </div>
+                        </div>
+                        <div class="decorativeShadowBlock"></div>
+                    </li>
+                    <li>
+                        <input name="" id="clast" type="checkbox">
+                        <label for="clast">Торг возможен</label></li>
+                    <li><select class="js-example-data-array-selected owner"></select></li>
+                    <li><select class="js-example-data-array-selected leaseTerm"></select></li>
+                </ul>
+                <div class="advanced-search-options">
+                    <p>Заполните параметры ниже, для более точного поиска</p>
+                    <ul class="building-parameters">
+                        <li onclick="allParam('apartment');">
+                            <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
+                            <div class="apartment-settings">
+                                <h2>Параметры квартиры</h2>
+                                <ul>
+                                    <li><span class="names-parameters">Кол-во комнат</span>
+                                        <p class="number-apartments">
+                                            <span>1</span>
+                                            <span>2</span>
+                                            <span>3</span>
+                                            <span>4</span>
+                                            <span>4+</span>
+                                        </p>
+                                    </li>
+                                    <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Балкон м2</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li><span class="names-parameters">Этаж</span>
+                                        <select class="js-example-data-array-selected floor"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Комплектация </span>
+                                        <select class="js-example-data-array-selected equipment"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Высота потолков м</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
+                                                    required></p>
+                                    </li>
+                                </ul>
+                                <button class="closeBlock">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                        <li onclick="allFilterBlocks('appearanceOfTheApartment')">
+                            <img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
+                            <div class="appearance-of-the-apartment">
+                                <h2>Внешний вид квартиры</h2>
+                                <ul>
+                                    <li>
+                                        <p>Команты</p>
+                                        <img src="../../template/images/r-d-1.png" alt="icons1">
+                                        <select class="js-example-data-array-selected rooms"></select>
+                                    </li>
+                                    <li>
+                                        <p>Санузел</p>
+                                        <img src="../../template/images/r-d-2.png" alt="icons2">
+                                        <select class="js-example-data-array-selected a-bathroom"></select>
+                                    </li>
+                                    <li>
+                                        <p>Отделка</p>
+                                        <img src="../../template/images/r-d-3.png" alt="icons3">
+                                        <select class="js-example-data-array-selected decoration"></select>
+                                    </li>
+                                </ul>
+                                <button class="search">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li onclick="allParam('buildingParametersFilter');">
+                            <img src="../../template/images/search-3.png" alt="search">Параметры здания
+                            <div class="building-parameters-filter">
+                                <h2>Параметры здания</h2>
+                                <ul>
+                                    <li><span class="names-parameters">Количество этажей</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Год окончания строительства</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Наличие лифта</span>
+                                        <select class="js-example-data-array-selected the-presence-of-an-elevator"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Обязеьельные услуги ЖКХ</span>
+                                        <select class="js-example-data-array-selected nursery-services"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Вид объекта</span>
+                                        <select class="js-example-data-array-selected type-of-object"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Парковка</span>
+                                        <select class="js-example-data-array-selected parking-area"></select>
+                                    </li>
+                                </ul>
+                                <button class="close-building-parameter">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li onclick="allParam('appearanceBuild')">
+                            <img src="../../template/images/search-4.png" alt="search">Внешний вид здания
+                            <div class="appearance-of-the-build">
+                                <h2>Внешний вид здания</h2>
+                                <ul>
+                                    <li>
+                                        <p>Материал<br>стен</p>
+                                        <select class="js-example-data-array-selected wall_material"></select>
+                                    </li>
+                                    <li>
+                                        <p>Кровля</p>
+                                        <select class="js-example-data-array-selected roof"></select>
+                                    </li>
+                                    <li>
+                                        <p>Фундамент</p>
+                                        <select class="js-example-data-array-selected foundation"></select>
+                                    </li>
+                                </ul>
+                                <button class="closeApparenceBuild">Поиск</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                        <li><img src="../../template/images/search-5.png" alt="search">Безопасность
+                            <select class="js-example-data-array-selected security"></select>
+                        </li>
+                        <li><img src="../../template/images/search-1.png" alt="search">Документы
+                            <select class="js-example-data-array-selected documents"></select>
+                        </li>
+                        <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png"
+                                                                   alt="search">Вложения
+                            <div class="attachments">
+                                <h2>Вложения</h2>
+                                <ul>
+                                    <li>
+                                        <p>Проект планировки</p>
+                                        <img src="../../template/images/at-1.png" alt="icons1">
+                                        <select class="js-example-data-array-selected design-plan"></select>
+                                    </li>
+                                    <li>
+                                        <p>3D проект</p>
+                                        <img src="../../template/images/at-2.png" alt="icons2">
+                                        <select class="js-example-data-array-selected project"></select>
+                                    </li>
+                                    <li>
+                                        <p>Видео</p>
+                                        <img src="../../template/images/at-3.png" alt="icons3">
+                                        <select class="js-example-data-array-selected video"></select>
+                                    </li>
+                                </ul>
+                                <button class="closeAttachment">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="building-parameters-apartment">
+                        <li onclick="allParam('apartment');">
+                            <img src="../../template/images/search-1.png" alt="search">Исходные параметры квартиры
+                            <div class="apartment-settings">
+                                <h2>Исходные параметры квартиры</h2>
+                                <ul>
+                                    <li><span class="names-parameters">Площадь м<sup>2</sup></span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Балкон м2</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li><span class="names-parameters">Этаж</span>
+                                        <select class="js-example-data-array-selected floor"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Комплектация </span>
+                                        <select class="js-example-data-array-selected equipment"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Высота потолков м</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
+                                                    required></p>
+                                    </li>
+                                </ul>
+                                <button class="closeBlock">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                        <li onclick="allParam('apperanceOfTheApartment')">
+                            <img src="../../template/images/search-2.png" alt="search">Ремонт и обустройства
+                            <div class="appearance-of-the-apartment">
+                                <h2>Внешний вид квартиры</h2>
+                                <ul>
+                                    <li>
+                                        <p>Комнаты</p>
+                                        <img src="../../template/images/r-d-1.png" alt="icons1">
+                                        <select class="js-example-data-array-selected rooms"></select>
+                                    </li>
+                                    <li>
+                                        <p>Санузел</p>
+                                        <img src="../../template/images/r-d-2.png" alt="icons2">
+                                        <select class="js-example-data-array-selected a-bathroom"></select>
+                                    </li>
+                                    <li>
+                                        <p>Отделка</p>
+                                        <img src="../../template/images/r-d-3.png" alt="icons3">
+                                        <select class="js-example-data-array-selected decoration"></select>
+                                    </li>
+                                </ul>
+                                <button class="search">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li onclick="allParam('buildingParametersFilter');"><img
+                                    src="../../template/images/search-3.png" alt="search">Параметры здания
+                            <div class="building-parameters-filter">
+                                <h2>Параметры здания</h2>
+                                <ul>
+                                    <li><span class="names-parameters">Количество этажей</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Год окончания строительства</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Наличие лифта</span>
+                                        <select class="js-example-data-array-selected the-presence-of-an-elevator"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Обязеьельные услуги ЖКХ</span>
+                                        <select class="js-example-data-array-selected nursery-services"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Вид объекта</span>
+                                        <select class="js-example-data-array-selected type-of-object"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Парковка</span>
+                                        <select class="js-example-data-array-selected parking-area"></select>
+                                    </li>
+                                </ul>
+                                <button class="close-building-parameter">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png"
+                                                                   alt="search">Вложения
+                            <div class="attachments">
+                                <h2>Вложения</h2>
+                                <ul>
+                                    <li>
+                                        <p>Проект планировки</p>
+                                        <img src="../../template/images/at-1.png" alt="icons1">
+                                        <select class="js-example-data-array-selected design-plan"></select>
+                                    </li>
+                                    <li>
+                                        <p>3D проект</p>
+                                        <img src="../../template/images/at-2.png" alt="icons2">
+                                        <select class="js-example-data-array-selected project"></select>
+                                    </li>
+                                    <li>
+                                        <p>Видео</p>
+                                        <img src="../../template/images/at-3.png" alt="icons3">
+                                        <select class="js-example-data-array-selected video"></select>
+                                    </li>
+                                </ul>
+                                <button class="closeAttachment">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="building-parameters-home">
+                        <li onclick="allParam('apartment');">
+                            <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
+                            <div class="apartment-settings">
+                                <h2>Параметры квартиры</h2>
+                                <ul>
+                                    <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Балкон м2</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li><span class="names-parameters">Этаж</span>
+                                        <select class="js-example-data-array-selected floor"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Комплектация </span>
+                                        <select class="js-example-data-array-selected equipment"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Высота потолков м</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
+                                                    required></p>
+                                    </li>
+                                </ul>
+                                <button class="closeBlock">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                        <li onclick="allParam('apperanceOfTheApartment')"><img src="../../template/images/search-2.png"
+                                                                               alt="search">Внешний вид квартиры
+                            <div class="appearance-of-the-apartment">
+                                <h2>Внешний вид квартиры</h2>
+                                <ul>
+                                    <li>
+                                        <p>Команты</p>
+                                        <img src="../../template/images/r-d-1.png" alt="icons1">
+                                        <select class="js-example-data-array-selected rooms"></select>
+                                    </li>
+                                    <li>
+                                        <p>Санузел</p>
+                                        <img src="../../template/images/r-d-2.png" alt="icons2">
+                                        <select class="js-example-data-array-selected a-bathroom"></select>
+                                    </li>
+                                    <li>
+                                        <p>Отделка</p>
+                                        <img src="../../template/images/r-d-3.png" alt="icons3">
+                                        <select class="js-example-data-array-selected decoration"></select>
+                                    </li>
+                                </ul>
+                                <button class="search">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li onclick="allParam('buildingParametersFilter');">
+                            <img src="../../template/images/search-3.png" alt="search">Параметры здания
+                            <div class="building-parameters-filter">
+                                <h2>Параметры здания</h2>
+                                <ul>
+                                    <li><span class="names-parameters">Количество этажей</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Год окончания строительства</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Наличие лифта</span>
+                                        <select class="js-example-data-array-selected the-presence-of-an-elevator"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Обязеьельные услуги ЖКХ</span>
+                                        <select class="js-example-data-array-selected nursery-services"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Вид объекта</span>
+                                        <select class="js-example-data-array-selected type-of-object"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Парковка</span>
+                                        <select class="js-example-data-array-selected parking-area"></select>
+                                    </li>
+                                </ul>
+                                <button class="close-building-parameter">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li onclick="allParam('appearanceBuild')"><img src="../../template/images/search-4.png"
+                                                                       alt="search">Внешний вид здания
+                            <div class="appearance-of-the-build">
+                                <h2>Внешний вид здания</h2>
+                                <ul>
+                                    <li>
+                                        <p>Материал<br>стен</p>
+                                        <select class="js-example-data-array-selected wall_material"></select>
+                                    </li>
+                                    <li>
+                                        <p>Кровля</p>
+                                        <select class="js-example-data-array-selected roof"></select>
+                                    </li>
+                                    <li>
+                                        <p>Фундамент</p>
+                                        <select class="js-example-data-array-selected foundation"></select>
+                                    </li>
+                                </ul>
+                                <button class="closeApparenceBuild">Поиск</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                        <li><img src="../../template/images/search-5.png" alt="search">Безопасность
+                            <select class="js-example-data-array-selected security"></select>
+                        </li>
+                        <li><img src="../../template/images/search-1.png" alt="search">Документы
+                            <select class="js-example-data-array-selected documents"></select>
+                        </li>
+                        <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png"
+                                                                   alt="search">Вложения
+                            <div class="attachments">
+                                <h2>Вложения</h2>
+                                <ul>
+                                    <li>
+                                        <p>Проект планировки</p>
+                                        <img src="../../template/images/at-1.png" alt="icons1">
+                                        <select class="js-example-data-array-selected design-plan"></select>
+                                    </li>
+                                    <li>
+                                        <p>3D проект</p>
+                                        <img src="../../template/images/at-2.png" alt="icons2">
+                                        <select class="js-example-data-array-selected project"></select>
+                                    </li>
+                                    <li>
+                                        <p>Видео</p>
+                                        <img src="../../template/images/at-3.png" alt="icons3">
+                                        <select class="js-example-data-array-selected video"></select>
+                                    </li>
+                                </ul>
+                                <button class="closeAttachment">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="building-parameters-room">
+                        <li onclick="allParam('apartment');">
+                            <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
+                            <div class="apartment-settings">
+                                <h2>Параметры квартиры</h2>
+                                <ul>
+                                    <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Балкон м2</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li><span class="names-parameters">Этаж</span>
+                                        <select class="js-example-data-array-selected floor"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Комплектация </span>
+                                        <select class="js-example-data-array-selected equipment"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Высота потолков м</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
+                                                    required></p>
+                                    </li>
+                                </ul>
+                                <button class="closeBlock">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                        <li onclick="allParam('apperanceOfTheApartment')"><img src="../../template/images/search-2.png"
+                                                                               alt="search">Внешний вид квартиры
+                            <div class="appearance-of-the-apartment">
+                                <h2>Внешний вид квартиры</h2>
+                                <ul>
+                                    <li>
+                                        <p>Команты</p>
+                                        <img src="../../template/images/r-d-1.png" alt="icons1">
+                                        <select class="js-example-data-array-selected rooms"></select>
+                                    </li>
+                                    <li>
+                                        <p>Санузел</p>
+                                        <img src="../../template/images/r-d-2.png" alt="icons2">
+                                        <select class="js-example-data-array-selected a-bathroom"></select>
+                                    </li>
+                                    <li>
+                                        <p>Отделка</p>
+                                        <img src="../../template/images/r-d-3.png" alt="icons3">
+                                        <select class="js-example-data-array-selected decoration"></select>
+                                    </li>
+                                </ul>
+                                <button class="search">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li onclick="allParam('buildingParametersFilter');"><img
+                                    src="../../template/images/search-3.png" alt="search">Параметры здания
+                            <div class="building-parameters-filter">
+                                <h2>Параметры здания</h2>
+                                <ul>
+                                    <li><span class="names-parameters">Количество этажей</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Год окончания строительства</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Наличие лифта</span>
+                                        <select class="js-example-data-array-selected the-presence-of-an-elevator"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Обязеьельные услуги ЖКХ</span>
+                                        <select class="js-example-data-array-selected nursery-services"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Вид объекта</span>
+                                        <select class="js-example-data-array-selected type-of-object"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Парковка</span>
+                                        <select class="js-example-data-array-selected parking-area"></select>
+                                    </li>
+                                </ul>
+                                <button class="close-building-parameter">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li onclick="allParam('appearanceBuild')"><img src="../../template/images/search-4.png"
+                                                                       alt="search">Внешний вид здания
+                            <div class="appearance-of-the-build">
+                                <h2>Внешний вид здания</h2>
+                                <ul>
+                                    <li>
+                                        <p>Материал<br>стен</p>
+                                        <select class="js-example-data-array-selected wall_material"></select>
+                                    </li>
+                                    <li>
+                                        <p>Кровля</p>
+                                        <select class="js-example-data-array-selected roof"></select>
+                                    </li>
+                                    <li>
+                                        <p>Фундамент</p>
+                                        <select class="js-example-data-array-selected foundation"></select>
+                                    </li>
+                                </ul>
+                                <button class="closeApparenceBuild">Поиск</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                        <li><img src="../../template/images/search-5.png" alt="search">Безопасность
+                            <select class="js-example-data-array-selected security"></select>
+                        </li>
+                        <li><img src="../../template/images/search-1.png" alt="search">Документы
+                            <select class="js-example-data-array-selected documents"></select>
+                        </li>
+                        <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png"
+                                                                   alt="search">Вложения
+                            <div class="attachments">
+                                <h2>Вложения</h2>
+                                <ul>
+                                    <li>
+                                        <p>Проект планировки</p>
+                                        <img src="../../template/images/at-1.png" alt="icons1">
+                                        <select class="js-example-data-array-selected design-plan"></select>
+                                    </li>
+                                    <li>
+                                        <p>3D проект</p>
+                                        <img src="../../template/images/at-2.png" alt="icons2">
+                                        <select class="js-example-data-array-selected project"></select>
+                                    </li>
+                                    <li>
+                                        <p>Видео</p>
+                                        <img src="../../template/images/at-3.png" alt="icons3">
+                                        <select class="js-example-data-array-selected video"></select>
+                                    </li>
+                                </ul>
+                                <button class="closeAttachment">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="building-parameters-office-area">
+                        <li onclick="allParam('apartment');">
+                            <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
+                            <div class="apartment-settings">
+                                <h2>Параметры квартиры</h2>
+                                <ul>
+                                    <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Балкон м2</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li><span class="names-parameters">Этаж</span>
+                                        <select class="js-example-data-array-selected floor"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Комплектация </span>
+                                        <select class="js-example-data-array-selected equipment"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Высота потолков м</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
+                                                    required></p>
+                                    </li>
+                                </ul>
+                                <button class="closeBlock">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                        <li onclick="allParam('apperanceOfTheApartment')"><img src="../../template/images/search-2.png"
+                                                                               alt="search">Внешний вид квартиры
+                            <div class="appearance-of-the-apartment">
+                                <h2>Внешний вид квартиры</h2>
+                                <ul>
+                                    <li>
+                                        <p>Команты</p>
+                                        <img src="../../template/images/r-d-1.png" alt="icons1">
+                                        <select class="js-example-data-array-selected rooms"></select>
+                                    </li>
+                                    <li>
+                                        <p>Санузел</p>
+                                        <img src="../../template/images/r-d-2.png" alt="icons2">
+                                        <select class="js-example-data-array-selected a-bathroom"></select>
+                                    </li>
+                                    <li>
+                                        <p>Отделка</p>
+                                        <img src="../../template/images/r-d-3.png" alt="icons3">
+                                        <select class="js-example-data-array-selected decoration"></select>
+                                    </li>
+                                </ul>
+                                <button class="search">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li onclick="allParam('buildingParametersFilter');"><img
+                                    src="../../template/images/search-3.png" alt="search">Параметры здания
+                            <div class="building-parameters-filter">
+                                <h2>Параметры здания</h2>
+                                <ul>
+                                    <li><span class="names-parameters">Количество этажей</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Год окончания строительства</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Наличие лифта</span>
+                                        <select class="js-example-data-array-selected the-presence-of-an-elevator"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Обязеьельные услуги ЖКХ</span>
+                                        <select class="js-example-data-array-selected nursery-services"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Вид объекта</span>
+                                        <select class="js-example-data-array-selected type-of-object"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Парковка</span>
+                                        <select class="js-example-data-array-selected parking-area"></select>
+                                    </li>
+                                </ul>
+                                <button class="close-building-parameter">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li onclick="allParam('appearanceBuild')"><img src="../../template/images/search-4.png"
+                                                                       alt="search">Внешний вид здания
+                            <div class="appearance-of-the-build">
+                                <h2>Внешний вид здания</h2>
+                                <ul>
+                                    <li>
+                                        <p>Материал<br>стен</p>
+                                        <select class="js-example-data-array-selected wall_material"></select>
+                                    </li>
+                                    <li>
+                                        <p>Кровля</p>
+                                        <select class="js-example-data-array-selected roof"></select>
+                                    </li>
+                                    <li>
+                                        <p>Фундамент</p>
+                                        <select class="js-example-data-array-selected foundation"></select>
+                                    </li>
+                                </ul>
+                                <button class="closeApparenceBuild">Поиск</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                        <li><img src="../../template/images/search-5.png" alt="search">Безопасность
+                            <select class="js-example-data-array-selected security"></select>
+                        </li>
+                        <li><img src="../../template/images/search-1.png" alt="search">Документы
+                            <select class="js-example-data-array-selected documents"></select>
+                        </li>
+                        <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png"
+                                                                   alt="search">Вложения
+                            <div class="attachments">
+                                <h2>Вложения</h2>
+                                <ul>
+                                    <li>
+                                        <p>Проект планировки</p>
+                                        <img src="../../template/images/at-1.png" alt="icons1">
+                                        <select class="js-example-data-array-selected design-plan"></select>
+                                    </li>
+                                    <li>
+                                        <p>3D проект</p>
+                                        <img src="../../template/images/at-2.png" alt="icons2">
+                                        <select class="js-example-data-array-selected project"></select>
+                                    </li>
+                                    <li>
+                                        <p>Видео</p>
+                                        <img src="../../template/images/at-3.png" alt="icons3">
+                                        <select class="js-example-data-array-selected video"></select>
+                                    </li>
+                                </ul>
+                                <button class="closeAttachment">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="building-parameters-separate-building">
+                        <li onclick="allParam('apartment');">
+                            <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
+                            <div class="apartment-settings">
+                                <h2>Параметры квартиры</h2>
+                                <ul>
+                                    <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Балкон м2</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li><span class="names-parameters">Этаж</span>
+                                        <select class="js-example-data-array-selected floor"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Комплектация </span>
+                                        <select class="js-example-data-array-selected equipment"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Высота потолков м</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
+                                                    required></p>
+                                    </li>
+                                </ul>
+                                <button class="closeBlock">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                        <li onclick="allParam('apperanceOfTheApartment')"><img src="../../template/images/search-2.png"
+                                                                               alt="search">Внешний вид квартиры
+                            <div class="appearance-of-the-apartment">
+                                <h2>Внешний вид квартиры</h2>
+                                <ul>
+                                    <li>
+                                        <p>Команты</p>
+                                        <img src="../../template/images/r-d-1.png" alt="icons1">
+                                        <select class="js-example-data-array-selected rooms"></select>
+                                    </li>
+                                    <li>
+                                        <p>Санузел</p>
+                                        <img src="../../template/images/r-d-2.png" alt="icons2">
+                                        <select class="js-example-data-array-selected a-bathroom"></select>
+                                    </li>
+                                    <li>
+                                        <p>Отделка</p>
+                                        <img src="../../template/images/r-d-3.png" alt="icons3">
+                                        <select class="js-example-data-array-selected decoration"></select>
+                                    </li>
+                                </ul>
+                                <button class="search">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li onclick="allParam('buildingParametersFilter');"><img
+                                    src="../../template/images/search-3.png" alt="search">Параметры здания
+                            <div class="building-parameters-filter">
+                                <h2>Параметры здания</h2>
+                                <ul>
+                                    <li><span class="names-parameters">Количество этажей</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Год окончания строительства</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Наличие лифта</span>
+                                        <select class="js-example-data-array-selected the-presence-of-an-elevator"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Обязеьельные услуги ЖКХ</span>
+                                        <select class="js-example-data-array-selected nursery-services"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Вид объекта</span>
+                                        <select class="js-example-data-array-selected type-of-object"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Парковка</span>
+                                        <select class="js-example-data-array-selected parking-area"></select>
+                                    </li>
+                                </ul>
+                                <button class="close-building-parameter">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li onclick="allParam('appearanceBuild')"><img src="../../template/images/search-4.png"
+                                                                       alt="search">Внешний вид здания
+                            <div class="appearance-of-the-build">
+                                <h2>Внешний вид здания</h2>
+                                <ul>
+                                    <li>
+                                        <p>Материал<br>стен</p>
+                                        <select class="js-example-data-array-selected wall_material"></select>
+                                    </li>
+                                    <li>
+                                        <p>Кровля</p>
+                                        <select class="js-example-data-array-selected roof"></select>
+                                    </li>
+                                    <li>
+                                        <p>Фундамент</p>
+                                        <select class="js-example-data-array-selected foundation"></select>
+                                    </li>
+                                </ul>
+                                <button class="closeApparenceBuild">Поиск</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                        <li><img src="../../template/images/search-5.png" alt="search">Безопасность
+                            <select class="js-example-data-array-selected security"></select>
+                        </li>
+                        <li><img src="../../template/images/search-1.png" alt="search">Документы
+                            <select class="js-example-data-array-selected documents"></select>
+                        </li>
+                        <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png"
+                                                                   alt="search">Вложения
+                            <div class="attachments">
+                                <h2>Вложения</h2>
+                                <ul>
+                                    <li>
+                                        <p>Проект планировки</p>
+                                        <img src="../../template/images/at-1.png" alt="icons1">
+                                        <select class="js-example-data-array-selected design-plan"></select>
+                                    </li>
+                                    <li>
+                                        <p>3D проект</p>
+                                        <img src="../../template/images/at-2.png" alt="icons2">
+                                        <select class="js-example-data-array-selected project"></select>
+                                    </li>
+                                    <li>
+                                        <p>Видео</p>
+                                        <img src="../../template/images/at-3.png" alt="icons3">
+                                        <select class="js-example-data-array-selected video"></select>
+                                    </li>
+                                </ul>
+                                <button class="closeAttachment">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="building-parameters-ozs-сomplex">
+                        <li onclick="allParam('apartment');">
+                            <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
+                            <div class="apartment-settings">
+                                <h2>Параметры квартиры</h2>
+                                <ul>
+                                    <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Балкон м2</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li><span class="names-parameters">Этаж</span>
+                                        <select class="js-example-data-array-selected floor"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Комплектация </span>
+                                        <select class="js-example-data-array-selected equipment"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Высота потолков м</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
+                                                    required></p>
+                                    </li>
+                                </ul>
+                                <button class="closeBlock">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                        <li onclick="allParam('apperanceOfTheApartment')"><img src="../../template/images/search-2.png"
+                                                                               alt="search">Внешний вид квартиры
+                            <div class="appearance-of-the-apartment">
+                                <h2>Внешний вид квартиры</h2>
+                                <ul>
+                                    <li>
+                                        <p>Команты</p>
+                                        <img src="../../template/images/r-d-1.png" alt="icons1">
+                                        <select class="js-example-data-array-selected rooms"></select>
+                                    </li>
+                                    <li>
+                                        <p>Санузел</p>
+                                        <img src="../../template/images/r-d-2.png" alt="icons2">
+                                        <select class="js-example-data-array-selected a-bathroom"></select>
+                                    </li>
+                                    <li>
+                                        <p>Отделка</p>
+                                        <img src="../../template/images/r-d-3.png" alt="icons3">
+                                        <select class="js-example-data-array-selected decoration"></select>
+                                    </li>
+                                </ul>
+                                <button class="search">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li onclick="allParam('buildingParametersFilter');"><img
+                                    src="../../template/images/search-3.png" alt="search">Параметры здания
+                            <div class="building-parameters-filter">
+                                <h2>Параметры здания</h2>
+                                <ul>
+                                    <li><span class="names-parameters">Количество этажей</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Год окончания строительства</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Наличие лифта</span>
+                                        <select class="js-example-data-array-selected the-presence-of-an-elevator"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Обязеьельные услуги ЖКХ</span>
+                                        <select class="js-example-data-array-selected nursery-services"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Вид объекта</span>
+                                        <select class="js-example-data-array-selected type-of-object"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Парковка</span>
+                                        <select class="js-example-data-array-selected parking-area"></select>
+                                    </li>
+                                </ul>
+                                <button class="close-building-parameter">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li onclick="allParam('appearanceBuild')"><img src="../../template/images/search-4.png"
+                                                                       alt="search">Внешний вид здания
+                            <div class="appearance-of-the-build">
+                                <h2>Внешний вид здания</h2>
+                                <ul>
+                                    <li>
+                                        <p>Материал<br>стен</p>
+                                        <select class="js-example-data-array-selected wall_material"></select>
+                                    </li>
+                                    <li>
+                                        <p>Кровля</p>
+                                        <select class="js-example-data-array-selected roof"></select>
+                                    </li>
+                                    <li>
+                                        <p>Фундамент</p>
+                                        <select class="js-example-data-array-selected foundation"></select>
+                                    </li>
+                                </ul>
+                                <button class="closeApparenceBuild">Поиск</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                        <li><img src="../../template/images/search-5.png" alt="search">Безопасность
+                            <select class="js-example-data-array-selected security"></select>
+                        </li>
+                        <li><img src="../../template/images/search-1.png" alt="search">Документы
+                            <select class="js-example-data-array-selected documents"></select>
+                        </li>
+                        <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png"
+                                                                   alt="search">Вложения
+                            <div class="attachments">
+                                <h2>Вложения</h2>
+                                <ul>
+                                    <li>
+                                        <p>Проект планировки</p>
+                                        <img src="../../template/images/at-1.png" alt="icons1">
+                                        <select class="js-example-data-array-selected design-plan"></select>
+                                    </li>
+                                    <li>
+                                        <p>3D проект</p>
+                                        <img src="../../template/images/at-2.png" alt="icons2">
+                                        <select class="js-example-data-array-selected project"></select>
+                                    </li>
+                                    <li>
+                                        <p>Видео</p>
+                                        <img src="../../template/images/at-3.png" alt="icons3">
+                                        <select class="js-example-data-array-selected video"></select>
+                                    </li>
+                                </ul>
+                                <button class="closeAttachment">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                    </ul>
+                    <div id="map">
+                        <input type="text" id="address" placeholder="Адрес ...">
+                        <button class="close-map">Закрыть карту</button>
                     </div>
-                    <div class="apartment-settings-home">
-                        <h2>Параметры дома</h2>
-                        <ul>
-                            <li><span class="names-parameters">Кол-во комнат</span>
-                                <p class="number-apartments">
-                                    <span>1</span>
-                                    <span>2</span>
-                                    <span>3</span>
-                                    <span>4</span>
-                                    <span>4+</span>
-                                </p>
-                            </li>
-                            <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                            <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                            <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                            <li><span class="names-parameters">Балкон м2</span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                        </ul>
-                        <ul>
-                            <li><span class="names-parameters">Этаж</span>
-                                <select class="js-example-data-array-selected floor"></select>
-                            </li>
-                            <li><span class="names-parameters">Комплектация </span>
-                                <select class="js-example-data-array-selected equipment"></select>
-                            </li>
-                            <li><span class="names-parameters">Высота потолков м</span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                            </li>
-                        </ul>
-                        <a><button>Готово</button></a>
-                    </div>
-                    <div class="apartment-settings-room">
-                        <h2>Параметры комнаты</h2>
-                        <ul>
-                            <li><span class="names-parameters">Кол-во комнат</span>
-                                <p class="number-apartments">
-                                    <span>1</span>
-                                    <span>2</span>
-                                    <span>3</span>
-                                    <span>4</span>
-                                    <span>4+</span>
-                                </p>
-                            </li>
-                            <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                            <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                            <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                            <li><span class="names-parameters">Балкон м2</span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                        </ul>
-                        <ul>
-                            <li><span class="names-parameters">Этаж</span>
-                                <select class="js-example-data-array-selected floor"></select>
-                            </li>
-                            <li><span class="names-parameters">Комплектация </span>
-                                <select class="js-example-data-array-selected equipment"></select>
-                            </li>
-                            <li><span class="names-parameters">Высота потолков м</span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                            </li>
-                        </ul>
-                        <a><button>Готово</button></a>
-                    </div>
-                    <div class="apartment-settings-office-area">
-                        <h2>Офисная площадь</h2>
-                        <ul>
-                            <li><span class="names-parameters">Кол-во комнат</span>
-                                <p class="number-apartments">
-                                    <span>1</span>
-                                    <span>2</span>
-                                    <span>3</span>
-                                    <span>4</span>
-                                    <span>4+</span>
-                                </p>
-                            </li>
-                            <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                            <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                            <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                            <li><span class="names-parameters">Балкон м2</span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                        </ul>
-                        <ul>
-                            <li><span class="names-parameters">Этаж</span>
-                                <select class="js-example-data-array-selected floor"></select>
-                            </li>
-                            <li><span class="names-parameters">Комплектация </span>
-                                <select class="js-example-data-array-selected equipment"></select>
-                            </li>
-                            <li><span class="names-parameters">Высота потолков м</span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                            </li>
-                        </ul>
-                        <a><button>Готово</button></a>
-                    </div>
-                    <div class="apartment-settings-separate-building">
-                        <h2>Отдельное стоящее здание</h2>
-                        <ul>
-                            <li><span class="names-parameters">Кол-во комнат</span>
-                                <p class="number-apartments">
-                                    <span>1</span>
-                                    <span>2</span>
-                                    <span>3</span>
-                                    <span>4</span>
-                                    <span>4+</span>
-                                </p>
-                            </li>
-                            <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                            <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                            <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                            <li><span class="names-parameters">Балкон м2</span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                        </ul>
-                        <ul>
-                            <li><span class="names-parameters">Этаж</span>
-                                <select class="js-example-data-array-selected floor"></select>
-                            </li>
-                            <li><span class="names-parameters">Комплектация </span>
-                                <select class="js-example-data-array-selected equipment"></select>
-                            </li>
-                            <li><span class="names-parameters">Высота потолков м</span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                            </li>
-                        </ul>
-                        <a><button>Готово</button></a>
-                    </div>
-                    <div class="apartment-settings-ozs-сomplex">
-                        <h2>Комплекс ОЗС</h2>
-                        <ul>
-                            <li><span class="names-parameters">Кол-во комнат</span>
-                                <p class="number-apartments">
-                                    <span>1</span>
-                                    <span>2</span>
-                                    <span>3</span>
-                                    <span>4</span>
-                                    <span>4+</span>
-                                </p>
-                            </li>
-                            <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                            <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                            <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                            <li><span class="names-parameters">Балкон м2</span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                            </li>
-                        </ul>
-                        <ul>
-                            <li><span class="names-parameters">Этаж</span>
-                                <select class="js-example-data-array-selected floor"></select>
-                            </li>
-                            <li><span class="names-parameters">Комплектация </span>
-                                <select class="js-example-data-array-selected equipment"></select>
-                            </li>
-                            <li><span class="names-parameters">Высота потолков м</span>
-                                <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                                <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                            </li>
-                        </ul>
-                        <a><button>Готово</button></a>
-                    </div>
-                    <div class="search-more-precisely-search">
-                        <div class="exact-area">
+                    <a onclick="allParam('map');" id="searchYandexMap">
+                        <i class="fa fa-map-marker" aria-hidden="true"></i>Поиск по карте</a>
+                </div>
+            </div>
+            <!-- Блок Купить -->
+            <div class="big-search-menu-tenancy">
+                <div class="apartment-settings-apartment">
+                    <h2>Параметры квартиры</h2>
+                    <ul>
+                        <li><span class="names-parameters">Кол-во комнат</span>
+                            <p class="number-apartments">
+                                <span>1</span>
+                                <span>2</span>
+                                <span>3</span>
+                                <span>4</span>
+                                <span>4+</span>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Балкон м2</span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li><span class="names-parameters">Этаж</span>
+                            <select class="js-example-data-array-selected floor"></select>
+                        </li>
+                        <li><span class="names-parameters">Комплектация </span>
+                            <select class="js-example-data-array-selected equipment"></select>
+                        </li>
+                        <li><span class="names-parameters">Высота потолков м</span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required>
+                            </p>
+                        </li>
+                    </ul>
+                    <a>
+                        <button>Готово</button>
+                    </a>
+                </div>
+                <div class="apartment-settings-home">
+                    <h2>Параметры дома</h2>
+                    <ul>
+                        <li><span class="names-parameters">Кол-во комнат</span>
+                            <p class="number-apartments">
+                                <span>1</span>
+                                <span>2</span>
+                                <span>3</span>
+                                <span>4</span>
+                                <span>4+</span>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Балкон м2</span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li><span class="names-parameters">Этаж</span>
+                            <select class="js-example-data-array-selected floor"></select>
+                        </li>
+                        <li><span class="names-parameters">Комплектация </span>
+                            <select class="js-example-data-array-selected equipment"></select>
+                        </li>
+                        <li><span class="names-parameters">Высота потолков м</span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required>
+                            </p>
+                        </li>
+                    </ul>
+                    <a>
+                        <button>Готово</button>
+                    </a>
+                </div>
+                <div class="apartment-settings-room">
+                    <h2>Параметры комнаты</h2>
+                    <ul>
+                        <li><span class="names-parameters">Кол-во комнат</span>
+                            <p class="number-apartments">
+                                <span>1</span>
+                                <span>2</span>
+                                <span>3</span>
+                                <span>4</span>
+                                <span>4+</span>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Балкон м2</span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li><span class="names-parameters">Этаж</span>
+                            <select class="js-example-data-array-selected floor"></select>
+                        </li>
+                        <li><span class="names-parameters">Комплектация </span>
+                            <select class="js-example-data-array-selected equipment"></select>
+                        </li>
+                        <li><span class="names-parameters">Высота потолков м</span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required>
+                            </p>
+                        </li>
+                    </ul>
+                    <a>
+                        <button>Готово</button>
+                    </a>
+                </div>
+                <div class="apartment-settings-office-area">
+                    <h2>Офисная площадь</h2>
+                    <ul>
+                        <li><span class="names-parameters">Кол-во комнат</span>
+                            <p class="number-apartments">
+                                <span>1</span>
+                                <span>2</span>
+                                <span>3</span>
+                                <span>4</span>
+                                <span>4+</span>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Балкон м2</span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li><span class="names-parameters">Этаж</span>
+                            <select class="js-example-data-array-selected floor"></select>
+                        </li>
+                        <li><span class="names-parameters">Комплектация </span>
+                            <select class="js-example-data-array-selected equipment"></select>
+                        </li>
+                        <li><span class="names-parameters">Высота потолков м</span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required>
+                            </p>
+                        </li>
+                    </ul>
+                    <a>
+                        <button>Готово</button>
+                    </a>
+                </div>
+                <div class="apartment-settings-separate-building">
+                    <h2>Отдельное стоящее здание</h2>
+                    <ul>
+                        <li><span class="names-parameters">Кол-во комнат</span>
+                            <p class="number-apartments">
+                                <span>1</span>
+                                <span>2</span>
+                                <span>3</span>
+                                <span>4</span>
+                                <span>4+</span>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Балкон м2</span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li><span class="names-parameters">Этаж</span>
+                            <select class="js-example-data-array-selected floor"></select>
+                        </li>
+                        <li><span class="names-parameters">Комплектация </span>
+                            <select class="js-example-data-array-selected equipment"></select>
+                        </li>
+                        <li><span class="names-parameters">Высота потолков м</span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required>
+                            </p>
+                        </li>
+                    </ul>
+                    <a>
+                        <button>Готово</button>
+                    </a>
+                </div>
+                <div class="apartment-settings-ozs-сomplex">
+                    <h2>Комплекс ОЗС</h2>
+                    <ul>
+                        <li><span class="names-parameters">Кол-во комнат</span>
+                            <p class="number-apartments">
+                                <span>1</span>
+                                <span>2</span>
+                                <span>3</span>
+                                <span>4</span>
+                                <span>4+</span>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Балкон м2</span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            </p>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li><span class="names-parameters">Этаж</span>
+                            <select class="js-example-data-array-selected floor"></select>
+                        </li>
+                        <li><span class="names-parameters">Комплектация </span>
+                            <select class="js-example-data-array-selected equipment"></select>
+                        </li>
+                        <li><span class="names-parameters">Высота потолков м</span>
+                            <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required>
+                            </p>
+                            <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required>
+                            </p>
+                        </li>
+                    </ul>
+                    <a>
+                        <button>Готово</button>
+                    </a>
+                </div>
+                <div class="search-more-precisely-search">
+                    <div class="exact-area">
                             <span class="search-city" onclick="allFilterBlocks('historySearch')">
                                 <img src="../../template/images/s1.png" alt="city">
-                                <input class="historyInput" name="" placeholder="Москва, ул, Малая Ордынка" disabled>
+                                <input id="inputTwo" type="text" name="" placeholder="Москва, ул, Малая Ордынка"
+                                       disabled>
                             </span>
-                            <div class="history-search">
+                        <div class="history-search">
                                 <span class="search-city active-search">
                                     <img src="../../template/images/s1.png" alt="city">
                                     <input id="history" name="" placeholder="г. Москва Северное медведково">
                                 </span>
-                                <h5>История</h5>
-                                <div class="all-history-search">
-                                    <div class="history">
-                                        <img src="../../template/images/m-r.png" alt="metro">
-                                        <p>Красные ворота<span>не более 15 мин пешком</span></p>
-                                    </div>
-                                    <div class="history">
-                                        <img src="../../template/images/m-w.png" alt="metro">
-                                        <p>Свиблово, Бабушкинская<span>не более 5 мин пешком</span></p>
-                                    </div>
-                                    <div class="history">
-                                        <img src="../../template/images/m-w.png" alt="metro">
-                                        <p>Академичекий<span>не более 5 мин пешком</span></p>
-                                    </div>
-                                    <div class="history">
-                                        <img src="../../template/images/m-r.png" alt="metro">
-                                        <p>Красные ворота<span>не более 15 мин пешком</span></p>
-                                    </div>
-                                    <div class="history">
-                                        <img src="../../template/images/m-w.png" alt="metro">
-                                        <p>Свиблово, Бабушкинская<span>не более 5 мин пешком</span></p>
-                                    </div>
-                                    <div class="history">
-                                        <img src="../../template/images/m-w.png" alt="metro">
-                                        <p>Академичекий<span>не более 5 мин пешком</span></p>
-                                    </div>
+                            <h5>История</h5>
+                            <div class="all-history-search">
+                                <div class="history">
+                                    <img src="../../template/images/m-r.png" alt="metro">
+                                    <p>Красные ворота<span>не более 15 мин пешком</span></p>
+                                </div>
+                                <div class="history">
+                                    <img src="../../template/images/m-w.png" alt="metro">
+                                    <p>Свиблово, Бабушкинская<span>не более 5 мин пешком</span></p>
+                                </div>
+                                <div class="history">
+                                    <img src="../../template/images/m-w.png" alt="metro">
+                                    <p>Академичекий<span>не более 5 мин пешком</span></p>
+                                </div>
+                                <div class="history">
+                                    <img src="../../template/images/m-r.png" alt="metro">
+                                    <p>Красные ворота<span>не более 15 мин пешком</span></p>
+                                </div>
+                                <div class="history">
+                                    <img src="../../template/images/m-w.png" alt="metro">
+                                    <p>Свиблово, Бабушкинская<span>не более 5 мин пешком</span></p>
+                                </div>
+                                <div class="history">
+                                    <img src="../../template/images/m-w.png" alt="metro">
+                                    <p>Академичекий<span>не более 5 мин пешком</span></p>
                                 </div>
                             </div>
                         </div>
-                        <div class="the-exact-address">
+                    </div>
+                    <div class="the-exact-address">
                             <span onclick="allFilterBlocks('searchMetroMainBlock')" class="location-metro-map">Третьяковская<span
                                         class="metro-people"><img src="../../template/images/people.png" alt="people">2мин.</span>
                                 <div class="search-metro-main-block">
@@ -2193,1159 +2481,1274 @@
                                     <div class="metro-location-and-travel-information">
                                         <div class="metro-location">
                                             <div class="panel-move">
-                                                <span onclick="moreAndLess('more')"><i class="fa fa-plus" aria-hidden="true"></i></span>
-                                                <span onclick="moreAndLess('less')"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                                                <span onclick="moreAndLess('more')"><i class="fa fa-plus"
+                                                                                       aria-hidden="true"></i></span>
+                                                <span onclick="moreAndLess('less')"><i class="fa fa-minus"
+                                                                                       aria-hidden="true"></i></span>
                                             </div>
                                             <img src="../../template/images/map-location-metro.png" alt="map">
                                         </div>
                                         <div class="travel-information">
                                             <div class="distance-on-foot">
                                                 <img src="../../template/images/people-2.png" alt="icon"><p>Уделенность пекшом не более</p>
-                                                <span><input placeholder="" type="number" name="foot" value="5" min="5" max="60" step="5"><span class="timer">Минут</span></span>
+                                                <span><input placeholder="" type="number" name="foot" value="5" min="5"
+                                                             max="60" step="5"><span class="timer">Минут</span></span>
                                             </div>
                                             <div class="distance-on-transport">
                                                 <img src="../../template/images/avto.png" alt="icon"><p>Уделенность пекшом не более</p>
-                                                <span><input placeholder="" type="number" name="transport" value="5" min="5" max="60" step="5"><span class="timer">Минут</span></span>
+                                                <span><input placeholder="" type="number" name="transport" value="5"
+                                                             min="5" max="60" step="5"><span class="timer">Минут</span></span>
                                             </div>
                                             <button class="closeSearchMetro">Готово</button>
                                         </div>
                                     </div>
                                 </div>
                             </span>
-                        </div>
-                        <button onclick="allParam('quickSearch')">Задать точнее</button>
-                        <div class="quick-search">
-                            <h5><i class="fa fa-map-marker" aria-hidden="true"></i>Введите город, район, область или
-                                точный адрес<span><img src="../../template/images/location.png" alt="location">выделить область на карте</span>
-                            </h5>
-                            <ul class="quick-search-by-parameters">
-                                <li><label>Область
-                                        <input name="" type="text" placeholder="Московская">
-                                    </label></li>
-                                <li><label>Город
-                                        <input name="" type="text" placeholder="Москва">
-                                    </label></li>
-                                <li><label>Округ
-                                        <select class="js-example-data-array okrug"></select>
-                                    </label></li>
-                                <li><label>Район
-                                        <select class="js-example-data-array area"></select>
-                                    </label></li>
-                                <li><label>Улица
-                                        <select class="js-example-data-array street"></select>
-                                    </label></li>
-                                <li><label>Дом<input name="" type="text" placeholder="16" maxlength="4"
-                                                     pattern="[0-9]{4}"></label></li>
-                                <li><label>Метро
-                                        <select class="js-example-templating metro-lines"></select>
-                                    </label></li>
-                                <li><label>Удаленность от метро не более
-                                        <select class="js-example-data-array distance"></select>
-                                    </label></li>
-                                <li>
-                                    <button class="closeQuickSearch">Готово</button>
-                                </li>
+                    </div>
+                    <button onclick="allParam('quickSearch')">Задать точнее</button>
+                    <div class="quick-search">
+                        <h5><i class="fa fa-map-marker" aria-hidden="true"></i>Введите город, район, область или
+                            точный адрес<span><img src="../../template/images/location.png" alt="location">выделить область на карте</span>
+                        </h5>
+                        <ul class="quick-search-by-parameters">
+                            <li><label>Область
+                                    <input name="" type="text" placeholder="Московская">
+                                </label></li>
+                            <li><label>Город
+                                    <input name="" type="text" placeholder="Москва">
+                                </label></li>
+                            <li><label>Округ
+                                    <select class="js-example-data-array okrug"></select>
+                                </label></li>
+                            <li><label>Район
+                                    <select class="js-example-data-array area"></select>
+                                </label></li>
+                            <li><label>Улица
+                                    <select class="js-example-data-array street"></select>
+                                </label></li>
+                            <li><label>Дом<input name="" type="text" placeholder="16" maxlength="4"
+                                                 pattern="[0-9]{4}"></label></li>
+                            <li><label>Метро
+                                    <select class="js-example-templating metro-lines"></select>
+                                </label></li>
+                            <li><label>Удаленность от метро не более
+                                    <select class="js-example-data-array distance"></select>
+                                </label></li>
+                            <li>
+                                <button class="closeQuickSearch">Готово</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <button onclick="data()">Найти</button>
+                <ul class="filter-block-big-menu">
+                    <li class="pointer value-text" onclick="filterOptionsApartments();">
+                        <img src="../../template/images/apartments.png" alt="apartments">Тип недвижимости
+                        <div class="property-type-apartment-settings">
+                            <ul>
+                                <li>Жилая</li>
+                                <li onclick="allFilterBlocks('1');">
+                                    <img src="../../template/images/b-s-1.png" alt="icon">
+                                    <p>Квартира</p></li>
+                                <li onclick="allFilterBlocks('2');">
+                                    <img src="../../template/images/b-s-2.png" alt="icon">
+                                    <p>Дом</p></li>
+                                <li onclick="allFilterBlocks('3');">
+                                    <img src="../../template/images/b-s-3.png" alt="icon">
+                                    <p>Комната</p></li>
+                                <li><img src="../../template/images/b-s-4.png" alt="icon">
+                                    <p>Земельный участок</p></li>
+                                <li><img src="../../template/images/b-s-5.png" alt="icon">
+                                    <p>Гараж/машиноместо</p></li>
+                            </ul>
+                            <ul>
+                                <li>Коммерческая</li>
+                                <li onclick="allFilterBlocks('4');">
+                                    <img src="../../template/images/b-s-6.png" alt="icon">
+                                    <p>Офисная площадь</p></li>
+                                <li onclick="allFilterBlocks('5');">
+                                    <img src="../../template/images/b-s-1.png" alt="icon">
+                                    <p>Отдельно стоящее здание</p></li>
+                                <li onclick="allFilterBlocks('6');">
+                                    <img src="../../template/images/b-s-7.png" alt="icon">
+                                    <p>Комплекс ОСЗ</p></li>
+                                <li><img src="../../template/images/b-s-8.png" alt="icon">
+                                    <p>Рынок/Ярмарка</p></li>
+                                <li><img src="../../template/images/b-s-9.png" alt="icon">
+                                    <p>Производственно-складские помещения</p></li>
+                                <li><img src="../../template/images/b-s-10.png" alt="icon">
+                                    <p>Производственно-складские здания</p></li>
+                                <li><img src="../../template/images/b-s-11.png" alt="icon">
+                                    <p>Недвижимость для туризма и отдыха</p></li>
                             </ul>
                         </div>
-                    </div>
-                    <button onclick="data()">Найти</button>
-                    <ul class="filter-block-big-menu">
-                        <li class="pointer value-text" onclick="filterOptionsApartments();">
-                            <img src="../../template/images/apartments.png" alt="apartments">Тип недвижимости
-                            <div class="property-type-apartment-settings">
+                    </li>
+                    <li onclick="allParam('bigOption')">
+                        <label for="#amount-buy">Цена</label>
+                        <div class="showBigOptions">
+                            <p>От<input name="" placeholder="" type="text" id="amountBeforeBuy" readonly disabled></p>
+                            <p>До<input name="" placeholder="" type="text" id="amountAfterBuy" readonly disabled></p>
+                            <div id="slider-range-buy"></div>
+                            <div class="currency">
+                                <p>Валюта</p>
+                                <button class="closeCurrency"><i class="fa fa-rub" aria-hidden="true"></i>рубли</button>
+                                <button class="closeCurrency"><i class="fa fa-usd" aria-hidden="true"></i>доллары
+                                </button>
+                                <button class="closeCurrency"><i class="fa fa-eur" aria-hidden="true"></i>евро</button>
+                            </div>
+                        </div>
+                        <div class="decorativeShadowBlock"></div>
+                    </li>
+                    <li>
+                        <input name="" id="clast" type="checkbox">
+                        <label for="clast">Торг возможен</label></li>
+                    <li><select class="js-example-data-array-selected owner"></select></li>
+                </ul>
+                <div class="advanced-search-options">
+                    <p>Заполните параметры ниже, для более точного поиска</p>
+                    <ul class="building-parameters">
+                        <li onclick="allParam('apartment');">
+                            <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
+                            <div class="apartment-settings">
+                                <h2>Параметры квартиры</h2>
                                 <ul>
-                                    <li>Жилая</li>
-                                    <li onclick="allFilterBlocks('1');">
-                                        <img src="../../template/images/b-s-1.png" alt="icon">
-                                        <p>Квартира</p></li>
-                                    <li onclick="allFilterBlocks('2');">
-                                        <img src="../../template/images/b-s-2.png" alt="icon">
-                                        <p>Дом</p></li>
-                                    <li onclick="allFilterBlocks('3');">
-                                        <img src="../../template/images/b-s-3.png" alt="icon">
-                                        <p>Комната</p></li>
-                                    <li><img src="../../template/images/b-s-4.png" alt="icon">
-                                        <p>Земельный участок</p></li>
-                                    <li><img src="../../template/images/b-s-5.png" alt="icon">
-                                        <p>Гараж/машиноместо</p></li>
+                                    <li><span class="names-parameters">Кол-во комнат</span>
+                                        <p class="number-apartments">
+                                            <span>1</span>
+                                            <span>2</span>
+                                            <span>3</span>
+                                            <span>4</span>
+                                            <span>4+</span>
+                                        </p>
+                                    </li>
+                                    <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Балкон м2</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
                                 </ul>
                                 <ul>
-                                    <li>Коммерческая</li>
-                                    <li onclick="allFilterBlocks('4');">
-                                        <img src="../../template/images/b-s-6.png" alt="icon">
-                                        <p>Офисная площадь</p></li>
-                                    <li onclick="allFilterBlocks('5');">
-                                        <img src="../../template/images/b-s-1.png" alt="icon">
-                                        <p>Отдельно стоящее здание</p></li>
-                                    <li onclick="allFilterBlocks('6');">
-                                        <img src="../../template/images/b-s-7.png" alt="icon">
-                                        <p>Комплекс ОСЗ</p></li>
-                                    <li><img src="../../template/images/b-s-8.png" alt="icon">
-                                        <p>Рынок/Ярмарка</p></li>
-                                    <li><img src="../../template/images/b-s-9.png" alt="icon">
-                                        <p>Производственно-складские помещения</p></li>
-                                    <li><img src="../../template/images/b-s-10.png" alt="icon">
-                                        <p>Производственно-складские здания</p></li>
-                                    <li><img src="../../template/images/b-s-11.png" alt="icon">
-                                        <p>Недвижимость для туризма и отдыха</p></li>
+                                    <li><span class="names-parameters">Этаж</span>
+                                        <select class="js-example-data-array-selected floor"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Комплектация </span>
+                                        <select class="js-example-data-array-selected equipment"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Высота потолков м</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
+                                                    required></p>
+                                    </li>
                                 </ul>
+                                <button class="closeBlock">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
                             </div>
                         </li>
-                        <li onclick="allParam('bigOption')">
-                            <label for="#amount-buy">Цена</label>
-                            <div class="showBigOptions">
-                                <p>От<input name="" placeholder="" type="text" id="amountBeforeBuy" readonly disabled></p>
-                                <p>До<input name="" placeholder="" type="text" id="amountAfterBuy" readonly disabled></p>
-                                <div id="slider-range-buy"></div>
-                                <div class="currency">
-                                    <p>Валюта</p>
-                                    <button class="closeCurrency"><i class="fa fa-rub" aria-hidden="true"></i>рубли</button>
-                                    <button class="closeCurrency"><i class="fa fa-usd" aria-hidden="true"></i>доллары</button>
-                                    <button class="closeCurrency"><i class="fa fa-eur" aria-hidden="true"></i>евро</button>
-                                </div>
+                        <li onclick="allParam('apperanceOfTheApartment')">
+                            <img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
+                            <div class="appearance-of-the-apartment">
+                                <h2>Внешний вид квартиры</h2>
+                                <ul>
+                                    <li>
+                                        <p>Команты</p>
+                                        <img src="../../template/images/r-d-1.png" alt="icons1">
+                                        <select class="js-example-data-array-selected rooms"></select>
+                                    </li>
+                                    <li>
+                                        <p>Санузел</p>
+                                        <img src="../../template/images/r-d-2.png" alt="icons2">
+                                        <select class="js-example-data-array-selected a-bathroom"></select>
+                                    </li>
+                                    <li>
+                                        <p>Отделка</p>
+                                        <img src="../../template/images/r-d-3.png" alt="icons3">
+                                        <select class="js-example-data-array-selected decoration"></select>
+                                    </li>
+                                </ul>
+                                <button class="search">Готово</button>
                             </div>
-                            <div class="decorativeShadowBlock"></div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
                         </li>
-                        <li>
-                            <input name="" id="clast" type="checkbox">
-                            <label for="clast">Торг возможен</label></li>
-                        <li><select class="js-example-data-array-selected owner"></select></li>
+                        <li onclick="allParam('buildingParametersFilter');">
+                            <img src="../../template/images/search-3.png" alt="search">Параметры здания
+                            <div class="building-parameters-filter">
+                                <h2>Параметры здания</h2>
+                                <ul>
+                                    <li><span class="names-parameters">Количество этажей</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Год окончания строительства</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Наличие лифта</span>
+                                        <select class="js-example-data-array-selected the-presence-of-an-elevator"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Обязеьельные услуги ЖКХ</span>
+                                        <select class="js-example-data-array-selected nursery-services"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Вид объекта</span>
+                                        <select class="js-example-data-array-selected type-of-object"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Парковка</span>
+                                        <select class="js-example-data-array-selected parking-area"></select>
+                                    </li>
+                                </ul>
+                                <button class="close-building-parameter">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li onclick="allParam('appearanceBuild')">
+                            <img src="../../template/images/search-4.png" alt="search">Внешний вид здания
+                            <div class="appearance-of-the-build">
+                                <h2>Внешний вид здания</h2>
+                                <ul>
+                                    <li>
+                                        <p>Материал<br>стен</p>
+                                        <select class="js-example-data-array-selected wall_material"></select>
+                                    </li>
+                                    <li>
+                                        <p>Кровля</p>
+                                        <select class="js-example-data-array-selected roof"></select>
+                                    </li>
+                                    <li>
+                                        <p>Фундамент</p>
+                                        <select class="js-example-data-array-selected foundation"></select>
+                                    </li>
+                                </ul>
+                                <button class="closeApparenceBuild">Поиск</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                        <li><img src="../../template/images/search-5.png" alt="search">Безопасность
+                            <select class="js-example-data-array-selected security"></select>
+                        </li>
+                        <li><img src="../../template/images/search-1.png" alt="search">Документы
+                            <select class="js-example-data-array-selected documents"></select>
+                        </li>
+                        <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png"
+                                                                   alt="search">Вложения
+                            <div class="attachments">
+                                <h2>Вложения</h2>
+                                <ul>
+                                    <li>
+                                        <p>Проект планировки</p>
+                                        <img src="../../template/images/at-1.png" alt="icons1">
+                                        <select class="js-example-data-array-selected design-plan"></select>
+                                    </li>
+                                    <li>
+                                        <p>3D проект</p>
+                                        <img src="../../template/images/at-2.png" alt="icons2">
+                                        <select class="js-example-data-array-selected project"></select>
+                                    </li>
+                                    <li>
+                                        <p>Видео</p>
+                                        <img src="../../template/images/at-3.png" alt="icons3">
+                                        <select class="js-example-data-array-selected video"></select>
+                                    </li>
+                                </ul>
+                                <button class="closeAttachment">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
                     </ul>
-                    <div class="advanced-search-options">
-                        <p>Заполните параметры ниже, для более точного поиска</p>
-                        <ul class="building-parameters">
-                            <li onclick="allParam('apartment');">
-                                <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
-                                <div class="apartment-settings">
-                                    <h2>Параметры квартиры</h2>
-                                    <ul>
-                                        <li><span class="names-parameters">Кол-во комнат</span>
-                                            <p class="number-apartments">
-                                                <span>1</span>
-                                                <span>2</span>
-                                                <span>3</span>
-                                                <span>4</span>
-                                                <span>4+</span>
-                                            </p>
-                                        </li>
-                                        <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Балкон м2</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                    </ul>
-                                    <ul>
-                                        <li><span class="names-parameters">Этаж</span>
-                                            <select class="js-example-data-array-selected floor"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Комплектация </span>
-                                            <select class="js-example-data-array-selected equipment"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Высота потолков м</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                                        </li>
-                                    </ul>
-                                    <button class="closeBlock">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:0"></span>
-                                </div>
-                            </li>
-                            <li onclick="allParam('apperanceOfTheApartment')">
-                                <img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
-                                <div class="appearance-of-the-apartment">
-                                    <h2>Внешний вид квартиры</h2>
-                                    <ul>
-                                        <li>
-                                            <p>Команты</p>
-                                            <img src="../../template/images/r-d-1.png" alt="icons1">
-                                            <select class="js-example-data-array-selected rooms"></select>
-                                        </li>
-                                        <li>
-                                            <p>Санузел</p>
-                                            <img src="../../template/images/r-d-2.png" alt="icons2">
-                                            <select class="js-example-data-array-selected a-bathroom"></select>
-                                        </li>
-                                        <li>
-                                            <p>Отделка</p>
-                                            <img src="../../template/images/r-d-3.png" alt="icons3">
-                                            <select class="js-example-data-array-selected decoration"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="search">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:40%"></span>
-                                </div>
-                            </li>
-                            <li onclick="allParam('buildingParametersFilter');">
-                                <img src="../../template/images/search-3.png" alt="search">Параметры здания
-                                <div class="building-parameters-filter">
-                                    <h2>Параметры здания</h2>
-                                    <ul>
-                                        <li><span class="names-parameters">Количество этажей</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Год окончания строительства</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Наличие лифта</span>
-                                            <select class="js-example-data-array-selected the-presence-of-an-elevator"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Обязеьельные услуги ЖКХ</span>
-                                            <select class="js-example-data-array-selected nursery-services"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Вид объекта</span>
-                                            <select class="js-example-data-array-selected type-of-object"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Парковка</span>
-                                            <select class="js-example-data-array-selected parking-area"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="close-building-parameter">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:40%"></span>
-                                </div>
-                            </li>
-                            <li onclick="allParam('appearanceBuild')">
-                                <img src="../../template/images/search-4.png" alt="search">Внешний вид здания
-                                <div class="appearance-of-the-build">
-                                    <h2>Внешний вид здания</h2>
-                                    <ul>
-                                        <li>
-                                            <p>Материал<br>стен</p>
-                                            <select class="js-example-data-array-selected wall_material"></select>
-                                        </li>
-                                        <li>
-                                            <p>Кровля</p>
-                                            <select class="js-example-data-array-selected roof"></select>
-                                        </li>
-                                        <li>
-                                            <p>Фундамент</p>
-                                            <select class="js-example-data-array-selected foundation"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="closeApparenceBuild">Поиск</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:0"></span>
-                                </div>
-                            </li>
-                            <li><img src="../../template/images/search-5.png" alt="search">Безопасность
-                                <select class="js-example-data-array-selected security"></select>
-                            </li>
-                            <li><img src="../../template/images/search-1.png" alt="search">Документы
-                                <select class="js-example-data-array-selected documents"></select>
-                            </li>
-                            <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png" alt="search">Вложения
-                                <div class="attachments">
-                                    <h2>Вложения</h2>
-                                    <ul>
-                                        <li>
-                                            <p>Проект планировки</p>
-                                            <img src="../../template/images/at-1.png" alt="icons1">
-                                            <select class="js-example-data-array-selected design-plan"></select>
-                                        </li>
-                                        <li>
-                                            <p>3D проект</p>
-                                            <img src="../../template/images/at-2.png" alt="icons2">
-                                            <select class="js-example-data-array-selected project"></select>
-                                        </li>
-                                        <li>
-                                            <p>Видео</p>
-                                            <img src="../../template/images/at-3.png" alt="icons3">
-                                            <select class="js-example-data-array-selected video"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="closeAttachment">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:0"></span>
-                                </div>
-                            </li>
-                        </ul>
-                        <ul class="building-parameters-apartment">
-                            <li onclick="allParam('apartment');">
-                                <img src="../../template/images/search-1.png" alt="search">Исходные параметры квартиры
-                                <div class="apartment-settings">
-                                    <h2>Исходные параметры квартиры</h2>
-                                    <ul>
-                                        <li><span class="names-parameters">Площадь м<sup>2</sup></span>
-                                            <p>От<input type="text" placeholder="0" name="space-min" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input type="text" placeholder="0" name="space-max" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Высота потолков м<sup>2</sup></span>
-                                            <p>От<input type="text" placeholder="0" name="ceiling_height-min" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input type="text" placeholder="0"
-                                                        name="ceiling_height-max" maxlength="3" pattern="[0-9]{3}"
-                                                        required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Количество этажей</span>
-                                            <p>От<input type="text" name="number_of_floors-min" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
-                                            </p>
-                                            <p>До<input type="text" name="number_of_floors-max" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
-                                            </p>
-                                        </li>
-                                        <li><span>Вид постройки
+                    <ul class="building-parameters-apartment">
+                        <li onclick="allParam('apartment');">
+                            <img src="../../template/images/search-1.png" alt="search">Исходные параметры квартиры
+                            <div class="apartment-settings">
+                                <h2>Исходные параметры квартиры</h2>
+                                <ul>
+                                    <li><span class="names-parameters">Площадь м<sup>2</sup></span>
+                                        <p>От<input type="text" placeholder="0" name="space-min" maxlength="3"
+                                                    pattern="[0-9]{3}" required></p>
+                                        <p>До<input type="text" placeholder="0" name="space-max" maxlength="3"
+                                                    pattern="[0-9]{3}" required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Высота потолков м<sup>2</sup></span>
+                                        <p>От<input type="text" placeholder="0" name="ceiling_height-min" maxlength="3"
+                                                    pattern="[0-9]{3}" required></p>
+                                        <p>До<input type="text" placeholder="0"
+                                                    name="ceiling_height-max" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Количество этажей</span>
+                                        <p>От<input type="text" name="number_of_floors-min" placeholder="0"
+                                                    maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input type="text" name="number_of_floors-max" placeholder="0"
+                                                    maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                    </li>
+                                    <li><span>Вид постройки
                                             <select class="js-example-data-array-selected type_of_construction"></select></span>
-                                        </li>
-                                        <li><span class="names-parameters">Количество комнат</span>
-                                            <p>От<input type="text" placeholder="0" name="number_of_rooms-min" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input type="text" placeholder="0" name="number_of_rooms-max" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li>
-                                            <span class="names-parameters">Год постройки</span>
-                                            <p>От<input type="text" placeholder="0" name="year_of_construction-min" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input type="text" placeholder="0" name="year_of_construction-max" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span>Тип здания
+                                    </li>
+                                    <li><span class="names-parameters">Количество комнат</span>
+                                        <p>От<input type="text" placeholder="0" name="number_of_rooms-min" maxlength="3"
+                                                    pattern="[0-9]{3}" required></p>
+                                        <p>До<input type="text" placeholder="0" name="number_of_rooms-max" maxlength="3"
+                                                    pattern="[0-9]{3}" required></p>
+                                    </li>
+                                    <li>
+                                        <span class="names-parameters">Год постройки</span>
+                                        <p>От<input type="text" placeholder="0" name="year_of_construction-min"
+                                                    maxlength="3" pattern="[0-9]{3}" required></p>
+                                        <p>До<input type="text" placeholder="0" name="year_of_construction-max"
+                                                    maxlength="3" pattern="[0-9]{3}" required></p>
+                                    </li>
+                                    <li><span>Тип здания
                                             <select class="js-example-data-array-selected building_type"></select></span>
-                                        </li>
-                                        <li><span>Кровля
+                                    </li>
+                                    <li><span>Кровля
                                             <select class="js-example-data-array-selected building_type"></select></span>
-                                        </li>
-                                        <li><span>Фундамент
+                                    </li>
+                                    <li><span>Фундамент
                                             <select class="js-example-data-array-selected foundation"></select></span>
-                                        </li>
-                                        <li><span>Материал стен
+                                    </li>
+                                    <li><span>Материал стен
                                             <select class="js-example-data-array-selected foundation"></select></span>
-                                        </li>
-                                    </ul>
-                                    <button class="closeBlock">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:0"></span>
-                                </div>
-                            </li>
-                            <li onclick="allParam('apperanceOfTheApartment')">
-                                <img src="../../template/images/search-2.png" alt="search">Ремонт и обустройства
-                                <div class="appearance-of-the-apartment">
-                                    <h2>Ремонт и обустройства</h2>
-                                    <ul>
-                                        <li>
-                                            <p>Безопасность
-                                            <p>
-                                                <label>
-                                                    <input type="checkbox" name="concierge">Консьерж</label>
-                                                <label>
-                                                    <input type="checkbox" name="security">Охрана</label>
-                                                <label>
-                                                    <input type="checkbox" name="intercom">Домофон</label>
-                                                <label>
-                                                    <input type="checkbox" name="cctv">Видеонаблюдение</label>
-                                                <label>
-                                                    <input type="checkbox" name="signaling">Сигнализация</label>
-                                        </li>
-                                        <li>
-                                            <p>Отделка</p>
-                                            <img src="../../template/images/r-d-3.png" alt="icons3">
-                                            <select class="js-example-data-array-selected decoration"></select>
-                                        </li>
-                                        <li>
-                                            <label><input type="checkbox" name="fencing">Ограждение</label>
-                                            <select class="js-example-data-array-selected material"></select>
-                                        </li>
-                                        <li>
-                                            <label><input type="checkbox" name="fencing">Ограждение</label>
-                                            <select class="js-example-data-array-selected parking"></select>
-                                        </li>
-                                        <li>
-                                            <p>Жилищно-коммунальные услуги</p>
-                                            <label><input type="checkbox" name="electricity">Электричество</label>
-                                        </li>
-                                        <li>
-                                            <label for="electricity"><input type="checkbox" name="electricity">Электричество</label>
-                                            <p class="show-elect">От<input type="text" placeholder="0" name="electricity-min" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p class="show-elect">До<input type="text" placeholder="0" name="electricity-max" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li>
-                                            <label for="sanitation">Водопровод и канализация
-                                                <select name="sanitation"
-                                                        class="js-example-data-array-selected sanitation"></select>
-                                            </label>
-                                            <label for="electricity"><input type="checkbox" name="possible_to_post">Возможность
-                                                проводки</label>
-                                            <label for="electricity"><input type="checkbox" name="possible_to_post">Описание</label>
-                                            <label for="sanitation">Наличие санузлов</label>
-                                            <label for="electricity">Количество</label>
-                                            <input name="bathroom_number-min" type="text" placeholder="от">
-                                            <input name="bathroom_number-max" type="text" placeholder="до">
-                                            <label for="">Расположение:</label>
-                                            <select style="display:none"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="search">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:40%"></span>
-                                </div>
-                            </li>
-                            <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png" alt="search">Документы
-                                <div class="attachments">
-                                    <h2>Документы</h2>
-                                    <ul>
-                                        <li>
-                                            <label>Документы на право владения<input type="checkbox" name="documents_on_ownership"></label><br>
-                                            <label>Договор аренды<input type="checkbox" name="lease_contract"></label>
-                                        </li>
-                                    </ul>
-                                    <button value="Найти">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:0"></span>
-                                </div>
-                            </li>
-                            <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png" alt="search">Вложения
-                                <div class="attachments">
-                                    <h2>Вложения</h2>
-                                    <ul>
-                                        <li>
-                                            <label>Проект планировки<input type="checkbox" name="planning_project"></label>
-                                            <label>3d проект<input type="checkbox" name="three_d_project"></label>
-                                            <label>Видео<input type="checkbox" name="video"></label>
-                                        </li>
-                                    </ul>
-                                    <button class="closeAttachment">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:0"></span>
-                                </div>
-                            </li>
-                        </ul>
-                        <ul class="building-parameters-home">
-                            <li onclick="allParam('apartment');">
-                                <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
-                                <div class="apartment-settings">
-                                    <h2>Параметры квартиры</h2>
-                                    <ul>
-                                        <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Балкон м2</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                    </ul>
-                                    <ul>
-                                        <li><span class="names-parameters">Этаж</span>
-                                            <select class="js-example-data-array-selected floor"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Комплектация </span>
-                                            <select class="js-example-data-array-selected equipment"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Высота потолков м</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                                        </li>
-                                    </ul>
-                                    <button class="closeBlock">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:0"></span>
-                                </div>
-                            </li>
-                            <li onclick="allParam('apperanceOfTheApartment')"><img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
-                                <div class="appearance-of-the-apartment">
-                                    <h2>Внешний вид квартиры</h2>
-                                    <ul>
-                                        <li>
-                                            <p>Команты</p>
-                                            <img src="../../template/images/r-d-1.png" alt="icons1">
-                                            <select class="js-example-data-array-selected rooms"></select>
-                                        </li>
-                                        <li>
-                                            <p>Санузел</p>
-                                            <img src="../../template/images/r-d-2.png" alt="icons2">
-                                            <select class="js-example-data-array-selected a-bathroom"></select>
-                                        </li>
-                                        <li>
-                                            <p>Отделка</p>
-                                            <img src="../../template/images/r-d-3.png" alt="icons3">
-                                            <select class="js-example-data-array-selected decoration"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="search">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:40%"></span>
-                                </div>
-                            </li>
-                            <li onclick="allParam('buildingParametersFilter');"><img src="../../template/images/search-3.png" alt="search">Параметры здания
-                                <div class="building-parameters-filter">
-                                    <h2>Параметры здания</h2>
-                                    <ul>
-                                        <li><span class="names-parameters">Количество этажей</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Год окончания строительства</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Наличие лифта</span>
-                                            <select class="js-example-data-array-selected the-presence-of-an-elevator"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Обязеьельные услуги ЖКХ</span>
-                                            <select class="js-example-data-array-selected nursery-services"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Вид объекта</span>
-                                            <select class="js-example-data-array-selected type-of-object"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Парковка</span>
-                                            <select class="js-example-data-array-selected parking-area"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="close-building-parameter">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:40%"></span>
-                                </div>
-                            </li>
-                            <li onclick="allParam('appearanceBuild')"><img src="../../template/images/search-4.png" alt="search">Внешний вид здания
-                                <div class="appearance-of-the-build">
-                                    <h2>Внешний вид здания</h2>
-                                    <ul>
-                                        <li>
-                                            <p>Материал<br>стен</p>
-                                            <select class="js-example-data-array-selected wall_material"></select>
-                                        </li>
-                                        <li>
-                                            <p>Кровля</p>
-                                            <select class="js-example-data-array-selected roof"></select>
-                                        </li>
-                                        <li>
-                                            <p>Фундамент</p>
-                                            <select class="js-example-data-array-selected foundation"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="closeApparenceBuild">Поиск</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:0"></span>
-                                </div>
-                            </li>
-                            <li><img src="../../template/images/search-5.png" alt="search">Безопасность
-                                <select class="js-example-data-array-selected security"></select>
-                            </li>
-                            <li><img src="../../template/images/search-1.png" alt="search">Документы
-                                <select class="js-example-data-array-selected documents"></select>
-                            </li>
-                            <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png" alt="search">Вложения
-                                <div class="attachments">
-                                    <h2>Вложения</h2>
-                                    <ul>
-                                        <li>
-                                            <p>Проект планировки</p>
-                                            <img src="../../template/images/at-1.png" alt="icons1">
-                                            <select class="js-example-data-array-selected design-plan"></select>
-                                        </li>
-                                        <li>
-                                            <p>3D проект</p>
-                                            <img src="../../template/images/at-2.png" alt="icons2">
-                                            <select class="js-example-data-array-selected project"></select>
-                                        </li>
-                                        <li>
-                                            <p>Видео</p>
-                                            <img src="../../template/images/at-3.png" alt="icons3">
-                                            <select class="js-example-data-array-selected video"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="closeAttachment">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:0"></span>
-                                </div>
-                            </li>
-                        </ul>
-                        <ul class="building-parameters-room">
-                            <li onclick="allParam('apartment');">
-                                <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
-                                <div class="apartment-settings">
-                                    <h2>Параметры квартиры</h2>
-                                    <ul>
-                                        <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Балкон м2</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                    </ul>
-                                    <ul>
-                                        <li><span class="names-parameters">Этаж</span>
-                                            <select class="js-example-data-array-selected floor"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Комплектация </span>
-                                            <select class="js-example-data-array-selected equipment"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Высота потолков м</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                                        </li>
-                                    </ul>
-                                    <button class="closeBlock">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:0"></span>
-                                </div>
-                            </li>
-                            <li onclick="allParam('apperanceOfTheApartment')"><img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
-                                <div class="appearance-of-the-apartment">
-                                    <h2>Внешний вид квартиры</h2>
-                                    <ul>
-                                        <li>
-                                            <p>Команты</p>
-                                            <img src="../../template/images/r-d-1.png" alt="icons1">
-                                            <select class="js-example-data-array-selected rooms"></select>
-                                        </li>
-                                        <li>
-                                            <p>Санузел</p>
-                                            <img src="../../template/images/r-d-2.png" alt="icons2">
-                                            <select class="js-example-data-array-selected a-bathroom"></select>
-                                        </li>
-                                        <li>
-                                            <p>Отделка</p>
-                                            <img src="../../template/images/r-d-3.png" alt="icons3">
-                                            <select class="js-example-data-array-selected decoration"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="search">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:40%"></span>
-                                </div>
-                            </li>
-                            <li onclick="allParam('buildingParametersFilter');"><img src="../../template/images/search-3.png" alt="search">Параметры здания
-                                <div class="building-parameters-filter">
-                                    <h2>Параметры здания</h2>
-                                    <ul>
-                                        <li><span class="names-parameters">Количество этажей</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Год окончания строительства</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Наличие лифта</span>
-                                            <select class="js-example-data-array-selected the-presence-of-an-elevator"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Обязеьельные услуги ЖКХ</span>
-                                            <select class="js-example-data-array-selected nursery-services"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Вид объекта</span>
-                                            <select class="js-example-data-array-selected type-of-object"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Парковка</span>
-                                            <select class="js-example-data-array-selected parking-area"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="close-building-parameter">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:40%"></span>
-                                </div>
-                            </li>
-                            <li onclick="allParam('appearanceBuild')"><img src="../../template/images/search-4.png" alt="search">Внешний вид здания
-                                <div class="appearance-of-the-build">
-                                    <h2>Внешний вид здания</h2>
-                                    <ul>
-                                        <li>
-                                            <p>Материал<br>стен</p>
-                                            <select class="js-example-data-array-selected wall_material"></select>
-                                        </li>
-                                        <li>
-                                            <p>Кровля</p>
-                                            <select class="js-example-data-array-selected roof"></select>
-                                        </li>
-                                        <li>
-                                            <p>Фундамент</p>
-                                            <select class="js-example-data-array-selected foundation"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="closeApparenceBuild">Поиск</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:0"></span>
-                                </div>
-                            </li>
-                            <li><img src="../../template/images/search-5.png" alt="search">Безопасность
-                                <select class="js-example-data-array-selected security"></select>
-                            </li>
-                            <li><img src="../../template/images/search-1.png" alt="search">Документы
-                                <select class="js-example-data-array-selected documents"></select>
-                            </li>
-                            <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png" alt="search">Вложения
-                                <div class="attachments">
-                                    <h2>Вложения</h2>
-                                    <ul>
-                                        <li>
-                                            <p>Проект планировки</p>
-                                            <img src="../../template/images/at-1.png" alt="icons1">
-                                            <select class="js-example-data-array-selected design-plan"></select>
-                                        </li>
-                                        <li>
-                                            <p>3D проект</p>
-                                            <img src="../../template/images/at-2.png" alt="icons2">
-                                            <select class="js-example-data-array-selected project"></select>
-                                        </li>
-                                        <li>
-                                            <p>Видео</p>
-                                            <img src="../../template/images/at-3.png" alt="icons3">
-                                            <select class="js-example-data-array-selected video"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="closeAttachment">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:0"></span>
-                                </div>
-                            </li>
-                        </ul>
-                        <ul class="building-parameters-office-area">
-                            <li onclick="allParam('apartment');">
-                                <img src="../../template/images/search-1.png" alt="search">Исходные параметры
-                                <div class="apartment-settings">
-                                    <h2>Исходные параметры</h2>
-                                    <ul>
-                                        <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Балкон м2</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                    </ul>
-                                    <ul>
-                                        <li><span class="names-parameters">Этаж</span>
-                                            <select class="js-example-data-array-selected floor"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Комплектация </span>
-                                            <select class="js-example-data-array-selected equipment"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Высота потолков м</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                                        </li>
-                                    </ul>
-                                    <button class="closeBlock">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:0"></span>
-                                </div>
-                            </li>
-                            <li onclick="allParam('apperanceOfTheApartment')">
-                                <img src="../../template/images/search-2.png" alt="search">Ремонт и обустройства
-                                <div class="appearance-of-the-apartment">
-                                    <h2>Ремонт и обустройства</h2>
-                                    <ul>
-                                        <li>
-                                            <p>Команты</p>
-                                            <img src="../../template/images/r-d-1.png" alt="icons1">
-                                            <select class="js-example-data-array-selected rooms"></select>
-                                        </li>
-                                        <li>
-                                            <p>Санузел</p>
-                                            <img src="../../template/images/r-d-2.png" alt="icons2">
-                                            <select class="js-example-data-array-selected a-bathroom"></select>
-                                        </li>
-                                        <li>
-                                            <p>Отделка</p>
-                                            <img src="../../template/images/r-d-3.png" alt="icons3">
-                                            <select class="js-example-data-array-selected decoration"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="search">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:40%"></span>
-                                </div>
-                            </li>
-                            <li><img src="../../template/images/search-1.png" alt="search">Документы
-                                <select class="js-example-data-array-selected documents"></select>
-                            </li>
-                            <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png" alt="search">Вложения
-                                <div class="attachments">
-                                    <h2>Вложения</h2>
-                                    <ul>
-                                        <li>
-                                            <p>Проект планировки</p>
-                                            <img src="../../template/images/at-1.png" alt="icons1">
-                                            <select class="js-example-data-array-selected design-plan"></select>
-                                        </li>
-                                        <li>
-                                            <p>3D проект</p>
-                                            <img src="../../template/images/at-2.png" alt="icons2">
-                                            <select class="js-example-data-array-selected project"></select>
-                                        </li>
-                                        <li>
-                                            <p>Видео</p>
-                                            <img src="../../template/images/at-3.png" alt="icons3">
-                                            <select class="js-example-data-array-selected video"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="closeAttachment">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:0"></span>
-                                </div>
-                            </li>
-                        </ul>
-                        <ul class="building-parameters-separate-building">
-                            <li onclick="allParam('apartment');">
-                                <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
-                                <div class="apartment-settings">
-                                    <h2>Параметры квартиры</h2>
-                                    <ul>
-                                        <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Балкон м2</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                    </ul>
-                                    <ul>
-                                        <li><span class="names-parameters">Этаж</span>
-                                            <select class="js-example-data-array-selected floor"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Комплектация </span>
-                                            <select class="js-example-data-array-selected equipment"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Высота потолков м</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                                        </li>
-                                    </ul>
-                                    <button class="closeBlock">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:0"></span>
-                                </div>
-                            </li>
-                            <li onclick="allParam('apperanceOfTheApartment')"><img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
-                                <div class="appearance-of-the-apartment">
-                                    <h2>Внешний вид квартиры</h2>
-                                    <ul>
-                                        <li>
-                                            <p>Команты</p>
-                                            <img src="../../template/images/r-d-1.png" alt="icons1">
-                                            <select class="js-example-data-array-selected rooms"></select>
-                                        </li>
-                                        <li>
-                                            <p>Санузел</p>
-                                            <img src="../../template/images/r-d-2.png" alt="icons2">
-                                            <select class="js-example-data-array-selected a-bathroom"></select>
-                                        </li>
-                                        <li>
-                                            <p>Отделка</p>
-                                            <img src="../../template/images/r-d-3.png" alt="icons3">
-                                            <select class="js-example-data-array-selected decoration"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="search">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:40%"></span>
-                                </div>
-                            </li>
-                            <li onclick="allParam('buildingParametersFilter');">
-                                <img src="../../template/images/search-3.png" alt="search">Параметры здания
-                                <div class="building-parameters-filter">
-                                    <h2>Параметры здания</h2>
-                                    <ul>
-                                        <li><span class="names-parameters">Количество этажей</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Год окончания строительства</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Наличие лифта</span>
-                                            <select class="js-example-data-array-selected the-presence-of-an-elevator"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Обязеьельные услуги ЖКХ</span>
-                                            <select class="js-example-data-array-selected nursery-services"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Вид объекта</span>
-                                            <select class="js-example-data-array-selected type-of-object"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Парковка</span>
-                                            <select class="js-example-data-array-selected parking-area"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="close-building-parameter">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:40%"></span>
-                                </div>
-                            </li>
-                            <li onclick="allParam('appearanceBuild')">
-                                <img src="../../template/images/search-4.png" alt="search">Внешний вид здания
-                                <div class="appearance-of-the-build">
-                                    <h2>Внешний вид здания</h2>
-                                    <ul>
-                                        <li>
-                                            <p>Материал<br>стен</p>
-                                            <select class="js-example-data-array-selected wall_material"></select>
-                                        </li>
-                                        <li>
-                                            <p>Кровля</p>
-                                            <select class="js-example-data-array-selected roof"></select>
-                                        </li>
-                                        <li>
-                                            <p>Фундамент</p>
-                                            <select class="js-example-data-array-selected foundation"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="closeApparenceBuild">Поиск</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:0"></span>
-                                </div>
-                            </li>
-                            <li><img src="../../template/images/search-5.png" alt="search">Безопасность
-                                <select class="js-example-data-array-selected security"></select>
-                            </li>
-                            <li><img src="../../template/images/search-1.png" alt="search">Документы
-                                <select class="js-example-data-array-selected documents"></select>
-                            </li>
-                            <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png" alt="search">Вложения
-                                <div class="attachments">
-                                    <h2>Вложения</h2>
-                                    <ul>
-                                        <li>
-                                            <p>Проект планировки</p>
-                                            <img src="../../template/images/at-1.png" alt="icons1">
-                                            <select class="js-example-data-array-selected design-plan"></select>
-                                        </li>
-                                        <li>
-                                            <p>3D проект</p>
-                                            <img src="../../template/images/at-2.png" alt="icons2">
-                                            <select class="js-example-data-array-selected project"></select>
-                                        </li>
-                                        <li>
-                                            <p>Видео</p>
-                                            <img src="../../template/images/at-3.png" alt="icons3">
-                                            <select class="js-example-data-array-selected video"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="closeAttachment">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:0"></span>
-                                </div>
-                            </li>
-                        </ul>
-                        <ul class="building-parameters-ozs-сomplex">
-                            <li onclick="allParam('apartment');">
-                                <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
-                                <div class="apartment-settings">
-                                    <h2>Параметры квартиры</h2>
-                                    <ul>
-                                        <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Балкон м2</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                    </ul>
-                                    <ul>
-                                        <li><span class="names-parameters">Этаж</span>
-                                            <select class="js-example-data-array-selected floor"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Комплектация </span>
-                                            <select class="js-example-data-array-selected equipment"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Высота потолков м</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required></p>
-                                        </li>
-                                    </ul>
-                                    <button class="closeBlock">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:0"></span>
-                                </div>
-                            </li>
-                            <li onclick="allParam('apperanceOfTheApartment')"><img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
-                                <div class="appearance-of-the-apartment">
-                                    <h2>Внешний вид квартиры</h2>
-                                    <ul>
-                                        <li>
-                                            <p>Команты</p>
-                                            <img src="../../template/images/r-d-1.png" alt="icons1">
-                                            <select class="js-example-data-array-selected rooms"></select>
-                                        </li>
-                                        <li>
-                                            <p>Санузел</p>
-                                            <img src="../../template/images/r-d-2.png" alt="icons2">
-                                            <select class="js-example-data-array-selected a-bathroom"></select>
-                                        </li>
-                                        <li>
-                                            <p>Отделка</p>
-                                            <img src="../../template/images/r-d-3.png" alt="icons3">
-                                            <select class="js-example-data-array-selected decoration"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="search">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:40%"></span>
-                                </div>
-                            </li>
-                            <li onclick="allParam('buildingParametersFilter');"><img
-                                        src="../../template/images/search-3.png" alt="search">Параметры здания
-                                <div class="building-parameters-filter">
-                                    <h2>Параметры здания</h2>
-                                    <ul>
-                                        <li><span class="names-parameters">Количество этажей</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Год окончания строительства</span>
-                                            <p>От<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}" required></p>
-                                            <p>До<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}" required></p>
-                                        </li>
-                                        <li><span class="names-parameters">Наличие лифта</span>
-                                            <select class="js-example-data-array-selected the-presence-of-an-elevator"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Обязеьельные услуги ЖКХ</span>
-                                            <select class="js-example-data-array-selected nursery-services"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Вид объекта</span>
-                                            <select class="js-example-data-array-selected type-of-object"></select>
-                                        </li>
-                                        <li><span class="names-parameters">Парковка</span>
-                                            <select class="js-example-data-array-selected parking-area"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="close-building-parameter">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:40%"></span>
-                                </div>
-                            </li>
-                            <li onclick="allParam('appearanceBuild')"><img src="../../template/images/search-4.png" alt="search">Внешний вид здания
-                                <div class="appearance-of-the-build">
-                                    <h2>Внешний вид здания</h2>
-                                    <ul>
-                                        <li>
-                                            <p>Материал<br>стен</p>
-                                            <select class="js-example-data-array-selected wall_material"></select>
-                                        </li>
-                                        <li>
-                                            <p>Кровля</p>
-                                            <select class="js-example-data-array-selected roof"></select>
-                                        </li>
-                                        <li>
-                                            <p>Фундамент</p>
-                                            <select class="js-example-data-array-selected foundation"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="closeApparenceBuild">Поиск</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:0"></span>
-                                </div>
-                            </li>
-                            <li><img src="../../template/images/search-5.png" alt="search">Безопасность
-                                <select class="js-example-data-array-selected security"></select>
-                            </li>
-                            <li><img src="../../template/images/search-1.png" alt="search">Документы
-                                <select class="js-example-data-array-selected documents"></select>
-                            </li>
-                            <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png" alt="search">Вложения
-                                <div class="attachments">
-                                    <h2>Вложения</h2>
-                                    <ul>
-                                        <li>
-                                            <p>Проект планировки</p>
-                                            <img src="../../template/images/at-1.png" alt="icons1">
-                                            <select class="js-example-data-array-selected design-plan"></select>
-                                        </li>
-                                        <li>
-                                            <p>3D проект</p>
-                                            <img src="../../template/images/at-2.png" alt="icons2">
-                                            <select class="js-example-data-array-selected project"></select>
-                                        </li>
-                                        <li>
-                                            <p>Видео</p>
-                                            <img src="../../template/images/at-3.png" alt="icons3">
-                                            <select class="js-example-data-array-selected video"></select>
-                                        </li>
-                                    </ul>
-                                    <button class="closeAttachment">Готово</button>
-                                </div>
-                                <div class="progress-bar blue stripes">
-                                    <span style="width:0"></span>
-                                </div>
-                            </li>
-                        </ul>
-                        <a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i>Поиск по карте</a>
-                    </div>
+                                    </li>
+                                </ul>
+                                <button class="closeBlock">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                        <li onclick="allParam('apperanceOfTheApartment')">
+                            <img src="../../template/images/search-2.png" alt="search">Ремонт и обустройства
+                            <div class="appearance-of-the-apartment">
+                                <h2>Ремонт и обустройства</h2>
+                                <ul>
+                                    <li>
+                                        <p>Безопасность
+                                        <p>
+                                            <label>
+                                                <input type="checkbox" name="concierge">Консьерж</label>
+                                            <label>
+                                                <input type="checkbox" name="security">Охрана</label>
+                                            <label>
+                                                <input type="checkbox" name="intercom">Домофон</label>
+                                            <label>
+                                                <input type="checkbox" name="cctv">Видеонаблюдение</label>
+                                            <label>
+                                                <input type="checkbox" name="signaling">Сигнализация</label>
+                                    </li>
+                                    <li>
+                                        <p>Отделка</p>
+                                        <img src="../../template/images/r-d-3.png" alt="icons3">
+                                        <select class="js-example-data-array-selected decoration"></select>
+                                    </li>
+                                    <li>
+                                        <label><input type="checkbox" name="fencing">Ограждение</label>
+                                        <select class="js-example-data-array-selected material"></select>
+                                    </li>
+                                    <li>
+                                        <label><input type="checkbox" name="fencing">Ограждение</label>
+                                        <select class="js-example-data-array-selected parking"></select>
+                                    </li>
+                                    <li>
+                                        <p>Жилищно-коммунальные услуги</p>
+                                        <label><input type="checkbox" name="electricity">Электричество</label>
+                                    </li>
+                                    <li>
+                                        <label for="electricity"><input type="checkbox" name="electricity">Электричество</label>
+                                        <p class="show-elect">От<input type="text" placeholder="0"
+                                                                       name="electricity-min" maxlength="3"
+                                                                       pattern="[0-9]{3}" required></p>
+                                        <p class="show-elect">До<input type="text" placeholder="0"
+                                                                       name="electricity-max" maxlength="3"
+                                                                       pattern="[0-9]{3}" required></p>
+                                    </li>
+                                    <li>
+                                        <label for="sanitation">Водопровод и канализация
+                                            <select name="sanitation"
+                                                    class="js-example-data-array-selected sanitation"></select>
+                                        </label>
+                                        <label for="electricity"><input type="checkbox" name="possible_to_post">Возможность
+                                            проводки</label>
+                                        <label for="electricity"><input type="checkbox" name="possible_to_post">Описание</label>
+                                        <label for="sanitation">Наличие санузлов</label>
+                                        <label for="electricity">Количество</label>
+                                        <input name="bathroom_number-min" type="text" placeholder="от">
+                                        <input name="bathroom_number-max" type="text" placeholder="до">
+                                        <label for="">Расположение:</label>
+                                        <select style="display:none"></select>
+                                    </li>
+                                </ul>
+                                <button class="search">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png"
+                                                                   alt="search">Документы
+                            <div class="attachments">
+                                <h2>Документы</h2>
+                                <ul>
+                                    <li>
+                                        <label>Документы на право владения<input type="checkbox"
+                                                                                 name="documents_on_ownership"></label><br>
+                                        <label>Договор аренды<input type="checkbox" name="lease_contract"></label>
+                                    </li>
+                                </ul>
+                                <button value="Найти">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                        <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png"
+                                                                   alt="search">Вложения
+                            <div class="attachments">
+                                <h2>Вложения</h2>
+                                <ul>
+                                    <li>
+                                        <label>Проект планировки<input type="checkbox" name="planning_project"></label>
+                                        <label>3d проект<input type="checkbox" name="three_d_project"></label>
+                                        <label>Видео<input type="checkbox" name="video"></label>
+                                    </li>
+                                </ul>
+                                <button class="closeAttachment">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="building-parameters-home">
+                        <li onclick="allParam('apartment');">
+                            <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
+                            <div class="apartment-settings">
+                                <h2>Параметры квартиры</h2>
+                                <ul>
+                                    <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Балкон м2</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li><span class="names-parameters">Этаж</span>
+                                        <select class="js-example-data-array-selected floor"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Комплектация </span>
+                                        <select class="js-example-data-array-selected equipment"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Высота потолков м</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
+                                                    required></p>
+                                    </li>
+                                </ul>
+                                <button class="closeBlock">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                        <li onclick="allParam('apperanceOfTheApartment')"><img src="../../template/images/search-2.png"
+                                                                               alt="search">Внешний вид квартиры
+                            <div class="appearance-of-the-apartment">
+                                <h2>Внешний вид квартиры</h2>
+                                <ul>
+                                    <li>
+                                        <p>Команты</p>
+                                        <img src="../../template/images/r-d-1.png" alt="icons1">
+                                        <select class="js-example-data-array-selected rooms"></select>
+                                    </li>
+                                    <li>
+                                        <p>Санузел</p>
+                                        <img src="../../template/images/r-d-2.png" alt="icons2">
+                                        <select class="js-example-data-array-selected a-bathroom"></select>
+                                    </li>
+                                    <li>
+                                        <p>Отделка</p>
+                                        <img src="../../template/images/r-d-3.png" alt="icons3">
+                                        <select class="js-example-data-array-selected decoration"></select>
+                                    </li>
+                                </ul>
+                                <button class="search">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li onclick="allParam('buildingParametersFilter');"><img
+                                    src="../../template/images/search-3.png" alt="search">Параметры здания
+                            <div class="building-parameters-filter">
+                                <h2>Параметры здания</h2>
+                                <ul>
+                                    <li><span class="names-parameters">Количество этажей</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Год окончания строительства</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Наличие лифта</span>
+                                        <select class="js-example-data-array-selected the-presence-of-an-elevator"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Обязеьельные услуги ЖКХ</span>
+                                        <select class="js-example-data-array-selected nursery-services"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Вид объекта</span>
+                                        <select class="js-example-data-array-selected type-of-object"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Парковка</span>
+                                        <select class="js-example-data-array-selected parking-area"></select>
+                                    </li>
+                                </ul>
+                                <button class="close-building-parameter">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li onclick="allParam('appearanceBuild')"><img src="../../template/images/search-4.png"
+                                                                       alt="search">Внешний вид здания
+                            <div class="appearance-of-the-build">
+                                <h2>Внешний вид здания</h2>
+                                <ul>
+                                    <li>
+                                        <p>Материал<br>стен</p>
+                                        <select class="js-example-data-array-selected wall_material"></select>
+                                    </li>
+                                    <li>
+                                        <p>Кровля</p>
+                                        <select class="js-example-data-array-selected roof"></select>
+                                    </li>
+                                    <li>
+                                        <p>Фундамент</p>
+                                        <select class="js-example-data-array-selected foundation"></select>
+                                    </li>
+                                </ul>
+                                <button class="closeApparenceBuild">Поиск</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                        <li><img src="../../template/images/search-5.png" alt="search">Безопасность
+                            <select class="js-example-data-array-selected security"></select>
+                        </li>
+                        <li><img src="../../template/images/search-1.png" alt="search">Документы
+                            <select class="js-example-data-array-selected documents"></select>
+                        </li>
+                        <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png"
+                                                                   alt="search">Вложения
+                            <div class="attachments">
+                                <h2>Вложения</h2>
+                                <ul>
+                                    <li>
+                                        <p>Проект планировки</p>
+                                        <img src="../../template/images/at-1.png" alt="icons1">
+                                        <select class="js-example-data-array-selected design-plan"></select>
+                                    </li>
+                                    <li>
+                                        <p>3D проект</p>
+                                        <img src="../../template/images/at-2.png" alt="icons2">
+                                        <select class="js-example-data-array-selected project"></select>
+                                    </li>
+                                    <li>
+                                        <p>Видео</p>
+                                        <img src="../../template/images/at-3.png" alt="icons3">
+                                        <select class="js-example-data-array-selected video"></select>
+                                    </li>
+                                </ul>
+                                <button class="closeAttachment">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="building-parameters-room">
+                        <li onclick="allParam('apartment');">
+                            <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
+                            <div class="apartment-settings">
+                                <h2>Параметры квартиры</h2>
+                                <ul>
+                                    <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Балкон м2</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li><span class="names-parameters">Этаж</span>
+                                        <select class="js-example-data-array-selected floor"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Комплектация </span>
+                                        <select class="js-example-data-array-selected equipment"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Высота потолков м</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
+                                                    required></p>
+                                    </li>
+                                </ul>
+                                <button class="closeBlock">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                        <li onclick="allParam('apperanceOfTheApartment')"><img src="../../template/images/search-2.png"
+                                                                               alt="search">Внешний вид квартиры
+                            <div class="appearance-of-the-apartment">
+                                <h2>Внешний вид квартиры</h2>
+                                <ul>
+                                    <li>
+                                        <p>Команты</p>
+                                        <img src="../../template/images/r-d-1.png" alt="icons1">
+                                        <select class="js-example-data-array-selected rooms"></select>
+                                    </li>
+                                    <li>
+                                        <p>Санузел</p>
+                                        <img src="../../template/images/r-d-2.png" alt="icons2">
+                                        <select class="js-example-data-array-selected a-bathroom"></select>
+                                    </li>
+                                    <li>
+                                        <p>Отделка</p>
+                                        <img src="../../template/images/r-d-3.png" alt="icons3">
+                                        <select class="js-example-data-array-selected decoration"></select>
+                                    </li>
+                                </ul>
+                                <button class="search">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li onclick="allParam('buildingParametersFilter');"><img
+                                    src="../../template/images/search-3.png" alt="search">Параметры здания
+                            <div class="building-parameters-filter">
+                                <h2>Параметры здания</h2>
+                                <ul>
+                                    <li><span class="names-parameters">Количество этажей</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Год окончания строительства</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Наличие лифта</span>
+                                        <select class="js-example-data-array-selected the-presence-of-an-elevator"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Обязеьельные услуги ЖКХ</span>
+                                        <select class="js-example-data-array-selected nursery-services"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Вид объекта</span>
+                                        <select class="js-example-data-array-selected type-of-object"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Парковка</span>
+                                        <select class="js-example-data-array-selected parking-area"></select>
+                                    </li>
+                                </ul>
+                                <button class="close-building-parameter">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li onclick="allParam('appearanceBuild')"><img src="../../template/images/search-4.png"
+                                                                       alt="search">Внешний вид здания
+                            <div class="appearance-of-the-build">
+                                <h2>Внешний вид здания</h2>
+                                <ul>
+                                    <li>
+                                        <p>Материал<br>стен</p>
+                                        <select class="js-example-data-array-selected wall_material"></select>
+                                    </li>
+                                    <li>
+                                        <p>Кровля</p>
+                                        <select class="js-example-data-array-selected roof"></select>
+                                    </li>
+                                    <li>
+                                        <p>Фундамент</p>
+                                        <select class="js-example-data-array-selected foundation"></select>
+                                    </li>
+                                </ul>
+                                <button class="closeApparenceBuild">Поиск</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                        <li><img src="../../template/images/search-5.png" alt="search">Безопасность
+                            <select class="js-example-data-array-selected security"></select>
+                        </li>
+                        <li><img src="../../template/images/search-1.png" alt="search">Документы
+                            <select class="js-example-data-array-selected documents"></select>
+                        </li>
+                        <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png"
+                                                                   alt="search">Вложения
+                            <div class="attachments">
+                                <h2>Вложения</h2>
+                                <ul>
+                                    <li>
+                                        <p>Проект планировки</p>
+                                        <img src="../../template/images/at-1.png" alt="icons1">
+                                        <select class="js-example-data-array-selected design-plan"></select>
+                                    </li>
+                                    <li>
+                                        <p>3D проект</p>
+                                        <img src="../../template/images/at-2.png" alt="icons2">
+                                        <select class="js-example-data-array-selected project"></select>
+                                    </li>
+                                    <li>
+                                        <p>Видео</p>
+                                        <img src="../../template/images/at-3.png" alt="icons3">
+                                        <select class="js-example-data-array-selected video"></select>
+                                    </li>
+                                </ul>
+                                <button class="closeAttachment">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="building-parameters-office-area">
+                        <li onclick="allParam('apartment');">
+                            <img src="../../template/images/search-1.png" alt="search">Исходные параметры
+                            <div class="apartment-settings">
+                                <h2>Исходные параметры</h2>
+                                <ul>
+                                    <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Балкон м2</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li><span class="names-parameters">Этаж</span>
+                                        <select class="js-example-data-array-selected floor"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Комплектация </span>
+                                        <select class="js-example-data-array-selected equipment"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Высота потолков м</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
+                                                    required></p>
+                                    </li>
+                                </ul>
+                                <button class="closeBlock">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                        <li onclick="allParam('apperanceOfTheApartment')">
+                            <img src="../../template/images/search-2.png" alt="search">Ремонт и обустройства
+                            <div class="appearance-of-the-apartment">
+                                <h2>Ремонт и обустройства</h2>
+                                <ul>
+                                    <li>
+                                        <p>Команты</p>
+                                        <img src="../../template/images/r-d-1.png" alt="icons1">
+                                        <select class="js-example-data-array-selected rooms"></select>
+                                    </li>
+                                    <li>
+                                        <p>Санузел</p>
+                                        <img src="../../template/images/r-d-2.png" alt="icons2">
+                                        <select class="js-example-data-array-selected a-bathroom"></select>
+                                    </li>
+                                    <li>
+                                        <p>Отделка</p>
+                                        <img src="../../template/images/r-d-3.png" alt="icons3">
+                                        <select class="js-example-data-array-selected decoration"></select>
+                                    </li>
+                                </ul>
+                                <button class="search">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li><img src="../../template/images/search-1.png" alt="search">Документы
+                            <select class="js-example-data-array-selected documents"></select>
+                        </li>
+                        <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png"
+                                                                   alt="search">Вложения
+                            <div class="attachments">
+                                <h2>Вложения</h2>
+                                <ul>
+                                    <li>
+                                        <p>Проект планировки</p>
+                                        <img src="../../template/images/at-1.png" alt="icons1">
+                                        <select class="js-example-data-array-selected design-plan"></select>
+                                    </li>
+                                    <li>
+                                        <p>3D проект</p>
+                                        <img src="../../template/images/at-2.png" alt="icons2">
+                                        <select class="js-example-data-array-selected project"></select>
+                                    </li>
+                                    <li>
+                                        <p>Видео</p>
+                                        <img src="../../template/images/at-3.png" alt="icons3">
+                                        <select class="js-example-data-array-selected video"></select>
+                                    </li>
+                                </ul>
+                                <button class="closeAttachment">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="building-parameters-separate-building">
+                        <li onclick="allParam('apartment');">
+                            <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
+                            <div class="apartment-settings">
+                                <h2>Параметры квартиры</h2>
+                                <ul>
+                                    <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Балкон м2</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li><span class="names-parameters">Этаж</span>
+                                        <select class="js-example-data-array-selected floor"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Комплектация </span>
+                                        <select class="js-example-data-array-selected equipment"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Высота потолков м</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
+                                                    required></p>
+                                    </li>
+                                </ul>
+                                <button class="closeBlock">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                        <li onclick="allParam('apperanceOfTheApartment')"><img src="../../template/images/search-2.png"
+                                                                               alt="search">Внешний вид квартиры
+                            <div class="appearance-of-the-apartment">
+                                <h2>Внешний вид квартиры</h2>
+                                <ul>
+                                    <li>
+                                        <p>Команты</p>
+                                        <img src="../../template/images/r-d-1.png" alt="icons1">
+                                        <select class="js-example-data-array-selected rooms"></select>
+                                    </li>
+                                    <li>
+                                        <p>Санузел</p>
+                                        <img src="../../template/images/r-d-2.png" alt="icons2">
+                                        <select class="js-example-data-array-selected a-bathroom"></select>
+                                    </li>
+                                    <li>
+                                        <p>Отделка</p>
+                                        <img src="../../template/images/r-d-3.png" alt="icons3">
+                                        <select class="js-example-data-array-selected decoration"></select>
+                                    </li>
+                                </ul>
+                                <button class="search">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li onclick="allParam('buildingParametersFilter');">
+                            <img src="../../template/images/search-3.png" alt="search">Параметры здания
+                            <div class="building-parameters-filter">
+                                <h2>Параметры здания</h2>
+                                <ul>
+                                    <li><span class="names-parameters">Количество этажей</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Год окончания строительства</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Наличие лифта</span>
+                                        <select class="js-example-data-array-selected the-presence-of-an-elevator"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Обязеьельные услуги ЖКХ</span>
+                                        <select class="js-example-data-array-selected nursery-services"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Вид объекта</span>
+                                        <select class="js-example-data-array-selected type-of-object"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Парковка</span>
+                                        <select class="js-example-data-array-selected parking-area"></select>
+                                    </li>
+                                </ul>
+                                <button class="close-building-parameter">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li onclick="allParam('appearanceBuild')">
+                            <img src="../../template/images/search-4.png" alt="search">Внешний вид здания
+                            <div class="appearance-of-the-build">
+                                <h2>Внешний вид здания</h2>
+                                <ul>
+                                    <li>
+                                        <p>Материал<br>стен</p>
+                                        <select class="js-example-data-array-selected wall_material"></select>
+                                    </li>
+                                    <li>
+                                        <p>Кровля</p>
+                                        <select class="js-example-data-array-selected roof"></select>
+                                    </li>
+                                    <li>
+                                        <p>Фундамент</p>
+                                        <select class="js-example-data-array-selected foundation"></select>
+                                    </li>
+                                </ul>
+                                <button class="closeApparenceBuild">Поиск</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                        <li><img src="../../template/images/search-5.png" alt="search">Безопасность
+                            <select class="js-example-data-array-selected security"></select>
+                        </li>
+                        <li><img src="../../template/images/search-1.png" alt="search">Документы
+                            <select class="js-example-data-array-selected documents"></select>
+                        </li>
+                        <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png"
+                                                                   alt="search">Вложения
+                            <div class="attachments">
+                                <h2>Вложения</h2>
+                                <ul>
+                                    <li>
+                                        <p>Проект планировки</p>
+                                        <img src="../../template/images/at-1.png" alt="icons1">
+                                        <select class="js-example-data-array-selected design-plan"></select>
+                                    </li>
+                                    <li>
+                                        <p>3D проект</p>
+                                        <img src="../../template/images/at-2.png" alt="icons2">
+                                        <select class="js-example-data-array-selected project"></select>
+                                    </li>
+                                    <li>
+                                        <p>Видео</p>
+                                        <img src="../../template/images/at-3.png" alt="icons3">
+                                        <select class="js-example-data-array-selected video"></select>
+                                    </li>
+                                </ul>
+                                <button class="closeAttachment">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="building-parameters-ozs-сomplex">
+                        <li onclick="allParam('apartment');">
+                            <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
+                            <div class="apartment-settings">
+                                <h2>Параметры квартиры</h2>
+                                <ul>
+                                    <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Балкон м2</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li><span class="names-parameters">Этаж</span>
+                                        <select class="js-example-data-array-selected floor"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Комплектация </span>
+                                        <select class="js-example-data-array-selected equipment"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Высота потолков м</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
+                                                    required></p>
+                                    </li>
+                                </ul>
+                                <button class="closeBlock">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                        <li onclick="allParam('apperanceOfTheApartment')"><img src="../../template/images/search-2.png"
+                                                                               alt="search">Внешний вид квартиры
+                            <div class="appearance-of-the-apartment">
+                                <h2>Внешний вид квартиры</h2>
+                                <ul>
+                                    <li>
+                                        <p>Команты</p>
+                                        <img src="../../template/images/r-d-1.png" alt="icons1">
+                                        <select class="js-example-data-array-selected rooms"></select>
+                                    </li>
+                                    <li>
+                                        <p>Санузел</p>
+                                        <img src="../../template/images/r-d-2.png" alt="icons2">
+                                        <select class="js-example-data-array-selected a-bathroom"></select>
+                                    </li>
+                                    <li>
+                                        <p>Отделка</p>
+                                        <img src="../../template/images/r-d-3.png" alt="icons3">
+                                        <select class="js-example-data-array-selected decoration"></select>
+                                    </li>
+                                </ul>
+                                <button class="search">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li onclick="allParam('buildingParametersFilter');"><img
+                                    src="../../template/images/search-3.png" alt="search">Параметры здания
+                            <div class="building-parameters-filter">
+                                <h2>Параметры здания</h2>
+                                <ul>
+                                    <li><span class="names-parameters">Количество этажей</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Год окончания строительства</span>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
+                                                    required></p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
+                                                    required></p>
+                                    </li>
+                                    <li><span class="names-parameters">Наличие лифта</span>
+                                        <select class="js-example-data-array-selected the-presence-of-an-elevator"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Обязеьельные услуги ЖКХ</span>
+                                        <select class="js-example-data-array-selected nursery-services"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Вид объекта</span>
+                                        <select class="js-example-data-array-selected type-of-object"></select>
+                                    </li>
+                                    <li><span class="names-parameters">Парковка</span>
+                                        <select class="js-example-data-array-selected parking-area"></select>
+                                    </li>
+                                </ul>
+                                <button class="close-building-parameter">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li onclick="allParam('appearanceBuild')"><img src="../../template/images/search-4.png"
+                                                                       alt="search">Внешний вид здания
+                            <div class="appearance-of-the-build">
+                                <h2>Внешний вид здания</h2>
+                                <ul>
+                                    <li>
+                                        <p>Материал<br>стен</p>
+                                        <select class="js-example-data-array-selected wall_material"></select>
+                                    </li>
+                                    <li>
+                                        <p>Кровля</p>
+                                        <select class="js-example-data-array-selected roof"></select>
+                                    </li>
+                                    <li>
+                                        <p>Фундамент</p>
+                                        <select class="js-example-data-array-selected foundation"></select>
+                                    </li>
+                                </ul>
+                                <button class="closeApparenceBuild">Поиск</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                        <li><img src="../../template/images/search-5.png" alt="search">Безопасность
+                            <select class="js-example-data-array-selected security"></select>
+                        </li>
+                        <li><img src="../../template/images/search-1.png" alt="search">Документы
+                            <select class="js-example-data-array-selected documents"></select>
+                        </li>
+                        <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png"
+                                                                   alt="search">Вложения
+                            <div class="attachments">
+                                <h2>Вложения</h2>
+                                <ul>
+                                    <li>
+                                        <p>Проект планировки</p>
+                                        <img src="../../template/images/at-1.png" alt="icons1">
+                                        <select class="js-example-data-array-selected design-plan"></select>
+                                    </li>
+                                    <li>
+                                        <p>3D проект</p>
+                                        <img src="../../template/images/at-2.png" alt="icons2">
+                                        <select class="js-example-data-array-selected project"></select>
+                                    </li>
+                                    <li>
+                                        <p>Видео</p>
+                                        <img src="../../template/images/at-3.png" alt="icons3">
+                                        <select class="js-example-data-array-selected video"></select>
+                                    </li>
+                                </ul>
+                                <button class="closeAttachment">Готово</button>
+                            </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                    </ul>
+                    <a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i>Поиск по карте</a>
                 </div>
             </div>
             <div class="big-search" onclick="showBigSearch();">
@@ -3354,8 +3757,7 @@
             </div>
         </form>
     </div>
-</div>
-<div class="information-for-the-user">
+    <div class="information-for-the-user">
     <ul>
         <li>Удобный поиск по карте
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia iusto architecto quia!</p>
@@ -3386,225 +3788,8 @@
         </li>
     </ul>
 </div>
-<div class="published-articles">
-    <div class="scroll-decoration">
-        <h2>Только что опубликованные<span>live</span></h2>
-        <div class="list-of-all-apartments">
-            <!-- Основной блок всех апартаментов -->
-            <div class="all-apartments">
-                <?php $this->content(); ?>
-<!--                <!-- Информация одного апартамента -->-->
-<!--                <div class="block-apartments">-->
-<!--                    <img src="../../template/images/apartments/1.png" alt="apartments">-->
-<!--                    <span>2-комн. кв. 134м<sup>2</sup></span>-->
-<!--                    <div class="price-of-apartments-and-show-apartments">-->
-<!--                        <div class="price-of-apartments">-->
-<!--                            <span>25 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>-->
-<!--                            <div class="location">-->
-<!--                                <p><img src="../../template/images/m.png" alt="img">Рижская</p>-->
-<!--                                <span><img src="../../template/images/people.png" alt="img">2 мин</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="show-apartments">-->
-<!--                            <a href="#"><img src="../../template/images/show.png" alt="show"></a>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>-->
-<!--                </div>-->
-<!--                <!-- Закончился первый блок -->-->
-<!--                <div class="block-apartments">-->
-<!--                    <img src="../../template/images/apartments/2.png" alt="apartments">-->
-<!--                    <span>2-комн. кв. 134м<sup>2</sup></span>-->
-<!--                    <div class="price-of-apartments-and-show-apartments">-->
-<!--                        <div class="price-of-apartments">-->
-<!--                            <span>34 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>-->
-<!--                            <div class="location">-->
-<!--                                <p><img src="../../template/images/m.png" alt="img">Свиблово</p>-->
-<!--                                <span><img src="../../template/images/people.png" alt="img">2 мин</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="show-apartments">-->
-<!--                            <a href="#"><img src="../../template/images/show.png" alt="show"></a>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>-->
-<!--                </div>-->
-<!--                <div class="block-apartments">-->
-<!--                    <img src="../../template/images/apartments/3.png" alt="apartments">-->
-<!--                    <span>2-комн. кв. 134м<sup>2</sup></span>-->
-<!--                    <div class="price-of-apartments-and-show-apartments">-->
-<!--                        <div class="price-of-apartments">-->
-<!--                            <span>34 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>-->
-<!--                            <div class="location">-->
-<!--                                <p><img src="../../template/images/m.png" alt="img">Медведково</p>-->
-<!--                                <span><img src="../../template/images/people.png" alt="img">2 мин</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="show-apartments">-->
-<!--                            <a href="#"><img src="../../template/images/show.png" alt="show"></a>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>-->
-<!--                </div>-->
-<!--                <div class="block-apartments">-->
-<!--                    <img src="../../template/images/apartments/4.png" alt="apartments">-->
-<!--                    <span>2-комн. кв. 134м<sup>2</sup></span>-->
-<!--                    <div class="price-of-apartments-and-show-apartments">-->
-<!--                        <div class="price-of-apartments">-->
-<!--                            <span>34 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>-->
-<!--                            <div class="location">-->
-<!--                                <p><img src="../../template/images/m.png" alt="img">Медведково</p>-->
-<!--                                <span><img src="../../template/images/people.png" alt="img">2 мин</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="show-apartments">-->
-<!--                            <a href="#"><img src="../../template/images/show.png" alt="show"></a>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>-->
-<!--                </div>-->
-<!--                <div class="block-apartments">-->
-<!--                    <img src="../../template/images/apartments/5.png" alt="apartments">-->
-<!--                    <span>2-комн. кв. 134м<sup>2</sup></span>-->
-<!--                    <div class="price-of-apartments-and-show-apartments">-->
-<!--                        <div class="price-of-apartments">-->
-<!--                            <span>25 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>-->
-<!--                            <div class="location">-->
-<!--                                <p><img src="../../template/images/m.png" alt="img">Рижская</p>-->
-<!--                                <span><img src="../../template/images/people.png" alt="img">2 мин</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="show-apartments">-->
-<!--                            <a href="#"><img src="../../template/images/show.png" alt="show"></a>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>-->
-<!--                </div>-->
-<!--                <div class="block-apartments">-->
-<!--                    <img src="../../template/images/apartments/6.png" alt="apartments">-->
-<!--                    <span>2-комн. кв. 134м<sup>2</sup></span>-->
-<!--                    <div class="price-of-apartments-and-show-apartments">-->
-<!--                        <div class="price-of-apartments">-->
-<!--                            <span>34 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>-->
-<!--                            <div class="location">-->
-<!--                                <p><img src="../../template/images/m.png" alt="img">Свиблово</p>-->
-<!--                                <span><img src="../../template/images/people.png" alt="img">2 мин</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="show-apartments">-->
-<!--                            <a href="#"><img src="../../template/images/show.png" alt="show"></a>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>-->
-<!--                </div>-->
-<!--                <div class="block-apartments">-->
-<!--                    <img src="../../template/images/apartments/7.png" alt="apartments">-->
-<!--                    <span>2-комн. кв. 134м<sup>2</sup></span>-->
-<!--                    <div class="price-of-apartments-and-show-apartments">-->
-<!--                        <div class="price-of-apartments">-->
-<!--                            <span>34 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>-->
-<!--                            <div class="location">-->
-<!--                                <p><img src="../../template/images/m.png" alt="img">Медведково</p>-->
-<!--                                <span><img src="../../template/images/people.png" alt="img">2 мин</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="show-apartments">-->
-<!--                            <a href="#"><img src="../../template/images/show.png" alt="show"></a>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>-->
-<!--                </div>-->
-<!--                <div class="block-apartments">-->
-<!--                    <img src="../../template/images/apartments/8.png" alt="apartments">-->
-<!--                    <span>2-комн. кв. 134м<sup>2</sup></span>-->
-<!--                    <div class="price-of-apartments-and-show-apartments">-->
-<!--                        <div class="price-of-apartments">-->
-<!--                            <span>34 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>-->
-<!--                            <div class="location">-->
-<!--                                <p><img src="../../template/images/m.png" alt="img">Медведково</p>-->
-<!--                                <span><img src="../../template/images/people.png" alt="img">2 мин</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="show-apartments">-->
-<!--                            <a href="#"><img src="../../template/images/show.png" alt="show"></a>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>-->
-<!--                </div>-->
-<!--                <div class="block-apartments">-->
-<!--                    <img src="../../template/images/apartments/1.png" alt="apartments">-->
-<!--                    <span>2-комн. кв. 134м<sup>2</sup></span>-->
-<!--                    <div class="price-of-apartments-and-show-apartments">-->
-<!--                        <div class="price-of-apartments">-->
-<!--                            <span>25 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>-->
-<!--                            <div class="location">-->
-<!--                                <p><img src="../../template/images/m.png" alt="img">Рижская</p>-->
-<!--                                <span><img src="../../template/images/people.png" alt="img">2 мин</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="show-apartments">-->
-<!--                            <a href="#"><img src="../../template/images/show.png" alt="show"></a>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>-->
-<!--                </div>-->
-<!--                <div class="block-apartments">-->
-<!--                    <img src="../../template/images/apartments/2.png" alt="apartments">-->
-<!--                    <span>2-комн. кв. 134м<sup>2</sup></span>-->
-<!--                    <div class="price-of-apartments-and-show-apartments">-->
-<!--                        <div class="price-of-apartments">-->
-<!--                            <span>34 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>-->
-<!--                            <div class="location">-->
-<!--                                <p><img src="../../template/images/m.png" alt="img">Свиблово</p>-->
-<!--                                <span><img src="../../template/images/people.png" alt="img">2 мин</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="show-apartments">-->
-<!--                            <a href="#"><img src="../../template/images/show.png" alt="show"></a>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>-->
-<!--                </div>-->
-<!--                <div class="block-apartments">-->
-<!--                    <img src="../../template/images/apartments/3.png" alt="apartments">-->
-<!--                    <span>2-комн. кв. 134м<sup>2</sup></span>-->
-<!--                    <div class="price-of-apartments-and-show-apartments">-->
-<!--                        <div class="price-of-apartments">-->
-<!--                            <span>34 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>-->
-<!--                            <div class="location">-->
-<!--                                <p><img src="../../template/images/m.png" alt="img">Медведково</p>-->
-<!--                                <span><img src="../../template/images/people.png" alt="img">2 мин</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="show-apartments">-->
-<!--                            <a href="#"><img src="../../template/images/show.png" alt="show"></a>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>-->
-<!--                </div>-->
-<!--                <div class="block-apartments">-->
-<!--                    <img src="../../template/images/apartments/4.png" alt="apartments">-->
-<!--                    <span>2-комн. кв. 134м<sup>2</sup></span>-->
-<!--                    <div class="price-of-apartments-and-show-apartments">-->
-<!--                        <div class="price-of-apartments">-->
-<!--                            <span>34 000 <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>-->
-<!--                            <div class="location">-->
-<!--                                <p><img src="../../template/images/m.png" alt="img">Медведково</p>-->
-<!--                                <span><img src="../../template/images/people.png" alt="img">2 мин</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="show-apartments">-->
-<!--                            <a href="#"><img src="../../template/images/show.png" alt="show"></a>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>-->
-<!--                </div>-->
-            </div>
-            <!-- Закончились все блоки -->
-        </div>
-    </div>
-</div>
-<div class="visitor-statistics">
+    <div class="published-articles" >
+        <div class="visitor-statistics">
     <div class="container-w-2">
         <p>Сегодня вы и еще<span>143 645</span>человек сейчас с нами, а так же:</p>
         <ul>
@@ -3631,7 +3816,7 @@
         </div>
     </div>
 </div>
-<div class="sales-evaluation">
+        <div class="sales-evaluation">
     <div class="container-w-2">
         <h2>Оценка продажи и аренды недвижимости<br>в Москве и области</h2>
         <div class="appreciate-the-apartment">
@@ -3660,7 +3845,7 @@
         </div>
     </div>
 </div>
-<div class="best-ads-per-day">
+        <div class="best-ads-per-day">
     <div class="top-apartments">
         <h2>Лучшие объявления за 24 часа</h2>
         <div class="filter-and-top-blocks">
@@ -3684,7 +3869,8 @@
                         <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
                         <div class="price-and-view-the-apartment">
                             <div class="price">
-                                <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img src="../../template/images/people.png" alt="">2 мин</span></p>
+                                <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img
+                                                src="../../template/images/people.png" alt="">2 мин</span></p>
                                 <span class="decorate-number">25 000<i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
                             </div>
                             <div class="view-the-apartment">
@@ -3704,7 +3890,8 @@
                         <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
                         <div class="price-and-view-the-apartment">
                             <div class="price">
-                                <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img src="../../template/images/people.png" alt="">2 мин</span></p>
+                                <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img
+                                                src="../../template/images/people.png" alt="">2 мин</span></p>
                                 <span class="decorate-number">25 000<i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
                             </div>
                             <div class="view-the-apartment">
@@ -3723,7 +3910,8 @@
                         <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
                         <div class="price-and-view-the-apartment">
                             <div class="price">
-                                <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img src="../../template/images/people.png" alt="">2 мин</span></p>
+                                <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img
+                                                src="../../template/images/people.png" alt="">2 мин</span></p>
                                 <span class="decorate-number">25 000<i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
                             </div>
                             <div class="view-the-apartment">
@@ -3742,7 +3930,8 @@
                         <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
                         <div class="price-and-view-the-apartment">
                             <div class="price">
-                                <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img src="../../template/images/people.png" alt="">2 мин</span></p>
+                                <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img
+                                                src="../../template/images/people.png" alt="">2 мин</span></p>
                                 <span class="decorate-number">25 000<i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
                             </div>
                             <div class="view-the-apartment">
@@ -3762,7 +3951,7 @@
                         <div class="price-and-view-the-apartment">
                             <div class="price">
                                 <p><img src="../../template/images/m.png" alt="metro">Рижская<span>
-                                        <img src="../../template/images/people.png" alt="">2 мин</span></p>
+                                            <img src="../../template/images/people.png" alt="">2 мин</span></p>
                                 <span class="decorate-number">25 000<i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
                             </div>
                             <div class="view-the-apartment">
@@ -3864,7 +4053,7 @@
         </div>
     </div>
 </div>
-<div class="our-application">
+        <div class="our-application">
     <div class="container-w">
         <div class="app-store">
             <h5>Поиск удобнее в приложении</h5>
@@ -3883,7 +4072,7 @@
         </div>
     </div>
 </div>
-<div class="our-work">
+        <div class="our-work">
     <div class="container-w-2">
         <h2>Мы трудимся для Вас</h2>
         <ul class="bxslider">
@@ -3926,7 +4115,7 @@
         </ul>
     </div>
 </div>
-<div class="official-partners">
+        <div class="official-partners">
     <div class="partners">
         <h2>Официальные партнеры</h2>
         <ul class="bxslider-partners main-block-2">
@@ -3948,8 +4137,8 @@
         </ul>
     </div>
 </div>
-<div class="footer">
-    <div class="container-w-2">
+        <div class="footer">
+        <div class="container-w-2">
         <div class="lant-io">
             <p>© 2016-2017 Lant.io</p>
             <p>ООО «ЛЭНТИО»</p>
@@ -3968,10 +4157,11 @@
             <li><a href="#"><img src="../../template/images/work.png" alt="work"><span>У нас</span></a></li>
         </ul>
     </div>
+    </div>
+</div>
 </div>
 <!-- Preloader -->
-<style type="text/css">#hellopreloader>#hellopreloader_preload{position:fixed;z-index:99999;top:0;left:0;right:0;bottom:0;width:100vw;height:100vh;
-        background: url('../../template/images/puff.svg') center no-repeat, url('../../template/images/access_background.jpg') center no-repeat;background-size:123px,cover;}</style>
+<style type="text/css">#hellopreloader>#hellopreloader_preload{position:fixed;z-index:99999;top:0;left:0;right:0;bottom:0;width:100vw;height:100vh;background: url('../../template/images/puff.svg') center no-repeat, url('../../template/images/access_background.jpg') center no-repeat;background-size:123px,cover;}</style>
 <div id="hellopreloader"><div id="hellopreloader_preload"></div></div>
 <script type="text/javascript">var hellopreloader = document.getElementById("hellopreloader_preload");function fadeOutnojquery(el){el.style.opacity = 1;var interhellopreloader = setInterval(function(){el.style.opacity = el.style.opacity - 0.05;if (el.style.opacity <=0.05){ clearInterval(interhellopreloader);hellopreloader.style.display = "none";}},16);}window.onload = function(){setTimeout(function(){fadeOutnojquery(hellopreloader);},1000);};</script>
 <?php
@@ -4008,3 +4198,4 @@ if (isset($this->data['script_footer'])) {
 </script>
 </body>
 </html>
+

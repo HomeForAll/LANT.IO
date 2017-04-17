@@ -6,20 +6,6 @@ var data = [
         {id: 3, text: 'Москва и область4'},
         {id: 4, text: 'Москва и область5'}
     ],
-    offices = [
-        {id: 0, text: 'Офис'},
-        {id: 1, text: 'Офис2'},
-        {id: 2, text: 'Офис3'},
-        {id: 3, text: 'Офис4'},
-        {id: 4, text: 'Офис5'}
-    ],
-    productPrice = [
-        {id: 0, text: 'Цена'},
-        {id: 1, text: 'Цена2'},
-        {id: 2, text: 'Цена3'},
-        {id: 3, text: 'Цена4'},
-        {id: 4, text: 'Цена5'}
-    ],
     locationApartments = [
         {id: 0, text: 'Квартира'},
         {id: 1, text: 'Квартира2'},
@@ -324,15 +310,15 @@ var data = [
     ];
 /** Библиотека select2(фильтры) **/
 $(document).ready(function () {
-    $('.js-example-data-array, .region').select2({
-        data: data
+   // var $image = $('<img src="../../template/images/s1.png" alt="Perice">');
+
+    /** Фильтр поиска**/
+    $(".js-example-placeholder-single, .data").select2({
+        data: data,
+        placeholder: 'Выберите область', //  $image + 'Выберите область </img>'
+        allowClear: true
     });
-    $('.js-example-data-array, .offices').select2({
-        data: offices
-    });
-    $('.js-example-data-array, .product-price').select2({
-        data: productPrice
-    });
+    //-------------------------------------
     $('.js-example-data-array, .location-apartments').select2({
         data: locationApartments
     });
@@ -468,17 +454,7 @@ $(document).ready(function () {
         data: leaseTerm,
         maximumInputLength: 2
     });
-
 //---------------------------------------------------------
-    $('.js-example-data-array-selected, .region').select2({
-        data: data
-    });
-    $('.js-example-data-array-selected, .offices').select2({
-        data: offices
-    });
-    $('.js-example-data-array-selected, .product-price').select2({
-        data: productPrice
-    });
     $('.js-example-data-array-selected, .location-apartments').select2({
         data: locationApartments
     });
