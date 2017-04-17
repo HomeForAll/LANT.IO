@@ -9,6 +9,7 @@ class Model
     function __construct()
     {
         $this->db = new DataBase();
+        $this->countStatistic();
     }
 
     static function instance($model)
@@ -38,4 +39,29 @@ class Model
 
         return $result[0];
     }
+    private function countStatistic()
+    {
+        $ip = $_SERVER["REMOTE_ADDR"];
+
+        $query = $this->db->prepare('SELECT * FROM ips WHERE ip = :ip');
+        $query->execute(array(':ip' => $ip));
+        $result = $query->fetch();
+
+        if ($result) {
+            $visits = $result['visits'] + 1;
+
+            $query = $this->db->prepare('UPDATE ips SET visits = :visits WHERE ip = :ip');
+            $query->execute(array(':ip' => $ip, ':visits' => $visits));
+
+            return $query->rowCount();
+        } else {
+            $visits = 1;
+
+            $query = $this->db->prepare('INSERT INTO ips (ip, visits) VALUES (:ip, :visits)');
+            $query->execute(array(':ip' => $ip, ':visits' => $visits));
+
+            return $query->rowCount();
+        }
+    }
+
 }

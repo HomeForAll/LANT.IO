@@ -394,7 +394,6 @@ if (!empty($this->data['objects'])) {
 
         };
 
-
     });
 </script>
 

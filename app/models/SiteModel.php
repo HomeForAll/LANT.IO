@@ -82,4 +82,17 @@ class SiteModel extends Model
             echo 'keyDeleted';
         }
     }
+
+    private function getStatistic() {
+        $db = new DataBase();
+
+        $query = $db->prepare('SELECT count(*), sum(visits) FROM ips');
+        $query->execute();
+        $result = $query->fetch();
+
+        return [
+            'unique' => $result['count'],
+            'visits' => $result['sum'],
+        ];
+    }
 }
