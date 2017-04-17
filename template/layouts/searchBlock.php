@@ -46,7 +46,7 @@
         <div id="navigation-true">
             <div class="container-w-0">
                 <div class="logo-img">
-                    <a href="#"><img src="../../template/images/logo-true.png" alt=" logo-true"></a>
+                    <a href="web_build.php"><img src="../../template/images/logo-true.png" alt=" logo-true"></a>
                 </div>
                 <div class="registration-users">
                     <div class="place-an-ad">
@@ -578,14 +578,14 @@
                                         <img src="../../template/images/people-2.png" alt="icon">
                                         <p>Уделенность пекшом не более</p>
                                         <span><input placeholder="" type="number" name="foot" value="5" min="5"
-                                                     max="60" step="5">
+                                                     max="60" step="5" disabled>
                                                 <span class="timer">Минут</span></span>
                                     </div>
                                     <div class="distance-on-transport">
                                         <img src="../../template/images/avto.png" alt="icon">
                                         <p>Уделенность пекшом не более</p>
                                         <span><input placeholder="" type="number" name="transport" value="5"
-                                                     min="5" max="60" step="5">
+                                                     min="5" max="60" step="5" disabled>
                                                 <span class="timer">Минут</span></span>
                                     </div>
                                     <button class="closeSearchMetro">Готово</button>
@@ -607,7 +607,7 @@
                                 </label></li>
                             <li>
                                 <div class="select">
-                                    <label for="">
+                                    <label for="">Округ
                                         <select>
                                             <option>Language of communication</option>
                                             <option>English</option>
@@ -618,7 +618,7 @@
                             </li>
                             <li>
                                 <div class="select">
-                                    <label for="">
+                                    <label for="">Район
                                         <select>
                                             <option>Language of communication</option>
                                             <option>English</option>
@@ -629,11 +629,11 @@
                             </li>
                             <li>
                                 <div class="select">
-                                    <label for="">
+                                    <label for="">Улица
                                         <select>
-                                            <option>Language of communication</option>
-                                            <option>English</option>
-                                            <option>Spanish</option>
+                                            <option>Енивмасейская</option>
+                                            <option>Енивмасейская</option>
+                                            <option>Енивмасейская</option>
                                         </select>
                                     </label>
                                 </div>
@@ -642,22 +642,24 @@
                                                  pattern="[0-9]{4}"></label></li>
                             <li>
                                 <div class="select">
-                                    <label for="">
+                                    <label for="">Метро
                                         <select>
-                                            <option>Language of communication</option>
-                                            <option>English</option>
-                                            <option>Spanish</option>
+                                            <option>Выбрано 1</option>
+                                            <option>Выбрано 2</option>
+                                            <option>Выбрано 3</option>
+                                            <option>Выбрано 4</option>
+                                            <option>Выбрано 5</option>
                                         </select>
                                     </label>
                                 </div>
                             </li>
                             <li>
                                 <div class="select">
-                                    <label for="">
+                                    <label for="">Удаленность от метро небеолее
                                         <select>
-                                            <option>Language of communication</option>
-                                            <option>English</option>
-                                            <option>Spanish</option>
+                                            <option>5 мин пешком</option>
+                                            <option>10 мин пешком</option>
+                                            <option>15 мин пешком</option>
                                         </select>
                                     </label>
                                 </div>

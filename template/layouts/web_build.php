@@ -875,38 +875,38 @@
                         <span onclick="allFilterBlocks('searchMetroMainBlock')" class="location-metro-map">Третьяковская
                             <span class="metro-people">
                                 <img src="../../template/images/people.png" alt="people">2мин.</span>
-                            <div class="search-metro-main-block">
-                                <div class="top-search-results">
-                                    <span>Свиблово<i class="fa fa-times" aria-hidden="true"></i></span>
-                                </div>
-                                <div class="metro-location-and-travel-information">
-                                    <div class="metro-location">
-                                        <div class="panel-move">
+                        </span>
+                        <div class="search-metro-main-block">
+                            <div class="top-search-results">
+                                <span>Свиблово<i class="fa fa-times" aria-hidden="true"></i></span>
+                            </div>
+                            <div class="metro-location-and-travel-information">
+                                <div class="metro-location">
+                                    <div class="panel-move">
                                             <span onclick="moreAndLess('more')">
                                                 <i class="fa fa-plus" aria-hidden="true"></i></span>
-                                            <span onclick="moreAndLess('less')">
+                                        <span onclick="moreAndLess('less')">
                                                 <i class="fa fa-minus" aria-hidden="true"></i></span>
-                                        </div>
-                                        <img src="../../template/images/map-location-metro.png" alt="map">
                                     </div>
-                                    <div class="travel-information">
-                                        <div class="distance-on-foot">
-                                            <img src="../../template/images/people-2.png" alt="icon"><p>Уделенность пекшом не более</p>
-                                            <span><input placeholder="" type="number" name="foot" value="5" min="5"
-                                                         max="60" step="5">
+                                    <img src="../../template/images/map-location-metro.png" alt="map">
+                                </div>
+                                <div class="travel-information">
+                                    <div class="distance-on-foot">
+                                        <img src="../../template/images/people-2.png" alt="icon"><p>Уделенность пекшом не более</p>
+                                        <span><input placeholder="" type="number" name="foot" value="5" min="5"
+                                                     max="60" step="5">
                                             <span class="timer">Минут</span></span>
-                                        </div>
-                                        <div class="distance-on-transport">
-                                            <img src="../../template/images/avto.png" alt="icon"><p>Уделенность пекшом не более</p>
-                                            <span><input placeholder="" type="number" name="transport" value="5"
-                                                         min="5" max="60" step="5">
-                                            <span class="timer">Минут</span></span>
-                                        </div>
-                                        <button class="closeSearchMetro">Готово</button>
                                     </div>
+                                    <div class="distance-on-transport">
+                                        <img src="../../template/images/avto.png" alt="icon"><p>Уделенность пекшом не более</p>
+                                        <span><input placeholder="" type="number" name="transport" value="5"
+                                                     min="5" max="60" step="5">
+                                            <span class="timer">Минут</span></span>
+                                    </div>
+                                    <button class="closeSearchMetro">Готово</button>
                                 </div>
                             </div>
-                        </span>
+                        </div>
                     </div>
                     <button onclick="allParam('quickSearch')">Задать точнее</button>
                     <div class="quick-search">
@@ -914,65 +914,78 @@
                             точный адрес<span><img src="../../template/images/location.png" alt="location">выделить область на карте</span>
                         </h5>
                         <ul class="quick-search-by-parameters">
-                            <li><label>Область
-                                    <input name="" type="text" placeholder="Московская">
-                                </label></li>
-                            <li><label>Город
-                                    <input name="" type="text" placeholder="Москва">
-                                </label></li>
                             <li>
-                                <div class="select">
+                                <div class="select">Область
+                                    <label for="">
+                                        <input name="" type="text" placeholder="Московская">
+                                    </label>
+                                </div>
+                            <li>
+                                <div class="select">Город
+                                    <label for="">
+                                        <input name="" type="text" placeholder="Москва">
+                                    </label>
+                                </div>
+                            <li>
+                                <div class="select">Округ
                                     <label for="">
                                         <select>
-                                            <option>Language of communication</option>
-                                            <option>English</option>
-                                            <option>Spanish</option>
+                                            <option>Северо-западный</option>
+                                            <option>Северо-западный</option>
+                                            <option>Северо-западный</option>
                                         </select>
                                     </label>
                                 </div>
                             </li>
                             <li>
-                                <div class="select">
+                                <div class="select">Район
                                     <label for="">
                                         <select>
-                                            <option>Language of communication</option>
-                                            <option>English</option>
-                                            <option>Spanish</option>
+                                            <option>Северное медведково</option>
+                                            <option>Северное медведково</option>
+                                            <option>Северное медведково</option>
                                         </select>
                                     </label>
                                 </div>
                             </li>
                             <li>
-                                <div class="select">
+                                <div class="select">Улица
                                     <label for="">
                                         <select>
-                                            <option>Language of communication</option>
-                                            <option>English</option>
-                                            <option>Spanish</option>
-                                        </select>
-                                    </label>
-                                </div>
-                            </li>
-                            <li><label>Дом<input name="" type="text" placeholder="16" maxlength="4"
-                                                 pattern="[0-9]{4}"></label></li>
-                            <li>
-                                <div class="select">
-                                    <label for="">
-                                        <select>
-                                            <option>Language of communication</option>
-                                            <option>English</option>
-                                            <option>Spanish</option>
+                                            <option>Ениивмасейская</option>
+                                            <option>Ениивмасейская</option>
+                                            <option>Ениивмасейская</option>
                                         </select>
                                     </label>
                                 </div>
                             </li>
                             <li>
-                                <div class="select">
+                                <div class="select">Дом
+                                    <label for="">
+                                        <input name="" type="text" placeholder="16" maxlength="4"
+                                               pattern="[0-9]{4}">
+                                    </label>
+                                </div>
+                            <li>
+                                <div class="select">Метро
                                     <label for="">
                                         <select>
-                                            <option>Language of communication</option>
-                                            <option>English</option>
-                                            <option>Spanish</option>
+                                            <option>Выбрано1</option>
+                                            <option>Выбрано2</option>
+                                            <option>Выбрано3</option>
+                                            <option>Выбрано4</option>
+                                            <option>Выбрано5</option>
+                                        </select>
+                                    </label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="select">Удаленность от метро не более
+                                    <label for="">
+                                        <select>
+                                            <option>5 мин пешком</option>
+                                            <option>10 мин пешком</option>
+                                            <option>15 мин пешком</option>
                                         </select>
                                     </label>
                                 </div>

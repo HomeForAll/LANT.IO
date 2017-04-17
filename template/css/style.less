@@ -351,6 +351,7 @@
     display: inline-block;
     vertical-align: middle;
     margin-left: 10px;
+    width: 80%;
     font-size: 14px;
     text-align: left;
     color: #3c3c3c;
@@ -414,13 +415,13 @@
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
-  align-items: center;
+  align-items: stretch;
   background: #fff;
   margin: 0;
   li {
     width: 32%;
     text-align: left;
-    padding: 15px;
+    padding: 15px 0;
     border-radius: 0;
     background: none;
     &:nth-child(1) {
@@ -432,7 +433,10 @@
   }
   label {
     display: block;
+    background: #f5f5f5;
     color: #444;
+    padding: 15px;
+    margin-top: 8px;
     font-size: 14px;
   }
   input {
@@ -440,7 +444,6 @@
     width: 100%;
     background: #f5f5f5;
     color: #1c1c1c;
-    padding: 15px;
     margin-top: 8px;
     border: none;
     &::placeholder {
@@ -609,7 +612,14 @@
   }
 }
 
+.timer {
+  display: block !important;
+  width: 70px;
+  background: none;
+}
+
 .filter-block-big-menu {
+  padding-left: 15px;
   width: 100%;
   text-align: left;
   background: #fff;
@@ -679,9 +689,14 @@
     vertical-align: middle;
     margin-right: 5px;
   }
+  li {
+    padding: 0 10px !important;
+  }
 }
 
 .select {
+  position: relative;
+  z-index: 1 !important;
   display: block !important;
   ul {
     display: block !important;
@@ -691,7 +706,7 @@
   li {
     display: block !important;
     width: auto !important;
-    padding: 10px !important;
+    padding: 10px;
     color: #444 !important;
     border-radius: 0 !important;
     text-align: left !important;
@@ -706,6 +721,12 @@
   }
   & .jq-selectbox {
     width: 80%;
+  }
+  & .jq-selectbox__select {
+    background: none;
+  }
+  & .jq-selectbox__trigger {
+    background: none;
   }
 }
 
@@ -758,6 +779,7 @@
     cursor: pointer;
     text-align: left;
     font-size: 14px;
+    margin: 0 !important;
     padding: 10px 0;
     text-transform: capitalize;
     color: #6b6b6b;
@@ -1502,12 +1524,6 @@
   border-radius: 6px 0 0 0;
   z-index: 60;
   background: #e8e8e8;
-  span {
-    background: #f7f7f7;
-    color: #828282;
-    vertical-align: middle;
-    border-radius: 4px;
-  }
   i {
     color: #7e7e7e;
     font-size: 10px;
@@ -1566,7 +1582,6 @@
   vertical-align: top;
   text-align: center;
   width: 29.5%;
-  background: #e8e8e8;
   img {
     vertical-align: middle;
     margin-right: 10px;
@@ -1630,10 +1645,11 @@
 }
 
 .timer {
-  display: block;
-  color: #828282;
+  display: block !important;
+  width: 70px;
+  background: none;
   font-size: 12px;
-  background: #e8e8e8;
+  color: #828282;
 }
 
 .big-search {

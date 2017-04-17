@@ -308,27 +308,21 @@ function allFilterBlocks(filters) {
     blockFilterAndShadow.fadeOut('slow');
 }
 
-$(function () {
-    var clickSelect = $('.jq-selectbox__trigger-arrow') || false;
+$('.select').on('click', function () {
+    var pointer = $('.jq-selectbox__trigger-arrow');
+    console.log('работает');
 
-    clickSelect.on('click', function () {
-        return clickSelect = true;
-    });
+pointer.css({
+    'background': 'url("../../template/images/pointer_top.png") center right 5px no-repeat',
+    'background-size': 'auto'
+});
 
-    if (!clickSelect) {return false;}
-
-    clickSelect.css({
-        'background': 'url("../../template/images/pointer_top.png") center right 5px no-repeat',
+setTimeout(function () {
+    pointer.css({
+        'background': 'url("../../template/images/pointer_bottom.png") center right 5px no-repeat',
         'background-size': 'auto'
     });
-
-    setTimeout(function () {
-        clickSelect.css({
-            'background': 'url("../../template/images/pointer_bottom.png") center right 5px no-repeat',
-            'background-size': 'auto'
-        });
-        return clickSelect = false;
-    }, 5000);
+}, 5000);
 });
 //---------------------------------------------------------
 
@@ -373,7 +367,7 @@ $("#form").on('submit', function(e) { // устанавливаем событи
 //---------------------------------------------------------
 
 /** Фильтр - Цена **/
-$(function () {
+ $(function () {
     var $amountBefore = $('#amountBefore'),
         $amountAfter = $('#amountAfter'),
         $amountBeforeBuy = $('#amountBeforeBuy'),
@@ -405,7 +399,7 @@ $(function () {
         }
     });
     $('#amount').val($amountBefore.slider('values', 0) + $amountAfter.slider('values', 1));
-    $('#amount-buy').val($amountBeforeBuy.slider('values', 0) + $amountAfterBuy.slider('values', 1));
+    $('#amount-buy').val($amountBeforeBuy.slider('values', 0) + $amountAfterBuy.slider('values', 1))
 });
 //---------------------------------------------------------
 
