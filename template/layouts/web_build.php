@@ -384,7 +384,7 @@
                             </label>
                         </div>
                     </div>
-                    <div class="main-filter" onclick="allFilterBlocks('showMenu');">
+                    <div class="main-filter" onclick="filterOptionsApartments()">
                         <span>
                             <img src="../../template/images/apartments.png" alt="apartments">Тип недвижимости
                         </span>
@@ -998,7 +998,7 @@
                 </div>
                 <button>Найти</button>
                 <ul class="filter-block-big-menu">
-                    <li class="pointer value-text" onclick="filterOptionsApartments();">
+                    <li class="pointer value-text" onclick="filterOptionsApartments()">
                         <img src="../../template/images/apartments.png" alt="apartments">Тип недвижимости
                         <div class="property-type-apartment-settings">
                             <ul>
@@ -3669,7 +3669,7 @@
                 </div>
                 <button onclick="data()">Найти</button>
                 <ul class="filter-block-big-menu">
-                    <li class="pointer value-text" onclick="filterOptionsApartments();">
+                    <li class="pointer value-text" onclick="filterOptionsApartments()">
                         <img src="../../template/images/apartments.png" alt="apartments">Тип недвижимости
                         <div class="property-type-apartment-settings">
                             <ul>

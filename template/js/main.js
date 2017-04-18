@@ -1,5 +1,6 @@
 'use strict';
 var productSearch, showAndHideTopMenu, boolean, rootBlock, showFilter = false,
+    blockFilterAndShadow = $('.property-type-apartment-settings, .decorativeShadowBlock'),
     imagesWidth = 130,
     valueButton = {
         'more': (function () {
@@ -156,12 +157,16 @@ function showTopMenuAndSearch() {
 
 /** Блоки с фильтрами **/
 function filterOptionsApartments() {
+
+    console.log('Пытаемся запустить');
     showFilter = !showFilter;
 
+    // Не запускает из-за логики
     if (!showFilter) {
         return false;
     }
-    $('.property-type-apartment-settings, .decorativeShadowBlock').fadeIn('slow');
+    blockFilterAndShadow.fadeIn('slow');
+    console.log('Запустили');
 }
 
 function allParam(filterParam) {
@@ -248,11 +253,8 @@ function allParam(filterParam) {
 }
 
 function allFilterBlocks(filters) {
-    var blockFilterAndShadow = $('.property-type-apartment-settings, .decorativeShadowBlock');
 
-    $('.building-parameters-apartment, building-parameters-home,' +
-        '.building-parameters-room, .building-parameters-office-area,' +
-        '.building-parameters-separate-building, .building-parameters-ozs-сomplex').css({'display': 'none'});
+    $('.advanced-search-options').find('ul').css({'display': 'none'});
 
     switch (filters) {
         case 'searchMetroMainBlock':
@@ -261,18 +263,6 @@ function allFilterBlocks(filters) {
 
             $('.closeSearchMetro').on('click', function () {
                 $searchMetro.hide('slow', function () {
-                    $(this).css({'display': 'none'});
-                });
-            });
-            break;
-        case 'showMenu' :
-            var $showMenu = $('.mainBlock');
-            $showMenu.css({'display': 'block'});
-
-            blockFilterAndShadow.fadeIn('slow');
-
-            $('.button').on('click', function () {
-                $showMenu.hide('slow', function () {
                     $(this).css({'display': 'none'});
                 });
             });
@@ -312,17 +302,17 @@ $('.select').on('click', function () {
     var pointer = $('.jq-selectbox__trigger-arrow');
     console.log('работает');
 
-pointer.css({
-    'background': 'url("../../template/images/pointer_top.png") center right 5px no-repeat',
-    'background-size': 'auto'
-});
-
-setTimeout(function () {
     pointer.css({
-        'background': 'url("../../template/images/pointer_bottom.png") center right 5px no-repeat',
+        'background': 'url("../../template/images/pointer_top.png") center right 5px no-repeat',
         'background-size': 'auto'
     });
-}, 5000);
+
+    setTimeout(function () {
+        pointer.css({
+            'background': 'url("../../template/images/pointer_bottom.png") center right 5px no-repeat',
+            'background-size': 'auto'
+        });
+    }, 5000);
 });
 //---------------------------------------------------------
 
