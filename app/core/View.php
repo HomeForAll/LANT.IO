@@ -17,7 +17,6 @@ class View extends Access implements ViewInterface
     public function __construct($layout)
     {
         $this->layout = $layout;
-        $this->getStatistic();
     }
 
     public static function instance($layout) {

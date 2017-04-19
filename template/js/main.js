@@ -1,5 +1,6 @@
 'use strict';
 var productSearch, showAndHideTopMenu, boolean, rootBlock, showFilter = false,
+    blockFilterAndShadow = $('.property-type-apartment-settings, .decorativeShadowBlock'),
     imagesWidth = 130,
     valueButton = {
         'more': (function () {
@@ -11,6 +12,12 @@ var productSearch, showAndHideTopMenu, boolean, rootBlock, showFilter = false,
             return imagesWidth;
         })
     };
+
+/** Select **/
+$('select').styler({
+    selectSearch: true
+});
+//---------------------------------------------------------
 
 /** Слайдер **/
 $(document).ready(function(){
@@ -35,9 +42,21 @@ $(document).ready(function(){
         pause: 15000,
         infiniteLoop: true
     });
+    $('.apartments-wallpapers').bxSlider({
+        slideWidth: 74,
+        minSlides: 1,
+        maxSlides: 5,
+        moveSlides: 3,
+        slideMargin: 0,
+        pager: false,
+        pause: 20000,
+        auto: true,
+        infiniteLoop: true
+    });
 });
 //---------------------------------------------------------
 
+/** Цвета линий метро **/
 function formatState (state) {
     var $allMetroLines = $('<span><a class="branch-line"></a>' + state.text + '</span>'),
         $tagSearchByClass = $allMetroLines.find('a');
@@ -139,12 +158,13 @@ function showTopMenuAndSearch() {
 
 /** Блоки с фильтрами **/
 function filterOptionsApartments() {
+
     showFilter = !showFilter;
 
     if (!showFilter) {
         return false;
     }
-    $('.property-type-apartment-settings, .decorativeShadowBlock').fadeIn('slow');
+    blockFilterAndShadow.fadeIn('slow');
 }
 
 function allParam(filterParam) {
@@ -231,8 +251,9 @@ function allParam(filterParam) {
 }
 
 function allFilterBlocks(filters) {
-    $('.building-parameters-apartment, building-parameters-home,' +
-        '.building-parameters-room, .building-parameters-office-area,' +
+
+    $('.advanced-search-options').find('.building-parameters, .building-parameters-apartment,' +
+        ' .building-parameters-home, .building-parameters-room, .building-parameters-office-area,' +
         '.building-parameters-separate-building, .building-parameters-ozs-сomplex').css({'display': 'none'});
 
     switch (filters) {
@@ -255,47 +276,49 @@ function allFilterBlocks(filters) {
             }, 10000);
             break;
         case '1':
-            $('.building-parameters-apartment').css({'display': 'block'});
+            $('.building-parameters-apartment').css({'display': 'flex'});
             break;
         case '2':
-            $('.building-parameters-home').css({'display': 'block'});
+            $('.building-parameters-home').css({'display': 'flex'});
             break;
         case '3':
-            $('.building-parameters-room').css({'display': 'block'});
+            $('.building-parameters-room').css({'display': 'flex'});
             break;
         case '4':
-            $('.building-parameters-office-area').css({'display': 'block'});
+            $('.building-parameters-office-area').css({'display': 'flex'});
             break;
         case '5':
-            $('.building-parameters-separate-building').css({'display': 'block'});
+            $('.building-parameters-separate-building').css({'display': 'flex'});
             break;
         case '6':
-            $('.building-parameters-ozs-сomplex').css({'display': 'block'});
+            $('.building-parameters-ozs-сomplex').css({'display': 'flex'});
             break;
         default: console.log('Фильтр не настроен');
     }
-    $('.property-type-apartment-settings, .decorativeShadowBlock').fadeOut('slow');
-}
-
-$('.select2-selection--single, .pointer').on('click', function () {
-    $(this).css({
-        'background': 'url("../../template/images/pointer_top.png") right 5px center no-repeat',
-        'background-size': 'auto'
-    });
-    setTimeout(function () {
-        closePointer();
-    }, 4500);
-});
-
-function closePointer() {
-    var el = $('.select2-selection--single, .pointer');
-    el.css({
-        'background': 'url("../../template/images/pointer_bottom.png") right 5px center no-repeat',
-        'background-size': 'auto'
-    });
+    blockFilterAndShadow.fadeOut('slow');
 }
 //---------------------------------------------------------
 
+/** Указатели в теге select **/
+$('.select').on('click', function () {
+    var pointer = $('.jq-selectbox__trigger-arrow');
+    console.log('работает');
+
+    pointer.css({
+        'background': 'url("../../template/images/pointer_top.png") center right 5px no-repeat',
+        'background-size': 'auto'
+    });
+
+    setTimeout(function () {
+        pointer.css({
+            'background': 'url("../../template/images/pointer_bottom.png") center right 5px no-repeat',
+            'background-size': 'auto'
+        });
+    }, 5000);
+});
+//---------------------------------------------------------
+
+/** Масштаб карты **/
 function moreAndLess(sizeImage) {
    var $img = $('.metro-location img');
 
@@ -310,7 +333,9 @@ function moreAndLess(sizeImage) {
 
     $img.css({'width': + imagesWidth + '%'});
 }
+//---------------------------------------------------------
 
+/** Блок предупреждения **/
 function closeFixedBlock() {
 	$('.warning').css({'display':'block'})
 }
@@ -337,17 +362,21 @@ $("#form").on('submit', function(e) { // устанавливаем событи
 //---------------------------------------------------------
 
 /** Фильтр - Цена **/
-$(function () {
+ $(function () {
     var $amountBefore = $('#amountBefore'),
         $amountAfter = $('#amountAfter'),
         $amountBeforeBuy = $('#amountBeforeBuy'),
-        $amountAfterBuy = $('#amountAfterBuy');
+        $amountAfterBuy = $('#amountAfterBuy'),
+        $mainAmountBefore = $('#mainAmountBefore'),
+        $mainAmountAfter = $('#mainAmountAfter');
 
     /** Фильтры в доп.параметрах **/
     $amountBefore.val('20000');
     $amountAfter.val('20000');
     $amountBeforeBuy.val('20000');
     $amountAfterBuy.val('20000');
+     $mainAmountBefore.val('20000');
+     $mainAmountAfter.val('20000');
     $("#slider-range").slider({
         range: true,
         min: 20000,
@@ -368,8 +397,19 @@ $(function () {
             $amountAfterBuy.val(ui.values[1]);
         }
     });
+     $("#main-slider").slider({
+         range: true,
+         min: 20000,
+         max: 20000000,
+         values: [75, 300],
+         slide: function (event, ui) {
+             $mainAmountBefore.val(ui.values[0]);
+             $mainAmountAfter.val(ui.values[1]);
+         }
+     });
     $('#amount').val($amountBefore.slider('values', 0) + $amountAfter.slider('values', 1));
     $('#amount-buy').val($amountBeforeBuy.slider('values', 0) + $amountAfterBuy.slider('values', 1));
+    $('#mainAmount').val($mainAmountBefore.slider('values', 0) + $mainAmountAfter.slider('values', 1));
 });
 //---------------------------------------------------------
 
