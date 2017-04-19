@@ -372,6 +372,7 @@
                     <li id="Buy" onclick="choiceBlock('Buy')"><a>Купить</a></li>
                 </ul>
                 <div class="search-menu-apartment">
+                    <div class="decorativeShadowBlock"></div>
                     <div class="main-filter">
                         <div class="select">
                             <label for="">
@@ -383,6 +384,50 @@
                                 </select>
                             </label>
                         </div>
+                        <div class="property-type-apartment-settings">
+                            <ul>
+                                <li>Жилая</li>
+                                <li onclick="allFilterBlocks('1');"><img src="../../template/images/b-s-1.png"
+                                                                         alt="icon">
+                                    <p>Квартира</p></li>
+                                <li onclick="allFilterBlocks('2');"><img src="../../template/images/b-s-2.png"
+                                                                         alt="icon">
+                                    <p>Дом</p></li>
+                                <li onclick="allFilterBlocks('3');"><img src="../../template/images/b-s-3.png"
+                                                                         alt="icon">
+                                    <p>Комната</p></li>
+                                <li onclick="allFilterBlocks('7');"><img src="../../template/images/b-s-4.png"
+                                                                         alt="icon">
+                                    <p>Земельный участок</p></li>
+                                <li onclick="allFilterBlocks('8');"><img src="../../template/images/b-s-5.png"
+                                                                         alt="icon">
+                                    <p>Гараж/машиноместо</p></li>
+                            </ul>
+                            <ul>
+                                <li>Коммерческая</li>
+                                <li onclick="allFilterBlocks('4');"><img src="../../template/images/b-s-6.png"
+                                                                         alt="icon">
+                                    <p>Офисная площадь</p></li>
+                                <li onclick="allFilterBlocks('5');"><img src="../../template/images/b-s-1.png"
+                                                                         alt="icon">
+                                    <p>Отдельно стоящее здание</p></li>
+                                <li onclick="allFilterBlocks('6');"><img src="../../template/images/b-s-7.png"
+                                                                         alt="icon">
+                                    <p>Комплекс ОСЗ</p></li>
+                                <li onclick="allFilterBlocks('9');"><img src="../../template/images/b-s-8.png"
+                                                                         alt="icon">
+                                    <p>Рынок/Ярмарка</p></li>
+                                <li onclick="allFilterBlocks('10');"><img src="../../template/images/b-s-9.png"
+                                                                          alt="icon">
+                                    <p>Производственно-складские помещения</p></li>
+                                <li onclick="allFilterBlocks('11');"><img src="../../template/images/b-s-10.png"
+                                                                          alt="icon">
+                                    <p>Производственно-складские здания</p></li>
+                                <li onclick="allFilterBlocks('12');"><img src="../../template/images/b-s-11.png"
+                                                                          alt="icon">
+                                    <p>Недвижимость для туризма и отдыха</p></li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="main-filter" onclick="filterOptionsApartments()">
                         <span>
@@ -390,9 +435,23 @@
                         </span>
                     </div>
                     <div class="main-filter" onclick="allParam('bigOption')">
-                        <label for="#amount">
+                        <label for="#mainAmount">
                             <img src="../../template/images/s3.png" alt="price">Цена
                         </label>
+                        <div class="showBigOptions">
+                            <p>От<input name="" placeholder="" type="text" id="mainAmountBefore" readonly disabled>
+                            </p>
+                            <p>До<input name="" placeholder="" type="text" id="mainAmountAfter" readonly disabled>
+                            </p>
+                            <div id="main-slider"></div>
+                            <div class="currency">
+                                <p>Валюта</p>
+                                <button class="closeCurrency"><i class="fa fa-rub" aria-hidden="true"></i>рубли</button>
+                                <button class="closeCurrency"><i class="fa fa-usd" aria-hidden="true"></i>доллары
+                                </button>
+                                <button class="closeCurrency"><i class="fa fa-eur" aria-hidden="true"></i>евро</button>
+                            </div>
+                        </div>
                     </div>
                     <button>Найти</button>
                 </div>

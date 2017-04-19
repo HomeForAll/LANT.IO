@@ -56,6 +56,7 @@ $(document).ready(function(){
 });
 //---------------------------------------------------------
 
+/** Цвета линий метро **/
 function formatState (state) {
     var $allMetroLines = $('<span><a class="branch-line"></a>' + state.text + '</span>'),
         $tagSearchByClass = $allMetroLines.find('a');
@@ -158,15 +159,12 @@ function showTopMenuAndSearch() {
 /** Блоки с фильтрами **/
 function filterOptionsApartments() {
 
-    console.log('Пытаемся запустить');
     showFilter = !showFilter;
 
-    // Не запускает из-за логики
     if (!showFilter) {
         return false;
     }
     blockFilterAndShadow.fadeIn('slow');
-    console.log('Запустили');
 }
 
 function allParam(filterParam) {
@@ -254,7 +252,9 @@ function allParam(filterParam) {
 
 function allFilterBlocks(filters) {
 
-    $('.advanced-search-options').find('ul').css({'display': 'none'});
+    $('.advanced-search-options').find('.building-parameters, .building-parameters-apartment,' +
+        ' .building-parameters-home, .building-parameters-room, .building-parameters-office-area,' +
+        '.building-parameters-separate-building, .building-parameters-ozs-сomplex').css({'display': 'none'});
 
     switch (filters) {
         case 'searchMetroMainBlock':
@@ -297,7 +297,9 @@ function allFilterBlocks(filters) {
     }
     blockFilterAndShadow.fadeOut('slow');
 }
+//---------------------------------------------------------
 
+/** Указатели в теге select **/
 $('.select').on('click', function () {
     var pointer = $('.jq-selectbox__trigger-arrow');
     console.log('работает');
@@ -316,6 +318,7 @@ $('.select').on('click', function () {
 });
 //---------------------------------------------------------
 
+/** Масштаб карты **/
 function moreAndLess(sizeImage) {
    var $img = $('.metro-location img');
 
@@ -330,7 +333,9 @@ function moreAndLess(sizeImage) {
 
     $img.css({'width': + imagesWidth + '%'});
 }
+//---------------------------------------------------------
 
+/** Блок предупреждения **/
 function closeFixedBlock() {
 	$('.warning').css({'display':'block'})
 }
@@ -361,13 +366,17 @@ $("#form").on('submit', function(e) { // устанавливаем событи
     var $amountBefore = $('#amountBefore'),
         $amountAfter = $('#amountAfter'),
         $amountBeforeBuy = $('#amountBeforeBuy'),
-        $amountAfterBuy = $('#amountAfterBuy');
+        $amountAfterBuy = $('#amountAfterBuy'),
+        $mainAmountBefore = $('#mainAmountBefore'),
+        $mainAmountAfter = $('#mainAmountAfter');
 
     /** Фильтры в доп.параметрах **/
     $amountBefore.val('20000');
     $amountAfter.val('20000');
     $amountBeforeBuy.val('20000');
     $amountAfterBuy.val('20000');
+     $mainAmountBefore.val('20000');
+     $mainAmountAfter.val('20000');
     $("#slider-range").slider({
         range: true,
         min: 20000,
@@ -388,8 +397,19 @@ $("#form").on('submit', function(e) { // устанавливаем событи
             $amountAfterBuy.val(ui.values[1]);
         }
     });
+     $("#main-slider").slider({
+         range: true,
+         min: 20000,
+         max: 20000000,
+         values: [75, 300],
+         slide: function (event, ui) {
+             $mainAmountBefore.val(ui.values[0]);
+             $mainAmountAfter.val(ui.values[1]);
+         }
+     });
     $('#amount').val($amountBefore.slider('values', 0) + $amountAfter.slider('values', 1));
-    $('#amount-buy').val($amountBeforeBuy.slider('values', 0) + $amountAfterBuy.slider('values', 1))
+    $('#amount-buy').val($amountBeforeBuy.slider('values', 0) + $amountAfterBuy.slider('values', 1));
+    $('#mainAmount').val($mainAmountBefore.slider('values', 0) + $mainAmountAfter.slider('values', 1));
 });
 //---------------------------------------------------------
 

@@ -751,18 +751,6 @@
   z-index: 60;
   background: #f8f6f6;
   padding: 10px;
-   &:before {
-    content: '';
-    display: block;
-    position: relative;
-    width: 0;
-    height: 0;
-    z-index: 13;
-    margin: -21px 0 0 calc(110px);
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 10px solid #f8f6f6;
-  }
   ul {
     position: relative;
     display: inline-block;
@@ -779,6 +767,7 @@
     cursor: pointer;
     text-align: left;
     font-size: 14px;
+    background: #fff;
     margin: 0 !important;
     padding: 10px 0;
     text-transform: capitalize;
@@ -1081,7 +1070,8 @@
 }
 
 #slider-range,
-#slider-range-buy {
+#slider-range-buy,
+#main-slider {
   margin-top: 15px;
   height: 8px;
   border-radius: 10px;
@@ -1093,7 +1083,7 @@
   span {
     border: 1px solid #d9d9d9;
     background: #f6f6f6;
-    top: -.7em;
+    top: -5px;
     border-radius: 100%;
     cursor: pointer;
     color: #454545;
@@ -1116,11 +1106,12 @@
     border: 1px solid #e0e0e0;
     font-size: 13px;
     margin: 5px 3px;
-    background: 0;
+    background: none;
+    height: auto;
     float: none;
-    width: initial;
+    width: 100px;
     color: #6c6c6c;
-    padding: 5px 15px;
+    padding: 12px 4px;
     &:hover {
       background: #d5d5d5;
       transition: 1.5s;
@@ -2480,6 +2471,7 @@
     display: inline-block;
     vertical-align: middle;
     width: 225px;
+    height: 60px;
     margin: auto 17px 5px 5px;
     padding: 4px 20px 8px;
     border-radius: 8px;
@@ -3090,6 +3082,7 @@
     padding: 92px 45px 0;
     a {
       width: 235px;
+      height: 60px;
       height: auto;
       margin: auto 8px 5px 5px;
       padding: 8px 20px;
@@ -4106,9 +4099,6 @@
     right: 5vw;
     width: auto;
     padding: 10px 0;
-    &:before {
-      display: none;
-    }
     ul {
       display: block;
       width: auto;
@@ -4315,7 +4305,8 @@
     }
   }
   #slider-range span,
-  #slider-range-by span {
+  #slider-range-by span,
+  #main-slider span {
     top: -0.3em;
   }
   .registration-users {
