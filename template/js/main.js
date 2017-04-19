@@ -43,7 +43,7 @@ $(document).ready(function(){
         infiniteLoop: true
     });
     $('.apartments-wallpapers').bxSlider({
-        slideWidth: 74,
+        slideWidth: 70,
         minSlides: 1,
         maxSlides: 5,
         moveSlides: 3,
@@ -206,12 +206,16 @@ function allParam(filterParam) {
             });
             break;
         case 'bigOption':
-            var $bigOption = $('.showBigOptions');
+            var $bigOption = $('.showBigOptions'),
+                qa = $('.decorativeShadowBlock');
             $bigOption.css({'display': 'block'});
+            qa.css({'display':'block'});
 
             $('.closeCurrency').on('click', function (e) {
                 e.preventDefault();
-                $bigOption.fadeOut('slow');
+                $bigOption.fadeOut('slow', function () {
+                    qa.css({'display':'none'});
+                });
             });
             break;
         case 'map':
@@ -302,7 +306,6 @@ function allFilterBlocks(filters) {
 /** Указатели в теге select **/
 $('.select').on('click', function () {
     var pointer = $('.jq-selectbox__trigger-arrow');
-    console.log('работает');
 
     pointer.css({
         'background': 'url("../../template/images/pointer_top.png") center right 5px no-repeat',
@@ -368,15 +371,15 @@ $("#form").on('submit', function(e) { // устанавливаем событи
         $amountBeforeBuy = $('#amountBeforeBuy'),
         $amountAfterBuy = $('#amountAfterBuy'),
         $mainAmountBefore = $('#mainAmountBefore'),
-        $mainAmountAfter = $('#mainAmountAfter');
+        $mainAmountAfter = $('#mainAmountAfter'),
+        $amountBeforeSearch = $('#amountBeforeSearch'),
+        $amountAfterSearch = $('#amountAfterSearch');
 
     /** Фильтры в доп.параметрах **/
-    $amountBefore.val('20000');
-    $amountAfter.val('20000');
-    $amountBeforeBuy.val('20000');
-    $amountAfterBuy.val('20000');
-     $mainAmountBefore.val('20000');
-     $mainAmountAfter.val('20000');
+    $amountBefore.val('20000');$amountAfter.val('20000');
+    $amountBeforeBuy.val('20000');$amountAfterBuy.val('20000');
+     $mainAmountBefore.val('20000');$mainAmountAfter.val('20000');
+     $amountBeforeSearch.val('20000');$amountAfterSearch.val('20000');
     $("#slider-range").slider({
         range: true,
         min: 20000,
@@ -397,7 +400,7 @@ $("#form").on('submit', function(e) { // устанавливаем событи
             $amountAfterBuy.val(ui.values[1]);
         }
     });
-     $("#main-slider").slider({
+    $("#main-slider").slider({
          range: true,
          min: 20000,
          max: 20000000,
@@ -407,9 +410,20 @@ $("#form").on('submit', function(e) { // устанавливаем событи
              $mainAmountAfter.val(ui.values[1]);
          }
      });
+    $("#slider-range-search").slider({
+        range: true,
+        min: 20000,
+        max: 20000000,
+        values: [75, 300],
+        slide: function (event, ui) {
+            $amountBeforeSearch.val(ui.values[0]);
+            $amountAfterSearch.val(ui.values[1]);
+        }
+    });
     $('#amount').val($amountBefore.slider('values', 0) + $amountAfter.slider('values', 1));
     $('#amount-buy').val($amountBeforeBuy.slider('values', 0) + $amountAfterBuy.slider('values', 1));
     $('#mainAmount').val($mainAmountBefore.slider('values', 0) + $mainAmountAfter.slider('values', 1));
+    $('#amountSearch').val($amountBeforeSearch.slider('values', 0) + $amountAfterSearch.slider('values', 1));
 });
 //---------------------------------------------------------
 

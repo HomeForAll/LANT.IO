@@ -370,6 +370,7 @@
   left: 0;
   top: 0;
   right: 100px;
+  height: 400px;
   z-index: 60;
   bottom: 0;
   padding: 24px;
@@ -720,7 +721,7 @@
     padding: 0 25px 0 0;
   }
   & .jq-selectbox {
-    width: 80%;
+    width: auto !important;
   }
   & .jq-selectbox__select {
     background: none;
@@ -1069,9 +1070,8 @@
   }
 }
 
-#slider-range,
-#slider-range-buy,
-#main-slider {
+#slider-range, #slider-range-buy,
+#main-slider, #slider-range-search {
   margin-top: 15px;
   height: 8px;
   border-radius: 10px;
@@ -1751,6 +1751,33 @@
   }
 }
 
+.just-published {
+  padding-top: 30px;
+  h2 {
+    font-size: 26px;
+    color: #343434;
+    font-weight: 300;
+    & span {
+      font-size: 20px;
+      margin-left: 20px;
+      font-weight: bold;
+      color: #ed8181;
+      text-transform: uppercase;
+      &:before {
+        content: '';
+        position: relative;
+        display: inline-block;
+        margin-right: 6px;
+        vertical-align: middle;
+        width: 14px;
+        height: 14px;
+        border-radius: 100%;
+        background: #fff;
+      }
+    }
+  }
+}
+
 .published-articles {
   text-align: center;
   background: url('../../template/images/background-3.png') top center no-repeat;
@@ -1852,6 +1879,7 @@
     content: 'Новое';
     display: block;
     position: absolute;
+    text-align: center;
     top: 14px;
     right: 23px;
     padding: 3px 1px;
@@ -2102,7 +2130,6 @@
 
 .appreciate-the-apartment {
   text-align: left;
-  overflow: hidden;
   border-radius: 8px;
   background: #fff;
   clear: both;
@@ -2116,6 +2143,7 @@
     width: 49%;
     text-align: left;
     padding: 7px 0;
+    margin: 7px auto;
   }
   i {
     vertical-align: middle;
@@ -2135,7 +2163,7 @@
     }
   }
   button {
-    padding: 25px 10px;
+    padding: 23px 10px;
     font-size: 15px;
     width: 150px;
     border: none;
@@ -3083,7 +3111,6 @@
     a {
       width: 235px;
       height: 60px;
-      height: auto;
       margin: auto 8px 5px 5px;
       padding: 8px 20px;
     }
@@ -3127,6 +3154,7 @@
     margin: auto;
     & li {
       margin: auto 5px;
+
       width: 80px;
     }
     & i {
