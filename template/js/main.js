@@ -178,6 +178,15 @@ function allParam(filterParam) {
                 $apartmentSettings.fadeOut('slow');
             });
             break;
+        case 'houseCharacteristics':
+            var $houseCharacteristics = $('.house-characteristics');
+            $houseCharacteristics.css({'display': 'block'});
+
+            $('.closeHouseCharacteristics').on('click', function (e) {
+                e.preventDefault();
+                $houseCharacteristics.fadeOut('slow');
+            });
+            break;
         case 'apperanceOfTheApartment':
             var $apartmentApartment = $('.appearance-of-the-apartment');
             $apartmentApartment.css({'display': 'block'});
@@ -256,9 +265,10 @@ function allParam(filterParam) {
 
 function allFilterBlocks(filters) {
 
-    $('.advanced-search-options').find('.building-parameters, .building-parameters-apartment,' +
+    $('.advanced-search-options').find('.building-parameters-apartment,' +
         ' .building-parameters-home, .building-parameters-room, .building-parameters-office-area,' +
-        '.building-parameters-separate-building, .building-parameters-ozs-сomplex').css({'display': 'none'});
+        '.building-parameters-separate-building, .building-parameters-ozs-сomplex,' +
+        '.test-7, .test-8, .test-9, .test-10, .test-11, .test-12').css({'display': 'none'});
 
     switch (filters) {
         case 'searchMetroMainBlock':
@@ -296,6 +306,24 @@ function allFilterBlocks(filters) {
             break;
         case '6':
             $('.building-parameters-ozs-сomplex').css({'display': 'flex'});
+            break;
+        case '7':
+            $('.test-7').css({'display': 'flex'});
+            break;
+        case '8':
+            $('.test-8').css({'display': 'flex'});
+            break;
+        case '9':
+            $('.test-9').css({'display': 'flex'});
+            break;
+        case '10':
+            $('.test-10').css({'display': 'flex'});
+            break;
+        case '11':
+            $('.test-11').css({'display': 'flex'});
+            break;
+        case '12':
+            $('.test-12').css({'display': 'flex'});
             break;
         default: console.log('Фильтр не настроен');
     }
@@ -366,6 +394,7 @@ $("#form").on('submit', function(e) { // устанавливаем событи
 //---------------------------------------------------------
 
 /** Фильтр - Цена **/
+// ошибки в - value
  $(function () {
     var $amountBefore = $('#amountBefore'),
         $amountAfter = $('#amountAfter'),
@@ -559,3 +588,15 @@ function yandexMap() {
         window.suggests = new ymaps.SuggestView("address", {width: 300, offset: [0, 4], results: 20});
     });
 }
+
+/** Яндекс карты внутри параметров **/
+
+ymaps.ready(function () {
+    var map = new ymaps.Map("ymap", {
+        center: [55.451332, 37.369336],
+        zoom: 10,
+        controls: ['fullscreenControl', 'typeSelector', 'geolocationControl', 'zoomControl']
+    });
+
+    window.suggests = new ymaps.SuggestView("suggest", {width: 300, offset: [0, 4], results: 20});
+});

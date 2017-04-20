@@ -1124,12 +1124,15 @@
                         <div class="decorativeShadowBlock"></div>
                     </li>
                     <li>
-                        <input name="" id="clast" type="checkbox">
-                        <label for="clast">Торг возможен</label></li>
+                        <label for="clast">
+                            <input name="" id="clast" type="checkbox">
+                            Торг возможен
+                        </label>
+                    </li>
                     <li>
                         <div class="select">
+                            <img src="../../template/images/ava.png" alt="icons">
                             <label for="">
-                                <img src="../../template/images/ava.png" alt="icons">
                                 <select>
                                     <option>От собственника</option>
                                     <option>От собственника</option>
@@ -1153,11 +1156,11 @@
                 </ul>
                 <div class="advanced-search-options">
                     <p>Заполните параметры ниже, для более точного поиска</p>
-                    <ul class="building-parameters">
+                    <ul class="building-parameters-apartment">
                         <li onclick="allParam('apartment');">
-                            <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
+                            <img src="../../template/images/search-1.png" alt="search">Исходные параметры квартиры
                             <div class="apartment-settings">
-                                <h2>Параметры квартиры</h2>
+                                <h2>Исходные параметры квартиры</h2>
                                 <ul>
                                     <li><span class="names-parameters">Кол-во комнат</span>
                                         <p class="number-apartments">
@@ -1169,350 +1172,28 @@
                                         </p>
                                     </li>
                                     <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
                                     </li>
                                     <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
                                     </li>
                                     <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
                                     </li>
                                     <li><span class="names-parameters">Балкон м2</span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                    </li>
-                                </ul>
-                                <ul>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li><span class="names-parameters">Высота потолков м</span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
-                                                    required></p>
-                                    </li>
-                                </ul>
-                                <button class="closeBlock">Готово</button>
-                            </div>
-                            <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
-                            </div>
-                        </li>
-                        <li onclick="allFilterBlocks('appearanceOfTheApartment')">
-                            <img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
-                            <div class="appearance-of-the-apartment">
-                                <h2>Внешний вид квартиры</h2>
-                                <ul>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <button class="search">Готово</button>
-                            </div>
-                            <div class="progress-bar blue stripes">
-                                <span style="width:40%"></span>
-                            </div>
-                        </li>
-                        <li onclick="allParam('buildingParametersFilter');">
-                            <img src="../../template/images/search-3.png" alt="search">Параметры здания
-                            <div class="building-parameters-filter">
-                                <h2>Параметры здания</h2>
-                                <ul>
-                                    <li><span class="names-parameters">Количество этажей</span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                    </li>
-                                    <li><span class="names-parameters">Год окончания строительства</span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
-                                                    required></p>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <button class="close-building-parameter">Готово</button>
-                            </div>
-                            <div class="progress-bar blue stripes">
-                                <span style="width:40%"></span>
-                            </div>
-                        </li>
-                        <li onclick="allParam('appearanceBuild')">
-                            <img src="../../template/images/search-4.png" alt="search">Внешний вид здания
-                            <div class="appearance-of-the-build">
-                                <h2>Внешний вид здания</h2>
-                                <ul>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <button class="closeApparenceBuild">Поиск</button>
-                            </div>
-                            <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
-                            </div>
-                        </li>
-                        <li><img src="../../template/images/search-5.png" alt="search">Безопасность
-                            <div class="select main-filter-s">
-                                <label for="">
-                                    <select>
-                                        <option>Выберите</option>
-                                        <option>Выберите1</option>
-                                        <option>Выберите2</option>
-                                    </select>
-                                </label>
-                            </div>
-                        </li>
-                        <li><img src="../../template/images/search-1.png" alt="search">Документы
-                            <div class="select main-filter-s">
-                                <label for="">
-                                    <select>
-                                        <option>Выбрано</option>
-                                        <option>Выбрано1</option>
-                                        <option>Выбрано2</option>
-                                    </select>
-                                </label>
-                            </div>
-                        </li>
-                        <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png"
-                                                                   alt="search">Вложения
-                            <div class="attachments">
-                                <h2>Вложения</h2>
-                                <ul>
-                                    <li>
-                                        <div class="select">
-                                            <label for=""><select>
-                                                    <option>Прилагается</option>
-                                                    <option>Прилагается1</option>
-                                                    <option>Прилагается2</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <button class="closeAttachment">Готово</button>
-                            </div>
-                            <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
-                            </div>
-                        </li>
-                    </ul>
-                    <ul class="building-parameters-apartment">
-                        <li onclick="allParam('apartment');">
-                            <img src="../../template/images/search-1.png" alt="search">Исходные параметры квартиры
-                            <div class="apartment-settings">
-                                <h2>Исходные параметры квартиры</h2>
-                                <ul>
-                                    <li><span class="names-parameters">Площадь м<sup>2</sup></span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                    </li>
-                                    <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                    </li>
-                                    <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                    </li>
-                                    <li><span class="names-parameters">Балкон м2</span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                    </li>
-                                </ul>
-                                <ul>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li><span class="names-parameters">Высота потолков м</span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
-                                                    required></p>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
                                     </li>
                                 </ul>
                                 <button class="closeBlock">Готово</button>
@@ -1566,10 +1247,9 @@
                                 <span style="width:40%"></span>
                             </div>
                         </li>
-                        <li onclick="allParam('buildingParametersFilter');"><img
-                                    src="../../template/images/search-3.png" alt="search">Параметры здания
+                        <li onclick="allParam('buildingParametersFilter');"><img src="../../template/images/search-3.png" alt="search">Характеристики дома
                             <div class="building-parameters-filter">
-                                <h2>Параметры здания</h2>
+                                <h2>Характеристики дома</h2>
                                 <ul>
                                     <li><span class="names-parameters">Количество этажей</span>
                                         <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
@@ -1634,8 +1314,8 @@
                                 <span style="width:40%"></span>
                             </div>
                         </li>
-                        <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png"
-                                                                   alt="search">Вложения
+                        <li onclick="allParam('attachment');">
+                            <img src="../../template/images/search-1.png" alt="search">Вложения
                             <div class="attachments">
                                 <h2>Вложения</h2>
                                 <ul>
@@ -1681,9 +1361,9 @@
                     </ul>
                     <ul class="building-parameters-home">
                         <li onclick="allParam('apartment');">
-                            <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
+                            <img src="../../template/images/search-1.png" alt="search">Параметры Объекта
                             <div class="apartment-settings">
-                                <h2>Параметры квартиры</h2>
+                                <h2>Параметры Объекта</h2>
                                 <ul>
                                     <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
                                         <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
@@ -1747,9 +1427,9 @@
                             </div>
                         </li>
                         <li onclick="allParam('apperanceOfTheApartment')"><img src="../../template/images/search-2.png"
-                                                                               alt="search">Внешний вид квартиры
+                                                                               alt="search">Ремонт и обустройства
                             <div class="appearance-of-the-apartment">
-                                <h2>Внешний вид квартиры</h2>
+                                <h2>Ремонт и обустройства</h2>
                                 <ul>
                                     <li>
                                         <div class="select">
@@ -1792,9 +1472,9 @@
                             </div>
                         </li>
                         <li onclick="allParam('buildingParametersFilter');">
-                            <img src="../../template/images/search-3.png" alt="search">Параметры здания
+                            <img src="../../template/images/search-3.png" alt="search">Участок
                             <div class="building-parameters-filter">
-                                <h2>Параметры здания</h2>
+                                <h2>Участок</h2>
                                 <ul>
                                     <li><span class="names-parameters">Количество этажей</span>
                                         <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
@@ -1860,9 +1540,9 @@
                             </div>
                         </li>
                         <li onclick="allParam('appearanceBuild')"><img src="../../template/images/search-4.png"
-                                                                       alt="search">Внешний вид здания
+                                                                       alt="search">Вложения
                             <div class="appearance-of-the-build">
-                                <h2>Внешний вид здания</h2>
+                                <h2>Вложения</h2>
                                 <ul>
                                     <li>
                                         <div class="select">
@@ -1904,132 +1584,45 @@
                                 <span style="width:0"></span>
                             </div>
                         </li>
-                        <li><img src="../../template/images/search-5.png" alt="search">Безопасность
-                            <div class="select main-filter-s">
-                                <label for="">
-                                    <select>
-                                        <option>Выберите</option>
-                                        <option>Выберите1</option>
-                                        <option>Выберите2</option>
-                                    </select>
-                                </label>
-                            </div>
-                        </li>
-                        <li><img src="../../template/images/search-1.png" alt="search">Документы
-                            <div class="select main-filter-s">
-                                <label for="">
-                                    <select>
-                                        <option>Выбрано</option>
-                                        <option>Выбрано1</option>
-                                        <option>Выбрано2</option>
-                                    </select>
-                                </label>
-                            </div>
-                        </li>
-                        <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png"
-                                                                   alt="search">Вложения
-                            <div class="attachments">
-                                <h2>Вложения</h2>
-                                <ul>
-                                    <li>
-                                        <div class="select">
-                                            <label for=""><select>
-                                                    <option>Прилагается</option>
-                                                    <option>Прилагается1</option>
-                                                    <option>Прилагается2</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <button class="closeAttachment">Готово</button>
-                            </div>
-                            <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
-                            </div>
-                        </li>
                     </ul>
                     <ul class="building-parameters-room">
                         <li onclick="allParam('apartment');">
-                            <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
+                            <img src="../../template/images/search-1.png" alt="search">Исходные параметры квартиры
                             <div class="apartment-settings">
-                                <h2>Параметры квартиры</h2>
+                                <h2>Исходные параметры квартиры</h2>
                                 <ul>
+                                    <li><span class="names-parameters">Кол-во комнат</span>
+                                        <p class="number-apartments">
+                                            <span>1</span>
+                                            <span>2</span>
+                                            <span>3</span>
+                                            <span>4</span>
+                                            <span>4+</span>
+                                        </p>
+                                    </li>
                                     <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
                                     </li>
                                     <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
                                     </li>
                                     <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
                                     </li>
                                     <li><span class="names-parameters">Балкон м2</span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                    </li>
-                                </ul>
-                                <ul>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li><span class="names-parameters">Высота потолков м</span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
-                                                    required></p>
+                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
                                     </li>
                                 </ul>
                                 <button class="closeBlock">Готово</button>
@@ -2039,9 +1632,9 @@
                             </div>
                         </li>
                         <li onclick="allParam('apperanceOfTheApartment')"><img src="../../template/images/search-2.png"
-                                                                               alt="search">Внешний вид квартиры
+                                                                               alt="search">Ремонт и обустройства квартиры
                             <div class="appearance-of-the-apartment">
-                                <h2>Внешний вид квартиры</h2>
+                                <h2>Ремонт и обустройства квартиры</h2>
                                 <ul>
                                     <li>
                                         <div class="select">
@@ -2084,9 +1677,9 @@
                             </div>
                         </li>
                         <li onclick="allParam('buildingParametersFilter');"><img
-                                    src="../../template/images/search-3.png" alt="search">Параметры здания
+                                    src="../../template/images/search-3.png" alt="search">Характеристики дома
                             <div class="building-parameters-filter">
-                                <h2>Параметры здания</h2>
+                                <h2>Характеристики дома</h2>
                                 <ul>
                                     <li><span class="names-parameters">Количество этажей</span>
                                         <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
@@ -2152,9 +1745,9 @@
                             </div>
                         </li>
                         <li onclick="allParam('appearanceBuild')"><img src="../../template/images/search-4.png"
-                                                                       alt="search">Внешний вид здания
+                                                                       alt="search">Вложения
                             <div class="appearance-of-the-build">
-                                <h2>Внешний вид здания</h2>
+                                <h2>Вложения</h2>
                                 <ul>
                                     <li>
                                         <div class="select">
@@ -2191,72 +1784,6 @@
                                     </li>
                                 </ul>
                                 <button class="closeApparenceBuild">Поиск</button>
-                            </div>
-                            <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
-                            </div>
-                        </li>
-                        <li><img src="../../template/images/search-5.png" alt="search">Безопасность
-                            <div class="select main-filter-s">
-                                <label for="">
-                                    <select>
-                                        <option>Выберите</option>
-                                        <option>Выберите1</option>
-                                        <option>Выберите2</option>
-                                    </select>
-                                </label>
-                            </div>
-                        </li>
-                        <li><img src="../../template/images/search-1.png" alt="search">Документы
-                            <div class="select main-filter-s">
-                                <label for="">
-                                    <select>
-                                        <option>Выбрано</option>
-                                        <option>Выбрано1</option>
-                                        <option>Выбрано2</option>
-                                    </select>
-                                </label>
-                            </div>
-                        </li>
-                        <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png"
-                                                                   alt="search">Вложения
-                            <div class="attachments">
-                                <h2>Вложения</h2>
-                                <ul>
-                                    <li>
-                                        <div class="select">
-                                            <label for=""><select>
-                                                    <option>Прилагается</option>
-                                                    <option>Прилагается1</option>
-                                                    <option>Прилагается2</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <button class="closeAttachment">Готово</button>
                             </div>
                             <div class="progress-bar blue stripes">
                                 <span style="width:0"></span>
@@ -2965,9 +2492,9 @@
                                 <h2>Параметры здания</h2>
                                 <ul>
                                     <li><span class="names-parameters">Количество этажей</span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                        <p>От<input id="number_of_floors-min" name="number_of_floors-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
                                                     required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                        <p>До<input id="number_of_floors-max" name="number_of_floors-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
                                                     required></p>
                                     </li>
                                     <li><span class="names-parameters">Год окончания строительства</span>
@@ -2975,6 +2502,16 @@
                                                     required></p>
                                         <p>До<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
                                                     required></p>
+                                    </li>
+                                    <li>
+                                        <div class="select">
+                                            <label for="elevator">Наличие лифта
+                                                <select name="elevator" id="elevator">
+                                                    <option value="1">Да</option>
+                                                    <option value="0">Нет</option>
+                                                </select>
+                                            </label>
+                                        </div>
                                     </li>
                                     <li>
                                         <div class="select">
@@ -3134,6 +2671,270 @@
                                 </ul>
                                 <button class="closeAttachment">Готово</button>
                             </div>
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="test-7">
+                        <li>
+                            <img src="../../template/images/search-1.png" alt="search">name-7
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../../template/images/search-3.png" alt="search">Параметры здания
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../../template/images/search-4.png" alt="search">Внешний вид здания
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../../template/images/search-5.png" alt="search">Безопасность
+                            <div class="select main-filter-s">
+                                <label for="">
+                                    <select>
+                                        <option>Выберите</option>
+                                        <option>Выберите1</option>
+                                        <option>Выберите2</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../../template/images/search-1.png" alt="search">Вложения
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="test-8">
+                        <li>
+                            <img src="../../template/images/search-1.png" alt="search">name-8
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../../template/images/search-3.png" alt="search">Параметры здания
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../../template/images/search-4.png" alt="search">Внешний вид здания
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../../template/images/search-5.png" alt="search">Безопасность
+                            <div class="select main-filter-s">
+                                <label for="">
+                                    <select>
+                                        <option>Выберите</option>
+                                        <option>Выберите1</option>
+                                        <option>Выберите2</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../../template/images/search-1.png" alt="search">Вложения
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="test-9">
+                        <li>
+                            <img src="../../template/images/search-1.png" alt="search">name-9
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../../template/images/search-3.png" alt="search">Параметры здания
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../../template/images/search-4.png" alt="search">Внешний вид здания
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../../template/images/search-5.png" alt="search">Безопасность
+                            <div class="select main-filter-s">
+                                <label for="">
+                                    <select>
+                                        <option>Выберите</option>
+                                        <option>Выберите1</option>
+                                        <option>Выберите2</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../../template/images/search-1.png" alt="search">Вложения
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="test-10">
+                        <li>
+                            <img src="../../template/images/search-1.png" alt="search">name-10
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../../template/images/search-3.png" alt="search">Параметры здания
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../../template/images/search-4.png" alt="search">Внешний вид здания
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../../template/images/search-5.png" alt="search">Безопасность
+                            <div class="select main-filter-s">
+                                <label for="">
+                                    <select>
+                                        <option>Выберите</option>
+                                        <option>Выберите1</option>
+                                        <option>Выберите2</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../../template/images/search-1.png" alt="search">Вложения
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="test-11">
+                        <li>
+                            <img src="../../template/images/search-1.png" alt="search">name-11
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../../template/images/search-3.png" alt="search">Параметры здания
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../../template/images/search-4.png" alt="search">Внешний вид здания
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../../template/images/search-5.png" alt="search">Безопасность
+                            <div class="select main-filter-s">
+                                <label for="">
+                                    <select>
+                                        <option>Выберите</option>
+                                        <option>Выберите1</option>
+                                        <option>Выберите2</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../../template/images/search-1.png" alt="search">Вложения
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="test-12">
+                        <li>
+                            <img src="../../template/images/search-1.png" alt="search">name-12
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../../template/images/search-3.png" alt="search">Параметры здания
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../../template/images/search-4.png" alt="search">Внешний вид здания
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../../template/images/search-5.png" alt="search">Безопасность
+                            <div class="select main-filter-s">
+                                <label for="">
+                                    <select>
+                                        <option>Выберите</option>
+                                        <option>Выберите1</option>
+                                        <option>Выберите2</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../../template/images/search-1.png" alt="search">Вложения
                             <div class="progress-bar blue stripes">
                                 <span style="width:0"></span>
                             </div>
@@ -3727,7 +3528,7 @@
                         </ul>
                     </div>
                 </div>
-                <button onclick="data()">Найти</button>
+                <button>Найти</button>
                 <ul class="filter-block-big-menu">
                     <li class="pointer value-text" onclick="filterOptionsApartments()">
                         <img src="../../template/images/apartments.png" alt="apartments">Тип недвижимости
@@ -3787,12 +3588,15 @@
                         <div class="decorativeShadowBlock"></div>
                     </li>
                     <li>
-                        <input name="" id="clast" type="checkbox">
-                        <label for="clast">Торг возможен</label></li>
+                        <label for="clast">
+                            <input name="" id="clast" type="checkbox">
+                            Торг возможен
+                        </label>
+                    </li>
                     <li>
                         <div class="select">
+                            <img src="../../template/images/ava.png" alt="icons">
                             <label for="">
-                                <img src="../../template/images/ava.png" alt="icons">
                                 <select>
                                     <option>От собственника</option>
                                     <option>От собственника</option>
@@ -3804,74 +3608,154 @@
                 </ul>
                 <div class="advanced-search-options">
                     <p>Заполните параметры ниже, для более точного поиска</p>
-                    <ul class="building-parameters">
-                        <li onclick="allParam('apartment');">
-                            <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
-                            <div class="apartment-settings">
-                                <h2>Параметры квартиры</h2>
+                    <ul class="building-parameters-apartment">
+                        <li>
+                            <img src="../../template/images/search-1.png" alt="search">Базовый раздел
+                            <div class="base-partition">
+                                <h2>Базовый раздел</h2>
                                 <ul>
-                                    <li><span class="names-parameters">Кол-во комнат</span>
-                                        <p class="number-apartments">
-                                            <span>1</span>
-                                            <span>2</span>
-                                            <span>3</span>
-                                            <span>4</span>
-                                            <span>4+</span>
+                                    <li><span class="names-parameters">Цена</span>
+                                        <p>От<input id="price-min" name="price-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
                                         </p>
+                                        <p>До<input id="price-max" name="price-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <div class="map">
+                                            <input type="text" name="address" placeholder="Адрес..." id="suggest">
+                                            <span>Страна: </span><span>Область: </span>
+                                            <span>Город: </span><span>Район: </span>
+                                            <span>Дом: </span>
+                                            <div id="ymap"></div>
+                                            <label>Кадастровый номер <input type="checkbox" name="cadastral_number">
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="select">
+                                            <label for="number_of_rooms">Кол-во комнат
+                                                <select class="number-apartments" name="number_of_rooms" id="number_of_rooms">
+                                                    <option value="5">4+</option>
+                                                    <option value="4">4</option>
+                                                    <option value="3">3</option>
+                                                    <option value="2">2</option>
+                                                    <option value="1">1</option>
+                                                </select>
+                                            </label>
+                                        </div>
                                     </li>
                                     <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
+                                        <p>От<input name="total-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="total-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
                                     </li>
                                     <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
+                                        <p>От<input name="not_residential-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="not_residential-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
                                     </li>
                                     <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
+                                        <p>От<input name="residential-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="residential-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
                                     </li>
                                     <li><span class="names-parameters">Балкон м2</span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
+                                        <p>От<input name="balcony-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="balcony-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                    </li>
+                                    <li><span class="names-parameters">Высота потолков</span>
+                                        <p>От<input name="ceiling_height-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="ceiling_height-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                    </li>
+                                    <li><span class="names-parameters">Этаж</span>
+                                        <p>От<input name="floor-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="floor-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <div class="select">
+                                            <label for="lavatory" >Санузел
+                                                <select id="lavatory">
+                                                    <option value="41">Не важно</option>
+                                                    <option value="116">Раздельный</option>
+                                                    <option value="29">Совмещенный</option>
+                                                </select>
+                                            </label>
+                                        </div>
                                     </li>
                                 </ul>
+                                <button class="closeBlock">Готово</button>
+                            </div>
+                        </li>
+                        <li onclick="allParam('apartment')">
+                            <img src="../../template/images/search-1.png" alt="search">Исходные параметры квартиры
+                            <div class="apartment-settings">
+                                <h2>Исходные параметры квартиры</h2>
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
+                                            <label for="">Кол-во комнат
+                                                <select class="number-apartments" name="number_of_rooms" id="number_of_rooms">
+                                                    <option value="5">4+</option>
+                                                    <option value="4">4</option>
+                                                    <option value="3">3</option>
+                                                    <option value="2">2</option>
+                                                    <option value="1">1</option>
                                                 </select>
                                             </label>
                                         </div>
+                                    </li>
+                                    <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
+                                        <p>От<input name="total-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="total-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                    </li>
+                                    <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
+                                        <p>От<input name="not_residential-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="not_residential-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                    </li>
+                                    <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
+                                        <p>От<input name="residential-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="residential-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                    </li>
+                                    <li><span class="names-parameters">Балкон м2</span>
+                                        <p>От<input name="balcony-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="balcony-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                    </li>
+                                    <li><span class="names-parameters">Высота потолков</span>
+                                        <p>От<input name="ceiling_height-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="ceiling_height-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                    </li>
+                                    <li><span class="names-parameters">Этаж</span>
+                                        <p>От<input name="floor-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="floor-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
+                                            <label for="lavatory" >Санузел
+                                                <select id="lavatory">
+                                                    <option value="41">Не важно</option>
+                                                    <option value="116">Раздельный</option>
+                                                    <option value="29">Совмещенный</option>
                                                 </select>
                                             </label>
                                         </div>
-                                    </li>
-                                    <li><span class="names-parameters">Высота потолков м</span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
-                                                    required></p>
                                     </li>
                                 </ul>
                                 <button class="closeBlock">Готово</button>
@@ -3881,39 +3765,42 @@
                             </div>
                         </li>
                         <li onclick="allParam('apperanceOfTheApartment')">
-                            <img src="../../template/images/search-2.png" alt="search">Внешний вид квартиры
+                            <img src="../../template/images/search-2.png" alt="search">Ремонт и обустройства
                             <div class="appearance-of-the-apartment">
-                                <h2>Внешний вид квартиры</h2>
+                                <h2>Ремонт и обустройства квартиры</h2>
                                 <ul>
                                     <li>
+                                        <p>Комнаты</p>
+                                        <label>Ванная<input type="checkbox" name="bathroom"></label>
+                                        <label>Столовая<input type="checkbox" name="dining_room"></label>
+                                        <label>Рабочий кабинет <input type="checkbox" name="study"></label>
+                                        <label>Детская<input type="checkbox" name="playroom"></label>
+                                        <label>Прихожая<input type="checkbox" name="hallway"></label>
+                                        <label>Гостиная<input type="checkbox" name="living_room"></label>
+                                        <label>Кухня<input type="checkbox" name="kitchen"></label>
+                                        <label>Спальня<input type="checkbox" name="bedroom"></label>
+                                    </li>
+                                    <li>
                                         <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
+                                            <label for="furnish">Отделка
+                                                <select name="furnish" id="furnish">
+                                                    <option value="141">Без ремонта</option>
+                                                    <option value="65">Незавершенный ремонт</option>
+                                                    <option value="107">Требуется ремонт</option>
+                                                    <option value="106">Требуется косметический ремонт</option>
+                                                    <option value="57">Хорошая отделка</option>
+                                                    <option value="64">Высококачественная отделка</option>
+                                                    <option value="46">Эксклюзивного качества</option>
                                                 </select>
                                             </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
+                                            <label for="equipment">Комплектация
+                                                <select name="equipment" id="equipment">
+                                                    <option value="45">Укомплектованная</option>
+                                                    <option value="44">Пустая</option>
                                                 </select>
                                             </label>
                                         </div>
@@ -3925,78 +3812,55 @@
                                 <span style="width:40%"></span>
                             </div>
                         </li>
-                        <li onclick="allParam('buildingParametersFilter');">
-                            <img src="../../template/images/search-3.png" alt="search">Параметры здания
-                            <div class="building-parameters-filter">
-                                <h2>Параметры здания</h2>
+                        <li onclick="allParam('houseCharacteristics')">
+                            <img src="../../template/images/search-2.png" alt="search">Характеристики дома
+                            <div class="house-characteristics">
+                                <h2>Характеристики дома</h2>
                                 <ul>
-                                    <li><span class="names-parameters">Количество этажей</span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                    </li>
-                                    <li><span class="names-parameters">Год окончания строительства</span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
-                                                    required></p>
+                                    <li>
+                                        <p>Комнаты</p>
+                                        <label>Ванная<input type="checkbox" name="bathroom"></label>
+                                        <label>Столовая<input type="checkbox" name="dining_room"></label>
+                                        <label>Рабочий кабинет <input type="checkbox" name="study"></label>
+                                        <label>Детская<input type="checkbox" name="playroom"></label>
+                                        <label>Прихожая<input type="checkbox" name="hallway"></label>
+                                        <label>Гостиная<input type="checkbox" name="living_room"></label>
+                                        <label>Кухня<input type="checkbox" name="kitchen"></label>
+                                        <label>Спальня<input type="checkbox" name="bedroom"></label>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
+                                            <label for="furnish">Отделка
+                                                <select name="furnish" id="furnish">
+                                                    <option value="141">Без ремонта</option>
+                                                    <option value="65">Незавершенный ремонт</option>
+                                                    <option value="107">Требуется ремонт</option>
+                                                    <option value="106">Требуется косметический ремонт</option>
+                                                    <option value="57">Хорошая отделка</option>
+                                                    <option value="64">Высококачественная отделка</option>
+                                                    <option value="46">Эксклюзивного качества</option>
                                                 </select>
                                             </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
+                                            <label for="equipment">Комплектация
+                                                <select name="equipment" id="equipment">
+                                                    <option value="45">Укомплектованная</option>
+                                                    <option value="44">Пустая</option>
                                                 </select>
                                             </label>
                                         </div>
                                     </li>
                                 </ul>
-                                <button class="close-building-parameter">Готово</button>
-                            </div>
-                            <div class="progress-bar blue stripes">
-                                <span style="width:40%"></span>
+                                <button class="closeHouseCharacteristics">Готово</button>
                             </div>
                         </li>
                         <li onclick="allParam('appearanceBuild')">
-                            <img src="../../template/images/search-4.png" alt="search">Внешний вид здания
+                            <img src="../../template/images/search-1.png" alt="search">Вложения
                             <div class="appearance-of-the-build">
-                                <h2>Внешний вид здания</h2>
+                                <h2>Вложения</h2>
                                 <ul>
                                     <li>
                                         <div class="select">
@@ -4033,268 +3897,7 @@
                                     </li>
                                 </ul>
                                 <button class="closeApparenceBuild">Поиск</button>
-                            </div>
-                            <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
-                            </div>
                         </li>
-                        <li><img src="../../template/images/search-5.png" alt="search">Безопасность
-                            <div class="select main-filter-s">
-                                <label for="">
-                                    <select>
-                                        <option>Выберите</option>
-                                        <option>Выберите1</option>
-                                        <option>Выберите2</option>
-                                    </select>
-                                </label>
-                            </div>
-                        </li>
-                        <li><img src="../../template/images/search-1.png" alt="search">Документы
-                            <div class="select main-filter-s">
-                                <label for="">
-                                    <select>
-                                        <option>Выбрано</option>
-                                        <option>Выбрано1</option>
-                                        <option>Выбрано2</option>
-                                    </select>
-                                </label>
-                            </div>
-                        </li>
-                        <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png"
-                                                                   alt="search">Вложения
-                            <div class="attachments">
-                                <h2>Вложения</h2>
-                                <ul>
-                                    <li>
-                                        <div class="select">
-                                            <label for=""><select>
-                                                    <option>Прилагается</option>
-                                                    <option>Прилагается1</option>
-                                                    <option>Прилагается2</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <button class="closeAttachment">Готово</button>
-                            </div>
-                            <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
-                            </div>
-                        </li>
-                    </ul>
-                    <ul class="building-parameters-apartment">
-                        <li onclick="allParam('apartment');">
-                            <img src="../../template/images/search-1.png" alt="search">Исходные параметры квартиры
-                            <div class="apartment-settings">
-                                <h2>Исходные параметры квартиры</h2>
-                                <ul>
-                                    <li><span class="names-parameters">Площадь м<sup>2</sup></span>
-                                        <p>От<input type="text" placeholder="0" name="space-min" maxlength="3"
-                                                    pattern="[0-9]{3}" required></p>
-                                        <p>До<input type="text" placeholder="0" name="space-max" maxlength="3"
-                                                    pattern="[0-9]{3}" required></p>
-                                    </li>
-                                    <li><span class="names-parameters">Высота потолков м<sup>2</sup></span>
-                                        <p>От<input type="text" placeholder="0" name="ceiling_height-min" maxlength="3"
-                                                    pattern="[0-9]{3}" required></p>
-                                        <p>До<input type="text" placeholder="0"
-                                                    name="ceiling_height-max" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                    </li>
-                                    <li><span class="names-parameters">Количество этажей</span>
-                                        <p>От<input type="text" name="number_of_floors-min" placeholder="0"
-                                                    maxlength="3" pattern="[0-9]{3}" required>
-                                        </p>
-                                        <p>До<input type="text" name="number_of_floors-max" placeholder="0"
-                                                    maxlength="3" pattern="[0-9]{3}" required>
-                                        </p>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li><span class="names-parameters">Количество комнат</span>
-                                        <p>От<input type="text" placeholder="0" name="number_of_rooms-min" maxlength="3"
-                                                    pattern="[0-9]{3}" required></p>
-                                        <p>До<input type="text" placeholder="0" name="number_of_rooms-max" maxlength="3"
-                                                    pattern="[0-9]{3}" required></p>
-                                    </li>
-                                    <li>
-                                        <span class="names-parameters">Год постройки</span>
-                                        <p>От<input type="text" placeholder="0" name="year_of_construction-min"
-                                                    maxlength="3" pattern="[0-9]{3}" required></p>
-                                        <p>До<input type="text" placeholder="0" name="year_of_construction-max"
-                                                    maxlength="3" pattern="[0-9]{3}" required></p>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <button class="closeBlock">Готово</button>
-                            </div>
-                            <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
-                            </div>
-                        </li>
-                        <li onclick="allParam('apperanceOfTheApartment')">
-                            <img src="../../template/images/search-2.png" alt="search">Ремонт и обустройства
-                            <div class="appearance-of-the-apartment">
-                                <h2>Ремонт и обустройства</h2>
-                                <ul>
-                                    <li>
-                                        <p>Безопасность
-                                        <p>
-                                            <label>
-                                                <input type="checkbox" name="concierge">Консьерж</label>
-                                            <label>
-                                                <input type="checkbox" name="security">Охрана</label>
-                                            <label>
-                                                <input type="checkbox" name="intercom">Домофон</label>
-                                            <label>
-                                                <input type="checkbox" name="cctv">Видеонаблюдение</label>
-                                            <label>
-                                                <input type="checkbox" name="signaling">Сигнализация</label>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <p>Жилищно-коммунальные услуги</p>
-                                        <label><input type="checkbox" name="electricity">Электричество</label>
-                                    </li>
-                                    <li>
-                                        <label for="electricity"><input type="checkbox" name="electricity">Электричество</label>
-                                        <p class="show-elect">От<input type="text" placeholder="0"
-                                                                       name="electricity-min" maxlength="3"
-                                                                       pattern="[0-9]{3}" required></p>
-                                        <p class="show-elect">До<input type="text" placeholder="0"
-                                                                       name="electricity-max" maxlength="3"
-                                                                       pattern="[0-9]{3}" required></p>
-                                    </li>
-                                    <li>
-                                        <label for="sanitation">Водопровод и канализация
-                                            <select name="sanitation"
-                                                    class="js-example-data-array-selected sanitation"></select>
-                                        </label>
-                                        <label for="electricity"><input type="checkbox" name="possible_to_post">Возможность
-                                            проводки</label>
-                                        <label for="electricity"><input type="checkbox" name="possible_to_post">Описание</label>
-                                        <label for="sanitation">Наличие санузлов</label>
-                                        <label for="electricity">Количество</label>
-                                        <input name="bathroom_number-min" type="text" placeholder="от">
-                                        <input name="bathroom_number-max" type="text" placeholder="до">
-                                        <label for="">Расположение:</label>
-                                    </li>
-                                </ul>
-                                <button class="search">Готово</button>
-                            </div>
-                            <div class="progress-bar blue stripes">
-                                <span style="width:40%"></span>
-                            </div>
-                        </li>
-                        <li onclick="allParam('attachment');"></li>
-                        <li onclick="allParam('attachment');"></li>
                     </ul>
                     <ul class="building-parameters-home">
                         <li onclick="allParam('apartment');">
@@ -5648,6 +5251,125 @@
                             </div>
                         </li>
                     </ul>
+                    <ul class="test-7">
+                        <li>
+                            <img src="../../template/images/search-1.png" alt="search">Основные параметры
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../../template/images/search-2.png" alt="search">Убустройства
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../../template/images/search-3.png" alt="search">Вложения
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="test-8">
+                        <li>
+                            <img src="../../template/images/search-1.png" alt="search">Основное
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../../template/images/search-2.png" alt="search">Дополнительно
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../../template/images/search-3.png" alt="search">Вложения
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="test-9">
+                        <li>
+                            <img src="../../template/images/search-1.png" alt="search">Исходные параметры
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../../template/images/search-2.png" alt="search">Ремонт и обустройства
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../../template/images/search-3.png" alt="search">Документы
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../../template/images/search-4.png" alt="search">Вложения
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="test-10">
+                        <li>
+                            <img src="../../template/images/search-1.png" alt="search">Исходные параметры
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../../template/images/search-2.png" alt="search">Ремонт и обустройства
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../../template/images/search-3.png" alt="search">Документы
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../../template/images/search-4.png" alt="search">Вложения
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="test-11">
+                        <li>
+                            <img src="../../template/images/search-1.png" alt="search">Исходные параметры
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../../template/images/search-2.png" alt="search">Ремонт и обустройства
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../../template/images/search-3.png" alt="search">Документы
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../../template/images/search-4.png" alt="search">Вложения
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="test-12"></ul>  <!-- заглушка -->
                     <a href="#"><i class="fa fa-map-marker" aria-hidden="true"></i>Поиск по карте</a>
                 </div>
             </div>
@@ -5905,76 +5627,42 @@
             </div>
         </div>
     </div>
-    <div class="published-articles">
-        <div class="visitor-statistics">
-            <div class="container-w-2">
-                <p>Сегодня вы и еще<span>143 645</span>человек сейчас с нами, а так же:</p>
+    <div class="visitor-statistics">
+        <div class="container-w-2">
+            <p>Сегодня вы и еще<span>143 645</span>человек сейчас с нами, а так же:</p>
+            <ul>
+                <li><img src="../../template/images/sec-4-1.png" alt="icon">645 644
+                    <p>Людей зашло сегодня</p>
+                </li>
+                <li><img src="../../template/images/sec-4-2.png" alt="icon">23 635 773
+                    <p>объявлений выложено</p>
+                </li>
+                <li><img src="../../template/images/sec-4-3.png" alt="icon">11 345
+                    <p>объявлений в вашем городе</p>
+                </li>
+                <li><img src="../../template/images/sec-4-4.png" alt="icon">342 244
+                    <p>активных сделак сейчас</p>
+                </li>
+            </ul>
+            <div class="schedule">
+                <div class="schedule-interface">
+                    <div class="year-schedule-interface"></div>
+                </div>
+                <a href="#"><span id="yellow"></span>Октябрь</a>
+                <a href="#"><span id="green"></span>Ноябрь</a>
+                <a href="#"><span id="blue"></span>Декабрь</a>
+            </div>
+        </div>
+    </div>
+    <div class="sales-evaluation">
+        <div class="container-w-2">
+            <h2>Оценка продажи и аренды недвижимости<br>в Москве и области</h2>
+            <div class="appreciate-the-apartment">
                 <ul>
-                    <li><img src="../../template/images/sec-4-1.png" alt="icon">645 644
-                        <p>Людей зашло сегодня</p>
+                    <li><i class="fa fa-map-marker" aria-hidden="true"></i>
+                        <input placeholder="например: Москва, ул. Большого Голушкина, 17">
                     </li>
-                    <li><img src="../../template/images/sec-4-2.png" alt="icon">23 635 773
-                        <p>объявлений выложено</p>
-                    </li>
-                    <li><img src="../../template/images/sec-4-3.png" alt="icon">11 345
-                        <p>объявлений в вашем городе</p>
-                    </li>
-                    <li><img src="../../template/images/sec-4-4.png" alt="icon">342 244
-                        <p>активных сделак сейчас</p>
-                    </li>
-                </ul>
-                <div class="schedule">
-                    <div class="schedule-interface">
-                        <div class="year-schedule-interface"></div>
-                    </div>
-                    <a href="#"><span id="yellow"></span>Октябрь</a>
-                    <a href="#"><span id="green"></span>Ноябрь</a>
-                    <a href="#"><span id="blue"></span>Декабрь</a>
-                </div>
-            </div>
-        </div>
-        <div class="sales-evaluation">
-            <div class="container-w-2">
-                <h2>Оценка продажи и аренды недвижимости<br>в Москве и области</h2>
-                <div class="appreciate-the-apartment">
-                    <ul>
-                        <li><i class="fa fa-map-marker" aria-hidden="true"></i>
-                            <input placeholder="например: Москва, ул. Большого Голушкина, 17">
-                        </li>
-                        <li>
-                            <div class="select">
-                                <label for="">
-                                    <select>
-                                        <option>Language of communication</option>
-                                        <option>English</option>
-                                        <option>Spanish</option>
-                                    </select>
-                                </label>
-                            </div>
-                        </li>
-                    </ul>
-                    <button>Оценить</button>
-                </div>
-                <div class="appreciate-the-rooms">
-                    <p>Кол-во<br>комнат</p>
-                    <span>1</span>
-                    <span>2</span>
-                    <span>3</span>
-                    <span>4</span>
-                    <span>4+</span>
-                </div>
-                <div class="estimate-the-area">
-                    <label>Площадь м2
-                        <input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}">
-                    </label>
-                </div>
-            </div>
-        </div>
-        <div class="best-ads-per-day">
-            <div class="top-apartments">
-                <h2>Лучшие объявления за 24 часа</h2>
-                <div class="filter-and-top-blocks">
-                    <div class="filter-apartment">
+                    <li>
                         <div class="select">
                             <label for="">
                                 <select>
@@ -5984,312 +5672,344 @@
                                 </select>
                             </label>
                         </div>
+                    </li>
+                </ul>
+                <button>Оценить</button>
+            </div>
+            <div class="appreciate-the-rooms">
+                <p>Кол-во<br>комнат</p>
+                <span>1</span>
+                <span>2</span>
+                <span>3</span>
+                <span>4</span>
+                <span>4+</span>
+            </div>
+            <div class="estimate-the-area">
+                <label>Площадь м2
+                    <input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}">
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="best-ads-per-day">
+        <div class="top-apartments">
+            <h2>Лучшие объявления за 24 часа</h2>
+            <div class="filter-and-top-blocks">
+                <div class="filter-apartment">
+                    <div class="select">
+                        <label for="">
+                            <select>
+                                <option>Language of communication</option>
+                                <option>English</option>
+                                <option>Spanish</option>
+                            </select>
+                        </label>
                     </div>
-                    <!-- Основной блок TOP апартаментов -->
-                    <div class="all-apartments-top">
-                        <!-- Информация одного TOP апартамента -->
-                        <div class="top-block">
-                            <div class="left-wallpaper">
-                                <a href="#"><img src="../../template/images/apartments/1.png" alt="apartments"></a>
-                                <p>2-комн. кв. 134м<sup>2</sup></p>
-                            </div>
-                            <div class="right-information-block">
-                                <span>Шикардосная двушка в самом центре столицы</span>
-                                <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
-                                <div class="price-and-view-the-apartment">
-                                    <div class="price">
-                                        <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img
-                                                        src="../../template/images/people.png" alt="">2 мин</span></p>
-                                        <span class="decorate-number">25 000<i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
-                                    </div>
-                                    <div class="view-the-apartment">
-                                        <a href="#"><img src="../../template/images/show.png" alt="show"></a>
-                                    </div>
+                </div>
+                <!-- Основной блок TOP апартаментов -->
+                <div class="all-apartments-top">
+                    <!-- Информация одного TOP апартамента -->
+                    <div class="top-block">
+                        <div class="left-wallpaper">
+                            <a href="#"><img src="../../template/images/apartments/1.png" alt="apartments"></a>
+                            <p>2-комн. кв. 134м<sup>2</sup></p>
+                        </div>
+                        <div class="right-information-block">
+                            <span>Шикардосная двушка в самом центре столицы</span>
+                            <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
+                            <div class="price-and-view-the-apartment">
+                                <div class="price">
+                                    <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img
+                                                    src="../../template/images/people.png" alt="">2 мин</span></p>
+                                    <span class="decorate-number">25 000<i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
+                                </div>
+                                <div class="view-the-apartment">
+                                    <a href="#"><img src="../../template/images/show.png" alt="show"></a>
                                 </div>
                             </div>
                         </div>
-                        <!-- Закончился первый блок -->
-                        <div class="top-block">
-                            <div class="left-wallpaper">
-                                <a href="#"><img src="../../template/images/apartments/2.png" alt="apartments"></a>
-                                <p>2-комн. кв. 134м<sup>2</sup></p>
-                            </div>
-                            <div class="right-information-block">
-                                <span>Шикардосная двушка в самом центре столицы</span>
-                                <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
-                                <div class="price-and-view-the-apartment">
-                                    <div class="price">
-                                        <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img
-                                                        src="../../template/images/people.png" alt="">2 мин</span></p>
-                                        <span class="decorate-number">25 000<i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
-                                    </div>
-                                    <div class="view-the-apartment">
-                                        <a href="#"><img src="../../template/images/show.png" alt="show"></a>
-                                    </div>
+                    </div>
+                    <!-- Закончился первый блок -->
+                    <div class="top-block">
+                        <div class="left-wallpaper">
+                            <a href="#"><img src="../../template/images/apartments/2.png" alt="apartments"></a>
+                            <p>2-комн. кв. 134м<sup>2</sup></p>
+                        </div>
+                        <div class="right-information-block">
+                            <span>Шикардосная двушка в самом центре столицы</span>
+                            <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
+                            <div class="price-and-view-the-apartment">
+                                <div class="price">
+                                    <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img
+                                                    src="../../template/images/people.png" alt="">2 мин</span></p>
+                                    <span class="decorate-number">25 000<i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
+                                </div>
+                                <div class="view-the-apartment">
+                                    <a href="#"><img src="../../template/images/show.png" alt="show"></a>
                                 </div>
                             </div>
                         </div>
-                        <div class="top-block">
-                            <div class="left-wallpaper">
-                                <a href="#"><img src="../../template/images/apartments/3.png" alt="apartments"></a>
-                                <p>2-комн. кв. 134м<sup>2</sup></p>
-                            </div>
-                            <div class="right-information-block">
-                                <span>Шикардосная двушка в самом центре столицы</span>
-                                <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
-                                <div class="price-and-view-the-apartment">
-                                    <div class="price">
-                                        <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img
-                                                        src="../../template/images/people.png" alt="">2 мин</span></p>
-                                        <span class="decorate-number">25 000<i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
-                                    </div>
-                                    <div class="view-the-apartment">
-                                        <a href="#"><img src="../../template/images/show.png" alt="show"></a>
-                                    </div>
+                    </div>
+                    <div class="top-block">
+                        <div class="left-wallpaper">
+                            <a href="#"><img src="../../template/images/apartments/3.png" alt="apartments"></a>
+                            <p>2-комн. кв. 134м<sup>2</sup></p>
+                        </div>
+                        <div class="right-information-block">
+                            <span>Шикардосная двушка в самом центре столицы</span>
+                            <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
+                            <div class="price-and-view-the-apartment">
+                                <div class="price">
+                                    <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img
+                                                    src="../../template/images/people.png" alt="">2 мин</span></p>
+                                    <span class="decorate-number">25 000<i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
+                                </div>
+                                <div class="view-the-apartment">
+                                    <a href="#"><img src="../../template/images/show.png" alt="show"></a>
                                 </div>
                             </div>
                         </div>
-                        <div class="top-block">
-                            <div class="left-wallpaper">
-                                <a href="#"><img src="../../template/images/apartments/4.png" alt="apartments"></a>
-                                <p>2-комн. кв. 134м<sup>2</sup></p>
-                            </div>
-                            <div class="right-information-block">
-                                <span>Шикардосная двушка в самом центре столицы</span>
-                                <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
-                                <div class="price-and-view-the-apartment">
-                                    <div class="price">
-                                        <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img
-                                                        src="../../template/images/people.png" alt="">2 мин</span></p>
-                                        <span class="decorate-number">25 000<i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
-                                    </div>
-                                    <div class="view-the-apartment">
-                                        <a href="#"><img src="../../template/images/show.png" alt="show"></a>
-                                    </div>
+                    </div>
+                    <div class="top-block">
+                        <div class="left-wallpaper">
+                            <a href="#"><img src="../../template/images/apartments/4.png" alt="apartments"></a>
+                            <p>2-комн. кв. 134м<sup>2</sup></p>
+                        </div>
+                        <div class="right-information-block">
+                            <span>Шикардосная двушка в самом центре столицы</span>
+                            <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
+                            <div class="price-and-view-the-apartment">
+                                <div class="price">
+                                    <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img
+                                                    src="../../template/images/people.png" alt="">2 мин</span></p>
+                                    <span class="decorate-number">25 000<i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
+                                </div>
+                                <div class="view-the-apartment">
+                                    <a href="#"><img src="../../template/images/show.png" alt="show"></a>
                                 </div>
                             </div>
                         </div>
-                        <div class="top-block">
-                            <div class="left-wallpaper">
-                                <a href="#"><img src="../../template/images/apartments/5.png" alt="apartments"></a>
-                                <p>2-комн. кв. 134м<sup>2</sup></p>
-                            </div>
-                            <div class="right-information-block">
-                                <span>Шикардосная двушка в самом центре столицы</span>
-                                <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
-                                <div class="price-and-view-the-apartment">
-                                    <div class="price">
-                                        <p><img src="../../template/images/m.png" alt="metro">Рижская<span>
+                    </div>
+                    <div class="top-block">
+                        <div class="left-wallpaper">
+                            <a href="#"><img src="../../template/images/apartments/5.png" alt="apartments"></a>
+                            <p>2-комн. кв. 134м<sup>2</sup></p>
+                        </div>
+                        <div class="right-information-block">
+                            <span>Шикардосная двушка в самом центре столицы</span>
+                            <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
+                            <div class="price-and-view-the-apartment">
+                                <div class="price">
+                                    <p><img src="../../template/images/m.png" alt="metro">Рижская<span>
                                             <img src="../../template/images/people.png" alt="">2 мин</span></p>
-                                        <span class="decorate-number">25 000<i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
-                                    </div>
-                                    <div class="view-the-apartment">
-                                        <a href="#"><img src="../../template/images/show.png" alt="show"></a>
-                                    </div>
+                                    <span class="decorate-number">25 000<i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="top-block">
-                            <div class="left-wallpaper">
-                                <a href="#"><img src="../../template/images/apartments/6.png" alt="apartments"></a>
-                                <p>2-комн. кв. 134м<sup>2</sup></p>
-                            </div>
-                            <div class="right-information-block">
-                                <span>Шикардосная двушка в самом центре столицы</span>
-                                <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
-                                <div class="price-and-view-the-apartment">
-                                    <div class="price">
-                                        <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img
-                                                        src="../../template/images/people.png" alt="">2 мин</span></p>
-                                        <span class="decorate-number">25 000<i class="fa fa-rub"
-                                                                               aria-hidden="true"></i><sub>/мес</sub></span>
-                                    </div>
-                                    <div class="view-the-apartment">
-                                        <a href="#"><img src="../../template/images/show.png" alt="show"></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="top-block">
-                            <div class="left-wallpaper">
-                                <a href="#"><img src="../../template/images/apartments/7.png" alt="apartments"></a>
-                                <p>2-комн. кв. 134м<sup>2</sup></p>
-                            </div>
-                            <div class="right-information-block">
-                                <span>Шикардосная двушка в самом центре столицы</span>
-                                <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
-                                <div class="price-and-view-the-apartment">
-                                    <div class="price">
-                                        <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img
-                                                        src="../../template/images/people.png" alt="">2 мин</span></p>
-                                        <span class="decorate-number">25 000<i class="fa fa-rub"
-                                                                               aria-hidden="true"></i><sub>/мес</sub></span>
-                                    </div>
-                                    <div class="view-the-apartment">
-                                        <a href="#"><img src="../../template/images/show.png" alt="show"></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="top-block">
-                            <div class="left-wallpaper">
-                                <a href="#"><img src="../../template/images/apartments/8.png" alt="apartments"></a>
-                                <p>2-комн. кв. 134м<sup>2</sup></p>
-                            </div>
-                            <div class="right-information-block">
-                                <span>Шикардосная двушка в самом центре столицы</span>
-                                <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
-                                <div class="price-and-view-the-apartment">
-                                    <div class="price">
-                                        <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img
-                                                        src="../../template/images/people.png" alt="">2 мин</span></p>
-                                        <span class="decorate-number">25 000<i class="fa fa-rub"
-                                                                               aria-hidden="true"></i><sub>/мес</sub></span>
-                                    </div>
-                                    <div class="view-the-apartment">
-                                        <a href="#"><img src="../../template/images/show.png" alt="show"></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="top-block">
-                            <div class="left-wallpaper">
-                                <a href="#"><img src="../../template/images/apartments/2.png" alt="apartments"></a>
-                                <p>2-комн. кв. 134м<sup>2</sup></p>
-                            </div>
-                            <div class="right-information-block">
-                                <span>Шикардосная двушка в самом центре столицы</span>
-                                <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
-                                <div class="price-and-view-the-apartment">
-                                    <div class="price">
-                                        <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img
-                                                        src="../../template/images/people.png" alt="">2 мин</span></p>
-                                        <span class="decorate-number">25 000<i class="fa fa-rub"
-                                                                               aria-hidden="true"></i><sub>/мес</sub></span>
-                                    </div>
-                                    <div class="view-the-apartment">
-                                        <a href="#"><img src="../../template/images/show.png" alt="show"></a>
-                                    </div>
+                                <div class="view-the-apartment">
+                                    <a href="#"><img src="../../template/images/show.png" alt="show"></a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Закончились все блоки -->
-                    <div class="see-more">
-                        <p>Еще<span>23 423</span>объявления</p>
-                        <a href="#">Смотреть все</a>
+                    <div class="top-block">
+                        <div class="left-wallpaper">
+                            <a href="#"><img src="../../template/images/apartments/6.png" alt="apartments"></a>
+                            <p>2-комн. кв. 134м<sup>2</sup></p>
+                        </div>
+                        <div class="right-information-block">
+                            <span>Шикардосная двушка в самом центре столицы</span>
+                            <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
+                            <div class="price-and-view-the-apartment">
+                                <div class="price">
+                                    <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img
+                                                    src="../../template/images/people.png" alt="">2 мин</span></p>
+                                    <span class="decorate-number">25 000<i class="fa fa-rub"
+                                                                           aria-hidden="true"></i><sub>/мес</sub></span>
+                                </div>
+                                <div class="view-the-apartment">
+                                    <a href="#"><img src="../../template/images/show.png" alt="show"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="top-block">
+                        <div class="left-wallpaper">
+                            <a href="#"><img src="../../template/images/apartments/7.png" alt="apartments"></a>
+                            <p>2-комн. кв. 134м<sup>2</sup></p>
+                        </div>
+                        <div class="right-information-block">
+                            <span>Шикардосная двушка в самом центре столицы</span>
+                            <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
+                            <div class="price-and-view-the-apartment">
+                                <div class="price">
+                                    <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img
+                                                    src="../../template/images/people.png" alt="">2 мин</span></p>
+                                    <span class="decorate-number">25 000<i class="fa fa-rub"
+                                                                           aria-hidden="true"></i><sub>/мес</sub></span>
+                                </div>
+                                <div class="view-the-apartment">
+                                    <a href="#"><img src="../../template/images/show.png" alt="show"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="top-block">
+                        <div class="left-wallpaper">
+                            <a href="#"><img src="../../template/images/apartments/8.png" alt="apartments"></a>
+                            <p>2-комн. кв. 134м<sup>2</sup></p>
+                        </div>
+                        <div class="right-information-block">
+                            <span>Шикардосная двушка в самом центре столицы</span>
+                            <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
+                            <div class="price-and-view-the-apartment">
+                                <div class="price">
+                                    <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img
+                                                    src="../../template/images/people.png" alt="">2 мин</span></p>
+                                    <span class="decorate-number">25 000<i class="fa fa-rub"
+                                                                           aria-hidden="true"></i><sub>/мес</sub></span>
+                                </div>
+                                <div class="view-the-apartment">
+                                    <a href="#"><img src="../../template/images/show.png" alt="show"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="top-block">
+                        <div class="left-wallpaper">
+                            <a href="#"><img src="../../template/images/apartments/2.png" alt="apartments"></a>
+                            <p>2-комн. кв. 134м<sup>2</sup></p>
+                        </div>
+                        <div class="right-information-block">
+                            <span>Шикардосная двушка в самом центре столицы</span>
+                            <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
+                            <div class="price-and-view-the-apartment">
+                                <div class="price">
+                                    <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img
+                                                    src="../../template/images/people.png" alt="">2 мин</span></p>
+                                    <span class="decorate-number">25 000<i class="fa fa-rub"
+                                                                           aria-hidden="true"></i><sub>/мес</sub></span>
+                                </div>
+                                <div class="view-the-apartment">
+                                    <a href="#"><img src="../../template/images/show.png" alt="show"></a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="our-application">
-            <div class="container-w">
-                <div class="app-store">
-                    <h5>Поиск удобнее в приложении</h5>
-                    <p>Доступно для любых операционных систем, скачивайте и пользуйтесь удобным приложением по подбору
-                        недвижемости прямо сейчас.</p>
-                    <a href="#">
-                        <img src="../../template/images/apple.png" alt="logo" id="decor-img">
-                        <span>Загрузите</span>
-                        <p class="decoration-text">App Store</p>
-                    </a>
-                    <a href="#">
-                        <img src="../../template/images/gp.png" alt="logo">
-                        <span>Загрузите</span>
-                        <p class="decoration-text">Google Play</p>
-                    </a>
+                <!-- Закончились все блоки -->
+                <div class="see-more">
+                    <p>Еще<span>23 423</span>объявления</p>
+                    <a href="#">Смотреть все</a>
                 </div>
             </div>
         </div>
-        <div class="our-work">
-            <div class="container-w-2">
-                <h2>Мы трудимся для Вас</h2>
-                <ul class="bxslider">
-                    <li>
-                        <img src="../../template/images/daniil.png"/>
-                        <div class="admins">
-                            <h6>Александр Никулин</h6>
-                            <span>Гениральный директор</span>
-                            <p>Наш сервис не просто воплощение стараний нашей команды, это сервис обеспечивающий
-                                комфортное
-                                приобретение или аренду жилья</p>
-                        </div>
-                    </li>
-                    <li>
-                        <img src="../../template/images/aleksandr.png"/>
-                        <div class="admins">
-                            <h6>Александр Никулин</h6>
-                            <span>Гениральный директор</span>
-                            <p>Наш сервис не просто воплощение стараний нашей команды, это сервис обеспечивающий
-                                комфортное
-                                приобретение или аренду жилья</p>
-                        </div>
-                    </li>
-                    <li>
-                        <img src="../../template/images/daniil.png"/>
-                        <div class="admins">
-                            <h6>Александр Никулин</h6>
-                            <span>Гениральный директор</span>
-                            <p>Наш сервис не просто воплощение стараний нашей команды, это сервис обеспечивающий
-                                комфортное
-                                приобретение или аренду жилья</p>
-                        </div>
-                    </li>
-                    <li>
-                        <img src="../../template/images/aleksandr.png"/>
-                        <div class="admins">
-                            <h6>Александр Никулин</h6>
-                            <span>Гениральный директор</span>
-                            <p>Наш сервис не просто воплощение стараний нашей команды, это сервис обеспечивающий
-                                комфортное
-                                приобретение или аренду жилья</p>
-                        </div>
-                    </li>
-                </ul>
+    </div>
+    <div class="our-application">
+        <div class="container-w">
+            <div class="app-store">
+                <h5>Поиск удобнее в приложении</h5>
+                <p>Доступно для любых операционных систем, скачивайте и пользуйтесь удобным приложением по подбору
+                    недвижемости прямо сейчас.</p>
+                <a href="#">
+                    <img src="../../template/images/apple.png" alt="logo" id="decor-img">
+                    <span>Загрузите</span>
+                    <p class="decoration-text">App Store</p>
+                </a>
+                <a href="#">
+                    <img src="../../template/images/gp.png" alt="logo">
+                    <span>Загрузите</span>
+                    <p class="decoration-text">Google Play</p>
+                </a>
             </div>
         </div>
-        <div class="official-partners">
-            <div class="partners">
-                <h2>Официальные партнеры</h2>
-                <ul class="bxslider-partners main-block-2">
-                    <li>
-                        <a href="#"><img src="../../template/images/sec-6-1.png" alt="partners"></a>
-                    </li>
-                    <li>
-                        <a href="#"><img src="../../template/images/sec-6-2.png" alt="partners"></a>
-                    </li>
-                    <li>
-                        <a href="#"><img src="../../template/images/sec-6-3.png" alt="partners"></a>
-                    </li>
-                    <li>
-                        <a href="#"><img src="../../template/images/sec-6-4.png" alt="partners"></a>
-                    </li>
-                    <li>
-                        <a href="#"><img src="../../template/images/sec-6-5.png" alt="partners"></a>
-                    </li>
-                </ul>
-            </div>
+    </div>
+    <div class="our-work">
+        <div class="container-w-2">
+            <h2>Мы трудимся для Вас</h2>
+            <ul class="bxslider">
+                <li>
+                    <img src="../../template/images/daniil.png"/>
+                    <div class="admins">
+                        <h6>Александр Никулин</h6>
+                        <span>Гениральный директор</span>
+                        <p>Наш сервис не просто воплощение стараний нашей команды, это сервис обеспечивающий
+                            комфортное
+                            приобретение или аренду жилья</p>
+                    </div>
+                </li>
+                <li>
+                    <img src="../../template/images/aleksandr.png"/>
+                    <div class="admins">
+                        <h6>Александр Никулин</h6>
+                        <span>Гениральный директор</span>
+                        <p>Наш сервис не просто воплощение стараний нашей команды, это сервис обеспечивающий
+                            комфортное
+                            приобретение или аренду жилья</p>
+                    </div>
+                </li>
+                <li>
+                    <img src="../../template/images/daniil.png"/>
+                    <div class="admins">
+                        <h6>Александр Никулин</h6>
+                        <span>Гениральный директор</span>
+                        <p>Наш сервис не просто воплощение стараний нашей команды, это сервис обеспечивающий
+                            комфортное
+                            приобретение или аренду жилья</p>
+                    </div>
+                </li>
+                <li>
+                    <img src="../../template/images/aleksandr.png"/>
+                    <div class="admins">
+                        <h6>Александр Никулин</h6>
+                        <span>Гениральный директор</span>
+                        <p>Наш сервис не просто воплощение стараний нашей команды, это сервис обеспечивающий
+                            комфортное
+                            приобретение или аренду жилья</p>
+                    </div>
+                </li>
+            </ul>
         </div>
-        <div class="footer">
-            <div class="container-w-2">
-                <div class="lant-io">
-                    <p>© 2016-2017 Lant.io</p>
-                    <p>ООО «ЛЭНТИО»</p>
-                </div>
-                <div class="policy">
-                    <p><a href="#">Техническая поддержка</a></p>
-                    <p><a href="#">Пользовательское соглашение</a></p>
-                    <p><a href="#">Политика конфиденциальности</a></p>
-                    <p><a href="#">Команда проекта</a></p>
-                </div>
-                <ul>
-                    <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i><span>Читай</span></a></li>
-                    <li><a href="#"><i class="fa fa-vk" aria-hidden="true"></i><span>Вступай</span></a></li>
-                    <li><a href="#"><i class="fa fa-youtube" aria-hidden="true"></i><span>Смотри</span></a></li>
-                    <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i><span>Подписывайся</span></a></li>
-                    <li><a href="#"><img src="../../template/images/work.png" alt="work"><span>У нас</span></a></li>
-                </ul>
+    </div>
+    <div class="official-partners">
+        <div class="partners">
+            <h2>Официальные партнеры</h2>
+            <ul class="bxslider-partners main-block-2">
+                <li>
+                    <a href="#"><img src="../../template/images/sec-6-1.png" alt="partners"></a>
+                </li>
+                <li>
+                    <a href="#"><img src="../../template/images/sec-6-2.png" alt="partners"></a>
+                </li>
+                <li>
+                    <a href="#"><img src="../../template/images/sec-6-3.png" alt="partners"></a>
+                </li>
+                <li>
+                    <a href="#"><img src="../../template/images/sec-6-4.png" alt="partners"></a>
+                </li>
+                <li>
+                    <a href="#"><img src="../../template/images/sec-6-5.png" alt="partners"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="container-w-2">
+            <div class="lant-io">
+                <p>© 2016-2017 Lant.io</p>
+                <p>ООО «ЛЭНТИО»</p>
             </div>
+            <div class="policy">
+                <p><a href="#">Техническая поддержка</a></p>
+                <p><a href="#">Пользовательское соглашение</a></p>
+                <p><a href="#">Политика конфиденциальности</a></p>
+                <p><a href="#">Команда проекта</a></p>
+            </div>
+            <ul>
+                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i><span>Читай</span></a></li>
+                <li><a href="#"><i class="fa fa-vk" aria-hidden="true"></i><span>Вступай</span></a></li>
+                <li><a href="#"><i class="fa fa-youtube" aria-hidden="true"></i><span>Смотри</span></a></li>
+                <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i><span>Подписывайся</span></a></li>
+                <li><a href="#"><img src="../../template/images/work.png" alt="work"><span>У нас</span></a></li>
+            </ul>
         </div>
     </div>
 </div>
