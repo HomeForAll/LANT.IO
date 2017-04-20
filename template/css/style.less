@@ -370,6 +370,7 @@
   left: 0;
   top: 0;
   right: 100px;
+  height: 400px;
   z-index: 60;
   bottom: 0;
   padding: 24px;
@@ -647,7 +648,7 @@
     cursor: pointer;
     text-align: center;
     padding: 0;
-    width: 85%;
+    width: 80%;
     min-width: 95px;
     margin: auto;
   }
@@ -720,7 +721,7 @@
     padding: 0 25px 0 0;
   }
   & .jq-selectbox {
-    width: 80%;
+    width: auto !important;
   }
   & .jq-selectbox__select {
     background: none;
@@ -929,10 +930,10 @@
     margin: auto;
   }
   li {
-    display: inline-block;
+    display: block;
     box-shadow: none;
     background: #f9f9f9;
-    width: 49%;
+    width: auto;
     padding: 10px;
     margin: auto;
   }
@@ -1069,9 +1070,8 @@
   }
 }
 
-#slider-range,
-#slider-range-buy,
-#main-slider {
+#slider-range, #slider-range-buy,
+#main-slider, #slider-range-search {
   margin-top: 15px;
   height: 8px;
   border-radius: 10px;
@@ -1202,16 +1202,6 @@
   }
 }
 
-.building-parameters {
-  display: none;
-  li {
-    vertical-align: top;
-    &:nth-child(1) {
-      background: #fff;
-    }
-  }
-}
-
 .vkl {
   display: inline-block;
   width: auto;
@@ -1222,11 +1212,20 @@
 .building-parameters-room,
 .building-parameters-office-area,
 .building-parameters-separate-building,
-.building-parameters-ozs-сomplex {
+.building-parameters-ozs-сomplex,
+.test-7,
+.test-8,
+.test-9,
+.test-10,
+.test-11,
+.test-12 {
   display: none;
+  position: relative;
   flex-flow: row wrap;
+  padding: 0 20px;
   justify-content: flex-start;
   li {
+    position: relative;
     vertical-align: top;
   }
   p {
@@ -1362,7 +1361,9 @@
 .apartment-settings-ozs-сomplex,
 .apartment-settings-office-area,
 .apartment-settings-room,
-.apartment-settings-home {
+.apartment-settings-home,
+.house-characteristics,
+.base-partition {
   position: absolute;
   display: none;
   width: 850px;
@@ -1751,13 +1752,13 @@
   }
 }
 
-.published-articles {
+.just-published {
   text-align: center;
   background: url('../../template/images/background-3.png') top center no-repeat;
   background-size: cover;
   padding-right: 8px;
   padding-bottom: 81px;
-   h2 {
+  h2 {
     text-align: left;
     color: #343434;
     font-size: 26px;
@@ -1852,6 +1853,7 @@
     content: 'Новое';
     display: block;
     position: absolute;
+    text-align: center;
     top: 14px;
     right: 23px;
     padding: 3px 1px;
@@ -2102,7 +2104,6 @@
 
 .appreciate-the-apartment {
   text-align: left;
-  overflow: hidden;
   border-radius: 8px;
   background: #fff;
   clear: both;
@@ -2116,6 +2117,7 @@
     width: 49%;
     text-align: left;
     padding: 7px 0;
+    margin: 7px auto;
   }
   i {
     vertical-align: middle;
@@ -2135,7 +2137,7 @@
     }
   }
   button {
-    padding: 25px 10px;
+    padding: 23px 10px;
     font-size: 15px;
     width: 150px;
     border: none;
@@ -2895,7 +2897,10 @@
     width: 150px;
   }
 }
-
+/** Яндекс карта внутри параметров **/
+.map {
+  text-align: center;
+}
 /** Яндекс карта **/
 #map {
   display: none;
@@ -2909,10 +2914,10 @@
     padding: 10px;
     text-align: left;
     border: 1px solid silver;
-    width: 80%;
+    width: 60%;
     top: 15px;
-    left: 10vw;
-    right: 10vw;
+    left: 20%;
+    right: 20%;
     z-index: 2;
     background: #fff;
     border-radius: 6px;
@@ -2937,7 +2942,13 @@
   .building-parameters-room,
   .building-parameters-office-area,
   .building-parameters-separate-building,
-  .building-parameters-ozs-сomplex {
+  .building-parameters-ozs-сomplex,
+  .test-7,
+  .test-8,
+  .test-9,
+  .test-10,
+  .test-11,
+  .test-12 {
     display: none;
     li {
       vertical-align: top;
@@ -2978,11 +2989,6 @@
       width: 65%;
     }
   }
-  .building-parameters-filter {
-    p {
-      width: 33%;
-    }
-  }
   .container-w-0 {
     width: auto;
     max-width: 1200px;
@@ -3019,7 +3025,7 @@
       cursor: pointer;
       text-align: center;
       padding: 0;
-      width: 85%;
+      width: 80%;
       min-width: 95px;
       margin: auto;
     }
@@ -3083,7 +3089,6 @@
     a {
       width: 235px;
       height: 60px;
-      height: auto;
       margin: auto 8px 5px 5px;
       padding: 8px 20px;
     }
@@ -3127,6 +3132,7 @@
     margin: auto;
     & li {
       margin: auto 5px;
+
       width: 80px;
     }
     & i {
@@ -3531,15 +3537,6 @@
     img {
       width: 25px;
       margin: 0;
-    }
-  }
-  .building-parameters {
-    display: none;
-    text-align: center;
-    margin-left: 0;
-    float: none;
-    & li {
-      width: 225px;
     }
   }
   .users-information {
@@ -4426,10 +4423,6 @@
       padding: 0;
     }
   }
-  .building-parameters {
-    margin-left: 0;
-    float: none;
-  }
   .number-apartments {
     display: block;
     padding: 10px 0 0;
@@ -4717,16 +4710,17 @@
 
 /** Прогресс бар **/
 .progress-bar {
-  position: relative;
-  display: inline-block;
+  position: absolute;
+  display: block;
+  bottom: 15px;
+  right: 20px;
   background-color: #f6f6f6;
   padding: 0;
-  width: 90px;
-  margin: 5px 0;
+  width: 110px;
   font-size: 5px;
   border-radius: 5px;
   z-index: 3;
-  box-shadow: inset 0 0 1px 0 #e2e2e2;      
+  box-shadow: inset 0 0 1px 0 #e2e2e2;
   & span {
     display: inline-block;
     font-size: 10px;

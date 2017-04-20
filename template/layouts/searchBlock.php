@@ -13,7 +13,9 @@
 <?php if (isset($_SESSION['authorized'])) { ?>
     <div id="navigation">
         <div class="background-image">
-            <div class="logo-img"><a href="#"><img src="../../template/images/logo.png" alt="logo"></a></div>
+            <div class="logo-img">
+                <a href="#"><img src="../../template/images/logo.png" alt="logo"></a>
+            </div>
             <div class="registration-users">
                 <div class="place-an-ad">
                     <a href="../../index.php"><img src="../../template/images/add-blue.png" alt="add">Дать
@@ -46,7 +48,7 @@
         <div id="navigation-true">
             <div class="container-w-0">
                 <div class="logo-img">
-                    <a href="web_build.php"><img src="../../template/images/logo-true.png" alt=" logo-true"></a>
+                    <a href="#"><img src="../../template/images/logo-true.png" alt=" logo-true"></a>
                 </div>
                 <div class="registration-users">
                     <div class="place-an-ad">
@@ -599,63 +601,74 @@
                             точный адрес<span><img src="../../template/images/location.png" alt="location">выделить область на карте</span>
                         </h5>
                         <ul class="quick-search-by-parameters">
-                            <li><label>Область
-                                    <input name="" type="text" placeholder="Московская">
-                                </label></li>
-                            <li><label>Город
-                                    <input name="" type="text" placeholder="Москва">
-                                </label></li>
                             <li>
-                                <div class="select">
-                                    <label for="">Округ
+                                <div class="select">Область
+                                    <label for="">
+                                        <input name="" type="text" placeholder="Московская">
+                                    </label>
+                                </div>
+                            <li>
+                                <div class="select">Город
+                                    <label for="">
+                                        <input name="" type="text" placeholder="Москва">
+                                    </label>
+                                </div>
+                            <li>
+                                <div class="select">Округ
+                                    <label for="">
                                         <select>
-                                            <option>Language of communication</option>
-                                            <option>English</option>
-                                            <option>Spanish</option>
+                                            <option>Северо-западный</option>
+                                            <option>Северо-западный</option>
+                                            <option>Северо-западный</option>
                                         </select>
                                     </label>
                                 </div>
                             </li>
                             <li>
-                                <div class="select">
-                                    <label for="">Район
+                                <div class="select">Район
+                                    <label for="">
                                         <select>
-                                            <option>Language of communication</option>
-                                            <option>English</option>
-                                            <option>Spanish</option>
+                                            <option>Северное медведково</option>
+                                            <option>Северное медведково</option>
+                                            <option>Северное медведково</option>
                                         </select>
                                     </label>
                                 </div>
                             </li>
                             <li>
-                                <div class="select">
-                                    <label for="">Улица
+                                <div class="select">Улица
+                                    <label for="">
                                         <select>
-                                            <option>Енивмасейская</option>
-                                            <option>Енивмасейская</option>
-                                            <option>Енивмасейская</option>
-                                        </select>
-                                    </label>
-                                </div>
-                            </li>
-                            <li><label>Дом<input name="" type="text" placeholder="16" maxlength="4"
-                                                 pattern="[0-9]{4}"></label></li>
-                            <li>
-                                <div class="select">
-                                    <label for="">Метро
-                                        <select>
-                                            <option>Выбрано 1</option>
-                                            <option>Выбрано 2</option>
-                                            <option>Выбрано 3</option>
-                                            <option>Выбрано 4</option>
-                                            <option>Выбрано 5</option>
+                                            <option>Ениивмасейская</option>
+                                            <option>Ениивмасейская</option>
+                                            <option>Ениивмасейская</option>
                                         </select>
                                     </label>
                                 </div>
                             </li>
                             <li>
-                                <div class="select">
-                                    <label for="">Удаленность от метро небеолее
+                                <div class="select">Дом
+                                    <label for="">
+                                        <input name="" type="text" placeholder="16" maxlength="4"
+                                               pattern="[0-9]{4}">
+                                    </label>
+                                </div>
+                            <li>
+                                <div class="select">Метро
+                                    <label for="">
+                                        <select>
+                                            <option>Выбрано1</option>
+                                            <option>Выбрано2</option>
+                                            <option>Выбрано3</option>
+                                            <option>Выбрано4</option>
+                                            <option>Выбрано5</option>
+                                        </select>
+                                    </label>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="select">Удаленность от метро не более
+                                    <label for="">
                                         <select>
                                             <option>5 мин пешком</option>
                                             <option>10 мин пешком</option>
@@ -673,13 +686,13 @@
                 <button>Найти</button>
                 <ul class="filter-block-big-menu">
                     <li onclick="allParam('bigOption')" class="menu-left-window">
-                        <label for="#amount"><img src="../../template/images/s3.png" alt="price"> Цена</label>
+                        <label for="#amountSearch"><img src="../../template/images/s3.png" alt="price"> Цена</label>
                         <div class="showBigOptions">
-                            <p>От<input name="" placeholder="" type="text" id="amountBefore" readonly disabled>
+                            <p>От<input name="" placeholder="" type="text" id="amountBeforeSearch" readonly disabled>
                             </p>
-                            <p>До<input name="" placeholder="" type="text" id="amountAfter" readonly disabled>
+                            <p>До<input name="" placeholder="" type="text" id="amountAfterSearch" readonly disabled>
                             </p>
-                            <div id="slider-range"></div>
+                            <div id="slider-range-search"></div>
                             <div class="currency">
                                 <p>Валюта</p>
                                 <button class="closeCurrency"><i class="fa fa-rub" aria-hidden="true"></i>рубли</button>

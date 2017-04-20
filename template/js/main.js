@@ -43,7 +43,7 @@ $(document).ready(function(){
         infiniteLoop: true
     });
     $('.apartments-wallpapers').bxSlider({
-        slideWidth: 74,
+        slideWidth: 70,
         minSlides: 1,
         maxSlides: 5,
         moveSlides: 3,
@@ -178,6 +178,15 @@ function allParam(filterParam) {
                 $apartmentSettings.fadeOut('slow');
             });
             break;
+        case 'houseCharacteristics':
+            var $houseCharacteristics = $('.house-characteristics');
+            $houseCharacteristics.css({'display': 'block'});
+
+            $('.closeHouseCharacteristics').on('click', function (e) {
+                e.preventDefault();
+                $houseCharacteristics.fadeOut('slow');
+            });
+            break;
         case 'apperanceOfTheApartment':
             var $apartmentApartment = $('.appearance-of-the-apartment');
             $apartmentApartment.css({'display': 'block'});
@@ -206,12 +215,16 @@ function allParam(filterParam) {
             });
             break;
         case 'bigOption':
-            var $bigOption = $('.showBigOptions');
+            var $bigOption = $('.showBigOptions'),
+                qa = $('.decorativeShadowBlock');
             $bigOption.css({'display': 'block'});
+            qa.css({'display':'block'});
 
             $('.closeCurrency').on('click', function (e) {
                 e.preventDefault();
-                $bigOption.fadeOut('slow');
+                $bigOption.fadeOut('slow', function () {
+                    qa.css({'display':'none'});
+                });
             });
             break;
         case 'map':
@@ -252,9 +265,10 @@ function allParam(filterParam) {
 
 function allFilterBlocks(filters) {
 
-    $('.advanced-search-options').find('.building-parameters, .building-parameters-apartment,' +
+    $('.advanced-search-options').find('.building-parameters-apartment,' +
         ' .building-parameters-home, .building-parameters-room, .building-parameters-office-area,' +
-        '.building-parameters-separate-building, .building-parameters-ozs-сomplex').css({'display': 'none'});
+        '.building-parameters-separate-building, .building-parameters-ozs-сomplex,' +
+        '.test-7, .test-8, .test-9, .test-10, .test-11, .test-12').css({'display': 'none'});
 
     switch (filters) {
         case 'searchMetroMainBlock':
@@ -293,6 +307,24 @@ function allFilterBlocks(filters) {
         case '6':
             $('.building-parameters-ozs-сomplex').css({'display': 'flex'});
             break;
+        case '7':
+            $('.test-7').css({'display': 'flex'});
+            break;
+        case '8':
+            $('.test-8').css({'display': 'flex'});
+            break;
+        case '9':
+            $('.test-9').css({'display': 'flex'});
+            break;
+        case '10':
+            $('.test-10').css({'display': 'flex'});
+            break;
+        case '11':
+            $('.test-11').css({'display': 'flex'});
+            break;
+        case '12':
+            $('.test-12').css({'display': 'flex'});
+            break;
         default: console.log('Фильтр не настроен');
     }
     blockFilterAndShadow.fadeOut('slow');
@@ -302,7 +334,6 @@ function allFilterBlocks(filters) {
 /** Указатели в теге select **/
 $('.select').on('click', function () {
     var pointer = $('.jq-selectbox__trigger-arrow');
-    console.log('работает');
 
     pointer.css({
         'background': 'url("../../template/images/pointer_top.png") center right 5px no-repeat',
@@ -352,31 +383,33 @@ $("#form").on('submit', function(e) { // устанавливаем событи
         url: "/search",
         data: form_data,
         success: function(form_data) {
+            window.location.href = '/template/layouts/searchBlock.php';
             console.log('Собрынные данные - ', form_data);
         },
-        error: function(form_data) {
-            console.log('Ошибка отправки', form_data);
+        error: function() {
+            console.log('Ошибка отправки');
         }
     });
 });
 //---------------------------------------------------------
 
 /** Фильтр - Цена **/
+// ошибки в - value
  $(function () {
     var $amountBefore = $('#amountBefore'),
         $amountAfter = $('#amountAfter'),
         $amountBeforeBuy = $('#amountBeforeBuy'),
         $amountAfterBuy = $('#amountAfterBuy'),
         $mainAmountBefore = $('#mainAmountBefore'),
-        $mainAmountAfter = $('#mainAmountAfter');
+        $mainAmountAfter = $('#mainAmountAfter'),
+        $amountBeforeSearch = $('#amountBeforeSearch'),
+        $amountAfterSearch = $('#amountAfterSearch');
 
     /** Фильтры в доп.параметрах **/
-    $amountBefore.val('20000');
-    $amountAfter.val('20000');
-    $amountBeforeBuy.val('20000');
-    $amountAfterBuy.val('20000');
-     $mainAmountBefore.val('20000');
-     $mainAmountAfter.val('20000');
+    $amountBefore.val('20000');$amountAfter.val('20000');
+    $amountBeforeBuy.val('20000');$amountAfterBuy.val('20000');
+     $mainAmountBefore.val('20000');$mainAmountAfter.val('20000');
+     $amountBeforeSearch.val('20000');$amountAfterSearch.val('20000');
     $("#slider-range").slider({
         range: true,
         min: 20000,
@@ -397,7 +430,7 @@ $("#form").on('submit', function(e) { // устанавливаем событи
             $amountAfterBuy.val(ui.values[1]);
         }
     });
-     $("#main-slider").slider({
+    $("#main-slider").slider({
          range: true,
          min: 20000,
          max: 20000000,
@@ -407,9 +440,20 @@ $("#form").on('submit', function(e) { // устанавливаем событи
              $mainAmountAfter.val(ui.values[1]);
          }
      });
+    $("#slider-range-search").slider({
+        range: true,
+        min: 20000,
+        max: 20000000,
+        values: [75, 300],
+        slide: function (event, ui) {
+            $amountBeforeSearch.val(ui.values[0]);
+            $amountAfterSearch.val(ui.values[1]);
+        }
+    });
     $('#amount').val($amountBefore.slider('values', 0) + $amountAfter.slider('values', 1));
     $('#amount-buy').val($amountBeforeBuy.slider('values', 0) + $amountAfterBuy.slider('values', 1));
     $('#mainAmount').val($mainAmountBefore.slider('values', 0) + $mainAmountAfter.slider('values', 1));
+    $('#amountSearch').val($amountBeforeSearch.slider('values', 0) + $amountAfterSearch.slider('values', 1));
 });
 //---------------------------------------------------------
 
@@ -544,3 +588,15 @@ function yandexMap() {
         window.suggests = new ymaps.SuggestView("address", {width: 300, offset: [0, 4], results: 20});
     });
 }
+
+/** Яндекс карты внутри параметров **/
+
+ymaps.ready(function () {
+    var map = new ymaps.Map("ymap", {
+        center: [55.451332, 37.369336],
+        zoom: 10,
+        controls: ['fullscreenControl', 'typeSelector', 'geolocationControl', 'zoomControl']
+    });
+
+    window.suggests = new ymaps.SuggestView("suggest", {width: 300, offset: [0, 4], results: 20});
+});
