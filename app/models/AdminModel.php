@@ -6,7 +6,6 @@ class AdminModel extends Model
 
     public function __construct()
     {
-        parent::__construct();
         $this->db = new DataBase();
     }
 
@@ -34,7 +33,6 @@ class AdminModel extends Model
             } else {
                 return $r;
             }
-
             return $r;
         }
 
@@ -465,12 +463,26 @@ class AdminModel extends Model
             'resedential' => 'integer',
             'elevator' => 'smallint',
             'elevator_yes' => 'smallint',
-            'bathroom_description' =>  'character varying(255)',
+            'bathroom_available' => 'boolean',
+            'bathroom_description' => 'character varying(255)',
             'bathroom_location' => 'smallint',
             'bathroom_number' => 'integer',
             'possible_to_post' => 'boolean',
             'sanitation_description' => 'character varying(255)',
-            'documents_on_tenure' =>  'character varying(255)',
+            'documents_on_tenure' => 'character varying(255)',
+            'alcove' => 'boolean',
+            'barn' => 'boolean',
+            'bath' => 'boolean',
+            'forest_trees' => 'boolean',
+            'garden_trees' => 'boolean',
+            'guest_house' => 'boolean',
+            'lodge' => 'boolean',
+            'playground' => 'boolean',
+            'river' => 'boolean',
+            'spring' => 'boolean',
+            'swimming_pool' => 'boolean',
+            'waterfront' => 'boolean',
+            'wine_vault' => 'boolean',
 
 
         );
@@ -1212,17 +1224,17 @@ class AdminModel extends Model
                 $lines[$key] = $this->cutLine($lines[$key], $start, $end);
 
                 //Замена некоторых полей checkbox -> text
-                $checkbox_to_text = ['bathroom_description', 'sanitation_description', 'cadastral_number' ];
+                $checkbox_to_text = ['bathroom_description', 'sanitation_description', 'cadastral_number'];
 
                 if (preg_match("/type=\"checkbox\"/", $lines[$key])) {
                     // Имя
                     $name = $this->getNameFromLine($lines[$key]);
-                    if(in_array($name, $checkbox_to_text)){
+                    if (in_array($name, $checkbox_to_text)) {
                         $start_pos = strpos($lines[$key], 'type="');
                         $end_pos = strpos($lines[$key], '"', ($start_pos + strlen('type="'))) + 1;
                         $line_before = substr($lines[$key], 0, $start_pos);
                         $line_after = substr($lines[$key], $end_pos);
-                        $lines[$key] = $line_before .'type="text"' .$line_after;
+                        $lines[$key] = $line_before . 'type="text"' . $line_after;
                     }
 
                 }
@@ -1235,8 +1247,8 @@ class AdminModel extends Model
 
         }
 //Удаление двойных строк
-        foreach ($result['form'] as $k => $v){
-            if ($k>1) {
+        foreach ($result['form'] as $k => $v) {
+            if ($k > 1) {
                 if ($result['form'][$k] == $result['form'][($k - 1)]) {
                     unset($result['form'][($k - 1)]);
                 }
@@ -1268,19 +1280,19 @@ class AdminModel extends Model
             $line_before = substr($line, 0, $insert_pos);
             $line_after = substr($line, $insert_pos);
             //Вставка отрезка
-            return $line_before .' '.$insert_line.' '. $line_after;
+            return $line_before . ' ' . $insert_line . ' ' . $line_after;
         } else return $line;
     }
 
     public function getNameFromLine($line)
     {
         //имя
-      if(preg_match('/name="\w*.\w*"/', $line, $matches)) {
-          $name = substr($matches[0], 6, -1);
-          return $name;
-      } else {
-          return FALSE;
-      }
+        if (preg_match('/name="\w*.\w*"/', $line, $matches)) {
+            $name = substr($matches[0], 6, -1);
+            return $name;
+        } else {
+            return FALSE;
+        }
 
     }
 
@@ -1296,46 +1308,46 @@ class AdminModel extends Model
         if (file_exists($file_name)) {
             $lines = file($file_name);
 
-        foreach ($lines as $key => $line) {
-            //news_editor.php функции
-            //inputToInput
-            //inputToCheckbox
-            //inputToSelect
+            foreach ($lines as $key => $line) {
+                //news_editor.php функции
+                //inputToInput
+                //inputToCheckbox
+                //inputToSelect
 
-            // отсутствует inputToRadio
-            // отсутствует addClassCheckbox
-            // отсутствует inputOtherSelect
-            // отсутствует addClassOtherInput
+                // отсутствует inputToRadio
+                // отсутствует addClassCheckbox
+                // отсутствует inputOtherSelect
+                // отсутствует addClassOtherInput
 
-            //inputToInput
-            if (preg_match("/input/", $line) && preg_match("/type=\"text\"/", $line)) {
-            $name = $this->getNameFromLine($line);
-            $insert_line = '<?php inputToInput("'.$name.'"); ?>';
-            $lines[$key] = $this->insertLineAfterName($line, $insert_line);
-            }
+                //inputToInput
+                if (preg_match("/input/", $line) && preg_match("/type=\"text\"/", $line)) {
+                    $name = $this->getNameFromLine($line);
+                    $insert_line = '<?php inputToInput("' . $name . '"); ?>';
+                    $lines[$key] = $this->insertLineAfterName($line, $insert_line);
+                }
 
-            //inputToCheckbox
-            if (preg_match("/input/", $line) && preg_match("/type=\"checkbox\"/", $line)) {
-                $name = $this->getNameFromLine($line);
-                $insert_line = '<?php inputToCheckbox("'.$name.'"); ?>';
-                $lines[$key] = $this->insertLineAfterName($line, $insert_line);
+                //inputToCheckbox
+                if (preg_match("/input/", $line) && preg_match("/type=\"checkbox\"/", $line)) {
+                    $name = $this->getNameFromLine($line);
+                    $insert_line = '<?php inputToCheckbox("' . $name . '"); ?>';
+                    $lines[$key] = $this->insertLineAfterName($line, $insert_line);
 
-                //перед импутом вставляем спрятаный импут пустого значения
-                $insert_line = " <input type=\"hidden\" name=\"".$name."\" value=\"\"> ";
-                //позиция начала имени
-                $insert_pos = strpos($lines[$key], '<input ');
-                //части перед и после вставки
-                $line_before = substr($lines[$key], 0, $insert_pos);
-                $line_after = substr($lines[$key], $insert_pos);
-                //Вставка отрезка
-                $lines[$key] = $line_before .' '.$insert_line.' '. $line_after;
-            }
+                    //перед импутом вставляем спрятаный импут пустого значения
+                    $insert_line = " <input type=\"hidden\" name=\"" . $name . "\" value=\"\"> ";
+                    //позиция начала имени
+                    $insert_pos = strpos($lines[$key], '<input ');
+                    //части перед и после вставки
+                    $line_before = substr($lines[$key], 0, $insert_pos);
+                    $line_after = substr($lines[$key], $insert_pos);
+                    //Вставка отрезка
+                    $lines[$key] = $line_before . ' ' . $insert_line . ' ' . $line_after;
+                }
 
-            //inputToSelect
-            if (preg_match("/option/", $line) && preg_match("/value/", $line)) {
-            // Имя опции
-                preg_match('/value="\w*.\w*"/', $line, $matches);
-                $option_name = substr($matches[0], 7, -1);
+                //inputToSelect
+                if (preg_match("/option/", $line) && preg_match("/value/", $line)) {
+                    // Имя опции
+                    preg_match('/value="\w*.\w*"/', $line, $matches);
+                    $option_name = substr($matches[0], 7, -1);
                     //Имя селекта
                     for ($i = $key; $i > 0; $i--) {
                         if ($select_name = $this->getNameFromLine($lines[$i])) {
@@ -1346,11 +1358,10 @@ class AdminModel extends Model
                     $lines[$key] = $this->insertLineAfterName($line, $insert_line, "value=\"");
 
 
+                }
+
+
             }
-
-
-
-        }
             //Вставка первой опции "---"
 
             do {
@@ -1376,67 +1387,68 @@ class AdminModel extends Model
                     // Имя опции
                     preg_match('/value="\w*.\w*"/', $line, $matches);
                     $option_name = substr($matches[0], 7, -1);
-                    if($option_name == 41) {
+                    if ($option_name == 41) {
                         unset($lines[$key]);
                     }
                 }
             }
 
-    }
-    return $lines;
+        }
+        return $lines;
     }
 
 
-    public function elementsEngRus($news_db){
+    public function elementsEngRus($news_db)
+    {
         $news_en_ru = [];
         $form_en_ru = [];
         // Дополнительные параметры
         $dop_en_ru = [
-  'id_news' => 'Индекс объявления',
-  'form_name' => 'Имя формы',
-  'space_type' => 'Тип площади',
-  'operation_type' => 'Операция',
-  'object_type' => 'Тип объекта',
-  'category' => 'Категория',
-  'status' => 'Статус',
-  'user_id' => 'ID пользователя',
-  'title' => 'Название новости',
-  'date' => 'Дата',
-  'content' => 'Контент',
-  'photo_available' => 'Наличие фотографий',
-  'tags' => 'Тег',
-  'country' => 'Страна',
-  'area' => 'Область',
-  'city' => 'Город',
-  'region' => 'Регион',
-  'address' => 'Адрес',
-  'gas' => 'Газ',
-  'heating' => 'Отопление',
-  'water_pipes' => 'Водопровод',
-  'elevator_passangers' => 'Пассажирский лифт',
-  'elevator_cargo' => 'Грузовой лифт',
-  'bathroom' => 'Ванная',
-  'dining_room' => 'Столовая',
-  'study' => 'Рабочий кабинет',
-  'playroom' => 'Детская',
-  'hallway' => 'Прихожая',
-  'living_room' => 'Гостиная',
-  'kitchen' => 'Кухня',
-  'bedroom' => 'Спальня',
-  'signaling' => 'Сигнализация',
-  'cctv' => 'Видеонаблюдение',
-  'intercom' => 'Домофон',
-  'concierge' => 'Консьерж',
-  'common' => 'Общая',
-  'resedential' => 'Жилая',
-  'elevator' => 'Наличие лифта',
-  'elevator_yes' => 'Лифт',
-  'bathroom_description' => 'Описание санузлов',
-  'bathroom_location' => 'Расположение санузлов',
-  'bathroom_number' => 'Количество санузлов',
-  'possible_to_post' => 'Возможность проводки',
-  'sanitation_description' => 'Описание',
-  'documents_on_tenure' => 'Документы на право владения',
+            'id_news' => 'Индекс объявления',
+            'form_name' => 'Имя формы',
+            'space_type' => 'Тип площади',
+            'operation_type' => 'Операция',
+            'object_type' => 'Тип объекта',
+            'category' => 'Категория',
+            'status' => 'Статус',
+            'user_id' => 'ID пользователя',
+            'title' => 'Название новости',
+            'date' => 'Дата',
+            'content' => 'Контент',
+            'photo_available' => 'Наличие фотографий',
+            'tags' => 'Тег',
+            'country' => 'Страна',
+            'area' => 'Область',
+            'city' => 'Город',
+            'region' => 'Регион',
+            'address' => 'Адрес',
+            'gas' => 'Газ',
+            'heating' => 'Отопление',
+            'water_pipes' => 'Водопровод',
+            'elevator_passangers' => 'Пассажирский лифт',
+            'elevator_cargo' => 'Грузовой лифт',
+            'bathroom' => 'Ванная',
+            'dining_room' => 'Столовая',
+            'study' => 'Рабочий кабинет',
+            'playroom' => 'Детская',
+            'hallway' => 'Прихожая',
+            'living_room' => 'Гостиная',
+            'kitchen' => 'Кухня',
+            'bedroom' => 'Спальня',
+            'signaling' => 'Сигнализация',
+            'cctv' => 'Видеонаблюдение',
+            'intercom' => 'Домофон',
+            'concierge' => 'Консьерж',
+            'common' => 'Общая',
+            'resedential' => 'Жилая',
+            'elevator' => 'Наличие лифта',
+            'elevator_yes' => 'Лифт',
+            'bathroom_description' => 'Описание санузлов',
+            'bathroom_location' => 'Расположение санузлов',
+            'bathroom_number' => 'Количество санузлов',
+            'possible_to_post' => 'Возможность проводки',
+            'sanitation_description' => 'Описание',
+            'documents_on_tenure' => 'Документы на право владения',
         ];
         // Удалить
         $delete_en_ru = ['preview_img'];
@@ -1445,23 +1457,23 @@ class AdminModel extends Model
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
         $stmt_result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        foreach($stmt_result as $k => $v){
+        foreach ($stmt_result as $k => $v) {
             $form_en_ru[$v['e_name']] = $v['r_name'];
         }
         // Список переменных из базы данных news_base
-        foreach ($news_db as $k => $v){
-            if(isset($form_en_ru[$k])){
-                $news_en_ru['element'][$k] =  $form_en_ru[$k];
-            }elseif(in_array($k, $delete_en_ru)){
-            }else {
+        foreach ($news_db as $k => $v) {
+            if (isset($form_en_ru[$k])) {
+                $news_en_ru['element'][$k] = $form_en_ru[$k];
+            } elseif (in_array($k, $delete_en_ru)) {
+            } else {
                 $news_en_ru['element'][$k] = '!!!';
             }
 
         }
 // Ввод дополнительных параметров
-foreach ($dop_en_ru as $e => $r){
-    $news_en_ru['element'][$e] = $r;
-}
+        foreach ($dop_en_ru as $e => $r) {
+            $news_en_ru['element'][$e] = $r;
+        }
 
 //Опции
 
@@ -1470,14 +1482,12 @@ foreach ($dop_en_ru as $e => $r){
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
         $stmt_result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        foreach($stmt_result as $k => $v){
+        foreach ($stmt_result as $k => $v) {
             $news_en_ru['options'][$v['value']] = $v['r_name'];
         }
-asort($news_en_ru['options']);
+        asort($news_en_ru['options']);
         return $news_en_ru;
     }
-
-
 
 
 }

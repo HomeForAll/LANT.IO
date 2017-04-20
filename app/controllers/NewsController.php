@@ -21,6 +21,7 @@ class NewsController extends Controller
 
         $data = $this->model->getNewsList($params);
         $data['last_viewed_news'] = $this->model->getLastViewedNews();
+        $data['last_news'] = $this->model->getRecentNewsList(24);
 
         $this->view->render('news_list', $data);
     }
@@ -114,8 +115,7 @@ class NewsController extends Controller
             }
 
             //Проверка на владельца новости и уровня доступа к редактированию
-           //!($access['news_admin'])
-            if (  ($news_to_edit["user_id"] != $_SESSION['userID'])) {
+            if (!$access['news_admin'] && ($news_to_edit["user_id"] != $_SESSION['userID'])) {
                 $this->view->render('no_access');
                 return;
             }

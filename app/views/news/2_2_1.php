@@ -6,36 +6,122 @@
     <label for="price">Стоимость:</label><br>
     <input id="price" name="price" <?php inputToInput("price"); ?> type="text"><br>
     <b>Расположение</b><br>
-    <input type="text" name="address" <?php inputToInput("address"); ?> id="suggest"><br>
-    <span>Страна: </span><br>
-    <span>Область: </span><br>
-    <span>Город: </span><br>
-    <span>Район: </span><br>
-    <span>Дом: </span><br>
-<!--    <input type="hidden" name="country" value="">-->
-<!--    <input type="hidden" name="area" value="">-->
-<!--    <input type="hidden" name="city" value="">-->
-<!--    <input type="hidden" name="region" value="">-->
-<!--    <input type="hidden" name="street" value="">-->
-    <div id="ymap" style="margin: 0 auto; width: 700px; height: 700px; background: #000;"></div>
- <script src="https://api-maps.yandex.ru/1.1/index.xml?modules=metro" type="text/javascript"></script>
+    <label for="suggest">Полный адрес
+        <input type="text" name="address" style=" width: 600px;" <?php inputToInput("address"); ?> id="suggest"
+               placeholder="Полный адрес"><br>
+    </label>
+    <label for="country">Страна
+        <input type="text" name="country" id="country" class="address" placeholder="Страна"><br>
+    </label>
+    <label for="area">Область
+        <input type="text" name="area" id="area" class="address" placeholder="Область"><br>
+    </label>
+    <label for="city">Город
+        <input type="text" name="city" id="city" class="address" placeholder="Город"><br>
+    </label>
+    <label for="street">Улица
+        <input type="text" name="street" id="street" class="address" placeholder="Улица"><br>
+    </label>
+    <label for="house">Дом
+        <input type="text" name="house" id="house" class="address" placeholder="Дом"><br>
+    </label>
+    <div id="ymap" style="margin: 0 auto; width: 400px; height: 400px; background: #000;"></div>
 
     <script>
-        ymaps.ready(function () {
-            var map = new ymaps.Map("ymap", {
-                center: [55.451332, 37.369336],
-                zoom: 10,
-                controls: ['fullscreenControl', 'typeSelector', 'geolocationControl', 'zoomControl']
+        ymaps.ready(init);
+
+        function init() {
+            var map = new ymaps.Map('ymap', {
+                center: [55.753994, 37.622093],
+                zoom: 9
             });
 
-            window.suggests = new ymaps.SuggestView("suggest", {width: 300, offset: [0, 4], results: 20});
+            // Поле подсказки
+            suggestView = new ymaps.SuggestView("suggest", {width: 300, offset: [0, 4], results: 20});
 
-            var gp = new YMaps.GeoPoint(55.451332, 37.369336);
-            var metro = YMaps.Metro.Closest(gp);
-            ymap.addOverlay(metro);
-//            alert(metro.text);
-        });
+            // Определение адреса при выборе подсказки и вывод метки.
+            suggestView.state.events.add('change', function () {
+                var activeIndex = suggestView.state.get('activeIndex');
+                if (typeof activeIndex == 'number') {
+                    activeItem = suggestView.state.get('items')[activeIndex];
+                    if (activeItem && activeItem.value != address) {
+                        var address = activeItem.value;
+                        setMark(address);
+                    }
+                }
+            });
+
+            // Определение координат клика по карте.
+            map.events.add('click', function (e) {
+                var coords = e.get('coords');
+                getAddress(coords);
+            });
+
+            // Определяем адрес по координатам (обратное геокодирование) и вывод метки.
+            function getAddress(coords) {
+                ymaps.geocode(coords).then(function (res) {
+                    var firstGeoObject = res.geoObjects.get(0);
+                    var address = firstGeoObject.properties.get('text');
+                    $('#suggest').val(address);
+                    setMark(address);
+                });
+            };
+
+            //Вывод метки при вводе в поле suggest вручную
+            $('#suggest').change(function(){
+                var address = $(this).val();
+                setMark(address);
+            });
+
+            // Метка на карте и запись данных метки в поля адреса
+            function setMark(address) {
+                // Поиск координат
+                ymaps.geocode(address, {
+                    results: 1
+                }).then(function (res) {
+                    // Выбираем первый результат геокодирования.
+                    var firstGeoObject = res.geoObjects.get(0),
+                        // Координаты геообъекта.
+                        coords = firstGeoObject.geometry.getCoordinates(),
+                        // Область видимости геообъекта.
+                        bounds = firstGeoObject.properties.get('boundedBy');
+                    map.geoObjects.removeAll();
+                    // Добавляем первый найденный геообъект на карту.
+                    map.geoObjects.add(firstGeoObject);
+                    // Масштабируем карту на область видимости геообъекта.
+                    map.setBounds(bounds, {
+                        // Проверяем наличие тайлов на данном масштабе.
+                        checkZoomRange: true
+                    });
+                    //Метаданные геокодера Address.Components -> Запись в поля адреса
+                    addr = firstGeoObject.properties.get('metaDataProperty.GeocoderMetaData.Address.Components');
+                    $.each(addr, function (i, obj) {
+                        switch (obj.kind) {
+                            case 'country':
+                                $('#country').val(obj.name);
+                                break;
+                            case 'province':
+                                $('#area').val(obj.name);
+                                break;
+                            case 'locality':
+                                $('#city').val(obj.name);
+                                break;
+                            case 'street':
+                                $('#street').val(obj.name);
+                                break;
+                            case 'district':
+                                $('#street').val(obj.name);
+                                break;
+                            case 'house':
+                                $('#house').val(obj.name);
+                                break;
+                        }
+                    });
+                });
+            };
+        };
     </script>
+
     <div class="indent">
         <label for="rentApartSpanCountry">Страна:</label> <span id="rentApartSpanCountry"></span>
         <br>
