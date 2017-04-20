@@ -1,3 +1,8 @@
+<?php
+$siteModel = Registry::model('site');
+?>
+
+
 <!doctype html>
 <html lang="ru">
 <head>
@@ -5690,18 +5695,18 @@
     <div class="published-articles">
         <div class="visitor-statistics">
             <div class="container-w-2">
-                <p>Сегодня вы и еще<span>143 645</span>человек сейчас с нами, а так же:</p>
+                <p>Сегодня вы и еще<span><?php echo $siteModel->getRegisteredUsers(); ?></span>человек сейчас с нами, а так же:</p>
                 <ul>
-                    <li><img src="../../template/images/sec-4-1.png" alt="icon">645 644
+                    <li><img src="../../template/images/sec-4-1.png" alt="icon"><?php echo $siteModel->getUniquePeopleThisDay(); ?>
                         <p>Людей зашло сегодня</p>
                     </li>
-                    <li><img src="../../template/images/sec-4-2.png" alt="icon">23 635 773
+                    <li><img src="../../template/images/sec-4-2.png" alt="icon"><?php echo $siteModel->getNumberOfAds(); ?>
                         <p>объявлений выложено</p>
                     </li>
                     <li><img src="../../template/images/sec-4-3.png" alt="icon">11 345
                         <p>объявлений в вашем городе</p>
                     </li>
-                    <li><img src="../../template/images/sec-4-4.png" alt="icon">342 244
+                    <li><img src="../../template/images/sec-4-4.png" alt="icon"><?php echo $siteModel->getActiveDialogs(); ?>
                         <p>активных сделак сейчас</p>
                     </li>
                 </ul>
@@ -5958,7 +5963,7 @@
                     </div>
                     <!-- Закончились все блоки -->
                     <div class="see-more">
-                        <p>Еще<span>23 423</span>объявления</p>
+                        <p>Еще<span><?php echo $siteModel->getNumberOfAds(); ?></span>объявления</p>
                         <a href="#">Смотреть все</a>
                     </div>
                 </div>

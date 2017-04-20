@@ -27,7 +27,9 @@ class Registry
         $name = ucfirst($name);
         
         if (!isset(self::$models[$name]) || empty(self::$models[$name])) {
-            self::$models[$name] = new $name . 'Model';
+            $model = $name . 'Model';
+
+            self::$models[$name] = new $model;
             return self::$models[$name];
         } else {
             return self::$models[$name];
