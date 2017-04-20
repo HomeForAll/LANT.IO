@@ -5,7 +5,6 @@ class NewsModel extends Model
 {
     public function __construct()
     {
-        parent::__construct();
         $this->db = new DataBase;
     }
 
@@ -385,8 +384,11 @@ class NewsModel extends Model
         return $new_data;
     }
 
-    // Вход: страница новостей
-    // Возвращает: выборку всех данных новостей в виде массива
+    /**
+     * Список объявлений
+     * @param int $page - страница новостей
+     * @return array - выборка всех данных новостей в виде массива
+     */
     public function getNewsList($page = 0)
     {
         $data = []; //выходные данные
@@ -515,6 +517,10 @@ class NewsModel extends Model
 
 //Получает список новостей из заданной табицы($table) или из всех таблиц новостей(по умолчанию)
 // отсортированный по дате    
+    /**
+     * @param null $user_id
+     * @return array|bool
+     */
     public function getMyNewsList($user_id = NULL)
     {
         if (!empty($user_id)) {
@@ -1311,6 +1317,51 @@ class NewsModel extends Model
     {
         $all_checkbox_list = ['photo_available', 'gas', 'heating', 'water_pipes', 'elevator_passangers', 'elevator_cargo', 'bathroom', 'dining_room', 'study', 'playroom', 'hallway', 'living_room', 'kitchen', 'bedroom', 'signaling', 'cctv', 'intercom', 'concierge', 'availability_of_garbage_chute', 'bargain', 'cadastral_number', 'documents_on_ownership', 'electricity', 'fencing', 'lease_contract', 'property_documents', 'security'];
         return $all_checkbox_list;
+    }
+
+    /**
+     * Возвращает список последних объявлений
+     * @param int $time - время в часах
+     * @return array
+     */
+    public function getRecentNewsList($time = 24)
+    {
+//Текущее время
+        $now_time = time();
+        return $now_time;
+        $sql = "SELECT id_news, date::date, title, content, user_id, preview_img, status, category, tags "
+            . "FROM news_base WHERE status = 1 ";
+        if (!empty($data['news_table_category'])) {
+            $sql = $sql . " AND (";
+            foreach ($data['news_table_category'] as $value) {
+                $sql = $sql . ' category = ' . $value . ' OR ';
+            }
+            // удаление последнего OR
+            $sql = substr($sql, 0, -4);
+            $sql = $sql . ')';
+        }
+
+        $sql = $sql . " ORDER BY date DESC"
+            . " LIMIT :number_of_news"
+            . " OFFSET :from_page";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':number_of_news', $number_of_news);
+        $stmt->bindParam(':from_page', $from_page);
+        $stmt->execute();
+        $data['news'] = $stmt->fetchAll();
+        //Строку файлов картинок преобразуем в массив $data['news'][number]['preview_img'][]
+        $data['news'] = $this->explodePreviewImg($data['news']);
+        // Получение имен категорий
+        foreach ($data['news'] as $key => $value) {
+            $data['news'][$key]['category_rus'] = $this->translateIndex($data['news'][$key]['category'], 'category');
+        }
+
+        return $data;
+    }
+
+    public function proba(){
+        return"Получилось!";
     }
 
 }
