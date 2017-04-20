@@ -1,14 +1,7 @@
 <?php
 $this->title = 'Объявления';
 ?>
-<h2>Последние новости</h2>
-<?php
-echo'---- $this->data[\'last_news\'] ----';
-echo'<br>';
-var_dump($this->data['last_news']);
-echo'<br>';
-echo'_____________';
-?>
+
 <h2>Объявления</h2>
 <!-- Выбор количества выводимых новостей -->
 <form action="" method="post">
