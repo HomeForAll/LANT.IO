@@ -355,10 +355,11 @@ $("#form").on('submit', function(e) { // устанавливаем событи
         url: "/search",
         data: form_data,
         success: function(form_data) {
+            window.location.href = '/template/layouts/searchBlock.php';
             console.log('Собрынные данные - ', form_data);
         },
-        error: function(form_data) {
-            console.log('Ошибка отправки', form_data);
+        error: function() {
+            console.log('Ошибка отправки');
         }
     });
 });

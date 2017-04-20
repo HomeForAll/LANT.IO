@@ -294,7 +294,9 @@
 <body>
 <?php if (isset($_SESSION['authorized'])) { ?>
     <div id="navigation">
-        <div class="logo-img"><a href="#"><img src="../../template/images/logo.png" alt="logo"></a></div>
+        <div class="logo-img">
+            <a href="#"><img src="../../template/images/logo.png" alt="logo"></a>
+        </div>
         <div class="registration-users">
             <div class="place-an-ad">
                 <a href="../../index.php"><img src="../../template/images/add-blue.png" alt="add">Дать
@@ -366,7 +368,6 @@
     <div class="section-home-with-filters">
         <form action="" id="form" novalidate>
             <div class="apartment-search">
-                <a href="/template/layouts/searchBlock.php">Перейти</a>
                 <ul class="vkl">
                     <li id="blockToRent" onclick="choiceBlock('toRent')"><a>Арендовать</a></li>
                     <li id="Buy" onclick="choiceBlock('Buy')"><a>Купить</a></li>
