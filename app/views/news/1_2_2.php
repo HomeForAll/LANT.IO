@@ -5,30 +5,128 @@
     <b>Цена</b><br>
     <label for="price">Стоимость:</label><br>
     <input id="price" name="price" <?php inputToInput("price"); ?> type="text"><br>
+    <label>Торг <input type="hidden" name="bargain" value="">
+        <input type="checkbox" name="bargain" <?php inputToCheckbox("bargain"); ?> ></label><br>
     <b>Расположение</b><br>
-    <input type="text" name="address" <?php inputToInput("address"); ?> id="suggest"><br>
-    <span>Страна: </span><br>
-    <span>Область: </span><br>
-    <span>Город: </span><br>
-    <span>Район: </span><br>
-    <span>Дом: </span><br>
-    <div id="ymap" style="margin: 0 auto; width: 700px; height: 700px; background: #000;"></div>
+    <label for="suggest">Полный адрес
+        <input type="text" name="address" style=" width: 600px;" <?php inputToInput("address"); ?> id="suggest"
+               placeholder="Полный адрес"><br>
+    </label>
+    <label for="country">Страна
+        <input type="text" name="country" id="country" class="address" placeholder="Страна"><br>
+    </label>
+    <label for="area">Область
+        <input type="text" name="area" id="area" class="address" placeholder="Область"><br>
+    </label>
+    <label for="city">Город
+        <input type="text" name="city" id="city" class="address" placeholder="Город"><br>
+    </label>
+    <label for="street">Улица
+        <input type="text" name="street" id="street" class="address" placeholder="Улица"><br>
+    </label>
+    <label for="house">Дом
+        <input type="text" name="house" id="house" class="address" placeholder="Дом"><br>
+    </label>
+    <div id="ymap" style="margin: 0 auto; width: 400px; height: 400px; background: #000;"></div>
+
     <script>
-        ymaps.ready(function () {
-            var map = new ymaps.Map("ymap", {
-                center: [55.451332, 37.369336],
-                zoom: 10,
-                controls: ['fullscreenControl', 'typeSelector', 'geolocationControl', 'zoomControl']
+        ymaps.ready(init);
+
+        function init() {
+            var map = new ymaps.Map('ymap', {
+                center: [55.753994, 37.622093],
+                zoom: 9
             });
 
-            window.suggests = new ymaps.SuggestView("suggest", {width: 300, offset: [0, 4], results: 20});
-        });
+            // Поле подсказки
+            suggestView = new ymaps.SuggestView("suggest", {width: 300, offset: [0, 4], results: 20});
+
+            // Определение адреса при выборе подсказки и вывод метки.
+            suggestView.state.events.add('change', function () {
+                var activeIndex = suggestView.state.get('activeIndex');
+                if (typeof activeIndex == 'number') {
+                    activeItem = suggestView.state.get('items')[activeIndex];
+                    if (activeItem && activeItem.value != address) {
+                        var address = activeItem.value;
+                        setMark(address);
+                    }
+                }
+            });
+
+            // Определение координат клика по карте.
+            map.events.add('click', function (e) {
+                var coords = e.get('coords');
+                getAddress(coords);
+            });
+
+            // Определяем адрес по координатам (обратное геокодирование) и вывод метки.
+            function getAddress(coords) {
+                ymaps.geocode(coords).then(function (res) {
+                    var firstGeoObject = res.geoObjects.get(0);
+                    var address = firstGeoObject.properties.get('text');
+                    $('#suggest').val(address);
+                    setMark(address);
+                });
+            };
+
+            //Вывод метки при вводе в поле suggest вручную
+            $('#suggest').change(function(){
+                var address = $(this).val();
+                setMark(address);
+            });
+
+            // Метка на карте и запись данных метки в поля адреса
+            function setMark(address) {
+                // Поиск координат
+                ymaps.geocode(address, {
+                    results: 1
+                }).then(function (res) {
+                    // Выбираем первый результат геокодирования.
+                    var firstGeoObject = res.geoObjects.get(0),
+                        // Координаты геообъекта.
+                        coords = firstGeoObject.geometry.getCoordinates(),
+                        // Область видимости геообъекта.
+                        bounds = firstGeoObject.properties.get('boundedBy');
+                    map.geoObjects.removeAll();
+                    // Добавляем первый найденный геообъект на карту.
+                    map.geoObjects.add(firstGeoObject);
+                    // Масштабируем карту на область видимости геообъекта.
+                    map.setBounds(bounds, {
+                        // Проверяем наличие тайлов на данном масштабе.
+                        checkZoomRange: true
+                    });
+                    //Метаданные геокодера Address.Components -> Запись в поля адреса
+                    addr = firstGeoObject.properties.get('metaDataProperty.GeocoderMetaData.Address.Components');
+                    $.each(addr, function (i, obj) {
+                        switch (obj.kind) {
+                            case 'country':
+                                $('#country').val(obj.name);
+                                break;
+                            case 'province':
+                                $('#area').val(obj.name);
+                                break;
+                            case 'locality':
+                                $('#city').val(obj.name);
+                                break;
+                            case 'street':
+                                $('#street').val(obj.name);
+                                break;
+                            case 'district':
+                                $('#street').val(obj.name);
+                                break;
+                            case 'house':
+                                $('#house').val(obj.name);
+                                break;
+                        }
+                    });
+                });
+            };
+        };
     </script>
+
     <label for="distance_from_mkad_or_metro">Удаленность от МКАД/метро:</label><br>
     <input id="distance_from_mkad_or_metro"
            name="distance_from_mkad_or_metro" <?php inputToInput("distance_from_mkad_or_metro"); ?> type="text"><br>
-    <label>Торг <input type="hidden" name="bargain" value="">
-        <input type="checkbox" name="bargain" <?php inputToCheckbox("bargain"); ?> ></label><br>
     <label for="object_located">Объект размещен</label><br>
     <select name="object_located" id="object_located">
         <option value="0">---</option>
@@ -37,6 +135,8 @@
     </select><br>
     <br>
 </fieldset><br>
+
+
 <fieldset>
     <legend>Исходные параметры</legend>
     <br>
@@ -63,6 +163,22 @@
         <option value="108" <?php inputToSelect('building_type', '108'); ?> >Жилое</option>
         <option value="8" <?php inputToSelect('building_type', '8'); ?> >Административное</option>
     </select><br>
+    <label for="wall_material">Материал стен</label><br>
+    <select name="wall_material" id="wall_material">
+        <option value="0">---</option>
+        <option value="49" <?php inputToSelect('wall_material', '49'); ?> >Фахверк</option>
+        <option value="19" <?php inputToSelect('wall_material', '19'); ?> >Кирпич</option>
+        <option value="105" <?php inputToSelect('wall_material', '105'); ?> >Железобетон</option>
+        <option value="78" <?php inputToSelect('wall_material', '78'); ?> >Монолит</option>
+        <option value="96" <?php inputToSelect('wall_material', '96'); ?> >Пеноблок</option>
+        <option value="55" <?php inputToSelect('wall_material', '55'); ?> >Газосиликатные блоки</option>
+        <option value="28" <?php inputToSelect('wall_material', '28'); ?> >Шлакоблоки</option>
+        <option value="27" <?php inputToSelect('wall_material', '27'); ?> >Рубленое дерево</option>
+        <option value="24" <?php inputToSelect('wall_material', '24'); ?> >Лафет</option>
+        <option value="112" <?php inputToSelect('wall_material', '112'); ?> >Оцилиндрованное бревно</option>
+        <option value="102" <?php inputToSelect('wall_material', '102'); ?> >Профилированный брус</option>
+        <option value="56" <?php inputToSelect('wall_material', '56'); ?> >Клееный брус</option>
+    </select><br>
     <label for="roofing">Кровля</label><br>
     <select name="roofing" id="roofing">
         <option value="0">---</option>
@@ -86,24 +202,10 @@
         <option value="58" <?php inputToSelect('foundation', '58'); ?> >Ростверк</option>
         <option value="140" <?php inputToSelect('foundation', '140'); ?> >Без фундамента</option>
     </select><br>
-    <label for="wall_material">Материал стен</label><br>
-    <select name="wall_material" id="wall_material">
-        <option value="0">---</option>
-        <option value="49" <?php inputToSelect('wall_material', '49'); ?> >Фахверк</option>
-        <option value="19" <?php inputToSelect('wall_material', '19'); ?> >Кирпич</option>
-        <option value="105" <?php inputToSelect('wall_material', '105'); ?> >Железобетон</option>
-        <option value="78" <?php inputToSelect('wall_material', '78'); ?> >Монолит</option>
-        <option value="96" <?php inputToSelect('wall_material', '96'); ?> >Пеноблок</option>
-        <option value="55" <?php inputToSelect('wall_material', '55'); ?> >Газосиликатные блоки</option>
-        <option value="28" <?php inputToSelect('wall_material', '28'); ?> >Шлакоблоки</option>
-        <option value="27" <?php inputToSelect('wall_material', '27'); ?> >Рубленое дерево</option>
-        <option value="24" <?php inputToSelect('wall_material', '24'); ?> >Лафет</option>
-        <option value="112" <?php inputToSelect('wall_material', '112'); ?> >Оцилиндрованное бревно</option>
-        <option value="102" <?php inputToSelect('wall_material', '102'); ?> >Профилированный брус</option>
-        <option value="56" <?php inputToSelect('wall_material', '56'); ?> >Клееный брус</option>
-    </select><br>
     <br>
 </fieldset><br>
+
+
 <fieldset>
     <legend> Ремонт и обустройство</legend>
     <br>
@@ -118,6 +220,31 @@
         <option value="65" <?php inputToSelect('furnish', '65'); ?> >Незавершенный ремонт</option>
         <option value="141" <?php inputToSelect('furnish', '141'); ?> >Без ремонта</option>
     </select><br>
+    <span>Жилищно-коммунальные услуги</span><br>
+    <label>Электричество <input type="hidden" name="electricity" value="">
+        <input type="checkbox" name="electricity" <?php inputToCheckbox("electricity"); ?> ></label><br>
+    <label for="electricity">Кол-во кВт:</label><br>
+    <input name="electricity" <?php inputToInput("electricity"); ?> type="text">
+    <label for="sanitation">Водопровод и канализация</label><br>
+    <select name="sanitation" id="sanitation">
+        <option value="0">---</option>
+        <option value="47" <?php inputToSelect('sanitation', '47'); ?> >Есть</option>
+        <option value="84" <?php inputToSelect('sanitation', '84'); ?> >Нет</option>
+    </select><br>
+    <label>Возможность проводки <input type="hidden" name="possible_to_post" value="">
+        <input type="checkbox" name="possible_to_post" <?php inputToCheckbox("possible_to_post"); ?> ></label><br>
+    <label>Описание <input type="text" name="sanitation_description" <?php inputToInput("sanitation_description"); ?> ></label><br>
+    <label for="sanitation">Наличие санузлов</label><br>
+    <label for="">Количество:</label><br>
+    <input name="bathroom_number" <?php inputToInput("bathroom_number"); ?> type="text">
+    <label for="">Расположение:</label><br>
+    <select name="bathroom_location" id="sanitation">
+        <option value="0">---</option>
+        <option value="" <?php inputToSelect('bathroom_location', ''); ?> >---</option>
+    </select><br>
+    <label>Описание <input type="text"
+                           name="bathroom_description" <?php inputToInput("bathroom_description"); ?> ></label><br>
+    <br>
     <span>Безопасность</span><br>
     <label>Консьерж <input type="hidden" name="concierge" value="">
         <input type="checkbox" name="concierge" <?php inputToCheckbox("concierge"); ?> ></label><br>
@@ -159,30 +286,7 @@
         <option value="94" <?php inputToSelect('municipal', '94'); ?> >Платная</option>
         <option value="51" <?php inputToSelect('municipal', '51'); ?> >Бесплатная</option>
     </select><br>
-    <span>Жилищно-коммунальные услуги</span><br>
-    <label>Электричество <input type="hidden" name="electricity" value="">
-        <input type="checkbox" name="electricity" <?php inputToCheckbox("electricity"); ?> ></label><br>
-    <label for="electricity">Кол-во кВт:</label><br>
-    <input name="electricity" <?php inputToInput("electricity"); ?> type="text">
-    <label for="sanitation">Водопровод и канализация</label><br>
-    <select name="sanitation" id="sanitation">
-        <option value="0">---</option>
-        <option value="47" <?php inputToSelect('sanitation', '47'); ?> >Есть</option>
-        <option value="84" <?php inputToSelect('sanitation', '84'); ?> >Нет</option>
-    </select><br>
-    <label>Возможность проводки <input type="hidden" name="possible_to_post" value="">
-        <input type="checkbox" name="possible_to_post" <?php inputToCheckbox("possible_to_post"); ?> ></label><br>
-    <label>Описание <input type="text" name="sanitation_description" <?php inputToInput("sanitation_description"); ?> ></label><br>
-    <label for="sanitation">Наличие санузлов</label><br>
-    <label for="">Количество:</label><br>
-    <input name="bathroom_number" <?php inputToInput("bathroom_number"); ?> type="text">
-    <label for="">Расположение:</label><br>
-    <select name="bathroom_location" id="sanitation">
-        <option value="0">---</option>
-        <option value="" <?php inputToSelect('bathroom_location', ''); ?> >---</option>
-    </select><br>
-    <label>Описание <input type="text"
-                           name="bathroom_description" <?php inputToInput("bathroom_description"); ?> ></label><br><br>
+
 </fieldset><br>
 <fieldset>
     <legend>Документы</legend>

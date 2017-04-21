@@ -200,18 +200,17 @@ if (empty($this->data['news']['id_news'])) {
 <script>
     $(document).ready(function () {
 
-        $(function() {
-            $('#add_news').change(function(){
-                var opt1 = $('#space_types').val();
-                var opt2 = $('#operation_types').val();
-                var opt3 = $('#object_types').val();
+
+            $('#add_news').submit(function(){
+                var opt1 = $('#space_type').val();
+                var opt2 = $('#operation_type').val();
+                var opt3 = $('#object_type').val();
                 if (typeof form_options_menu[opt1][opt2][opt3] === "undefined"){
                     alert('Данной опции не существует!');
+                    return false;
                 }
-
             });
-        });
-    });
+            });
 </script>
 
 

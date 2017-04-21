@@ -39,12 +39,14 @@ class Model
 
         return $result[0];
     }
+
     private function countStatistic()
     {
         $ip = $_SERVER["REMOTE_ADDR"];
+        $date = date('Y-m-d');
 
-        $query = $this->db->prepare('SELECT * FROM ips WHERE ip = :ip');
-        $query->execute(array(':ip' => $ip));
+        $query = $this->db->prepare('SELECT * FROM ips WHERE ip = :ip AND date = :date_val');
+        $query->execute(array(':ip' => $ip, ':date_val' => $date));
         $result = $query->fetch();
 
         if ($result) {
@@ -57,11 +59,66 @@ class Model
         } else {
             $visits = 1;
 
-            $query = $this->db->prepare('INSERT INTO ips (ip, visits) VALUES (:ip, :visits)');
-            $query->execute(array(':ip' => $ip, ':visits' => $visits));
+            $query = $this->db->prepare('INSERT INTO ips (ip, visits, date) VALUES (:ip, :visits, :date_val)');
+            $query->execute(array(':ip' => $ip, ':visits' => $visits, ':date_val' => $date));
 
             return $query->rowCount();
         }
     }
 
+    public function getRegisteredUsers()
+    {
+        $query = $this->db->prepare('SELECT count(id) FROM users');
+        $query->execute();
+        $result = $query->fetch();
+
+        if ($result) {
+            return $result['count'];
+        }
+
+        return 0;
+    }
+
+    public function getUniquePeopleThisDay()
+    {
+        $date = date('Y-m-d');
+
+        $query = $this->db->prepare('SELECT count(*) FROM ips WHERE date = :date_val');
+        $query->execute(array(":date_val" => $date));
+        $result = $query->fetch();
+
+        if ($result) {
+            return $result['count'];
+        }
+
+        return 0;
+    }
+
+    public function getNumberOfAds()
+    {
+        $query = $this->db->prepare('SELECT count(*) FROM news_base');
+        $query->execute();
+        $result = $query->fetch();
+
+        if ($result) {
+            return $result['count'];
+        }
+
+        return 0;
+    }
+
+    public function getActiveDialogs()
+    {
+        $query = $this->db->prepare('SELECT DISTINCT(id) FROM dialogs WHERE show = \'1\'');
+        $query->execute();
+        $dialogs = $query->fetchAll();
+
+        if ($dialogs) {
+            $count = count($dialogs);
+
+            return $count;
+        }
+
+        return 0;
+    }
 }

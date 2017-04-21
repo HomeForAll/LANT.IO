@@ -32,8 +32,6 @@ class ServiceController extends Controller
                 return;
             }
 
-
-
         // Если посланы параметры на новый сервис
         if (!empty($_POST['service_add'])) {
             if($this->model->makeServiceInsert($this->user)){
@@ -91,6 +89,7 @@ class ServiceController extends Controller
         $data['my_sub_serv_data'] = $data_service_result['my'];
         $data['css'][0] = 'service.css';
         $data['message']=$this->service_message;
+        $data['count_services']=$this->model->getNumberOfServices();
         $this->view->render('service_sub', $data);
     }
 

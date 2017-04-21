@@ -250,7 +250,7 @@ if (!empty($this->data['message'])) {
     <input type="submit" name="elements_eng_rus" value="Вывести все параметры в БД eng - rus">
     <hr>
     <h4>Генерация форм новостей на основе форм поиска</h4>
-    <label for="generation_file_name">Имя файла (типа: 2_1_1.php)</label>
+    <label for="generation_file_name">Имя файла (типа: 2_1_1)</label>
     <p>При генерации, файл остается неизменным.</p>
     <input name="generation_file_name" type="text"><br>
     <input type="submit" name="generating_news_forms_by_search_forms" value="Генерация форм новостей на основе форм поиска">
