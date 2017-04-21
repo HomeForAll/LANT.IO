@@ -798,60 +798,6 @@
   }
 }
 
-.appearance-of-the-apartment {
-  display: none;
-  position: absolute;
-  left: 0;
-  right: 0;
-  width: 850px;
-  z-index: 60;
-  background: #f9f9f9;
-  text-align: center;
-  h2 {
-    font-size: 20px;
-    padding: 15px 5px;
-    font-weight: 300;
-    color: #454545;
-    background: #efefef;
-  }
-  ul {
-    display: inline-block;
-    width: 450px;
-    list-style: none;
-    text-align: center;
-    margin: auto;
-  }
-  li {
-    display: block;
-    width: auto;
-    background: red;
-    padding: 10px;
-    margin: auto;
-  }
-  p {
-    display: inline-block;
-    vertical-align: middle;
-    text-align: left;
-    width: 85px;
-  }
-  img {
-    float: none;
-    margin: auto 15px;
-  }
-  button {
-    display: block;
-    width: 220px;
-    margin: 25px auto;
-    padding: 15px;
-    float: none;
-    background: #71cb6f;
-    color: #fff;
-    border: 1px solid #d0d0d0;
-    border-radius: 30px;
-    cursor: pointer;
-  }
-}
-
 .building-parameters-filter {
   display: none;
   position: absolute;
@@ -921,6 +867,8 @@
   }
 }
 
+.attachment,
+.appearance-of-the-apartment,
 .appearance-of-the-build {
   display: none;
   position: absolute;
@@ -947,7 +895,6 @@
   li {
     display: block !important;
     width: auto !important;
-    background: red;
     padding: 10px;
     margin: auto;
   }
@@ -1112,7 +1059,7 @@
     & img {
       display: inline-block;
       vertical-align: middle;
-      margin-right: 15px;
+      margin-right: 10px;
       float: left;
     }
     &:hover {
@@ -1172,7 +1119,6 @@
   padding: 0 20px;
   justify-content: flex-start;
   li {
-    position: relative;
     vertical-align: top;
   }
   p {
@@ -1207,7 +1153,10 @@
   }
 }
 
-.apartment-settings {
+.repair-and-utilities-of-the-apartment,
+.close-repair-and-utilities-of-the-apartment,
+.apartment-settings,
+.plot-of-land {
   position: absolute;
   display: none;
   width: 850px;
@@ -1326,10 +1275,9 @@
     background: #efefef;
   }
   ul {
-    display: inline-block;
-    vertical-align: top;
-    width: 49.5%;
-    margin: 0;
+    display: block;
+    width: 80%;
+    margin: 10px auto;
   }
   li {
     display: block;
@@ -1405,6 +1353,7 @@
     background: #71cb6f;
     color: #fff;
     cursor: pointer;
+    float: none !important;
     width: 220px;
     margin: 20px auto;
   }
@@ -3331,45 +3280,6 @@
       display: none;
     }
   }
-  .appearance-of-the-apartment {
-    width: auto;
-    left: 5vw;
-    right: 5vw;
-    ul {
-      margin: auto;
-      float: none;
-      width: 82%;
-    }
-    li {
-      display: block;
-      text-align: center;
-      padding: 20px 10px;
-      width: auto;
-    }
-    input {
-      margin: 8px 12px;
-      width: 60%;
-    }
-    p {
-      display: inline-block;
-      vertical-align: middle;
-      text-align: left;
-      padding: 0;
-      width: 100px;
-      margin: auto;
-      & span {
-        display: inline-block;
-        text-align: center;
-        width: 25px;
-        height: 25px;
-        font-size: 11px;
-        line-height: 25px;
-      }
-    }
-    select {
-      display: none;
-    }
-  }
   .building-parameters-filter {
     width: auto;
     left: 5vw;
@@ -3395,45 +3305,6 @@
       width: 120px;
       text-align: left;
       padding: 0;
-      margin: auto;
-      & span {
-        display: inline-block;
-        text-align: center;
-        width: 25px;
-        height: 25px;
-        font-size: 11px;
-        line-height: 25px;
-      }
-    }
-    select {
-      display: none;
-    }
-  }
-   .appearance-of-the-build {
-    width: auto;
-    left: 5vw;
-    right: 5vw;
-    ul {
-      margin: auto;
-      float: none;
-      width: 82%;
-    }
-    li {
-      display: block;
-      text-align: center;
-      padding: 20px 10px;
-      width: auto;
-    }
-    input {
-      margin: 8px 12px;
-      width: 60%;
-    }
-    p {
-      display: inline-block;
-      vertical-align: middle;
-      padding: 0;
-      text-align: left;
-      width: 100px;
       margin: auto;
       & span {
         display: inline-block;
@@ -4132,27 +4003,6 @@
       width: 75%;
     }
   }
-  .appearance-of-the-apartment {
-    position: absolute;
-    left: 0;
-    right: 0;
-    width: auto;
-    ul {
-      width: auto;
-      display: block;
-    }
-    li {
-      text-align: center;
-    }
-    p {
-      width: 100%;
-      margin: 0;
-      padding: 10px 20% 0;
-    }
-    input {
-      width: 75%;
-    }
-  }
   .building-parameters-filter {
     position: absolute;
     left: 0;
@@ -4171,27 +4021,6 @@
       display: block;
       text-align: center;
       width: auto;
-      margin: 0;
-      padding: 10px 20% 0;
-    }
-    input {
-      width: 75%;
-    }
-  }
-  .appearance-of-the-build {
-    position: absolute;
-    left: 0;
-    right: 0;
-    width: auto;
-    ul {
-      width: auto;
-      display: block;
-    }
-    li {
-      text-align: center;
-    }
-    p {
-      width: 100%;
       margin: 0;
       padding: 10px 20% 0;
     }
@@ -4608,7 +4437,8 @@
 
 /** Прогресс бар **/
 .progress-bar {
-  position: absolute;
+  position: relative;
+  float: right;
   display: block;
   bottom: 15px;
   right: 20px;

@@ -206,7 +206,7 @@ function allParam(filterParam) {
             });
             break;
         case 'attachment':
-            var $attachment = $('.attachments');
+            var $attachment = $('.attachment');
             $attachment.css({'display': 'block'});
 
             $('.closeAttachment').on('click', function (e) {
@@ -248,6 +248,24 @@ function allParam(filterParam) {
             $('.closeQuickSearch').on('click', function (e) {
                 e.preventDefault();
                 $quickSearch.fadeOut('slow');
+            });
+            break;
+        case 'plotOfLand':
+            var $plotOfLand = $('.plot-of-land');
+            $plotOfLand.css({'display': 'block'});
+
+            $('.close-plot-of-land').on('click', function (e) {
+                e.preventDefault();
+                $plotOfLand.fadeOut('slow');
+            });
+            break;
+        case 'repairAndUtilitiesOfTheApartment':
+            var $repairAndUtilitiesOfTheApartment = $('.repair-and-utilities-of-the-apartment');
+            $repairAndUtilitiesOfTheApartment.css({'display': 'block'});
+
+            $('.close-repair-and-utilities-of-the-apartment').on('click', function (e) {
+                e.preventDefault();
+                $repairAndUtilitiesOfTheApartment.fadeOut('slow');
             });
             break;
         case 'buildingParametersFilter':
