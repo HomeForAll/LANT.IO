@@ -749,58 +749,6 @@
   display: inline-block;
   vertical-align: middle;
 }
-.attachments {
-  display: none;
-  position: absolute;
-  left: 5vw;
-  right: 5vw;
-  width: auto;
-  z-index: 60;
-  background: #f9f9f9;
-  text-align: center;
-}
-.attachments h2 {
-  font-size: 20px;
-  padding: 15px 5px;
-  font-weight: 300;
-  color: #454545;
-  background: #efefef;
-}
-.attachments ul {
-  display: inline-block;
-  width: 450px;
-  list-style: none;
-  text-align: center;
-  margin: auto;
-}
-.attachments li {
-  display: block !important;
-  width: auto !important;
-  padding: 10px;
-  margin: auto;
-}
-.attachments p {
-  display: inline-block;
-  vertical-align: middle;
-  text-align: left;
-  width: 85px;
-}
-.attachments img {
-  float: none;
-  margin: auto 15px;
-}
-.attachments button {
-  display: block;
-  width: 220px;
-  margin: 25px auto;
-  padding: 15px;
-  float: none;
-  background: #71cb6f;
-  color: #fff;
-  border: 1px solid #d0d0d0;
-  border-radius: 30px;
-  cursor: pointer;
-}
 .appearance-of-the-apartment {
   display: none;
   position: absolute;
@@ -3612,22 +3560,6 @@ li p {
   .appearance-of-the-build select {
     display: none;
   }
-  .attachments ul {
-    display: block;
-    margin: auto;
-    float: none;
-    width: auto;
-  }
-  .attachments li {
-    display: block;
-    text-align: center;
-    width: auto;
-    padding: 15px 10vw;
-  }
-  .attachments p {
-    text-align: left;
-    padding: 15px 5px 15px;
-  }
   .names-parameters {
     display: block;
     text-align: center;
@@ -4384,37 +4316,6 @@ li p {
   }
   .appearance-of-the-build input {
     width: 75%;
-  }
-  .attachments {
-    left: 5vw;
-    right: 5vw;
-  }
-  .attachments h2 {
-    font-size: 17px;
-    padding: 15px 0;
-  }
-  .attachments ul {
-    display: block;
-    margin: auto;
-    float: none;
-    width: auto;
-  }
-  .attachments li {
-    text-align: center;
-    clear: none;
-    padding: 10px 0;
-    width: auto;
-  }
-  .attachments p {
-    display: block;
-    width: auto;
-    text-align: center;
-    padding: 14px 4px;
-  }
-  .attachments button {
-    padding: 10px;
-    width: 195px;
-    font-size: 18px;
   }
   #slider-range span,
   #slider-range-by span,

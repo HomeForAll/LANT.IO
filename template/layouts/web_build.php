@@ -1314,17 +1314,18 @@
                                 <span style="width:40%"></span>
                             </div>
                         </li>
-                        <li onclick="allParam('attachment');">
+                        <li onclick="allParam('appearanceBuild')">
                             <img src="../../template/images/search-1.png" alt="search">Вложения
-                            <div class="attachments">
+                            <div class="appearance-of-the-build">
                                 <h2>Вложения</h2>
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <label for=""><select>
-                                                    <option>Прилагается</option>
-                                                    <option>Прилагается1</option>
-                                                    <option>Прилагается2</option>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
                                                 </select>
                                             </label>
                                         </div>
@@ -1352,8 +1353,50 @@
                                         </div>
                                     </li>
                                 </ul>
-                                <button class="closeAttachment">Готово</button>
-                            </div>
+                                <button class="closeApparenceBuild">Поиск</button>
+                        </li>
+                            <img src="../../template/images/search-1.png" alt="search">Вложения
+                        <li onclick="allParam('appearanceBuild')">
+                            <img src="../../template/images/search-1.png" alt="search">Вложения
+                            <div class="appearance-of-the-build">
+                                <h2>Вложения</h2>
+                                <ul>
+                                    <li>
+                                        <div class="select">
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="select">
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="select">
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <button class="closeApparenceBuild">Поиск</button>
+                        </li>
                             <div class="progress-bar blue stripes">
                                 <span style="width:0"></span>
                             </div>
@@ -2037,17 +2080,18 @@
                                 </label>
                             </div>
                         </li>
-                        <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png"
-                                                                   alt="search">Вложения
-                            <div class="attachments">
+                        <li onclick="allParam('appearanceBuild')">
+                            <img src="../../template/images/search-1.png" alt="search">Вложения
+                            <div class="appearance-of-the-build">
                                 <h2>Вложения</h2>
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <label for=""><select>
-                                                    <option>Прилагается</option>
-                                                    <option>Прилагается1</option>
-                                                    <option>Прилагается2</option>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
                                                 </select>
                                             </label>
                                         </div>
@@ -2075,11 +2119,7 @@
                                         </div>
                                     </li>
                                 </ul>
-                                <button class="closeAttachment">Готово</button>
-                            </div>
-                            <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
-                            </div>
+                                <button class="closeApparenceBuild">Поиск</button>
                         </li>
                     </ul>
                     <ul class="building-parameters-separate-building">
@@ -2329,17 +2369,18 @@
                                 </label>
                             </div>
                         </li>
-                        <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png"
-                                                                   alt="search">Вложения
-                            <div class="attachments">
+                        <li onclick="allParam('appearanceBuild')">
+                            <img src="../../template/images/search-1.png" alt="search">Вложения
+                            <div class="appearance-of-the-build">
                                 <h2>Вложения</h2>
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <label for=""><select>
-                                                    <option>Прилагается</option>
-                                                    <option>Прилагается1</option>
-                                                    <option>Прилагается2</option>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
                                                 </select>
                                             </label>
                                         </div>
@@ -2367,11 +2408,7 @@
                                         </div>
                                     </li>
                                 </ul>
-                                <button class="closeAttachment">Готово</button>
-                            </div>
-                            <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
-                            </div>
+                                <button class="closeApparenceBuild">Поиск</button>
                         </li>
                     </ul>
                     <ul class="building-parameters-ozs-сomplex">
@@ -2631,17 +2668,18 @@
                                 </label>
                             </div>
                         </li>
-                        <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png"
-                                                                   alt="search">Вложения
-                            <div class="attachments">
+                        <li onclick="allParam('appearanceBuild')">
+                            <img src="../../template/images/search-1.png" alt="search">Вложения
+                            <div class="appearance-of-the-build">
                                 <h2>Вложения</h2>
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <label for=""><select>
-                                                    <option>Прилагается</option>
-                                                    <option>Прилагается1</option>
-                                                    <option>Прилагается2</option>
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
                                                 </select>
                                             </label>
                                         </div>
@@ -2669,11 +2707,7 @@
                                         </div>
                                     </li>
                                 </ul>
-                                <button class="closeAttachment">Готово</button>
-                            </div>
-                            <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
-                            </div>
+                                <button class="closeApparenceBuild">Поиск</button>
                         </li>
                     </ul>
                     <ul class="test-7">
@@ -3897,314 +3931,6 @@
                                     </li>
                                 </ul>
                                 <button class="closeApparenceBuild">Поиск</button>
-                        </li>
-                    </ul>
-                    <ul class="building-parameters-home">
-                        <li onclick="allParam('apartment');">
-                            <img src="../../template/images/search-1.png" alt="search">Документы
-                            <div class="attachments">
-                                <h2>Документы</h2>
-                                <ul>Прилагается2</ul>
-                                <button value="Найти">Готово</button>
-                            </div>
-                            <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
-                            </div>
-                            <div class="attachments">
-                                <h2>Вложения</h2>
-                                <ul>ВидеоПрилагается2</ul>
-                                <button class="closeAttachment">Готово</button>
-                            </div>
-                            <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
-                            </div>
-                            <div class="apartment-settings">
-                                <h2>Параметры квартиры</h2>
-                                <ul>
-                                    <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                    </li>
-                                    <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                    </li>
-                                    <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                    </li>
-                                    <li><span class="names-parameters">Балкон м2</span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                    </li>
-                                </ul>
-                                <ul>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li><span class="names-parameters">Высота потолков м</span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
-                                                    required></p>
-                                    </li>
-                                </ul>
-                                <button class="closeBlock">Готово</button>
-                            </div>
-                            <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
-                            </div>
-                        </li>
-                        <li onclick="allParam('apperanceOfTheApartment')"><img src="../../template/images/search-2.png"
-                                                                               alt="search">Внешний вид квартиры
-                            <div class="appearance-of-the-apartment">
-                                <h2>Внешний вид квартиры</h2>
-                                <ul>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <button class="search">Готово</button>
-                            </div>
-                            <div class="progress-bar blue stripes">
-                                <span style="width:40%"></span>
-                            </div>
-                        </li>
-                        <li onclick="allParam('buildingParametersFilter');"><img
-                                    src="../../template/images/search-3.png" alt="search">Параметры здания
-                            <div class="building-parameters-filter">
-                                <h2>Параметры здания</h2>
-                                <ul>
-                                    <li><span class="names-parameters">Количество этажей</span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                    </li>
-                                    <li><span class="names-parameters">Год окончания строительства</span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
-                                                    required></p>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <button class="close-building-parameter">Готово</button>
-                            </div>
-                            <div class="progress-bar blue stripes">
-                                <span style="width:40%"></span>
-                            </div>
-                        </li>
-                        <li onclick="allParam('appearanceBuild')"><img src="../../template/images/search-4.png"
-                                                                       alt="search">Внешний вид здания
-                            <div class="appearance-of-the-build">
-                                <h2>Внешний вид здания</h2>
-                                <ul>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <button class="closeApparenceBuild">Поиск</button>
-                            </div>
-                            <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
-                            </div>
-                        </li>
-                        <li><img src="../../template/images/search-5.png" alt="search">Безопасность
-                            <div class="select main-filter-s">
-                                <label for="">
-                                    <select>
-                                        <option>Выберите</option>
-                                        <option>Выберите1</option>
-                                        <option>Выберите2</option>
-                                    </select>
-                                </label>
-                            </div>
-                        </li>
-                        <li><img src="../../template/images/search-1.png" alt="search">Документы
-                            <div class="select main-filter-s">
-                                <label for="">
-                                    <select>
-                                        <option>Выбрано</option>
-                                        <option>Выбрано1</option>
-                                        <option>Выбрано2</option>
-                                    </select>
-                                </label>
-                            </div>
-                        </li>
-                        <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png"
-                                                                   alt="search">Вложения
-                            <div class="attachments">
-                                <h2>Вложения</h2>
-                                <ul>
-                                    <li>
-                                        <div class="select">
-                                            <label for=""><select>
-                                                    <option>Прилагается</option>
-                                                    <option>Прилагается1</option>
-                                                    <option>Прилагается2</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <button class="closeAttachment">Готово</button>
-                            </div>
-                            <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
-                            </div>
                         </li>
                     </ul>
                     <ul class="building-parameters-room">
