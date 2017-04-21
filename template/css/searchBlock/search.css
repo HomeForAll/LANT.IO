@@ -2155,6 +2155,7 @@
   display: inline-block;
   vertical-align: middle;
   width: 85%;
+  height: 65px;
 }
 .appreciate-the-apartment li {
   vertical-align: middle;
@@ -2184,6 +2185,7 @@
   padding: 23px 10px;
   font-size: 15px;
   width: 150px;
+  height: 65px;
   border: none;
   cursor: pointer;
   float: right;
@@ -2668,15 +2670,23 @@
   vertical-align: middle;
   margin: auto 28px;
 }
-.footer li:hover i {
+.footer li:hover:nth-child(1) i {
   color: #41c0f5;
+}
+.footer li:hover:nth-child(2) i {
+  color: #6f90a9;
+}
+.footer li:hover:nth-child(3) i {
+  color: #d26d6d;
+}
+.footer li:hover:nth-child(4) i {
+  color: #c4ae71;
 }
 .footer li:hover span {
   color: #fff;
 }
 .footer li:hover img {
-  background: url("../../template/images/work-true.png") no-repeat;
-  background-size: auto;
+  background-image: url("../../template/images/work-true.png");
 }
 .footer i {
   font-size: 42px;
@@ -2748,7 +2758,7 @@ li p {
   margin-left: -100px;
 }
 .object {
-  border-radius: 50% 50% 50% 50%;
+  border-radius: 50%;
   position: absolute;
   border-left: 5px solid #fff;
   border-right: 5px solid #fff;
@@ -4610,7 +4620,8 @@ li p {
   float: right;
   display: block;
   bottom: 15px;
-  right: 20px;
+  right: 8px;
+  margin-top: 35px;
   background-color: #f6f6f6;
   padding: 0;
   width: 110px;
