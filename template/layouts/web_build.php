@@ -1,7 +1,6 @@
 <?php
 $siteModel = Registry::model('site');
 ?>
-
 <!doctype html>
 <html lang="ru">
 <head>

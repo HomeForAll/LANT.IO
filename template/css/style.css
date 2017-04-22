@@ -560,7 +560,7 @@
   position: relative;
   float: right;
   background: none;
-  padding: 25px 0;
+  padding: 27px 0;
   display: inline-block;
   vertical-align: middle;
   font-size: 14px;
@@ -883,6 +883,29 @@
   border-radius: 30px;
   cursor: pointer;
 }
+.attachment input,
+.appearance-of-the-apartment input,
+.appearance-of-the-build input {
+  color: #000;
+  padding: 10px;
+  margin: auto 7px;
+  width: 75px;
+  height: auto;
+  border: none;
+  background: #fff;
+  box-shadow: 0 5px 15px 1px #ebebeb;
+  border-radius: 4px;
+}
+.attachment input:valid,
+.appearance-of-the-apartment input:valid,
+.appearance-of-the-build input:valid {
+  border: 1px solid green;
+}
+.attachment input:invalid,
+.appearance-of-the-apartment input:invalid,
+.appearance-of-the-build input:invalid {
+  border: none;
+}
 .showBigOptions {
   position: absolute;
   display: none;
@@ -1124,8 +1147,11 @@
 .test-10 label,
 .test-11 label,
 .test-12 label {
+  position: relative;
   display: inline-block;
   width: 85%;
+  background: #fff;
+  z-index: 5 !important;
   margin-bottom: 5px;
   cursor: pointer;
   padding: 10px;
@@ -1239,10 +1265,11 @@
 .close-repair-and-utilities-of-the-apartment p,
 .apartment-settings p,
 .plot-of-land p {
-  display: inline-block;
+  display: inline-block !important;
   vertical-align: middle;
   text-align: left;
   padding: 0;
+  margin: 15px auto;
   width: 30%;
 }
 .repair-and-utilities-of-the-apartment p span,

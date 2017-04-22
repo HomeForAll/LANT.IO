@@ -346,7 +346,8 @@
 	color: #231F20;
 }
 .jq-selectbox li.selected {
-	background-color: #A3ABB1;
+	background-color: red;
+	z-index: 20;
 	color: #444;
 }
 .jq-selectbox li:hover {

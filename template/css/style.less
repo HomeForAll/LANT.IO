@@ -601,7 +601,7 @@
     position: relative;
     float: right;
     background: none;
-    padding: 25px 0;
+    padding: 27px 0;
     display: inline-block;
     vertical-align: middle;
     font-size: 14px;
@@ -920,6 +920,23 @@
     border-radius: 30px;
     cursor: pointer;
   }
+  input {
+    color: #000;
+    padding: 10px;
+    margin: auto 7px;
+    width: 75px;
+    height: auto;
+    border: none;
+    background: #fff;
+    box-shadow: 0 5px 15px 1px #ebebeb;
+    border-radius: 4px;
+    &:valid {
+      border: 1px solid green;
+    }
+    &:invalid {
+      border: none;
+    }
+  }
 }
 
 .showBigOptions {
@@ -1127,8 +1144,11 @@
     text-align: center;
   }
   label {
+    position: relative;
     display: inline-block;
     width: 85%;
+    background: #fff;
+    z-index: 5 !important;
     margin-bottom: 5px;
     cursor: pointer;
     padding: 10px;
@@ -1187,10 +1207,11 @@
     padding: 15px;
   }
   p {
-    display: inline-block;
+    display: inline-block !important;
     vertical-align: middle;
     text-align: left;
     padding: 0;
+    margin: 15px auto;
     width: 30%;
     & span {
       display: inline-block;

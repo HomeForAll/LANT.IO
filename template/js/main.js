@@ -168,6 +168,7 @@ function filterOptionsApartments() {
 }
 
 function allParam(filterParam) {
+
     switch (filterParam) {
         case 'apartment':
             var $apartmentSettings = $('.apartment-settings');
@@ -350,8 +351,10 @@ function allFilterBlocks(filters) {
 //---------------------------------------------------------
 
 /** Указатели в теге select **/
-$('.select').on('click', function () {
+$('.select').on('click', function (e) {
     var pointer = $('.jq-selectbox__trigger-arrow');
+
+    e.preventDefault();
 
     pointer.css({
         'background': 'url("../../template/images/pointer_top.png") center right 5px no-repeat',
@@ -392,7 +395,8 @@ function closeFixedBlock() {
 
 /** Получение данных через Ajax и отправка данных**/
 $("#form").on('submit', function(e) { // устанавливаем событие отправки для формы с id=form
-    e.preventDefault();
+
+    //e.preventDefault();
 
     var form_data = $(this).serialize(); // собераем все данные из формы
 
@@ -608,7 +612,6 @@ function yandexMap() {
 }
 
 /** Яндекс карты внутри параметров **/
-
 ymaps.ready(function () {
     var map = new ymaps.Map("ymap", {
         center: [55.451332, 37.369336],
