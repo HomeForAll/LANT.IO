@@ -589,14 +589,14 @@
 }
 .filter-block-big-menu li {
   background: #fff;
-  vertical-align: middle;
   color: #000;
   font-size: 14px;
   border-right: 2px dotted #e0e0e0;
-  text-align: center;
+  text-align: left;
   cursor: pointer;
-  width: 19.5%;
-  padding: 10px 0;
+  width: auto;
+  min-width: 185px;
+  padding: 10px 7px;
   margin: 10px auto;
   border-radius: 0;
 }
@@ -608,8 +608,8 @@
   display: inline-block;
   vertical-align: middle;
   cursor: pointer;
-  text-align: center;
-  padding: 0;
+  text-align: left;
+  padding: 10px 7px;
   width: 80%;
   min-width: 95px;
   margin: auto;
@@ -635,6 +635,7 @@
   display: inline-block;
   vertical-align: middle;
   background: #fff;
+  font-weight: 100;
   font-size: 14px;
   padding: 0 10px;
   color: #444;
@@ -668,6 +669,7 @@
   display: block !important;
   width: auto !important;
   padding: 10px;
+  font-weight: 100 !important;
   color: #444 !important;
   border-radius: 0 !important;
   border: none !important;
@@ -2491,9 +2493,10 @@
   margin-right: 10px;
 }
 .price i {
-  font-size: 19px;
+  font-size: 15px;
   vertical-align: middle;
-  color: #565656;
+  color: #a09d9d;
+  font-weight: 200;
   margin-left: 4px;
 }
 .view-the-apartment {
@@ -2757,6 +2760,13 @@
   vertical-align: middle;
   margin: auto 28px;
 }
+.footer li:hover span {
+  color: #fff;
+}
+.footer li:hover .icon-footer {
+  background: url('../../template/images/112.png') no-repeat;
+  background-size: auto;
+}
 .footer li:hover:nth-child(1) i {
   color: #41c0f5;
 }
@@ -2769,14 +2779,17 @@
 .footer li:hover:nth-child(4) i {
   color: #c4ae71;
 }
-.footer li:hover span {
-  color: #fff;
-}
-.footer li:hover img {
-  background-image: url("../../template/images/work-true.png");
-}
 .footer i {
   font-size: 42px;
+}
+.icon-footer {
+  display: block;
+  text-align: center;
+  margin: auto;
+  width: 60px;
+  height: 32px;
+  background: url('../../template/images/11.png') no-repeat;
+  background-size: auto;
 }
 .lant-io,
 .policy,
@@ -2819,6 +2832,9 @@ li p {
   margin-left: 98px;
   font-size: 13px;
   line-height: 23px;
+}
+.policy a:hover {
+  color: #fff;
 }
 #loading {
   background-color: #000;
@@ -3293,15 +3309,8 @@ li p {
   .footer ul i {
     font-size: 30px;
   }
-  .policy img,
-  .footer ul img {
-    width: 50px;
-  }
   .footer ul {
-    display: inline-block;
-    vertical-align: middle;
     width: auto;
-    margin: auto;
   }
   .lant-io {
     display: inline-block;

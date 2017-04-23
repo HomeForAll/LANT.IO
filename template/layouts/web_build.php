@@ -383,8 +383,8 @@ $siteModel = Registry::model('site');
                                 <img src="../../template/images/apartments.png" alt="icons">
                                 <select>
                                     <option>Квартира</option>
-                                    <option>Квартира1</option>
-                                    <option>Квартира2</option>
+                                    <option>Квартира</option>
+                                    <option>Квартира</option>
                                 </select>
                             </label>
                         </div>
@@ -971,9 +971,7 @@ $siteModel = Registry::model('site');
                     </div>
                     <button onclick="quickSearch(event)">Задать точнее</button>
                     <div class="quick-search">
-                        <h5><i class="fa fa-map-marker" aria-hidden="true"></i>Введите город, район, область или
-                            точный адрес<span><img src="../../template/images/location.png" alt="location">выделить область на карте</span>
-                        </h5>
+                        <h5><i class="fa fa-map-marker" aria-hidden="true"></i>Введите город, район, область или точный адрес</h5>
                         <ul class="quick-search-by-parameters">
                             <li>
                                 <div class="select">Область
@@ -4011,9 +4009,7 @@ $siteModel = Registry::model('site');
                     </div>
                     <button onclick="quickSearch(event)">Задать точнее</button>
                     <div class="quick-search">
-                        <h5><i class="fa fa-map-marker" aria-hidden="true"></i>Введите город, район, область или
-                            точный адрес<span><img src="../../template/images/location.png" alt="location">выделить область на карте</span>
-                        </h5>
+                        <h5><i class="fa fa-map-marker" aria-hidden="true"></i>Введите город, район, область или точный адрес</h5>
                         <ul class="quick-search-by-parameters">
                             <li><label>Область
                                     <input name="" type="text" placeholder="Московская">
@@ -6714,7 +6710,7 @@ $siteModel = Registry::model('site');
             <h2>Мы трудимся для Вас</h2>
             <ul class="bxslider">
                 <li>
-                    <img src="../../template/images/daniil.png"/>
+                    <img src="../../template/images/01.png"/>
                     <div class="admins">
                         <h6>Александр Никулин</h6>
                         <span>Гениральный директор</span>
@@ -6724,7 +6720,7 @@ $siteModel = Registry::model('site');
                     </div>
                 </li>
                 <li>
-                    <img src="../../template/images/aleksandr.png"/>
+                    <img src="../../template/images/02.png"/>
                     <div class="admins">
                         <h6>Александр Никулин</h6>
                         <span>Гениральный директор</span>
@@ -6734,7 +6730,7 @@ $siteModel = Registry::model('site');
                     </div>
                 </li>
                 <li>
-                    <img src="../../template/images/daniil.png"/>
+                    <img src="../../template/images/03.png"/>
                     <div class="admins">
                         <h6>Александр Никулин</h6>
                         <span>Гениральный директор</span>
@@ -6744,7 +6740,17 @@ $siteModel = Registry::model('site');
                     </div>
                 </li>
                 <li>
-                    <img src="../../template/images/aleksandr.png"/>
+                    <img src="../../template/images/04.png"/>
+                    <div class="admins">
+                        <h6>Александр Никулин</h6>
+                        <span>Гениральный директор</span>
+                        <p>Наш сервис не просто воплощение стараний нашей команды, это сервис обеспечивающий
+                            комфортное
+                            приобретение или аренду жилья</p>
+                    </div>
+                </li>
+                <li>
+                    <img src="../../template/images/05.png"/>
                     <div class="admins">
                         <h6>Александр Никулин</h6>
                         <span>Гениральный директор</span>
@@ -6795,7 +6801,7 @@ $siteModel = Registry::model('site');
                 <li><a href="#"><i class="fa fa-vk" aria-hidden="true"></i><span>Вступай</span></a></li>
                 <li><a href="#"><i class="fa fa-youtube" aria-hidden="true"></i><span>Смотри</span></a></li>
                 <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i><span>Подписывайся</span></a></li>
-                <li><a href="#"><img src="../../template/images/work.png" alt="work"><span>У нас</span></a></li>
+                <li><a href="#"><div class="icon-footer"></div><span>У нас</span></a></li>
             </ul>
         </div>
     </div>
