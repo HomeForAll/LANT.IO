@@ -316,6 +316,12 @@
   }
 }
 
+.title-center {
+  display: block !important;
+  text-align: center !important;
+  width: auto !important;
+}
+
 .history-search {
   display: none;
   position: absolute;
@@ -710,6 +716,7 @@
     padding: 10px;
     color: #444 !important;
     border-radius: 0 !important;
+    border: none !important;
     text-align: left !important;
     background: #fff !important;
     &:hover {
@@ -722,6 +729,7 @@
   }
   & .jq-selectbox {
     width: auto !important;
+    min-width: 50% !important;
   }
   & .jq-selectbox__select {
     background: none;
@@ -930,12 +938,22 @@
     background: #fff;
     box-shadow: 0 5px 15px 1px #ebebeb;
     border-radius: 4px;
+    &[type="checkbox"] {
+      display: inline-block;
+      vertical-align: middle;
+    }
     &:valid {
       border: 1px solid green;
     }
     &:invalid {
       border: none;
     }
+  }
+  & .names-parameters {
+    float: none;
+  }
+  & .jq-selectbox {
+    float: right;
   }
 }
 
@@ -1158,8 +1176,9 @@
     margin: auto;
     width: 70%;
     &[type="checkbox"] {
-      display: inline-block;
-      vertical-align: middle;
+      width: 50%;
+      text-align: left;
+      float: right;
     }
   }
   span {
@@ -1168,8 +1187,11 @@
     width: auto;
     margin: 0 0 10px;
   }
-  .names-parameters {
+  & .names-parameters {
     float: none;
+  }
+  & .jq-selectbox {
+    float: right;
   }
 }
 
@@ -1248,6 +1270,11 @@
     background: #fff;
     box-shadow: 0 5px 15px 1px #ebebeb;
     border-radius: 4px;
+    &[type="checkbox"] {
+      width: 50%;
+      text-align: left;
+      float: right;
+    }
     &:valid {
       border: 1px solid green;
     }
@@ -1270,6 +1297,14 @@
     cursor: pointer;
     width: 220px;
     margin: 20px auto;
+  }
+  & .jq-selectbox__dropdown ul {
+    position: relative;
+    z-index: 5 !important;
+    width: auto;
+  }
+  & .jq-selectbox {
+    float: right;
   }
 }
 
@@ -1741,7 +1776,7 @@
     background: linear-gradient(to top,#fff,rgba(255,255,255,.0));
   }
   &::-webkit-scrollbar {
-    width: 6px;
+    width: 4px;
     background: #fff;
     border-radius: 4px;
     margin-right: 8px;
@@ -1802,7 +1837,7 @@
     text-align: left;
     font-size: 13px;
     color: #928787;
-    padding: 0 25px;
+    padding: 0 15px;
     margin: auto;
     height: 65px;
     line-height: 18px;
@@ -1839,7 +1874,7 @@
     text-align: left;
     color: #565656;
     padding: 0;
-    margin: 16px 0 16px 10px;
+    margin: 16px 0;
     font-weight: bold;
     font-size: 25px;
   }

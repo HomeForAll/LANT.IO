@@ -284,6 +284,11 @@
   border: none;
   background: none;
 }
+.title-center {
+  display: block !important;
+  text-align: center !important;
+  width: auto !important;
+}
 .history-search {
   display: none;
   position: absolute;
@@ -665,6 +670,7 @@
   padding: 10px;
   color: #444 !important;
   border-radius: 0 !important;
+  border: none !important;
   text-align: left !important;
   background: #fff !important;
 }
@@ -677,6 +683,7 @@
 }
 .select .jq-selectbox {
   width: auto !important;
+  min-width: 50% !important;
 }
 .select .jq-selectbox__select {
   background: none;
@@ -896,6 +903,12 @@
   box-shadow: 0 5px 15px 1px #ebebeb;
   border-radius: 4px;
 }
+.attachment input[type="checkbox"],
+.appearance-of-the-apartment input[type="checkbox"],
+.appearance-of-the-build input[type="checkbox"] {
+  display: inline-block;
+  vertical-align: middle;
+}
 .attachment input:valid,
 .appearance-of-the-apartment input:valid,
 .appearance-of-the-build input:valid {
@@ -905,6 +918,16 @@
 .appearance-of-the-apartment input:invalid,
 .appearance-of-the-build input:invalid {
   border: none;
+}
+.attachment .names-parameters,
+.appearance-of-the-apartment .names-parameters,
+.appearance-of-the-build .names-parameters {
+  float: none;
+}
+.attachment .jq-selectbox,
+.appearance-of-the-apartment .jq-selectbox,
+.appearance-of-the-build .jq-selectbox {
+  float: right;
 }
 .showBigOptions {
   position: absolute;
@@ -1184,8 +1207,9 @@
 .test-10 input[type="checkbox"],
 .test-11 input[type="checkbox"],
 .test-12 input[type="checkbox"] {
-  display: inline-block;
-  vertical-align: middle;
+  width: 50%;
+  text-align: left;
+  float: right;
 }
 .building-parameters-apartment span,
 .building-parameters-home span,
@@ -1217,6 +1241,20 @@
 .test-11 .names-parameters,
 .test-12 .names-parameters {
   float: none;
+}
+.building-parameters-apartment .jq-selectbox,
+.building-parameters-home .jq-selectbox,
+.building-parameters-room .jq-selectbox,
+.building-parameters-office-area .jq-selectbox,
+.building-parameters-separate-building .jq-selectbox,
+.building-parameters-ozs-сomplex .jq-selectbox,
+.test-7 .jq-selectbox,
+.test-8 .jq-selectbox,
+.test-9 .jq-selectbox,
+.test-10 .jq-selectbox,
+.test-11 .jq-selectbox,
+.test-12 .jq-selectbox {
+  float: right;
 }
 .repair-and-utilities-of-the-apartment,
 .close-repair-and-utilities-of-the-apartment,
@@ -1322,6 +1360,14 @@
   box-shadow: 0 5px 15px 1px #ebebeb;
   border-radius: 4px;
 }
+.repair-and-utilities-of-the-apartment input[type="checkbox"],
+.close-repair-and-utilities-of-the-apartment input[type="checkbox"],
+.apartment-settings input[type="checkbox"],
+.plot-of-land input[type="checkbox"] {
+  width: 50%;
+  text-align: left;
+  float: right;
+}
 .repair-and-utilities-of-the-apartment input:valid,
 .close-repair-and-utilities-of-the-apartment input:valid,
 .apartment-settings input:valid,
@@ -1355,6 +1401,20 @@
   cursor: pointer;
   width: 220px;
   margin: 20px auto;
+}
+.repair-and-utilities-of-the-apartment .jq-selectbox__dropdown ul,
+.close-repair-and-utilities-of-the-apartment .jq-selectbox__dropdown ul,
+.apartment-settings .jq-selectbox__dropdown ul,
+.plot-of-land .jq-selectbox__dropdown ul {
+  position: relative;
+  z-index: 5 !important;
+  width: auto;
+}
+.repair-and-utilities-of-the-apartment .jq-selectbox,
+.close-repair-and-utilities-of-the-apartment .jq-selectbox,
+.apartment-settings .jq-selectbox,
+.plot-of-land .jq-selectbox {
+  float: right;
 }
 .apartment-settings-apartment,
 .apartment-settings-separate-building,
@@ -1907,7 +1967,7 @@
   background: linear-gradient(to top, #fff, rgba(255, 255, 255, 0));
 }
 .all-apartments::-webkit-scrollbar {
-  width: 6px;
+  width: 4px;
   background: #fff;
   border-radius: 4px;
   margin-right: 8px;
@@ -1967,7 +2027,7 @@
   text-align: left;
   font-size: 13px;
   color: #928787;
-  padding: 0 25px;
+  padding: 0 15px;
   margin: auto;
   height: 65px;
   line-height: 18px;
@@ -2002,7 +2062,7 @@
   text-align: left;
   color: #565656;
   padding: 0;
-  margin: 16px 0 16px 10px;
+  margin: 16px 0;
   font-weight: bold;
   font-size: 25px;
 }

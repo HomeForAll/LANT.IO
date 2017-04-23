@@ -240,16 +240,6 @@ function allParam(filterParam) {
                 $('#searchYandexMap').show();
                 $map.fadeOut('slow');
             });
-
-            break;
-        case 'quickSearch':
-            var $quickSearch = $('.quick-search');
-            $quickSearch.css({'display': 'block'});
-
-            $('.closeQuickSearch').on('click', function (e) {
-                e.preventDefault();
-                $quickSearch.fadeOut('slow');
-            });
             break;
         case 'plotOfLand':
             var $plotOfLand = $('.plot-of-land');
@@ -294,7 +284,8 @@ function allFilterBlocks(filters) {
             var $searchMetro = $('.search-metro-main-block');
             $searchMetro.css({'display': 'block'});
 
-            $('.closeSearchMetro').on('click', function () {
+            $('.closeSearchMetro').on('click', function (e) {
+                e.preventDefault();
                 $searchMetro.hide('slow', function () {
                     $(this).css({'display': 'none'});
                 });
@@ -347,6 +338,21 @@ function allFilterBlocks(filters) {
         default: console.log('Фильтр не настроен');
     }
     blockFilterAndShadow.fadeOut('slow');
+}
+//---------------------------------------------------------
+
+/** Отмена за переход **/
+function quickSearch(event) {
+    var $quickSearch = $('.quick-search');
+
+    event.preventDefault();
+
+    $quickSearch.css({'display': 'block'});
+
+    $('.closeQuickSearch').on('click', function (e) {
+        e.preventDefault();
+        $quickSearch.fadeOut('slow');
+    });
 }
 //---------------------------------------------------------
 
@@ -430,8 +436,8 @@ $("#form").on('submit', function(e) { // устанавливаем событи
     /** Фильтры в доп.параметрах **/
     $amountBefore.val('20000');$amountAfter.val('20000');
     $amountBeforeBuy.val('20000');$amountAfterBuy.val('20000');
-     $mainAmountBefore.val('20000');$mainAmountAfter.val('20000');
-     $amountBeforeSearch.val('20000');$amountAfterSearch.val('20000');
+    $mainAmountBefore.val('20000');$mainAmountAfter.val('20000');
+    $amountBeforeSearch.val('20000');$amountAfterSearch.val('20000');
     $("#slider-range").slider({
         range: true,
         min: 20000,

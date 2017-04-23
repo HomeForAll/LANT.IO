@@ -969,7 +969,7 @@ $siteModel = Registry::model('site');
                             </div>
                         </div>
                     </div>
-                    <button onclick="allParam('quickSearch')">Задать точнее</button>
+                    <button onclick="quickSearch(event)">Задать точнее</button>
                     <div class="quick-search">
                         <h5><i class="fa fa-map-marker" aria-hidden="true"></i>Введите город, район, область или
                             точный адрес<span><img src="../../template/images/location.png" alt="location">выделить область на карте</span>
@@ -1239,7 +1239,7 @@ $siteModel = Registry::model('site');
                                 <h2>Ремонт и обустройства квартиры</h2>
                                 <ul>
                                     <li>
-                                        <p>Комнаты</p>
+                                        <p class="title-center">Комнаты</p>
                                         <label>Ванная<input type="checkbox" name="bathroom"></label>
                                         <label>Столовая<input type="checkbox" name="dining_room"></label>
                                         <label>Рабочий кабинет <input type="checkbox" name="study"></label>
@@ -1287,7 +1287,7 @@ $siteModel = Registry::model('site');
                                 <h2>Характеристики дома</h2>
                                 <ul>
                                     <li>
-                                        <p>Комнаты</p>
+                                        <p class="title-center">Комнаты</p>
                                         <label>Ванная<input type="checkbox" name="bathroom"></label>
                                         <label>Столовая<input type="checkbox" name="dining_room"></label>
                                         <label>Рабочий кабинет <input type="checkbox" name="study"></label>
@@ -1370,70 +1370,76 @@ $siteModel = Registry::model('site');
                         </li>
                     </ul>
                     <ul class="building-parameters-home">
-                        <li onclick="allParam('apartment');">
-                            <img src="../../template/images/search-1.png" alt="search">Параметры Объекта
+                        <li onclick="allParam('apartment')">
+                            <img src="../../template/images/search-1.png" alt="search">Исходные параметры квартиры
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
                             <div class="apartment-settings">
-                                <h2>Параметры Объекта</h2>
+                                <h2>Исходные параметры квартиры</h2>
                                 <ul>
+                                    <li>
+                                        <div class="select">
+                                            <label for="">Кол-во комнат
+                                                <select class="number-apartments" name="number_of_rooms" id="number_of_rooms">
+                                                    <option value="5">4+</option>
+                                                    <option value="4">4</option>
+                                                    <option value="3">3</option>
+                                                    <option value="2">2</option>
+                                                    <option value="1">1</option>
+                                                </select>
+                                            </label>
+                                        </div>
+                                    </li>
                                     <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
+                                        <p>От<input name="total-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="total-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
                                     </li>
                                     <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
+                                        <p>От<input name="not_residential-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="not_residential-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
                                     </li>
                                     <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
+                                        <p>От<input name="residential-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="residential-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
                                     </li>
                                     <li><span class="names-parameters">Балкон м2</span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
+                                        <p>От<input name="balcony-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="balcony-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
                                     </li>
-                                </ul>
-                                <ul>
+                                    <li><span class="names-parameters">Высота потолков</span>
+                                        <p>От<input name="ceiling_height-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="ceiling_height-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                    </li>
+                                    <li><span class="names-parameters">Этаж</span>
+                                        <p>От<input name="floor-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="floor-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                    </li>
                                     <li>
                                         <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
+                                            <label for="lavatory" >Санузел
+                                                <select id="lavatory">
+                                                    <option value="41">Не важно</option>
+                                                    <option value="116">Раздельный</option>
+                                                    <option value="29">Совмещенный</option>
                                                 </select>
                                             </label>
                                         </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li><span class="names-parameters">Высота потолков м</span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
-                                                    required></p>
                                     </li>
                                 </ul>
                                 <button class="closeBlock">Готово</button>
-                            </div>
-                            <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
                             </div>
                         </li>
                         <li onclick="allParam('repairAndUtilitiesOfTheApartment')">
@@ -1445,7 +1451,7 @@ $siteModel = Registry::model('site');
                                 <h2>Ремонт и обустройства квартиры</h2>
                                 <ul>
                                     <li>
-                                        <p>Комнаты</p>
+                                        <p class="title-center">Комнаты</p>
                                         <label>Ванная<input type="checkbox" name="bathroom"></label>
                                         <label>Столовая<input type="checkbox" name="dining_room"></label>
                                         <label>Рабочий кабинет <input type="checkbox" name="study"></label>
@@ -1602,6 +1608,9 @@ $siteModel = Registry::model('site');
                     <ul class="building-parameters-room">
                         <li onclick="allParam('apartment')">
                             <img src="../../template/images/search-1.png" alt="search">Исходные параметры квартиры
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
                             <div class="apartment-settings">
                                 <h2>Исходные параметры квартиры</h2>
                                 <ul>
@@ -1668,9 +1677,6 @@ $siteModel = Registry::model('site');
                                 </ul>
                                 <button class="closeBlock">Готово</button>
                             </div>
-                            <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
-                            </div>
                         </li>
                         <li onclick="allParam('repairAndUtilitiesOfTheApartment')">
                             <img src="../../template/images/search-2.png" alt="search">Ремонт и обустройства
@@ -1681,7 +1687,7 @@ $siteModel = Registry::model('site');
                                 <h2>Ремонт и обустройства квартиры</h2>
                                 <ul>
                                     <li>
-                                        <p>Комнаты</p>
+                                        <p class="title-center">Комнаты</p>
                                         <label>Ванная<input type="checkbox" name="bathroom"></label>
                                         <label>Столовая<input type="checkbox" name="dining_room"></label>
                                         <label>Рабочий кабинет <input type="checkbox" name="study"></label>
@@ -1729,7 +1735,7 @@ $siteModel = Registry::model('site');
                                 <h2>Характеристики дома</h2>
                                 <ul>
                                     <li>
-                                        <p>Комнаты</p>
+                                        <p class="title-center">Комнаты</p>
                                         <label>Ванная<input type="checkbox" name="bathroom"></label>
                                         <label>Столовая<input type="checkbox" name="dining_room"></label>
                                         <label>Рабочий кабинет <input type="checkbox" name="study"></label>
@@ -1812,70 +1818,76 @@ $siteModel = Registry::model('site');
                         </li>
                     </ul>
                     <ul class="building-parameters-office-area">
-                        <li onclick="allParam('apartment');">
-                            <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
+                        <li onclick="allParam('apartment')">
+                            <img src="../../template/images/search-1.png" alt="search">Исходные параметры квартиры
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
                             <div class="apartment-settings">
-                                <h2>Параметры квартиры</h2>
+                                <h2>Исходные параметры квартиры</h2>
                                 <ul>
+                                    <li>
+                                        <div class="select">
+                                            <label for="">Кол-во комнат
+                                                <select class="number-apartments" name="number_of_rooms" id="number_of_rooms">
+                                                    <option value="5">4+</option>
+                                                    <option value="4">4</option>
+                                                    <option value="3">3</option>
+                                                    <option value="2">2</option>
+                                                    <option value="1">1</option>
+                                                </select>
+                                            </label>
+                                        </div>
+                                    </li>
                                     <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
+                                        <p>От<input name="total-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="total-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
                                     </li>
                                     <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
+                                        <p>От<input name="not_residential-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="not_residential-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
                                     </li>
                                     <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
+                                        <p>От<input name="residential-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="residential-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
                                     </li>
                                     <li><span class="names-parameters">Балкон м2</span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
+                                        <p>От<input name="balcony-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="balcony-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
                                     </li>
-                                </ul>
-                                <ul>
+                                    <li><span class="names-parameters">Высота потолков</span>
+                                        <p>От<input name="ceiling_height-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="ceiling_height-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                    </li>
+                                    <li><span class="names-parameters">Этаж</span>
+                                        <p>От<input name="floor-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="floor-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                    </li>
                                     <li>
                                         <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
+                                            <label for="lavatory" >Санузел
+                                                <select id="lavatory">
+                                                    <option value="41">Не важно</option>
+                                                    <option value="116">Раздельный</option>
+                                                    <option value="29">Совмещенный</option>
                                                 </select>
                                             </label>
                                         </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li><span class="names-parameters">Высота потолков м</span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
-                                                    required></p>
                                     </li>
                                 </ul>
                                 <button class="closeBlock">Готово</button>
-                            </div>
-                            <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
                             </div>
                         </li>
                         <li onclick="allParam('apperanceOfTheApartment')">
@@ -1888,11 +1900,11 @@ $siteModel = Registry::model('site');
                                 <ul>
                                     <li>
                                         <div class="select">Базовый раздел
-                                            <p>Цена</p>
+                                            <p class="title-center">Цена</p>
                                             <label for="price-min">Стоимость:</label>
                                             <input id="price-min" name="price-min" type="text" placeholder="от">
                                             <input id="price-max" name="price-max" type="text" placeholder="до">
-                                            <b>Расположение</b>
+                                            <p class="title-center">Расположение</p>
                                         </div>
                                         <div id="ymap"></div>
                                         <label for="distance_from_mkad_or_metro-min">Удаленность от МКАД/метро:</label>
@@ -1965,6 +1977,9 @@ $siteModel = Registry::model('site');
                         </li>
                         <li onclick="allParam('appearanceBuild')">
                             <img src="../../template/images/search-4.png" alt="search">Исходные параметры
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
                             <div class="appearance-of-the-build">
                                 <h2>Исходные параметры</h2>
                                 <ul>
@@ -2057,9 +2072,6 @@ $siteModel = Registry::model('site');
                                 </ul>
                                 <button class="closeApparenceBuild">Поиск</button>
                             </div>
-                            <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
-                            </div>
                         </li>
                         <li><img src="../../template/images/search-5.png" alt="search">Безопасность
                             <div class="select main-filter-s">
@@ -2127,70 +2139,76 @@ $siteModel = Registry::model('site');
                         </li>
                     </ul>
                     <ul class="building-parameters-separate-building">
-                        <li onclick="allParam('apartment');">
-                            <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
+                        <li onclick="allParam('apartment')">
+                            <img src="../../template/images/search-1.png" alt="search">Исходные параметры квартиры
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
                             <div class="apartment-settings">
-                                <h2>Параметры квартиры</h2>
+                                <h2>Исходные параметры квартиры</h2>
                                 <ul>
+                                    <li>
+                                        <div class="select">
+                                            <label for="">Кол-во комнат
+                                                <select class="number-apartments" name="number_of_rooms" id="number_of_rooms">
+                                                    <option value="5">4+</option>
+                                                    <option value="4">4</option>
+                                                    <option value="3">3</option>
+                                                    <option value="2">2</option>
+                                                    <option value="1">1</option>
+                                                </select>
+                                            </label>
+                                        </div>
+                                    </li>
                                     <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
+                                        <p>От<input name="total-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="total-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
                                     </li>
                                     <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
+                                        <p>От<input name="not_residential-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="not_residential-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
                                     </li>
                                     <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
+                                        <p>От<input name="residential-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="residential-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
                                     </li>
                                     <li><span class="names-parameters">Балкон м2</span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
+                                        <p>От<input name="balcony-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="balcony-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
                                     </li>
-                                </ul>
-                                <ul>
+                                    <li><span class="names-parameters">Высота потолков</span>
+                                        <p>От<input name="ceiling_height-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="ceiling_height-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                    </li>
+                                    <li><span class="names-parameters">Этаж</span>
+                                        <p>От<input name="floor-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="floor-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                    </li>
                                     <li>
                                         <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
+                                            <label for="lavatory" >Санузел
+                                                <select id="lavatory">
+                                                    <option value="41">Не важно</option>
+                                                    <option value="116">Раздельный</option>
+                                                    <option value="29">Совмещенный</option>
                                                 </select>
                                             </label>
                                         </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li><span class="names-parameters">Высота потолков м</span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
-                                                    required></p>
                                     </li>
                                 </ul>
                                 <button class="closeBlock">Готово</button>
-                            </div>
-                            <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
                             </div>
                         </li>
                         <li onclick="allParam('apperanceOfTheApartment')">
@@ -2203,11 +2221,11 @@ $siteModel = Registry::model('site');
                                 <ul>
                                     <li>
                                         <div class="select">Базовый раздел
-                                            <p>Цена</p>
+                                            <p class="title-center">Цена</p>
                                             <label for="price-min">Стоимость:</label>
                                             <input id="price-min" name="price-min" type="text" placeholder="от">
                                             <input id="price-max" name="price-max" type="text" placeholder="до">
-                                            <b>Расположение</b>
+                                            <p class="title-center">Расположение</p>
                                         </div>
                                         <div id="ymap"></div>
                                         <label for="distance_from_mkad_or_metro-min">Удаленность от МКАД/метро:</label>
@@ -2298,49 +2316,102 @@ $siteModel = Registry::model('site');
                                 <span style="width:40%"></span>
                             </div>
                         </li>
-                        <li onclick="allParam('appearanceBuild')"><img src="../../template/images/search-4.png"
-                                                                       alt="search">Внешний вид здания
+                        <li onclick="allParam('appearanceBuild')">
+                            <img src="../../template/images/search-4.png" alt="search">Исходные параметры
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
                             <div class="appearance-of-the-build">
-                                <h2>Внешний вид здания</h2>
+                                <h2>Исходные параметры</h2>
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
+                                            <label for="space-min">Площадь:</label>
+                                            <input id="space-min" name="space-min" type="text" placeholder="от">
+                                            <input id="space-max" name="space-max" type="text" placeholder="до">
+                                            <label for="ceiling_height-min">Высота потолков:</label>
+                                            <input id="ceiling_height-min" name="ceiling_height-min" type="text" placeholder="от">
+                                            <input id="ceiling_height-max" name="ceiling_height-max" type="text" placeholder="до">
+                                            <label for="number_of_floors-min">Количество этажей:</label>
+                                            <input id="number_of_floors-min" name="number_of_floors-min" type="text" placeholder="от">
+                                            <input id="number_of_floors-max" name="number_of_floors-max" type="text" placeholder="до">
+                                            <label for="type_of_construction">Вид постройки:
+                                                <select name="type_of_construction" id="type_of_construction">
+                                                    <option value="111">Комнаты</option>
+                                                    <option value="90">Опен спэйс</option>
+                                                </select>
+                                            </label>
+                                            <label for="number_of_rooms-min">Количество комнат:</label>
+                                            <input id="number_of_rooms-min" name="number_of_rooms-min" type="text" placeholder="от">
+                                            <input id="number_of_rooms-max" name="number_of_rooms-max" type="text" placeholder="до">
+                                            <label for="year_of_construction-min">Год постройки/окончания строительства:</label>
+                                            <input id="year_of_construction-min" name="year_of_construction-min" type="text" placeholder="от">
+                                            <input id="year_of_construction-max" name="year_of_construction-max" type="text" placeholder="до">
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="select">
+                                            <label for="building_type">Тип здания
+                                                <select name="building_type" id="building_type">
+                                                    <option value="108">Жилое</option>
+                                                    <option value="8">Административное</option>
                                                 </select>
                                             </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
+                                            <label for="roofing">Кровля
+                                                <select name="roofing" id="roofing">
+                                                    <option value="67">Железо</option>
+                                                    <option value="34">Медь</option>
+                                                    <option value="76">Металлочерепица</option>
+                                                    <option value="113">Пескобетонная черепица</option>
+                                                    <option value="129">Черепица</option>
+                                                    <option value="123">Солома</option>
+                                                    <option value="122">Камень</option>
+                                                    <option value="118">Шифер</option>
+                                                    <option value="88">Ондулин</option>
+                                                    <option value="127">Временная</option>
                                                 </select>
                                             </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
+                                            <label for="foundation">Фундамент
+                                                <select name="foundation" id="foundation">
+                                                    <option value="120">Монолитная плита</option>
+                                                    <option value="125">Шведская плита</option>
+                                                    <option value="109">Ленточный</option>
+                                                    <option value="58">Ростверк</option>
+                                                    <option value="140">Без фундамента</option>
+                                                </select>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="select">
+                                            <label for="wall_material">Материал стен
+                                                <select name="wall_material" id="wall_material">
+                                                    <option value="49">Фахверк</option>
+                                                    <option value="19">Кирпич</option>
+                                                    <option value="105">Железобетон</option>
+                                                    <option value="78">Монолит</option>
+                                                    <option value="96">Пеноблок</option>
+                                                    <option value="55">Газосиликатные блоки</option>
+                                                    <option value="28">Шлакоблоки</option>
+                                                    <option value="27">Рубленое дерево</option>
+                                                    <option value="24">Лафет</option>
+                                                    <option value="112">Оцилиндрованное бревно</option>
+                                                    <option value="102">Профилированный брус</option>
+                                                    <option value="56">Клееный брус</option>
                                                 </select>
                                             </label>
                                         </div>
                                     </li>
                                 </ul>
                                 <button class="closeApparenceBuild">Поиск</button>
-                            </div>
-                            <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
                             </div>
                         </li>
                         <li><img src="../../template/images/search-5.png" alt="search">Безопасность
@@ -2409,70 +2480,76 @@ $siteModel = Registry::model('site');
                         </li>
                     </ul>
                     <ul class="building-parameters-ozs-сomplex">
-                        <li onclick="allParam('apartment');">
-                            <img src="../../template/images/search-1.png" alt="search">Параметры квартиры
+                        <li onclick="allParam('apartment')">
+                            <img src="../../template/images/search-1.png" alt="search">Исходные параметры квартиры
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
                             <div class="apartment-settings">
-                                <h2>Параметры квартиры</h2>
+                                <h2>Исходные параметры квартиры</h2>
                                 <ul>
+                                    <li>
+                                        <div class="select">
+                                            <label for="">Кол-во комнат
+                                                <select class="number-apartments" name="number_of_rooms" id="number_of_rooms">
+                                                    <option value="5">4+</option>
+                                                    <option value="4">4</option>
+                                                    <option value="3">3</option>
+                                                    <option value="2">2</option>
+                                                    <option value="1">1</option>
+                                                </select>
+                                            </label>
+                                        </div>
+                                    </li>
                                     <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
+                                        <p>От<input name="total-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="total-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
                                     </li>
                                     <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
+                                        <p>От<input name="not_residential-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="not_residential-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
                                     </li>
                                     <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
+                                        <p>От<input name="residential-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="residential-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
                                     </li>
                                     <li><span class="names-parameters">Балкон м2</span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
-                                                    required></p>
+                                        <p>От<input name="balcony-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="balcony-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
                                     </li>
-                                </ul>
-                                <ul>
+                                    <li><span class="names-parameters">Высота потолков</span>
+                                        <p>От<input name="ceiling_height-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="ceiling_height-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                    </li>
+                                    <li><span class="names-parameters">Этаж</span>
+                                        <p>От<input name="floor-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                        <p>До<input name="floor-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                                        </p>
+                                    </li>
                                     <li>
                                         <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
+                                            <label for="lavatory" >Санузел
+                                                <select id="lavatory">
+                                                    <option value="41">Не важно</option>
+                                                    <option value="116">Раздельный</option>
+                                                    <option value="29">Совмещенный</option>
                                                 </select>
                                             </label>
                                         </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li><span class="names-parameters">Высота потолков м</span>
-                                        <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
-                                                    required></p>
-                                        <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}"
-                                                    required></p>
                                     </li>
                                 </ul>
                                 <button class="closeBlock">Готово</button>
-                            </div>
-                            <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
                             </div>
                         </li>
                         <li onclick="allParam('apperanceOfTheApartment')">
@@ -2485,11 +2562,11 @@ $siteModel = Registry::model('site');
                                 <ul>
                                     <li>
                                         <div class="select">Базовый раздел
-                                            <p>Цена</p>
+                                            <p class="title-center">Цена</p>
                                             <label for="price-min">Стоимость:</label>
                                             <input id="price-min" name="price-min" type="text" placeholder="от">
                                             <input id="price-max" name="price-max" type="text" placeholder="до">
-                                            <b>Расположение</b>
+                                            <p class="title-center">Расположение</p>
                                         </div>
                                         <div id="ymap"></div>
                                         <label for="distance_from_mkad_or_metro-min">Удаленность от МКАД/метро:</label>
@@ -2590,49 +2667,102 @@ $siteModel = Registry::model('site');
                                 <span style="width:40%"></span>
                             </div>
                         </li>
-                        <li onclick="allParam('appearanceBuild')"><img src="../../template/images/search-4.png"
-                                                                       alt="search">Внешний вид здания
+                        <li onclick="allParam('appearanceBuild')">
+                            <img src="../../template/images/search-4.png" alt="search">Исходные параметры
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
                             <div class="appearance-of-the-build">
-                                <h2>Внешний вид здания</h2>
+                                <h2>Исходные параметры</h2>
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
+                                            <label for="space-min">Площадь:</label>
+                                            <input id="space-min" name="space-min" type="text" placeholder="от">
+                                            <input id="space-max" name="space-max" type="text" placeholder="до">
+                                            <label for="ceiling_height-min">Высота потолков:</label>
+                                            <input id="ceiling_height-min" name="ceiling_height-min" type="text" placeholder="от">
+                                            <input id="ceiling_height-max" name="ceiling_height-max" type="text" placeholder="до">
+                                            <label for="number_of_floors-min">Количество этажей:</label>
+                                            <input id="number_of_floors-min" name="number_of_floors-min" type="text" placeholder="от">
+                                            <input id="number_of_floors-max" name="number_of_floors-max" type="text" placeholder="до">
+                                            <label for="type_of_construction">Вид постройки:
+                                                <select name="type_of_construction" id="type_of_construction">
+                                                    <option value="111">Комнаты</option>
+                                                    <option value="90">Опен спэйс</option>
+                                                </select>
+                                            </label>
+                                            <label for="number_of_rooms-min">Количество комнат:</label>
+                                            <input id="number_of_rooms-min" name="number_of_rooms-min" type="text" placeholder="от">
+                                            <input id="number_of_rooms-max" name="number_of_rooms-max" type="text" placeholder="до">
+                                            <label for="year_of_construction-min">Год постройки/окончания строительства:</label>
+                                            <input id="year_of_construction-min" name="year_of_construction-min" type="text" placeholder="от">
+                                            <input id="year_of_construction-max" name="year_of_construction-max" type="text" placeholder="до">
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="select">
+                                            <label for="building_type">Тип здания
+                                                <select name="building_type" id="building_type">
+                                                    <option value="108">Жилое</option>
+                                                    <option value="8">Административное</option>
                                                 </select>
                                             </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
+                                            <label for="roofing">Кровля
+                                                <select name="roofing" id="roofing">
+                                                    <option value="67">Железо</option>
+                                                    <option value="34">Медь</option>
+                                                    <option value="76">Металлочерепица</option>
+                                                    <option value="113">Пескобетонная черепица</option>
+                                                    <option value="129">Черепица</option>
+                                                    <option value="123">Солома</option>
+                                                    <option value="122">Камень</option>
+                                                    <option value="118">Шифер</option>
+                                                    <option value="88">Ондулин</option>
+                                                    <option value="127">Временная</option>
                                                 </select>
                                             </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
+                                            <label for="foundation">Фундамент
+                                                <select name="foundation" id="foundation">
+                                                    <option value="120">Монолитная плита</option>
+                                                    <option value="125">Шведская плита</option>
+                                                    <option value="109">Ленточный</option>
+                                                    <option value="58">Ростверк</option>
+                                                    <option value="140">Без фундамента</option>
+                                                </select>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="select">
+                                            <label for="wall_material">Материал стен
+                                                <select name="wall_material" id="wall_material">
+                                                    <option value="49">Фахверк</option>
+                                                    <option value="19">Кирпич</option>
+                                                    <option value="105">Железобетон</option>
+                                                    <option value="78">Монолит</option>
+                                                    <option value="96">Пеноблок</option>
+                                                    <option value="55">Газосиликатные блоки</option>
+                                                    <option value="28">Шлакоблоки</option>
+                                                    <option value="27">Рубленое дерево</option>
+                                                    <option value="24">Лафет</option>
+                                                    <option value="112">Оцилиндрованное бревно</option>
+                                                    <option value="102">Профилированный брус</option>
+                                                    <option value="56">Клееный брус</option>
                                                 </select>
                                             </label>
                                         </div>
                                     </li>
                                 </ul>
                                 <button class="closeApparenceBuild">Поиск</button>
-                            </div>
-                            <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
                             </div>
                         </li>
                         <li><img src="../../template/images/search-5.png" alt="search">Безопасность
@@ -2717,11 +2847,11 @@ $siteModel = Registry::model('site');
                                 <ul>
                                     <li>
                                         <div class="select">Базовый раздел
-                                            <p>Цена</p>
+                                            <p class="title-center">Цена</p>
                                             <label for="price-min">Стоимость:</label>
                                             <input id="price-min" name="price-min" type="text" placeholder="от">
                                             <input id="price-max" name="price-max" type="text" placeholder="до">
-                                            <b>Расположение</b>
+                                            <p class="title-center">Расположение</p>
                                         </div>
                                         <div id="ymap"></div>
                                         <label for="distance_from_mkad_or_metro-min">Удаленность от МКАД/метро:</label>
@@ -2828,11 +2958,11 @@ $siteModel = Registry::model('site');
                                 <ul>
                                     <li>
                                         <div class="select">Базовый раздел
-                                            <p>Цена</p>
+                                            <p class="title-center">Цена</p>
                                             <label for="price-min">Стоимость:</label>
                                             <input id="price-min" name="price-min" type="text" placeholder="от">
                                             <input id="price-max" name="price-max" type="text" placeholder="до">
-                                            <b>Расположение</b>
+                                            <p class="title-center">Расположение</p>
                                         </div>
                                         <div id="ymap"></div>
                                         <label for="distance_from_mkad_or_metro-min">Удаленность от МКАД/метро:</label>
@@ -2939,11 +3069,11 @@ $siteModel = Registry::model('site');
                                 <ul>
                                     <li>
                                         <div class="select">Базовый раздел
-                                            <p>Цена</p>
+                                            <p class="title-center">Цена</p>
                                             <label for="price-min">Стоимость:</label>
                                             <input id="price-min" name="price-min" type="text" placeholder="от">
                                             <input id="price-max" name="price-max" type="text" placeholder="до">
-                                            <b>Расположение</b>
+                                            <p class="title-center">Расположение</p>
                                         </div>
                                         <div id="ymap"></div>
                                         <label for="distance_from_mkad_or_metro-min">Удаленность от МКАД/метро:</label>
@@ -3050,11 +3180,11 @@ $siteModel = Registry::model('site');
                                 <ul>
                                     <li>
                                         <div class="select">Базовый раздел
-                                            <p>Цена</p>
+                                            <p class="title-center">Цена</p>
                                             <label for="price-min">Стоимость:</label>
                                             <input id="price-min" name="price-min" type="text" placeholder="от">
                                             <input id="price-max" name="price-max" type="text" placeholder="до">
-                                            <b>Расположение</b>
+                                            <p class="title-center">Расположение</p>
                                         </div>
                                         <div id="ymap"></div>
                                         <label for="distance_from_mkad_or_metro-min">Удаленность от МКАД/метро:</label>
@@ -3161,11 +3291,11 @@ $siteModel = Registry::model('site');
                                 <ul>
                                     <li>
                                         <div class="select">Базовый раздел
-                                            <p>Цена</p>
+                                            <p class="title-center">Цена</p>
                                             <label for="price-min">Стоимость:</label>
                                             <input id="price-min" name="price-min" type="text" placeholder="от">
                                             <input id="price-max" name="price-max" type="text" placeholder="до">
-                                            <b>Расположение</b>
+                                            <p class="title-center">Расположение</p>
                                         </div>
                                         <div id="ymap"></div>
                                         <label for="distance_from_mkad_or_metro-min">Удаленность от МКАД/метро:</label>
@@ -3272,11 +3402,11 @@ $siteModel = Registry::model('site');
                                 <ul>
                                     <li>
                                         <div class="select">Базовый раздел
-                                            <p>Цена</p>
+                                            <p class="title-center">Цена</p>
                                             <label for="price-min">Стоимость:</label>
                                             <input id="price-min" name="price-min" type="text" placeholder="от">
                                             <input id="price-max" name="price-max" type="text" placeholder="до">
-                                            <b>Расположение</b>
+                                            <p class="title-center">Расположение</p>
                                         </div>
                                         <div id="ymap"></div>
                                         <label for="distance_from_mkad_or_metro-min">Удаленность от МКАД/метро:</label>
@@ -3879,7 +4009,7 @@ $siteModel = Registry::model('site');
                             </div>
                         </div>
                     </div>
-                    <button onclick="allParam('quickSearch')">Задать точнее</button>
+                    <button onclick="quickSearch(event)">Задать точнее</button>
                     <div class="quick-search">
                         <h5><i class="fa fa-map-marker" aria-hidden="true"></i>Введите город, район, область или
                             точный адрес<span><img src="../../template/images/location.png" alt="location">выделить область на карте</span>
@@ -4199,7 +4329,7 @@ $siteModel = Registry::model('site');
                                 <h2>Ремонт и обустройства квартиры</h2>
                                 <ul>
                                     <li>
-                                        <p>Комнаты</p>
+                                        <p class="title-center">Комнаты</p>
                                         <label>Ванная<input type="checkbox" name="bathroom"></label>
                                         <label>Столовая<input type="checkbox" name="dining_room"></label>
                                         <label>Рабочий кабинет <input type="checkbox" name="study"></label>
@@ -4247,7 +4377,7 @@ $siteModel = Registry::model('site');
                                 <h2>Характеристики дома</h2>
                                 <ul>
                                     <li>
-                                        <p>Комнаты</p>
+                                        <p class="title-center">Комнаты</p>
                                         <label>Ванная<input type="checkbox" name="bathroom"></label>
                                         <label>Столовая<input type="checkbox" name="dining_room"></label>
                                         <label>Рабочий кабинет <input type="checkbox" name="study"></label>
@@ -4412,11 +4542,11 @@ $siteModel = Registry::model('site');
                                 <ul>
                                     <li>
                                         <div class="select">Базовый раздел
-                                            <p>Цена</p>
+                                            <p class="title-center">Цена</p>
                                             <label for="price-min">Стоимость:</label>
                                             <input id="price-min" name="price-min" type="text" placeholder="от">
                                             <input id="price-max" name="price-max" type="text" placeholder="до">
-                                            <b>Расположение</b>
+                                            <p class="title-center">Расположение</p>
                                         </div>
                                         <div id="ymap"></div>
                                         <label for="distance_from_mkad_or_metro-min">Удаленность от МКАД/метро:</label>
@@ -4507,121 +4637,11 @@ $siteModel = Registry::model('site');
                                 <span style="width:40%"></span>
                             </div>
                         </li>
-                        <li onclick="allParam('appearanceBuild')"><img src="../../template/images/search-4.png"
-                                                                       alt="search">Внешний вид здания
-                            <div class="appearance-of-the-build">
-                                <h2>Внешний вид здания</h2>
-                                <ul>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <button class="closeApparenceBuild">Поиск</button>
-                            </div>
-                            <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
-                            </div>
-                        </li>
-                        <li><img src="../../template/images/search-5.png" alt="search">Безопасность
-                            <div class="select main-filter-s">
-                                <label for="">
-                                    <select>
-                                        <option>Language of communication</option>
-                                        <option>English</option>
-                                        <option>Spanish</option>
-                                    </select>
-                                </label>
-                            </div>
-                        </li>
-                        <li><img src="../../template/images/search-1.png" alt="search">Документы
-                            <div class="select main-filter-s">
-                                <label for="">
-                                    <select>
-                                        <option>Language of communication</option>
-                                        <option>English</option>
-                                        <option>Spanish</option>
-                                    </select>
-                                </label>
-                            </div>
-                        </li>
-                        <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png"
-                                                                   alt="search">Вложения
-                            <div class="attachment">
-                                <h2>Вложения</h2>
-                                <ul>
-                                    <li>
-                                        <div class="select">
-                                            <label for=""><select>
-                                                    <option>Прилагается</option>
-                                                    <option>Прилагается1</option>
-                                                    <option>Прилагается2</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
-                                                </select>
-                                            </label>
-                                        </div>
-                                    </li>
-                                </ul>
-                                <button class="closeAttachment">Готово</button>
-                            </div>
-                            <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
-                            </div>
-                        </li>
-                    </ul>
-                    <ul class="building-parameters-office-area">
                         <li onclick="allParam('appearanceBuild')">
                             <img src="../../template/images/search-4.png" alt="search">Исходные параметры
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
                             <div class="appearance-of-the-build">
                                 <h2>Исходные параметры</h2>
                                 <ul>
@@ -4714,8 +4734,171 @@ $siteModel = Registry::model('site');
                                 </ul>
                                 <button class="closeApparenceBuild">Поиск</button>
                             </div>
+                        </li>
+                        <li><img src="../../template/images/search-5.png" alt="search">Безопасность
+                            <div class="select main-filter-s">
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </li>
+                        <li><img src="../../template/images/search-1.png" alt="search">Документы
+                            <div class="select main-filter-s">
+                                <label for="">
+                                    <select>
+                                        <option>Language of communication</option>
+                                        <option>English</option>
+                                        <option>Spanish</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </li>
+                        <li onclick="allParam('attachment');"><img src="../../template/images/search-1.png"
+                                                                   alt="search">Вложения
+                            <div class="attachment">
+                                <h2>Вложения</h2>
+                                <ul>
+                                    <li>
+                                        <div class="select">
+                                            <label for=""><select>
+                                                    <option>Прилагается</option>
+                                                    <option>Прилагается1</option>
+                                                    <option>Прилагается2</option>
+                                                </select>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="select">
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="select">
+                                            <label for="">
+                                                <select>
+                                                    <option>Language of communication</option>
+                                                    <option>English</option>
+                                                    <option>Spanish</option>
+                                                </select>
+                                            </label>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <button class="closeAttachment">Готово</button>
+                            </div>
                             <div class="progress-bar blue stripes">
                                 <span style="width:0"></span>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="building-parameters-office-area">
+                        <li onclick="allParam('appearanceBuild')">
+                            <img src="../../template/images/search-4.png" alt="search">Исходные параметры
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
+                            <div class="appearance-of-the-build">
+                                <h2>Исходные параметры</h2>
+                                <ul>
+                                    <li>
+                                        <div class="select">
+                                            <label for="space-min">Площадь:</label>
+                                            <input id="space-min" name="space-min" type="text" placeholder="от">
+                                            <input id="space-max" name="space-max" type="text" placeholder="до">
+                                            <label for="ceiling_height-min">Высота потолков:</label>
+                                            <input id="ceiling_height-min" name="ceiling_height-min" type="text" placeholder="от">
+                                            <input id="ceiling_height-max" name="ceiling_height-max" type="text" placeholder="до">
+                                            <label for="number_of_floors-min">Количество этажей:</label>
+                                            <input id="number_of_floors-min" name="number_of_floors-min" type="text" placeholder="от">
+                                            <input id="number_of_floors-max" name="number_of_floors-max" type="text" placeholder="до">
+                                            <label for="type_of_construction">Вид постройки:
+                                                <select name="type_of_construction" id="type_of_construction">
+                                                    <option value="111">Комнаты</option>
+                                                    <option value="90">Опен спэйс</option>
+                                                </select>
+                                            </label>
+                                            <label for="number_of_rooms-min">Количество комнат:</label>
+                                            <input id="number_of_rooms-min" name="number_of_rooms-min" type="text" placeholder="от">
+                                            <input id="number_of_rooms-max" name="number_of_rooms-max" type="text" placeholder="до">
+                                            <label for="year_of_construction-min">Год постройки/окончания строительства:</label>
+                                            <input id="year_of_construction-min" name="year_of_construction-min" type="text" placeholder="от">
+                                            <input id="year_of_construction-max" name="year_of_construction-max" type="text" placeholder="до">
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="select">
+                                            <label for="building_type">Тип здания
+                                                <select name="building_type" id="building_type">
+                                                    <option value="108">Жилое</option>
+                                                    <option value="8">Административное</option>
+                                                </select>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="select">
+                                            <label for="roofing">Кровля
+                                                <select name="roofing" id="roofing">
+                                                    <option value="67">Железо</option>
+                                                    <option value="34">Медь</option>
+                                                    <option value="76">Металлочерепица</option>
+                                                    <option value="113">Пескобетонная черепица</option>
+                                                    <option value="129">Черепица</option>
+                                                    <option value="123">Солома</option>
+                                                    <option value="122">Камень</option>
+                                                    <option value="118">Шифер</option>
+                                                    <option value="88">Ондулин</option>
+                                                    <option value="127">Временная</option>
+                                                </select>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="select">
+                                            <label for="foundation">Фундамент
+                                                <select name="foundation" id="foundation">
+                                                    <option value="120">Монолитная плита</option>
+                                                    <option value="125">Шведская плита</option>
+                                                    <option value="109">Ленточный</option>
+                                                    <option value="58">Ростверк</option>
+                                                    <option value="140">Без фундамента</option>
+                                                </select>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="select">
+                                            <label for="wall_material">Материал стен
+                                                <select name="wall_material" id="wall_material">
+                                                    <option value="49">Фахверк</option>
+                                                    <option value="19">Кирпич</option>
+                                                    <option value="105">Железобетон</option>
+                                                    <option value="78">Монолит</option>
+                                                    <option value="96">Пеноблок</option>
+                                                    <option value="55">Газосиликатные блоки</option>
+                                                    <option value="28">Шлакоблоки</option>
+                                                    <option value="27">Рубленое дерево</option>
+                                                    <option value="24">Лафет</option>
+                                                    <option value="112">Оцилиндрованное бревно</option>
+                                                    <option value="102">Профилированный брус</option>
+                                                    <option value="56">Клееный брус</option>
+                                                </select>
+                                            </label>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <button class="closeApparenceBuild">Поиск</button>
                             </div>
                         </li>
                         <li onclick="allParam('repairAndUtilitiesOfTheApartment')">
@@ -4727,7 +4910,7 @@ $siteModel = Registry::model('site');
                                 <h2>Ремонт и обустройства квартиры</h2>
                                 <ul>
                                     <li>
-                                        <p>Комнаты</p>
+                                        <p class="title-center">Комнаты</p>
                                         <label>Ванная<input type="checkbox" name="bathroom"></label>
                                         <label>Столовая<input type="checkbox" name="dining_room"></label>
                                         <label>Рабочий кабинет <input type="checkbox" name="study"></label>
@@ -4850,11 +5033,11 @@ $siteModel = Registry::model('site');
                                 <ul>
                                     <li>
                                         <div class="select">Базовый раздел
-                                            <p>Цена</p>
+                                            <p class="title-center">Цена</p>
                                             <label for="price-min">Стоимость:</label>
                                             <input id="price-min" name="price-min" type="text" placeholder="от">
                                             <input id="price-max" name="price-max" type="text" placeholder="до">
-                                            <b>Расположение</b>
+                                            <p class="title-center">Расположение</p>
                                         </div>
                                         <div id="ymap"></div>
                                         <label for="distance_from_mkad_or_metro-min">Удаленность от МКАД/метро:</label>
@@ -4946,48 +5129,101 @@ $siteModel = Registry::model('site');
                             </div>
                         </li>
                         <li onclick="allParam('appearanceBuild')">
-                            <img src="../../template/images/search-4.png" alt="search">Внешний вид здания
+                            <img src="../../template/images/search-4.png" alt="search">Исходные параметры
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
                             <div class="appearance-of-the-build">
-                                <h2>Внешний вид здания</h2>
+                                <h2>Исходные параметры</h2>
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
+                                            <label for="space-min">Площадь:</label>
+                                            <input id="space-min" name="space-min" type="text" placeholder="от">
+                                            <input id="space-max" name="space-max" type="text" placeholder="до">
+                                            <label for="ceiling_height-min">Высота потолков:</label>
+                                            <input id="ceiling_height-min" name="ceiling_height-min" type="text" placeholder="от">
+                                            <input id="ceiling_height-max" name="ceiling_height-max" type="text" placeholder="до">
+                                            <label for="number_of_floors-min">Количество этажей:</label>
+                                            <input id="number_of_floors-min" name="number_of_floors-min" type="text" placeholder="от">
+                                            <input id="number_of_floors-max" name="number_of_floors-max" type="text" placeholder="до">
+                                            <label for="type_of_construction">Вид постройки:
+                                                <select name="type_of_construction" id="type_of_construction">
+                                                    <option value="111">Комнаты</option>
+                                                    <option value="90">Опен спэйс</option>
+                                                </select>
+                                            </label>
+                                            <label for="number_of_rooms-min">Количество комнат:</label>
+                                            <input id="number_of_rooms-min" name="number_of_rooms-min" type="text" placeholder="от">
+                                            <input id="number_of_rooms-max" name="number_of_rooms-max" type="text" placeholder="до">
+                                            <label for="year_of_construction-min">Год постройки/окончания строительства:</label>
+                                            <input id="year_of_construction-min" name="year_of_construction-min" type="text" placeholder="от">
+                                            <input id="year_of_construction-max" name="year_of_construction-max" type="text" placeholder="до">
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="select">
+                                            <label for="building_type">Тип здания
+                                                <select name="building_type" id="building_type">
+                                                    <option value="108">Жилое</option>
+                                                    <option value="8">Административное</option>
                                                 </select>
                                             </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
+                                            <label for="roofing">Кровля
+                                                <select name="roofing" id="roofing">
+                                                    <option value="67">Железо</option>
+                                                    <option value="34">Медь</option>
+                                                    <option value="76">Металлочерепица</option>
+                                                    <option value="113">Пескобетонная черепица</option>
+                                                    <option value="129">Черепица</option>
+                                                    <option value="123">Солома</option>
+                                                    <option value="122">Камень</option>
+                                                    <option value="118">Шифер</option>
+                                                    <option value="88">Ондулин</option>
+                                                    <option value="127">Временная</option>
                                                 </select>
                                             </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
+                                            <label for="foundation">Фундамент
+                                                <select name="foundation" id="foundation">
+                                                    <option value="120">Монолитная плита</option>
+                                                    <option value="125">Шведская плита</option>
+                                                    <option value="109">Ленточный</option>
+                                                    <option value="58">Ростверк</option>
+                                                    <option value="140">Без фундамента</option>
+                                                </select>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="select">
+                                            <label for="wall_material">Материал стен
+                                                <select name="wall_material" id="wall_material">
+                                                    <option value="49">Фахверк</option>
+                                                    <option value="19">Кирпич</option>
+                                                    <option value="105">Железобетон</option>
+                                                    <option value="78">Монолит</option>
+                                                    <option value="96">Пеноблок</option>
+                                                    <option value="55">Газосиликатные блоки</option>
+                                                    <option value="28">Шлакоблоки</option>
+                                                    <option value="27">Рубленое дерево</option>
+                                                    <option value="24">Лафет</option>
+                                                    <option value="112">Оцилиндрованное бревно</option>
+                                                    <option value="102">Профилированный брус</option>
+                                                    <option value="56">Клееный брус</option>
                                                 </select>
                                             </label>
                                         </div>
                                     </li>
                                 </ul>
                                 <button class="closeApparenceBuild">Поиск</button>
-                            </div>
-                            <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
                             </div>
                         </li>
                         <li><img src="../../template/images/search-5.png" alt="search">Безопасность
@@ -5140,11 +5376,11 @@ $siteModel = Registry::model('site');
                                 <ul>
                                     <li>
                                         <div class="select">Базовый раздел
-                                            <p>Цена</p>
+                                            <p class="title-center">Цена</p>
                                             <label for="price-min">Стоимость:</label>
                                             <input id="price-min" name="price-min" type="text" placeholder="от">
                                             <input id="price-max" name="price-max" type="text" placeholder="до">
-                                            <b>Расположение</b>
+                                            <p class="title-center">Расположение</p>
                                         </div>
                                         <div id="ymap"></div>
                                         <label for="distance_from_mkad_or_metro-min">Удаленность от МКАД/метро:</label>
@@ -5235,49 +5471,102 @@ $siteModel = Registry::model('site');
                                 <span style="width:40%"></span>
                             </div>
                         </li>
-                        <li onclick="allParam('appearanceBuild')"><img src="../../template/images/search-4.png"
-                                                                       alt="search">Внешний вид здания
+                        <li onclick="allParam('appearanceBuild')">
+                            <img src="../../template/images/search-4.png" alt="search">Исходные параметры
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
                             <div class="appearance-of-the-build">
-                                <h2>Внешний вид здания</h2>
+                                <h2>Исходные параметры</h2>
                                 <ul>
                                     <li>
                                         <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
+                                            <label for="space-min">Площадь:</label>
+                                            <input id="space-min" name="space-min" type="text" placeholder="от">
+                                            <input id="space-max" name="space-max" type="text" placeholder="до">
+                                            <label for="ceiling_height-min">Высота потолков:</label>
+                                            <input id="ceiling_height-min" name="ceiling_height-min" type="text" placeholder="от">
+                                            <input id="ceiling_height-max" name="ceiling_height-max" type="text" placeholder="до">
+                                            <label for="number_of_floors-min">Количество этажей:</label>
+                                            <input id="number_of_floors-min" name="number_of_floors-min" type="text" placeholder="от">
+                                            <input id="number_of_floors-max" name="number_of_floors-max" type="text" placeholder="до">
+                                            <label for="type_of_construction">Вид постройки:
+                                                <select name="type_of_construction" id="type_of_construction">
+                                                    <option value="111">Комнаты</option>
+                                                    <option value="90">Опен спэйс</option>
+                                                </select>
+                                            </label>
+                                            <label for="number_of_rooms-min">Количество комнат:</label>
+                                            <input id="number_of_rooms-min" name="number_of_rooms-min" type="text" placeholder="от">
+                                            <input id="number_of_rooms-max" name="number_of_rooms-max" type="text" placeholder="до">
+                                            <label for="year_of_construction-min">Год постройки/окончания строительства:</label>
+                                            <input id="year_of_construction-min" name="year_of_construction-min" type="text" placeholder="от">
+                                            <input id="year_of_construction-max" name="year_of_construction-max" type="text" placeholder="до">
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="select">
+                                            <label for="building_type">Тип здания
+                                                <select name="building_type" id="building_type">
+                                                    <option value="108">Жилое</option>
+                                                    <option value="8">Административное</option>
                                                 </select>
                                             </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
+                                            <label for="roofing">Кровля
+                                                <select name="roofing" id="roofing">
+                                                    <option value="67">Железо</option>
+                                                    <option value="34">Медь</option>
+                                                    <option value="76">Металлочерепица</option>
+                                                    <option value="113">Пескобетонная черепица</option>
+                                                    <option value="129">Черепица</option>
+                                                    <option value="123">Солома</option>
+                                                    <option value="122">Камень</option>
+                                                    <option value="118">Шифер</option>
+                                                    <option value="88">Ондулин</option>
+                                                    <option value="127">Временная</option>
                                                 </select>
                                             </label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="">
-                                                <select>
-                                                    <option>Language of communication</option>
-                                                    <option>English</option>
-                                                    <option>Spanish</option>
+                                            <label for="foundation">Фундамент
+                                                <select name="foundation" id="foundation">
+                                                    <option value="120">Монолитная плита</option>
+                                                    <option value="125">Шведская плита</option>
+                                                    <option value="109">Ленточный</option>
+                                                    <option value="58">Ростверк</option>
+                                                    <option value="140">Без фундамента</option>
+                                                </select>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="select">
+                                            <label for="wall_material">Материал стен
+                                                <select name="wall_material" id="wall_material">
+                                                    <option value="49">Фахверк</option>
+                                                    <option value="19">Кирпич</option>
+                                                    <option value="105">Железобетон</option>
+                                                    <option value="78">Монолит</option>
+                                                    <option value="96">Пеноблок</option>
+                                                    <option value="55">Газосиликатные блоки</option>
+                                                    <option value="28">Шлакоблоки</option>
+                                                    <option value="27">Рубленое дерево</option>
+                                                    <option value="24">Лафет</option>
+                                                    <option value="112">Оцилиндрованное бревно</option>
+                                                    <option value="102">Профилированный брус</option>
+                                                    <option value="56">Клееный брус</option>
                                                 </select>
                                             </label>
                                         </div>
                                     </li>
                                 </ul>
                                 <button class="closeApparenceBuild">Поиск</button>
-                            </div>
-                            <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
                             </div>
                         </li>
                         <li><img src="../../template/images/search-5.png" alt="search">Безопасность
@@ -5390,6 +5679,9 @@ $siteModel = Registry::model('site');
                     <ul class="test-9">
                         <li onclick="allParam('appearanceBuild')">
                             <img src="../../template/images/search-4.png" alt="search">Исходные параметры
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
                             <div class="appearance-of-the-build">
                                 <h2>Исходные параметры</h2>
                                 <ul>
@@ -5482,9 +5774,6 @@ $siteModel = Registry::model('site');
                                 </ul>
                                 <button class="closeApparenceBuild">Поиск</button>
                             </div>
-                            <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
-                            </div>
                         </li>
                         <li onclick="allParam('repairAndUtilitiesOfTheApartment')">
                             <img src="../../template/images/search-2.png" alt="search">Ремонт и обустройства
@@ -5495,7 +5784,7 @@ $siteModel = Registry::model('site');
                                 <h2>Ремонт и обустройства квартиры</h2>
                                 <ul>
                                     <li>
-                                        <p>Комнаты</p>
+                                        <p class="title-center">Комнаты</p>
                                         <label>Ванная<input type="checkbox" name="bathroom"></label>
                                         <label>Столовая<input type="checkbox" name="dining_room"></label>
                                         <label>Рабочий кабинет <input type="checkbox" name="study"></label>
@@ -5550,6 +5839,9 @@ $siteModel = Registry::model('site');
                     <ul class="test-10">
                         <li onclick="allParam('appearanceBuild')">
                             <img src="../../template/images/search-4.png" alt="search">Исходные параметры
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
                             <div class="appearance-of-the-build">
                                 <h2>Исходные параметры</h2>
                                 <ul>
@@ -5642,9 +5934,6 @@ $siteModel = Registry::model('site');
                                 </ul>
                                 <button class="closeApparenceBuild">Поиск</button>
                             </div>
-                            <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
-                            </div>
                         </li>
                         <li onclick="allParam('repairAndUtilitiesOfTheApartment')">
                             <img src="../../template/images/search-2.png" alt="search">Ремонт и обустройства
@@ -5655,7 +5944,7 @@ $siteModel = Registry::model('site');
                                 <h2>Ремонт и обустройства квартиры</h2>
                                 <ul>
                                     <li>
-                                        <p>Комнаты</p>
+                                        <p class="title-center">Комнаты</p>
                                         <label>Ванная<input type="checkbox" name="bathroom"></label>
                                         <label>Столовая<input type="checkbox" name="dining_room"></label>
                                         <label>Рабочий кабинет <input type="checkbox" name="study"></label>
@@ -5710,6 +5999,9 @@ $siteModel = Registry::model('site');
                     <ul class="test-11">
                         <li onclick="allParam('appearanceBuild')">
                             <img src="../../template/images/search-4.png" alt="search">Исходные параметры
+                            <div class="progress-bar blue stripes">
+                                <span style="width:0"></span>
+                            </div>
                             <div class="appearance-of-the-build">
                                 <h2>Исходные параметры</h2>
                                 <ul>
@@ -5802,9 +6094,6 @@ $siteModel = Registry::model('site');
                                 </ul>
                                 <button class="closeApparenceBuild">Поиск</button>
                             </div>
-                            <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
-                            </div>
                         </li>
                         <li onclick="allParam('repairAndUtilitiesOfTheApartment')">
                             <img src="../../template/images/search-2.png" alt="search">Ремонт и обустройства
@@ -5815,7 +6104,7 @@ $siteModel = Registry::model('site');
                                 <h2>Ремонт и обустройства квартиры</h2>
                                 <ul>
                                     <li>
-                                        <p>Комнаты</p>
+                                        <p class="title-center">Комнаты</p>
                                         <label>Ванная<input type="checkbox" name="bathroom"></label>
                                         <label>Столовая<input type="checkbox" name="dining_room"></label>
                                         <label>Рабочий кабинет <input type="checkbox" name="study"></label>
