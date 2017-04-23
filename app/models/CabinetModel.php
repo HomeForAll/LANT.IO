@@ -8,6 +8,7 @@ class CabinetModel extends Model
     private $mailer;
 
 
+
     public function __construct()
     {
         parent::__construct();
@@ -214,10 +215,35 @@ class CabinetModel extends Model
         return $this->getdialogs();
     }
 
+    public function CountOfUsersInDialogCheck($chat_owners)
+    {
+        $admin_status = 8;
+        $max_count_of_dialog_users = 5;
+        $count_of_owners = 0;
+        $CountOfUsersInDialogCheck_flag = 0;
+
+        foreach ($chat_owners as $key => $value) {
+            $stmt = $this->db->prepare("SELECT status FROM users WHERE id = {$value}");
+            $stmt->execute();
+            $user_or_admin_flag = $stmt->fetchAll();
+
+            if ($user_or_admin_flag[0][0] != $admin_status) {
+                $count_of_owners++;
+            }
+        }
+
+        if ($count_of_owners >= $max_count_of_dialog_users) {
+            $CountOfUsersInDialogCheck_flag = 1;
+        }
+        return $CountOfUsersInDialogCheck_flag;
+    }
+
     public function create_new_dialog()
     {
+        $_SESSION['count_of_users_in_dialog_error'] = 0;
         unset($_SESSION['add_admin_button']);
-        $admin_status = 5;
+        $admin_status = 8;
+
         $profile_id = $_SESSION['userID'];
         if (isset($_POST['add_user']) || (isset($_POST['add_admin']))) {
             $matrix = $_SESSION['matrix_for_dialogs'][$_SESSION['chat']];
@@ -228,52 +254,60 @@ class CabinetModel extends Model
 
             $chat_owners = explode(",", $chat_owner[0]['owners']);
 
-            $query = 'SELECT * FROM users WHERE id != ';
-            foreach ($chat_owners as $value => $key) {
-                if ($value == 0)
-                    $query .= $key;
-                else
-                    $query .= ' AND id != ' . $key;
-            }
+            if ($this->CountOfUsersInDialogCheck($chat_owners) == 0) {
+                $query = 'SELECT * FROM users WHERE id != ';
+                foreach ($chat_owners as $value => $key) {
+                    if ($value == 0)
+                        $query .= $key;
+                    else
+                        $query .= ' AND id != ' . $key;
+                }
 
-            if (isset($_POST['add_admin'])) {
-                $query .= ' AND status = ' . $admin_status;
-                $_SESSION['add_admin_button'] = 1;
-            }
-            else
-                $query .= ' AND status != ' . $admin_status;
+                if (isset($_POST['add_admin'])) {
+                    $query .= ' AND status = ' . $admin_status;
+                    $_SESSION['add_admin_button'] = 1;
+                } else
+                    $query .= ' AND status != ' . $admin_status;
 
-            $stmt = $this->db->prepare($query);
+                $stmt = $this->db->prepare($query);
+            } else {
+                $_SESSION['count_of_users_in_dialog_error'] = 1;
+            }
         } else {
             $stmt = $this->db->prepare("SELECT * FROM users WHERE id != {$profile_id} AND status != " . $admin_status);
         }
-        $stmt->execute();
-        $users = $stmt->fetchAll();
-        $arrays_num = 0;
-        $i_max = 0;
+        if ($_SESSION['count_of_users_in_dialog_error'] == 0) {
+            $stmt->execute();
+            $users = $stmt->fetchAll();
+            $arrays_num = 0;
+            $i_max = 0;
 
-        foreach ($users as $value) {
-            $i_max++;
-        }
+            foreach ($users as $value) {
+                $i_max++;
+            }
 
-        $matrix = [];
+            $matrix = [];
 
-        $_SESSION['count_of_users'] = $i_max;
+            $_SESSION['count_of_users'] = $i_max;
 
-        foreach ($users as $key => $value) {
-            $matrix[$key][1] = $value[1];
-            $matrix[$key][2] = $value[2];
-            $arrays_num++;
-        }
+            foreach ($users as $key => $value) {
+                $matrix[$key][1] = $value[1];
+                $matrix[$key][2] = $value[2];
+                $arrays_num++;
+            }
 
-        if (isset($matrix)) {
-            $_SESSION['matrix_for_users'] = $matrix;
-            return $matrix;
+            if (isset($matrix)) {
+                $_SESSION['matrix_for_users'] = $matrix;
+                return $matrix;
+            }
         }
     }
 
+
+
     public function add_dialog()
     {
+        $_SESSION['count_of_users_in_dialog_error'] = 0;
         unset($_SESSION['add_user_error']);
         $profile_id = $_SESSION['userID'];
         $count_of_owners = 0;
@@ -297,6 +331,8 @@ class CabinetModel extends Model
                     $flag_user_selected = true;
                 }
             }
+
+
 
 
             if ($flag_user_selected == true) {
@@ -380,87 +416,94 @@ class CabinetModel extends Model
                 }
             }
 
+            if ($this->CountOfUsersInDialogCheck($massiv) == 0) {
 
-            if ($flag_user_selected == true) {
-                $stmt = $this->db->prepare("SELECT * FROM users WHERE id = $profile_id");
-                $stmt->execute();
-                $user_owner = $stmt->fetchAll();
-                $names_of_users[$count_of_owners] = ($user_owner[0]['first_name']);
+                if ($flag_user_selected == true) {
+                    $stmt = $this->db->prepare("SELECT * FROM users WHERE id = $profile_id");
+                    $stmt->execute();
+                    $user_owner = $stmt->fetchAll();
+                    $names_of_users[$count_of_owners] = ($user_owner[0]['first_name']);
 
-                sort($massiv);
+                    sort($massiv);
 
-                $count = 0;
-                $new_owners_names = '';
-                foreach ($massiv as $value)
-                    $count++;
-                for ($j = 0; $j < $count; $j++) {
-                    if ($j == 0) {
-                        $new_owners = $massiv[$j];
-                        $new_owners_names = $names_of_users[$j];
-                    } else {
-                        $new_owners .= ',' . $massiv[$j];
-                        $new_owners_names .= ',' . $names_of_users[$j];
+                    $count = 0;
+                    $new_owners_names = '';
+                    foreach ($massiv as $value)
+                        $count++;
+                    for ($j = 0; $j < $count; $j++) {
+                        if ($j == 0) {
+                            $new_owners = $massiv[$j];
+                            $new_owners_names = $names_of_users[$j];
+                        } else {
+                            $new_owners .= ',' . $massiv[$j];
+                            $new_owners_names .= ',' . $names_of_users[$j];
+                        }
                     }
-                }
 
-                if ($count_of_owners == 1)
-                    $new_owners_names = $_SESSION['matrix_for_users'][$number_for_solo_dialog][1] . ' ' . $_SESSION['matrix_for_users'][$number_for_solo_dialog][2];
+                    if ($count_of_owners == 1)
+                        $new_owners_names = $_SESSION['matrix_for_users'][$number_for_solo_dialog][1] . ' ' . $_SESSION['matrix_for_users'][$number_for_solo_dialog][2];
 
-                $query = "SELECT id FROM dialogs WHERE ";
-                $query .= "user_id = ";
-                $query .= $profile_id;
-                $stmt = $this->db->prepare($query);
-                $stmt->execute();
-                $dialog = $stmt->fetchAll();
-
-                foreach ($dialog as $value)
-                    $count_of_dialogs++;
-
-                for ($j = 0; $j < $count_of_dialogs; $j++) {
-                    $query = "SELECT owners FROM dialogs_properties WHERE id = {$dialog[$j][0]}";
+                    $query = "SELECT id FROM dialogs WHERE ";
+                    $query .= "user_id = ";
+                    $query .= $profile_id;
                     $stmt = $this->db->prepare($query);
                     $stmt->execute();
-                    $flag_dialog_exist = $stmt->fetchAll();
-                    $massiv_dialogs[$j] = $flag_dialog_exist[0][0];
-                }
+                    $dialog = $stmt->fetchAll();
 
-                $flag = false;
-                for ($j = 0; $j < $count_of_dialogs; $j++) {
-                    if ($new_owners == $massiv_dialogs[$j]) {
-                        $query = "SELECT id FROM dialogs_properties WHERE owners = '{$new_owners}'";
+                    foreach ($dialog as $value)
+                        $count_of_dialogs++;
+
+                    for ($j = 0; $j < $count_of_dialogs; $j++) {
+                        $query = "SELECT owners FROM dialogs_properties WHERE id = {$dialog[$j][0]}";
                         $stmt = $this->db->prepare($query);
                         $stmt->execute();
-                        $id = $stmt->fetchAll();
-                        foreach ($_SESSION['matrix_for_dialogs'] as $key => $value) {
-                            if ($value[0] == $id[0]['id']) {
-                                $_SESSION['chat'] = $key;
-                                header('Location: http://' . $_SERVER['HTTP_HOST'] . '/cabinet/chat');
-                                exit;
+                        $flag_dialog_exist = $stmt->fetchAll();
+                        $massiv_dialogs[$j] = $flag_dialog_exist[0][0];
+                    }
+
+                    $flag = false;
+                    for ($j = 0; $j < $count_of_dialogs; $j++) {
+                        if ($new_owners == $massiv_dialogs[$j]) {
+                            $query = "SELECT id FROM dialogs_properties WHERE owners = '{$new_owners}'";
+                            $stmt = $this->db->prepare($query);
+                            $stmt->execute();
+                            $id = $stmt->fetchAll();
+                            foreach ($_SESSION['matrix_for_dialogs'] as $key => $value) {
+                                if ($value[0] == $id[0]['id']) {
+                                    $_SESSION['chat'] = $key;
+                                    header('Location: http://' . $_SERVER['HTTP_HOST'] . '/cabinet/chat');
+                                    exit;
+                                }
                             }
                         }
                     }
-                }
 
-                if ($flag == false) {
-                    $query = $this->db->prepare("INSERT INTO dialogs_properties (name, owners) VALUES (:name, :owners) RETURNING id");
-                    $query->execute([
-                        ':name' => $new_owners_names,
-                        ':owners' => $new_owners,
-                    ]);
-                    $result = $query->fetch();
-
-                    $query = $this->db->prepare("INSERT INTO dialogs (id, user_id, show) VALUES (:id, :user_id, :show)");
-                    foreach ($massiv as $key => $value) {
+                    if ($flag == false) {
+                        $query = $this->db->prepare("INSERT INTO dialogs_properties (name, owners) VALUES (:name, :owners) RETURNING id");
                         $query->execute([
-                            ':id' => $result[0],
-                            ':user_id' => $massiv[$key],
-                            ':show' => 1,
+                            ':name' => $new_owners_names,
+                            ':owners' => $new_owners,
                         ]);
+                        $result = $query->fetch();
+
+                        $query = $this->db->prepare("INSERT INTO dialogs (id, user_id, show) VALUES (:id, :user_id, :show)");
+                        foreach ($massiv as $key => $value) {
+                            $query->execute([
+                                ':id' => $result[0],
+                                ':user_id' => $massiv[$key],
+                                ':show' => 1,
+                            ]);
+                        }
+                        return $this->getdialogs();
                     }
-                    return $this->getdialogs();
+                } else {
+                    $_SESSION['add_user_error'] = 1;
+                    $_POST['create_new_dialog'] = 1;
+                    return $this->create_new_dialog();
                 }
-            } else {
-                $_SESSION['add_user_error'] = 1;
+            }
+            else {
+                $_SESSION['count_of_users_in_dialog_error'] = 1;
                 $_POST['create_new_dialog'] = 1;
                 return $this->create_new_dialog();
             }
@@ -537,129 +580,187 @@ class CabinetModel extends Model
     {
     }
 
-    public function savePersonalInfo()
+    public function сheckPersonalName($str) // Проверка ФИО пользователя
     {
-        //$_SESSION['userID'] = 1;
-        $_SESSION['error'] = [];
+        $str = trim($str);
+        $pattern = "/([a-z0-9])+/i";
+        if (preg_match($pattern, $str, $matches))
+            return false;
+        if ($str == '')
+            return false;
+        $str = ucfirst($str);
+        return $str;
+    }
+
+    public function сheckNumbers($str) // Проверка числового значения
+    {
+        $old_str = $str;
+        $str = trim($str);
+        $str = preg_replace("/[^0-9]/", '', $str);
+        if ($old_str != $str)
+            return false;
+        return $str;
+    }
+
+    public function сheckBirthDay() { // Проверка дня рождения
+        $month = array(
+            "Январь",
+            "Февраль",
+            "Март",
+            "Апрель",
+            "Май",
+            "Июнь",
+            "Июль",
+            "Август",
+            "Сентябрь",
+            "Октябрь",
+            "Ноябрь",
+            "Декабрь");
+
+        $_POST['sel_date'] = preg_replace("/[^0-9]/", '', $_POST['sel_date']);
+        $day = $_POST['sel_date'];
+        if (($_POST['sel_date'] > 31) || ($_POST['sel_date'] < 1))
+            return false;
+
+        $_POST['sel_year'] = preg_replace("/[^0-9]/", '', $_POST['sel_year']);
+        if (($_POST['sel_year'] > date('Y')) || ($_POST['sel_year'] < 1920))
+            return false;
+
+        $month_num = 0;
+        for ($i = 0; $i < 12; $i++) {
+            $var1 = $_POST['sel_month'];
+            $var2 = $month[$i];
+            if (strcasecmp($var1, $var2) == 0) {
+                $_POST['sel_month'] = $i + 1;
+                $month_num = $i + 1;
+                break;
+            } else {
+                if ($i == 12) {
+                    return false;
+                }
+            }
+        }
+
+        if ($month_num == 4 || $month_num == 6 || $month_num == 9 || $month_num == 11) {
+            if ($day > 30) {
+                return false;
+            }
+        }
+        if ($month_num == 2) {
+            if ($day > 28) {
+                return false;
+            }
+        }
+        return true;
+    } // Проверка даты рождения
+
+    public function сheckEmail($profile_id)
+    {
+        if (filter_var(trim($_POST['email']), FILTER_VALIDATE_EMAIL)) {
+            $this->db->query("UPDATE users SET email = '{$_POST['email']}' WHERE id = $profile_id");
+        } else {
+            return false;
+        }
+        return true;
+    } // Проверка E-mail
+
+    public function сheckIllegalSymbols($str) // Проверка на запрещенные символы, исключения "/" "."
+    {
+        $str = trim($str);
+        //$pattern = "~([0-9а-я./\s]+)~i";
+        //$pattern = "~([^0-9а-я\.\/])+~i";
+        $pattern = "/[^a-zA-Z@\.]/";
+        if (preg_match($pattern, $str, $matches))
+            return $matches;
+        if ($str == '')
+            return false;
+        $str = ucfirst($str);
+        return $str;
+    }
+
+
+    public function savePersonalInfo() // Редактирование профиля
+    {
         $profile_id = $_SESSION['userID'];
 
-
-        $n = 4; // kol-vo post dlia proverki
-        for ($i = 0; $i <= $n - 1; $i++) {
-            $error_array[$i] = "";
-            $_SESSION['error'][$i] = 0;
-        }
-
-        if (isset($_POST['save_1'])) {
-            $str = $_POST['name'];
-            $str = trim($str);
-            $pattern = "/([a-z0-9])+/i";
-            if (preg_match($pattern, $str, $matches))
-                $error_array[0] = 1;
-            if ($str == '')
-                $error_array[0] = 1;
-            $_POST['name'] = $str;
-            if ($error_array[0] == 0)
-                $this->db->query("UPDATE users SET first_name = '{$_POST['name']}' WHERE id = $profile_id");
-
-            $str = $_POST['surname'];
-            $str = trim($str);
-            $pattern = "/([a-z0-9])+/i";
-            if (preg_match($pattern, $str, $matches))
-                $error_array[1] = 1;
-            if ($str == '')
-                $error_array[1] = 1;
-            $_POST['surname'] = $str;
-            if ($error_array[1] == 0)
-                $this->db->query("UPDATE users SET last_name = '{$_POST['surname']}' WHERE id = $profile_id");
-
-            $str = $_POST['patronymic'];
-            $str = trim($str);
-            $pattern = "/([a-z0-9])+/i";
-            if (preg_match($pattern, $str, $matches))
-                $error_array[2] = 1;
-            if ($str == '')
-                $error_array[2] = 1;
-            $_POST['patronymic'] = $str;
-            if ($error_array[2] == 0)
-                $this->db->query("UPDATE users SET patronymic = '{$_POST['patronymic']}' WHERE id = $profile_id");
-
-            $_SESSION['phone_error'] = 0;
-            $str = $_POST['phonenumber'];
-            $old_str = $str;
-            $str = trim($str);
-            $str = preg_replace("/[^0-9]/", '', $str);
-            $_POST['phonenumber'] = $str;
-            if ($old_str != $str)
-                $_SESSION['phone_error'] = 1;
-            $this->db->query("UPDATE users SET phone_number = '{$_POST['phonenumber']}' WHERE id = $profile_id");
-
-            $month = array(
-                "Январь",
-                "Февраль",
-                "Март",
-                "Апрель",
-                "Май",
-                "Июнь",
-                "Июль",
-                "Август",
-                "Сентябрь",
-                "Октябрь",
-                "Ноябрь",
-                "Декабрь");
-
-            $_POST['sel_date'] = preg_replace("/[^0-9]/", '', $_POST['sel_date']);
-            $day = $_POST['sel_date'];
-            if (($_POST['sel_date'] > 31) || ($_POST['sel_date'] < 1))
-                $error_array[3] = 1;
-
-            $_POST['sel_year'] = preg_replace("/[^0-9]/", '', $_POST['sel_year']);
-            if (($_POST['sel_year'] > date('Y')) || ($_POST['sel_year'] < 1920))
-                $error_array[3] = 1;
-
-            $month_num = 0;
-            for ($i = 0; $i < 12; $i++) {
-                $var1 = $_POST['sel_month'];
-                $var2 = $month[$i];
-                if (strcasecmp($var1, $var2) == 0) {
-                    $_POST['sel_month'] = $i + 1;
-                    $month_num = $i + 1;
-                    break;
-                } else {
-                    if ($i == 12) {
-                        echo $var1;
-                        echo $var2;
-                        $error_array[3] = 1;
-                    }
-                }
-            }
-
-
-            if ($month_num == 4 || $month_num == 6 || $month_num == 9 || $month_num == 11) {
-                if ($day > 30) {
-                    $error_array[3] = 1;
-                }
-            }
-            if ($month_num == 2) {
-                if ($day > 28) {
-                    $error_array[3] = 1;
-                }
-            }
-
-            if ($error_array[3] == 0)
-                $this->db->query("UPDATE users SET birthday = '{$_POST['sel_year']}-{$_POST['sel_month']}-{$_POST['sel_date']}' WHERE id = $profile_id");
-
-            $_SESSION['email_error'] = 0;
-            if (filter_var(trim($_POST['email']), FILTER_VALIDATE_EMAIL)) {
-                $this->db->query("UPDATE users SET email = '{$_POST['email']}' WHERE id = $profile_id");
+        if (isset($_POST['save_1'])) // Информация о пользователе
+        {
+            if ($str = $this->сheckPersonalName($_POST['name'])) {
+                $stmt = $this->db->prepare("UPDATE users SET first_name = :first_name WHERE id = :profile_id");
+                $stmt->execute(array(':first_name' => $str, ':profile_id' => $profile_id));
             } else {
-                $_SESSION['email_error'] = 1;
+                Registry::set('name_profile_edit_error', 'Введено неверно!');
+            }
+            if ($str = $this->сheckPersonalName($_POST['surname'])) {
+                $stmt = $this->db->prepare("UPDATE users SET last_name = :surname WHERE id = :profile_id");
+                $stmt->execute(array(':surname' => $str, ':profile_id' => $profile_id));
+            } else {
+                Registry::set('surname_profile_edit_error', 'Введено неверно!');
+            }
+            if ($str = $this->сheckPersonalName($_POST['patronymic'])) {
+                $stmt = $this->db->prepare("UPDATE users SET patronymic = :patronymic WHERE id = :profile_id");
+                $stmt->execute(array(':patronymic' => $str, ':profile_id' => $profile_id));
+            } else {
+                Registry::set('patronymic_profile_edit_error', 'Введено неверно!');
+            }
+            if ($this->сheckBirthDay()) {
+                $stmt = $this->db->prepare("UPDATE users SET birthday = :year-:month-:day WHERE id = :profile_id");
+                $stmt->execute(array(':year' => $_POST['sel_year'], ':month' => $_POST['sel_month'], ':day' => $_POST['sel_date'], ':profile_id' => $profile_id));
+            } else {
+                Registry::set('date_profile_edit_error', 'Введено неверно!');
+            }
+            if ($str = $this->сheckNumbers($_POST['series'])) {
+                $stmt = $this->db->prepare("UPDATE users SET series = :series WHERE id = :profile_id");
+                $stmt->execute(array(':series' => $str, ':profile_id' => $profile_id));
+            } else {
+                Registry::set('series_profile_edit_error', 'Введено неверно!');
+            }
+            if ($str = $this->сheckNumbers($_POST['number'])) {
+                $stmt = $this->db->prepare("UPDATE users SET number = :number WHERE id = :profile_id");
+                $stmt->execute(array(':number' => $str, ':profile_id' => $profile_id));
+            } else {
+                Registry::set('number_profile_edit_error', 'Введено неверно!');
+            }
+            if ($str = $this->сheckNumbers($_POST['index'])) {
+                $stmt = $this->db->prepare("UPDATE users SET index = :index WHERE id = :profile_id");
+                $stmt->execute(array(':index' => $str, ':profile_id' => $profile_id));
+            } else {
+                Registry::set('index_profile_edit_error', 'Введено неверно!');
+            }
+            if ($str = $this->сheckPersonalName($_POST['city'])) {
+                $stmt = $this->db->prepare("UPDATE users SET city = :city WHERE id = :profile_id");
+                $stmt->execute(array(':city' => $str, ':profile_id' => $profile_id));
+            } else {
+                Registry::set('city_profile_edit_error', 'Введено неверно!');
             }
 
-            $_SESSION['error'] = $error_array;
-            $this->db->query("UPDATE users SET profile_foto_id = '{$_POST['profile_foto']}' WHERE id = $profile_id");
+            var_dump($this->сheckIllegalSymbols($_POST['street']));
+            var_dump($this->сheckIllegalSymbols($_POST['home']));
+
+            if ($str = $this->сheckNumbers($_POST['flat'])) {
+                $stmt = $this->db->prepare("UPDATE users SET flat = :flat WHERE id = :profile_id");
+                $stmt->execute(array(':flat' => $str, ':profile_id' => $profile_id));
+            } else {
+                Registry::set('flat_profile_edit_error', 'Введено неверно!');
+            }
         }
 
+        if (isset($_POST['save_2'])) {
+            if ($str = $this->сheckNumbers($_POST['phonenumber'])) {
+                $stmt = $this->db->prepare("UPDATE users SET phone_number = :phonenumber WHERE id = :profile_id");
+                $stmt->execute(array(':phonenumber' => $str, ':profile_id' => $profile_id));
+            } else {
+                Registry::set('phonenumber_profile_edit_error', 'Введено неверно!');
+            }
+            if ($this->сheckEmail($profile_id)) {
+                $stmt = $this->db->prepare("UPDATE users SET email = :email WHERE id = :profile_id");
+                $stmt->execute(array(':email' => $_POST['email'], ':profile_id' => $profile_id));
+            } else {
+                Registry::set('email_profile_edit_error', 'Введено неверно!');
+            }
+        } // Контакты
+
+        // Отвязка социальных сетей
         if (isset($_POST['delete_vk']) || (isset($_POST['delete_steam'])) || (isset($_POST['delete_ok'])) || (isset($_POST['delete_ya'])) || (isset($_POST['delete_mail'])) || (isset($_POST['delete_facebook'])) || (isset($_POST['delete_google']))) {
             foreach ($_POST as $key => $value) {
                 if ($value == 'Отвязать') {
@@ -668,17 +769,34 @@ class CabinetModel extends Model
                         $id = $social_net[1] . "_id";
                         $name = $social_net[1] . "_name";
                         $avatar = $social_net[1] . "_avatar";
-                        $this->db->query("UPDATE users SET {$id} = NULL WHERE id = $profile_id");
-                        $this->db->query("UPDATE users SET {$name} = NULL WHERE id = $profile_id");
-                        $this->db->query("UPDATE users SET {$avatar} = NULL WHERE id = $profile_id");
+                        $stmt = $this->db->prepare("UPDATE users SET :id = NULL WHERE id = :profile_id");
+                        $stmt->execute(array(':id' => $id, ':profile_id' => $profile_id));
+                        $stmt = $this->db->prepare("UPDATE users SET :name = NULL WHERE id = :profile_id");
+                        $stmt->execute(array(':name' => $name, ':profile_id' => $profile_id));
+                        $stmt = $this->db->prepare("UPDATE users SET :avatar = NULL WHERE id = :profile_id");
+                        $stmt->execute(array(':avatar' => $avatar, ':profile_id' => $profile_id));
                     }
                 }
             }
         }
 
+        if (isset($_POST['check_with_passport'])) // Подтвердить паспортом
+        {
+        }
 
-        // save_2 отсутсвует! Удалена по ненадобности.
-        if (isset($_POST['save_3'])) {
+        if (isset($_POST['update_foto_id']))
+        {
+        }
+
+        if (isset($_POST['delete_foto_id'])) // Установить default аватар профиля
+        {
+            $link = 'http://images.lant.io/profile_fotos/user_foto_id_default.jpg';
+            $stmt = $this->db->prepare("UPDATE users SET profile_foto_id = :link WHERE id = :profile_id");
+            $stmt->execute(array(':link' => $link, ':profile_id' => $profile_id));
+        }
+
+        if (isset($_POST['save_3'])) // Изменить пароль
+        {
             $stmt = $this->db->prepare("SELECT password FROM users WHERE id = $profile_id");
             $stmt->execute();
             $result = $stmt->fetchAll();
@@ -687,55 +805,68 @@ class CabinetModel extends Model
 
             if (password_verify($_POST['old_pass'], $new_result)) {
                 $passwordHash = password_hash($_POST['new_pass'], PASSWORD_DEFAULT);
-                $this->db->query("UPDATE users SET password = '{$passwordHash}' WHERE id = $profile_id");
+                $stmt = $this->db->prepare("UPDATE users SET password = :password WHERE id = :profile_id");
+                $stmt->execute(array(':password' => $passwordHash, ':profile_id' => $profile_id));
             } else {
-                $_SESSION['password_error'] = 1;
+                Registry::set('password_profile_edit_error', 'Введено неверно!');
             }
         }
 
-        if (isset($_POST['save_aboutme'])) {
+        if (isset($_POST['save_aboutme']))  // О себе
+        {
             $aboutme = $_POST['aboutme'];
-            $this->db->query("UPDATE users SET about_me = '{$aboutme}' WHERE id = $profile_id");
+            $stmt = $this->db->prepare("UPDATE users SET about_me = :aboutme WHERE id = :profile_id");
+            $stmt->execute(array(':aboutme' => $aboutme, ':profile_id' => $profile_id));
         }
 
-        if (isset($_POST['save_4'])) {
+        if (isset($_POST['save_4'])) // Связь с сайтом
+        {
             if (isset($_POST['phone_only'])) {
-                $this->db->query("UPDATE users SET phone_only = 1 WHERE id = $profile_id");
+                $stmt = $this->db->prepare("UPDATE users SET phone_only = 1 WHERE id = :profile_id");
+                $stmt->execute(array(':profile_id' => $profile_id));
             }
             if (isset($_POST['site_only'])) {
-                $this->db->query("UPDATE users SET site_only = 1 WHERE id = $profile_id");
+                $stmt = $this->db->prepare("UPDATE users SET site_only = 1 WHERE id = :profile_id");
+                $stmt->execute(array(':profile_id' => $profile_id));
             }
             if (!isset($_POST['phone_only'])) {
-                $this->db->query("UPDATE users SET phone_only = 0 WHERE id = $profile_id");
+                $stmt = $this->db->prepare("UPDATE users SET phone_only = 0 WHERE id = :profile_id");
+                $stmt->execute(array(':profile_id' => $profile_id));
             }
             if (!isset($_POST['site_only'])) {
-                $this->db->query("UPDATE users SET site_only = 0 WHERE id = $profile_id");
+                $stmt = $this->db->prepare("UPDATE users SET site_only = 0 WHERE id = :profile_id");
+                $stmt->execute(array(':profile_id' => $profile_id));
             }
         }
 
-        if (isset($_POST['save_5'])) {
-            echo 123;
+        if (isset($_POST['save_5'])) // Уведомления от сайта
+        {
             if (isset($_POST['new_dialog'])) {
-                $this->db->query("UPDATE users SET new_dialog = 1 WHERE id = $profile_id");
+                $stmt = $this->db->prepare("UPDATE users SET new_dialog = 1 WHERE id = :profile_id");
+                $stmt->execute(array(':profile_id' => $profile_id));
             }
             if (isset($_POST['close_ad'])) {
-                $this->db->query("UPDATE users SET close_ad = 1 WHERE id = $profile_id");
+                $stmt = $this->db->prepare("UPDATE users SET close_ad = 1 WHERE id = :profile_id");
+                $stmt->execute(array(':profile_id' => $profile_id));
             }
             if (isset($_POST['prom_offers'])) {
-                $this->db->query("UPDATE users SET prom_offers = 1 WHERE id = $profile_id");
+                $stmt = $this->db->prepare("UPDATE users SET prom_offers = 1 WHERE id = :profile_id");
+                $stmt->execute(array(':profile_id' => $profile_id));
             }
             if (!isset($_POST['new_dialog'])) {
-                $this->db->query("UPDATE users SET new_dialog = 0 WHERE id = $profile_id");
+                $stmt = $this->db->prepare("UPDATE users SET new_dialog = 0 WHERE id = :profile_id");
+                $stmt->execute(array(':profile_id' => $profile_id));
             }
             if (!isset($_POST['close_ad'])) {
-                $this->db->query("UPDATE users SET close_ad = 0 WHERE id = $profile_id");
+                $stmt = $this->db->prepare("UPDATE users SET close_ad = 0 WHERE id = :profile_id");
+                $stmt->execute(array(':profile_id' => $profile_id));
             }
             if (!isset($_POST['prom_offers'])) {
-                $this->db->query("UPDATE users SET prom_offers = 0 WHERE id = $profile_id");
+                $stmt = $this->db->prepare("UPDATE users SET prom_offers = 0 WHERE id = :profile_id");
+                $stmt->execute(array(':profile_id' => $profile_id));
             }
         }
     }
-
 
     private function geoip_client($ip, $opt, $sid)
     {
@@ -781,7 +912,7 @@ class CabinetModel extends Model
             throw new Exception('Geo_IP: Нет связи с сервером');
         }
 
-    }
+    } // Геолокация
 
     public function handleKeys()
     {
