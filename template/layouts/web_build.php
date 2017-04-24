@@ -369,7 +369,7 @@ $siteModel = Registry::model('site');
 <div id="content">
     <!--<?php $this->content(); ?> -->
     <div class="section-home-with-filters">
-        <form id="form"> <!--novalidate -->
+        <form action="" id="form"> <!--novalidate -->
             <div class="apartment-search">
                 <ul class="vkl">
                     <li id="blockToRent" onclick="choiceBlock('toRent')"><a>Арендовать</a></li>
@@ -439,7 +439,7 @@ $siteModel = Registry::model('site');
                         </span>
                     </div>
                     <div class="main-filter" onclick="allParam('bigOption')">
-                        <label for="#mainAmount"><img src="../../template/images/s3.png" alt="price">Цена</label>
+                        <label><img src="../../template/images/s3.png" alt="price">Цена</label>
                         <div class="showBigOptions">
                             <p>От<label for="amountBeforeBy"><input name="price-min" type="text" id="amountBeforeBy" readonly disabled></label></p>
                             <p>До<label for="amountAfterBy"><input name="price-max" type="text" id="amountAfterBy" readonly disabled></label></p>
@@ -1093,7 +1093,7 @@ $siteModel = Registry::model('site');
                         </div>
                     </li>
                     <li onclick="allParam('bigOption')">
-                        <label for="price-min" id="resultPrice"><img src="../../template/images/s3.png" alt="price">Цена</label>
+                        <label><img src="../../template/images/s3.png" alt="price">Цена</label>
                         <div class="showBigOptions">
                             <p>От<label for="amountBeforeSearch"><input name="price-min" type="text" id="amountBeforeSearch" readonly disabled></label></p>
                             <p>До<label for="amountAfterSearch"><input name="price-max" type="text" id="amountAfterSearch" readonly disabled></label></p>
@@ -3568,7 +3568,7 @@ $siteModel = Registry::model('site');
                         </div>
                     </li>
                     <li onclick="allParam('bigOption')">
-                        <label for="price-min" id="resultPrice"><img src="../../template/images/s3.png" alt="price">Цена</label>
+                        <label><img src="../../template/images/s3.png" alt="price">Цена</label>
                         <div class="showBigOptions">
                             <p>От<label for="amountBefore"><input name="price-min" type="text" id="amountBefore" readonly disabled></p>
                             <p>До<label for="amountAfter"><input name="price-max" type="text" id="amountAfter" readonly disabled></p>

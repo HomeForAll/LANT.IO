@@ -242,7 +242,6 @@ function allParam(filterParam) {
                 openMap = false;
 
             openMap = true;
-            console.log('Должен быть true - ', openMap);
 
             if (!openMap) {return false;}
 
@@ -444,9 +443,9 @@ function closeFixedBlock() {
 //---------------------------------------------------------
 
 /** Получение данных через Ajax и отправка данных**/
-$("#form").on('submit', function() { // устанавливаем событие отправки для формы с id=form
+$("#form").on('submit', function(e) { // устанавливаем событие отправки для формы с id=form
 
-    //e.preventDefault();
+    e.preventDefault();
 
     var form_data = $(this).serialize(); // собераем все данные из формы
 
@@ -455,7 +454,7 @@ $("#form").on('submit', function() { // устанавливаем событи�
         url: "/search",
         data: form_data,
         success: function(form_data) {
-            window.location.href = '/template/layouts/searchBlock.php';
+            //window.location.href = '/template/layouts/searchBlock.php';
             console.log('Собрынные данные - ', form_data);
         },
         error: function() {
@@ -472,21 +471,18 @@ $("#form").on('submit', function() { // устанавливаем событи�
         $amountAfter = $('#amountAfter'),
         $amountBeforeBuy = $('#amountBeforeBy'),
         $amountAfterBuy = $('#amountAfterBy'),
-        $mainAmountBefore = $('#mainAmountBefore'),
-        $mainAmountAfter = $('#mainAmountAfter'),
         $amountBeforeSearch = $('#amountBeforeSearch'),
         $amountAfterSearch = $('#amountAfterSearch');
 
     /** Фильтры в доп.параметрах **/
-    $amountBefore.val('20000');$amountAfter.val('20000');
-    $amountBeforeBuy.val('20000');$amountAfterBuy.val('20000');
-    $mainAmountBefore.val('20000');$mainAmountAfter.val('20000');
-    $amountBeforeSearch.val('20000');$amountAfterSearch.val('20000');
+    $amountBefore.val('75');$amountAfter.val('20000');
+    $amountBeforeBuy.val('75');$amountAfterBuy.val('20000');
+    $amountBeforeSearch.val('75');$amountAfterSearch.val('20000');
     $("#slider-range").slider({
         range: true,
-        min: 20000,
+        min: 0,
         max: 20000000,
-        values: [75, 300],
+        values: [75, 10000],
         slide: function (event, ui) {
             $amountBefore.val(ui.values[0]);
             $amountAfter.val(ui.values[1]);
@@ -494,38 +490,27 @@ $("#form").on('submit', function() { // устанавливаем событи�
     });
     $("#slider-range-buy").slider({
         range: true,
-        min: 20000,
+        min: 0,
         max: 20000000,
-        values: [75, 300],
+        values: [75, 10000],
         slide: function (event, ui) {
             $amountBeforeBuy.val(ui.values[0]);
             $amountAfterBuy.val(ui.values[1]);
         }
     });
-    $("#main-slider").slider({
-         range: true,
-         min: 20000,
-         max: 20000000,
-         values: [75, 300],
-         slide: function (event, ui) {
-             $mainAmountBefore.val(ui.values[0]);
-             $mainAmountAfter.val(ui.values[1]);
-         }
-     });
     $("#slider-range-search").slider({
         range: true,
-        min: 20000,
+        min: 0,
         max: 20000000,
-        values: [75, 300],
+        values: [75, 10000],
         slide: function (event, ui) {
             $amountBeforeSearch.val(ui.values[0]);
             $amountAfterSearch.val(ui.values[1]);
         }
     });
-    $('#amount').val($amountBefore.slider('values', 0) + $amountAfter.slider('values', 1));
-    $('#resultPrice').val($amountBeforeBuy.slider('values', 0) + $amountAfterBuy.slider('values', 1));
-    $('#mainAmount').val($mainAmountBefore.slider('values', 0) + $mainAmountAfter.slider('values', 1));
-    $('#amountSearch').val($amountBeforeSearch.slider('values', 0) + $amountAfterSearch.slider('values', 1));
+    $amountBefore.slider({values: 0}); $amountAfter.slider({values: 1});
+    $amountBeforeBuy.slider({values: 0}); $amountAfterBuy.slider({values: 1});
+    $amountBeforeSearch.slider({values: 0}); $amountAfterSearch.slider({values: 1});
 });
 //---------------------------------------------------------
 
