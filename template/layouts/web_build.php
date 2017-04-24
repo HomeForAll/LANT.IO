@@ -439,20 +439,19 @@ $siteModel = Registry::model('site');
                         </span>
                     </div>
                     <div class="main-filter" onclick="allParam('bigOption')">
-                        <label for="#mainAmount"><img src="../../template/images/s3.png" alt="price">Цена
-                            <div class="showBigOptions">
-                                <p>От<input name="price-min" type="text" id="amountBeforeBy" readonly disabled></p>
-                                <p>До<input name="price-max" type="text" id="amountAfterBy" readonly disabled></p>
-                                <div id="slider-range-buy"></div>
-                                <div class="currency">
-                                    <p>Валюта</p>
-                                    <button class="closeCurrency"><i class="fa fa-rub" aria-hidden="true"></i>рубли</button>
-                                    <button class="closeCurrency"><i class="fa fa-usd" aria-hidden="true"></i>доллары
-                                    </button>
-                                    <button class="closeCurrency"><i class="fa fa-eur" aria-hidden="true"></i>евро</button>
-                                </div>
+                        <label for="#mainAmount"><img src="../../template/images/s3.png" alt="price">Цена</label>
+                        <div class="showBigOptions">
+                            <p>От<label for="amountBeforeBy"><input name="price-min" type="text" id="amountBeforeBy" readonly disabled></label></p>
+                            <p>До<label for="amountAfterBy"><input name="price-max" type="text" id="amountAfterBy" readonly disabled></label></p>
+                            <div id="slider-range-buy"></div>
+                            <div class="currency">
+                                <p>Валюта</p>
+                                <button class="closeCurrency"><i class="fa fa-rub" aria-hidden="true"></i>рубли</button>
+                                <button class="closeCurrency"><i class="fa fa-usd" aria-hidden="true"></i>доллары
+                                </button>
+                                <button class="closeCurrency"><i class="fa fa-eur" aria-hidden="true"></i>евро</button>
                             </div>
-                        </label>
+                        </div>
                     </div>
                     <button>Найти</button>
                 </div>
@@ -1094,20 +1093,19 @@ $siteModel = Registry::model('site');
                         </div>
                     </li>
                     <li onclick="allParam('bigOption')">
-                        <label for="price-min" id="resultPrice"><img src="../../template/images/s3.png" alt="price">Цена
-                            <div class="showBigOptions">
-                                <p>От<input name="price-min" type="text" id="amountBeforeSearch" readonly disabled></p>
-                                <p>До<input name="price-max" type="text" id="amountAfterSearch" readonly disabled></p>
-                                <div id="slider-range-search"></div>
-                                <div class="currency">
-                                    <p>Валюта</p>
-                                    <button class="closeCurrency"><i class="fa fa-rub" aria-hidden="true"></i>рубли</button>
-                                    <button class="closeCurrency"><i class="fa fa-usd" aria-hidden="true"></i>доллары
-                                    </button>
-                                    <button class="closeCurrency"><i class="fa fa-eur" aria-hidden="true"></i>евро</button>
-                                </div>
+                        <label for="price-min" id="resultPrice"><img src="../../template/images/s3.png" alt="price">Цена</label>
+                        <div class="showBigOptions">
+                            <p>От<label for="amountBeforeSearch"><input name="price-min" type="text" id="amountBeforeSearch" readonly disabled></label></p>
+                            <p>До<label for="amountAfterSearch"><input name="price-max" type="text" id="amountAfterSearch" readonly disabled></label></p>
+                            <div id="slider-range-search"></div>
+                            <div class="currency">
+                                <p>Валюта</p>
+                                <button class="closeCurrency"><i class="fa fa-rub" aria-hidden="true"></i>рубли</button>
+                                <button class="closeCurrency"><i class="fa fa-usd" aria-hidden="true"></i>доллары
+                                </button>
+                                <button class="closeCurrency"><i class="fa fa-eur" aria-hidden="true"></i>евро</button>
                             </div>
-                        </label>
+                        </div>
                         <div class="decorativeShadowBlock"></div>
                     </li>
                     <li>
@@ -3570,20 +3568,19 @@ $siteModel = Registry::model('site');
                         </div>
                     </li>
                     <li onclick="allParam('bigOption')">
-                        <label for="price-min" id="resultPrice"><img src="../../template/images/s3.png" alt="price">Цена
-                            <div class="showBigOptions">
-                                <p>От<input name="price-min" type="text" id="amountBefore" readonly disabled></p>
-                                <p>До<input name="price-max" type="text" id="amountAfter" readonly disabled></p>
-                                <div id="slider-range"></div>
-                                <div class="currency">
-                                    <p>Валюта</p>
-                                    <button class="closeCurrency"><i class="fa fa-rub" aria-hidden="true"></i>рубли</button>
-                                    <button class="closeCurrency"><i class="fa fa-usd" aria-hidden="true"></i>доллары
-                                    </button>
-                                    <button class="closeCurrency"><i class="fa fa-eur" aria-hidden="true"></i>евро</button>
-                                </div>
+                        <label for="price-min" id="resultPrice"><img src="../../template/images/s3.png" alt="price">Цена</label>
+                        <div class="showBigOptions">
+                            <p>От<label for="amountBefore"><input name="price-min" type="text" id="amountBefore" readonly disabled></p>
+                            <p>До<label for="amountAfter"><input name="price-max" type="text" id="amountAfter" readonly disabled></p>
+                            <div id="slider-range"></div>
+                            <div class="currency">
+                                <p>Валюта</p>
+                                <button class="closeCurrency"><i class="fa fa-rub" aria-hidden="true"></i>рубли</button>
+                                <button class="closeCurrency"><i class="fa fa-usd" aria-hidden="true"></i>доллары
+                                </button>
+                                <button class="closeCurrency"><i class="fa fa-eur" aria-hidden="true"></i>евро</button>
                             </div>
-                        </label>
+                        </div>
                         <div class="decorativeShadowBlock"></div>
                     </li>
                     <li>
