@@ -369,7 +369,7 @@ $siteModel = Registry::model('site');
 <div id="content">
     <!--<?php $this->content(); ?> -->
     <div class="section-home-with-filters">
-        <form action="" id="form"> <!--novalidate -->
+        <form action="" id="form" novalidate> <!--novalidate -->
             <div class="apartment-search">
                 <ul class="vkl">
                     <li id="blockToRent" onclick="choiceBlock('toRent')"><a>Арендовать</a></li>
