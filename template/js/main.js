@@ -369,12 +369,6 @@ function allFilterBlocks(filters) {
     blockFilterAndShadow.fadeOut('slow');
 }
 
-/** Поиск по городам **/
-ymaps.ready(function () {
-   var metroLocation = new ymaps.SuggestView('address', {width: 300, offset: [0, 4], results: 20});
-    metroLocation();
-});
-
 /** Показать больше надстроек в фильтрах **/
 $('.more-settings').on('click', function () {
     $('.show-more-settings').fadeIn('slow', $(this).css({'display':'block'}));
@@ -438,7 +432,7 @@ function moreAndLess(sizeImage) {
 
 /** Блок предупреждения **/
 function closeFixedBlock() {
-	$('.warning').css({'display':'block'})
+    $('.warning').css({'display':'block'})
 }
 //---------------------------------------------------------
 
@@ -465,7 +459,6 @@ $("#form").on('submit', function(e) { // устанавливаем событи
 //---------------------------------------------------------
 
 /** Фильтр - Цена **/
-// ошибки в - value
  $(function () {
     var $amountBefore = $('#amountBefore'),
         $amountAfter = $('#amountAfter'),
@@ -655,4 +648,10 @@ ymaps.ready(function () {
     });
 
     window.suggests = new ymaps.SuggestView("suggest", {width: 300, offset: [0, 4], results: 20});
+});
+
+/** Поиск по городам **/
+ymaps.ready(function () {
+    var metroLocation = new ymaps.SuggestView('address', {width: 300, offset: [0, 4], results: 20});
+    metroLocation();
 });
