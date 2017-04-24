@@ -215,6 +215,15 @@ function allParam(filterParam) {
                 $attachment.fadeOut('slow');
             });
             break;
+        case 'document':
+            var $document = $('.document');
+            $document.css({'display': 'block'});
+
+            $('.closeDocument').on('click', function (e) {
+                e.preventDefault();
+                $document.fadeOut('slow');
+            });
+            break;
         case 'bigOption':
             var $bigOption = $('.showBigOptions'),
                 qa = $('.decorativeShadowBlock');
@@ -229,7 +238,14 @@ function allParam(filterParam) {
             });
             break;
         case 'map':
-            var $map = $('#map');
+            var $map = $('#map'),
+                openMap = false;
+
+            openMap = true;
+            console.log('Должен быть true - ', openMap);
+
+            if (!openMap) {return false;}
+
             yandexMap();
 
             $('#searchYandexMap').hide();
@@ -292,11 +308,25 @@ function allFilterBlocks(filters) {
             });
             break;
         case 'historySearch':
-            var $history = $('.history-search');
+            var $exactArea = $('.exact-area');
 
-            $history.css({'display': 'block'});
+            $exactArea.fadeIn('slow', function () {
+                $(this).css({
+                    'position': 'absolute',
+                    'height': '435px',
+                    'width': '85%'
+                });
+            });
+
             setTimeout(function () {
-                $history.css({'display': 'none'})
+                $exactArea.fadeOut('slow', function () {
+                    $(this).css({
+                        'position': 'relative',
+                        'height': '75px',
+                        'width': '37%',
+                        'display': 'inline-block'
+                    });
+                });
             }, 10000);
             break;
         case '1':
@@ -339,9 +369,20 @@ function allFilterBlocks(filters) {
     }
     blockFilterAndShadow.fadeOut('slow');
 }
+
+/** Поиск по городам **/
+ymaps.ready(function () {
+   var metroLocation = new ymaps.SuggestView('address', {width: 300, offset: [0, 4], results: 20});
+    metroLocation();
+});
+
+/** Показать больше надстроек в фильтрах **/
+$('.more-settings').on('click', function () {
+    $('.show-more-settings').fadeIn('slow', $(this).css({'display':'block'}));
+});
 //---------------------------------------------------------
 
-/** Отмена за переход **/
+/** Отмена На переход **/
 function quickSearch(event) {
     var $quickSearch = $('.quick-search');
 
@@ -389,7 +430,10 @@ function moreAndLess(sizeImage) {
         return imagesWidth = 100;
     }
 
-    $img.css({'width': + imagesWidth + '%'});
+    $img.css({
+        'width': + imagesWidth + '%',
+        'height': + imagesWidth +'%'
+    });
 }
 //---------------------------------------------------------
 
@@ -400,7 +444,7 @@ function closeFixedBlock() {
 //---------------------------------------------------------
 
 /** Получение данных через Ajax и отправка данных**/
-$("#form").on('submit', function(e) { // устанавливаем событие отправки для формы с id=form
+$("#form").on('submit', function() { // устанавливаем событие отправки для формы с id=form
 
     //e.preventDefault();
 
@@ -426,8 +470,8 @@ $("#form").on('submit', function(e) { // устанавливаем событи
  $(function () {
     var $amountBefore = $('#amountBefore'),
         $amountAfter = $('#amountAfter'),
-        $amountBeforeBuy = $('#amountBeforeBuy'),
-        $amountAfterBuy = $('#amountAfterBuy'),
+        $amountBeforeBuy = $('#amountBeforeBy'),
+        $amountAfterBuy = $('#amountAfterBy'),
         $mainAmountBefore = $('#mainAmountBefore'),
         $mainAmountAfter = $('#mainAmountAfter'),
         $amountBeforeSearch = $('#amountBeforeSearch'),
@@ -479,7 +523,7 @@ $("#form").on('submit', function(e) { // устанавливаем событи
         }
     });
     $('#amount').val($amountBefore.slider('values', 0) + $amountAfter.slider('values', 1));
-    $('#amount-buy').val($amountBeforeBuy.slider('values', 0) + $amountAfterBuy.slider('values', 1));
+    $('#resultPrice').val($amountBeforeBuy.slider('values', 0) + $amountAfterBuy.slider('values', 1));
     $('#mainAmount').val($mainAmountBefore.slider('values', 0) + $mainAmountAfter.slider('values', 1));
     $('#amountSearch').val($amountBeforeSearch.slider('values', 0) + $amountAfterSearch.slider('values', 1));
 });

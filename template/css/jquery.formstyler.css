@@ -332,6 +332,7 @@
 	font-size: 13px;
 }
 .jq-selectbox ul {
+	z-index: 22;
 	margin: 0;
 	padding: 0;
 }
@@ -346,16 +347,15 @@
 	color: #231F20;
 }
 .jq-selectbox li.selected {
-	background-color: red;
 	z-index: 20;
 	color: #444;
 }
 .jq-selectbox li:hover {
 	background-color: #08C;
-	color: #FFF;
+	color: #fff;
 }
 .jq-selectbox li.disabled {
-	color: #AAA;
+	color: #aaa;
 }
 .jq-selectbox li.disabled:hover {
 	background: none;
