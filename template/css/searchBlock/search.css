@@ -637,6 +637,9 @@
   vertical-align: middle;
   margin-right: 10px;
 }
+.main-filter input {
+  padding-left: 10px !important;
+}
 .main-filter li {
   padding: 0 10px !important;
 }
@@ -687,25 +690,14 @@
   top: 30%;
   margin-right: 5px;
 }
-.main-filter-s {
-  display: inline-block !important;
-  width: 60%!important;
-  margin: 6px 0;
-}
-.main-filter-s label {
-  display: block !important;
-  width: auto !important;
-  padding: 0 !important;
-}
 .property-type-apartment-settings {
   display: none;
   position: absolute;
-  left: 0;
-  right: 0;
-  width: 850px;
+  margin: auto;
+  left: 15vw;
+  right: 15vw;
   box-shadow: 0 0 25px 1px rgba(0, 0, 0, 0.5);
-  margin-top: 10px;
-  z-index: 60;
+  z-index: 200;
   background: #f8f6f6;
   padding: 10px;
 }

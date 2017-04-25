@@ -221,7 +221,7 @@ $siteModel = Registry::model('site');
         }
 
         function getRentApartHTML() {
-            return '<fieldset> <legend>Базовые параметры</legend> <div style="margin: 15px"> Цена: <div class="indent"> Стоимость: <input name="minPrice" type="text" placeholder="Мин."> <input name="maxPrice" type="text" placeholder="Макс."><br> <label for="bargain">Торг:</label> <select name="bargain" id="bargain"> <option value="">---</option> <option value="yes">Возможен</option> <option value="">Не возможен</option> </select><br> <label for="rentType">Тип аренды:</label> <select name="rentType" id="rentType"> <option value="">---</option> <option value="hourRent">Часовая</option> <option value="dailyRent">Посуточная</option> <option value="longRent">Долгосрочная</option> </select> </div> Расположение: <br> <div class="indent"> <label for="region">Область:</label> <input type="text" name="region" id="region"><br> <label for="city">Город:</label> <input type="text" name="city" id="city"><br> <div class="indent"> <label for="district">Округ:</label> <input type="text" name="district" id="district"><br> <label for="area">Район:</label> <input type="text" name="area" id="area"><br> <label for="address">Адрес:</label> <input type="text" name="address" id="address"><br> </div> Станция метро: <br> <div class="indent"> Удаленность от метро: <input type="text" name="metroMin" placeholder="Мин."> <input type="text" name="metroMax" placeholder="Макс."><br> </div> </div> </div> </fieldset> <br><br> <fieldset> <legend>Описание объекта</legend> <div style="margin: 15px"> <strong>Квартира:</strong> <div class="indent"> <label for="roomsNumber">Количество комнат:</label> <select name="roomsNumber" id="roomsNumber" onchange=""> <option value="">---</option> <option value="1">1</option> <option value="2">2</option> <option value="3">3</option> <option value="more">4+</option> </select><br> Площадь: <input type="text" name="spaceMin" placeholder="От"> <input type="text" name="spaceMax" placeholder="До"><br> Этаж: <input type="text" name="floorMin" placeholder="От"> <input type="text" name="floorMax" placeholder="До"><br> <label for="equipment">Комплектация:</label> <select name="equipment" id="equipment"> <option value="">---</option> <option value="1">Укомплектована</option> <option value="">Пустая</option> </select><br> <label for="ceilingHeight">Высота потолков:</label> <input type="text" name="ceilingHeight" id="ceilingHeight"> </div> </div> <div style="margin: 15px"> <strong>Дом квартиры:</strong> <div class="indent"> <label for="houseType">Тип дома:</label> <select name="houseType" id="houseType" onchange=""> <option value="">---</option> <option value="1">Блочный</option> <option value="2">Брежневка</option> <option value="3">Индивидуальный</option> <option value="4">Кирпично-монолитный</option> <option value="5">Монолит</option> <option value="6">Панельный</option> <option value="7">Сталинка</option> <option value="8">Хрущевка</option> <option value="9">Серия дома</option> </select><br> <label for="houseFloorNumber">Количество этажей:</label> <input type="text" name="houseFloorNumber" id="houseFloorNumber"><br> <label for="lift">Лифт:</label> <select name="lift" id="lift" onchange=""> <option value="">---</option> <option value="1">Есть</option> <option value="2">Нет</option> </select><br> <label for="parking">Парковка:</label> <select name="parking" id="parking" onchange=""> <option value="">---</option> <option value="1">Подземная</option> <option value="2">Во дворе</option> <option value="2">Платная (неподалеку)</option> </select><br> Безопасность: <div class="indent"> <label for="concierge">Консьерж</label> <input type="checkbox" name="concierge" id="concierge"><br> <label for="security">Охрана</label> <input type="checkbox" name="security" id="security"><br> <label for="intercom">Домофон</label> <input type="checkbox" name="intercom" id="intercom"><br> <label for="CCTV">Видеонаблюдение</label> <input type="checkbox" name="CCTV" id="CCTV"><br> </div> <label for="chute">Мусоропровод:</label> <select name="chute" id="chute" onchange=""> <option value="">---</option> <option value="1">Да</option> <option value="2">Нет</option> </select><br> </div> <strong>Состав квартиры:</strong> <div class="indent"> Комнаты: <div class="indent"> <label for="bedroom">Спальня</label> <input type="checkbox" name="bedroom" id="bedroom"><br> <label for="kitchen">Кухня</label> <input type="checkbox" name="kitchen" id="kitchen"><br> <label for="livingRoom">Гостиная</label> <input type="checkbox" name="livingRoom" id="livingRoom"><br> <label for="hallway">Прихожая</label> <input type="checkbox" name="hallway" id="hallway"><br> <label for="nursery">Детская</label> <input type="checkbox" name="nursery" id="nursery"><br> <label for="study">Рабочий кабинет</label> <input type="checkbox" name="study" id="study"><br> <label for="canteen">Столовая</label> <input type="checkbox" name="canteen" id="canteen"><br> <label for="bathroom">Ванная</label> <input type="checkbox" name="bathroom" id="bathroom"><br> </div> Состояние квартиры: <div class="indent"> <label for="decoration">Отделка:</label> <select name="decoration" id="decoration"> <option value="">---</option> <option value="1">Да</option> <option value="0">Нет</option> </select> <select name="decorationValue"> <option value="">---</option> <option value="1">Люкс</option> <option value="0">Косметическая</option> </select><br> </div> <label for="lavatory">Санузел:</label> <select name="lavatory" id="lavatory"> <option value="">---</option> <option value="1">Совмещенный</option> <option value="0">Раздельный</option> </select><br> <label for="balcony">Обязательное наличие балкона</label> <input type="checkbox" name="balcony" id="balcony"><br> Жилищно-комунальные услуги: <div class="indent"> <label for="heating">Отопление</label> <input type="checkbox" name="heating" id="heating"><br> <label for="gas">Газ</label> <input type="checkbox" name="gas" id="gas"><br> <label for="electricity">Электричество</label> <input type="checkbox" name="electricity" id="electricity"><br> <label for="water">Водопровод</label> <input type="checkbox" name="water" id="water"><br> </div> Наполнение квартиры: <div class="indent"> Электроника для досуга и отдыха: <div class="indent"> <label for="TV">Телевизор</label> <input type="checkbox" name="TV" id="TV"><br> <label for="musicCenter">Музыкльный центр</label> <input type="checkbox" name="musicCenter" id="musicCenter"><br> <label for="conditioner">Кондиционер</label> <input type="checkbox" name="conditioner" id="conditioner"><br> </div> Бытовая техника: <div class="indent"> <label for="fridge">Холодильник</label> <input type="checkbox" name="fridge" id="fridge"><br> <label for="plate">Плита</label> <input type="checkbox" name="plate" id="plate"><br> <label for="bake">Печь</label> <input type="checkbox" name="bake" id="bake"><br> <label for="microwave">СВЧ</label> <input type="checkbox" name="microwave" id="microwave"><br> <label for="dishwasher">Посудомойка</label> <input type="checkbox" name="dishwasher" id="dishwasher"><br> </div> Мебель: <div class="indent"> <label for="table">Стол</label> <input type="checkbox" name="table" id="table"><br> <label for="bed">Кровать</label> <input type="checkbox" name="bed" id="bed"><br> <label for="cupboard">Шкаф</label> <input type="checkbox" name="cupboard" id="cupboard"><br> <label for="stand">Тумба</label> <input type="checkbox" name="stand" id="stand"><br> <label for="mirror">Зеркало</label> <input type="checkbox" name="mirror" id="mirror"><br> <label for="armchair">Кресло</label> <input type="checkbox" name="armchair" id="armchair"><br> <label for="sofa">Диван</label> <input type="checkbox" name="sofa" id="sofa"><br> </div> </div> </div> <strong>Вложения:</strong> <div class="indent"> <label for="plan">План квартиры:</label> <select name="plan" id="plan" onchange=""> <option value="">---</option> <option value="1">Есть</option> <option value="2">Нет</option> </select><br> <label for="3d">3D проект:</label> <select name="3d" id="3d" onchange=""> <option value="">---</option> <option value="1">Есть</option> <option value="2">Нет</option> </select><br> <label for="video">Видео:</label> <select name="video" id="video" onchange=""> <option value="">---</option> <option value="1">Есть</option> <option value="2">Нет</option> </select><br> </div> </div> </fieldset> <input style="margin-top: 20px" type="submit" name="extended" value="Найти">';
+            return '<fieldset> <legend>Базовые параметры</legend> <div style="margin: 15px"> Цена: <div class="indent"> Стоимость: <input name="minPrice" type="text" placeholder="Мин."> <input name="maxPrice" type="text" placeholder="Макс."><br> <label for="bargain">Торг:</label> <select name="bargain" id="bargain"> <option value="">---</option> <option value="yes">Возможен</option> <option value="">Не возможен</option> </select><br> <label for="rentType">Тип аренды:</label> <select name="rentType" id="rentType"> <option value="">---</option> <option value="hourRent">Часовая</option> <option value="dailyRent">Посуточная</option> <option value="longRent">Долгосрочная</option> </select> </div> Расположение: <br> <div class="indent"> <label for="region">Область:</label> <input type="text" name="region" id="region"><br> <label for="city">Город:</label> <input type="text" name="city" id="city"><br> <div class="indent"> <label for="district">Округ:</label> <input type="text" name="district" id="district"><br> <label for="area">Район:</label> <input type="text" name="area" id="area"><br> <label for="address">Адрес:</label> <input type="text" name="addressclassid="address"><br> </div> Станция метро: <br> <div class="indent"> Удаленность от метро: <input type="text" name="metroMin" placeholder="Мин."> <input type="text" name="metroMax" placeholder="Макс."><br> </div> </div> </div> </fieldset> <br><br> <fieldset> <legend>Описание объекта</legend> <div style="margin: 15px"> <strong>Квартира:</strong> <div class="indent"> <label for="roomsNumber">Количество комнат:</label> <select name="roomsNumber" id="roomsNumber" onchange=""> <option value="">---</option> <option value="1">1</option> <option value="2">2</option> <option value="3">3</option> <option value="more">4+</option> </select><br> Площадь: <input type="text" name="spaceMin" placeholder="От"> <input type="text" name="spaceMax" placeholder="До"><br> Этаж: <input type="text" name="floorMin" placeholder="От"> <input type="text" name="floorMax" placeholder="До"><br> <label for="equipment">Комплектация:</label> <select name="equipment" id="equipment"> <option value="">---</option> <option value="1">Укомплектована</option> <option value="">Пустая</option> </select><br> <label for="ceilingHeight">Высота потолков:</label> <input type="text" name="ceilingHeight" id="ceilingHeight"> </div> </div> <div style="margin: 15px"> <strong>Дом квартиры:</strong> <div class="indent"> <label for="houseType">Тип дома:</label> <select name="houseType" id="houseType" onchange=""> <option value="">---</option> <option value="1">Блочный</option> <option value="2">Брежневка</option> <option value="3">Индивидуальный</option> <option value="4">Кирпично-монолитный</option> <option value="5">Монолит</option> <option value="6">Панельный</option> <option value="7">Сталинка</option> <option value="8">Хрущевка</option> <option value="9">Серия дома</option> </select><br> <label for="houseFloorNumber">Количество этажей:</label> <input type="text" name="houseFloorNumber" id="houseFloorNumber"><br> <label for="lift">Лифт:</label> <select name="lift" id="lift" onchange=""> <option value="">---</option> <option value="1">Есть</option> <option value="2">Нет</option> </select><br> <label for="parking">Парковка:</label> <select name="parking" id="parking" onchange=""> <option value="">---</option> <option value="1">Подземная</option> <option value="2">Во дворе</option> <option value="2">Платная (неподалеку)</option> </select><br> Безопасность: <div class="indent"> <label for="concierge">Консьерж</label> <input type="checkbox" name="concierge" id="concierge"><br> <label for="security">Охрана</label> <input type="checkbox" name="security" id="security"><br> <label for="intercom">Домофон</label> <input type="checkbox" name="intercom" id="intercom"><br> <label for="CCTV">Видеонаблюдение</label> <input type="checkbox" name="CCTV" id="CCTV"><br> </div> <label for="chute">Мусоропровод:</label> <select name="chute" id="chute" onchange=""> <option value="">---</option> <option value="1">Да</option> <option value="2">Нет</option> </select><br> </div> <strong>Состав квартиры:</strong> <div class="indent"> Комнаты: <div class="indent"> <label for="bedroom">Спальня</label> <input type="checkbox" name="bedroom" id="bedroom"><br> <label for="kitchen">Кухня</label> <input type="checkbox" name="kitchen" id="kitchen"><br> <label for="livingRoom">Гостиная</label> <input type="checkbox" name="livingRoom" id="livingRoom"><br> <label for="hallway">Прихожая</label> <input type="checkbox" name="hallway" id="hallway"><br> <label for="nursery">Детская</label> <input type="checkbox" name="nursery" id="nursery"><br> <label for="study">Рабочий кабинет</label> <input type="checkbox" name="study" id="study"><br> <label for="canteen">Столовая</label> <input type="checkbox" name="canteen" id="canteen"><br> <label for="bathroom">Ванная</label> <input type="checkbox" name="bathroom" id="bathroom"><br> </div> Состояние квартиры: <div class="indent"> <label for="decoration">Отделка:</label> <select name="decoration" id="decoration"> <option value="">---</option> <option value="1">Да</option> <option value="0">Нет</option> </select> <select name="decorationValue"> <option value="">---</option> <option value="1">Люкс</option> <option value="0">Косметическая</option> </select><br> </div> <label for="lavatory">Санузел:</label> <select name="lavatory" id="lavatory"> <option value="">---</option> <option value="1">Совмещенный</option> <option value="0">Раздельный</option> </select><br> <label for="balcony">Обязательное наличие балкона</label> <input type="checkbox" name="balcony" id="balcony"><br> Жилищно-комунальные услуги: <div class="indent"> <label for="heating">Отопление</label> <input type="checkbox" name="heating" id="heating"><br> <label for="gas">Газ</label> <input type="checkbox" name="gas" id="gas"><br> <label for="electricity">Электричество</label> <input type="checkbox" name="electricity" id="electricity"><br> <label for="water">Водопровод</label> <input type="checkbox" name="water" id="water"><br> </div> Наполнение квартиры: <div class="indent"> Электроника для досуга и отдыха: <div class="indent"> <label for="TV">Телевизор</label> <input type="checkbox" name="TV" id="TV"><br> <label for="musicCenter">Музыкльный центр</label> <input type="checkbox" name="musicCenter" id="musicCenter"><br> <label for="conditioner">Кондиционер</label> <input type="checkbox" name="conditioner" id="conditioner"><br> </div> Бытовая техника: <div class="indent"> <label for="fridge">Холодильник</label> <input type="checkbox" name="fridge" id="fridge"><br> <label for="plate">Плита</label> <input type="checkbox" name="plate" id="plate"><br> <label for="bake">Печь</label> <input type="checkbox" name="bake" id="bake"><br> <label for="microwave">СВЧ</label> <input type="checkbox" name="microwave" id="microwave"><br> <label for="dishwasher">Посудомойка</label> <input type="checkbox" name="dishwasher" id="dishwasher"><br> </div> Мебель: <div class="indent"> <label for="table">Стол</label> <input type="checkbox" name="table" id="table"><br> <label for="bed">Кровать</label> <input type="checkbox" name="bed" id="bed"><br> <label for="cupboard">Шкаф</label> <input type="checkbox" name="cupboard" id="cupboard"><br> <label for="stand">Тумба</label> <input type="checkbox" name="stand" id="stand"><br> <label for="mirror">Зеркало</label> <input type="checkbox" name="mirror" id="mirror"><br> <label for="armchair">Кресло</label> <input type="checkbox" name="armchair" id="armchair"><br> <label for="sofa">Диван</label> <input type="checkbox" name="sofa" id="sofa"><br> </div> </div> </div> <strong>Вложения:</strong> <div class="indent"> <label for="plan">План квартиры:</label> <select name="plan" id="plan" onchange=""> <option value="">---</option> <option value="1">Есть</option> <option value="2">Нет</option> </select><br> <label for="3d">3D проект:</label> <select name="3d" id="3d" onchange=""> <option value="">---</option> <option value="1">Есть</option> <option value="2">Нет</option> </select><br> <label for="video">Видео:</label> <select name="video" id="video" onchange=""> <option value="">---</option> <option value="1">Есть</option> <option value="2">Нет</option> </select><br> </div> </div> </fieldset> <input style="margin-top: 20px" type="submit" name="extended" value="Найти">';
         }
 
         function getRegions() {
@@ -370,6 +370,50 @@ $siteModel = Registry::model('site');
     <!--<?php $this->content(); ?> -->
     <div class="section-home-with-filters">
         <form action="" id="form" novalidate> <!--novalidate -->
+            <div class="property-type-apartment-settings">
+                <ul>
+                    <li>Жилая</li>
+                    <li onclick="allFilterBlocks('1');"><img src="../../template/images/b-s-1.png"
+                                                             alt="icon">
+                        <p>Квартира</p></li>
+                    <li onclick="allFilterBlocks('2');"><img src="../../template/images/b-s-2.png"
+                                                             alt="icon">
+                        <p>Дом</p></li>
+                    <li onclick="allFilterBlocks('3');"><img src="../../template/images/b-s-3.png"
+                                                             alt="icon">
+                        <p>Комната</p></li>
+                    <li onclick="allFilterBlocks('7');"><img src="../../template/images/b-s-4.png"
+                                                             alt="icon">
+                        <p>Земельный участок</p></li>
+                    <li onclick="allFilterBlocks('8');"><img src="../../template/images/b-s-5.png"
+                                                             alt="icon">
+                        <p>Гараж/машиноместо</p></li>
+                </ul>
+                <ul>
+                    <li>Коммерческая</li>
+                    <li onclick="allFilterBlocks('4');"><img src="../../template/images/b-s-6.png"
+                                                             alt="icon">
+                        <p>Офисная площадь</p></li>
+                    <li onclick="allFilterBlocks('5');"><img src="../../template/images/b-s-1.png"
+                                                             alt="icon">
+                        <p>Отдельно стоящее здание</p></li>
+                    <li onclick="allFilterBlocks('6');"><img src="../../template/images/b-s-7.png"
+                                                             alt="icon">
+                        <p>Комплекс ОСЗ</p></li>
+                    <li onclick="allFilterBlocks('9');"><img src="../../template/images/b-s-8.png"
+                                                             alt="icon">
+                        <p>Рынок/Ярмарка</p></li>
+                    <li onclick="allFilterBlocks('10');"><img src="../../template/images/b-s-9.png"
+                                                              alt="icon">
+                        <p>Производственно-складские помещения</p></li>
+                    <li onclick="allFilterBlocks('11');"><img src="../../template/images/b-s-10.png"
+                                                              alt="icon">
+                        <p>Производственно-складские здания</p></li>
+                    <li onclick="allFilterBlocks('12');"><img src="../../template/images/b-s-11.png"
+                                                              alt="icon">
+                        <p>Недвижимость для туризма и отдыха</p></li>
+                </ul>
+            </div>
             <div class="apartment-search">
                 <ul class="vkl">
                     <li id="blockToRent" onclick="choiceBlock('toRent')"><a>Арендовать</a></li>
@@ -379,61 +423,10 @@ $siteModel = Registry::model('site');
                     <div class="decorativeShadowBlock"></div>
                     <div class="main-filter">
                         <div class="select">
-                            <label for="">
-                                <img src="../../template/images/apartments.png" alt="icons">
-                                <select>
-                                    <option>Квартира</option>
-                                    <option>Квартира</option>
-                                    <option>Квартира</option>
-                                </select>
-                            </label>
-                        </div>
-                        <div class="property-type-apartment-settings">
-                            <ul>
-                                <li>Жилая</li>
-                                <li onclick="allFilterBlocks('1');"><img src="../../template/images/b-s-1.png"
-                                                                         alt="icon">
-                                    <p>Квартира</p></li>
-                                <li onclick="allFilterBlocks('2');"><img src="../../template/images/b-s-2.png"
-                                                                         alt="icon">
-                                    <p>Дом</p></li>
-                                <li onclick="allFilterBlocks('3');"><img src="../../template/images/b-s-3.png"
-                                                                         alt="icon">
-                                    <p>Комната</p></li>
-                                <li onclick="allFilterBlocks('7');"><img src="../../template/images/b-s-4.png"
-                                                                         alt="icon">
-                                    <p>Земельный участок</p></li>
-                                <li onclick="allFilterBlocks('8');"><img src="../../template/images/b-s-5.png"
-                                                                         alt="icon">
-                                    <p>Гараж/машиноместо</p></li>
-                            </ul>
-                            <ul>
-                                <li>Коммерческая</li>
-                                <li onclick="allFilterBlocks('4');"><img src="../../template/images/b-s-6.png"
-                                                                         alt="icon">
-                                    <p>Офисная площадь</p></li>
-                                <li onclick="allFilterBlocks('5');"><img src="../../template/images/b-s-1.png"
-                                                                         alt="icon">
-                                    <p>Отдельно стоящее здание</p></li>
-                                <li onclick="allFilterBlocks('6');"><img src="../../template/images/b-s-7.png"
-                                                                         alt="icon">
-                                    <p>Комплекс ОСЗ</p></li>
-                                <li onclick="allFilterBlocks('9');"><img src="../../template/images/b-s-8.png"
-                                                                         alt="icon">
-                                    <p>Рынок/Ярмарка</p></li>
-                                <li onclick="allFilterBlocks('10');"><img src="../../template/images/b-s-9.png"
-                                                                          alt="icon">
-                                    <p>Производственно-складские помещения</p></li>
-                                <li onclick="allFilterBlocks('11');"><img src="../../template/images/b-s-10.png"
-                                                                          alt="icon">
-                                    <p>Производственно-складские здания</p></li>
-                                <li onclick="allFilterBlocks('12');"><img src="../../template/images/b-s-11.png"
-                                                                          alt="icon">
-                                    <p>Недвижимость для туризма и отдыха</p></li>
-                            </ul>
+                            <input type="text" placeholder="Москва, ул, Малая Ордынка" autocomplete="off" class="api-search-city address">
                         </div>
                     </div>
-                    <div class="main-filter" onclick="filterOptionsApartments()">
+                    <div class="main-filter value-text" onclick="filterOptionsApartments()">
                         <span>
                             <img src="../../template/images/apartments.png" alt="apartments">Тип недвижимости
                         </span>
@@ -889,7 +882,7 @@ $siteModel = Registry::model('site');
                         <div class="history-search" onclick="allFilterBlocks('historySearch')">
                             <span class="search-city active-search">
                                 <img src="../../template/images/s1.png" alt="city">
-                                 <input type="text" id="address" placeholder="Москва, ул, Малая Ордынка" autocomplete="off" class="api-search-city">
+                                 <input type="text" placeholder="Москва, ул, Малая Ордынка" autocomplete="off" class="api-search-city address">
                             </span>
                             <h5>История</h5>
                             <div class="all-history-search">
@@ -1047,50 +1040,6 @@ $siteModel = Registry::model('site');
                 <ul class="filter-block-big-menu">
                     <li class="pointer value-text" onclick="filterOptionsApartments()">
                         <img src="../../template/images/apartments.png" alt="apartments">Тип недвижимости
-                        <div class="property-type-apartment-settings">
-                            <ul>
-                                <li>Жилая</li>
-                                <li onclick="allFilterBlocks('1');"><img src="../../template/images/b-s-1.png"
-                                                                         alt="icon">
-                                    <p>Квартира</p></li>
-                                <li onclick="allFilterBlocks('2');"><img src="../../template/images/b-s-2.png"
-                                                                         alt="icon">
-                                    <p>Дом</p></li>
-                                <li onclick="allFilterBlocks('3');"><img src="../../template/images/b-s-3.png"
-                                                                         alt="icon">
-                                    <p>Комната</p></li>
-                                <li onclick="allFilterBlocks('7');"><img src="../../template/images/b-s-4.png"
-                                                                         alt="icon">
-                                    <p>Земельный участок</p></li>
-                                <li onclick="allFilterBlocks('8');"><img src="../../template/images/b-s-5.png"
-                                                                         alt="icon">
-                                    <p>Гараж/машиноместо</p></li>
-                            </ul>
-                            <ul>
-                                <li>Коммерческая</li>
-                                <li onclick="allFilterBlocks('4');"><img src="../../template/images/b-s-6.png"
-                                                                         alt="icon">
-                                    <p>Офисная площадь</p></li>
-                                <li onclick="allFilterBlocks('5');"><img src="../../template/images/b-s-1.png"
-                                                                         alt="icon">
-                                    <p>Отдельно стоящее здание</p></li>
-                                <li onclick="allFilterBlocks('6');"><img src="../../template/images/b-s-7.png"
-                                                                         alt="icon">
-                                    <p>Комплекс ОСЗ</p></li>
-                                <li onclick="allFilterBlocks('9');"><img src="../../template/images/b-s-8.png"
-                                                                         alt="icon">
-                                    <p>Рынок/Ярмарка</p></li>
-                                <li onclick="allFilterBlocks('10');"><img src="../../template/images/b-s-9.png"
-                                                                          alt="icon">
-                                    <p>Производственно-складские помещения</p></li>
-                                <li onclick="allFilterBlocks('11');"><img src="../../template/images/b-s-10.png"
-                                                                          alt="icon">
-                                    <p>Производственно-складские здания</p></li>
-                                <li onclick="allFilterBlocks('12');"><img src="../../template/images/b-s-11.png"
-                                                                          alt="icon">
-                                    <p>Недвижимость для туризма и отдыха</p></li>
-                            </ul>
-                        </div>
                     </li>
                     <li onclick="allParam('bigOption')">
                         <label><img src="../../template/images/s3.png" alt="price">Цена</label>
@@ -2154,15 +2103,118 @@ $siteModel = Registry::model('site');
                                 <button class="closeApparenceBuild">Поиск</button>
                             </div>
                         </li>
-                        <li><img src="../../template/images/search-5.png" alt="search">Безопасность
-                            <div class="select main-filter-s">
-                                <label for="">
-                                    <select>
-                                        <option>Выберите</option>
-                                        <option>Выберите1</option>
-                                        <option>Выберите2</option>
-                                    </select>
-                                </label>
+                        <li onclick="allParam('repairAndUtilitiesOfTheApartment')">
+                            <img src="../../template/images/search-2.png" alt="search">Ремонт и обустройства
+                            <div class="progress-bar blue stripes">
+                                <span style="width:40%"></span>
+                            </div>
+                            <div class="repair-and-utilities-of-the-apartment">
+                                <h2>Ремонт и обустройства</h2>
+                                <ul>
+                                    <li>
+                                        <div class="select">
+                                            <label for="furnish">Отделка
+                                                <select name="furnish" id="furnish">
+                                                    <option value="46">Эксклюзивного качества</option>
+                                                    <option value="64">Высококачественная отделка</option>
+                                                    <option value="57">Хорошая отделка</option>
+                                                    <option value="106">Требуется косметический ремонт</option>
+                                                    <option value="107">Требуется ремонт</option>
+                                                    <option value="65">Незавершенный ремонт</option>
+                                                    <option value="141">Без ремонта</option>
+                                                </select>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p class="title-center">Безопасность</p>
+                                        <label>Консьерж <input type="checkbox" name="concierge"></label>
+                                        <label>Охрана <input type="checkbox" name="security"></label>
+                                        <label>Домофон <input type="checkbox" name="intercom"></label>
+                                        <label>Видеонаблюдение <input type="checkbox" name="cctv"></label>
+                                        <label>Сигнализация <input type="checkbox" name="signaling"></label>
+                                    </li>
+                                    <li>
+                                        <p class="title-center">Ограждение</p>
+                                        <label>Ограждение<input type="checkbox" name="fencing"></label>
+                                    </li>
+                                    <li>
+                                        <div class="select">
+                                            <label for="material">Материал
+                                                <select name="material" id="material">
+                                                    <option value="98">Пластик</option>
+                                                    <option value="142">Дерево</option>
+                                                    <option value="38">Профнастил</option>
+                                                    <option value="122">Камень</option>
+                                                    <option value="31">Бетон</option>
+                                                    <option value="19">Кирпич</option>
+                                                    <option value="75">Металлические прутья</option>
+                                                    <option value="143">Кованая ограда</option>
+                                                </select>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="select">
+                                            <label for="parking">Парковка
+                                                <select name="parking" id="parking">
+                                                    <option class="more-settings" value="81">Многоуровневый паркинг</option>
+                                                    <option class="more-settings" value="132">Подземная парковка</option>
+                                                    <option class="more-settings" value="52">Гаражный комплекс</option>
+                                                    <option class="more-settings" value="7">Придомовой гараж</option>
+                                                    <option class="more-settings" value="82">Муниципальная</option>
+                                                    <option class="more-settings" value="5">Отсутствует</option>
+                                                    <option class="more-settings" value="41">Не важно</option>
+                                                </select>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li class="show-more-settings">
+                                        <div class="select">
+                                            <label for="municipal">Муниципальная
+                                                <select name="municipal" id="municipal">
+                                                    <option value="94">Платная</option>
+                                                    <option value="51">Бесплатная</option>
+                                                </select>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <p class="title-center">Жилищно-коммунальные услуги</p>
+                                        <label>Электричество<input type="checkbox" name="electricity"></label>
+                                        <label for="electricity">Кол-во кВт:</label>
+                                        <input name="electricity-min" type="text" placeholder="от"><input name="electricity-max" type="text" placeholder="до">
+                                    </li>
+                                    <li>
+                                        <div class="select">
+                                            <label for="sanitation">Водопровод и канализация</label>
+                                            <select name="sanitation" id="sanitation">
+                                                <option value="47">Есть</option>
+                                                <option value="84">Нет</option>
+                                            </select>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <label>Возможность проводки <input type="checkbox" name="possible_to_post"></label>
+                                        <label>Описание <input type="checkbox" name="sanitation_description"></label>
+                                        <label for="sanitation">Наличие санузлов</label>
+                                        <label for="">Количество:</label>
+                                        <input name="bathroom_number-min" type="text" placeholder="от">
+                                        <input name="bathroom_number-max" type="text" placeholder="до">
+                                        <label for="">Расположение:</label>
+                                    </li>
+                                    <li>
+                                        <div class="select">
+                                            <select name="bathroom_location" id="sanitation">
+                                                <option value="">---</option>
+                                            </select>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <label>Описание<input type="checkbox" name="bathroom_description"></label>
+                                    </li>
+                                </ul>
+                                <button class="close-repair-and-utilities-of-the-apartment">Готово</button>
                             </div>
                         </li>
                         <li onclick="allParam('document')"><img src="../../template/images/search-1.png" alt="search">Документы
@@ -2479,7 +2531,7 @@ $siteModel = Registry::model('site');
                              </div>
                          </li>
                          <li><img src="../../template/images/search-5.png" alt="search">Безопасность
-                             <div class="select main-filter-s">
+                             <div class="select">
                                  <label for="">
                                      <select>
                                          <option>Выберите</option>
@@ -2813,7 +2865,7 @@ $siteModel = Registry::model('site');
                              </div>
                          </li>
                          <li><img src="../../template/images/search-5.png" alt="search">Безопасность
-                             <div class="select main-filter-s">
+                             <div class="select">
                                  <label for="">
                                      <select>
                                          <option>Выберите</option>
@@ -2920,7 +2972,7 @@ $siteModel = Registry::model('site');
                          </li>
                          <li>
                              <img src="../../template/images/search-5.png" alt="search">Безопасность
-                             <div class="select main-filter-s">
+                             <div class="select">
                                  <label for="">
                                      <select>
                                          <option>Выберите</option>
@@ -3018,7 +3070,7 @@ $siteModel = Registry::model('site');
                          </li>
                          <li>
                              <img src="../../template/images/search-5.png" alt="search">Безопасность
-                             <div class="select main-filter-s">
+                             <div class="select">
                                  <label for="">
                                      <select>
                                          <option>Выберите</option>
@@ -3116,7 +3168,7 @@ $siteModel = Registry::model('site');
                          </li>
                          <li>
                              <img src="../../template/images/search-5.png" alt="search">Безопасность
-                             <div class="select main-filter-s">
+                             <div class="select">
                                  <label for="">
                                      <select>
                                          <option>Выберите</option>
@@ -3214,7 +3266,7 @@ $siteModel = Registry::model('site');
                          </li>
                          <li>
                              <img src="../../template/images/search-5.png" alt="search">Безопасность
-                             <div class="select main-filter-s">
+                             <div class="select">
                                  <label for="">
                                      <select>
                                          <option>Выберите</option>
@@ -3312,7 +3364,7 @@ $siteModel = Registry::model('site');
                          </li>
                          <li>
                              <img src="../../template/images/search-5.png" alt="search">Безопасность
-                             <div class="select main-filter-s">
+                             <div class="select">
                                  <label for="">
                                      <select>
                                          <option>Выберите</option>
@@ -3366,7 +3418,7 @@ $siteModel = Registry::model('site');
                          </li>
                      </ul>-->
                     <div id="map">
-                        <input type="text" id="address" placeholder="Адрес ...">
+                        <input type="text" class="address" placeholder="Адрес ...">
                         <button class="close-map">Закрыть карту</button>
                     </div>
                     <a onclick="allParam('map');" id="searchYandexMap">
@@ -3380,7 +3432,7 @@ $siteModel = Registry::model('site');
                         <div class="history-search" onclick="allFilterBlocks('historySearch')">
                             <span class="search-city active-search">
                                 <img src="../../template/images/s1.png" alt="city">
-                                <input type="text" id="address" placeholder="Москва, ул, Малая Ордынка" autocomplete="off" class="api-search-city">
+                                <input type="text" placeholder="Москва, ул, Малая Ордынка" autocomplete="off" class="api-search-city address">
                             </span>
                             <h5>История</h5>
                             <div class="all-history-search">
@@ -3528,44 +3580,6 @@ $siteModel = Registry::model('site');
                 <ul class="filter-block-big-menu">
                     <li class="pointer value-text" onclick="filterOptionsApartments()">
                         <img src="../../template/images/apartments.png" alt="apartments">Тип недвижимости
-                        <div class="property-type-apartment-settings">
-                            <ul>
-                                <li>Жилая</li>
-                                <li onclick="allFilterBlocks('1');">
-                                    <img src="../../template/images/b-s-1.png" alt="icon">
-                                    <p>Квартира</p></li>
-                                <li onclick="allFilterBlocks('2');">
-                                    <img src="../../template/images/b-s-2.png" alt="icon">
-                                    <p>Дом</p></li>
-                                <li onclick="allFilterBlocks('3');">
-                                    <img src="../../template/images/b-s-3.png" alt="icon">
-                                    <p>Комната</p></li>
-                                <li><img src="../../template/images/b-s-4.png" alt="icon">
-                                    <p>Земельный участок</p></li>
-                                <li><img src="../../template/images/b-s-5.png" alt="icon">
-                                    <p>Гараж/машиноместо</p></li>
-                            </ul>
-                            <ul>
-                                <li>Коммерческая</li>
-                                <li onclick="allFilterBlocks('4');">
-                                    <img src="../../template/images/b-s-6.png" alt="icon">
-                                    <p>Офисная площадь</p></li>
-                                <li onclick="allFilterBlocks('5');">
-                                    <img src="../../template/images/b-s-1.png" alt="icon">
-                                    <p>Отдельно стоящее здание</p></li>
-                                <li onclick="allFilterBlocks('6');">
-                                    <img src="../../template/images/b-s-7.png" alt="icon">
-                                    <p>Комплекс ОСЗ</p></li>
-                                <li><img src="../../template/images/b-s-8.png" alt="icon">
-                                    <p>Рынок/Ярмарка</p></li>
-                                <li><img src="../../template/images/b-s-9.png" alt="icon">
-                                    <p>Производственно-складские помещения</p></li>
-                                <li><img src="../../template/images/b-s-10.png" alt="icon">
-                                    <p>Производственно-складские здания</p></li>
-                                <li><img src="../../template/images/b-s-11.png" alt="icon">
-                                    <p>Недвижимость для туризма и отдыха</p></li>
-                            </ul>
-                        </div>
                     </li>
                     <li onclick="allParam('bigOption')">
                         <label><img src="../../template/images/s3.png" alt="price">Цена</label>
@@ -4373,7 +4387,7 @@ $siteModel = Registry::model('site');
                             </div>
                         </li>
                         <li><img src="../../template/images/search-5.png" alt="search">Безопасность
-                            <div class="select main-filter-s">
+                            <div class="select">
                                 <label for="">
                                     <select>
                                         <option>Language of communication</option>
@@ -4961,7 +4975,7 @@ $siteModel = Registry::model('site');
                              </div>
                          </li>
                          <li><img src="../../template/images/search-5.png" alt="search">Безопасность
-                             <div class="select main-filter-s">
+                             <div class="select">
                                  <label for="">
                                      <select>
                                          <option>Выберите</option>
@@ -5285,7 +5299,7 @@ $siteModel = Registry::model('site');
                              </div>
                          </li>
                          <li><img src="../../template/images/search-5.png" alt="search">Безопасность
-                             <div class="select main-filter-s">
+                             <div class="select">
                                  <label for="">
                                      <select>
                                          <option>Выберите</option>

@@ -161,9 +161,8 @@ function filterOptionsApartments() {
 
     showFilter = !showFilter;
 
-    if (!showFilter) {
-        return false;
-    }
+    if (!showFilter) {return false;}
+
     blockFilterAndShadow.fadeIn('slow');
 }
 
@@ -288,6 +287,21 @@ function allParam(filterParam) {
 }
 
 function allFilterBlocks(filters) {
+    var $valueText = $('.value-text'),
+        $namesSettings = {
+            1: 'Квартира',
+            2: 'Дом',
+            3: 'Комната',
+            4: 'Офисная площадь',
+            5: 'Отдельно стоящее здание',
+            6: 'Комплекс ОС',
+            7: 'Земельный участок',
+            8: 'Гараж/машиноместо',
+            9: 'Рынок/Ярмарка',
+            10: 'Производственно-складские помещения',
+            11: 'Производственно-складские здания',
+            12: 'Недвижимость для туризма и отдыха'
+        };
 
     $('.advanced-search-options').find('.building-parameters-apartment,' +
         ' .building-parameters-home, .building-parameters-room, .building-parameters-office-area,' +
@@ -307,7 +321,12 @@ function allFilterBlocks(filters) {
             });
             break;
         case 'historySearch':
-            var $exactArea = $('.exact-area');
+            var $exactArea = $('.exact-area'),
+                inputLocation = $('.address');
+
+            console.log('наш input ---- >', inputLocation);
+
+            if (inputLocation)
 
             $exactArea.fadeIn('slow', function () {
                 $(this).css({
@@ -330,42 +349,57 @@ function allFilterBlocks(filters) {
             break;
         case '1':
             $('.building-parameters-apartment').css({'display': 'flex'});
+            $valueText.text(($namesSettings[1]));
             break;
         case '2':
             $('.building-parameters-home').css({'display': 'flex'});
+            $valueText.text(($namesSettings[2]));
             break;
         case '3':
             $('.building-parameters-room').css({'display': 'flex'});
+            $valueText.text(($namesSettings[3]));
             break;
         case '4':
             $('.building-parameters-office-area').css({'display': 'flex'});
+            $valueText.text(($namesSettings[4]));
             break;
         case '5':
             $('.building-parameters-separate-building').css({'display': 'flex'});
+            $valueText.text(($namesSettings[5]));
             break;
         case '6':
             $('.building-parameters-ozs-сomplex').css({'display': 'flex'});
+            $valueText.text(($namesSettings[6]));
             break;
         case '7':
             $('.test-7').css({'display': 'flex'});
+            $valueText.text(($namesSettings[7]));
             break;
         case '8':
             $('.test-8').css({'display': 'flex'});
+            $valueText.text(($namesSettings[8]));
             break;
         case '9':
             $('.test-9').css({'display': 'flex'});
+            $valueText.text(($namesSettings[9]));
             break;
         case '10':
             $('.test-10').css({'display': 'flex'});
+            $valueText.text(($namesSettings[10]));
             break;
         case '11':
             $('.test-11').css({'display': 'flex'});
+            $valueText.text(($namesSettings[11]));
             break;
         case '12':
             $('.test-12').css({'display': 'flex'});
+            $valueText.text(($namesSettings[12]));
             break;
         default: console.log('Фильтр не настроен');
     }
+
+    $valueText.prepend('<img src="../../template/images/apartments.png">');
+
     blockFilterAndShadow.fadeOut('slow');
 }
 
@@ -475,7 +509,7 @@ $("#form").on('submit', function(e) { // устанавливаем событи
         range: true,
         min: 0,
         max: 20000000,
-        values: [75, 10000],
+        values: [75, 20000000],
         slide: function (event, ui) {
             $amountBefore.val(ui.values[0]);
             $amountAfter.val(ui.values[1]);
@@ -485,7 +519,7 @@ $("#form").on('submit', function(e) { // устанавливаем событи
         range: true,
         min: 0,
         max: 20000000,
-        values: [75, 10000],
+        values: [75, 20000000],
         slide: function (event, ui) {
             $amountBeforeBuy.val(ui.values[0]);
             $amountAfterBuy.val(ui.values[1]);
@@ -495,7 +529,7 @@ $("#form").on('submit', function(e) { // устанавливаем событи
         range: true,
         min: 0,
         max: 20000000,
-        values: [75, 10000],
+        values: [75, 20000000],
         slide: function (event, ui) {
             $amountBeforeSearch.val(ui.values[0]);
             $amountAfterSearch.val(ui.values[1]);
