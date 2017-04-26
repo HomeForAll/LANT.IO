@@ -303,6 +303,8 @@ function allFilterBlocks(filters) {
             12: 'Недвижимость для туризма и отдыха'
         };
 
+    $valueText.find('img').detach();
+
     $('.advanced-search-options').find('.building-parameters-apartment,' +
         ' .building-parameters-home, .building-parameters-room, .building-parameters-office-area,' +
         '.building-parameters-separate-building, .building-parameters-ozs-сomplex,' +
@@ -321,31 +323,26 @@ function allFilterBlocks(filters) {
             });
             break;
         case 'historySearch':
-            var $exactArea = $('.exact-area'),
-                inputLocation = $('.address');
+            var $exactArea = $('.exact-area');
 
-            console.log('наш input ---- >', inputLocation);
+            setInterval(function () {
+                var inputLocation = $('.history-text').val();
 
-            if (inputLocation)
-
-            $exactArea.fadeIn('slow', function () {
-                $(this).css({
-                    'position': 'absolute',
-                    'height': '435px',
-                    'width': '85%'
-                });
-            });
-
-            setTimeout(function () {
-                $exactArea.fadeOut('slow', function () {
-                    $(this).css({
+                if (inputLocation === '') {
+                    $exactArea.css({
                         'position': 'relative',
                         'height': '75px',
                         'width': '37%',
                         'display': 'inline-block'
                     });
-                });
-            }, 10000);
+                } else {
+                    $exactArea.css({
+                        'position': 'absolute',
+                        'height': '435px',
+                        'width': '85%'
+                    });
+                }
+            }, 5000);
             break;
         case '1':
             $('.building-parameters-apartment').css({'display': 'flex'});
@@ -502,9 +499,9 @@ $("#form").on('submit', function(e) { // устанавливаем событи
         $amountAfterSearch = $('#amountAfterSearch');
 
     /** Фильтры в доп.параметрах **/
-    $amountBefore.val('75');$amountAfter.val('20000');
-    $amountBeforeBuy.val('75');$amountAfterBuy.val('20000');
-    $amountBeforeSearch.val('75');$amountAfterSearch.val('20000');
+    $amountBefore.val('0');$amountAfter.val('20000');
+    $amountBeforeBuy.val('0');$amountAfterBuy.val('20000');
+    $amountBeforeSearch.val('0');$amountAfterSearch.val('20000');
     $("#slider-range").slider({
         range: true,
         min: 0,
@@ -673,19 +670,7 @@ function yandexMap() {
     });
 }
 
-/** Яндекс карты внутри параметров **/
-ymaps.ready(function () {
-    var map = new ymaps.Map("ymap", {
-        center: [55.451332, 37.369336],
-        zoom: 10,
-        controls: ['fullscreenControl', 'typeSelector', 'geolocationControl', 'zoomControl']
-    });
-
-    window.suggests = new ymaps.SuggestView("suggest", {width: 300, offset: [0, 4], results: 20});
-});
-
 /** Поиск по городам **/
 ymaps.ready(function () {
     var metroLocation = new ymaps.SuggestView('address', {width: 300, offset: [0, 4], results: 20});
-    metroLocation();
 });

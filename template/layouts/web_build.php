@@ -423,7 +423,7 @@ $siteModel = Registry::model('site');
                     <div class="decorativeShadowBlock"></div>
                     <div class="main-filter">
                         <div class="select">
-                            <input type="text" placeholder="Москва, ул, Малая Ордынка" autocomplete="off" class="api-search-city address">
+                            <input type="text" id="address" placeholder="Москва, ул, Малая Ордынка" autocomplete="off" class="api-search-city">
                         </div>
                     </div>
                     <div class="main-filter value-text" onclick="filterOptionsApartments()">
@@ -882,7 +882,7 @@ $siteModel = Registry::model('site');
                         <div class="history-search" onclick="allFilterBlocks('historySearch')">
                             <span class="search-city active-search">
                                 <img src="../../template/images/s1.png" alt="city">
-                                 <input type="text" placeholder="Москва, ул, Малая Ордынка" autocomplete="off" class="api-search-city address">
+                                <input type="text" id="address" placeholder="Москва, ул, Малая Ордынка" autocomplete="off" class="api-search-city history-text">
                             </span>
                             <h5>История</h5>
                             <div class="all-history-search">
@@ -3418,7 +3418,7 @@ $siteModel = Registry::model('site');
                          </li>
                      </ul>-->
                     <div id="map">
-                        <input type="text" class="address" placeholder="Адрес ...">
+                        <input type="text" id="address" placeholder="Введите адрес..." autocomplete="off" class="api-search-city">
                         <button class="close-map">Закрыть карту</button>
                     </div>
                     <a onclick="allParam('map');" id="searchYandexMap">
@@ -3432,7 +3432,7 @@ $siteModel = Registry::model('site');
                         <div class="history-search" onclick="allFilterBlocks('historySearch')">
                             <span class="search-city active-search">
                                 <img src="../../template/images/s1.png" alt="city">
-                                <input type="text" placeholder="Москва, ул, Малая Ордынка" autocomplete="off" class="api-search-city address">
+                                <input type="text" id="address" placeholder="Москва, ул, Малая Ордынка" autocomplete="off" class="api-search-city history-text">
                             </span>
                             <h5>История</h5>
                             <div class="all-history-search">

@@ -295,6 +295,9 @@
       transition: 1.5s;
     }
   }
+  & .main-filter {
+    overflow: hidden;
+  }
 }
 
 .search-city {
@@ -614,6 +617,9 @@
   background: #fff;
   margin: auto;
   li {
+    overflow: auto;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     background: #fff;
     color: #000;
     font-size: 14px;
