@@ -1,5 +1,5 @@
 'use strict';
-var productSearch, showAndHideTopMenu, boolean, rootBlock, showFilter = false,
+var productSearch, showAndHideTopMenu, boolean, rootBlock, showFilter, openMap = false,
     blockFilterAndShadow = $('.property-type-apartment-settings, .decorativeShadowBlock'),
     imagesWidth = 130,
     valueButton = {
@@ -237,14 +237,12 @@ function allParam(filterParam) {
             });
             break;
         case 'map':
-            var $map = $('#map'),
-                openMap = false;
+            var $map = $('#map');
 
-            openMap = true;
-
-            if (!openMap) {return false;}
-
-            yandexMap();
+            if (!openMap) {
+                yandexMap();
+                openMap = true;
+            }
 
             $('#searchYandexMap').hide();
             $map.css({'display': 'block'});
