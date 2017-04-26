@@ -12,7 +12,7 @@ class Registry
 
     public static function get($name)
     {
-        return self::$variables[$name];
+        return isset(self::$variables[$name]) ? self::$variables[$name] : null;
     }
 
     public static function del($name)
