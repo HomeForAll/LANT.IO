@@ -266,9 +266,6 @@
   background: #21a71e;
   transition: 1.5s;
 }
-.search-menu-apartment .main-filter {
-  overflow: hidden;
-}
 .search-city {
   position: relative;
   vertical-align: middle;
@@ -566,6 +563,12 @@
   width: 70px;
   background: none;
 }
+.value-text {
+  margin: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 .filter-block-big-menu {
   padding-left: 15px;
   width: 100%;
@@ -574,9 +577,6 @@
   margin: auto;
 }
 .filter-block-big-menu li {
-  overflow: auto;
-  white-space: nowrap;
-  text-overflow: ellipsis;
   background: #fff;
   color: #000;
   font-size: 14px;

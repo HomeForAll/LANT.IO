@@ -426,8 +426,8 @@ $siteModel = Registry::model('site');
                             <input type="text" id="address" placeholder="Москва, ул, Малая Ордынка" autocomplete="off" class="api-search-city">
                         </div>
                     </div>
-                    <div class="main-filter value-text" onclick="filterOptionsApartments()">
-                        <span>
+                    <div class="main-filter" onclick="filterOptionsApartments()">
+                        <span class="value-text">
                             <img src="../../template/images/apartments.png" alt="apartments">Тип недвижимости
                         </span>
                     </div>
@@ -1039,7 +1039,9 @@ $siteModel = Registry::model('site');
                 <button>Найти</button>
                 <ul class="filter-block-big-menu">
                     <li class="pointer value-text" onclick="filterOptionsApartments()">
-                        <img src="../../template/images/apartments.png" alt="apartments">Тип недвижимости
+                        <span class="value-text">
+                            <img src="../../template/images/apartments.png" alt="apartments">Тип недвижимости
+                        </span>
                     </li>
                     <li onclick="allParam('bigOption')">
                         <label><img src="../../template/images/s3.png" alt="price">Цена</label>
@@ -3579,7 +3581,9 @@ $siteModel = Registry::model('site');
                 <button>Найти</button>
                 <ul class="filter-block-big-menu">
                     <li class="pointer value-text" onclick="filterOptionsApartments()">
-                        <img src="../../template/images/apartments.png" alt="apartments">Тип недвижимости
+                        <span class="value-text">
+                            <img src="../../template/images/apartments.png" alt="apartments">Тип недвижимости
+                        </span>
                     </li>
                     <li onclick="allParam('bigOption')">
                         <label><img src="../../template/images/s3.png" alt="price">Цена</label>
