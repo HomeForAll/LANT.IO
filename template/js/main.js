@@ -262,6 +262,59 @@ function allParam(filterParam) {
                 $plotOfLand.fadeOut('slow');
             });
             break;
+        case 'repairAndUtilitiesOfHome':
+            var $repairHome = $('.repair-and-utilities-of-home');
+            $repairHome.css({'display': 'block'});
+
+            $('.close-repair-home').on('click', function (e) {
+                e.preventDefault();
+                $repairHome.fadeOut('slow');
+            });
+            break;
+        case 'objectParameters':
+            var $objectParameters = $('.object-parameters');
+            $objectParameters.css({'display': 'block'});
+
+            $('.close-object-parameters').on('click', function (e) {
+                e.preventDefault();
+                $objectParameters.fadeOut('slow');
+            });
+        case 'additionallyAp':
+            var $additionallyAp = $('.additionally-ap');
+            $additionallyAp.css({'display': 'block'});
+
+            $('.closeAdditionallyAp').on('click', function (e) {
+                e.preventDefault();
+                $additionallyAp.fadeOut('slow');
+            });
+            break;
+        case 'main':
+            var $mainAp = $('.main-ap');
+            $mainAp.css({'display': 'block'});
+
+            $('.closeMainAp').on('click', function (e) {
+                e.preventDefault();
+                $mainAp.fadeOut('slow');
+            });
+            break;
+        case 'furnishing':
+            var $furnishing = $('.furnishing');
+            $furnishing.css({'display': 'block'});
+
+            $('.closeFurnishing').on('click', function (e) {
+                e.preventDefault();
+                $furnishing.fadeOut('slow');
+            });
+            break;
+        case 'mainSettings':
+            var $mainSettings = $('.main-settings');
+            $mainSettings.css({'display': 'block'});
+
+            $('.closeMainSettings').on('click', function (e) {
+                e.preventDefault();
+                $mainSettings.fadeOut('slow');
+            });
+            break;
         case 'repairAndUtilitiesOfTheApartment':
             var $repairAndUtilitiesOfTheApartment = $('.repair-and-utilities-of-the-apartment');
             $repairAndUtilitiesOfTheApartment.css({'display': 'block'});
@@ -292,7 +345,7 @@ function allFilterBlocks(filters) {
             3: 'Комната',
             4: 'Офисная площадь',
             5: 'Отдельно стоящее здание',
-            6: 'Комплекс ОС',
+            6: 'Комплекс ОСЗ',
             7: 'Земельный участок',
             8: 'Гараж/машиноместо',
             9: 'Рынок/Ярмарка',
@@ -306,7 +359,7 @@ function allFilterBlocks(filters) {
     $('.advanced-search-options').find('.building-parameters-apartment,' +
         ' .building-parameters-home, .building-parameters-room, .building-parameters-office-area,' +
         '.building-parameters-separate-building, .building-parameters-ozs-сomplex,' +
-        '.test-7, .test-8, .test-9, .test-10, .test-11, .test-12').css({'display': 'none'});
+        '.test-7, .test-8, .test-9, .test-10, .test-11, .test-12, .test-13, .test-14').css({'display': 'none'});
 
     switch (filters) {
         case 'searchMetroMainBlock':

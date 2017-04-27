@@ -337,6 +337,11 @@
     padding: 20px 40px;
     font-weight: 100;
   }
+  input {
+    background: none;
+    box-shadow: none;
+    width: auto;
+  }
 }
 
 .all-history-search {
@@ -609,6 +614,7 @@
 
 .value-text {
   display: block;
+  text-align: left;
   width: auto;
   margin: 0;
   overflow: hidden;
@@ -803,75 +809,11 @@
   }
 }
 
-.building-parameters-filter {
-  display: none;
-  position: absolute;
-  left: 5vw;
-  right: 5vw;
-  margin: 10px auto 0;
-  width: 850px;
-  z-index: 60;
-  background: #f9f9f9;
-  text-align: center;
-  h2 {
-    font-size: 20px;
-    padding: 15px 5px;
-    font-weight: 300;
-    color: #454545;
-    background: #efefef;
-  }
-  ul {
-    display: block;
-    width: auto;
-    list-style: none;
-    text-align: center;
-    margin: auto;
-  }
-  li {
-    display: block;
-    box-shadow: none;
-    background: #f9f9f9;
-    width: auto;
-    padding: 10px;
-    margin: auto;
-  }
-  p {
-    display: inline-block;
-    vertical-align: middle;
-    text-align: left;
-    width: 33%;
-    padding: 10px 0;
-  }
-  input {
-    display: inline-block;
-    margin: auto 10px;
-    border-radius: 4px;
-    box-shadow: 0 5px 15px 1px rgba(0, 0, 0, 0.3);
-    border: none;
-    text-align: left;
-    width: 62%;
-    padding: 10px 5px;
-    &:valid {
-      border: 1px solid green;
-    }
-    &:invalid {
-      border: none;
-    }
-  }
-  button {
-    display: block;
-    width: 220px;
-    margin: 100px auto 25px;
-    padding: 15px;
-    float: none;
-    background: #71cb6f;
-    color: #fff;
-    border: 1px solid #d0d0d0;
-    border-radius: 30px;
-    cursor: pointer;
-  }
-}
-
+.main-ap,
+.main-settings,
+.furnishing,
+.object-parameters,
+.building-parameters-filter,
 .document,
 .attachment,
 .appearance-of-the-apartment,
@@ -937,8 +879,11 @@
     box-shadow: 0 5px 15px 1px #ebebeb;
     border-radius: 4px;
     &[type="checkbox"] {
-      display: inline-block;
-      vertical-align: middle;
+      background: none !important;
+      width: auto !important;
+      margin-right: 15%;
+      text-align: left;
+      float: right !important;
     }
     &:valid {
       border: 1px solid green;
@@ -946,6 +891,9 @@
     &:invalid {
       border: none;
     }
+  }
+  & .select {
+    text-align: center;
   }
   & .names-parameters {
     float: none;
@@ -1130,7 +1078,7 @@
 }
 
 .show-more-settings {
-  display: none;
+  display: none !important;
   position: relative;
 }
 
@@ -1150,7 +1098,9 @@
 .test-9,
 .test-10,
 .test-11,
-.test-12 {
+.test-12,
+.test-13,
+.test-14 {
   display: none;
   position: relative;
   flex-flow: row wrap;
@@ -1176,7 +1126,7 @@
   }
   input {
     margin: auto;
-    width: 70%;
+    width: auto;
     &[type="checkbox"] {
       width: 50%;
       text-align: left;
@@ -1197,6 +1147,7 @@
   }
 }
 
+.repair-and-utilities-of-home,
 .repair-and-utilities-of-the-apartment,
 .close-repair-and-utilities-of-the-apartment,
 .apartment-settings,
@@ -1275,7 +1226,8 @@
     box-shadow: 0 5px 15px 1px #ebebeb;
     border-radius: 4px;
     &[type="checkbox"] {
-      width: 50%;
+      width: auto;
+      margin-right: 35%;
       text-align: left;
       float: right;
     }
@@ -1386,6 +1338,9 @@
       background: none;
     }
   }
+  label {
+    width: 50%;
+  }
   input {
     color: #000;
     padding: 10px;
@@ -1396,6 +1351,12 @@
     background: #fff;
     box-shadow: 0 5px 15px 1px #ebebeb;
     border-radius: 4px;
+    &[type="checkbox"] {
+      width: auto;
+      margin-right: 35%;
+      text-align: left;
+      float: right;
+    }
     &:valid {
       border: 1px solid green;
     }
@@ -1555,7 +1516,7 @@
     text-align: left;
     font-size: 14px;
     color: #b9b9b9;
-    width: 48%;
+    width: 45%;
   }
   input {
     border: none;
@@ -1605,6 +1566,9 @@
 
 .distance-on-foot, .distance-on-transport {
   padding: 10px 0;
+  span {
+    width: 80px;
+  }
 }
 
 .timer {
@@ -2943,8 +2907,9 @@
   .test-9,
   .test-10,
   .test-11,
-  .test-12 {
-    display: none;
+  .test-12,
+  .test-13,
+  .test-14 {
     li {
       vertical-align: top;
       &:nth-child(1) {
@@ -4582,4 +4547,4 @@
 ::-webkit-scrollbar{
   width: 2px;
 }
-//------------------------------             
+//------------------------------                                                                                                                                                                                                                                                                                                                                                                           

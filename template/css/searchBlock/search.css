@@ -305,6 +305,11 @@
   padding: 20px 40px;
   font-weight: 100;
 }
+.history-search input {
+  background: none;
+  box-shadow: none;
+  width: auto;
+}
 .all-history-search {
   display: flex;
   flex-flow: row wrap;
@@ -565,6 +570,7 @@
 }
 .value-text {
   display: block;
+  text-align: left;
   width: auto;
   margin: 0;
   overflow: hidden;
@@ -754,74 +760,11 @@
   display: inline-block;
   vertical-align: middle;
 }
-.building-parameters-filter {
-  display: none;
-  position: absolute;
-  left: 5vw;
-  right: 5vw;
-  margin: 10px auto 0;
-  width: 850px;
-  z-index: 60;
-  background: #f9f9f9;
-  text-align: center;
-}
-.building-parameters-filter h2 {
-  font-size: 20px;
-  padding: 15px 5px;
-  font-weight: 300;
-  color: #454545;
-  background: #efefef;
-}
-.building-parameters-filter ul {
-  display: block;
-  width: auto;
-  list-style: none;
-  text-align: center;
-  margin: auto;
-}
-.building-parameters-filter li {
-  display: block;
-  box-shadow: none;
-  background: #f9f9f9;
-  width: auto;
-  padding: 10px;
-  margin: auto;
-}
-.building-parameters-filter p {
-  display: inline-block;
-  vertical-align: middle;
-  text-align: left;
-  width: 33%;
-  padding: 10px 0;
-}
-.building-parameters-filter input {
-  display: inline-block;
-  margin: auto 10px;
-  border-radius: 4px;
-  box-shadow: 0 5px 15px 1px rgba(0, 0, 0, 0.3);
-  border: none;
-  text-align: left;
-  width: 62%;
-  padding: 10px 5px;
-}
-.building-parameters-filter input:valid {
-  border: 1px solid green;
-}
-.building-parameters-filter input:invalid {
-  border: none;
-}
-.building-parameters-filter button {
-  display: block;
-  width: 220px;
-  margin: 100px auto 25px;
-  padding: 15px;
-  float: none;
-  background: #71cb6f;
-  color: #fff;
-  border: 1px solid #d0d0d0;
-  border-radius: 30px;
-  cursor: pointer;
-}
+.main-ap,
+.main-settings,
+.furnishing,
+.object-parameters,
+.building-parameters-filter,
 .document,
 .attachment,
 .appearance-of-the-apartment,
@@ -835,6 +778,11 @@
   background: #f9f9f9;
   text-align: center;
 }
+.main-ap h2,
+.main-settings h2,
+.furnishing h2,
+.object-parameters h2,
+.building-parameters-filter h2,
 .document h2,
 .attachment h2,
 .appearance-of-the-apartment h2,
@@ -845,6 +793,11 @@
   color: #454545;
   background: #efefef;
 }
+.main-ap ul,
+.main-settings ul,
+.furnishing ul,
+.object-parameters ul,
+.building-parameters-filter ul,
 .document ul,
 .attachment ul,
 .appearance-of-the-apartment ul,
@@ -855,6 +808,11 @@
   text-align: center;
   margin: auto;
 }
+.main-ap li,
+.main-settings li,
+.furnishing li,
+.object-parameters li,
+.building-parameters-filter li,
 .document li,
 .attachment li,
 .appearance-of-the-apartment li,
@@ -864,6 +822,11 @@
   padding: 10px;
   margin: auto;
 }
+.main-ap p,
+.main-settings p,
+.furnishing p,
+.object-parameters p,
+.building-parameters-filter p,
 .document p,
 .attachment p,
 .appearance-of-the-apartment p,
@@ -873,6 +836,11 @@
   text-align: left;
   width: 85px;
 }
+.main-ap img,
+.main-settings img,
+.furnishing img,
+.object-parameters img,
+.building-parameters-filter img,
 .document img,
 .attachment img,
 .appearance-of-the-apartment img,
@@ -880,6 +848,11 @@
   float: none;
   margin: auto 15px;
 }
+.main-ap button,
+.main-settings button,
+.furnishing button,
+.object-parameters button,
+.building-parameters-filter button,
 .document button,
 .attachment button,
 .appearance-of-the-apartment button,
@@ -895,6 +868,11 @@
   border-radius: 30px;
   cursor: pointer;
 }
+.main-ap input,
+.main-settings input,
+.furnishing input,
+.object-parameters input,
+.building-parameters-filter input,
 .document input,
 .attachment input,
 .appearance-of-the-apartment input,
@@ -909,31 +887,70 @@
   box-shadow: 0 5px 15px 1px #ebebeb;
   border-radius: 4px;
 }
+.main-ap input[type="checkbox"],
+.main-settings input[type="checkbox"],
+.furnishing input[type="checkbox"],
+.object-parameters input[type="checkbox"],
+.building-parameters-filter input[type="checkbox"],
 .document input[type="checkbox"],
 .attachment input[type="checkbox"],
 .appearance-of-the-apartment input[type="checkbox"],
 .appearance-of-the-build input[type="checkbox"] {
-  display: inline-block;
-  vertical-align: middle;
+  background: none !important;
+  width: auto !important;
+  margin-right: 15%;
+  text-align: left;
+  float: right !important;
 }
+.main-ap input:valid,
+.main-settings input:valid,
+.furnishing input:valid,
+.object-parameters input:valid,
+.building-parameters-filter input:valid,
 .document input:valid,
 .attachment input:valid,
 .appearance-of-the-apartment input:valid,
 .appearance-of-the-build input:valid {
   border: 1px solid green;
 }
+.main-ap input:invalid,
+.main-settings input:invalid,
+.furnishing input:invalid,
+.object-parameters input:invalid,
+.building-parameters-filter input:invalid,
 .document input:invalid,
 .attachment input:invalid,
 .appearance-of-the-apartment input:invalid,
 .appearance-of-the-build input:invalid {
   border: none;
 }
+.main-ap .select,
+.main-settings .select,
+.furnishing .select,
+.object-parameters .select,
+.building-parameters-filter .select,
+.document .select,
+.attachment .select,
+.appearance-of-the-apartment .select,
+.appearance-of-the-build .select {
+  text-align: center;
+}
+.main-ap .names-parameters,
+.main-settings .names-parameters,
+.furnishing .names-parameters,
+.object-parameters .names-parameters,
+.building-parameters-filter .names-parameters,
 .document .names-parameters,
 .attachment .names-parameters,
 .appearance-of-the-apartment .names-parameters,
 .appearance-of-the-build .names-parameters {
   float: none;
 }
+.main-ap .jq-selectbox,
+.main-settings .jq-selectbox,
+.furnishing .jq-selectbox,
+.object-parameters .jq-selectbox,
+.building-parameters-filter .jq-selectbox,
 .document .jq-selectbox,
 .attachment .jq-selectbox,
 .appearance-of-the-apartment .jq-selectbox,
@@ -1118,7 +1135,7 @@
   font-size: 20px;
 }
 .show-more-settings {
-  display: none;
+  display: none !important;
   position: relative;
 }
 .vkl {
@@ -1136,7 +1153,9 @@
 .test-9,
 .test-10,
 .test-11,
-.test-12 {
+.test-12,
+.test-13,
+.test-14 {
   display: none;
   position: relative;
   flex-flow: row wrap;
@@ -1154,7 +1173,9 @@
 .test-9 li,
 .test-10 li,
 .test-11 li,
-.test-12 li {
+.test-12 li,
+.test-13 li,
+.test-14 li {
   vertical-align: top;
 }
 .building-parameters-apartment p,
@@ -1168,7 +1189,9 @@
 .test-9 p,
 .test-10 p,
 .test-11 p,
-.test-12 p {
+.test-12 p,
+.test-13 p,
+.test-14 p {
   display: block;
   width: auto;
   text-align: center;
@@ -1184,7 +1207,9 @@
 .test-9 label,
 .test-10 label,
 .test-11 label,
-.test-12 label {
+.test-12 label,
+.test-13 label,
+.test-14 label {
   position: relative;
   display: inline-block;
   width: 85%;
@@ -1205,9 +1230,11 @@
 .test-9 input,
 .test-10 input,
 .test-11 input,
-.test-12 input {
+.test-12 input,
+.test-13 input,
+.test-14 input {
   margin: auto;
-  width: 70%;
+  width: auto;
 }
 .building-parameters-apartment input[type="checkbox"],
 .building-parameters-home input[type="checkbox"],
@@ -1220,7 +1247,9 @@
 .test-9 input[type="checkbox"],
 .test-10 input[type="checkbox"],
 .test-11 input[type="checkbox"],
-.test-12 input[type="checkbox"] {
+.test-12 input[type="checkbox"],
+.test-13 input[type="checkbox"],
+.test-14 input[type="checkbox"] {
   width: 50%;
   text-align: left;
   float: right;
@@ -1236,7 +1265,9 @@
 .test-9 span,
 .test-10 span,
 .test-11 span,
-.test-12 span {
+.test-12 span,
+.test-13 span,
+.test-14 span {
   display: block;
   text-align: center;
   width: auto;
@@ -1253,7 +1284,9 @@
 .test-9 .names-parameters,
 .test-10 .names-parameters,
 .test-11 .names-parameters,
-.test-12 .names-parameters {
+.test-12 .names-parameters,
+.test-13 .names-parameters,
+.test-14 .names-parameters {
   float: none;
 }
 .building-parameters-apartment .jq-selectbox,
@@ -1267,9 +1300,12 @@
 .test-9 .jq-selectbox,
 .test-10 .jq-selectbox,
 .test-11 .jq-selectbox,
-.test-12 .jq-selectbox {
+.test-12 .jq-selectbox,
+.test-13 .jq-selectbox,
+.test-14 .jq-selectbox {
   float: right;
 }
+.repair-and-utilities-of-home,
 .repair-and-utilities-of-the-apartment,
 .close-repair-and-utilities-of-the-apartment,
 .apartment-settings,
@@ -1285,6 +1321,7 @@
   background: #f9f9f9;
   text-align: center;
 }
+.repair-and-utilities-of-home h2,
 .repair-and-utilities-of-the-apartment h2,
 .close-repair-and-utilities-of-the-apartment h2,
 .apartment-settings h2,
@@ -1294,6 +1331,7 @@
   font-weight: 300;
   background: #efefef;
 }
+.repair-and-utilities-of-home ul,
 .repair-and-utilities-of-the-apartment ul,
 .close-repair-and-utilities-of-the-apartment ul,
 .apartment-settings ul,
@@ -1303,6 +1341,7 @@
   width: 49.5%;
   margin: 0;
 }
+.repair-and-utilities-of-home li,
 .repair-and-utilities-of-the-apartment li,
 .close-repair-and-utilities-of-the-apartment li,
 .apartment-settings li,
@@ -1315,6 +1354,7 @@
   clear: both;
   padding: 15px;
 }
+.repair-and-utilities-of-home p,
 .repair-and-utilities-of-the-apartment p,
 .close-repair-and-utilities-of-the-apartment p,
 .apartment-settings p,
@@ -1326,6 +1366,7 @@
   margin: 15px auto;
   width: 30%;
 }
+.repair-and-utilities-of-home p span,
 .repair-and-utilities-of-the-apartment p span,
 .close-repair-and-utilities-of-the-apartment p span,
 .apartment-settings p span,
@@ -1339,6 +1380,7 @@
   line-height: 35px;
   border-radius: 100%;
 }
+.repair-and-utilities-of-home p span:hover,
 .repair-and-utilities-of-the-apartment p span:hover,
 .close-repair-and-utilities-of-the-apartment p span:hover,
 .apartment-settings p span:hover,
@@ -1346,6 +1388,7 @@
   background: #71cb6f;
   color: #fff;
 }
+.repair-and-utilities-of-home a,
 .repair-and-utilities-of-the-apartment a,
 .close-repair-and-utilities-of-the-apartment a,
 .apartment-settings a,
@@ -1356,12 +1399,14 @@
   padding: 0;
   margin: auto;
 }
+.repair-and-utilities-of-home a:hover,
 .repair-and-utilities-of-the-apartment a:hover,
 .close-repair-and-utilities-of-the-apartment a:hover,
 .apartment-settings a:hover,
 .plot-of-land a:hover {
   background: none;
 }
+.repair-and-utilities-of-home input,
 .repair-and-utilities-of-the-apartment input,
 .close-repair-and-utilities-of-the-apartment input,
 .apartment-settings input,
@@ -1376,32 +1421,38 @@
   box-shadow: 0 5px 15px 1px #ebebeb;
   border-radius: 4px;
 }
+.repair-and-utilities-of-home input[type="checkbox"],
 .repair-and-utilities-of-the-apartment input[type="checkbox"],
 .close-repair-and-utilities-of-the-apartment input[type="checkbox"],
 .apartment-settings input[type="checkbox"],
 .plot-of-land input[type="checkbox"] {
-  width: 50%;
+  width: auto;
+  margin-right: 35%;
   text-align: left;
   float: right;
 }
+.repair-and-utilities-of-home input:valid,
 .repair-and-utilities-of-the-apartment input:valid,
 .close-repair-and-utilities-of-the-apartment input:valid,
 .apartment-settings input:valid,
 .plot-of-land input:valid {
   border: 1px solid green;
 }
+.repair-and-utilities-of-home input:invalid,
 .repair-and-utilities-of-the-apartment input:invalid,
 .close-repair-and-utilities-of-the-apartment input:invalid,
 .apartment-settings input:invalid,
 .plot-of-land input:invalid {
   border: none;
 }
+.repair-and-utilities-of-home select,
 .repair-and-utilities-of-the-apartment select,
 .close-repair-and-utilities-of-the-apartment select,
 .apartment-settings select,
 .plot-of-land select {
   display: none;
 }
+.repair-and-utilities-of-home button,
 .repair-and-utilities-of-the-apartment button,
 .close-repair-and-utilities-of-the-apartment button,
 .apartment-settings button,
@@ -1418,6 +1469,7 @@
   width: 220px;
   margin: 20px auto;
 }
+.repair-and-utilities-of-home .jq-selectbox__dropdown ul,
 .repair-and-utilities-of-the-apartment .jq-selectbox__dropdown ul,
 .close-repair-and-utilities-of-the-apartment .jq-selectbox__dropdown ul,
 .apartment-settings .jq-selectbox__dropdown ul,
@@ -1426,6 +1478,7 @@
   z-index: 25 !important;
   width: auto;
 }
+.repair-and-utilities-of-home .jq-selectbox,
 .repair-and-utilities-of-the-apartment .jq-selectbox,
 .close-repair-and-utilities-of-the-apartment .jq-selectbox,
 .apartment-settings .jq-selectbox,
@@ -1570,6 +1623,16 @@
 .base-partition a:hover {
   background: none;
 }
+.apartment-settings-apartment label,
+.apartment-settings-separate-building label,
+.apartment-settings-ozs-сomplex label,
+.apartment-settings-office-area label,
+.apartment-settings-room label,
+.apartment-settings-home label,
+.house-characteristics label,
+.base-partition label {
+  width: 50%;
+}
 .apartment-settings-apartment input,
 .apartment-settings-separate-building input,
 .apartment-settings-ozs-сomplex input,
@@ -1587,6 +1650,19 @@
   background: #fff;
   box-shadow: 0 5px 15px 1px #ebebeb;
   border-radius: 4px;
+}
+.apartment-settings-apartment input[type="checkbox"],
+.apartment-settings-separate-building input[type="checkbox"],
+.apartment-settings-ozs-сomplex input[type="checkbox"],
+.apartment-settings-office-area input[type="checkbox"],
+.apartment-settings-room input[type="checkbox"],
+.apartment-settings-home input[type="checkbox"],
+.house-characteristics input[type="checkbox"],
+.base-partition input[type="checkbox"] {
+  width: auto;
+  margin-right: 35%;
+  text-align: left;
+  float: right;
 }
 .apartment-settings-apartment input:valid,
 .apartment-settings-separate-building input:valid,
@@ -1764,7 +1840,7 @@
   text-align: left;
   font-size: 14px;
   color: #b9b9b9;
-  width: 48%;
+  width: 45%;
 }
 .travel-information input {
   border: none;
@@ -1812,6 +1888,10 @@
 .distance-on-foot,
 .distance-on-transport {
   padding: 10px 0;
+}
+.distance-on-foot span,
+.distance-on-transport span {
+  width: 80px;
 }
 .timer {
   display: block !important;
@@ -3075,20 +3155,6 @@ li p {
 }
 /** Адаптивность **/
 @media (min-width: 1101px) and (max-width: 2500px) {
-  .building-parameters-apartment,
-  .building-parameters-home,
-  .building-parameters-room,
-  .building-parameters-office-area,
-  .building-parameters-separate-building,
-  .building-parameters-ozs-сomplex,
-  .test-7,
-  .test-8,
-  .test-9,
-  .test-10,
-  .test-11,
-  .test-12 {
-    display: none;
-  }
   .building-parameters-apartment li,
   .building-parameters-home li,
   .building-parameters-room li,
@@ -3100,7 +3166,9 @@ li p {
   .test-9 li,
   .test-10 li,
   .test-11 li,
-  .test-12 li {
+  .test-12 li,
+  .test-13 li,
+  .test-14 li {
     vertical-align: top;
   }
   .building-parameters-apartment li:nth-child(1),
@@ -3114,7 +3182,9 @@ li p {
   .test-9 li:nth-child(1),
   .test-10 li:nth-child(1),
   .test-11 li:nth-child(1),
-  .test-12 li:nth-child(1) {
+  .test-12 li:nth-child(1),
+  .test-13 li:nth-child(1),
+  .test-14 li:nth-child(1) {
     background: #fff;
   }
   .building-parameters-apartment p,
@@ -3128,7 +3198,9 @@ li p {
   .test-9 p,
   .test-10 p,
   .test-11 p,
-  .test-12 p {
+  .test-12 p,
+  .test-13 p,
+  .test-14 p {
     display: block;
     width: auto;
     text-align: center;
@@ -3144,7 +3216,9 @@ li p {
   .test-9 label,
   .test-10 label,
   .test-11 label,
-  .test-12 label {
+  .test-12 label,
+  .test-13 label,
+  .test-14 label {
     display: inline-block;
     width: 85%;
     cursor: pointer;
@@ -3162,7 +3236,9 @@ li p {
   .test-9 span,
   .test-10 span,
   .test-11 span,
-  .test-12 span {
+  .test-12 span,
+  .test-13 span,
+  .test-14 span {
     margin: 0;
   }
   .search-menu-apartment {
