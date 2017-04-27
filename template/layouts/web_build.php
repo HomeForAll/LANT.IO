@@ -462,7 +462,7 @@ $siteModel = Registry::model('site');
                         <li>
                             <div class="select">
                                 <label for="number_of_rooms">Кол-во комнат
-                                    <select class="number-apartments" name="number_of_rooms" id="number_of_rooms">
+                                    <select value="" class="number-apartments" name="number_of_rooms" id="number_of_rooms">
                                         <option value="5">4+</option>
                                         <option value="4">4</option>
                                         <option value="3">3</option>
@@ -511,7 +511,7 @@ $siteModel = Registry::model('site');
                         <li>
                             <div class="select">
                                 <label for="lavatory">Санузел
-                                    <select id="lavatory">
+                                    <select value="" id="lavatory">
                                         <option value="41">Не важно</option>
                                         <option value="116">Раздельный</option>
                                         <option value="29">Совмещенный</option>
@@ -563,10 +563,10 @@ $siteModel = Registry::model('site');
                          <li>
                              <div class="select">
                                  <label for="">
-                                     <select>
-                                         <option value=>Language of communication</option>
-                                         <option value=>English</option>
-                                         <option value=>Spanish</option>
+                                     <select value="" name="">
+                                         <option value="">Language of communication</option>
+                                         <option value="">English</option>
+                                         <option value="">Spanish</option>
                                      </select>
                                  </label>
                              </div>
@@ -574,10 +574,10 @@ $siteModel = Registry::model('site');
                          <li>
                              <div class="select">
                                  <label for="">
-                                     <select>
-                                         <option value=>Language of communication</option>
-                                         <option value=>English</option>
-                                         <option value=>Spanish</option>
+                                     <select value="" name="">
+                                         <option value="">Language of communication</option>
+                                         <option value="">English</option>
+                                         <option value="">Spanish</option>
                                      </select>
                                  </label>
                              </div>
@@ -634,10 +634,10 @@ $siteModel = Registry::model('site');
                          <li>
                              <div class="select">
                                  <label for="">
-                                     <select>
-                                         <option value=>Language of communication</option>
-                                         <option value=>English</option>
-                                         <option value=>Spanish</option>
+                                     <select value="" name="">
+                                         <option value="">Language of communication</option>
+                                         <option value="">English</option>
+                                         <option value="">Spanish</option>
                                      </select>
                                  </label>
                              </div>
@@ -645,10 +645,10 @@ $siteModel = Registry::model('site');
                          <li>
                              <div class="select">
                                  <label for="">
-                                     <select>
-                                         <option value=>Language of communication</option>
-                                         <option value=>English</option>
-                                         <option value=>Spanish</option>
+                                     <select value="" name="">
+                                         <option value="">Language of communication</option>
+                                         <option value="">English</option>
+                                         <option value="">Spanish</option>
                                      </select>
                                  </label>
                              </div>
@@ -705,10 +705,10 @@ $siteModel = Registry::model('site');
                         <li>
                             <div class="select">
                                 <label for="">
-                                    <select>
-                                        <option value=>Language of communication</option>
-                                        <option value=>English</option>
-                                        <option value=>Spanish</option>
+                                    <select value="" name="">
+                                        <option value="">Language of communication</option>
+                                        <option value="">English</option>
+                                        <option value="">Spanish</option>
                                     </select>
                                 </label>
                             </div>
@@ -716,10 +716,10 @@ $siteModel = Registry::model('site');
                         <li>
                             <div class="select">
                                 <label for="">
-                                    <select>
-                                        <option value=>Language of communication</option>
-                                        <option value=>English</option>
-                                        <option value=>Spanish</option>
+                                    <select value="" name="">
+                                        <option value="">Language of communication</option>
+                                        <option value="">English</option>
+                                        <option value="">Spanish</option>
                                     </select>
                                 </label>
                             </div>
@@ -776,10 +776,10 @@ $siteModel = Registry::model('site');
                         <li>
                             <div class="select">
                                 <label for="">
-                                    <select>
-                                        <option value=>Language of communication</option>
-                                        <option value=>English</option>
-                                        <option value=>Spanish</option>
+                                    <select value="" name="">
+                                        <option value="">Language of communication</option>
+                                        <option value="">English</option>
+                                        <option value="">Spanish</option>
                                     </select>
                                 </label>
                             </div>
@@ -787,10 +787,10 @@ $siteModel = Registry::model('site');
                         <li>
                             <div class="select">
                                 <label for="">
-                                    <select>
-                                        <option value=>Language of communication</option>
-                                        <option value=>English</option>
-                                        <option value=>Spanish</option>
+                                    <select value="" name="">
+                                        <option value="">Language of communication</option>
+                                        <option value="">English</option>
+                                        <option value="">Spanish</option>
                                     </select>
                                 </label>
                             </div>
@@ -847,10 +847,10 @@ $siteModel = Registry::model('site');
                         <li>
                             <div class="select">
                                 <label for="">
-                                    <select>
-                                        <option value=>Language of communication</option>
-                                        <option value=>English</option>
-                                        <option value=>Spanish</option>
+                                    <select value="" name="">
+                                        <option value="">Language of communication</option>
+                                        <option value="">English</option>
+                                        <option value="">Spanish</option>
                                     </select>
                                 </label>
                             </div>
@@ -858,10 +858,10 @@ $siteModel = Registry::model('site');
                         <li>
                             <div class="select">
                                 <label for="">
-                                    <select>
-                                        <option value=>Language of communication</option>
-                                        <option value=>English</option>
-                                        <option value=>Spanish</option>
+                                    <select value="" name="">
+                                        <option value="">Language of communication</option>
+                                        <option value="">English</option>
+                                        <option value="">Spanish</option>
                                     </select>
                                 </label>
                             </div>
@@ -969,7 +969,7 @@ $siteModel = Registry::model('site');
                             <li>
                                 <div class="select">Округ
                                     <label for="region">
-                                        <select name="region">
+                                        <select value="" name="region">
                                             <option value="">Северо-западный</option>
                                             <option value="">Северо-западный</option>
                                             <option value="">Северо-западный</option>
@@ -980,7 +980,7 @@ $siteModel = Registry::model('site');
                             <li>
                                 <div class="select">Район
                                     <label for="district">
-                                        <select name="district">
+                                        <select value="" name="district">
                                             <option value="">Северное медведково</option>
                                             <option value="">Северное медведково</option>
                                             <option value="">Северное медведково</option>
@@ -991,7 +991,7 @@ $siteModel = Registry::model('site');
                             <li>
                                 <div class="select">Улица
                                     <label for="street">
-                                        <select name="street">
+                                        <select value="" name="street">
                                             <option value="">Ениивмасейская</option>
                                             <option value="">Ениивмасейская</option>
                                             <option value="">Ениивмасейская</option>
@@ -1009,7 +1009,7 @@ $siteModel = Registry::model('site');
                             <li>
                                 <div class="select">Метро
                                     <label for="metro_station">
-                                        <select name="metro_station">
+                                        <select value="" name="metro_station">
                                             <option value="">Выбрано1</option>
                                             <option value="">Выбрано2</option>
                                             <option value="">Выбрано3</option>
@@ -1022,7 +1022,7 @@ $siteModel = Registry::model('site');
                             <li>
                                 <div class="select">Удаленность от метро не более
                                     <label for="distance_from_metro">
-                                        <select name="distance_from_metro">
+                                        <select value="" name="distance_from_metro">
                                             <option value="">5 мин пешком</option>
                                             <option value="">10 мин пешком</option>
                                             <option value="">15 мин пешком</option>
@@ -1067,7 +1067,7 @@ $siteModel = Registry::model('site');
                     <li>
                         <div class="select"><img src="../../template/images/ava.png" alt="icons">
                             <label for="object_located">
-                                <select name="object_located" id="object_located">
+                                <select value="" name="object_located" id="object_located">
                                     <option value="">Объект размещен</option>
                                     <option value="41">Не важно</option>
                                     <option value="22">Риэлтором</option>
@@ -1080,7 +1080,7 @@ $siteModel = Registry::model('site');
                         <div class="select">
                             <label for="lease">
                                 <img src="../../template/images/timer.png" alt="icons">
-                                <select name="lease" id="lease">
+                                <select value="" name="lease" id="lease">
                                     <option value="">Срок аренды</option>
                                     <option value="80">Более года</option>
                                     <option value="145">Год</option>
@@ -1106,7 +1106,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="number_of_rooms">Кол-во комнат
-                                                <select class="number-apartments" name="number_of_rooms" id="number_of_rooms">
+                                                <select value="" class="number-apartments" name="number_of_rooms" id="number_of_rooms">
                                                     <option value="5">4+</option>
                                                     <option value="4">4</option>
                                                     <option value="3">3</option>
@@ -1155,7 +1155,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="lavatory" >Санузел
-                                                <select id="lavatory">
+                                                <select value="" id="lavatory">
                                                     <option value="41">Не важно</option>
                                                     <option value="116">Раздельный</option>
                                                     <option value="29">Совмещенный</option>
@@ -1189,7 +1189,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="furnish">Отделка
-                                                <select name="furnish" id="furnish">
+                                                <select value="" name="furnish" id="furnish">
                                                     <option value="141">Без ремонта</option>
                                                     <option value="65">Незавершенный ремонт</option>
                                                     <option value="107">Требуется ремонт</option>
@@ -1204,7 +1204,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="equipment">Комплектация
-                                                <select name="equipment" id="equipment">
+                                                <select value="" name="equipment" id="equipment">
                                                     <option value="45">Укомплектованная</option>
                                                     <option value="44">Пустая</option>
                                                 </select>
@@ -1226,7 +1226,7 @@ $siteModel = Registry::model('site');
                                     <li><p>Наличие лифта</p>
                                         <div class="select">
                                             <label for="elevator">
-                                                <select name="elevator" id="elevator">
+                                                <select value="" name="elevator" id="elevator">
                                                     <option value="1">Да</option>
                                                     <option value="0">Нет</option>
                                                 </select>
@@ -1236,7 +1236,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="elevator_yes">
-                                                <select name="elevator_yes" id="elevator_yes">
+                                                <select value="" name="elevator_yes" id="elevator_yes">
                                                     <option value="41">Не важно</option>
                                                     <option value="95">Пассажирский</option>
                                                     <option value="23">Грузовой</option>
@@ -1257,7 +1257,7 @@ $siteModel = Registry::model('site');
                                         <label for="clarification_of_the_object_type">Уточнение вида объектов</label>
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">
-                                                <select name="clarification_of_the_object_type"
+                                                <select value="" name="clarification_of_the_object_type"
                                                         id="clarification_of_the_object_type">
                                                     <option value="146">Год постройки\окончания строительства</option>
                                                     <option value="92">Собственность менее 5 лет</option>
@@ -1272,7 +1272,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="parking">Парковка
-                                                <select name="parking" id="parking">
+                                                <select value="" name="parking" id="parking">
                                                     <option value="41">Не важно</option>
                                                     <option value="5">Отсутствует</option>
                                                     <option value="7">Придомовой гараж</option>
@@ -1286,7 +1286,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="wall_material">Материал стен
-                                                <select name="wall_material" id="wall_material">
+                                                <select value="" name="wall_material" id="wall_material">
                                                     <option value="91">Другое</option>
                                                     <option value="32">Железобетонные панели</option>
                                                     <option value="78">Монолит</option>
@@ -1298,7 +1298,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="stairwells_status">Состояние лестничных клеток
-                                                <select name="stairwells_status" id="stairwells_status">
+                                                <select value="" name="stairwells_status" id="stairwells_status">
                                                     <option value="141">Без ремонта</option>
                                                     <option value="107">Требуется ремонт</option>
                                                     <option value="106">Требуется косметический ремонт</option>
@@ -1342,7 +1342,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="video">Видео
-                                                <select name="video" id="video">
+                                                <select value="" name="video" id="video">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -1352,7 +1352,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
-                                                <select name="planning_project" id="planning_project">
+                                                <select value="" name="planning_project" id="planning_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -1362,7 +1362,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="three_d_project">3d проект
-                                                <select name="three_d_project" id="three_d_project">
+                                                <select value="" name="three_d_project" id="three_d_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -1404,7 +1404,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="number_of_rooms">Количество комнат
-                                                <select name="number_of_rooms" id="number_of_rooms">
+                                                <select value="" name="number_of_rooms" id="number_of_rooms">
                                                     <option value="4">4+</option>
                                                     <option value="3">3</option>
                                                     <option value="2">2</option>
@@ -1416,7 +1416,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="number_of_rooms">Количество комнат
-                                                <select name="number_of_rooms" id="number_of_rooms">
+                                                <select value="" name="number_of_rooms" id="number_of_rooms">
                                                     <option value="4">4+</option>
                                                     <option value="3">3</option>
                                                     <option value="2">2</option>
@@ -1436,7 +1436,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="lavatory">Санузел
-                                                <select name="lavatory" id="lavatory">
+                                                <select value="" name="lavatory" id="lavatory">
                                                     <option value="41">Не важно</option>
                                                     <option value="116">Раздельный</option>
                                                     <option value="29">Совмещенный</option>
@@ -1447,7 +1447,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="roofing">Кровля
-                                                <select name="roofing" id="roofing">
+                                                <select value="" name="roofing" id="roofing">
                                                     <option value="127">Временная</option>
                                                     <option value="118">Шифер</option>
                                                     <option value="122">Камень</option>
@@ -1463,7 +1463,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="foundation">Фундамент
-                                                <select name="foundation" id="foundation">
+                                                <select value="" name="foundation" id="foundation">
                                                     <option value="140">Без фундамента</option>
                                                     <option value="58">Ростверк</option>
                                                     <option value="109">Ленточный</option>
@@ -1476,7 +1476,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="wall_material">Материал стен
-                                                <select name="wall_material" id="wall_material">
+                                                <select value="" name="wall_material" id="wall_material">
                                                     <option value="49">Фахверк</option>
                                                     <option value="56">Клееный брус</option>
                                                     <option value="102">Профилированный брус</option>
@@ -1496,7 +1496,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="type_of_house">Тип дома
-                                                <select name="type_of_house" id="type_of_house">
+                                                <select value="" name="type_of_house" id="type_of_house">
                                                     <option value="35">Коттедж</option>
                                                     <option value="130">Таунхаус</option>
                                                     <option value="42">Дуплекс</option>
@@ -1530,7 +1530,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="furnish">Отделка
-                                                <select name="furnish" id="furnish">
+                                                <select value="" name="furnish" id="furnish">
                                                     <option value="141">Без ремонта</option>
                                                     <option value="65">Незавершенный ремонт</option>
                                                     <option value="107">Требуется ремонт</option>
@@ -1545,7 +1545,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="equipment">Комплектация
-                                                <select name="equipment" id="equipment">
+                                                <select value="" name="equipment" id="equipment">
                                                     <option value="45">Укомплектованная</option>
                                                     <option value="44">Пустая</option>
                                                 </select>
@@ -1555,7 +1555,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
-                                                <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                <select value="" name="clarification_of_the_object_type" id="clarification_of_the_object_type">
                                                     <option value="92">Собственность менее 5 лет</option>
                                                     <option value="93">Собственность более 5 лет</option>
                                                     <option value="70">Участок с подрядом</option>
@@ -1598,7 +1598,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">Участок
                                             <label for="parking">Парковка
-                                                <select name="parking" id="parking">
+                                                <select value="" name="parking" id="parking">
                                                     <option value="41">Не важно</option>
                                                     <option value="5">Отсутствует</option>
                                                     <option value="7">Придомовой гараж</option>
@@ -1624,7 +1624,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="site">Участок
-                                                <select name="site" id="site">
+                                                <select value="" name="site" id="site">
                                                     <option value="136">Заболоченный</option>
                                                     <option value="103">Овраг</option>
                                                     <option value="89">На склоне</option>
@@ -1644,7 +1644,7 @@ $siteModel = Registry::model('site');
                                             <label>Лесные деревья <input type="checkbox" name="forest_trees"></label>
                                             <label>Ограждение <input type="checkbox" name="fencing"></label>
                                             <label for="material">Материал
-                                                <select name="material" id="material">
+                                                <select value="" name="material" id="material">
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -1675,7 +1675,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="video">Видео
-                                                <select name="video" id="video">
+                                                <select value="" name="video" id="video">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -1685,7 +1685,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
-                                                <select name="planning_project" id="planning_project">
+                                                <select value="" name="planning_project" id="planning_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -1695,7 +1695,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="three_d_project">3d проект
-                                                <select name="three_d_project" id="three_d_project">
+                                                <select value="" name="three_d_project" id="three_d_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -1719,7 +1719,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="number_of_rooms">Кол-во комнат
-                                                <select class="number-apartments" name="number_of_rooms" id="number_of_rooms">
+                                                <select value="" class="number-apartments" name="number_of_rooms" id="number_of_rooms">
                                                     <option value="5">4+</option>
                                                     <option value="4">4</option>
                                                     <option value="3">3</option>
@@ -1768,7 +1768,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="lavatory" >Санузел
-                                                <select id="lavatory">
+                                                <select value="" id="lavatory">
                                                     <option value="41">Не важно</option>
                                                     <option value="116">Раздельный</option>
                                                     <option value="29">Совмещенный</option>
@@ -1791,7 +1791,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="object_located">Объект размещен
-                                                <select>
+                                                <select value="" name="">
                                                     <option value="41">Не важно</option>
                                                     <option value="22">Риэлтором</option>
                                                     <option value="21">Собственником</option>
@@ -1823,10 +1823,10 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="">
-                                                <select>
-                                                    <option value=>Language of communication</option>
-                                                    <option value=>English</option>
-                                                    <option value=>Spanish</option>
+                                                <select value="" name="">
+                                                    <option value="">Language of communication</option>
+                                                    <option value="">English</option>
+                                                    <option value="">Spanish</option>
                                                 </select>
                                             </label>
                                         </div>
@@ -1834,10 +1834,10 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="">
-                                                <select>
-                                                    <option value=>Language of communication</option>
-                                                    <option value=>English</option>
-                                                    <option value=>Spanish</option>
+                                                <select value="" name="">
+                                                    <option value="">Language of communication</option>
+                                                    <option value="">English</option>
+                                                    <option value="">Spanish</option>
                                                 </select>
                                             </label>
                                         </div>
@@ -1845,10 +1845,10 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="">
-                                                <select>
-                                                    <option value=>Language of communication</option>
-                                                    <option value=>English</option>
-                                                    <option value=>Spanish</option>
+                                                <select value="" name="">
+                                                    <option value="">Language of communication</option>
+                                                    <option value="">English</option>
+                                                    <option value="">Spanish</option>
                                                 </select>
                                             </label>
                                         </div>
@@ -1856,10 +1856,10 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="">
-                                                <select>
-                                                    <option value=>Language of communication</option>
-                                                    <option value=>English</option>
-                                                    <option value=>Spanish</option>
+                                                <select value="" name="">
+                                                    <option value="">Language of communication</option>
+                                                    <option value="">English</option>
+                                                    <option value="">Spanish</option>
                                                 </select>
                                             </label>
                                         </div>
@@ -1892,7 +1892,7 @@ $siteModel = Registry::model('site');
                                                 <input id="number_of_floors-max" name="number_of_floors-max" type="text" placeholder="до">
                                             </label>
                                             <label for="type_of_construction">Вид постройки:
-                                                <select name="type_of_construction" id="type_of_construction">
+                                                <select value="" name="type_of_construction" id="type_of_construction">
                                                     <option value="111">Комнаты</option>
                                                     <option value="90">Опен спэйс</option>
                                                 </select>
@@ -1910,7 +1910,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="building_type">Тип здания
-                                                <select name="building_type" id="building_type">
+                                                <select value="" name="building_type" id="building_type">
                                                     <option value="108">Жилое</option>
                                                     <option value="8">Административное</option>
                                                 </select>
@@ -1920,7 +1920,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="roofing">Кровля
-                                                <select name="roofing" id="roofing">
+                                                <select value="" name="roofing" id="roofing">
                                                     <option value="67">Железо</option>
                                                     <option value="34">Медь</option>
                                                     <option value="76">Металлочерепица</option>
@@ -1938,7 +1938,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="foundation">Фундамент
-                                                <select name="foundation" id="foundation">
+                                                <select value="" name="foundation" id="foundation">
                                                     <option value="120">Монолитная плита</option>
                                                     <option value="125">Шведская плита</option>
                                                     <option value="109">Ленточный</option>
@@ -1951,7 +1951,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="wall_material">Материал стен
-                                                <select name="wall_material" id="wall_material">
+                                                <select value="" name="wall_material" id="wall_material">
                                                     <option value="49">Фахверк</option>
                                                     <option value="19">Кирпич</option>
                                                     <option value="105">Железобетон</option>
@@ -1975,10 +1975,10 @@ $siteModel = Registry::model('site');
                         <li><img src="../../template/images/search-5.png" alt="search">Безопасность
                             <div class="select">
                                 <label for="">
-                                    <select>
-                                        <option value=>Language of communication</option>
-                                        <option value=>English</option>
-                                        <option value=>Spanish</option>
+                                    <select value="" name="">
+                                        <option value="">Language of communication</option>
+                                        <option value="">English</option>
+                                        <option value="">Spanish</option>
                                     </select>
                                 </label>
                             </div>
@@ -2002,7 +2002,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="video">Видео
-                                                <select name="video" id="video">
+                                                <select value="" name="video" id="video">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -2012,7 +2012,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
-                                                <select name="planning_project" id="planning_project">
+                                                <select value="" name="planning_project" id="planning_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -2022,7 +2022,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="three_d_project">3d проект
-                                                <select name="three_d_project" id="three_d_project">
+                                                <select value="" name="three_d_project" id="three_d_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -2056,7 +2056,7 @@ $siteModel = Registry::model('site');
                                                 <input id="number_of_floors-max" name="number_of_floors-max" type="text" placeholder="до">
                                             </label>
                                             <label for="type_of_construction">Вид постройки:
-                                                <select name="type_of_construction" id="type_of_construction">
+                                                <select value="" name="type_of_construction" id="type_of_construction">
                                                     <option value="111">Комнаты</option>
                                                     <option value="90">Опен спэйс</option>
                                                 </select>
@@ -2074,7 +2074,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="building_type">Тип здания
-                                                <select name="building_type" id="building_type">
+                                                <select value="" name="building_type" id="building_type">
                                                     <option value="108">Жилое</option>
                                                     <option value="8">Административное</option>
                                                 </select>
@@ -2084,7 +2084,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="roofing">Кровля
-                                                <select name="roofing" id="roofing">
+                                                <select value="" name="roofing" id="roofing">
                                                     <option value="67">Железо</option>
                                                     <option value="34">Медь</option>
                                                     <option value="76">Металлочерепица</option>
@@ -2102,7 +2102,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="foundation">Фундамент
-                                                <select name="foundation" id="foundation">
+                                                <select value="" name="foundation" id="foundation">
                                                     <option value="120">Монолитная плита</option>
                                                     <option value="125">Шведская плита</option>
                                                     <option value="109">Ленточный</option>
@@ -2115,7 +2115,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="wall_material">Материал стен
-                                                <select name="wall_material" id="wall_material">
+                                                <select value="" name="wall_material" id="wall_material">
                                                     <option value="49">Фахверк</option>
                                                     <option value="19">Кирпич</option>
                                                     <option value="105">Железобетон</option>
@@ -2147,7 +2147,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="furnish">Отделка
-                                                <select name="furnish" id="furnish">
+                                                <select value="" name="furnish" id="furnish">
                                                     <option value="46">Эксклюзивного качества</option>
                                                     <option value="64">Высококачественная отделка</option>
                                                     <option value="57">Хорошая отделка</option>
@@ -2174,7 +2174,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="material">Материал
-                                                <select name="material" id="material">
+                                                <select value="" name="material" id="material">
                                                     <option value="98">Пластик</option>
                                                     <option value="142">Дерево</option>
                                                     <option value="38">Профнастил</option>
@@ -2190,7 +2190,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="parking">Парковка
-                                                <select name="parking" id="parking">
+                                                <select value="" name="parking" id="parking">
                                                     <option class="more-settings" value="81">Многоуровневый паркинг</option>
                                                     <option class="more-settings" value="132">Подземная парковка</option>
                                                     <option class="more-settings" value="52">Гаражный комплекс</option>
@@ -2205,7 +2205,7 @@ $siteModel = Registry::model('site');
                                     <li class="show-more-settings">
                                         <div class="select">
                                             <label for="municipal">Муниципальная
-                                                <select name="municipal" id="municipal">
+                                                <select value="" name="municipal" id="municipal">
                                                     <option value="94">Платная</option>
                                                     <option value="51">Бесплатная</option>
                                                 </select>
@@ -2223,7 +2223,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="sanitation">Водопровод и канализация
-                                                <select name="sanitation" id="sanitation">
+                                                <select value="" name="sanitation" id="sanitation">
                                                     <option value="47">Есть</option>
                                                     <option value="84">Нет</option>
                                                 </select>
@@ -2241,7 +2241,7 @@ $siteModel = Registry::model('site');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select name="bathroom_location" id="sanitation">
+                                            <select value="" name="bathroom_location" id="sanitation">
                                                 <option value="">---</option>
                                             </select>
                                         </div>
@@ -2272,7 +2272,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="video">Видео
-                                                <select name="video" id="video">
+                                                <select value="" name="video" id="video">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -2282,7 +2282,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
-                                                <select name="planning_project" id="planning_project">
+                                                <select value="" name="planning_project" id="planning_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -2292,7 +2292,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="three_d_project">3d проект
-                                                <select name="three_d_project" id="three_d_project">
+                                                <select value="" name="three_d_project" id="three_d_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -2338,7 +2338,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
-                                                <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                <select value="" name="clarification_of_the_object_type" id="clarification_of_the_object_type">
                                                     <option value="92">Собственность менее 5 лет</option>
                                                     <option value="93">Собственность более 5 лет</option>
                                                     <option value="70">Участок с подрядом</option>
@@ -2352,7 +2352,7 @@ $siteModel = Registry::model('site');
                                         <label>Ограждение <input type="checkbox" name="fencing"></label>
                                         <div class="select">
                                             <label for="material">Материал
-                                                <select name="material" id="material">
+                                                <select value="" name="material" id="material">
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -2385,7 +2385,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="furnish">Отделка
-                                                <select name="furnish" id="furnish">
+                                                <select value="" name="furnish" id="furnish">
                                                     <option value="46">Эксклюзивного качества</option>
                                                     <option value="64">Высококачественная отделка</option>
                                                     <option value="57">Хорошая отделка</option>
@@ -2412,7 +2412,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="material">Материал
-                                                <select name="material" id="material">
+                                                <select value="" name="material" id="material">
                                                     <option value="98">Пластик</option>
                                                     <option value="142">Дерево</option>
                                                     <option value="38">Профнастил</option>
@@ -2428,7 +2428,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="parking">Парковка
-                                                <select name="parking" id="parking">
+                                                <select value="" name="parking" id="parking">
                                                     <option class="more-settings" value="81">Многоуровневый паркинг</option>
                                                     <option class="more-settings" value="132">Подземная парковка</option>
                                                     <option class="more-settings" value="52">Гаражный комплекс</option>
@@ -2443,7 +2443,7 @@ $siteModel = Registry::model('site');
                                     <li class="show-more-settings">
                                         <div class="select">
                                             <label for="municipal">Муниципальная
-                                                <select name="municipal" id="municipal">
+                                                <select value="" name="municipal" id="municipal">
                                                     <option value="94">Платная</option>
                                                     <option value="51">Бесплатная</option>
                                                 </select>
@@ -2461,7 +2461,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="sanitation">Водопровод и канализация
-                                                <select name="sanitation" id="sanitation">
+                                                <select value="" name="sanitation" id="sanitation">
                                                     <option value="47">Есть</option>
                                                     <option value="84">Нет</option>
                                                 </select>
@@ -2479,7 +2479,7 @@ $siteModel = Registry::model('site');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select name="bathroom_location" id="sanitation">
+                                            <select value="" name="bathroom_location" id="sanitation">
                                                 <option value="">---</option>
                                             </select>
                                         </div>
@@ -2511,7 +2511,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="video">Видео
-                                                <select name="video" id="video">
+                                                <select value="" name="video" id="video">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -2521,7 +2521,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
-                                                <select name="planning_project" id="planning_project">
+                                                <select value="" name="planning_project" id="planning_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -2531,7 +2531,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="three_d_project">3d проект
-                                                <select name="three_d_project" id="three_d_project">
+                                                <select value="" name="three_d_project" id="three_d_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -2577,7 +2577,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
-                                                <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                <select value="" name="clarification_of_the_object_type" id="clarification_of_the_object_type">
                                                     <option value="92">Собственность менее 5 лет</option>
                                                     <option value="93">Собственность более 5 лет</option>
                                                     <option value="70">Участок с подрядом</option>
@@ -2591,7 +2591,7 @@ $siteModel = Registry::model('site');
                                         <label>Ограждение <input type="checkbox" name="fencing"></label>
                                         <div class="select">
                                             <label for="material">Материал
-                                                <select name="material" id="material">
+                                                <select value="" name="material" id="material">
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -2624,7 +2624,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="furnish">Отделка
-                                                <select name="furnish" id="furnish">
+                                                <select value="" name="furnish" id="furnish">
                                                     <option value="46">Эксклюзивного качества</option>
                                                     <option value="64">Высококачественная отделка</option>
                                                     <option value="57">Хорошая отделка</option>
@@ -2651,7 +2651,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="material">Материал
-                                                <select name="material" id="material">
+                                                <select value="" name="material" id="material">
                                                     <option value="98">Пластик</option>
                                                     <option value="142">Дерево</option>
                                                     <option value="38">Профнастил</option>
@@ -2667,7 +2667,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="parking">Парковка
-                                                <select name="parking" id="parking">
+                                                <select value="" name="parking" id="parking">
                                                     <option class="more-settings" value="81">Многоуровневый паркинг</option>
                                                     <option class="more-settings" value="132">Подземная парковка</option>
                                                     <option class="more-settings" value="52">Гаражный комплекс</option>
@@ -2682,7 +2682,7 @@ $siteModel = Registry::model('site');
                                     <li class="show-more-settings">
                                         <div class="select">
                                             <label for="municipal">Муниципальная
-                                                <select name="municipal" id="municipal">
+                                                <select value="" name="municipal" id="municipal">
                                                     <option value="94">Платная</option>
                                                     <option value="51">Бесплатная</option>
                                                 </select>
@@ -2700,7 +2700,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="sanitation">Водопровод и канализация
-                                                <select name="sanitation" id="sanitation">
+                                                <select value="" name="sanitation" id="sanitation">
                                                     <option value="47">Есть</option>
                                                     <option value="84">Нет</option>
                                                 </select>
@@ -2716,13 +2716,13 @@ $siteModel = Registry::model('site');
                                         <input name="bathroom_number-max" type="text" placeholder="до">
                                         <label for="">Расположение:</label>
                                     </li>
-                                    <li>
+                                    <!--<li>
                                         <div class="select">
-                                            <select name="bathroom_location" id="sanitation">
+                                            <select value="name="bathroom_location" id="sanitation">
                                                 <option value="">---</option>
                                             </select>
                                         </div>
-                                    </li>
+                                    </li>-->
                                     <li>
                                         <label>Описание<input type="checkbox" name="bathroom_description"></label>
                                     </li>
@@ -2749,7 +2749,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="video">Видео
-                                                <select name="video" id="video">
+                                                <select value="" name="video" id="video">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -2759,7 +2759,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
-                                                <select name="planning_project" id="planning_project">
+                                                <select value="" name="planning_project" id="planning_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -2769,7 +2769,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="three_d_project">3d проект
-                                                <select name="three_d_project" id="three_d_project">
+                                                <select value="" name="three_d_project" id="three_d_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -2799,7 +2799,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
-                                                <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                <select value="" name="clarification_of_the_object_type" id="clarification_of_the_object_type">
                                                     <option value="59">Земли под размещение промышленных и коммерческих объектов</option>
                                                     <option value="9">Сельскохозяйственные земли</option>
                                                     <option value="92">Собственность менее 5 лет</option>
@@ -2811,7 +2811,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="site">Участок
-                                                <select name="site" id="site">
+                                                <select value="" name="site" id="site">
                                                     <option value="136">Заболоченный</option>
                                                     <option value="103">Овраг</option>
                                                     <option value="89">На склоне</option>
@@ -2844,7 +2844,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="parking">Парковка
-                                                <select name="parking" id="parking">
+                                                <select value="" name="parking" id="parking">
                                                     <option value="41">Не важно</option>
                                                     <option value="5">Отсутствует</option>
                                                     <option value="7">Придомовой гараж</option>
@@ -2878,7 +2878,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="material">Материал
-                                                <select name="material" id="material">
+                                                <select value="" name="material" id="material">
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -2913,7 +2913,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="video">Видео
-                                                <select name="video" id="video">
+                                                <select value="" name="video" id="video">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -2923,7 +2923,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
-                                                <select name="planning_project" id="planning_project">
+                                                <select value="" name="planning_project" id="planning_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -2933,7 +2933,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="three_d_project">3d проект
-                                                <select name="three_d_project" id="three_d_project">
+                                                <select value="" name="three_d_project" id="three_d_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -2979,7 +2979,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
-                                                <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                <select value="" name="clarification_of_the_object_type" id="clarification_of_the_object_type">
                                                     <option value="92">Собственность менее 5 лет</option>
                                                     <option value="93">Собственность более 5 лет</option>
                                                     <option value="70">Участок с подрядом</option>
@@ -2993,7 +2993,7 @@ $siteModel = Registry::model('site');
                                         <label>Ограждение <input type="checkbox" name="fencing"></label>
                                         <div class="select">
                                             <label for="material">Материал
-                                                <select name="material" id="material">
+                                                <select value="" name="material" id="material">
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -3026,7 +3026,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="roofing">Кровля
-                                                <select name="roofing" id="roofing">
+                                                <select value="" name="roofing" id="roofing">
                                                     <option value="127">Временная</option>
                                                     <option value="118">Шифер</option>
                                                     <option value="122">Камень</option>
@@ -3042,7 +3042,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="foundation">Фундамент
-                                                <select name="foundation" id="foundation">
+                                                <select value="" name="foundation" id="foundation">
                                                     <option value="140">Без фундамента</option>
                                                     <option value="58">Ростверк</option>
                                                     <option value="109">Ленточный</option>
@@ -3055,7 +3055,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="wall_material">Материал стен
-                                                <select name="wall_material" id="wall_material">
+                                                <select value="" name="wall_material" id="wall_material">
                                                     <option value="49">Фахверк</option>
                                                     <option value="56">Клееный брус</option>
                                                     <option value="102">Профилированный брус</option>
@@ -3087,7 +3087,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="video">Видео
-                                                <select name="video" id="video">
+                                                <select value="" name="video" id="video">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -3097,7 +3097,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
-                                                <select name="planning_project" id="planning_project">
+                                                <select value="" name="planning_project" id="planning_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -3107,7 +3107,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="three_d_project">3d проект
-                                                <select name="three_d_project" id="three_d_project">
+                                                <select value="" name="three_d_project" id="three_d_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -3153,7 +3153,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
-                                                <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                <select value="" name="clarification_of_the_object_type" id="clarification_of_the_object_type">
                                                     <option value="92">Собственность менее 5 лет</option>
                                                     <option value="93">Собственность более 5 лет</option>
                                                     <option value="70">Участок с подрядом</option>
@@ -3167,7 +3167,7 @@ $siteModel = Registry::model('site');
                                         <label>Ограждение <input type="checkbox" name="fencing"></label>
                                         <div class="select">
                                             <label for="material">Материал
-                                                <select name="material" id="material">
+                                                <select value="" name="material" id="material">
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -3200,7 +3200,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="furnish">Отделка
-                                                <select name="furnish" id="furnish">
+                                                <select value="" name="furnish" id="furnish">
                                                     <option value="46">Эксклюзивного качества</option>
                                                     <option value="64">Высококачественная отделка</option>
                                                     <option value="57">Хорошая отделка</option>
@@ -3227,7 +3227,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="material">Материал
-                                                <select name="material" id="material">
+                                                <select value="" name="material" id="material">
                                                     <option value="98">Пластик</option>
                                                     <option value="142">Дерево</option>
                                                     <option value="38">Профнастил</option>
@@ -3243,7 +3243,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="parking">Парковка
-                                                <select name="parking" id="parking">
+                                                <select value="" name="parking" id="parking">
                                                     <option class="more-settings" value="81">Многоуровневый паркинг</option>
                                                     <option class="more-settings" value="132">Подземная парковка</option>
                                                     <option class="more-settings" value="52">Гаражный комплекс</option>
@@ -3258,7 +3258,7 @@ $siteModel = Registry::model('site');
                                     <li class="show-more-settings">
                                         <div class="select">
                                             <label for="municipal">Муниципальная
-                                                <select name="municipal" id="municipal">
+                                                <select value="" name="municipal" id="municipal">
                                                     <option value="94">Платная</option>
                                                     <option value="51">Бесплатная</option>
                                                 </select>
@@ -3276,7 +3276,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="sanitation">Водопровод и канализация
-                                                <select name="sanitation" id="sanitation">
+                                                <select value="" name="sanitation" id="sanitation">
                                                     <option value="47">Есть</option>
                                                     <option value="84">Нет</option>
                                                 </select>
@@ -3294,7 +3294,7 @@ $siteModel = Registry::model('site');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select name="bathroom_location" id="sanitation">
+                                            <select value="" name="bathroom_location" id="sanitation">
                                                 <option value="">---</option>
                                             </select>
                                         </div>
@@ -3325,7 +3325,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="video">Видео
-                                                <select name="video" id="video">
+                                                <select value="" name="video" id="video">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -3335,7 +3335,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
-                                                <select name="planning_project" id="planning_project">
+                                                <select value="" name="planning_project" id="planning_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -3345,7 +3345,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="three_d_project">3d проект
-                                                <select name="three_d_project" id="three_d_project">
+                                                <select value="" name="three_d_project" id="three_d_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -3391,7 +3391,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
-                                                <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                <select value="" name="clarification_of_the_object_type" id="clarification_of_the_object_type">
                                                     <option value="92">Собственность менее 5 лет</option>
                                                     <option value="93">Собственность более 5 лет</option>
                                                     <option value="70">Участок с подрядом</option>
@@ -3405,7 +3405,7 @@ $siteModel = Registry::model('site');
                                         <label>Ограждение <input type="checkbox" name="fencing"></label>
                                         <div class="select">
                                             <label for="material">Материал
-                                                <select name="material" id="material">
+                                                <select value="" name="material" id="material">
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -3438,7 +3438,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="furnish">Отделка
-                                                <select name="furnish" id="furnish">
+                                                <select value="" name="furnish" id="furnish">
                                                     <option value="46">Эксклюзивного качества</option>
                                                     <option value="64">Высококачественная отделка</option>
                                                     <option value="57">Хорошая отделка</option>
@@ -3465,7 +3465,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="material">Материал
-                                                <select name="material" id="material">
+                                                <select value="" name="material" id="material">
                                                     <option value="98">Пластик</option>
                                                     <option value="142">Дерево</option>
                                                     <option value="38">Профнастил</option>
@@ -3481,7 +3481,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="parking">Парковка
-                                                <select name="parking" id="parking">
+                                                <select value="" name="parking" id="parking">
                                                     <option class="more-settings" value="81">Многоуровневый паркинг</option>
                                                     <option class="more-settings" value="132">Подземная парковка</option>
                                                     <option class="more-settings" value="52">Гаражный комплекс</option>
@@ -3496,7 +3496,7 @@ $siteModel = Registry::model('site');
                                     <li class="show-more-settings">
                                         <div class="select">
                                             <label for="municipal">Муниципальная
-                                                <select name="municipal" id="municipal">
+                                                <select value="" name="municipal" id="municipal">
                                                     <option value="94">Платная</option>
                                                     <option value="51">Бесплатная</option>
                                                 </select>
@@ -3514,7 +3514,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="sanitation">Водопровод и канализация
-                                                <select name="sanitation" id="sanitation">
+                                                <select value="" name="sanitation" id="sanitation">
                                                     <option value="47">Есть</option>
                                                     <option value="84">Нет</option>
                                                 </select>
@@ -3530,13 +3530,13 @@ $siteModel = Registry::model('site');
                                         <input name="bathroom_number-max" type="text" placeholder="до">
                                         <label for="">Расположение:</label>
                                     </li>
-                                    <li>
+                                   <!-- <li>
                                         <div class="select">
-                                            <select name="bathroom_location" id="sanitation">
+                                            <select value="name="bathroom_location" id="sanitation">
                                                 <option value="">---</option>
                                             </select>
                                         </div>
-                                    </li>
+                                    </li>-->
                                     <li>
                                         <label>Описание<input type="checkbox" name="bathroom_description"></label>
                                     </li>
@@ -3563,7 +3563,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="video">Видео
-                                                <select name="video" id="video">
+                                                <select value="" name="video" id="video">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -3573,7 +3573,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
-                                                <select name="planning_project" id="planning_project">
+                                                <select value="" name="planning_project" id="planning_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -3583,7 +3583,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="three_d_project">3d проект
-                                                <select name="three_d_project" id="three_d_project">
+                                                <select value="" name="three_d_project" id="three_d_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -3629,7 +3629,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
-                                                <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                <select value="" name="clarification_of_the_object_type" id="clarification_of_the_object_type">
                                                     <option value="92">Собственность менее 5 лет</option>
                                                     <option value="93">Собственность более 5 лет</option>
                                                     <option value="70">Участок с подрядом</option>
@@ -3643,7 +3643,7 @@ $siteModel = Registry::model('site');
                                         <label>Ограждение <input type="checkbox" name="fencing"></label>
                                         <div class="select">
                                             <label for="material">Материал
-                                                <select name="material" id="material">
+                                                <select value="" name="material" id="material">
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -3676,7 +3676,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="furnish">Отделка
-                                                <select name="furnish" id="furnish">
+                                                <select value="" name="furnish" id="furnish">
                                                     <option value="46">Эксклюзивного качества</option>
                                                     <option value="64">Высококачественная отделка</option>
                                                     <option value="57">Хорошая отделка</option>
@@ -3703,7 +3703,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="material">Материал
-                                                <select name="material" id="material">
+                                                <select value="" name="material" id="material">
                                                     <option value="98">Пластик</option>
                                                     <option value="142">Дерево</option>
                                                     <option value="38">Профнастил</option>
@@ -3719,7 +3719,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="parking">Парковка
-                                                <select name="parking" id="parking">
+                                                <select value="" name="parking" id="parking">
                                                     <option class="more-settings" value="81">Многоуровневый паркинг</option>
                                                     <option class="more-settings" value="132">Подземная парковка</option>
                                                     <option class="more-settings" value="52">Гаражный комплекс</option>
@@ -3734,7 +3734,7 @@ $siteModel = Registry::model('site');
                                     <li class="show-more-settings">
                                         <div class="select">
                                             <label for="municipal">Муниципальная
-                                                <select name="municipal" id="municipal">
+                                                <select value="" name="municipal" id="municipal">
                                                     <option value="94">Платная</option>
                                                     <option value="51">Бесплатная</option>
                                                 </select>
@@ -3752,7 +3752,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="sanitation">Водопровод и канализация
-                                                <select name="sanitation" id="sanitation">
+                                                <select value="" name="sanitation" id="sanitation">
                                                     <option value="47">Есть</option>
                                                     <option value="84">Нет</option>
                                                 </select>
@@ -3770,7 +3770,7 @@ $siteModel = Registry::model('site');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select name="bathroom_location" id="sanitation">
+                                            <select value="" name="bathroom_location" id="sanitation">
                                                 <option value="">---</option>
                                             </select>
                                         </div>
@@ -3801,7 +3801,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="video">Видео
-                                                <select name="video" id="video">
+                                                <select value="" name="video" id="video">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -3811,7 +3811,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
-                                                <select name="planning_project" id="planning_project">
+                                                <select value="" name="planning_project" id="planning_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -3821,7 +3821,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="three_d_project">3d проект
-                                                <select name="three_d_project" id="three_d_project">
+                                                <select value="" name="three_d_project" id="three_d_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -3867,7 +3867,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
-                                                <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                <select value="" name="clarification_of_the_object_type" id="clarification_of_the_object_type">
                                                     <option value="92">Собственность менее 5 лет</option>
                                                     <option value="93">Собственность более 5 лет</option>
                                                     <option value="70">Участок с подрядом</option>
@@ -3881,7 +3881,7 @@ $siteModel = Registry::model('site');
                                         <label>Ограждение <input type="checkbox" name="fencing"></label>
                                         <div class="select">
                                             <label for="material">Материал
-                                                <select name="material" id="material">
+                                                <select value="" name="material" id="material">
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -3914,7 +3914,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="furnish">Отделка
-                                                <select name="furnish" id="furnish">
+                                                <select value="" name="furnish" id="furnish">
                                                     <option value="46">Эксклюзивного качества</option>
                                                     <option value="64">Высококачественная отделка</option>
                                                     <option value="57">Хорошая отделка</option>
@@ -3941,7 +3941,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="material">Материал
-                                                <select name="material" id="material">
+                                                <select value="" name="material" id="material">
                                                     <option value="98">Пластик</option>
                                                     <option value="142">Дерево</option>
                                                     <option value="38">Профнастил</option>
@@ -3957,7 +3957,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="parking">Парковка
-                                                <select name="parking" id="parking">
+                                                <select value="" name="parking" id="parking">
                                                     <option class="more-settings" value="81">Многоуровневый паркинг</option>
                                                     <option class="more-settings" value="132">Подземная парковка</option>
                                                     <option class="more-settings" value="52">Гаражный комплекс</option>
@@ -3972,7 +3972,7 @@ $siteModel = Registry::model('site');
                                     <li class="show-more-settings">
                                         <div class="select">
                                             <label for="municipal">Муниципальная
-                                                <select name="municipal" id="municipal">
+                                                <select value="" name="municipal" id="municipal">
                                                     <option value="94">Платная</option>
                                                     <option value="51">Бесплатная</option>
                                                 </select>
@@ -3990,7 +3990,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="sanitation">Водопровод и канализация
-                                                <select name="sanitation" id="sanitation">
+                                                <select value="" name="sanitation" id="sanitation">
                                                     <option value="47">Есть</option>
                                                     <option value="84">Нет</option>
                                                 </select>
@@ -4008,7 +4008,7 @@ $siteModel = Registry::model('site');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select name="bathroom_location" id="sanitation">
+                                            <select value="" name="bathroom_location" id="sanitation">
                                                 <option value="">---</option>
                                             </select>
                                         </div>
@@ -4039,7 +4039,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="video">Видео
-                                                <select name="video" id="video">
+                                                <select value="" name="video" id="video">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -4049,7 +4049,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
-                                                <select name="planning_project" id="planning_project">
+                                                <select value="" name="planning_project" id="planning_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -4059,7 +4059,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="three_d_project">3d проект
-                                                <select name="three_d_project" id="three_d_project">
+                                                <select value="" name="three_d_project" id="three_d_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -4105,7 +4105,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
-                                                <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                <select value="" name="clarification_of_the_object_type" id="clarification_of_the_object_type">
                                                     <option value="92">Собственность менее 5 лет</option>
                                                     <option value="93">Собственность более 5 лет</option>
                                                     <option value="70">Участок с подрядом</option>
@@ -4119,7 +4119,7 @@ $siteModel = Registry::model('site');
                                         <label>Ограждение <input type="checkbox" name="fencing"></label>
                                         <div class="select">
                                             <label for="material">Материал
-                                                <select name="material" id="material">
+                                                <select value="" name="material" id="material">
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -4152,7 +4152,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="furnish">Отделка
-                                                <select name="furnish" id="furnish">
+                                                <select value="" name="furnish" id="furnish">
                                                     <option value="46">Эксклюзивного качества</option>
                                                     <option value="64">Высококачественная отделка</option>
                                                     <option value="57">Хорошая отделка</option>
@@ -4179,7 +4179,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="material">Материал
-                                                <select name="material" id="material">
+                                                <select value="" name="material" id="material">
                                                     <option value="98">Пластик</option>
                                                     <option value="142">Дерево</option>
                                                     <option value="38">Профнастил</option>
@@ -4195,7 +4195,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="parking">Парковка
-                                                <select name="parking" id="parking">
+                                                <select value="" name="parking" id="parking">
                                                     <option class="more-settings" value="81">Многоуровневый паркинг</option>
                                                     <option class="more-settings" value="132">Подземная парковка</option>
                                                     <option class="more-settings" value="52">Гаражный комплекс</option>
@@ -4210,7 +4210,7 @@ $siteModel = Registry::model('site');
                                     <li class="show-more-settings">
                                         <div class="select">
                                             <label for="municipal">Муниципальная
-                                                <select name="municipal" id="municipal">
+                                                <select value="" name="municipal" id="municipal">
                                                     <option value="94">Платная</option>
                                                     <option value="51">Бесплатная</option>
                                                 </select>
@@ -4228,7 +4228,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="sanitation">Водопровод и канализация
-                                                <select name="sanitation" id="sanitation">
+                                                <select value="" name="sanitation" id="sanitation">
                                                     <option value="47">Есть</option>
                                                     <option value="84">Нет</option>
                                                 </select>
@@ -4246,7 +4246,7 @@ $siteModel = Registry::model('site');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select name="bathroom_location" id="sanitation">
+                                            <select value="" name="bathroom_location" id="sanitation">
                                                 <option value="">---</option>
                                             </select>
                                         </div>
@@ -4277,7 +4277,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="video">Видео
-                                                <select name="video" id="video">
+                                                <select value="" name="video" id="video">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -4287,7 +4287,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
-                                                <select name="planning_project" id="planning_project">
+                                                <select value="" name="planning_project" id="planning_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -4297,7 +4297,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="three_d_project">3d проект
-                                                <select name="three_d_project" id="three_d_project">
+                                                <select value="" name="three_d_project" id="three_d_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -4343,7 +4343,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
-                                                <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                <select value="" name="clarification_of_the_object_type" id="clarification_of_the_object_type">
                                                     <option value="92">Собственность менее 5 лет</option>
                                                     <option value="93">Собственность более 5 лет</option>
                                                     <option value="70">Участок с подрядом</option>
@@ -4357,7 +4357,7 @@ $siteModel = Registry::model('site');
                                         <label>Ограждение <input type="checkbox" name="fencing"></label>
                                         <div class="select">
                                             <label for="material">Материал
-                                                <select name="material" id="material">
+                                                <select value="" name="material" id="material">
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -4390,7 +4390,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="furnish">Отделка
-                                                <select name="furnish" id="furnish">
+                                                <select value="" name="furnish" id="furnish">
                                                     <option value="46">Эксклюзивного качества</option>
                                                     <option value="64">Высококачественная отделка</option>
                                                     <option value="57">Хорошая отделка</option>
@@ -4417,7 +4417,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="material">Материал
-                                                <select name="material" id="material">
+                                                <select value="" name="material" id="material">
                                                     <option value="98">Пластик</option>
                                                     <option value="142">Дерево</option>
                                                     <option value="38">Профнастил</option>
@@ -4433,7 +4433,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="parking">Парковка
-                                                <select name="parking" id="parking">
+                                                <select value="" name="parking" id="parking">
                                                     <option class="more-settings" value="81">Многоуровневый паркинг</option>
                                                     <option class="more-settings" value="132">Подземная парковка</option>
                                                     <option class="more-settings" value="52">Гаражный комплекс</option>
@@ -4448,7 +4448,7 @@ $siteModel = Registry::model('site');
                                     <li class="show-more-settings">
                                         <div class="select">
                                             <label for="municipal">Муниципальная
-                                                <select name="municipal" id="municipal">
+                                                <select value="" name="municipal" id="municipal">
                                                     <option value="94">Платная</option>
                                                     <option value="51">Бесплатная</option>
                                                 </select>
@@ -4466,7 +4466,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="sanitation">Водопровод и канализация
-                                                <select name="sanitation" id="sanitation">
+                                                <select value="" name="sanitation" id="sanitation">
                                                     <option value="47">Есть</option>
                                                     <option value="84">Нет</option>
                                                 </select>
@@ -4484,7 +4484,7 @@ $siteModel = Registry::model('site');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select name="bathroom_location" id="sanitation">
+                                            <select value="" name="bathroom_location" id="sanitation">
                                                 <option value="">---</option>
                                             </select>
                                         </div>
@@ -4515,7 +4515,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="video">Видео
-                                                <select name="video" id="video">
+                                                <select value="" name="video" id="video">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -4525,7 +4525,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
-                                                <select name="planning_project" id="planning_project">
+                                                <select value="" name="planning_project" id="planning_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -4535,7 +4535,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="three_d_project">3d проект
-                                                <select name="three_d_project" id="three_d_project">
+                                                <select value="" name="three_d_project" id="three_d_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -4650,7 +4650,7 @@ $siteModel = Registry::model('site');
                             <li>
                                 <div class="select">Район
                                     <label for="region">
-                                        <select name="region">
+                                        <select value="" name="region">
                                             <option value="">Северное медведково</option>
                                             <option value="">Северное медведково</option>
                                             <option value="">Северное медведково</option>
@@ -4668,7 +4668,7 @@ $siteModel = Registry::model('site');
                             <li>
                                 <div class="select">Метро
                                     <label for="metro_station">
-                                        <select name="metro_station">
+                                        <select value="" name="metro_station">
                                             <option value="">Выбрано1</option>
                                             <option value="">Выбрано2</option>
                                             <option value="">Выбрано3</option>
@@ -4681,7 +4681,7 @@ $siteModel = Registry::model('site');
                             <li>
                                 <div class="select">Удаленность от метро не более
                                     <label for="distance_from_metro">
-                                        <select name="distance_from_metro">
+                                        <select value="" name="distance_from_metro">
                                             <option value="">5 мин пешком</option>
                                             <option value="">10 мин пешком</option>
                                             <option value="">15 мин пешком</option>
@@ -4726,7 +4726,7 @@ $siteModel = Registry::model('site');
                     <li>
                         <div class="select"><img src="../../template/images/ava.png" alt="icons">
                             <label for="object_located">
-                                <select name="object_located" id="object_located">
+                                <select value="" name="object_located" id="object_located">
                                     <option value="">Объект размещен</option>
                                     <option value="41">Не важно</option>
                                     <option value="22">Риэлтором</option>
@@ -4750,7 +4750,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="number_of_rooms">Кол-во комнат
-                                                <select class="number-apartments" name="number_of_rooms" id="number_of_rooms">
+                                                <select value="" class="number-apartments" name="number_of_rooms" id="number_of_rooms">
                                                     <option value="5">4+</option>
                                                     <option value="4">4</option>
                                                     <option value="3">3</option>
@@ -4799,7 +4799,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="lavatory" >Санузел
-                                                <select id="lavatory">
+                                                <select value="" name="" id="lavatory">
                                                     <option value="41">Не важно</option>
                                                     <option value="116">Раздельный</option>
                                                     <option value="29">Совмещенный</option>
@@ -4833,7 +4833,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="furnish">Отделка
-                                                <select name="furnish" id="furnish">
+                                                <select value="" name="furnish" id="furnish">
                                                     <option value="141">Без ремонта</option>
                                                     <option value="65">Незавершенный ремонт</option>
                                                     <option value="107">Требуется ремонт</option>
@@ -4848,7 +4848,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="equipment">Комплектация
-                                                <select name="equipment" id="equipment">
+                                                <select value="" name="equipment" id="equipment">
                                                     <option value="45">Укомплектованная</option>
                                                     <option value="44">Пустая</option>
                                                 </select>
@@ -4870,7 +4870,7 @@ $siteModel = Registry::model('site');
                                     <li><p>Наличие лифта</p>
                                         <div class="select">
                                             <label for="elevator">
-                                                <select name="elevator" id="elevator">
+                                                <select value="" name="elevator" id="elevator">
                                                     <option value="1">Да</option>
                                                     <option value="0">Нет</option>
                                                 </select>
@@ -4880,7 +4880,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="elevator_yes">
-                                                <select name="elevator_yes" id="elevator_yes">
+                                                <select value="" name="elevator_yes" id="elevator_yes">
                                                     <option value="41">Не важно</option>
                                                     <option value="95">Пассажирский</option>
                                                     <option value="23">Грузовой</option>
@@ -4901,7 +4901,7 @@ $siteModel = Registry::model('site');
                                         <label for="clarification_of_the_object_type">Уточнение вида объектов</label>
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">
-                                                <select name="clarification_of_the_object_type"
+                                                <select value="" name="clarification_of_the_object_type"
                                                         id="clarification_of_the_object_type">
                                                     <option value="146">Год постройки\окончания строительства</option>
                                                     <option value="92">Собственность менее 5 лет</option>
@@ -4916,7 +4916,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="parking">Парковка
-                                                <select name="parking" id="parking">
+                                                <select value="" name="parking" id="parking">
                                                     <option value="41">Не важно</option>
                                                     <option value="5">Отсутствует</option>
                                                     <option value="7">Придомовой гараж</option>
@@ -4930,7 +4930,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="wall_material">Материал стен
-                                                <select name="wall_material" id="wall_material">
+                                                <select value="" name="wall_material" id="wall_material">
                                                     <option value="91">Другое</option>
                                                     <option value="32">Железобетонные панели</option>
                                                     <option value="78">Монолит</option>
@@ -4942,7 +4942,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="stairwells_status">Состояние лестничных клеток
-                                                <select name="stairwells_status" id="stairwells_status">
+                                                <select value="" name="stairwells_status" id="stairwells_status">
                                                     <option value="141">Без ремонта</option>
                                                     <option value="107">Требуется ремонт</option>
                                                     <option value="106">Требуется косметический ремонт</option>
@@ -4986,7 +4986,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="video">Видео
-                                                <select name="video" id="video">
+                                                <select value="" name="video" id="video">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -4996,7 +4996,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
-                                                <select name="planning_project" id="planning_project">
+                                                <select value="" name="planning_project" id="planning_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -5006,7 +5006,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="three_d_project">3d проект
-                                                <select name="three_d_project" id="three_d_project">
+                                                <select value="" name="three_d_project" id="three_d_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -5048,7 +5048,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="number_of_rooms">Количество комнат
-                                                <select name="number_of_rooms" id="number_of_rooms">
+                                                <select value="" name="number_of_rooms" id="number_of_rooms">
                                                     <option value="4">4+</option>
                                                     <option value="3">3</option>
                                                     <option value="2">2</option>
@@ -5060,7 +5060,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="number_of_rooms">Количество комнат
-                                                <select name="number_of_rooms" id="number_of_rooms">
+                                                <select value="" name="number_of_rooms" id="number_of_rooms">
                                                     <option value="4">4+</option>
                                                     <option value="3">3</option>
                                                     <option value="2">2</option>
@@ -5080,7 +5080,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="lavatory">Санузел
-                                                <select name="lavatory" id="lavatory">
+                                                <select value="" name="lavatory" id="lavatory">
                                                     <option value="41">Не важно</option>
                                                     <option value="116">Раздельный</option>
                                                     <option value="29">Совмещенный</option>
@@ -5091,7 +5091,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="roofing">Кровля
-                                                <select name="roofing" id="roofing">
+                                                <select value="" name="roofing" id="roofing">
                                                     <option value="127">Временная</option>
                                                     <option value="118">Шифер</option>
                                                     <option value="122">Камень</option>
@@ -5107,7 +5107,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="foundation">Фундамент
-                                                <select name="foundation" id="foundation">
+                                                <select value="" name="foundation" id="foundation">
                                                     <option value="140">Без фундамента</option>
                                                     <option value="58">Ростверк</option>
                                                     <option value="109">Ленточный</option>
@@ -5120,7 +5120,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="wall_material">Материал стен
-                                                <select name="wall_material" id="wall_material">
+                                                <select value="" name="wall_material" id="wall_material">
                                                     <option value="49">Фахверк</option>
                                                     <option value="56">Клееный брус</option>
                                                     <option value="102">Профилированный брус</option>
@@ -5140,7 +5140,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="type_of_house">Тип дома
-                                                <select name="type_of_house" id="type_of_house">
+                                                <select value="" name="type_of_house" id="type_of_house">
                                                     <option value="35">Коттедж</option>
                                                     <option value="130">Таунхаус</option>
                                                     <option value="42">Дуплекс</option>
@@ -5174,7 +5174,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="furnish">Отделка
-                                                <select name="furnish" id="furnish">
+                                                <select value="" name="furnish" id="furnish">
                                                     <option value="141">Без ремонта</option>
                                                     <option value="65">Незавершенный ремонт</option>
                                                     <option value="107">Требуется ремонт</option>
@@ -5189,7 +5189,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="equipment">Комплектация
-                                                <select name="equipment" id="equipment">
+                                                <select value="" name="equipment" id="equipment">
                                                     <option value="45">Укомплектованная</option>
                                                     <option value="44">Пустая</option>
                                                 </select>
@@ -5199,7 +5199,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
-                                                <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                <select value="" name="clarification_of_the_object_type" id="clarification_of_the_object_type">
                                                     <option value="92">Собственность менее 5 лет</option>
                                                     <option value="93">Собственность более 5 лет</option>
                                                     <option value="70">Участок с подрядом</option>
@@ -5242,7 +5242,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">Участок
                                             <label for="parking">Парковка
-                                                <select name="parking" id="parking">
+                                                <select value="" name="parking" id="parking">
                                                     <option value="41">Не важно</option>
                                                     <option value="5">Отсутствует</option>
                                                     <option value="7">Придомовой гараж</option>
@@ -5268,7 +5268,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="site">Участок
-                                                <select name="site" id="site">
+                                                <select value="" name="site" id="site">
                                                     <option value="136">Заболоченный</option>
                                                     <option value="103">Овраг</option>
                                                     <option value="89">На склоне</option>
@@ -5288,7 +5288,7 @@ $siteModel = Registry::model('site');
                                             <label>Лесные деревья <input type="checkbox" name="forest_trees"></label>
                                             <label>Ограждение <input type="checkbox" name="fencing"></label>
                                             <label for="material">Материал
-                                                <select name="material" id="material">
+                                                <select value="" name="material" id="material">
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -5319,7 +5319,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="video">Видео
-                                                <select name="video" id="video">
+                                                <select value="" name="video" id="video">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -5329,7 +5329,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
-                                                <select name="planning_project" id="planning_project">
+                                                <select value="" name="planning_project" id="planning_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -5339,7 +5339,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="three_d_project">3d проект
-                                                <select name="three_d_project" id="three_d_project">
+                                                <select value="" name="three_d_project" id="three_d_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -5363,7 +5363,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="number_of_rooms">Кол-во комнат
-                                                <select class="number-apartments" name="number_of_rooms" id="number_of_rooms">
+                                                <select value="" class="number-apartments" name="number_of_rooms" id="number_of_rooms">
                                                     <option value="5">4+</option>
                                                     <option value="4">4</option>
                                                     <option value="3">3</option>
@@ -5412,7 +5412,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="lavatory" >Санузел
-                                                <select id="lavatory">
+                                                <select value="" id="lavatory">
                                                     <option value="41">Не важно</option>
                                                     <option value="116">Раздельный</option>
                                                     <option value="29">Совмещенный</option>
@@ -5435,7 +5435,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="object_located">Объект размещен
-                                                <select>
+                                                <select value="" name="">
                                                     <option value="41">Не важно</option>
                                                     <option value="22">Риэлтором</option>
                                                     <option value="21">Собственником</option>
@@ -5467,10 +5467,10 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="">
-                                                <select>
-                                                    <option value=>Language of communication</option>
-                                                    <option value=>English</option>
-                                                    <option value=>Spanish</option>
+                                                <select value="" name="">
+                                                    <option value="">Language of communication</option>
+                                                    <option value="">English</option>
+                                                    <option value="">Spanish</option>
                                                 </select>
                                             </label>
                                         </div>
@@ -5478,10 +5478,10 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="">
-                                                <select>
-                                                    <option value=>Language of communication</option>
-                                                    <option value=>English</option>
-                                                    <option value=>Spanish</option>
+                                                <select value="" name="">
+                                                    <option value="">Language of communication</option>
+                                                    <option value="">English</option>
+                                                    <option value="">Spanish</option>
                                                 </select>
                                             </label>
                                         </div>
@@ -5489,10 +5489,10 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="">
-                                                <select>
-                                                    <option value=>Language of communication</option>
-                                                    <option value=>English</option>
-                                                    <option value=>Spanish</option>
+                                                <select value="" name="">
+                                                    <option value="">Language of communication</option>
+                                                    <option value="">English</option>
+                                                    <option value="">Spanish</option>
                                                 </select>
                                             </label>
                                         </div>
@@ -5500,10 +5500,10 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="">
-                                                <select>
-                                                    <option value=>Language of communication</option>
-                                                    <option value=>English</option>
-                                                    <option value=>Spanish</option>
+                                                <select value="" name="">
+                                                    <option value="">Language of communication</option>
+                                                    <option value="">English</option>
+                                                    <option value="">Spanish</option>
                                                 </select>
                                             </label>
                                         </div>
@@ -5536,7 +5536,7 @@ $siteModel = Registry::model('site');
                                             <input id="number_of_floors-max" name="number_of_floors-max" type="text" placeholder="до">
                                         </label>
                                             <label for="type_of_construction">Вид постройки:
-                                                <select name="type_of_construction" id="type_of_construction">
+                                                <select value="" name="type_of_construction" id="type_of_construction">
                                                     <option value="111">Комнаты</option>
                                                     <option value="90">Опен спэйс</option>
                                                 </select>
@@ -5554,7 +5554,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="building_type">Тип здания
-                                                <select name="building_type" id="building_type">
+                                                <select value="" name="building_type" id="building_type">
                                                     <option value="108">Жилое</option>
                                                     <option value="8">Административное</option>
                                                 </select>
@@ -5564,7 +5564,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="roofing">Кровля
-                                                <select name="roofing" id="roofing">
+                                                <select value="" name="roofing" id="roofing">
                                                     <option value="67">Железо</option>
                                                     <option value="34">Медь</option>
                                                     <option value="76">Металлочерепица</option>
@@ -5582,7 +5582,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="foundation">Фундамент
-                                                <select name="foundation" id="foundation">
+                                                <select value="" name="foundation" id="foundation">
                                                     <option value="120">Монолитная плита</option>
                                                     <option value="125">Шведская плита</option>
                                                     <option value="109">Ленточный</option>
@@ -5595,7 +5595,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="wall_material">Материал стен
-                                                <select name="wall_material" id="wall_material">
+                                                <select value="" name="wall_material" id="wall_material">
                                                     <option value="49">Фахверк</option>
                                                     <option value="19">Кирпич</option>
                                                     <option value="105">Железобетон</option>
@@ -5619,10 +5619,10 @@ $siteModel = Registry::model('site');
                         <li><img src="../../template/images/search-5.png" alt="search">Безопасность
                             <div class="select">
                                 <label for="">
-                                    <select>
-                                        <option value=>Language of communication</option>
-                                        <option value=>English</option>
-                                        <option value=>Spanish</option>
+                                    <select value="value=" name="">
+                                        <option value="">Language of communication</option>
+                                        <option value="">English</option>
+                                        <option value="">Spanish</option>
                                     </select>
                                 </label>
                             </div>
@@ -5646,7 +5646,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="video">Видео
-                                                <select name="video" id="video">
+                                                <select value="" name="video" id="video">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -5656,7 +5656,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
-                                                <select name="planning_project" id="planning_project">
+                                                <select value="" name="planning_project" id="planning_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -5666,7 +5666,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="three_d_project">3d проект
-                                                <select name="three_d_project" id="three_d_project">
+                                                <select value="" name="three_d_project" id="three_d_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -5700,7 +5700,7 @@ $siteModel = Registry::model('site');
                                                 <input id="number_of_floors-max" name="number_of_floors-max" type="text" placeholder="до">
                                             </label>
                                             <label for="type_of_construction">Вид постройки:
-                                                <select name="type_of_construction" id="type_of_construction">
+                                                <select value="" name="type_of_construction" id="type_of_construction">
                                                     <option value="111">Комнаты</option>
                                                     <option value="90">Опен спэйс</option>
                                                 </select>
@@ -5718,7 +5718,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="building_type">Тип здания
-                                                <select name="building_type" id="building_type">
+                                                <select value="" name="building_type" id="building_type">
                                                     <option value="108">Жилое</option>
                                                     <option value="8">Административное</option>
                                                 </select>
@@ -5728,7 +5728,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="roofing">Кровля
-                                                <select name="roofing" id="roofing">
+                                                <select value="" name="roofing" id="roofing">
                                                     <option value="67">Железо</option>
                                                     <option value="34">Медь</option>
                                                     <option value="76">Металлочерепица</option>
@@ -5746,7 +5746,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="foundation">Фундамент
-                                                <select name="foundation" id="foundation">
+                                                <select value="" name="foundation" id="foundation">
                                                     <option value="120">Монолитная плита</option>
                                                     <option value="125">Шведская плита</option>
                                                     <option value="109">Ленточный</option>
@@ -5759,7 +5759,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="wall_material">Материал стен
-                                                <select name="wall_material" id="wall_material">
+                                                <select value="" name="wall_material" id="wall_material">
                                                     <option value="49">Фахверк</option>
                                                     <option value="19">Кирпич</option>
                                                     <option value="105">Железобетон</option>
@@ -5791,7 +5791,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="furnish">Отделка
-                                                <select name="furnish" id="furnish">
+                                                <select value="" name="furnish" id="furnish">
                                                     <option value="46">Эксклюзивного качества</option>
                                                     <option value="64">Высококачественная отделка</option>
                                                     <option value="57">Хорошая отделка</option>
@@ -5818,7 +5818,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="material">Материал
-                                                <select name="material" id="material">
+                                                <select value="" name="material" id="material">
                                                     <option value="98">Пластик</option>
                                                     <option value="142">Дерево</option>
                                                     <option value="38">Профнастил</option>
@@ -5834,7 +5834,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="parking">Парковка
-                                                <select name="parking" id="parking">
+                                                <select value="" name="parking" id="parking">
                                                     <option class="more-settings" value="81">Многоуровневый паркинг</option>
                                                     <option class="more-settings" value="132">Подземная парковка</option>
                                                     <option class="more-settings" value="52">Гаражный комплекс</option>
@@ -5849,7 +5849,7 @@ $siteModel = Registry::model('site');
                                     <li class="show-more-settings">
                                         <div class="select">
                                             <label for="municipal">Муниципальная
-                                                <select name="municipal" id="municipal">
+                                                <select value="" name="municipal" id="municipal">
                                                     <option value="94">Платная</option>
                                                     <option value="51">Бесплатная</option>
                                                 </select>
@@ -5867,7 +5867,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="sanitation">Водопровод и канализация
-                                                <select name="sanitation" id="sanitation">
+                                                <select value="" name="sanitation" id="sanitation">
                                                     <option value="47">Есть</option>
                                                     <option value="84">Нет</option>
                                                 </select>
@@ -5885,7 +5885,7 @@ $siteModel = Registry::model('site');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select name="bathroom_location" id="sanitation">
+                                            <select value="" name="bathroom_location" id="sanitation">
                                                 <option value="">---</option>
                                             </select>
                                         </div>
@@ -5916,7 +5916,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="video">Видео
-                                                <select name="video" id="video">
+                                                <select value="" name="video" id="video">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -5926,7 +5926,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
-                                                <select name="planning_project" id="planning_project">
+                                                <select value="" name="planning_project" id="planning_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -5936,7 +5936,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="three_d_project">3d проект
-                                                <select name="three_d_project" id="three_d_project">
+                                                <select value="" name="three_d_project" id="three_d_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -5982,7 +5982,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
-                                                <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                <select value="" name="clarification_of_the_object_type" id="clarification_of_the_object_type">
                                                     <option value="92">Собственность менее 5 лет</option>
                                                     <option value="93">Собственность более 5 лет</option>
                                                     <option value="70">Участок с подрядом</option>
@@ -5996,7 +5996,7 @@ $siteModel = Registry::model('site');
                                         <label>Ограждение <input type="checkbox" name="fencing"></label>
                                         <div class="select">
                                             <label for="material">Материал
-                                                <select name="material" id="material">
+                                                <select value="" name="material" id="material">
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -6029,7 +6029,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="furnish">Отделка
-                                                <select name="furnish" id="furnish">
+                                                <select value="" name="furnish" id="furnish">
                                                     <option value="46">Эксклюзивного качества</option>
                                                     <option value="64">Высококачественная отделка</option>
                                                     <option value="57">Хорошая отделка</option>
@@ -6056,7 +6056,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="material">Материал
-                                                <select name="material" id="material">
+                                                <select value="" name="material" id="material">
                                                     <option value="98">Пластик</option>
                                                     <option value="142">Дерево</option>
                                                     <option value="38">Профнастил</option>
@@ -6072,7 +6072,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="parking">Парковка
-                                                <select name="parking" id="parking">
+                                                <select value="" name="parking" id="parking">
                                                     <option class="more-settings" value="81">Многоуровневый паркинг</option>
                                                     <option class="more-settings" value="132">Подземная парковка</option>
                                                     <option class="more-settings" value="52">Гаражный комплекс</option>
@@ -6087,7 +6087,7 @@ $siteModel = Registry::model('site');
                                     <li class="show-more-settings">
                                         <div class="select">
                                             <label for="municipal">Муниципальная
-                                                <select name="municipal" id="municipal">
+                                                <select value="" name="municipal" id="municipal">
                                                     <option value="94">Платная</option>
                                                     <option value="51">Бесплатная</option>
                                                 </select>
@@ -6105,7 +6105,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="sanitation">Водопровод и канализация
-                                                <select name="sanitation" id="sanitation">
+                                                <select value="" name="sanitation" id="sanitation">
                                                     <option value="47">Есть</option>
                                                     <option value="84">Нет</option>
                                                 </select>
@@ -6123,7 +6123,7 @@ $siteModel = Registry::model('site');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select name="bathroom_location" id="sanitation">
+                                            <select value="" name="bathroom_location" id="sanitation">
                                                 <option value="">---</option>
                                             </select>
                                         </div>
@@ -6155,7 +6155,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="video">Видео
-                                                <select name="video" id="video">
+                                                <select value="" name="video" id="video">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -6165,7 +6165,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
-                                                <select name="planning_project" id="planning_project">
+                                                <select value="" name="planning_project" id="planning_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -6175,7 +6175,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="three_d_project">3d проект
-                                                <select name="three_d_project" id="three_d_project">
+                                                <select value="" name="three_d_project" id="three_d_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -6221,7 +6221,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
-                                                <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                <select value="" name="clarification_of_the_object_type" id="clarification_of_the_object_type">
                                                     <option value="92">Собственность менее 5 лет</option>
                                                     <option value="93">Собственность более 5 лет</option>
                                                     <option value="70">Участок с подрядом</option>
@@ -6235,7 +6235,7 @@ $siteModel = Registry::model('site');
                                         <label>Ограждение <input type="checkbox" name="fencing"></label>
                                         <div class="select">
                                             <label for="material">Материал
-                                                <select name="material" id="material">
+                                                <select value="" name="material" id="material">
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -6268,7 +6268,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="furnish">Отделка
-                                                <select name="furnish" id="furnish">
+                                                <select value="" name="furnish" id="furnish">
                                                     <option value="46">Эксклюзивного качества</option>
                                                     <option value="64">Высококачественная отделка</option>
                                                     <option value="57">Хорошая отделка</option>
@@ -6295,7 +6295,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="material">Материал
-                                                <select name="material" id="material">
+                                                <select value="" name="material" id="material">
                                                     <option value="98">Пластик</option>
                                                     <option value="142">Дерево</option>
                                                     <option value="38">Профнастил</option>
@@ -6311,7 +6311,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="parking">Парковка
-                                                <select name="parking" id="parking">
+                                                <select value="" name="parking" id="parking">
                                                     <option class="more-settings" value="81">Многоуровневый паркинг</option>
                                                     <option class="more-settings" value="132">Подземная парковка</option>
                                                     <option class="more-settings" value="52">Гаражный комплекс</option>
@@ -6326,7 +6326,7 @@ $siteModel = Registry::model('site');
                                     <li class="show-more-settings">
                                         <div class="select">
                                             <label for="municipal">Муниципальная
-                                                <select name="municipal" id="municipal">
+                                                <select value="" name="municipal" id="municipal">
                                                     <option value="94">Платная</option>
                                                     <option value="51">Бесплатная</option>
                                                 </select>
@@ -6344,7 +6344,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="sanitation">Водопровод и канализация
-                                                <select name="sanitation" id="sanitation">
+                                                <select value="" name="sanitation" id="sanitation">
                                                     <option value="47">Есть</option>
                                                     <option value="84">Нет</option>
                                                 </select>
@@ -6362,7 +6362,7 @@ $siteModel = Registry::model('site');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select name="bathroom_location" id="sanitation">
+                                            <select value="" name="bathroom_location" id="sanitation">
                                                 <option value="">---</option>
                                             </select>
                                         </div>
@@ -6393,7 +6393,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="video">Видео
-                                                <select name="video" id="video">
+                                                <select value="" name="video" id="video">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -6403,7 +6403,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
-                                                <select name="planning_project" id="planning_project">
+                                                <select value="" name="planning_project" id="planning_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -6413,7 +6413,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="three_d_project">3d проект
-                                                <select name="three_d_project" id="three_d_project">
+                                                <select value="" name="three_d_project" id="three_d_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -6443,7 +6443,7 @@ $siteModel = Registry::model('site');
                                      <li>
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
-                                                <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                <select value="" name="clarification_of_the_object_type" id="clarification_of_the_object_type">
                                                     <option value="59">Земли под размещение промышленных и коммерческих объектов</option>
                                                     <option value="9">Сельскохозяйственные земли</option>
                                                     <option value="92">Собственность менее 5 лет</option>
@@ -6455,7 +6455,7 @@ $siteModel = Registry::model('site');
                                      <li>
                                          <div class="select">
                                              <label for="site">Участок
-                                                <select name="site" id="site">
+                                                <select value="" name="site" id="site">
                                                     <option value="136">Заболоченный</option>
                                                     <option value="103">Овраг</option>
                                                     <option value="89">На склоне</option>
@@ -6488,7 +6488,7 @@ $siteModel = Registry::model('site');
                                      <li>
                                          <div class="select">
                                              <label for="parking">Парковка
-                                                <select name="parking" id="parking">
+                                                <select value="" name="parking" id="parking">
                                                     <option value="41">Не важно</option>
                                                     <option value="5">Отсутствует</option>
                                                     <option value="7">Придомовой гараж</option>
@@ -6522,7 +6522,7 @@ $siteModel = Registry::model('site');
                                      <li>
                                          <div class="select">
                                              <label for="material">Материал
-                                                <select name="material" id="material">
+                                                <select value="" name="material" id="material">
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -6557,7 +6557,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="video">Видео
-                                                <select name="video" id="video">
+                                                <select value="" name="video" id="video">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -6567,7 +6567,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
-                                                <select name="planning_project" id="planning_project">
+                                                <select value="" name="planning_project" id="planning_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -6577,7 +6577,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="three_d_project">3d проект
-                                                <select name="three_d_project" id="three_d_project">
+                                                <select value="" name="three_d_project" id="three_d_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -6623,7 +6623,7 @@ $siteModel = Registry::model('site');
                                      <li>
                                          <div class="select">
                                              <label for="clarification_of_the_object_type">Уточнение вида объектов
-                                                <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                <select value="" name="clarification_of_the_object_type" id="clarification_of_the_object_type">
                                                     <option value="92">Собственность менее 5 лет</option>
                                                     <option value="93">Собственность более 5 лет</option>
                                                     <option value="70">Участок с подрядом</option>
@@ -6637,7 +6637,7 @@ $siteModel = Registry::model('site');
                                          <label>Ограждение <input type="checkbox" name="fencing"></label>
                                          <div class="select">
                                              <label for="material">Материал
-                                                <select name="material" id="material">
+                                                <select value="" name="material" id="material">
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -6670,7 +6670,7 @@ $siteModel = Registry::model('site');
                                      <li>
                                          <div class="select">
                                              <label for="roofing">Кровля
-                                                <select name="roofing" id="roofing">
+                                                <select value="" name="roofing" id="roofing">
                                                     <option value="127">Временная</option>
                                                     <option value="118">Шифер</option>
                                                     <option value="122">Камень</option>
@@ -6686,7 +6686,7 @@ $siteModel = Registry::model('site');
                                      <li>
                                          <div class="select">
                                              <label for="foundation">Фундамент
-                                                <select name="foundation" id="foundation">
+                                                <select value="" name="foundation" id="foundation">
                                                     <option value="140">Без фундамента</option>
                                                     <option value="58">Ростверк</option>
                                                     <option value="109">Ленточный</option>
@@ -6699,7 +6699,7 @@ $siteModel = Registry::model('site');
                                      <li>
                                          <div class="select">
                                             <label for="wall_material">Материал стен
-                                               <select name="wall_material" id="wall_material">
+                                               <select value="" name="wall_material" id="wall_material">
                                                    <option value="49">Фахверк</option>
                                                    <option value="56">Клееный брус</option>
                                                    <option value="102">Профилированный брус</option>
@@ -6731,7 +6731,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="video">Видео
-                                                <select name="video" id="video">
+                                                <select value="" name="video" id="video">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -6741,7 +6741,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
-                                                <select name="planning_project" id="planning_project">
+                                                <select value="" name="planning_project" id="planning_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -6751,7 +6751,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="three_d_project">3d проект
-                                                <select name="three_d_project" id="three_d_project">
+                                                <select value="" name="three_d_project" id="three_d_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -6797,7 +6797,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
-                                                <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                <select value="" name="clarification_of_the_object_type" id="clarification_of_the_object_type">
                                                     <option value="92">Собственность менее 5 лет</option>
                                                     <option value="93">Собственность более 5 лет</option>
                                                     <option value="70">Участок с подрядом</option>
@@ -6811,7 +6811,7 @@ $siteModel = Registry::model('site');
                                         <label>Ограждение <input type="checkbox" name="fencing"></label>
                                         <div class="select">
                                             <label for="material">Материал
-                                                <select name="material" id="material">
+                                                <select value="" name="material" id="material">
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -6844,7 +6844,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="furnish">Отделка
-                                                <select name="furnish" id="furnish">
+                                                <select value="" name="furnish" id="furnish">
                                                     <option value="46">Эксклюзивного качества</option>
                                                     <option value="64">Высококачественная отделка</option>
                                                     <option value="57">Хорошая отделка</option>
@@ -6871,7 +6871,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="material">Материал
-                                                <select name="material" id="material">
+                                                <select value="" name="material" id="material">
                                                     <option value="98">Пластик</option>
                                                     <option value="142">Дерево</option>
                                                     <option value="38">Профнастил</option>
@@ -6887,7 +6887,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="parking">Парковка
-                                                <select name="parking" id="parking">
+                                                <select value="" name="parking" id="parking">
                                                     <option class="more-settings" value="81">Многоуровневый паркинг</option>
                                                     <option class="more-settings" value="132">Подземная парковка</option>
                                                     <option class="more-settings" value="52">Гаражный комплекс</option>
@@ -6902,7 +6902,7 @@ $siteModel = Registry::model('site');
                                     <li class="show-more-settings">
                                         <div class="select">
                                             <label for="municipal">Муниципальная
-                                                <select name="municipal" id="municipal">
+                                                <select value="" name="municipal" id="municipal">
                                                     <option value="94">Платная</option>
                                                     <option value="51">Бесплатная</option>
                                                 </select>
@@ -6920,7 +6920,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="sanitation">Водопровод и канализация
-                                                <select name="sanitation" id="sanitation">
+                                                <select value="" name="sanitation" id="sanitation">
                                                     <option value="47">Есть</option>
                                                     <option value="84">Нет</option>
                                                 </select>
@@ -6938,7 +6938,7 @@ $siteModel = Registry::model('site');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select name="bathroom_location" id="sanitation">
+                                            <select value="" name="bathroom_location" id="sanitation">
                                                 <option value="">---</option>
                                             </select>
                                         </div>
@@ -6969,7 +6969,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="video">Видео
-                                                <select name="video" id="video">
+                                                <select value="" name="video" id="video">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -6979,7 +6979,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
-                                                <select name="planning_project" id="planning_project">
+                                                <select value="" name="planning_project" id="planning_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -6989,7 +6989,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="three_d_project">3d проект
-                                                <select name="three_d_project" id="three_d_project">
+                                                <select value="" name="three_d_project" id="three_d_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -7035,7 +7035,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
-                                                <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                <select value="" name="clarification_of_the_object_type" id="clarification_of_the_object_type">
                                                     <option value="92">Собственность менее 5 лет</option>
                                                     <option value="93">Собственность более 5 лет</option>
                                                     <option value="70">Участок с подрядом</option>
@@ -7049,7 +7049,7 @@ $siteModel = Registry::model('site');
                                         <label>Ограждение <input type="checkbox" name="fencing"></label>
                                         <div class="select">
                                             <label for="material">Материал
-                                                <select name="material" id="material">
+                                                <select value="" name="material" id="material">
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -7082,7 +7082,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="furnish">Отделка
-                                                <select name="furnish" id="furnish">
+                                                <select value="" name="furnish" id="furnish">
                                                     <option value="46">Эксклюзивного качества</option>
                                                     <option value="64">Высококачественная отделка</option>
                                                     <option value="57">Хорошая отделка</option>
@@ -7109,7 +7109,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="material">Материал
-                                                <select name="material" id="material">
+                                                <select value="" name="material" id="material">
                                                     <option value="98">Пластик</option>
                                                     <option value="142">Дерево</option>
                                                     <option value="38">Профнастил</option>
@@ -7125,7 +7125,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="parking">Парковка
-                                                <select name="parking" id="parking">
+                                                <select value="" name="parking" id="parking">
                                                     <option class="more-settings" value="81">Многоуровневый паркинг</option>
                                                     <option class="more-settings" value="132">Подземная парковка</option>
                                                     <option class="more-settings" value="52">Гаражный комплекс</option>
@@ -7140,7 +7140,7 @@ $siteModel = Registry::model('site');
                                     <li class="show-more-settings">
                                         <div class="select">
                                             <label for="municipal">Муниципальная
-                                                <select name="municipal" id="municipal">
+                                                <select value="" name="municipal" id="municipal">
                                                     <option value="94">Платная</option>
                                                     <option value="51">Бесплатная</option>
                                                 </select>
@@ -7158,7 +7158,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="sanitation">Водопровод и канализация
-                                                <select name="sanitation" id="sanitation">
+                                                <select value="" name="sanitation" id="sanitation">
                                                     <option value="47">Есть</option>
                                                     <option value="84">Нет</option>
                                                 </select>
@@ -7176,7 +7176,7 @@ $siteModel = Registry::model('site');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select name="bathroom_location" id="sanitation">
+                                            <select value="" name="bathroom_location" id="sanitation">
                                                 <option value="">---</option>
                                             </select>
                                         </div>
@@ -7207,7 +7207,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="video">Видео
-                                                <select name="video" id="video">
+                                                <select value="" name="video" id="video">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -7217,7 +7217,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
-                                                <select name="planning_project" id="planning_project">
+                                                <select value="" name="planning_project" id="planning_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -7227,7 +7227,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="three_d_project">3d проект
-                                                <select name="three_d_project" id="three_d_project">
+                                                <select value="" name="three_d_project" id="three_d_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -7273,7 +7273,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
-                                                <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                <select value="" name="clarification_of_the_object_type" id="clarification_of_the_object_type">
                                                     <option value="92">Собственность менее 5 лет</option>
                                                     <option value="93">Собственность более 5 лет</option>
                                                     <option value="70">Участок с подрядом</option>
@@ -7287,7 +7287,7 @@ $siteModel = Registry::model('site');
                                         <label>Ограждение <input type="checkbox" name="fencing"></label>
                                         <div class="select">
                                             <label for="material">Материал
-                                                <select name="material" id="material">
+                                                <select value="" name="material" id="material">
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -7320,7 +7320,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="furnish">Отделка
-                                                <select name="furnish" id="furnish">
+                                                <select value="" name="furnish" id="furnish">
                                                     <option value="46">Эксклюзивного качества</option>
                                                     <option value="64">Высококачественная отделка</option>
                                                     <option value="57">Хорошая отделка</option>
@@ -7347,7 +7347,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="material">Материал
-                                                <select name="material" id="material">
+                                                <select value="" name="material" id="material">
                                                     <option value="98">Пластик</option>
                                                     <option value="142">Дерево</option>
                                                     <option value="38">Профнастил</option>
@@ -7363,7 +7363,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="parking">Парковка
-                                                <select name="parking" id="parking">
+                                                <select value="" name="parking" id="parking">
                                                     <option class="more-settings" value="81">Многоуровневый паркинг</option>
                                                     <option class="more-settings" value="132">Подземная парковка</option>
                                                     <option class="more-settings" value="52">Гаражный комплекс</option>
@@ -7378,7 +7378,7 @@ $siteModel = Registry::model('site');
                                     <li class="show-more-settings">
                                         <div class="select">
                                             <label for="municipal">Муниципальная
-                                                <select name="municipal" id="municipal">
+                                                <select value="" name="municipal" id="municipal">
                                                     <option value="94">Платная</option>
                                                     <option value="51">Бесплатная</option>
                                                 </select>
@@ -7396,7 +7396,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="sanitation">Водопровод и канализация
-                                                <select name="sanitation" id="sanitation">
+                                                <select value="" name="sanitation" id="sanitation">
                                                     <option value="47">Есть</option>
                                                     <option value="84">Нет</option>
                                                 </select>
@@ -7414,7 +7414,7 @@ $siteModel = Registry::model('site');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select name="bathroom_location" id="sanitation">
+                                            <select value="" name="bathroom_location" id="sanitation">
                                                 <option value="">---</option>
                                             </select>
                                         </div>
@@ -7445,7 +7445,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="video">Видео
-                                                <select name="video" id="video">
+                                                <select value="" name="video" id="video">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -7455,7 +7455,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
-                                                <select name="planning_project" id="planning_project">
+                                                <select value="" name="planning_project" id="planning_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -7465,7 +7465,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="three_d_project">3d проект
-                                                <select name="three_d_project" id="three_d_project">
+                                                <select value="" name="three_d_project" id="three_d_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -7511,7 +7511,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
-                                                <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                <select value="" name="clarification_of_the_object_type" id="clarification_of_the_object_type">
                                                     <option value="92">Собственность менее 5 лет</option>
                                                     <option value="93">Собственность более 5 лет</option>
                                                     <option value="70">Участок с подрядом</option>
@@ -7525,7 +7525,7 @@ $siteModel = Registry::model('site');
                                         <label>Ограждение <input type="checkbox" name="fencing"></label>
                                         <div class="select">
                                             <label for="material">Материал
-                                                <select name="material" id="material">
+                                                <select value="" name="material" id="material">
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -7558,7 +7558,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="furnish">Отделка
-                                                <select name="furnish" id="furnish">
+                                                <select value="" name="furnish" id="furnish">
                                                     <option value="46">Эксклюзивного качества</option>
                                                     <option value="64">Высококачественная отделка</option>
                                                     <option value="57">Хорошая отделка</option>
@@ -7585,7 +7585,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="material">Материал
-                                                <select name="material" id="material">
+                                                <select value="" name="material" id="material">
                                                     <option value="98">Пластик</option>
                                                     <option value="142">Дерево</option>
                                                     <option value="38">Профнастил</option>
@@ -7601,7 +7601,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="parking">Парковка
-                                                <select name="parking" id="parking">
+                                                <select value="" name="parking" id="parking">
                                                     <option class="more-settings" value="81">Многоуровневый паркинг</option>
                                                     <option class="more-settings" value="132">Подземная парковка</option>
                                                     <option class="more-settings" value="52">Гаражный комплекс</option>
@@ -7616,7 +7616,7 @@ $siteModel = Registry::model('site');
                                     <li class="show-more-settings">
                                         <div class="select">
                                             <label for="municipal">Муниципальная
-                                                <select name="municipal" id="municipal">
+                                                <select value="" name="municipal" id="municipal">
                                                     <option value="94">Платная</option>
                                                     <option value="51">Бесплатная</option>
                                                 </select>
@@ -7634,7 +7634,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="sanitation">Водопровод и канализация
-                                                <select name="sanitation" id="sanitation">
+                                                <select value="" name="sanitation" id="sanitation">
                                                     <option value="47">Есть</option>
                                                     <option value="84">Нет</option>
                                                 </select>
@@ -7652,7 +7652,7 @@ $siteModel = Registry::model('site');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select name="bathroom_location" id="sanitation">
+                                            <select value="" name="bathroom_location" id="sanitation">
                                                 <option value="">---</option>
                                             </select>
                                         </div>
@@ -7683,7 +7683,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="video">Видео
-                                                <select name="video" id="video">
+                                                <select value="" name="video" id="video">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -7693,7 +7693,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
-                                                <select name="planning_project" id="planning_project">
+                                                <select value="" name="planning_project" id="planning_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -7703,7 +7703,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="three_d_project">3d проект
-                                                <select name="three_d_project" id="three_d_project">
+                                                <select value="" name="three_d_project" id="three_d_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -7749,7 +7749,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
-                                                <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                <select value="" name="clarification_of_the_object_type" id="clarification_of_the_object_type">
                                                     <option value="92">Собственность менее 5 лет</option>
                                                     <option value="93">Собственность более 5 лет</option>
                                                     <option value="70">Участок с подрядом</option>
@@ -7763,7 +7763,7 @@ $siteModel = Registry::model('site');
                                         <label>Ограждение <input type="checkbox" name="fencing"></label>
                                         <div class="select">
                                             <label for="material">Материал
-                                                <select name="material" id="material">
+                                                <select value="" name="material" id="material">
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -7796,7 +7796,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="furnish">Отделка
-                                                <select name="furnish" id="furnish">
+                                                <select value="" name="furnish" id="furnish">
                                                     <option value="46">Эксклюзивного качества</option>
                                                     <option value="64">Высококачественная отделка</option>
                                                     <option value="57">Хорошая отделка</option>
@@ -7823,7 +7823,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="material">Материал
-                                                <select name="material" id="material">
+                                                <select value="" name="material" id="material">
                                                     <option value="98">Пластик</option>
                                                     <option value="142">Дерево</option>
                                                     <option value="38">Профнастил</option>
@@ -7839,7 +7839,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="parking">Парковка
-                                                <select name="parking" id="parking">
+                                                <select value="" name="parking" id="parking">
                                                     <option class="more-settings" value="81">Многоуровневый паркинг</option>
                                                     <option class="more-settings" value="132">Подземная парковка</option>
                                                     <option class="more-settings" value="52">Гаражный комплекс</option>
@@ -7854,7 +7854,7 @@ $siteModel = Registry::model('site');
                                     <li class="show-more-settings">
                                         <div class="select">
                                             <label for="municipal">Муниципальная
-                                                <select name="municipal" id="municipal">
+                                                <select value="" name="municipal" id="municipal">
                                                     <option value="94">Платная</option>
                                                     <option value="51">Бесплатная</option>
                                                 </select>
@@ -7872,7 +7872,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="sanitation">Водопровод и канализация
-                                                <select name="sanitation" id="sanitation">
+                                                <select value="" name="sanitation" id="sanitation">
                                                     <option value="47">Есть</option>
                                                     <option value="84">Нет</option>
                                                 </select>
@@ -7890,7 +7890,7 @@ $siteModel = Registry::model('site');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select name="bathroom_location" id="sanitation">
+                                            <select value="" name="bathroom_location" id="sanitation">
                                                 <option value="">---</option>
                                             </select>
                                         </div>
@@ -7921,7 +7921,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="video">Видео
-                                                <select name="video" id="video">
+                                                <select value="" name="video" id="video">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -7931,7 +7931,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
-                                                <select name="planning_project" id="planning_project">
+                                                <select value="" name="planning_project" id="planning_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -7941,7 +7941,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="three_d_project">3d проект
-                                                <select name="three_d_project" id="three_d_project">
+                                                <select value="" name="three_d_project" id="three_d_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -7987,7 +7987,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
-                                                <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                <select value="" name="clarification_of_the_object_type" id="clarification_of_the_object_type">
                                                     <option value="92">Собственность менее 5 лет</option>
                                                     <option value="93">Собственность более 5 лет</option>
                                                     <option value="70">Участок с подрядом</option>
@@ -8001,7 +8001,7 @@ $siteModel = Registry::model('site');
                                         <label>Ограждение <input type="checkbox" name="fencing"></label>
                                         <div class="select">
                                             <label for="material">Материал
-                                                <select name="material" id="material">
+                                                <select value="" name="material" id="material">
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -8034,7 +8034,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="furnish">Отделка
-                                                <select name="furnish" id="furnish">
+                                                <select value="" name="furnish" id="furnish">
                                                     <option value="46">Эксклюзивного качества</option>
                                                     <option value="64">Высококачественная отделка</option>
                                                     <option value="57">Хорошая отделка</option>
@@ -8061,7 +8061,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="material">Материал
-                                                <select name="material" id="material">
+                                                <select value="" name="material" id="material">
                                                     <option value="98">Пластик</option>
                                                     <option value="142">Дерево</option>
                                                     <option value="38">Профнастил</option>
@@ -8077,7 +8077,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="parking">Парковка
-                                                <select name="parking" id="parking">
+                                                <select value="" name="parking" id="parking">
                                                     <option class="more-settings" value="81">Многоуровневый паркинг</option>
                                                     <option class="more-settings" value="132">Подземная парковка</option>
                                                     <option class="more-settings" value="52">Гаражный комплекс</option>
@@ -8092,7 +8092,7 @@ $siteModel = Registry::model('site');
                                     <li class="show-more-settings">
                                         <div class="select">
                                             <label for="municipal">Муниципальная
-                                                <select name="municipal" id="municipal">
+                                                <select value="" name="municipal" id="municipal">
                                                     <option value="94">Платная</option>
                                                     <option value="51">Бесплатная</option>
                                                 </select>
@@ -8110,7 +8110,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="sanitation">Водопровод и канализация
-                                                <select name="sanitation" id="sanitation">
+                                                <select value="" name="sanitation" id="sanitation">
                                                     <option value="47">Есть</option>
                                                     <option value="84">Нет</option>
                                                 </select>
@@ -8128,7 +8128,7 @@ $siteModel = Registry::model('site');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <select name="bathroom_location" id="sanitation">
+                                            <select value="" name="bathroom_location" id="sanitation">
                                                 <option value="">---</option>
                                             </select>
                                         </div>
@@ -8159,7 +8159,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="video">Видео
-                                                <select name="video" id="video">
+                                                <select value="" name="video" id="video">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -8169,7 +8169,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
-                                                <select name="planning_project" id="planning_project">
+                                                <select value="" name="planning_project" id="planning_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -8179,7 +8179,7 @@ $siteModel = Registry::model('site');
                                     <li>
                                         <div class="select">
                                             <label for="three_d_project">3d проект
-                                                <select name="three_d_project" id="three_d_project">
+                                                <select value="" name="three_d_project" id="three_d_project">
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -8486,7 +8486,7 @@ $siteModel = Registry::model('site');
                     <li>
                         <div class="select">
                             <label for="">
-                                <select>
+                                <select value="" name="">
                                     <option value="">Language of communication</option>
                                     <option value="">English</option>
                                     <option value="">Spanish</option>
@@ -8519,7 +8519,7 @@ $siteModel = Registry::model('site');
                 <div class="filter-apartment">
                     <div class="select">
                         <label for="">
-                            <select>
+                            <select value="" name="">
                                 <option value="">Language of communication</option>
                                 <option value="">English</option>
                                 <option value="">Spanish</option>
