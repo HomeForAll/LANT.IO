@@ -17,7 +17,7 @@ class SocialNets extends LightOpenID
         parent::__construct($currentURL);
 
         // Поучаем параметры соц. сетей: secret_key, redirect_url ...
-        $this->settings = require ROOT_DIR . '/app/config/auth.php';
+        $this->settings = Registry::get('config');
         // Запоминаем URL на котором сейчас находимся
         $this->currentURL = $currentURL;
         $this->steamApiKey = $this->settings['steam_api_key'];

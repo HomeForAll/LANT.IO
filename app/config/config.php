@@ -1,5 +1,27 @@
 <?php
 return array(
+    // DataBase
+    'db_host' => '192.168.0.2',
+    'db_username' => 'lantio',
+    'db_password' => '112233',
+    'db' => 'site',
+
+    // WebSocket
+    'ws_host' => '127.0.0.1',
+    'ws_protect_port' => '8089',
+    'ws_common_port' => '8088',
+
+    // SMTP
+    'email' => '',
+    'senderName' => '',
+    'SMTP_host' => '',
+    'SMTP_secure' => '',
+    'SMTP_port' => '',
+    'SMTP_auth' => true,
+    'SMTP_username' => '',
+    'SMTP_password' => '',
+
+    // Соц. сети
     'registration_url' => 'http://beta.lant.io/registration',
     'login_url' => 'http://beta.lant.io/login',
     'update_service_url' => 'http://beta.lant.io/cabinet',

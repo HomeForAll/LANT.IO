@@ -6,8 +6,7 @@ class Router
     
     public function __construct()
     {
-        $routesPath   = ROOT_DIR . '/app/config/routes.php';
-        $this->routes = require $routesPath;
+        $this->routes = Registry::get('routes');
     }
     
     /**

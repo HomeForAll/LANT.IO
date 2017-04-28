@@ -16,9 +16,10 @@ spl_autoload_register(array(
     'classLoad',
 ));
 
-//$_SESSION['authorized'] = true;
-//$_SESSION['userID'] = 3;
-//$_SESSION['status'] = 100;
-
 Loader::getPaths();
+Registry::set('config', require ROOT_DIR . '/app/config/config.php');
+Registry::set('routes', require ROOT_DIR . '/app/config/routes.php');
+
+//$db = new \IP2Location\Database('./databases/IP-COUNTRY-SAMPLE.BIN', \IP2Location\Database::FILE_IO);
+
 (new Router())->run();
