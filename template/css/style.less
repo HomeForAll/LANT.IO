@@ -743,7 +743,9 @@
     background: none;
   }
   & .jq-selectbox__dropdown li {
+    position: relative;
     padding: 10px;
+    z-index: 100;
   }
   & .jq-selectbox__dropdown li > img {
     position: absolute;
@@ -809,6 +811,7 @@
   }
 }
 
+.additionally-ap,
 .main-ap,
 .main-settings,
 .furnishing,
@@ -4493,10 +4496,9 @@
 
 /** Прогресс бар **/
 .progress-bar {
-  position: absolute;
+  position: relative;
+  float: right;
   display: block;
-  bottom: 10px;
-  right: 30px;
   background-color: #f6f6f6;
   padding: 0;
   width: 110px;

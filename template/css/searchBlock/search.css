@@ -697,7 +697,9 @@
   background: none;
 }
 .select .jq-selectbox__dropdown li {
+  position: relative;
   padding: 10px;
+  z-index: 100;
 }
 .select .jq-selectbox__dropdown li > img {
   position: absolute;
@@ -760,6 +762,7 @@
   display: inline-block;
   vertical-align: middle;
 }
+.additionally-ap,
 .main-ap,
 .main-settings,
 .furnishing,
@@ -778,6 +781,7 @@
   background: #f9f9f9;
   text-align: center;
 }
+.additionally-ap h2,
 .main-ap h2,
 .main-settings h2,
 .furnishing h2,
@@ -793,6 +797,7 @@
   color: #454545;
   background: #efefef;
 }
+.additionally-ap ul,
 .main-ap ul,
 .main-settings ul,
 .furnishing ul,
@@ -808,6 +813,7 @@
   text-align: center;
   margin: auto;
 }
+.additionally-ap li,
 .main-ap li,
 .main-settings li,
 .furnishing li,
@@ -822,6 +828,7 @@
   padding: 10px;
   margin: auto;
 }
+.additionally-ap p,
 .main-ap p,
 .main-settings p,
 .furnishing p,
@@ -836,6 +843,7 @@
   text-align: left;
   width: 85px;
 }
+.additionally-ap img,
 .main-ap img,
 .main-settings img,
 .furnishing img,
@@ -848,6 +856,7 @@
   float: none;
   margin: auto 15px;
 }
+.additionally-ap button,
 .main-ap button,
 .main-settings button,
 .furnishing button,
@@ -868,6 +877,7 @@
   border-radius: 30px;
   cursor: pointer;
 }
+.additionally-ap input,
 .main-ap input,
 .main-settings input,
 .furnishing input,
@@ -887,6 +897,7 @@
   box-shadow: 0 5px 15px 1px #ebebeb;
   border-radius: 4px;
 }
+.additionally-ap input[type="checkbox"],
 .main-ap input[type="checkbox"],
 .main-settings input[type="checkbox"],
 .furnishing input[type="checkbox"],
@@ -902,6 +913,7 @@
   text-align: left;
   float: right !important;
 }
+.additionally-ap input:valid,
 .main-ap input:valid,
 .main-settings input:valid,
 .furnishing input:valid,
@@ -913,6 +925,7 @@
 .appearance-of-the-build input:valid {
   border: 1px solid green;
 }
+.additionally-ap input:invalid,
 .main-ap input:invalid,
 .main-settings input:invalid,
 .furnishing input:invalid,
@@ -924,6 +937,7 @@
 .appearance-of-the-build input:invalid {
   border: none;
 }
+.additionally-ap .select,
 .main-ap .select,
 .main-settings .select,
 .furnishing .select,
@@ -935,6 +949,7 @@
 .appearance-of-the-build .select {
   text-align: center;
 }
+.additionally-ap .names-parameters,
 .main-ap .names-parameters,
 .main-settings .names-parameters,
 .furnishing .names-parameters,
@@ -946,6 +961,7 @@
 .appearance-of-the-build .names-parameters {
   float: none;
 }
+.additionally-ap .jq-selectbox,
 .main-ap .jq-selectbox,
 .main-settings .jq-selectbox,
 .furnishing .jq-selectbox,
@@ -4813,10 +4829,9 @@ li p {
 }
 /** Прогресс бар **/
 .progress-bar {
-  position: absolute;
+  position: relative;
+  float: right;
   display: block;
-  bottom: 10px;
-  right: 30px;
   background-color: #f6f6f6;
   padding: 0;
   width: 110px;

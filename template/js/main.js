@@ -520,10 +520,16 @@ function closeFixedBlock() {
 
 /** Получение данных через Ajax и отправка данных**/
 $("#form").on('submit', function(e) { // устанавливаем событие отправки для формы с id=form
+    var form_data = $(this).serialize(); // собераем все данные из формы
 
     e.preventDefault();
 
-    var form_data = $(this).serialize(); // собераем все данные из формы
+   $('option').each(function () {
+       if ($(this)) {
+           $(this).val('Пустая форма Option');
+           console.log('нашли пустой option - ', $(this).val());
+       }
+   });
 
     $.ajax({
         type: "POST",
@@ -531,7 +537,7 @@ $("#form").on('submit', function(e) { // устанавливаем событи
         data: form_data,
         success: function(form_data) {
             //window.location.href = '/template/layouts/searchBlock.php';
-            console.log('Собрынные данные - ', form_data);
+            console.log('Собранные данные - ', form_data);
         },
         error: function() {
             console.log('Ошибка отправки');
