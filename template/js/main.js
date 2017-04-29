@@ -526,8 +526,7 @@ $("#form").on('submit', function(e) { // устанавливаем событи
 
    $('option').each(function () {
        if ($(this)) {
-           $(this).val('Пустая форма Option');
-           console.log('нашли пустой option - ', $(this).val());
+           $(this).val('');
        }
    });
 
@@ -536,7 +535,7 @@ $("#form").on('submit', function(e) { // устанавливаем событи
         url: "/search",
         data: form_data,
         success: function(form_data) {
-            //window.location.href = '/template/layouts/searchBlock.php';
+            window.location.href = '/template/layouts/searchBlock.php';
             console.log('Собранные данные - ', form_data);
         },
         error: function() {

@@ -295,77 +295,9 @@ $siteModel = Registry::model('site');
     <?php $this->head() ?>
 </head>
 <body>
-<?php if (isset($_SESSION['authorized'])) { ?>
-    <div id="navigation">
-        <div class="logo-img">
-            <a href="#"><img src="../../template/images/logo.png" alt="logo"></a>
-        </div>
-        <div class="registration-users">
-            <div class="place-an-ad">
-                <a href="../../index.php"><img src="../../template/images/add-blue.png" alt="add">Дать
-                    объявление</a>
-            </div>
-            <div class="registration">
-                <a href="../../index.php"><img src="../../template/images/add-green.png" alt="add">Войти</a>
-            </div>
-        </div>
-    </div>
-    <div id="wrapper">
-        <div id="navigation">
-            <ul>
-                <li><a href="/news">Объявления</a></li>
-                <li><a href="/search">Поиск</a></li>
-                <?php if (isset($_SESSION['authorized'])) { ?>
-                    <li><a href="/cabinet">Личный кабинет</a></li>
-                    <li><a href="/logout">Выход</a></li>
-                <?php } else { ?>
-                    <li><a href="/registration">Регистрация</a></li>
-                    <li><a href="/login">Вход</a></li>
-                <?php } ?>
-            </ul>
-            <button class="show-and-hide-menu"><i class="fa fa-bars" aria-hidden="true"></i></button>
-        </div>
-    </div>
-<?php } else { ?>
-    <div id="navigation-true">
-        <div class="container-w-0">
-            <div class="logo-img">
-                <a href="#"><img src="../../template/images/logo-true.png" alt=" logo-true"></a>
-            </div>
-            <div class="registration-users">
-                <div class="place-an-ad">
-                    <a href="../../index.php"><img src="../../template/images/add-blue.png" alt="add">Дать
-                        объявление</a>
-                </div>
-                <div class="registration">
-                    <div class="message"><img src="../../template/images/notification.png" alt="  notification">
-                    </div>
-                    <div class="user" onclick="showTopMenuAndSearch();">
-                        <div class="users-information">
-                            <p>Александр Никулин</p>
-                            <span><img src="../../template/images/crown.png" alt="user">Пользователь +</span>
-                        </div>
-                        <img src="../../template/images/user.png" alt="user">
-                        <ul>
-                            <li><a href="#"><img src="../../template/images/m1.png" alt="menu">Мои объявления</a>
-                            </li>
-                            <li><a href="#"><img src="../../template/images/m2.png" alt="menu">Избранное</a></li>
-                            <li><a href="#"><img src="../../template/images/m3.png" alt="menu">Тех поддержка</a>
-                            </li>
-                            <li><a href="#"><img src="../../template/images/m4.png" alt="menu">Настройка профиля</a>
-                            </li>
-                            <li><a href="#"><img src="../../template/images/m5.png" alt="menu">Выйти из системы</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <button class="show-and-hide-menu" onclick="showTopMenuAndSearch();">
-                    <i class="fa fa-bars" aria-hidden="true"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-<?php } ?>
+<!-- Heeader -->
+<?php include_once 'header.php' ?>
+<!-- Content -->
 <div id="content">
     <!--<?php $this->content(); ?> -->
     <div class="section-home-with-filters">
@@ -562,7 +494,7 @@ $siteModel = Registry::model('site');
                      <ul>
                          <li>
                              <div class="select">
-                                 <label for="">
+                                 <label for="0">
                                      <select name="0">
                                          <option>Language of communication</option>
                                          <option>English</option>
@@ -573,7 +505,7 @@ $siteModel = Registry::model('site');
                          </li>
                          <li>
                              <div class="select">
-                                 <label for="">
+                                 <label for="0">
                                      <select name="0">
                                          <option>Language of communication</option>
                                          <option>English</option>
@@ -583,9 +515,9 @@ $siteModel = Registry::model('site');
                              </div>
                          </li>
                          <li><span class="names-parameters">Высота потолков м</span>
-                             <p>От<input name="0" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
+                             <p>От<input name="none" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
                              </p>
-                             <p>До<input name="0" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
+                             <p>До<input name="none" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
                              </p>
                          </li>
                      </ul>
@@ -606,34 +538,34 @@ $siteModel = Registry::model('site');
                              </p>
                          </li>
                          <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                             <p>От<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                             <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                              </p>
-                             <p>До<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                             <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                              </p>
                          </li>
                          <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                             <p>От<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                             <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                              </p>
-                             <p>До<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                             <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                              </p>
                          </li>
                          <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                             <p>От<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                             <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                              </p>
-                             <p>До<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                             <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                              </p>
                          </li>
                          <li><span class="names-parameters">Балкон м2</span>
-                             <p>От<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                             <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                              </p>
-                             <p>До<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                             <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                              </p>
                          </li>
                      </ul>
                      <ul>
                          <li>
                              <div class="select">
-                                 <label for="">
+                                 <label for="0">
                                      <select name="0">
                                          <option>Language of communication</option>
                                          <option>English</option>
@@ -644,7 +576,7 @@ $siteModel = Registry::model('site');
                          </li>
                          <li>
                              <div class="select">
-                                 <label for="">
+                                 <label for="0">
                                      <select name="0">
                                          <option>Language of communication</option>
                                          <option>English</option>
@@ -654,9 +586,9 @@ $siteModel = Registry::model('site');
                              </div>
                          </li>
                          <li><span class="names-parameters">Высота потолков м</span>
-                             <p>От<input name="0" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
+                             <p>От<input name="none" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
                              </p>
-                             <p>До<input name="0" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
+                             <p>До<input name="none" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
                              </p>
                          </li>
                      </ul>
@@ -677,27 +609,27 @@ $siteModel = Registry::model('site');
                             </p>
                         </li>
                         <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                            <p>От<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                         <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                            <p>От<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                         <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                            <p>От<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                         <li><span class="names-parameters">Балкон м2</span>
-                            <p>От<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                     </ul>
@@ -725,9 +657,9 @@ $siteModel = Registry::model('site');
                             </div>
                         </li>
                         <li><span class="names-parameters">Высота потолков м</span>
-                            <p>От<input name="0" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
+                            <p>От<input name="none" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
                             </p>
-                            <p>До<input name="0" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
+                            <p>До<input name="none" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
                             </p>
                         </li>
                     </ul>
@@ -748,27 +680,27 @@ $siteModel = Registry::model('site');
                             </p>
                         </li>
                         <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                            <p>От<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                         <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                            <p>От<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                         <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                            <p>От<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                         <li><span class="names-parameters">Балкон м2</span>
-                            <p>От<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                     </ul>
@@ -796,9 +728,9 @@ $siteModel = Registry::model('site');
                             </div>
                         </li>
                         <li><span class="names-parameters">Высота потолков м</span>
-                            <p>От<input name="0" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
+                            <p>От<input name="none" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
                             </p>
-                            <p>До<input name="0" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
+                            <p>До<input name="none" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
                             </p>
                         </li>
                     </ul>
@@ -819,27 +751,27 @@ $siteModel = Registry::model('site');
                             </p>
                         </li>
                         <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                            <p>От<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                         <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                            <p>От<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                         <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                            <p>От<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                         <li><span class="names-parameters">Балкон м2</span>
-                            <p>От<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                     </ul>
@@ -867,9 +799,9 @@ $siteModel = Registry::model('site');
                             </div>
                         </li>
                         <li><span class="names-parameters">Высота потолков м</span>
-                            <p>От<input name="0" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
+                            <p>От<input name="none" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
                             </p>
-                            <p>До<input name="0" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
+                            <p>До<input name="none" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
                             </p>
                         </li>
                     </ul>
@@ -934,13 +866,13 @@ $siteModel = Registry::model('site');
                                 </div>
                                 <div class="travel-information">
                                     <div class="distance-on-foot">
-                                        <img src="../../template/images/people-2.png" alt="icon"><p>Уделенность пекшом не более</p>
+                                        <img src="../../template/images/people-2.png" alt="icon"><p>Удаленность пекшом не более</p>
                                         <span><input placeholder="" type="number" name="foot" value="5" min="5"
                                                      max="60" step="5">
                                             <span class="timer">Минут</span></span>
                                     </div>
                                     <div class="distance-on-transport">
-                                        <img src="../../template/images/avto.png" alt="icon"><p>Уделенность пекшом не более</p>
+                                        <img src="../../template/images/avto.png" alt="icon"><p>Удаленность пекшом не более</p>
                                         <span><input placeholder="" type="number" name="transport" value="5"
                                                      min="5" max="60" step="5">
                                             <span class="timer">Минут</span></span>
@@ -1052,8 +984,7 @@ $siteModel = Registry::model('site');
                             <div class="currency">
                                 <p>Валюта</p>
                                 <button class="closeCurrency"><i class="fa fa-rub" aria-hidden="true"></i>рубли</button>
-                                <button class="closeCurrency"><i class="fa fa-usd" aria-hidden="true"></i>доллары
-                                </button>
+                                <button class="closeCurrency"><i class="fa fa-usd" aria-hidden="true"></i>доллары</button>
                                 <button class="closeCurrency"><i class="fa fa-eur" aria-hidden="true"></i>евро</button>
                             </div>
                         </div>
@@ -1807,20 +1738,20 @@ $siteModel = Registry::model('site');
                                 <h2>Параметры здания</h2>
                                 <ul>
                                     <li><span class="names-parameters">Количество этажей</span>
-                                        <p>От<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                        <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
                                             ></p>
-                                        <p>До<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                        <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
                                             ></p>
                                     </li>
                                     <li><span class="names-parameters">Год окончания строительства</span>
-                                        <p>От<input name="0" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
+                                        <p>От<input name="none" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
                                             ></p>
-                                        <p>До<input name="0" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
+                                        <p>До<input name="none" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
                                             ></p>
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="">
+                                            <label for="0">
                                                 <select name="0">
                                                     <option>Language of communication</option>
                                                     <option>English</option>
@@ -1831,7 +1762,7 @@ $siteModel = Registry::model('site');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="">
+                                            <label for="0">
                                                 <select name="0">
                                                     <option>Language of communication</option>
                                                     <option>English</option>
@@ -1842,7 +1773,7 @@ $siteModel = Registry::model('site');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="">
+                                            <label for="0">
                                                 <select name="0">
                                                     <option>Language of communication</option>
                                                     <option>English</option>
@@ -1853,7 +1784,7 @@ $siteModel = Registry::model('site');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="">
+                                            <label for="0">
                                                 <select name="0">
                                                     <option>Language of communication</option>
                                                     <option>English</option>
@@ -5438,15 +5369,15 @@ $siteModel = Registry::model('site');
                                 <h2>Параметры здания</h2>
                                 <ul>
                                     <li><span class="names-parameters">Количество этажей</span>
-                                        <p>От<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                        <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
                                             ></p>
-                                        <p>До<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                        <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
                                             ></p>
                                     </li>
                                     <li><span class="names-parameters">Год окончания строительства</span>
-                                        <p>От<input name="0" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
+                                        <p>От<input name="none" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
                                             ></p>
-                                        <p>До<input name="0" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
+                                        <p>До<input name="none" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
                                             ></p>
                                     </li>
                                     <li>
@@ -8481,7 +8412,7 @@ $siteModel = Registry::model('site');
             </div>
             <div class="estimate-the-area">
                 <label>Площадь м2
-                    <input name="0" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}">
+                    <input name="none" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}">
                 </label>
             </div>
         </div>
