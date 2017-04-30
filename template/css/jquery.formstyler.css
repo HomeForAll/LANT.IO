@@ -229,7 +229,7 @@
 .jq-selectbox {
 	display: inline-block !important;
 	position: relative !important;
-	z-index: 20 !important;
+	z-index: auto !important;
 	text-align: left;
 	width: 78%;
 	vertical-align: middle;

@@ -279,6 +279,7 @@ function allParam(filterParam) {
                 e.preventDefault();
                 $objectParameters.fadeOut('slow');
             });
+            break;
         case 'additionallyAp':
             var $additionallyAp = $('.additionally-ap');
             $additionallyAp.css({'display': 'block'});
