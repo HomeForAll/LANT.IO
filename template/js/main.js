@@ -13,6 +13,22 @@ var productSearch, showAndHideTopMenu, boolean, rootBlock, showFilter, openMap =
         })
     };
 
+/** Инициализация Paralax **/
+$('#scene').parallax({
+    calibrateX: false,
+    calibrateY: true,
+    invertX: false,
+    invertY: true,
+    limitX: false,
+    limitY: 10,
+    scalarX: 2,
+    scalarY: 8,
+    frictionX: 0.2,
+    frictionY: 0.8,
+    originX: 0.0,
+    originY: 1.0
+});
+
 /** Select **/
 $('select').styler({
     selectSearch: true
@@ -182,9 +198,9 @@ function allParam(filterParam) {
             var $houseCharacteristics = $('.house-characteristics');
             $houseCharacteristics.css({'display': 'block'});
 
-            $('.closeHouseCharacteristics').on('click', function (e) {
+            $('.close-house-characteristics').on('click', function (e) {
                 e.preventDefault();
-                $houseCharacteristics.fadeOut('slow');
+                $houseCharacteristics.fadeOut('slow').css({'display':'none'});
             });
             break;
         case 'apperanceOfTheApartment':

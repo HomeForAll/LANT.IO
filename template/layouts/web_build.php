@@ -300,6 +300,13 @@ $siteModel = Registry::model('site');
 <!-- Content -->
 <div id="content">
     <!--<?php $this->content(); ?> -->
+    <ul id="scene">
+        <li class="layer" data-depth="0.20"><img src="../../template/images/paralax/home-1.png"></li>
+        <li class="layer" data-depth="0.40"><img src="../../template/images/paralax/home-2.png"></li>
+        <li class="layer" data-depth="0.40"><img src="../../template/images/paralax/tree-l.png"></li>
+        <li class="layer" data-depth="0.60"><img src="../../template/images/paralax/tree-r.png"></li>
+        <li class="layer" data-depth="0.80"><img src="../../template/images/paralax/back-1.png"></li>
+    </ul>
     <div class="section-home-with-filters">
         <form action="" id="form"> <!--novalidate -->
             <div class="property-type-apartment-settings">
@@ -1154,9 +1161,9 @@ $siteModel = Registry::model('site');
                             <div class="house-characteristics">
                                 <h2>Характеристики дома</h2>
                                 <ul>
-                                    <li><p>Наличие лифта</p>
-                                        <div class="select">
-                                            <label for="elevator">
+                                    <li>
+                                        <div class="select more-settings">
+                                            <label for="elevator">Наличие лифта
                                                 <select name="elevator" id="elevator">
                                                     <option value="1">Да</option>
                                                     <option value="0">Нет</option>
@@ -1164,7 +1171,7 @@ $siteModel = Registry::model('site');
                                             </label>
                                         </div>
                                     </li>
-                                    <li>
+                                    <li class="show-more-settings">
                                         <div class="select">
                                             <label for="elevator_yes">
                                                 <select name="elevator_yes" id="elevator_yes">
@@ -1257,7 +1264,7 @@ $siteModel = Registry::model('site');
                                         </label>
                                     </li>
                                 </ul>
-                                <button class="closeHouseCharacteristics">Готово</button>
+                                <button class="close-house-characteristics">Готово</button>
                             </div>
                         </li>
                         <li onclick="allParam('attachment')">
@@ -1903,13 +1910,19 @@ $siteModel = Registry::model('site');
                         </li>
                         <li onclick="allParam('document')">
                             <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
+                                <span style="width:40%"></span>
                             </div>
                             <img src="../../template/images/search-1.png" alt="search">Документы
                             <div class="document">
                                 <h2>Документы</h2>
-                                <label>Документы на право владения<input type="checkbox" name="documents_on_ownership"></label>
-                                <label>Договор аренды<input type="checkbox" name="lease_contract"></label>
+                                <ul>
+                                    <li>
+                                        <label>Документы на право владения<input type="checkbox" name="documents_on_ownership"></label>
+                                    </li>
+                                    <li>
+                                        <label>Договор аренды<input type="checkbox" name="lease_contract"></label>
+                                    </li>
+                                </ul>
                                 <button class="closeDocument">Поиск</button>
                             </div>
                         </li>
@@ -2156,9 +2169,10 @@ $siteModel = Registry::model('site');
                                         <label>Возможность проводки <input type="checkbox" name="possible_to_post"></label>
                                         <label>Описание <input type="checkbox" name="sanitation_description"></label>
                                         <label for="sanitation">Наличие санузлов</label>
-                                        <label for="">Количество:</label>
-                                        <input name="bathroom_number-min" type="text" placeholder="от">
-                                        <input name="bathroom_number-max" type="text" placeholder="до">
+                                        <label for="">Количество:
+                                            <input name="bathroom_number-min" type="text" placeholder="от">
+                                            <input name="bathroom_number-max" type="text" placeholder="до">
+                                        </label>
                                         <label for="">Расположение:</label>
                                     </li>
                                     <li>
@@ -2177,13 +2191,19 @@ $siteModel = Registry::model('site');
                         </li>
                         <li onclick="allParam('document')">
                             <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
+                                <span style="width:40%"></span>
                             </div>
                             <img src="../../template/images/search-1.png" alt="search">Документы
                             <div class="document">
                                 <h2>Документы</h2>
-                                <label>Документы на право владения<input type="checkbox" name="documents_on_ownership"></label>
-                                <label>Договор аренды<input type="checkbox" name="lease_contract"></label>
+                                <ul>
+                                    <li>
+                                        <label>Документы на право владения<input type="checkbox" name="documents_on_ownership"></label>
+                                    </li>
+                                    <li>
+                                        <label>Договор аренды<input type="checkbox" name="lease_contract"></label>
+                                    </li>
+                                </ul>
                                 <button class="closeDocument">Поиск</button>
                             </div>
                         </li>
@@ -2398,9 +2418,10 @@ $siteModel = Registry::model('site');
                                         <label>Возможность проводки <input type="checkbox" name="possible_to_post"></label>
                                         <label>Описание <input type="checkbox" name="sanitation_description"></label>
                                         <label for="sanitation">Наличие санузлов</label>
-                                        <label for="">Количество:</label>
-                                        <input name="bathroom_number-min" type="text" placeholder="от">
-                                        <input name="bathroom_number-max" type="text" placeholder="до">
+                                        <label for="">Количество:
+                                            <input name="bathroom_number-min" type="text" placeholder="от">
+                                            <input name="bathroom_number-max" type="text" placeholder="до">
+                                        </label>
                                         <label for="">Расположение:</label>
                                     </li>
                                     <li>
@@ -2419,13 +2440,19 @@ $siteModel = Registry::model('site');
                         </li>
                         <li onclick="allParam('document')">
                             <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
+                                <span style="width:40%"></span>
                             </div>
                             <img src="../../template/images/search-1.png" alt="search">Документы
                             <div class="document">
                                 <h2>Документы</h2>
-                                <label>Документы на право владения<input type="checkbox" name="documents_on_ownership"></label>
-                                <label>Договор аренды<input type="checkbox" name="lease_contract"></label>
+                                <ul>
+                                    <li>
+                                        <label>Документы на право владения<input type="checkbox" name="documents_on_ownership"></label>
+                                    </li>
+                                    <li>
+                                        <label>Договор аренды<input type="checkbox" name="lease_contract"></label>
+                                    </li>
+                                </ul>
                                 <button class="closeDocument">Поиск</button>
                             </div>
                         </li>
@@ -2640,9 +2667,10 @@ $siteModel = Registry::model('site');
                                         <label>Возможность проводки <input type="checkbox" name="possible_to_post"></label>
                                         <label>Описание <input type="checkbox" name="sanitation_description"></label>
                                         <label for="sanitation">Наличие санузлов</label>
-                                        <label for="">Количество:</label>
-                                        <input name="bathroom_number-min" type="text" placeholder="от">
-                                        <input name="bathroom_number-max" type="text" placeholder="до">
+                                        <label for="">Количество:
+                                            <input name="bathroom_number-min" type="text" placeholder="от">
+                                            <input name="bathroom_number-max" type="text" placeholder="до">
+                                        </label>
                                         <label for="">Расположение:</label>
                                     </li>
                                     <!--<li>
@@ -2661,13 +2689,19 @@ $siteModel = Registry::model('site');
                         </li>
                         <li onclick="allParam('document')">
                             <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
+                                <span style="width:40%"></span>
                             </div>
                             <img src="../../template/images/search-1.png" alt="search">Документы
                             <div class="document">
                                 <h2>Документы</h2>
-                                <label>Документы на право владения<input type="checkbox" name="documents_on_ownership"></label>
-                                <label>Договор аренды<input type="checkbox" name="lease_contract"></label>
+                                <ul>
+                                    <li>
+                                        <label>Документы на право владения<input type="checkbox" name="documents_on_ownership"></label>
+                                    </li>
+                                    <li>
+                                        <label>Договор аренды<input type="checkbox" name="lease_contract"></label>
+                                    </li>
+                                </ul>
                                 <button class="closeDocument">Поиск</button>
                             </div>
                         </li>
@@ -3220,9 +3254,10 @@ $siteModel = Registry::model('site');
                                         <label>Возможность проводки <input type="checkbox" name="possible_to_post"></label>
                                         <label>Описание <input type="checkbox" name="sanitation_description"></label>
                                         <label for="sanitation">Наличие санузлов</label>
-                                        <label for="">Количество:</label>
-                                        <input name="bathroom_number-min" type="text" placeholder="от">
-                                        <input name="bathroom_number-max" type="text" placeholder="до">
+                                        <label for="">Количество:
+                                            <input name="bathroom_number-min" type="text" placeholder="от">
+                                            <input name="bathroom_number-max" type="text" placeholder="до">
+                                        </label>
                                         <label for="">Расположение:</label>
                                     </li>
                                     <li>
@@ -3241,13 +3276,19 @@ $siteModel = Registry::model('site');
                         </li>
                         <li onclick="allParam('document')">
                             <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
+                                <span style="width:40%"></span>
                             </div>
                             <img src="../../template/images/search-1.png" alt="search">Документы
                             <div class="document">
                                 <h2>Документы</h2>
-                                <label>Документы на право владения<input type="checkbox" name="documents_on_ownership"></label>
-                                <label>Договор аренды<input type="checkbox" name="lease_contract"></label>
+                                <ul>
+                                    <li>
+                                        <label>Документы на право владения<input type="checkbox" name="documents_on_ownership"></label>
+                                    </li>
+                                    <li>
+                                        <label>Договор аренды<input type="checkbox" name="lease_contract"></label>
+                                    </li>
+                                </ul>
                                 <button class="closeDocument">Поиск</button>
                             </div>
                         </li>
@@ -3462,9 +3503,10 @@ $siteModel = Registry::model('site');
                                         <label>Возможность проводки <input type="checkbox" name="possible_to_post"></label>
                                         <label>Описание <input type="checkbox" name="sanitation_description"></label>
                                         <label for="sanitation">Наличие санузлов</label>
-                                        <label for="">Количество:</label>
-                                        <input name="bathroom_number-min" type="text" placeholder="от">
-                                        <input name="bathroom_number-max" type="text" placeholder="до">
+                                        <label for="">Количество:
+                                            <input name="bathroom_number-min" type="text" placeholder="от">
+                                            <input name="bathroom_number-max" type="text" placeholder="до">
+                                        </label>
                                         <label for="">Расположение:</label>
                                     </li>
                                    <!-- <li>
@@ -3483,13 +3525,19 @@ $siteModel = Registry::model('site');
                         </li>
                         <li onclick="allParam('document')">
                             <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
+                                <span style="width:40%"></span>
                             </div>
                             <img src="../../template/images/search-1.png" alt="search">Документы
                             <div class="document">
                                 <h2>Документы</h2>
-                                <label>Документы на право владения<input type="checkbox" name="documents_on_ownership"></label>
-                                <label>Договор аренды<input type="checkbox" name="lease_contract"></label>
+                                <ul>
+                                    <li>
+                                        <label>Документы на право владения<input type="checkbox" name="documents_on_ownership"></label>
+                                    </li>
+                                    <li>
+                                        <label>Договор аренды<input type="checkbox" name="lease_contract"></label>
+                                    </li>
+                                </ul>
                                 <button class="closeDocument">Поиск</button>
                             </div>
                         </li>
@@ -3704,9 +3752,10 @@ $siteModel = Registry::model('site');
                                         <label>Возможность проводки <input type="checkbox" name="possible_to_post"></label>
                                         <label>Описание <input type="checkbox" name="sanitation_description"></label>
                                         <label for="sanitation">Наличие санузлов</label>
-                                        <label for="">Количество:</label>
-                                        <input name="bathroom_number-min" type="text" placeholder="от">
-                                        <input name="bathroom_number-max" type="text" placeholder="до">
+                                        <label for="">Количество:
+                                            <input name="bathroom_number-min" type="text" placeholder="от">
+                                            <input name="bathroom_number-max" type="text" placeholder="до">
+                                        </label>
                                         <label for="">Расположение:</label>
                                     </li>
                                     <li>
@@ -3725,13 +3774,19 @@ $siteModel = Registry::model('site');
                         </li>
                         <li onclick="allParam('document')">
                             <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
+                                <span style="width:40%"></span>
                             </div>
                             <img src="../../template/images/search-1.png" alt="search">Документы
                             <div class="document">
                                 <h2>Документы</h2>
-                                <label>Документы на право владения<input type="checkbox" name="documents_on_ownership"></label>
-                                <label>Договор аренды<input type="checkbox" name="lease_contract"></label>
+                                <ul>
+                                    <li>
+                                        <label>Документы на право владения<input type="checkbox" name="documents_on_ownership"></label>
+                                    </li>
+                                    <li>
+                                        <label>Договор аренды<input type="checkbox" name="lease_contract"></label>
+                                    </li>
+                                </ul>
                                 <button class="closeDocument">Поиск</button>
                             </div>
                         </li>
@@ -3944,9 +3999,10 @@ $siteModel = Registry::model('site');
                                         <label>Возможность проводки <input type="checkbox" name="possible_to_post"></label>
                                         <label>Описание <input type="checkbox" name="sanitation_description"></label>
                                         <label for="sanitation">Наличие санузлов</label>
-                                        <label for="">Количество:</label>
-                                        <input name="bathroom_number-min" type="text" placeholder="от">
-                                        <input name="bathroom_number-max" type="text" placeholder="до">
+                                        <label for="">Количество:
+                                            <input name="bathroom_number-min" type="text" placeholder="от">
+                                            <input name="bathroom_number-max" type="text" placeholder="до">
+                                        </label>
                                         <label for="">Расположение:</label>
                                     </li>
                                     <li>
@@ -3965,13 +4021,19 @@ $siteModel = Registry::model('site');
                         </li>
                         <li onclick="allParam('document')">
                             <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
+                                <span style="width:40%"></span>
                             </div>
                             <img src="../../template/images/search-1.png" alt="search">Документы
                             <div class="document">
                                 <h2>Документы</h2>
-                                <label>Документы на право владения<input type="checkbox" name="documents_on_ownership"></label>
-                                <label>Договор аренды<input type="checkbox" name="lease_contract"></label>
+                                <ul>
+                                    <li>
+                                        <label>Документы на право владения<input type="checkbox" name="documents_on_ownership"></label>
+                                    </li>
+                                    <li>
+                                        <label>Договор аренды<input type="checkbox" name="lease_contract"></label>
+                                    </li>
+                                </ul>
                                 <button class="closeDocument">Поиск</button>
                             </div>
                         </li>
@@ -4186,9 +4248,10 @@ $siteModel = Registry::model('site');
                                         <label>Возможность проводки <input type="checkbox" name="possible_to_post"></label>
                                         <label>Описание <input type="checkbox" name="sanitation_description"></label>
                                         <label for="sanitation">Наличие санузлов</label>
-                                        <label for="">Количество:</label>
-                                        <input name="bathroom_number-min" type="text" placeholder="от">
-                                        <input name="bathroom_number-max" type="text" placeholder="до">
+                                        <label for="">Количество:
+                                            <input name="bathroom_number-min" type="text" placeholder="от">
+                                            <input name="bathroom_number-max" type="text" placeholder="до">
+                                        </label>
                                         <label for="">Расположение:</label>
                                     </li>
                                     <li>
@@ -4207,13 +4270,19 @@ $siteModel = Registry::model('site');
                         </li>
                         <li onclick="allParam('document')">
                             <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
+                                <span style="width:40%"></span>
                             </div>
                             <img src="../../template/images/search-1.png" alt="search">Документы
                             <div class="document">
                                 <h2>Документы</h2>
-                                <label>Документы на право владения<input type="checkbox" name="documents_on_ownership"></label>
-                                <label>Договор аренды<input type="checkbox" name="lease_contract"></label>
+                                <ul>
+                                    <li>
+                                        <label>Документы на право владения<input type="checkbox" name="documents_on_ownership"></label>
+                                    </li>
+                                    <li>
+                                        <label>Договор аренды<input type="checkbox" name="lease_contract"></label>
+                                    </li>
+                                </ul>
                                 <button class="closeDocument">Поиск</button>
                             </div>
                         </li>
@@ -4425,12 +4494,13 @@ $siteModel = Registry::model('site');
                                         </div>
                                     </li>
                                     <li>
-                                        <label>Возможность проводки <input type="checkbox" name="possible_to_post"></label>
-                                        <label>Описание <input type="checkbox" name="sanitation_description"></label>
+                                        <label>Возможность проводки<input type="checkbox" name="possible_to_post"></label>
+                                        <label>Описание<input type="checkbox" name="sanitation_description"></label>
                                         <label for="sanitation">Наличие санузлов</label>
-                                        <label for="">Количество:</label>
-                                        <input name="bathroom_number-min" type="text" placeholder="от">
-                                        <input name="bathroom_number-max" type="text" placeholder="до">
+                                        <label for="">Количество:
+                                            <input name="bathroom_number-min" type="text" placeholder="от">
+                                            <input name="bathroom_number-max" type="text" placeholder="до">
+                                        </label>
                                         <label for="">Расположение:</label>
                                     </li>
                                     <li>
@@ -4449,13 +4519,19 @@ $siteModel = Registry::model('site');
                         </li>
                         <li onclick="allParam('document')">
                             <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
+                                <span style="width:40%"></span>
                             </div>
                             <img src="../../template/images/search-1.png" alt="search">Документы
                             <div class="document">
                                 <h2>Документы</h2>
-                                <label>Документы на право владения<input type="checkbox" name="documents_on_ownership"></label>
-                                <label>Договор аренды<input type="checkbox" name="lease_contract"></label>
+                                <ul>
+                                    <li>
+                                        <label>Документы на право владения<input type="checkbox" name="documents_on_ownership"></label>
+                                    </li>
+                                    <li>
+                                        <label>Договор аренды<input type="checkbox" name="lease_contract"></label>
+                                    </li>
+                                </ul>
                                 <button class="closeDocument">Поиск</button>
                             </div>
                         </li>
@@ -4823,9 +4899,9 @@ $siteModel = Registry::model('site');
                             <div class="house-characteristics">
                                 <h2>Характеристики дома</h2>
                                 <ul>
-                                    <li><p>Наличие лифта</p>
-                                        <div class="select">
-                                            <label for="elevator">
+                                    <li>
+                                        <div class="select more-settings">
+                                            <label for="elevator">Наличие лифта
                                                 <select name="elevator" id="elevator">
                                                     <option value="1">Да</option>
                                                     <option value="0">Нет</option>
@@ -4833,7 +4909,7 @@ $siteModel = Registry::model('site');
                                             </label>
                                         </div>
                                     </li>
-                                    <li>
+                                    <li class="show-more-settings">
                                         <div class="select">
                                             <label for="elevator_yes">
                                                 <select name="elevator_yes" id="elevator_yes">
@@ -4926,7 +5002,7 @@ $siteModel = Registry::model('site');
                                         </label>
                                     </li>
                                 </ul>
-                                <button class="closeHouseCharacteristics">Готово</button>
+                                <button class="close-house-characteristics">Готово</button>
                             </div>
                         </li>
                         <li onclick="allParam('attachment')">
@@ -5577,8 +5653,14 @@ $siteModel = Registry::model('site');
                             <img src="../../template/images/search-1.png" alt="search">Документы
                             <div class="document">
                                 <h2>Документы</h2>
-                                <label>Документы на право владения<input type="checkbox" name="documents_on_ownership"></label>
-                                <label>Договор аренды<input type="checkbox" name="lease_contract"></label>
+                                <ul>
+                                    <li>
+                                        <label>Документы на право владения<input type="checkbox" name="documents_on_ownership"></label>
+                                    </li>
+                                    <li>
+                                        <label>Договор аренды<input type="checkbox" name="lease_contract"></label>
+                                    </li>
+                                </ul>
                                 <button class="closeDocument">Поиск</button>
                             </div>
                         </li>
@@ -5825,9 +5907,10 @@ $siteModel = Registry::model('site');
                                         <label>Возможность проводки <input type="checkbox" name="possible_to_post"></label>
                                         <label>Описание <input type="checkbox" name="sanitation_description"></label>
                                         <label for="sanitation">Наличие санузлов</label>
-                                        <label for="">Количество:</label>
-                                        <input name="bathroom_number-min" type="text" placeholder="от">
-                                        <input name="bathroom_number-max" type="text" placeholder="до">
+                                        <label for="">Количество:
+                                            <input name="bathroom_number-min" type="text" placeholder="от">
+                                            <input name="bathroom_number-max" type="text" placeholder="до">
+                                        </label>
                                         <label for="">Расположение:</label>
                                     </li>
                                     <li>
@@ -5851,8 +5934,14 @@ $siteModel = Registry::model('site');
                             <img src="../../template/images/search-1.png" alt="search">Документы
                             <div class="document">
                                 <h2>Документы</h2>
-                                <label>Документы на право владения<input type="checkbox" name="documents_on_ownership"></label>
-                                <label>Договор аренды<input type="checkbox" name="lease_contract"></label>
+                                <ul>
+                                    <li>
+                                        <label>Документы на право владения<input type="checkbox" name="documents_on_ownership"></label>
+                                    </li>
+                                    <li>
+                                        <label>Договор аренды<input type="checkbox" name="lease_contract"></label>
+                                    </li>
+                                </ul>
                                 <button class="closeDocument">Поиск</button>
                             </div>
                         </li>
@@ -6067,9 +6156,10 @@ $siteModel = Registry::model('site');
                                         <label>Возможность проводки <input type="checkbox" name="possible_to_post"></label>
                                         <label>Описание <input type="checkbox" name="sanitation_description"></label>
                                         <label for="sanitation">Наличие санузлов</label>
-                                        <label for="">Количество:</label>
-                                        <input name="bathroom_number-min" type="text" placeholder="от">
-                                        <input name="bathroom_number-max" type="text" placeholder="до">
+                                        <label for="">Количество:
+                                            <input name="bathroom_number-min" type="text" placeholder="от">
+                                            <input name="bathroom_number-max" type="text" placeholder="до">
+                                        </label>
                                         <label for="">Расположение:</label>
                                     </li>
                                     <li>
@@ -6093,8 +6183,14 @@ $siteModel = Registry::model('site');
                             <img src="../../template/images/search-1.png" alt="search">Документы
                             <div class="document">
                                 <h2>Документы</h2>
-                                <label>Документы на право владения<input type="checkbox" name="documents_on_ownership"></label>
-                                <label>Договор аренды<input type="checkbox" name="lease_contract"></label>
+                                <ul>
+                                    <li>
+                                        <label>Документы на право владения<input type="checkbox" name="documents_on_ownership"></label>
+                                    </li>
+                                    <li>
+                                        <label>Договор аренды<input type="checkbox" name="lease_contract"></label>
+                                    </li>
+                                </ul>
                                 <button class="closeDocument">Поиск</button>
                             </div>
                         </li>
@@ -6309,9 +6405,10 @@ $siteModel = Registry::model('site');
                                         <label>Возможность проводки <input type="checkbox" name="possible_to_post"></label>
                                         <label>Описание <input type="checkbox" name="sanitation_description"></label>
                                         <label for="sanitation">Наличие санузлов</label>
-                                        <label for="">Количество:</label>
-                                        <input name="bathroom_number-min" type="text" placeholder="от">
-                                        <input name="bathroom_number-max" type="text" placeholder="до">
+                                        <label for="">Количество:
+                                            <input name="bathroom_number-min" type="text" placeholder="от">
+                                            <input name="bathroom_number-max" type="text" placeholder="до">
+                                        </label>
                                         <label for="">Расположение:</label>
                                     </li>
                                     <li>
@@ -6335,8 +6432,14 @@ $siteModel = Registry::model('site');
                             <img src="../../template/images/search-1.png" alt="search">Документы
                             <div class="document">
                                 <h2>Документы</h2>
-                                <label>Документы на право владения<input type="checkbox" name="documents_on_ownership"></label>
-                                <label>Договор аренды<input type="checkbox" name="lease_contract"></label>
+                                <ul>
+                                    <li>
+                                        <label>Документы на право владения<input type="checkbox" name="documents_on_ownership"></label>
+                                    </li>
+                                    <li>
+                                        <label>Договор аренды<input type="checkbox" name="lease_contract"></label>
+                                    </li>
+                                </ul>
                                 <button class="closeDocument">Поиск</button>
                             </div>
                         </li>
@@ -6889,9 +6992,10 @@ $siteModel = Registry::model('site');
                                         <label>Возможность проводки <input type="checkbox" name="possible_to_post"></label>
                                         <label>Описание <input type="checkbox" name="sanitation_description"></label>
                                         <label for="sanitation">Наличие санузлов</label>
-                                        <label for="">Количество:</label>
-                                        <input name="bathroom_number-min" type="text" placeholder="от">
-                                        <input name="bathroom_number-max" type="text" placeholder="до">
+                                        <label for="">Количество:
+                                            <input name="bathroom_number-min" type="text" placeholder="от">
+                                            <input name="bathroom_number-max" type="text" placeholder="до">
+                                        </label>
                                         <label for="">Расположение:</label>
                                     </li>
                                     <li>
@@ -6910,13 +7014,19 @@ $siteModel = Registry::model('site');
                         </li>
                         <li onclick="allParam('document')">
                             <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
+                                <span style="width:40%"></span>
                             </div>
                             <img src="../../template/images/search-1.png" alt="search">Документы
                             <div class="document">
                                 <h2>Документы</h2>
-                                <label>Документы на право владения<input type="checkbox" name="documents_on_ownership"></label>
-                                <label>Договор аренды<input type="checkbox" name="lease_contract"></label>
+                                <ul>
+                                    <li>
+                                        <label>Документы на право владения<input type="checkbox" name="documents_on_ownership"></label>
+                                    </li>
+                                    <li>
+                                        <label>Договор аренды<input type="checkbox" name="lease_contract"></label>
+                                    </li>
+                                </ul>
                                 <button class="closeDocument">Поиск</button>
                             </div>
                         </li>
@@ -7131,9 +7241,10 @@ $siteModel = Registry::model('site');
                                         <label>Возможность проводки <input type="checkbox" name="possible_to_post"></label>
                                         <label>Описание <input type="checkbox" name="sanitation_description"></label>
                                         <label for="sanitation">Наличие санузлов</label>
-                                        <label for="">Количество:</label>
-                                        <input name="bathroom_number-min" type="text" placeholder="от">
-                                        <input name="bathroom_number-max" type="text" placeholder="до">
+                                        <label for="">Количество:
+                                            <input name="bathroom_number-min" type="text" placeholder="от">
+                                            <input name="bathroom_number-max" type="text" placeholder="до">
+                                        </label>
                                         <label for="">Расположение:</label>
                                     </li>
                                     <li>
@@ -7152,13 +7263,19 @@ $siteModel = Registry::model('site');
                         </li>
                         <li onclick="allParam('document')">
                             <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
+                                <span style="width:40%"></span>
                             </div>
                             <img src="../../template/images/search-1.png" alt="search">Документы
                             <div class="document">
                                 <h2>Документы</h2>
-                                <label>Документы на право владения<input type="checkbox" name="documents_on_ownership"></label>
-                                <label>Договор аренды<input type="checkbox" name="lease_contract"></label>
+                                <ul>
+                                    <li>
+                                        <label>Документы на право владения<input type="checkbox" name="documents_on_ownership"></label>
+                                    </li>
+                                    <li>
+                                        <label>Договор аренды<input type="checkbox" name="lease_contract"></label>
+                                    </li>
+                                </ul>
                                 <button class="closeDocument">Поиск</button>
                             </div>
                         </li>
@@ -7373,9 +7490,10 @@ $siteModel = Registry::model('site');
                                         <label>Возможность проводки <input type="checkbox" name="possible_to_post"></label>
                                         <label>Описание <input type="checkbox" name="sanitation_description"></label>
                                         <label for="sanitation">Наличие санузлов</label>
-                                        <label for="">Количество:</label>
-                                        <input name="bathroom_number-min" type="text" placeholder="от">
-                                        <input name="bathroom_number-max" type="text" placeholder="до">
+                                        <label for="">Количество:
+                                            <input name="bathroom_number-min" type="text" placeholder="от">
+                                            <input name="bathroom_number-max" type="text" placeholder="до">
+                                        </label>
                                         <label for="">Расположение:</label>
                                     </li>
                                     <li>
@@ -7394,13 +7512,19 @@ $siteModel = Registry::model('site');
                         </li>
                         <li onclick="allParam('document')">
                             <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
+                                <span style="width:40%"></span>
                             </div>
                             <img src="../../template/images/search-1.png" alt="search">Документы
                             <div class="document">
                                 <h2>Документы</h2>
-                                <label>Документы на право владения<input type="checkbox" name="documents_on_ownership"></label>
-                                <label>Договор аренды<input type="checkbox" name="lease_contract"></label>
+                                <ul>
+                                    <li>
+                                        <label>Документы на право владения<input type="checkbox" name="documents_on_ownership"></label>
+                                    </li>
+                                    <li>
+                                        <label>Договор аренды<input type="checkbox" name="lease_contract"></label>
+                                    </li>
+                                </ul>
                                 <button class="closeDocument">Поиск</button>
                             </div>
                         </li>
@@ -7615,9 +7739,10 @@ $siteModel = Registry::model('site');
                                         <label>Возможность проводки <input type="checkbox" name="possible_to_post"></label>
                                         <label>Описание <input type="checkbox" name="sanitation_description"></label>
                                         <label for="sanitation">Наличие санузлов</label>
-                                        <label for="">Количество:</label>
-                                        <input name="bathroom_number-min" type="text" placeholder="от">
-                                        <input name="bathroom_number-max" type="text" placeholder="до">
+                                        <label for="">Количество:
+                                            <input name="bathroom_number-min" type="text" placeholder="от">
+                                            <input name="bathroom_number-max" type="text" placeholder="до">
+                                        </label>
                                         <label for="">Расположение:</label>
                                     </li>
                                     <li>
@@ -7636,13 +7761,19 @@ $siteModel = Registry::model('site');
                         </li>
                         <li onclick="allParam('document')">
                             <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
+                                <span style="width:40%"></span>
                             </div>
                             <img src="../../template/images/search-1.png" alt="search">Документы
                             <div class="document">
                                 <h2>Документы</h2>
-                                <label>Документы на право владения<input type="checkbox" name="documents_on_ownership"></label>
-                                <label>Договор аренды<input type="checkbox" name="lease_contract"></label>
+                                <ul>
+                                    <li>
+                                        <label>Документы на право владения<input type="checkbox" name="documents_on_ownership"></label>
+                                    </li>
+                                    <li>
+                                        <label>Договор аренды<input type="checkbox" name="lease_contract"></label>
+                                    </li>
+                                </ul>
                                 <button class="closeDocument">Поиск</button>
                             </div>
                         </li>
@@ -7857,9 +7988,10 @@ $siteModel = Registry::model('site');
                                         <label>Возможность проводки <input type="checkbox" name="possible_to_post"></label>
                                         <label>Описание <input type="checkbox" name="sanitation_description"></label>
                                         <label for="sanitation">Наличие санузлов</label>
-                                        <label for="">Количество:</label>
-                                        <input name="bathroom_number-min" type="text" placeholder="от">
-                                        <input name="bathroom_number-max" type="text" placeholder="до">
+                                        <label for="">Количество:
+                                            <input name="bathroom_number-min" type="text" placeholder="от">
+                                            <input name="bathroom_number-max" type="text" placeholder="до">
+                                        </label>
                                         <label for="">Расположение:</label>
                                     </li>
                                     <li>
@@ -7878,13 +8010,19 @@ $siteModel = Registry::model('site');
                         </li>
                         <li onclick="allParam('document')">
                             <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
+                                <span style="width:40%"></span>
                             </div>
                             <img src="../../template/images/search-1.png" alt="search">Документы
                             <div class="document">
                                 <h2>Документы</h2>
-                                <label>Документы на право владения<input type="checkbox" name="documents_on_ownership"></label>
-                                <label>Договор аренды<input type="checkbox" name="lease_contract"></label>
+                                <ul>
+                                    <li>
+                                        <label>Документы на право владения<input type="checkbox" name="documents_on_ownership"></label>
+                                    </li>
+                                    <li>
+                                        <label>Договор аренды<input type="checkbox" name="lease_contract"></label>
+                                    </li>
+                                </ul>
                                 <button class="closeDocument">Поиск</button>
                             </div>
                         </li>
@@ -8099,9 +8237,10 @@ $siteModel = Registry::model('site');
                                         <label>Возможность проводки <input type="checkbox" name="possible_to_post"></label>
                                         <label>Описание <input type="checkbox" name="sanitation_description"></label>
                                         <label for="sanitation">Наличие санузлов</label>
-                                        <label for="">Количество:</label>
-                                        <input name="bathroom_number-min" type="text" placeholder="от">
-                                        <input name="bathroom_number-max" type="text" placeholder="до">
+                                        <label for="">Количество:
+                                            <input name="bathroom_number-min" type="text" placeholder="от">
+                                            <input name="bathroom_number-max" type="text" placeholder="до">
+                                        </label>
                                         <label for="">Расположение:</label>
                                     </li>
                                     <li>
@@ -8120,13 +8259,19 @@ $siteModel = Registry::model('site');
                         </li>
                         <li onclick="allParam('document')">
                             <div class="progress-bar blue stripes">
-                                <span style="width:0"></span>
+                                <span style="width:40%"></span>
                             </div>
                             <img src="../../template/images/search-1.png" alt="search">Документы
                             <div class="document">
                                 <h2>Документы</h2>
-                                <label>Документы на право владения<input type="checkbox" name="documents_on_ownership"></label>
-                                <label>Договор аренды<input type="checkbox" name="lease_contract"></label>
+                                <ul>
+                                    <li>
+                                        <label>Документы на право владения<input type="checkbox" name="documents_on_ownership"></label>
+                                    </li>
+                                    <li>
+                                        <label>Договор аренды<input type="checkbox" name="lease_contract"></label>
+                                    </li>
+                                </ul>
                                 <button class="closeDocument">Поиск</button>
                             </div>
                         </li>
@@ -8844,6 +8989,7 @@ if (isset($this->data['script_footer'])) {
 <script src="/template/js/mapController.js"></script>
 <script src="/template/js/jquery.bxslider.min.js"></script>
 <script src="/template/js/forms.editor.handler.js"></script>
+<script src="/template/js/jquery.parallax.min.js"></script>
 <script src="/template/js/main.min.js"></script>
 </body>
 </html>
