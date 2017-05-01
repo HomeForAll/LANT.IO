@@ -229,7 +229,7 @@
 .jq-selectbox {
 	display: inline-block !important;
 	position: relative !important;
-	z-index: 20 !important;
+	z-index: auto !important;
 	text-align: left;
 	width: 78%;
 	vertical-align: middle;
@@ -332,6 +332,7 @@
 	font-size: 13px;
 }
 .jq-selectbox ul {
+	z-index: 22;
 	margin: 0;
 	padding: 0;
 }
@@ -346,15 +347,15 @@
 	color: #231F20;
 }
 .jq-selectbox li.selected {
-	background-color: #A3ABB1;
+	z-index: 20;
 	color: #444;
 }
 .jq-selectbox li:hover {
 	background-color: #08C;
-	color: #FFF;
+	color: #fff;
 }
 .jq-selectbox li.disabled {
-	color: #AAA;
+	color: #aaa;
 }
 .jq-selectbox li.disabled:hover {
 	background: none;

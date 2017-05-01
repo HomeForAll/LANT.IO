@@ -10,155 +10,76 @@
     <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css">
 </head>
 <body>
-<?php if (isset($_SESSION['authorized'])) { ?>
-    <div id="navigation">
-        <div class="background-image">
-            <div class="logo-img">
-                <a href="#"><img src="../../template/images/logo.png" alt="logo"></a>
-            </div>
-            <div class="registration-users">
-                <div class="place-an-ad">
-                    <a href="../../index.php"><img src="../../template/images/add-blue.png" alt="add">Дать
-                        объявление</a>
-                </div>
-                <div class="registration">
-                    <a href="../../index.php"><img src="../../template/images/add-green.png" alt="add">Войти</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="wrapper">
-        <div id="navigation">
-            <ul>
-                <li><a href="/news">Объявления</a></li>
-                <li><a href="/search">Поиск</a></li>
-                <?php if (isset($_SESSION['authorized'])) { ?>
-                    <li><a href="/cabinet">Личный кабинет</a></li>
-                    <li><a href="/logout">Выход</a></li>
-                <?php } else { ?>
-                    <li><a href="/registration">Регистрация</a></li>
-                    <li><a href="/login">Вход</a></li>
-                <?php } ?>
-            </ul>
-            <button class="show-and-hide-menu"><i class="fa fa-bars" aria-hidden="true"></i></button>
-        </div>
-    </div>
-<?php } else { ?>
-    <div class="background-image">
-        <div id="navigation-true">
-            <div class="container-w-0">
-                <div class="logo-img">
-                    <a href="#"><img src="../../template/images/logo-true.png" alt=" logo-true"></a>
-                </div>
-                <div class="registration-users">
-                    <div class="place-an-ad">
-                        <a href="../../index.php"><img src="../../template/images/add-blue.png" alt="add">Дать
-                            объявление</a>
-                    </div>
-                    <div class="registration">
-                        <div class="message"><img src="../../template/images/notification.png" alt="  notification">
-                        </div>
-                        <div class="user" onclick="showTopMenuAndSearch();">
-                            <div class="users-information">
-                                <p>Александр Никулин</p>
-                                <span><img src="../../template/images/crown.png" alt="user">Пользователь +</span>
-                            </div>
-                            <img src="../../template/images/user.png" alt="user">
-                            <ul>
-                                <li><a href="#"><img src="../../template/images/m1.png" alt="menu">Мои объявления</a>
-                                </li>
-                                <li><a href="#"><img src="../../template/images/m2.png" alt="menu">Избранное</a></li>
-                                <li><a href="#"><img src="../../template/images/m3.png" alt="menu">Тех поддержка</a>
-                                </li>
-                                <li><a href="#"><img src="../../template/images/m4.png" alt="menu">Настройка профиля</a>
-                                </li>
-                                <li><a href="#"><img src="../../template/images/m5.png" alt="menu">Выйти из системы</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <button class="show-and-hide-menu" onclick="showTopMenuAndSearch();">
-                        <i class="fa fa-bars" aria-hidden="true"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-<?php } ?>
+<div class="header"><?php include_once 'header.php' ?></div>
 <div class="search-and-filter">
     <div class="container-w-0">
         <form action="">
             <div class="big-search-menu">
                 <div class="apartment-settings-apartment">
-                    <h2>Параметры квартиры</h2>
+                    <h2>Исходные параметры квартиры</h2>
                     <ul>
-                        <li><span class="names-parameters">Кол-во комнат</span>
-                            <p class="number-apartments">
-                                <span>1</span>
-                                <span>2</span>
-                                <span>3</span>
-                                <span>4</span>
-                                <span>4+</span>
-                            </p>
+                        <li>
+                            <div class="select">
+                                <label for="number_of_rooms">Кол-во комнат
+                                    <select class="number-apartments" name="number_of_rooms" id="number_of_rooms">
+                                        <option value="5">4+</option>
+                                        <option value="4">4</option>
+                                        <option value="3">3</option>
+                                        <option value="2">2</option>
+                                        <option value="1">1</option>
+                                    </select>
+                                </label>
+                            </div>
                         </li>
                         <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>От<input name="total-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>До<input name="total-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                         <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>От<input name="not_residential-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>До<input name="not_residential-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                         <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>От<input name="residential-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>До<input name="residential-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                         <li><span class="names-parameters">Балкон м2</span>
-                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>От<input name="balcony-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>До<input name="balcony-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
-                    </ul>
-                    <ul>
+                        <li><span class="names-parameters">Высота потолков</span>
+                            <p>От<input name="ceiling_height-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            </p>
+                            <p>До<input name="ceiling_height-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            </p>
+                        </li>
+                        <li><span class="names-parameters">Этаж</span>
+                            <p>От<input name="floor-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            </p>
+                            <p>До<input name="floor-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            </p>
+                        </li>
                         <li>
                             <div class="select">
-                                <label for="">
-                                    <select>
-                                        <option>Language of communication</option>
-                                        <option>English</option>
-                                        <option>Spanish</option>
+                                <label for="lavatory">Санузел
+                                    <select name="lavatory" id="lavatory">
+                                        <option value="41">Не важно</option>
+                                        <option value="116">Раздельный</option>
+                                        <option value="29">Совмещенный</option>
                                     </select>
                                 </label>
                             </div>
                         </li>
-                        <li>
-                            <div class="select">
-                                <label for="">
-                                    <select>
-                                        <option>Language of communication</option>
-                                        <option>English</option>
-                                        <option>Spanish</option>
-                                    </select>
-                                </label>
-                            </div>
-                        </li>
-                        <li><span class="names-parameters">Высота потолков м</span>
-                            <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required>
-                            </p>
-                            <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required>
-                            </p>
-                        </li>
                     </ul>
-                    <a>
-                        <button>Готово</button>
-                    </a>
+                    <button class="closeBlock">Готово</button>
                 </div>
                 <div class="apartment-settings-home">
                     <h2>Параметры дома</h2>
@@ -173,35 +94,35 @@
                             </p>
                         </li>
                         <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>От<input name="total-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>До<input name="total-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                         <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>От<input name="not_residential-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>До<input name="not_residential-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                         <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>От<input name="residential-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>До<input name="residential-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                         <li><span class="names-parameters">Балкон м2</span>
-                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>От<input name="balcony-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>До<input name="balcony-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                     </ul>
                     <ul>
                         <li>
                             <div class="select">
-                                <label for="">
-                                    <select>
+                                <label for="0">
+                                    <select name="0">
                                         <option>Language of communication</option>
                                         <option>English</option>
                                         <option>Spanish</option>
@@ -211,8 +132,8 @@
                         </li>
                         <li>
                             <div class="select">
-                                <label for="">
-                                    <select>
+                                <label for="0">
+                                    <select name="0">
                                         <option>Language of communication</option>
                                         <option>English</option>
                                         <option>Spanish</option>
@@ -221,9 +142,9 @@
                             </div>
                         </li>
                         <li><span class="names-parameters">Высота потолков м</span>
-                            <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required>
+                            <p>От<input name="none" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
                             </p>
-                            <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required>
+                            <p>До<input name="none" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
                             </p>
                         </li>
                     </ul>
@@ -244,35 +165,35 @@
                             </p>
                         </li>
                         <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                         <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                         <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                         <li><span class="names-parameters">Балкон м2</span>
-                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                     </ul>
                     <ul>
                         <li>
                             <div class="select">
-                                <label for="">
-                                    <select>
+                                <label for="0">
+                                    <select name="0">
                                         <option>Language of communication</option>
                                         <option>English</option>
                                         <option>Spanish</option>
@@ -282,8 +203,8 @@
                         </li>
                         <li>
                             <div class="select">
-                                <label for="">
-                                    <select>
+                                <label for="0">
+                                    <select name="0">
                                         <option>Language of communication</option>
                                         <option>English</option>
                                         <option>Spanish</option>
@@ -292,9 +213,9 @@
                             </div>
                         </li>
                         <li><span class="names-parameters">Высота потолков м</span>
-                            <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required>
+                            <p>От<input name="none" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
                             </p>
-                            <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required>
+                            <p>До<input name="none" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
                             </p>
                         </li>
                     </ul>
@@ -315,27 +236,27 @@
                             </p>
                         </li>
                         <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                         <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                         <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                         <li><span class="names-parameters">Балкон м2</span>
-                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                     </ul>
@@ -343,7 +264,7 @@
                         <li>
                             <div class="select">
                                 <label for="">
-                                    <select>
+                                    <select name="0">
                                         <option>Language of communication</option>
                                         <option>English</option>
                                         <option>Spanish</option>
@@ -354,7 +275,7 @@
                         <li>
                             <div class="select">
                                 <label for="">
-                                    <select>
+                                    <select name="0">
                                         <option>Language of communication</option>
                                         <option>English</option>
                                         <option>Spanish</option>
@@ -363,9 +284,9 @@
                             </div>
                         </li>
                         <li><span class="names-parameters">Высота потолков м</span>
-                            <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required>
+                            <p>От<input name="none" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
                             </p>
-                            <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required>
+                            <p>До<input name="none" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
                             </p>
                         </li>
                     </ul>
@@ -386,27 +307,27 @@
                             </p>
                         </li>
                         <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                         <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                         <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                         <li><span class="names-parameters">Балкон м2</span>
-                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                     </ul>
@@ -414,7 +335,7 @@
                         <li>
                             <div class="select">
                                 <label for="">
-                                    <select>
+                                    <select name="0">
                                         <option>Language of communication</option>
                                         <option>English</option>
                                         <option>Spanish</option>
@@ -425,7 +346,7 @@
                         <li>
                             <div class="select">
                                 <label for="">
-                                    <select>
+                                    <select name="0">
                                         <option>Language of communication</option>
                                         <option>English</option>
                                         <option>Spanish</option>
@@ -434,9 +355,9 @@
                             </div>
                         </li>
                         <li><span class="names-parameters">Высота потолков м</span>
-                            <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required>
+                            <p>От<input name="none" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
                             </p>
-                            <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required>
+                            <p>До<input name="none" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
                             </p>
                         </li>
                     </ul>
@@ -457,27 +378,27 @@
                             </p>
                         </li>
                         <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                         <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                         <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                         <li><span class="names-parameters">Балкон м2</span>
-                            <p>От<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}" required>
+                            <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                     </ul>
@@ -485,7 +406,7 @@
                         <li>
                             <div class="select">
                                 <label for="">
-                                    <select>
+                                    <select name="0">
                                         <option>Language of communication</option>
                                         <option>English</option>
                                         <option>Spanish</option>
@@ -496,7 +417,7 @@
                         <li>
                             <div class="select">
                                 <label for="">
-                                    <select>
+                                    <select name="0">
                                         <option>Language of communication</option>
                                         <option>English</option>
                                         <option>Spanish</option>
@@ -505,9 +426,9 @@
                             </div>
                         </li>
                         <li><span class="names-parameters">Высота потолков м</span>
-                            <p>От<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required>
+                            <p>От<input name="none" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
                             </p>
-                            <p>До<input name="" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}" required>
+                            <p>До<input name="none" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
                             </p>
                         </li>
                     </ul>
@@ -515,18 +436,14 @@
                         <button>Готово</button>
                     </a>
                 </div>
+                <!-- -------------------------------- -->
                 <div class="search-more-precisely-search">
                     <div class="exact-area">
-                                <span class="search-city" onclick="allFilterBlocks('historySearch');">
-                                    <img src="../../template/images/s1.png" alt="city">
-                                    <input id="inputOne" type="text" name="" placeholder="Москва, ул, Малая Ордынка"
-                                           disabled>
-                                </span>
-                        <div class="history-search">
-                                    <span class="search-city active-search">
-                                        <img src="../../template/images/s1.png" alt="city">
-                                        <input type="text" name="" placeholder="г. Москва Северное медведково">
-                                    </span>
+                        <div class="history-search" onclick="allFilterBlocks('historySearch')">
+                            <span class="search-city active-search">
+                                <img src="../../template/images/s1.png" alt="city">
+                                <input type="text" id="address" placeholder="Москва, ул, Малая Ордынка" autocomplete="off" class="api-search-city history-text">
+                            </span>
                             <h5>История</h5>
                             <div class="all-history-search">
                                 <div class="history">
@@ -557,10 +474,10 @@
                         </div>
                     </div>
                     <div class="the-exact-address">
-                <span onclick="allFilterBlocks('searchMetroMainBlock')" class="location-metro-map">Третьяковская
-                    <span class="metro-people">
-                        <img src="../../template/images/people.png" alt="people">2мин.</span>
-                </span>
+                        <span onclick="allFilterBlocks('searchMetroMainBlock')" class="location-metro-map">Третьяковская
+                            <span class="metro-people"><img src="../../template/images/people.png"
+                                                            alt="people">2мин.</span>
+                        </span>
                         <div class="search-metro-main-block">
                             <div class="top-search-results">
                                 <span>Свиблово<i class="fa fa-times" aria-hidden="true"></i></span>
@@ -568,95 +485,70 @@
                             <div class="metro-location-and-travel-information">
                                 <div class="metro-location">
                                     <div class="panel-move">
-                                                <span onclick="moreAndLess('more')">
-                                                    <i class="fa fa-plus" aria-hidden="true"></i></span>
-                                        <span onclick="moreAndLess('less')">
-                                                    <i class="fa fa-minus" aria-hidden="true"></i></span>
+                                            <span onclick="moreAndLess('more')"><i class="fa fa-plus"
+                                                                                   aria-hidden="true"></i></span>
+                                        <span onclick="moreAndLess('less')"><i class="fa fa-minus"
+                                                                               aria-hidden="true"></i></span>
                                     </div>
                                     <img src="../../template/images/map-location-metro.png" alt="map">
                                 </div>
                                 <div class="travel-information">
                                     <div class="distance-on-foot">
-                                        <img src="../../template/images/people-2.png" alt="icon">
-                                        <p>Уделенность пекшом не более</p>
+                                        <img src="../../template/images/people-2.png" alt="icon"><p>Уделенность пекшом не более</p>
                                         <span><input placeholder="" type="number" name="foot" value="5" min="5"
-                                                     max="60" step="5" disabled>
-                                                <span class="timer">Минут</span></span>
+                                                     max="60" step="5"><span class="timer">Минут</span></span>
                                     </div>
                                     <div class="distance-on-transport">
-                                        <img src="../../template/images/avto.png" alt="icon">
-                                        <p>Уделенность пекшом не более</p>
+                                        <img src="../../template/images/avto.png" alt="icon"><p>Уделенность пекшом не более</p>
                                         <span><input placeholder="" type="number" name="transport" value="5"
-                                                     min="5" max="60" step="5" disabled>
-                                                <span class="timer">Минут</span></span>
+                                                     min="5" max="60" step="5"><span
+                                                    class="timer">Минут</span></span>
                                     </div>
                                     <button class="closeSearchMetro">Готово</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <button onclick="allParam('quickSearch')">Задать точнее</button>
+                    <button onclick="quickSearch(event)">Задать точнее</button>
                     <div class="quick-search">
-                        <h5><i class="fa fa-map-marker" aria-hidden="true"></i>Введите город, район, область или
-                            точный адрес<span><img src="../../template/images/location.png" alt="location">выделить область на карте</span>
-                        </h5>
+                        <h5><i class="fa fa-map-marker" aria-hidden="true"></i>Введите город, район, область или точный адрес</h5>
                         <ul class="quick-search-by-parameters">
                             <li>
                                 <div class="select">Область
-                                    <label for="">
-                                        <input name="" type="text" placeholder="Московская">
+                                    <label for="area">
+                                        <input name="area" type="text" placeholder="Московская">
                                     </label>
                                 </div>
+                            </li>
                             <li>
                                 <div class="select">Город
-                                    <label for="">
-                                        <input name="" type="text" placeholder="Москва">
-                                    </label>
-                                </div>
-                            <li>
-                                <div class="select">Округ
-                                    <label for="">
-                                        <select>
-                                            <option>Северо-западный</option>
-                                            <option>Северо-западный</option>
-                                            <option>Северо-западный</option>
-                                        </select>
+                                    <label for="city">
+                                        <input name="city" type="text" placeholder="Москва">
                                     </label>
                                 </div>
                             </li>
                             <li>
                                 <div class="select">Район
-                                    <label for="">
-                                        <select>
+                                    <label for="region">
+                                        <select name="region">
                                             <option>Северное медведково</option>
                                             <option>Северное медведково</option>
                                             <option>Северное медведково</option>
-                                        </select>
-                                    </label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="select">Улица
-                                    <label for="">
-                                        <select>
-                                            <option>Ениивмасейская</option>
-                                            <option>Ениивмасейская</option>
-                                            <option>Ениивмасейская</option>
                                         </select>
                                     </label>
                                 </div>
                             </li>
                             <li>
                                 <div class="select">Дом
-                                    <label for="">
-                                        <input name="" type="text" placeholder="16" maxlength="4"
+                                    <label for="house">
+                                        <input name="house" type="text" placeholder="16" maxlength="4"
                                                pattern="[0-9]{4}">
                                     </label>
                                 </div>
                             <li>
                                 <div class="select">Метро
-                                    <label for="">
-                                        <select>
+                                    <label for="metro_station">
+                                        <select name="metro_station">
                                             <option>Выбрано1</option>
                                             <option>Выбрано2</option>
                                             <option>Выбрано3</option>
@@ -668,8 +560,8 @@
                             </li>
                             <li>
                                 <div class="select">Удаленность от метро не более
-                                    <label for="">
-                                        <select>
+                                    <label for="distance_from_metro">
+                                        <select name="distance_from_metro">
                                             <option>5 мин пешком</option>
                                             <option>10 мин пешком</option>
                                             <option>15 мин пешком</option>
@@ -688,9 +580,9 @@
                     <li onclick="allParam('bigOption')" class="menu-left-window">
                         <label for="#amountSearch"><img src="../../template/images/s3.png" alt="price"> Цена</label>
                         <div class="showBigOptions">
-                            <p>От<input name="" placeholder="" type="text" id="amountBeforeSearch" readonly disabled>
+                            <p>От<label for="amountBeforeSearch"><input name="price-min" type="text" id="amountBeforeSearch" readonly disabled></label>
                             </p>
-                            <p>До<input name="" placeholder="" type="text" id="amountAfterSearch" readonly disabled>
+                            <p>До<label for="amountAfterSearch"><input name="price-max" type="text" id="amountAfterSearch" readonly disabled></label>
                             </p>
                             <div id="slider-range-search"></div>
                             <div class="currency">
@@ -703,14 +595,14 @@
                         </div>
                         <div class="decorativeShadowBlock"></div>
                     </li>
-                    <li class="menu-left-window"><span class="left-names-filter">Кол-во<br>комнат</span>
-                        <div class="numbers">
-                            <label for="">
+                    <li class="menu-left-window">
+                        <div class="numbers"><span class="left-names-filter">Кол-во<br>комнат</span>
+                            <label for="" class="label-filter">
                                 <input type="number" placeholder="0" maxlength="1" minlength="0">
                             </label>
                         </div>
-                    <li><span class="left-names-filter">Площадь</span>
-                        <div class="select number">
+                    <li>
+                        <div class="select"><span class="left-names-filter">Площадь</span>
                             <label for="">
                                 <select>
                                     <option>От 120м2 До 230м2</option>
@@ -720,8 +612,8 @@
                             </label>
                         </div>
                     </li>
-                    <li class="number-button"><span class="left-names-filter">Наполнение<br>квартиры</span>
-                        <div class="select number">
+                    <li class="number-button">
+                        <div class="select"><span class="left-names-filter">Наполнение<br>квартиры</span>
                             <label for="">
                                 <select>
                                     <option>Выбрано(1)</option>
@@ -731,10 +623,9 @@
                             </label>
                         </div>
                     </li>
-                    <li class="number-button"><span class="left-names-filter">Фильтрация<br>поиска</span>
-                        <div class="select number">
-                            <button>Показать</button>
-                        </div>
+                    <li class="number-button">
+                        <span class="left-names-filter">Фильтрация<br>поиска</span>
+                        <button class="filter-button">Показать</button>
                     </li>
                 </ul>
             </div>
@@ -764,19 +655,23 @@
                     </div>
                     <div class="small-description">
                         <span>Сдаю квартиру на 1,5 месяца</span>
-                        <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до метро Фрунзенская, рядом магазины, парковка, ночной бухло-ларек</p>
+                        <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до метро Фрунзенская, рядом
+                            магазины, парковка, ночной бухло-ларек</p>
                     </div>
                     <div class="price-and-view-the-apartment">
                         <div class="price">
                             <span class="decorate-number">25 000<i class="fa fa-rub"
-                                                                    aria-hidden="true"></i><sub>/мес</sub></span>
+                                                                   aria-hidden="true"></i><sub>/мес</sub></span>
                             <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img
                                             src="../../template/images/people.png" alt="">2 мин</span></p>
                         </div>
                     </div>
                     <div class="back-call">
-                        <button class="back-call-web"><i class="fa fa-phone" aria-hidden="true"></i>Звонок через сайт</button>
-                        <button class="back-call-message"><i class="fa fa-envelope" aria-hidden="true"></i>Написать сообщение</button>
+                        <button class="back-call-web"><i class="fa fa-phone" aria-hidden="true"></i>Звонок через сайт
+                        </button>
+                        <button class="back-call-message"><i class="fa fa-envelope" aria-hidden="true"></i>Написать
+                            сообщение
+                        </button>
                     </div>
                 </div>
                 <div class="right-information-block-apartment">
@@ -1000,7 +895,7 @@
 <script src="/template/js/mapController.js"></script>
 <script src="/template/js/jquery.bxslider.min.js"></script>
 <script src="/template/js/forms.editor.handler.js"></script>
-<script src="/bower_components/select2/dist/js/select2.min.js"></script>
+<script src="/template/js/jquery.parallax.min.js"></script>
 <script src="/template/js/main.min.js"></script>
 </body>
 </html>

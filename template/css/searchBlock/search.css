@@ -200,9 +200,64 @@
   padding-top: 35vh;
   min-height: 100vh;
   padding-bottom: 100px;
-  background: url("../../template/images/background-1.png") no-repeat center fixed;
-  background-size: cover;
   text-align: center;
+}
+#scene {
+  position: absolute;
+  left: -5vw;
+  right: -5vw;
+  top: -5vh;
+  bottom: -5vh;
+  width: 110vw;
+  height: 100vh;
+  z-index: -5;
+}
+#scene li {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+#scene img {
+  width: 100%;
+  height: 100%;
+}
+#scene li:nth-child(1) {
+  z-index: -2;
+  left: 0 !important;
+  right: 0 !important;
+  top: 15% !important;
+  width: 100%;
+  height: 95%;
+}
+#scene li:nth-child(2) {
+  z-index: -3;
+  left: 15% !important;
+  top: 14% !important;
+  width: 70%;
+  height: 100%;
+}
+#scene li:nth-child(3) {
+  z-index: -1;
+  top: 48% !important;
+  left: 2% !important;
+  width: 18%;
+  height: 62%;
+}
+#scene li:nth-child(4) {
+  z-index: -1;
+  top: 25% !important;
+  left: 78% !important;
+  width: 24%;
+  height: 85%;
+}
+#scene li:nth-child(5) {
+  left: -5vw;
+  right: -5vw;
+  top: -50vh;
+  bottom: -15vh;
+  width: 150%;
+  height: 150%;
+  z-index: -5;
 }
 .apartment-search {
   margin: auto;
@@ -267,7 +322,7 @@
   transition: 1.5s;
 }
 .search-city {
-  display: block;
+  position: relative;
   vertical-align: middle;
   text-align: left;
   font-size: 14px;
@@ -284,18 +339,19 @@
   border: none;
   background: none;
 }
+.title-center {
+  display: block !important;
+  text-align: center !important;
+  width: auto !important;
+}
 .history-search {
-  display: none;
-  position: absolute;
-  left: 0;
-  right: 100px;
-  top: 0;
-  bottom: 0;
-  height: 400px;
+  display: block;
+  position: relative;
   background: #fff;
   border-radius: 6px 0 0 0;
-  z-index: 60;
-  padding: 24px;
+  z-index: 50;
+  clear: both;
+  padding: 0;
 }
 .history-search h5 {
   font-size: 14px;
@@ -303,6 +359,11 @@
   text-align: left;
   padding: 20px 40px;
   font-weight: 100;
+}
+.history-search input {
+  background: none;
+  box-shadow: none;
+  width: auto;
 }
 .all-history-search {
   display: flex;
@@ -314,6 +375,7 @@
   display: inline-block;
   vertical-align: middle;
   margin: auto;
+  width: 30px;
 }
 .all-history-search p {
   display: inline-block;
@@ -411,7 +473,7 @@
   width: 100%;
   background: #f5f5f5;
   color: #1c1c1c;
-  margin-top: 8px;
+  margin-top: 0;
   border: none;
 }
 .quick-search-by-parameters input::placeholder {
@@ -447,20 +509,6 @@
   width: 32%;
   background: #fff;
   padding: 20px 5px;
-}
-.active-search {
-  display: block;
-  border-bottom: 1px solid #ebebeb;
-  transition: 1.5s;
-  padding-bottom: 15px;
-}
-.active-search input {
-  background: #fff;
-  padding: 12px 5px;
-  width: 250px;
-  font-size: 14px;
-  border: none;
-  color: #434343;
 }
 .big-search-menu {
   position: relative;
@@ -552,15 +600,15 @@
   display: inline-block;
   vertical-align: top;
   border-bottom: 1px solid #e9e9e9;
-  margin-left: 20px;
-  width: 80%;
+  margin-left: 10px;
+  width: 82%;
   clear: both;
 }
 .search-more-precisely-search button {
   position: relative;
   float: right;
   background: none;
-  padding: 25px 0;
+  padding: 27px 0;
   display: inline-block;
   vertical-align: middle;
   font-size: 14px;
@@ -575,6 +623,15 @@
   width: 70px;
   background: none;
 }
+.value-text {
+  display: block;
+  text-align: left;
+  width: auto;
+  margin: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 .filter-block-big-menu {
   padding-left: 15px;
   width: 100%;
@@ -583,15 +640,16 @@
   margin: auto;
 }
 .filter-block-big-menu li {
+  display: inline-block;
   background: #fff;
-  vertical-align: middle;
   color: #000;
   font-size: 14px;
   border-right: 2px dotted #e0e0e0;
-  text-align: center;
+  text-align: left;
   cursor: pointer;
-  width: 19.5%;
-  padding: 10px 0;
+  width: auto;
+  min-width: 185px;
+  padding: 10px 7px;
   margin: 10px auto;
   border-radius: 0;
 }
@@ -600,14 +658,16 @@
   color: #000;
 }
 .filter-block-big-menu label {
-  display: inline-block;
+  display: block;
   vertical-align: middle;
   cursor: pointer;
-  text-align: center;
-  padding: 0;
-  width: 80%;
+  padding: 6px 0 0;
+  width: 82%;
   min-width: 95px;
   margin: auto;
+}
+.filter-block-big-menu label img {
+  margin: 0 4px;
 }
 .filter-block-big-menu input[type="checkbox"] {
   display: inline-block;
@@ -630,6 +690,7 @@
   display: inline-block;
   vertical-align: middle;
   background: #fff;
+  font-weight: 100;
   font-size: 14px;
   padding: 0 10px;
   color: #444;
@@ -644,14 +705,16 @@
 .main-filter img {
   display: inline-block;
   vertical-align: middle;
-  margin-right: 5px;
+  margin-right: 10px;
+}
+.main-filter input {
+  padding-left: 10px !important;
 }
 .main-filter li {
   padding: 0 10px !important;
 }
 .select {
   position: relative;
-  z-index: 1 !important;
   display: block !important;
 }
 .select ul {
@@ -663,8 +726,10 @@
   display: block !important;
   width: auto !important;
   padding: 10px;
+  font-weight: 100 !important;
   color: #444 !important;
   border-radius: 0 !important;
+  border: none !important;
   text-align: left !important;
   background: #fff !important;
 }
@@ -677,6 +742,7 @@
 }
 .select .jq-selectbox {
   width: auto !important;
+  min-width: 50% !important;
 }
 .select .jq-selectbox__select {
   background: none;
@@ -684,24 +750,25 @@
 .select .jq-selectbox__trigger {
   background: none;
 }
-.main-filter-s {
-  display: inline-block !important;
-  width: 60%!important;
-  margin: 6px 0;
+.select .jq-selectbox__dropdown li {
+  position: relative;
+  padding: 10px;
+  z-index: 100;
 }
-.main-filter-s label {
-  display: block !important;
-  width: auto !important;
-  padding: 0 !important;
+.select .jq-selectbox__dropdown li > img {
+  position: absolute;
+  left: 0;
+  top: 30%;
+  margin-right: 5px;
 }
 .property-type-apartment-settings {
   display: none;
-  position: absolute;
-  left: 0;
-  width: 850px;
+  position: fixed;
+  margin: auto;
+  left: 15vw;
+  right: 15vw;
   box-shadow: 0 0 25px 1px rgba(0, 0, 0, 0.5);
-  margin-top: 10px;
-  z-index: 60;
+  z-index: 200;
   background: #f8f6f6;
   padding: 10px;
 }
@@ -749,179 +816,15 @@
   display: inline-block;
   vertical-align: middle;
 }
-.attachments {
-  display: none;
-  position: absolute;
-  left: 5vw;
-  right: 5vw;
-  width: auto;
-  z-index: 60;
-  background: #f9f9f9;
-  text-align: center;
-}
-.attachments h2 {
-  font-size: 20px;
-  padding: 15px 5px;
-  font-weight: 300;
-  color: #454545;
-  background: #efefef;
-}
-.attachments ul {
-  display: inline-block;
-  width: 450px;
-  list-style: none;
-  text-align: center;
-  margin: auto;
-}
-.attachments li {
-  display: block !important;
-  width: auto !important;
-  padding: 10px;
-  margin: auto;
-}
-.attachments p {
-  display: inline-block;
-  vertical-align: middle;
-  text-align: left;
-  width: 85px;
-}
-.attachments img {
-  float: none;
-  margin: auto 15px;
-}
-.attachments button {
-  display: block;
-  width: 220px;
-  margin: 25px auto;
-  padding: 15px;
-  float: none;
-  background: #71cb6f;
-  color: #fff;
-  border: 1px solid #d0d0d0;
-  border-radius: 30px;
-  cursor: pointer;
-}
-.appearance-of-the-apartment {
-  display: none;
-  position: absolute;
-  left: 0;
-  right: 0;
-  width: 850px;
-  z-index: 60;
-  background: #f9f9f9;
-  text-align: center;
-}
-.appearance-of-the-apartment h2 {
-  font-size: 20px;
-  padding: 15px 5px;
-  font-weight: 300;
-  color: #454545;
-  background: #efefef;
-}
-.appearance-of-the-apartment ul {
-  display: inline-block;
-  width: 450px;
-  list-style: none;
-  text-align: center;
-  margin: auto;
-}
-.appearance-of-the-apartment li {
-  display: block;
-  width: auto;
-  background: red;
-  padding: 10px;
-  margin: auto;
-}
-.appearance-of-the-apartment p {
-  display: inline-block;
-  vertical-align: middle;
-  text-align: left;
-  width: 85px;
-}
-.appearance-of-the-apartment img {
-  float: none;
-  margin: auto 15px;
-}
-.appearance-of-the-apartment button {
-  display: block;
-  width: 220px;
-  margin: 25px auto;
-  padding: 15px;
-  float: none;
-  background: #71cb6f;
-  color: #fff;
-  border: 1px solid #d0d0d0;
-  border-radius: 30px;
-  cursor: pointer;
-}
-.building-parameters-filter {
-  display: none;
-  position: absolute;
-  left: 5vw;
-  right: 5vw;
-  margin: 10px auto 0;
-  width: 850px;
-  z-index: 60;
-  background: #f9f9f9;
-  text-align: center;
-}
-.building-parameters-filter h2 {
-  font-size: 20px;
-  padding: 15px 5px;
-  font-weight: 300;
-  color: #454545;
-  background: #efefef;
-}
-.building-parameters-filter ul {
-  display: block;
-  width: auto;
-  list-style: none;
-  text-align: center;
-  margin: auto;
-}
-.building-parameters-filter li {
-  display: block;
-  box-shadow: none;
-  background: #f9f9f9;
-  width: auto;
-  padding: 10px;
-  margin: auto;
-}
-.building-parameters-filter p {
-  display: inline-block;
-  vertical-align: middle;
-  text-align: left;
-  width: 33%;
-  padding: 10px 0;
-}
-.building-parameters-filter input {
-  display: inline-block;
-  margin: auto 10px;
-  border-radius: 4px;
-  box-shadow: 0 5px 15px 1px rgba(0, 0, 0, 0.3);
-  border: none;
-  text-align: left;
-  width: 62%;
-  padding: 10px 5px;
-}
-.building-parameters-filter input:valid {
-  border: 1px solid green;
-}
-.building-parameters-filter input:invalid {
-  border: none;
-}
-.building-parameters-filter button {
-  display: block;
-  width: 220px;
-  margin: 100px auto 25px;
-  padding: 15px;
-  float: none;
-  background: #71cb6f;
-  color: #fff;
-  border: 1px solid #d0d0d0;
-  border-radius: 30px;
-  cursor: pointer;
-}
+.additionally-ap,
+.main-ap,
+.main-settings,
+.furnishing,
+.object-parameters,
+.building-parameters-filter,
+.document,
+.attachment,
+.appearance-of-the-apartment,
 .appearance-of-the-build {
   display: none;
   position: absolute;
@@ -932,6 +835,15 @@
   background: #f9f9f9;
   text-align: center;
 }
+.additionally-ap h2,
+.main-ap h2,
+.main-settings h2,
+.furnishing h2,
+.object-parameters h2,
+.building-parameters-filter h2,
+.document h2,
+.attachment h2,
+.appearance-of-the-apartment h2,
 .appearance-of-the-build h2 {
   font-size: 20px;
   padding: 15px 5px;
@@ -939,6 +851,15 @@
   color: #454545;
   background: #efefef;
 }
+.additionally-ap ul,
+.main-ap ul,
+.main-settings ul,
+.furnishing ul,
+.object-parameters ul,
+.building-parameters-filter ul,
+.document ul,
+.attachment ul,
+.appearance-of-the-apartment ul,
 .appearance-of-the-build ul {
   display: inline-block;
   width: 450px;
@@ -946,23 +867,58 @@
   text-align: center;
   margin: auto;
 }
+.additionally-ap li,
+.main-ap li,
+.main-settings li,
+.furnishing li,
+.object-parameters li,
+.building-parameters-filter li,
+.document li,
+.attachment li,
+.appearance-of-the-apartment li,
 .appearance-of-the-build li {
   display: block !important;
   width: auto !important;
-  background: red;
   padding: 10px;
   margin: auto;
 }
+.additionally-ap p,
+.main-ap p,
+.main-settings p,
+.furnishing p,
+.object-parameters p,
+.building-parameters-filter p,
+.document p,
+.attachment p,
+.appearance-of-the-apartment p,
 .appearance-of-the-build p {
   display: inline-block;
   vertical-align: middle;
   text-align: left;
   width: 85px;
 }
+.additionally-ap img,
+.main-ap img,
+.main-settings img,
+.furnishing img,
+.object-parameters img,
+.building-parameters-filter img,
+.document img,
+.attachment img,
+.appearance-of-the-apartment img,
 .appearance-of-the-build img {
   float: none;
   margin: auto 15px;
 }
+.additionally-ap button,
+.main-ap button,
+.main-settings button,
+.furnishing button,
+.object-parameters button,
+.building-parameters-filter button,
+.document button,
+.attachment button,
+.appearance-of-the-apartment button,
 .appearance-of-the-build button {
   display: block;
   width: 220px;
@@ -974,6 +930,102 @@
   border: 1px solid #d0d0d0;
   border-radius: 30px;
   cursor: pointer;
+}
+.additionally-ap input,
+.main-ap input,
+.main-settings input,
+.furnishing input,
+.object-parameters input,
+.building-parameters-filter input,
+.document input,
+.attachment input,
+.appearance-of-the-apartment input,
+.appearance-of-the-build input {
+  color: #000;
+  padding: 10px;
+  margin: auto 7px;
+  width: 75px;
+  height: auto;
+  border: none;
+  background: #fff;
+  box-shadow: 0 5px 15px 1px #ebebeb;
+  border-radius: 4px;
+}
+.additionally-ap input[type="checkbox"],
+.main-ap input[type="checkbox"],
+.main-settings input[type="checkbox"],
+.furnishing input[type="checkbox"],
+.object-parameters input[type="checkbox"],
+.building-parameters-filter input[type="checkbox"],
+.document input[type="checkbox"],
+.attachment input[type="checkbox"],
+.appearance-of-the-apartment input[type="checkbox"],
+.appearance-of-the-build input[type="checkbox"] {
+  background: none !important;
+  width: auto !important;
+  margin-right: 15%;
+  text-align: left;
+  float: right !important;
+}
+.additionally-ap input:valid,
+.main-ap input:valid,
+.main-settings input:valid,
+.furnishing input:valid,
+.object-parameters input:valid,
+.building-parameters-filter input:valid,
+.document input:valid,
+.attachment input:valid,
+.appearance-of-the-apartment input:valid,
+.appearance-of-the-build input:valid {
+  border: 1px solid green;
+}
+.additionally-ap input:invalid,
+.main-ap input:invalid,
+.main-settings input:invalid,
+.furnishing input:invalid,
+.object-parameters input:invalid,
+.building-parameters-filter input:invalid,
+.document input:invalid,
+.attachment input:invalid,
+.appearance-of-the-apartment input:invalid,
+.appearance-of-the-build input:invalid {
+  border: none;
+}
+.additionally-ap .select,
+.main-ap .select,
+.main-settings .select,
+.furnishing .select,
+.object-parameters .select,
+.building-parameters-filter .select,
+.document .select,
+.attachment .select,
+.appearance-of-the-apartment .select,
+.appearance-of-the-build .select {
+  text-align: center;
+}
+.additionally-ap .names-parameters,
+.main-ap .names-parameters,
+.main-settings .names-parameters,
+.furnishing .names-parameters,
+.object-parameters .names-parameters,
+.building-parameters-filter .names-parameters,
+.document .names-parameters,
+.attachment .names-parameters,
+.appearance-of-the-apartment .names-parameters,
+.appearance-of-the-build .names-parameters {
+  float: none;
+}
+.additionally-ap .jq-selectbox,
+.main-ap .jq-selectbox,
+.main-settings .jq-selectbox,
+.furnishing .jq-selectbox,
+.object-parameters .jq-selectbox,
+.building-parameters-filter .jq-selectbox,
+.document .jq-selectbox,
+.attachment .jq-selectbox,
+.appearance-of-the-apartment .jq-selectbox,
+.appearance-of-the-build .jq-selectbox {
+  float: right;
 }
 .showBigOptions {
   position: absolute;
@@ -1038,7 +1090,7 @@
 #slider-range-search span {
   border: 1px solid #d9d9d9;
   background: #f6f6f6;
-  top: -5px;
+  top: -6px;
   border-radius: 100%;
   cursor: pointer;
   color: #454545;
@@ -1118,7 +1170,7 @@
 .advanced-search-options li img {
   display: inline-block;
   vertical-align: middle;
-  margin-right: 15px;
+  margin-right: 10px;
   float: left;
 }
 .advanced-search-options li:hover {
@@ -1152,6 +1204,10 @@
   margin-right: 10px;
   font-size: 20px;
 }
+.show-more-settings {
+  display: none !important;
+  position: relative;
+}
 .vkl {
   display: inline-block;
   width: auto;
@@ -1167,7 +1223,9 @@
 .test-9,
 .test-10,
 .test-11,
-.test-12 {
+.test-12,
+.test-13,
+.test-14 {
   display: none;
   position: relative;
   flex-flow: row wrap;
@@ -1185,8 +1243,9 @@
 .test-9 li,
 .test-10 li,
 .test-11 li,
-.test-12 li {
-  position: relative;
+.test-12 li,
+.test-13 li,
+.test-14 li {
   vertical-align: top;
 }
 .building-parameters-apartment p,
@@ -1200,7 +1259,9 @@
 .test-9 p,
 .test-10 p,
 .test-11 p,
-.test-12 p {
+.test-12 p,
+.test-13 p,
+.test-14 p {
   display: block;
   width: auto;
   text-align: center;
@@ -1216,9 +1277,12 @@
 .test-9 label,
 .test-10 label,
 .test-11 label,
-.test-12 label {
-  display: inline-block;
-  width: 85%;
+.test-12 label,
+.test-13 label,
+.test-14 label {
+  position: relative;
+  display: block;
+  background: #fff;
   margin-bottom: 5px;
   cursor: pointer;
   padding: 10px;
@@ -1235,9 +1299,11 @@
 .test-9 input,
 .test-10 input,
 .test-11 input,
-.test-12 input {
+.test-12 input,
+.test-13 input,
+.test-14 input {
   margin: auto;
-  width: 70%;
+  width: auto;
 }
 .building-parameters-apartment input[type="checkbox"],
 .building-parameters-home input[type="checkbox"],
@@ -1250,9 +1316,12 @@
 .test-9 input[type="checkbox"],
 .test-10 input[type="checkbox"],
 .test-11 input[type="checkbox"],
-.test-12 input[type="checkbox"] {
-  display: inline-block;
-  vertical-align: middle;
+.test-12 input[type="checkbox"],
+.test-13 input[type="checkbox"],
+.test-14 input[type="checkbox"] {
+  width: 50%;
+  text-align: left;
+  float: right;
 }
 .building-parameters-apartment span,
 .building-parameters-home span,
@@ -1265,7 +1334,9 @@
 .test-9 span,
 .test-10 span,
 .test-11 span,
-.test-12 span {
+.test-12 span,
+.test-13 span,
+.test-14 span {
   display: block;
   text-align: center;
   width: auto;
@@ -1282,11 +1353,35 @@
 .test-9 .names-parameters,
 .test-10 .names-parameters,
 .test-11 .names-parameters,
-.test-12 .names-parameters {
+.test-12 .names-parameters,
+.test-13 .names-parameters,
+.test-14 .names-parameters {
   float: none;
 }
-.apartment-settings {
+.building-parameters-apartment .jq-selectbox,
+.building-parameters-home .jq-selectbox,
+.building-parameters-room .jq-selectbox,
+.building-parameters-office-area .jq-selectbox,
+.building-parameters-separate-building .jq-selectbox,
+.building-parameters-ozs-сomplex .jq-selectbox,
+.test-7 .jq-selectbox,
+.test-8 .jq-selectbox,
+.test-9 .jq-selectbox,
+.test-10 .jq-selectbox,
+.test-11 .jq-selectbox,
+.test-12 .jq-selectbox,
+.test-13 .jq-selectbox,
+.test-14 .jq-selectbox {
+  float: right;
+}
+.repair-and-utilities-of-home,
+.repair-and-utilities-of-the-apartment,
+.close-repair-and-utilities-of-the-apartment,
+.apartment-settings,
+.plot-of-land {
   position: absolute;
+  left: 0;
+  right: 0;
   display: none;
   width: 850px;
   z-index: 60;
@@ -1295,19 +1390,31 @@
   background: #f9f9f9;
   text-align: center;
 }
-.apartment-settings h2 {
+.repair-and-utilities-of-home h2,
+.repair-and-utilities-of-the-apartment h2,
+.close-repair-and-utilities-of-the-apartment h2,
+.apartment-settings h2,
+.plot-of-land h2 {
   font-size: 20px;
   padding: 15px 0;
   font-weight: 300;
   background: #efefef;
 }
-.apartment-settings ul {
+.repair-and-utilities-of-home ul,
+.repair-and-utilities-of-the-apartment ul,
+.close-repair-and-utilities-of-the-apartment ul,
+.apartment-settings ul,
+.plot-of-land ul {
   display: inline-block;
   vertical-align: top;
   width: 49.5%;
   margin: 0;
 }
-.apartment-settings li {
+.repair-and-utilities-of-home li,
+.repair-and-utilities-of-the-apartment li,
+.close-repair-and-utilities-of-the-apartment li,
+.apartment-settings li,
+.plot-of-land li {
   display: block;
   width: auto;
   text-align: right;
@@ -1316,14 +1423,23 @@
   clear: both;
   padding: 15px;
 }
-.apartment-settings p {
-  display: inline-block;
+.repair-and-utilities-of-home p,
+.repair-and-utilities-of-the-apartment p,
+.close-repair-and-utilities-of-the-apartment p,
+.apartment-settings p,
+.plot-of-land p {
+  display: block;
   vertical-align: middle;
-  text-align: left;
+  text-align: center;
   padding: 0;
+  margin: 15px auto;
   width: 30%;
 }
-.apartment-settings p span {
+.repair-and-utilities-of-home p span,
+.repair-and-utilities-of-the-apartment p span,
+.close-repair-and-utilities-of-the-apartment p span,
+.apartment-settings p span,
+.plot-of-land p span {
   display: inline-block;
   vertical-align: middle;
   cursor: pointer;
@@ -1333,21 +1449,37 @@
   line-height: 35px;
   border-radius: 100%;
 }
-.apartment-settings p span:hover {
+.repair-and-utilities-of-home p span:hover,
+.repair-and-utilities-of-the-apartment p span:hover,
+.close-repair-and-utilities-of-the-apartment p span:hover,
+.apartment-settings p span:hover,
+.plot-of-land p span:hover {
   background: #71cb6f;
   color: #fff;
 }
-.apartment-settings a {
+.repair-and-utilities-of-home a,
+.repair-and-utilities-of-the-apartment a,
+.close-repair-and-utilities-of-the-apartment a,
+.apartment-settings a,
+.plot-of-land a {
   background: none;
   border: none;
   border-radius: 0;
   padding: 0;
   margin: auto;
 }
-.apartment-settings a:hover {
+.repair-and-utilities-of-home a:hover,
+.repair-and-utilities-of-the-apartment a:hover,
+.close-repair-and-utilities-of-the-apartment a:hover,
+.apartment-settings a:hover,
+.plot-of-land a:hover {
   background: none;
 }
-.apartment-settings input {
+.repair-and-utilities-of-home input,
+.repair-and-utilities-of-the-apartment input,
+.close-repair-and-utilities-of-the-apartment input,
+.apartment-settings input,
+.plot-of-land input {
   color: #000;
   padding: 10px;
   margin: auto 7px;
@@ -1358,17 +1490,44 @@
   box-shadow: 0 5px 15px 1px #ebebeb;
   border-radius: 4px;
 }
-.apartment-settings input:valid {
+.repair-and-utilities-of-home input[type="checkbox"],
+.repair-and-utilities-of-the-apartment input[type="checkbox"],
+.close-repair-and-utilities-of-the-apartment input[type="checkbox"],
+.apartment-settings input[type="checkbox"],
+.plot-of-land input[type="checkbox"] {
+  width: auto;
+  margin-right: 35%;
+  text-align: left;
+  float: right;
+}
+.repair-and-utilities-of-home input:valid,
+.repair-and-utilities-of-the-apartment input:valid,
+.close-repair-and-utilities-of-the-apartment input:valid,
+.apartment-settings input:valid,
+.plot-of-land input:valid {
   border: 1px solid green;
 }
-.apartment-settings input:invalid {
+.repair-and-utilities-of-home input:invalid,
+.repair-and-utilities-of-the-apartment input:invalid,
+.close-repair-and-utilities-of-the-apartment input:invalid,
+.apartment-settings input:invalid,
+.plot-of-land input:invalid {
   border: none;
 }
-.apartment-settings select {
+.repair-and-utilities-of-home select,
+.repair-and-utilities-of-the-apartment select,
+.close-repair-and-utilities-of-the-apartment select,
+.apartment-settings select,
+.plot-of-land select {
   display: none;
 }
-.apartment-settings button {
+.repair-and-utilities-of-home button,
+.repair-and-utilities-of-the-apartment button,
+.close-repair-and-utilities-of-the-apartment button,
+.apartment-settings button,
+.plot-of-land button {
   display: block;
+  z-index: 0;
   float: none;
   text-align: center;
   padding: 15px;
@@ -1380,6 +1539,22 @@
   width: 220px;
   margin: 20px auto;
 }
+.repair-and-utilities-of-home .jq-selectbox__dropdown ul,
+.repair-and-utilities-of-the-apartment .jq-selectbox__dropdown ul,
+.close-repair-and-utilities-of-the-apartment .jq-selectbox__dropdown ul,
+.apartment-settings .jq-selectbox__dropdown ul,
+.plot-of-land .jq-selectbox__dropdown ul {
+  position: relative;
+  z-index: 25 !important;
+  width: auto;
+}
+.repair-and-utilities-of-home .jq-selectbox,
+.repair-and-utilities-of-the-apartment .jq-selectbox,
+.close-repair-and-utilities-of-the-apartment .jq-selectbox,
+.apartment-settings .jq-selectbox,
+.plot-of-land .jq-selectbox {
+  float: right;
+}
 .apartment-settings-apartment,
 .apartment-settings-separate-building,
 .apartment-settings-ozs-сomplex,
@@ -1389,6 +1564,8 @@
 .house-characteristics,
 .base-partition {
   position: absolute;
+  left: 0;
+  right: 0;
   display: none;
   width: 850px;
   z-index: 61;
@@ -1418,10 +1595,9 @@
 .apartment-settings-home ul,
 .house-characteristics ul,
 .base-partition ul {
-  display: inline-block;
-  vertical-align: top;
-  width: 49.5%;
-  margin: 0;
+  display: block;
+  width: 80%;
+  margin: 10px auto;
 }
 .apartment-settings-apartment li,
 .apartment-settings-separate-building li,
@@ -1517,6 +1693,16 @@
 .base-partition a:hover {
   background: none;
 }
+.apartment-settings-apartment label,
+.apartment-settings-separate-building label,
+.apartment-settings-ozs-сomplex label,
+.apartment-settings-office-area label,
+.apartment-settings-room label,
+.apartment-settings-home label,
+.house-characteristics label,
+.base-partition label {
+  width: 50%;
+}
 .apartment-settings-apartment input,
 .apartment-settings-separate-building input,
 .apartment-settings-ozs-сomplex input,
@@ -1534,6 +1720,19 @@
   background: #fff;
   box-shadow: 0 5px 15px 1px #ebebeb;
   border-radius: 4px;
+}
+.apartment-settings-apartment input[type="checkbox"],
+.apartment-settings-separate-building input[type="checkbox"],
+.apartment-settings-ozs-сomplex input[type="checkbox"],
+.apartment-settings-office-area input[type="checkbox"],
+.apartment-settings-room input[type="checkbox"],
+.apartment-settings-home input[type="checkbox"],
+.house-characteristics input[type="checkbox"],
+.base-partition input[type="checkbox"] {
+  width: auto;
+  margin-right: 35%;
+  text-align: left;
+  float: right;
 }
 .apartment-settings-apartment input:valid,
 .apartment-settings-separate-building input:valid,
@@ -1581,6 +1780,7 @@
   background: #71cb6f;
   color: #fff;
   cursor: pointer;
+  float: none !important;
   width: 220px;
   margin: 20px auto;
 }
@@ -1591,7 +1791,7 @@
   display: inline-block;
   vertical-align: middle;
   cursor: pointer;
-  padding: 15px 25px;
+  padding: 7px 23px;
   color: #444;
   width: 110%;
   background: url("../../template/images/m.png") no-repeat left 5px center;
@@ -1607,13 +1807,19 @@
   margin-left: 10px;
 }
 .the-exact-address {
-  margin-top: -8px;
+  margin-top: -4px;
+}
+.exact-area {
+  overflow: hidden;
+  z-index: 5;
+  height: 75px;
 }
 .exact-area,
 .the-exact-address {
   display: inline-block;
+  width: 37%;
   vertical-align: middle;
-  padding: 20px 20px 10px 0;
+  padding: 24px 20px 20px 0;
 }
 .exact-area span,
 .the-exact-address span {
@@ -1653,6 +1859,10 @@
   padding: 10px;
   margin-right: 10px;
 }
+.api-search-city {
+  border: none;
+  background: none;
+}
 .metro-location-and-travel-information {
   display: block;
   position: relative;
@@ -1673,6 +1883,7 @@
   vertical-align: top;
   text-align: center;
   width: 70%;
+  height: 500px;
 }
 .metro-location img {
   z-index: 9;
@@ -1699,7 +1910,7 @@
   text-align: left;
   font-size: 14px;
   color: #b9b9b9;
-  width: 48%;
+  width: 45%;
 }
 .travel-information input {
   border: none;
@@ -1747,6 +1958,10 @@
 .distance-on-foot,
 .distance-on-transport {
   padding: 10px 0;
+}
+.distance-on-foot span,
+.distance-on-transport span {
+  width: 80px;
 }
 .timer {
   display: block !important;
@@ -1931,7 +2146,7 @@
   background: linear-gradient(to top, #fff, rgba(255, 255, 255, 0));
 }
 .all-apartments::-webkit-scrollbar {
-  width: 6px;
+  width: 4px;
   background: #fff;
   border-radius: 4px;
   margin-right: 8px;
@@ -1991,7 +2206,7 @@
   text-align: left;
   font-size: 13px;
   color: #928787;
-  padding: 0 25px;
+  padding: 0 15px;
   margin: auto;
   height: 65px;
   line-height: 18px;
@@ -2026,7 +2241,7 @@
   text-align: left;
   color: #565656;
   padding: 0;
-  margin: 16px 0 16px 10px;
+  margin: 16px 0;
   font-weight: bold;
   font-size: 25px;
 }
@@ -2206,6 +2421,7 @@
   display: inline-block;
   vertical-align: middle;
   width: 85%;
+  height: 65px;
 }
 .appreciate-the-apartment li {
   vertical-align: middle;
@@ -2222,19 +2438,21 @@
 }
 .appreciate-the-apartment input {
   width: 80%;
-  padding: 10px;
   border: none;
   color: #252525;
+  padding: 10px;
+  font-size: 14px;
   border-right: 2px dotted #e0e0e0;
   background: #fff;
 }
 .appreciate-the-apartment input::placeholder {
-  color: #8a8686;
+  color: #333;
 }
 .appreciate-the-apartment button {
   padding: 23px 10px;
   font-size: 15px;
   width: 150px;
+  height: 65px;
   border: none;
   cursor: pointer;
   float: right;
@@ -2259,19 +2477,27 @@
   color: #595959;
   font-size: 13px;
 }
-.appreciate-the-rooms span {
+.appreciate-the-rooms a {
   display: inline-block;
   border-radius: 100%;
   text-align: center;
   line-height: 35px;
-  background: none;
   width: 35px;
   height: 35px;
   color: #000;
   cursor: pointer;
 }
-.appreciate-the-rooms span:hover {
+.appreciate-the-rooms a:active {
+  background: #71cb6f;
+}
+.appreciate-the-rooms a:link {
+  color: #000;
+}
+.appreciate-the-rooms a:hover {
   color: #fff;
+  background: #71cb6f;
+}
+.appreciate-the-rooms a:visited {
   background: #71cb6f;
 }
 .estimate-the-area {
@@ -2331,8 +2557,16 @@
   padding: 0 10px 0 14px;
 }
 .filter-apartment {
+  display: block;
   text-align: left;
-  padding: 21px 33px 9px;
+  padding: 20px 50px 10px;
+}
+.filter-apartment img {
+  vertical-align: middle;
+}
+.filter-apartment li {
+  display: inline-block;
+  vertical-align: middle;
 }
 .filter-apartment a {
   border-bottom: 1px solid #d8d6d6;
@@ -2345,6 +2579,12 @@
   margin-top: 8px;
   font-weight: 300;
   color: #a8a8a8;
+}
+.filter-apartment label {
+  padding: 10px;
+}
+.filter-apartment .jq-selectbox {
+  margin-left: 12px;
 }
 #style {
   width: 64px;
@@ -2447,15 +2687,15 @@
   font-size: 13px;
   color: #bcbcbc;
   vertical-align: middle;
-  margin: auto 4px auto 19px;
 }
 .price img {
   margin-right: 10px;
 }
 .price i {
-  font-size: 19px;
+  font-size: 15px;
   vertical-align: middle;
-  color: #565656;
+  color: #a09d9d;
+  font-weight: 200;
   margin-left: 4px;
 }
 .view-the-apartment {
@@ -2719,18 +2959,36 @@
   vertical-align: middle;
   margin: auto 28px;
 }
-.footer li:hover i {
-  color: #41c0f5;
-}
 .footer li:hover span {
   color: #fff;
 }
-.footer li:hover img {
-  background: url("../../template/images/work-true.png") no-repeat;
+.footer li:hover .icon-footer {
+  background: url('../../template/images/112.png') no-repeat;
   background-size: auto;
+}
+.footer li:hover:nth-child(1) i {
+  color: #41c0f5;
+}
+.footer li:hover:nth-child(2) i {
+  color: #6f90a9;
+}
+.footer li:hover:nth-child(3) i {
+  color: #d26d6d;
+}
+.footer li:hover:nth-child(4) i {
+  color: #c4ae71;
 }
 .footer i {
   font-size: 42px;
+}
+.icon-footer {
+  display: block;
+  text-align: center;
+  margin: auto;
+  width: 60px;
+  height: 32px;
+  background: url('../../template/images/11.png') no-repeat;
+  background-size: auto;
 }
 .lant-io,
 .policy,
@@ -2774,6 +3032,9 @@ li p {
   font-size: 13px;
   line-height: 23px;
 }
+.policy a:hover {
+  color: #fff;
+}
 #loading {
   background-color: #000;
   height: 100%;
@@ -2799,7 +3060,7 @@ li p {
   margin-left: -100px;
 }
 .object {
-  border-radius: 50% 50% 50% 50%;
+  border-radius: 50%;
   position: absolute;
   border-left: 5px solid #fff;
   border-right: 5px solid #fff;
@@ -2986,20 +3247,6 @@ li p {
 }
 /** Адаптивность **/
 @media (min-width: 1101px) and (max-width: 2500px) {
-  .building-parameters-apartment,
-  .building-parameters-home,
-  .building-parameters-room,
-  .building-parameters-office-area,
-  .building-parameters-separate-building,
-  .building-parameters-ozs-сomplex,
-  .test-7,
-  .test-8,
-  .test-9,
-  .test-10,
-  .test-11,
-  .test-12 {
-    display: none;
-  }
   .building-parameters-apartment li,
   .building-parameters-home li,
   .building-parameters-room li,
@@ -3011,7 +3258,9 @@ li p {
   .test-9 li,
   .test-10 li,
   .test-11 li,
-  .test-12 li {
+  .test-12 li,
+  .test-13 li,
+  .test-14 li {
     vertical-align: top;
   }
   .building-parameters-apartment li:nth-child(1),
@@ -3025,7 +3274,9 @@ li p {
   .test-9 li:nth-child(1),
   .test-10 li:nth-child(1),
   .test-11 li:nth-child(1),
-  .test-12 li:nth-child(1) {
+  .test-12 li:nth-child(1),
+  .test-13 li:nth-child(1),
+  .test-14 li:nth-child(1) {
     background: #fff;
   }
   .building-parameters-apartment p,
@@ -3039,7 +3290,9 @@ li p {
   .test-9 p,
   .test-10 p,
   .test-11 p,
-  .test-12 p {
+  .test-12 p,
+  .test-13 p,
+  .test-14 p {
     display: block;
     width: auto;
     text-align: center;
@@ -3055,7 +3308,9 @@ li p {
   .test-9 label,
   .test-10 label,
   .test-11 label,
-  .test-12 label {
+  .test-12 label,
+  .test-13 label,
+  .test-14 label {
     display: inline-block;
     width: 85%;
     cursor: pointer;
@@ -3073,7 +3328,9 @@ li p {
   .test-9 span,
   .test-10 span,
   .test-11 span,
-  .test-12 span {
+  .test-12 span,
+  .test-13 span,
+  .test-14 span {
     margin: 0;
   }
   .search-menu-apartment {
@@ -3114,7 +3371,6 @@ li p {
     color: #000;
     font-size: 14px;
     border-right: 2px dotted #e0e0e0;
-    text-align: center;
     cursor: pointer;
     width: 19.5%;
     padding: 10px 0;
@@ -3125,11 +3381,13 @@ li p {
     display: inline-block;
     vertical-align: middle;
     cursor: pointer;
-    text-align: center;
-    padding: 0;
-    width: 80%;
+    padding: 6px 0 0;
+    width: 82%;
     min-width: 95px;
     margin: auto;
+  }
+  .filter-block-big-menu label img {
+    margin-right: 6px !important;
   }
   #navigation-true {
     padding: 10px 200px;
@@ -3247,15 +3505,8 @@ li p {
   .footer ul i {
     font-size: 30px;
   }
-  .policy img,
-  .footer ul img {
-    width: 50px;
-  }
   .footer ul {
-    display: inline-block;
-    vertical-align: middle;
     width: auto;
-    margin: auto;
   }
   .lant-io {
     display: inline-block;
@@ -3313,9 +3564,6 @@ li p {
   }
   .price p {
     font-size: 12px;
-  }
-  .price span {
-    margin: auto 2px auto 7px;
   }
 }
 @media (min-width: 601px) and (max-width: 1100px) {
@@ -3495,45 +3743,6 @@ li p {
   .apartment-settings select {
     display: none;
   }
-  .appearance-of-the-apartment {
-    width: auto;
-    left: 5vw;
-    right: 5vw;
-  }
-  .appearance-of-the-apartment ul {
-    margin: auto;
-    float: none;
-    width: 82%;
-  }
-  .appearance-of-the-apartment li {
-    display: block;
-    text-align: center;
-    padding: 20px 10px;
-    width: auto;
-  }
-  .appearance-of-the-apartment input {
-    margin: 8px 12px;
-    width: 60%;
-  }
-  .appearance-of-the-apartment p {
-    display: inline-block;
-    vertical-align: middle;
-    text-align: left;
-    padding: 0;
-    width: 100px;
-    margin: auto;
-  }
-  .appearance-of-the-apartment p span {
-    display: inline-block;
-    text-align: center;
-    width: 25px;
-    height: 25px;
-    font-size: 11px;
-    line-height: 25px;
-  }
-  .appearance-of-the-apartment select {
-    display: none;
-  }
   .building-parameters-filter {
     width: auto;
     left: 5vw;
@@ -3572,61 +3781,6 @@ li p {
   }
   .building-parameters-filter select {
     display: none;
-  }
-  .appearance-of-the-build {
-    width: auto;
-    left: 5vw;
-    right: 5vw;
-  }
-  .appearance-of-the-build ul {
-    margin: auto;
-    float: none;
-    width: 82%;
-  }
-  .appearance-of-the-build li {
-    display: block;
-    text-align: center;
-    padding: 20px 10px;
-    width: auto;
-  }
-  .appearance-of-the-build input {
-    margin: 8px 12px;
-    width: 60%;
-  }
-  .appearance-of-the-build p {
-    display: inline-block;
-    vertical-align: middle;
-    padding: 0;
-    text-align: left;
-    width: 100px;
-    margin: auto;
-  }
-  .appearance-of-the-build p span {
-    display: inline-block;
-    text-align: center;
-    width: 25px;
-    height: 25px;
-    font-size: 11px;
-    line-height: 25px;
-  }
-  .appearance-of-the-build select {
-    display: none;
-  }
-  .attachments ul {
-    display: block;
-    margin: auto;
-    float: none;
-    width: auto;
-  }
-  .attachments li {
-    display: block;
-    text-align: center;
-    width: auto;
-    padding: 15px 10vw;
-  }
-  .attachments p {
-    text-align: left;
-    padding: 15px 5px 15px;
   }
   .names-parameters {
     display: block;
@@ -3756,7 +3910,6 @@ li p {
   }
   .filter-block-big-menu {
     margin: auto;
-    text-align: center;
     float: none;
   }
   .filter-block-big-menu li {
@@ -3765,7 +3918,6 @@ li p {
     padding: 8px 5px;
     border: none;
     vertical-align: middle;
-    text-align: center;
   }
   .filter-block-big-menu li:nth-child(2) {
     margin-left: 0;
@@ -4203,7 +4355,6 @@ li p {
     float: none;
   }
   .property-type-apartment-settings {
-    position: absolute;
     left: 5vw;
     right: 5vw;
     width: auto;
@@ -4318,27 +4469,6 @@ li p {
   .apartment-settings input {
     width: 75%;
   }
-  .appearance-of-the-apartment {
-    position: absolute;
-    left: 0;
-    right: 0;
-    width: auto;
-  }
-  .appearance-of-the-apartment ul {
-    width: auto;
-    display: block;
-  }
-  .appearance-of-the-apartment li {
-    text-align: center;
-  }
-  .appearance-of-the-apartment p {
-    width: 100%;
-    margin: 0;
-    padding: 10px 20% 0;
-  }
-  .appearance-of-the-apartment input {
-    width: 75%;
-  }
   .building-parameters-filter {
     position: absolute;
     left: 0;
@@ -4363,58 +4493,6 @@ li p {
   }
   .building-parameters-filter input {
     width: 75%;
-  }
-  .appearance-of-the-build {
-    position: absolute;
-    left: 0;
-    right: 0;
-    width: auto;
-  }
-  .appearance-of-the-build ul {
-    width: auto;
-    display: block;
-  }
-  .appearance-of-the-build li {
-    text-align: center;
-  }
-  .appearance-of-the-build p {
-    width: 100%;
-    margin: 0;
-    padding: 10px 20% 0;
-  }
-  .appearance-of-the-build input {
-    width: 75%;
-  }
-  .attachments {
-    left: 5vw;
-    right: 5vw;
-  }
-  .attachments h2 {
-    font-size: 17px;
-    padding: 15px 0;
-  }
-  .attachments ul {
-    display: block;
-    margin: auto;
-    float: none;
-    width: auto;
-  }
-  .attachments li {
-    text-align: center;
-    clear: none;
-    padding: 10px 0;
-    width: auto;
-  }
-  .attachments p {
-    display: block;
-    width: auto;
-    text-align: center;
-    padding: 14px 4px;
-  }
-  .attachments button {
-    padding: 10px;
-    width: 195px;
-    font-size: 18px;
   }
   #slider-range span,
   #slider-range-by span,
@@ -4520,7 +4598,6 @@ li p {
   }
   .filter-block-big-menu li {
     display: block;
-    text-align: left;
     font-size: 14px;
     padding: 20px ;
     width: auto;
@@ -4825,15 +4902,13 @@ li p {
 /** Прогресс бар **/
 .progress-bar {
   position: absolute;
+  margin: 48px 0 0 65px;
   display: block;
-  bottom: 15px;
-  right: 20px;
   background-color: #f6f6f6;
   padding: 0;
   width: 110px;
   font-size: 5px;
   border-radius: 5px;
-  z-index: 3;
   box-shadow: inset 0 0 1px 0 #e2e2e2;
 }
 .progress-bar span {
@@ -4883,30 +4958,66 @@ li p {
 }
 .search-and-filter {
   position: relative;
-  padding-top: 80px;
+  padding-top: 110px;
   z-index: 1;
   min-height: 100vh;
   background: #f3f3f3;
+}
+.jq-selectbox {
+  z-index: auto !important;
 }
 .big-search-menu {
   display: block;
   width: auto;
   background: #fff;
 }
+.filter-button {
+  float: none !important;
+  margin-left: 20px;
+  width: 120px!important;
+  height: 35px!important;
+  padding: 5px 10px !important;
+  border-radius: 30px!important;
+  border: 1px solid #dcdcdc!important;
+  background: #f3f3f3!important;
+  color: #6c6c6c!important;
+}
+.filter-button:hover {
+  background: #bfbfbf!important;
+  transition: 1.5s!important;
+}
+.left-names-filter {
+  display: inline-block;
+  vertical-align: middle;
+  text-align: left;
+  margin: auto;
+  font-size: 10px;
+  width: auto !important;
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.label-filter {
+  display: inline-block;
+  vertical-align: middle;
+  text-align: left;
+  width: 70%;
+}
 .filter-block-big-menu {
   display: flex;
   flex-flow: row wrap;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  align-content: center;
+  padding: 20px 0;
   background: #f3f3f3;
 }
 .filter-block-big-menu li {
-  width: 26%;
+  width: 26.5%;
+  padding: 10px;
+  margin: auto;
+  min-width: 80px;
   border-right: 2px dotted #bebebe;
   background: none;
-  margin: auto 2px;
-  font-size: 12px;
 }
 .filter-block-big-menu input[type="number"] {
   position: relative;
@@ -4919,6 +5030,20 @@ li p {
   font-weight: bold;
   font-size: 24px;
 }
+.filter-block-big-menu .select {
+  z-index: auto;
+  overflow: initial;
+  text-overflow: ellipsis;
+}
+.filter-block-big-menu .select > li {
+  width: auto !important;
+  height: auto;
+}
+.filter-block-big-menu .select > label {
+  width: 58%;
+  margin-left: 15px;
+  padding: 0;
+}
 .menu-left-window {
   width: 10% !important;
 }
@@ -4926,9 +5051,14 @@ li p {
   width: 60%;
 }
 .numbers {
+  vertical-align: middle;
+}
+.numbers label {
   display: inline-block;
   vertical-align: middle;
-  width: 65%;
+  padding: 0;
+  width: 58%!important;
+  min-width: inherit;
 }
 .number {
   position: relative;
@@ -4955,19 +5085,15 @@ li p {
   display: block;
   width: auto;
 }
-.left-names-filter {
-  display: inline-block;
-  vertical-align: middle;
-  color: #bebebe !important;
-  text-align: left;
-  font-size: 13px;
-  width: 30%;
-}
 .search-more-precisely-search {
   border: none;
 }
-.background-image {
-  position: relative;
+.header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 999;
   background: url("../../../template/images/header-background-search.png") no-repeat center;
   background-size: cover;
   height: 80px;
@@ -4994,7 +5120,7 @@ li p {
   right: 20px !important;
 }
 .show-result-parametrs {
-  display: inline-flex;
+  display: none;
   flex-flow: row wrap;
   justify-content: flex-start;
   align-items: flex-start;
