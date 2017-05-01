@@ -1,9 +1,9 @@
 <?php
 return array(
     // DataBase
-    'db_host' => '192.168.0.2',
-    'db_username' => 'lantio',
-    'db_password' => '112233',
+    'db_host' => '91.202.180.160',
+    'db_username' => 'postgres',
+    'db_password' => 'ZSH1wb88',
     'db' => 'site',
 
     // WebSocket

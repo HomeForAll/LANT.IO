@@ -93,7 +93,16 @@ class SearchController extends Controller
         $data['formData'] = $this->model->getRentApartData();
 
         $this->ifAJAX(function() {
-            echo json_encode($this->model->getRentApartData(), JSON_UNESCAPED_UNICODE);
+            foreach ($_POST as &$value) {
+                if (preg_match('~(Пустая форма Option)~i', $value)) {
+                    $value = '';
+                }
+            }
+
+            $data = $this->model->getRentApartData();
+
+            print_r($_POST);
+//            echo json_encode($data, JSON_UNESCAPED_UNICODE);
         });
 
         $this->view->render('search', $data);
