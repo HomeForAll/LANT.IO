@@ -8,6 +8,10 @@
   background: #f3f3f3;
 }
 
+.jq-selectbox {
+  z-index: auto !important;
+}
+
 .big-search-menu {
   display: block;
   width: auto;
@@ -76,6 +80,7 @@
     font-size: 24px;
   }
   & .select {
+    z-index: auto;
     overflow: initial;
     text-overflow: ellipsis;
   }
@@ -174,7 +179,8 @@
 }
 
 .show-result-parametrs {
-  display: inline-flex;
+  display: none;
+  //display: inline-flex;
   flex-flow: row wrap;
   justify-content: flex-start;
   align-items: flex-start;

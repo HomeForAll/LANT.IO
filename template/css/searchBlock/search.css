@@ -763,7 +763,7 @@
 }
 .property-type-apartment-settings {
   display: none;
-  position: absolute;
+  position: fixed;
   margin: auto;
   left: 15vw;
   right: 15vw;
@@ -2438,14 +2438,15 @@
 }
 .appreciate-the-apartment input {
   width: 80%;
-  padding: 10px;
   border: none;
   color: #252525;
+  padding: 10px;
+  font-size: 14px;
   border-right: 2px dotted #e0e0e0;
   background: #fff;
 }
 .appreciate-the-apartment input::placeholder {
-  color: #8a8686;
+  color: #333;
 }
 .appreciate-the-apartment button {
   padding: 23px 10px;
@@ -2476,19 +2477,27 @@
   color: #595959;
   font-size: 13px;
 }
-.appreciate-the-rooms span {
+.appreciate-the-rooms a {
   display: inline-block;
   border-radius: 100%;
   text-align: center;
   line-height: 35px;
-  background: none;
   width: 35px;
   height: 35px;
   color: #000;
   cursor: pointer;
 }
-.appreciate-the-rooms span:hover {
+.appreciate-the-rooms a:active {
+  background: #71cb6f;
+}
+.appreciate-the-rooms a:link {
+  color: #000;
+}
+.appreciate-the-rooms a:hover {
   color: #fff;
+  background: #71cb6f;
+}
+.appreciate-the-rooms a:visited {
   background: #71cb6f;
 }
 .estimate-the-area {
@@ -2548,8 +2557,16 @@
   padding: 0 10px 0 14px;
 }
 .filter-apartment {
+  display: block;
   text-align: left;
-  padding: 21px 33px 9px;
+  padding: 20px 50px 10px;
+}
+.filter-apartment img {
+  vertical-align: middle;
+}
+.filter-apartment li {
+  display: inline-block;
+  vertical-align: middle;
 }
 .filter-apartment a {
   border-bottom: 1px solid #d8d6d6;
@@ -2562,6 +2579,12 @@
   margin-top: 8px;
   font-weight: 300;
   color: #a8a8a8;
+}
+.filter-apartment label {
+  padding: 10px;
+}
+.filter-apartment .jq-selectbox {
+  margin-left: 12px;
 }
 #style {
   width: 64px;
@@ -2664,7 +2687,6 @@
   font-size: 13px;
   color: #bcbcbc;
   vertical-align: middle;
-  margin: auto 4px auto 19px;
 }
 .price img {
   margin-right: 10px;
@@ -3543,9 +3565,6 @@ li p {
   .price p {
     font-size: 12px;
   }
-  .price span {
-    margin: auto 2px auto 7px;
-  }
 }
 @media (min-width: 601px) and (max-width: 1100px) {
   .registration-users,
@@ -4336,7 +4355,6 @@ li p {
     float: none;
   }
   .property-type-apartment-settings {
-    position: absolute;
     left: 5vw;
     right: 5vw;
     width: auto;
@@ -4945,6 +4963,9 @@ li p {
   min-height: 100vh;
   background: #f3f3f3;
 }
+.jq-selectbox {
+  z-index: auto !important;
+}
 .big-search-menu {
   display: block;
   width: auto;
@@ -5010,6 +5031,7 @@ li p {
   font-size: 24px;
 }
 .filter-block-big-menu .select {
+  z-index: auto;
   overflow: initial;
   text-overflow: ellipsis;
 }
@@ -5098,7 +5120,7 @@ li p {
   right: 20px !important;
 }
 .show-result-parametrs {
-  display: inline-flex;
+  display: none;
   flex-flow: row wrap;
   justify-content: flex-start;
   align-items: flex-start;

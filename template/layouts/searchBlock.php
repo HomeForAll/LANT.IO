@@ -895,7 +895,7 @@
 <script src="/template/js/mapController.js"></script>
 <script src="/template/js/jquery.bxslider.min.js"></script>
 <script src="/template/js/forms.editor.handler.js"></script>
-<script src="/bower_components/select2/dist/js/select2.min.js"></script>
+<script src="/template/js/jquery.parallax.min.js"></script>
 <script src="/template/js/main.min.js"></script>
 </body>
 </html>

@@ -8626,14 +8626,14 @@ $siteModel = Registry::model('site');
             </div>
             <div class="appreciate-the-rooms">
                 <p>Кол-во<br>комнат</p>
-                <span>1</span>
-                <span>2</span>
-                <span>3</span>
-                <span>4</span>
-                <span>4+</span>
+                <a href="#">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">4+</a>
             </div>
             <div class="estimate-the-area">
-                <label>Площадь м2
+                <label>Площадь м<sup>2</sup>
                     <input name="none" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}">
                 </label>
             </div>
@@ -8643,17 +8643,35 @@ $siteModel = Registry::model('site');
         <div class="top-apartments">
             <h2>Лучшие объявления за 24 часа</h2>
             <div class="filter-and-top-blocks">
-                <div class="filter-apartment">
-                    <div class="select">
-                        <label for="">
-                            <select name="0">
-                                <option>Language of communication</option>
-                                <option>English</option>
-                                <option>Spanish</option>
-                            </select>
-                        </label>
-                    </div>
-                </div>
+                <ul class="filter-apartment">
+                    <li class="pointer" onclick="filterOptionsApartments()">
+                        <span class="value-text">
+                            <img src="../../template/images/apartments.png" alt="apartments">Тип недвижимости
+                        </span>
+                    </li>
+                    <li>
+                        <div class="select">
+                            <label for="">От
+                                <select name="0">
+                                    <option>20.000</option>
+                                    <option>40.000</option>
+                                    <option>80.000</option>
+                                </select>
+                            </label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="select">
+                            <label for="">Площадь
+                                <select name="0">
+                                    <option>От 120 м2 До 230 м2</option>
+                                    <option>От 120 м2 До 230 м2</option>
+                                    <option>От 120 м2 До 230 м2</option>
+                                </select>
+                            </label>
+                        </div>
+                    </li>
+                </ul>
                 <!-- Основной блок TOP апартаментов -->
                 <div class="all-apartments-top">
                     <!-- Информация одного TOP апартамента -->
