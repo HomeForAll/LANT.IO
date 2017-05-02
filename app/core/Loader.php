@@ -4,7 +4,7 @@ class Loader
 {
     private static $paths = array();
     private static $directories = array();
-    
+
     /*
      * Подключает файл класса по пути полученному из файла /app/config/paths.php,
      * если его нет, производит поиск, подключает и записывает путь к файлу в paths.php
@@ -12,53 +12,62 @@ class Loader
     public static function classLoad($class)
     {
         if (isset(static::$paths[$class])) {
-            include_once static::$paths[$class];
+            if (file_exists(self::$paths[$class])) {
+                include_once self::$paths[$class];
+            } else {
+                self::writeNewPath($class);
+            }
         } else {
-            self::getDirPaths(ROOT_DIR);
-            
-            foreach (static::$directories as $directory) {
-                $path = $directory . '/' . $class . '.php';
-                
-                if (file_exists($path)) {
-                    include_once $path;
-                    self::setClassPath($class, $path);
-                    self::putPathsToFile(static::$paths);
-                    break;
-                }
+            self::writeNewPath($class);
+        }
+    }
+
+    private static function writeNewPath($class)
+    {
+        self::getDirPaths(ROOT_DIR);
+
+        foreach (static::$directories as $directory) {
+            $path = $directory . '/' . $class . '.php';
+
+            if (file_exists($path)) {
+                include_once $path;
+                self::setClassPath($class, $path);
+                self::putPathsToFile(static::$paths);
+                break;
             }
         }
     }
-    
+
     /*
      * Получает список директроий по указанному пути
      */
     private static function getDirectories($path)
     {
         chdir($path);
-        
+
         $directories = array();
-        $dirContent  = scandir($path);
-        
+        $dirContent = scandir($path);
+
         for ($i = 0; isset($dirContent[$i]); $i++) {
             if ($dirContent[$i] !== '.' && $dirContent[$i] !== '..' && is_dir($dirContent[$i])) {
                 array_push($directories, $dirContent[$i]);
             }
         }
-        
+
         return $directories;
     }
-    
+
     /*
      * Генерирует пути папок которые находятся в заданной директории $path
      */
     private static function getDirPaths($path)
     {
         $path = str_replace('\\', '/', $path);
-        
+
         array_push(static::$directories, (string)$path);
-        
+
         $directories = self::getDirectories($path);
-        
+
         if (!empty($directories)) {
             foreach ($directories as $directory) {
                 $dirPath = $path . '/' . $directory;
@@ -66,23 +75,23 @@ class Loader
             }
         }
     }
-    
+
     private static function setClassPath($className, $path)
     {
         static::$paths[$className] = (string)$path;
     }
-    
+
     private static function putPathsToFile(Array $array)
     {
-        $file = fopen(ROOT_DIR . '/app/config/paths.conf', 'w+');
-        chmod(ROOT_DIR . '/app/config/paths.conf', 0777);
+        $file = fopen(ROOT_DIR . '/app/config/map.php', 'w+');
+        chmod(ROOT_DIR . '/app/config/map.php', 0777);
         fwrite($file, serialize($array));
-        fclose ($file);
+        fclose($file);
     }
-    
+
     public static function getPaths()
     {
-        static::$paths = unserialize(file_get_contents(ROOT_DIR . '/app/config/paths.conf'));
+        static::$paths = unserialize(file_get_contents(ROOT_DIR . '/app/config/map.php'));
     }
 }
 
