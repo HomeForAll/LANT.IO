@@ -2,7 +2,7 @@
 <?php if (isset($_SESSION['authorized'])) { ?>
     <div id="navigation">
         <div class="logo-img">
-            <a href="#"><img src="../../template/images/logo.png" alt="logo"></a>
+            <a href="../../index.php"><img src="../../template/images/logo.png" alt="logo"></a>
         </div>
         <div class="registration-users">
             <div class="place-an-ad">

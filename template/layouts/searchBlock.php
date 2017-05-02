@@ -13,7 +13,7 @@
 <div class="header"><?php include_once 'header.php' ?></div>
 <div class="search-and-filter">
     <div class="container-w-0">
-        <form action="">
+        <form action="" id="form">
             <div class="big-search-menu">
                 <div class="apartment-settings-apartment">
                     <h2>Исходные параметры квартиры</h2>
@@ -575,16 +575,16 @@
                         </ul>
                     </div>
                 </div>
-                <button>Найти</button>
+                <button class="button-style">Найти</button>
                 <ul class="filter-block-big-menu">
                     <li onclick="allParam('bigOption')" class="menu-left-window">
-                        <label for="#amountSearch"><img src="../../template/images/s3.png" alt="price"> Цена</label>
+                        <label for="#amountSearch"><img src="../../template/images/s3.png" alt="price">Цена</label>
                         <div class="showBigOptions">
                             <p>От<label for="amountBeforeSearch"><input name="price-min" type="text" id="amountBeforeSearch" readonly disabled></label>
                             </p>
                             <p>До<label for="amountAfterSearch"><input name="price-max" type="text" id="amountAfterSearch" readonly disabled></label>
                             </p>
-                            <div id="slider-range-search"></div>
+                            <div id="main-slider"></div>
                             <div class="currency">
                                 <p>Валюта</p>
                                 <button class="closeCurrency"><i class="fa fa-rub" aria-hidden="true"></i>рубли</button>

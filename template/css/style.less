@@ -964,25 +964,16 @@
 }
 
 .showBigOptions {
-  position: absolute;
+  position: fixed;
+  left: 0;
+  right: 0;
+  margin: auto;
   display: none;
   padding: 30px;
   width: 400px;
-  margin: calc(25px) 0 0 calc(-120px);
   background: #fff;
   z-index: 60;
   box-shadow: 0 0 0 3px #f7f7f7;
-  &:before {
-    content: '';
-    display: block;
-    position: relative;
-    width: 0;
-    height: 0;
-    margin: -44px 0 25px calc(165px);
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 10px solid #fbfbfb;
-  }
   input {
     display: inline-block;
     text-align: right;
@@ -4620,7 +4611,6 @@
 //------------------------------
 
 /** Стили скроллинга **/
-::-webkit-scrollbar{
+::-webkit-scrollbar {
   width: 2px;
 }
-//------------------------------                                                                                                                                                                                                                                                                                                                                                                           

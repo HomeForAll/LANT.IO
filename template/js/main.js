@@ -548,11 +548,12 @@ $("#form").on('submit', function(e) { // устанавливаем событи
    });
 
     $.ajax({
-        type: "POST",
-        url: "/search",
+        method: 'POST',
+        url: '/search',
         data: form_data,
         success: function(form_data) {
             window.location.href = '/template/layouts/searchBlock.php';
+            JSON.stringify(form_data);
             console.log('Собранные данные - ', form_data);
         },
         error: function() {

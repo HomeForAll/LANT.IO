@@ -6,12 +6,14 @@ $siteModel = Registry::model('site');
 <head>
     <meta charset="UTF-8">
     <title><?php $this->title(); ?></title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/template/css/jquery.formstyler.css">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/template/css/jquery.bxslider.min.css">
+<!--    <link rel="stylesheet" href="/bower_components/n3-charts/build/LineChart.css">-->
     <link rel="stylesheet" href="/template/css/style.css">
     <link rel="stylesheet" href="/template/css/news_style.css">
+    <!--<link rel="stylesheet" href="/template/css/graphics.css">-->
     <script type="text/javascript" src="/template/js/socket.io.min.js"></script>
     <?php
     // Подключение стилей в контроллере
@@ -8596,6 +8598,9 @@ $siteModel = Registry::model('site');
                 <div class="schedule-interface">
                     <div class="year-schedule-interface"></div>
                 </div>
+                <div class="container" ng-app="app" ng-controller="MainCtrl">
+                    <linechart data="data" options="options"></linechart>
+                </div>
                 <a href="#"><span id="yellow"></span>Октябрь</a>
                 <a href="#"><span id="green"></span>Ноябрь</a>
                 <a href="#"><span id="blue"></span>Декабрь</a>
@@ -9002,6 +9007,9 @@ if (isset($this->data['script_footer'])) {
 ?>
 <script src="/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="/bower_components/jquery-ui/jquery-ui.min.js"></script>
+<!--<script src="/bower_components/angular/angular.min.js"></script> -->
+<!--<script src="bower_components/n3-charts/build/LineChart.js"></script>-->
+<!--<script src="/bower_components/d3/d3.min.js"></script>-->
 <script src="/template/js/jquery.formstyler.min.js"></script>
 <script src="//api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
 <script src="/template/js/mapController.js"></script>
@@ -9009,6 +9017,6 @@ if (isset($this->data['script_footer'])) {
 <script src="/template/js/forms.editor.handler.js"></script>
 <script src="/template/js/jquery.parallax.min.js"></script>
 <script src="/template/js/main.min.js"></script>
+<!--<script src="/template/js/graphics.min.js"></script>-->
 </body>
 </html>
-
