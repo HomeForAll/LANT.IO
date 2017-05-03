@@ -72,33 +72,6 @@ $(document).ready(function(){
 });
 //---------------------------------------------------------
 
-/** Цвета линий метро **/
-function formatState (state) {
-    var $allMetroLines = $('<span><a class="branch-line"></a>' + state.text + '</span>'),
-        $tagSearchByClass = $allMetroLines.find('a');
-
-    if (state.id === '0') {
-        $tagSearchByClass.css({'background': 'orange'});
-    }
-    if (state.id === '1') {
-        $tagSearchByClass.css({'background': 'red'});
-    }
-    if (state.id === '2') {
-        $tagSearchByClass.css({'background': 'blue'});
-    }
-    if (state.id === '3') {
-        $tagSearchByClass.css({'background': 'silver'});
-    }
-    if (state.id === '4') {
-        $tagSearchByClass.css({'background': 'yellowgreen'});
-    }
-
-    if (!state.id) {
-        return state.text;
-    } else return $allMetroLines;
-}
-//---------------------------------------------------------
-
 /** Отслежка и изменение расширенного и простого блока **/
 function choiceBlock(allBlock) {
     if (!rootBlock) {return false}
@@ -535,7 +508,7 @@ function closeFixedBlock() {
 }
 //---------------------------------------------------------
 
-/** Получение данных через Ajax и отправка данных**/
+/** Получение и отправка данных через Ajax **/
 $("#form").on('submit', function(e) { // устанавливаем событие отправки для формы с id=form
     var form_data = $(this).serialize(); // собераем все данные из формы
 
@@ -553,14 +526,57 @@ $("#form").on('submit', function(e) { // устанавливаем событи
         data: form_data,
         success: function(form_data) {
             window.location.href = '/template/layouts/searchBlock.php';
-            JSON.stringify(form_data);
-            console.log('Собранные данные - ', form_data);
+            renderAllApartments(form_data);
         },
         error: function() {
             console.log('Ошибка отправки');
         }
     });
 });
+
+$("#form_s").on('submit', function(e) { // устанавливаем событие отправки для формы с id=form
+    var form_data = $(this).serialize(); // собераем все данные из формы
+
+    e.preventDefault();
+
+    $('option').each(function () {
+        if ($(this)) {
+            $(this).val('');
+        }
+    });
+
+    $.ajax({
+        method: 'POST',
+        url: '/search',
+        data: form_data,
+        success: function(form_data) {
+            renderAllApartments(form_data);
+        },
+        error: function() {
+            console.log('Ошибка отправки');
+        }
+    });
+});
+
+function renderAllApartments(data) {
+    var $topBlock = $('<div>').addClass('top-block'),
+        $leftWallpaper = $('<div>').addClass('left-wallpaper'),
+        $rightInformationBlock = $('<div>').addClass('right-information-block'),
+        $priceAndViewTheApartment = $('<div>').addClass('price-and-view-the-apartment'),
+        $price = $('<div>').addClass('price'),
+        $viewTheApartment = $('<div>').addClass('view-the-apartment');
+
+    console.log('Нужный массив data - ', data[1]);
+    console.log('Нужный массив data object - ', data);
+
+    $('.result-all-apartments').prepend($topBlock);
+    $topBlock.append($leftWallpaper, $rightInformationBlock);
+    $leftWallpaper.append('<p>2-комн.кв.134м<sup>2</sup></p>');
+    $rightInformationBlock.append('<span>' + data.title + '</span>', '<p>' + data.content + '</p>', $priceAndViewTheApartment);
+    $priceAndViewTheApartment.append($price, $viewTheApartment);
+    $price.append();
+    $viewTheApartment.append('<a href="#"><img src="../../template/images/show.png" alt="show"></a>')
+}
 //---------------------------------------------------------
 
 /** Фильтр - Цена **/
