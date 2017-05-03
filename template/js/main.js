@@ -524,6 +524,7 @@ $("#form").on('submit', function(e) { // устанавливаем событи
         method: 'POST',
         url: '/search',
         data: form_data,
+        dataType: 'Json',
         success: function(form_data) {
             window.location.href = '/template/layouts/searchBlock.php';
             renderAllApartments(form_data);
@@ -549,6 +550,7 @@ $("#form_s").on('submit', function(e) { // устанавливаем событ
         method: 'POST',
         url: '/search',
         data: form_data,
+        dataType: 'Json',
         success: function(form_data) {
             renderAllApartments(form_data);
         },
@@ -566,15 +568,22 @@ function renderAllApartments(data) {
         $price = $('<div>').addClass('price'),
         $viewTheApartment = $('<div>').addClass('view-the-apartment');
 
-    console.log('Нужный массив data - ', data[1]);
-    console.log('Нужный массив data object - ', data);
+    //for (var i = 0; i < data.length; i++) {
+    //    var $topBlock = $('<div>').addClass('top-block');
+    //    console.log('Запустили - ', data.length, 'раз');
+    //    $('.result-all-apartments').prepend($topBlock);
+    //}
 
-    $('.result-all-apartments').prepend($topBlock);
+    $('.result-all-apartments').prepend($topBlock); // убрать
     $topBlock.append($leftWallpaper, $rightInformationBlock);
-    $leftWallpaper.append('<p>2-комн.кв.134м<sup>2</sup></p>');
-    $rightInformationBlock.append('<span>' + data.title + '</span>', '<p>' + data.content + '</p>', $priceAndViewTheApartment);
+    $leftWallpaper.append('<img src="'+ data[1].preview_img +'">'
+        + '<p>'+ data[1].title +'<sup>2</sup></p>');
+    $rightInformationBlock.append('<span>' + data[1].price +
+        '<i class="fa fa-rub" aria-hidden="true"><sub>/мес</sub></i></span>',
+        '<p>' + data[1].content + '</p>', $priceAndViewTheApartment);
     $priceAndViewTheApartment.append($price, $viewTheApartment);
-    $price.append();
+    $price.append('<p><a href=""><img src="../../template/images/m.png" alt="metro"></a>' + data[1].price + '</p>',
+        '<span><img src="../../template/images/people.png" alt=""></span>');
     $viewTheApartment.append('<a href="#"><img src="../../template/images/show.png" alt="show"></a>')
 }
 //---------------------------------------------------------
