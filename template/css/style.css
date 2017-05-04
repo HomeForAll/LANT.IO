@@ -1973,15 +1973,14 @@
   z-index: 2;
   margin: auto;
   cursor: pointer;
-  padding-bottom: 1;
+  padding: 0 0 1px;
   text-shadow: 1px 1px 5px #933d38;
   color: #fff;
   font-size: 15px;
   width: auto;
-  padding: 0;
 }
 .big-search a:hover {
-  padding-bottom: 0;
+  padding: 0;
   border-bottom: 1px solid #fff;
 }
 .big-search i {

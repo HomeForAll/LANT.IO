@@ -9014,8 +9014,9 @@ if (isset($this->data['script_footer'])) {
 <script src="//api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
 <script src="/template/js/mapController.js"></script>
 <script src="/template/js/jquery.bxslider.min.js"></script>
-<script src="/template/js/forms.editor.handler.js"></script>
 <script src="/template/js/jquery.parallax.min.js"></script>
+<script src="/bower_components/handlebars/handlebars.min.js"></script>
+<script src="/bower_components/handlebars/handlebars.runtime.min.js"></script>
 <script src="/template/js/main.min.js"></script>
 <!--<script src="/template/js/graphics.min.js"></script>-->
 </body>

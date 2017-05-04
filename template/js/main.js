@@ -540,6 +540,8 @@ $("#form_s").on('submit', function(e) { // устанавливаем событ
 
     e.preventDefault();
 
+    $('.result-all-apartments').find('div').remove();
+
     $('option').each(function () {
         if ($(this)) {
             $(this).val('');
@@ -561,30 +563,29 @@ $("#form_s").on('submit', function(e) { // устанавливаем событ
 });
 
 function renderAllApartments(data) {
-    var $topBlock = $('<div>').addClass('top-block'),
-        $leftWallpaper = $('<div>').addClass('left-wallpaper'),
-        $rightInformationBlock = $('<div>').addClass('right-information-block'),
-        $priceAndViewTheApartment = $('<div>').addClass('price-and-view-the-apartment'),
-        $price = $('<div>').addClass('price'),
-        $viewTheApartment = $('<div>').addClass('view-the-apartment');
+    //var $leftWallpaper = $('<div>').addClass('left-wallpaper'),
+    //    $rightInformationBlock = $('<div>').addClass('right-information-block'),
+    //    $priceAndViewTheApartment = $('<div>').addClass('price-and-view-the-apartment'),
+    //    $price = $('<div>').addClass('price'),
+    //    $viewTheApartment = $('<div>').addClass('view-the-apartment');
 
-    //for (var i = 0; i < data.length; i++) {
-    //    var $topBlock = $('<div>').addClass('top-block');
-    //    console.log('Запустили - ', data.length, 'раз');
-    //    $('.result-all-apartments').prepend($topBlock);
-    //}
+    var source = $("#entry-template").html();
+    var template = Handlebars.compile(source);
+    var context = {title: "My New Post", body: "This is my first post!"};
+    var html = template(context);
 
-    $('.result-all-apartments').prepend($topBlock); // убрать
-    $topBlock.append($leftWallpaper, $rightInformationBlock);
-    $leftWallpaper.append('<img src="'+ data[1].preview_img +'">'
-        + '<p>'+ data[1].title +'<sup>2</sup></p>');
-    $rightInformationBlock.append('<span>' + data[1].price +
-        '<i class="fa fa-rub" aria-hidden="true"><sub>/мес</sub></i></span>',
-        '<p>' + data[1].content + '</p>', $priceAndViewTheApartment);
-    $priceAndViewTheApartment.append($price, $viewTheApartment);
-    $price.append('<p><a href=""><img src="../../template/images/m.png" alt="metro"></a>' + data[1].price + '</p>',
-        '<span><img src="../../template/images/people.png" alt=""></span>');
-    $viewTheApartment.append('<a href="#"><img src="../../template/images/show.png" alt="show"></a>')
+    $('.result-all-apartments').html(html);
+
+    //$topBlock.append($leftWallpaper, $rightInformationBlock);
+    //$leftWallpaper.append('<img src="'+ data[i].preview_img +'">'
+    //    + '<p>'+ data[i].title +'<sup>2</sup></p>');
+    //$rightInformationBlock.append('<span>' + data[i].price +
+    //    '<i class="fa fa-rub" aria-hidden="true"><sub>/мес</sub></i></span>',
+    //    '<p>' + data[i].content + '</p>', $priceAndViewTheApartment);
+    //$priceAndViewTheApartment.append($price, $viewTheApartment);
+    //$price.append('<p><a href=""><img src="../../template/images/m.png" alt="metro"></a>' + data[i].price + '</p>',
+    //    '<span><img src="../../template/images/people.png" alt="people"></span>');
+    //$viewTheApartment.append('<a href="#"><img src="../../template/images/show.png" alt="show"></a>')
 }
 //---------------------------------------------------------
 
