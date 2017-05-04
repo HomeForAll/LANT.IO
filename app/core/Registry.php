@@ -5,6 +5,10 @@ class Registry
     private static $variables = [];
     private static $models = [];
 
+    /**
+     * @param string $name - Имя переменной
+     * @param $value - Значение
+     */
     public static function set($name, $value)
     {
         self::$variables[$name] = $value;

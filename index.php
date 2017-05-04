@@ -20,6 +20,29 @@ Loader::getPaths();
 Registry::set('config', require ROOT_DIR . '/app/config/config.php');
 Registry::set('routes', require ROOT_DIR . '/app/config/routes.php');
 
-//$db = new \IP2Location\Database('./databases/IP-COUNTRY-SAMPLE.BIN', \IP2Location\Database::FILE_IO);
+/**
+ * geolocation
+ */
+Registry::set('location', new \IP2Location\Database(ROOT_DIR . '/app/config/IP2LOCATION-LITE-DB5.BIN', \IP2Location\Database::FILE_IO));
+
+use GeoIp2\Database\Reader;
+
+$reader = new Reader(ROOT_DIR . '/app/config/GeoLite2-City.mmdb');;
+$record = $reader->city('134.249.129.113');
+
+print($record->country->isoCode . "\n"); // 'US'
+print($record->country->names['ru'] . "\n");
+
+print($record->mostSpecificSubdivision->name . "\n"); // 'Minnesota'
+print($record->mostSpecificSubdivision->isoCode . "\n"); // 'MN'
+
+print($record->city->name . "\n"); // 'Minneapolis'
+
+print($record->postal->code . "\n"); // '55455'
+
+print($record->location->latitude . "\n"); // 44.9733
+print($record->location->longitude . "\n"); // -93.2323
+/*
+ * ****/
 
 (new Router())->run();

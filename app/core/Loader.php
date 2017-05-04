@@ -83,15 +83,15 @@ class Loader
 
     private static function putPathsToFile(Array $array)
     {
-        $file = fopen(ROOT_DIR . '/app/config/map.php', 'w+');
-        chmod(ROOT_DIR . '/app/config/map.php', 0777);
+        $file = fopen(ROOT_DIR . '/app/config/paths.php', 'w+');
+        chmod(ROOT_DIR . '/app/config/paths.php', 0777);
         fwrite($file, serialize($array));
         fclose($file);
     }
 
     public static function getPaths()
     {
-        static::$paths = unserialize(file_get_contents(ROOT_DIR . '/app/config/map.php'));
+        static::$paths = unserialize(file_get_contents(ROOT_DIR . '/app/config/paths.php'));
     }
 }
 
