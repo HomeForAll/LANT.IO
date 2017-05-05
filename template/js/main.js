@@ -569,12 +569,29 @@ function renderAllApartments(data) {
     //    $price = $('<div>').addClass('price'),
     //    $viewTheApartment = $('<div>').addClass('view-the-apartment');
 
-    var source = $("#entry-template").html();
-    var template = Handlebars.compile(source);
-    var context = {title: "My New Post", body: "This is my first post!"};
-    var html = template(context);
+    if (!data) {return false;}
 
-    $('.result-all-apartments').html(html);
+    console.log('массив - ', data);
+
+    for (var i = 0; i < data.length; i++) {
+        var render = data[i];
+        var source = $("#entry-template").html();
+        var template = Handlebars.compile(source);
+        //var context = {title: "Ураа вывелся пост", body: "Ураа вывелось описание квартиры!"};
+        var html = template(render); //context(вместо data)
+
+        //$('.result-all-apartments').load('../html/apartmentsItem.html .top-block');
+        $('.result-all-apartments').html(html);
+        console.log('Перебрали', render);
+    }
+
+    //var source = $("#entry-template").html();
+    //var template = Handlebars.compile(source);
+    //var context = {title: "Ураа вывелся пост", body: "Ураа вывелось описание квартиры!"};
+    //var html = template(data); //context(вместо data)
+
+    //$('.result-all-apartments').load('../html/apartmentsItem.html .top-block');
+    //$('.result-all-apartments').html(html);
 
     //$topBlock.append($leftWallpaper, $rightInformationBlock);
     //$leftWallpaper.append('<img src="'+ data[i].preview_img +'">'
