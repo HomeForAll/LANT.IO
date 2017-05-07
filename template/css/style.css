@@ -203,13 +203,14 @@
   text-align: center;
 }
 #scene {
+  overflow: hidden;
   position: absolute;
-  left: -5vw;
-  right: -5vw;
-  top: -5vh;
-  bottom: -5vh;
-  width: 110vw;
-  height: 100vh;
+  left: -5%;
+  right: 0;
+  top: -5%;
+  bottom: 0;
+  width: auto;
+  height: auto;
   z-index: -5;
 }
 #scene li {
@@ -223,40 +224,39 @@
 }
 #scene li:nth-child(1) {
   z-index: -2;
-  left: 0 !important;
-  right: 0 !important;
-  top: 15% !important;
+  top: 6% !important;
+  bottom: 0;
   width: 100%;
-  height: 95%;
+  height: 95vh;
 }
 #scene li:nth-child(2) {
   z-index: -3;
   left: 15% !important;
-  top: 14% !important;
+  top: 8% !important;
   width: 70%;
-  height: 100%;
+  height: 100vh;
 }
 #scene li:nth-child(3) {
   z-index: -1;
-  top: 48% !important;
+  top: 55vw !important;
   left: 2% !important;
   width: 18%;
-  height: 62%;
+  height: 55vh;
 }
 #scene li:nth-child(4) {
   z-index: -1;
-  top: 25% !important;
-  left: 78% !important;
-  width: 24%;
-  height: 85%;
+  top: 65vh !important;
+  left: 85vw !important;
+  width: 20%;
+  height: 70vh;
 }
 #scene li:nth-child(5) {
   left: -5vw;
   right: -5vw;
-  top: -50vh;
-  bottom: -15vh;
-  width: 150%;
-  height: 150%;
+  top: -5vh;
+  bottom: -5vh;
+  width: 105vw;
+  height: 150vh;
   z-index: -5;
 }
 .apartment-search {

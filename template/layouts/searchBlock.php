@@ -13,7 +13,7 @@
 <div class="header"><?php include_once 'header.php' ?></div>
 <div class="search-and-filter">
     <div class="container-w-0">
-        <form action="" id="form_s">
+        <form action="" class="form">
             <div class="big-search-menu">
                 <div class="apartment-settings-apartment">
                     <h2>Исходные параметры квартиры</h2>
@@ -696,27 +696,6 @@
                     </div>
                 </div>
             </div>
-            <div class="top-block">
-                <div class="left-wallpaper">
-                    <a href="#"><img src="../../template/images/apartments/8.png" alt="apartments"></a>
-                    <p>text<sup>2</sup></p>
-                </div>
-                <div class="right-information-block">
-                    <span>Шикардосная двушка в самом центре столицы</span>
-                    <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
-                    <div class="price-and-view-the-apartment">
-                        <div class="price">
-                            <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img
-                                            src="../../template/images/people.png" alt="">2 мин</span></p>
-                            <span class="decorate-number">25 000<i class="fa fa-rub"
-                                                                   aria-hidden="true"></i><sub>/мес</sub></span>
-                        </div>
-                        <div class="view-the-apartment">
-                            <a href="#"><img src="../../template/images/show.png" alt="show"></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
@@ -730,10 +709,9 @@
 <script src="/bower_components/handlebars/handlebars.runtime.min.js"></script>
 <script src="/bower_components/handlebars/handlebars.min.js"></script>
 <script id="entry-template" type="text/x-handlebars-template">
-{{#each render}}
     <div class="top-block">
         <div class="left-wallpaper">
-            <a href="#"><img src="{{address}}" alt="apartments"></a>
+            <a href="#"><img src="{{preview_img}}" alt="apartments"></a>
             <p>{{title}}<sup>2</sup></p>
         </div>
         <div class="right-information-block">
@@ -755,7 +733,6 @@
             </div>
         </div>
     </div>
-{{/each}}
 </script>
 <script src="/template/js/main.min.js"></script>
 </body>
