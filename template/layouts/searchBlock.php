@@ -13,7 +13,7 @@
 <div class="header"><?php include_once 'header.php' ?></div>
 <div class="search-and-filter">
     <div class="container-w-0">
-        <form action="">
+        <form action="" id="form_2">
             <div class="big-search-menu">
                 <div class="apartment-settings-apartment">
                     <h2>Исходные параметры квартиры</h2>
@@ -575,16 +575,16 @@
                         </ul>
                     </div>
                 </div>
-                <button>Найти</button>
+                <button class="button-style">Найти</button>
                 <ul class="filter-block-big-menu">
                     <li onclick="allParam('bigOption')" class="menu-left-window">
-                        <label for="#amountSearch"><img src="../../template/images/s3.png" alt="price"> Цена</label>
+                        <label for="#amountSearch"><img src="../../template/images/s3.png" alt="price">Цена</label>
                         <div class="showBigOptions">
-                            <p>От<label for="amountBeforeSearch"><input name="price-min" type="text" id="amountBeforeSearch" readonly disabled></label>
+                            <p>От<label for="amountBeforeMain"><input name="price-min" type="text" id="amountBeforeMain" readonly disabled></label>
                             </p>
-                            <p>До<label for="amountAfterSearch"><input name="price-max" type="text" id="amountAfterSearch" readonly disabled></label>
+                            <p>До<label for="amountAfterMain"><input name="price-max" type="text" id="amountAfterMain" readonly disabled></label>
                             </p>
-                            <div id="slider-range-search"></div>
+                            <div id="main-slider"></div>
                             <div class="currency">
                                 <p>Валюта</p>
                                 <button class="closeCurrency"><i class="fa fa-rub" aria-hidden="true"></i>рубли</button>
@@ -655,7 +655,7 @@
                     </div>
                     <div class="small-description">
                         <span>Сдаю квартиру на 1,5 месяца</span>
-                        <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до метро Фрунзенская, рядом
+                        <p class="apartment-description">Шикарная 2-х комнатная квартира в тихом центре города пешая до метро Фрунзенская, рядом
                             магазины, парковка, ночной бухло-ларек</p>
                     </div>
                     <div class="price-and-view-the-apartment">
@@ -696,195 +696,6 @@
                     </div>
                 </div>
             </div>
-            <div class="top-block">
-                <div class="left-wallpaper">
-                    <a href="#"><img src="../../template/images/apartments/8.png" alt="apartments"></a>
-                    <p>2-комн. кв. 134м<sup>2</sup></p>
-                </div>
-                <div class="right-information-block">
-                    <span>Шикардосная двушка в самом центре столицы</span>
-                    <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
-                    <div class="price-and-view-the-apartment">
-                        <div class="price">
-                            <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img
-                                            src="../../template/images/people.png" alt="">2 мин</span></p>
-                            <span class="decorate-number">25 000<i class="fa fa-rub"
-                                                                   aria-hidden="true"></i><sub>/мес</sub></span>
-                        </div>
-                        <div class="view-the-apartment">
-                            <a href="#"><img src="../../template/images/show.png" alt="show"></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="top-block">
-                <div class="left-wallpaper">
-                    <a href="#"><img src="../../template/images/apartments/8.png" alt="apartments"></a>
-                    <p>2-комн. кв. 134м<sup>2</sup></p>
-                </div>
-                <div class="right-information-block">
-                    <span>Шикардосная двушка в самом центре столицы</span>
-                    <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
-                    <div class="price-and-view-the-apartment">
-                        <div class="price">
-                            <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img
-                                            src="../../template/images/people.png" alt="">2 мин</span></p>
-                            <span class="decorate-number">25 000<i class="fa fa-rub"
-                                                                   aria-hidden="true"></i><sub>/мес</sub></span>
-                        </div>
-                        <div class="view-the-apartment">
-                            <a href="#"><img src="../../template/images/show.png" alt="show"></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="top-block">
-                <div class="left-wallpaper">
-                    <a href="#"><img src="../../template/images/apartments/8.png" alt="apartments"></a>
-                    <p>2-комн. кв. 134м<sup>2</sup></p>
-                </div>
-                <div class="right-information-block">
-                    <span>Шикардосная двушка в самом центре столицы</span>
-                    <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
-                    <div class="price-and-view-the-apartment">
-                        <div class="price">
-                            <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img
-                                            src="../../template/images/people.png" alt="">2 мин</span></p>
-                            <span class="decorate-number">25 000<i class="fa fa-rub"
-                                                                   aria-hidden="true"></i><sub>/мес</sub></span>
-                        </div>
-                        <div class="view-the-apartment">
-                            <a href="#"><img src="../../template/images/show.png" alt="show"></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="top-block">
-                <div class="left-wallpaper">
-                    <a href="#"><img src="../../template/images/apartments/8.png" alt="apartments"></a>
-                    <p>2-комн. кв. 134м<sup>2</sup></p>
-                </div>
-                <div class="right-information-block">
-                    <span>Шикардосная двушка в самом центре столицы</span>
-                    <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
-                    <div class="price-and-view-the-apartment">
-                        <div class="price">
-                            <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img
-                                            src="../../template/images/people.png" alt="">2 мин</span></p>
-                            <span class="decorate-number">25 000<i class="fa fa-rub"
-                                                                   aria-hidden="true"></i><sub>/мес</sub></span>
-                        </div>
-                        <div class="view-the-apartment">
-                            <a href="#"><img src="../../template/images/show.png" alt="show"></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="top-block">
-                <div class="left-wallpaper">
-                    <a href="#"><img src="../../template/images/apartments/8.png" alt="apartments"></a>
-                    <p>2-комн. кв. 134м<sup>2</sup></p>
-                </div>
-                <div class="right-information-block">
-                    <span>Шикардосная двушка в самом центре столицы</span>
-                    <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
-                    <div class="price-and-view-the-apartment">
-                        <div class="price">
-                            <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img
-                                            src="../../template/images/people.png" alt="">2 мин</span></p>
-                            <span class="decorate-number">25 000<i class="fa fa-rub"
-                                                                   aria-hidden="true"></i><sub>/мес</sub></span>
-                        </div>
-                        <div class="view-the-apartment">
-                            <a href="#"><img src="../../template/images/show.png" alt="show"></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="top-block">
-                <div class="left-wallpaper">
-                    <a href="#"><img src="../../template/images/apartments/8.png" alt="apartments"></a>
-                    <p>2-комн. кв. 134м<sup>2</sup></p>
-                </div>
-                <div class="right-information-block">
-                    <span>Шикардосная двушка в самом центре столицы</span>
-                    <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
-                    <div class="price-and-view-the-apartment">
-                        <div class="price">
-                            <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img
-                                            src="../../template/images/people.png" alt="">2 мин</span></p>
-                            <span class="decorate-number">25 000<i class="fa fa-rub"
-                                                                   aria-hidden="true"></i><sub>/мес</sub></span>
-                        </div>
-                        <div class="view-the-apartment">
-                            <a href="#"><img src="../../template/images/show.png" alt="show"></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="top-block">
-                <div class="left-wallpaper">
-                    <a href="#"><img src="../../template/images/apartments/8.png" alt="apartments"></a>
-                    <p>2-комн. кв. 134м<sup>2</sup></p>
-                </div>
-                <div class="right-information-block">
-                    <span>Шикардосная двушка в самом центре столицы</span>
-                    <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
-                    <div class="price-and-view-the-apartment">
-                        <div class="price">
-                            <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img
-                                            src="../../template/images/people.png" alt="">2 мин</span></p>
-                            <span class="decorate-number">25 000<i class="fa fa-rub"
-                                                                   aria-hidden="true"></i><sub>/мес</sub></span>
-                        </div>
-                        <div class="view-the-apartment">
-                            <a href="#"><img src="../../template/images/show.png" alt="show"></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="top-block">
-                <div class="left-wallpaper">
-                    <a href="#"><img src="../../template/images/apartments/8.png" alt="apartments"></a>
-                    <p>2-комн. кв. 134м<sup>2</sup></p>
-                </div>
-                <div class="right-information-block">
-                    <span>Шикардосная двушка в самом центре столицы</span>
-                    <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
-                    <div class="price-and-view-the-apartment">
-                        <div class="price">
-                            <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img
-                                            src="../../template/images/people.png" alt="">2 мин</span></p>
-                            <span class="decorate-number">25 000<i class="fa fa-rub"
-                                                                   aria-hidden="true"></i><sub>/мес</sub></span>
-                        </div>
-                        <div class="view-the-apartment">
-                            <a href="#"><img src="../../template/images/show.png" alt="show"></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="top-block">
-                <div class="left-wallpaper">
-                    <a href="#"><img src="../../template/images/apartments/8.png" alt="apartments"></a>
-                    <p>2-комн. кв. 134м<sup>2</sup></p>
-                </div>
-                <div class="right-information-block">
-                    <span>Шикардосная двушка в самом центре столицы</span>
-                    <p>Шикарная 2-х комнатная квартира в тихом центре города пешая до...</p>
-                    <div class="price-and-view-the-apartment">
-                        <div class="price">
-                            <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img
-                                            src="../../template/images/people.png" alt="">2 мин</span></p>
-                            <span class="decorate-number">25 000<i class="fa fa-rub"
-                                                                   aria-hidden="true"></i><sub>/мес</sub></span>
-                        </div>
-                        <div class="view-the-apartment">
-                            <a href="#"><img src="../../template/images/show.png" alt="show"></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
@@ -894,8 +705,35 @@
 <script src="//api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
 <script src="/template/js/mapController.js"></script>
 <script src="/template/js/jquery.bxslider.min.js"></script>
-<script src="/template/js/forms.editor.handler.js"></script>
 <script src="/template/js/jquery.parallax.min.js"></script>
+<script src="/bower_components/handlebars/handlebars.runtime.min.js"></script>
+<script src="/bower_components/handlebars/handlebars.min.js"></script>
+<script id="entry-template" type="text/x-handlebars-template">
+    <div class="top-block">
+        <div class="left-wallpaper">
+            <a href="#"><img src="/uploads/images/{{preview_img}}" alt="apartments"></a>
+            <p>{{title}}м<sup>2</sup></p>
+        </div>
+        <div class="right-information-block">
+            <span>Шикардосная двушка в самом центре столицы</span>
+            <p>{{content}}</p>
+            <div class="price-and-view-the-apartment">
+                <div class="price">
+                    <p>
+                        <img src="../../template/images/m.png" alt="metro">Рижская<span>
+                        <img src="../../template/images/people.png" alt="">2 мин</span>
+                    </p>
+                    <span class="decorate-number">{{price}}
+                        <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub>
+                    </span>
+                </div>
+                <div class="view-the-apartment">
+                    <a href="#"><img src="../../template/images/show.png" alt="show"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
 <script src="/template/js/main.min.js"></script>
 </body>
 </html>

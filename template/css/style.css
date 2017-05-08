@@ -203,13 +203,14 @@
   text-align: center;
 }
 #scene {
+  overflow: hidden;
   position: absolute;
-  left: -5vw;
-  right: -5vw;
-  top: -5vh;
-  bottom: -5vh;
-  width: 110vw;
-  height: 100vh;
+  left: -5%;
+  right: 0;
+  top: -5%;
+  bottom: 0;
+  width: auto;
+  height: auto;
   z-index: -5;
 }
 #scene li {
@@ -223,40 +224,39 @@
 }
 #scene li:nth-child(1) {
   z-index: -2;
-  left: 0 !important;
-  right: 0 !important;
-  top: 15% !important;
+  top: 6% !important;
+  bottom: 0;
   width: 100%;
-  height: 95%;
+  height: 95vh;
 }
 #scene li:nth-child(2) {
   z-index: -3;
   left: 15% !important;
-  top: 14% !important;
+  top: 8% !important;
   width: 70%;
-  height: 100%;
+  height: 100vh;
 }
 #scene li:nth-child(3) {
   z-index: -1;
-  top: 48% !important;
+  top: 55vw !important;
   left: 2% !important;
   width: 18%;
-  height: 62%;
+  height: 55vh;
 }
 #scene li:nth-child(4) {
   z-index: -1;
-  top: 25% !important;
-  left: 78% !important;
-  width: 24%;
-  height: 85%;
+  top: 65vh !important;
+  left: 85vw !important;
+  width: 20%;
+  height: 70vh;
 }
 #scene li:nth-child(5) {
   left: -5vw;
   right: -5vw;
-  top: -50vh;
-  bottom: -15vh;
-  width: 150%;
-  height: 150%;
+  top: -5vh;
+  bottom: -5vh;
+  width: 105vw;
+  height: 150vh;
   z-index: -5;
 }
 .apartment-search {
@@ -1028,25 +1028,16 @@
   float: right;
 }
 .showBigOptions {
-  position: absolute;
+  position: fixed;
+  left: 0;
+  right: 0;
+  margin: auto;
   display: none;
   padding: 30px;
   width: 400px;
-  margin: calc(25px) 0 0 calc(-120px);
   background: #fff;
   z-index: 60;
   box-shadow: 0 0 0 3px #f7f7f7;
-}
-.showBigOptions:before {
-  content: '';
-  display: block;
-  position: relative;
-  width: 0;
-  height: 0;
-  margin: -44px 0 25px calc(165px);
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-bottom: 10px solid #fbfbfb;
 }
 .showBigOptions input {
   display: inline-block;
@@ -1975,16 +1966,6 @@
   width: 975px;
   margin: 160px auto 0;
 }
-.big-search:after {
-  content: '';
-  position: absolute;
-  z-index: 1;
-  margin-left: -100px;
-  width: 0;
-  height: 0;
-  border-radius: 100%;
-  box-shadow: 0 0 150px 50px rgba(0, 0, 0, 0.99);
-}
 .big-search a {
   position: relative;
   display: inline-block;
@@ -1992,11 +1973,15 @@
   z-index: 2;
   margin: auto;
   cursor: pointer;
-  color: #d7d7d7;
+  padding: 0 0 1px;
+  text-shadow: 1px 1px 5px #933d38;
+  color: #fff;
   font-size: 15px;
   width: auto;
+}
+.big-search a:hover {
   padding: 0;
-  border-bottom: 1px solid #989997;
+  border-bottom: 1px solid #fff;
 }
 .big-search i {
   vertical-align: middle;
@@ -2662,9 +2647,13 @@
   margin-top: 15px;
 }
 .right-information-block span {
+  margin-left: 5px;
   font-size: 16px;
   color: #424242;
   line-height: 20px;
+}
+.right-information-block i {
+  margin-left: 5px;
 }
 .price-and-view-the-apartment {
   text-align: center;
@@ -2909,6 +2898,9 @@
 .partners h2 {
   font-size: 20px;
   font-weight: 300;
+}
+.partners li:hover:before {
+  display: none;
 }
 .left-button-2,
 .right-button-2 {
@@ -4495,8 +4487,9 @@ li p {
     width: 75%;
   }
   #slider-range span,
-  #slider-range-by span,
-  #main-slider span {
+  #slider-range-buy span,
+  #main-slider span,
+  #slider-range-search span {
     top: -0.3em;
   }
   .registration-users {

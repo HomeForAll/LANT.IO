@@ -1,0 +1,18 @@
+.container {
+  height: 300px;
+}
+/* Axis */
+.chart .axis > path,
+.chart .axis > .tick line {
+  stroke: rgba(0, 0, 0, 0.5);
+}
+/* Axis Tick Labels */
+.chart .axis > .tick text {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+}
+/* Legend */
+.chart-legend .item,
+.chart-tooltip {
+  font-family: 'Open Sans', sans-serif;
+}

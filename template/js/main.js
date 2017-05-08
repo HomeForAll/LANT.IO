@@ -72,33 +72,6 @@ $(document).ready(function(){
 });
 //---------------------------------------------------------
 
-/** Цвета линий метро **/
-function formatState (state) {
-    var $allMetroLines = $('<span><a class="branch-line"></a>' + state.text + '</span>'),
-        $tagSearchByClass = $allMetroLines.find('a');
-
-    if (state.id === '0') {
-        $tagSearchByClass.css({'background': 'orange'});
-    }
-    if (state.id === '1') {
-        $tagSearchByClass.css({'background': 'red'});
-    }
-    if (state.id === '2') {
-        $tagSearchByClass.css({'background': 'blue'});
-    }
-    if (state.id === '3') {
-        $tagSearchByClass.css({'background': 'silver'});
-    }
-    if (state.id === '4') {
-        $tagSearchByClass.css({'background': 'yellowgreen'});
-    }
-
-    if (!state.id) {
-        return state.text;
-    } else return $allMetroLines;
-}
-//---------------------------------------------------------
-
 /** Отслежка и изменение расширенного и простого блока **/
 function choiceBlock(allBlock) {
     if (!rootBlock) {return false}
@@ -535,31 +508,62 @@ function closeFixedBlock() {
 }
 //---------------------------------------------------------
 
-/** Получение данных через Ajax и отправка данных**/
-$("#form").on('submit', function(e) { // устанавливаем событие отправки для формы с id=form
+/** Получение и отправка данных через Ajax **/
+$("#form_1").on('submit', function(e) { // устанавливаем событие отправки для формы с id=form
     var form_data = $(this).serialize(); // собераем все данные из формы
 
     e.preventDefault();
 
-   $('option').each(function () {
-       if ($(this)) {
-           $(this).val('');
-       }
-   });
-
     $.ajax({
-        type: "POST",
-        url: "/search",
+        method: 'POST',
+        url: '/search',
         data: form_data,
+        dataType: 'Json',
         success: function(form_data) {
+            console.log('Собранные данные', form_data);
+            renderAllApartments(form_data);
             window.location.href = '/template/layouts/searchBlock.php';
-            console.log('Собранные данные - ', form_data);
         },
-        error: function() {
-            console.log('Ошибка отправки');
+        error: function(form_data) {
+            console.log('Ошибка отправки', form_data);
         }
     });
 });
+
+$("#form_2").on('submit', function(e) { // устанавливаем событие отправки для формы с id=form
+    var form_data = $(this).serialize(); // собераем все данные из формы
+
+    e.preventDefault();
+
+    $.ajax({
+        method: 'POST',
+        url: '/search',
+        data: form_data,
+        dataType: 'Json',
+        success: function(form_data) {
+            console.log('Собранные данные', form_data);
+            renderAllApartments(form_data);
+        },
+        error: function(form_data) {
+            console.log('Ошибка отправки', form_data);
+        }
+    });
+});
+
+function renderAllApartments(data) {
+    var content = '';
+    console.log('data', data);
+
+    if (!data) {return false;}
+
+    for (var i = 0; i < data.length; i++) {
+        console.log('data', data[i]);
+        var source = $("#entry-template").html();
+        var template = Handlebars.compile(source);
+        content += template(data[i]);
+    }
+    $('.result-all-apartments').html(content);
+}
 //---------------------------------------------------------
 
 /** Фильтр - Цена **/
@@ -569,12 +573,15 @@ $("#form").on('submit', function(e) { // устанавливаем событи
         $amountBeforeBuy = $('#amountBeforeBy'),
         $amountAfterBuy = $('#amountAfterBy'),
         $amountBeforeSearch = $('#amountBeforeSearch'),
-        $amountAfterSearch = $('#amountAfterSearch');
+        $amountAfterSearch = $('#amountAfterSearch'),
+        $amountBeforeMain = $('#amountBeforeMain'),
+        $amountAfterMain = $('#amountAfterMain');
 
     /** Фильтры в доп.параметрах **/
     $amountBefore.val('0');$amountAfter.val('20000');
     $amountBeforeBuy.val('0');$amountAfterBuy.val('20000');
     $amountBeforeSearch.val('0');$amountAfterSearch.val('20000');
+    $amountBeforeMain.val('0');$amountAfterMain.val('20000');
     $("#slider-range").slider({
         range: true,
         min: 0,
@@ -605,9 +612,20 @@ $("#form").on('submit', function(e) { // устанавливаем событи
             $amountAfterSearch.val(ui.values[1]);
         }
     });
+     $("#main-slider").slider({
+         range: true,
+         min: 0,
+         max: 20000000,
+         values: [75, 20000000],
+         slide: function (event, ui) {
+             $amountBeforeMain.val(ui.values[0]);
+             $amountAfterMain.val(ui.values[1]);
+         }
+     });
     $amountBefore.slider({values: 0}); $amountAfter.slider({values: 1});
     $amountBeforeBuy.slider({values: 0}); $amountAfterBuy.slider({values: 1});
     $amountBeforeSearch.slider({values: 0}); $amountAfterSearch.slider({values: 1});
+    $amountBeforeMain.slider({values: 0}); $amountAfterMain.slider({values: 1});
 });
 //---------------------------------------------------------
 
