@@ -284,15 +284,15 @@ class SearchModel extends Model
             $query->where('price', '<=', (int)$price_max);
         }
 
-        $distance_from_metro_min = isset($_POST['distance_from_metro-min']) ? $_POST['distance_from_metro-min'] : '';
-        $distance_from_metro_max = isset($_POST['distance_from_metro-max']) ? $_POST['distance_from_metro-max'] : '';
-        if ($distance_from_metro_min && $distance_from_metro_max) {
-            $query->where('distance_from_metro', 'between', array((int)$distance_from_metro_min, (int)$distance_from_metro_max));
-        } elseif ($distance_from_metro_min) {
-            $query->where('distance_from_metro', '>=', (int)$distance_from_metro_min);
-        } elseif ($distance_from_metro_max) {
-            $query->where('distance_from_metro', '<=', (int)$distance_from_metro_max);
-        }
+//        $distance_from_metro_min = isset($_POST['distance_from_metro-min']) ? $_POST['distance_from_metro-min'] : '';
+//        $distance_from_metro_max = isset($_POST['distance_from_metro-max']) ? $_POST['distance_from_metro-max'] : '';
+//        if ($distance_from_metro_min && $distance_from_metro_max) {
+//            $query->where('distance_from_metro', 'between', array((int)$distance_from_metro_min, (int)$distance_from_metro_max));
+//        } elseif ($distance_from_metro_min) {
+//            $query->where('distance_from_metro', '>=', (int)$distance_from_metro_min);
+//        } elseif ($distance_from_metro_max) {
+//            $query->where('distance_from_metro', '<=', (int)$distance_from_metro_max);
+//        }
 
         $residential_min = isset($_POST['residential-min']) ? $_POST['residential-min'] : '';
         $residential_max = isset($_POST['residential-max']) ? $_POST['residential-max'] : '';
@@ -377,6 +377,11 @@ class SearchModel extends Model
         $address = isset($_POST['address']) ? $_POST['address'] : '';
         if ($address || $address !== '') {
             $query->where('address', '=', $address);
+        }
+
+        $distance_from_metro = isset($_POST['distance_from_metro']) ? $_POST['distance_from_metro'] : '';
+        if ($address || $address !== '') {
+            $query->where('distance_from_metro', '=', $distance_from_metro);
         }
 
         $country = isset($_POST['country']) ? $_POST['country'] : '';
