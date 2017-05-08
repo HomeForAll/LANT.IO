@@ -11,38 +11,39 @@ defined('ERROR_HANDLER_STATUS') or define('ERROR_HANDLER_STATUS', '2'); // не 
 require_once __DIR__ . '/app/core/Loader.php';
 require_once __DIR__ . '/vendor/autoload.php';
 
+Loader::getPaths(); // загружаем карту классов из файла
+
 spl_autoload_register(array(
     'Loader',
     'classLoad',
 ));
 
-Loader::getPaths();
-Registry::set('config', require ROOT_DIR . '/app/config/config.php');
-Registry::set('routes', require ROOT_DIR . '/app/config/routes.php');
+$redis = new Predis\Client();
 
-/**
- * geolocation
- */
-Registry::set('location', new \IP2Location\Database(ROOT_DIR . '/app/config/IP2LOCATION-LITE-DB5.BIN', \IP2Location\Database::FILE_IO));
+Registry::set('redis', $redis);
 
-use GeoIp2\Database\Reader;
+if (!$redis->exists('config')) {
+    $config = serialize(require ROOT_DIR . '/app/config/config.php');
+    $redis->set('config', $config);
+    $redis->expire('config', 30);
+}
 
-$reader = new Reader(ROOT_DIR . '/app/config/GeoLite2-City.mmdb');;
-$record = $reader->city('134.249.129.113');
+if (!$redis->exists('routes')) {
+    $routes = serialize(require ROOT_DIR . '/app/config/routes.php');
+    $redis->set('routes', $routes);
+    $redis->expire('routes', 30);
+}
 
-print($record->country->isoCode . "\n"); // 'US'
-print($record->country->names['ru'] . "\n");
+$location = new \IP2Location\Database(ROOT_DIR . '/app/config/IP2LOCATION-DB.BIN', \IP2Location\Database::FILE_IO);
+//$records = $location->lookup($_SERVER['REMOTE_ADDR'], \IP2Location\Database::ALL);
+$records = $location->lookup('134.249.129.113', \IP2Location\Database::ALL);
 
-print($record->mostSpecificSubdivision->name . "\n"); // 'Minnesota'
-print($record->mostSpecificSubdivision->isoCode . "\n"); // 'MN'
+Registry::set('country', $records['countryName']);
+Registry::set('region', $records['regionName']);
+Registry::set('city', $records['cityName']);
 
-print($record->city->name . "\n"); // 'Minneapolis'
-
-print($record->postal->code . "\n"); // '55455'
-
-print($record->location->latitude . "\n"); // 44.9733
-print($record->location->longitude . "\n"); // -93.2323
-/*
- * ****/
+var_dump(Registry::get('country'));
+var_dump(Registry::get('region'));
+var_dump(Registry::get('city'));
 
 (new Router())->run();

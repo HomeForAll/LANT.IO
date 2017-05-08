@@ -6,7 +6,8 @@ class Router
     
     public function __construct()
     {
-        $this->routes = Registry::get('routes');
+        $redis = Registry::get('redis');
+        $this->routes = unserialize($redis->get('routes'));
     }
     
     /**

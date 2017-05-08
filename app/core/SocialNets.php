@@ -4,7 +4,7 @@ class SocialNets extends LightOpenID
 {
     private $steamID;
     private $steamApiKey;
-    private $settings;
+    private $config;
     private $currentURL;
     private $state;
 
@@ -16,11 +16,11 @@ class SocialNets extends LightOpenID
     {
         parent::__construct($currentURL);
 
-        // Поучаем параметры соц. сетей: secret_key, redirect_url ...
-        $this->settings = Registry::get('config');
+        $redis = Registry::get('redis');
+        $this->config = unserialize($redis->get('config'));
         // Запоминаем URL на котором сейчас находимся
         $this->currentURL = $currentURL;
-        $this->steamApiKey = $this->settings['steam_api_key'];
+        $this->steamApiKey = $this->config['steam_api_key'];
     }
 
     public function setState($state)
@@ -58,10 +58,10 @@ class SocialNets extends LightOpenID
         if (isset($_GET['code'])) {
             // Вбиваем в массив данные которые хотим отправить в GET запросе
             $params = array(
-                'client_id' => $this->settings['vk_app_id'],
-                'client_secret' => $this->settings['vk_secret_key'],
+                'client_id' => $this->config['vk_app_id'],
+                'client_secret' => $this->config['vk_secret_key'],
                 'code' => $_GET['code'],
-                'redirect_uri' => $this->settings['vk_redirect_url'],
+                'redirect_uri' => $this->config['vk_redirect_url'],
             );
 
             // Инициализируем cURL
@@ -106,8 +106,8 @@ class SocialNets extends LightOpenID
             // Составляем параметры для получения $_GET['code'] и перенарпавляем пользователя на авторизацию в соц. сети
             $url = 'http://oauth.vk.com/authorize';
             $params = array(
-                'client_id' => $this->settings['vk_app_id'],
-                'redirect_uri' => $this->settings['vk_redirect_url'],
+                'client_id' => $this->config['vk_app_id'],
+                'redirect_uri' => $this->config['vk_redirect_url'],
                 'display' => 'page',
                 'scope' => 'email',
                 'response_type' => 'code',
@@ -130,10 +130,10 @@ class SocialNets extends LightOpenID
             // Составляем параметры дл получения token
             $params = array(
                 'code' => $_GET['code'],
-                'redirect_uri' => $this->settings['ok_redirect_url'],
+                'redirect_uri' => $this->config['ok_redirect_url'],
                 'grant_type' => 'authorization_code',
-                'client_id' => $this->settings['ok_app_id'],
-                'client_secret' => $this->settings['ok_secret_key'],
+                'client_id' => $this->config['ok_app_id'],
+                'client_secret' => $this->config['ok_secret_key'],
             );
 
             $url = 'http://api.odnoklassniki.ru/oauth/token.do';
@@ -151,12 +151,12 @@ class SocialNets extends LightOpenID
             $token = json_decode($result, true);
 
             if (isset($token['access_token'])) {
-                $sign = md5("application_key={$this->settings['ok_public_key']}format=jsonmethod=users.getCurrentUser" . md5("{$token['access_token']}{$this->settings['ok_secret_key']}"));
+                $sign = md5("application_key={$this->config['ok_public_key']}format=jsonmethod=users.getCurrentUser" . md5("{$token['access_token']}{$this->config['ok_secret_key']}"));
 
                 $params = array(
                     'method' => 'users.getCurrentUser',
                     'access_token' => $token['access_token'],
-                    'application_key' => $this->settings['ok_public_key'],
+                    'application_key' => $this->config['ok_public_key'],
                     'format' => 'json',
                     'sig' => $sign,
                 );
@@ -184,9 +184,9 @@ class SocialNets extends LightOpenID
             $url = 'http://www.odnoklassniki.ru/oauth/authorize';
 
             $params = array(
-                'client_id' => $this->settings['ok_app_id'],
+                'client_id' => $this->config['ok_app_id'],
                 'response_type' => 'code',
-                'redirect_uri' => $this->settings['ok_redirect_url'],
+                'redirect_uri' => $this->config['ok_redirect_url'],
                 'state' => $this->getState(),
             );
 
@@ -210,11 +210,11 @@ class SocialNets extends LightOpenID
         if (isset($_GET['code'])) {
 
             $params = array(
-                'client_id' => $this->settings['mail_app_id'],
-                'client_secret' => $this->settings['mail_secret_key'],
+                'client_id' => $this->config['mail_app_id'],
+                'client_secret' => $this->config['mail_secret_key'],
                 'grant_type' => 'authorization_code',
                 'code' => $_GET['code'],
-                'redirect_uri' => $this->settings['mail_redirect_url'],
+                'redirect_uri' => $this->config['mail_redirect_url'],
             );
 
             $url = 'https://connect.mail.ru/oauth/token';
@@ -231,12 +231,12 @@ class SocialNets extends LightOpenID
             $token = json_decode($result, true);
 
             if (isset($token['access_token'])) {
-                $sign = md5("app_id={$this->settings['mail_app_id']}method=users.getInfosecure=1session_key={$token['access_token']}{$this->settings['mail_secret_key']}");
+                $sign = md5("app_id={$this->config['mail_app_id']}method=users.getInfosecure=1session_key={$token['access_token']}{$this->config['mail_secret_key']}");
 
                 $params = array(
                     'method' => 'users.getInfo',
                     'secure' => '1',
-                    'app_id' => $this->settings['mail_app_id'],
+                    'app_id' => $this->config['mail_app_id'],
                     'session_key' => $token['access_token'],
                     'sig' => $sign,
                 );
@@ -260,9 +260,9 @@ class SocialNets extends LightOpenID
         } else {
             $url = 'https://connect.mail.ru/oauth/authorize';
             $params = array(
-                'client_id' => $this->settings['mail_app_id'],
+                'client_id' => $this->config['mail_app_id'],
                 'response_type' => 'code',
-                'redirect_uri' => $this->settings['mail_redirect_url'],
+                'redirect_uri' => $this->config['mail_redirect_url'],
                 'state' => $this->getState(),
             );
             $location = $url . '?' . urldecode(http_build_query($params));
@@ -286,8 +286,8 @@ class SocialNets extends LightOpenID
             $params = array(
                 'grant_type' => 'authorization_code',
                 'code' => $_GET['code'],
-                'client_id' => $this->settings['ya_app_id'],
-                'client_secret' => $this->settings['ya_secret_key'],
+                'client_id' => $this->config['ya_app_id'],
+                'client_secret' => $this->config['ya_secret_key'],
             );
 
             $url = 'https://oauth.yandex.ru/token';
@@ -328,7 +328,7 @@ class SocialNets extends LightOpenID
             $url = 'https://oauth.yandex.ru/authorize';
             $params = array(
                 'response_type' => 'code',
-                'client_id' => $this->settings['ya_app_id'],
+                'client_id' => $this->config['ya_app_id'],
                 'display' => 'popup',
                 'state' => $this->getState(),
             );
@@ -350,9 +350,9 @@ class SocialNets extends LightOpenID
         if (isset($_GET['code'])) {
 
             $params = array(
-                'client_id' => $this->settings['google_app_id'],
-                'client_secret' => $this->settings['google_secret_key'],
-                'redirect_uri' => $this->settings['google_redirect_url'],
+                'client_id' => $this->config['google_app_id'],
+                'client_secret' => $this->config['google_secret_key'],
+                'redirect_uri' => $this->config['google_redirect_url'],
                 'grant_type' => 'authorization_code',
                 'code' => $_GET['code'],
             );
@@ -390,9 +390,9 @@ class SocialNets extends LightOpenID
         } else {
             $url = 'https://accounts.google.com/o/oauth2/auth';
             $params = array(
-                'redirect_uri' => $this->settings['google_redirect_url'],
+                'redirect_uri' => $this->config['google_redirect_url'],
                 'response_type' => 'code',
-                'client_id' => $this->settings['google_app_id'],
+                'client_id' => $this->config['google_app_id'],
                 'scope' => 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile',
                 'state' => $this->getState(),
             );
@@ -415,9 +415,9 @@ class SocialNets extends LightOpenID
     {
         if (isset($_GET['code'])) {
             $params = array(
-                'client_id' => $this->settings['fb_app_id'],
-                'redirect_uri' => $this->settings['fb_redirect_url'],
-                'client_secret' => $this->settings['fb_secret_key'],
+                'client_id' => $this->config['fb_app_id'],
+                'redirect_uri' => $this->config['fb_redirect_url'],
+                'client_secret' => $this->config['fb_secret_key'],
                 'code' => $_GET['code'],
             );
 
@@ -447,8 +447,8 @@ class SocialNets extends LightOpenID
         } else {
             $url = 'https://www.facebook.com/v2.8/dialog/oauth';
             $params = array(
-                'client_id' => $this->settings['fb_app_id'],
-                'redirect_uri' => $this->settings['fb_redirect_url'],
+                'client_id' => $this->config['fb_app_id'],
+                'redirect_uri' => $this->config['fb_redirect_url'],
                 'response_type' => 'code',
                 'scope' => 'email,public_profile,user_friends',
                 'state' => $this->getState(),
@@ -518,13 +518,13 @@ class SocialNets extends LightOpenID
 
     private function redirect(){
         if ($this->getState() == self::STATE_LOGIN) {
-            header('Location: ' . $this->settings['login_url']);
+            header('Location: ' . $this->config['login_url']);
             exit;
         } elseif ($this->getState() == self::STATE_REGISTRATION) {
-            header('Location: ' . $this->settings['registration_url']);
+            header('Location: ' . $this->config['registration_url']);
             exit;
         } elseif ($this->getState() == self::STATE_UPDATE_SERVICE) {
-            header('Location: ' . $this->settings['update_service_url']);
+            header('Location: ' . $this->config['update_service_url']);
             exit;
         }
     }

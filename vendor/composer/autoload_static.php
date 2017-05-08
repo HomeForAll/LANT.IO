@@ -19,14 +19,9 @@ class ComposerStaticInitcfb7b422eed57f5af675a7889d3e5600
         array (
             'Symfony\\Component\\Yaml\\' => 23,
         ),
-        'M' => 
+        'P' => 
         array (
-            'MaxMind\\Db\\' => 11,
-            'MaxMind\\' => 8,
-        ),
-        'G' => 
-        array (
-            'GeoIp2\\' => 7,
+            'Predis\\' => 7,
         ),
         'F' => 
         array (
@@ -36,10 +31,6 @@ class ComposerStaticInitcfb7b422eed57f5af675a7889d3e5600
         array (
             'Doctrine\\Instantiator\\' => 22,
             'DeepCopy\\' => 9,
-        ),
-        'C' => 
-        array (
-            'Composer\\CaBundle\\' => 18,
         ),
     );
 
@@ -58,17 +49,9 @@ class ComposerStaticInitcfb7b422eed57f5af675a7889d3e5600
         array (
             0 => __DIR__ . '/..' . '/symfony/yaml',
         ),
-        'MaxMind\\Db\\' => 
+        'Predis\\' => 
         array (
-            0 => __DIR__ . '/..' . '/maxmind-db/reader/src/MaxMind/Db',
-        ),
-        'MaxMind\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/maxmind/web-service-common/src',
-        ),
-        'GeoIp2\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/geoip2/geoip2/src',
+            0 => __DIR__ . '/..' . '/predis/predis/src',
         ),
         'Foolz\\SphinxQL\\' => 
         array (
@@ -81,10 +64,6 @@ class ComposerStaticInitcfb7b422eed57f5af675a7889d3e5600
         'DeepCopy\\' => 
         array (
             0 => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy',
-        ),
-        'Composer\\CaBundle\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/composer/ca-bundle/src',
         ),
     );
 
