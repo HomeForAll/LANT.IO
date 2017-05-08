@@ -13,7 +13,7 @@
 <div class="header"><?php include_once 'header.php' ?></div>
 <div class="search-and-filter">
     <div class="container-w-0">
-        <form action="" class="form">
+        <form action="" id="form_2">
             <div class="big-search-menu">
                 <div class="apartment-settings-apartment">
                     <h2>Исходные параметры квартиры</h2>
@@ -580,9 +580,9 @@
                     <li onclick="allParam('bigOption')" class="menu-left-window">
                         <label for="#amountSearch"><img src="../../template/images/s3.png" alt="price">Цена</label>
                         <div class="showBigOptions">
-                            <p>От<label for="amountBeforeSearch"><input name="price-min" type="text" id="amountBeforeSearch" readonly disabled></label>
+                            <p>От<label for="amountBeforeMain"><input name="price-min" type="text" id="amountBeforeMain" readonly disabled></label>
                             </p>
-                            <p>До<label for="amountAfterSearch"><input name="price-max" type="text" id="amountAfterSearch" readonly disabled></label>
+                            <p>До<label for="amountAfterMain"><input name="price-max" type="text" id="amountAfterMain" readonly disabled></label>
                             </p>
                             <div id="main-slider"></div>
                             <div class="currency">
@@ -711,8 +711,8 @@
 <script id="entry-template" type="text/x-handlebars-template">
     <div class="top-block">
         <div class="left-wallpaper">
-            <a href="#"><img src="{{preview_img}}" alt="apartments"></a>
-            <p>{{title}}<sup>2</sup></p>
+            <a href="#"><img src="/uploads/images/{{preview_img}}" alt="apartments"></a>
+            <p>{{title}}м<sup>2</sup></p>
         </div>
         <div class="right-information-block">
             <span>Шикардосная двушка в самом центре столицы</span>

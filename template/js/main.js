@@ -509,7 +509,7 @@ function closeFixedBlock() {
 //---------------------------------------------------------
 
 /** Получение и отправка данных через Ajax **/
-$(".form").on('submit', function(e) { // устанавливаем событие отправки для формы с id=form
+$("#form_1").on('submit', function(e) { // устанавливаем событие отправки для формы с id=form
     var form_data = $(this).serialize(); // собераем все данные из формы
 
     e.preventDefault();
@@ -526,21 +526,33 @@ $(".form").on('submit', function(e) { // устанавливаем событи
         data: form_data,
         dataType: 'Json',
         success: function(form_data) {
-            var a = false;
-
             renderAllApartments(form_data);
+            window.location.href = '/template/layouts/searchBlock.php';
+        },
+        error: function() {
+            console.log('Ошибка отправки');
+        }
+    });
+});
 
-            console.log('a - До функции', a);
+$("#form_2").on('submit', function(e) { // устанавливаем событие отправки для формы с id=form
+    var form_data = $(this).serialize(); // собераем все данные из формы
 
-            if (a === false) {
-                console.log('Перешли на сайт');
-                window.location.href = '/template/layouts/searchBlock.php';
-                a = true;
-                console.log('a - После функции', a);
-            } else {
-                a = true;
-            }
-            console.log('Конец функции', a);
+    e.preventDefault();
+
+    $('option').each(function () {
+        if ($(this)) {
+            $(this).val('');
+        }
+    });
+
+    $.ajax({
+        method: 'POST',
+        url: '/search',
+        data: form_data,
+        dataType: 'Json',
+        success: function(form_data) {
+            renderAllApartments(form_data);
         },
         error: function() {
             console.log('Ошибка отправки');
@@ -550,10 +562,12 @@ $(".form").on('submit', function(e) { // устанавливаем событи
 
 function renderAllApartments(data) {
     var content = '';
+    console.log('data', data);
 
     if (!data) {return false;}
 
     for (var i = 0; i < data.length; i++) {
+        console.log('data', data[i]);
         var source = $("#entry-template").html();
         var template = Handlebars.compile(source);
         content += template(data[i]);
@@ -569,12 +583,15 @@ function renderAllApartments(data) {
         $amountBeforeBuy = $('#amountBeforeBy'),
         $amountAfterBuy = $('#amountAfterBy'),
         $amountBeforeSearch = $('#amountBeforeSearch'),
-        $amountAfterSearch = $('#amountAfterSearch');
+        $amountAfterSearch = $('#amountAfterSearch'),
+        $amountBeforeMain = $('#amountBeforeMain'),
+        $amountAfterMain = $('#amountAfterMain');
 
     /** Фильтры в доп.параметрах **/
     $amountBefore.val('0');$amountAfter.val('20000');
     $amountBeforeBuy.val('0');$amountAfterBuy.val('20000');
     $amountBeforeSearch.val('0');$amountAfterSearch.val('20000');
+    $amountBeforeMain.val('0');$amountAfterMain.val('20000');
     $("#slider-range").slider({
         range: true,
         min: 0,
@@ -605,9 +622,20 @@ function renderAllApartments(data) {
             $amountAfterSearch.val(ui.values[1]);
         }
     });
+     $("#main-slider").slider({
+         range: true,
+         min: 0,
+         max: 20000000,
+         values: [75, 20000000],
+         slide: function (event, ui) {
+             $amountBeforeMain.val(ui.values[0]);
+             $amountAfterMain.val(ui.values[1]);
+         }
+     });
     $amountBefore.slider({values: 0}); $amountAfter.slider({values: 1});
     $amountBeforeBuy.slider({values: 0}); $amountAfterBuy.slider({values: 1});
     $amountBeforeSearch.slider({values: 0}); $amountAfterSearch.slider({values: 1});
+    $amountBeforeMain.slider({values: 0}); $amountAfterMain.slider({values: 1});
 });
 //---------------------------------------------------------
 

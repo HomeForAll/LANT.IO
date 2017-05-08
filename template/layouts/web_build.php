@@ -310,7 +310,7 @@ $siteModel = Registry::model('site');
         <li class="layer" data-depth="0.80"><img src="../../template/images/paralax/back-1.png"></li>
     </ul>
     <div class="section-home-with-filters">
-        <form action="" class="form"> <!--novalidate -->
+        <form action="" id="form_1"> <!--novalidate -->
             <div class="property-type-apartment-settings">
                 <ul>
                     <li>Жилая</li>

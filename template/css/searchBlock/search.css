@@ -2899,6 +2899,9 @@
   font-size: 20px;
   font-weight: 300;
 }
+.partners li:hover:before {
+  display: none;
+}
 .left-button-2,
 .right-button-2 {
   width: 5%;
