@@ -514,23 +514,18 @@ $("#form_1").on('submit', function(e) { // устанавливаем событ
 
     e.preventDefault();
 
-   $('option').each(function () {
-       if ($(this)) {
-           $(this).val('');
-       }
-   });
-
     $.ajax({
         method: 'POST',
         url: '/search',
         data: form_data,
         dataType: 'Json',
         success: function(form_data) {
+            console.log('Собранные данные', form_data);
             renderAllApartments(form_data);
             window.location.href = '/template/layouts/searchBlock.php';
         },
-        error: function() {
-            console.log('Ошибка отправки');
+        error: function(form_data) {
+            console.log('Ошибка отправки', form_data);
         }
     });
 });
@@ -540,22 +535,17 @@ $("#form_2").on('submit', function(e) { // устанавливаем событ
 
     e.preventDefault();
 
-    $('option').each(function () {
-        if ($(this)) {
-            $(this).val('');
-        }
-    });
-
     $.ajax({
         method: 'POST',
         url: '/search',
         data: form_data,
         dataType: 'Json',
         success: function(form_data) {
+            console.log('Собранные данные', form_data);
             renderAllApartments(form_data);
         },
-        error: function() {
-            console.log('Ошибка отправки');
+        error: function(form_data) {
+            console.log('Ошибка отправки', form_data);
         }
     });
 });

@@ -964,9 +964,9 @@ $siteModel = Registry::model('site');
                                 <div class="select">Удаленность от метро не более
                                     <label for="distance_from_metro">
                                         <select name="distance_from_metro">
-                                            <option>5 мин пешком</option>
-                                            <option>10 мин пешком</option>
-                                            <option>15 мин пешком</option>
+                                            <option value="5">5 мин пешком</option>
+                                            <option value="10">10 мин пешком</option>
+                                            <option value="15">15 мин пешком</option>
                                         </select>
                                     </label>
                                 </div>
@@ -4715,9 +4715,9 @@ $siteModel = Registry::model('site');
                                 <div class="select">Удаленность от метро не более
                                     <label for="distance_from_metro">
                                         <select name="distance_from_metro">
-                                            <option>5 мин пешком</option>
-                                            <option>10 мин пешком</option>
-                                            <option>15 мин пешком</option>
+                                            <option value="5">5 мин пешком</option>
+                                            <option value="10">10 мин пешком</option>
+                                            <option value="15">15 мин пешком</option>
                                         </select>
                                     </label>
                                 </div>

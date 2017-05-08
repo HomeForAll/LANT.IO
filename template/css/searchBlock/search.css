@@ -4487,8 +4487,9 @@ li p {
     width: 75%;
   }
   #slider-range span,
-  #slider-range-by span,
-  #main-slider span {
+  #slider-range-buy span,
+  #main-slider span,
+  #slider-range-search span {
     top: -0.3em;
   }
   .registration-users {
