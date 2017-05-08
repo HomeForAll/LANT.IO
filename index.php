@@ -36,7 +36,7 @@ if (!$redis->exists('routes')) {
 
 $location = new \IP2Location\Database(ROOT_DIR . '/app/config/IP2LOCATION-DB.BIN', \IP2Location\Database::FILE_IO);
 //$records = $location->lookup($_SERVER['REMOTE_ADDR'], \IP2Location\Database::ALL);
-$records = $location->lookup('134.249.129.113', \IP2Location\Database::ALL);
+$records = $location->lookup('77.37.167.197', \IP2Location\Database::ALL);
 
 Registry::set('country', $records['countryName']);
 Registry::set('region', $records['regionName']);
