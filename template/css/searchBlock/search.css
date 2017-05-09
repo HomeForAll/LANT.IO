@@ -2552,6 +2552,8 @@
 .filter-apartment li {
   display: inline-block;
   vertical-align: middle;
+  width: auto;
+  padding: 0 10px;
 }
 .filter-apartment a {
   border-bottom: 1px solid #d8d6d6;
@@ -2642,6 +2644,7 @@
 .right-information-block p {
   font-size: 13px;
   color: #aba3a3;
+  height: 60px;
   word-wrap: break-word;
   line-height: 20px;
   margin-top: 15px;
@@ -2898,9 +2901,10 @@
 .partners h2 {
   font-size: 20px;
   font-weight: 300;
+  margin-bottom: 25px;
 }
-.partners li:hover:before {
-  display: none;
+.partners li {
+  cursor: pointer;
 }
 .left-button-2,
 .right-button-2 {
@@ -2917,22 +2921,20 @@
 .right-button-2 {
   text-align: left;
 }
-.main-block-2 li {
-  display: inline-block;
-  vertical-align: middle;
-}
 .main-block-2 li:before {
   content: '';
   display: block;
   background: rgba(248, 248, 248, 0.85);
-  position: relative;
+  position: absolute;
+  left: 0;
+  right: 0;
   cursor: pointer;
   margin-bottom: calc(-55%);
   height: 115px;
   z-index: 5;
 }
-.main-block-2 li:before:hover {
-  background: #e5e5e5;
+.main-block-2 li:hover:before {
+  display: none;
   z-index: -1;
 }
 .footer {
@@ -3207,7 +3209,9 @@ li p {
 /** Яндекс карта **/
 #map {
   display: none;
-  position: relative;
+  position: absolute;
+  left: 0;
+  right: 0;
   text-align: center;
   height: 500px;
   min-height: 100px;

@@ -8654,15 +8654,18 @@ $siteModel = Registry::model('site');
                             <img src="../../template/images/apartments.png" alt="apartments">Тип недвижимости
                         </span>
                     </li>
-                    <li>
-                        <div class="select">
-                            <label for="">От
-                                <select name="0">
-                                    <option>20.000</option>
-                                    <option>40.000</option>
-                                    <option>80.000</option>
-                                </select>
-                            </label>
+                    <li onclick="allParam('bigOption')">
+                        <label><img src="../../template/images/s3.png" alt="price">Цена</label>
+                        <div class="showBigOptions">
+                            <p>От<label for="amountBeforeSearch"><input name="price-min" type="text" id="amountBeforeSearch" readonly disabled></label></p>
+                            <p>До<label for="amountAfterSearch"><input name="price-max" type="text" id="amountAfterSearch" readonly disabled></label></p>
+                            <div id="slider-range-search"></div>
+                            <div class="currency">
+                                <p>Валюта</p>
+                                <button class="closeCurrency"><i class="fa fa-rub" aria-hidden="true"></i>рубли</button>
+                                <button class="closeCurrency"><i class="fa fa-usd" aria-hidden="true"></i>доллары</button>
+                                <button class="closeCurrency"><i class="fa fa-eur" aria-hidden="true"></i>евро</button>
+                            </div>
                         </div>
                     </li>
                     <li>
@@ -8955,19 +8958,19 @@ $siteModel = Registry::model('site');
             <h2>Официальные партнеры</h2>
             <ul class="bxslider-partners main-block-2">
                 <li>
-                    <a href="#"><img src="../../template/images/sec-6-1.png" alt="partners"></a>
+                    <img src="../../template/images/sec-6-1.png" alt="partners">
                 </li>
                 <li>
-                    <a href="#"><img src="../../template/images/sec-6-2.png" alt="partners"></a>
+                    <img src="../../template/images/sec-6-2.png" alt="partners">
                 </li>
                 <li>
-                    <a href="#"><img src="../../template/images/sec-6-3.png" alt="partners"></a>
+                    <img src="../../template/images/sec-6-3.png" alt="partners">
                 </li>
                 <li>
-                    <a href="#"><img src="../../template/images/sec-6-4.png" alt="partners"></a>
+                    <img src="../../template/images/sec-6-4.png" alt="partners">
                 </li>
                 <li>
-                    <a href="#"><img src="../../template/images/sec-6-5.png" alt="partners"></a>
+                    <img src="../../template/images/sec-6-5.png" alt="partners">
                 </li>
             </ul>
         </div>
@@ -8985,9 +8988,9 @@ $siteModel = Registry::model('site');
                 <p><a href="#">Команда проекта</a></p>
             </div>
             <ul>
-                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i><span>Читай</span></a></li>
-                <li><a href="#"><i class="fa fa-vk" aria-hidden="true"></i><span>Вступай</span></a></li>
-                <li><a href="#"><i class="fa fa-youtube" aria-hidden="true"></i><span>Смотри</span></a></li>
+                <li><a href="//twitter.com/LantioP"><i class="fa fa-twitter" aria-hidden="true"></i><span>Читай</span></a></li>
+                <li><a href="//vk.com/lantio"><i class="fa fa-vk" aria-hidden="true"></i><span>Вступай</span></a></li>
+                <li><a href="//www.youtube.com/channel/UC54yeyBi5X4wsyQYLje0v-w"><i class="fa fa-youtube" aria-hidden="true"></i><span>Смотри</span></a></li>
                 <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i><span>Подписывайся</span></a></li>
                 <li><a href="#"><div class="icon-footer"></div><span>У нас</span></a></li>
             </ul>

@@ -2244,6 +2244,8 @@
   li {
     display: inline-block;
     vertical-align: middle;
+    width: auto;
+    padding: 0 10px;
   }
   a {
     border-bottom: 1px solid #d8d6d6;
@@ -2338,6 +2340,7 @@
   p {
     font-size: 13px;
     color: #aba3a3;
+    height: 60px;
     word-wrap: break-word;
     line-height: 20px;
     margin-top: 15px;
@@ -2609,9 +2612,10 @@
   h2 {
     font-size: 20px;
     font-weight: 300;
+    margin-bottom: 25px;
   }
-  li:hover:before {
-    display: none;
+  li {
+    cursor: pointer;
   }
 }
 
@@ -2631,21 +2635,21 @@
 }
 
 .main-block-2 li {
-  display: inline-block;
-  vertical-align: middle;
   &:before {
     content: '';
     display: block;
-    background: rgba(248,248,248,.85);
-    position: relative;
+    background: rgba(248, 248, 248, 0.85);
+    position: absolute;
+    left: 0;
+    right: 0;
     cursor: pointer;
     margin-bottom: calc(-55%);
     height: 115px;
     z-index: 5;
-    &:hover {
-      background: #e5e5e5;
-      z-index: -1;
-    }
+  }
+  &:hover:before {
+    display: none;
+    z-index: -1;
   }
 }
 
@@ -2937,7 +2941,9 @@
 /** Яндекс карта **/
 #map {
   display: none;
-  position: relative;
+  position: absolute;
+  left: 0;
+  right: 0;
   text-align: center;
   height: 500px;
   min-height: 100px;
