@@ -18,7 +18,7 @@ class Controller extends Access
         $this->model = Model::instance($model);
 
         if (isset($_SESSION['userID']) ){
-            $this->access = $this->checkAccessLevel($_SESSION['status']);
+            $this->access = $this->checkAccessLevel();
         }
     }
     
