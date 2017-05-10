@@ -11,7 +11,7 @@ class CabinetController extends Controller
     public function actionCabinet()
     {
         $data = array_merge($this->model->getCabinetData(), $this->model->getinfo());
-        $data['access'] = $this->checkAccessLevel($_SESSION['status']);
+        $data['access'] = $this->checkAccessLevel();
         $this->view->render('cabinet', $data);
     }
 
@@ -225,7 +225,7 @@ class CabinetController extends Controller
     public function actionPayment()
     {
         $data = $this->model->getinfo()[0];
-        $access = $this->checkAccessLevel($_SESSION['status']);
+        $access = $this->checkAccessLevel();
         $data['access'] = $access;
         $this->view->render('payment', $data);
     }
@@ -237,7 +237,7 @@ class CabinetController extends Controller
             $data['balance_history'] = $this->model->getBalanceHistory();
 
         }
-        $access = $this->checkAccessLevel($_SESSION['status']);
+        $access = $this->checkAccessLevel();
         $data['access'] = $access;
         $this->view->addJSFile('pickmeup.js');
 
