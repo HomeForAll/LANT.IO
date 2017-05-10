@@ -1,8 +1,13 @@
 <?php
 
 
+use PhpAmqpLib\Connection\AMQPStreamConnection;
+use PhpAmqpLib\Connection\AMQPConnection;
+use PhpAmqpLib\Message\AMQPMessage;
+
 class NewsModel extends Model
 {
+
     public function __construct()
     {
         $this->db = new DataBase;
@@ -188,6 +193,22 @@ class NewsModel extends Model
             'video' => 'Видео',
             'wall_material' => 'Материал стен',
             'year_of_construction' => 'Год постройки/окончания строительства',
+            'time_walk' => 'Время от метро пешком',
+            'time_car' => 'Время от метро на транспорте',
+            'bathroom_available' => 'Наличие санузла',
+            'alcove' => 'Беседка',
+            'barn' => 'Сарай',
+            'bath' => 'Баня',
+            'forest_trees' => 'Лесные деревья',
+            'garden_trees' => 'Садовые деревья',
+            'guest_house' => 'Гостевой дом',
+            'lodge' => 'Сторожка',
+            'playground' => 'Детская площадка',
+            'river' => 'Река',
+            'spring' => 'Родник',
+            'swimming_pool' => 'Бассейн',
+            'waterfront' => 'Берег водоёма',
+            'wine_vault' => 'Винный погреб',
         );
 
 
@@ -363,18 +384,18 @@ class NewsModel extends Model
             'year_of_construction'
         ];
         //Присваивание значениям опций - перевода
-        foreach ($new_data as $key => $val){
-            if(is_int($val) && !in_array($key, $integer_elements)){
-                if(isset($options[$val])){
+        foreach ($new_data as $key => $val) {
+            if (is_int($val) && !in_array($key, $integer_elements)) {
+                if (isset($options[$val])) {
                     $new_data[$key] = $options[$val];
                 } else {
-                    $new_data[$key] = '!!! неизвестная опция  = '.$val;
+                    $new_data[$key] = '!!! неизвестная опция  = ' . $val;
                 }
 
             }
         }
 
-            //Присваивание заголовков
+        //Присваивание заголовков
         foreach ($new_data as $key => $val) {
             if (!empty($header[$key])) {
                 $new_data[$key . '_h'] = $header[$key];
@@ -389,7 +410,7 @@ class NewsModel extends Model
      * @param int $page - страница новостей
      * @return array - выборка всех данных новостей в виде массива
      */
-    public function getNewsList($page = 0)
+    public function getNewsList($page = 0, $space_type = 0, $operation_type = 0, $object_type = 0)
     {
         $data = []; //выходные данные
         // Определение номера страницы выводимых новостей
@@ -430,7 +451,7 @@ class NewsModel extends Model
         // Запрос БД      
         $from_page = $data['firstnews'] - 1;
 
-        $sql = "SELECT id_news, date::date, title, content, user_id, preview_img, status, category, tags "
+        $sql = "SELECT id_news, date::date, title, space_type, operation_type, object_type, content, user_id, preview_img, status, category, tags "
             . "FROM news_base WHERE status = 1 ";
         if (!empty($data['news_table_category'])) {
             $sql = $sql . " AND (";
@@ -451,12 +472,9 @@ class NewsModel extends Model
         $stmt->bindParam(':from_page', $from_page);
         $stmt->execute();
         $data['news'] = $stmt->fetchAll();
-        //Строку файлов картинок преобразуем в массив $data['news'][number]['preview_img'][]
-        $data['news'] = $this->explodePreviewImg($data['news']);
-        // Получение имен категорий
-        foreach ($data['news'] as $key => $value) {
-            $data['news'][$key]['category_rus'] = $this->translateIndex($data['news'][$key]['category'], 'category');
-        }
+
+        // Подкотовка данных для вывода
+        $data['news'] = $this->prepareNewsPreview($data['news']);
 
         return $data;
     }
@@ -683,6 +701,22 @@ class NewsModel extends Model
             'video' => FILTER_SANITIZE_STRING,
             'wall_material' => FILTER_SANITIZE_NUMBER_INT,
             'year_of_construction' => FILTER_SANITIZE_NUMBER_INT,
+            'time_walk' => FILTER_SANITIZE_NUMBER_INT,
+            'time_car' => FILTER_SANITIZE_NUMBER_INT,
+            'bathroom_available' => FILTER_VALIDATE_BOOLEAN,
+            'alcove' => FILTER_VALIDATE_BOOLEAN,
+            'barn' => FILTER_VALIDATE_BOOLEAN,
+            'bath' => FILTER_VALIDATE_BOOLEAN,
+            'forest_trees' => FILTER_VALIDATE_BOOLEAN,
+            'garden_trees' => FILTER_VALIDATE_BOOLEAN,
+            'guest_house' => FILTER_VALIDATE_BOOLEAN,
+            'lodge' => FILTER_VALIDATE_BOOLEAN,
+            'playground' => FILTER_VALIDATE_BOOLEAN,
+            'river' => FILTER_VALIDATE_BOOLEAN,
+            'spring' => FILTER_VALIDATE_BOOLEAN,
+            'swimming_pool' => FILTER_VALIDATE_BOOLEAN,
+            'waterfront' => FILTER_VALIDATE_BOOLEAN,
+            'wine_vault' => FILTER_VALIDATE_BOOLEAN
         );
 
         $new_form_data = filter_input_array(INPUT_POST, $args);
@@ -859,7 +893,7 @@ class NewsModel extends Model
         $blacklistOfFile = array(".php", ".phtml", ".php3", ".php4"); // Запрещенный формат файлов
         $imgMaxSize = 3050000; // Максимальный размер картинок в байтах
         $return_image_arr = []; //подготовительный массив для сохранения порядка следования
-        $return_image_names = ''; // Возвращаемая строка имен картинок 
+        $return_image_names = ''; // Возвращаемая строка имен картинок
 
         if (!empty($_FILES)) {
             //Получаем имена полей "image_name_?" ввода картинок переданных POST
@@ -872,9 +906,9 @@ class NewsModel extends Model
                     $i = (int)substr($v, 11, 2) - 1;
                     // определяем имя файла
 //                 $f_name =strstr($v, 'news_') ;
-                    //переделываем 4 знак с конца в точку
-//                 $f_name = substr_replace($f_name, '.', -4, 1);
-                    // добавляем в подготовительный массив под номером
+                    //переделываем 4 знак конца в точку
+//                 $f_name = substr_repla($f_name, '.', -4, 1);
+                    // добавляем в подготовельный массив под номером
                     $return_image_arr[$i] = $_SESSION['preview_img'][$i];
 
                     //удаляем ссылку на поле ввода, что бы исключить обработку
@@ -1044,7 +1078,7 @@ class NewsModel extends Model
 
     //Принимает индекс и имя переменной
     //Возвращает значение соответствующее индексу
-    public function translateIndex($index = 0, $name = '')
+    public function translateIndex($index = 0, $names_type = '')
     {
 
         // Проверочный массив
@@ -1074,175 +1108,11 @@ class NewsModel extends Model
                 13 => 'Гараж/Машиноместо',
                 14 => 'Земельный участок'
             ),
-
-
-            'category_eng' => array(
-                1 => 'base',
-                11 => 'saleroom',
-                12 => 'saleapart',
-                13 => 'salehouse',
-                14 => 'saleland',
-                21 => 'rentroom',
-                22 => 'rentapart',
-                23 => 'renthouse',
-                24 => 'rentland'
-            ),
-            'category' => array(
-                1 => 'Без категории',
-                11 => 'Продажа комнаты',
-                12 => 'Продажа квартиры',
-                13 => 'Продажа дома',
-                14 => 'Продажа участка',
-                21 => 'Аренда комнаты',
-                22 => 'Аренда квартиры',
-                23 => 'Аренда дома',
-                24 => 'Аренда участка'
-            ),
-            'type_of_rent' => array(
-                1 => 'Часовая',
-                2 => 'Посуточная',
-                3 => 'Долгосрочная'
-            ),
-            'equipment' => array(
-                1 => 'Укомплектованная',
-                2 => 'Пустая'
-            ),
-            'type_of_house' => array(
-                1 => 'Блочный',
-                2 => 'Брежневка',
-                3 => 'Индивидуальный',
-                4 => 'Кирпично-монолитный',
-                5 => 'Монолит',
-                6 => 'Панельный',
-                7 => 'Сталинка',
-                8 => 'Хрущевка',
-                9 => 'Другое',
-                10 => 'Частный',
-                11 => 'Многоквартирный',
-                12 => 'Таунхаус',
-                13 => 'Усадьба'
-            ),
-            'style_of_house' => array(
-                1 => 'Классический',
-                2 => 'Русский',
-                3 => 'Русская усадьба',
-                4 => 'Замковый',
-                5 => 'Ренессанс',
-                6 => 'Готический',
-                7 => 'Барокко',
-                8 => 'Рококо',
-                9 => 'Классицизм',
-                10 => 'Ампир',
-                11 => 'Эклектика',
-                12 => 'Модерн',
-                13 => 'Органическая архитектура',
-                14 => 'Конструктивизм',
-                15 => 'Ар-деко',
-                16 => 'Минимализм',
-                17 => 'High tech',
-                18 => 'Финский минимализм',
-                19 => 'Шале',
-                20 => 'Фахверк',
-                21 => 'Скандинавский',
-                22 => 'Восточный',
-                23 => 'Американский кантри',
-                24 => 'Шато',
-                25 => 'Адирондак',
-                26 => 'Стильпрерий'
-            ),
-            'material_lining' => array(
-                1 => 'Кирпич',
-                2 => 'Камень',
-                3 => 'Фасадная плитка',
-                4 => 'Фасадная панель',
-                5 => 'Деревянная панель',
-                6 => 'Штукатурка'
-            ),
-            'parking_space' => array(
-                1 => 'Парковочное место',
-                2 => 'Закрытый гараж',
-                3 => 'За пределами участка'
-            ),
-            'landscape' => array(
-                1 => 'Ровный',
-                2 => 'Не ровный'
-            ),
-            'security' => array(
-                1 => 'Консьерж',
-                2 => 'Охрана',
-                3 => 'Домофон',
-                4 => 'Видеонаблюдение'
-            ),
-            'toilet' => array(
-                1 => 'Совмещенный',
-                2 => 'Раздельный'
-            ),
-            'seasonality' => array(
-                1 => 'Круглый год',
-                2 => 'Весна-лето'
-            ),
-            'flora' => array(
-                1 => 'Лесные деревья',
-                2 => 'Садовые растения'
-            ),
-            'rooms_for_sale' => array(
-                1 => '1',
-                2 => '2',
-                3 => '3+'
-            ),
-            'room_location' => array(
-                1 => 'Квартира',
-                2 => 'Общежитие',
-                3 => 'Частный дом'
-            ),
-
-            'tszh' => array(
-                1 => 'Нет',
-                2 => 'Кооператив',
-                3 => 'Кондоминиум',
-                4 => 'Частный дом',
-                5 => 'Другое'
-            ),
-            'parking_type' => array(
-                1 => 'Нет',
-                2 => 'Подземная',
-                3 => 'Обозначенная, во дворе',
-                4 => 'Не обозначенная, во дворе',
-                5 => 'Платная(неподалёку)'
-            ),
-            'fencing' => array(
-                1 => 'Нет',
-                2 => 'Профнастил',
-                3 => 'Забор из дерева',
-                4 => 'Евроштакетник',
-                5 => 'Сетка рабица',
-                6 => 'Монолитный'
-            ),
-            'house_condition' => array(
-                1 => 'Отделки нет',
-                2 => 'Стандартная отделка',
-                3 => 'Премиум отделка'
-            ),
-            'flat_condition' => array(
-                1 => 'Отделки нет',
-                2 => 'Стандартная отделка',
-                3 => 'Премиум отделка'
-            ),
-            'balcony' => array(
-                1 => 'Отсутствует',
-                2 => 'Незастеклённый',
-                3 => 'Лоджия'
-            ),
-            'room_condition' => array(
-                1 => 'Отделки нет',
-                2 => 'Стандартная отделка',
-                3 => 'Премиум отделка'
-            )
         );
 // Определение значения
-        if (!empty($index) && !empty($name)) {
-            if (isset($test_array[$name][$index])) {
-                $index = $test_array[$name][$index];
+        if (!empty($index) && !empty($names_type)) {
+            if (isset($test_array[$names_type][$index])) {
+                $index = $test_array[$names_type][$index];
             }
         }
         return $index;
@@ -1319,49 +1189,191 @@ class NewsModel extends Model
         return $all_checkbox_list;
     }
 
+
     /**
      * Возвращает список последних объявлений
-     * @param int $time - время в часах
+     * @param int $time_start - период до начала поиска в часах
+     * @param int $time - период до конца поиска в часах
+     * @param int $max_numder - количество объявлений
+     * @param int $space_type - Тип площади
+     * @param int $operation_type - Операция
+     * @param int $object_type - Тип объекта
+     * @param bool $best - Только лучшие объявления
      * @return array
      */
-    public function getRecentNewsList($time = 24)
+    public function getRecentNewsList($time_start = 0, $time = 24, $max_numder = 20, $space_type = 0, $operation_type = 0,
+                                      $object_type = 0, $best = false, $status = true)
     {
-//Текущее время
-        $now_time = time();
-        return $now_time;
-        $sql = "SELECT id_news, date::date, title, content, user_id, preview_img, status, category, tags "
-            . "FROM news_base WHERE status = 1 ";
-        if (!empty($data['news_table_category'])) {
-            $sql = $sql . " AND (";
-            foreach ($data['news_table_category'] as $value) {
-                $sql = $sql . ' category = ' . $value . ' OR ';
-            }
-            // удаление последнего OR
-            $sql = substr($sql, 0, -4);
-            $sql = $sql . ')';
+        //Заданное время начала поиска ($time - час)
+        $news_time = time() - $time * 60 * 60;
+        //Текущая Дата в формате стандарта ISO 8601
+        $news_date = date('c', $news_time);
+
+        //Дата окончания поиска (по умолчанию настоящее время)
+        if (!empty($time_start)) {
+            $time_start = date('c', strtotime($time_start)+86400);
+        } else {
+            $time_start = 0;
         }
 
-        $sql = $sql . " ORDER BY date DESC"
-            . " LIMIT :number_of_news"
-            . " OFFSET :from_page";
+        $sql = "SELECT id_news, date::date, title, space_type, operation_type, object_type, content, user_id, preview_img, status, category, tags "
+            . "FROM news_base WHERE (date >= :date) ";
+
+        if ($time_start) {
+            $sql .= "AND (date <= :date_start) ";
+        }
+        if ($status) {
+            $sql .= "AND (status = 1) ";
+        }
+        if ($space_type != 0) {
+            $sql .= "AND (space_type = :space_type) ";
+        }
+        if ($operation_type != 0) {
+            $sql .= "AND (operation_type = :operation_type) ";
+        }
+        if ($object_type != 0) {
+            $sql .= "AND (object_type = :object_type) ";
+        }
+        if ($best) {
+            $sql .= "AND (category = 1) ";
+        }
+
+        $sql .= " ORDER BY date DESC"
+            . " LIMIT :max_numder";
 
         $stmt = $this->db->prepare($sql);
-        $stmt->bindParam(':number_of_news', $number_of_news);
-        $stmt->bindParam(':from_page', $from_page);
-        $stmt->execute();
-        $data['news'] = $stmt->fetchAll();
-        //Строку файлов картинок преобразуем в массив $data['news'][number]['preview_img'][]
-        $data['news'] = $this->explodePreviewImg($data['news']);
-        // Получение имен категорий
-        foreach ($data['news'] as $key => $value) {
-            $data['news'][$key]['category_rus'] = $this->translateIndex($data['news'][$key]['category'], 'category');
+        $stmt->bindParam(':date', $news_date);
+        if ($time_start != 0) {
+            $stmt->bindParam(':date_start', $time_start);
         }
+        $stmt->bindParam(':max_numder', $max_numder);
+        if ($space_type != 0) {
+            $stmt->bindParam(':space_type', $space_type);
+        }
+        if ($operation_type != 0) {
+            $stmt->bindParam(':operation_type', $operation_type);
+        }
+        if ($object_type != 0) {
+            $stmt->bindParam(':object_type', $object_type);
+        }
+        $stmt->execute();
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // Подкотовка данных для вывода
+        $data = $this->prepareNewsPreview($data);
 
         return $data;
     }
 
-    public function proba(){
-        return"Получилось!";
+    /**
+     * Подкотовка данных для вывода превью объявлений
+     * @param $data - исходные данные объявлений из БД в виде arr[[0]=>arr, [1]=>arr...]
+     * @return mixed - преобразованные данные
+     */
+    public function prepareNewsPreview($data)
+    {
+        //Строку файлов картинок преобразуем в массив $data['news'][number]['preview_img'][]
+        $data = $this->explodePreviewImg($data);
+
+        foreach ($data as $key => $value) {
+            // Получение имен категорий
+            $data[$key]['space_type'] = $this->translateIndex($data[$key]['space_type'], 'space_type');
+            $data[$key]['operation_type'] = $this->translateIndex($data[$key]['operation_type'], 'operation_type');
+            $data[$key]['object_type'] = $this->translateIndex($data[$key]['object_type'], 'object_type');
+            // Превью содержания
+            $short_len = 60; // длина предпросмотра (short_content) в символах
+
+            if (!empty($data[$key]['content'])) {
+                if (strlen($data[$key]['content']) > $short_len) {
+                    //Обрезка содержания по окончанию слова (пробелу)
+                    if ($short_content_position = strpos($data[$key]['content'], ' ', $short_len)) {
+                        $data[$key]['content'] = substr($data[$key]['content'], 0, $short_content_position);
+                        $data[$key]['content'] .= '...';
+                    }
+                }
+            }
+        }
+        return $data;
     }
+
+    public function sendNewNewsByRabbitMQ($message)
+    {
+        $connection = new AMQPStreamConnection('localhost', 5672, 'guest', 'guest');
+        $channel = $connection->channel();
+        // Параметры Обмена - "точки доступа"
+        //Имя Обмена; false-НЕ пассив(сервер может создать очередь); true - надежный(durable)
+        //false - НЕ auto-delete когда отписывается последний подписчик;
+        // $channel->exchange_declare('ex_newNews', 'fanout', false, true, false);
+
+        //Очередь
+        //Имя очереди; false-НЕ пассив(сервер может создать очередь); true - надежный(durable)
+        //false - НЕ используется только данным соединением;
+        // false - очередь НЕ автоудаляется, когда отписывается последний подписчик
+        $channel->queue_declare('newNews', false, true, false, false);
+
+        //delivery_mode - сообщение постоянно, чтобы не потерялось при падении сервера
+        $msg = new AMQPMessage($message, array('delivery_mode' => 2));
+        //$msg - (сообщение, обмен, ключ очереди)
+        //$channel->basic_publish($msg, 'ex_newNews');
+        $channel->basic_publish($msg, '', 'newNews');
+
+        $channel->close();
+        $connection->close();
+        return;
+    }
+
+    public function getNewNewsByRabbitMQ()
+    {
+        global $rabbitmq_message_newnews;
+        $rabbitmq_message_newnews = [];
+        $connection = new AMQPStreamConnection('localhost', 5672, 'guest', 'guest');
+        $channel = $connection->channel();
+
+        //$channel->exchange_declare('ex_newNews', 'fanout', false, true, false);
+        $channel->queue_declare('newNews', false, true, false, false);
+        //не отправляем новое сообщение на обработчик,
+        // пока он не обработал и не подтвердил предыдущее. Вместо этого
+        // направляем сообщение на любой свободный обработчик
+        //null - без ограничения размера выборки
+        //1 - количество предварительных выборок
+        //null - настройки QoS применяются для получателей (true - к каналу)
+        $channel->basic_qos(null, 1, null);
+
+        $callback = function ($msg) {
+            global $rabbitmq_message_newnews;
+            $message = $msg->body;
+            array_push($rabbitmq_message_newnews, $message);
+        };
+
+
+        // Установление подписки
+        // newNews - очередь , '' - тег канала Обмена
+        // false - не локальный; true -  подтверждения ВЫКЛючены
+        // false - не эксклюзивная; false -  НЕ не ждать ответа сервера
+        // функция обратного вызова
+        $channel->basic_consume('newNews', '', false, true, false, false, $callback);
+
+//        while(count($channel->callbacks)) {
+//            $channel->wait();
+//        }
+
+
+        // wait function works only with sockets, we have to catch the exception
+        $timeout = 5;
+        while (count($channel->callbacks)) {
+            try {
+                $channel->wait(null, false, $timeout);
+            } catch (\PhpAmqpLib\Exception\AMQPTimeoutException $e) {
+                $channel->close();
+                $connection->close();
+                return $rabbitmq_message_newnews;
+            }
+        }
+
+        $channel->close();
+        $connection->close();
+        return $rabbitmq_message_newnews;
+    }
+
 
 }
