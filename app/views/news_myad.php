@@ -13,11 +13,11 @@ var form_options_menu = {1:{1:{2:1, 3:1, 4:1, 5:1, 6:1, 7:1, 8:1, 9:1, 10:1}, 2:
 <div class="my_news clearfix">
     <h3>Мои объявления</h3>
     <p> Вы вошли как: <?php
-        if(!empty($this->data['user_id'])){
-            echo $this->data['user_id'];
-        } else {
+        if (empty($this->data['user_id'])) {
             $this->data['user_id'] = 'Aноним';
-        }; ?></p>
+        }
+        echo $this->data['user_id'];
+        ?></p>
 
     <br>
     <form id="add_news" action="/news/editor" method="post">
@@ -51,27 +51,6 @@ var form_options_menu = {1:{1:{2:1, 3:1, 4:1, 5:1, 6:1, 7:1, 8:1, 9:1, 10:1}, 2:
 
         <input type="submit" name="submit_add_news" value="Добавить новость">
     </form>
-
-<!--        <div  id="add_news_menu_button" class="clearfix icon add_news_menu_plus">Добавить новость</div>-->
-<!--     <div id="add_news_menu_body" class="clearfix">-->
-<!--        <legend>Выбор категории для создания нового объявления</legend>-->
-<!---->
-<!--            <a href="/news/editor/saleapart">Продажа Квартиры</a>-->
-<!--            <a href="/news/editor/salehouse">Продажа Дома</a>-->
-<!--            <a href="/news/editor/saleroom">Продажа Комнаты</a>-->
-<!--            <a href="/news/editor/saleland">Продажа Участка</a>-->
-
-<!---->
-<!---->
-<!---->
-<!--            <a href="/news/editor/rentapart">Аренда Квартиры</a>-->
-<!--            <a href="/news/editor/renthouse">Аренда Дома</a>-->
-<!--            <a href="/news/editor/rentroom">Аренда Комнаты</a>-->
-<!--            <a href="/news/editor/rentland">Аренда Участка</a>-->
-<!---->
-<!--     </div>-->
-
-
 
 <?php
 
@@ -129,6 +108,7 @@ foreach ($this->data['news'] as $news) {
     <?php if (!empty($news['tags'])) { ?>
     <div class="news_tags"><?php echo " Метки :". $news['tags']; ?></div>
     <?php } ?>
+    <a href="<?php echo "../news/editor/". $news['id_news']; ?>">редактировать</a>
 </div>
     <?php
 }
@@ -146,9 +126,7 @@ if (empty($this->data['news']['id_news'])) {
     ?>
 
         <table border="1", cellspacing="0">
-
             <tr>
-
                 <td> Дата </td>
                 <td> Заголовок <br>(нажмите для редактирования новости) </td>
                 <?php if($this->data['user_id'] == 'admin'){ ?>
@@ -199,8 +177,6 @@ if (empty($this->data['news']['id_news'])) {
 
 <script>
     $(document).ready(function () {
-
-
             $('#add_news').submit(function(){
                 var opt1 = $('#space_type').val();
                 var opt2 = $('#operation_type').val();

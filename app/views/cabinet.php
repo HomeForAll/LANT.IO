@@ -1,7 +1,7 @@
 <?php
 $this->title = 'Личный кабинет';
 
-$access = $this->checkAccessLevel($_SESSION['status']);
+$access = $this->checkAccessLevel();
 ?>
     <h1>Личный кабинет!</h1>
 
@@ -49,7 +49,7 @@ if ($access['forms_editor']) {
 
     <a class="button" href="service">Услуги</a>
     <a class="button" href="service/admin">Добавление\Редактирование услуг</a>
-    <a class="button" href="admin/newsformgenerator">News Form Generator</a>
+     <a class="button" href="admin">Административная панель</a>
     
 <?php
 if ($access['admin_service']) {
