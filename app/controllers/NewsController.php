@@ -21,7 +21,6 @@ class NewsController extends Controller
 
         $data = $this->model->getNewsList($params);
         $data['last_viewed_news'] = $this->model->getLastViewedNews();
-        $data['last_news'] = $this->model->getRecentNewsList(24);
 
         $this->view->render('news_list', $data);
     }
@@ -62,16 +61,9 @@ class NewsController extends Controller
         }
 
         // Проверка доступа
-        if (!empty($_SESSION['userID'])) {
-            $access = $this->checkAccessLevel($_SESSION['status']);
-            if (!$access['add_news']) {
-                $this->view->render('no_access');
-                return;
-            }
-        } else {
-            $this->view->render('login');
-            return;
-        }
+        $this->getAccessFor('add_news');
+
+
         // Определяем: Если есть id новости => update или вывод формы для редактирования
         if (!empty((int)$params)) {
             $news_to_edit_id = (int)$params;
@@ -115,9 +107,8 @@ class NewsController extends Controller
             }
 
             //Проверка на владельца новости и уровня доступа к редактированию
-            if (!$access['news_admin'] && ($news_to_edit["user_id"] != $_SESSION['userID'])) {
-                $this->view->render('no_access');
-                return;
+            if ($news_to_edit["user_id"] != $_SESSION['userID']) {
+                $this->getAccessFor('admin_news');
             }
         } else {
 
@@ -147,6 +138,9 @@ class NewsController extends Controller
                     array_push($news_error,
                         'Новость: "' . $_POST['title'] . '" не удалось добавить так как не заполнены все поля!');
                 }
+                //JSON формат новости и отсылка на RabbitMQ
+                $news_rabbitmq = json_encode($form_data);
+                $this->model->sendNewNewsByRabbitMQ(json_encode($form_data));
             }
         } // окончание else (если в строке ввода не id новости
 // Объеденяем массивы данных в один для передачи data[] = параметры новости (если редактирование новости) + массив-лист всех новостей + массив сообщений

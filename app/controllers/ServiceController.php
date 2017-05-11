@@ -16,7 +16,7 @@ class ServiceController extends Controller
         $this->service_message = [];
 
         if (!empty($this->user)) {
-            $this->access = $this->checkAccessLevel($this->status);
+            $this->access = $this->checkAccessLevel();
         } else {
             $this->view->render('login');
             return;

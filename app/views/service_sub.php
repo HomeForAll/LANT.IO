@@ -13,7 +13,7 @@ $this->title = 'Услуги';
     </div>
 
 <p>Всего услуг: <?php echo $this->data['count_services']; ?></p>
-<?php registry::model();?>
+<?php // registry::model();?>
 <h2>Подключенные услуги</h2>
     <table>
         <tr>

@@ -9,6 +9,142 @@ class AdminModel extends Model
         $this->db = new DataBase();
     }
 
+     public function makeNewsStatus()
+    {
+        global $news_message, $news_error;
+
+        // Массив id объявлений подлежащих изменению
+        $news_id_status = [];
+        $news_id_category = [];
+        foreach ($_POST as $key => $value) {
+            if(preg_match('/^change_status_/', $key)) {
+                $news_id = substr($key, 14);
+                array_push($news_id_status, (int)$news_id);
+            }
+            if(preg_match('/^change_category_/', $key)) {
+                $news_id = substr($key, 16);
+                array_push($news_id_category, (int)$news_id);
+            }
+        }
+
+        //Обработка массива статусов
+        foreach($news_id_status as $id_news){
+            if(isset($_POST['status_'.$id_news])) {
+                $status = $_POST['status_' . $id_news];
+                //Удаление новости
+                if ($status == 3) {
+                    Registry::model('news')->makeNewsDelete($id_news);
+                } else {
+                    //UPDATE статуса
+                    $sql = "UPDATE news_base SET status = :status  WHERE id_news = :id_news";
+                    $stmt = $this->db->prepare($sql);
+                    $stmt->bindParam(':id_news', $id_news);
+                    $stmt->bindParam(':status', $status, PDO::PARAM_INT);
+                    if ($stmt->execute()) {
+                        // Добавление сообщения
+                        array_push($news_message,
+                            'Изменён статус у новости c id = ' . $id_news);
+                    } else {
+                        array_push($news_error,
+                            'Статус у новости с id = ' . $id_news . ' не удалось изменить');
+                    }
+                }
+            }
+            }
+
+        //Обработка массива категории Лучшая новость
+        foreach($news_id_category as $id_news) {
+            if (isset($_POST['category_' . $id_news])) {
+                $category = 1;
+            }else{ $category = 0; }
+                //Изменение category
+                $sql = "UPDATE news_base SET category = :category  WHERE id_news = :id_news";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindParam(':id_news', $id_news);
+                $stmt->bindParam(':category', $category, PDO::PARAM_INT);
+                if ($stmt->execute()) {
+                    // Добавление сообщения
+                    array_push($news_message,
+                        'Присвоен статус Лучшее объявление id = ' . $id_news);
+                } else {
+                    array_push($news_error,
+                        'Присвоение статуса Лучшее объявление (id = ' . $id_news . ') не удалось');
+                }
+        }
+        return;
+    }
+
+    /**
+     * Возвращает массив первоначальных данных таблицы просмотра административной панели
+     * в зависимости от POST, SESSION и устанавливает SESSION
+     * @return array
+     */
+    public function getDataFromPostOrSession(){
+        $data = [];
+        if(!empty($_POST['submit_show_news'])){
+            $data['time']=(int)$_POST['time'];
+            if(!empty((int)$_POST['time_start'])){
+                $time_start_arr = explode('-',$_POST['time_start']);
+                if(isset($time_start_arr[0])) $data['time_start'] =  (int)$time_start_arr[0];
+                if(isset($time_start_arr[1])){
+                    $data['time_start'] .= '-'.(int)$time_start_arr[1];
+                } else {
+                    $data['time_start'] .= '-01-01';
+                }
+                if(isset($time_start_arr[2])){
+                    $data['time_start'] .= '-'.(int)$time_start_arr[2];
+                } else {
+                    $data['time_start'] .= '-01';
+                }
+           }else {
+               $data['time_start'] = 0;
+           }
+            $data['max_number']=(int)$_POST['max_number'];
+            $data['space_type']=(int)$_POST['space_type'];
+            $data['operation_type']=(int)$_POST['operation_type'];
+            $data['object_type']=(int)$_POST['object_type'];
+            if(isset($_POST['best'])){
+                $data['best'] = TRUE;
+            }else {
+                $data['best'] = FALSE;
+            }
+            if(isset($_POST['status'])){
+                $data['status'] = TRUE;
+            }else {
+                $data['status'] = FALSE;
+            }
+            //Сессии
+            $_SESSION['news_admin']['time'] = $data['time'];
+            $_SESSION['news_admin']['time_start'] = $data['time_start'];
+            $_SESSION['news_admin']['max_number'] = $data['max_number'];
+            $_SESSION['news_admin']['space_type'] = $data['space_type'];
+            $_SESSION['news_admin']['operation_type'] = $data['operation_type'];
+            $_SESSION['news_admin']['object_type'] = $data['object_type'];
+            $_SESSION['news_admin']['best'] = $data['best'];
+            $_SESSION['news_admin']['status'] = $data['status'];
+        }else if(!empty($_SESSION['news_admin'])){
+            $data['time'] = (int)$_SESSION['news_admin']['time'];
+            $data['time_start'] = (int)$_SESSION['news_admin']['time_start'];
+            $data['max_number'] = (int)$_SESSION['news_admin']['max_number'];
+            $data['space_type'] = (int)$_SESSION['news_admin']['space_type'];
+            $data['operation_type'] = (int)$_SESSION['news_admin']['operation_type'];
+            $data['object_type'] = (int)$_SESSION['news_admin']['object_type'];
+            $data['best'] = boolval($_SESSION['news_admin']['best']);
+            $data['status'] = boolval($_SESSION['news_admin']['status']);
+        } else{
+            //  По умолчанию
+            $data['time'] = 24;
+            $data['time_start'] = 0;
+            $data['max_number'] = 5;
+            $data['space_type'] = 0;
+            $data['operation_type'] = 0;
+            $data['object_type'] = 0;
+            $data['best'] = FALSE;
+            $data['status'] = FALSE;
+        }
+        return $data;
+    }
+
 
     /**
      * Возвращает массив для формирования выбора форм
@@ -483,8 +619,9 @@ class AdminModel extends Model
             'swimming_pool' => 'boolean',
             'waterfront' => 'boolean',
             'wine_vault' => 'boolean',
-
-
+            'availability_of_garbage_chute' => 'boolean',
+            'time_walk' => 'integer',
+            'time_car' => 'integer',
         );
         // получение всех id элементов со списками
         $sql = 'SELECT DISTINCT ON (element_id) element_id FROM form_select_options';
@@ -534,7 +671,7 @@ class AdminModel extends Model
         // Исключения для параметров по умолчанию в таблице
         $default_exeptions = array(
             'id_news' => '',
-            'category' => 'DEFAULT 1',
+            'category' => 'DEFAULT 0',
             'status' => 'DEFAULT 1',
             'date' => 'NOT NULL DEFAULT current_timestamp',
 
@@ -1160,7 +1297,7 @@ class AdminModel extends Model
 
 
         $result = [];
-        $file_name = 'app/views/news/' . $generation_file_name;
+        $file_name = 'app/views/news/' . $generation_file_name . '.php';
 
         // Определение переменных из файла
         $db_vars = [];
@@ -1202,42 +1339,42 @@ class AdminModel extends Model
                 $start = 'style="';
                 $end = '"';
                 $lines[$key] = $this->cutLine($lines[$key], $start, $end);
-
-                $start = 'placeholder="';
-                $end = '"';
-                $lines[$key] = $this->cutLine($lines[$key], $start, $end);
-
-                $start = '-mi';
-                $end = 'n';
-                $lines[$key] = $this->cutLine($lines[$key], $start, $end);
-
-                $start = '-ma';
-                $end = 'x';
-                $lines[$key] = $this->cutLine($lines[$key], $start, $end);
-
-                $start = '-mi';
-                $end = 'n';
-                $lines[$key] = $this->cutLine($lines[$key], $start, $end);
-
-                $start = '-ma';
-                $end = 'x';
-                $lines[$key] = $this->cutLine($lines[$key], $start, $end);
-
-                //Замена некоторых полей checkbox -> text
-                $checkbox_to_text = ['bathroom_description', 'sanitation_description', 'cadastral_number'];
-
-                if (preg_match("/type=\"checkbox\"/", $lines[$key])) {
-                    // Имя
-                    $name = $this->getNameFromLine($lines[$key]);
-                    if (in_array($name, $checkbox_to_text)) {
-                        $start_pos = strpos($lines[$key], 'type="');
-                        $end_pos = strpos($lines[$key], '"', ($start_pos + strlen('type="'))) + 1;
-                        $line_before = substr($lines[$key], 0, $start_pos);
-                        $line_after = substr($lines[$key], $end_pos);
-                        $lines[$key] = $line_before . 'type="text"' . $line_after;
-                    }
-
-                }
+//
+//                $start = 'placeholder="';
+//                $end = '"';
+//                $lines[$key] = $this->cutLine($lines[$key], $start, $end);
+//
+//                $start = '-mi';
+//                $end = 'n';
+//                $lines[$key] = $this->cutLine($lines[$key], $start, $end);
+//
+//                $start = '-ma';
+//                $end = 'x';
+//                $lines[$key] = $this->cutLine($lines[$key], $start, $end);
+//
+//                $start = '-mi';
+//                $end = 'n';
+//                $lines[$key] = $this->cutLine($lines[$key], $start, $end);
+//
+//                $start = '-ma';
+//                $end = 'x';
+//                $lines[$key] = $this->cutLine($lines[$key], $start, $end);
+//
+//                //Замена некоторых полей checkbox -> text
+//                $checkbox_to_text = ['bathroom_description', 'sanitation_description', 'cadastral_number'];
+//
+//                if (preg_match("/type=\"checkbox\"/", $lines[$key])) {
+//                    // Имя
+//                    $name = $this->getNameFromLine($lines[$key]);
+//                    if (in_array($name, $checkbox_to_text)) {
+//                        $start_pos = strpos($lines[$key], 'type="');
+//                        $end_pos = strpos($lines[$key], '"', ($start_pos + strlen('type="'))) + 1;
+//                        $line_before = substr($lines[$key], 0, $start_pos);
+//                        $line_after = substr($lines[$key], $end_pos);
+//                        $lines[$key] = $line_before . 'type="text"' . $line_after;
+//                    }
+//
+//                }
 
                 array_push($result['form'], $lines[$key]);
 
@@ -1247,13 +1384,13 @@ class AdminModel extends Model
 
         }
 //Удаление двойных строк
-        foreach ($result['form'] as $k => $v) {
-            if ($k > 1) {
-                if ($result['form'][$k] == $result['form'][($k - 1)]) {
-                    unset($result['form'][($k - 1)]);
-                }
-            }
-        }
+//        foreach ($result['form'] as $k => $v) {
+//            if ($k > 1) {
+//                if ($result['form'][$k] == $result['form'][($k - 1)]) {
+//                    unset($result['form'][($k - 1)]);
+//                }
+//            }
+//        }
         return $result;
     }
 
@@ -1489,5 +1626,341 @@ class AdminModel extends Model
         return $news_en_ru;
     }
 
+
+    public function getFormFromMMrtf($file)
+    {
+        $file = $file; // Файл с ММ
+        $arr_main = [];//Основные формы и блоки
+        $arr_all_el = []; //Все элементы
+        $form = [];
+        $arr_h = '@'; //Символ массива
+        $arr_e = '\$'; //Символ элементов массива
+        $arr_e2 = '\*'; //Символ элементов массива 2
+        $arr_e3 = '\^'; //Символ элементов массива 3
+        if (file_exists($file)) {
+            $lines = file($file);
+            $i = 0;
+
+            foreach ($lines as $key => $value) {
+                $arr_h = '^' . $arr_h;
+                $arr_e = '^' . $arr_e;
+                $arr_e2 = '^' . $arr_e2; // (все эл.)
+                $arr_e3 = '^' . $arr_e3; // (все эл.)
+
+                if (preg_match("/\#1\#/", $value)) {
+                    $form_upupname = substr($value, 3, -31);
+                }
+                if (preg_match("/\#2\#/", $value)) {
+                    $form_upname = substr($value, 3, -39);
+                }
+                if (preg_match("/\#\#\#3\#\#\#/", $value)) {
+                    $form_name = $form_upupname . '_' . $form_upname . '_' . substr($value, 7, -2);
+                    echo '<br>' . $form_name . '<br>';
+                    $form[$form_name] = [];
+                    $arr_all_el[$form_name] = []; // (все эл.)
+                }
+                if (preg_match("/$arr_h/", $value)) {
+                    $header = substr($value, 1, -2);
+                    $arr_main[$i][$header] = [];
+                    if ($i == 42 OR $i == 14) {
+
+                        echo '[! -- отличия -- !] ';
+                        $header2 = $header . '_2';
+                        array_push($form[$form_name], $header2);
+                    } else {
+                        array_push($form[$form_name], $header);
+                    }
+                    echo ' @ ' . $header . '<br>';
+                    $i++;
+                    $arr_all_el[$form_name][$header] = []; // (все эл.)
+                }
+                if (preg_match("/$arr_e/", $value)) {
+                    $j = $i - 1;
+                    $element = substr($value, 1, -2);
+                    array_push($arr_main[$j][$header], $element);
+                    $arr_all_el[$form_name][$header][$element] = []; // (все эл.)
+                }
+                if (preg_match("/$arr_e2/", $value)) {
+                    $element2 = substr($value, 1, -2);
+                    $arr_all_el[$form_name][$header][$element][$element2] = []; // (все эл.)
+                }
+                if (preg_match("/$arr_e3/", $value)) {
+                    $element3 = substr($value, 1, -2);
+                    $arr_all_el[$form_name][$header][$element][$element2][$element3] = []; // (все эл.)
+                }
+
+            }
+        } else {
+            echo '<br>Файл ' . $file . ' не найден!<br>';
+        }
+
+        //[] -> в элементы массивов // (все эл.)
+        foreach ($arr_all_el as $k1 => $v1) {
+            foreach ($v1 as $k2 => $v2) {
+                if (empty($v2)) {
+                    array_push($arr_all_el[$k1], $k2);
+                    unset($arr_all_el[$k1][$k2]);
+                }
+                foreach ($v2 as $k3 => $v3) {
+                    if (empty($v3)) {
+                        array_push($arr_all_el[$k1][$k2], $k3);
+                        unset($arr_all_el[$k1][$k2][$k3]);
+                    }
+                    foreach ($v3 as $k4 => $v4) {
+                        if (empty($v4)) {
+                            array_push($arr_all_el[$k1][$k2][$k3], $k4);
+                            unset($arr_all_el[$k1][$k2][$k3][$k4]);
+                        }
+                        foreach ($v4 as $k5 => $v5) {
+                            if (empty($v5)) {
+                                array_push($arr_all_el[$k1][$k2][$k3][$k4], $k5);
+                                unset($arr_all_el[$k1][$k2][$k3][$k4][$k5]);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+//Уровневые массивы // (все эл.)
+        $arr_all_el_1 = [];
+        $arr_all_el_2 = [];
+        $arr_all_el_3 = [];
+        $arr_all_el_4 = [];
+        $arr_all_el_5 = [];
+
+
+//        echo'---- $arr_all_el ----';
+//        echo'<br><pre>';
+//        var_dump($arr_all_el);
+//        echo'<br></pre>';
+//        echo'_____________';
+
+
+        foreach ($arr_all_el as $k1 => $v1) {
+            if (is_array($v1)) {
+                $arr_all_el_1[$k1][$k1] = $v1;
+                foreach ($v1 as $k2 => $v2) {
+                    if (is_array($v2)) {
+                        $arr_all_el_2[$k1][$k2] = $v2;
+                        foreach ($v2 as $k3 => $v3) {
+                            if (is_array($v3)) {
+                                $arr_all_el_3[$k1 . ' - ' . $k2][$k3] = $v3;
+                                foreach ($v3 as $k4 => $v4) {
+                                    if (is_array($v4)) {
+                                        $arr_all_el_4[$k1 . ' - ' . $k2 . ' - ' . $k3][$k4] = $v4;
+                                        foreach ($v4 as $k5 => $v5) {
+                                            if (is_array($v5)) {
+                                                $arr_all_el_5[$k1 . ' - ' . $k2 . ' - ' . $k3 . ' - ' . $k4][$k5] = $v5;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        foreach ($arr_all_el_1 as $k1 => $v1) {
+            foreach ($v1 as $k2 => $v2) {
+                foreach ($v2 as $k3 => $v3) {
+                    if (is_array($v3)) {
+                        $arr_all_el_1[$k1][$k2][$k3] = $k3;
+                    }
+                }
+            }
+        }
+        foreach ($arr_all_el_2 as $k1 => $v1) {
+            foreach ($v1 as $k2 => $v2) {
+                foreach ($v2 as $k3 => $v3) {
+                    if (is_array($v3)) {
+                        $arr_all_el_2[$k1][$k2][$k3] = $k3;
+                    }
+                }
+            }
+        }
+        foreach ($arr_all_el_3 as $k1 => $v1) {
+            foreach ($v1 as $k2 => $v2) {
+                foreach ($v2 as $k3 => $v3) {
+                    if (is_array($v3)) {
+                        $arr_all_el_3[$k1][$k2][$k3] = $k3;
+                    }
+                }
+            }
+        }
+        foreach ($arr_all_el_4 as $k1 => $v1) {
+            foreach ($v1 as $k2 => $v2) {
+                foreach ($v2 as $k3 => $v3) {
+                    if (is_array($v3)) {
+                        $arr_all_el_4[$k1][$k2][$k3] = $k3;
+                    }
+                }
+            }
+        }
+
+
+        //Вывод и сравнение уровней
+        $uroven = 4;
+        switch ($uroven) {
+            case 1:
+                $arr_ur_el = $arr_all_el_1;
+                break;
+            case 2:
+                $arr_ur_el = $arr_all_el_2;
+                break;
+            case 3:
+                $arr_ur_el = $arr_all_el_3;
+                break;
+            case 4:
+                $arr_ur_el = $arr_all_el_4;
+                break;
+            case 5:
+                $arr_ur_el = $arr_all_el_5;
+                break;
+        }
+
+        echo "<br><h3> Уникальные параметры по названию уровня ".$uroven." :</h3><br>";
+        $arr_ur_unic = [];
+        foreach($arr_ur_el as $k1 => $v1){
+            foreach($v1 as $k2 => $v2){
+                $arr_ur_unic[$k2] = $v2;
+                $arr_ur_unic_key[$k2] = $k1;
+            }
+        }
+        ksort($arr_ur_unic);
+        foreach($arr_ur_unic as $k1 => $v1){
+            echo " - ".$k1."<br>";
+        }
+
+        echo "<br><h3> Отличающиеса по составу параметры уровня ".$uroven." :</h3><br>";
+
+        foreach($arr_ur_el as $k1 => $v1){
+            foreach($v1 as $k2 => $v2){
+//                if(($k2 != 'Цена') && ($k2 != 'Расположение') && ($k2 != 'Видео (выбор пользователя)')
+//                && ($k2 != 'Жилищно-коммунальные услуги (список)')
+//                    && ($k2 != 'Уточнение вида объекта (список)')
+//                    && ($k2 != 'Площадь (ввод вручную)')
+//                    && ($k2 != 'Комплектация (список)')
+//                    && ($k2 != 'Материал стен (список)')
+//               ) {
+                    if ($v2 != $arr_ur_unic[$k2]) {
+                        echo "<b>\"" . $k2 . "\"</b> из [" . $k1 . "] отличается -> [" . $arr_ur_unic_key[$k2] . "] <br>";
+                        echo "---------------------------------------<br>";
+                        echo "<b>Надо добавить:</b><br>";
+                        $dif_arr_ur = array_diff($v2, $arr_ur_unic[$k2]);
+                        foreach ($dif_arr_ur as $dif_arr_name) {
+                            echo $dif_arr_name . "<br>";
+                        }
+                        echo "<b>Надо удалить:</b><br>";
+                        $dif_arr_ur = array_diff($arr_ur_unic[$k2], $v2);
+                        foreach ($dif_arr_ur as $dif_arr_name) {
+                            echo $dif_arr_name . "<br>";
+                        }
+                        echo "<br>";
+                        echo "-----здесь----<br>";
+                        foreach($v2 as $show_value){
+                            echo $show_value."<br>";
+                        }
+                        echo "-----обычно----<br>";
+                        foreach($arr_ur_unic[$k2] as $show_value){
+                            echo $show_value."<br>";
+                        }
+echo "<br><br><br>";
+                    }
+             //   }
+            }
+        }
+
+
+
+        $uniq_header_arr = [];
+        foreach ($arr_main as $key => $value) {
+            foreach ($value as $k => $v) {
+                $uniq_header_arr[$k] = $v;
+            }
+
+        }
+
+        foreach ($arr_main as $key => $value) {
+            foreach ($value as $k => $v) {
+                $dif_header_arr = array_diff($uniq_header_arr[$k], $v);
+                if (!empty($dif_header_arr)) {
+                    echo '---- ' . $k . ' отсутствующие [' . $key . ']----';
+                    echo '<br><pre>';
+                    var_dump($dif_header_arr);
+                    echo '<br></pre>';
+                    echo '_____________';
+                }
+                $dif_header_arr = array_diff($v, $uniq_header_arr[$k]);
+                if (!empty($dif_header_arr)) {
+                    echo '---- ' . $k . ' добавленные [' . $key . ']----';
+                    echo '<br><pre>';
+                    var_dump($dif_header_arr);
+                    echo '<br></pre>';
+                    echo '_____________';
+                }
+            }
+        }
+
+        $form2 = $form;
+
+        echo '<br> Уникальные блоки по названию <br> ---- <br>';
+        $diff_header_arr = [];
+        foreach ($uniq_header_arr as $k => $v) {
+            $diff_header_arr[$k] = $k;
+        }
+        ksort($diff_header_arr);
+
+        $i = 0;
+        foreach ($diff_header_arr as $name) {
+            echo $i . ' - ' . $name . '<br>';
+            foreach ($form as $key => $value) {
+                foreach ($value as $k => $v) {
+                    if ($v === $name) {
+                        $form[$key][$k] = $i;
+                    }
+                    if ($v === 'Ремонт и обустройство_2') {
+                        $form[$key][$k] = 112;
+                    }
+                }
+            }
+            $i++;
+
+        }
+
+        //Удаление ненужных блоков
+        foreach ($form as $key => $value) {
+            foreach ($value as $k => $v) {
+                if ($v === 0 OR $v == 7) {
+                    unset($form[$key][$k]);
+                }
+            }
+        }
+        //вывод форм
+//        echo "<br><br> Вывод форм <br>--------------<br>";
+//        foreach ($form as $key => $value) {
+//            echo '<br><br><br>' . $key . '<br>-------------------------<br>';
+//            foreach ($value as $k => $v) {
+//                $filename = 'forms/tmp_front/' . $v . '.html';
+//
+//                if (file_exists($filename)) {
+//                    $lines = file($filename);
+//                    foreach ($lines as $content) {
+//                        echo htmlspecialchars($content) . '<br>';
+//                    }
+//
+//                    //                 echo htmlspecialchars(file_get_contents($filename));
+//
+//                    echo '<br><br><br><br>';
+//                } else {
+//                    echo '<br> ---------------[БЛОК] - ' . $v . '---------------<br><br>';
+//                }
+//            }
+//        }
+
+
+    }
 
 }

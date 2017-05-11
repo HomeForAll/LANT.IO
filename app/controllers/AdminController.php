@@ -8,6 +8,33 @@ class AdminController extends Controller
         $this->checkAuth();
     }
 
+public function actionAdmin(){
+
+        // Проверка доступа
+        global $news_message, $news_error;
+        $this->getAccessFor('admin');
+        $news_message = [];
+        $news_error = [];
+        // Данные просмотра таблицы редактирования объявлений
+        $data = $this->model->getDataFromPostOrSession();
+
+        if(!empty($_POST['submit_status'])){
+            //Запись $_POST параметров в БД
+            $this->model->makeNewsStatus();
+        }
+
+        if (!empty($_POST['test2'])) {
+            $data['rabbitmq_message_newnews'] = Registry::model('news')->getNewNewsByRabbitMQ();
+        }
+
+            $data['news'] = Registry::model('news')->
+            getRecentNewsList($data['time_start'], $data['time'], $data['max_number'], $data['space_type'],
+                $data['operation_type'], $data['object_type'], $data['best'], $data['status']);
+        $data['message'] = $news_message;
+        $data['error'] = $news_error;
+        $this->view->render('admin', $data);
+    }
+
 
     public function actionNewsFormGenerator()
     {
