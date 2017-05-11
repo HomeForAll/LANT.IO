@@ -1,5 +1,5 @@
 <?php
-$siteModel = Registry::model('site');
+$siteModel = $this->model('SiteModel');
 ?>
 <!doctype html>
 <html lang="ru">

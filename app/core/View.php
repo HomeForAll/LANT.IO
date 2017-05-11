@@ -12,7 +12,7 @@ class View extends Access implements ViewInterface
     private $jsFiles = [];
     private $layout;
     private $content;
-    protected $models;
+    protected $models = [];
 
     public function __construct($layout)
     {
@@ -109,5 +109,26 @@ class View extends Access implements ViewInterface
         foreach ($errorsArr as $error) {
             echo "<br><span style='margin-left: 5px; font-family: Arial sans-serif; font-size: 10pt; color: #942a25'>{$error}</span>";
         }
+    }
+
+    /**
+     * Записывает полученный экземпляр модели в массив $this->models
+     *
+     * @param Model $model
+     */
+    public function setModel(Model &$model)
+    {
+        $name = $model->getClassName();
+        $this->models[$name] = $model;
+    }
+
+    /**
+     * Возвращает экземпляр класса модели из $this->models по имени
+     *
+     * @param $name
+     * @return mixed
+     */
+    public function model($name) {
+        return $this->models[$name];
     }
 }

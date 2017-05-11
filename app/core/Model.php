@@ -12,16 +12,6 @@ class Model
         $this->countStatistic();
     }
 
-    static function instance($model)
-    {
-        if (file_exists(ROOT_DIR . '/app/models/' . $model . '.php')) {
-
-            return new $model;
-        }
-
-        return null;
-    }
-
     protected function getUserFirstName(PDO $PDO, $userID)
     {
         $query = $PDO->prepare("SELECT first_name FROM users WHERE id = :userID");
@@ -120,5 +110,10 @@ class Model
         }
 
         return 0;
+    }
+
+    public function getClassName()
+    {
+        return get_called_class();
     }
 }

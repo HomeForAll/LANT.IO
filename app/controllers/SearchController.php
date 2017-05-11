@@ -2,6 +2,12 @@
 
 class SearchController extends Controller
 {
+    public function __construct($layout)
+    {
+        parent::__construct($layout);
+        $this->setModel(new SearchModel());
+    }
+
     public function actionIndex()
     {
 
@@ -90,7 +96,7 @@ class SearchController extends Controller
 //            }
 //        }
         $data = array();
-        $data['formData'] = $this->model->getRentApartData();
+        $data['formData'] = $this->model('SearchModel')->getRentApartData();
 
         $this->ifAJAX(function() {
 //            foreach ($_POST as &$value) {
@@ -99,10 +105,8 @@ class SearchController extends Controller
 //                }
 //            }
 
-            $data = $this->model->getRentApartData();
-
-            print_r($_POST);
-//            echo json_encode($data, JSON_UNESCAPED_UNICODE);
+            $data = $this->model('SearchModel')->getRentApartData();
+            echo json_encode($data, JSON_UNESCAPED_UNICODE);
         });
 
         $this->view->render('search', $data);
@@ -110,15 +114,15 @@ class SearchController extends Controller
 
     public function actionGenSearchForm($id)
     {
-        $forms = $this->model->getForms();
+        $forms = $this->model('SearchModel')->getForms();
 
         $data = array(
             'forms' => $forms,
-            'types' => $this->model->getFormTypes(),
-            'categories' => $this->model->getFormCategories(),
-            'subcategories' => $this->model->getFormSubcategories(),
-            'elements' => $this->model->getFormElements(),
-            'lists' => $this->model->getFormSelectOptions(),
+            'types' => $this->model('SearchModel')->getFormTypes(),
+            'categories' => $this->model('SearchModel')->getFormCategories(),
+            'subcategories' => $this->model('SearchModel')->getFormSubcategories(),
+            'elements' => $this->model('SearchModel')->getFormElements(),
+            'lists' => $this->model('SearchModel')->getFormSelectOptions(),
         );
 
         if (!empty($id)) {

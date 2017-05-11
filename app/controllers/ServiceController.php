@@ -7,9 +7,9 @@ class ServiceController extends Controller
     protected $access;
     private $service_message;
 
-    public function __construct($template, $model)
+    public function __construct($template, $modelName)
     {
-        parent::__construct($template, $model);
+        parent::__construct($template, $modelName);
         $this->checkAuth();
         $this->user = $_SESSION['userID'];
         $this->status = $this->getAccessLevel();

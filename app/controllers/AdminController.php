@@ -2,9 +2,9 @@
 
 class AdminController extends Controller
 {
-    public function __construct($template, $model)
+    public function __construct($template, $modelName)
     {
-        parent::__construct($template, $model);
+        parent::__construct($template, $modelName);
         $this->checkAuth();
     }
 
