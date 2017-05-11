@@ -640,6 +640,17 @@ function yandexMap() {
             controls: ['fullscreenControl', 'typeSelector', 'geolocationControl', 'zoomControl']
         });
 
+        //myMap.geoObjects.add(
+        //    new ymaps.Placemark(
+        //        coords,
+        //        {
+        //            balloonContentHeader: geolocation.country, // страна
+        //            balloonContent: geolocation.city, // город
+        //            balloonContentFooter: geolocation.region // регион
+        //        }
+        //    )
+        //);
+
         element.on('change', function () {
             ymaps.geocode(element.val()).then(
                 function (res) {
@@ -763,5 +774,5 @@ function yandexMap() {
 
 /** Поиск по городам **/
 ymaps.ready(function () {
-    var metroLocation = new ymaps.SuggestView('address', {width: 300, offset: [0, 4], results: 20});
+    new ymaps.SuggestView('address', {width: 300, offset: [0, 4], results: 20});
 });

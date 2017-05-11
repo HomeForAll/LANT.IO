@@ -757,6 +757,7 @@
   }
   input {
     padding-left: 10px !important;
+    color: rgba(51, 51, 51, 0.7);
   }
   li {
     padding: 0 10px !important;
@@ -1678,46 +1679,37 @@
     list-style: none;
     box-shadow: 0 0 1px #fff;
     font-size: 18px;
-    padding: 32px 10px 15px 100px;
+    padding: 32px 10px 15px 90px;
     line-height: 23px;
     text-align: left;
-    height: 169px;
     width: 32.5%;
     margin: 2px;
     &:nth-child(1) {
-      background: url('../../template/images/sec-2-1.png') left 25px top 55px no-repeat, url('../../template/images/sec-2-b-1.png') top center no-repeat;
+      background: url('../../template/images/sec-2-1.png') left 25px top 55px no-repeat,
+                  url('../../template/images/sec-2-b-1.png') top center no-repeat;
       background-size: auto, cover;
     }
     &:nth-child(2) {
-      background: url('../../template/images/sec-2-2.png') left 35px top 50px no-repeat, url('../../template/images/sec-2-b-2.png') top center no-repeat;
+      background: url('../../template/images/sec-2-2.png') left 35px top 50px no-repeat,
+                  url('../../template/images/sec-2-b-2.png') top center no-repeat;
       background-size: auto, cover;
     }
     &:nth-child(3) {
-      background: url('../../template/images/sec-2-3.png') center no-repeat;
-      background-size: cover;
+      background: url('../../template/images/sec-2-4.png') left 15px top 68px no-repeat,
+                  url('../../template/images/sec-2-b-3.png') top center no-repeat;
+      background-size: auto, cover;
     }
     &:nth-child(4) {
-      background: url('../../template/images/sec-2-4.png') left 15px top 68px no-repeat, url('../../template/images/sec-2-b-4.png') top center no-repeat;
+      background: url('../../template/images/sec-2-5.png') left 0 top 42px no-repeat,
+                  url('../../template/images/sec-2-b-5.png') top center no-repeat;
       background-size: auto, cover;
     }
     &:nth-child(5) {
-      background: url('../../template/images/sec-2-5.png') left 0 top 42px no-repeat, url('../../template/images/sec-2-b-5.png') top center no-repeat;
-      background-size: auto, cover;
+      background: url('../../template/images/sec-2-8.png') left 8px top 55px no-repeat #fff;
+      background-size: auto;
     }
     &:nth-child(6) {
-      background: url('../../template/images/sec-2-6.png') left 5px top 60px no-repeat, url('../../template/images/sec-2-b-6.png') top center no-repeat;
-      background-size: auto, cover;
-    }
-    &:nth-child(7) {
-      background: url('../../template/images/sec-2-7.png') left 8px top 55px no-repeat #fff;
-      background-size: auto;
-    }
-    &:nth-child(8) {
-      background: url('../../template/images/sec-2-8.png') left 0 top 25px no-repeat #fff;
-      background-size: auto;
-    }
-    &:nth-child(9) {
-      background: url('../../template/images/sec-2-9.png') left 20px top 46px no-repeat #fff;
+      background: url('../../template/images/sec-2-9.png') left 0 top 25px no-repeat #fff;
       background-size: auto;
     }
     &:nth-child(n+10) {
@@ -2240,10 +2232,13 @@
   padding: 20px 50px 10px;
   img {
     vertical-align: middle;
+    margin: auto 5px;
   }
   li {
     display: inline-block;
     vertical-align: middle;
+    width: auto;
+    padding: 0 10px;
   }
   a {
     border-bottom: 1px solid #d8d6d6;
@@ -2338,6 +2333,7 @@
   p {
     font-size: 13px;
     color: #aba3a3;
+    height: 60px;
     word-wrap: break-word;
     line-height: 20px;
     margin-top: 15px;
@@ -2609,9 +2605,10 @@
   h2 {
     font-size: 20px;
     font-weight: 300;
+    margin-bottom: 25px;
   }
-  li:hover:before {
-    display: none;
+  li {
+    cursor: pointer;
   }
 }
 
@@ -2631,21 +2628,21 @@
 }
 
 .main-block-2 li {
-  display: inline-block;
-  vertical-align: middle;
   &:before {
     content: '';
     display: block;
-    background: rgba(248,248,248,.85);
-    position: relative;
+    background: rgba(248, 248, 248, 0.85);
+    position: absolute;
+    left: 0;
+    right: 0;
     cursor: pointer;
     margin-bottom: calc(-55%);
     height: 115px;
     z-index: 5;
-    &:hover {
-      background: #e5e5e5;
-      z-index: -1;
-    }
+  }
+  &:hover:before {
+    display: none;
+    z-index: -1;
   }
 }
 
@@ -2937,7 +2934,9 @@
 /** Яндекс карта **/
 #map {
   display: none;
-  position: relative;
+  position: absolute;
+  left: 0;
+  right: 0;
   text-align: center;
   height: 500px;
   min-height: 100px;
@@ -3070,16 +3069,12 @@
   }
   .information-for-the-user ul {
     width: 1100px;
-    & li {
+    li {
       width: 32.5%;
-      padding: 32px 10px 15px 100px;
+      padding: 32px 10px 15px 90px;
       &:nth-child(-n+999) {
         background-position: left center;
         background-size: 85px, cover;
-      }
-       &:nth-child(3) {
-        background-position: center;
-        background-size: cover;
       }
     }
   }
@@ -3627,10 +3622,6 @@
       &:nth-child(-n+999) {
         background-position: left 5px center, center;
         background-size: 50px, cover;
-      }
-      &:nth-child(3) {
-        background-position: center, center;
-        background-size: cover, cover;
       }
     }
   }
@@ -4320,10 +4311,6 @@
       &:nth-child(-n+999) {
         background-position: left 15px center, center;
         background-size: 60px, cover;
-      }
-      &:nth-child(3) {
-        background: url("../../template/images/sec-2-3.png") no-repeat center;
-        background-size: cover;
       }
     }
   }

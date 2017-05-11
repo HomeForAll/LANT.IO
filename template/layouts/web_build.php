@@ -676,7 +676,7 @@ $siteModel = $this->model('SiteModel');
                         <button>Готово</button>
                     </a>
                 </div>
-                <div class="apartment-settings-separate-building">
+                <div class="apartment-settings-separate-building"> <!-- name="none" -->
                     <h2>Отдельное стоящее здание</h2>
                     <ul>
                         <li><span class="names-parameters">Кол-во комнат</span>
@@ -823,7 +823,7 @@ $siteModel = $this->model('SiteModel');
                         <div class="history-search" onclick="allFilterBlocks('historySearch')">
                             <span class="search-city active-search">
                                 <img src="../../template/images/s1.png" alt="city">
-                                <input type="text" id="address" placeholder="Москва, ул, Малая Ордынка" autocomplete="off" class="api-search-city history-text">
+                                <input type="text" id="address" name="address" placeholder="Москва, ул, Малая Ордынка" autocomplete="off" class="api-search-city history-text">
                             </span>
                             <h5>История</h5>
                             <div class="all-history-search">
@@ -4581,7 +4581,7 @@ $siteModel = $this->model('SiteModel');
                         </li>
                     </ul>
                     <div id="map">
-                        <input type="text" id="address" placeholder="Введите адрес..." autocomplete="off" class="api-search-city">
+                        <input type="text" id="address" name="address" placeholder="Введите адрес..." autocomplete="off" class="api-search-city">
                         <button class="close-map">Закрыть карту</button>
                     </div>
                     <a onclick="allParam('map');" id="searchYandexMap">
@@ -4595,7 +4595,7 @@ $siteModel = $this->model('SiteModel');
                         <div class="history-search" onclick="allFilterBlocks('historySearch')">
                             <span class="search-city active-search">
                                 <img src="../../template/images/s1.png" alt="city">
-                                <input type="text" id="address" placeholder="Москва, ул, Малая Ордынка" autocomplete="off" class="api-search-city history-text">
+                                <input type="text" id="address" name="address" placeholder="Москва, ул, Малая Ордынка" autocomplete="off" class="api-search-city history-text">
                             </span>
                             <h5>История</h5>
                             <div class="all-history-search">
@@ -8331,32 +8331,25 @@ $siteModel = $this->model('SiteModel');
     </div>
     <div class="information-for-the-user">
         <ul>
-            <li>Удобный поиск по карте
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia iusto architecto quia!</p>
+            <li>Поиск по карте
+                <p>Для тех, кто ищет недвижимость в определённом
+                    районе и тех, кто хочет увидеть полную картину</p>
             </li>
-            <li>Обширный список<br> юридических услуг
-                <p>Lorem ipsum dolor sit amet, consectetur.</p>
-            </li>
-            <li>Обширный список критериев
-                <p>Для поиска и составления объявлений</p>
+            <li>Юридические услуги
+                <p>Воспользуйтесь нашими услугами для получения: Выписки из ЕГРН, Кадастрового паспорта, Регистрации прав собственности,
+                    Согласования перепланировки и других юр. услуг.</p>
             </li>
             <li>Онлайн-чат
-                <p>Онлайн-чат со службой поддержки, которая всегда решает ваши вопросы</p>
+                <p>Свяжитесь с нашей службой поддержки в любой момент</p>
             </li>
-            <li>Постоянная модерация объявлений
-                <p>Мы гарантируем только самые реальные и честные объявления</p>
+            <li>Личный кабинет
+                <p>Зарегистрируйтесь в 1 клик, чтобы получить доступ ко всем нашим услугам</p>
             </li>
-            <li>Удобный быстрый поиск
-                <p>Мы гарантируем только самые реальные и честные объявления</p>
+            <li>LantioПремиум
+                <p>Стать участником бонусной программы для постоянных пользователей</p>
             </li>
-            <li>Информативная страница объявлений
-                <p>Мы гарантируем только самые реальные и честные объявления</p>
-            </li>
-            <li>Бонусы для премиум клиентов
-                <p>Мы гарантируем только самые реальные и честные объявления</p>
-            </li>
-            <li>Профессионалы недвижимости
-                <p>На сайте работают профессиональные участники рынка недвижимости</p>
+            <li>База фрилансеров
+                <p>Воспользуйтесь услугами профессионалов: Ремонт, Дизайн, Уборка и многое другое</p>
             </li>
         </ul>
     </div>
@@ -8579,7 +8572,7 @@ $siteModel = $this->model('SiteModel');
     </div>
     <div class="visitor-statistics">
         <div class="container-w-2">
-            <p>Сегодня вы и еще<span><?php echo $siteModel->getRegisteredUsers(); ?></span>человек сейчас с нами, а так же:</p>
+            <p>Прямо сейчас с нами: Вы и еще<span><?php echo $siteModel->getRegisteredUsers();?></span>пользователей</p>
             <ul>
                 <li><img src="../../template/images/sec-4-1.png" alt="icon"><?php echo $siteModel->getUniquePeopleThisDay(); ?>
                     <p>Людей зашло сегодня</p>
@@ -8651,18 +8644,21 @@ $siteModel = $this->model('SiteModel');
                 <ul class="filter-apartment">
                     <li class="pointer" onclick="filterOptionsApartments()">
                         <span class="value-text">
-                            <img src="../../template/images/apartments.png" alt="apartments">Тип недвижимости
+                            <img src="../../template/images/apartments.png" alt="apartments"> Тип недвижимости
                         </span>
                     </li>
-                    <li>
-                        <div class="select">
-                            <label for="">От
-                                <select name="0">
-                                    <option>20.000</option>
-                                    <option>40.000</option>
-                                    <option>80.000</option>
-                                </select>
-                            </label>
+                    <li onclick="allParam('bigOption')">
+                        <label><img src="../../template/images/s3.png" alt="price">Цена</label>
+                        <div class="showBigOptions">
+                            <p>От<label for="amountBeforeSearch"><input name="price-min" type="text" id="amountBeforeSearch" readonly disabled></label></p>
+                            <p>До<label for="amountAfterSearch"><input name="price-max" type="text" id="amountAfterSearch" readonly disabled></label></p>
+                            <div id="slider-range-search"></div>
+                            <div class="currency">
+                                <p>Валюта</p>
+                                <button class="closeCurrency"><i class="fa fa-rub" aria-hidden="true"></i>рубли</button>
+                                <button class="closeCurrency"><i class="fa fa-usd" aria-hidden="true"></i>доллары</button>
+                                <button class="closeCurrency"><i class="fa fa-eur" aria-hidden="true"></i>евро</button>
+                            </div>
                         </div>
                     </li>
                     <li>
@@ -8893,81 +8889,81 @@ $siteModel = $this->model('SiteModel');
             </div>
         </div>
     </div>
-    <div class="our-work">
-        <div class="container-w-2">
-            <h2>Мы трудимся для Вас</h2>
-            <ul class="bxslider">
-                <li>
-                    <img src="../../template/images/01.png"/>
-                    <div class="admins">
-                        <h6>Александр Никулин</h6>
-                        <span>Гениральный директор</span>
-                        <p>Наш сервис не просто воплощение стараний нашей команды, это сервис обеспечивающий
-                            комфортное
-                            приобретение или аренду жилья</p>
-                    </div>
-                </li>
-                <li>
-                    <img src="../../template/images/02.png"/>
-                    <div class="admins">
-                        <h6>Александр Никулин</h6>
-                        <span>Гениральный директор</span>
-                        <p>Наш сервис не просто воплощение стараний нашей команды, это сервис обеспечивающий
-                            комфортное
-                            приобретение или аренду жилья</p>
-                    </div>
-                </li>
-                <li>
-                    <img src="../../template/images/03.png"/>
-                    <div class="admins">
-                        <h6>Александр Никулин</h6>
-                        <span>Гениральный директор</span>
-                        <p>Наш сервис не просто воплощение стараний нашей команды, это сервис обеспечивающий
-                            комфортное
-                            приобретение или аренду жилья</p>
-                    </div>
-                </li>
-                <li>
-                    <img src="../../template/images/04.png"/>
-                    <div class="admins">
-                        <h6>Александр Никулин</h6>
-                        <span>Гениральный директор</span>
-                        <p>Наш сервис не просто воплощение стараний нашей команды, это сервис обеспечивающий
-                            комфортное
-                            приобретение или аренду жилья</p>
-                    </div>
-                </li>
-                <li>
-                    <img src="../../template/images/05.png"/>
-                    <div class="admins">
-                        <h6>Александр Никулин</h6>
-                        <span>Гениральный директор</span>
-                        <p>Наш сервис не просто воплощение стараний нашей команды, это сервис обеспечивающий
-                            комфортное
-                            приобретение или аренду жилья</p>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
+<!--    <div class="our-work">-->
+<!--        <div class="container-w-2">-->
+<!--            <h2>Мы трудимся для Вас</h2>-->
+<!--            <ul class="bxslider">-->
+<!--                <li>-->
+<!--                    <img src="../../template/images/01.png"/>-->
+<!--                    <div class="admins">-->
+<!--                        <h6>Александр Никулин</h6>-->
+<!--                        <span>Гениральный директор</span>-->
+<!--                        <p>Наш сервис не просто воплощение стараний нашей команды, это сервис обеспечивающий-->
+<!--                            комфортное-->
+<!--                            приобретение или аренду жилья</p>-->
+<!--                    </div>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                    <img src="../../template/images/02.png"/>-->
+<!--                    <div class="admins">-->
+<!--                        <h6>Александр Никулин</h6>-->
+<!--                        <span>Гениральный директор</span>-->
+<!--                        <p>Наш сервис не просто воплощение стараний нашей команды, это сервис обеспечивающий-->
+<!--                            комфортное-->
+<!--                            приобретение или аренду жилья</p>-->
+<!--                    </div>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                    <img src="../../template/images/03.png"/>-->
+<!--                    <div class="admins">-->
+<!--                        <h6>Александр Никулин</h6>-->
+<!--                        <span>Гениральный директор</span>-->
+<!--                        <p>Наш сервис не просто воплощение стараний нашей команды, это сервис обеспечивающий-->
+<!--                            комфортное-->
+<!--                            приобретение или аренду жилья</p>-->
+<!--                    </div>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                    <img src="../../template/images/04.png"/>-->
+<!--                    <div class="admins">-->
+<!--                        <h6>Александр Никулин</h6>-->
+<!--                        <span>Гениральный директор</span>-->
+<!--                        <p>Наш сервис не просто воплощение стараний нашей команды, это сервис обеспечивающий-->
+<!--                            комфортное-->
+<!--                            приобретение или аренду жилья</p>-->
+<!--                    </div>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                    <img src="../../template/images/05.png"/>-->
+<!--                    <div class="admins">-->
+<!--                        <h6>Александр Никулин</h6>-->
+<!--                        <span>Гениральный директор</span>-->
+<!--                        <p>Наш сервис не просто воплощение стараний нашей команды, это сервис обеспечивающий-->
+<!--                            комфортное-->
+<!--                            приобретение или аренду жилья</p>-->
+<!--                    </div>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </div>-->
+<!--    </div>-->
     <div class="official-partners">
         <div class="partners">
             <h2>Официальные партнеры</h2>
             <ul class="bxslider-partners main-block-2">
                 <li>
-                    <a href="#"><img src="../../template/images/sec-6-1.png" alt="partners"></a>
+                    <img src="../../template/images/sec-6-1.png" alt="partners">
                 </li>
                 <li>
-                    <a href="#"><img src="../../template/images/sec-6-2.png" alt="partners"></a>
+                    <img src="../../template/images/sec-6-2.png" alt="partners">
                 </li>
                 <li>
-                    <a href="#"><img src="../../template/images/sec-6-3.png" alt="partners"></a>
+                    <img src="../../template/images/sec-6-3.png" alt="partners">
                 </li>
                 <li>
-                    <a href="#"><img src="../../template/images/sec-6-4.png" alt="partners"></a>
+                    <img src="../../template/images/sec-6-4.png" alt="partners">
                 </li>
                 <li>
-                    <a href="#"><img src="../../template/images/sec-6-5.png" alt="partners"></a>
+                    <img src="../../template/images/sec-6-5.png" alt="partners">
                 </li>
             </ul>
         </div>
@@ -8985,9 +8981,9 @@ $siteModel = $this->model('SiteModel');
                 <p><a href="#">Команда проекта</a></p>
             </div>
             <ul>
-                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i><span>Читай</span></a></li>
-                <li><a href="#"><i class="fa fa-vk" aria-hidden="true"></i><span>Вступай</span></a></li>
-                <li><a href="#"><i class="fa fa-youtube" aria-hidden="true"></i><span>Смотри</span></a></li>
+                <li><a href="//twitter.com/LantioP"><i class="fa fa-twitter" aria-hidden="true"></i><span>Читай</span></a></li>
+                <li><a href="//vk.com/lantio"><i class="fa fa-vk" aria-hidden="true"></i><span>Вступай</span></a></li>
+                <li><a href="//www.youtube.com/channel/UC54yeyBi5X4wsyQYLje0v-w"><i class="fa fa-youtube" aria-hidden="true"></i><span>Смотри</span></a></li>
                 <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i><span>Подписывайся</span></a></li>
                 <li><a href="#"><div class="icon-footer"></div><span>У нас</span></a></li>
             </ul>
