@@ -517,7 +517,7 @@ $("#form_1").on('submit', function(e) { // устанавливаем событ
 
     $.ajax({
         method: 'POST',
-        url: '/search',
+        url: '/search-test', // /search
         data: form_data,
         dataType: 'Json',
         success: function(form_data) {
@@ -538,7 +538,7 @@ $("#form_2").on('submit', function(e) { // устанавливаем событ
 
     $.ajax({
         method: 'POST',
-        url: '/search',
+        url: '/search-test', // /search
         data: form_data,
         dataType: 'Json',
         success: function(form_data) {
