@@ -10,10 +10,10 @@ $siteModel = $this->model('SiteModel');
     <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/template/css/jquery.formstyler.css">
     <link rel="stylesheet" href="/template/css/jquery.bxslider.min.css">
-<!--    <link rel="stylesheet" href="/bower_components/n3-charts/build/LineChart.css">-->
+<!--    <link rel="stylesheet" href="/bower_components/n3-charts/build/lineChart.min.css">-->
     <link rel="stylesheet" href="/template/css/style.css">
     <link rel="stylesheet" href="/template/css/news_style.css">
-    <!--<link rel="stylesheet" href="/template/css/graphics.css">-->
+<!--    <link rel="stylesheet" href="/template/css/graphics.css">-->
     <script type="text/javascript" src="/template/js/socket.io.min.js"></script>
     <?php
     // Подключение стилей в контроллере
@@ -296,7 +296,7 @@ $siteModel = $this->model('SiteModel');
     </script>
     <?php $this->head() ?>
 </head>
-<body>
+<body ng-controller='MyChartCtrl'>
 <!-- Heeader -->
 <?php include_once 'header.php' ?>
 <!-- Content -->
@@ -8591,89 +8591,90 @@ $siteModel = $this->model('SiteModel');
                 <div class="schedule-interface">
                     <div class="year-schedule-interface"></div>
                 </div>
-                <div class="container" ng-app="app" ng-controller="MainCtrl">
-                    <linechart data="data" options="options"></linechart>
-                </div>
-                <a href="#"><span id="yellow"></span>Октябрь</a>
-                <a href="#"><span id="green"></span>Ноябрь</a>
-                <a href="#"><span id="blue"></span>Декабрь</a>
-            </div>
-        </div>
-    </div>
-    <div class="sales-evaluation">
-        <div class="container-w-2">
-            <h2>Оценка продажи и аренды недвижимости<br>в Москве и области</h2>
-            <div class="appreciate-the-apartment">
-                <ul>
-                    <li><i class="fa fa-map-marker" aria-hidden="true"></i>
-                        <input placeholder="например: Москва, ул. Большого Голушкина, 17">
-                    </li>
-                    <li>
-                        <div class="select">
-                            <label for="">
-                                <select name="0">
-                                    <option>Language of communication</option>
-                                    <option>English</option>
-                                    <option>Spanish</option>
-                                </select>
-                            </label>
-                        </div>
-                    </li>
-                </ul>
-                <button>Оценить</button>
-            </div>
-            <div class="appreciate-the-rooms">
-                <p>Кол-во<br>комнат</p>
-                <a href="#">1</a>
-                <a href="#">2</a>
-                <a href="#">3</a>
-                <a href="#">4</a>
-                <a href="#">4+</a>
-            </div>
-            <div class="estimate-the-area">
-                <label>Площадь м<sup>2</sup>
-                    <input name="none" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}">
-                </label>
-            </div>
-        </div>
-    </div>
-    <div class="best-ads-per-day">
-        <div class="top-apartments">
-            <h2>Лучшие объявления за 24 часа</h2>
-            <div class="filter-and-top-blocks">
-                <ul class="filter-apartment">
-                    <li class="pointer" onclick="filterOptionsApartments()">
-                        <span class="value-text">
-                            <img src="../../template/images/apartments.png" alt="apartments"> Тип недвижимости
-                        </span>
-                    </li>
-                    <li onclick="allParam('bigOption')">
-                        <label><img src="../../template/images/s3.png" alt="price">Цена</label>
-                        <div class="showBigOptions">
-                            <p>От<label for="amountBeforeSearch"><input name="price-min" type="text" id="amountBeforeSearch" readonly disabled></label></p>
-                            <p>До<label for="amountAfterSearch"><input name="price-max" type="text" id="amountAfterSearch" readonly disabled></label></p>
-                            <div id="slider-range-search"></div>
-                            <div class="currency">
-                                <p>Валюта</p>
-                                <button class="closeCurrency"><i class="fa fa-rub" aria-hidden="true"></i>рубли</button>
-                                <button class="closeCurrency"><i class="fa fa-usd" aria-hidden="true"></i>доллары</button>
-                                <button class="closeCurrency"><i class="fa fa-eur" aria-hidden="true"></i>евро</button>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="select">
-                            <label for="">Площадь
-                                <select name="0">
-                                    <option>От 120 м2 До 230 м2</option>
-                                    <option>От 120 м2 До 230 м2</option>
-                                    <option>От 120 м2 До 230 м2</option>
-                                </select>
-                            </label>
-                        </div>
-                    </li>
-                </ul>
-                <!-- Основной блок TOP апартаментов -->
+                <!-- График n3-charts -->
+                <!--  <div class="container" ng-app="schedule" ng-controller="ExampleCtrl">
+                      <linechart data="data" options="options"></linechart>
+                  </div> -->
+                  <a><span id="yellow"></span>Октябрь</a>
+                  <a><span id="green"></span>Ноябрь</a>
+                  <a><span id="blue"></span>Декабрь</a>
+              </div>
+          </div>
+      </div>
+      <div class="sales-evaluation">
+          <div class="container-w-2">
+              <h2>Оценка продажи и аренды недвижимости<br>в Москве и области</h2>
+              <div class="appreciate-the-apartment">
+                  <ul>
+                      <li><i class="fa fa-map-marker" aria-hidden="true"></i>
+                          <input placeholder="например: Москва, ул. Большого Голушкина, 17">
+                      </li>
+                      <li>
+                          <div class="select">
+                              <label for="">
+                                  <select name="0">
+                                      <option>Language of communication</option>
+                                      <option>English</option>
+                                      <option>Spanish</option>
+                                  </select>
+                              </label>
+                          </div>
+                      </li>
+                  </ul>
+                  <button>Оценить</button>
+              </div>
+              <div class="appreciate-the-rooms">
+                  <p>Кол-во<br>комнат</p>
+                  <a href="#">1</a>
+                  <a href="#">2</a>
+                  <a href="#">3</a>
+                  <a href="#">4</a>
+                  <a href="#">4+</a>
+              </div>
+              <div class="estimate-the-area">
+                  <label>Площадь м<sup>2</sup>
+                      <input name="none" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}">
+                  </label>
+              </div>
+          </div>
+      </div>
+      <div class="best-ads-per-day">
+          <div class="top-apartments">
+              <h2>Лучшие объявления за 24 часа</h2>
+              <div class="filter-and-top-blocks">
+                  <ul class="filter-apartment">
+                      <li class="pointer" onclick="filterOptionsApartments()">
+                          <span class="value-text">
+                              <img src="../../template/images/apartments.png" alt="apartments"> Тип недвижимости
+                          </span>
+                      </li>
+                      <li onclick="allParam('bigOption')">
+                          <label><img src="../../template/images/s3.png" alt="price">Цена</label>
+                          <div class="showBigOptions">
+                              <p>От<label for="amountBeforeSearch"><input name="price-min" type="text" id="amountBeforeSearch" readonly disabled></label></p>
+                              <p>До<label for="amountAfterSearch"><input name="price-max" type="text" id="amountAfterSearch" readonly disabled></label></p>
+                              <div id="slider-range-search"></div>
+                              <div class="currency">
+                                  <p>Валюта</p>
+                                  <button class="closeCurrency"><i class="fa fa-rub" aria-hidden="true"></i>рубли</button>
+                                  <button class="closeCurrency"><i class="fa fa-usd" aria-hidden="true"></i>доллары</button>
+                                  <button class="closeCurrency"><i class="fa fa-eur" aria-hidden="true"></i>евро</button>
+                              </div>
+                          </div>
+                      </li>
+                      <li>
+                          <div class="select">
+                              <label for="">Площадь
+                                  <select name="0">
+                                      <option>От 120 м2 До 230 м2</option>
+                                      <option>От 120 м2 До 230 м2</option>
+                                      <option>От 120 м2 До 230 м2</option>
+                                  </select>
+                              </label>
+                          </div>
+                      </li>
+                  </ul>
+                  <!-- Основной блок TOP апартаментов -->
                 <div class="all-apartments-top">
                     <!-- Информация одного TOP апартамента -->
                     <div class="top-block">
@@ -9003,15 +9004,15 @@ if (isset($this->data['script_footer'])) {
 ?>
 <script src="/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="/bower_components/jquery-ui/jquery-ui.min.js"></script>
-<!--<script src="/bower_components/angular/angular.min.js"></script> -->
-<!--<script src="bower_components/n3-charts/build/LineChart.js"></script>-->
+<!--<script src="/bower_components/angular/angular.min.js"></script>-->
 <!--<script src="/bower_components/d3/d3.min.js"></script>-->
+<!--<script src="bower_components/n3-charts/build/lineChart.js"></script>-->
 <script src="/template/js/jquery.formstyler.min.js"></script>
 <script src="//api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
 <script src="/template/js/mapController.js"></script>
 <script src="/template/js/jquery.bxslider.min.js"></script>
 <script src="/template/js/jquery.parallax.min.js"></script>
-<script src="/template/js/main.min.js"></script>
 <!--<script src="/template/js/graphics.min.js"></script>-->
+<script src="/template/js/main.min.js"></script>
 </body>
 </html>
