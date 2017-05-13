@@ -16,14 +16,14 @@ class SupportController extends Controller
             return;
         }
 
-        $this->view->render('tickets_editor', $this->model('UserModel')->get_tickets());
+        $this->view->render('tickets_editor', $this->model('SupportModel')->get_tickets());
     }
 
     public function actionIndex()
     {
         $support_button = '';
         if (isset($_GET['article'])) {
-            $this->view->render('article', $this->model('UserModel')->article_id($_GET['article']));
+            $this->view->render('article', $this->model('SupportModel')->article_id($_GET['article']));
         }
         else {
             if (isset($_POST['account'])) {
@@ -39,35 +39,35 @@ class SupportController extends Controller
                 $support_button = 'other';
             }
                 $this->view->render('support', array(
-                    'statistic' => $this->model('UserModel')->getStatistic(),
-                    'articles' => $this->model('UserModel')->support_articles($support_button)
+                    'statistic' => $this->model('SupportModel')->getStatistic(),
+                    'articles' => $this->model('SupportModel')->support_articles($support_button)
                 ));
                 }
     }
 
     public function actionTickets()
     {
-        $this->view->render('tickets', $this->model('UserModel')->getTickets());
+        $this->view->render('tickets', $this->model('SupportModel')->getTickets());
     }
 
     public function actionDialog($ticketID)
     {
         if(isset($_POST['submit'])) {
-            $this->model('UserModel')->addMessage($ticketID);
+            $this->model('SupportModel')->addMessage($ticketID);
         }
 
-        $this->view->render('ticket_dialog', $this->model('UserModel')->getDialog($ticketID[0]));
+        $this->view->render('ticket_dialog', $this->model('SupportModel')->getDialog($ticketID[0]));
     }
 
     public function actionClose($ticketID)
     {
-        $this->view->render('ticket_close', $this->model('UserModel')->closeTicket($ticketID[0]));
+        $this->view->render('ticket_close', $this->model('SupportModel')->closeTicket($ticketID[0]));
     }
 
     public function actionNew()
     {
         if (isset($_POST['submit'])) {
-            $this->view->render('new_ticket', $this->model('UserModel')->addTicket());
+            $this->view->render('new_ticket', $this->model('SupportModel')->addTicket());
         } else {
             $this->view->render('new_ticket');
         }
