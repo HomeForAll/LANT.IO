@@ -517,7 +517,7 @@ $("#form_1").on('submit', function(e) { // устанавливаем событ
 
     $.ajax({
         method: 'POST',
-        url: '/search-test', // /search
+        url: '/search', //   /search   /search-test
         data: form_data,
         dataType: 'Json',
         success: function(form_data) {
@@ -531,24 +531,38 @@ $("#form_1").on('submit', function(e) { // устанавливаем событ
     });
 });
 
-$("#form_2").on('submit', function(e) { // устанавливаем событие отправки для формы с id=form
+$("#form_2").on('submit', function(e) {
     var form_data = $(this).serialize(); // собераем все данные из формы
+        //form = $(this), // зaпишeм фoрму, чтoбы пoтoм нe былo прoблeм с this
+        //error = false; // прeдвaритeльнo oшибoк нeт
+
+    //form.find('input, textarea').each( function(){ // прoбeжим пo кaждoму пoлю в фoрмe
+    //    if ($(this).val() === '---') { // eсли нaхoдим пустoe
+    //        alert('Зaпoлнитe пoлe "'+$(this).attr('placeholder')+'"!'); // гoвoрим зaпoлняй!
+    //        error = true; // oшибкa
+    //    }
+    //});
 
     e.preventDefault();
 
-    $.ajax({
-        method: 'POST',
-        url: '/search-test', // /search
-        data: form_data,
-        dataType: 'Json',
-        success: function(form_data) {
-            console.log('Собранные данные', form_data);
-            renderAllApartments(form_data);
-        },
-        error: function(form_data) {
-            console.log('Ошибка отправки', form_data);
-        }
-    });
+    //if (!error) {
+        $.ajax({
+            method: 'POST',
+            url: '/search', //   /search   /search-test
+            data: form_data,
+            dataType: 'Json',
+            success: function(form_data) {
+                console.log('Собранные данные', form_data);
+                renderAllApartments(form_data);
+            },
+            error: function(form_data) {
+                console.log('Ошибка отправки', form_data);
+            }
+        });
+    //}
+    //
+    //return false;
+
 });
 
 function renderAllApartments(data) {
