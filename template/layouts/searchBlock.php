@@ -22,6 +22,7 @@
                             <div class="select">
                                 <label for="number_of_rooms">Кол-во комнат
                                     <select class="number-apartments" name="number_of_rooms" id="number_of_rooms">
+                                        <option value="">---</option>
                                         <option value="5">4+</option>
                                         <option value="4">4</option>
                                         <option value="3">3</option>
@@ -71,6 +72,7 @@
                             <div class="select">
                                 <label for="lavatory">Санузел
                                     <select name="lavatory" id="lavatory">
+                                        <option value="">---</option>
                                         <option value="41">Не важно</option>
                                         <option value="116">Раздельный</option>
                                         <option value="29">Совмещенный</option>
@@ -123,7 +125,8 @@
                             <div class="select">
                                 <label for="0">
                                     <select name="0">
-                                        <option>Language of communication</option>
+                                        <option value="">---</option>
+                                        <option>Language</option>
                                         <option>English</option>
                                         <option>Spanish</option>
                                     </select>
@@ -134,7 +137,8 @@
                             <div class="select">
                                 <label for="0">
                                     <select name="0">
-                                        <option>Language of communication</option>
+                                        <option value="">---</option>
+                                        <option>Language</option>
                                         <option>English</option>
                                         <option>Spanish</option>
                                     </select>
@@ -194,7 +198,8 @@
                             <div class="select">
                                 <label for="0">
                                     <select name="0">
-                                        <option>Language of communication</option>
+                                        <option value="">---</option>
+                                        <option>Language</option>
                                         <option>English</option>
                                         <option>Spanish</option>
                                     </select>
@@ -205,7 +210,8 @@
                             <div class="select">
                                 <label for="0">
                                     <select name="0">
-                                        <option>Language of communication</option>
+                                        <option value="">---</option>
+                                        <option>Language</option>
                                         <option>English</option>
                                         <option>Spanish</option>
                                     </select>
@@ -265,7 +271,8 @@
                             <div class="select">
                                 <label for="">
                                     <select name="0">
-                                        <option>Language of communication</option>
+                                        <option value="">---</option>
+                                        <option>Language</option>
                                         <option>English</option>
                                         <option>Spanish</option>
                                     </select>
@@ -276,7 +283,8 @@
                             <div class="select">
                                 <label for="">
                                     <select name="0">
-                                        <option>Language of communication</option>
+                                        <option value="">---</option>
+                                        <option>Language</option>
                                         <option>English</option>
                                         <option>Spanish</option>
                                     </select>
@@ -336,7 +344,8 @@
                             <div class="select">
                                 <label for="">
                                     <select name="0">
-                                        <option>Language of communication</option>
+                                        <option value="">---</option>
+                                        <option>Language</option>
                                         <option>English</option>
                                         <option>Spanish</option>
                                     </select>
@@ -347,7 +356,8 @@
                             <div class="select">
                                 <label for="">
                                     <select name="0">
-                                        <option>Language of communication</option>
+                                        <option value="">---</option>
+                                        <option>Language</option>
                                         <option>English</option>
                                         <option>Spanish</option>
                                     </select>
@@ -407,7 +417,8 @@
                             <div class="select">
                                 <label for="">
                                     <select name="0">
-                                        <option>Language of communication</option>
+                                        <option value="">---</option>
+                                        <option>Language</option>
                                         <option>English</option>
                                         <option>Spanish</option>
                                     </select>
@@ -418,7 +429,8 @@
                             <div class="select">
                                 <label for="">
                                     <select name="0">
-                                        <option>Language of communication</option>
+                                        <option value="">---</option>
+                                        <option>Language</option>
                                         <option>English</option>
                                         <option>Spanish</option>
                                     </select>
@@ -495,12 +507,12 @@
                                 <div class="travel-information">
                                     <div class="distance-on-foot">
                                         <img src="../../template/images/people-2.png" alt="icon"><p>Уделенность пекшом не более</p>
-                                        <span><input placeholder="" type="number" name="foot" value="5" min="5"
+                                        <span><input placeholder="5" type="number" name="foot" min="5"
                                                      max="60" step="5"><span class="timer">Минут</span></span>
                                     </div>
                                     <div class="distance-on-transport">
                                         <img src="../../template/images/avto.png" alt="icon"><p>Уделенность пекшом не более</p>
-                                        <span><input placeholder="" type="number" name="transport" value="5"
+                                        <span><input placeholder="5" type="number" name="transport"
                                                      min="5" max="60" step="5"><span
                                                     class="timer">Минут</span></span>
                                     </div>
@@ -531,6 +543,7 @@
                                 <div class="select">Район
                                     <label for="region">
                                         <select name="region">
+                                            <option value="">---</option>
                                             <option>Северное медведково</option>
                                             <option>Северное медведково</option>
                                             <option>Северное медведково</option>
@@ -549,6 +562,7 @@
                                 <div class="select">Метро
                                     <label for="metro_station">
                                         <select name="metro_station">
+                                            <option value="">---</option>
                                             <option>Выбрано1</option>
                                             <option>Выбрано2</option>
                                             <option>Выбрано3</option>
@@ -562,6 +576,7 @@
                                 <div class="select">Удаленность от метро не более
                                     <label for="distance_from_metro">
                                         <select name="distance_from_metro">
+                                            <option value="">---</option>
                                             <option>5 мин пешком</option>
                                             <option>10 мин пешком</option>
                                             <option>15 мин пешком</option>
@@ -734,6 +749,7 @@
         </div>
     </div>
 </script>
+<?php include_once '../html/apartmentsItem.php'?>
 <script src="/template/js/main.min.js"></script>
 </body>
 </html>

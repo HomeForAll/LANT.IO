@@ -223,7 +223,7 @@ $siteModel = $this->model('SiteModel');
         }
 
         function getRentApartHTML() {
-            return '<fieldset> <legend>Базовые параметры</legend> <div style="margin: 15px"> Цена: <div class="indent"> Стоимость: <input name="minPrice" type="text" placeholder="Мин."> <input name="maxPrice" type="text" placeholder="Макс."><br> <label for="bargain">Торг:</label> <select name="bargain" id="bargain"> <option>---</option> <option value="yes">Возможен</option> <option>Не возможен</option> </select><br> <label for="rentType">Тип аренды:</label> <select name="rentType" id="rentType"> <option>---</option> <option value="hourRent">Часовая</option> <option value="dailyRent">Посуточная</option> <option value="longRent">Долгосрочная</option> </select> </div> Расположение: <br> <div class="indent"> <label for="region">Область:</label> <input type="text" name="region" id="region"><br> <label for="city">Город:</label> <input type="text" name="city" id="city"><br> <div class="indent"> <label for="district">Округ:</label> <input type="text" name="district" id="district"><br> <label for="area">Район:</label> <input type="text" name="area" id="area"><br> <label for="address">Адрес:</label> <input type="text" name="addressclassid="address"><br> </div> Станция метро: <br> <div class="indent"> Удаленность от метро: <input type="text" name="metroMin" placeholder="Мин."> <input type="text" name="metroMax" placeholder="Макс."><br> </div> </div> </div> </fieldset> <br><br> <fieldset> <legend>Описание объекта</legend> <div style="margin: 15px"> <strong>Квартира:</strong> <div class="indent"> <label for="roomsNumber">Количество комнат:</label> <select name="roomsNumber" id="roomsNumber" onchange=""> <option>---</option> <option value="1">1</option> <option value="2">2</option> <option value="3">3</option> <option value="more">4+</option> </select><br> Площадь: <input type="text" name="spaceMin" placeholder="От"> <input type="text" name="spaceMax" placeholder="До"><br> Этаж: <input type="text" name="floorMin" placeholder="От"> <input type="text" name="floorMax" placeholder="До"><br> <label for="equipment">Комплектация:</label> <select name="equipment" id="equipment"> <option>---</option> <option value="1">Укомплектована</option> <option>Пустая</option> </select><br> <label for="ceilingHeight">Высота потолков:</label> <input type="text" name="ceilingHeight" id="ceilingHeight"> </div> </div> <div style="margin: 15px"> <strong>Дом квартиры:</strong> <div class="indent"> <label for="houseType">Тип дома:</label> <select name="houseType" id="houseType" onchange=""> <option>---</option> <option value="1">Блочный</option> <option value="2">Брежневка</option> <option value="3">Индивидуальный</option> <option value="4">Кирпично-монолитный</option> <option value="5">Монолит</option> <option value="6">Панельный</option> <option value="7">Сталинка</option> <option value="8">Хрущевка</option> <option value="9">Серия дома</option> </select><br> <label for="houseFloorNumber">Количество этажей:</label> <input type="text" name="houseFloorNumber" id="houseFloorNumber"><br> <label for="lift">Лифт:</label> <select name="lift" id="lift" onchange=""> <option>---</option> <option value="1">Есть</option> <option value="2">Нет</option> </select><br> <label for="parking">Парковка:</label> <select name="parking" id="parking" onchange=""> <option>---</option> <option value="1">Подземная</option> <option value="2">Во дворе</option> <option value="2">Платная (неподалеку)</option> </select><br> Безопасность: <div class="indent"> <label for="concierge">Консьерж</label> <input type="checkbox" name="concierge" id="concierge"><br> <label for="security">Охрана</label> <input type="checkbox" name="security" id="security"><br> <label for="intercom">Домофон</label> <input type="checkbox" name="intercom" id="intercom"><br> <label for="CCTV">Видеонаблюдение</label> <input type="checkbox" name="CCTV" id="CCTV"><br> </div> <label for="chute">Мусоропровод:</label> <select name="chute" id="chute" onchange=""> <option>---</option> <option value="1">Да</option> <option value="2">Нет</option> </select><br> </div> <strong>Состав квартиры:</strong> <div class="indent"> Комнаты: <div class="indent"> <label for="bedroom">Спальня</label> <input type="checkbox" name="bedroom" id="bedroom"><br> <label for="kitchen">Кухня</label> <input type="checkbox" name="kitchen" id="kitchen"><br> <label for="livingRoom">Гостиная</label> <input type="checkbox" name="livingRoom" id="livingRoom"><br> <label for="hallway">Прихожая</label> <input type="checkbox" name="hallway" id="hallway"><br> <label for="nursery">Детская</label> <input type="checkbox" name="nursery" id="nursery"><br> <label for="study">Рабочий кабинет</label> <input type="checkbox" name="study" id="study"><br> <label for="canteen">Столовая</label> <input type="checkbox" name="canteen" id="canteen"><br> <label for="bathroom">Ванная</label> <input type="checkbox" name="bathroom" id="bathroom"><br> </div> Состояние квартиры: <div class="indent"> <label for="decoration">Отделка:</label> <select name="decoration" id="decoration"> <option>---</option> <option value="1">Да</option> <option value="0">Нет</option> </select> <select name="decorationValue"> <option>---</option> <option value="1">Люкс</option> <option value="0">Косметическая</option> </select><br> </div> <label for="lavatory">Санузел:</label> <select name="lavatory" id="lavatory"> <option>---</option> <option value="1">Совмещенный</option> <option value="0">Раздельный</option> </select><br> <label for="balcony">Обязательное наличие балкона</label> <input type="checkbox" name="balcony" id="balcony"><br> Жилищно-комунальные услуги: <div class="indent"> <label for="heating">Отопление</label> <input type="checkbox" name="heating" id="heating"><br> <label for="gas">Газ</label> <input type="checkbox" name="gas" id="gas"><br> <label for="electricity">Электричество</label> <input type="checkbox" name="electricity" id="electricity"><br> <label for="water">Водопровод</label> <input type="checkbox" name="water" id="water"><br> </div> Наполнение квартиры: <div class="indent"> Электроника для досуга и отдыха: <div class="indent"> <label for="TV">Телевизор</label> <input type="checkbox" name="TV" id="TV"><br> <label for="musicCenter">Музыкльный центр</label> <input type="checkbox" name="musicCenter" id="musicCenter"><br> <label for="conditioner">Кондиционер</label> <input type="checkbox" name="conditioner" id="conditioner"><br> </div> Бытовая техника: <div class="indent"> <label for="fridge">Холодильник</label> <input type="checkbox" name="fridge" id="fridge"><br> <label for="plate">Плита</label> <input type="checkbox" name="plate" id="plate"><br> <label for="bake">Печь</label> <input type="checkbox" name="bake" id="bake"><br> <label for="microwave">СВЧ</label> <input type="checkbox" name="microwave" id="microwave"><br> <label for="dishwasher">Посудомойка</label> <input type="checkbox" name="dishwasher" id="dishwasher"><br> </div> Мебель: <div class="indent"> <label for="table">Стол</label> <input type="checkbox" name="table" id="table"><br> <label for="bed">Кровать</label> <input type="checkbox" name="bed" id="bed"><br> <label for="cupboard">Шкаф</label> <input type="checkbox" name="cupboard" id="cupboard"><br> <label for="stand">Тумба</label> <input type="checkbox" name="stand" id="stand"><br> <label for="mirror">Зеркало</label> <input type="checkbox" name="mirror" id="mirror"><br> <label for="armchair">Кресло</label> <input type="checkbox" name="armchair" id="armchair"><br> <label for="sofa">Диван</label> <input type="checkbox" name="sofa" id="sofa"><br> </div> </div> </div> <strong>Вложения:</strong> <div class="indent"> <label for="plan">План квартиры:</label> <select name="plan" id="plan" onchange=""> <option>---</option> <option value="1">Есть</option> <option value="2">Нет</option> </select><br> <label for="3d">3D проект:</label> <select name="3d" id="3d" onchange=""> <option>---</option> <option value="1">Есть</option> <option value="2">Нет</option> </select><br> <label for="video">Видео:</label> <select name="video" id="video" onchange=""> <option>---</option> <option value="1">Есть</option> <option value="2">Нет</option> </select><br> </div> </div> </fieldset> <input style="margin-top: 20px" type="submit" name="extended" value="Найти">';
+            return '<fieldset> <legend>Базовые параметры</legend> <div style="margin: 15px"> Цена: <div class="indent"> Стоимость: <input name="minPrice" type="text" placeholder="Мин."> <input name="maxPrice" type="text" placeholder="Макс."><br> <label for="bargain">Торг:</label> <select name="bargain" id="bargain"> <option value=>---</option> <option value="yes">Возможен</option> <option>Не возможен</option> </select><br> <label for="rentType">Тип аренды:</label> <select name="rentType" id="rentType"> <option value=>---</option> <option value="hourRent">Часовая</option> <option value="dailyRent">Посуточная</option> <option value="longRent">Долгосрочная</option> </select> </div> Расположение: <br> <div class="indent"> <label for="region">Область:</label> <input type="text" name="region" id="region"><br> <label for="city">Город:</label> <input type="text" name="city" id="city"><br> <div class="indent"> <label for="district">Округ:</label> <input type="text" name="district" id="district"><br> <label for="area">Район:</label> <input type="text" name="area" id="area"><br> <label for="address">Адрес:</label> <input type="text" name="addressclassid="address"><br> </div> Станция метро: <br> <div class="indent"> Удаленность от метро: <input type="text" name="metroMin" placeholder="Мин."> <input type="text" name="metroMax" placeholder="Макс."><br> </div> </div> </div> </fieldset> <br><br> <fieldset> <legend>Описание объекта</legend> <div style="margin: 15px"> <strong>Квартира:</strong> <div class="indent"> <label for="roomsNumber">Количество комнат:</label> <select name="roomsNumber" id="roomsNumber" onchange=""> <option value=>---</option> <option value="1">1</option> <option value="2">2</option> <option value="3">3</option> <option value="more">4+</option> </select><br> Площадь: <input type="text" name="spaceMin" placeholder="От"> <input type="text" name="spaceMax" placeholder="До"><br> Этаж: <input type="text" name="floorMin" placeholder="От"> <input type="text" name="floorMax" placeholder="До"><br> <label for="equipment">Комплектация:</label> <select name="equipment" id="equipment"> <option value=>---</option> <option value="1">Укомплектована</option> <option>Пустая</option> </select><br> <label for="ceilingHeight">Высота потолков:</label> <input type="text" name="ceilingHeight" id="ceilingHeight"> </div> </div> <div style="margin: 15px"> <strong>Дом квартиры:</strong> <div class="indent"> <label for="houseType">Тип дома:</label> <select name="houseType" id="houseType" onchange=""> <option value=>---</option> <option value="1">Блочный</option> <option value="2">Брежневка</option> <option value="3">Индивидуальный</option> <option value="4">Кирпично-монолитный</option> <option value="5">Монолит</option> <option value="6">Панельный</option> <option value="7">Сталинка</option> <option value="8">Хрущевка</option> <option value="9">Серия дома</option> </select><br> <label for="houseFloorNumber">Количество этажей:</label> <input type="text" name="houseFloorNumber" id="houseFloorNumber"><br> <label for="lift">Лифт:</label> <select name="lift" id="lift" onchange=""> <option value=>---</option> <option value="1">Есть</option> <option value="2">Нет</option> </select><br> <label for="parking">Парковка:</label> <select name="parking" id="parking" onchange=""> <option value=>---</option> <option value="1">Подземная</option> <option value="2">Во дворе</option> <option value="2">Платная (неподалеку)</option> </select><br> Безопасность: <div class="indent"> <label for="concierge">Консьерж</label> <input type="checkbox" name="concierge" id="concierge"><br> <label for="security">Охрана</label> <input type="checkbox" name="security" id="security"><br> <label for="intercom">Домофон</label> <input type="checkbox" name="intercom" id="intercom"><br> <label for="CCTV">Видеонаблюдение</label> <input type="checkbox" name="CCTV" id="CCTV"><br> </div> <label for="chute">Мусоропровод:</label> <select name="chute" id="chute" onchange=""> <option value=>---</option> <option value="1">Да</option> <option value="2">Нет</option> </select><br> </div> <strong>Состав квартиры:</strong> <div class="indent"> Комнаты: <div class="indent"> <label for="bedroom">Спальня</label> <input type="checkbox" name="bedroom" id="bedroom"><br> <label for="kitchen">Кухня</label> <input type="checkbox" name="kitchen" id="kitchen"><br> <label for="livingRoom">Гостиная</label> <input type="checkbox" name="livingRoom" id="livingRoom"><br> <label for="hallway">Прихожая</label> <input type="checkbox" name="hallway" id="hallway"><br> <label for="nursery">Детская</label> <input type="checkbox" name="nursery" id="nursery"><br> <label for="study">Рабочий кабинет</label> <input type="checkbox" name="study" id="study"><br> <label for="canteen">Столовая</label> <input type="checkbox" name="canteen" id="canteen"><br> <label for="bathroom">Ванная</label> <input type="checkbox" name="bathroom" id="bathroom"><br> </div> Состояние квартиры: <div class="indent"> <label for="decoration">Отделка:</label> <select name="decoration" id="decoration"> <option value=>---</option> <option value="1">Да</option> <option value="0">Нет</option> </select> <select name="decorationValue"> <option value=>---</option> <option value="1">Люкс</option> <option value="0">Косметическая</option> </select><br> </div> <label for="lavatory">Санузел:</label> <select name="lavatory" id="lavatory"> <option value=>---</option> <option value="1">Совмещенный</option> <option value="0">Раздельный</option> </select><br> <label for="balcony">Обязательное наличие балкона</label> <input type="checkbox" name="balcony" id="balcony"><br> Жилищно-комунальные услуги: <div class="indent"> <label for="heating">Отопление</label> <input type="checkbox" name="heating" id="heating"><br> <label for="gas">Газ</label> <input type="checkbox" name="gas" id="gas"><br> <label for="electricity">Электричество</label> <input type="checkbox" name="electricity" id="electricity"><br> <label for="water">Водопровод</label> <input type="checkbox" name="water" id="water"><br> </div> Наполнение квартиры: <div class="indent"> Электроника для досуга и отдыха: <div class="indent"> <label for="TV">Телевизор</label> <input type="checkbox" name="TV" id="TV"><br> <label for="musicCenter">Музыкльный центр</label> <input type="checkbox" name="musicCenter" id="musicCenter"><br> <label for="conditioner">Кондиционер</label> <input type="checkbox" name="conditioner" id="conditioner"><br> </div> Бытовая техника: <div class="indent"> <label for="fridge">Холодильник</label> <input type="checkbox" name="fridge" id="fridge"><br> <label for="plate">Плита</label> <input type="checkbox" name="plate" id="plate"><br> <label for="bake">Печь</label> <input type="checkbox" name="bake" id="bake"><br> <label for="microwave">СВЧ</label> <input type="checkbox" name="microwave" id="microwave"><br> <label for="dishwasher">Посудомойка</label> <input type="checkbox" name="dishwasher" id="dishwasher"><br> </div> Мебель: <div class="indent"> <label for="table">Стол</label> <input type="checkbox" name="table" id="table"><br> <label for="bed">Кровать</label> <input type="checkbox" name="bed" id="bed"><br> <label for="cupboard">Шкаф</label> <input type="checkbox" name="cupboard" id="cupboard"><br> <label for="stand">Тумба</label> <input type="checkbox" name="stand" id="stand"><br> <label for="mirror">Зеркало</label> <input type="checkbox" name="mirror" id="mirror"><br> <label for="armchair">Кресло</label> <input type="checkbox" name="armchair" id="armchair"><br> <label for="sofa">Диван</label> <input type="checkbox" name="sofa" id="sofa"><br> </div> </div> </div> <strong>Вложения:</strong> <div class="indent"> <label for="plan">План квартиры:</label> <select name="plan" id="plan" onchange=""> <option value=>---</option> <option value="1">Есть</option> <option value="2">Нет</option> </select><br> <label for="3d">3D проект:</label> <select name="3d" id="3d" onchange=""> <option value=>---</option> <option value="1">Есть</option> <option value="2">Нет</option> </select><br> <label for="video">Видео:</label> <select name="video" id="video" onchange=""> <option value=>---</option> <option value="1">Есть</option> <option value="2">Нет</option> </select><br> </div> </div> </fieldset> <input style="margin-top: 20px" type="submit" name="extended" value="Найти">';
         }
 
         function getRegions() {
@@ -296,12 +296,11 @@ $siteModel = $this->model('SiteModel');
     </script>
     <?php $this->head() ?>
 </head>
-<body ng-controller='MyChartCtrl'>
+<body>
 <!-- Heeader -->
 <?php include_once 'header.php' ?>
 <!-- Content -->
 <div id="content">
-    <!--<?php $this->content(); ?> -->
     <ul id="scene">
         <li class="layer" data-depth="0.20"><img src="../../template/images/paralax/home-1.png"></li>
         <li class="layer" data-depth="0.40"><img src="../../template/images/paralax/home-2.png"></li>
@@ -310,7 +309,7 @@ $siteModel = $this->model('SiteModel');
         <li class="layer" data-depth="0.80"><img src="../../template/images/paralax/back-1.png"></li>
     </ul>
     <div class="section-home-with-filters">
-        <form action="" id="form_1"> <!--novalidate -->
+        <form action="" id="form_1" method="POST"> <!--novalidate -->
             <div class="property-type-apartment-settings">
                 <ul>
                     <li>Жилая</li>
@@ -404,6 +403,7 @@ $siteModel = $this->model('SiteModel');
                             <div class="select">
                                 <label for="number_of_rooms">Кол-во комнат
                                     <select class="number-apartments" name="number_of_rooms" id="number_of_rooms">
+                                        <option value="">---</option>
                                         <option value="5">4+</option>
                                         <option value="4">4</option>
                                         <option value="3">3</option>
@@ -453,6 +453,7 @@ $siteModel = $this->model('SiteModel');
                             <div class="select">
                                 <label for="lavatory">Санузел
                                     <select name="lavatory" id="lavatory">
+                                        <option value="">---</option>
                                         <option value="41">Не важно</option>
                                         <option value="116">Раздельный</option>
                                         <option value="29">Совмещенный</option>
@@ -505,7 +506,8 @@ $siteModel = $this->model('SiteModel');
                              <div class="select">
                                  <label for="0">
                                      <select name="0">
-                                         <option>Language of communication</option>
+                                         <option value="">---</option>
+                                         <option>Language</option>
                                          <option>English</option>
                                          <option>Spanish</option>
                                      </select>
@@ -516,7 +518,8 @@ $siteModel = $this->model('SiteModel');
                              <div class="select">
                                  <label for="0">
                                      <select name="0">
-                                         <option>Language of communication</option>
+                                         <option value="">---</option>
+                                         <option>Language</option>
                                          <option>English</option>
                                          <option>Spanish</option>
                                      </select>
@@ -524,9 +527,9 @@ $siteModel = $this->model('SiteModel');
                              </div>
                          </li>
                          <li><span class="names-parameters">Высота потолков м</span>
-                             <p>От<input name="none" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
+                             <p>От<input name="0" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
                              </p>
-                             <p>До<input name="none" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
+                             <p>До<input name="0" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
                              </p>
                          </li>
                      </ul>
@@ -547,27 +550,27 @@ $siteModel = $this->model('SiteModel');
                              </p>
                          </li>
                          <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                             <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                             <p>От<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                              </p>
-                             <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                             <p>До<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                              </p>
                          </li>
                          <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                             <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                             <p>От<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                              </p>
-                             <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                             <p>До<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                              </p>
                          </li>
                          <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                             <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                             <p>От<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                              </p>
-                             <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                             <p>До<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                              </p>
                          </li>
                          <li><span class="names-parameters">Балкон м2</span>
-                             <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                             <p>От<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                              </p>
-                             <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                             <p>До<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                              </p>
                          </li>
                      </ul>
@@ -576,7 +579,8 @@ $siteModel = $this->model('SiteModel');
                              <div class="select">
                                  <label for="0">
                                      <select name="0">
-                                         <option>Language of communication</option>
+                                         <option value="">---</option>
+                                         <option>Language</option>
                                          <option>English</option>
                                          <option>Spanish</option>
                                      </select>
@@ -587,7 +591,8 @@ $siteModel = $this->model('SiteModel');
                              <div class="select">
                                  <label for="0">
                                      <select name="0">
-                                         <option>Language of communication</option>
+                                         <option value="">---</option>
+                                         <option>Language</option>
                                          <option>English</option>
                                          <option>Spanish</option>
                                      </select>
@@ -595,9 +600,9 @@ $siteModel = $this->model('SiteModel');
                              </div>
                          </li>
                          <li><span class="names-parameters">Высота потолков м</span>
-                             <p>От<input name="none" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
+                             <p>От<input name="0" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
                              </p>
-                             <p>До<input name="none" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
+                             <p>До<input name="0" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
                              </p>
                          </li>
                      </ul>
@@ -618,27 +623,27 @@ $siteModel = $this->model('SiteModel');
                             </p>
                         </li>
                         <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                            <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>От<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>До<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                         <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                            <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>От<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>До<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                         <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                            <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>От<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>До<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                         <li><span class="names-parameters">Балкон м2</span>
-                            <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>От<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>До<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                     </ul>
@@ -647,7 +652,8 @@ $siteModel = $this->model('SiteModel');
                             <div class="select">
                                 <label for="">
                                     <select name="0">
-                                        <option>Language of communication</option>
+                                        <option value="">---</option>
+                                        <option>Language</option>
                                         <option>English</option>
                                         <option>Spanish</option>
                                     </select>
@@ -658,7 +664,8 @@ $siteModel = $this->model('SiteModel');
                             <div class="select">
                                 <label for="">
                                     <select name="0">
-                                        <option>Language of communication</option>
+                                        <option value="">---</option>
+                                        <option>Language</option>
                                         <option>English</option>
                                         <option>Spanish</option>
                                     </select>
@@ -666,9 +673,9 @@ $siteModel = $this->model('SiteModel');
                             </div>
                         </li>
                         <li><span class="names-parameters">Высота потолков м</span>
-                            <p>От<input name="none" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
+                            <p>От<input name="0" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
                             </p>
-                            <p>До<input name="none" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
+                            <p>До<input name="0" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
                             </p>
                         </li>
                     </ul>
@@ -676,7 +683,7 @@ $siteModel = $this->model('SiteModel');
                         <button>Готово</button>
                     </a>
                 </div>
-                <div class="apartment-settings-separate-building"> <!-- name="none" -->
+                <div class="apartment-settings-separate-building"> <!-- name="0" -->
                     <h2>Отдельное стоящее здание</h2>
                     <ul>
                         <li><span class="names-parameters">Кол-во комнат</span>
@@ -689,27 +696,27 @@ $siteModel = $this->model('SiteModel');
                             </p>
                         </li>
                         <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                            <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>От<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>До<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                         <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                            <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>От<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>До<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                         <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                            <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>От<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>До<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                         <li><span class="names-parameters">Балкон м2</span>
-                            <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>От<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>До<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                     </ul>
@@ -718,7 +725,8 @@ $siteModel = $this->model('SiteModel');
                             <div class="select">
                                 <label for="">
                                     <select name="0">
-                                        <option>Language of communication</option>
+                                        <option value="">---</option>
+                                        <option>Language</option>
                                         <option>English</option>
                                         <option>Spanish</option>
                                     </select>
@@ -729,7 +737,8 @@ $siteModel = $this->model('SiteModel');
                             <div class="select">
                                 <label for="">
                                     <select name="0">
-                                        <option>Language of communication</option>
+                                        <option value="">---</option>
+                                        <option>Language</option>
                                         <option>English</option>
                                         <option>Spanish</option>
                                     </select>
@@ -737,9 +746,9 @@ $siteModel = $this->model('SiteModel');
                             </div>
                         </li>
                         <li><span class="names-parameters">Высота потолков м</span>
-                            <p>От<input name="none" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
+                            <p>От<input name="0" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
                             </p>
-                            <p>До<input name="none" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
+                            <p>До<input name="0" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
                             </p>
                         </li>
                     </ul>
@@ -760,27 +769,27 @@ $siteModel = $this->model('SiteModel');
                             </p>
                         </li>
                         <li><span class="names-parameters">Общая площадь м<sup>2</sup></span>
-                            <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>От<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>До<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                         <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                            <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>От<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>До<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                         <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                            <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>От<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>До<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                         <li><span class="names-parameters">Балкон м2</span>
-                            <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>От<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>До<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
                             </p>
                         </li>
                     </ul>
@@ -789,7 +798,8 @@ $siteModel = $this->model('SiteModel');
                             <div class="select">
                                 <label for="">
                                     <select name="0">
-                                        <option>Language of communication</option>
+                                        <option value="">---</option>
+                                        <option>Language</option>
                                         <option>English</option>
                                         <option>Spanish</option>
                                     </select>
@@ -800,7 +810,8 @@ $siteModel = $this->model('SiteModel');
                             <div class="select">
                                 <label for="">
                                     <select name="0">
-                                        <option>Language of communication</option>
+                                        <option value="">---</option>
+                                        <option>Language</option>
                                         <option>English</option>
                                         <option>Spanish</option>
                                     </select>
@@ -808,9 +819,9 @@ $siteModel = $this->model('SiteModel');
                             </div>
                         </li>
                         <li><span class="names-parameters">Высота потолков м</span>
-                            <p>От<input name="none" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
+                            <p>От<input name="0" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
                             </p>
-                            <p>До<input name="none" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
+                            <p>До<input name="0" type="text" placeholder="0" maxlength="2" pattern="[0-9]{2}">
                             </p>
                         </li>
                     </ul>
@@ -876,14 +887,14 @@ $siteModel = $this->model('SiteModel');
                                 <div class="travel-information">
                                     <div class="distance-on-foot">
                                         <img src="../../template/images/people-2.png" alt="icon"><p>Удаленность пекшом не более</p>
-                                        <span><input placeholder="" type="number" name="foot" value="5" min="5"
+                                        <span><input type="number" name="foot" placeholder="5" value=""
                                                      max="60" step="5">
                                             <span class="timer">Минут</span></span>
                                     </div>
                                     <div class="distance-on-transport">
                                         <img src="../../template/images/avto.png" alt="icon"><p>Удаленность пекшом не более</p>
-                                        <span><input placeholder="" type="number" name="transport" value="5"
-                                                     min="5" max="60" step="5">
+                                        <span><input type="number" name="transport" placeholder="5" value=""
+                                                     max="60" step="5">
                                             <span class="timer">Минут</span></span>
                                     </div>
                                     <button class="closeSearchMetro">Готово</button>
@@ -911,6 +922,7 @@ $siteModel = $this->model('SiteModel');
                                 <div class="select">Округ
                                     <label for="region">
                                         <select name="region">
+                                            <option value="">---</option>
                                             <option>Северо-западный</option>
                                             <option>Северо-западный</option>
                                             <option>Северо-западный</option>
@@ -922,6 +934,7 @@ $siteModel = $this->model('SiteModel');
                                 <div class="select">Район
                                     <label for="district">
                                         <select name="district">
+                                            <option value="">---</option>
                                             <option>Северное медведково</option>
                                             <option>Северное медведково</option>
                                             <option>Северное медведково</option>
@@ -933,6 +946,7 @@ $siteModel = $this->model('SiteModel');
                                 <div class="select">Улица
                                     <label for="street">
                                         <select name="street">
+                                            <option value="">---</option>
                                             <option>Ениивмасейская</option>
                                             <option>Ениивмасейская</option>
                                             <option>Ениивмасейская</option>
@@ -951,6 +965,7 @@ $siteModel = $this->model('SiteModel');
                                 <div class="select">Метро
                                     <label for="metro_station">
                                         <select name="metro_station">
+                                            <option value="">---</option>
                                             <option>Выбрано1</option>
                                             <option>Выбрано2</option>
                                             <option>Выбрано3</option>
@@ -964,6 +979,7 @@ $siteModel = $this->model('SiteModel');
                                 <div class="select">Удаленность от метро не более
                                     <label for="distance_from_metro">
                                         <select name="distance_from_metro">
+                                            <option value="">---</option>
                                             <option value="5">5 мин пешком</option>
                                             <option value="10">10 мин пешком</option>
                                             <option value="15">15 мин пешком</option>
@@ -1008,6 +1024,7 @@ $siteModel = $this->model('SiteModel');
                         <div class="select"><img src="../../template/images/ava.png" alt="icons">
                             <label for="object_located">
                                 <select name="object_located" id="object_located">
+                                    <option value="">---</option>
                                     <option>Объект размещен</option>
                                     <option value="41">Не важно</option>
                                     <option value="22">Риэлтором</option>
@@ -1021,6 +1038,7 @@ $siteModel = $this->model('SiteModel');
                             <label for="lease">
                                 <img src="../../template/images/timer.png" alt="icons">
                                 <select name="lease" id="lease">
+                                    <option value="">---</option>
                                     <option>Срок аренды</option>
                                     <option value="80">Более года</option>
                                     <option value="145">Год</option>
@@ -1047,6 +1065,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="number_of_rooms">Кол-во комнат
                                                 <select class="number-apartments" name="number_of_rooms" id="number_of_rooms">
+                                                    <option value="">---</option>
                                                     <option value="5">4+</option>
                                                     <option value="4">4</option>
                                                     <option value="3">3</option>
@@ -1094,8 +1113,9 @@ $siteModel = $this->model('SiteModel');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="lavatory" >Санузел
+                                            <label for="lavatory">Санузел
                                                 <select name="lavatory" id="lavatory">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="116">Раздельный</option>
                                                     <option value="29">Совмещенный</option>
@@ -1130,6 +1150,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="furnish">Отделка
                                                 <select name="furnish" id="furnish">
+                                                    <option value="">---</option>
                                                     <option value="141">Без ремонта</option>
                                                     <option value="65">Незавершенный ремонт</option>
                                                     <option value="107">Требуется ремонт</option>
@@ -1145,6 +1166,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="equipment">Комплектация
                                                 <select name="equipment" id="equipment">
+                                                    <option value="">---</option>
                                                     <option value="45">Укомплектованная</option>
                                                     <option value="44">Пустая</option>
                                                 </select>
@@ -1167,6 +1189,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select more-settings">
                                             <label for="elevator">Наличие лифта
                                                 <select name="elevator" id="elevator">
+                                                    <option value="">---</option>
                                                     <option value="1">Да</option>
                                                     <option value="0">Нет</option>
                                                 </select>
@@ -1177,6 +1200,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="elevator_yes">
                                                 <select name="elevator_yes" id="elevator_yes">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="95">Пассажирский</option>
                                                     <option value="23">Грузовой</option>
@@ -1197,6 +1221,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
                                                 <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                    <option value="">---</option>
                                                     <option value="146">Год постройки\окончания строительства</option>
                                                     <option value="92">Собственность менее 5 лет</option>
                                                     <option value="93">Собственность более 5 лет</option>
@@ -1211,6 +1236,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="parking">Парковка
                                                 <select name="parking" id="parking">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="5">Отсутствует</option>
                                                     <option value="7">Придомовой гараж</option>
@@ -1225,6 +1251,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="wall_material">Материал стен
                                                 <select name="wall_material" id="wall_material">
+                                                    <option value="">---</option>
                                                     <option value="91">Другое</option>
                                                     <option value="32">Железобетонные панели</option>
                                                     <option value="78">Монолит</option>
@@ -1237,6 +1264,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="stairwells_status">Состояние лестничных клеток
                                                 <select name="stairwells_status" id="stairwells_status">
+                                                    <option value="">---</option>
                                                     <option value="141">Без ремонта</option>
                                                     <option value="107">Требуется ремонт</option>
                                                     <option value="106">Требуется косметический ремонт</option>
@@ -1281,6 +1309,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="video">Видео
                                                 <select name="video" id="video">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -1291,6 +1320,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
                                                 <select name="planning_project" id="planning_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -1301,6 +1331,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="three_d_project">3d проект
                                                 <select name="three_d_project" id="three_d_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -1343,6 +1374,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="number_of_rooms">Количество комнат
                                                 <select name="number_of_rooms" id="number_of_rooms">
+                                                    <option value="">---</option>
                                                     <option value="4">4+</option>
                                                     <option value="3">3</option>
                                                     <option value="2">2</option>
@@ -1355,6 +1387,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="number_of_rooms">Количество комнат
                                                 <select name="number_of_rooms" id="number_of_rooms">
+                                                    <option value="">---</option>
                                                     <option value="4">4+</option>
                                                     <option value="3">3</option>
                                                     <option value="2">2</option>
@@ -1375,6 +1408,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="lavatory">Санузел
                                                 <select name="lavatory" id="lavatory">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="116">Раздельный</option>
                                                     <option value="29">Совмещенный</option>
@@ -1386,6 +1420,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="roofing">Кровля
                                                 <select name="roofing" id="roofing">
+                                                    <option value="">---</option>
                                                     <option value="127">Временная</option>
                                                     <option value="118">Шифер</option>
                                                     <option value="122">Камень</option>
@@ -1402,6 +1437,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="foundation">Фундамент
                                                 <select name="foundation" id="foundation">
+                                                    <option value="">---</option>
                                                     <option value="140">Без фундамента</option>
                                                     <option value="58">Ростверк</option>
                                                     <option value="109">Ленточный</option>
@@ -1415,6 +1451,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="wall_material">Материал стен
                                                 <select name="wall_material" id="wall_material">
+                                                    <option value="">---</option>
                                                     <option value="49">Фахверк</option>
                                                     <option value="56">Клееный брус</option>
                                                     <option value="102">Профилированный брус</option>
@@ -1435,6 +1472,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="type_of_house">Тип дома
                                                 <select name="type_of_house" id="type_of_house">
+                                                    <option value="">---</option>
                                                     <option value="35">Коттедж</option>
                                                     <option value="130">Таунхаус</option>
                                                     <option value="42">Дуплекс</option>
@@ -1469,6 +1507,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="furnish">Отделка
                                                 <select name="furnish" id="furnish">
+                                                    <option value="">---</option>
                                                     <option value="141">Без ремонта</option>
                                                     <option value="65">Незавершенный ремонт</option>
                                                     <option value="107">Требуется ремонт</option>
@@ -1484,6 +1523,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="equipment">Комплектация
                                                 <select name="equipment" id="equipment">
+                                                    <option value="">---</option>
                                                     <option value="45">Укомплектованная</option>
                                                     <option value="44">Пустая</option>
                                                 </select>
@@ -1494,6 +1534,8 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
                                                 <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                    <option value="">---</option>
+                                                    <option value="">---</option>
                                                     <option value="92">Собственность менее 5 лет</option>
                                                     <option value="93">Собственность более 5 лет</option>
                                                     <option value="70">Участок с подрядом</option>
@@ -1540,6 +1582,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">Участок
                                             <label for="parking">Парковка
                                                 <select name="parking" id="parking">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="5">Отсутствует</option>
                                                     <option value="7">Придомовой гараж</option>
@@ -1566,6 +1609,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="site">Участок
                                                 <select name="site" id="site">
+                                                    <option value="">---</option>
                                                     <option value="136">Заболоченный</option>
                                                     <option value="103">Овраг</option>
                                                     <option value="89">На склоне</option>
@@ -1586,6 +1630,7 @@ $siteModel = $this->model('SiteModel');
                                             <label>Ограждение <input type="checkbox" name="fencing"></label>
                                             <label for="material">Материал
                                                 <select name="material" id="material">
+                                                    <option value="">---</option>
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -1614,6 +1659,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="video">Видео
                                                 <select name="video" id="video">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -1624,6 +1670,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
                                                 <select name="planning_project" id="planning_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -1634,6 +1681,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="three_d_project">3d проект
                                                 <select name="three_d_project" id="three_d_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -1658,6 +1706,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="number_of_rooms">Кол-во комнат
                                                 <select class="number-apartments" name="number_of_rooms" id="number_of_rooms">
+                                                    <option value="">---</option>
                                                     <option value="5">4+</option>
                                                     <option value="4">4</option>
                                                     <option value="3">3</option>
@@ -1705,8 +1754,9 @@ $siteModel = $this->model('SiteModel');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="lavatory" >Санузел
+                                            <label for="lavatory">Санузел
                                                 <select name="lavatory" id="lavatory">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="116">Раздельный</option>
                                                     <option value="29">Совмещенный</option>
@@ -1730,6 +1780,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="object_located">Объект размещен
                                                 <select name="0">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="22">Риэлтором</option>
                                                     <option value="21">Собственником</option>
@@ -1750,22 +1801,23 @@ $siteModel = $this->model('SiteModel');
                                 <h2>Параметры здания</h2>
                                 <ul>
                                     <li><span class="names-parameters">Количество этажей</span>
-                                        <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                        <p>От<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
                                             ></p>
-                                        <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                        <p>До<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
                                             ></p>
                                     </li>
                                     <li><span class="names-parameters">Год окончания строительства</span>
-                                        <p>От<input name="none" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
+                                        <p>От<input name="0" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
                                             ></p>
-                                        <p>До<input name="none" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
+                                        <p>До<input name="0" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
                                             ></p>
                                     </li>
                                     <li>
                                         <div class="select">
                                             <label for="0">
                                                 <select name="0">
-                                                    <option>Language of communication</option>
+                                                    <option value="">---</option>
+                                                    <option>Language</option>
                                                     <option>English</option>
                                                     <option>Spanish</option>
                                                 </select>
@@ -1776,7 +1828,8 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="0">
                                                 <select name="0">
-                                                    <option>Language of communication</option>
+                                                    <option value="">---</option>
+                                                    <option>Language</option>
                                                     <option>English</option>
                                                     <option>Spanish</option>
                                                 </select>
@@ -1787,7 +1840,8 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="0">
                                                 <select name="0">
-                                                    <option>Language of communication</option>
+                                                    <option value="">---</option>
+                                                    <option>Language</option>
                                                     <option>English</option>
                                                     <option>Spanish</option>
                                                 </select>
@@ -1798,7 +1852,8 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="0">
                                                 <select name="0">
-                                                    <option>Language of communication</option>
+                                                    <option value="">---</option>
+                                                    <option>Language</option>
                                                     <option>English</option>
                                                     <option>Spanish</option>
                                                 </select>
@@ -1831,6 +1886,7 @@ $siteModel = $this->model('SiteModel');
                                             </label>
                                             <label for="type_of_construction">Вид постройки:
                                                 <select name="type_of_construction" id="type_of_construction">
+                                                    <option value="">---</option>
                                                     <option value="111">Комнаты</option>
                                                     <option value="90">Опен спэйс</option>
                                                 </select>
@@ -1849,6 +1905,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="building_type">Тип здания
                                                 <select name="building_type" id="building_type">
+                                                    <option value="">---</option>
                                                     <option value="108">Жилое</option>
                                                     <option value="8">Административное</option>
                                                 </select>
@@ -1859,6 +1916,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="roofing">Кровля
                                                 <select name="roofing" id="roofing">
+                                                    <option value="">---</option>
                                                     <option value="67">Железо</option>
                                                     <option value="34">Медь</option>
                                                     <option value="76">Металлочерепица</option>
@@ -1877,6 +1935,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="foundation">Фундамент
                                                 <select name="foundation" id="foundation">
+                                                    <option value="">---</option>
                                                     <option value="120">Монолитная плита</option>
                                                     <option value="125">Шведская плита</option>
                                                     <option value="109">Ленточный</option>
@@ -1890,6 +1949,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="wall_material">Материал стен
                                                 <select name="wall_material" id="wall_material">
+                                                    <option value="">---</option>
                                                     <option value="49">Фахверк</option>
                                                     <option value="19">Кирпич</option>
                                                     <option value="105">Железобетон</option>
@@ -1940,6 +2000,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="video">Видео
                                                 <select name="video" id="video">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -1950,6 +2011,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
                                                 <select name="planning_project" id="planning_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -1960,6 +2022,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="three_d_project">3d проект
                                                 <select name="three_d_project" id="three_d_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -1994,6 +2057,7 @@ $siteModel = $this->model('SiteModel');
                                             </label>
                                             <label for="type_of_construction">Вид постройки:
                                                 <select name="type_of_construction" id="type_of_construction">
+                                                    <option value="">---</option>
                                                     <option value="111">Комнаты</option>
                                                     <option value="90">Опен спэйс</option>
                                                 </select>
@@ -2012,6 +2076,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="building_type">Тип здания
                                                 <select name="building_type" id="building_type">
+                                                    <option value="">---</option>
                                                     <option value="108">Жилое</option>
                                                     <option value="8">Административное</option>
                                                 </select>
@@ -2022,6 +2087,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="roofing">Кровля
                                                 <select name="roofing" id="roofing">
+                                                    <option value="">---</option>
                                                     <option value="67">Железо</option>
                                                     <option value="34">Медь</option>
                                                     <option value="76">Металлочерепица</option>
@@ -2040,6 +2106,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="foundation">Фундамент
                                                 <select name="foundation" id="foundation">
+                                                    <option value="">---</option>
                                                     <option value="120">Монолитная плита</option>
                                                     <option value="125">Шведская плита</option>
                                                     <option value="109">Ленточный</option>
@@ -2053,6 +2120,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="wall_material">Материал стен
                                                 <select name="wall_material" id="wall_material">
+                                                    <option value="">---</option>
                                                     <option value="49">Фахверк</option>
                                                     <option value="19">Кирпич</option>
                                                     <option value="105">Железобетон</option>
@@ -2085,6 +2153,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="furnish">Отделка
                                                 <select name="furnish" id="furnish">
+                                                    <option value="">---</option>
                                                     <option value="46">Эксклюзивного качества</option>
                                                     <option value="64">Высококачественная отделка</option>
                                                     <option value="57">Хорошая отделка</option>
@@ -2112,6 +2181,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="material">Материал
                                                 <select name="material" id="material">
+                                                    <option value="">---</option>
                                                     <option value="98">Пластик</option>
                                                     <option value="142">Дерево</option>
                                                     <option value="38">Профнастил</option>
@@ -2128,6 +2198,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="parking">Парковка
                                                 <select name="parking" id="parking">
+                                                    <option value="">---</option>
                                                     <option class="more-settings" value="81">Многоуровневый паркинг</option>
                                                     <option class="more-settings" value="132">Подземная парковка</option>
                                                     <option class="more-settings" value="52">Гаражный комплекс</option>
@@ -2143,6 +2214,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="municipal">Муниципальная
                                                 <select name="municipal" id="municipal">
+                                                    <option value="">---</option>
                                                     <option value="94">Платная</option>
                                                     <option value="51">Бесплатная</option>
                                                 </select>
@@ -2161,6 +2233,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="sanitation">Водопровод и канализация
                                                 <select name="sanitation" id="sanitation">
+                                                    <option value="">---</option>
                                                     <option value="47">Есть</option>
                                                     <option value="84">Нет</option>
                                                 </select>
@@ -2180,7 +2253,7 @@ $siteModel = $this->model('SiteModel');
                                     <li>
                                         <div class="select">
                                             <select name="bathroom_location" id="sanitation">
-                                                <option>---</option>
+                                                <option value="">---</option>
                                             </select>
                                         </div>
                                     </li>
@@ -2221,6 +2294,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="video">Видео
                                                 <select name="video" id="video">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -2231,6 +2305,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
                                                 <select name="planning_project" id="planning_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -2241,6 +2316,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="three_d_project">3d проект
                                                 <select name="three_d_project" id="three_d_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -2287,6 +2363,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
                                                 <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                    <option value="">---</option>
                                                     <option value="92">Собственность менее 5 лет</option>
                                                     <option value="93">Собственность более 5 лет</option>
                                                     <option value="70">Участок с подрядом</option>
@@ -2301,6 +2378,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="material">Материал
                                                 <select name="material" id="material">
+                                                    <option value="">---</option>
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -2334,6 +2412,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="furnish">Отделка
                                                 <select name="furnish" id="furnish">
+                                                    <option value="">---</option>
                                                     <option value="46">Эксклюзивного качества</option>
                                                     <option value="64">Высококачественная отделка</option>
                                                     <option value="57">Хорошая отделка</option>
@@ -2361,6 +2440,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="material">Материал
                                                 <select name="material" id="material">
+                                                    <option value="">---</option>
                                                     <option value="98">Пластик</option>
                                                     <option value="142">Дерево</option>
                                                     <option value="38">Профнастил</option>
@@ -2377,6 +2457,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="parking">Парковка
                                                 <select name="parking" id="parking">
+                                                    <option value="">---</option>
                                                     <option class="more-settings" value="81">Многоуровневый паркинг</option>
                                                     <option class="more-settings" value="132">Подземная парковка</option>
                                                     <option class="more-settings" value="52">Гаражный комплекс</option>
@@ -2392,6 +2473,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="municipal">Муниципальная
                                                 <select name="municipal" id="municipal">
+                                                    <option value="">---</option>
                                                     <option value="94">Платная</option>
                                                     <option value="51">Бесплатная</option>
                                                 </select>
@@ -2410,6 +2492,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="sanitation">Водопровод и канализация
                                                 <select name="sanitation" id="sanitation">
+                                                    <option value="">---</option>
                                                     <option value="47">Есть</option>
                                                     <option value="84">Нет</option>
                                                 </select>
@@ -2429,7 +2512,7 @@ $siteModel = $this->model('SiteModel');
                                     <li>
                                         <div class="select">
                                             <select name="bathroom_location" id="sanitation">
-                                                <option>---</option>
+                                                <option value="">---</option>
                                             </select>
                                         </div>
                                     </li>
@@ -2470,6 +2553,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="video">Видео
                                                 <select name="video" id="video">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -2480,6 +2564,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
                                                 <select name="planning_project" id="planning_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -2490,6 +2575,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="three_d_project">3d проект
                                                 <select name="three_d_project" id="three_d_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -2536,6 +2622,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
                                                 <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                    <option value="">---</option>
                                                     <option value="92">Собственность менее 5 лет</option>
                                                     <option value="93">Собственность более 5 лет</option>
                                                     <option value="70">Участок с подрядом</option>
@@ -2550,6 +2637,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="material">Материал
                                                 <select name="material" id="material">
+                                                    <option value="">---</option>
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -2583,6 +2671,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="furnish">Отделка
                                                 <select name="furnish" id="furnish">
+                                                    <option value="">---</option>
                                                     <option value="46">Эксклюзивного качества</option>
                                                     <option value="64">Высококачественная отделка</option>
                                                     <option value="57">Хорошая отделка</option>
@@ -2610,6 +2699,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="material">Материал
                                                 <select name="material" id="material">
+                                                    <option value="">---</option>
                                                     <option value="98">Пластик</option>
                                                     <option value="142">Дерево</option>
                                                     <option value="38">Профнастил</option>
@@ -2626,6 +2716,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="parking">Парковка
                                                 <select name="parking" id="parking">
+                                                    <option value="">---</option>
                                                     <option class="more-settings" value="81">Многоуровневый паркинг</option>
                                                     <option class="more-settings" value="132">Подземная парковка</option>
                                                     <option class="more-settings" value="52">Гаражный комплекс</option>
@@ -2641,6 +2732,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="municipal">Муниципальная
                                                 <select name="municipal" id="municipal">
+                                                    <option value="">---</option>
                                                     <option value="94">Платная</option>
                                                     <option value="51">Бесплатная</option>
                                                 </select>
@@ -2659,6 +2751,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="sanitation">Водопровод и канализация
                                                 <select name="sanitation" id="sanitation">
+                                                    <option value="">---</option>
                                                     <option value="47">Есть</option>
                                                     <option value="84">Нет</option>
                                                 </select>
@@ -2678,7 +2771,7 @@ $siteModel = $this->model('SiteModel');
                                     <!--<li>
                                         <div class="select">
                                             <select value="name="bathroom_location" id="sanitation">
-                                                <option>---</option>
+                                                <option value=>---</option>
                                             </select>
                                         </div>
                                     </li>-->
@@ -2719,6 +2812,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="video">Видео
                                                 <select name="video" id="video">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -2729,6 +2823,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
                                                 <select name="planning_project" id="planning_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -2739,6 +2834,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="three_d_project">3d проект
                                                 <select name="three_d_project" id="three_d_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -2769,6 +2865,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
                                                 <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                    <option value="">---</option>
                                                     <option value="59">Земли под размещение промышленных и коммерческих объектов</option>
                                                     <option value="9">Сельскохозяйственные земли</option>
                                                     <option value="92">Собственность менее 5 лет</option>
@@ -2781,6 +2878,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="site">Участок
                                                 <select name="site" id="site">
+                                                    <option value="">---</option>
                                                     <option value="136">Заболоченный</option>
                                                     <option value="103">Овраг</option>
                                                     <option value="89">На склоне</option>
@@ -2814,6 +2912,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="parking">Парковка
                                                 <select name="parking" id="parking">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="5">Отсутствует</option>
                                                     <option value="7">Придомовой гараж</option>
@@ -2848,6 +2947,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="material">Материал
                                                 <select name="material" id="material">
+                                                    <option value="">---</option>
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -2883,6 +2983,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="video">Видео
                                                 <select name="video" id="video">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -2893,6 +2994,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
                                                 <select name="planning_project" id="planning_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -2903,6 +3005,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="three_d_project">3d проект
                                                 <select name="three_d_project" id="three_d_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -2949,6 +3052,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
                                                 <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                    <option value="">---</option>
                                                     <option value="92">Собственность менее 5 лет</option>
                                                     <option value="93">Собственность более 5 лет</option>
                                                     <option value="70">Участок с подрядом</option>
@@ -2963,6 +3067,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="material">Материал
                                                 <select name="material" id="material">
+                                                    <option value="">---</option>
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -2996,6 +3101,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="roofing">Кровля
                                                 <select name="roofing" id="roofing">
+                                                    <option value="">---</option>
                                                     <option value="127">Временная</option>
                                                     <option value="118">Шифер</option>
                                                     <option value="122">Камень</option>
@@ -3012,6 +3118,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="foundation">Фундамент
                                                 <select name="foundation" id="foundation">
+                                                    <option value="">---</option>
                                                     <option value="140">Без фундамента</option>
                                                     <option value="58">Ростверк</option>
                                                     <option value="109">Ленточный</option>
@@ -3025,6 +3132,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="wall_material">Материал стен
                                                 <select name="wall_material" id="wall_material">
+                                                    <option value="">---</option>
                                                     <option value="49">Фахверк</option>
                                                     <option value="56">Клееный брус</option>
                                                     <option value="102">Профилированный брус</option>
@@ -3057,6 +3165,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="video">Видео
                                                 <select name="video" id="video">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -3067,6 +3176,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
                                                 <select name="planning_project" id="planning_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -3077,6 +3187,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="three_d_project">3d проект
                                                 <select name="three_d_project" id="three_d_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -3123,6 +3234,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
                                                 <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                    <option value="">---</option>
                                                     <option value="92">Собственность менее 5 лет</option>
                                                     <option value="93">Собственность более 5 лет</option>
                                                     <option value="70">Участок с подрядом</option>
@@ -3137,6 +3249,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="material">Материал
                                                 <select name="material" id="material">
+                                                    <option value="">---</option>
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -3170,6 +3283,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="furnish">Отделка
                                                 <select name="furnish" id="furnish">
+                                                    <option value="">---</option>
                                                     <option value="46">Эксклюзивного качества</option>
                                                     <option value="64">Высококачественная отделка</option>
                                                     <option value="57">Хорошая отделка</option>
@@ -3197,6 +3311,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="material">Материал
                                                 <select name="material" id="material">
+                                                    <option value="">---</option>
                                                     <option value="98">Пластик</option>
                                                     <option value="142">Дерево</option>
                                                     <option value="38">Профнастил</option>
@@ -3213,6 +3328,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="parking">Парковка
                                                 <select name="parking" id="parking">
+                                                    <option value="">---</option>
                                                     <option class="more-settings" value="81">Многоуровневый паркинг</option>
                                                     <option class="more-settings" value="132">Подземная парковка</option>
                                                     <option class="more-settings" value="52">Гаражный комплекс</option>
@@ -3228,6 +3344,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="municipal">Муниципальная
                                                 <select name="municipal" id="municipal">
+                                                    <option value="">---</option>
                                                     <option value="94">Платная</option>
                                                     <option value="51">Бесплатная</option>
                                                 </select>
@@ -3246,6 +3363,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="sanitation">Водопровод и канализация
                                                 <select name="sanitation" id="sanitation">
+                                                    <option value="">---</option>
                                                     <option value="47">Есть</option>
                                                     <option value="84">Нет</option>
                                                 </select>
@@ -3265,7 +3383,7 @@ $siteModel = $this->model('SiteModel');
                                     <li>
                                         <div class="select">
                                             <select name="bathroom_location" id="sanitation">
-                                                <option>---</option>
+                                                <option value="">---</option>
                                             </select>
                                         </div>
                                     </li>
@@ -3306,6 +3424,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="video">Видео
                                                 <select name="video" id="video">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -3316,6 +3435,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
                                                 <select name="planning_project" id="planning_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -3326,6 +3446,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="three_d_project">3d проект
                                                 <select name="three_d_project" id="three_d_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -3372,6 +3493,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
                                                 <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                    <option value="">---</option>
                                                     <option value="92">Собственность менее 5 лет</option>
                                                     <option value="93">Собственность более 5 лет</option>
                                                     <option value="70">Участок с подрядом</option>
@@ -3386,6 +3508,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="material">Материал
                                                 <select name="material" id="material">
+                                                    <option value="">---</option>
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -3419,6 +3542,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="furnish">Отделка
                                                 <select name="furnish" id="furnish">
+                                                    <option value="">---</option>
                                                     <option value="46">Эксклюзивного качества</option>
                                                     <option value="64">Высококачественная отделка</option>
                                                     <option value="57">Хорошая отделка</option>
@@ -3446,6 +3570,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="material">Материал
                                                 <select name="material" id="material">
+                                                    <option value="">---</option>
                                                     <option value="98">Пластик</option>
                                                     <option value="142">Дерево</option>
                                                     <option value="38">Профнастил</option>
@@ -3462,6 +3587,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="parking">Парковка
                                                 <select name="parking" id="parking">
+                                                    <option value="">---</option>
                                                     <option class="more-settings" value="81">Многоуровневый паркинг</option>
                                                     <option class="more-settings" value="132">Подземная парковка</option>
                                                     <option class="more-settings" value="52">Гаражный комплекс</option>
@@ -3477,6 +3603,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="municipal">Муниципальная
                                                 <select name="municipal" id="municipal">
+                                                    <option value="">---</option>
                                                     <option value="94">Платная</option>
                                                     <option value="51">Бесплатная</option>
                                                 </select>
@@ -3495,6 +3622,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="sanitation">Водопровод и канализация
                                                 <select name="sanitation" id="sanitation">
+                                                    <option value="">---</option>
                                                     <option value="47">Есть</option>
                                                     <option value="84">Нет</option>
                                                 </select>
@@ -3514,7 +3642,7 @@ $siteModel = $this->model('SiteModel');
                                    <!-- <li>
                                         <div class="select">
                                             <select value="name="bathroom_location" id="sanitation">
-                                                <option>---</option>
+                                                <option value=>---</option>
                                             </select>
                                         </div>
                                     </li>-->
@@ -3555,6 +3683,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="video">Видео
                                                 <select name="video" id="video">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -3565,6 +3694,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
                                                 <select name="planning_project" id="planning_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -3575,6 +3705,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="three_d_project">3d проект
                                                 <select name="three_d_project" id="three_d_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -3621,6 +3752,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
                                                 <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                    <option value="">---</option>
                                                     <option value="92">Собственность менее 5 лет</option>
                                                     <option value="93">Собственность более 5 лет</option>
                                                     <option value="70">Участок с подрядом</option>
@@ -3635,6 +3767,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="material">Материал
                                                 <select name="material" id="material">
+                                                    <option value="">---</option>
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -3668,6 +3801,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="furnish">Отделка
                                                 <select name="furnish" id="furnish">
+                                                    <option value="">---</option>
                                                     <option value="46">Эксклюзивного качества</option>
                                                     <option value="64">Высококачественная отделка</option>
                                                     <option value="57">Хорошая отделка</option>
@@ -3695,6 +3829,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="material">Материал
                                                 <select name="material" id="material">
+                                                    <option value="">---</option>
                                                     <option value="98">Пластик</option>
                                                     <option value="142">Дерево</option>
                                                     <option value="38">Профнастил</option>
@@ -3711,6 +3846,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="parking">Парковка
                                                 <select name="parking" id="parking">
+                                                    <option value="">---</option>
                                                     <option class="more-settings" value="81">Многоуровневый паркинг</option>
                                                     <option class="more-settings" value="132">Подземная парковка</option>
                                                     <option class="more-settings" value="52">Гаражный комплекс</option>
@@ -3726,6 +3862,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="municipal">Муниципальная
                                                 <select name="municipal" id="municipal">
+                                                    <option value="">---</option>
                                                     <option value="94">Платная</option>
                                                     <option value="51">Бесплатная</option>
                                                 </select>
@@ -3744,6 +3881,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="sanitation">Водопровод и канализация
                                                 <select name="sanitation" id="sanitation">
+                                                    <option value="">---</option>
                                                     <option value="47">Есть</option>
                                                     <option value="84">Нет</option>
                                                 </select>
@@ -3763,7 +3901,7 @@ $siteModel = $this->model('SiteModel');
                                     <li>
                                         <div class="select">
                                             <select name="bathroom_location" id="sanitation">
-                                                <option>---</option>
+                                                <option value="">---</option>
                                             </select>
                                         </div>
                                     </li>
@@ -3802,6 +3940,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="video">Видео
                                                 <select name="video" id="video">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -3812,6 +3951,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
                                                 <select name="planning_project" id="planning_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -3822,6 +3962,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="three_d_project">3d проект
                                                 <select name="three_d_project" id="three_d_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -3868,6 +4009,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
                                                 <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                    <option value="">---</option>
                                                     <option value="92">Собственность менее 5 лет</option>
                                                     <option value="93">Собственность более 5 лет</option>
                                                     <option value="70">Участок с подрядом</option>
@@ -3882,6 +4024,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="material">Материал
                                                 <select name="material" id="material">
+                                                    <option value="">---</option>
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -3915,6 +4058,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="furnish">Отделка
                                                 <select name="furnish" id="furnish">
+                                                    <option value="">---</option>
                                                     <option value="46">Эксклюзивного качества</option>
                                                     <option value="64">Высококачественная отделка</option>
                                                     <option value="57">Хорошая отделка</option>
@@ -3942,6 +4086,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="material">Материал
                                                 <select name="material" id="material">
+                                                    <option value="">---</option>
                                                     <option value="98">Пластик</option>
                                                     <option value="142">Дерево</option>
                                                     <option value="38">Профнастил</option>
@@ -3958,6 +4103,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="parking">Парковка
                                                 <select name="parking" id="parking">
+                                                    <option value="">---</option>
                                                     <option class="more-settings" value="81">Многоуровневый паркинг</option>
                                                     <option class="more-settings" value="132">Подземная парковка</option>
                                                     <option class="more-settings" value="52">Гаражный комплекс</option>
@@ -3973,6 +4119,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="municipal">Муниципальная
                                                 <select name="municipal" id="municipal">
+                                                    <option value="">---</option>
                                                     <option value="94">Платная</option>
                                                     <option value="51">Бесплатная</option>
                                                 </select>
@@ -3991,6 +4138,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="sanitation">Водопровод и канализация
                                                 <select name="sanitation" id="sanitation">
+                                                    <option value="">---</option>
                                                     <option value="47">Есть</option>
                                                     <option value="84">Нет</option>
                                                 </select>
@@ -4010,7 +4158,7 @@ $siteModel = $this->model('SiteModel');
                                     <li>
                                         <div class="select">
                                             <select name="bathroom_location" id="sanitation">
-                                                <option>---</option>
+                                                <option value="">---</option>
                                             </select>
                                         </div>
                                     </li>
@@ -4051,6 +4199,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="video">Видео
                                                 <select name="video" id="video">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -4061,6 +4210,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
                                                 <select name="planning_project" id="planning_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -4071,6 +4221,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="three_d_project">3d проект
                                                 <select name="three_d_project" id="three_d_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -4117,6 +4268,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
                                                 <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                    <option value="">---</option>
                                                     <option value="92">Собственность менее 5 лет</option>
                                                     <option value="93">Собственность более 5 лет</option>
                                                     <option value="70">Участок с подрядом</option>
@@ -4131,6 +4283,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="material">Материал
                                                 <select name="material" id="material">
+                                                    <option value="">---</option>
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -4164,6 +4317,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="furnish">Отделка
                                                 <select name="furnish" id="furnish">
+                                                    <option value="">---</option>
                                                     <option value="46">Эксклюзивного качества</option>
                                                     <option value="64">Высококачественная отделка</option>
                                                     <option value="57">Хорошая отделка</option>
@@ -4191,6 +4345,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="material">Материал
                                                 <select name="material" id="material">
+                                                    <option value="">---</option>
                                                     <option value="98">Пластик</option>
                                                     <option value="142">Дерево</option>
                                                     <option value="38">Профнастил</option>
@@ -4207,6 +4362,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="parking">Парковка
                                                 <select name="parking" id="parking">
+                                                    <option value="">---</option>
                                                     <option class="more-settings" value="81">Многоуровневый паркинг</option>
                                                     <option class="more-settings" value="132">Подземная парковка</option>
                                                     <option class="more-settings" value="52">Гаражный комплекс</option>
@@ -4222,6 +4378,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="municipal">Муниципальная
                                                 <select name="municipal" id="municipal">
+                                                    <option value="">---</option>
                                                     <option value="94">Платная</option>
                                                     <option value="51">Бесплатная</option>
                                                 </select>
@@ -4240,6 +4397,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="sanitation">Водопровод и канализация
                                                 <select name="sanitation" id="sanitation">
+                                                    <option value="">---</option>
                                                     <option value="47">Есть</option>
                                                     <option value="84">Нет</option>
                                                 </select>
@@ -4259,7 +4417,7 @@ $siteModel = $this->model('SiteModel');
                                     <li>
                                         <div class="select">
                                             <select name="bathroom_location" id="sanitation">
-                                                <option>---</option>
+                                                <option value="">---</option>
                                             </select>
                                         </div>
                                     </li>
@@ -4300,6 +4458,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="video">Видео
                                                 <select name="video" id="video">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -4310,6 +4469,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
                                                 <select name="planning_project" id="planning_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -4320,6 +4480,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="three_d_project">3d проект
                                                 <select name="three_d_project" id="three_d_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -4366,6 +4527,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
                                                 <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                    <option value="">---</option>
                                                     <option value="92">Собственность менее 5 лет</option>
                                                     <option value="93">Собственность более 5 лет</option>
                                                     <option value="70">Участок с подрядом</option>
@@ -4380,6 +4542,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="material">Материал
                                                 <select name="material" id="material">
+                                                    <option value="">---</option>
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -4413,6 +4576,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="furnish">Отделка
                                                 <select name="furnish" id="furnish">
+                                                    <option value="">---</option>
                                                     <option value="46">Эксклюзивного качества</option>
                                                     <option value="64">Высококачественная отделка</option>
                                                     <option value="57">Хорошая отделка</option>
@@ -4440,6 +4604,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="material">Материал
                                                 <select name="material" id="material">
+                                                    <option value="">---</option>
                                                     <option value="98">Пластик</option>
                                                     <option value="142">Дерево</option>
                                                     <option value="38">Профнастил</option>
@@ -4456,6 +4621,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="parking">Парковка
                                                 <select name="parking" id="parking">
+                                                    <option value="">---</option>
                                                     <option class="more-settings" value="81">Многоуровневый паркинг</option>
                                                     <option class="more-settings" value="132">Подземная парковка</option>
                                                     <option class="more-settings" value="52">Гаражный комплекс</option>
@@ -4471,6 +4637,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="municipal">Муниципальная
                                                 <select name="municipal" id="municipal">
+                                                    <option value="">---</option>
                                                     <option value="94">Платная</option>
                                                     <option value="51">Бесплатная</option>
                                                 </select>
@@ -4489,6 +4656,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="sanitation">Водопровод и канализация
                                                 <select name="sanitation" id="sanitation">
+                                                    <option value="">---</option>
                                                     <option value="47">Есть</option>
                                                     <option value="84">Нет</option>
                                                 </select>
@@ -4508,7 +4676,7 @@ $siteModel = $this->model('SiteModel');
                                     <li>
                                         <div class="select">
                                             <select name="bathroom_location" id="sanitation">
-                                                <option>---</option>
+                                                <option value="">---</option>
                                             </select>
                                         </div>
                                     </li>
@@ -4549,6 +4717,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="video">Видео
                                                 <select name="video" id="video">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -4559,6 +4728,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
                                                 <select name="planning_project" id="planning_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -4569,6 +4739,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="three_d_project">3d проект
                                                 <select name="three_d_project" id="three_d_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -4648,13 +4819,13 @@ $siteModel = $this->model('SiteModel');
                                 <div class="travel-information">
                                     <div class="distance-on-foot">
                                         <img src="../../template/images/people-2.png" alt="icon"><p>Уделенность пекшом не более</p>
-                                        <span><input placeholder="" type="number" name="foot" value="5" min="5"
+                                        <span><input placeholder="5" type="number" name="foot" value=""
                                                      max="60" step="5"><span class="timer">Минут</span></span>
                                     </div>
                                     <div class="distance-on-transport">
                                         <img src="../../template/images/avto.png" alt="icon"><p>Уделенность пекшом не более</p>
-                                        <span><input placeholder="" type="number" name="transport" value="5"
-                                                     min="5" max="60" step="5"><span
+                                        <span><input placeholder="5" type="number" name="transport" value=""
+                                                     max="60" step="5"><span
                                                     class="timer">Минут</span></span>
                                     </div>
                                     <button class="closeSearchMetro">Готово</button>
@@ -4684,6 +4855,7 @@ $siteModel = $this->model('SiteModel');
                                 <div class="select">Район
                                     <label for="region">
                                         <select name="region">
+                                            <option value="">---</option>
                                             <option>Северное медведково</option>
                                             <option>Северное медведково</option>
                                             <option>Северное медведково</option>
@@ -4702,6 +4874,7 @@ $siteModel = $this->model('SiteModel');
                                 <div class="select">Метро
                                     <label for="metro_station">
                                         <select name="metro_station">
+                                            <option value="">---</option>
                                             <option>Выбрано1</option>
                                             <option>Выбрано2</option>
                                             <option>Выбрано3</option>
@@ -4715,6 +4888,7 @@ $siteModel = $this->model('SiteModel');
                                 <div class="select">Удаленность от метро не более
                                     <label for="distance_from_metro">
                                         <select name="distance_from_metro">
+                                            <option value="">---</option>
                                             <option value="5">5 мин пешком</option>
                                             <option value="10">10 мин пешком</option>
                                             <option value="15">15 мин пешком</option>
@@ -4761,6 +4935,7 @@ $siteModel = $this->model('SiteModel');
                         <div class="select"><img src="../../template/images/ava.png" alt="icons">
                             <label for="object_located">
                                 <select name="object_located" id="object_located">
+                                    <option value="">---</option>
                                     <option>Объект размещен</option>
                                     <option value="41">Не важно</option>
                                     <option value="22">Риэлтором</option>
@@ -4785,6 +4960,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="number_of_rooms">Кол-во комнат
                                                 <select class="number-apartments" name="number_of_rooms" id="number_of_rooms">
+                                                    <option value="">---</option>
                                                     <option value="5">4+</option>
                                                     <option value="4">4</option>
                                                     <option value="3">3</option>
@@ -4832,8 +5008,9 @@ $siteModel = $this->model('SiteModel');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="lavatory" >Санузел
+                                            <label for="lavatory">Санузел
                                                 <select name="lavatory" id="lavatory">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="116">Раздельный</option>
                                                     <option value="29">Совмещенный</option>
@@ -4868,6 +5045,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="furnish">Отделка
                                                 <select name="furnish" id="furnish">
+                                                    <option value="">---</option>
                                                     <option value="141">Без ремонта</option>
                                                     <option value="65">Незавершенный ремонт</option>
                                                     <option value="107">Требуется ремонт</option>
@@ -4883,6 +5061,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="equipment">Комплектация
                                                 <select name="equipment" id="equipment">
+                                                    <option value="">---</option>
                                                     <option value="45">Укомплектованная</option>
                                                     <option value="44">Пустая</option>
                                                 </select>
@@ -4905,6 +5084,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select more-settings">
                                             <label for="elevator">Наличие лифта
                                                 <select name="elevator" id="elevator">
+                                                    <option value="">---</option>
                                                     <option value="1">Да</option>
                                                     <option value="0">Нет</option>
                                                 </select>
@@ -4915,6 +5095,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="elevator_yes">
                                                 <select name="elevator_yes" id="elevator_yes">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="95">Пассажирский</option>
                                                     <option value="23">Грузовой</option>
@@ -4935,6 +5116,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
                                                 <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                    <option value="">---</option>
                                                     <option value="146">Год постройки\окончания строительства</option>
                                                     <option value="92">Собственность менее 5 лет</option>
                                                     <option value="93">Собственность более 5 лет</option>
@@ -4949,6 +5131,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="parking">Парковка
                                                 <select name="parking" id="parking">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="5">Отсутствует</option>
                                                     <option value="7">Придомовой гараж</option>
@@ -4963,6 +5146,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="wall_material">Материал стен
                                                 <select name="wall_material" id="wall_material">
+                                                    <option value="">---</option>
                                                     <option value="91">Другое</option>
                                                     <option value="32">Железобетонные панели</option>
                                                     <option value="78">Монолит</option>
@@ -4975,6 +5159,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="stairwells_status">Состояние лестничных клеток
                                                 <select name="stairwells_status" id="stairwells_status">
+                                                    <option value="">---</option>
                                                     <option value="141">Без ремонта</option>
                                                     <option value="107">Требуется ремонт</option>
                                                     <option value="106">Требуется косметический ремонт</option>
@@ -5019,6 +5204,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="video">Видео
                                                 <select name="video" id="video">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -5029,6 +5215,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
                                                 <select name="planning_project" id="planning_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -5039,6 +5226,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="three_d_project">3d проект
                                                 <select name="three_d_project" id="three_d_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -5081,6 +5269,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="number_of_rooms">Количество комнат
                                                 <select name="number_of_rooms" id="number_of_rooms">
+                                                    <option value="">---</option>
                                                     <option value="4">4+</option>
                                                     <option value="3">3</option>
                                                     <option value="2">2</option>
@@ -5093,6 +5282,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="number_of_rooms">Количество комнат
                                                 <select name="number_of_rooms" id="number_of_rooms">
+                                                    <option value="">---</option>
                                                     <option value="4">4+</option>
                                                     <option value="3">3</option>
                                                     <option value="2">2</option>
@@ -5113,6 +5303,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="lavatory">Санузел
                                                 <select name="lavatory" id="lavatory">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="116">Раздельный</option>
                                                     <option value="29">Совмещенный</option>
@@ -5124,6 +5315,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="roofing">Кровля
                                                 <select name="roofing" id="roofing">
+                                                    <option value="">---</option>
                                                     <option value="127">Временная</option>
                                                     <option value="118">Шифер</option>
                                                     <option value="122">Камень</option>
@@ -5140,6 +5332,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="foundation">Фундамент
                                                 <select name="foundation" id="foundation">
+                                                    <option value="">---</option>
                                                     <option value="140">Без фундамента</option>
                                                     <option value="58">Ростверк</option>
                                                     <option value="109">Ленточный</option>
@@ -5153,6 +5346,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="wall_material">Материал стен
                                                 <select name="wall_material" id="wall_material">
+                                                    <option value="">---</option>
                                                     <option value="49">Фахверк</option>
                                                     <option value="56">Клееный брус</option>
                                                     <option value="102">Профилированный брус</option>
@@ -5173,6 +5367,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="type_of_house">Тип дома
                                                 <select name="type_of_house" id="type_of_house">
+                                                    <option value="">---</option>
                                                     <option value="35">Коттедж</option>
                                                     <option value="130">Таунхаус</option>
                                                     <option value="42">Дуплекс</option>
@@ -5207,6 +5402,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="furnish">Отделка
                                                 <select name="furnish" id="furnish">
+                                                    <option value="">---</option>
                                                     <option value="141">Без ремонта</option>
                                                     <option value="65">Незавершенный ремонт</option>
                                                     <option value="107">Требуется ремонт</option>
@@ -5222,6 +5418,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="equipment">Комплектация
                                                 <select name="equipment" id="equipment">
+                                                    <option value="">---</option>
                                                     <option value="45">Укомплектованная</option>
                                                     <option value="44">Пустая</option>
                                                 </select>
@@ -5232,6 +5429,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
                                                 <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                    <option value="">---</option>
                                                     <option value="92">Собственность менее 5 лет</option>
                                                     <option value="93">Собственность более 5 лет</option>
                                                     <option value="70">Участок с подрядом</option>
@@ -5278,6 +5476,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">Участок
                                             <label for="parking">Парковка
                                                 <select name="parking" id="parking">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="5">Отсутствует</option>
                                                     <option value="7">Придомовой гараж</option>
@@ -5304,6 +5503,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="site">Участок
                                                 <select name="site" id="site">
+                                                    <option value="">---</option>
                                                     <option value="136">Заболоченный</option>
                                                     <option value="103">Овраг</option>
                                                     <option value="89">На склоне</option>
@@ -5324,6 +5524,7 @@ $siteModel = $this->model('SiteModel');
                                             <label>Ограждение <input type="checkbox" name="fencing"></label>
                                             <label for="material">Материал
                                                 <select name="material" id="material">
+                                                    <option value="">---</option>
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -5352,6 +5553,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="video">Видео
                                                 <select name="video" id="video">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -5362,6 +5564,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
                                                 <select name="planning_project" id="planning_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -5372,6 +5575,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="three_d_project">3d проект
                                                 <select name="three_d_project" id="three_d_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -5396,6 +5600,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="number_of_rooms">Кол-во комнат
                                                 <select class="number-apartments" name="number_of_rooms" id="number_of_rooms">
+                                                    <option value="">---</option>
                                                     <option value="5">4+</option>
                                                     <option value="4">4</option>
                                                     <option value="3">3</option>
@@ -5443,8 +5648,9 @@ $siteModel = $this->model('SiteModel');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="lavatory" >Санузел
+                                            <label for="lavatory">Санузел
                                                 <select name="lavatory" id="lavatory">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="116">Раздельный</option>
                                                     <option value="29">Совмещенный</option>
@@ -5468,6 +5674,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="object_located">Объект размещен
                                                 <select name="0">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="22">Риэлтором</option>
                                                     <option value="21">Собственником</option>
@@ -5488,22 +5695,23 @@ $siteModel = $this->model('SiteModel');
                                 <h2>Параметры здания</h2>
                                 <ul>
                                     <li><span class="names-parameters">Количество этажей</span>
-                                        <p>От<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                        <p>От<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
                                             ></p>
-                                        <p>До<input name="none" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
+                                        <p>До<input name="0" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}"
                                             ></p>
                                     </li>
                                     <li><span class="names-parameters">Год окончания строительства</span>
-                                        <p>От<input name="none" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
+                                        <p>От<input name="0" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
                                             ></p>
-                                        <p>До<input name="none" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
+                                        <p>До<input name="0" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}"
                                             ></p>
                                     </li>
                                     <li>
                                         <div class="select">
                                             <label for="">
                                                 <select name="0">
-                                                    <option>Language of communication</option>
+                                                    <option value="">---</option>
+                                                    <option>Language</option>
                                                     <option>English</option>
                                                     <option>Spanish</option>
                                                 </select>
@@ -5514,7 +5722,8 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="">
                                                 <select name="0">
-                                                    <option>Language of communication</option>
+                                                    <option value="">---</option>
+                                                    <option>Language</option>
                                                     <option>English</option>
                                                     <option>Spanish</option>
                                                 </select>
@@ -5525,7 +5734,8 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="">
                                                 <select name="0">
-                                                    <option>Language of communication</option>
+                                                    <option value="">---</option>
+                                                    <option>Language</option>
                                                     <option>English</option>
                                                     <option>Spanish</option>
                                                 </select>
@@ -5536,7 +5746,8 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="">
                                                 <select name="0">
-                                                    <option>Language of communication</option>
+                                                    <option value="">---</option>
+                                                    <option>Language</option>
                                                     <option>English</option>
                                                     <option>Spanish</option>
                                                 </select>
@@ -5569,6 +5780,7 @@ $siteModel = $this->model('SiteModel');
                                         </label>
                                             <label for="type_of_construction">Вид постройки:
                                                 <select name="type_of_construction" id="type_of_construction">
+                                                    <option value="">---</option>
                                                     <option value="111">Комнаты</option>
                                                     <option value="90">Опен спэйс</option>
                                                 </select>
@@ -5587,6 +5799,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="building_type">Тип здания
                                                 <select name="building_type" id="building_type">
+                                                    <option value="">---</option>
                                                     <option value="108">Жилое</option>
                                                     <option value="8">Административное</option>
                                                 </select>
@@ -5597,6 +5810,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="roofing">Кровля
                                                 <select name="roofing" id="roofing">
+                                                    <option value="">---</option>
                                                     <option value="67">Железо</option>
                                                     <option value="34">Медь</option>
                                                     <option value="76">Металлочерепица</option>
@@ -5615,6 +5829,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="foundation">Фундамент
                                                 <select name="foundation" id="foundation">
+                                                    <option value="">---</option>
                                                     <option value="120">Монолитная плита</option>
                                                     <option value="125">Шведская плита</option>
                                                     <option value="109">Ленточный</option>
@@ -5628,6 +5843,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="wall_material">Материал стен
                                                 <select name="wall_material" id="wall_material">
+                                                    <option value="">---</option>
                                                     <option value="49">Фахверк</option>
                                                     <option value="19">Кирпич</option>
                                                     <option value="105">Железобетон</option>
@@ -5678,6 +5894,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="video">Видео
                                                 <select name="video" id="video">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -5688,6 +5905,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
                                                 <select name="planning_project" id="planning_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -5698,6 +5916,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="three_d_project">3d проект
                                                 <select name="three_d_project" id="three_d_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -5732,6 +5951,7 @@ $siteModel = $this->model('SiteModel');
                                             </label>
                                             <label for="type_of_construction">Вид постройки:
                                                 <select name="type_of_construction" id="type_of_construction">
+                                                    <option value="">---</option>
                                                     <option value="111">Комнаты</option>
                                                     <option value="90">Опен спэйс</option>
                                                 </select>
@@ -5750,6 +5970,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="building_type">Тип здания
                                                 <select name="building_type" id="building_type">
+                                                    <option value="">---</option>
                                                     <option value="108">Жилое</option>
                                                     <option value="8">Административное</option>
                                                 </select>
@@ -5760,6 +5981,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="roofing">Кровля
                                                 <select name="roofing" id="roofing">
+                                                    <option value="">---</option>
                                                     <option value="67">Железо</option>
                                                     <option value="34">Медь</option>
                                                     <option value="76">Металлочерепица</option>
@@ -5778,6 +6000,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="foundation">Фундамент
                                                 <select name="foundation" id="foundation">
+                                                    <option value="">---</option>
                                                     <option value="120">Монолитная плита</option>
                                                     <option value="125">Шведская плита</option>
                                                     <option value="109">Ленточный</option>
@@ -5791,6 +6014,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="wall_material">Материал стен
                                                 <select name="wall_material" id="wall_material">
+                                                    <option value="">---</option>
                                                     <option value="49">Фахверк</option>
                                                     <option value="19">Кирпич</option>
                                                     <option value="105">Железобетон</option>
@@ -5823,6 +6047,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="furnish">Отделка
                                                 <select name="furnish" id="furnish">
+                                                    <option value="">---</option>
                                                     <option value="46">Эксклюзивного качества</option>
                                                     <option value="64">Высококачественная отделка</option>
                                                     <option value="57">Хорошая отделка</option>
@@ -5850,6 +6075,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="material">Материал
                                                 <select name="material" id="material">
+                                                    <option value="">---</option>
                                                     <option value="98">Пластик</option>
                                                     <option value="142">Дерево</option>
                                                     <option value="38">Профнастил</option>
@@ -5866,6 +6092,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="parking">Парковка
                                                 <select name="parking" id="parking">
+                                                    <option value="">---</option>
                                                     <option class="more-settings" value="81">Многоуровневый паркинг</option>
                                                     <option class="more-settings" value="132">Подземная парковка</option>
                                                     <option class="more-settings" value="52">Гаражный комплекс</option>
@@ -5881,6 +6108,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="municipal">Муниципальная
                                                 <select name="municipal" id="municipal">
+                                                    <option value="">---</option>
                                                     <option value="94">Платная</option>
                                                     <option value="51">Бесплатная</option>
                                                 </select>
@@ -5899,6 +6127,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="sanitation">Водопровод и канализация
                                                 <select name="sanitation" id="sanitation">
+                                                    <option value="">---</option>
                                                     <option value="47">Есть</option>
                                                     <option value="84">Нет</option>
                                                 </select>
@@ -5918,7 +6147,7 @@ $siteModel = $this->model('SiteModel');
                                     <li>
                                         <div class="select">
                                             <select name="bathroom_location" id="sanitation">
-                                                <option>---</option>
+                                                <option value="">---</option>
                                             </select>
                                         </div>
                                     </li>
@@ -5959,6 +6188,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="video">Видео
                                                 <select name="video" id="video">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -5969,6 +6199,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
                                                 <select name="planning_project" id="planning_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -5979,6 +6210,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="three_d_project">3d проект
                                                 <select name="three_d_project" id="three_d_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -6025,6 +6257,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
                                                 <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                    <option value="">---</option>
                                                     <option value="92">Собственность менее 5 лет</option>
                                                     <option value="93">Собственность более 5 лет</option>
                                                     <option value="70">Участок с подрядом</option>
@@ -6039,6 +6272,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="material">Материал
                                                 <select name="material" id="material">
+                                                    <option value="">---</option>
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -6072,6 +6306,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="furnish">Отделка
                                                 <select name="furnish" id="furnish">
+                                                    <option value="">---</option>
                                                     <option value="46">Эксклюзивного качества</option>
                                                     <option value="64">Высококачественная отделка</option>
                                                     <option value="57">Хорошая отделка</option>
@@ -6099,6 +6334,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="material">Материал
                                                 <select name="material" id="material">
+                                                    <option value="">---</option>
                                                     <option value="98">Пластик</option>
                                                     <option value="142">Дерево</option>
                                                     <option value="38">Профнастил</option>
@@ -6115,6 +6351,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="parking">Парковка
                                                 <select name="parking" id="parking">
+                                                    <option value="">---</option>
                                                     <option class="more-settings" value="81">Многоуровневый паркинг</option>
                                                     <option class="more-settings" value="132">Подземная парковка</option>
                                                     <option class="more-settings" value="52">Гаражный комплекс</option>
@@ -6130,6 +6367,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="municipal">Муниципальная
                                                 <select name="municipal" id="municipal">
+                                                    <option value="">---</option>
                                                     <option value="94">Платная</option>
                                                     <option value="51">Бесплатная</option>
                                                 </select>
@@ -6148,6 +6386,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="sanitation">Водопровод и канализация
                                                 <select name="sanitation" id="sanitation">
+                                                    <option value="">---</option>
                                                     <option value="47">Есть</option>
                                                     <option value="84">Нет</option>
                                                 </select>
@@ -6167,7 +6406,7 @@ $siteModel = $this->model('SiteModel');
                                     <li>
                                         <div class="select">
                                             <select name="bathroom_location" id="sanitation">
-                                                <option>---</option>
+                                                <option value="">---</option>
                                             </select>
                                         </div>
                                     </li>
@@ -6208,6 +6447,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="video">Видео
                                                 <select name="video" id="video">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -6218,6 +6458,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
                                                 <select name="planning_project" id="planning_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -6228,6 +6469,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="three_d_project">3d проект
                                                 <select name="three_d_project" id="three_d_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -6274,6 +6516,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
                                                 <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                    <option value="">---</option>
                                                     <option value="92">Собственность менее 5 лет</option>
                                                     <option value="93">Собственность более 5 лет</option>
                                                     <option value="70">Участок с подрядом</option>
@@ -6288,6 +6531,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="material">Материал
                                                 <select name="material" id="material">
+                                                    <option value="">---</option>
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -6321,6 +6565,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="furnish">Отделка
                                                 <select name="furnish" id="furnish">
+                                                    <option value="">---</option>
                                                     <option value="46">Эксклюзивного качества</option>
                                                     <option value="64">Высококачественная отделка</option>
                                                     <option value="57">Хорошая отделка</option>
@@ -6348,6 +6593,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="material">Материал
                                                 <select name="material" id="material">
+                                                    <option value="">---</option>
                                                     <option value="98">Пластик</option>
                                                     <option value="142">Дерево</option>
                                                     <option value="38">Профнастил</option>
@@ -6364,6 +6610,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="parking">Парковка
                                                 <select name="parking" id="parking">
+                                                    <option value="">---</option>
                                                     <option class="more-settings" value="81">Многоуровневый паркинг</option>
                                                     <option class="more-settings" value="132">Подземная парковка</option>
                                                     <option class="more-settings" value="52">Гаражный комплекс</option>
@@ -6379,6 +6626,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="municipal">Муниципальная
                                                 <select name="municipal" id="municipal">
+                                                    <option value="">---</option>
                                                     <option value="94">Платная</option>
                                                     <option value="51">Бесплатная</option>
                                                 </select>
@@ -6397,6 +6645,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="sanitation">Водопровод и канализация
                                                 <select name="sanitation" id="sanitation">
+                                                    <option value="">---</option>
                                                     <option value="47">Есть</option>
                                                     <option value="84">Нет</option>
                                                 </select>
@@ -6416,7 +6665,7 @@ $siteModel = $this->model('SiteModel');
                                     <li>
                                         <div class="select">
                                             <select name="bathroom_location" id="sanitation">
-                                                <option>---</option>
+                                                <option value="">---</option>
                                             </select>
                                         </div>
                                     </li>
@@ -6457,6 +6706,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="video">Видео
                                                 <select name="video" id="video">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -6467,6 +6717,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
                                                 <select name="planning_project" id="planning_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -6477,6 +6728,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="three_d_project">3d проект
                                                 <select name="three_d_project" id="three_d_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -6507,6 +6759,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
                                                 <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                    <option value="">---</option>
                                                     <option value="59">Земли под размещение промышленных и коммерческих объектов</option>
                                                     <option value="9">Сельскохозяйственные земли</option>
                                                     <option value="92">Собственность менее 5 лет</option>
@@ -6519,6 +6772,7 @@ $siteModel = $this->model('SiteModel');
                                          <div class="select">
                                              <label for="site">Участок
                                                 <select name="site" id="site">
+                                                    <option value="">---</option>
                                                     <option value="136">Заболоченный</option>
                                                     <option value="103">Овраг</option>
                                                     <option value="89">На склоне</option>
@@ -6552,6 +6806,7 @@ $siteModel = $this->model('SiteModel');
                                          <div class="select">
                                              <label for="parking">Парковка
                                                 <select name="parking" id="parking">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="5">Отсутствует</option>
                                                     <option value="7">Придомовой гараж</option>
@@ -6586,6 +6841,7 @@ $siteModel = $this->model('SiteModel');
                                          <div class="select">
                                              <label for="material">Материал
                                                 <select name="material" id="material">
+                                                    <option value="">---</option>
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -6621,6 +6877,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="video">Видео
                                                 <select name="video" id="video">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -6631,6 +6888,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
                                                 <select name="planning_project" id="planning_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -6641,6 +6899,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="three_d_project">3d проект
                                                 <select name="three_d_project" id="three_d_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -6687,6 +6946,7 @@ $siteModel = $this->model('SiteModel');
                                          <div class="select">
                                              <label for="clarification_of_the_object_type">Уточнение вида объектов
                                                 <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                    <option value="">---</option>
                                                     <option value="92">Собственность менее 5 лет</option>
                                                     <option value="93">Собственность более 5 лет</option>
                                                     <option value="70">Участок с подрядом</option>
@@ -6701,6 +6961,7 @@ $siteModel = $this->model('SiteModel');
                                          <div class="select">
                                              <label for="material">Материал
                                                 <select name="material" id="material">
+                                                    <option value="">---</option>
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -6734,6 +6995,7 @@ $siteModel = $this->model('SiteModel');
                                          <div class="select">
                                              <label for="roofing">Кровля
                                                 <select name="roofing" id="roofing">
+                                                    <option value="">---</option>
                                                     <option value="127">Временная</option>
                                                     <option value="118">Шифер</option>
                                                     <option value="122">Камень</option>
@@ -6750,6 +7012,7 @@ $siteModel = $this->model('SiteModel');
                                          <div class="select">
                                              <label for="foundation">Фундамент
                                                 <select name="foundation" id="foundation">
+                                                    <option value="">---</option>
                                                     <option value="140">Без фундамента</option>
                                                     <option value="58">Ростверк</option>
                                                     <option value="109">Ленточный</option>
@@ -6763,6 +7026,7 @@ $siteModel = $this->model('SiteModel');
                                          <div class="select">
                                             <label for="wall_material">Материал стен
                                                <select name="wall_material" id="wall_material">
+                                                   <option value="">---</option>
                                                    <option value="49">Фахверк</option>
                                                    <option value="56">Клееный брус</option>
                                                    <option value="102">Профилированный брус</option>
@@ -6795,6 +7059,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="video">Видео
                                                 <select name="video" id="video">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -6805,6 +7070,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
                                                 <select name="planning_project" id="planning_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -6815,6 +7081,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="three_d_project">3d проект
                                                 <select name="three_d_project" id="three_d_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -6861,6 +7128,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
                                                 <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                    <option value="">---</option>
                                                     <option value="92">Собственность менее 5 лет</option>
                                                     <option value="93">Собственность более 5 лет</option>
                                                     <option value="70">Участок с подрядом</option>
@@ -6875,6 +7143,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="material">Материал
                                                 <select name="material" id="material">
+                                                    <option value="">---</option>
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -6908,6 +7177,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="furnish">Отделка
                                                 <select name="furnish" id="furnish">
+                                                    <option value="">---</option>
                                                     <option value="46">Эксклюзивного качества</option>
                                                     <option value="64">Высококачественная отделка</option>
                                                     <option value="57">Хорошая отделка</option>
@@ -6935,6 +7205,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="material">Материал
                                                 <select name="material" id="material">
+                                                    <option value="">---</option>
                                                     <option value="98">Пластик</option>
                                                     <option value="142">Дерево</option>
                                                     <option value="38">Профнастил</option>
@@ -6951,6 +7222,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="parking">Парковка
                                                 <select name="parking" id="parking">
+                                                    <option value="">---</option>
                                                     <option class="more-settings" value="81">Многоуровневый паркинг</option>
                                                     <option class="more-settings" value="132">Подземная парковка</option>
                                                     <option class="more-settings" value="52">Гаражный комплекс</option>
@@ -6966,6 +7238,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="municipal">Муниципальная
                                                 <select name="municipal" id="municipal">
+                                                    <option value="">---</option>
                                                     <option value="94">Платная</option>
                                                     <option value="51">Бесплатная</option>
                                                 </select>
@@ -6984,6 +7257,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="sanitation">Водопровод и канализация
                                                 <select name="sanitation" id="sanitation">
+                                                    <option value="">---</option>
                                                     <option value="47">Есть</option>
                                                     <option value="84">Нет</option>
                                                 </select>
@@ -7003,7 +7277,7 @@ $siteModel = $this->model('SiteModel');
                                     <li>
                                         <div class="select">
                                             <select name="bathroom_location" id="sanitation">
-                                                <option>---</option>
+                                                <option value="">---</option>
                                             </select>
                                         </div>
                                     </li>
@@ -7044,6 +7318,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="video">Видео
                                                 <select name="video" id="video">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -7054,6 +7329,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
                                                 <select name="planning_project" id="planning_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -7064,6 +7340,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="three_d_project">3d проект
                                                 <select name="three_d_project" id="three_d_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -7110,6 +7387,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
                                                 <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                    <option value="">---</option>
                                                     <option value="92">Собственность менее 5 лет</option>
                                                     <option value="93">Собственность более 5 лет</option>
                                                     <option value="70">Участок с подрядом</option>
@@ -7124,6 +7402,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="material">Материал
                                                 <select name="material" id="material">
+                                                    <option value="">---</option>
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -7157,6 +7436,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="furnish">Отделка
                                                 <select name="furnish" id="furnish">
+                                                    <option value="">---</option>
                                                     <option value="46">Эксклюзивного качества</option>
                                                     <option value="64">Высококачественная отделка</option>
                                                     <option value="57">Хорошая отделка</option>
@@ -7184,6 +7464,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="material">Материал
                                                 <select name="material" id="material">
+                                                    <option value="">---</option>
                                                     <option value="98">Пластик</option>
                                                     <option value="142">Дерево</option>
                                                     <option value="38">Профнастил</option>
@@ -7200,6 +7481,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="parking">Парковка
                                                 <select name="parking" id="parking">
+                                                    <option value="">---</option>
                                                     <option class="more-settings" value="81">Многоуровневый паркинг</option>
                                                     <option class="more-settings" value="132">Подземная парковка</option>
                                                     <option class="more-settings" value="52">Гаражный комплекс</option>
@@ -7215,6 +7497,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="municipal">Муниципальная
                                                 <select name="municipal" id="municipal">
+                                                    <option value="">---</option>
                                                     <option value="94">Платная</option>
                                                     <option value="51">Бесплатная</option>
                                                 </select>
@@ -7233,6 +7516,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="sanitation">Водопровод и канализация
                                                 <select name="sanitation" id="sanitation">
+                                                    <option value="">---</option>
                                                     <option value="47">Есть</option>
                                                     <option value="84">Нет</option>
                                                 </select>
@@ -7252,7 +7536,7 @@ $siteModel = $this->model('SiteModel');
                                     <li>
                                         <div class="select">
                                             <select name="bathroom_location" id="sanitation">
-                                                <option>---</option>
+                                                <option value="">---</option>
                                             </select>
                                         </div>
                                     </li>
@@ -7293,6 +7577,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="video">Видео
                                                 <select name="video" id="video">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -7303,6 +7588,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
                                                 <select name="planning_project" id="planning_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -7313,6 +7599,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="three_d_project">3d проект
                                                 <select name="three_d_project" id="three_d_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -7359,6 +7646,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
                                                 <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                    <option value="">---</option>
                                                     <option value="92">Собственность менее 5 лет</option>
                                                     <option value="93">Собственность более 5 лет</option>
                                                     <option value="70">Участок с подрядом</option>
@@ -7373,6 +7661,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="material">Материал
                                                 <select name="material" id="material">
+                                                    <option value="">---</option>
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -7406,6 +7695,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="furnish">Отделка
                                                 <select name="furnish" id="furnish">
+                                                    <option value="">---</option>
                                                     <option value="46">Эксклюзивного качества</option>
                                                     <option value="64">Высококачественная отделка</option>
                                                     <option value="57">Хорошая отделка</option>
@@ -7433,6 +7723,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="material">Материал
                                                 <select name="material" id="material">
+                                                    <option value="">---</option>
                                                     <option value="98">Пластик</option>
                                                     <option value="142">Дерево</option>
                                                     <option value="38">Профнастил</option>
@@ -7449,6 +7740,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="parking">Парковка
                                                 <select name="parking" id="parking">
+                                                    <option value="">---</option>
                                                     <option class="more-settings" value="81">Многоуровневый паркинг</option>
                                                     <option class="more-settings" value="132">Подземная парковка</option>
                                                     <option class="more-settings" value="52">Гаражный комплекс</option>
@@ -7464,6 +7756,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="municipal">Муниципальная
                                                 <select name="municipal" id="municipal">
+                                                    <option value="">---</option>
                                                     <option value="94">Платная</option>
                                                     <option value="51">Бесплатная</option>
                                                 </select>
@@ -7482,6 +7775,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="sanitation">Водопровод и канализация
                                                 <select name="sanitation" id="sanitation">
+                                                    <option value="">---</option>
                                                     <option value="47">Есть</option>
                                                     <option value="84">Нет</option>
                                                 </select>
@@ -7501,7 +7795,7 @@ $siteModel = $this->model('SiteModel');
                                     <li>
                                         <div class="select">
                                             <select name="bathroom_location" id="sanitation">
-                                                <option>---</option>
+                                                <option value="">---</option>
                                             </select>
                                         </div>
                                     </li>
@@ -7542,6 +7836,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="video">Видео
                                                 <select name="video" id="video">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -7552,6 +7847,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
                                                 <select name="planning_project" id="planning_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -7562,6 +7858,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="three_d_project">3d проект
                                                 <select name="three_d_project" id="three_d_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -7608,6 +7905,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
                                                 <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                    <option value="">---</option>
                                                     <option value="92">Собственность менее 5 лет</option>
                                                     <option value="93">Собственность более 5 лет</option>
                                                     <option value="70">Участок с подрядом</option>
@@ -7622,6 +7920,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="material">Материал
                                                 <select name="material" id="material">
+                                                    <option value="">---</option>
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -7655,6 +7954,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="furnish">Отделка
                                                 <select name="furnish" id="furnish">
+                                                    <option value="">---</option>
                                                     <option value="46">Эксклюзивного качества</option>
                                                     <option value="64">Высококачественная отделка</option>
                                                     <option value="57">Хорошая отделка</option>
@@ -7682,6 +7982,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="material">Материал
                                                 <select name="material" id="material">
+                                                    <option value="">---</option>
                                                     <option value="98">Пластик</option>
                                                     <option value="142">Дерево</option>
                                                     <option value="38">Профнастил</option>
@@ -7698,6 +7999,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="parking">Парковка
                                                 <select name="parking" id="parking">
+                                                    <option value="">---</option>
                                                     <option class="more-settings" value="81">Многоуровневый паркинг</option>
                                                     <option class="more-settings" value="132">Подземная парковка</option>
                                                     <option class="more-settings" value="52">Гаражный комплекс</option>
@@ -7713,6 +8015,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="municipal">Муниципальная
                                                 <select name="municipal" id="municipal">
+                                                    <option value="">---</option>
                                                     <option value="94">Платная</option>
                                                     <option value="51">Бесплатная</option>
                                                 </select>
@@ -7731,6 +8034,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="sanitation">Водопровод и канализация
                                                 <select name="sanitation" id="sanitation">
+                                                    <option value="">---</option>
                                                     <option value="47">Есть</option>
                                                     <option value="84">Нет</option>
                                                 </select>
@@ -7750,7 +8054,7 @@ $siteModel = $this->model('SiteModel');
                                     <li>
                                         <div class="select">
                                             <select name="bathroom_location" id="sanitation">
-                                                <option>---</option>
+                                                <option value="">---</option>
                                             </select>
                                         </div>
                                     </li>
@@ -7791,6 +8095,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="video">Видео
                                                 <select name="video" id="video">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -7801,6 +8106,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
                                                 <select name="planning_project" id="planning_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -7811,6 +8117,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="three_d_project">3d проект
                                                 <select name="three_d_project" id="three_d_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -7857,6 +8164,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
                                                 <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                    <option value="">---</option>
                                                     <option value="92">Собственность менее 5 лет</option>
                                                     <option value="93">Собственность более 5 лет</option>
                                                     <option value="70">Участок с подрядом</option>
@@ -7871,6 +8179,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="material">Материал
                                                 <select name="material" id="material">
+                                                    <option value="">---</option>
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -7904,6 +8213,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="furnish">Отделка
                                                 <select name="furnish" id="furnish">
+                                                    <option value="">---</option>
                                                     <option value="46">Эксклюзивного качества</option>
                                                     <option value="64">Высококачественная отделка</option>
                                                     <option value="57">Хорошая отделка</option>
@@ -7931,6 +8241,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="material">Материал
                                                 <select name="material" id="material">
+                                                    <option value="">---</option>
                                                     <option value="98">Пластик</option>
                                                     <option value="142">Дерево</option>
                                                     <option value="38">Профнастил</option>
@@ -7947,6 +8258,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="parking">Парковка
                                                 <select name="parking" id="parking">
+                                                    <option value="">---</option>
                                                     <option class="more-settings" value="81">Многоуровневый паркинг</option>
                                                     <option class="more-settings" value="132">Подземная парковка</option>
                                                     <option class="more-settings" value="52">Гаражный комплекс</option>
@@ -7962,6 +8274,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="municipal">Муниципальная
                                                 <select name="municipal" id="municipal">
+                                                    <option value="">---</option>
                                                     <option value="94">Платная</option>
                                                     <option value="51">Бесплатная</option>
                                                 </select>
@@ -7980,6 +8293,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="sanitation">Водопровод и канализация
                                                 <select name="sanitation" id="sanitation">
+                                                    <option value="">---</option>
                                                     <option value="47">Есть</option>
                                                     <option value="84">Нет</option>
                                                 </select>
@@ -7999,7 +8313,7 @@ $siteModel = $this->model('SiteModel');
                                     <li>
                                         <div class="select">
                                             <select name="bathroom_location" id="sanitation">
-                                                <option>---</option>
+                                                <option value="">---</option>
                                             </select>
                                         </div>
                                     </li>
@@ -8040,6 +8354,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="video">Видео
                                                 <select name="video" id="video">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -8050,6 +8365,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
                                                 <select name="planning_project" id="planning_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -8060,6 +8376,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="three_d_project">3d проект
                                                 <select name="three_d_project" id="three_d_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -8106,6 +8423,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="clarification_of_the_object_type">Уточнение вида объектов
                                                 <select name="clarification_of_the_object_type" id="clarification_of_the_object_type">
+                                                    <option value="">---</option>
                                                     <option value="92">Собственность менее 5 лет</option>
                                                     <option value="93">Собственность более 5 лет</option>
                                                     <option value="70">Участок с подрядом</option>
@@ -8120,6 +8438,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="material">Материал
                                                 <select name="material" id="material">
+                                                    <option value="">---</option>
                                                     <option value="143">Кованая ограда</option>
                                                     <option value="75">Металлические прутья</option>
                                                     <option value="19">Кирпич</option>
@@ -8153,6 +8472,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="furnish">Отделка
                                                 <select name="furnish" id="furnish">
+                                                    <option value="">---</option>
                                                     <option value="46">Эксклюзивного качества</option>
                                                     <option value="64">Высококачественная отделка</option>
                                                     <option value="57">Хорошая отделка</option>
@@ -8180,6 +8500,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="material">Материал
                                                 <select name="material" id="material">
+                                                    <option value="">---</option>
                                                     <option value="98">Пластик</option>
                                                     <option value="142">Дерево</option>
                                                     <option value="38">Профнастил</option>
@@ -8196,6 +8517,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="parking">Парковка
                                                 <select name="parking" id="parking">
+                                                    <option value="">---</option>
                                                     <option class="more-settings" value="81">Многоуровневый паркинг</option>
                                                     <option class="more-settings" value="132">Подземная парковка</option>
                                                     <option class="more-settings" value="52">Гаражный комплекс</option>
@@ -8211,6 +8533,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="municipal">Муниципальная
                                                 <select name="municipal" id="municipal">
+                                                    <option value="">---</option>
                                                     <option value="94">Платная</option>
                                                     <option value="51">Бесплатная</option>
                                                 </select>
@@ -8229,6 +8552,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="sanitation">Водопровод и канализация
                                                 <select name="sanitation" id="sanitation">
+                                                    <option value="">---</option>
                                                     <option value="47">Есть</option>
                                                     <option value="84">Нет</option>
                                                 </select>
@@ -8248,7 +8572,7 @@ $siteModel = $this->model('SiteModel');
                                     <li>
                                         <div class="select">
                                             <select name="bathroom_location" id="sanitation">
-                                                <option>---</option>
+                                                <option value="">---</option>
                                             </select>
                                         </div>
                                     </li>
@@ -8289,6 +8613,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="video">Видео
                                                 <select name="video" id="video">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -8299,6 +8624,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="planning_project">Проект планировки
                                                 <select name="planning_project" id="planning_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -8309,6 +8635,7 @@ $siteModel = $this->model('SiteModel');
                                         <div class="select">
                                             <label for="three_d_project">3d проект
                                                 <select name="three_d_project" id="three_d_project">
+                                                    <option value="">---</option>
                                                     <option value="41">Не важно</option>
                                                     <option value="11">Прилагается</option>
                                                 </select>
@@ -8613,7 +8940,8 @@ $siteModel = $this->model('SiteModel');
                           <div class="select">
                               <label for="">
                                   <select name="0">
-                                      <option>Language of communication</option>
+                                      <option value="">---</option>
+                                      <option>Language</option>
                                       <option>English</option>
                                       <option>Spanish</option>
                                   </select>
@@ -8633,7 +8961,7 @@ $siteModel = $this->model('SiteModel');
               </div>
               <div class="estimate-the-area">
                   <label>Площадь м<sup>2</sup>
-                      <input name="none" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}">
+                      <input name="0" type="text" placeholder="0" maxlength="4" pattern="[0-9]{4}">
                   </label>
               </div>
           </div>
@@ -8666,6 +8994,7 @@ $siteModel = $this->model('SiteModel');
                           <div class="select">
                               <label for="">Площадь
                                   <select name="0">
+                                      <option value="">---</option>
                                       <option>От 120 м2 До 230 м2</option>
                                       <option>От 120 м2 До 230 м2</option>
                                       <option>От 120 м2 До 230 м2</option>
@@ -9010,9 +9339,37 @@ if (isset($this->data['script_footer'])) {
 <script src="/template/js/jquery.formstyler.min.js"></script>
 <script src="//api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
 <script src="/template/js/mapController.js"></script>
+<!--<script src="/template/js/graphics.min.js"></script>-->
 <script src="/template/js/jquery.bxslider.min.js"></script>
 <script src="/template/js/jquery.parallax.min.js"></script>
-<!--<script src="/template/js/graphics.min.js"></script>-->
+<script src="/bower_components/handlebars/handlebars.runtime.min.js"></script>
+<script src="/bower_components/handlebars/handlebars.min.js"></script>
+<script id="entry-template" type="text/x-handlebars-template">
+    <div class="top-block">
+        <div class="left-wallpaper">
+            <a href="#"><img src="/uploads/images/{{preview_img}}" alt="apartments"></a>
+            <p>{{title}}м<sup>2</sup></p>
+        </div>
+        <div class="right-information-block">
+            <span>Шикардосная двушка в самом центре столицы</span>
+            <p>{{content}}</p>
+            <div class="price-and-view-the-apartment">
+                <div class="price">
+                    <p>
+                        <img src="../../template/images/m.png" alt="metro">Рижская<span>
+                        <img src="../../template/images/people.png" alt="">2 мин</span>
+                    </p>
+                    <span class="decorate-number">{{price}}
+                        <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub>
+                    </span>
+                </div>
+                <div class="view-the-apartment">
+                    <a href="#"><img src="../../template/images/show.png" alt="show"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
 <script src="/template/js/main.min.js"></script>
 </body>
 </html>
