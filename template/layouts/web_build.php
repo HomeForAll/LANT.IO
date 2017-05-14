@@ -296,12 +296,11 @@ $siteModel = $this->model('SiteModel');
     </script>
     <?php $this->head() ?>
 </head>
-<body ng-controller='MyChartCtrl'>
+<body>
 <!-- Heeader -->
 <?php include_once 'header.php' ?>
 <!-- Content -->
 <div id="content">
-    <!--<?php $this->content(); ?> -->
     <ul id="scene">
         <li class="layer" data-depth="0.20"><img src="../../template/images/paralax/home-1.png"></li>
         <li class="layer" data-depth="0.40"><img src="../../template/images/paralax/home-2.png"></li>
@@ -310,7 +309,7 @@ $siteModel = $this->model('SiteModel');
         <li class="layer" data-depth="0.80"><img src="../../template/images/paralax/back-1.png"></li>
     </ul>
     <div class="section-home-with-filters">
-        <form action="" id="form_1"> <!--novalidate -->
+        <form action="" id="form_1" method="POST"> <!--novalidate -->
             <div class="property-type-apartment-settings">
                 <ul>
                     <li>Жилая</li>
@@ -9340,9 +9339,37 @@ if (isset($this->data['script_footer'])) {
 <script src="/template/js/jquery.formstyler.min.js"></script>
 <script src="//api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
 <script src="/template/js/mapController.js"></script>
+<!--<script src="/template/js/graphics.min.js"></script>-->
 <script src="/template/js/jquery.bxslider.min.js"></script>
 <script src="/template/js/jquery.parallax.min.js"></script>
-<!--<script src="/template/js/graphics.min.js"></script>-->
+<script src="/bower_components/handlebars/handlebars.runtime.min.js"></script>
+<script src="/bower_components/handlebars/handlebars.min.js"></script>
+<script id="entry-template" type="text/x-handlebars-template">
+    <div class="top-block">
+        <div class="left-wallpaper">
+            <a href="#"><img src="/uploads/images/{{preview_img}}" alt="apartments"></a>
+            <p>{{title}}м<sup>2</sup></p>
+        </div>
+        <div class="right-information-block">
+            <span>Шикардосная двушка в самом центре столицы</span>
+            <p>{{content}}</p>
+            <div class="price-and-view-the-apartment">
+                <div class="price">
+                    <p>
+                        <img src="../../template/images/m.png" alt="metro">Рижская<span>
+                        <img src="../../template/images/people.png" alt="">2 мин</span>
+                    </p>
+                    <span class="decorate-number">{{price}}
+                        <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub>
+                    </span>
+                </div>
+                <div class="view-the-apartment">
+                    <a href="#"><img src="../../template/images/show.png" alt="show"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
 <script src="/template/js/main.min.js"></script>
 </body>
 </html>

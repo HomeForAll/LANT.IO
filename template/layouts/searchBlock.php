@@ -749,6 +749,7 @@
         </div>
     </div>
 </script>
+<?php include_once '../html/apartmentsItem.php'?>
 <script src="/template/js/main.min.js"></script>
 </body>
 </html>

@@ -1,8 +1,8 @@
 <script id="entry-template" type="text/x-handlebars-template">
     <div class="top-block">
         <div class="left-wallpaper">
-            <a href="#"><img src="{{preview_img}}" alt="apartments"></a>
-            <p>{{title}}<sup>2</sup></p>
+            <a href="#"><img src="/uploads/images/{{preview_img}}" alt="apartments"></a>
+            <p>{{title}}м<sup>2</sup></p>
         </div>
         <div class="right-information-block">
             <span>Шикардосная двушка в самом центре столицы</span>
