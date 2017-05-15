@@ -22,7 +22,7 @@ class Controller extends Access
      *
      * @param Model $model
      */
-    protected function setModel(Model &$model)
+    protected function setModel(Model $model)
     {
         $this->view->setModel($model);
         $this->models[$model->getClassName()] = $model;

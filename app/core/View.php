@@ -116,7 +116,7 @@ class View extends Access implements ViewInterface
      *
      * @param Model $model
      */
-    public function setModel(Model &$model)
+    public function setModel(Model $model)
     {
         $name = $model->getClassName();
         $this->models[$name] = $model;
