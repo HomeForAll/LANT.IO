@@ -46,7 +46,7 @@ function showNews($data)
     <div class="last_news clearfix">
         <?php
         // Получение данных
-        $data_24 = Registry::model('news')->getRecentNewsList(0, 24, 20, 0, 0, 0);
+        $data_24 = $this->model('NewsModel')->getRecentNewsList(0, 24, 20, 0, 0, 0);
         //Вывод
         showNews($data_24);
 

@@ -9,108 +9,46 @@ class AdminModel extends Model
         $this->db = new DataBase();
     }
 
-     public function makeNewsStatus()
-    {
-        global $news_message, $news_error;
-
-        // Массив id объявлений подлежащих изменению
-        $news_id_status = [];
-        $news_id_category = [];
-        foreach ($_POST as $key => $value) {
-            if(preg_match('/^change_status_/', $key)) {
-                $news_id = substr($key, 14);
-                array_push($news_id_status, (int)$news_id);
-            }
-            if(preg_match('/^change_category_/', $key)) {
-                $news_id = substr($key, 16);
-                array_push($news_id_category, (int)$news_id);
-            }
-        }
-
-        //Обработка массива статусов
-        foreach($news_id_status as $id_news){
-            if(isset($_POST['status_'.$id_news])) {
-                $status = $_POST['status_' . $id_news];
-                //Удаление новости
-                if ($status == 3) {
-                    Registry::model('news')->makeNewsDelete($id_news);
-                } else {
-                    //UPDATE статуса
-                    $sql = "UPDATE news_base SET status = :status  WHERE id_news = :id_news";
-                    $stmt = $this->db->prepare($sql);
-                    $stmt->bindParam(':id_news', $id_news);
-                    $stmt->bindParam(':status', $status, PDO::PARAM_INT);
-                    if ($stmt->execute()) {
-                        // Добавление сообщения
-                        array_push($news_message,
-                            'Изменён статус у новости c id = ' . $id_news);
-                    } else {
-                        array_push($news_error,
-                            'Статус у новости с id = ' . $id_news . ' не удалось изменить');
-                    }
-                }
-            }
-            }
-
-        //Обработка массива категории Лучшая новость
-        foreach($news_id_category as $id_news) {
-            if (isset($_POST['category_' . $id_news])) {
-                $category = 1;
-            }else{ $category = 0; }
-                //Изменение category
-                $sql = "UPDATE news_base SET category = :category  WHERE id_news = :id_news";
-                $stmt = $this->db->prepare($sql);
-                $stmt->bindParam(':id_news', $id_news);
-                $stmt->bindParam(':category', $category, PDO::PARAM_INT);
-                if ($stmt->execute()) {
-                    // Добавление сообщения
-                    array_push($news_message,
-                        'Присвоен статус Лучшее объявление id = ' . $id_news);
-                } else {
-                    array_push($news_error,
-                        'Присвоение статуса Лучшее объявление (id = ' . $id_news . ') не удалось');
-                }
-        }
-        return;
-    }
 
     /**
      * Возвращает массив первоначальных данных таблицы просмотра административной панели
      * в зависимости от POST, SESSION и устанавливает SESSION
      * @return array
      */
-    public function getDataFromPostOrSession(){
+    public function getDataFromPostOrSession()
+    {
+
         $data = [];
-        if(!empty($_POST['submit_show_news'])){
-            $data['time']=(int)$_POST['time'];
-            if(!empty((int)$_POST['time_start'])){
-                $time_start_arr = explode('-',$_POST['time_start']);
-                if(isset($time_start_arr[0])) $data['time_start'] =  (int)$time_start_arr[0];
-                if(isset($time_start_arr[1])){
-                    $data['time_start'] .= '-'.(int)$time_start_arr[1];
+        if (!empty($_POST['submit_show_news'])) {
+            $data['time'] = (int)$_POST['time'];
+            if (!empty((int)$_POST['time_start'])) {
+                $time_start_arr = explode('-', $_POST['time_start']);
+                if (isset($time_start_arr[0])) $data['time_start'] = (int)$time_start_arr[0];
+                if (isset($time_start_arr[1])) {
+                    $data['time_start'] .= '-' . (int)$time_start_arr[1];
                 } else {
                     $data['time_start'] .= '-01-01';
                 }
-                if(isset($time_start_arr[2])){
-                    $data['time_start'] .= '-'.(int)$time_start_arr[2];
+                if (isset($time_start_arr[2])) {
+                    $data['time_start'] .= '-' . (int)$time_start_arr[2];
                 } else {
                     $data['time_start'] .= '-01';
                 }
-           }else {
-               $data['time_start'] = 0;
-           }
-            $data['max_number']=(int)$_POST['max_number'];
-            $data['space_type']=(int)$_POST['space_type'];
-            $data['operation_type']=(int)$_POST['operation_type'];
-            $data['object_type']=(int)$_POST['object_type'];
-            if(isset($_POST['best'])){
+            } else {
+                $data['time_start'] = 0;
+            }
+            $data['max_number'] = (int)$_POST['max_number'];
+            $data['space_type'] = (int)$_POST['space_type'];
+            $data['operation_type'] = (int)$_POST['operation_type'];
+            $data['object_type'] = (int)$_POST['object_type'];
+            if (isset($_POST['best'])) {
                 $data['best'] = TRUE;
-            }else {
+            } else {
                 $data['best'] = FALSE;
             }
-            if(isset($_POST['status'])){
+            if (isset($_POST['status'])) {
                 $data['status'] = TRUE;
-            }else {
+            } else {
                 $data['status'] = FALSE;
             }
             //Сессии
@@ -122,7 +60,7 @@ class AdminModel extends Model
             $_SESSION['news_admin']['object_type'] = $data['object_type'];
             $_SESSION['news_admin']['best'] = $data['best'];
             $_SESSION['news_admin']['status'] = $data['status'];
-        }else if(!empty($_SESSION['news_admin'])){
+        } else if (!empty($_SESSION['news_admin'])) {
             $data['time'] = (int)$_SESSION['news_admin']['time'];
             $data['time_start'] = (int)$_SESSION['news_admin']['time_start'];
             $data['max_number'] = (int)$_SESSION['news_admin']['max_number'];
@@ -131,7 +69,7 @@ class AdminModel extends Model
             $data['object_type'] = (int)$_SESSION['news_admin']['object_type'];
             $data['best'] = boolval($_SESSION['news_admin']['best']);
             $data['status'] = boolval($_SESSION['news_admin']['status']);
-        } else{
+        } else {
             //  По умолчанию
             $data['time'] = 24;
             $data['time_start'] = 0;
@@ -551,6 +489,7 @@ class AdminModel extends Model
             'year_of_construction' => 'integer',
             'lease_contract' => 'character varying(255)',
             'cadastral_number' => 'character varying(255)',
+            'space' => 'integer',
 
         );
 
@@ -564,7 +503,6 @@ class AdminModel extends Model
             'space_type' => 'smallint',
             'operation_type' => 'smallint',
             'object_type' => 'smallint',
-            'category' => 'smallint',
             'status' => 'smallint',
             'user_id' => 'integer',
             'title' => 'character varying(255)',
@@ -622,6 +560,9 @@ class AdminModel extends Model
             'availability_of_garbage_chute' => 'boolean',
             'time_walk' => 'integer',
             'time_car' => 'integer',
+            'rating_views' => 'smallint',
+            'rating_admin' => 'smallint',
+            'rating_donate' => 'smallint',
         );
         // получение всех id элементов со списками
         $sql = 'SELECT DISTINCT ON (element_id) element_id FROM form_select_options';
@@ -689,6 +630,60 @@ class AdminModel extends Model
 
         return $result;
     }
+
+    public function testNewsTable($data1)
+    {
+        $data = $data1;
+        $result = [];
+        $result['commands'] = [];
+
+        $sql = "SELECT column_name, column_default, data_type "
+            . "FROM INFORMATION_SCHEMA.COLUMNS "
+            . "WHERE table_name = 'news_base'";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        $db_info = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+        foreach($db_info as $info){
+            if($info["column_name"] != 'id_news' && $info["column_name"] != 'date'){
+            if(!array_key_exists($info["column_name"], $data)){
+                array_push($result, $info["column_name"].' -> удалить');
+                array_push($result['commands'], 'ALTER TABLE news_base DROP COLUMN '.$info["column_name"].';');
+
+            } else {
+                if(!preg_match('/'.$info["data_type"].'/', $data[$info["column_name"]])) {
+                    array_push($result, $info["column_name"].' - ['.$info["data_type"].'] -> ['.$data[$info["column_name"]].']');
+                    $type_commands = stristr($data[$info["column_name"]], ' DEFAUlT', TRUE);
+                    array_push($result['commands'], 'ALTER TABLE news_base ALTER COLUMN '.$info["column_name"].' TYPE '
+                        . $type_commands .' USING '.$info["column_name"].'::'.$type_commands.';');
+                   // на случай  - ОШИБКА:  значение по умолчанию для колонки ... нельзя автоматически привести к типу ...
+                    $default_commands = substr(stristr($data[$info["column_name"]], 'DEFAUlT', FALSE), 7);
+                    array_push($result['commands'], '(?) ( ALTER TABLE news_base ALTER COLUMN '.$info["column_name"].' SET DEFAULT '
+                        .$default_commands.'; )');
+
+                }
+              $default = explode(':',$info["column_default"])[0];
+                if(!preg_match('/'.$default.'/', $data[$info["column_name"]])) {
+                    array_push($result, $info["column_name"].' - ['.$default.'] -> ['.$data[$info["column_name"]].']');
+                    $default_commands = substr(stristr($data[$info["column_name"]], 'DEFAUlT', FALSE), 7);
+                    array_push($result['commands'], 'ALTER TABLE news_base ALTER COLUMN '.$info["column_name"].' SET DEFAULT '
+                        .$default_commands.';');
+                }
+            }
+        }
+            unset($data[$info["column_name"]]);
+        }
+
+        if(isset($data)) {
+            foreach ($data as $k => $v){
+                array_push($result, $k.' - ['.$v.'] -> добавить');
+                array_push($result['commands'], 'ALTER TABLE news_base ADD COLUMN '.$k.' '.$v.';');
+            }
+           }
+        return $result;
+    }
+
 
     /**
      * Список ВСЕХ элементов и опций (не уникальных)
@@ -1546,7 +1541,9 @@ class AdminModel extends Model
             'space_type' => 'Тип площади',
             'operation_type' => 'Операция',
             'object_type' => 'Тип объекта',
-            'category' => 'Категория',
+            'rating_views' => 'Рейтинг просмотров',
+            'rating_admin' => 'Рейтинг администрации',
+            'rating_donate' => 'Рейтинг по оплате',
             'status' => 'Статус',
             'user_id' => 'ID пользователя',
             'title' => 'Название новости',
@@ -1586,6 +1583,76 @@ class AdminModel extends Model
             'possible_to_post' => 'Возможность проводки',
             'sanitation_description' => 'Описание',
             'documents_on_tenure' => 'Документы на право владения',
+            'additional_buildings' => 'Дополнительные строения',
+            'availability_of_bathroom' => 'Наличие санузлов',
+            'availability_of_garbage_chute' => 'Наличие мусоропровода',
+            'balcony' => 'Балкон',
+            'bargain' => 'Торг',
+            'building_type' => 'Тип здания',
+            'cadastral_number' => 'Кадастровый номер',
+            'ceiling_height' => 'Высота потолков',
+            'clarification_of_the_object_type' => 'Уточнение вида объектов',
+            'combined' => 'Совмещенный',
+            'distance_from_metro' => 'Удаленность от метро',
+            'distance_from_mkad_or_metro' => 'Удаленность от МКАД/метро',
+            'documents_on_ownership' => 'Документы на право владения',
+            'doesnt_matter' => 'Не важно',
+            'electricity' => 'Электричество',
+            'equipment' => 'Комплектация',
+            'fencing' => 'Ограждение',
+            'floor' => 'Этаж',
+            'foundation' => 'Фундамент',
+            'furnish' => 'Отделка',
+            'lavatory' => 'Санузел',
+            'lease' => 'Срок аренды',
+            'lease_contract' => 'Договор аренды',
+            'location_on' => 'На участке',
+            'material' => 'Материал',
+            'metro_station' => 'Станция метро',
+            'municipal' => 'Муниципальная',
+            'not_residential' => 'Нежилая',
+            'number_of_floors' => 'Количество этажей',
+            'number_of_rooms' => 'Количество комнат',
+            'object_located' => 'Объект размещен',
+            'paid' => 'Платная ',
+            'parking' => 'Парковка',
+            'planning_project' => 'Проект планировки',
+            'price' => 'Стоимость',
+            'property_documents' => 'Документы на собственность',
+            'residential' => 'Жилая',
+            'roofing' => 'Кровля',
+            'rooms' => 'Комнаты',
+            'sanitation' => 'Водопровод и канализация',
+            'security' => 'Безопасность',
+            'select_area_on_city' => 'Выбрать область',
+            'separated' => 'Раздельный',
+            'site' => 'Участок',
+            'space' => 'Площадь',
+            'stairwells_status' => 'Состояние лестничных клеток',
+            'the_number_of_kilowatt' => 'Количество киловатт',
+            'three_d_project' => '3d проект',
+            'total' => 'Общая',
+            'type_of_construction' => 'Вид постройки',
+            'type_of_house' => 'Тип дома',
+            'video' => 'Видео',
+            'wall_material' => 'Материал стен',
+            'year_of_construction' => 'Год постройки/окончания строительства',
+            'time_walk' => 'Время от метро пешком',
+            'time_car' => 'Время от метро на транспорте',
+            'bathroom_available' => 'Наличие санузла',
+            'alcove' => 'Беседка',
+            'barn' => 'Сарай',
+            'bath' => 'Баня',
+            'forest_trees' => 'Лесные деревья',
+            'garden_trees' => 'Садовые деревья',
+            'guest_house' => 'Гостевой дом',
+            'lodge' => 'Сторожка',
+            'playground' => 'Детская площадка',
+            'river' => 'Река',
+            'spring' => 'Родник',
+            'swimming_pool' => 'Бассейн',
+            'waterfront' => 'Берег водоёма',
+            'wine_vault' => 'Винный погреб',
         ];
         // Удалить
         $delete_en_ru = ['preview_img'];
@@ -1821,23 +1888,23 @@ class AdminModel extends Model
                 break;
         }
 
-        echo "<br><h3> Уникальные параметры по названию уровня ".$uroven." :</h3><br>";
+        echo "<br><h3> Уникальные параметры по названию уровня " . $uroven . " :</h3><br>";
         $arr_ur_unic = [];
-        foreach($arr_ur_el as $k1 => $v1){
-            foreach($v1 as $k2 => $v2){
+        foreach ($arr_ur_el as $k1 => $v1) {
+            foreach ($v1 as $k2 => $v2) {
                 $arr_ur_unic[$k2] = $v2;
                 $arr_ur_unic_key[$k2] = $k1;
             }
         }
         ksort($arr_ur_unic);
-        foreach($arr_ur_unic as $k1 => $v1){
-            echo " - ".$k1."<br>";
+        foreach ($arr_ur_unic as $k1 => $v1) {
+            echo " - " . $k1 . "<br>";
         }
 
-        echo "<br><h3> Отличающиеса по составу параметры уровня ".$uroven." :</h3><br>";
+        echo "<br><h3> Отличающиеса по составу параметры уровня " . $uroven . " :</h3><br>";
 
-        foreach($arr_ur_el as $k1 => $v1){
-            foreach($v1 as $k2 => $v2){
+        foreach ($arr_ur_el as $k1 => $v1) {
+            foreach ($v1 as $k2 => $v2) {
 //                if(($k2 != 'Цена') && ($k2 != 'Расположение') && ($k2 != 'Видео (выбор пользователя)')
 //                && ($k2 != 'Жилищно-коммунальные услуги (список)')
 //                    && ($k2 != 'Уточнение вида объекта (список)')
@@ -1845,34 +1912,33 @@ class AdminModel extends Model
 //                    && ($k2 != 'Комплектация (список)')
 //                    && ($k2 != 'Материал стен (список)')
 //               ) {
-                    if ($v2 != $arr_ur_unic[$k2]) {
-                        echo "<b>\"" . $k2 . "\"</b> из [" . $k1 . "] отличается -> [" . $arr_ur_unic_key[$k2] . "] <br>";
-                        echo "---------------------------------------<br>";
-                        echo "<b>Надо добавить:</b><br>";
-                        $dif_arr_ur = array_diff($v2, $arr_ur_unic[$k2]);
-                        foreach ($dif_arr_ur as $dif_arr_name) {
-                            echo $dif_arr_name . "<br>";
-                        }
-                        echo "<b>Надо удалить:</b><br>";
-                        $dif_arr_ur = array_diff($arr_ur_unic[$k2], $v2);
-                        foreach ($dif_arr_ur as $dif_arr_name) {
-                            echo $dif_arr_name . "<br>";
-                        }
-                        echo "<br>";
-                        echo "-----здесь----<br>";
-                        foreach($v2 as $show_value){
-                            echo $show_value."<br>";
-                        }
-                        echo "-----обычно----<br>";
-                        foreach($arr_ur_unic[$k2] as $show_value){
-                            echo $show_value."<br>";
-                        }
-echo "<br><br><br>";
+                if ($v2 != $arr_ur_unic[$k2]) {
+                    echo "<b>\"" . $k2 . "\"</b> из [" . $k1 . "] отличается -> [" . $arr_ur_unic_key[$k2] . "] <br>";
+                    echo "---------------------------------------<br>";
+                    echo "<b>Надо добавить:</b><br>";
+                    $dif_arr_ur = array_diff($v2, $arr_ur_unic[$k2]);
+                    foreach ($dif_arr_ur as $dif_arr_name) {
+                        echo $dif_arr_name . "<br>";
                     }
-             //   }
+                    echo "<b>Надо удалить:</b><br>";
+                    $dif_arr_ur = array_diff($arr_ur_unic[$k2], $v2);
+                    foreach ($dif_arr_ur as $dif_arr_name) {
+                        echo $dif_arr_name . "<br>";
+                    }
+                    echo "<br>";
+                    echo "-----здесь----<br>";
+                    foreach ($v2 as $show_value) {
+                        echo $show_value . "<br>";
+                    }
+                    echo "-----обычно----<br>";
+                    foreach ($arr_ur_unic[$k2] as $show_value) {
+                        echo $show_value . "<br>";
+                    }
+                    echo "<br><br><br>";
+                }
+                //   }
             }
         }
-
 
 
         $uniq_header_arr = [];
