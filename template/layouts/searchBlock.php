@@ -749,7 +749,7 @@
         </div>
     </div>
 </script>
-<?php include_once '../html/apartmentsItem.php'?>
+<?php include_once ROOT_DIR . '/template/html/apartmentsItem.php'?>
 <script src="/template/js/main.min.js"></script>
 </body>
 </html>

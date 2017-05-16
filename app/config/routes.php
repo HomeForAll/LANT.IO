@@ -2,7 +2,7 @@
 
 return array(
     '' => 'web_build/site/index',
-    'search' => 'main/search/index',
+    'search' => 'searchBlock/search/index',
     'search-test' => 'main/search/test',
 
     'registration' => 'main/user/registration',
