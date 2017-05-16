@@ -126,15 +126,16 @@ $form_options['object_types'] = [1 => 'Квартира', 2 => 'Офисная �
         <input type="checkbox" name="status" value="true" <?php if(isset($this->data['status'])){if($this->data['status']==
             TRUE){ echo 'checked';}} ?>>
 
-        <input type="submit" name="submit_show_news" value="Показать объявления">
+        <input type="submit" name="submit_show_news" id="submit_show_news" value="Показать объявления">
     </form>
 
     <a class="button" href="admin/newsformgenerator">News Form Generator</a>
 
      <!-- Список новостей для редактирования, изменения статуса или удаления -->
+    <div id="status_frm_wrap">
     <form id="status_frm" action="" method="post">
 
-            <table border="1" , cellspacing="0">
+            <table border="1", cellspacing="0">
 
                 <tr align="center">
                     <td>id</td>
@@ -199,12 +200,14 @@ $form_options['object_types'] = [1 => 'Квартира', 2 => 'Офисная �
 //            ?><!--"/>-->
             <input type="submit" name="submit_status" value="Изменить статус"> <input type="reset" value="Отмена">
     </form>
+    </div>
 
     <!-- Список новостей для редактирования, изменения статуса или удаления Конец-->
 
 
     <script>
         $(document).ready(function () {
+            //Ограничение меню добавления новостей
             $('#show_news').submit(function () {
                 var opt1 = $('#space_type').val();
                 var opt2 = $('#operation_type').val();
@@ -226,6 +229,25 @@ $form_options['object_types'] = [1 => 'Квартира', 2 => 'Офисная �
                 hidName = hidName.substr(9);
                 $(this).after('<input type="hidden" name="change_category_'+ hidName +'" value="'+ hidName +'">');
             });
+
+            //Ajax запрос для кнопки Показать объявления
+            $("#submit_show_news").click(function(e){
+                e.preventDefault();
+                var formResult = 'submit_show_news=submit&'+$('#show_news').serialize();
+                $.ajax({
+                url : "/admin",
+                method : 'POST',
+                data : formResult,
+                success : function(data){
+                        var data = $(data);
+                        var status_frm_wrap = data.find('#status_frm_wrap').html();
+                       // console.log(status_frm_wrap);
+                        $("#status_frm_wrap").html(status_frm_wrap);
+                    }
+                });
+            });
+
+
         });
 
     </script>
