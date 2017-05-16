@@ -2,6 +2,11 @@
 
 class NewsController extends Controller
 {
+    public function __construct($template)
+    {
+        parent::__construct($template);
+        $this->setModel(new NewsModel());
+    }
 
     //Функция выводит заданное количество новостей из базы данных
     public function actionNews_list($params)
@@ -16,11 +21,11 @@ class NewsController extends Controller
         //Если это первый запуск или произошел выбор параметров просмотра
         //Установка начальных параметров и Запись в SESSION
         if (!empty($_POST['watch_news_list']) || empty($params)) {
-            $this->model->setSessionForNewsList();
+            $this->model('NewsModel')->setSessionForNewsList();
         }
 
-        $data = $this->model->getNewsList($params);
-        $data['last_viewed_news'] = $this->model->getLastViewedNews();
+        $data = $this->model('NewsModel')->getNewsList($params);
+        $data['last_viewed_news'] = $this->model('NewsModel')->getLastViewedNews();
 
         $this->view->render('news_list', $data);
     }
@@ -34,9 +39,9 @@ class NewsController extends Controller
         }
 
         //Получение данных из БД
-        $news = $this->model->getNewsById($params);
+        $news = $this->model('NewsModel')->getNewsById($params);
         //Удаление NULL и "0" параметров и назначение имен существующим, для вывода
-        $news = $this->model->prepareNewsView($news);
+        $news = $this->model('NewsModel')->prepareNewsView($news);
 
         $this->view->render('news_id', $news);
     }
@@ -75,11 +80,11 @@ class NewsController extends Controller
             if (!empty($_POST['title']) || !empty($_POST["submit_editor"])) {
 
                 //Записываем картинки на сервер ($preview_img = имена файлов)
-                $preview_img = $this->model->saveNewsPictures();
+                $preview_img = $this->model('NewsModel')->saveNewsPictures();
                 //Приводим данные POST для добавления в БД
-                $form_data = $this->model->getFormData($preview_img);
+                $form_data = $this->model('NewsModel')->getFormData($preview_img);
                 // Апдейт БД
-                if ($this->model->makeNewsUpdate($news_to_edit_id, $form_data)) {
+                if ($this->model('NewsModel')->makeNewsUpdate($news_to_edit_id, $form_data)) {
                     // Добавление сообщения
                     array_push($news_message,
                         'Новость: "' . $_POST['title'] . '" успешно отредактирована!');
@@ -91,10 +96,10 @@ class NewsController extends Controller
 
 
 // Загружаем новость для редактирования из БД в $news_to_edit 
-            $news_to_edit = $this->model->getNewsById($news_to_edit_id);
+            $news_to_edit = $this->model('NewsModel')->getNewsById($news_to_edit_id);
             //Проверяем наличие данной новости
             if (isset($news_to_edit['id_news'])) {
-                $this->model->setSessionForEditor($news_to_edit);
+                $this->model('NewsModel')->setSessionForEditor($news_to_edit);
                 // тип формы
                 $space_type = $news_to_edit['space_type'];
                 $operation_type = $news_to_edit['operation_type'];
@@ -120,13 +125,13 @@ class NewsController extends Controller
 
                 if (!empty($_POST['title'])) {
                     //Записываем картинки на сервер ($preview_img = имена файлов)
-                    $preview_img = $this->model->saveNewsPictures();
+                    $preview_img = $this->model('NewsModel')->saveNewsPictures();
 
                     //Приводим данные POST для добавления в БД
-                    $form_data = $this->model->getFormData($preview_img);
+                    $form_data = $this->model('NewsModel')->getFormData($preview_img);
 
                     //Записываем в БД
-                    if ($this->model->makeNewsInsert($form_data)) {
+                    if ($this->model('NewsModel')->makeNewsInsert($form_data)) {
                         // Добавление сообщения
                         array_push($news_message,
                             'Новость: "' . $_POST['title'] . '" успешно добавлена');
@@ -140,7 +145,7 @@ class NewsController extends Controller
                 }
                 //JSON формат новости и отсылка на RabbitMQ
                 $news_rabbitmq = json_encode($form_data);
-                $this->model->sendNewNewsByRabbitMQ(json_encode($form_data));
+                $this->model('NewsModel')->sendNewNewsByRabbitMQ(json_encode($form_data));
             }
         } // окончание else (если в строке ввода не id новости
 // Объеденяем массивы данных в один для передачи data[] = параметры новости (если редактирование новости) + массив-лист всех новостей + массив сообщений
@@ -169,22 +174,23 @@ class NewsController extends Controller
 
             $data['user_id'] = (int)$_SESSION['userID'];
             $news_list = [];
-            // Изменение статуса новостей и удаление для определенной таблицы $table
-            if (!empty($_POST['submit_status'])) {
-                $this->model->makeNewsStatus();
+            // Изменение статуса новостей и удаление
+            if(!empty($_POST['submit_status'])){
+                //Запись $_POST параметров в БД
+                $this->model('NewsModel')->makeNewsStatus();
             }
 
 // Загружаем из БД список всех новостей и формируем проверочный массив статуса stat_arr[id_news] => [status]
 // Сессия  $_SESSION['stat_arr'] - статус пока еще не отредактированных новостей
-            $news_list = $this->model->getMyNewsList($data['user_id']);
+            $news_list = $this->model('NewsModel')->getMyNewsList($data['user_id']);
 
 
-// записываем в SESSION массив(stat_arr) из id=>status для сравнения изменений статуса
-            $stat_arr = array();
-            foreach ($news_list as $k => $i) {
-                $stat_arr += array($i['id_news'] => $i['status']);
-            }
-            $_SESSION['stat_arr'] = $stat_arr;
+//// записываем в SESSION массив(stat_arr) из id=>status для сравнения изменений статуса
+//            $stat_arr = array();
+//            foreach ($news_list as $k => $i) {
+//                $stat_arr += array($i['id_news'] => $i['status']);
+//            }
+//            $_SESSION['stat_arr'] = $stat_arr;
         } else {
 
             array_push($news_error,
