@@ -374,8 +374,8 @@ $siteModel = $this->model('SiteModel');
                     <div class="main-filter" onclick="allParam('bigOption')">
                         <label><img src="../../template/images/s3.png" alt="price">Цена</label>
                         <div class="showBigOptions">
-                            <p>От<label for="amountBeforeBy"><input name="price-min" type="text" id="amountBeforeBy" readonly disabled></label></p>
-                            <p>До<label for="amountAfterBy"><input name="price-max" type="text" id="amountAfterBy" readonly disabled></label></p>
+                            <p>От<label for="amountBeforeBy"><input name="price-min" type="text" id="amountBeforeBy" readonly></label></p>
+                            <p>До<label for="amountAfterBy"><input name="price-max" type="text" id="amountAfterBy" readonly></label></p>
                             <div id="slider-range-buy"></div>
                             <div class="currency">
                                 <p>Валюта</p>
@@ -1003,8 +1003,8 @@ $siteModel = $this->model('SiteModel');
                     <li onclick="allParam('bigOption')">
                         <label><img src="../../template/images/s3.png" alt="price">Цена</label>
                         <div class="showBigOptions">
-                            <p>От<label for="amountBeforeSearch"><input name="price-min" type="text" id="amountBeforeSearch" readonly disabled></label></p>
-                            <p>До<label for="amountAfterSearch"><input name="price-max" type="text" id="amountAfterSearch" readonly disabled></label></p>
+                            <p>От<label for="amountBeforeSearch"><input name="price-min" type="text" id="amountBeforeSearch" readonly></label></p>
+                            <p>До<label for="amountAfterSearch"><input name="price-max" type="text" id="amountAfterSearch" readonly></label></p>
                             <div id="slider-range-search"></div>
                             <div class="currency">
                                 <p>Валюта</p>
@@ -4913,8 +4913,8 @@ $siteModel = $this->model('SiteModel');
 
                         <label><img src="../../template/images/s3.png" alt="price">Цена</label>
                         <div class="showBigOptions">
-                            <p>От<label for="amountBefore"><input name="price-min" type="text" id="amountBefore" readonly disabled></p>
-                            <p>До<label for="amountAfter"><input name="price-max" type="text" id="amountAfter" readonly disabled></p>
+                            <p>От<label for="amountBefore"><input name="price-min" type="text" id="amountBefore" readonly></p>
+                            <p>До<label for="amountAfter"><input name="price-max" type="text" id="amountAfter" readonly></p>
                             <div id="slider-range"></div>
                             <div class="currency">
                                 <p>Валюта</p>
@@ -8979,8 +8979,8 @@ $siteModel = $this->model('SiteModel');
                       <li onclick="allParam('bigOption')">
                           <label><img src="../../template/images/s3.png" alt="price">Цена</label>
                           <div class="showBigOptions">
-                              <p>От<label for="amountBeforeSearch"><input name="price-min" type="text" id="amountBeforeSearch" readonly disabled></label></p>
-                              <p>До<label for="amountAfterSearch"><input name="price-max" type="text" id="amountAfterSearch" readonly disabled></label></p>
+                              <p>От<label for="amountBeforeSearch"><input name="price-min" type="text" id="amountBeforeSearch" readonly></label></p>
+                              <p>До<label for="amountAfterSearch"><input name="price-max" type="text" id="amountAfterSearch" readonly></label></p>
                               <div id="slider-range-search"></div>
                               <div class="currency">
                                   <p>Валюта</p>
