@@ -711,6 +711,7 @@
                     </div>
                 </div>
             </div>
+            <?php echo $this->content; ?>
         </div>
     </div>
 </div>
