@@ -78,7 +78,7 @@ class Router
 
             if (isset($_SESSION['access'])) {
                 if ($result['status'] == 1) {
-                    $template = strtolower(array_shift($segments));
+                    $template = array_shift($segments);
                     $controller = array_shift($segments);
                     $action = array_shift($segments);
                 } else {
