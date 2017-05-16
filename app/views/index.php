@@ -3,10 +3,10 @@ $this->title = 'Главная';
 
 //$this->printInPre($this->data);
 
-foreach ($this->data as $ad) {
+foreach ($this->model('SiteModel')->getAds(12) as $ad) {
     $ad['preview_img'] = explode("|", $ad['preview_img']);
 
-    $short_len = 70;
+    $short_len = 100;
 
     if (strlen($ad['content']) > $short_len) {
         if($short_content_position = strpos($ad['content'], ' ', $short_len)){
@@ -20,6 +20,7 @@ foreach ($this->data as $ad) {
 
     $ad['content'] = $short_content;
 ?>
+
     <div class="block-apartments">
         <img src="<?php echo '/uploads/images/' . $ad['preview_img'][0]; ?>" alt="apartments">
         <span><?php echo $ad['title']?></span>
@@ -32,9 +33,10 @@ foreach ($this->data as $ad) {
                 </div>
             </div>
             <div class="show-apartments">
-                <a href="/news/<?php echo $ad['id_news']?>" target="_blank"><img src="../../template/images/show.png" alt="show"></a>
+                <a href="#"><img src="../../template/images/show.png" alt="show"></a>
             </div>
         </div>
-        <p><?php echo $ad['content'] . ' ...'; ?></p>
+        <p><?php echo $ad['content'] . '...'; ?></p>
     </div>
+
 <?php } ?>

@@ -10,13 +10,7 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        $db = new DataBase();
-        $news = $db->prepare('SELECT * FROM news_base');
-        $news->execute();
-
-        $result = $news->fetchAll();
-
-        $this->view->render('index', $result);
+        $this->view->render('index');
     }
 
     public function actionAccess()
