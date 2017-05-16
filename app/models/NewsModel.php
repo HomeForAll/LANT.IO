@@ -99,7 +99,9 @@ class NewsModel extends Model
             'space_type' => 'Тип площади',
             'operation_type' => 'Операция',
             'object_type' => 'Тип объекта',
-            'category' => 'Категория',
+            'rating_views' => 'Рейтинг просмотров',
+            'rating_admin' => 'Рейтинг администрации',
+            'rating_donate' => 'Рейтинг по оплате',
             'status' => 'Статус',
             'user_id' => 'ID пользователя',
             'title' => 'Название новости',
@@ -858,31 +860,158 @@ class NewsModel extends Model
     public function makeNewsStatus()
     {
         global $news_message, $news_error;
-        foreach ($_SESSION['stat_arr'] as $s_id => $s_stat) {
-            $j = 'status_' . $s_id;
-            if ($_POST[$j] != $s_stat) {
+
+        // Массив id объявлений подлежащих изменению
+        $news_id_status = [];
+        $news_id_category = [];
+        foreach ($_POST as $key => $value) {
+            if (preg_match('/^change_status_/', $key)) {
+                $news_id = substr($key, 14);
+                array_push($news_id_status, (int)$news_id);
+            }
+            if (preg_match('/^change_category_/', $key)) {
+                $news_id = substr($key, 16);
+                array_push($news_id_category, (int)$news_id);
+            }
+        }
+
+        //Обработка массива статусов
+        foreach ($news_id_status as $id_news) {
+            if (isset($_POST['status_' . $id_news])) {
+                $status = $_POST['status_' . $id_news];
                 //Удаление новости
-                if ($_POST[$j] == 3) {
-                    $this->makeNewsDelete($s_id);
+                if ($status == 3) {
+                    $this->makeNewsDelete($id_news);
                 } else {
-                    $sql = "UPDATE news_base SET status = :status  WHERE id_news = :id";
+                    //UPDATE статуса
+                    $sql = "UPDATE news_base SET status = :status  WHERE id_news = :id_news";
                     $stmt = $this->db->prepare($sql);
-                    $stmt->bindParam(':id', $s_id);
-                    $stmt->bindParam(':status', $_POST[$j], PDO::PARAM_INT);
+                    $stmt->bindParam(':id_news', $id_news);
+                    $stmt->bindParam(':status', $status, PDO::PARAM_INT);
                     if ($stmt->execute()) {
                         // Добавление сообщения
                         array_push($news_message,
-                            'Изменён статус у новости c id = ' . $s_id);
+                            'Изменён статус у новости c id = ' . $id_news);
                     } else {
                         array_push($news_error,
-                            'Статус у новости с id = ' . $s_id . ' не удалось изменить');
+                            'Статус у новости с id = ' . $id_news . ' не удалось изменить');
                     }
                 }
             }
         }
 
+        //Обработка массива категории Лучшая новость
+        foreach ($news_id_category as $id_news) {
+            if (isset($_POST['category_' . $id_news])) {
+                $category = 1;
+                $category_messag = "Присвоение";
+            } else {
+                $category = 0;
+                $category_messag = "Удаление";
+            }
+            //Изменение category
+            $sql = "UPDATE news_base SET category = :category  WHERE id_news = :id_news";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(':id_news', $id_news);
+            $stmt->bindParam(':category', $category, PDO::PARAM_INT);
+            if ($stmt->execute()) {
+                // Добавление сообщения
+                array_push($news_message,
+                    $category_messag . ' статуса Лучшее объявление для id = ' . $id_news . ' успешно');
+            } else {
+                array_push($news_error,
+                    $category_messag . ' статуса Лучшее объявление (id = ' . $id_news . ') не удалось');
+            }
+        }
         return;
     }
+
+
+    /**
+     * Лучшие объявления за 24 часа
+     * @param int $time - за промежуток времени
+     * @param int $space_type - Тип площади
+     * @param int $operation_type - Операция
+     * @param int $object_type - Тип объекта
+     * @param int $price_from - Цена от
+     * @param int $price_to - Цена до
+     * @param int $space_from - Площадь от
+     * @param int $space_to - Площадь до
+     * @param int $max_number - Количество объявлений
+     * @return array -
+     * ['best_news'] - arr [0][1]... Данные Лучших объявлений
+     * ['best_news_number'] - Общее количество
+     */
+    public function getBestNewsOfTime($time = 24, $space_type = 0, $operation_type = 0, $object_type = 0,
+                                      $price_from = 0, $price_to = 0, $space_from = NULL, $space_to = NULL,
+                                      $max_number = 20)
+    {
+        $data = [];
+
+        //Заданное время начала поиска ($time - час)
+        $news_time = time() - $time * 60 * 60;
+        //Текущая Дата в формате стандарта ISO 8601
+        $news_date = date('c', $news_time);
+
+        $sql = "SELECT id_news, date::date, title, space_type, operation_type, object_type, "
+            . "content, user_id, preview_img, status, category, price, space "
+            . "FROM news_base WHERE (date >= :date) ";
+
+        if ($status) {
+            $sql .= "AND (status = 1) ";
+        }
+        if ($space_type != 0) {
+            $sql .= "AND (space_type = :space_type) ";
+        }
+        if ($operation_type != 0) {
+            $sql .= "AND (operation_type = :operation_type) ";
+        }
+        if ($object_type != 0) {
+            $sql .= "AND (object_type = :object_type) ";
+        }
+        if ($price_from != 0) {
+            $sql .= "AND (price >= :price_from) ";
+        }
+        if ($price_to != 0) {
+            $sql .= "AND (price <= :price_to) ";
+        }
+        if ($space_from != 0) {
+            $sql .= "AND (space >= :space_from) ";
+        }
+        if ($space_to != 0) {
+            $sql .= "AND (space <= :space_to) ";
+        }
+        if ($best) {
+            $sql .= "AND (category = 1) ";
+        }
+
+        $sql .= " ORDER BY date DESC"
+            . " LIMIT :max_numder";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':date', $news_date);
+        if ($time_start != 0) {
+            $stmt->bindParam(':date_start', $time_start);
+        }
+        $stmt->bindParam(':max_numder', $max_numder);
+        if ($space_type != 0) {
+            $stmt->bindParam(':space_type', $space_type);
+        }
+        if ($operation_type != 0) {
+            $stmt->bindParam(':operation_type', $operation_type);
+        }
+        if ($object_type != 0) {
+            $stmt->bindParam(':object_type', $object_type);
+        }
+        $stmt->execute();
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // Подкотовка данных для вывода
+        $data = $this->prepareNewsPreview($data);
+
+        return $data;
+    }
+
 
     // Возвращает строку имен (через '|') больших картинок 
     //(имя эскиза s_имя больш)
@@ -1211,7 +1340,7 @@ class NewsModel extends Model
 
         //Дата окончания поиска (по умолчанию настоящее время)
         if (!empty($time_start)) {
-            $time_start = date('c', strtotime($time_start)+86400);
+            $time_start = date('c', strtotime($time_start) + 86400);
         } else {
             $time_start = 0;
         }
