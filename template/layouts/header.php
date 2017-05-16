@@ -1,5 +1,6 @@
 <?php
-$model = $this->model('SiteModel');
+$this->setModel(new Model);
+$model = $this->model('Model');
 $user = $model->getUser($_SESSION['userID']);
 ?>
 
