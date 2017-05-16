@@ -245,6 +245,7 @@ if (!empty($this->data['message'])) {
     <hr>
     <h4>Генерация различного кода</h4>
     <input type="submit" name="generation_news_table" value="Генерировать таблицу новостей БД">
+    <input type="submit" name="generation_news_table_2" value="Расхождения текущей БД со сгенерированной таблицой">
     <input type="submit" name="generation_news_post_args" value="Генерировать $args - код фильтрации POST для getFormData модели news">
     <input type="submit" name="all_forms_elements_and_options" value="Вывести ВСЕ элементы и списки в forms">
     <input type="submit" name="elements_eng_rus" value="Вывести все параметры в БД eng - rus">
@@ -390,6 +391,29 @@ if (isset($this->data['news_table'])) {
 ?>
 
 <!-- Код для таблицы новостей БД   конец-->
+<!-- Расхождения текущей БД со сгенерированной таблицой -->
+<?php if(!empty($this->data['news_table_test'])) { ?>
+<h3>Расхождения текущей БД со сгенерированной таблицой</h3>
+    <?php
+    foreach($this->data['news_table_test'] as $v){
+        echo "* ".$v.'<br>';
+    }
+    ?>
+<?php } ?>
+
+
+<?php if(!empty($this->data['news_table_test_commands'])) { ?>
+    <h3>Команды</h3>
+    <?php
+    foreach($this->data['news_table_test_commands'] as $v){
+        echo $v.'<br>';
+    }
+    ?>
+<?php } ?>
+
+
+
+<!-- Расхождения текущей БД со сгенерированной таблицой  конец -->
 
 
 <!-- Одинаковые имена в форме -->
