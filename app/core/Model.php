@@ -12,22 +12,30 @@ class Model
         $this->countStatistic();
     }
 
-    protected function getUserFirstName(PDO $PDO, $userID)
+    public function getUserFirstName($PDO, $userID)
     {
-        $query = $PDO->prepare("SELECT first_name FROM users WHERE id = :userID");
+        $query = $this->db->prepare("SELECT first_name FROM users WHERE id = :userID");
         $query->execute(array(':userID' => $userID));
         $result = $query->fetch();
 
         return $result[0];
     }
 
-    protected function getUserLastName(PDO $PDO, $userID)
+    public function getUserLastName($PDO, $userID)
     {
-        $query = $PDO->prepare("SELECT last_name FROM users WHERE id = :userID");
+        $query = $this->db->prepare("SELECT last_name FROM users WHERE id = :userID");
         $query->execute(array(':userID' => $userID));
         $result = $query->fetch();
 
         return $result[0];
+    }
+
+    public function getUser($userID) {
+        $query = $this->db->prepare("SELECT * FROM users WHERE id = :userID");
+        $query->execute(array(':userID' => $userID));
+        $result = $query->fetch();
+
+        return $result;
     }
 
     private function countStatistic()
