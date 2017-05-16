@@ -514,33 +514,32 @@ function closeFixedBlock() {
 }
 //---------------------------------------------------------
 
-
 /** Получение и отправка данных через Ajax **/
-$("#form_1").on('submit', function(e) { // устанавливаем событие отправки для формы с id=form
-    var form_data = $(this).serialize(), // собераем все данные из формы
-        serialObj = JSON.stringify(form_data); //сериализуем его
-
-    e.preventDefault();
-
-    localStorage.setItem('Form_1', serialObj); //запишем его в хранилище по ключу 'Form_1'
-
-    var returnObj = JSON.parse(localStorage.getItem('Form_1')); //спарсим его обратно объект
-
-    $.ajax({
-        method: 'POST',
-        url: '/search', //   /search   /search-test
-        data: returnObj,
-        dataType: 'Json',
-        success: function(returnObj) {
-            console.log('form_data', returnObj);
-            renderAllApartments(returnObj); //form_data
-            window.location.href = '/template/layouts/searchBlock.php';
-        },
-        error: function(returnObj) {
-            console.log('Ошибка отправки', returnObj);
-        }
-    });
-});
+//$("#form_1").on('submit', function(e) { // устанавливаем событие отправки для формы с id=form
+//    var form_data = $(this).serialize(), // собераем все данные из формы
+//        serialObj = JSON.stringify(form_data); //сериализуем его
+//
+//    e.preventDefault();
+//
+//    localStorage.setItem('Form_1', serialObj); //запишем его в хранилище по ключу 'Form_1'
+//
+//    var returnObj = JSON.parse(localStorage.getItem('Form_1')); //спарсим его обратно объект
+//
+//    $.ajax({
+//        method: 'POST',
+//        url: '/search', //   /search   /search-test
+//        data: returnObj,
+//        dataType: 'Json',
+//        success: function(returnObj) {
+//            console.log('form_data', returnObj);
+//            renderAllApartments(returnObj); //form_data
+//            window.location.href = '/template/layouts/searchBlock.php';
+//        },
+//        error: function(returnObj) {
+//            console.log('Ошибка отправки', returnObj);
+//        }
+//    });
+//});
 
 $("#form_2").on('submit', function(e) {
     var form_data = $(this).serialize(); // собераем все данные из формы
