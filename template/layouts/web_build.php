@@ -14,6 +14,8 @@ $siteModel = $this->model('SiteModel');
     <link rel="stylesheet" href="/template/css/style.css">
     <link rel="stylesheet" href="/template/css/news_style.css">
 <!--    <link rel="stylesheet" href="/template/css/graphics.css">-->
+    <script src="/bower_components/handlebars/handlebars.runtime.min.js"></script>
+    <script src="/bower_components/handlebars/handlebars.min.js"></script>
     <script type="text/javascript" src="/template/js/socket.io.min.js"></script>
     <?php
     // Подключение стилей в контроллере
@@ -9021,7 +9023,7 @@ $siteModel = $this->model('SiteModel');
                                     <span class="decorate-number">25 000<i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
                                 </div>
                                 <div class="view-the-apartment">
-                                    <a href="#"><img src="../../template/images/show.png" alt="show"></a>
+                                    <a href="#" class="open-close-ad"><img src="../../template/images/show.png" alt="show"></a>
                                 </div>
                             </div>
                         </div>
@@ -9042,7 +9044,7 @@ $siteModel = $this->model('SiteModel');
                                     <span class="decorate-number">25 000<i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
                                 </div>
                                 <div class="view-the-apartment">
-                                    <a href="#"><img src="../../template/images/show.png" alt="show"></a>
+                                    <a href="#" class="open-close-ad"><img src="../../template/images/show.png" alt="show"></a>
                                 </div>
                             </div>
                         </div>
@@ -9062,7 +9064,7 @@ $siteModel = $this->model('SiteModel');
                                     <span class="decorate-number">25 000<i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
                                 </div>
                                 <div class="view-the-apartment">
-                                    <a href="#"><img src="../../template/images/show.png" alt="show"></a>
+                                    <a href="#" class="open-close-ad"><img src="../../template/images/show.png" alt="show"></a>
                                 </div>
                             </div>
                         </div>
@@ -9082,7 +9084,7 @@ $siteModel = $this->model('SiteModel');
                                     <span class="decorate-number">25 000<i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
                                 </div>
                                 <div class="view-the-apartment">
-                                    <a href="#"><img src="../../template/images/show.png" alt="show"></a>
+                                    <a href="#" class="open-close-ad"><img src="../../template/images/show.png" alt="show"></a>
                                 </div>
                             </div>
                         </div>
@@ -9102,7 +9104,7 @@ $siteModel = $this->model('SiteModel');
                                     <span class="decorate-number">25 000<i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub></span>
                                 </div>
                                 <div class="view-the-apartment">
-                                    <a href="#"><img src="../../template/images/show.png" alt="show"></a>
+                                    <a href="#" class="open-close-ad"><img src="../../template/images/show.png" alt="show"></a>
                                 </div>
                             </div>
                         </div>
@@ -9123,7 +9125,7 @@ $siteModel = $this->model('SiteModel');
                                                                            aria-hidden="true"></i><sub>/мес</sub></span>
                                 </div>
                                 <div class="view-the-apartment">
-                                    <a href="#"><img src="../../template/images/show.png" alt="show"></a>
+                                    <a href="#" class="open-close-ad"><img src="../../template/images/show.png" alt="show"></a>
                                 </div>
                             </div>
                         </div>
@@ -9144,7 +9146,7 @@ $siteModel = $this->model('SiteModel');
                                                                            aria-hidden="true"></i><sub>/мес</sub></span>
                                 </div>
                                 <div class="view-the-apartment">
-                                    <a href="#"><img src="../../template/images/show.png" alt="show"></a>
+                                    <a href="#" class="open-close-ad"><img src="../../template/images/show.png" alt="show"></a>
                                 </div>
                             </div>
                         </div>
@@ -9165,7 +9167,7 @@ $siteModel = $this->model('SiteModel');
                                                                            aria-hidden="true"></i><sub>/мес</sub></span>
                                 </div>
                                 <div class="view-the-apartment">
-                                    <a href="#"><img src="../../template/images/show.png" alt="show"></a>
+                                    <a href="#" class="open-close-ad"><img src="../../template/images/show.png" alt="show"></a>
                                 </div>
                             </div>
                         </div>
@@ -9186,7 +9188,7 @@ $siteModel = $this->model('SiteModel');
                                                                            aria-hidden="true"></i><sub>/мес</sub></span>
                                 </div>
                                 <div class="view-the-apartment">
-                                    <a href="#"><img src="../../template/images/show.png" alt="show"></a>
+                                    <a href="#" class="open-close-ad"><img src="../../template/images/show.png" alt="show"></a>
                                 </div>
                             </div>
                         </div>
@@ -9295,30 +9297,10 @@ $siteModel = $this->model('SiteModel');
                 <li>
                     <img src="../../template/images/sec-6-5.png" alt="partners">
                 </li>
-            </ul>
+            </ul>f
         </div>
     </div>
-    <div class="footer">
-        <div class="container-w-2">
-            <div class="lant-io">
-                <p>© 2016-2017 Lant.io</p>
-                <p>ООО «ЛЭНТИО»</p>
-            </div>
-            <div class="policy">
-                <p><a href="#">Техническая поддержка</a></p>
-                <p><a href="#">Пользовательское соглашение</a></p>
-                <p><a href="#">Политика конфиденциальности</a></p>
-                <p><a href="#">Команда проекта</a></p>
-            </div>
-            <ul>
-                <li><a href="//twitter.com/LantioP"><i class="fa fa-twitter" aria-hidden="true"></i><span>Читай</span></a></li>
-                <li><a href="//vk.com/lantio"><i class="fa fa-vk" aria-hidden="true"></i><span>Вступай</span></a></li>
-                <li><a href="//www.youtube.com/channel/UC54yeyBi5X4wsyQYLje0v-w"><i class="fa fa-youtube" aria-hidden="true"></i><span>Смотри</span></a></li>
-                <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i><span>Подписывайся</span></a></li>
-                <li><a href="#"><div class="icon-footer"></div><span>У нас</span></a></li>
-            </ul>
-        </div>
-    </div>
+    <?php include_once 'footer.php' ?>
 </div>
 <!-- Preloader -->
 <style type="text/css">#hellopreloader>#hellopreloader_preload{position:fixed;z-index:99999;top:0;left:0;right:0;bottom:0;width:100vw;height:100vh;background: url('../../template/images/puff.svg') center no-repeat, url('../../template/images/access_background.jpg') center no-repeat;background-size:123px,cover;}</style>
@@ -9342,34 +9324,6 @@ if (isset($this->data['script_footer'])) {
 <!--<script src="/template/js/graphics.min.js"></script>-->
 <script src="/template/js/jquery.bxslider.min.js"></script>
 <script src="/template/js/jquery.parallax.min.js"></script>
-<script src="/bower_components/handlebars/handlebars.runtime.min.js"></script>
-<script src="/bower_components/handlebars/handlebars.min.js"></script>
-<script id="entry-template" type="text/x-handlebars-template">
-    <div class="top-block">
-        <div class="left-wallpaper">
-            <a href="#"><img src="/uploads/images/{{preview_img}}" alt="apartments"></a>
-            <p>{{title}}м<sup>2</sup></p>
-        </div>
-        <div class="right-information-block">
-            <span>Шикардосная двушка в самом центре столицы</span>
-            <p>{{content}}</p>
-            <div class="price-and-view-the-apartment">
-                <div class="price">
-                    <p>
-                        <img src="../../template/images/m.png" alt="metro">Рижская<span>
-                        <img src="../../template/images/people.png" alt="">2 мин</span>
-                    </p>
-                    <span class="decorate-number">{{price}}
-                        <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub>
-                    </span>
-                </div>
-                <div class="view-the-apartment">
-                    <a href="#"><img src="../../template/images/show.png" alt="show"></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</script>
 <script src="/template/js/main.min.js"></script>
 </body>
 </html>

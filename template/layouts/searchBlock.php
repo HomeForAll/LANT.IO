@@ -8,6 +8,34 @@
     <title>Filters</title>
     <link rel="stylesheet" href="/template/css/searchBlock/search.css">
     <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css">
+    <script src="/bower_components/handlebars/handlebars.runtime.min.js"></script>
+    <script src="/bower_components/handlebars/handlebars.min.js"></script>
+    <script id="entry-template" type="text/x-handlebars-template">
+        <div class="top-block">
+            <div class="left-wallpaper">
+                <a href="#"><img src="/uploads/images/{{preview_img}}" alt="apartments"></a>
+                <p>{{title}}м<sup>2</sup></p>
+            </div>
+            <div class="right-information-block">
+                <span>Шикардосная двушка в самом центре столицы</span>
+                <p>{{content}}</p>
+                <div class="price-and-view-the-apartment">
+                    <div class="price">
+                        <p>
+                            <img src="../../template/images/m.png" alt="metro">Рижская<span>
+                        <img src="../../template/images/people.png" alt="">2 мин</span>
+                        </p>
+                        <span class="decorate-number">{{price}}
+                        <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub>
+                    </span>
+                    </div>
+                    <div class="view-the-apartment">
+                        <a href="#" class="open-close-ad"><img src="../../template/images/show.png" alt="show"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
 </head>
 <body>
 <div class="header"><?php include_once 'header.php' ?></div>
@@ -706,7 +734,7 @@
                             <p>Олег Герасимов</p>
                         </div>
                         <div class="ad-close">
-                            <p>Свернуть<a href="#"><img src="../../template/images/close.png" alt="clear"></a></p>
+                            <p>Свернуть<a href="#" class="close-Ad"><img src="../../template/images/close.png" alt="clear"></a></p>
                         </div>
                     </div>
                 </div>
@@ -722,34 +750,6 @@
 <script src="/template/js/mapController.js"></script>
 <script src="/template/js/jquery.bxslider.min.js"></script>
 <script src="/template/js/jquery.parallax.min.js"></script>
-<script src="/bower_components/handlebars/handlebars.runtime.min.js"></script>
-<script src="/bower_components/handlebars/handlebars.min.js"></script>
-<script id="entry-template" type="text/x-handlebars-template">
-    <div class="top-block">
-        <div class="left-wallpaper">
-            <a href="#"><img src="/uploads/images/{{preview_img}}" alt="apartments"></a>
-            <p>{{title}}м<sup>2</sup></p>
-        </div>
-        <div class="right-information-block">
-            <span>Шикардосная двушка в самом центре столицы</span>
-            <p>{{content}}</p>
-            <div class="price-and-view-the-apartment">
-                <div class="price">
-                    <p>
-                        <img src="../../template/images/m.png" alt="metro">Рижская<span>
-                        <img src="../../template/images/people.png" alt="">2 мин</span>
-                    </p>
-                    <span class="decorate-number">{{price}}
-                        <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub>
-                    </span>
-                </div>
-                <div class="view-the-apartment">
-                    <a href="#"><img src="../../template/images/show.png" alt="show"></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</script>
 <?php include_once ROOT_DIR . '/template/html/apartmentsItem.php'?>
 <script src="/template/js/main.min.js"></script>
 </body>

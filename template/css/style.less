@@ -227,13 +227,11 @@
   padding-top: 35vh;
   min-height: 100vh;
   padding-bottom: 100px;
- // background: url("../../template/images/background-1.png") no-repeat center fixed;
- // background-size: cover;
   text-align: center;
 }
 
 #scene {
-  position: absolute;
+  position: fixed;
   left: -5vw;
   right: 0;
   top: -5vh;
@@ -2253,6 +2251,7 @@
   li {
     display: inline-block;
     vertical-align: middle;
+    cursor: pointer;
     width: auto;
     padding: 0 10px;
   }
@@ -2416,7 +2415,7 @@
   font-weight: bold;
   color: #565656;
   text-transform: uppercase;
-  margin: 12px 0 ;
+  margin: 6px 0;
   sub {
     position: absolute;
     font-size: 15px;

@@ -203,7 +203,7 @@
   text-align: center;
 }
 #scene {
-  position: absolute;
+  position: fixed;
   left: -5vw;
   right: 0;
   top: -5vh;
@@ -2557,6 +2557,7 @@
 .filter-apartment li {
   display: inline-block;
   vertical-align: middle;
+  cursor: pointer;
   width: auto;
   padding: 0 10px;
 }
@@ -2711,7 +2712,7 @@
   font-weight: bold;
   color: #565656;
   text-transform: uppercase;
-  margin: 12px 0 ;
+  margin: 6px 0;
 }
 .decorate-number sub {
   position: absolute;

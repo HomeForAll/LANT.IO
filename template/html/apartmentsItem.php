@@ -18,7 +18,7 @@
                     </span>
                 </div>
                 <div class="view-the-apartment">
-                    <a href="#"><img src="../../template/images/show.png" alt="show"></a>
+                    <a href="#" class="open-close-ad"><img src="../../template/images/show.png" alt="show"></a>
                 </div>
             </div>
         </div>

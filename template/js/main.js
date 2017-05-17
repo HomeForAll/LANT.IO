@@ -517,47 +517,39 @@ function closeFixedBlock() {
 /** Получение и отправка данных через Ajax **/
 $("#form_2").on('submit', function(e) {
     var form_data = $(this).serialize(); // собераем все данные из формы
-        //form = $(this), // зaпишeм фoрму, чтoбы пoтoм нe былo прoблeм с this
-        //error = false; // прeдвaритeльнo oшибoк нeт
-
-    //localStorage.removeItem('Form_1');
-
-    //form.find('input, textarea').each( function(){ // прoбeжим пo кaждoму пoлю в фoрмe
-    //    if ($(this).val() === '---') { // eсли нaхoдим пустoe
-    //        alert('Зaпoлнитe пoлe "'+$(this).attr('placeholder')+'"!'); // гoвoрим зaпoлняй!
-    //        error = true; // oшибкa
-    //    }
-    //});
 
     e.preventDefault();
 
-    //if (!error) {
-        $.ajax({
-            method: 'POST',
-            url: '/search', //   /search   /search-test
-            data: form_data,
-            dataType: 'Json',
-            success: function(form_data) {
-                console.log('Собранные данные', form_data);
-                renderAllApartments(form_data);
-            },
-            error: function(form_data) {
-                console.log('Ошибка отправки', form_data);
-            }
-        });
-    //}
-    //
-    //return false;
+    $.ajax({
+        method: 'POST',
+        url: '/search',
+        data: form_data,
+        dataType: 'Json',
+        success: function(form_data) {
+            console.log('Собранные данные', form_data);
+            renderAllApartments(form_data);
+        },
+        error: function(form_data) {
+            console.log('Ошибка отправки', form_data);
+        }
+    });
 });
 
+/** Рендеринг форм **/
 function renderAllApartments(data) {
-    var content = '';
+    var content = '',
+        resultAllApartments = $('.result-all-apartments'),
+        showResultParametrs = $('.show-result-parametrs'),
+        logicAd = false;
 
+    resultAllApartments.find('div').remove();
     console.log('До условия - ', data);
 
-    if (!data) {return false;}
-
-    console.log('После условия - ', data);
+    if (!data) {
+        return false;
+    } else if (!logicAd) {
+        logicAd = true;
+    }
 
     for (var i = 0; i < data.length; i++) {
         console.log('data', data[i]);
@@ -565,7 +557,18 @@ function renderAllApartments(data) {
         var template = Handlebars.compile(source);
         content += template(data[i]);
     }
-    $('.result-all-apartments').html(content);
+
+    $('.open-close-ad').click(function (e) {
+        console.log('1');
+        e.preventDefault();
+        showResultParametrs.fadeIn();
+    });
+    $('.close-Ad').click(function (e) {
+        console.log('2');
+        e.preventDefault();
+        showResultParametrs.fadeOut();
+    });
+    resultAllApartments.html(content);
 }
 //---------------------------------------------------------
 
