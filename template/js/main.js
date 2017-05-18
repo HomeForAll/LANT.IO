@@ -389,7 +389,17 @@ function allFilterBlocks(filters) {
                         'width': '85%'
                     });
                 }
-            }, 5000);
+                if (inputLocation !== '') {
+                    setTimeout(function () {
+                        $exactArea.css({
+                            'position': 'relative',
+                            'height': '75px',
+                            'width': '37%',
+                            'display': 'inline-block'
+                        });
+                    }, 8000)
+                }
+            }, 1000);
             break;
         case '1':
             $('.building-parameters-apartment').css({'display': 'flex'});
@@ -543,18 +553,20 @@ function renderAllApartments(data) {
         logicAd = false;
 
     resultAllApartments.find('div').remove();
-    console.log('До условия - ', data);
 
-    if (!data) {
-        return false;
-    } else if (!logicAd) {
-        logicAd = true;
-    }
+    if (!data) {return false;}
 
     for (var i = 0; i < data.length; i++) {
-        console.log('data', data[i]);
-        var source = $("#entry-template").html();
-        var template = Handlebars.compile(source);
+        var source = $("#entry-template").html(),
+            template = Handlebars.compile(source),
+            str = data[i].preview_img.split('|')[0];
+
+        if (!logicAd) {
+            logicAd = true;
+        } else {
+            data[i].preview_img = str;
+        }
+
         content += template(data[i]);
     }
 

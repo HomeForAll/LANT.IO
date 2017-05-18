@@ -631,8 +631,7 @@
                             <div class="currency">
                                 <p>Валюта</p>
                                 <button class="closeCurrency"><i class="fa fa-rub" aria-hidden="true"></i>рубли</button>
-                                <button class="closeCurrency"><i class="fa fa-usd" aria-hidden="true"></i>доллары
-                                </button>
+                                <button class="closeCurrency"><i class="fa fa-usd" aria-hidden="true"></i>доллары</button>
                                 <button class="closeCurrency"><i class="fa fa-eur" aria-hidden="true"></i>евро</button>
                             </div>
                         </div>

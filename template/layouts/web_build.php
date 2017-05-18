@@ -382,8 +382,7 @@ $siteModel = $this->model('SiteModel');
                             <div class="currency">
                                 <p>Валюта</p>
                                 <button class="closeCurrency"><i class="fa fa-rub" aria-hidden="true"></i>рубли</button>
-                                <button class="closeCurrency"><i class="fa fa-usd" aria-hidden="true"></i>доллары
-                                </button>
+                                <button class="closeCurrency"><i class="fa fa-usd" aria-hidden="true"></i>доллары</button>
                                 <button class="closeCurrency"><i class="fa fa-eur" aria-hidden="true"></i>евро</button>
                             </div>
                         </div>
@@ -1320,7 +1319,7 @@ $siteModel = $this->model('SiteModel');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="planning_project">Проект планировки
+                                            <label for="planning_project">Проект<br>планировки
                                                 <select name="planning_project" id="planning_project">
                                                     <option value="">---</option>
                                                     <option value="41">Не важно</option>
@@ -1670,7 +1669,7 @@ $siteModel = $this->model('SiteModel');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="planning_project">Проект планировки
+                                            <label for="planning_project">Проект<br>планировки
                                                 <select name="planning_project" id="planning_project">
                                                     <option value="">---</option>
                                                     <option value="41">Не важно</option>
@@ -2011,7 +2010,7 @@ $siteModel = $this->model('SiteModel');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="planning_project">Проект планировки
+                                            <label for="planning_project">Проект<br>планировки
                                                 <select name="planning_project" id="planning_project">
                                                     <option value="">---</option>
                                                     <option value="41">Не важно</option>
@@ -2305,7 +2304,7 @@ $siteModel = $this->model('SiteModel');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="planning_project">Проект планировки
+                                            <label for="planning_project">Проект<br>планировки
                                                 <select name="planning_project" id="planning_project">
                                                     <option value="">---</option>
                                                     <option value="41">Не важно</option>
@@ -2564,7 +2563,7 @@ $siteModel = $this->model('SiteModel');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="planning_project">Проект планировки
+                                            <label for="planning_project">Проект<br>планировки
                                                 <select name="planning_project" id="planning_project">
                                                     <option value="">---</option>
                                                     <option value="41">Не важно</option>
@@ -2823,7 +2822,7 @@ $siteModel = $this->model('SiteModel');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="planning_project">Проект планировки
+                                            <label for="planning_project">Проект<br>планировки
                                                 <select name="planning_project" id="planning_project">
                                                     <option value="">---</option>
                                                     <option value="41">Не важно</option>
@@ -2994,7 +2993,7 @@ $siteModel = $this->model('SiteModel');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="planning_project">Проект планировки
+                                            <label for="planning_project">Проект<br>планировки
                                                 <select name="planning_project" id="planning_project">
                                                     <option value="">---</option>
                                                     <option value="41">Не важно</option>
@@ -3176,7 +3175,7 @@ $siteModel = $this->model('SiteModel');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="planning_project">Проект планировки
+                                            <label for="planning_project">Проект<br>планировки
                                                 <select name="planning_project" id="planning_project">
                                                     <option value="">---</option>
                                                     <option value="41">Не важно</option>
@@ -3435,7 +3434,7 @@ $siteModel = $this->model('SiteModel');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="planning_project">Проект планировки
+                                            <label for="planning_project">Проект<br>планировки
                                                 <select name="planning_project" id="planning_project">
                                                     <option value="">---</option>
                                                     <option value="41">Не важно</option>
@@ -3694,7 +3693,7 @@ $siteModel = $this->model('SiteModel');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="planning_project">Проект планировки
+                                            <label for="planning_project">Проект<br>планировки
                                                 <select name="planning_project" id="planning_project">
                                                     <option value="">---</option>
                                                     <option value="41">Не важно</option>
@@ -3951,7 +3950,7 @@ $siteModel = $this->model('SiteModel');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="planning_project">Проект планировки
+                                            <label for="planning_project">Проект<br>планировки
                                                 <select name="planning_project" id="planning_project">
                                                     <option value="">---</option>
                                                     <option value="41">Не важно</option>
@@ -4210,7 +4209,7 @@ $siteModel = $this->model('SiteModel');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="planning_project">Проект планировки
+                                            <label for="planning_project">Проект<br>планировки
                                                 <select name="planning_project" id="planning_project">
                                                     <option value="">---</option>
                                                     <option value="41">Не важно</option>
@@ -4469,7 +4468,7 @@ $siteModel = $this->model('SiteModel');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="planning_project">Проект планировки
+                                            <label for="planning_project">Проект<br>планировки
                                                 <select name="planning_project" id="planning_project">
                                                     <option value="">---</option>
                                                     <option value="41">Не важно</option>
@@ -4728,7 +4727,7 @@ $siteModel = $this->model('SiteModel');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="planning_project">Проект планировки
+                                            <label for="planning_project">Проект<br>планировки
                                                 <select name="planning_project" id="planning_project">
                                                     <option value="">---</option>
                                                     <option value="41">Не важно</option>
@@ -4921,8 +4920,7 @@ $siteModel = $this->model('SiteModel');
                             <div class="currency">
                                 <p>Валюта</p>
                                 <button class="closeCurrency"><i class="fa fa-rub" aria-hidden="true"></i>рубли</button>
-                                <button class="closeCurrency"><i class="fa fa-usd" aria-hidden="true"></i>доллары
-                                </button>
+                                <button class="closeCurrency"><i class="fa fa-usd" aria-hidden="true"></i>доллары</button>
                                 <button class="closeCurrency"><i class="fa fa-eur" aria-hidden="true"></i>евро</button>
                             </div>
                         </div>
@@ -5215,7 +5213,7 @@ $siteModel = $this->model('SiteModel');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="planning_project">Проект планировки
+                                            <label for="planning_project">Проект<br>планировки
                                                 <select name="planning_project" id="planning_project">
                                                     <option value="">---</option>
                                                     <option value="41">Не важно</option>
@@ -5564,7 +5562,7 @@ $siteModel = $this->model('SiteModel');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="planning_project">Проект планировки
+                                            <label for="planning_project">Проект<br>планировки
                                                 <select name="planning_project" id="planning_project">
                                                     <option value="">---</option>
                                                     <option value="41">Не важно</option>
@@ -5905,7 +5903,7 @@ $siteModel = $this->model('SiteModel');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="planning_project">Проект планировки
+                                            <label for="planning_project">Проект<br>планировки
                                                 <select name="planning_project" id="planning_project">
                                                     <option value="">---</option>
                                                     <option value="41">Не важно</option>
@@ -6199,7 +6197,7 @@ $siteModel = $this->model('SiteModel');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="planning_project">Проект планировки
+                                            <label for="planning_project">Проект<br>планировки
                                                 <select name="planning_project" id="planning_project">
                                                     <option value="">---</option>
                                                     <option value="41">Не важно</option>
@@ -6458,7 +6456,7 @@ $siteModel = $this->model('SiteModel');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="planning_project">Проект планировки
+                                            <label for="planning_project">Проект<br>планировки
                                                 <select name="planning_project" id="planning_project">
                                                     <option value="">---</option>
                                                     <option value="41">Не важно</option>
@@ -6717,7 +6715,7 @@ $siteModel = $this->model('SiteModel');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="planning_project">Проект планировки
+                                            <label for="planning_project">Проект<br>планировки
                                                 <select name="planning_project" id="planning_project">
                                                     <option value="">---</option>
                                                     <option value="41">Не важно</option>
@@ -6888,7 +6886,7 @@ $siteModel = $this->model('SiteModel');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="planning_project">Проект планировки
+                                            <label for="planning_project">Проект<br>планировки
                                                 <select name="planning_project" id="planning_project">
                                                     <option value="">---</option>
                                                     <option value="41">Не важно</option>
@@ -7070,7 +7068,7 @@ $siteModel = $this->model('SiteModel');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="planning_project">Проект планировки
+                                            <label for="planning_project">Проект<br>планировки
                                                 <select name="planning_project" id="planning_project">
                                                     <option value="">---</option>
                                                     <option value="41">Не важно</option>
@@ -7329,7 +7327,7 @@ $siteModel = $this->model('SiteModel');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="planning_project">Проект планировки
+                                            <label for="planning_project">Проект<br>планировки
                                                 <select name="planning_project" id="planning_project">
                                                     <option value="">---</option>
                                                     <option value="41">Не важно</option>
@@ -7588,7 +7586,7 @@ $siteModel = $this->model('SiteModel');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="planning_project">Проект планировки
+                                            <label for="planning_project">Проект<br>планировки
                                                 <select name="planning_project" id="planning_project">
                                                     <option value="">---</option>
                                                     <option value="41">Не важно</option>
@@ -7847,7 +7845,7 @@ $siteModel = $this->model('SiteModel');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="planning_project">Проект планировки
+                                            <label for="planning_project">Проект<br>планировки
                                                 <select name="planning_project" id="planning_project">
                                                     <option value="">---</option>
                                                     <option value="41">Не важно</option>
@@ -8106,7 +8104,7 @@ $siteModel = $this->model('SiteModel');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="planning_project">Проект планировки
+                                            <label for="planning_project">Проект<br>планировки
                                                 <select name="planning_project" id="planning_project">
                                                     <option value="">---</option>
                                                     <option value="41">Не важно</option>
@@ -8365,7 +8363,7 @@ $siteModel = $this->model('SiteModel');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="planning_project">Проект планировки
+                                            <label for="planning_project">Проект<br>планировки
                                                 <select name="planning_project" id="planning_project">
                                                     <option value="">---</option>
                                                     <option value="41">Не важно</option>
@@ -8624,7 +8622,7 @@ $siteModel = $this->model('SiteModel');
                                     </li>
                                     <li>
                                         <div class="select">
-                                            <label for="planning_project">Проект планировки
+                                            <label for="planning_project">Проект<br>планировки
                                                 <select name="planning_project" id="planning_project">
                                                     <option value="">---</option>
                                                     <option value="41">Не важно</option>
@@ -9297,7 +9295,7 @@ $siteModel = $this->model('SiteModel');
                 <li>
                     <img src="../../template/images/sec-6-5.png" alt="partners">
                 </li>
-            </ul>f
+            </ul>
         </div>
     </div>
     <?php include_once 'footer.php' ?>
