@@ -147,7 +147,9 @@ $form_options['object_types'] = [1 => 'Квартира', 2 => 'Офисная �
                     <td>Тип объекта</td>
                     <td>Видна</td>
                     <td>Скрыта</td>
-                    <td>Лучшая</td>
+                    <td>Рейт.посещ.</td>
+                    <td>Рейт.админ.</td>
+                    <td>Рейт.донат.</td>
                     <td>Удалить</td>
                 </tr>
 
@@ -177,13 +179,20 @@ $form_options['object_types'] = [1 => 'Квартира', 2 => 'Офисная �
                             }
                             ?> >
                         </td>
-                        <td><input type="checkbox" class="category" name="category_<?php echo $this->data['news'][$i]['id_news']; ?>"
-                                   value="1" <?php
-                            if ($this->data['news'][$i]['category'] === 1) {
-                                echo "checked";
-                            }
-                            ?> >
+                        <td> <?php echo $this->data['news'][$i]['rating_views']; ?> </td>
+                        <td> <select class="rating_admin" name="rating_admin_<?php echo $this->data['news'][$i]['id_news']; ?>">
+                                <?php
+                                for($j=0;$j<10;$j++){
+                                ?><option value="<?php echo $j; ?>" <?php
+                                if ($this->data['news'][$i]['rating_admin'] == $j) {
+                                    echo "selected";
+                                }
+                                ?>><?php echo $j; ?></option> <?php
+                                }
+                                ?>
+                            </select>
                         </td>
+                        <td> <?php echo $this->data['news'][$i]['rating_donate']; ?> </td>
                         <td><input type="radio" class="status" name="status_<?php echo $this->data['news'][$i]['id_news']; ?>"
                                    value="3">
                         </td>
@@ -223,11 +232,11 @@ $form_options['object_types'] = [1 => 'Квартира', 2 => 'Офисная �
                 hidName = hidName.substr(7);
                $(this).after('<input type="hidden" name="change_status_'+ hidName +'" value="'+ hidName +'">');
             });
-            // Добавление поля hidden при изменении category
-            $("#status_frm .category").change(function () {
+            // Добавление поля hidden при изменении rating_admin
+            $("#status_frm .rating_admin").change(function () {
                 var hidName = ($(this).attr('name'));
-                hidName = hidName.substr(9);
-                $(this).after('<input type="hidden" name="change_category_'+ hidName +'" value="'+ hidName +'">');
+                hidName = hidName.substr(13);
+                $(this).after('<input type="hidden" name="change_rating_'+ hidName +'" value="'+ hidName +'">');
             });
 
             //Ajax запрос для кнопки Показать объявления
