@@ -615,6 +615,9 @@ class AdminModel extends Model
             'category' => 'DEFAULT 0',
             'status' => 'DEFAULT 1',
             'date' => 'NOT NULL DEFAULT current_timestamp',
+            'rating_views' => 'DEFAULT 0',
+            'rating_admin' => 'DEFAULT 0',
+            'rating_donate' => 'DEFAULT 0',
 
         );
 
@@ -645,42 +648,46 @@ class AdminModel extends Model
         $db_info = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
-        foreach($db_info as $info){
-            if($info["column_name"] != 'id_news' && $info["column_name"] != 'date'){
-            if(!array_key_exists($info["column_name"], $data)){
-                array_push($result, $info["column_name"].' -> удалить');
-                array_push($result['commands'], 'ALTER TABLE news_base DROP COLUMN '.$info["column_name"].';');
+        foreach ($db_info as $info) {
+            //Лишнее?
+            if ($info["column_name"] != 'id_news' && $info["column_name"] != 'date') {
+                if (!array_key_exists($info["column_name"], $data)) {
+                    array_push($result, $info["column_name"] . ' -> удалить');
+                    array_push($result['commands'], 'ALTER TABLE news_base DROP COLUMN ' . $info["column_name"] . ';');
 
-            } else {
-                if(!preg_match('/'.$info["data_type"].'/', $data[$info["column_name"]])) {
-                    array_push($result, $info["column_name"].' - ['.$info["data_type"].'] -> ['.$data[$info["column_name"]].']');
-                    $type_commands = stristr($data[$info["column_name"]], ' DEFAUlT', TRUE);
-                    array_push($result['commands'], 'ALTER TABLE news_base ALTER COLUMN '.$info["column_name"].' TYPE '
-                        . $type_commands .' USING '.$info["column_name"].'::'.$type_commands.';');
-                   // на случай  - ОШИБКА:  значение по умолчанию для колонки ... нельзя автоматически привести к типу ...
-                    $default_commands = substr(stristr($data[$info["column_name"]], 'DEFAUlT', FALSE), 7);
-                    array_push($result['commands'], '(?) ( ALTER TABLE news_base ALTER COLUMN '.$info["column_name"].' SET DEFAULT '
-                        .$default_commands.'; )');
+                } else {
+                    // Тип?
+                    if (!preg_match('/' . $info["data_type"] . '/', $data[$info["column_name"]])) {
+                        array_push($result, $info["column_name"] . ' - [' . $info["data_type"] . '] -> [' . $data[$info["column_name"]] . ']');
+                        $type_commands = stristr($data[$info["column_name"]], ' DEFAUlT', TRUE);
+                        array_push($result['commands'], 'ALTER TABLE news_base ALTER COLUMN ' . $info["column_name"] . ' TYPE '
+                            . $type_commands . ' USING ' . $info["column_name"] . '::' . $type_commands . ';');
+                        // на случай  - ОШИБКА:  значение по умолчанию для колонки ... нельзя автоматически привести к типу ...
+                        $default_commands = substr(stristr($data[$info["column_name"]], 'DEFAUlT', FALSE), 7);
+                        array_push($result['commands'], '(?) ( ALTER TABLE news_base ALTER COLUMN ' . $info["column_name"] . ' SET DEFAULT '
+                            . $default_commands . '; )');
+                    }
 
-                }
-              $default = explode(':',$info["column_default"])[0];
-                if(!preg_match('/'.$default.'/', $data[$info["column_name"]])) {
-                    array_push($result, $info["column_name"].' - ['.$default.'] -> ['.$data[$info["column_name"]].']');
-                    $default_commands = substr(stristr($data[$info["column_name"]], 'DEFAUlT', FALSE), 7);
-                    array_push($result['commands'], 'ALTER TABLE news_base ALTER COLUMN '.$info["column_name"].' SET DEFAULT '
-                        .$default_commands.';');
+                    // DEFAULT?
+                    if (is_null($info["column_default"])) $info["column_default"] = 'NULL';
+                    $default = explode(':', $info["column_default"])[0];
+                    if (!preg_match('/' . $default . '/', $data[$info["column_name"]])) {
+                        array_push($result, $info["column_name"] . ' - [' . $default . '] -> [' . $data[$info["column_name"]] . ']');
+                        $default_commands = substr(stristr($data[$info["column_name"]], 'DEFAUlT', FALSE), 7);
+                        array_push($result['commands'], 'ALTER TABLE news_base ALTER COLUMN ' . $info["column_name"] . ' SET DEFAULT '
+                            . $default_commands . ';');
+                    }
                 }
             }
-        }
             unset($data[$info["column_name"]]);
         }
-
-        if(isset($data)) {
-            foreach ($data as $k => $v){
-                array_push($result, $k.' - ['.$v.'] -> добавить');
-                array_push($result['commands'], 'ALTER TABLE news_base ADD COLUMN '.$k.' '.$v.';');
+        // Отсутствует?
+        if (isset($data)) {
+            foreach ($data as $k => $v) {
+                array_push($result, $k . ' - [' . $v . '] -> добавить');
+                array_push($result['commands'], 'ALTER TABLE news_base ADD COLUMN ' . $k . ' ' . $v . ';');
             }
-           }
+        }
         return $result;
     }
 

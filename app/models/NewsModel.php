@@ -27,24 +27,82 @@ class NewsModel extends Model
         return $str;
     }
 
-    public function getNamber_of_all_rows($category_list = [])
+    /**
+     * Количество объявлений удовлетворяющих условиям
+     * @param int $time_start - за промежуток времени в часах
+     * @param int $space_type - Тип площади
+     * @param int $operation_type - Операция
+     * @param int $object_type - Тип объекта
+     * @param int $price_from - Цена от
+     * @param int $price_to - Цена до
+     * @param int $space_from - Площадь от
+     * @param int $space_to - Площадь до
+     * @return int - Количество объявлений
+     */
+    public function getNamber_of_all_rows($time_start = 0, $space_type = 0, $operation_type = 0, $object_type = 0,
+                                          $price_from = 0, $price_to = 0, $space_from = 0, $space_to = 0)
     {
 
 // Составление запроса
-        $sql = "SELECT COUNT(*) FROM news_base WHERE status = 1";
-// Условия поиска по категориям
-        if (!empty($category_list)) {
-            $sql = $sql . " AND (";
-            foreach ($category_list as $value) {
-                $sql = $sql . ' category = ' . $value . ' OR ';
-            }
-            // удаление последнего OR
-            $sql = substr($sql, 0, -4);
-            $sql = $sql . ' )';
+        $sql = "SELECT COUNT(*) FROM news_base WHERE ";
+
+        // Только активные(видимые)
+        $sql .= "(status = 1) ";
+
+        if ($time_start != 0) {
+            $time_start = time() - $time_start * 60 * 60;
+            $time_start = date('c', $time_start);
+            $sql .= "AND (date >= :time_start) ";
         }
 
+        if ($space_type != 0) {
+            $sql .= "AND (space_type = :space_type) ";
+        }
+        if ($operation_type != 0) {
+            $sql .= "AND (operation_type = :operation_type) ";
+        }
+        if ($object_type != 0) {
+            $sql .= "AND (object_type = :object_type) ";
+        }
+        if ($price_from != 0) {
+            $sql .= "AND (price >= :price_from) ";
+        }
+        if ($price_to != 0) {
+            $sql .= "AND (price <= :price_to) ";
+        }
+        if ($space_from != 0) {
+            $sql .= "AND (space >= :space_from) ";
+        }
+        if ($space_to != 0) {
+            $sql .= "AND (space <= :space_to) ";
+        }
 
         $stmt = $this->db->prepare($sql);
+        if ($time_start != 0) {
+            $stmt->bindParam(':time_start', $time_start);
+        }
+        if ($space_type != 0) {
+            $stmt->bindParam(':space_type', $space_type);
+        }
+        if ($operation_type != 0) {
+            $stmt->bindParam(':operation_type', $operation_type);
+        }
+        if ($object_type != 0) {
+            $stmt->bindParam(':object_type', $object_type);
+        }
+
+        if ($price_from != 0) {
+            $stmt->bindParam(':price_from', $price_from);
+        }
+        if ($price_to != 0) {
+            $stmt->bindParam(':price_to', $price_to);
+        }
+        if ($space_from != 0) {
+            $stmt->bindParam(':space_from', $space_from);
+        }
+        if ($space_to != 0) {
+            $stmt->bindParam(':space_to', $space_to);
+        }
         $stmt->execute();
         $result = $stmt->fetchColumn();
         return $result;
@@ -426,11 +484,11 @@ class NewsModel extends Model
         // Количество выводимых новостей
         $number_of_news = (int)$_SESSION['news_list']['number_of_news'];
         // Таблица новостей
-        if (!empty($_SESSION['news_list']['category'])) {
-            foreach ($_SESSION['news_list']['category'] as $key => $value) {
-                $data['news_table_category'][(int)$key] = (int)$value;
-            }
-        }
+//        if (!empty($_SESSION['news_list']['category'])) {
+//            foreach ($_SESSION['news_list']['category'] as $key => $value) {
+//                $data['news_table_category'][(int)$key] = (int)$value;
+//            }
+//        }
         // Общее кол-во новостей
         $data['namber_of_all_rows'] = (int)$_SESSION['news_list']['namber_of_all_rows'];
 
@@ -453,17 +511,17 @@ class NewsModel extends Model
         // Запрос БД      
         $from_page = $data['firstnews'] - 1;
 
-        $sql = "SELECT id_news, date::date, title, space_type, operation_type, object_type, content, user_id, preview_img, status, category, tags "
+        $sql = "SELECT id_news, date::date, title, space_type, operation_type, object_type, content, user_id, preview_img, status, tags "
             . "FROM news_base WHERE status = 1 ";
-        if (!empty($data['news_table_category'])) {
-            $sql = $sql . " AND (";
-            foreach ($data['news_table_category'] as $value) {
-                $sql = $sql . ' category = ' . $value . ' OR ';
-            }
-            // удаление последнего OR
-            $sql = substr($sql, 0, -4);
-            $sql = $sql . ')';
-        }
+//        if (!empty($data['news_table_category'])) {
+//            $sql = $sql . " AND (";
+//            foreach ($data['news_tabl_category'] as $value) {
+//                $sql = $sql . ' category = ' . $value . ' OR ';
+//            }
+//            // удаление последнего OR
+//            $sql = substr($sql, 0, -4);
+//            $sql = $sql . ')';
+//        }
 
         $sql = $sql . " ORDER BY date DESC"
             . " LIMIT :number_of_news"
@@ -512,8 +570,8 @@ class NewsModel extends Model
             }
 
         }
-        // общее кол-во новостей
-        $namber_of_all_rows = $this->getNamber_of_all_rows($category_list);
+        // общее кол-во новостей !!! исправить !!!
+        $namber_of_all_rows = $this->getNamber_of_all_rows();
 
 
         // Запись в SESSION
@@ -612,7 +670,6 @@ class NewsModel extends Model
             'space_type' => FILTER_SANITIZE_NUMBER_INT,
             'operation_type' => FILTER_SANITIZE_NUMBER_INT,
             'object_type' => FILTER_SANITIZE_NUMBER_INT,
-            'category' => FILTER_SANITIZE_NUMBER_INT,
             'status' => FILTER_SANITIZE_NUMBER_INT,
             'author_id' => FILTER_SANITIZE_STRING,
             'title' => FILTER_SANITIZE_STRING,
@@ -863,15 +920,15 @@ class NewsModel extends Model
 
         // Массив id объявлений подлежащих изменению
         $news_id_status = [];
-        $news_id_category = [];
+        $news_id_rating = [];
         foreach ($_POST as $key => $value) {
             if (preg_match('/^change_status_/', $key)) {
                 $news_id = substr($key, 14);
                 array_push($news_id_status, (int)$news_id);
             }
-            if (preg_match('/^change_category_/', $key)) {
-                $news_id = substr($key, 16);
-                array_push($news_id_category, (int)$news_id);
+            if (preg_match('/^change_rating_/', $key)) {
+                $news_id = substr($key, 14);
+                array_push($news_id_rating, (int)$news_id);
             }
         }
 
@@ -900,27 +957,23 @@ class NewsModel extends Model
             }
         }
 
-        //Обработка массива категории Лучшая новость
-        foreach ($news_id_category as $id_news) {
-            if (isset($_POST['category_' . $id_news])) {
-                $category = 1;
-                $category_messag = "Присвоение";
-            } else {
-                $category = 0;
-                $category_messag = "Удаление";
+        //Обработка массива категории Лучшая новость rating_admin
+        foreach ($news_id_rating as $id_news) {
+            if (isset($_POST['rating_admin_' . $id_news])) {
+                $rating_admin = (int)$_POST['rating_admin_' . $id_news];
             }
             //Изменение category
-            $sql = "UPDATE news_base SET category = :category  WHERE id_news = :id_news";
+            $sql = "UPDATE news_base SET rating_admin = :rating_admin  WHERE id_news = :id_news";
             $stmt = $this->db->prepare($sql);
             $stmt->bindParam(':id_news', $id_news);
-            $stmt->bindParam(':category', $category, PDO::PARAM_INT);
+            $stmt->bindParam(':rating_admin', $rating_admin, PDO::PARAM_INT);
             if ($stmt->execute()) {
                 // Добавление сообщения
                 array_push($news_message,
-                    $category_messag . ' статуса Лучшее объявление для id = ' . $id_news . ' успешно');
+                    'Изменение статуса Лучшее объявление для id = ' . $id_news . 'прошло успешно');
             } else {
                 array_push($news_error,
-                    $category_messag . ' статуса Лучшее объявление (id = ' . $id_news . ') не удалось');
+                    'Изменение статуса Лучшее объявление (id = ' . $id_news . ') не удалось');
             }
         }
         return;
@@ -940,11 +993,10 @@ class NewsModel extends Model
      * @param int $max_number - Количество объявлений
      * @return array -
      * ['best_news'] - arr [0][1]... Данные Лучших объявлений
-     * ['best_news_number'] - Общее количество
      */
     public function getBestNewsOfTime($time = 24, $space_type = 0, $operation_type = 0, $object_type = 0,
-                                      $price_from = 0, $price_to = 0, $space_from = NULL, $space_to = NULL,
-                                      $max_number = 20)
+                                      $price_from = 0, $price_to = 0, $space_from = 0, $space_to = 0,
+                                      $max_number = 9)
     {
         $data = [];
 
@@ -953,13 +1005,15 @@ class NewsModel extends Model
         //Текущая Дата в формате стандарта ISO 8601
         $news_date = date('c', $news_time);
 
-        $sql = "SELECT id_news, date::date, title, space_type, operation_type, object_type, "
-            . "content, user_id, preview_img, status, category, price, space "
+        $sql = "SELECT id_news, to_char(date,'YYYY-MM-DD HH24:MI:SS') as date, title, "
+            . "space_type, operation_type, object_type, "
+            . "content, user_id, preview_img, status, rating_admin, price, lease, space, "
+            . "number_of_rooms, metro_station, time_walk, time_car "
             . "FROM news_base WHERE (date >= :date) ";
 
-        if ($status) {
-            $sql .= "AND (status = 1) ";
-        }
+        // Только активные(видимые)
+        $sql .= "AND (status = 1) ";
+
         if ($space_type != 0) {
             $sql .= "AND (space_type = :space_type) ";
         }
@@ -981,19 +1035,14 @@ class NewsModel extends Model
         if ($space_to != 0) {
             $sql .= "AND (space <= :space_to) ";
         }
-        if ($best) {
-            $sql .= "AND (category = 1) ";
-        }
 
-        $sql .= " ORDER BY date DESC"
-            . " LIMIT :max_numder";
+        $sql .= " ORDER BY rating_admin DESC"
+            . " LIMIT :max_number";
 
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':date', $news_date);
-        if ($time_start != 0) {
-            $stmt->bindParam(':date_start', $time_start);
-        }
-        $stmt->bindParam(':max_numder', $max_numder);
+        $stmt->bindParam(':max_number', $max_number);
+
         if ($space_type != 0) {
             $stmt->bindParam(':space_type', $space_type);
         }
@@ -1003,17 +1052,30 @@ class NewsModel extends Model
         if ($object_type != 0) {
             $stmt->bindParam(':object_type', $object_type);
         }
+
+        if ($price_from != 0) {
+            $stmt->bindParam(':price_from', $price_from);
+        }
+        if ($price_to != 0) {
+            $stmt->bindParam(':price_to', $price_to);
+        }
+        if ($space_from != 0) {
+            $stmt->bindParam(':space_from', $space_from);
+        }
+        if ($space_to != 0) {
+            $stmt->bindParam(':space_to', $space_to);
+        }
         $stmt->execute();
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         // Подкотовка данных для вывода
-        $data = $this->prepareNewsPreview($data);
+        $data = $this->prepareNewsPreview($data, FALSE);
 
         return $data;
     }
 
 
-    // Возвращает строку имен (через '|') больших картинок 
+    // Возвращает строку имен (через '|') больших картинок
     //(имя эскиза s_имя больш)
     public function saveNewsPictures()
     {
@@ -1327,7 +1389,8 @@ class NewsModel extends Model
      * @param int $space_type - Тип площади
      * @param int $operation_type - Операция
      * @param int $object_type - Тип объекта
-     * @param bool $best - Только лучшие объявления
+     * @param bool $best - Сортировка по лучшим
+     * @param bool $status - Статус (только Видимые или нет)
      * @return array
      */
     public function getRecentNewsList($time_start = 0, $time = 24, $max_numder = 20, $space_type = 0, $operation_type = 0,
@@ -1345,7 +1408,8 @@ class NewsModel extends Model
             $time_start = 0;
         }
 
-        $sql = "SELECT id_news, date::date, title, space_type, operation_type, object_type, content, user_id, preview_img, status, category, tags "
+        $sql = "SELECT id_news, to_char(date,'YYYY-MM-DD HH24:MI:SS') as date, title, space_type, operation_type, object_type, content, user_id, "
+            . "preview_img, status, rating_views, rating_admin, rating_donate "
             . "FROM news_base WHERE (date >= :date) ";
 
         if ($time_start) {
@@ -1364,11 +1428,12 @@ class NewsModel extends Model
             $sql .= "AND (object_type = :object_type) ";
         }
         if ($best) {
-            $sql .= "AND (category = 1) ";
+            $sql .= " ORDER BY rating_admin DESC";
+        } else {
+            $sql .= " ORDER BY date DESC";
         }
+        $sql .= " LIMIT :max_numder";
 
-        $sql .= " ORDER BY date DESC"
-            . " LIMIT :max_numder";
 
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':date', $news_date);
@@ -1399,16 +1464,18 @@ class NewsModel extends Model
      * @param $data - исходные данные объявлений из БД в виде arr[[0]=>arr, [1]=>arr...]
      * @return mixed - преобразованные данные
      */
-    public function prepareNewsPreview($data)
+    public function prepareNewsPreview($data, $translate_indx = TRUE)
     {
         //Строку файлов картинок преобразуем в массив $data['news'][number]['preview_img'][]
         $data = $this->explodePreviewImg($data);
 
         foreach ($data as $key => $value) {
             // Получение имен категорий
-            $data[$key]['space_type'] = $this->translateIndex($data[$key]['space_type'], 'space_type');
-            $data[$key]['operation_type'] = $this->translateIndex($data[$key]['operation_type'], 'operation_type');
-            $data[$key]['object_type'] = $this->translateIndex($data[$key]['object_type'], 'object_type');
+            if ($translate_indx) {
+                $data[$key]['space_type'] = $this->translateIndex($data[$key]['space_type'], 'space_type');
+                $data[$key]['operation_type'] = $this->translateIndex($data[$key]['operation_type'], 'operation_type');
+                $data[$key]['object_type'] = $this->translateIndex($data[$key]['object_type'], 'object_type');
+            }
             // Превью содержания
             $short_len = 60; // длина предпросмотра (short_content) в символах
 
@@ -1502,6 +1569,172 @@ class NewsModel extends Model
         $channel->close();
         $connection->close();
         return $rabbitmq_message_newnews;
+    }
+
+    public function renderBestNewsOfTime($best_news, $best_news_number)
+    {
+        ?>
+        <div class="all-apartments-top">
+            <?php
+            foreach ($best_news as $ad) {
+                ?>
+                <div class="top-block">
+                    <div class="left-wallpaper">
+                        <a href="/news/<?php echo $ad["id_news"]; ?>">
+                            <img src="../../<?php
+                            if (!empty($ad["preview_img"][0])) {
+                                echo 'uploads/images/' . $ad["preview_img"][0];
+                            } else {
+                                echo 'template/images/apartments/1.png';
+                            }
+                            ?>" alt="apartments">
+                        </a>
+                        <p><?php
+                            if (!empty($ad["number_of_rooms"])) echo $ad["number_of_rooms"] . '-комн. ';
+                            switch ($ad["object_type"]) {
+                                case 1;
+                                    echo 'кв.';
+                                    break;
+                                case 2;
+                                    echo 'оф.пл.';
+                                    break;
+                                case 3;
+                                    echo 'торг.пл.';
+                                    break;
+                                case 4;
+                                    echo 'оф.пл. с землей';
+                                    break;
+                                case 5;
+                                    echo 'пр/скл зд.';
+                                    break;
+                                case 6;
+                                    echo 'пр/скл пом. ';
+                                    break;
+                                case 7;
+                                    echo 'рынок';
+                                    break;
+                                case 8;
+                                    echo 'к. ОСЗ';
+                                    break;
+                                case 9;
+                                    echo 'ОСЗ';
+                                    break;
+                                case 10;
+                                    echo 'торг. зд.';
+                                    break;
+                                case 11;
+                                    echo 'комн.';
+                                    break;
+                                case 12;
+                                    echo 'дом';
+                                    break;
+                                case 13;
+                                    echo 'гараж';
+                                    break;
+                                case 14;
+                                    echo 'з/у';
+                                    break;
+                                default;
+                                    echo 'объект';
+                                    break;
+                            }
+                            echo ' ';
+                            if (!empty($ad["space"])) echo $ad["space"] . 'м<sup>2</sup> ';
+                            ?></p>
+                    </div>
+                    <div class="right-information-block">
+                        <span><?php if (!empty($ad["title"])) echo $ad["title"]; ?></span>
+                        <p><?php if (!empty($ad["content"])) echo $ad["content"]; ?></p>
+                        <div class="price-and-view-the-apartment">
+                            <div class="price">
+                                <p><?php if (!empty($ad["metro_station"])) {
+                                        ?><img src="../../template/images/m.png" alt="metro"><?php
+                                        echo $ad["metro_station"];
+                                    }
+                                    if (!empty($ad["time_walk"])) {
+                                        ?>
+                                        <span><img src="../../template/images/people.png"
+                                                   alt=""><?php echo $ad["time_walk"]; ?>
+                                            мин</span>
+                                    <?php } ?></p>
+                                <span class="decorate-number"><?php if (!empty($ad["price"])) echo $ad["price"];
+                                    ?><i class="fa fa-rub" aria-hidden="true"></i><sub><?php
+                                        if (!empty($ad["lease"])) {
+                                            echo '/';
+                                            switch ($ad["lease"]) {
+                                                case 37;
+                                                    echo 'день';
+                                                    break;
+                                                case 138;
+                                                    echo 'нед.';
+                                                    break;
+                                                case 79;
+                                                    echo 'мес.';
+                                                    break;
+                                                case 145;
+                                                    echo 'год';
+                                                    break;
+                                                case 80;
+                                                    echo 'неск. лет';
+                                                    break;
+                                                default;
+                                                    echo 'период';
+                                                    break;
+                                            }
+                                        }
+                                        ?></sub></span>
+                            </div>
+                            <div class="view-the-apartment">
+                                <a href="#"><img src="../../template/images/show.png" alt="show"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php
+            }
+            ?>
+        </div>
+        <div class="see-more">
+            <?php
+            if (!empty($best_news_number)) {
+                $ending = $this->getNumEnding($best_news_number, ['объявление', 'объявления', 'объявлений']);
+
+                if($best_news_number<=9){ ?>
+                    <p>Всего <?php echo $best_news_number .' '.  $ending; ?>.</p>
+                <?php }else { ?>
+                <p>Еще<span><?php echo $best_news_number .'</span> '.  $ending; ?></p>
+                <a href="#">Смотреть все</a>
+            <?php }} else { ?>
+                <p>К сожалению, ничего не найдено.</p>
+            <?php }
+            ?> </div> <?php
+    }
+
+    /**
+     * Функция возвращает окончание для множественного числа слова на основании числа и массива окончаний
+     * @param $number Integer Число на основе которого нужно сформировать окончание
+     * @param $endingArray Array Массив слов или окончаний для чисел (1, 4, 5),
+     *         например array('яблоко', 'яблока', 'яблок')
+     * @return String
+     */
+    public function getNumEnding($number, $endingArray)
+    {
+        $number = $number % 100;
+        if ($number>=11 && $number<=19) {
+            $ending=$endingArray[2];
+        }
+        else {
+            $i = $number % 10;
+            switch ($i)
+            {
+                case (1): $ending = $endingArray[0]; break;
+                case (2):
+                case (3):
+                case (4): $ending = $endingArray[1]; break;
+                default: $ending=$endingArray[2];
+            }
+        }
+        return $ending;
     }
 
 
