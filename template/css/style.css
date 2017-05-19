@@ -758,7 +758,7 @@
 }
 .select .jq-selectbox {
   width: auto !important;
-  min-width: 75% !important;
+  min-width: 33% !important;
 }
 .select .jq-selectbox__select {
   background: none;

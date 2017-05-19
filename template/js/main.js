@@ -389,16 +389,6 @@ function allFilterBlocks(filters) {
                         'width': '85%'
                     });
                 }
-                if (inputLocation !== '') {
-                    setTimeout(function () {
-                        $exactArea.css({
-                            'position': 'relative',
-                            'height': '75px',
-                            'width': '37%',
-                            'display': 'inline-block'
-                        });
-                    }, 8000)
-                }
             }, 1000);
             break;
         case '1':
