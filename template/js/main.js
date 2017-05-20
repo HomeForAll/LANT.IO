@@ -132,7 +132,7 @@ function showBigSearch() {
 
 /** Header меню **/
 function showTopMenuAndSearch() {
-    var $user = $('.user ul');
+    var $user = $('.user');
 
     showAndHideTopMenu = !showAndHideTopMenu;
 
@@ -538,18 +538,22 @@ $("#form_2").on('submit', function(e) {
 /** Рендеринг форм **/
 function renderAllApartments(data) {
     var content = '',
-        resultAllApartments = $('.result-all-apartments'),
-        showResultParametrs = $('.show-result-parametrs'),
+        $resultAllApartments = $('.result-all-apartments'),
+        $showResultParametrs = $('.show-result-parametrs'),
         logicAd = false;
 
-    resultAllApartments.find('div').remove();
+    $resultAllApartments.find('div').remove();
 
     if (!data) {return false;}
 
     for (var i = 0; i < data.length; i++) {
-        var source = $("#entry-template").html(),
-            template = Handlebars.compile(source),
+        var $source = $("#entry-template").html(),
+            $showMoreInformation = $("#show-more-information").html(),
+            template = Handlebars.compile($source),
+            handleHow = Handlebars.compile($showMoreInformation),
             str = data[i].preview_img.split('|')[0];
+
+            console.log('data[i] - ', data[i]);
 
         if (!logicAd) {
             logicAd = true;
@@ -557,20 +561,10 @@ function renderAllApartments(data) {
             data[i].preview_img = str;
         }
 
-        content += template(data[i]);
+        content += handleHow(data[i]) + template(data[i]);
     }
-
-    $('.open-close-ad').click(function (e) {
-        console.log('1');
-        e.preventDefault();
-        showResultParametrs.fadeIn();
-    });
-    $('.close-Ad').click(function (e) {
-        console.log('2');
-        e.preventDefault();
-        showResultParametrs.fadeOut();
-    });
-    resultAllApartments.html(content);
+    $showResultParametrs.css({'display':'none'});
+    $resultAllApartments.html(content);
 }
 //---------------------------------------------------------
 

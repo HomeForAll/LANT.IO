@@ -184,7 +184,7 @@
 }
 
 .show-result-parametrs {
-  display: none; // flex
+  display: flex; // flex
   flex-flow: row wrap;
   justify-content: flex-start;
   align-items: flex-start;
@@ -414,5 +414,25 @@
   }
   a {
     cursor: pointer;
+  }
+}
+
+/** Цена **/
+#main-slider {
+  margin-top: 15px;
+  height: 8px;
+  border-radius: 10px;
+  background: #f7f7f7;
+  border: none;
+  & .ui-slider-range {
+    background: #a5d09d;
+  }
+  span {
+    border: 1px solid #d9d9d9;
+    background: #f6f6f6;
+    top: -6px;
+    border-radius: 100%;
+    cursor: pointer;
+    color: #454545;
   }
 }

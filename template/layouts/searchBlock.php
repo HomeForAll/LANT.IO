@@ -23,14 +23,80 @@
                     <div class="price">
                         <p>
                             <img src="../../template/images/m.png" alt="metro">Рижская<span>
-                        <img src="../../template/images/people.png" alt="">2 мин</span>
+                            <img src="../../template/images/people.png" alt="">2 мин</span>
                         </p>
                         <span class="decorate-number">{{price}}
-                        <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub>
-                    </span>
+                            <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub>
+                        </span>
                     </div>
                     <div class="view-the-apartment">
                         <a href="#" class="open-close-ad"><img src="../../template/images/show.png" alt="show"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script id="show-more-information" type="text/x-handlebars-template">
+        <div class="show-result-parametrs">
+            <div class="left-information-block-apartment">
+                <div class="carousel">
+                    <img src="/uploads/images/{{preview_img}}" alt="apartment">
+                    <ul class="apartments-wallpapers">
+                        <li>
+                            <a><img src="/uploads/images/{{preview_img}}" alt="partners"></a>
+                        </li>
+                        <li>
+                            <a><img src="/uploads/images/{{preview_img}}" alt="partners"></a>
+                        </li>
+                        <li>
+                            <a><img src="/uploads/images/{{preview_img}}" alt="partners"></a>
+                        </li>
+                        <li>
+                            <a><img src="/uploads/images/{{preview_img}}" alt="partners"></a>
+                        </li>
+                        <li>
+                            <a><img src="/uploads/images/{{preview_img}}" alt="partners"></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="small-description">
+                    <span>{{title}}м<sup>2</sup></span>
+                    <p class="apartment-description">{{content}}</p>
+                </div>
+                <div class="price-and-view-the-apartment">
+                    <div class="price">
+                        <span class="decorate-number">{{price}}
+                            <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub>
+                        </span>
+                        <p>
+                            <img src="../../template/images/m.png" alt="metro">Рижская
+                            <span><img src="../../template/images/people-2.png" alt="people">{{distance_from_metro}}мин</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="back-call">
+                    <button class="back-call-web"><i class="fa fa-phone" aria-hidden="true"></i>Звонок через сайт</button>
+                    <button class="back-call-message"><i class="fa fa-envelope" aria-hidden="true"></i>Написать сообщение</button>
+                </div>
+            </div>
+            <div class="right-information-block-apartment">
+                <p>Кол-во<br>комнат<span>{{number_of_rooms}}</span></p>
+                <p>Этаж<span>{{object_located}}</span></p>
+                <p>Безопасность<span>{{equipment}}</span></p>
+                <p>Комплектация<span>Полная</span></p>
+                <p>Высота<br>потолков<span>{{ceiling_height}}м</span></p>
+                <p>Санузел<span>{{bathroom}}</span></p>
+                <p>Жилая<br>площадь<span>{{resedential}}м<sup>2</sup></span></p>
+                <p>Парковка(вок)<span>{{parking}}</span></p>
+                <button>Смотреть полностью</button>
+                <div class="private-person">
+                    <div class="person-user">
+                        <img src="../../template/images/user-test.png" alt="user">
+                        <span>Олег Герасимов</span>
+                        <p>Олег Герасимов</p>
+                    </div>
+                    <div class="ad-close">
+                        <p>Свернуть<a href="#" class="close-Ad"><img src="../../template/images/close.png" alt="clear"></a></p>
                     </div>
                 </div>
             </div>
@@ -673,71 +739,6 @@
             </div>
         </form>
         <div class="result-all-apartments">
-            <div class="show-result-parametrs">
-                <div class="left-information-block-apartment">
-                    <div class="carousel">
-                        <img src="../../template/images/test-apartment.png" alt="apartment">
-                        <ul class="apartments-wallpapers">
-                            <li>
-                                <a><img src="../../template/images/c-a-1.png" alt="partners"></a>
-                            </li>
-                            <li>
-                                <a><img src="../../template/images/c-a-2.png" alt="partners"></a>
-                            </li>
-                            <li>
-                                <a><img src="../../template/images/c-a-3.png" alt="partners"></a>
-                            </li>
-                            <li>
-                                <a><img src="../../template/images/c-a-4.png" alt="partners"></a>
-                            </li>
-                            <li>
-                                <a><img src="../../template/images/c-a-5.png" alt="partners"></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="small-description">
-                        <span>Сдаю квартиру на 1,5 месяца</span>
-                        <p class="apartment-description">Шикарная 2-х комнатная квартира в тихом центре города пешая до метро Фрунзенская, рядом
-                            магазины, парковка, ночной бухло-ларек</p>
-                    </div>
-                    <div class="price-and-view-the-apartment">
-                        <div class="price">
-                            <span class="decorate-number">25 000<i class="fa fa-rub"
-                                                                   aria-hidden="true"></i><sub>/мес</sub></span>
-                            <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img
-                                            src="../../template/images/people.png" alt="">2 мин</span></p>
-                        </div>
-                    </div>
-                    <div class="back-call">
-                        <button class="back-call-web"><i class="fa fa-phone" aria-hidden="true"></i>Звонок через сайт
-                        </button>
-                        <button class="back-call-message"><i class="fa fa-envelope" aria-hidden="true"></i>Написать
-                            сообщение
-                        </button>
-                    </div>
-                </div>
-                <div class="right-information-block-apartment">
-                    <p>Кол-во<br>комнат<span>1</span></p>
-                    <p>Этаж<span>12 из 18</span></p>
-                    <p>Безопасность<span>Консьерж видеонаблюдения</span></p>
-                    <p>Комплектация<span>Полная</span></p>
-                    <p>Высота<br>потолков<span>3.14м</span></p>
-                    <p>Санузел<span>Сомещенный</span></p>
-                    <p>Жилая<br>площадь<span>134м<sup>2</sup></span></p>
-                    <p>Парковка<span>Нет</span></p>
-                    <button>Смотреть полностью</button>
-                    <div class="private-person">
-                        <div class="person-user">
-                            <img src="../../template/images/user-test.png" alt="user">
-                            <span>Олег Герасимов</span>
-                            <p>Олег Герасимов</p>
-                        </div>
-                        <div class="ad-close">
-                            <p>Свернуть<a href="#" class="close-Ad"><img src="../../template/images/close.png" alt="clear"></a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <?php echo $this->content; ?>
         </div>
     </div>
