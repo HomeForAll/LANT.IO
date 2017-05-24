@@ -11,14 +11,14 @@
                 <div class="price">
                     <p>
                         <img src="../../template/images/m.png" alt="metro">Рижская<span>
-                        <img src="../../template/images/people.png" alt="">2 мин</span>
+                            <img src="../../template/images/people.png" alt="">2 мин</span>
                     </p>
                     <span class="decorate-number">{{price}}
-                        <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub>
-                    </span>
+                            <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub>
+                        </span>
                 </div>
                 <div class="view-the-apartment">
-                    <a href="#" class="open-close-ad"><img src="../../template/images/show.png" alt="show"></a>
+                    <button class="open-close-ad"><img src="../../template/images/show.png" alt="show"></button>
                 </div>
             </div>
         </div>

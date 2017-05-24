@@ -32,30 +32,6 @@
   bottom: 30px;
   right: 5px;
   z-index: 800;
-  button {
-    position: relative;
-    cursor: pointer;
-    width: 50px;
-    height: 50px;
-    border-radius: 100%;
-    background: #3d3c32;
-    border: none;
-  }
-  button:before {
-    content: '';
-    display: block;
-    position: absolute;
-    margin-left: 35px;
-    margin-top: -15px;
-    width: 12px;
-    height: 12px;
-    border-radius: 100%;
-    background: #f75a5a;
-  }
-  button > i {
-    color: #fff;
-    font-size: 20px;
-  }
 }
 
 .container-w-0 {
@@ -113,6 +89,30 @@
     display: inline-block;
     vertical-align: middle;
     margin: auto 5px;
+  }
+  button {
+    position: relative;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    background: #3d3c32;
+    border: none;
+  }
+  button:before {
+    content: '';
+    display: block;
+    position: absolute;
+    margin-left: 35px;
+    margin-top: -15px;
+    width: 12px;
+    height: 12px;
+    border-radius: 100%;
+    background: #f75a5a;
+  }
+  button > i {
+    color: #fff;
+    font-size: 20px;
   }
 }
 
@@ -747,6 +747,7 @@
     }
   }
   & .jq-selectbox__select {
+    font-size: 13px;
     padding: 0 25px 0 0;
   }
   & .jq-selectbox {
@@ -1864,6 +1865,14 @@
   }
 }
 
+.open-close-ad {
+  width: auto;
+  cursor: pointer;
+  height: auto;
+  background: none;
+  border: none;
+}
+
 .show-apartments {
   display: inline-block;
   vertical-align: top;
@@ -1874,6 +1883,12 @@
     margin-top: 18px;
     width: auto;
     height: auto;
+  }
+  button {
+    width: auto;
+    height: auto;
+    background: none;
+    border: none;
   }
 }
 
@@ -2351,7 +2366,7 @@
   margin: 0 -12px -5px 0;
   text-align: right;
   img {
-    width:  42px;
+    width: 42px;
   }
 }
 
@@ -3172,7 +3187,7 @@
   .view-the-apartment {
     margin-right: 0;
     img {
-      width: 30px;
+      width: 32px;
     }
   }
   .decorate-number span {

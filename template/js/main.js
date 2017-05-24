@@ -13,6 +13,17 @@ var productSearch, showAndHideTopMenu, boolean, rootBlock, showFilter, openMap =
         })
     };
 
+$(document).ready(function () {
+    $.ajax({
+        method: 'POST',
+        url: '/search',
+        dataType: 'Json',
+        success: function(form_data) {
+            renderAllApartments(form_data);
+        }
+    });
+});
+
 /** Инициализация Paralax **/
 $('#scene').parallax({
     calibrateX: false,
@@ -351,6 +362,11 @@ function allFilterBlocks(filters) {
         };
 
     $valueText.find('img').detach();
+    switch ($valueText) {
+        case ($(this).attr('num-4')) :
+            console.log('num-4', $(this));
+            break;
+    }
 
     $('.advanced-search-options').find('.building-parameters-apartment,' +
         ' .building-parameters-home, .building-parameters-room, .building-parameters-office-area,' +
@@ -514,6 +530,11 @@ function closeFixedBlock() {
 }
 //---------------------------------------------------------
 
+$('#form_1').on('submit', function () {
+    $(this).serialize();
+    renderAllApartments($(this));
+});
+
 /** Получение и отправка данных через Ajax **/
 $("#form_2").on('submit', function(e) {
     var form_data = $(this).serialize(); // собераем все данные из формы
@@ -538,33 +559,40 @@ $("#form_2").on('submit', function(e) {
 /** Рендеринг форм **/
 function renderAllApartments(data) {
     var content = '',
-        $resultAllApartments = $('.result-all-apartments'),
-        $showResultParametrs = $('.show-result-parametrs'),
-        logicAd = false;
+        $resultAllApartments = $('.result-all-apartments');
 
-    $resultAllApartments.find('div').remove();
+    $resultAllApartments.find('div', $(this).remove());
 
-    if (!data) {return false;}
+    if (!data) {
+        console.log('Данные не полные');
+        return false;
+    }
 
     for (var i = 0; i < data.length; i++) {
         var $source = $("#entry-template").html(),
-            $showMoreInformation = $("#show-more-information").html(),
-            template = Handlebars.compile($source),
-            handleHow = Handlebars.compile($showMoreInformation),
-            str = data[i].preview_img.split('|')[0];
+            template = Handlebars.compile($source);
 
-            console.log('data[i] - ', data[i]);
+        if (data[i] === undefined) {return}
 
-        if (!logicAd) {
-            logicAd = true;
-        } else {
-            data[i].preview_img = str;
-        }
+        data[i].preview_img = data[i].preview_img.split('|')[0];
 
-        content += handleHow(data[i]) + template(data[i]);
+        content += template(data[i]);
+        addNewRenderForm(data[i]);
     }
-    $showResultParametrs.css({'display':'none'});
     $resultAllApartments.html(content);
+}
+
+/** Дополнительная информаионная форма **/
+function addNewRenderForm() {
+    var openForm = $('.open-close-ad'),
+        result = $('.result-all-apartments');
+
+    result.prepend('#show-more-information');
+
+    openForm.on('click', function () {
+        console.log('Отследили клик');
+        result.append('#entry-template');
+    })
 }
 //---------------------------------------------------------
 

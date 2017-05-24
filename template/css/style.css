@@ -15,30 +15,6 @@
   right: 5px;
   z-index: 800;
 }
-.navigation button {
-  position: relative;
-  cursor: pointer;
-  width: 50px;
-  height: 50px;
-  border-radius: 100%;
-  background: #3d3c32;
-  border: none;
-}
-.navigation button:before {
-  content: '';
-  display: block;
-  position: absolute;
-  margin-left: 35px;
-  margin-top: -15px;
-  width: 12px;
-  height: 12px;
-  border-radius: 100%;
-  background: #f75a5a;
-}
-.navigation button > i {
-  color: #fff;
-  font-size: 20px;
-}
 .container-w-0 {
   width: 1400px;
   margin: auto;
@@ -96,6 +72,30 @@
   display: inline-block;
   vertical-align: middle;
   margin: auto 5px;
+}
+.user button {
+  position: relative;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  background: #3d3c32;
+  border: none;
+}
+.user button:before {
+  content: '';
+  display: block;
+  position: absolute;
+  margin-left: 35px;
+  margin-top: -15px;
+  width: 12px;
+  height: 12px;
+  border-radius: 100%;
+  background: #f75a5a;
+}
+.user button > i {
+  color: #fff;
+  font-size: 20px;
 }
 .users-information {
   position: relative;
@@ -706,6 +706,7 @@
   color: #000 !important;
 }
 .select .jq-selectbox__select {
+  font-size: 13px;
   padding: 0 25px 0 0;
 }
 .select .jq-selectbox {
@@ -2190,6 +2191,13 @@
   font-size: 17px;
   vertical-align: middle;
 }
+.open-close-ad {
+  width: auto;
+  cursor: pointer;
+  height: auto;
+  background: none;
+  border: none;
+}
 .show-apartments {
   display: inline-block;
   vertical-align: top;
@@ -2201,6 +2209,12 @@
   margin-top: 18px;
   width: auto;
   height: auto;
+}
+.show-apartments button {
+  width: auto;
+  height: auto;
+  background: none;
+  border: none;
 }
 .location {
   display: block;
@@ -3498,7 +3512,7 @@ li p {
     margin-right: 0;
   }
   .view-the-apartment img {
-    width: 30px;
+    width: 32px;
   }
   .decorate-number span {
     font-size: 22px;

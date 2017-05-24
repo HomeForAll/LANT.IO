@@ -24,10 +24,10 @@
                     <li><a href="#"><img src="../../template/images/m4.png" alt="menu">Настройка профиля</a></li>
                     <li><a href="#"><img src="../../template/images/m5.png" alt="menu">Выйти из системы</a></li>
                 </ul>
+                <button class="show-and-hide-menu" onclick="showTopMenuAndSearch();">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                </button>
             </div>
-            <button class="show-and-hide-menu" onclick="showTopMenuAndSearch();">
-                <i class="fa fa-bars" aria-hidden="true"></i>
-            </button>
         </div>
     </div>
 <?php } ?>
