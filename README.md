@@ -24,13 +24,8 @@ git rebase dev
 git push -f origin [НАЗВАНИЕ ВАШЕЙ ВЕТКИ]
 ```
 
-Далее, делаем **Сreate Pull Request** на гитхабе из вашей ветки в **DEV**:
+Далее, создаем запрос **Сreate Pull Request** из вашей ветки в **DEV**:
 
 ![Новый запрос](http://images.lant.io/new_req.PNG)
 
 ![Создать запрос](http://images.lant.io/create_req.PNG)
-
-После проделанных операций заходим в **Pull requests**, находим наш запрос, заходим и если все изменения, и исправления предложенные другими разработчиками внесены, жмем **Merge pull request**:
-![Создать запрос](http://images.lant.io/merge_request.PNG)
-
-Все, ваши изменения были внесены.
