@@ -1,7 +1,6 @@
 <h3>Продажа комнаты</h3>
 <input type="hidden" name="category" value="11">
 
-       
         <fieldset>
         <legend>Базовая информация</legend>
         <div  class="spoiler_button"> + </div>

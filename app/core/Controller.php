@@ -4,27 +4,38 @@ class Controller extends Access
 {
     use PrintHelper;
 
-    protected $model;
     protected $view;
+    protected $models;
     protected $access;
     
-    public function __construct($template, $model)
+    public function __construct($layout)
     {
-        $this->view  = new View($template);
-        $this->model = $this->getModel($model);
+        $this->view  = View::instance($layout);
 
         if (isset($_SESSION['userID']) ){
-            $this->access = $this->checkAccessLevel($_SESSION['status']);
+            $this->access = $this->checkAccessLevel();
         }
     }
-    
-    private function getModel($model)
+
+    /**
+     * Записывает экземпляр класса модели в массив $this->models и передает его в View
+     *
+     * @param Model $model
+     */
+    protected function setModel(Model $model)
     {
-        if (file_exists(ROOT_DIR . '/app/models/' . $model . '.php')) {
-            return new $model;
-        }
-        
-        return false;
+        $this->view->setModel($model);
+        $this->models[$model->getClassName()] = $model;
+    }
+
+    /**
+     * Возвращает экземпляр класса модели из $this->models по имени
+     *
+     * @param string $name
+     * @return mixed
+     */
+    public function model($name) {
+        return $this->models[$name];
     }
 
     protected function ifAJAX(callable $callback)

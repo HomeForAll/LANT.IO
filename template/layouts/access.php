@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title><?php echo $this->title; ?></title>
     <link rel="stylesheet" href="/template/css/fonts.css">
     <link rel="stylesheet" href="/template/css/jquery.scrollbar.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">

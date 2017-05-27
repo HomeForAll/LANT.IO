@@ -2,6 +2,11 @@
 
 class NewsController extends Controller
 {
+    public function __construct($template)
+    {
+        parent::__construct($template);
+        $this->setModel(new NewsModel());
+    }
 
     //Функция выводит заданное количество новостей из базы данных
     public function actionNews_list($params)
@@ -16,11 +21,11 @@ class NewsController extends Controller
         //Если это первый запуск или произошел выбор параметров просмотра
         //Установка начальных параметров и Запись в SESSION
         if (!empty($_POST['watch_news_list']) || empty($params)) {
-            $this->model->setSessionForNewsList();
+            $this->model('NewsModel')->setSessionForNewsList();
         }
 
-        $data = $this->model->getNewsList($params);
-        $data['last_viewed_news'] = $this->model->getLastViewedNews();
+        $data = $this->model('NewsModel')->getNewsList($params);
+        $data['last_viewed_news'] = $this->model('NewsModel')->getLastViewedNews();
 
         $this->view->render('news_list', $data);
     }
@@ -34,9 +39,9 @@ class NewsController extends Controller
         }
 
         //Получение данных из БД
-        $news = $this->model->getNewsById($params);
+        $news = $this->model('NewsModel')->getNewsById($params);
         //Удаление NULL и "0" параметров и назначение имен существующим, для вывода
-        $news = $this->model->prepareNewsView($news);
+        $news = $this->model('NewsModel')->prepareNewsView($news);
 
         $this->view->render('news_id', $news);
     }
@@ -54,18 +59,16 @@ class NewsController extends Controller
         $news_error = [];
         $news_to_edit = [];
         $data = [];
+        if(isset($_POST['space_type']) && isset($_POST['operation_type']) && isset($_POST['object_type'])){
+            $space_type = (int)$_POST['space_type'];
+            $operation_type = (int)$_POST['operation_type'];
+            $object_type = (int)$_POST['object_type'];
+        }
 
         // Проверка доступа
-        if (!empty($_SESSION['userID'])) {
-            $access = $this->checkAccessLevel($_SESSION['status']);
-            if (!$access['add_news']) {
-                $this->view->render('no_access');
-                return;
-            }
-        } else {
-            $this->view->render('login');
-            return;
-        }
+        $this->getAccessFor('add_news');
+
+
         // Определяем: Если есть id новости => update или вывод формы для редактирования
         if (!empty((int)$params)) {
             $news_to_edit_id = (int)$params;
@@ -77,11 +80,11 @@ class NewsController extends Controller
             if (!empty($_POST['title']) || !empty($_POST["submit_editor"])) {
 
                 //Записываем картинки на сервер ($preview_img = имена файлов)
-                $preview_img = $this->model->saveNewsPictures();
+                $preview_img = $this->model('NewsModel')->saveNewsPictures();
                 //Приводим данные POST для добавления в БД
-                $form_data = $this->model->getFormData($preview_img);
+                $form_data = $this->model('NewsModel')->getFormData($preview_img);
                 // Апдейт БД
-                if ($this->model->makeNewsUpdate($news_to_edit_id, $form_data)) {
+                if ($this->model('NewsModel')->makeNewsUpdate($news_to_edit_id, $form_data)) {
                     // Добавление сообщения
                     array_push($news_message,
                         'Новость: "' . $_POST['title'] . '" успешно отредактирована!');
@@ -93,12 +96,15 @@ class NewsController extends Controller
 
 
 // Загружаем новость для редактирования из БД в $news_to_edit 
-            $news_to_edit = $this->model->getNewsById($news_to_edit_id);
+            $news_to_edit = $this->model('NewsModel')->getNewsById($news_to_edit_id);
             //Проверяем наличие данной новости
             if (isset($news_to_edit['id_news'])) {
-                $this->model->setSessionForEditor($news_to_edit);
-                $category = $this->model->translateIndex($news_to_edit['category'],
-                    'category_eng');
+                $this->model('NewsModel')->setSessionForEditor($news_to_edit);
+                // тип формы
+                $space_type = $news_to_edit['space_type'];
+                $operation_type = $news_to_edit['operation_type'];
+                $object_type = $news_to_edit['object_type'];
+
             } else {
                 //Если нет новости с данным id -> переход обратно в мои объявления
                 $this->actionNews_myad('');
@@ -106,30 +112,26 @@ class NewsController extends Controller
             }
 
             //Проверка на владельца новости и уровня доступа к редактированию
-            if (!$access['news_admin'] && ($news_to_edit["author_name"] != $_SESSION['userID'])) {
-                $this->view->render('no_access');
-                return;
+            if ($news_to_edit["user_id"] != $_SESSION['userID']) {
+                $this->getAccessFor('admin_news');
             }
         } else {
 
 // Если это не конкретная новость:
 //
-// Категория новостей из строки параметров
-            $category = $params;
-
 // Определяем, Если есть $_POST => запись новость, иначе => вывод пустой формы для записи
 // Добавление новости в БД (если POST )
             if (!empty($_POST['submit_editor'])) {
 
                 if (!empty($_POST['title'])) {
                     //Записываем картинки на сервер ($preview_img = имена файлов)
-                    $preview_img = $this->model->saveNewsPictures();
+                    $preview_img = $this->model('NewsModel')->saveNewsPictures();
 
                     //Приводим данные POST для добавления в БД
-                    $form_data = $this->model->getFormData($preview_img);
+                    $form_data = $this->model('NewsModel')->getFormData($preview_img);
 
                     //Записываем в БД
-                    if ($this->model->makeNewsInsert($form_data)) {
+                    if ($this->model('NewsModel')->makeNewsInsert($form_data)) {
                         // Добавление сообщения
                         array_push($news_message,
                             'Новость: "' . $_POST['title'] . '" успешно добавлена');
@@ -141,13 +143,21 @@ class NewsController extends Controller
                     array_push($news_error,
                         'Новость: "' . $_POST['title'] . '" не удалось добавить так как не заполнены все поля!');
                 }
+                //JSON формат новости и отсылка на RabbitMQ
+                $news_rabbitmq = json_encode($form_data);
+                $this->model('NewsModel')->sendNewNewsByRabbitMQ(json_encode($form_data));
             }
         } // окончание else (если в строке ввода не id новости
 // Объеденяем массивы данных в один для передачи data[] = параметры новости (если редактирование новости) + массив-лист всех новостей + массив сообщений
         $data = $news_to_edit;
         $data['message'] = $news_message;
         $data['error'] = $news_error;
-        $data['category'] = $category;
+
+        $data['space_type'] = $space_type;
+        $data['operation_type'] = $operation_type;
+        $data['object_type'] = $object_type;
+        $data['form_name'] = $space_type.'_'.$operation_type.'_'.$object_type;
+        $data['form_path'] = 'app/views/news/'.$data['form_name'].'.php';
 
         $this->view->render('news_editor', $data);
     }
@@ -162,24 +172,25 @@ class NewsController extends Controller
 
         if (!empty($_SESSION['userID'])) {
 
-            $data['author_name'] = $_SESSION['userID'];
+            $data['user_id'] = (int)$_SESSION['userID'];
             $news_list = [];
-            // Изменение статуса новостей и удаление для определенной таблицы $table
-            if (!empty($_POST['submit_status'])) {
-                $this->model->makeNewsStatus();
+            // Изменение статуса новостей и удаление
+            if(!empty($_POST['submit_status'])){
+                //Запись $_POST параметров в БД
+                $this->model('NewsModel')->makeNewsStatus();
             }
 
 // Загружаем из БД список всех новостей и формируем проверочный массив статуса stat_arr[id_news] => [status]
 // Сессия  $_SESSION['stat_arr'] - статус пока еще не отредактированных новостей
-            $news_list = $this->model->getMyNewsList($data['author_name']);
+            $news_list = $this->model('NewsModel')->getMyNewsList($data['user_id']);
 
 
-// записываем в SESSION массив(stat_arr) из id=>status для сравнения изменений статуса
-            $stat_arr = array();
-            foreach ($news_list as $k => $i) {
-                $stat_arr += array($i['id_news'] => $i['status']);
-            }
-            $_SESSION['stat_arr'] = $stat_arr;
+//// записываем в SESSION массив(stat_arr) из id=>status для сравнения изменений статуса
+//            $stat_arr = array();
+//            foreach ($news_list as $k => $i) {
+//                $stat_arr += array($i['id_news'] => $i['status']);
+//            }
+//            $_SESSION['stat_arr'] = $stat_arr;
         } else {
 
             array_push($news_error,

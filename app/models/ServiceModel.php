@@ -180,9 +180,8 @@ class ServiceModel extends Model
             $ser_name_id = 'service_id';
         }
 
-        //Проверка прав на удаление сервиса
-        if (!$access) {
-            $sql = 'SELECT owner_id   FROM services WHERE ' . $ser_name_id . ' = :service_id';
+            // Получение данных об удаляемом сервисе (owner_id, service_group_id)
+            $sql = 'SELECT owner_id, service_group_id FROM services WHERE ' . $ser_name_id . ' = :service_id';
             if ($group) {
                 $sql = $sql . ' OR service_id = :service_id2';
             }
@@ -192,28 +191,52 @@ class ServiceModel extends Model
                 $stmt->bindParam(':service_id2', $service_id);
             }
             $stmt->execute();
-            $owner_id = $stmt->fetch(PDO::FETCH_NUM);
+            $ser_param = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            if ((int)$owner_id[0] != $user) {
+        //Проверка прав на удаление сервиса по id, если нет админ прав access['admin_service']
+        if (!$access) {
+            // Проверка на соответствие id пользователя и id владельца сервиса
+            if ((int)$ser_param['owner_id'] != $user) {
                 return FALSE;
             }
-
         }
 
-
+        // Удаление сервиса или группы сервисов
         $sql = 'DELETE FROM services WHERE ' . $ser_name_id . ' = :service_id';
         if ($group) {
             $sql = $sql . ' OR service_id = :service_id2';
         }
-
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':service_id', $service_id);
         if ($group) {
             $stmt->bindParam(':service_id2', $service_id);
         }
+        if(!$stmt->execute()) { return FALSE;};
 
-
-        return ($stmt->execute());
+        //Когда из группы удаляется parent элемент => перезапись parent
+        if (!$group && $ser_param['service_group_id'] == 'parent'){
+            // Получение id всей группы из БД
+            $sql = 'SELECT service_id FROM services WHERE service_group_id = :service_id ORDER BY service_id';
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(':service_id', $service_id);
+            $stmt->execute();
+            $ser_group_id = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            //Если остался только один сервис => single
+            if(count($ser_group_id) == 1){
+                $new_ser_group_id = 'single';
+            } else {
+                $new_ser_group_id = 'parent';
+            }
+            //Перезапись первой опции группы
+            $sql = 'UPDATE services SET service_id = :service_id_2, service_group_id = :new_ser_group_id '
+                .'WHERE service_id = :service_id_1';
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(':service_id_1', $ser_group_id[0]['service_id']);
+            $stmt->bindParam(':service_id_2', $service_id);
+            $stmt->bindParam(':new_ser_group_id', $new_ser_group_id);
+            if(!$stmt->execute()) { return FALSE;}
+        }
+        return TRUE;
     }
 
     private function sortServices($res)
@@ -377,6 +400,14 @@ class ServiceModel extends Model
         $stmt->execute();
         $my_sub_serv = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $my_sub_serv;
+    }
+
+    //Метод возвращающий количество услуг сайта
+    public function getNumberOfServices(){
+        $sql = 'SELECT COUNT(*) FROM services WHERE service_group_id = \'parent\' OR service_group_id = \'single\'';
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchColumn();
     }
 
 

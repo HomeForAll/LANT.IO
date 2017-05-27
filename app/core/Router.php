@@ -6,8 +6,8 @@ class Router
     
     public function __construct()
     {
-        $routesPath   = ROOT_DIR . '/app/config/routes.php';
-        $this->routes = require $routesPath;
+        $redis = Registry::get('redis');
+        $this->routes = unserialize($redis->get('routes'));
     }
     
     /**
@@ -29,7 +29,7 @@ class Router
                 $action = $options['action'];
                 
                 if (file_exists(ROOT_DIR . '/app/controllers/' . $options['controller'] . '.php')) {
-                    $controllerObject = new $options['controller']($options['template'], $options['model']);
+                    $controllerObject = new $options['controller']($options['template']);
                     $controllerObject->$action($options['params']);
                 }
             }
@@ -67,8 +67,7 @@ class Router
     {
         $route    = preg_replace("~^{$pattern}$~", $path, $uri);
         $segments = explode('/', $route);
-        $template = 'main';
-        
+
         if (STATUS == '1') {
             $db = new DataBase();
             $stmt = $db->prepare("SELECT * FROM access WHERE key = :key");
@@ -79,7 +78,7 @@ class Router
 
             if (isset($_SESSION['access'])) {
                 if ($result['status'] == 1) {
-                    $template = strtolower(array_shift($segments));
+                    $template = array_shift($segments);
                     $controller = array_shift($segments);
                     $action = array_shift($segments);
                 } else {
@@ -104,7 +103,6 @@ class Router
             'template' => $template,
             'controller' => ucfirst($controller) . 'Controller',
             'action' => 'action' . ucfirst($action),
-            'model' => ucfirst($controller) . 'Model',
             'params' => $segments,
         );
     }

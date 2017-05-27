@@ -8,7 +8,7 @@ class UserModel extends Model
 
     public function __construct()
     {
-        $this->db = new DataBase();
+        parent::__construct();
         $this->socialNets = new SocialNets('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
     }
 
@@ -17,7 +17,7 @@ class UserModel extends Model
         $data = $this->getUserData($_POST['login'], $_POST['password']);
 
         if ($data) {
-            $this->atLogin($data['userID'], $data['status'], $data['personaName']);
+            $this->atLogin($data['userID'], $data['status'], $data['firstName'], $data['lastName']);
         } else {
             $errors = '<span style="color: red;">Вы указали неверные сведения или пользователь не существует.</span><br>';
 
@@ -87,7 +87,7 @@ class UserModel extends Model
 
     private function checkFirstName($first_name)
     {
-        $errors = array();
+        $errors = [];
 
         if ($first_name == '') {
             $errors[] = 'Вы должны указать имя.';
@@ -97,7 +97,7 @@ class UserModel extends Model
 
     private function checkLastName($last_name)
     {
-        $errors = array();
+        $errors = [];
 
         if ($last_name == '') {
             $errors[] = 'Вы должны указать фамилию.';
@@ -108,7 +108,7 @@ class UserModel extends Model
 
     private function checkPatronymic($patronymic)
     {
-        $errors = array();
+        $errors = [];
 
         if ($patronymic == '') {
             $errors[] = 'Вы должны указать отчество.';
@@ -119,7 +119,7 @@ class UserModel extends Model
 
     private function checkBirthday($birthday)
     {
-        $errors = array();
+        $errors = [];
 
         if ($birthday == '') {
             $errors[] = 'Укажите дату рождения.';
@@ -129,7 +129,7 @@ class UserModel extends Model
 
     private function checkPhone($phone)
     {
-        $errors = array();
+        $errors = [];
 
         if ($phone == '') {
             $errors[] = 'Телефон не может быть пустым.';
@@ -139,7 +139,7 @@ class UserModel extends Model
 
     private function checkEmail($email)
     {
-        $errors = array();
+        $errors = [];
 
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $stmt = $this->db->prepare("SELECT * FROM users WHERE email = :email");
@@ -158,7 +158,7 @@ class UserModel extends Model
 
     private function checkPassword($password)
     {
-        $errors = array();
+        $errors = [];
 
         if ($password == '') {
             $errors[] = 'Вы не указали пароль.';
@@ -179,29 +179,31 @@ class UserModel extends Model
             $login = $this->extractPhoneNumber($login);
         }
 
-        $query->execute(array(':login' => $login));
+        $query->execute([':login' => $login]);
         $result = $query->fetch();
 
         if ($result) {
             if (password_verify($password, $result['password'])) {
-                return array(
-                    'userID' => $result['id'],
-                    'status' => $result['status'],
-                    'personaName' => $result['first_name'] . ' ' . $result['last_name']
-                );
+                return [
+                    'userID'    => $result['id'],
+                    'status'    => $result['status'],
+                    'firstName' => $result['first_name'],
+                    'lastName'  => $result['last_name'],
+                ];
             }
         }
 
         return false;
     }
 
-    private function atLogin($userID, $userStatus, $personaName)
+    private function atLogin($userID, $userStatus, $firstName, $lastName)
     {
         $secret_key = 'secret';
 
         $_SESSION['authorized'] = true;
         $_SESSION['userID'] = $userID;
-        $_SESSION['personaName'] = $personaName;
+        $_SESSION['firstName'] = $firstName;
+        $_SESSION['lastName'] = $lastName;
         $_SESSION['user_hash'] = hash('sha512', 'user_id=' . $userID . 'secret_key=' . $secret_key);
         $this->activityWrite($userID);
         $_SESSION['status'] = $userStatus;
@@ -238,7 +240,7 @@ class UserModel extends Model
             curl_setopt($curl, CURLOPT_POST, true);
             curl_setopt($curl, CURLOPT_POSTFIELDS, "ipaddress=$ip");
             $out = curl_exec($curl);
-            $matches = array();
+            $matches = [];
             preg_match_all("~td.*</td>~i", $out, $matches);
             $found_match = $matches[0][4];
             preg_match_all("~>.*<~i", $found_match, $matches);
@@ -255,7 +257,10 @@ class UserModel extends Model
         $str_for_active = $str_for_active . $info[0][0];
         $str_for_active = trim($str_for_active, ';');
         $query = $this->db->prepare("UPDATE users SET active_text = :active WHERE id = :id");
-        $query->execute(array(":active" => $str_for_active, ":id" => $userID));
+        $query->execute([
+            ":active" => $str_for_active,
+            ":id"     => $userID,
+        ]);
 
         $device = new Detection\MobileDetect();
         $device_name = 'PC';
@@ -405,19 +410,19 @@ class UserModel extends Model
             }
 
             $query->execute([
-                ':firstName' => $first_name,
-                ':lastName' => $last_name,
-                ':phoneNumber' => $phone_number,
-                ':email' => $email,
-                ':password' => $password_hash,
-                ':serviceID' => $service_id,
-                ':serviceName' => $name,
+                ':firstName'     => $first_name,
+                ':lastName'      => $last_name,
+                ':phoneNumber'   => $phone_number,
+                ':email'         => $email,
+                ':password'      => $password_hash,
+                ':serviceID'     => $service_id,
+                ':serviceName'   => $name,
                 ':serviceAvatar' => $avatar,
             ]);
 
             if ($query->rowCount()) {
                 $this->clearOAuth();
-                return array('result' => true);
+                return ['result' => true];
             }
         } else {
             $email = trim($_POST['email']);
@@ -431,17 +436,17 @@ class UserModel extends Model
 
             $query = $this->db->prepare("INSERT INTO users (first_name, last_name, patronymic, birthday, phone_number, email, password) VALUES (:firstName, :lastName, :patronymic, :birthday, :phoneNumber, :email, :password)");
             $query->execute([
-                ':firstName' => $first_name,
-                ':lastName' => $last_name,
-                ':patronymic' => $patronymic,
-                ':birthday' => $birthday,
+                ':firstName'   => $first_name,
+                ':lastName'    => $last_name,
+                ':patronymic'  => $patronymic,
+                ':birthday'    => $birthday,
                 ':phoneNumber' => $phone_number,
-                ':email' => $email,
-                ':password' => $password_hash,
+                ':email'       => $email,
+                ':password'    => $password_hash,
             ]);
 
             if ($query->rowCount()) {
-                return array('result' => true);
+                return ['result' => true];
             }
         }
 
@@ -490,15 +495,15 @@ class UserModel extends Model
 
     public function OAuthLogin($service, $id)
     {
-        $services = array(
-            'vk' => 'vk_id',
-            'ok' => 'ok_id',
-            'mail' => 'mail_id',
-            'ya' => 'ya_id',
+        $services = [
+            'vk'     => 'vk_id',
+            'ok'     => 'ok_id',
+            'mail'   => 'mail_id',
+            'ya'     => 'ya_id',
             'google' => 'google_id',
-            'fb' => 'facebook_id',
-            'steam' => 'steam_id',
-        );
+            'fb'     => 'facebook_id',
+            'steam'  => 'steam_id',
+        ];
 
         $result = $this->db->select('*')->from('users')->where($services[$service], '=', trim($id))->execute();
 

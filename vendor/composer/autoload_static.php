@@ -4,9 +4,14 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitcfb7b422eed57f5af675a7889d3e5600
+class ComposerStaticInita69e9fcf458d58d632af20f52356c4f2
 {
     public static $prefixLengthsPsr4 = array (
+        'P' => 
+        array (
+            'Predis\\' => 7,
+            'PhpAmqpLib\\' => 11,
+        ),
         'F' => 
         array (
             'Foolz\\SphinxQL\\' => 15,
@@ -14,6 +19,14 @@ class ComposerStaticInitcfb7b422eed57f5af675a7889d3e5600
     );
 
     public static $prefixDirsPsr4 = array (
+        'Predis\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/predis/predis/src',
+        ),
+        'PhpAmqpLib\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-amqplib/php-amqplib/PhpAmqpLib',
+        ),
         'Foolz\\SphinxQL\\' => 
         array (
             0 => __DIR__ . '/..' . '/foolz/sphinxql-query-builder/src',
@@ -31,6 +44,7 @@ class ComposerStaticInitcfb7b422eed57f5af675a7889d3e5600
     );
 
     public static $classMap = array (
+        'IP2Location\\Database' => __DIR__ . '/..' . '/ip2location/ip2location-php/IP2Location.php',
         'Mobile_Detect' => __DIR__ . '/..' . '/mobiledetect/mobiledetectlib/Mobile_Detect.php',
         'SphinxClient' => __DIR__ . '/..' . '/neutron/sphinxsearch-api/sphinxapi.php',
     );
@@ -38,10 +52,10 @@ class ComposerStaticInitcfb7b422eed57f5af675a7889d3e5600
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitcfb7b422eed57f5af675a7889d3e5600::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitcfb7b422eed57f5af675a7889d3e5600::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitcfb7b422eed57f5af675a7889d3e5600::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInitcfb7b422eed57f5af675a7889d3e5600::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInita69e9fcf458d58d632af20f52356c4f2::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInita69e9fcf458d58d632af20f52356c4f2::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInita69e9fcf458d58d632af20f52356c4f2::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInita69e9fcf458d58d632af20f52356c4f2::$classMap;
 
         }, null, ClassLoader::class);
     }

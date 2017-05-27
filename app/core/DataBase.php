@@ -2,15 +2,16 @@
 
 class DataBase extends PDO
 {
-    private $settings;
+    private $config;
     private $columns;
     private $from;
     private $where = array();
 
     public function __construct()
     {
-        $this->settings = require __DIR__ . '/../config/settings.php';
-        parent::__construct('pgsql:host=' . $this->settings['db_host'] . ';port=5432;dbname=' . $this->settings['db'], $this->settings['db_username'], $this->settings['db_password']);
+        $redis = Registry::get('redis');
+        $this->config = unserialize($redis->get('config'));
+        parent::__construct('pgsql:host=' . $this->config['db_host'] . ';port=5432;dbname=' . $this->config['db'], $this->config['db_username'], $this->config['db_password']);
     }
 
     /**
@@ -85,12 +86,14 @@ class DataBase extends PDO
                 if ($key == 0) {
                     $query .= ' WHERE ' . $where['column'] . ' ' . $where['operator'] . ' \'' . $where['value']. '\'';
                 } else {
-                    $query .= ' AND ' . $where['column'] . ' ' . $where['operator'] . ' ' . $where['value'];
+                    $query .= ' AND ' . $where['column'] . ' ' . $where['operator'] . ' \'' . $where['value']. '\'';
                 }
             }
         }
 
+
         $result = $this->query($query)->fetchAll();
+
         return $result;
     }
 }

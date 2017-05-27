@@ -10,6 +10,7 @@ class CabinetModel extends Model
 
     public function __construct()
     {
+        parent::__construct();
         $this->db = new DataBase();
     }
 
@@ -1824,7 +1825,7 @@ class CabinetModel extends Model
         );
     }
 
-    private function getUser($user_id)
+    public function getUser($user_id)
     {
         $query = $this->db->prepare("SELECT * FROM users WHERE id = :user_id");
         $query->execute([':user_id' => $user_id]);

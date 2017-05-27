@@ -1,5 +1,31 @@
-# CLOSE ALPHA PRE-RELEASE
+## Цикл внесения изменений в ветку DEV:
+Для начала работы над ошибкой, дефектом или разработки полученного задания, переключаемся в ветку **DEV** и получаем ее последнюю версию:  
+```
+git checkout dev
+git pull origin dev
+```
+Создаем новую ветку из **DEV**, в названии должно присутствовать несколько слов указывающих с чем ведется работа: 
+```
+git checkout -b bug-login
+git checkout -b implement_payment_system
+```
+Или другие подобные имена.
 
-[![N|Solid](http://advbh.com/images/confidential.png)](https://nodesource.com/products/nsolid)
+Вносим изменения в созданную ветку. За время вашей работы, в ветку **DEV**, дргуие разработчики уже могли внести изменения, 
+поэтому снова получаем последние изменения, что бы избежать конфликтов:
+```
+git checkout dev
+git pull origin dev
+```
+Затем вливаем все изменения произошедшие в ветке **DEV** в вашу ветку:
+```
+git checkout [НАЗВАНИЕ ВАШЕЙ ВЕТКИ]
+git rebase dev
+git push -f origin [НАЗВАНИЕ ВАШЕЙ ВЕТКИ]
+```
 
-### 
+Далее, создаем запрос **Сreate Pull Request** из вашей ветки в **DEV**:
+
+![Новый запрос](http://images.lant.io/new_req.PNG)
+
+![Создать запрос](http://images.lant.io/create_req.PNG)

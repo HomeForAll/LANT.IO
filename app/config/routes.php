@@ -1,9 +1,9 @@
 <?php
 
 return array(
-    // 'URI' => 'template/controller/action'
-    '' => 'main/site/index',
-    'search' => 'main/search/index',
+    '' => 'web_build/site/index',
+    'search' => 'searchBlock/search/index',
+    'search-test' => 'main/search/test',
 
     'registration' => 'main/user/registration',
     'registration/([a-z]+)' => 'main/user/registration/$1',
@@ -62,5 +62,11 @@ return array(
     'news' => 'main/news/news_list',
 
     'service' => 'main/service/serviceSub',
-    'service/admin' => 'main/service/serviceAdmin'
+    'service/admin' => 'main/service/serviceAdmin',
+
+    'admin' => 'main/admin/admin',
+    'admin/newsformgenerator' => 'main/admin/newsFormGenerator',
+
+    'forms_gen' => 'main/search/GenSearchForm',
+    'forms_gen/([0-9]+)' => 'main/search/GenSearchForm/$1',
 );

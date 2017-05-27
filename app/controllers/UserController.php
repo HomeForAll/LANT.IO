@@ -4,6 +4,12 @@ class UserController extends Controller
 {
     use Cleaner;
 
+    public function __construct($layout)
+    {
+        parent::__construct($layout);
+        $this->setModel(new UserModel());
+    }
+
     public function actionRegistration()
     {
         if (isset($_SESSION['OAuth_state'])) {
@@ -15,7 +21,7 @@ class UserController extends Controller
                         'first_name' => $_SESSION['OAuth_first_name'],
                         'last_name' => $_SESSION['OAuth_last_name'],
                         'service_name' => $_SESSION['OAuth_service'],
-                        'errors' => $this->model->doRegistration(),
+                        'errors' => $this->model('UserModel')->doRegistration(),
                     ));
                 } elseif (isset($_POST['cancel_social_registration'])) {
                     $this->clearOAuth();
@@ -34,7 +40,7 @@ class UserController extends Controller
                 $this->view->render('registration');
             }
         } elseif (isset($_POST['submit'])) {
-            $this->view->render('registration', $this->model->doRegistration());
+            $this->view->render('registration', $this->model('UserModel')->doRegistration());
         } else {
             $this->view->render('registration');
         }
@@ -43,10 +49,10 @@ class UserController extends Controller
     public function actionLogin()
     {
         if (isset($_POST['submit'])) {
-            $this->view->render('login', $this->model->doLogin());
+            $this->view->render('login', $this->model('UserModel')->doLogin());
         } elseif (isset($_SESSION['OAuth_state'])) {
             if ($_SESSION['OAuth_state'] == 1) {
-                $this->model->OAuthLogin($_SESSION['OAuth_service'], $_SESSION['OAuth_user_id']);
+                $this->model('UserModel')->OAuthLogin($_SESSION['OAuth_service'], $_SESSION['OAuth_user_id']);
             }
             $this->view->render('login');
         } elseif (isset($_SESSION['authorized'])) {
@@ -68,6 +74,6 @@ class UserController extends Controller
 
     public function actionOAuth($data = null)
     {
-        $this->model->getOAuthData($data);
+        $this->model('UserModel')->getOAuthData($data);
     }
 }

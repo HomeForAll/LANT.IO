@@ -32,13 +32,13 @@ class Access
     /**
      * Возвращает массив всех допусков пользователя
      *
-     * @param type $user_st - статус пользователя
      * @return array - ассоциативный массив допусков TRUE/FALSE
      */
-    public function checkAccessLevel($user_st = 0)
+    public function checkAccessLevel()
     {
+        $user_st = (int)$_SESSION['status'];
 
-        //статус пользователя в Базе Данных
+       //статус пользователя в Базе Данных
         $user = [];
         $user[0] = 0; // Гость
         $user[1] = 1; // Пользователь
@@ -61,8 +61,15 @@ class Access
                 [0, 1, 1, 1, 1, 1, 1, 1, 1],
             'admin_service' => // Управление услугами сайта
                 [0, 0, 0, 0, 0, 0, 0, 1, 1],
-            'add_service' =>
+            'admin_news' => // Администрирование объявлений
                 [0, 0, 0, 0, 0, 0, 0, 1, 1],
+            'add_service' => // Добавление сервисов
+                [0, 0, 0, 0, 0, 0, 0, 1, 1],
+            'add_news' => // Добавление объявлений
+                [0, 1, 1, 1, 1, 1, 1, 1, 1],
+            'admin' => // Доступ к админ странице
+                [0, 0, 0, 0, 0, 0, 0, 1, 1],
+
         ];
 
         // Приведение статуса в БД к позиции в массиве (см. соответствие выше)
@@ -74,11 +81,28 @@ class Access
             }
         }
 
-//Получение массива допусков для данного статуса пользователя
+        //Получение массива допусков для данного статуса пользователя
         $access = [];
         foreach ($access_array as $key => $value) {
             $access[$key] = (boolean)$value[$status];
         }
         return $access;
+    }
+
+    public function getAccessFor($access_category = NULL){
+        //Если нет ID
+        if (empty($_SESSION['userID'])) {
+            $this->view->render('login');
+            return;
+        }
+        $this->access = $this->checkAccessLevel();
+        //Проверка на доступ к данной категории
+        if (!empty($access_category)){
+            if (!$this->access[$access_category]) {
+                $this->view->render('no_access');
+                return;
+            }
+        }
+        return;
     }
 }
