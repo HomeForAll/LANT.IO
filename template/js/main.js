@@ -13,6 +13,49 @@ var productSearch, showAndHideTopMenu, boolean, rootBlock, showFilter, openMap =
         })
     };
 
+$(function () {
+    setInterval(function () {
+        var scrolled = window.pageYOffset,
+            $header = $('.show-hide-header'),
+            $topHeader = $('.header'),
+            $buttonHideMenu = $('.show-and-hide-menu'),
+            $usersInformation = $('.user');
+
+        if (scrolled > 500) {
+            $header.fadeOut(function () {
+                $topHeader.css({'background': 'none'});
+            });
+            $buttonHideMenu.css({'display':'block'});
+            $usersInformation.css({'position': 'fixed',
+                'top': 'inherit',
+                'button': 'inherit',
+                'right':'0'
+            });
+        } else {
+            $header.fadeIn(function () {
+                $topHeader.css({'background': 'linear-gradient(to top, rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.72)'});
+            });
+            $buttonHideMenu.css({'display':'none'});
+            $usersInformation.css({'position': 'fixed',
+                'bottom':'65px',
+                'top':'75px',
+                'right':'10px'
+            });
+        }
+    }, 1000);
+});
+
+$(document).ready(function () {
+    $.ajax({
+        method: 'POST',
+        url: '/search',
+        dataType: 'Json',
+        success: function(form_data) {
+            renderAllApartments(form_data);
+        }
+    });
+});
+
 /** Инициализация Paralax **/
 $('#scene').parallax({
     calibrateX: false,
@@ -132,7 +175,7 @@ function showBigSearch() {
 
 /** Header меню **/
 function showTopMenuAndSearch() {
-    var $user = $('.user ul');
+    var $user = $('.user');
 
     showAndHideTopMenu = !showAndHideTopMenu;
 
@@ -348,9 +391,10 @@ function allFilterBlocks(filters) {
             10: 'Производственно-складские помещения',
             11: 'Производственно-складские здания',
             12: 'Недвижимость для туризма и отдыха'
-        };
+        },
+        settingsApartment, result = '';
 
-    $valueText.find('img').detach();
+    $valueText.empty();
 
     $('.advanced-search-options').find('.building-parameters-apartment,' +
         ' .building-parameters-home, .building-parameters-room, .building-parameters-office-area,' +
@@ -389,60 +433,79 @@ function allFilterBlocks(filters) {
                         'width': '85%'
                     });
                 }
-            }, 5000);
+            }, 1000);
             break;
         case '1':
             $('.building-parameters-apartment').css({'display': 'flex'});
-            $valueText.text(($namesSettings[1]));
+            settingsApartment = $namesSettings[1];
             break;
         case '2':
             $('.building-parameters-home').css({'display': 'flex'});
-            $valueText.text(($namesSettings[2]));
+            settingsApartment = $namesSettings[2];
             break;
         case '3':
             $('.building-parameters-room').css({'display': 'flex'});
-            $valueText.text(($namesSettings[3]));
+            settingsApartment = $namesSettings[3];
             break;
         case '4':
             $('.building-parameters-office-area').css({'display': 'flex'});
-            $valueText.text(($namesSettings[4]));
+            settingsApartment = $namesSettings[4];
             break;
         case '5':
             $('.building-parameters-separate-building').css({'display': 'flex'});
-            $valueText.text(($namesSettings[5]));
+            settingsApartment = $namesSettings[5];
             break;
         case '6':
             $('.building-parameters-ozs-сomplex').css({'display': 'flex'});
-            $valueText.text(($namesSettings[6]));
+            settingsApartment = $namesSettings[6];
             break;
         case '7':
             $('.test-7').css({'display': 'flex'});
-            $valueText.text(($namesSettings[7]));
+            settingsApartment = $namesSettings[7];
             break;
         case '8':
             $('.test-8').css({'display': 'flex'});
-            $valueText.text(($namesSettings[8]));
+            settingsApartment = $namesSettings[8];
             break;
         case '9':
             $('.test-9').css({'display': 'flex'});
-            $valueText.text(($namesSettings[9]));
+            settingsApartment = $namesSettings[9];
             break;
         case '10':
             $('.test-10').css({'display': 'flex'});
-            $valueText.text(($namesSettings[10]));
+            settingsApartment = $namesSettings[10];
             break;
         case '11':
             $('.test-11').css({'display': 'flex'});
-            $valueText.text(($namesSettings[11]));
+            settingsApartment = $namesSettings[11];
             break;
         case '12':
             $('.test-12').css({'display': 'flex'});
-            $valueText.text(($namesSettings[12]));
+            settingsApartment = $namesSettings[12];
             break;
         default: console.log('Фильтр не настроен');
     }
 
-    $valueText.prepend('<img src="../../template/images/apartments.png">');
+    switch (filters) {
+        case 'val_1':
+            result = settingsApartment;
+            console.log('Отследили - 1');
+            break;
+        case 'val_2':
+            result = settingsApartment;
+            console.log('Отследили - 2');
+            break;
+        case 'val_3':
+            result = settingsApartment;
+            console.log('Отследили - 3');
+            break;
+        case 'val_4':
+            result = settingsApartment;
+            console.log('Отследили - 4');
+            break;
+    }
+
+    $valueText.prepend('<img src="../../template/images/apartments.png">' + result);
 
     blockFilterAndShadow.fadeOut('slow');
 }
@@ -514,84 +577,69 @@ function closeFixedBlock() {
 }
 //---------------------------------------------------------
 
-/** Получение и отправка данных через Ajax **/
-//$("#form_1").on('submit', function(e) { // устанавливаем событие отправки для формы с id=form
-//    var form_data = $(this).serialize(), // собераем все данные из формы
-//        serialObj = JSON.stringify(form_data); //сериализуем его
-//
-//    e.preventDefault();
-//
-//    localStorage.setItem('Form_1', serialObj); //запишем его в хранилище по ключу 'Form_1'
-//
-//    var returnObj = JSON.parse(localStorage.getItem('Form_1')); //спарсим его обратно объект
-//
-//    $.ajax({
-//        method: 'POST',
-//        url: '/search', //   /search   /search-test
-//        data: returnObj,
-//        dataType: 'Json',
-//        success: function(returnObj) {
-//            console.log('form_data', returnObj);
-//            renderAllApartments(returnObj); //form_data
-//            window.location.href = '/template/layouts/searchBlock.php';
-//        },
-//        error: function(returnObj) {
-//            console.log('Ошибка отправки', returnObj);
-//        }
-//    });
-//});
+$('#form_1').on('submit', function () {
+    $(this).serialize();
+    renderAllApartments($(this));
+});
 
+/** Получение и отправка данных через Ajax **/
 $("#form_2").on('submit', function(e) {
     var form_data = $(this).serialize(); // собераем все данные из формы
-        //form = $(this), // зaпишeм фoрму, чтoбы пoтoм нe былo прoблeм с this
-        //error = false; // прeдвaритeльнo oшибoк нeт
-
-    //localStorage.removeItem('Form_1');
-
-    //form.find('input, textarea').each( function(){ // прoбeжим пo кaждoму пoлю в фoрмe
-    //    if ($(this).val() === '---') { // eсли нaхoдим пустoe
-    //        alert('Зaпoлнитe пoлe "'+$(this).attr('placeholder')+'"!'); // гoвoрим зaпoлняй!
-    //        error = true; // oшибкa
-    //    }
-    //});
 
     e.preventDefault();
 
-    //if (!error) {
-        $.ajax({
-            method: 'POST',
-            url: '/search', //   /search   /search-test
-            data: form_data,
-            dataType: 'Json',
-            success: function(form_data) {
-                console.log('Собранные данные', form_data);
-                renderAllApartments(form_data);
-            },
-            error: function(form_data) {
-                console.log('Ошибка отправки', form_data);
-            }
-        });
-    //}
-    //
-    //return false;
+    $.ajax({
+        method: 'POST',
+        url: '/search',
+        data: form_data,
+        dataType: 'Json',
+        success: function(form_data) {
+            console.log('Собранные данные', form_data);
+            renderAllApartments(form_data);
+        },
+        error: function(form_data) {
+            console.log('Ошибка отправки', form_data);
+        }
+    });
 });
 
+/** Рендеринг форм **/
 function renderAllApartments(data) {
-    var content = '';
+    var content = '',
+        $resultAllApartments = $('.result-all-apartments');
 
-    console.log('До условия - ', data);
+    $resultAllApartments.find('div', $(this).remove());
 
-    if (!data) {return false;}
-
-    console.log('После условия - ', data);
+    if (!data) {
+        console.log('Данные не полные');
+        return false;
+    }
 
     for (var i = 0; i < data.length; i++) {
-        console.log('data', data[i]);
-        var source = $("#entry-template").html();
-        var template = Handlebars.compile(source);
+        var $source = $("#entry-template").html(),
+            template = Handlebars.compile($source);
+
+        if (data[i].preview_img === undefined) {return}
+
+        data[i].preview_img = data[i].preview_img.split('|')[0];
+
         content += template(data[i]);
+        addNewRenderForm(data[i]);
     }
-    $('.result-all-apartments').html(content);
+    $resultAllApartments.html(content);
+}
+
+/** Дополнительная информаионная форма **/
+function addNewRenderForm() {
+    var openForm = $('.open-close-ad'),
+        result = $('.result-all-apartments');
+
+    result.prepend('#show-more-information');
+
+    openForm.on('click', function () {
+        console.log('Отследили клик');
+        result.append('#entry-template');
+    })
 }
 //---------------------------------------------------------
 

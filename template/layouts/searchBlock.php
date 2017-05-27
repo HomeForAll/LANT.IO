@@ -2,15 +2,114 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Filters</title>
     <link rel="stylesheet" href="/template/css/searchBlock/search.css">
     <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css">
+    <script src="/bower_components/handlebars/handlebars.runtime.min.js"></script>
+    <script src="/bower_components/handlebars/handlebars.min.js"></script>
+    <script id="show-more-information" type="text/x-handlebars-template">
+        <div class="show-result-parametrs">
+            <div class="left-information-block-apartment">
+                <div class="carousel">
+                    <img src="/uploads/images/{{preview_img}}" alt="apartment">
+                    <ul class="apartments-wallpapers">
+                        <li>
+                            <a><img src="/uploads/images/{{preview_img}}" alt="partners"></a>
+                        </li>
+                        <li>
+                            <a><img src="/uploads/images/{{preview_img}}" alt="partners"></a>
+                        </li>
+                        <li>
+                            <a><img src="/uploads/images/{{preview_img}}" alt="partners"></a>
+                        </li>
+                        <li>
+                            <a><img src="/uploads/images/{{preview_img}}" alt="partners"></a>
+                        </li>
+                        <li>
+                            <a><img src="/uploads/images/{{preview_img}}" alt="partners"></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="small-description">
+                    <span>{{title}}м<sup>2</sup></span>
+                    <p class="apartment-description">{{content}}</p>
+                </div>
+                <div class="price-and-view-the-apartment">
+                    <div class="price">
+                        <span class="decorate-number">{{price}}
+                            <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub>
+                        </span>
+                        <p>
+                            <img src="../../template/images/m.png" alt="metro">Рижская
+                            <span><img src="../../template/images/people-2.png" alt="people">{{distance_from_metro}}мин</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="back-call">
+                    <button class="back-call-web"><i class="fa fa-phone" aria-hidden="true"></i>Звонок через сайт</button>
+                    <button class="back-call-message"><i class="fa fa-envelope" aria-hidden="true"></i>Написать сообщение</button>
+                </div>
+            </div>
+            <div class="right-information-block-apartment">
+                <p>Кол-во<br>комнат<span>{{number_of_rooms}}</span></p>
+                <p>Этаж<span>{{object_located}}</span></p>
+                <p>Безопасность<span>{{equipment}}</span></p>
+                <p>Комплектация<span>Полная</span></p>
+                <p>Высота<br>потолков<span>{{ceiling_height}}м</span></p>
+                <p>Санузел<span>{{bathroom}}</span></p>
+                <p>Жилая<br>площадь<span>{{resedential}}м<sup>2</sup></span></p>
+                <p>Парковка(вок)<span>{{parking}}</span></p>
+                <button>Смотреть полностью</button>
+                <div class="private-person">
+                    <div class="person-user">
+                        <img src="../../template/images/user-test.png" alt="user">
+                        <span>Олег Герасимов</span>
+                        <p>Олег Герасимов</p>
+                    </div>
+                    <div class="ad-close">
+                        <p>Свернуть
+                            <button class="open-close-ad">
+                                <img src="../../template/images/close.png" alt="clear">
+                            </button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script id="entry-template" type="text/x-handlebars-template">
+        <div class="top-block">
+            <div class="left-wallpaper">
+                <a href="#"><img src="/uploads/images/{{preview_img}}" alt="apartments"></a>
+                <p>{{title}}м<sup>2</sup></p>
+            </div>
+            <div class="right-information-block">
+                <span>Шикардосная двушка в самом центре столицы</span>
+                <p>{{content}}</p>
+                <div class="price-and-view-the-apartment">
+                    <div class="price">
+                        <p>
+                            <img src="../../template/images/m.png" alt="metro">Рижская<span>
+                                            <img src="../../template/images/people.png" alt="">2 мин</span>
+                        </p>
+                        <span class="decorate-number">{{price}}
+                                            <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub>
+                                        </span>
+                    </div>
+                    <div class="view-the-apartment">
+                        <button class="open-close-ad">
+                            <img src="../../template/images/show.png" alt="show">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
 </head>
 <body>
-<div class="header"><?php include_once 'header.php' ?></div>
+<div class="header"><?php include_once ROOT_DIR . '/template/html/header.php' ?></div>
 <div class="search-and-filter">
     <div class="container-w-0">
         <form action="" id="form_2">
@@ -39,15 +138,19 @@
                             </p>
                         </li>
                         <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                            <p>От<input name="not_residential-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>От<input name="not_residential-min" type="text" placeholder="0" maxlength="3"
+                                        pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="not_residential-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>До<input name="not_residential-max" type="text" placeholder="0" maxlength="3"
+                                        pattern="[0-9]{3}">
                             </p>
                         </li>
                         <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                            <p>От<input name="residential-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>От<input name="residential-min" type="text" placeholder="0" maxlength="3"
+                                        pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="residential-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>До<input name="residential-max" type="text" placeholder="0" maxlength="3"
+                                        pattern="[0-9]{3}">
                             </p>
                         </li>
                         <li><span class="names-parameters">Балкон м2</span>
@@ -57,9 +160,11 @@
                             </p>
                         </li>
                         <li><span class="names-parameters">Высота потолков</span>
-                            <p>От<input name="ceiling_height-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>От<input name="ceiling_height-min" type="text" placeholder="0" maxlength="3"
+                                        pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="ceiling_height-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>До<input name="ceiling_height-max" type="text" placeholder="0" maxlength="3"
+                                        pattern="[0-9]{3}">
                             </p>
                         </li>
                         <li><span class="names-parameters">Этаж</span>
@@ -102,15 +207,19 @@
                             </p>
                         </li>
                         <li><span class="names-parameters">Нежилая площадь м<sup>2</sup></span>
-                            <p>От<input name="not_residential-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>От<input name="not_residential-min" type="text" placeholder="0" maxlength="3"
+                                        pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="not_residential-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>До<input name="not_residential-max" type="text" placeholder="0" maxlength="3"
+                                        pattern="[0-9]{3}">
                             </p>
                         </li>
                         <li><span class="names-parameters">Жилая площадь м<sup>2</sup></span>
-                            <p>От<input name="residential-min" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>От<input name="residential-min" type="text" placeholder="0" maxlength="3"
+                                        pattern="[0-9]{3}">
                             </p>
-                            <p>До<input name="residential-max" type="text" placeholder="0" maxlength="3" pattern="[0-9]{3}">
+                            <p>До<input name="residential-max" type="text" placeholder="0" maxlength="3"
+                                        pattern="[0-9]{3}">
                             </p>
                         </li>
                         <li><span class="names-parameters">Балкон м2</span>
@@ -454,7 +563,8 @@
                         <div class="history-search" onclick="allFilterBlocks('historySearch')">
                             <span class="search-city active-search">
                                 <img src="../../template/images/s1.png" alt="city">
-                                <input type="text" id="address" placeholder="Москва, ул, Малая Ордынка" autocomplete="off" class="api-search-city history-text">
+                                <input type="text" id="address" placeholder="Москва, ул, Малая Ордынка"
+                                       autocomplete="off" class="api-search-city history-text">
                             </span>
                             <h5>История</h5>
                             <div class="all-history-search">
@@ -506,12 +616,14 @@
                                 </div>
                                 <div class="travel-information">
                                     <div class="distance-on-foot">
-                                        <img src="../../template/images/people-2.png" alt="icon"><p>Уделенность пекшом не более</p>
+                                        <img src="../../template/images/people-2.png" alt="icon">
+                                        <p>Уделенность пекшом не более</p>
                                         <span><input placeholder="5" type="number" name="foot" min="5"
                                                      max="60" step="5"><span class="timer">Минут</span></span>
                                     </div>
                                     <div class="distance-on-transport">
-                                        <img src="../../template/images/avto.png" alt="icon"><p>Уделенность пекшом не более</p>
+                                        <img src="../../template/images/avto.png" alt="icon">
+                                        <p>Уделенность пекшом не более</p>
                                         <span><input placeholder="5" type="number" name="transport"
                                                      min="5" max="60" step="5"><span
                                                     class="timer">Минут</span></span>
@@ -523,7 +635,8 @@
                     </div>
                     <button onclick="quickSearch(event)">Задать точнее</button>
                     <div class="quick-search">
-                        <h5><i class="fa fa-map-marker" aria-hidden="true"></i>Введите город, район, область или точный адрес</h5>
+                        <h5><i class="fa fa-map-marker" aria-hidden="true"></i>Введите город, район, область или точный
+                            адрес</h5>
                         <ul class="quick-search-by-parameters">
                             <li>
                                 <div class="select">Область
@@ -595,9 +708,11 @@
                     <li onclick="allParam('bigOption')" class="menu-left-window">
                         <label for="#amountSearch"><img src="../../template/images/s3.png" alt="price">Цена</label>
                         <div class="showBigOptions">
-                            <p>От<label for="amountBeforeMain"><input name="price-min" type="text" id="amountBeforeMain" readonly disabled></label>
+                            <p>От<label for="amountBeforeMain"><input name="price-min" type="text" id="amountBeforeMain"
+                                                                      readonly disabled></label>
                             </p>
-                            <p>До<label for="amountAfterMain"><input name="price-max" type="text" id="amountAfterMain" readonly disabled></label>
+                            <p>До<label for="amountAfterMain"><input name="price-max" type="text" id="amountAfterMain"
+                                                                     readonly disabled></label>
                             </p>
                             <div id="main-slider"></div>
                             <div class="currency">
@@ -620,6 +735,7 @@
                         <div class="select"><span class="left-names-filter">Площадь</span>
                             <label for="">
                                 <select>
+                                    <option value="">----------</option>
                                     <option>От 120м2 До 230м2</option>
                                     <option>От 120м2 До 230м2</option>
                                     <option>От 120м2 До 230м2</option>
@@ -631,6 +747,7 @@
                         <div class="select"><span class="left-names-filter">Наполнение<br>квартиры</span>
                             <label for="">
                                 <select>
+                                    <option value="">----------</option>
                                     <option>Выбрано(1)</option>
                                     <option>Выбрано(2)</option>
                                     <option>Выбрано(3)</option>
@@ -645,74 +762,7 @@
                 </ul>
             </div>
         </form>
-        <div class="result-all-apartments">
-            <div class="show-result-parametrs">
-                <div class="left-information-block-apartment">
-                    <div class="carousel">
-                        <img src="../../template/images/test-apartment.png" alt="apartment">
-                        <ul class="apartments-wallpapers">
-                            <li>
-                                <a><img src="../../template/images/c-a-1.png" alt="partners"></a>
-                            </li>
-                            <li>
-                                <a><img src="../../template/images/c-a-2.png" alt="partners"></a>
-                            </li>
-                            <li>
-                                <a><img src="../../template/images/c-a-3.png" alt="partners"></a>
-                            </li>
-                            <li>
-                                <a><img src="../../template/images/c-a-4.png" alt="partners"></a>
-                            </li>
-                            <li>
-                                <a><img src="../../template/images/c-a-5.png" alt="partners"></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="small-description">
-                        <span>Сдаю квартиру на 1,5 месяца</span>
-                        <p class="apartment-description">Шикарная 2-х комнатная квартира в тихом центре города пешая до метро Фрунзенская, рядом
-                            магазины, парковка, ночной бухло-ларек</p>
-                    </div>
-                    <div class="price-and-view-the-apartment">
-                        <div class="price">
-                            <span class="decorate-number">25 000<i class="fa fa-rub"
-                                                                   aria-hidden="true"></i><sub>/мес</sub></span>
-                            <p><img src="../../template/images/m.png" alt="metro">Рижская<span><img
-                                            src="../../template/images/people.png" alt="">2 мин</span></p>
-                        </div>
-                    </div>
-                    <div class="back-call">
-                        <button class="back-call-web"><i class="fa fa-phone" aria-hidden="true"></i>Звонок через сайт
-                        </button>
-                        <button class="back-call-message"><i class="fa fa-envelope" aria-hidden="true"></i>Написать
-                            сообщение
-                        </button>
-                    </div>
-                </div>
-                <div class="right-information-block-apartment">
-                    <p>Кол-во<br>комнат<span>1</span></p>
-                    <p>Этаж<span>12 из 18</span></p>
-                    <p>Безопасность<span>Консьерж видеонаблюдения</span></p>
-                    <p>Комплектация<span>Полная</span></p>
-                    <p>Высота<br>потолков<span>3.14м</span></p>
-                    <p>Санузел<span>Сомещенный</span></p>
-                    <p>Жилая<br>площадь<span>134м<sup>2</sup></span></p>
-                    <p>Парковка<span>Нет</span></p>
-                    <button>Смотреть полностью</button>
-                    <div class="private-person">
-                        <div class="person-user">
-                            <img src="../../template/images/user-test.png" alt="user">
-                            <span>Олег Герасимов</span>
-                            <p>Олег Герасимов</p>
-                        </div>
-                        <div class="ad-close">
-                            <p>Свернуть<a href="#"><img src="../../template/images/close.png" alt="clear"></a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <?php echo $this->content; ?>
-        </div>
+        <div class="result-all-apartments"></div>
     </div>
 </div>
 <script src="/bower_components/jquery/dist/jquery.min.js"></script>
@@ -722,35 +772,6 @@
 <script src="/template/js/mapController.js"></script>
 <script src="/template/js/jquery.bxslider.min.js"></script>
 <script src="/template/js/jquery.parallax.min.js"></script>
-<script src="/bower_components/handlebars/handlebars.runtime.min.js"></script>
-<script src="/bower_components/handlebars/handlebars.min.js"></script>
-<script id="entry-template" type="text/x-handlebars-template">
-    <div class="top-block">
-        <div class="left-wallpaper">
-            <a href="#"><img src="/uploads/images/{{preview_img}}" alt="apartments"></a>
-            <p>{{title}}м<sup>2</sup></p>
-        </div>
-        <div class="right-information-block">
-            <span>Шикардосная двушка в самом центре столицы</span>
-            <p>{{content}}</p>
-            <div class="price-and-view-the-apartment">
-                <div class="price">
-                    <p>
-                        <img src="../../template/images/m.png" alt="metro">Рижская<span>
-                        <img src="../../template/images/people.png" alt="">2 мин</span>
-                    </p>
-                    <span class="decorate-number">{{price}}
-                        <i class="fa fa-rub" aria-hidden="true"></i><sub>/мес</sub>
-                    </span>
-                </div>
-                <div class="view-the-apartment">
-                    <a href="#"><img src="../../template/images/show.png" alt="show"></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</script>
-<?php include_once ROOT_DIR . '/template/html/apartmentsItem.php'?>
 <script src="/template/js/main.min.js"></script>
 </body>
 </html>

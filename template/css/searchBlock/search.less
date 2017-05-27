@@ -184,7 +184,7 @@
 }
 
 .show-result-parametrs {
-  display: none; // flex
+  display: flex; // flex
   flex-flow: row wrap;
   justify-content: flex-start;
   align-items: flex-start;
@@ -196,7 +196,7 @@
 }
 
 .left-information-block-apartment {
-  width: 60%;
+  width: 55%;
   background: #fff;
   text-align: center;
 }
@@ -292,7 +292,7 @@
 .price-and-view-the-apartment {
   position: relative;
   text-align: left;
-  padding: 20px 15px;
+  padding: 20px 10px;
 }
 
 .decorate-number {
@@ -312,6 +312,7 @@
     display: inline-block;
     margin-top: 10px !important;
     font-size: 20px;
+    height: auto;
   }
   span {
     display: inline-block;
@@ -413,5 +414,25 @@
   }
   a {
     cursor: pointer;
+  }
+}
+
+/** Цена **/
+#main-slider {
+  margin-top: 15px;
+  height: 8px;
+  border-radius: 10px;
+  background: #f7f7f7;
+  border: none;
+  & .ui-slider-range {
+    background: #a5d09d;
+  }
+  span {
+    border: 1px solid #d9d9d9;
+    background: #f6f6f6;
+    top: -6px;
+    border-radius: 100%;
+    cursor: pointer;
+    color: #454545;
   }
 }
