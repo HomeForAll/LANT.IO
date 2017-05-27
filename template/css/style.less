@@ -25,7 +25,27 @@
   font-family: @family, sans-serif;
 }
 
+.header {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  text-align: right;
+  min-height: 50px;
+  padding: 10px;
+  z-index: 800;
+  background: linear-gradient(to top, rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.72));
+  clear: left;
+}
+
+.logo {
+  display: inline-block;
+  float: left;
+  cursor: pointer;
+}
+
 .navigation {
+  display: block;
   position: fixed;
   width: 200px;
   text-align: center;
@@ -35,8 +55,65 @@
 }
 
 .container-w-0 {
-  width: 1400px;
+  width: 1050px;
   margin: auto;
+}
+
+.add-ad-and-user {
+  display: inline-block;
+  width: auto;
+  padding: 5px;
+  li {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0 10px;
+    text-align: center;
+    color: #fff;
+    font-size: 14px;
+    clear: both;
+  }
+  a {
+    color: #fff;
+  }
+  span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ca8b58;
+    border-radius: 8px;
+    width: auto;
+    text-align: right;
+  }
+  img, i {
+    vertical-align: middle;
+    margin: auto 5px;
+  }
+  i {
+    font-size: 10px;
+  }
+}
+
+.min-circle-notification:before {
+  content: '';
+  position: absolute;
+  margin-left: 20px;
+  display: block;
+  background: #f75a5a;
+  border-radius: 100%;
+  width: 10px;
+  height: 10px;
+}
+
+.user-logo {
+  cursor: pointer;
+  text-align: right;
+  img {
+    vertical-align: middle;
+    border-radius: 100%;
+    width: 40px;
+    margin-top: -2px;
+    float: right;
+  }
 }
 
 .user {
@@ -2999,10 +3076,6 @@
       width: 65%;
     }
   }
-  .container-w-0 {
-    width: auto;
-    max-width: 1200px;
-  }
   .names-parameters {
     overflow: hidden;
     float: left;
@@ -3993,9 +4066,6 @@
 //  }
 //  .metro-people {
 //    margin-left: 10px;
-//  }
-//  .container-w-0 {
-//    width: auto;
 //  }
 //  .show-and-hide-menu {
 //    display: initial;

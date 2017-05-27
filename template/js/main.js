@@ -359,14 +359,10 @@ function allFilterBlocks(filters) {
             10: 'Производственно-складские помещения',
             11: 'Производственно-складские здания',
             12: 'Недвижимость для туризма и отдыха'
-        };
+        },
+        settingsApartment, result = '';
 
-    $valueText.find('img').detach();
-    switch ($valueText) {
-        case ($(this).attr('num-4')) :
-            console.log('num-4', $(this));
-            break;
-    }
+    $valueText.empty();
 
     $('.advanced-search-options').find('.building-parameters-apartment,' +
         ' .building-parameters-home, .building-parameters-room, .building-parameters-office-area,' +
@@ -409,56 +405,75 @@ function allFilterBlocks(filters) {
             break;
         case '1':
             $('.building-parameters-apartment').css({'display': 'flex'});
-            $valueText.text(($namesSettings[1]));
+            settingsApartment = $namesSettings[1];
             break;
         case '2':
             $('.building-parameters-home').css({'display': 'flex'});
-            $valueText.text(($namesSettings[2]));
+            settingsApartment = $namesSettings[2];
             break;
         case '3':
             $('.building-parameters-room').css({'display': 'flex'});
-            $valueText.text(($namesSettings[3]));
+            settingsApartment = $namesSettings[3];
             break;
         case '4':
             $('.building-parameters-office-area').css({'display': 'flex'});
-            $valueText.text(($namesSettings[4]));
+            settingsApartment = $namesSettings[4];
             break;
         case '5':
             $('.building-parameters-separate-building').css({'display': 'flex'});
-            $valueText.text(($namesSettings[5]));
+            settingsApartment = $namesSettings[5];
             break;
         case '6':
             $('.building-parameters-ozs-сomplex').css({'display': 'flex'});
-            $valueText.text(($namesSettings[6]));
+            settingsApartment = $namesSettings[6];
             break;
         case '7':
             $('.test-7').css({'display': 'flex'});
-            $valueText.text(($namesSettings[7]));
+            settingsApartment = $namesSettings[7];
             break;
         case '8':
             $('.test-8').css({'display': 'flex'});
-            $valueText.text(($namesSettings[8]));
+            settingsApartment = $namesSettings[8];
             break;
         case '9':
             $('.test-9').css({'display': 'flex'});
-            $valueText.text(($namesSettings[9]));
+            settingsApartment = $namesSettings[9];
             break;
         case '10':
             $('.test-10').css({'display': 'flex'});
-            $valueText.text(($namesSettings[10]));
+            settingsApartment = $namesSettings[10];
             break;
         case '11':
             $('.test-11').css({'display': 'flex'});
-            $valueText.text(($namesSettings[11]));
+            settingsApartment = $namesSettings[11];
             break;
         case '12':
             $('.test-12').css({'display': 'flex'});
-            $valueText.text(($namesSettings[12]));
+            settingsApartment = $namesSettings[12];
             break;
         default: console.log('Фильтр не настроен');
     }
 
-    $valueText.prepend('<img src="../../template/images/apartments.png">');
+    switch (filters) {
+        case 'val_1':
+            result = settingsApartment;
+            console.log('Отследили - 1');
+            break;
+        case 'val_2':
+            result = settingsApartment;
+            console.log('Отследили - 2');
+            break;
+        case 'val_3':
+            result = settingsApartment;
+            console.log('Отследили - 3');
+            break;
+        case 'val_4':
+            result = settingsApartment;
+            console.log('Отследили - 4');
+            break;
+    }
+
+    $valueText.prepend('<img src="../../template/images/apartments.png">' + result);
 
     blockFilterAndShadow.fadeOut('slow');
 }
@@ -572,7 +587,7 @@ function renderAllApartments(data) {
         var $source = $("#entry-template").html(),
             template = Handlebars.compile($source);
 
-        if (data[i] === undefined) {return}
+        if (data[i].preview_img === undefined) {return}
 
         data[i].preview_img = data[i].preview_img.split('|')[0];
 

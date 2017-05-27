@@ -396,7 +396,7 @@ $siteModel = $this->model('SiteModel');
                         </div>
                     </div>
                     <div class="main-filter" onclick="filterOptionsApartments()">
-                        <span class="value-text" num-1>
+                        <span class="value-text" onclick="allFilterBlocks('val_1')">
                             <img src="../../template/images/apartments.png" alt="apartments">Тип недвижимости
                         </span>
                     </div>
@@ -1041,7 +1041,7 @@ $siteModel = $this->model('SiteModel');
                 <button>Найти</button>
                 <ul class="filter-block-big-menu">
                     <li class="pointer" onclick="filterOptionsApartments()">
-                        <span class="value-text" num-2>
+                        <span class="value-text" onclick="allFilterBlocks('val_2')">
                             <img src="../../template/images/apartments.png" alt="apartments">Тип недвижимости
                         </span>
                     </li>
@@ -5129,7 +5129,7 @@ $siteModel = $this->model('SiteModel');
                 <button>Найти</button>
                 <ul class="filter-block-big-menu">
                     <li class="pointer" onclick="filterOptionsApartments()">
-                        <span class="value-text" num-3>
+                        <span class="value-text" onclick="allFilterBlocks('val_3')">
                             <img src="../../template/images/apartments.png" alt="apartments">Тип недвижимости
                         </span>
                     </li>
@@ -9373,7 +9373,7 @@ $siteModel = $this->model('SiteModel');
             <div class="filter-and-top-blocks">
                 <ul class="filter-apartment">
                     <li class="pointer" onclick="filterOptionsApartments()">
-                          <span class="value-text" num-4>
+                          <span class="value-text" onclick="allFilterBlocks('val_4')">
                               <img src="../../template/images/apartments.png" alt="apartments">Тип недвижимости
                           </span>
                     </li>
