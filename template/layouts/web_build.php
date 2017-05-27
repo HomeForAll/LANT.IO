@@ -325,8 +325,8 @@ $siteModel = $this->model('SiteModel');
     <?php $this->head() ?>
 </head>
 <body>
-<!-- Heeader -->
-<?php include_once 'header.php' ?>
+<!-- Header -->
+<?php include_once ROOT_DIR . '/template/html/header.php' ?>
 <!-- Content -->
 <div id="content">
     <ul id="scene">
@@ -9716,7 +9716,7 @@ $siteModel = $this->model('SiteModel');
             </ul>
         </div>
     </div>
-    <?php include_once 'footer.php' ?>
+    <?php include_once ROOT_DIR . '/template/html/footer.php' ?>
 </div>
 <!-- Preloader -->
 <style type="text/css">#hellopreloader > #hellopreloader_preload {

@@ -9,17 +9,19 @@
 <?php } else { ?>
     <div class="header">
         <div class="container-w-0">
-            <div class="logo"><a href="#"><img src="../../template/images/logo-true.png" alt="logo"></a></div>
-            <ul class="add-ad-and-user" onclick="showTopMenuAndSearch();">
-                <li><a href="#"><img src="../../template/images/add-blue.png" alt="add-blue.png">Дать объявление</a></li>
-                <li><a href="#" class="min-circle-notification"><img src="../../template/images/notification.png" alt="notification"></a></li>
-                <li><a href="#" class="user-logo"><img src="../../template/images/user.png" alt="user">Александр Никулин</a>
-                    <span>
+            <div class="show-hide-header">
+                <div class="logo"><a href="#"><img src="../../template/images/logo-true.png" alt="logo"></a></div>
+                <ul class="add-ad-and-user">
+                    <li><a href="#"><img src="../../template/images/add-blue.png" alt="add-blue.png">Дать объявление</a></li>
+                    <li><a href="#" class="min-circle-notification"><img src="../../template/images/notification.png" alt="notification"></a></li>
+                    <li onclick="showTopMenuAndSearch();"><a href="#" class="user-logo"><img src="../../template/images/user.png" alt="user">Александр Никулин</a>
+                        <span>
                         <img src="../../template/images/crown.png" alt="crown">Пользователь
                         <i class="fa fa-plus" aria-hidden="true"></i>
                     </span>
-                </li>
-            </ul>
+                    </li>
+                </ul>
+            </div>
             <div class="navigation">
                 <div class="user" onclick="showTopMenuAndSearch();">
                     <div class="users-information">
@@ -38,11 +40,11 @@
                         <li><a href="#"><img src="../../template/images/m4.png" alt="menu">Настройка профиля</a></li>
                         <li><a href="#"><img src="../../template/images/m5.png" alt="menu">Выйти из системы</a></li>
                     </ul>
-                    <button class="show-and-hide-menu" onclick="showTopMenuAndSearch();">
-                        <i class="fa fa-bars" aria-hidden="true"></i>
-                    </button>
                 </div>
             </div>
+            <button class="show-and-hide-menu" onclick="showTopMenuAndSearch();">
+                <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
         </div>
     </div>
 <?php } ?>

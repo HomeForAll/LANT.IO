@@ -109,7 +109,7 @@
     </script>
 </head>
 <body>
-<div class="header"><?php include_once 'header.php' ?></div>
+<div class="header"><?php include_once ROOT_DIR . '/template/html/header.php' ?></div>
 <div class="search-and-filter">
     <div class="container-w-0">
         <form action="" id="form_2">

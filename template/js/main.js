@@ -13,6 +13,38 @@ var productSearch, showAndHideTopMenu, boolean, rootBlock, showFilter, openMap =
         })
     };
 
+$(function () {
+    setInterval(function () {
+        var scrolled = window.pageYOffset,
+            $header = $('.show-hide-header'),
+            $topHeader = $('.header'),
+            $buttonHideMenu = $('.show-and-hide-menu'),
+            $usersInformation = $('.user');
+
+        if (scrolled > 500) {
+            $header.fadeOut(function () {
+                $topHeader.css({'background': 'none'});
+            });
+            $buttonHideMenu.css({'display':'block'});
+            $usersInformation.css({'position': 'fixed',
+                'top': 'inherit',
+                'button': 'inherit',
+                'right':'0'
+            });
+        } else {
+            $header.fadeIn(function () {
+                $topHeader.css({'background': 'linear-gradient(to top, rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.72)'});
+            });
+            $buttonHideMenu.css({'display':'none'});
+            $usersInformation.css({'position': 'fixed',
+                'bottom':'65px',
+                'top':'75px',
+                'right':'10px'
+            });
+        }
+    }, 1000);
+});
+
 $(document).ready(function () {
     $.ajax({
         method: 'POST',
