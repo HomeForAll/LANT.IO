@@ -15,12 +15,16 @@ class AdminModel extends Model
      * в зависимости от POST, SESSION и устанавливает SESSION
      * @return array
      */
-    public function getDataFromPostOrSession()
+    public function getDataFromPost()
     {
 
         $data = [];
-        if (!empty($_POST['submit_show_news'])) {
-            $data['time'] = (int)$_POST['time'];
+        if (!empty($_POST)){
+            if (!empty((int)$_POST['time'])){
+                $data['time'] = (int)$_POST['time'];
+            }else {
+                $data['time'] = 0;
+            }
             if (!empty((int)$_POST['time_start'])) {
                 $time_start_arr = explode('-', $_POST['time_start']);
                 if (isset($time_start_arr[0])) $data['time_start'] = (int)$time_start_arr[0];
@@ -37,48 +41,52 @@ class AdminModel extends Model
             } else {
                 $data['time_start'] = 0;
             }
-            $data['max_number'] = (int)$_POST['max_number'];
+            if (!empty((int)$_POST['max_number'])){
+                $data['max_number'] = (int)$_POST['max_number'];
+            }else{
+                $data['max_number'] = 0;
+            }
             $data['space_type'] = (int)$_POST['space_type'];
             $data['operation_type'] = (int)$_POST['operation_type'];
             $data['object_type'] = (int)$_POST['object_type'];
-            if (isset($_POST['best'])) {
-                $data['best'] = TRUE;
-            } else {
-                $data['best'] = FALSE;
-            }
             if (isset($_POST['status'])) {
-                $data['status'] = TRUE;
+                $data['status'] = 1;
             } else {
-                $data['status'] = FALSE;
+                $data['status'] = 0;
             }
-            //Сессии
-            $_SESSION['news_admin']['time'] = $data['time'];
-            $_SESSION['news_admin']['time_start'] = $data['time_start'];
-            $_SESSION['news_admin']['max_number'] = $data['max_number'];
-            $_SESSION['news_admin']['space_type'] = $data['space_type'];
-            $_SESSION['news_admin']['operation_type'] = $data['operation_type'];
-            $_SESSION['news_admin']['object_type'] = $data['object_type'];
-            $_SESSION['news_admin']['best'] = $data['best'];
-            $_SESSION['news_admin']['status'] = $data['status'];
-        } else if (!empty($_SESSION['news_admin'])) {
-            $data['time'] = (int)$_SESSION['news_admin']['time'];
-            $data['time_start'] = (int)$_SESSION['news_admin']['time_start'];
-            $data['max_number'] = (int)$_SESSION['news_admin']['max_number'];
-            $data['space_type'] = (int)$_SESSION['news_admin']['space_type'];
-            $data['operation_type'] = (int)$_SESSION['news_admin']['operation_type'];
-            $data['object_type'] = (int)$_SESSION['news_admin']['object_type'];
-            $data['best'] = boolval($_SESSION['news_admin']['best']);
-            $data['status'] = boolval($_SESSION['news_admin']['status']);
-        } else {
-            //  По умолчанию
-            $data['time'] = 24;
-            $data['time_start'] = 0;
-            $data['max_number'] = 5;
-            $data['space_type'] = 0;
-            $data['operation_type'] = 0;
-            $data['object_type'] = 0;
-            $data['best'] = FALSE;
-            $data['status'] = FALSE;
+            if (isset($_POST['sorting'])){
+                $data['sorting'] = $_POST['sorting'];
+            } else {
+                $data['sorting'] = '';
+            }
+            if (isset($_POST['title_like'])){
+                $data['title_like'] = $_POST['title_like'];
+            }else{
+                $data['title_like'] = '';
+            }
+            if(isset($_POST['offset'])){
+                $data['offset'] = (int)$_POST['offset'];
+            }else {
+                $data['offset']=0;
+            }
+//            //Сессии
+//            $_SESSION['news_admin']['time'] = $data['time'];
+//            $_SESSION['news_admin']['time_start'] = $data['time_start'];
+//            $_SESSION['news_admin']['max_number'] = $data['max_number'];
+//            $_SESSION['news_admin']['space_type'] = $data['space_type'];
+//            $_SESSION['news_admin']['operation_type'] = $data['operation_type'];
+//            $_SESSION['news_admin']['object_type'] = $data['object_type'];
+//            $_SESSION['news_admin']['best'] = $data['best'];
+//            $_SESSION['news_admin']['status'] = $data['status'];
+//        } else if (!empty($_SESSION['news_admin'])) {
+//            $data['time'] = (int)$_SESSION['news_admin']['time'];
+//            $data['time_start'] = (int)$_SESSION['news_admin']['time_start'];
+//            $data['max_number'] = (int)$_SESSION['news_admin']['max_number'];
+//            $data['space_type'] = (int)$_SESSION['news_admin']['space_type'];
+//            $data['operation_type'] = (int)$_SESSION['news_admin']['operation_type'];
+//            $data['object_type'] = (int)$_SESSION['news_admin']['object_type'];
+//            $data['best'] = boolval($_SESSION['news_admin']['best']);
+//            $data['status'] = boolval($_SESSION['news_admin']['status']);
         }
         return $data;
     }
