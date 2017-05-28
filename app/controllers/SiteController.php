@@ -25,14 +25,14 @@ class SiteController extends Controller
                 $data['best_news'] = $this->model('NewsModel')->getBestNewsOfTime(8064,$res['space_type'],
                     $res['operation_type'], $res['object_type'], $res['price_from'], $res['price_to'],
                     $res['space_from'], $res['space_to'], 9);
-                $data['best_news_number'] = $this->model('NewsModel')->getNamber_of_all_rows(8064,$res['space_type'],
+                $data['best_news_number'] = $this->model('NewsModel')->getNamberOfAllNews(0,8064, $res['space_type'],
                     $res['operation_type'], $res['object_type'], $res['price_from'], $res['price_to'],
                     $res['space_from'], $res['space_to']);
                 $this->model('NewsModel')->renderBestNewsOfTime($data['best_news'], $data['best_news_number']);
             }
         });
         $data['best_news'] = $this->model('NewsModel')->getBestNewsOfTime(8064);
-        $data['best_news_number'] = $this->model('NewsModel')->getNamber_of_all_rows(8064);
+        $data['best_news_number'] = $this->model('NewsModel')->getNamberOfAllNews(0, 8064);
         $this->view->render('index', $data);
     }
 
