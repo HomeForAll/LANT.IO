@@ -402,7 +402,11 @@ class ServiceModel extends Model
         return $my_sub_serv;
     }
 
-    //Метод возвращающий количество услуг сайта
+
+    /**
+     * Метод возвращающий количество услуг сайта
+     * @return string
+     */
     public function getNumberOfServices(){
         $sql = 'SELECT COUNT(*) FROM services WHERE service_group_id = \'parent\' OR service_group_id = \'single\'';
         $stmt = $this->db->prepare($sql);
