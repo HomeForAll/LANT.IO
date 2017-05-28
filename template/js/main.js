@@ -13,6 +13,47 @@ var productSearch, showAndHideTopMenu, boolean, rootBlock, showFilter, openMap =
         })
     };
 
+/** Через Socket.io обрабатываем запросы **/
+$(document).ready(function () {
+    var socket = io('http://91.202.180.160:8089?user_id=<?php echo $user_id; ?>&hash=<?php echo $hash; ?>'),
+        userRegister = {
+            1: 'Зарегестрирован',
+            2: 'Не зарегистрирован'
+        };
+
+    if (socket.disconnected) {
+        console.log('Нет подключения');
+    } else if (!socket.connected) {
+        console.log('Подключено');
+    }
+    if (!socket.uri) {
+        verificationOfRegistration(userRegister[2]);
+    } else {
+        verificationOfRegistration(userRegister[1]);
+    }
+
+    socket.on('socket', function (ad) {
+        JSON.stringify(ad);
+        console.log('Получили свежие бъявления', ad);
+    });
+});
+
+verificationOfRegistration();
+
+/** Проверка регистрации **/
+function verificationOfRegistration(registration) {
+    console.log('Проверяем регистрацию', registration);
+    var $mainMessageBlock = $('.main-message-block'),
+        message = $('<div class="messageBlock">'+ registration +'</div>');
+
+    $mainMessageBlock.prepend(message);
+    setTimeout(function () {
+        console.log('пошел таймер');
+        message.remove();
+    }, 5000);
+}
+
+/** Стилизация (анимация) Header **/
 $(function () {
     setInterval(function () {
         var scrolled = window.pageYOffset,
@@ -45,6 +86,7 @@ $(function () {
     }, 1000);
 });
 
+/** Переходим в новую вкладку и получаем объявления **/
 $(document).ready(function () {
     $.ajax({
         method: 'POST',
@@ -489,19 +531,15 @@ function allFilterBlocks(filters) {
     switch (filters) {
         case 'val_1':
             result = settingsApartment;
-            console.log('Отследили - 1');
             break;
         case 'val_2':
             result = settingsApartment;
-            console.log('Отследили - 2');
             break;
         case 'val_3':
             result = settingsApartment;
-            console.log('Отследили - 3');
             break;
         case 'val_4':
             result = settingsApartment;
-            console.log('Отследили - 4');
             break;
     }
 

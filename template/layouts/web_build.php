@@ -329,6 +329,7 @@ $siteModel = $this->model('SiteModel');
 <?php include_once ROOT_DIR . '/template/html/header.php' ?>
 <!-- Content -->
 <div id="content">
+    <div class="main-message-block"></div>
     <ul id="scene">
         <li class="layer" data-depth="0.20"><img src="../../template/images/paralax/home-1.png"></li>
         <li class="layer" data-depth="0.40"><img src="../../template/images/paralax/home-2.png"></li>
