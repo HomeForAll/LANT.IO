@@ -42,14 +42,16 @@ $form_options['object_types'] = [1 => 'Квартира', 2 => 'Офисная �
         <input type="submit" name="test2" value="Получить сообщения с канала RabbitMQ newNews">
     </form>
     <?php
-    if(!empty($this->data['rabbitmq_message_newnews'])){
-        foreach($this->data['rabbitmq_message_newnews'] as $k => $v){
-         echo "<br><b>$k</b> : $v <br><hr>";
+    if (!empty($this->data['rabbitmq_message_newnews'])) {
+        foreach ($this->data['rabbitmq_message_newnews'] as $k => $v) {
+            echo "<br><b>$k</b> : $v <br><hr>";
         }
     }
     ?>
-
+    <div id="news_message"></div>
+    <div id="news_error"></div>
     <br>
+    <!--  Поиск объявлений  -->
     <form id="show_news" action="" method="post">
         <legend>Поиск объявлений</legend>
         <label for="space_type">Тип площади:</label>
@@ -57,8 +59,13 @@ $form_options['object_types'] = [1 => 'Квартира', 2 => 'Офисная �
             <option value="0">---</option>
             <?php foreach ($form_options['space_types'] as $k => $options) { ?>
                 <option value="<?php echo $k; ?>"
-                    <?php if(isset($this->data['space_type'])){if($this->data['space_type']==
-                    $k){ echo 'selected';}} ?>>
+                    <?php if (isset($this->data['space_type'])) {
+                        if ($this->data['space_type'] ==
+                            $k
+                        ) {
+                            echo 'selected';
+                        }
+                    } ?>>
                     <?php echo $options; ?>
                 </option>
             <?php } ?>
@@ -68,8 +75,13 @@ $form_options['object_types'] = [1 => 'Квартира', 2 => 'Офисная �
             <option value="0">---</option>
             <?php foreach ($form_options['operation_types'] as $k => $options) { ?>
                 <option value="<?php echo $k; ?>"
-                    <?php if(isset($this->data['operation_type'])){if($this->data['operation_type']==
-                    $k){ echo 'selected';}} ?>>
+                    <?php if (isset($this->data['operation_type'])) {
+                        if ($this->data['operation_type'] ==
+                            $k
+                        ) {
+                            echo 'selected';
+                        }
+                    } ?>>
                     <?php echo $options; ?>
                 </option>
             <?php } ?>
@@ -79,8 +91,13 @@ $form_options['object_types'] = [1 => 'Квартира', 2 => 'Офисная �
             <option value="0">---</option>
             <?php foreach ($form_options['object_types'] as $k => $options) { ?>
                 <option value="<?php echo $k; ?>"
-                    <?php if(isset($this->data['object_type'])){if($this->data['object_type']==
-                        $k){ echo 'selected';}} ?>>
+                    <?php if (isset($this->data['object_type'])) {
+                        if ($this->data['object_type'] ==
+                            $k
+                        ) {
+                            echo 'selected';
+                        }
+                    } ?>>
                     <?php echo $options; ?>
                 </option>
             <?php } ?>
@@ -90,14 +107,32 @@ $form_options['object_types'] = [1 => 'Квартира', 2 => 'Офисная �
         <label for="max_number">Количество выводимых новостей</label>
         <select name="max_number" id="max_number">
             <option value="5"
-                <?php if(isset($this->data['max_number'])){if($this->data['max_number']==
-                    5){ echo 'selected';}} ?>>5</option>
+                <?php if (isset($this->data['max_number'])) {
+                    if ($this->data['max_number'] ==
+                        5
+                    ) {
+                        echo 'selected';
+                    }
+                } ?>>5
+            </option>
             <option value="10"
-                <?php if(isset($this->data['max_number'])){if($this->data['max_number']==
-                    10){ echo 'selected';}} ?>>10</option>
+                <?php if (isset($this->data['max_number'])) {
+                    if ($this->data['max_number'] ==
+                        10
+                    ) {
+                        echo 'selected';
+                    }
+                } ?>>10
+            </option>
             <option value="20"
-                <?php if(isset($this->data['max_number'])){if($this->data['max_number']==
-                    20){ echo 'selected';}} ?>>20</option>
+                <?php if (isset($this->data['max_number'])) {
+                    if ($this->data['max_number'] ==
+                        20
+                    ) {
+                        echo 'selected';
+                    }
+                } ?>>20
+            </option>
         </select>
         <br>
         <label for="time_start">Дата окончания поиска (по умолчанию настоящее время):</label>
@@ -106,157 +141,124 @@ $form_options['object_types'] = [1 => 'Квартира', 2 => 'Офисная �
         <label for="time">За период</label>
         <select name="time" id="time">
             <option value="24"
-                <?php if(isset($this->data['time'])){if($this->data['time']==
-                    24){ echo 'selected';}} ?>>24 часа</option>
+                <?php if (isset($this->data['time'])) {
+                    if ($this->data['time'] ==
+                        24
+                    ) {
+                        echo 'selected';
+                    }
+                } ?>>24 часа
+            </option>
             <option value="168"
-                <?php if(isset($this->data['time'])){if($this->data['time']==
-                    168){ echo 'selected';}} ?>>1 неделя</option>
+                <?php if (isset($this->data['time'])) {
+                    if ($this->data['time'] ==
+                        168
+                    ) {
+                        echo 'selected';
+                    }
+                } ?>>1 неделя
+            </option>
             <option value="672"
-                <?php if(isset($this->data['time'])){if($this->data['time']==
-                    672){ echo 'selected';}} ?>>1 месяц</option>
+                <?php if (isset($this->data['time'])) {
+                    if ($this->data['time'] ==
+                        672
+                    ) {
+                        echo 'selected';
+                    }
+                } ?>>1 месяц
+            </option>
             <option value="8064"
-                <?php if(isset($this->data['time'])){if($this->data['time']==
-                    8064){ echo 'selected';}} ?>>1 год</option>
+                <?php if (isset($this->data['time'])) {
+                    if ($this->data['time'] ==
+                        8064
+                    ) {
+                        echo 'selected';
+                    }
+                } ?>>1 год
+            </option>
         </select>
         <br>
-        <label for="best">Только лучшие</label>
-        <input type="checkbox" name="best" value="true" <?php if(isset($this->data['best'])){if($this->data['best']==
-            TRUE){ echo 'checked';}} ?>>
+        <input type="text" id="title_like" name="title_like" placeholder="Заголовок содержит">
+<!--        <label for="best">Только лучшие</label>-->
+<!--        <input type="checkbox" name="best" value="true" --><?php //if (isset($this->data['best'])) {
+//            if ($this->data['best'] ==
+//                TRUE
+//            ) {
+//                echo 'checked';
+//            }
+//        } ?>
         <label for="best">Только активные</label>
-        <input type="checkbox" name="status" value="true" <?php if(isset($this->data['status'])){if($this->data['status']==
-            TRUE){ echo 'checked';}} ?>>
+        <input type="checkbox" name="status" value="true" <?php if (isset($this->data['status'])) {
+            if ($this->data['status'] ==
+                TRUE
+            ) {
+                echo 'checked';
+            }
+        } ?>>
 
+        <input type="hidden" name="action" value="news_search">
         <input type="submit" name="submit_show_news" id="submit_show_news" value="Показать объявления">
     </form>
 
     <a class="button" href="admin/newsformgenerator">News Form Generator</a>
 
-     <!-- Список новостей для редактирования, изменения статуса или удаления -->
+    <div id="status_pages"></div>
+    <!-- Список новостей для редактирования, изменения статуса или удаления -->
     <div id="status_frm_wrap">
-    <form id="status_frm" action="" method="post">
 
-            <table border="1", cellspacing="0">
 
-                <tr align="center">
-                    <td>id</td>
-                    <td>Дата</td>
-                    <td>Заголовок</td>
-                    <td>Автор</td>
-                    <td>Тип площади</td>
-                    <td>Операция</td>
-                    <td>Тип объекта</td>
-                    <td>Видна</td>
-                    <td>Скрыта</td>
-                    <td>Рейт.посещ.</td>
-                    <td>Рейт.админ.</td>
-                    <td>Рейт.донат.</td>
-                    <td>Удалить</td>
+        <form id="status_frm" action="" method="post">
+            <table border="1" , cellspacing="0" id="status_frm_table">
+                <tr class="status_frm_header">
+                    <td rowspan="2">id</td>
+                    <td rowspan="2">Дата</td>
+                    <td rowspan="2">Заголовок</td>
+                    <td rowspan="2">Автор</td>
+                    <td rowspan="2">Тип площади</td>
+                    <td rowspan="2">Операция</td>
+                    <td rowspan="2">Тип объекта</td>
+                    <td rowspan="2">Видна</td>
+                    <td rowspan="2">Скрыта</td>
+                    <td colspan="4">Рейтинг</td>
+                    <td rowspan="2">Удалить</td>
                 </tr>
+                <tr align="center" class="status_frm_header">
+                    <td>посещ.</td>
+                    <td>админ.</td>
+                    <td>донат.</td>
+                    <td>общий.</td>
+                </tr>
+                <tr align="center" class="status_frm_header">
+                    <td><input type="radio" class="sorting" name="sorting" value="id_news"></td>
+                    <td><input type="radio" class="sorting" name="sorting" value="date" checked></td>
+                    <td><input type="radio" class="sorting" name="sorting" value="title"></td>
+                    <td><input type="radio" class="sorting" name="sorting" value="user_id"></td>
+                    <td><input type="radio" class="sorting" name="sorting" value="space_type"></td>
+                    <td><input type="radio" class="sorting" name="sorting" value="operation_type"></td>
+                    <td><input type="radio" class="sorting" name="sorting" value="object_type"></td>
+                    <td><input type="radio" class="sorting" name="sorting" value="status"></td>
+                    <td></td>
+                    <td><input type="radio" class="sorting" name="sorting" value="rating_views"></td>
+                    <td><input type="radio" class="sorting" name="sorting" value="rating_admin"></td>
+                    <td><input type="radio" class="sorting" name="sorting" value="rating_donate"></td>
+                    <td><input type="radio" class="sorting" name="sorting" value="rating_real"></td>
+                    <td></td>
+                </tr>
+                <?php
+                $this->model('NewsModel')->renderAdminNews($this->data);
+                ?>
 
-                <?php for ($i = 0; (!empty($this->data['news'][$i])); $i++) { ?>
-                    <tr align="center">
-                        <td><i> <?php echo $this->data['news'][$i]['id_news']; ?></i></td>
-                        <td><i> <?php echo $this->data['news'][$i]['date']; ?></i></td>
-                        <td>
-                            <a href="/news/editor/<?php echo $this->data['news'][$i]['id_news'];
-                            ?>"><?php echo $this->data['news'][$i]['title']; ?> </a>
-                        </td>
-                        <td> <?php echo $this->data['news'][$i]['user_id']; ?> </td>
-                        <td><?php echo $this->data['news'][$i]['space_type']; ?></td>
-                        <td><?php echo $this->data['news'][$i]['operation_type']; ?></td>
-                        <td><?php echo $this->data['news'][$i]['object_type']; ?></td>
-                       <td><input type="radio" class="status" name="status_<?php echo $this->data['news'][$i]['id_news']; ?>"
-                                   value="1" <?php
-                            if ($this->data['news'][$i]['status'] === 1) {
-                                echo "checked";
-                            }
-                            ?> >
-                       </td>
-                        <td><input type="radio" class="status" name="status_<?php echo $this->data['news'][$i]['id_news']; ?>"
-                                   value="0" <?php
-                            if ($this->data['news'][$i]['status'] === 0) {
-                                echo "checked";
-                            }
-                            ?> >
-                        </td>
-                        <td> <?php echo $this->data['news'][$i]['rating_views']; ?> </td>
-                        <td> <select class="rating_admin" name="rating_admin_<?php echo $this->data['news'][$i]['id_news']; ?>">
-                                <?php
-                                for($j=0;$j<10;$j++){
-                                ?><option value="<?php echo $j; ?>" <?php
-                                if ($this->data['news'][$i]['rating_admin'] == $j) {
-                                    echo "selected";
-                                }
-                                ?>><?php echo $j; ?></option> <?php
-                                }
-                                ?>
-                            </select>
-                        </td>
-                        <td> <?php echo $this->data['news'][$i]['rating_donate']; ?> </td>
-                        <td><input type="radio" class="status" name="status_<?php echo $this->data['news'][$i]['id_news']; ?>"
-                                   value="3">
-                        </td>
-
-
-                    </tr>
-
-                <?php } ?>
             </table>
-<!--            <input type="hidden" id="stat_arr" name="stat_arr" value="--><?php
-//            if (!empty($this->data['stat_arr'])) {
-//                echo $this->data['stat_arr'];
-//            }
-//            ?><!--"/>-->
-            <input type="submit" name="submit_status" value="Изменить статус"> <input type="reset" value="Отмена">
-    </form>
+            <input type="hidden" id="stat_arr" name="stat_arr" value="<?php
+            if (!empty($this->data['stat_arr'])) {
+                echo $this->data['stat_arr'];
+            }
+            ?>"/>
+            <input type="submit" name="submit_status" id="submit_status" value="Изменить статус"> <input type="reset"
+                                                                                                         value="Отмена">
+        </form>
     </div>
 
     <!-- Список новостей для редактирования, изменения статуса или удаления Конец-->
 
-
-    <script>
-        $(document).ready(function () {
-            //Ограничение меню добавления новостей
-            $('#show_news').submit(function () {
-                var opt1 = $('#space_type').val();
-                var opt2 = $('#operation_type').val();
-                var opt3 = $('#object_type').val();
-                if (typeof form_options_menu[opt1][opt2][opt3] === "undefined") {
-                    alert('Данной опции не существует!');
-                    return false;
-                }
-            });
-            // Добавление поля hidden при изменении status
-            $("#status_frm .status").change(function () {
-                var hidName = ($(this).attr('name'));
-                hidName = hidName.substr(7);
-               $(this).after('<input type="hidden" name="change_status_'+ hidName +'" value="'+ hidName +'">');
-            });
-            // Добавление поля hidden при изменении rating_admin
-            $("#status_frm .rating_admin").change(function () {
-                var hidName = ($(this).attr('name'));
-                hidName = hidName.substr(13);
-                $(this).after('<input type="hidden" name="change_rating_'+ hidName +'" value="'+ hidName +'">');
-            });
-
-            //Ajax запрос для кнопки Показать объявления
-            $("#submit_show_news").click(function(e){
-                e.preventDefault();
-                var formResult = 'submit_show_news=submit&'+$('#show_news').serialize();
-                $.ajax({
-                url : "/admin",
-                method : 'POST',
-                data : formResult,
-                success : function(data){
-                        var data = $(data);
-                        var status_frm_wrap = data.find('#status_frm_wrap').html();
-                       // console.log(status_frm_wrap);
-                        $("#status_frm_wrap").html(status_frm_wrap);
-                    }
-                });
-            });
-
-
-        });
-
-    </script>
+    <script type="text/javascript" src="/template/js/admin.news.js"></script>

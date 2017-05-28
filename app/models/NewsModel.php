@@ -39,20 +39,31 @@ class NewsModel extends Model
      * @param int $space_to - Площадь до
      * @return int - Количество объявлений
      */
-    public function getNamber_of_all_rows($time_start = 0, $space_type = 0, $operation_type = 0, $object_type = 0,
-                                          $price_from = 0, $price_to = 0, $space_from = 0, $space_to = 0)
+    public function getNamberOfAllNews($time_from = 0, $time_to = 0, $space_type = 0, $operation_type = 0, $object_type = 0,
+                                       $price_from = 0, $price_to = 0, $space_from = 0, $space_to = 0,
+                                       $status = 1, $title_like = '')
     {
 
 // Составление запроса
         $sql = "SELECT COUNT(*) FROM news_base WHERE ";
 
-        // Только активные(видимые)
-        $sql .= "(status = 1) ";
+        if ($time_to != 0) {
+            $time_to = time() - $time_to * 60 * 60;
+            $time_to = date('c', $time_to);
+            $sql .= " (date >= :time_to) ";
+        } else {
+            $time_to = date('c', time());
+            $sql .= " (date >= :time_to) ";
+        }
+        //Дата окончания поиска (по умолчанию настоящее время)
+        if ($time_from != 0) {
+            $time_from = date('c', strtotime($time_from) + 86400);
+            $sql .= "AND (date <= :time_from) ";
+        }
 
-        if ($time_start != 0) {
-            $time_start = time() - $time_start * 60 * 60;
-            $time_start = date('c', $time_start);
-            $sql .= "AND (date >= :time_start) ";
+        if ($status == 1) {
+            // Только активные(видимые)
+            $sql .= "AND (status = 1) ";
         }
 
         if ($space_type != 0) {
@@ -76,11 +87,18 @@ class NewsModel extends Model
         if ($space_to != 0) {
             $sql .= "AND (space <= :space_to) ";
         }
+        if ($title_like) {
+            $title_like = $this->checkingString($title_like);
+            $sql .= "AND (title LIKE '%" . $title_like . "%') ";
+        }
 
         $stmt = $this->db->prepare($sql);
-        if ($time_start != 0) {
-            $stmt->bindParam(':time_start', $time_start);
+        if ($time_from != 0) {
+            $stmt->bindParam(':time_from', $time_from);
         }
+
+        $stmt->bindParam(':time_to', $time_to);
+
         if ($space_type != 0) {
             $stmt->bindParam(':space_type', $space_type);
         }
@@ -111,7 +129,7 @@ class NewsModel extends Model
     public function getNewsById($id)
     {
 
-// Считываем базовую информацию по id
+        // Считываем базовую информацию по id
         $sql = "SELECT *"
             . " FROM news_base"
             . " WHERE id_news = :id";
@@ -120,10 +138,83 @@ class NewsModel extends Model
         $stmt->execute();
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-// разбиваем имена и передаем их в массиве
+        // разбиваем имена и передаем их в массиве
         $data['preview_img'] = explode('|', $data['preview_img']);
 
         return $data;
+    }
+
+    public function setCountViewsNews($id_news, $user_ip)
+    {
+        // Установление куки о просмотренной странице
+        $last_viewed_news_namber = 5; // 5 новостей
+        $last_viewed_news_time = 0.00694; // время хранения (дней) 0.00694
+
+        $last_viewed_news_namber--;
+        $last_viewed_news_time = $last_viewed_news_time * 60 * 60 * 24;
+        // массив для записи и сортировки COOKIE
+        $last_viewed_news_array = [];
+
+        if (isset($_COOKIE['last_viewed_news'])) {
+            //запись COOKIE в массив
+            for ($index = $last_viewed_news_namber; $index >= 0; $index--) {
+                if (isset($_COOKIE['last_viewed_news'][$index])) {
+                    $last_viewed_news_array[$index] = (int)$_COOKIE['last_viewed_news'][$index];
+                }
+            }
+            ksort($last_viewed_news_array);
+
+            //Проверка существует ли уже новость в массиве
+            $id_key = array_search($id_news, $last_viewed_news_array);
+            if ($id_key !== FALSE) {
+                // если да, то удаляем этот элемент
+                array_splice($last_viewed_news_array, $id_key, 1);
+            } else {
+                // Проверка наличия просмотра в базе
+                //ip в число с учетом 32разрядных систем
+                $user_ip = sprintf('%u', ip2long($user_ip));
+                // Проверка в БД IP
+                $sql = "SELECT id FROM news_views WHERE id_news = :id_news AND user_ip = :user_ip";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindParam(':id_news', $id_news);
+                $stmt->bindParam(':user_ip', $user_ip);
+                $stmt->execute();
+                if (!$stmt->fetchColumn()) {
+                    //Если нет => Запись IP
+                    if (isset($_SESSION['userID'])) {
+                        $userID = (int)$_SESSION['userID'];
+                    } else {
+                        $userID = FALSE;
+                    }
+                    $sql = "INSERT INTO news_views (id_news, user_ip";
+                    if ($userID) $sql .= " ,user_id";
+                    $sql .= ") VALUES (:id_news, :user_ip";
+                    if ($userID) $sql .= " ,:user_id";
+                    $sql .= ")";
+                    $stmt = $this->db->prepare($sql);
+                    $stmt->bindParam(':id_news', $id_news);
+                    $stmt->bindParam(':user_ip', $user_ip);
+                    if ($userID) $stmt->bindParam(':user_id', $userID);
+                    $stmt->execute();
+                    //Увеличение рейтинга просмотров
+                    $sql = "UPDATE news_base SET rating_views = rating_views + 1 WHERE id_news = :id_news";
+                    $stmt = $this->db->prepare($sql);
+                    $stmt->bindParam(':id_news', $id_news);
+                    $stmt->execute();
+                }
+            }
+        }
+
+        // Добавляем id в начало массива
+        array_unshift($last_viewed_news_array, $id_news);
+        // Обрезаем массив
+        array_splice($last_viewed_news_array, ($last_viewed_news_namber + 1));
+
+        // Запись COOKIE
+        foreach ($last_viewed_news_array as $key => $value) {
+            $name = "last_viewed_news[$key]";
+            setcookie($name, $value, time() + $last_viewed_news_time);
+        }
     }
 
     public function prepareNewsView($news)
@@ -571,7 +662,7 @@ class NewsModel extends Model
 
         }
         // общее кол-во новостей !!! исправить !!!
-        $namber_of_all_rows = $this->getNamber_of_all_rows();
+        $namber_of_all_rows = $this->getNamberOfAllNews();
 
 
         // Запись в SESSION
@@ -899,8 +990,12 @@ class NewsModel extends Model
                 }
             }
         }
-
-
+        //Удаление из таблицы рейтинга
+        $sql = "DELETE FROM news_views WHERE id_news = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        //Удаление объявления
         $sql = "DELETE FROM news_base WHERE id_news = :id";
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':id', $id);
@@ -908,10 +1003,12 @@ class NewsModel extends Model
         if ($stmt->execute()) {
             // Добавление сообщения
             array_push($news_message, 'Удалена новость c id = ' . $id);
+            $return = $id;
         } else {
             array_push($news_error, 'Новость с id = ' . $id . ' не удалось удалить');
+            $return = FALSE;
         };
-        return;
+        return $return;
     }
 
     public function makeNewsStatus()
@@ -921,6 +1018,7 @@ class NewsModel extends Model
         // Массив id объявлений подлежащих изменению
         $news_id_status = [];
         $news_id_rating = [];
+        $news_delete_id = [];
         foreach ($_POST as $key => $value) {
             if (preg_match('/^change_status_/', $key)) {
                 $news_id = substr($key, 14);
@@ -938,9 +1036,12 @@ class NewsModel extends Model
                 $status = $_POST['status_' . $id_news];
                 //Удаление новости
                 if ($status == 3) {
-                    $this->makeNewsDelete($id_news);
+                    if ($id_news = $this->makeNewsDelete($id_news)) {
+                        array_push($news_delete_id, $id_news);
+                    }
                 } else {
                     //UPDATE статуса
+                    if ($status == 2) $status = 0;
                     $sql = "UPDATE news_base SET status = :status  WHERE id_news = :id_news";
                     $stmt = $this->db->prepare($sql);
                     $stmt->bindParam(':id_news', $id_news);
@@ -976,7 +1077,11 @@ class NewsModel extends Model
                     'Изменение статуса Лучшее объявление (id = ' . $id_news . ') не удалось');
             }
         }
-        return;
+        //сообщения для Ajax
+        $data['news_message'] = $news_message;
+        $data['news_error'] = $news_error;
+        $data['news_delete_id'] = $news_delete_id;
+        return $data;
     }
 
 
@@ -1389,12 +1494,13 @@ class NewsModel extends Model
      * @param int $space_type - Тип площади
      * @param int $operation_type - Операция
      * @param int $object_type - Тип объекта
-     * @param bool $best - Сортировка по лучшим
-     * @param bool $status - Статус (только Видимые или нет)
+     * @param bool $status - Статус (только Видимые (true))
+     * @param var $sorting - Сортировка (имя столбца)
+     * @param var $title_like - Строка поиска по названию
      * @return array
      */
-    public function getRecentNewsList($time_start = 0, $time = 24, $max_numder = 20, $space_type = 0, $operation_type = 0,
-                                      $object_type = 0, $best = false, $status = true)
+    public function getRecentNewsList($time_start = 0, $time = 24, $max_number = 20, $space_type = 0, $operation_type = 0,
+                                      $object_type = 0, $status = true, $sorting = '', $title_like = '', $offset = 0)
     {
         //Заданное время начала поиска ($time - час)
         $news_time = time() - $time * 60 * 60;
@@ -1409,7 +1515,7 @@ class NewsModel extends Model
         }
 
         $sql = "SELECT id_news, to_char(date,'YYYY-MM-DD HH24:MI:SS') as date, title, space_type, operation_type, object_type, content, user_id, "
-            . "preview_img, status, rating_views, rating_admin, rating_donate "
+            . "preview_img, status, rating_views, rating_admin, rating_donate, (rating_views + rating_admin+rating_donate) as rating_real "
             . "FROM news_base WHERE (date >= :date) ";
 
         if ($time_start) {
@@ -1427,20 +1533,30 @@ class NewsModel extends Model
         if ($object_type != 0) {
             $sql .= "AND (object_type = :object_type) ";
         }
-        if ($best) {
-            $sql .= " ORDER BY rating_admin DESC";
+        if ($title_like) {
+            $title_like = $this->checkingString($title_like);
+            $sql .= "AND (title LIKE '%" . $title_like . "%') ";
+        }
+
+        if ($sorting) {
+            $sorting = $this->checkingString($sorting);
+            $sql .= " ORDER BY " . $sorting . " DESC";
         } else {
             $sql .= " ORDER BY date DESC";
         }
-        $sql .= " LIMIT :max_numder";
 
+        $sql .= " LIMIT :max_number";
+        if ($offset != 0) {
+            $sql .= " OFFSET " . $offset;
+        }
 
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':date', $news_date);
         if ($time_start != 0) {
             $stmt->bindParam(':date_start', $time_start);
         }
-        $stmt->bindParam(':max_numder', $max_numder);
+        $stmt->bindParam(':max_number', $max_number);
+
         if ($space_type != 0) {
             $stmt->bindParam(':space_type', $space_type);
         }
@@ -1455,7 +1571,7 @@ class NewsModel extends Model
 
         // Подкотовка данных для вывода
         $data = $this->prepareNewsPreview($data);
-
+        //$data['offset'] = $offset;
         return $data;
     }
 
@@ -1699,15 +1815,71 @@ class NewsModel extends Model
             if (!empty($best_news_number)) {
                 $ending = $this->getNumEnding($best_news_number, ['объявление', 'объявления', 'объявлений']);
 
-                if($best_news_number<=9){ ?>
-                    <p>Всего <?php echo $best_news_number .' '.  $ending; ?>.</p>
-                <?php }else { ?>
-                <p>Еще<span><?php echo $best_news_number .'</span> '.  $ending; ?></p>
-                <a href="#">Смотреть все</a>
-            <?php }} else { ?>
+                if ($best_news_number <= 9) { ?>
+                    <p>Всего <?php echo $best_news_number . ' ' . $ending; ?>.</p>
+                <?php } else { ?>
+                    <p>Еще<span><?php echo $best_news_number . '</span> ' . $ending; ?></p>
+                    <a href="#">Смотреть все</a>
+                <?php }
+            } else { ?>
                 <p>К сожалению, ничего не найдено.</p>
             <?php }
             ?> </div> <?php
+    }
+
+    public function renderAdminNews($data)
+    {
+        ?>
+
+        <?php for ($i = 0; (!empty($data['news'][$i])); $i++) { ?>
+        <tr align="center" class="status_frm_data id_<?php echo $data['news'][$i]['id_news']; ?>">
+            <td><i> <?php echo $data['news'][$i]['id_news']; ?></i></td>
+            <td><i> <?php echo $data['news'][$i]['date']; ?></i></td>
+            <td>
+                <a href="/news/editor/<?php echo $data['news'][$i]['id_news'];
+                ?>"><?php echo $data['news'][$i]['title']; ?> </a>
+            </td>
+            <td> <?php echo $data['news'][$i]['user_id']; ?> </td>
+            <td><?php echo $data['news'][$i]['space_type']; ?></td>
+            <td><?php echo $data['news'][$i]['operation_type']; ?></td>
+            <td><?php echo $data['news'][$i]['object_type']; ?></td>
+            <td><input type="radio" class="status" name="status_<?php echo $data['news'][$i]['id_news']; ?>"
+                       value="1" <?php
+                if ($data['news'][$i]['status'] === 1) {
+                    echo "checked";
+                }
+                ?> >
+            </td>
+            <td><input type="radio" class="status" name="status_<?php echo $data['news'][$i]['id_news']; ?>"
+                       value="0" <?php
+                if ($data['news'][$i]['status'] === 0) {
+                    echo "checked";
+                }
+                ?> >
+            </td>
+            <td> <?php echo $data['news'][$i]['rating_views']; ?> </td>
+            <td><select class="rating_admin" name="rating_admin_<?php echo $data['news'][$i]['id_news']; ?>">
+                    <?php
+                    for ($j = 0; $j < 10; $j++) {
+                        ?>
+                        <option value="<?php echo $j; ?>" <?php
+                        if ($data['news'][$i]['rating_admin'] == $j) {
+                            echo "selected";
+                        }
+                        ?>><?php echo $j; ?></option> <?php
+                    }
+                    ?>
+                </select>
+            </td>
+            <td> <?php echo $data['news'][$i]['rating_donate']; ?> </td>
+            <td> <?php echo $data['news'][$i]['rating_real']; ?> </td>
+            <td><input type="radio" class="status" name="status_<?php echo $data['news'][$i]['id_news']; ?>"
+                       value="3">
+            </td>
+        </tr>
+    <?php } ?>
+
+        <?php
     }
 
     /**
@@ -1720,21 +1892,67 @@ class NewsModel extends Model
     public function getNumEnding($number, $endingArray)
     {
         $number = $number % 100;
-        if ($number>=11 && $number<=19) {
-            $ending=$endingArray[2];
-        }
-        else {
+        if ($number >= 11 && $number <= 19) {
+            $ending = $endingArray[2];
+        } else {
             $i = $number % 10;
-            switch ($i)
-            {
-                case (1): $ending = $endingArray[0]; break;
+            switch ($i) {
+                case (1):
+                    $ending = $endingArray[0];
+                    break;
                 case (2):
                 case (3):
-                case (4): $ending = $endingArray[1]; break;
-                default: $ending=$endingArray[2];
+                case (4):
+                    $ending = $endingArray[1];
+                    break;
+                default:
+                    $ending = $endingArray[2];
             }
         }
         return $ending;
+    }
+
+    public function renderNewsEditorMenu()
+    {
+        $form_options = [];
+        $form_options['space_types'] = [1 => 'Нежилая', 2 => 'Жилая',];
+        $form_options['operation_types'] = [1 => 'Арендовать', 2 => 'Купить',];
+        $form_options['object_types'] = [1 => 'Квартира', 2 => 'Офисная площадь', 3 => 'Торговая площадь', 4 => 'Офисная площадь с землей', 5 => 'Производственно-складские здания', 6 => 'Производственно-складские помещения ', 7 => 'Рынок/Ярмарка', 8 => 'Комплекс ОСЗ', 9 => 'ОСЗ', 10 => 'Торговое здание', 11 => 'Комната', 12 => 'Дом', 13 => 'Гараж/Машиноместо', 14 => 'Земельный участок',];
+        ?>
+
+        <form id="add_news" action="/news/editor" method="post">
+            <legend>Выбор категории для создания нового объявления</legend>
+            <label for="space_type">Тип площади:</label>
+            <select name="space_type" id="space_type">
+                <?php foreach ($form_options['space_types'] as $k => $options) { ?>
+                    <option value="<?php echo $k; ?>">
+                        <?php echo $options; ?>
+                    </option>
+                <?php } ?>
+            </select>
+            <br>
+            <label for="operation_type">Операция:</label>
+            <select name="operation_type" id="operation_type">
+                <?php foreach ($form_options['operation_types'] as $k => $options) { ?>
+                    <option value="<?php echo $k; ?>">
+                        <?php echo $options; ?>
+                    </option>
+                <?php } ?>
+            </select>
+            <br>
+            <label for="object_type">Тип объекта:</label>
+            <select name="object_type" id="object_type">
+                <?php foreach ($form_options['object_types'] as $k => $options) { ?>
+                    <option value="<?php echo $k; ?>">
+                        <?php echo $options; ?>
+                    </option>
+                <?php } ?>
+            </select>
+
+            <input type="submit" name="submit_add_news" value="Добавить новость">
+        </form>
+        <script type="text/javascript" src="/template/js/news.editor.menu.js"></script>
+        <?php
     }
 
 

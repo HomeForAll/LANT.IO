@@ -513,4 +513,16 @@ class UserModel extends Model
             $this->atLogin($result[0]['id'], $result[0]['status'], $result[0]['first_name'] . ' ' . $result[0]['last_name']);
         }
     }
+    
+        public function getUserIP()
+    {
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        } else {
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
+        return $ip;
+    }
 }
