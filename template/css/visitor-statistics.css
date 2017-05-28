@@ -1,0 +1,18 @@
+
+.visitor-statistics li[data-for] {
+    cursor: pointer;
+}
+
+.schedule-interface {
+  padding: 0;
+}
+.schedule-interface .chart-lines { position: relative; width: 100%; height: 204px; }
+.schedule-interface .chart-lines .chart-line { position: absolute; width: 100%; height: 204px; transition: opacity 300ms ease-out; }
+.schedule-interface .chart-lines .no-activ { opacity: .5; }
+.schedule-interface .chart-lines .activ { opacity: 1; z-index: 10; }
+.schedule a { transition: opacity 300ms ease-out; }
+.schedule a.no-activ { opacity: .5; }
+
+#schedule-in-city {
+    display: none;
+}
