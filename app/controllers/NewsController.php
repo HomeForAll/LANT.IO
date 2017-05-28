@@ -6,11 +6,16 @@ class NewsController extends Controller
     {
         parent::__construct($template);
         $this->setModel(new NewsModel());
+        $this->setModel(new UserModel());
     }
 
-    //Функция выводит заданное количество новостей из базы данных
+//Функция выводит заданное количество новостей из базы данных
     public function actionNews_list($params)
     {
+        $this->ifAJAX(function() {
+            $data = $this->model('SearchModel')->getRentApartData();
+            echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        });
 
         if (!empty($params)) {
             $params = $params[0];
@@ -38,8 +43,12 @@ class NewsController extends Controller
             $params = '';
         }
 
+        //IP пользователя
+        $user_ip = $this->model('UserModel')->getUserIP();
         //Получение данных из БД
         $news = $this->model('NewsModel')->getNewsById($params);
+        //Изменение количества просмотров объявления на 1 и запись cookie о просмотре
+        $this->model('NewsModel')->setCountViewsNews($news['id_news'], $user_ip);
         //Удаление NULL и "0" параметров и назначение имен существующим, для вывода
         $news = $this->model('NewsModel')->prepareNewsView($news);
 
@@ -152,12 +161,13 @@ class NewsController extends Controller
         $data = $news_to_edit;
         $data['message'] = $news_message;
         $data['error'] = $news_error;
-
-        $data['space_type'] = $space_type;
-        $data['operation_type'] = $operation_type;
-        $data['object_type'] = $object_type;
-        $data['form_name'] = $space_type.'_'.$operation_type.'_'.$object_type;
-        $data['form_path'] = 'app/views/news/'.$data['form_name'].'.php';
+ if(isset($space_type) && isset($operation_type) && isset($object_type)){
+     $data['space_type'] = $space_type;
+     $data['operation_type'] = $operation_type;
+     $data['object_type'] = $object_type;
+     $data['form_name'] = $space_type.'_'.$operation_type.'_'.$object_type;
+     $data['form_path'] = 'app/views/news/'.$data['form_name'].'.php';
+ }
 
         $this->view->render('news_editor', $data);
     }

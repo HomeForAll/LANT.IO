@@ -18,8 +18,36 @@ class AdminController extends Controller
         $this->getAccessFor('admin');
         $news_message = [];
         $news_error = [];
-        // Данные просмотра таблицы редактирования объявлений
-        $data = $this->model('AdminModel')->getDataFromPostOrSession();
+        $data = [];
+        // Данные проchange_news_menuсмотра таблицы редактирования объявлений
+//        $data = $this->model('AdminModel')->getDataFromPost();
+
+        $this->ifAJAX(function() {
+
+            if('news_search' == $_POST['action']){
+                $data = $this->model('AdminModel')->getDataFromPost();
+
+                    //Кол-во объявлений
+                    $data['news_number']= $this->model('NewsModel')->
+                    getNamberOfAllNews( $data['time_start'], $data['time'], $data['space_type'],
+                        $data['operation_type'], $data['object_type'], 0, 0, 0, 0, $data['status'], $data['title_like']);
+
+                    $data['one_page'] = $data['max_number'];
+
+                $data['news'] = $this->model('NewsModel')->
+                getRecentNewsList($data['time_start'], $data['time'], $data['max_number'], $data['space_type'],
+                    $data['operation_type'], $data['object_type'], $data['status'],$data['sorting'], $data['title_like'], $data['offset']);
+
+                //$this->model('NewsModel')->renderAdminNews($data);
+                echo json_encode($data);
+                die();
+            }
+            if('submit_status' == $_POST['action']){
+                $messege = $this->model('NewsModel')->makeNewsStatus();
+                echo json_encode($messege);
+                die();
+          }
+        });
 
         if (!empty($_POST['submit_status'])) {
             //Запись $_POST параметров в БД
@@ -29,10 +57,8 @@ class AdminController extends Controller
         if (!empty($_POST['test2'])) {
             $data['rabbitmq_message_newnews'] = $this->model('NewsModel')->getNewNewsByRabbitMQ();
         }
-
-        $data['news'] = $this->model('NewsModel')->
-        getRecentNewsList($data['time_start'], $data['time'], $data['max_number'], $data['space_type'],
-            $data['operation_type'], $data['object_type'], $data['best'], $data['status']);
+        // Таблица новостей по умолчанию
+        $data['news'] = $this->model('NewsModel')->getRecentNewsList(0,24,10,0,0,0,FALSE,FALSE);
         $data['message'] = $news_message;
         $data['error'] = $news_error;
         $this->view->render('admin', $data);
@@ -183,7 +209,7 @@ class AdminController extends Controller
 
         //Внесение изменений в меню новостей в файле $f_name = news_myad.php
         if (isset($_POST['change_news_menu'])) {
-            $f_name = "app/views/news_myad.php";
+            $f_name = "template/js/news.editor.menu.js";
             array_push($data['message'], $this->model('AdminModel')->changeFileNewsMenu($f_name, $data['form_options']));
         }
 
