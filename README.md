@@ -29,6 +29,16 @@
 ```
 <?php
     
+    /**
+     * Описание интерфейся
+     */
+    interface FooInterface
+    {
+    }
+    
+    /**
+     * Описание класса
+     */
     class Foo extends Bar implements FooInterface
     {
         const VERSION = '2.0';
