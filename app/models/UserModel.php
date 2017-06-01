@@ -16,10 +16,10 @@ class UserModel extends Model
     {
         $data = $this->getUserData($_POST['login'], $_POST['password']);
 
-        if ($data) {
+        if ($data && !$data['banned']) {
             $this->atLogin($data['userID'], $data['status'], $data['firstName'], $data['lastName']);
         } else {
-            $errors = '<span style="color: red;">Вы указали неверные сведения или пользователь не существует.</span><br>';
+            $errors = '<span style="color: red;">Вы указали неверные сведения или ваш аккаунт заблокирован.</span><br>';
 
             return $errors;
         }
@@ -189,6 +189,7 @@ class UserModel extends Model
                     'status'    => $result['status'],
                     'firstName' => $result['first_name'],
                     'lastName'  => $result['last_name'],
+                    'banned' => $result['banned'],
                 ];
             }
         }
@@ -513,8 +514,8 @@ class UserModel extends Model
             $this->atLogin($result[0]['id'], $result[0]['status'], $result[0]['first_name'] . ' ' . $result[0]['last_name']);
         }
     }
-    
-        public function getUserIP()
+
+    public function getUserIP()
     {
         if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
             $ip = $_SERVER['HTTP_CLIENT_IP'];
@@ -525,4 +526,6 @@ class UserModel extends Model
         }
         return $ip;
     }
+
+
 }

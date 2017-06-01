@@ -66,6 +66,8 @@ return array(
 
     'admin' => 'main/admin/admin',
     'admin/newsformgenerator' => 'main/admin/newsFormGenerator',
+    'admin/users/ban' => 'main/admin/usersBan',
+    'admin/users' => 'main/admin/users',
 
     'forms_gen' => 'main/search/GenSearchForm',
     'forms_gen/([0-9]+)' => 'main/search/GenSearchForm/$1',

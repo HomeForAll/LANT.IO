@@ -64,7 +64,6 @@ class AdminController extends Controller
         $this->view->render('admin', $data);
     }
 
-
     public function actionNewsFormGenerator()
     {
 //        !!!!
@@ -215,5 +214,28 @@ class AdminController extends Controller
 
 
         $this->view->render('news_form_generator', $data);
+    }
+
+    /**
+     * Административная панель, для работы с пользователями
+     */
+    public function actionUsers() {
+        $this->view->render('users_admin_panel');
+    }
+
+    /**
+     * Панель блокировки пользователей
+     * TODO: реализовать проверку на пустую дату
+     */
+    public function actionUsersBan() {
+        if (isset($_POST['search'])) {
+            $this->model('AdminModel')->searchUser($_POST['email']);
+        } elseif (isset($_POST['block'])) {
+            $this->model('AdminModel')->blockUser($_POST['user_id'], $_POST['block_date']); // блокировка по дате
+        } elseif (isset($_POST['perm_block'])) {
+            $this->model('AdminModel')->blockUser($_POST['user_id']); // блокировка навсегда
+        }
+
+        $this->view->render('users_ban_panel');
     }
 }

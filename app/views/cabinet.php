@@ -22,7 +22,8 @@ if ($access['key_editor']) {
 if ($access['admin_tickets']) {
     ?>
     <a class="button" href="cabinet/tickets_editor">Редактор тикетов</a>
-<?php }
+<?php
+}
 ?>
     <br>
     <a class="button" href="cabinet/profile/edit">Редактировать профиль</a>
@@ -30,6 +31,12 @@ if ($access['admin_tickets']) {
 if ($access['forms_editor']) {
     ?>
     <a class="button" href="cabinet/forms">Редактор форм</a>
+    <?php
+}
+
+if ($access['admin_users_panel']) {
+    ?>
+    <a class="button" href="admin/users">Работа с пользователями</a>
     <?php
 }
 ?>
