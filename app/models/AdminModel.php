@@ -4,11 +4,8 @@ class AdminModel extends Model
 {
     use Cleaner;
 
-    public function __construct()
-    {
-        $this->db = new DataBase();
-    }
-
+    private $users = [];
+    private $block_result = false;
 
     /**
      * Возвращает массив первоначальных данных таблицы просмотра административной панели
@@ -19,10 +16,10 @@ class AdminModel extends Model
     {
 
         $data = [];
-        if (!empty($_POST)){
-            if (!empty((int)$_POST['time'])){
+        if (!empty($_POST)) {
+            if (!empty((int)$_POST['time'])) {
                 $data['time'] = (int)$_POST['time'];
-            }else {
+            } else {
                 $data['time'] = 0;
             }
             if (!empty((int)$_POST['time_start'])) {
@@ -41,9 +38,9 @@ class AdminModel extends Model
             } else {
                 $data['time_start'] = 0;
             }
-            if (!empty((int)$_POST['max_number'])){
+            if (!empty((int)$_POST['max_number'])) {
                 $data['max_number'] = (int)$_POST['max_number'];
-            }else{
+            } else {
                 $data['max_number'] = 0;
             }
             $data['space_type'] = (int)$_POST['space_type'];
@@ -54,20 +51,20 @@ class AdminModel extends Model
             } else {
                 $data['status'] = 0;
             }
-            if (isset($_POST['sorting'])){
+            if (isset($_POST['sorting'])) {
                 $data['sorting'] = $_POST['sorting'];
             } else {
                 $data['sorting'] = '';
             }
-            if (isset($_POST['title_like'])){
+            if (isset($_POST['title_like'])) {
                 $data['title_like'] = $_POST['title_like'];
-            }else{
+            } else {
                 $data['title_like'] = '';
             }
-            if(isset($_POST['offset'])){
+            if (isset($_POST['offset'])) {
                 $data['offset'] = (int)$_POST['offset'];
-            }else {
-                $data['offset']=0;
+            } else {
+                $data['offset'] = 0;
             }
 //            //Сессии
 //            $_SESSION['news_admin']['time'] = $data['time'];
@@ -296,7 +293,7 @@ class AdminModel extends Model
             }
         }
         if (!isset($result['same_name'])) {
-            $result['same_name']['Нет совпадающих элементов'] = array();
+            $result['same_name']['Нет совпадающих элементов'] = [];
         }
 
         //Приведение данных в удобный для вывода массив
@@ -338,22 +335,22 @@ class AdminModel extends Model
         function sortFormCategory($a, $b)
         {
             $sort = [
-                'Базовый раздел' => 1,
-                'Основное' => 2,
-                'Основные параметры' => 3,
-                'Исходные параметры' => 4,
-                'Исходные параметры квартиры' => 5,
-                'Характеристики дома' => 6,
-                'Категории дома' => 7,
-                'Обустройство' => 8,
-                'Объект размещен' => 9,
-                'Параметры объекта' => 10,
-                'Ремонт и обустройство' => 11,
+                'Базовый раздел'                 => 1,
+                'Основное'                       => 2,
+                'Основные параметры'             => 3,
+                'Исходные параметры'             => 4,
+                'Исходные параметры квартиры'    => 5,
+                'Характеристики дома'            => 6,
+                'Категории дома'                 => 7,
+                'Обустройство'                   => 8,
+                'Объект размещен'                => 9,
+                'Параметры объекта'              => 10,
+                'Ремонт и обустройство'          => 11,
                 'Ремонт и обустройство квартиры' => 12,
-                'Участок' => 13,
-                'Документы' => 14,
-                'Вложения' => 15,
-                'Дополнительно' => 16,
+                'Участок'                        => 13,
+                'Документы'                      => 14,
+                'Вложения'                       => 15,
+                'Дополнительно'                  => 16,
             ];
 
             if (!isset($sort[$a['r_name']]) OR !isset($sort[$b['r_name']])) {
@@ -475,103 +472,110 @@ class AdminModel extends Model
     {
         $result = [];
         // Исключения
-        $exceptions = array(
-            'price' => 'integer',
-            'number_of_floors' => 'integer',
-            'number_of_rooms' => 'integer',
-            'the_number_of_kilowatt' => 'integer',
-            'planning_project' => 'character varying(255)',
-            'three_d_project' => 'character varying(255)',
-            'video' => 'character varying(255)',
-            'bargain' => 'boolean',
+        $exceptions = [
+            'price'                       => 'integer',
+            'number_of_floors'            => 'integer',
+            'number_of_rooms'             => 'integer',
+            'the_number_of_kilowatt'      => 'integer',
+            'planning_project'            => 'character varying(255)',
+            'three_d_project'             => 'character varying(255)',
+            'video'                       => 'character varying(255)',
+            'bargain'                     => 'boolean',
             'distance_from_mkad_or_metro' => 'integer',
-            'availability_of_bathroom' => 'smallint',  // Количество санузлов
-            'floor' => 'integer',
-            'metro_station' => 'smallint',
-            'balcony' => 'integer',
-            'ceiling_height' => 'integer',
-            'distance_from_metro' => 'integer',
-            'electricity' => 'boolean',
-            'not_residential' => 'integer',
-            'security' => 'boolean',
-            'year_of_construction' => 'integer',
-            'lease_contract' => 'character varying(255)',
-            'cadastral_number' => 'character varying(255)',
-            'space' => 'integer',
+            'availability_of_bathroom'    => 'smallint',
+            // Количество санузлов
+            'floor'                       => 'integer',
+            'metro_station'               => 'smallint',
+            'balcony'                     => 'integer',
+            'ceiling_height'              => 'integer',
+            'distance_from_metro'         => 'integer',
+            'electricity'                 => 'boolean',
+            'not_residential'             => 'integer',
+            'security'                    => 'boolean',
+            'year_of_construction'        => 'integer',
+            'lease_contract'              => 'character varying(255)',
+            'cadastral_number'            => 'character varying(255)',
+            'space'                       => 'integer',
 
-        );
+        ];
 
 
         // Удалить
-        $delete = ['no', 'yes', 'region_city', 'housing_and_communal_services', 'availability_of_elevator'];
+        $delete = [
+            'no',
+            'yes',
+            'region_city',
+            'housing_and_communal_services',
+            'availability_of_elevator',
+        ];
         // По умолчанию, дополнительные параметры
-        $on_default = array(
-            'id_news' => 'serial',
-            'form_name' => 'character varying(255)',
-            'space_type' => 'smallint',
-            'operation_type' => 'smallint',
-            'object_type' => 'smallint',
-            'status' => 'smallint',
-            'user_id' => 'integer',
-            'title' => 'character varying(255)',
-            'date' => 'timestamp with time zone',
-            'content' => 'text',
-            'preview_img' => 'character varying(255)',
-            'photo_available' => 'boolean',
-            'tags' => 'character varying(255)',
-            'country' => 'character varying(255)',
-            'area' => 'character varying(255)',
-            'city' => 'character varying(255)',
-            'region' => 'character varying(255)',
-            'address' => 'character varying(255)',
-            'gas' => 'boolean',
-            'heating' => 'boolean',
-            'water_pipes' => 'boolean',
-            'elevator_passangers' => 'boolean',
-            'elevator_cargo' => 'boolean',
-            'bathroom' => 'boolean',
-            'dining_room' => 'boolean',
-            'study' => 'boolean',
-            'playroom' => 'boolean',
-            'hallway' => 'boolean',
-            'living_room' => 'boolean',
-            'kitchen' => 'boolean',
-            'bedroom' => 'boolean',
-            'signaling' => 'boolean',
-            'cctv' => 'boolean',
-            'intercom' => 'boolean',
-            'concierge' => 'boolean',
-            'common' => 'integer',
-            'resedential' => 'integer',
-            'elevator' => 'smallint',
-            'elevator_yes' => 'smallint',
-            'bathroom_available' => 'boolean',
-            'bathroom_description' => 'character varying(255)',
-            'bathroom_location' => 'smallint',
-            'bathroom_number' => 'integer',
-            'possible_to_post' => 'boolean',
-            'sanitation_description' => 'character varying(255)',
-            'documents_on_tenure' => 'character varying(255)',
-            'alcove' => 'boolean',
-            'barn' => 'boolean',
-            'bath' => 'boolean',
-            'forest_trees' => 'boolean',
-            'garden_trees' => 'boolean',
-            'guest_house' => 'boolean',
-            'lodge' => 'boolean',
-            'playground' => 'boolean',
-            'river' => 'boolean',
-            'spring' => 'boolean',
-            'swimming_pool' => 'boolean',
-            'waterfront' => 'boolean',
-            'wine_vault' => 'boolean',
+        $on_default = [
+            'id_news'                       => 'serial',
+            'form_name'                     => 'character varying(255)',
+            'space_type'                    => 'smallint',
+            'operation_type'                => 'smallint',
+            'object_type'                   => 'smallint',
+            'status'                        => 'smallint',
+            'user_id'                       => 'integer',
+            'title'                         => 'character varying(255)',
+            'date'                          => 'timestamp with time zone',
+            'content'                       => 'text',
+            'preview_img'                   => 'character varying(255)',
+            'photo_available'               => 'boolean',
+            'tags'                          => 'character varying(255)',
+            'country'                       => 'character varying(255)',
+            'area'                          => 'character varying(255)',
+            'city'                          => 'character varying(255)',
+            'region'                        => 'character varying(255)',
+            'address'                       => 'character varying(255)',
+            'gas'                           => 'boolean',
+            'heating'                       => 'boolean',
+            'water_pipes'                   => 'boolean',
+            'elevator_passangers'           => 'boolean',
+            'elevator_cargo'                => 'boolean',
+            'bathroom'                      => 'boolean',
+            'dining_room'                   => 'boolean',
+            'study'                         => 'boolean',
+            'playroom'                      => 'boolean',
+            'hallway'                       => 'boolean',
+            'living_room'                   => 'boolean',
+            'kitchen'                       => 'boolean',
+            'bedroom'                       => 'boolean',
+            'signaling'                     => 'boolean',
+            'cctv'                          => 'boolean',
+            'intercom'                      => 'boolean',
+            'concierge'                     => 'boolean',
+            'common'                        => 'integer',
+            'resedential'                   => 'integer',
+            'elevator'                      => 'smallint',
+            'elevator_yes'                  => 'smallint',
+            'bathroom_available'            => 'boolean',
+            'bathroom_description'          => 'character varying(255)',
+            'bathroom_location'             => 'smallint',
+            'bathroom_number'               => 'integer',
+            'possible_to_post'              => 'boolean',
+            'sanitation_description'        => 'character varying(255)',
+            'documents_on_tenure'           => 'character varying(255)',
+            'alcove'                        => 'boolean',
+            'barn'                          => 'boolean',
+            'bath'                          => 'boolean',
+            'forest_trees'                  => 'boolean',
+            'garden_trees'                  => 'boolean',
+            'guest_house'                   => 'boolean',
+            'lodge'                         => 'boolean',
+            'playground'                    => 'boolean',
+            'river'                         => 'boolean',
+            'spring'                        => 'boolean',
+            'swimming_pool'                 => 'boolean',
+            'waterfront'                    => 'boolean',
+            'wine_vault'                    => 'boolean',
             'availability_of_garbage_chute' => 'boolean',
-            'time_walk' => 'integer',
-            'time_car' => 'integer',
-            'rating_views' => 'smallint',
-            'rating_admin' => 'smallint',
-            'rating_donate' => 'smallint',
-        );
+            'time_walk'                     => 'integer',
+            'time_car'                      => 'integer',
+            'rating_views'                  => 'smallint',
+            'rating_admin'                  => 'smallint',
+            'rating_donate'                 => 'smallint',
+        ];
         // получение всех id элементов со списками
         $sql = 'SELECT DISTINCT ON (element_id) element_id FROM form_select_options';
         $stmt = $this->db->prepare($sql);
@@ -618,16 +622,16 @@ class AdminModel extends Model
     {
         $result = $data;
         // Исключения для параметров по умолчанию в таблице
-        $default_exeptions = array(
-            'id_news' => '',
-            'category' => 'DEFAULT 0',
-            'status' => 'DEFAULT 1',
-            'date' => 'NOT NULL DEFAULT current_timestamp',
-            'rating_views' => 'DEFAULT 0',
-            'rating_admin' => 'DEFAULT 0',
+        $default_exeptions = [
+            'id_news'       => '',
+            'category'      => 'DEFAULT 0',
+            'status'        => 'DEFAULT 1',
+            'date'          => 'NOT NULL DEFAULT current_timestamp',
+            'rating_views'  => 'DEFAULT 0',
+            'rating_admin'  => 'DEFAULT 0',
             'rating_donate' => 'DEFAULT 0',
 
-        );
+        ];
 
         //Добавление параметров по умолчанию
         foreach ($result as $name => $type) {
@@ -757,11 +761,11 @@ class AdminModel extends Model
         function setInputType($element, $news_db)
         {
             //Исключения
-            $exceptions = array(
+            $exceptions = [
                 'planning_project' => 'file',
-                'three_d_project' => 'file',
-                'video' => 'file',
-            );
+                'three_d_project'  => 'file',
+                'video'            => 'file',
+            ];
             // Предварительное назначение типа в соответствии с БД
             if (isset($news_db[$element['e_name']])) {
                 switch ($news_db[$element['e_name']]) {
@@ -814,9 +818,17 @@ class AdminModel extends Model
         //Категории
         $c_new = [''];
         //Подкатегории
-        $s_new = ['elevator', 'fencing'];
+        $s_new = [
+            'elevator',
+            'fencing',
+        ];
         //Элементы
-        $e_new = ['region_city', 'availability_of_bathroom', 'housing_and_communal_services', 'fencing'];
+        $e_new = [
+            'region_city',
+            'availability_of_bathroom',
+            'housing_and_communal_services',
+            'fencing',
+        ];
 
         //Функции правок
         function correctingCategory($k_c, $v_c, $category)
@@ -835,12 +847,16 @@ class AdminModel extends Model
                 $category['subcategory'][$k_s]['element'] = [];
                 //Новые элементы
                 $category['subcategory'][$k_s]['element'] = [
-                    ['r_name' => 'Пассажирский',
-                        'e_name' => 'elevator_passangers',
-                        'input_type' => 'checkbox'],
-                    ['r_name' => 'Грузовой',
-                        'e_name' => 'elevator_cargo',
-                        'input_type' => 'checkbox'],
+                    [
+                        'r_name'     => 'Пассажирский',
+                        'e_name'     => 'elevator_passangers',
+                        'input_type' => 'checkbox',
+                    ],
+                    [
+                        'r_name'     => 'Грузовой',
+                        'e_name'     => 'elevator_cargo',
+                        'input_type' => 'checkbox',
+                    ],
                 ];
             }
 
@@ -850,56 +866,58 @@ class AdminModel extends Model
                 //Новые элементы
                 $id_1 = notExistingID($category['element']);
                 $category['element'][$id_1] = [
-                    'r_name' => 'Ограждение',
-                    'e_name' => 'fencing',
-                    'input_type' => 'checkbox'];
+                    'r_name'     => 'Ограждение',
+                    'e_name'     => 'fencing',
+                    'input_type' => 'checkbox',
+                ];
                 $id_2 = notExistingID($category['element']);
                 $category['element'][$id_2] = [
-                    'r_name' => 'Материал ограждения',
-                    'e_name' => 'fencing_material',
-                    'input_type' => 'select',
+                    'r_name'         => 'Материал ограждения',
+                    'e_name'         => 'fencing_material',
+                    'input_type'     => 'select',
                     'select_options' => [
                         0 => [
                             'r_name' => 'Кованая ограда',
                             'e_name' => 'wrought_iron_fence',
-                            'value' => '143'
+                            'value'  => '143',
                         ],
                         1 => [
                             'r_name' => 'Металлические прутья',
                             'e_name' => 'metal_rods',
-                            'value' => '75'
+                            'value'  => '75',
                         ],
                         2 => [
                             'r_name' => 'Кирпич',
                             'e_name' => 'brick',
-                            'value' => '19'
+                            'value'  => '19',
                         ],
                         3 => [
                             'r_name' => 'Бетон',
                             'e_name' => 'concrete',
-                            'value' => '31'
+                            'value'  => '31',
                         ],
                         4 => [
                             'r_name' => 'Камень',
                             'e_name' => 'stone',
-                            'value' => '122'
+                            'value'  => '122',
                         ],
                         5 => [
                             'r_name' => 'Профнастил',
                             'e_name' => 'decking',
-                            'value' => '38'
+                            'value'  => '38',
                         ],
                         6 => [
                             'r_name' => 'Дерево',
                             'e_name' => 'wood',
-                            'value' => '142'
+                            'value'  => '142',
                         ],
                         7 => [
                             'r_name' => 'Пластик',
                             'e_name' => 'plastic',
-                            'value' => '98'
+                            'value'  => '98',
                         ],
-                    ]];
+                    ],
+                ];
             }
 
 
@@ -919,25 +937,30 @@ class AdminModel extends Model
                 //передвигаем ключи других элементов на 4 вперед
                 $category['element'] = shiftID(4, $indx_e, $category['element']);
                 $category['element'][($indx_e + 0)] = [
-                    'r_name' => 'Страна',
-                    'e_name' => 'country',
-                    'input_type' => 'text'];
+                    'r_name'     => 'Страна',
+                    'e_name'     => 'country',
+                    'input_type' => 'text',
+                ];
                 $category['element'][($indx_e + 1)] = [
-                    'r_name' => 'Область',
-                    'e_name' => 'area',
-                    'input_type' => 'text'];
+                    'r_name'     => 'Область',
+                    'e_name'     => 'area',
+                    'input_type' => 'text',
+                ];
                 $category['element'][($indx_e + 2)] = [
-                    'r_name' => 'Город',
-                    'e_name' => 'city',
-                    'input_type' => 'text'];
+                    'r_name'     => 'Город',
+                    'e_name'     => 'city',
+                    'input_type' => 'text',
+                ];
                 $category['element'][($indx_e + 3)] = [
-                    'r_name' => 'Район',
-                    'e_name' => 'region',
-                    'input_type' => 'text'];
+                    'r_name'     => 'Район',
+                    'e_name'     => 'region',
+                    'input_type' => 'text',
+                ];
                 $category['element'][($indx_e + 4)] = [
-                    'r_name' => 'Точный адрес',
-                    'e_name' => 'address',
-                    'input_type' => 'text'];
+                    'r_name'     => 'Точный адрес',
+                    'e_name'     => 'address',
+                    'input_type' => 'text',
+                ];
             }
 
             if ($name_e == 'availability_of_bathroom') {
@@ -945,44 +968,47 @@ class AdminModel extends Model
                 // Элемент =>  3 новых элемента
                 $category['element'] = shiftID(3, $indx_e, $category['element']);
                 $category['element'][($indx_e + 0)] = [
-                    'r_name' => 'Количество санузлов',
-                    'e_name' => 'availability_of_bathroom',
-                    'input_type' => 'select',
+                    'r_name'         => 'Количество санузлов',
+                    'e_name'         => 'availability_of_bathroom',
+                    'input_type'     => 'select',
                     'select_options' => [
                         0 => [
                             'r_name' => 'Нет',
                             'e_name' => 'no',
-                            'value' => '84'
+                            'value'  => '84',
                         ],
                         1 => [
                             'r_name' => '1',
                             'e_name' => '1',
-                            'value' => '1'
+                            'value'  => '1',
                         ],
                         2 => [
                             'r_name' => '2',
                             'e_name' => '2',
-                            'value' => '2'
+                            'value'  => '2',
                         ],
                         3 => [
                             'r_name' => '3',
                             'e_name' => '3',
-                            'value' => '3'
+                            'value'  => '3',
                         ],
                         4 => [
                             'r_name' => '4+',
                             'e_name' => '4+',
-                            'value' => '4'
+                            'value'  => '4',
                         ],
-                    ]];
+                    ],
+                ];
                 $category['element'][($indx_e + 1)] = [
-                    'r_name' => 'Расположение санузлов',
-                    'e_name' => 'location_of_bathroom',
-                    'input_type' => 'text'];
+                    'r_name'     => 'Расположение санузлов',
+                    'e_name'     => 'location_of_bathroom',
+                    'input_type' => 'text',
+                ];
                 $category['element'][($indx_e + 2)] = [
-                    'r_name' => 'Описание санузлов',
-                    'e_name' => 'description_of_bathroom',
-                    'input_type' => 'text'];
+                    'r_name'     => 'Описание санузлов',
+                    'e_name'     => 'description_of_bathroom',
+                    'input_type' => 'text',
+                ];
             }
 
             if ($name_e == 'housing_and_communal_services') {
@@ -994,23 +1020,31 @@ class AdminModel extends Model
                 } else $new_subcategory_id = 1;
 
                 $category['subcategory'][$new_subcategory_id] = [
-                    'r_name' => 'Жилищно-коммунальные услуги',
-                    'e_name' => 'housing_and_communal_services',
-                    'id' => 0,
+                    'r_name'  => 'Жилищно-коммунальные услуги',
+                    'e_name'  => 'housing_and_communal_services',
+                    'id'      => 0,
                     'element' => [
-                        ['r_name' => 'Отопление',
-                            'e_name' => 'availability_of_heating',
-                            'input_type' => 'checkbox'],
-                        ['r_name' => 'Газ',
-                            'e_name' => 'availability_of_gas',
-                            'input_type' => 'checkbox'],
-                        ['r_name' => 'Электричество',
-                            'e_name' => 'availability_of_electricity',
-                            'input_type' => 'checkbox'],
-                        ['r_name' => 'Водопровод',
-                            'e_name' => 'availability_of_water_pipes',
-                            'input_type' => 'checkbox']
-                    ]
+                        [
+                            'r_name'     => 'Отопление',
+                            'e_name'     => 'availability_of_heating',
+                            'input_type' => 'checkbox',
+                        ],
+                        [
+                            'r_name'     => 'Газ',
+                            'e_name'     => 'availability_of_gas',
+                            'input_type' => 'checkbox',
+                        ],
+                        [
+                            'r_name'     => 'Электричество',
+                            'e_name'     => 'availability_of_electricity',
+                            'input_type' => 'checkbox',
+                        ],
+                        [
+                            'r_name'     => 'Водопровод',
+                            'e_name'     => 'availability_of_water_pipes',
+                            'input_type' => 'checkbox',
+                        ],
+                    ],
                 ];
 
             }
@@ -1024,57 +1058,59 @@ class AdminModel extends Model
                 }
                 //Если нет => элемент ограждение
                 $category['element'][$indx_e] = [
-                    'r_name' => 'Ограждение',
-                    'e_name' => 'fencing',
-                    'input_type' => 'checkbox'];
+                    'r_name'     => 'Ограждение',
+                    'e_name'     => 'fencing',
+                    'input_type' => 'checkbox',
+                ];
                 // Добавляем список материал ограждения
                 $new_id = notExistingID($category['element']);
                 $category['element'][$new_id] = [
-                    'r_name' => 'Материал ограждения',
-                    'e_name' => 'fencing_material',
-                    'input_type' => 'select',
+                    'r_name'         => 'Материал ограждения',
+                    'e_name'         => 'fencing_material',
+                    'input_type'     => 'select',
                     'select_options' => [
                         0 => [
                             'r_name' => 'Кованая ограда',
                             'e_name' => 'wrought_iron_fence',
-                            'value' => '143'
+                            'value'  => '143',
                         ],
                         1 => [
                             'r_name' => 'Металлические прутья',
                             'e_name' => 'metal_rods',
-                            'value' => '75'
+                            'value'  => '75',
                         ],
                         2 => [
                             'r_name' => 'Кирпич',
                             'e_name' => 'brick',
-                            'value' => '19'
+                            'value'  => '19',
                         ],
                         3 => [
                             'r_name' => 'Бетон',
                             'e_name' => 'concrete',
-                            'value' => '31'
+                            'value'  => '31',
                         ],
                         4 => [
                             'r_name' => 'Камень',
                             'e_name' => 'stone',
-                            'value' => '122'
+                            'value'  => '122',
                         ],
                         5 => [
                             'r_name' => 'Профнастил',
                             'e_name' => 'decking',
-                            'value' => '38'
+                            'value'  => '38',
                         ],
                         6 => [
                             'r_name' => 'Дерево',
                             'e_name' => 'wood',
-                            'value' => '142'
+                            'value'  => '142',
                         ],
                         7 => [
                             'r_name' => 'Пластик',
                             'e_name' => 'plastic',
-                            'value' => '98'
+                            'value'  => '98',
                         ],
-                    ]];
+                    ],
+                ];
             }
 
             ksort($category['element']);
@@ -1551,123 +1587,123 @@ class AdminModel extends Model
         $form_en_ru = [];
         // Дополнительные параметры
         $dop_en_ru = [
-            'id_news' => 'Индекс объявления',
-            'form_name' => 'Имя формы',
-            'space_type' => 'Тип площади',
-            'operation_type' => 'Операция',
-            'object_type' => 'Тип объекта',
-            'rating_views' => 'Рейтинг просмотров',
-            'rating_admin' => 'Рейтинг администрации',
-            'rating_donate' => 'Рейтинг по оплате',
-            'status' => 'Статус',
-            'user_id' => 'ID пользователя',
-            'title' => 'Название новости',
-            'date' => 'Дата',
-            'content' => 'Контент',
-            'photo_available' => 'Наличие фотографий',
-            'tags' => 'Тег',
-            'country' => 'Страна',
-            'area' => 'Область',
-            'city' => 'Город',
-            'region' => 'Регион',
-            'address' => 'Адрес',
-            'gas' => 'Газ',
-            'heating' => 'Отопление',
-            'water_pipes' => 'Водопровод',
-            'elevator_passangers' => 'Пассажирский лифт',
-            'elevator_cargo' => 'Грузовой лифт',
-            'bathroom' => 'Ванная',
-            'dining_room' => 'Столовая',
-            'study' => 'Рабочий кабинет',
-            'playroom' => 'Детская',
-            'hallway' => 'Прихожая',
-            'living_room' => 'Гостиная',
-            'kitchen' => 'Кухня',
-            'bedroom' => 'Спальня',
-            'signaling' => 'Сигнализация',
-            'cctv' => 'Видеонаблюдение',
-            'intercom' => 'Домофон',
-            'concierge' => 'Консьерж',
-            'common' => 'Общая',
-            'resedential' => 'Жилая',
-            'elevator' => 'Наличие лифта',
-            'elevator_yes' => 'Лифт',
-            'bathroom_description' => 'Описание санузлов',
-            'bathroom_location' => 'Расположение санузлов',
-            'bathroom_number' => 'Количество санузлов',
-            'possible_to_post' => 'Возможность проводки',
-            'sanitation_description' => 'Описание',
-            'documents_on_tenure' => 'Документы на право владения',
-            'additional_buildings' => 'Дополнительные строения',
-            'availability_of_bathroom' => 'Наличие санузлов',
-            'availability_of_garbage_chute' => 'Наличие мусоропровода',
-            'balcony' => 'Балкон',
-            'bargain' => 'Торг',
-            'building_type' => 'Тип здания',
-            'cadastral_number' => 'Кадастровый номер',
-            'ceiling_height' => 'Высота потолков',
+            'id_news'                          => 'Индекс объявления',
+            'form_name'                        => 'Имя формы',
+            'space_type'                       => 'Тип площади',
+            'operation_type'                   => 'Операция',
+            'object_type'                      => 'Тип объекта',
+            'rating_views'                     => 'Рейтинг просмотров',
+            'rating_admin'                     => 'Рейтинг администрации',
+            'rating_donate'                    => 'Рейтинг по оплате',
+            'status'                           => 'Статус',
+            'user_id'                          => 'ID пользователя',
+            'title'                            => 'Название новости',
+            'date'                             => 'Дата',
+            'content'                          => 'Контент',
+            'photo_available'                  => 'Наличие фотографий',
+            'tags'                             => 'Тег',
+            'country'                          => 'Страна',
+            'area'                             => 'Область',
+            'city'                             => 'Город',
+            'region'                           => 'Регион',
+            'address'                          => 'Адрес',
+            'gas'                              => 'Газ',
+            'heating'                          => 'Отопление',
+            'water_pipes'                      => 'Водопровод',
+            'elevator_passangers'              => 'Пассажирский лифт',
+            'elevator_cargo'                   => 'Грузовой лифт',
+            'bathroom'                         => 'Ванная',
+            'dining_room'                      => 'Столовая',
+            'study'                            => 'Рабочий кабинет',
+            'playroom'                         => 'Детская',
+            'hallway'                          => 'Прихожая',
+            'living_room'                      => 'Гостиная',
+            'kitchen'                          => 'Кухня',
+            'bedroom'                          => 'Спальня',
+            'signaling'                        => 'Сигнализация',
+            'cctv'                             => 'Видеонаблюдение',
+            'intercom'                         => 'Домофон',
+            'concierge'                        => 'Консьерж',
+            'common'                           => 'Общая',
+            'resedential'                      => 'Жилая',
+            'elevator'                         => 'Наличие лифта',
+            'elevator_yes'                     => 'Лифт',
+            'bathroom_description'             => 'Описание санузлов',
+            'bathroom_location'                => 'Расположение санузлов',
+            'bathroom_number'                  => 'Количество санузлов',
+            'possible_to_post'                 => 'Возможность проводки',
+            'sanitation_description'           => 'Описание',
+            'documents_on_tenure'              => 'Документы на право владения',
+            'additional_buildings'             => 'Дополнительные строения',
+            'availability_of_bathroom'         => 'Наличие санузлов',
+            'availability_of_garbage_chute'    => 'Наличие мусоропровода',
+            'balcony'                          => 'Балкон',
+            'bargain'                          => 'Торг',
+            'building_type'                    => 'Тип здания',
+            'cadastral_number'                 => 'Кадастровый номер',
+            'ceiling_height'                   => 'Высота потолков',
             'clarification_of_the_object_type' => 'Уточнение вида объектов',
-            'combined' => 'Совмещенный',
-            'distance_from_metro' => 'Удаленность от метро',
-            'distance_from_mkad_or_metro' => 'Удаленность от МКАД/метро',
-            'documents_on_ownership' => 'Документы на право владения',
-            'doesnt_matter' => 'Не важно',
-            'electricity' => 'Электричество',
-            'equipment' => 'Комплектация',
-            'fencing' => 'Ограждение',
-            'floor' => 'Этаж',
-            'foundation' => 'Фундамент',
-            'furnish' => 'Отделка',
-            'lavatory' => 'Санузел',
-            'lease' => 'Срок аренды',
-            'lease_contract' => 'Договор аренды',
-            'location_on' => 'На участке',
-            'material' => 'Материал',
-            'metro_station' => 'Станция метро',
-            'municipal' => 'Муниципальная',
-            'not_residential' => 'Нежилая',
-            'number_of_floors' => 'Количество этажей',
-            'number_of_rooms' => 'Количество комнат',
-            'object_located' => 'Объект размещен',
-            'paid' => 'Платная ',
-            'parking' => 'Парковка',
-            'planning_project' => 'Проект планировки',
-            'price' => 'Стоимость',
-            'property_documents' => 'Документы на собственность',
-            'residential' => 'Жилая',
-            'roofing' => 'Кровля',
-            'rooms' => 'Комнаты',
-            'sanitation' => 'Водопровод и канализация',
-            'security' => 'Безопасность',
-            'select_area_on_city' => 'Выбрать область',
-            'separated' => 'Раздельный',
-            'site' => 'Участок',
-            'space' => 'Площадь',
-            'stairwells_status' => 'Состояние лестничных клеток',
-            'the_number_of_kilowatt' => 'Количество киловатт',
-            'three_d_project' => '3d проект',
-            'total' => 'Общая',
-            'type_of_construction' => 'Вид постройки',
-            'type_of_house' => 'Тип дома',
-            'video' => 'Видео',
-            'wall_material' => 'Материал стен',
-            'year_of_construction' => 'Год постройки/окончания строительства',
-            'time_walk' => 'Время от метро пешком',
-            'time_car' => 'Время от метро на транспорте',
-            'bathroom_available' => 'Наличие санузла',
-            'alcove' => 'Беседка',
-            'barn' => 'Сарай',
-            'bath' => 'Баня',
-            'forest_trees' => 'Лесные деревья',
-            'garden_trees' => 'Садовые деревья',
-            'guest_house' => 'Гостевой дом',
-            'lodge' => 'Сторожка',
-            'playground' => 'Детская площадка',
-            'river' => 'Река',
-            'spring' => 'Родник',
-            'swimming_pool' => 'Бассейн',
-            'waterfront' => 'Берег водоёма',
-            'wine_vault' => 'Винный погреб',
+            'combined'                         => 'Совмещенный',
+            'distance_from_metro'              => 'Удаленность от метро',
+            'distance_from_mkad_or_metro'      => 'Удаленность от МКАД/метро',
+            'documents_on_ownership'           => 'Документы на право владения',
+            'doesnt_matter'                    => 'Не важно',
+            'electricity'                      => 'Электричество',
+            'equipment'                        => 'Комплектация',
+            'fencing'                          => 'Ограждение',
+            'floor'                            => 'Этаж',
+            'foundation'                       => 'Фундамент',
+            'furnish'                          => 'Отделка',
+            'lavatory'                         => 'Санузел',
+            'lease'                            => 'Срок аренды',
+            'lease_contract'                   => 'Договор аренды',
+            'location_on'                      => 'На участке',
+            'material'                         => 'Материал',
+            'metro_station'                    => 'Станция метро',
+            'municipal'                        => 'Муниципальная',
+            'not_residential'                  => 'Нежилая',
+            'number_of_floors'                 => 'Количество этажей',
+            'number_of_rooms'                  => 'Количество комнат',
+            'object_located'                   => 'Объект размещен',
+            'paid'                             => 'Платная ',
+            'parking'                          => 'Парковка',
+            'planning_project'                 => 'Проект планировки',
+            'price'                            => 'Стоимость',
+            'property_documents'               => 'Документы на собственность',
+            'residential'                      => 'Жилая',
+            'roofing'                          => 'Кровля',
+            'rooms'                            => 'Комнаты',
+            'sanitation'                       => 'Водопровод и канализация',
+            'security'                         => 'Безопасность',
+            'select_area_on_city'              => 'Выбрать область',
+            'separated'                        => 'Раздельный',
+            'site'                             => 'Участок',
+            'space'                            => 'Площадь',
+            'stairwells_status'                => 'Состояние лестничных клеток',
+            'the_number_of_kilowatt'           => 'Количество киловатт',
+            'three_d_project'                  => '3d проект',
+            'total'                            => 'Общая',
+            'type_of_construction'             => 'Вид постройки',
+            'type_of_house'                    => 'Тип дома',
+            'video'                            => 'Видео',
+            'wall_material'                    => 'Материал стен',
+            'year_of_construction'             => 'Год постройки/окончания строительства',
+            'time_walk'                        => 'Время от метро пешком',
+            'time_car'                         => 'Время от метро на транспорте',
+            'bathroom_available'               => 'Наличие санузла',
+            'alcove'                           => 'Беседка',
+            'barn'                             => 'Сарай',
+            'bath'                             => 'Баня',
+            'forest_trees'                     => 'Лесные деревья',
+            'garden_trees'                     => 'Садовые деревья',
+            'guest_house'                      => 'Гостевой дом',
+            'lodge'                            => 'Сторожка',
+            'playground'                       => 'Детская площадка',
+            'river'                            => 'Река',
+            'spring'                           => 'Родник',
+            'swimming_pool'                    => 'Бассейн',
+            'waterfront'                       => 'Берег водоёма',
+            'wine_vault'                       => 'Винный погреб',
         ];
         // Удалить
         $delete_en_ru = ['preview_img'];
@@ -2044,4 +2080,64 @@ class AdminModel extends Model
 
     }
 
+    /**
+     * Метод ищет в базе пользователя по Email или ID и записывает его данные в массив $this->users
+     *
+     * @param null $email
+     */
+    public function searchUser($email)
+    {
+        $searchQuery = $this->db->prepare('SELECT * FROM users WHERE email = :email');
+        $searchQuery->execute([
+            ':email' => $email,
+        ]);
+
+        $result = $searchQuery->fetchAll();
+
+        if ($result) {
+            $this->users = $result;
+        }
+    }
+
+    /**
+     * Возвращает массив с пользователями
+     *
+     * @return mixed
+     */
+    public function getUsers()
+    {
+        return $this->users;
+    }
+
+    /**
+     * Банит пользователя на время или навсегда, если дата не указана
+     *
+     * TODO: Доделать проверки и реализовать выброс ошибок
+     *
+     * @param $userID
+     * @param $date
+     */
+    public function blockUser($userID, $date = null)
+    {
+        $query = null;
+
+        if ($date) {
+            $query = $this->db->prepare('UPDATE users SET banned = true, ban_date = :block_date WHERE id = :user_id');
+            $query->execute([
+                ':user_id'    => $userID,
+                ':block_date' => $date,
+            ]);
+        } else {
+            $query = $this->db->prepare('UPDATE users SET banned = true, ban_date = \'01.01.2199\' WHERE id = :user_id');
+            $query->execute([':user_id' => $userID]);
+        }
+
+        if ($query->rowCount()) {
+            $this->block_result = true;
+        }
+    }
+
+    public function getBlockResult() {
+        return $this->block_result;
+    }
 }

@@ -15,7 +15,7 @@
     ?>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <!-- jquery -->
-    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+<!--    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>-->
     <script src="/template/js/searchFormBuilder.js"></script>
     <script src="/template/js/mapController.js"></script>
     <script src="/template/js/forms.editor.handler.js"></script>
