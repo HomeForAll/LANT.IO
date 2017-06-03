@@ -2138,12 +2138,10 @@ class AdminModel extends Model
     /**
      * Банит пользователя на время или навсегда, если дата не указана
      *
-     * TODO: Доделать проверки и реализовать выброс ошибок
-     *
      * @param $users
      * @param $date
      */
-    public function blockUsers($users, $date)
+    public function banUsers($users, $date = null)
     {
         $query = null;
         
@@ -2174,5 +2172,18 @@ class AdminModel extends Model
     public function getBlockResult()
     {
         return $this->block_result;
+    }
+    
+    public function unbanUsers($users)
+    {
+        $query = $this->db->prepare('UPDATE users SET banned = null, ban_date = null WHERE id = :user_id');
+    
+        foreach ($users as $id) {
+            $query->execute([':user_id' => $id,]);
+        }
+        
+        if ($query->rowCount()) {
+            echo 'Пользователь(и) разблокирован(ы).';
+        }
     }
 }
