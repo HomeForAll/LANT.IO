@@ -61,7 +61,8 @@ pre {
     background: #ffffff;
 }
 
-input[type=submit] {
+input[type=submit], input[type=reset] {
+    margin: 0 0 15px 0;
     padding: 7px 15px 7px 15px;
 }
 
@@ -300,28 +301,20 @@ input {
     margin-bottom: 5px;
 }
 
-.table {
-    width: 100%;
-    margin: 20px auto;
-    border-collapse: separate;
-    border-spacing: 0;
-    border: 0;
-    text-shadow: 0 1px 0 #fff;
-    color: #2a2a2a;
-    background: #fafafa;
-    background-image: -moz-linear-gradient(top, #fff, #eaeaea, #fff); /* Firefox 3.6 */
-    background-image: -webkit-gradient(linear,center bottom,center top,from(#fff),color-stop(0.5, #eaeaea),to(#fff));
+table {
+    margin: 0 0 15px 0;
+    border: solid 1px black;
+    border-collapse: collapse;
 }
-.table td {
-    height: 50px;
-    padding: 0 20px;
-    border: 1px solid #cdcdcd;
-    box-shadow: 0 1px 0 white;
-    -moz-box-shadow: 0 1px 0 white;
-    -webkit-box-shadow: 0 1px 0 white;
-    text-align: center;
-    vertical-align: middle;
-    display: table-cell;
-    width: 150px;
+
+th {
+    background: #C3CBD1;
 }
+
+th, td {
+    padding: 10px 15px 10px 15px;
+    border: solid 1px black;
+}
+
+
 
