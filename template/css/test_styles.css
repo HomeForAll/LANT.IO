@@ -61,7 +61,7 @@ pre {
     background: #ffffff;
 }
 
-input[type=submit], input[type=reset] {
+input[type=submit], input[type=reset], select {
     margin: 0 0 15px 0;
     padding: 7px 15px 7px 15px;
 }

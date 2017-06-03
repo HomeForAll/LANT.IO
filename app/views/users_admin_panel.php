@@ -5,6 +5,12 @@ $adminModel  = $this->model('AdminModel');
 
 <h1>Работа с пользователями</h1>
 
+<?php
+if ($adminModel->getBlockResult()) {
+    echo '<br><span style="color: red;">Пользовтель(и) успешно заблокирован(ы)!</span>';
+}
+?>
+
 <form action="" method="post">
     <table>
         <tr>
@@ -74,7 +80,15 @@ if ($users) {
             }
             ?>
         </table>
-        <input type="submit" value="Выполнить">
+        
+        <select name="action">
+            <option value="ban">Блокировать</option>
+            <option value="perm_ban">Блокировать навсегда</option>
+            <option value="unban">Разблокировать</option>
+        </select>
+        
+        <input type="date" name="banDate">
+        <input type="submit" name="doIt" value="Выполнить">
     </form>
     <?php
 }

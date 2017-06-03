@@ -2140,24 +2140,30 @@ class AdminModel extends Model
      *
      * TODO: Доделать проверки и реализовать выброс ошибок
      *
-     * @param $userID
+     * @param $users
      * @param $date
      */
-    public function blockUser($userID, $date = null)
+    public function blockUsers($users, $date)
     {
         $query = null;
         
         if ($date) {
             $query = $this->db->prepare('UPDATE users SET banned = true, ban_date = :block_date WHERE id = :user_id');
-            $query->execute(
-                [
-                    ':user_id'    => $userID,
-                    ':block_date' => $date,
-                ]
-            );
+            
+            foreach ($users as $id) {
+                $query->execute(
+                    [
+                        ':user_id'    => $id,
+                        ':block_date' => $date,
+                    ]
+                );
+            }
         } else {
             $query = $this->db->prepare('UPDATE users SET banned = true, ban_date = \'01.01.2199\' WHERE id = :user_id');
-            $query->execute([':user_id' => $userID]);
+            
+            foreach ($users as $id) {
+                $query->execute([':user_id' => $id,]);
+            }
         }
         
         if ($query->rowCount()) {

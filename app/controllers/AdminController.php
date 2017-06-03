@@ -246,6 +246,19 @@ class AdminController extends Controller
             $this->model('AdminModel')->fetchUsers();
         }
         
+        if (isset($_POST['doIt'])) {
+            switch ($_POST['action']) {
+                case 'ban':
+                    $this->model('AdminModel')->blockUsers($_POST['userIDs'], $_POST['banDate']);
+                    break;
+                case 'perm_ban':
+                    $this->model('AdminModel')->blockUsers($_POST['userIDs']);
+                    break;
+                case 'unbun':
+                    break;
+            }
+        }
+        
         $this->view->render('users_admin_panel');
     }
     
