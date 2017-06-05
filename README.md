@@ -48,6 +48,7 @@
 ------------- | -------------
 Классы  | SiteController
 Константы  | VERSION, DATE_APPROVED
+Ключ ассоциативного массива | 'under_score'
 Свойства  |  $camelCase
 Методы  |  renameElement()
 Ключевые слова  |  true, false и null
