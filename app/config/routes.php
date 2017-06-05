@@ -65,7 +65,8 @@ return [
     'service/admin' => 'main/service/serviceAdmin',
     
     'admin'                   => 'main/admin/admin',
-    'admin/newsformgenerator' => 'main/admin/newsFormGenerator',
+    'admin/news' => 'main/admin/adminNews',
+    'admin/newsformgenerator' => 'main/formgenerator/newsFormGenerator',
     'admin/users/ban'         => 'main/admin/usersBan',
     'admin/users'             => 'main/admin/users',
     

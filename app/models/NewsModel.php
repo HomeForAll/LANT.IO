@@ -18,7 +18,7 @@ class NewsModel extends Model
 
     }
 
-    // Проверка строки на вредоносные элементы
+// Проверка строки на вредоносные элементы
     public function checkingString($str)
     {
         $str = trim($str);
@@ -599,7 +599,7 @@ class NewsModel extends Model
             $data['lastnews'] = $data['page'] * $number_of_news;
         }
 
-        // Запрос БД      
+        // Запрос БД
         $from_page = $data['firstnews'] - 1;
 
         $sql = "SELECT id_news, date::date, title, space_type, operation_type, object_type, content, user_id, preview_img, status, tags "
@@ -630,9 +630,9 @@ class NewsModel extends Model
         return $data;
     }
 
-    // Определяет и записывает в SESSION при $_POST['watch_news_list']
-    // или выставляет по умолчанию
-    // общее кол-во новостей, кол-во нов. на странице, категории, сортировка
+// Определяет и записывает в SESSION при $_POST['watch_news_list']
+// или выставляет по умолчанию
+// общее кол-во новостей, кол-во нов. на странице, категории, сортировка
     public function setSessionForNewsList()
     {
         // По умолчанию
@@ -748,7 +748,7 @@ class NewsModel extends Model
             return false;
         }
 
-        //Удаление пробелов и переводов строк в начале и в конце строк 
+        //Удаление пробелов и переводов строк в начале и в конце строк
         function trim_value(&$value)
         {
             $value = trim($value);
@@ -1180,8 +1180,8 @@ class NewsModel extends Model
     }
 
 
-    // Возвращает строку имен (через '|') больших картинок
-    //(имя эскиза s_имя больш)
+// Возвращает строку имен (через '|') больших картинок
+//(имя эскиза s_имя больш)
     public function saveNewsPictures()
     {
         global $news_error;
@@ -1295,9 +1295,9 @@ class NewsModel extends Model
         return $return_image_names;
     }
 
-    //Изменение размеров картинки на эскиз ($type = 'small') и нормальные ($type = 'big') 
-    //и сохраниение во временной папке  $tmpPath
-    //Запись результата в  $imgPath
+//Изменение размеров картинки на эскиз ($type = 'small') и нормальные ($type = 'big')
+//и сохраниение во временной папке  $tmpPath
+//Запись результата в  $imgPath
     public function newsPicturesResize($file, $type = 'big', $new_name)
     {
         global $news_error, $tmpPath;
@@ -1358,7 +1358,7 @@ class NewsModel extends Model
         unlink($tmpPath . $new_name);
     }
 
-    // Вывод картинки во временную директорию
+// Вывод картинки во временную директорию
     public function picturesSaveAndClear($file, $dest, $name, $quality)
     {
         global $tmpPath;
@@ -1372,8 +1372,8 @@ class NewsModel extends Model
         else return false;
     }
 
-    //Принимает индекс и имя переменной
-    //Возвращает значение соответствующее индексу
+//Принимает индекс и имя переменной
+//Возвращает значение соответствующее индексу
     public function translateIndex($index = 0, $names_type = '')
     {
 
@@ -1585,6 +1585,14 @@ class NewsModel extends Model
         //Строку файлов картинок преобразуем в массив $data['news'][number]['preview_img'][]
         $data = $this->explodePreviewImg($data);
 
+        // Данные индекс метро -> наименование
+        $sql = "SELECT metro_id, metro_name, line_id "
+            . "FROM metro_stations "
+            . "WHERE working = 1";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        $metro_stations = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
         foreach ($data as $key => $value) {
             // Получение имен категорий
             if ($translate_indx) {
@@ -1604,6 +1612,12 @@ class NewsModel extends Model
                     }
                 }
             }
+
+            //Перевод индекса метро в наименование
+            if(!empty($data[$key]['metro_station'])){
+                $data[$key]['metro_station'] = $metro_stations[$data[$key]['metro_station']]['metro_name'];
+            }
+
         }
         return $data;
     }
@@ -1768,12 +1782,10 @@ class NewsModel extends Model
                                         echo $ad["metro_station"];
                                     }
                                     if (!empty($ad["time_walk"])) {
-                                        ?>
-                                        <span><img src="../../template/images/people.png"
-                                                   alt=""><?php echo $ad["time_walk"]; ?>
-                                            мин</span>
-                                    <?php } ?></p>
-                                <span class="decorate-number"><?php if (!empty($ad["price"])) echo $ad["price"];
+                                        ?><span><img src="../../template/images/people.png" alt=""><?php
+                                        echo $ad["time_walk"];
+                                        ?>мин</span><?php } ?></p><span class="decorate-number"><?php
+                                    if (!empty($ad["price"])) { echo $ad["price"];}
                                     ?><i class="fa fa-rub" aria-hidden="true"></i><sub><?php
                                         if (!empty($ad["lease"])) {
                                             echo '/';
@@ -1798,8 +1810,7 @@ class NewsModel extends Model
                                                     break;
                                             }
                                         }
-                                        ?></sub></span>
-                            </div>
+                                        ?></sub></span></div>
                             <div class="view-the-apartment">
                                 <a href="#"><img src="../../template/images/show.png" alt="show"></a>
                             </div>
@@ -1954,6 +1965,38 @@ class NewsModel extends Model
         <script type="text/javascript" src="/template/js/news.editor.menu.js"></script>
         <?php
     }
+
+    public function renderMetroSelect($metro_id=0)
+    {
+        $sql = "SELECT metro_id, metro_name, line_id "
+            . "FROM metro_stations "
+            . "WHERE working = 1";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        $metro_stations = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $sql = "SELECT line_id, line_number, line_name "
+            . "FROM metro_line ";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        $line_arr = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $line=[];
+        foreach ($line_arr as $k => $v){
+            $line[$v['line_id']] = $v;
+        }
+
+        ?>
+        <label for="metro_station">Станция метро</label><br>
+        <select name="metro_station" id="metro_station">
+            <?php foreach ($metro_stations as $k => $metro) { ?>
+                <option value="<?php echo $metro['metro_id']; ?>" <?php
+                if($metro_id == $metro['metro_id']) { echo ' selected ';} ?>>
+                    <?php echo $metro['metro_name'].' - ('.$line[$metro['line_id']]['line_name']
+                        .' линия ['.$line[$metro['line_id']]['line_number'].']) '; ?>
+                </option>
+            <?php } ?>
+        </select>
+    <?php }
 
 
 }
