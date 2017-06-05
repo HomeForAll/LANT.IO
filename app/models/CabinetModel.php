@@ -8,7 +8,6 @@ class CabinetModel extends Model
     private $mailer;
 
 
-
     public function __construct()
     {
         parent::__construct();
@@ -215,7 +214,7 @@ class CabinetModel extends Model
         return $this->getdialogs();
     }
 
-    public function CountOfUsersInDialogCheck($chat_owners)
+    public function CountOfUsersInDialogCheck($chat_owners)  // Проверка кол-ва пользователей в диалоге(исключая админов). На вход массив, на выход true, если превысило максимальное
     {
         $admin_status = 8;
         $max_count_of_dialog_users = 5;
@@ -303,8 +302,6 @@ class CabinetModel extends Model
         }
     }
 
-
-
     public function add_dialog()
     {
         $_SESSION['count_of_users_in_dialog_error'] = 0;
@@ -331,8 +328,6 @@ class CabinetModel extends Model
                     $flag_user_selected = true;
                 }
             }
-
-
 
 
             if ($flag_user_selected == true) {
@@ -512,7 +507,6 @@ class CabinetModel extends Model
 
     public function getgadgets()
     {
-        //$_SESSION['userID'] = 1;
         $profile_id = $_SESSION['userID'];
 
         $stmt = $this->db->prepare("SELECT * FROM sessions WHERE id_user = $profile_id");
@@ -567,9 +561,7 @@ class CabinetModel extends Model
 
     public function getinfo()
     {
-        //$_SESSION['userID'] = 1;
         $profile_id = $_SESSION['userID'];
-
         $stmt = $this->db->prepare("SELECT * FROM users WHERE id = $profile_id");
         $stmt->execute();
         $info = $stmt->fetchAll();
@@ -578,6 +570,22 @@ class CabinetModel extends Model
 
     public function showActivity()
     {
+    }
+
+    public function getVisitsOfNews($profile_id) // На вход id пользователя, на выходе кол-во просмотров по его объявлениям
+    {
+        $stmt = $this->db->prepare("SELECT SUM(rating_views) FROM news_base WHERE id = {$profile_id}");
+        $stmt->execute();
+        $count = $stmt->fetch();
+        return $count;
+    }
+
+    public function getBalance($profile_id) // Возвращает баланс пользователя
+    {
+        $stmt = $this->db->prepare("SELECT balance FROM users WHERE id = {$profile_id}");
+        $stmt->execute();
+        $count = $stmt->fetch();
+        return $count;
     }
 
     public function сheckPersonalName($str) // Проверка ФИО пользователя
@@ -677,7 +685,6 @@ class CabinetModel extends Model
         $str = ucfirst($str);
         return $str;
     }
-
 
     public function savePersonalInfo() // Редактирование профиля
     {
@@ -1956,7 +1963,7 @@ class CabinetModel extends Model
         );
     }
 
-    private function getUser($user_id)
+    public function getUser($user_id)
     {
         $query = $this->db->prepare("SELECT * FROM users WHERE id = :user_id");
         $query->execute([':user_id' => $user_id]);
