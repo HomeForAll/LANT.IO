@@ -1,5 +1,5 @@
 <?php
-$this->title = 'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїСЂРѕС„РёР»СЏ';
+$this->title = 'Редактирование профиля';
 
 ?>
 <style>
@@ -71,17 +71,17 @@ $this->title = 'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїС
         width: 100%;
     }
 </style>
-<h1>Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїСЂРѕС„РёР»СЏ</h1>
+<h1>Редактирование профиля</h1>
 
 <form action="" method="post">
     <table>
         <tr>
             <td>
-                <h3>РРЅС„РѕСЂРјР°С†РёСЏ Рѕ РїРѕР»СЊР·РѕРІР°С‚РµР»Рµ</h3>
+                <h3>Информация о пользователе</h3>
             </td>
         </tr>
         <tr><td><br></td></tr>
-        <tr><td><label for="name">РРјСЏ:</label></td>
+        <tr><td><label for="name">Имя:</label></td>
             <td>
                 <input name="name" type="text" id="name"
                        value="<?php if (isset($this->data[0]['first_name'])) echo $this->data[0]['first_name'] ?>">
@@ -93,7 +93,7 @@ $this->title = 'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїС
                 ?>
             </td>
         </tr>
-        <tr><td><label for="surname">Р¤Р°РјРёР»РёСЏ:</label></td>
+        <tr><td><label for="surname">Фамилия:</label></td>
             <td>
                 <input name="surname" type="text" id="surname"
                        value="<?php if (isset($this->data[0]['last_name'])) echo $this->data[0]['last_name'] ?>">
@@ -105,7 +105,7 @@ $this->title = 'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїС
                 ?>
             </td>
         </tr>
-        <tr><td><label for="patronymic">РћС‚С‡РµСЃС‚РІРѕ:</label></td>
+        <tr><td><label for="patronymic">Отчество:</label></td>
             <td>
                 <input name="patronymic" type="text" id="patronymic"
                        value="<?php if (isset($this->data[0]['patronymic'])) echo $this->data[0]['patronymic'] ?>">
@@ -117,7 +117,7 @@ $this->title = 'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїС
                 ?>
             </td>
         </tr>
-        <tr><td><label for="date">Р”Р°С‚Р° СЂРѕР¶РґРµРЅРёСЏ:</label></td>
+        <tr><td><label for="date">Дата рождения:</label></td>
             <td>
                 <?php
                 $str = $this->data[0]['birthday'];
@@ -126,21 +126,21 @@ $this->title = 'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїС
                 $month_num = $pieces[1] - 1;
                 $day = $pieces[2];
                 $month = array(
-                    "РЇРЅРІР°СЂСЊ",
-                    "Р¤РµРІСЂР°Р»СЊ",
-                    "РњР°СЂС‚",
-                    "РђРїСЂРµР»СЊ",
-                    "РњР°Р№",
-                    "РСЋРЅСЊ",
-                    "РСЋР»СЊ",
-                    "РђРІРіСѓСЃС‚",
-                    "РЎРµРЅС‚СЏР±СЂСЊ",
-                    "РћРєС‚СЏР±СЂСЊ",
-                    "РќРѕСЏР±СЂСЊ",
-                    "Р”РµРєР°Р±СЂСЊ"
+                    "Январь",
+                    "Февраль",
+                    "Март",
+                    "Апрель",
+                    "Май",
+                    "Июнь",
+                    "Июль",
+                    "Август",
+                    "Сентябрь",
+                    "Октябрь",
+                    "Ноябрь",
+                    "Декабрь"
                 );
 
-                // Р§РёСЃР»Рѕ
+                // Число
                 echo "<select name='sel_date' id='sel_date'>";
                 echo "<option value='" . $day . "'>$day</option>";
 
@@ -156,7 +156,7 @@ $this->title = 'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїС
                 }
                 echo "</select>";
 
-                // РњРµСЃСЏС†
+                // Месяц
                 echo "<select name='sel_month' id='sel_month'>";
                 echo "<option value='" . $month[$month_num] . "'>$month[$month_num]</option>";
 
@@ -167,7 +167,7 @@ $this->title = 'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїС
                 }
                 echo "</select>";
 
-                // Р“РѕРґ
+                // Год
                 echo "<select name='sel_year' id='sel_year'>";
                 echo "<option value='" . $year . "'>$year</option>";
                 $j = 1920;
@@ -191,8 +191,8 @@ $this->title = 'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїС
             </td>
         </tr>
         <tr><td><br></td></tr>
-        <tr><td><h3>РџР°СЃРїРѕСЂС‚РЅС‹Рµ РґР°РЅРЅС‹Рµ</h3></td></tr>
-        <tr><td><label for="series">РЎРµСЂРёСЏ:</label></td>
+        <tr><td><h3>Паспортные данные</h3></td></tr>
+        <tr><td><label for="series">Серия:</label></td>
             <td>
                 <input name="series" type="text" id="series"
                        value="">
@@ -204,7 +204,7 @@ $this->title = 'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїС
                 ?>
             </td>
         </tr>
-        <tr><td><label for="number">РќРѕРјРµСЂ:</label></td>
+        <tr><td><label for="number">Номер:</label></td>
             <td>
                 <input name="number" type="text" id="number"
                        value="">
@@ -217,9 +217,9 @@ $this->title = 'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїС
             </td>
         </tr>
         <tr><td><br></td></tr>
-        <tr><td><h3>РђРґСЂРµСЃ СЂРµРіРёСЃС‚СЂР°С†РёРё</h3></td></tr>
+        <tr><td><h3>Адрес регистрации</h3></td></tr>
         <tr><td><br></td></tr>
-        <tr><td><label for="index">РРЅРґРµРєСЃ:</label></td>
+        <tr><td><label for="index">Индекс:</label></td>
             <td>
                 <input name="index" type="text" id="index"
                        value="<?php if (isset($this->data[0]['index'])) echo $this->data[0]['index'] ?>">
@@ -231,7 +231,7 @@ $this->title = 'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїС
                 ?>
             </td>
         </tr>
-        <tr><td><label for="city">Р“РѕСЂРѕРґ:</label></td>
+        <tr><td><label for="city">Город:</label></td>
             <td>
                 <input name="city" type="text" id="city"
                        value="<?php if (isset($this->data[0]['city'])) echo $this->data[0]['city'] ?>">
@@ -243,7 +243,7 @@ $this->title = 'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїС
                 ?>
             </td>
         </tr>
-        <tr><td><label for="street">РЈР»РёС†Р°:</label></td>
+        <tr><td><label for="street">Улица:</label></td>
             <td>
                 <input name="street" type="text" id="street"
                        value="<?php if (isset($this->data[0]['street'])) echo $this->data[0]['street'] ?>" disabled>
@@ -255,7 +255,7 @@ $this->title = 'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїС
                 ?>
             </td>
         </tr>
-        <tr><td><label for="home">Р”РѕРј:</label></td>
+        <tr><td><label for="home">Дом:</label></td>
             <td>
                 <input name="home" type="text" id="home"
                        value="<?php if (isset($this->data[0]['home'])) echo $this->data[0]['home'] ?>" disabled>
@@ -267,7 +267,7 @@ $this->title = 'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїС
                 ?>
             </td>
         </tr>
-        <tr><td><label for="flat">РљРІР°СЂС‚РёСЂР°:</label></td>
+        <tr><td><label for="flat">Квартира:</label></td>
             <td>
                 <input name="flat" type="text" id="flat"
                        value="<?php if (isset($this->data[0]['flat'])) echo $this->data[0]['flat'] ?>">
@@ -283,16 +283,16 @@ $this->title = 'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїС
         <tr>
             <td>
                 <input class="real_buttons" style="float: left" type=submit name=save_1
-                       value="РЎРѕС…СЂР°РЅРёС‚СЊ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ РїРѕР»СЊР·РѕРІР°С‚РµР»Рµ">
+                       value="Сохранить информацию о пользователе">
             </td>
             <td>
                 <input class="real_buttons" style="float: left" type=submit name=check_with_passport
-                       value="РџРѕРґС‚РІРµСЂРґРёС‚СЊ РїР°СЃРїРѕСЂС‚РѕРј" disabled>
+                       value="Подтвердить паспортом" disabled>
             </td>
         </tr>
         <tr><td><br></td></tr>
-        <tr><td><h3>РљРѕРЅС‚Р°РєС‚С‹</h3></td></tr>
-        <tr><td><label for="phonenumber">РќРѕРјРµСЂ С‚РµР»РµС„РѕРЅР°:</label></td>
+        <tr><td><h3>Контакты</h3></td></tr>
+        <tr><td><label for="phonenumber">Номер телефона:</label></td>
             <td>
                 <input name="phonenumber" type="text" id="phonenumber"
                        value="<?php if (isset($this->data[0]['phone_number'])) echo $this->data[0]['phone_number'] ?>">
@@ -319,11 +319,11 @@ $this->title = 'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїС
         <tr>
             <td>
                 <input class="real_buttons" style="float: left" type=submit name=save_2
-                       value="РЎРѕС…СЂР°РЅРёС‚СЊ РєРѕРЅС‚Р°РєС‚С‹">
+                       value="Сохранить контакты">
             </td>
         </tr>
         <tr><td><br></td></tr>
-        <tr><td><h3>РР·РѕР±СЂР°Р¶РµРЅРёРµ РїСЂРѕС„РёР»СЏ</h3></td></tr>
+        <tr><td><h3>Изображение профиля</h3></td></tr>
         <tr><td><br></td></tr>
         <tr>
             <td>
@@ -336,7 +336,7 @@ $this->title = 'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїС
                         ?>
                         <tr>
                             <td width="200">
-                                <label for="uploadbtn" class="buttons" style="width: 200px">РР·РјРµРЅРёС‚СЊ С„РѕС‚РѕРіСЂР°С„РёСЋ</label>
+                                <label for="uploadbtn" class="buttons" style="width: 200px">Изменить фотографию</label>
                                 <input style="opacity: 0; z-index: -1;" type="file" name="upload" id="uploadbtn">
                             </td>
                         </tr>
@@ -344,7 +344,7 @@ $this->title = 'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїС
                     else { ?>
                         <tr>
                             <td width="200">
-                                <label for="uploadbtn" class="buttons" style="width: 200px">Р”РѕР±Р°РІРёС‚СЊ С„РѕС‚РѕРіСЂР°С„РёСЋ</label>
+                                <label for="uploadbtn" class="buttons" style="width: 200px">Добавить фотографию</label>
                                 <input style="opacity: 0; z-index: -1;" type="file" name="upload" id="uploadbtn">
                             </td>
                         </tr>
@@ -354,7 +354,7 @@ $this->title = 'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїС
                         ?>
                         <tr>
                             <td width="200">
-                                <label for="deletebtn" class="buttons" style="width: 200px">РЈРґР°Р»РёС‚СЊ С„РѕС‚РѕРіСЂР°С„РёСЋ</label>
+                                <label for="deletebtn" class="buttons" style="width: 200px">Удалить фотографию</label>
                                 <input style="opacity: 0; z-index: -1;" type="submit" name="delete_foto_id" id="deletebtn">
                             </td>
                         </tr>
@@ -366,7 +366,7 @@ $this->title = 'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїС
         <?php if ((isset($this->data[0]['vk_id'])) || (isset($this->data[0]['ok_id'])) || (isset($this->data[0]['mail_id'])) || (isset($this->data[0]['ya_id'])) || (isset($this->data[0]['google_id'])) || (isset($this->data[0]['steam_id'])) || (isset($this->data[0]['facebook_id']))) { ?>
             <tr>
                 <td>
-                    <h3>РЎРѕС†РёР°Р»СЊРЅС‹Рµ СЃРµС‚Рё Рё СЃРІСЏР·СЊ</h3>
+                    <h3>Социальные сети и связь</h3>
                 </td>
             </tr>
             <tr>
@@ -375,7 +375,7 @@ $this->title = 'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїС
             <?php if (isset($this->data[0]['vk_id'])) { ?>
                 <tr>
                     <td>
-                        <label for="vkcom">Р’РєРѕРЅС‚Р°РєС‚Рµ:</label>
+                        <label for="vkcom">Вконтакте:</label>
                     </td>
                     <td>
                         <?php if (isset($this->data[0]['vk_id'])) echo $this->data[0]['vk_id'] ?>
@@ -385,7 +385,7 @@ $this->title = 'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїС
                     </td>
                     <td style="text-align: center;">
                         <?php if (isset($this->data[0]['vk_id'])) echo "<input class=\"real_buttons\" style=\"float: left\" type=submit name=delete_vk
-                       value=\"РћС‚РІСЏР·Р°С‚СЊ\">" ?>
+                       value=\"Отвязать\">" ?>
                     </td>
                 </tr>
             <?php } ?>
@@ -393,7 +393,7 @@ $this->title = 'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїС
             <?php if (isset($this->data[0]['ok_id'])) { ?>
                 <tr>
                     <td>
-                        <label for="classmates">РћРґРЅРѕРєР»Р°СЃСЃРЅРёРєРё:</label>
+                        <label for="classmates">Одноклассники:</label>
                     </td>
                     <td>
                         <?php if (isset($this->data[0]['ok_id'])) echo $this->data[0]['ok_id'] ?>
@@ -403,7 +403,7 @@ $this->title = 'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїС
                     </td>
                     <td>
                         <?php if (isset($this->data[0]['ok_id'])) echo "<input class=\"real_buttons\" style=\"float: left\" type=submit name=delete_ok
-                       value=\"РћС‚РІСЏР·Р°С‚СЊ\">" ?>
+                       value=\"Отвязать\">" ?>
                     </td>
                 </tr>
             <?php } ?>
@@ -421,7 +421,7 @@ $this->title = 'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїС
                     </td>
                     <td>
                         <?php if (isset($this->data[0]['mail_id'])) echo "<input class=\"real_buttons\" style=\"float: left\" type=submit name=delete_mail
-                       value=\"РћС‚РІСЏР·Р°С‚СЊ\">" ?>
+                       value=\"Отвязать\">" ?>
                     </td>
                 </tr>
             <?php } ?>
@@ -439,7 +439,7 @@ $this->title = 'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїС
                     </td>
                     <td>
                         <?php if (isset($this->data[0]['ya_id'])) echo "<input class=\"real_buttons\" style=\"float: left\" type=submit name=delete_ya
-                       value=\"РћС‚РІСЏР·Р°С‚СЊ\">" ?>
+                       value=\"Отвязать\">" ?>
                     </td>
                 </tr>
             <?php } ?>
@@ -457,7 +457,7 @@ $this->title = 'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїС
                     </td>
                     <td>
                         <?php if (isset($this->data[0]['google_id'])) echo "<input class=\"real_buttons\" style=\"float: left\" type=submit name=delete_google
-                       value=\"РћС‚РІСЏР·Р°С‚СЊ\">" ?>
+                       value=\"Отвязать\">" ?>
                     </td>
                 </tr>
             <?php } ?>
@@ -475,7 +475,7 @@ $this->title = 'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїС
                     </td>
                     <td>
                         <?php if (isset($this->data[0]['facebook_id'])) echo "<input class=\"real_buttons\" style=\"float: left\" type=submit name=delete_facebook
-                       value=\"РћС‚РІСЏР·Р°С‚СЊ\">" ?>
+                       value=\"Отвязать\">" ?>
                     </td>
                 </tr>
             <?php } ?>
@@ -493,16 +493,16 @@ $this->title = 'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїС
                     </td>
                     <td>
                         <?php if (isset($this->data[0]['steam_id'])) echo "<input class=\"real_buttons\" style=\"float: left\" type=submit name=delete_steam
-                       value=\"РћС‚РІСЏР·Р°С‚СЊ\">" ?>
+                       value=\"Отвязать\">" ?>
                     </td>
                 </tr>
             <?php } ?>
         <?php } ?>
         <tr><td><br></td></tr>
         <tr><td><br></td></tr>
-        <tr><td><h3>РџР°СЂР°РјРµС‚СЂС‹ Р±РµР·РѕРїР°СЃРЅРѕСЃС‚Рё</h3></td></tr>
+        <tr><td><h3>Параметры безопасности</h3></td></tr>
         <tr><td><br></td></tr>
-        <tr><td><label for="old_pass">РЎС‚Р°СЂС‹Р№ РїР°СЂРѕР»СЊ:</label></td>
+        <tr><td><label for="old_pass">Старый пароль:</label></td>
             <td>
                 <input name="old_pass" type="text" id="old_pass">
             </td>
@@ -513,7 +513,7 @@ $this->title = 'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїС
                 ?>
             </td>
         </tr>
-        <tr><td><label for="new_pass">РќРѕРІС‹Р№ РїР°СЂРѕР»СЊ:</label></td>
+        <tr><td><label for="new_pass">Новый пароль:</label></td>
             <td>
                 <input name="new_pass" type="text" id="new_pass">
             </td>
@@ -523,7 +523,7 @@ $this->title = 'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїС
         <tr>
             <td>
                 <input class="real_buttons" style="float: left" type=submit name=save_3
-                       value="РЎРѕС…СЂР°РЅРёС‚СЊ РїР°СЂР°РјРµС‚СЂС‹ Р±РµР·РѕРїР°СЃРЅРѕСЃС‚Рё">
+                       value="Сохранить параметры безопасности">
             </td>
         </tr>
     </table>
@@ -531,23 +531,23 @@ $this->title = 'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїС
 </form>
 <form action="" method="post">
     <textarea name="aboutme" cols="120" rows="20"
-              placeholder="Рћ СЃРµР±Рµ..."><?php if (isset($this->data[0]['about_me'])) echo $this->data[0]['about_me'] ?></textarea>
-    <input class="real_buttons" style="float: left" type=submit name=save_aboutme value="РЎРѕС…СЂР°РЅРёС‚СЊ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ СЃРµР±Рµ">
+              placeholder="О себе..."><?php if (isset($this->data[0]['about_me'])) echo $this->data[0]['about_me'] ?></textarea>
+    <input class="real_buttons" style="float: left" type=submit name=save_aboutme value="Сохранить информацию о себе">
     <br>
 </form>
 <form action="" method="post">
     <br><br>
     <table>
         <tr><td><br></td></tr>
-        <tr><td><h3>РќР°СЃС‚СЂРѕР№РєРё РѕРїРѕРІРµС‰РµРЅРёР№ Рё СЃРІСЏР·Рё</h3></td></tr>
+        <tr><td><h3>Настройки оповещений и связи</h3></td></tr>
         <tr><td><br></td></tr>
         <tr>
             <td>
-                <label for="phone_only">Р§РµСЂРµР· С‚РµР»РµС„РѕРЅ</label>
+                <label for="phone_only">Через телефон</label>
                 <input type="checkbox" name="phone_only"
                        id="phone_only" <?php if ($this->data[0]['phone_only'] == 1) echo 'checked' ?>>
                 <br>
-                <label for="site_only">Р§РµСЂРµР· СЃР°Р№С‚</label>
+                <label for="site_only">Через сайт</label>
                 <input type="checkbox" name="site_only"
                        id="site_only" <?php if ($this->data[0]['site_only'] == 1) echo 'checked' ?>>
             </td>
@@ -556,22 +556,22 @@ $this->title = 'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїС
         <tr>
             <td>
                 <input class="real_buttons" style="float: left" type=submit name=save_4
-                       value="РЎРѕС…СЂР°РЅРёС‚СЊ РЅР°СЃС‚СЂРѕР№РєРё РѕРїРѕРІРµС‰РµРЅРёР№ Рё СЃРІСЏР·Рё">
+                       value="Сохранить настройки оповещений и связи">
             </td>
         </tr>
         <tr><td><br></td></tr>
-        <tr><td><h3>РЈРІРµРґРѕРјР»РµРЅРёСЏ РѕС‚ СЃР°Р№С‚Р°</h3></td>
+        <tr><td><h3>Уведомления от сайта</h3></td>
         </tr>
         <tr><td><br></td></tr>
         <tr>
             <td>
-                <label for="new_dialog">РЈРІРµРґРѕРјР»РµРЅРёСЏ Рѕ РЅРѕРІРѕРј РґРёР°Р»РѕРіРµ</label>
+                <label for="new_dialog">Уведомления о новом диалоге</label>
                 <input type="checkbox" name="new_dialog"
                        id="new_dialog" <?php if ($this->data[0]['new_dialog'] == 1) echo 'checked' ?>> <br>
-                <label for="close_ad">РЈРІРµРґРѕРјР»РµРЅРёРµ Рѕ Р·Р°РєСЂС‹С‚РёРё РѕР±СЉСЏРІР»РµРЅРёСЏ, РїРѕРјРµС‡РµРЅРЅРѕРіРѕ РєР°Рє вЂњРёР·Р±СЂР°РЅРЅРѕРµвЂќ</label>
+                <label for="close_ad">Уведомление о закрытии объявления, помеченного как “избранное”</label>
                 <input type="checkbox" name="close_ad"
                        id="close_ad" <?php if ($this->data[0]['close_ad'] == 1) echo 'checked' ?>><br>
-                <label for="prom_offers">Р РµРєР»Р°РјРЅС‹Рµ РїСЂРµРґР»РѕР¶РµРЅРёСЏ</label>
+                <label for="prom_offers">Рекламные предложения</label>
                 <input type="checkbox" name="prom_offers"
                        id="prom_offers" <?php if ($this->data[0]['prom_offers'] == 1) echo 'checked' ?>><br>
             </td>
@@ -581,20 +581,20 @@ $this->title = 'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїС
         <tr>
             <td>
                 <input class="real_buttons" style="float: left" type=submit name=save_5
-                       value="РЎРѕС…СЂР°РЅРёС‚СЊ РЅР°СЃС‚СЂРѕР№РєРё СѓРІРµРґРѕРјР»РµРЅРёР№ РѕС‚ СЃР°Р№С‚Р°">
+                       value="Сохранить настройки уведомлений от сайта">
             </td>
         </tr>
     </table>
-    <br><h3>Р”РѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ С„СѓРЅРєС†РёРё</h3><br>
+    <br><h3>Дополнительные функции</h3><br>
     <table>
         <tr>
             <td>
-                <a class="real_buttons" style="line-height: 30px" href="/cabinet/profile/activity">РџРѕРєР°Р·Р°С‚СЊ
-                    Р°РєС‚РёРІРЅРѕСЃС‚СЊ</a>
+                <a class="real_buttons" style="line-height: 30px" href="/cabinet/profile/activity">Показать
+                    активность</a>
             </td>
             <td>
-                <a class="real_buttons" style="line-height: 30px" href="/cabinet/profile/gadgets">РџСЂРѕСЃРјРѕС‚СЂ РїРѕРґРєР»СЋС‡РµРЅРЅС‹С…
-                    СѓСЃС‚СЂРѕР№СЃС‚РІ</a>
+                <a class="real_buttons" style="line-height: 30px" href="/cabinet/profile/gadgets">Просмотр подключенных
+                    устройств</a>
             </td>
         </tr>
     </table>
