@@ -25,7 +25,7 @@ $(document).ready(function () {
     //Ajax запрос + вывод таблицы + page меню
     var sendAjaxNewsSearch = function (formResult) {
         $.ajax({
-            url: "/admin",
+            url: "/admin/news",
             method: 'POST',
             dataType: 'json',
             data: formResult,
@@ -134,7 +134,7 @@ $(document).ready(function () {
     //Ajax запрос для статуса
     var sendAjaxStatusFrm = function (formResult) {
         $.ajax({
-            url: "/admin",
+            url: "/admin/news",
             method: 'POST',
             dataType: 'json',
             data: formResult,
