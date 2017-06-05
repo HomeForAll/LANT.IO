@@ -24,7 +24,6 @@ class SupportModel extends Model
                 array_push($matrix, $item);
             }
         }
-
         return $matrix;
     }
 
@@ -91,7 +90,6 @@ class SupportModel extends Model
         $userID = isset($_SESSION['userID']) ? $_SESSION['userID'] : 0;
 
         if ($userID) {
-
             $firstName = $this->getUserFirstName($this->db, $userID);
             $lastName = $this->getUserLastName($this->db, $userID);
             $userName = $firstName . " " . $lastName;
