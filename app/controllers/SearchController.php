@@ -111,39 +111,4 @@ class SearchController extends Controller
 
         $this->view->render('search', $data);
     }
-
-    public function actionTest()
-    {
-//        $data = array();
-//        $data['formData'] = $this->model('SearchModel')->getRentApartData();
-
-        $this->ifAJAX(function() {
-//            $data = $this->model('SearchModel')->getRentApartData();
-            echo json_encode($_POST, JSON_UNESCAPED_UNICODE);
-        });
-
-        echo 'Search Test Page!';
-//        $this->view->render('search', $data);
-    }
-
-    public function actionGenSearchForm($id)
-    {
-        $forms = $this->model('SearchModel')->getForms();
-
-        $data = array(
-            'forms' => $forms,
-            'types' => $this->model('SearchModel')->getFormTypes(),
-            'categories' => $this->model('SearchModel')->getFormCategories(),
-            'subcategories' => $this->model('SearchModel')->getFormSubcategories(),
-            'elements' => $this->model('SearchModel')->getFormElements(),
-            'lists' => $this->model('SearchModel')->getFormSelectOptions(),
-        );
-
-        if (!empty($id)) {
-            $id = $id[0];
-            $data['id'] = $id;
-        }
-
-        $this->view->render('gen_search_form', $data);
-    }
 }
