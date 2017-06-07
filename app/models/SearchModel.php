@@ -1,6 +1,4 @@
 <?php
-use Foolz\SphinxQL\Connection;
-use Foolz\SphinxQL\SphinxQL;
 
 class SearchModel extends Model
 {
