@@ -3,38 +3,42 @@
 class UserController extends Controller
 {
     use Cleaner;
-
+    
     public function __construct($layout)
     {
         parent::__construct($layout);
         $this->setModel(new UserModel());
     }
-
+    
     public function actionRegistration()
     {
         if (isset($_SESSION['OAuth_state'])) {
             if ($_SESSION['OAuth_state'] == 2) {
                 if (isset($_POST['submit'])) {
-                    $this->view->render('social_registration', array(
-                        'user_id' => $_SESSION['OAuth_user_id'],
-                        'avatar' => $_SESSION['OAuth_avatar'],
-                        'first_name' => $_SESSION['OAuth_first_name'],
-                        'last_name' => $_SESSION['OAuth_last_name'],
-                        'service_name' => $_SESSION['OAuth_service'],
-                        'errors' => $this->model('UserModel')->doRegistration(),
-                    ));
+                    $this->view->render(
+                        'social_registration', [
+                                                 'user_id'      => $_SESSION['OAuth_user_id'],
+                                                 'avatar'       => $_SESSION['OAuth_avatar'],
+                                                 'first_name'   => $_SESSION['OAuth_first_name'],
+                                                 'last_name'    => $_SESSION['OAuth_last_name'],
+                                                 'service_name' => $_SESSION['OAuth_service'],
+                                                 'errors'       => $this->model('UserModel')->doRegistration(),
+                                             ]
+                    );
                 } elseif (isset($_POST['cancel_social_registration'])) {
                     $this->clearOAuth();
                     header('Location: http://' . $_SERVER['HTTP_HOST'] . '/registration');
                     exit;
                 } else {
-                    $this->view->render('social_registration', array(
-                        'user_id' => $_SESSION['OAuth_user_id'],
-                        'avatar' => $_SESSION['OAuth_avatar'],
-                        'first_name' => $_SESSION['OAuth_first_name'],
-                        'last_name' => $_SESSION['OAuth_last_name'],
-                        'service_name' => $_SESSION['OAuth_service'],
-                    ));
+                    $this->view->render(
+                        'social_registration', [
+                                                 'user_id'      => $_SESSION['OAuth_user_id'],
+                                                 'avatar'       => $_SESSION['OAuth_avatar'],
+                                                 'first_name'   => $_SESSION['OAuth_first_name'],
+                                                 'last_name'    => $_SESSION['OAuth_last_name'],
+                                                 'service_name' => $_SESSION['OAuth_service'],
+                                             ]
+                    );
                 }
             } else {
                 $this->view->render('registration');
@@ -45,9 +49,23 @@ class UserController extends Controller
             $this->view->render('registration');
         }
     }
-
+    
     public function actionLogin()
     {
+        // TODO: Удалить это для теста
+        $arr = [
+            'bathroom'        => '1',
+            'count_rooms_num' => [
+                'from' => 1,
+                'to'   => 5,
+            ],
+        ];
+        $this->setModel(new SearchModel());
+        $this->model('SearchModel')->fetchAds($arr);
+        $ads = $this->model('SearchModel')->getAds($arr);
+        var_dump($ads);
+        // конец кода, для теста
+        
         if (isset($_POST['submit'])) {
             $this->view->render('login', $this->model('UserModel')->doLogin());
         } elseif (isset($_SESSION['OAuth_state'])) {
@@ -62,7 +80,7 @@ class UserController extends Controller
             $this->view->render('login');
         }
     }
-
+    
     public function actionLogout()
     {
         unset($_SESSION['authorized']);
@@ -71,7 +89,7 @@ class UserController extends Controller
         header('Location: http://' . $_SERVER['HTTP_HOST']);
         exit;
     }
-
+    
     public function actionOAuth($data = null)
     {
         $this->model('UserModel')->getOAuthData($data);

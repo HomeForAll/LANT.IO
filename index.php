@@ -13,10 +13,12 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 Loader::getPaths(); // загружаем карту классов из файла
 
-spl_autoload_register(array(
-    'Loader',
-    'classLoad',
-));
+spl_autoload_register(
+    [
+        'Loader',
+        'classLoad',
+    ]
+);
 
 $redis = new Predis\Client();
 
