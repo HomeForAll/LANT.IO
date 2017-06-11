@@ -542,7 +542,7 @@ class SearchModel extends Model
                         $this->sql .= " {$column} BETWEEN {$filter['from']} AND {$filter['to']}";
                         break;
                     case 'in':
-                        $this->sql .= " {$column} IN('{$filter}')";
+                        $this->sql .= " {$column} IN({$filter})";
                         break;
                     case 'bool':
                         $this->sql .= " {$column} = true";
@@ -557,7 +557,7 @@ class SearchModel extends Model
                         $this->sql .= " OR {$column} BETWEEN {$filter['from']} AND {$filter['to']}";
                         break;
                     case 'in':
-                        $this->sql .= " OR {$column} IN('{$filter}')";
+                        $this->sql .= " OR {$column} IN({$filter})";
                         break;
                     case 'bool':
                         $this->sql .= " OR {$column} = true";
