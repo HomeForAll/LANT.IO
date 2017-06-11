@@ -3,6 +3,7 @@
 return [
     ''            => 'web_build/site/index',
     'search'      => 'searchBlock/search/index',
+    'search-test'      => 'searchBlock/search/test',
     
     'registration'          => 'main/user/registration',
     'registration/([a-z]+)' => 'main/user/registration/$1',

@@ -111,4 +111,10 @@ class SearchController extends Controller
 
         $this->view->render('search', $data);
     }
+    
+    public function actionTest() {
+        if (!empty($_GET)) {
+            $this->model('SearchModel')->fetchAds($_GET);
+        }
+    }
 }

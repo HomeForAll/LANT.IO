@@ -52,20 +52,6 @@ class UserController extends Controller
     
     public function actionLogin()
     {
-        // TODO: Удалить это для теста
-        $arr = [
-            'bathroom'        => '1',
-            'count_rooms_num' => [
-                'from' => 1,
-                'to'   => 5,
-            ],
-        ];
-        $this->setModel(new SearchModel());
-        $this->model('SearchModel')->fetchAds($arr);
-        $ads = $this->model('SearchModel')->getAds($arr);
-        var_dump($ads);
-        // конец кода, для теста
-        
         if (isset($_POST['submit'])) {
             $this->view->render('login', $this->model('UserModel')->doLogin());
         } elseif (isset($_SESSION['OAuth_state'])) {

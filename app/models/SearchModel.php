@@ -454,7 +454,7 @@ class SearchModel extends Model
         ],
     ];
     // Ключи значениям которых соответствуют разные колонки в таблице
-    private $differentColumns = [
+    private $multipleColumns = [
         'rooms',
         'hc_services',
         'hc_services_nr',
@@ -464,7 +464,7 @@ class SearchModel extends Model
     ];
     // Полученные объявления
     private $Ads;
-    private $query = 'SELECT * FROM news_base WHERE';
+    private $sql = 'SELECT * FROM news_base WHERE';
     
     /**
      * Метод выбирает объявления исходя из заданных фильтров
@@ -473,46 +473,86 @@ class SearchModel extends Model
      */
     public function fetchAds($filters)
     {
-        $sql = '';
-        
         // Обрабатываем первый фильтр и добвляем его в запрос
         $firstKey    = key($filters);
         $firstFilter = array_shift($filters);
-        $this->addFilter($firstKey, $firstFilter, $sql, true);
+        $this->addFilter($firstKey, $firstFilter, true);
         
         // Обрабатываем оставшиеся фильтры
-        foreach ($filters as $k => $filter) {
-            $this->addFilter($k, $filter, $sql);
+        foreach ($filters as $key => $filter) {
+            $this->addFilter($key, $filter);
         }
         
         // Выполняем запрос и записываем результаты в $this->Ads
         // TODO: Дописать
-        echo $sql . '<br>';
+        echo $this->sql . '<br>';
         
-        $query = $this->db->prepare($sql);
-        $query->execute();
-        $this->Ads = $query->fetchAll();
+//        $query = $this->db->prepare($sql);
+//        $query->execute();
+//        $this->Ads = $query->fetchAll();
     }
     
-    private function addFilter($key, $filter, &$sql, $f = false)
+    /**
+     * @param $key - ключ элемента присланный в запросе
+     * @param $filter
+     * @param bool $first - передеать true если обрабатывается первый фильтр,
+     * необходимо для правильного составления запроса
+     */
+    private function addFilter($key, $filter, $first = false)
     {
-        $column = $this->keys[$key]['table_column_name'];
-        
-        if ($f) {
-            if (is_array($filter)) {
-                $sql .= " {$column} BETWEEN {$filter['from']} AND {$filter['to']}";
-            } else {
-                $sql .= " {$column} IN('{$filter}')";
+        if (in_array($key, $this->multipleColumns)) {
+            $arr = explode(',', $filter);
+            
+            foreach ($arr as $number) {
+                $column = $this->keys[$key . '_' .  $number]['table_column_name'];
+                
+                if ($first) {
+                    $this->sql .= " {$column} = true";
+                } else {
+                    $this->sql .= " OR {$column} = true";
+                }
             }
         } else {
-            if (is_array($filter)) {
-                $sql .= " OR {$column} BETWEEN {$filter['from']} AND {$filter['to']}";
+            $column = $this->keys[$key]['table_column_name'];
+            $type = $this->keys[$key]['filter_type'];
+    
+            if ($first) {
+                switch ($type) {
+                    case 'between':
+                        $this->sql .= " {$column} BETWEEN {$filter['from']} AND {$filter['to']}";
+                        break;
+                    case 'in':
+                        $this->sql .= " {$column} IN('{$filter}')";
+                        break;
+                    case 'bool':
+                        $this->sql .= " {$column} = true";
+                        break;
+                    case '!null':
+                        $this->sql .= " {$column} IS NOT NULL";
+                        break;
+                }
             } else {
-                $sql .= " OR {$column} IN('{$filter}')";
+                switch ($type) {
+                    case 'between':
+                        $this->sql .= " OR {$column} BETWEEN {$filter['from']} AND {$filter['to']}";
+                        break;
+                    case 'in':
+                        $this->sql .= " OR {$column} IN('{$filter}')";
+                        break;
+                    case 'bool':
+                        $this->sql .= " OR {$column} = true";
+                        break;
+                    case '!null':
+                        $this->sql .= " OR {$column} IS NOT NULL";
+                        break;
+                }
             }
         }
     }
     
+    /**
+     * @return mixed полученные объявления с помощью $this->fetchAds()
+     */
     public function getAds()
     {
         return $this->Ads;
