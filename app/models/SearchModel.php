@@ -4,6 +4,18 @@ class SearchModel extends Model
 {
     // Массив соответствия ключа поиска к названию колонки в таблице
     private $keys = [
+        // Тип операции (int)
+        'tabs'                => [
+            'table_column_name' => 'operation_type',
+            'filter_type'       => 'in',
+        ],
+        
+        // TODO: Неизвестно к чему относится
+        'blah'                => [
+            'table_column_name' => '',
+            'filter_type'       => '',
+        ],
+        
         // Цена от-до (int)
         'price'                => [
             'table_column_name' => 'price',
@@ -56,6 +68,13 @@ class SearchModel extends Model
         'area_only'            => [
             'table_column_name' => 'space',
             'filter_type'       => 'between',
+        ],
+        
+        // TODO: Спорный момент
+        // Площадь (простой поиск) (int)
+        'area'            => [
+            'table_column_name' => 'space',
+            'filter_type'       => '',
         ],
         
         // Площадь жилая от-до (int)
@@ -484,12 +503,9 @@ class SearchModel extends Model
         }
         
         // Выполняем запрос и записываем результаты в $this->Ads
-        // TODO: Дописать
-        echo $this->sql . '<br>';
-        
-//        $query = $this->db->prepare($sql);
-//        $query->execute();
-//        $this->Ads = $query->fetchAll();
+        $query = $this->db->prepare($this->sql);
+        $query->execute();
+        $this->Ads = $query->fetchAll();
     }
     
     /**
@@ -500,6 +516,10 @@ class SearchModel extends Model
      */
     private function addFilter($key, $filter, $first = false)
     {
+        if (empty($filter) || is_array($filter) && empty($filter['from']) && empty($filter['to'])) {
+            return;
+        }
+        
         if (in_array($key, $this->multipleColumns)) {
             $arr = explode(',', $filter);
             

@@ -115,6 +115,7 @@ class SearchController extends Controller
     public function actionTest() {
         if (!empty($_GET)) {
             $this->model('SearchModel')->fetchAds($_GET);
+            var_dump($this->model('SearchModel')->getAds());
         }
     }
 }
