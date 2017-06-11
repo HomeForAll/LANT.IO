@@ -4,10 +4,10 @@ class SearchModel extends Model
 {
     // Массив соответствия ключа поиска к названию колонки в таблице
     private $keys = [
-        // Цена (int)
+        // Цена от-до (int)
         'price'                => [
             'table_column_name' => 'price',
-            'filter_type'       => '',
+            'filter_type'       => 'between',
         ],
         
         // Город (string)
@@ -19,438 +19,438 @@ class SearchModel extends Model
         // Нет комиссии (bool)
         'non-commission'       => [
             'table_column_name' => 'non_commission',
-            'filter_type'       => '',
+            'filter_type'       => 'bool',
         ],
         
         // Торг (bool)
         'bargain'              => [
             'table_column_name' => 'bargain',
-            'filter_type'       => '',
+            'filter_type'       => 'bool',
         ],
         
         // Тип недвижимости (int)
         'type'                 => [
             'table_column_name' => 'object_type',
-            'filter_type'       => '',
+            'filter_type'       => 'in',
         ],
         
         // Срок аренды (int)
         'term'                 => [
             'table_column_name' => 'lease',
-            'filter_type'       => '',
+            'filter_type'       => 'in',
         ],
         
         // Количество комнат (int)
         'count_rooms'          => [
             'table_column_name' => 'number_of_rooms',
-            'filter_type'       => '',
+            'filter_type'       => 'in',
         ],
         
         // Количество комнат от-до (int)
         'count_rooms_num'      => [
             'table_column_name' => 'number_of_rooms',
-            'filter_type'       => '',
+            'filter_type'       => 'between',
         ],
         
         // Площадь от-до (int)
         'area_only'            => [
             'table_column_name' => 'space',
-            'filter_type'       => '',
+            'filter_type'       => 'between',
         ],
         
         // Площадь жилая от-до (int)
         'area_residential'     => [
             'table_column_name' => 'residential',
-            'filter_type'       => '',
+            'filter_type'       => 'between',
         ],
         
         // Площадь нежилая от-до (int)
         'area_non_residential' => [
             'table_column_name' => 'not_residential',
-            'filter_type'       => '',
+            'filter_type'       => 'between',
         ],
         
         // Площадь общая от-до (int)
         'area_general'         => [
             'table_column_name' => 'common',
-            'filter_type'       => '',
+            'filter_type'       => 'between',
         ],
         
         // Площадь балкона от-до (int)
         'area_balcony'         => [
             'table_column_name' => 'balcony',
-            'filter_type'       => '',
+            'filter_type'       => 'between',
         ],
         
         // Высота потолков от-до (int)
         'height_ceiling'       => [
             'table_column_name' => 'ceiling_height',
-            'filter_type'       => '',
+            'filter_type'       => 'between',
         ],
         
         // Этаж от-до (int)
         'floor'                => [
             'table_column_name' => 'floor',
-            'filter_type'       => '',
+            'filter_type'       => 'between',
         ],
         
         // Санузел (bool)
         'bathroom'             => [
             'table_column_name' => 'lavatory',
-            'filter_type'       => '',
+            'filter_type'       => 'bool',
         ],
         
         // Спальня (bool)
         'rooms_0'              => [
             'table_column_name' => 'bedroom',
-            'filter_type'       => '',
+            'filter_type'       => 'bool',
         ],
         
         // Кухня (bool)
         'rooms_1'              => [
             'table_column_name' => 'kitchen',
-            'filter_type'       => '',
+            'filter_type'       => 'bool',
         ],
         
         // Гостиная (bool)
         'rooms_2'              => [
             'table_column_name' => 'living_room',
-            'filter_type'       => '',
+            'filter_type'       => 'bool',
         ],
         
         // Прихожая (bool)
         'rooms_3'              => [
             'table_column_name' => 'hallway',
-            'filter_type'       => '',
+            'filter_type'       => 'bool',
         ],
         
         // Детская (bool)
         'rooms_4'              => [
             'table_column_name' => 'playroom',
-            'filter_type'       => '',
+            'filter_type'       => 'bool',
         ],
         
         // Рабочий кабинет (bool)
         'rooms_5'              => [
             'table_column_name' => 'study',
-            'filter_type'       => '',
+            'filter_type'       => 'bool',
         ],
         
         // Столовая (bool)
         'rooms_6'              => [
             'table_column_name' => 'dining_room',
-            'filter_type'       => '',
+            'filter_type'       => 'bool',
         ],
         
         // Ванная (bool)
         'rooms_7'              => [
             'table_column_name' => 'bathroom',
-            'filter_type'       => '',
+            'filter_type'       => 'bool',
         ],
         
         // Комплектация (bool)
         'equipment'            => [
             'table_column_name' => 'equipment',
-            'filter_type'       => '',
+            'filter_type'       => 'bool',
         ],
         
         // Отделка (int)
         'decoration'           => [
             'table_column_name' => 'furnish',
-            'filter_type'       => '',
+            'filter_type'       => 'in',
         ],
         
         // Количество этажей от-до (int)
         'count_floors'         => [
             'table_column_name' => 'number_of_floors',
-            'filter_type'       => '',
+            'filter_type'       => 'between',
         ],
         
         // Лифт (int)
         'lift'                 => [
             'table_column_name' => 'elevator',
-            'filter_type'       => '',
+            'filter_type'       => 'in',
         ],
         
         // Наличие мусоропровода (bool)
         'garbage'              => [
             'table_column_name' => 'availability_of_garbage_chute',
-            'filter_type'       => '',
+            'filter_type'       => 'bool',
         ],
         
         // Уточнение вида объекта (int)
         'object_type'          => [
             'table_column_name' => 'clarification_of_the_object_type',
-            'filter_type'       => '',
+            'filter_type'       => 'in',
         ],
         
         'object_type_plot'    => [
             'table_column_name' => 'clarification_of_the_object_type',
-            'filter_type'       => '',
+            'filter_type'       => 'in',
         ],
         
-        // Год постройки/окончания строительства (int)
+        // Год постройки/окончания строительства от-до (int)
         'year_building'       => [
             'table_column_name' => 'year_of_construction',
-            'filter_type'       => '',
+            'filter_type'       => 'between',
         ],
         
         // Отопление (bool)
         'hc_services_0'       => [
             'table_column_name' => 'heating',
-            'filter_type'       => '',
+            'filter_type'       => 'bool',
         ],
         
         // Газ (bool)
         'hc_services_1'       => [
             'table_column_name' => 'gas',
-            'filter_type'       => '',
+            'filter_type'       => 'bool',
         ],
         
         // Электричество (bool)
         'hc_services_2'       => [
             'table_column_name' => 'electricity',
-            'filter_type'       => '',
+            'filter_type'       => 'bool',
         ],
         
         // Водопровод (bool)
         'hc_services_3'       => [
             'table_column_name' => 'water_pipes',
-            'filter_type'       => '',
+            'filter_type'       => 'bool',
         ],
         
         // Электричество (bool)
         'hc_services_nr_0'    => [
             'table_column_name' => 'electricity',
-            'filter_type'       => '',
+            'filter_type'       => 'bool',
         ],
         
         // Водопровод и канализация (bool)
         'hc_services_nr_1'    => [
             'table_column_name' => 'sanitation',
-            'filter_type'       => '',
+            'filter_type'       => 'bool',
         ],
         
         // Наличие санузлов (bool)
         'hc_services_nr_2'    => [
             'table_column_name' => 'bathroom_available',
-            'filter_type'       => '',
+            'filter_type'       => 'bool',
         ],
         
         // Парковка (int)
         'parking'             => [
             'table_column_name' => 'parking',
-            'filter_type'       => '',
+            'filter_type'       => 'in',
         ],
         
         // Материал стен (int)
         'wall_material'       => [
             'table_column_name' => 'wall_material',
-            'filter_type'       => '',
+            'filter_type'       => 'in',
         ],
         
         // Состояние лестничных клеток (int)
         'state_stairs'        => [
             'table_column_name' => 'stairwells_status',
-            'filter_type'       => '',
+            'filter_type'       => 'in',
         ],
         
         // Консьерж (bool)
         'security_0'          => [
             'table_column_name' => 'concierge',
-            'filter_type'       => '',
+            'filter_type'       => 'bool',
         ],
         
         // Охрана (bool)
         'security_1'          => [
             'table_column_name' => 'security',
-            'filter_type'       => '',
+            'filter_type'       => 'bool',
         ],
         
         // Домофон (bool)
         'security_2'          => [
             'table_column_name' => 'intercom',
-            'filter_type'       => '',
+            'filter_type'       => 'bool',
         ],
         
         // Видеонаблюдение (bool)
         'security_3'          => [
             'table_column_name' => 'cctv',
-            'filter_type'       => '',
+            'filter_type'       => 'bool',
         ],
         
         // Сигнализация (bool)
         'security_4'          => [
             'table_column_name' => 'signaling',
-            'filter_type'       => '',
+            'filter_type'       => 'bool',
         ],
         
         // Кровля (int)
         'roofing'             => [
             'table_column_name' => 'roofing',
-            'filter_type'       => '',
+            'filter_type'       => 'in',
         ],
         
         // Фундамент (int)
         'foundation'          => [
             'table_column_name' => 'foundation',
-            'filter_type'       => '',
+            'filter_type'       => 'in',
         ],
         
         // Материал стен дома (int)
         'wall_material_house' => [
             'table_column_name' => 'wall_material',
-            'filter_type'       => '',
+            'filter_type'       => 'in',
         ],
         
         // Тип дома (int)
         'type_house'          => [
             'table_column_name' => 'type_of_house',
-            'filter_type'       => '',
+            'filter_type'       => 'in',
         ],
         
         // Вид постройки (int)
         'view_buildings'      => [
             'table_column_name' => 'type_of_construction',
-            'filter_type'       => '',
+            'filter_type'       => 'in',
         ],
         
         // Тип здания (int)
         'type_buildings'      => [
             'table_column_name' => 'building_type',
-            'filter_type'       => '',
+            'filter_type'       => 'in',
         ],
         
         // Беседка (bool)
         'add_buildings_0'     => [
             'table_column_name' => 'alcove',
-            'filter_type'       => '',
+            'filter_type'       => 'bool',
         ],
         
         // Сарай (bool)
         'add_buildings_1'     => [
             'table_column_name' => 'barn',
-            'filter_type'       => '',
+            'filter_type'       => 'bool',
         ],
         
         // Винный погреб (bool)
         'add_buildings_2'     => [
             'table_column_name' => 'wine_vault',
-            'filter_type'       => '',
+            'filter_type'       => 'bool',
         ],
         
         // Детская площадка (bool)
         'add_buildings_3'     => [
             'table_column_name' => 'playground',
-            'filter_type'       => '',
+            'filter_type'       => 'bool',
         ],
         
         // Бассейн (bool)
         'add_buildings_4'     => [
             'table_column_name' => 'swimming_pool',
-            'filter_type'       => '',
+            'filter_type'       => 'bool',
         ],
         
         // Баня (bool)
         'add_buildings_5'     => [
             'table_column_name' => 'bath',
-            'filter_type'       => '',
+            'filter_type'       => 'bool',
         ],
         
         // Гостевой дом (bool)
         'add_buildings_6'     => [
             'table_column_name' => 'guest_house',
-            'filter_type'       => '',
+            'filter_type'       => 'bool',
         ],
         
         // Сторожка (bool)
         'add_buildings_7'     => [
             'table_column_name' => 'lodge',
-            'filter_type'       => '',
+            'filter_type'       => 'bool',
         ],
         
         // Участок (int)
         'plot'                => [
             'table_column_name' => 'site',
-            'filter_type'       => '',
+            'filter_type'       => 'in',
         ],
         
         // Лесные деревья (bool)
         'on_plot_0'           => [
             'table_column_name' => 'forest_trees',
-            'filter_type'       => '',
+            'filter_type'       => 'bool',
         ],
         
         // Садовые деревья (bool)
         'on_plot_1'           => [
             'table_column_name' => 'garden_trees',
-            'filter_type'       => '',
+            'filter_type'       => 'bool',
         ],
         
         // Родник (bool)
         'on_plot_2'           => [
             'table_column_name' => 'spring',
-            'filter_type'       => '',
+            'filter_type'       => 'bool',
         ],
         
         // Река (bool)
         'on_plot_3'           => [
             'table_column_name' => 'river',
-            'filter_type'       => '',
+            'filter_type'       => 'bool',
         ],
         
         // Берег водоема (bool)
         'on_plot_4'           => [
             'table_column_name' => 'waterfront',
-            'filter_type'       => '',
+            'filter_type'       => 'bool',
         ],
         
         // Ограждение (int)
         'guardrail'           => [
             'table_column_name' => 'fencing',
-            'filter_type'       => '',
+            'filter_type'       => 'in',
         ],
         
         // Объект размещен (int)
         'hosted'              => [
             'table_column_name' => 'object_located',
-            'filter_type'       => '',
+            'filter_type'       => 'in',
         ],
         
         // Документы на право владения (string)
         'documents_0'         => [
             'table_column_name' => 'documents_on_tenure',
-            'filter_type'       => '',
+            'filter_type'       => '!null',
         ],
         
         // Договор аренды (string)
         'documents_1'         => [
             'table_column_name' => 'lease_contract',
-            'filter_type'       => '',
+            'filter_type'       => '!null',
         ],
         
         // Документы на собственность (string)
         'documents_2'         => [
             'table_column_name' => 'property_documents',
-            'filter_type'       => '',
+            'filter_type'       => '!null',
         ],
         
         // Проект планировки (string)
         'project'             => [
             'table_column_name' => 'planning_project',
-            'filter_type'       => '',
+            'filter_type'       => '!null',
         ],
         
         // 3D проект (string)
         'project3d'           => [
             'table_column_name' => 'three_d_project',
-            'filter_type'       => '',
+            'filter_type'       => '!null',
         ],
         
         // Видео (string)
         'video'               => [
             'table_column_name' => 'video',
-            'filter_type'       => '',
+            'filter_type'       => '!null',
         ],
     ];
     // Ключи значениям которых соответствуют разные колонки в таблице
@@ -464,6 +464,7 @@ class SearchModel extends Model
     ];
     // Полученные объявления
     private $Ads;
+    private $query = 'SELECT * FROM news_base WHERE';
     
     /**
      * Метод выбирает объявления исходя из заданных фильтров
@@ -472,7 +473,7 @@ class SearchModel extends Model
      */
     public function fetchAds($filters)
     {
-        $sql = 'SELECT * FROM news_base WHERE';
+        $sql = '';
         
         // Обрабатываем первый фильтр и добвляем его в запрос
         $firstKey    = key($filters);
