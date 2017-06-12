@@ -504,7 +504,7 @@ class SearchModel extends Model
         }
         
         // Выполняем запрос и записываем результаты в $this->Ads
-        $this->sql .= " LIMIT 100";
+        $this->sql .= " ORDER BY price LIMIT 100";
         $query = $this->db->prepare($this->sql);
         $query->execute();
         $this->Ads = $query->fetchAll();
