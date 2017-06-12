@@ -113,10 +113,10 @@ class SearchModel extends Model
             'filter_type'       => 'between',
         ],
         
-        // Санузел (bool)
+        // Санузел (int)
         'bathroom'             => [
             'table_column_name' => 'lavatory',
-            'filter_type'       => 'bool',
+            'filter_type'       => 'in',
         ],
         
         // Спальня (bool)
@@ -480,6 +480,7 @@ class SearchModel extends Model
         'security',
         'add_buildings',
         'on_plot',
+        'documents',
     ];
     // Полученные объявления
     private $Ads;
@@ -503,6 +504,7 @@ class SearchModel extends Model
         }
         
         // Выполняем запрос и записываем результаты в $this->Ads
+        $this->sql .= " LIMIT 100";
         $query = $this->db->prepare($this->sql);
         $query->execute();
         $this->Ads = $query->fetchAll();
@@ -516,7 +518,7 @@ class SearchModel extends Model
      */
     private function addFilter($key, $filter, $first = false)
     {
-        if (empty($filter) || is_array($filter) && empty($filter['from']) && empty($filter['to'])) {
+        if (empty($filter) && $filter != '0' || is_array($filter) && empty($filter['from']) && empty($filter['to'])) {
             return;
         }
         
@@ -525,11 +527,26 @@ class SearchModel extends Model
             
             foreach ($arr as $number) {
                 $column = $this->keys[$key . '_' .  $number]['table_column_name'];
+                $type = $this->keys[$key . '_' .  $number]['filter_type'];
                 
                 if ($first) {
-                    $this->sql .= " {$column} = true";
+                    switch ($type) {
+                        case 'bool':
+                            $this->sql .= " {$column} = true";
+                            break;
+                        case '!null':
+                            $this->sql .= " {$column} IS NOT NULL";
+                            break;
+                    }
                 } else {
-                    $this->sql .= " OR {$column} = true";
+                    switch ($type) {
+                        case 'bool':
+                            $this->sql .= " AND {$column} = true";
+                            break;
+                        case '!null':
+                            $this->sql .= " AND {$column} IS NOT NULL";
+                            break;
+                    }
                 }
             }
         } else {
@@ -554,16 +571,16 @@ class SearchModel extends Model
             } else {
                 switch ($type) {
                     case 'between':
-                        $this->sql .= " OR {$column} BETWEEN {$filter['from']} AND {$filter['to']}";
+                        $this->sql .= " AND {$column} BETWEEN {$filter['from']} AND {$filter['to']}";
                         break;
                     case 'in':
-                        $this->sql .= " OR {$column} IN({$filter})";
+                        $this->sql .= " AND {$column} IN({$filter})";
                         break;
                     case 'bool':
                         $this->sql .= " OR {$column} = true";
                         break;
                     case '!null':
-                        $this->sql .= " OR {$column} IS NOT NULL";
+                        $this->sql .= " AND {$column} IS NOT NULL";
                         break;
                 }
             }

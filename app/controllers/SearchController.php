@@ -15,6 +15,6 @@ class SearchController extends Controller
             echo json_encode($this->model('SearchModel')->getAds(), JSON_UNESCAPED_UNICODE);
         }
         
-        $this->view->render('search', $data);
+        $this->view->render('search');
     }
 }
