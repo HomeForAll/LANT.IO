@@ -3,7 +3,6 @@
 return [
     ''            => 'web_build/site/index',
     'search'      => 'searchBlock/search/index',
-    'search-test'      => 'searchBlock/search/test',
     
     'registration'          => 'main/user/registration',
     'registration/([a-z]+)' => 'main/user/registration/$1',
@@ -41,10 +40,6 @@ return [
     'oauth/([A-Za-z]+)/state/([0-9]+)' => 'empty/user/OAuth/$1/$2',
     'oauth/([A-Za-z]+)'                => 'empty/user/OAuth/$1',
     
-    //    'auth/unset' => 'empty/user/OAuthDestroy',
-    //    'auth/unset/([A-Za-z]+)' => 'empty/user/OAuthDestroy/$1',
-    //    'auth/([A-Za-z]+)' => 'empty/user/OAuthInit/$1',
-    
     'news/page([0-9]+)'       => 'main/news/news_list/$1',
     'news/([0-9]+)'           => 'main/news/news_id/$1',
     'news/editor'             => 'main/news/news_editor',
@@ -70,6 +65,6 @@ return [
     'admin/users/ban'         => 'main/admin/usersBan',
     'admin/users'             => 'main/admin/users',
     
-    'forms_gen'          => 'main/search/GenSearchForm',
-    'forms_gen/([0-9]+)' => 'main/search/GenSearchForm/$1',
+    // API
+    'api/search' => 'main/AJAX/search',
 ];
