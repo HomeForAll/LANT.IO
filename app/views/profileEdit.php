@@ -340,12 +340,12 @@ $this->title = 'Редактирование профиля';
                                 <input style="opacity: 0; z-index: -1;" type="file" name="upload" id="uploadbtn">
                             </td>
                         </tr>
-                    <?php }
-                    else { ?>
+                    <?php } else { ?>
                         <tr>
                             <td width="200">
-                                <label for="uploadbtn" class="buttons" style="width: 200px">Добавить фотографию</label>
-                                <input style="opacity: 0; z-index: -1;" type="file" name="upload" id="uploadbtn">
+                                <span style="font-size: 10pt">Допустимые форматы: JPEG, PNG, BMP</span>
+                                <input style="opacity: 1;" type="file" name="upload" id="uploadbtn">
+                                <input type="submit" name="save_avatar" value="Сохранить"><br>
                             </td>
                         </tr>
                     <?php } ?>
