@@ -5,13 +5,13 @@ class SearchModel extends Model
     // Массив соответствия ключа поиска к названию колонки в таблице
     private $keys = [
         // Тип операции (int)
-        'tabs'                => [
+        'tabs'                 => [
             'table_column_name' => 'operation_type',
             'filter_type'       => 'in',
         ],
         
         // TODO: Неизвестно к чему относится
-        'blah'                => [
+        'blah'                 => [
             'table_column_name' => '',
             'filter_type'       => '',
         ],
@@ -72,7 +72,7 @@ class SearchModel extends Model
         
         // TODO: Спорный момент
         // Площадь (простой поиск) (int)
-        'area'            => [
+        'area'                 => [
             'table_column_name' => 'space',
             'filter_type'       => '',
         ],
@@ -505,7 +505,7 @@ class SearchModel extends Model
         
         // Выполняем запрос и записываем результаты в $this->Ads
         $this->sql .= " ORDER BY price LIMIT 100";
-        $query = $this->db->prepare($this->sql);
+        $query     = $this->db->prepare($this->sql);
         $query->execute();
         $this->Ads = $query->fetchAll();
     }
@@ -526,8 +526,8 @@ class SearchModel extends Model
             $arr = explode(',', $filter);
             
             foreach ($arr as $number) {
-                $column = $this->keys[$key . '_' .  $number]['table_column_name'];
-                $type = $this->keys[$key . '_' .  $number]['filter_type'];
+                $column = $this->keys[$key . '_' . $number]['table_column_name'];
+                $type   = $this->keys[$key . '_' . $number]['filter_type'];
                 
                 if ($first) {
                     switch ($type) {
@@ -551,8 +551,8 @@ class SearchModel extends Model
             }
         } else {
             $column = $this->keys[$key]['table_column_name'];
-            $type = $this->keys[$key]['filter_type'];
-    
+            $type   = $this->keys[$key]['filter_type'];
+            
             if ($first) {
                 switch ($type) {
                     case 'between':
