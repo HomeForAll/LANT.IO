@@ -1,6 +1,5 @@
 /** Ajax запрос для блока "Лучшие объявления за 24 часа" **/
 $(document).ready(function () {
-    //
     function topAdsAjaxHandler(e) {
         e.preventDefault();
         var filterResult = 'action=top_apartments';
@@ -18,7 +17,7 @@ $(document).ready(function () {
             'Рынок/Ярмарка': 7,
             'Производственно-складские помещения': 6,
             'Производственно-складские здания': 5,
-            'Недвижимость для туризма и отдыха': 0,
+            'Недвижимость для туризма и отдыха': 0
         };
         object_type = namesSettings[object_type];
         if (typeof object_type !== "undefined") {
@@ -34,8 +33,8 @@ $(document).ready(function () {
             filterResult += '&space_from=' + space_arr[0];
             if (typeof space_arr[1] !== "undefined") {
                 filterResult += '&space_to=' + space_arr[1];
-            };
-        };
+            }
+        }
 
         $.ajax({
             url: "/",
@@ -47,7 +46,7 @@ $(document).ready(function () {
                 $(".top-apartments .filter-and-top-blocks").append($(data));
             }
         });
-    };
+    }
 
     $(".top-apartments .filter-apartment select").on('change', topAdsAjaxHandler);
     $(".closeCurrency").on('click', topAdsAjaxHandler);

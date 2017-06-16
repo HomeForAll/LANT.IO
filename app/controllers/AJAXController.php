@@ -7,11 +7,11 @@ class AJAXController extends Controller
         parent::__construct($layout);
         $this->setModel(new SearchModel());
     }
-    
+
     public function actionSearch()
     {
-        $this->ifAJAX(
-            function () {
+        //$this->ifAJAX(
+            //function () {
                 if (!empty($_GET)) {
                     $this->model('SearchModel')->fetchAds($_GET);
                     echo json_encode($this->model('SearchModel')->getAds(), JSON_UNESCAPED_UNICODE);
@@ -19,7 +19,7 @@ class AJAXController extends Controller
                     $this->model('SearchModel')->fetchAds($_POST);
                     echo json_encode($this->model('SearchModel')->getAds(), JSON_UNESCAPED_UNICODE);
                 }
-            }
-        );
+            //}
+        //);
     }
 }

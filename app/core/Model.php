@@ -46,7 +46,7 @@ class Model extends UserErrors
         $query = $this->db->prepare('SELECT * FROM ips WHERE ip = :ip AND date = :date_val');
         $query->execute(array(':ip' => $ip, ':date_val' => $date));
         $result = $query->fetch();
-        
+
         if ($result) {
             $visits = $result['visits'] + 1;
 

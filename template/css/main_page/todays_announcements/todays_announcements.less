@@ -1,0 +1,238 @@
+@import "/template/css/main_page/fonts.min.css";
+@import "/template/css/main_page/adaptive.min.css";
+
+.just-published {
+  text-align: center;
+  background: url('/template/images/background-3.png') top center no-repeat;
+  background-size: cover;
+  padding-right: 8px;
+  padding-bottom: 81px;
+  h2 {
+    text-align: left;
+    color: #343434;
+    font-size: 26px;
+    font-weight: 300;
+    padding: 25px 0 0 18px;
+    & span {
+      color: #ed8181;
+      font-weight: bold;
+      font-size: 20px;
+      margin-left: 40px;
+      vertical-align: middle;
+      text-transform: uppercase;
+      &:before {
+        content: '';
+        display: inline-block;
+        vertical-align: middle;
+        width: 12px;
+        height: 12px;
+        margin-right: 8px;
+        background: #fff;
+        border-radius: 100%;
+      }
+    }
+  }
+}
+
+.scroll-decoration {
+  padding: 26px 10px 0;
+  width: 1395px;
+  margin: auto;
+}
+
+.list-of-all-apartments {
+  margin: 30px auto 0;
+  background: #f3f3f3;
+  padding: 18px 6px 0;
+  box-shadow: 0 0 120px 0 rgba(0,0,0,.5);
+}
+
+.all-apartments {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: stretch;
+  justify-content: center;
+  flex-shrink: 4;
+  padding-right: 12px;
+  max-height: 990px;
+  background: #f3f3f3;
+  overflow-x:hidden;
+  overflow-y: scroll;
+  &:after {
+    content: '';
+    display: block;
+    position: relative;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border: 0;
+    z-index: 5;
+    width: 100%;
+    margin-top: -65px;
+    height: 70px;
+    background: linear-gradient(to top,#fff,rgba(255,255,255,.0));
+  }
+  &::-webkit-scrollbar {
+    width: 4px;
+    background: #fff;
+    border-radius: 4px;
+    margin-right: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    background: #e7e7e7;
+    border-radius: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #69dd7f;
+    border-radius: 6px;
+    &:active {
+      background: orange;
+    }
+  }
+}
+
+.block-apartments {
+  position: relative;
+  align-content: center;
+  margin: 7px;
+  padding-bottom: 10px;
+  background: #fff;
+  width: 23%;
+  &:before {
+    content: 'Новое';
+    display: block;
+    position: absolute;
+    text-align: center;
+    top: 14px;
+    right: 23px;
+    padding: 3px 1px;
+    color: #fff;
+    font-size: 13px;
+    border-top: 1px solid #ebb3b6;
+    width: 70px;
+    background: #e77070;
+    border-radius: 15px;
+  }
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 155px;
+    height: 55px;
+    width: 100%;
+    z-index: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.45), rgba(255, 255, 255, 0));
+    padding: 3px 1px;
+    font-size: 13px;
+  }
+  img {
+    width: 100%;
+    height: 215px;
+    margin: auto;
+  }
+  p {
+    text-align: left;
+    font-size: 13px;
+    color: #928787;
+    padding: 0 15px;
+    margin: auto;
+    height: 65px;
+    line-height: 18px;
+  }
+  sub {
+    display: inline-block;
+    position: absolute;
+    font-size: 15px;
+    top: 10px;
+  }
+  span {
+    display: block;
+    position: absolute;
+    font-size: 15px;
+    z-index: 2;
+    margin-top: -36px;
+    text-align: left;
+    padding-left: 40px;
+    font-weight: 700;
+    color: #fff;
+  }
+}
+
+.price-of-apartments-and-show-apartments {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.price-of-apartments {
+  display: inline-block;
+  width: 73%;
+  span {
+    position: relative;
+    text-align: left;
+    color: #565656;
+    padding: 0;
+    margin: 16px 0;
+    font-weight: bold;
+    font-size: 25px;
+  }
+  i {
+    font-size: 17px;
+    vertical-align: middle;
+  }
+}
+
+.open-close-ad {
+  width: auto;
+  cursor: pointer;
+  height: auto;
+  background: none;
+  border: none;
+}
+
+.show-apartments {
+  display: inline-block;
+  vertical-align: top;
+  width: 22%;
+  margin-left: -15px;
+  img {
+    cursor: pointer;
+    margin-top: 18px;
+    width: auto;
+    height: auto;
+  }
+  button {
+    width: auto;
+    height: auto;
+    background: none;
+    border: none;
+  }
+}
+
+.location {
+  display: block;
+  text-align: left;
+  padding-left: 2px;
+  p {
+    display: inline-block;
+    vertical-align: middle;
+    font-weight: 300;
+    padding: 0;
+    color: #414040;
+    height: auto;
+    width: auto;
+    font-size: 15px;
+  }
+  span {
+    display: inline-block;
+    vertical-align: middle;
+    color: #bcbcbc;
+    font-size: 13px;
+    margin: 0 0 0 5px;
+  }
+  img {
+    margin-right: 5px;
+    width: auto;
+    height: auto;
+    vertical-align: middle;
+  }
+}

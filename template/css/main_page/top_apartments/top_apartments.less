@@ -1,0 +1,260 @@
+@import "/template/css/main_page/fonts.min.css";
+@import "/template/css/main_page/adaptive.min.css";
+
+.best-ads-per-day {
+  text-align: center;
+  background: url('/template/images/background-5.png') top center no-repeat;
+  background-size: cover;
+  padding-right: 8px;
+  padding-bottom: 35px;
+  h2 {
+    text-align: left;
+    color: #343434;
+    font-size: 25px;
+    font-weight: 300;
+    padding: 42px 0 0 35px;
+  }
+}
+
+.top-apartments {
+  width: 1438px;
+  padding-right: 5px;
+  margin: auto;
+  padding-top: 26px;
+}
+
+.filter-and-top-blocks {
+  background: rgba(255, 255, 255, 0.35);
+  margin: 29px auto 0;
+  .value-text {
+    padding: 0;
+  }
+}
+
+.all-apartments-top {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: stretch;
+  justify-content: center;
+  flex-shrink: 3;
+  padding: 0 10px 0 14px;
+}
+
+.filter-apartment {
+  display: block;
+  text-align: left;
+  padding: 20px 50px 10px;
+  img {
+    vertical-align: middle;
+    margin: auto 5px;
+  }
+  li {
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+    width: auto;
+    padding: 0 10px;
+  }
+  li:nth-child(3) .jq-selectbox {
+    margin-left: 70px;
+  }
+  a {
+    border-bottom: 1px solid #d8d6d6;
+    padding-bottom: 15px;
+  }
+  p {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 13px;
+    margin-top: 8px;
+    font-weight: 300;
+    color: #a8a8a8;
+  }
+  label {
+    padding: 10px;
+  }
+  & .jq-selectbox {
+    margin-left: 12px;
+  }
+}
+
+#style {
+  width: 64px;
+}
+
+.top-block {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: stretch;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 3;
+  overflow: hidden;
+  align-content: center;
+  border-radius: 8px;
+  background: #fff;
+  width: 450px;
+  height: 236px;
+  min-width: 250px;
+  margin: 9px 9px 13px;
+}
+
+.left-wallpaper {
+  width: 183px;
+  overflow: hidden;
+  &:before {
+    content: 'Новое';
+    overflow: hidden;
+    display: block;
+    position: absolute;
+    text-align: center;
+    padding: 3px 1px;
+    margin-top: 12px;
+    margin-left: 104px;
+    color: #fff;
+    font-size: 13px;
+    border-top: 1px solid #ebb3b6;
+    width: 70px;
+    background: #e77070;
+    border-radius: 15px;
+  }
+  &:after {
+    content: '';
+    display: block;
+    position: relative;
+    width: 100%;
+    background: linear-gradient(to top,rgba(0,0,0,.43),rgba(255,255,255,0));
+    height: 75px;
+    z-index: 1;
+    margin-top: -70px;
+  }
+  img {
+    width: 130%;
+    margin-left: calc(-20%);
+    height: calc(100%);
+  }
+  p {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    padding: 13px 23px;
+    text-align: center;
+    color: #fff;
+    bottom: 0;
+  }
+}
+
+.right-information-block {
+  width: 228px;
+  text-align: left;
+  padding: 18px 5px;
+  p {
+    font-size: 13px;
+    color: #aba3a3;
+    height: 60px;
+    word-wrap: break-word;
+    line-height: 20px;
+    margin-top: 15px;
+  }
+  span {
+    margin-left: 5px;
+    font-size: 16px;
+    color: #424242;
+    line-height: 20px;
+  }
+  i {
+    margin-left: 5px;
+  }
+}
+
+.price-and-view-the-apartment {
+  text-align: center;
+  img {
+    vertical-align: middle;
+  }
+}
+
+.price {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 20px;
+  p {
+    font-size: 15px;
+    color: #414040;
+    height: auto;
+    margin-top: 15px;
+    vertical-align: middle;
+  }
+  span {
+    font-size: 13px;
+    color: #bcbcbc;
+    vertical-align: middle;
+  }
+  img {
+    margin-right: 5px;
+  }
+  i {
+    font-size: 15px;
+    vertical-align: middle;
+    color: #a09d9d;
+    font-weight: 200;
+    margin-left: 4px;
+  }
+}
+
+.view-the-apartment {
+  display: inline-block;
+  vertical-align: bottom;
+  margin: 0 -12px -5px 0;
+  text-align: right;
+  img {
+    width: 42px;
+  }
+}
+
+.decorate-number {
+  display: block;
+  text-align: left;
+  font-size: 25px;
+  font-weight: bold;
+  color: #565656;
+  text-transform: uppercase;
+  margin: 6px 0;
+  sub {
+    position: absolute;
+    font-size: 15px;
+    margin-top: 8px;
+  }
+}
+
+.see-more {
+  text-align: center;
+  margin: 22px auto;
+  padding-left: 20px;
+  padding-bottom: 48px;
+  p {
+    font-size: 15px;
+    padding-right: 5px;
+    color: #e3e2e2;
+    margin-bottom: 16px;
+  }
+  span {
+    margin: auto 7px;
+  }
+  a {
+    display: inline-block;
+    border-bottom: 1px solid #cdcdcd;
+    margin: auto;
+    text-align: center;
+    cursor: pointer;
+    padding: 13px;
+    color: grey;
+    background: #f3f3f3;
+    border-radius: 50px;
+    width: 190px;
+    &:hover {
+      background: #d8d8d8;
+      transition: 1.5s;
+    }
+  }
+}

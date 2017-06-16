@@ -1,0 +1,37 @@
+/** Шрифты **/
+.font-face(@family, @filename: @family, @weight: normal, @style: normal){
+  @font-face{
+    font-family: "@{family}";
+    src:url('/template/fonts/@{filename}.eot');
+    src:url('/template/fonts/@{filename}.eot?#iefix') format('embedded-opentype'),
+    url('/template/fonts/@{filename}.woff') format('woff'),
+    url('/template/fonts/@{filename}.ttf') format('truetype'),
+    url('/template/fonts/@{filename}.svg#@{filename}') format('svg');
+    font-weight: @weight;
+    font-style: @style;
+  }
+}
+@family: Gotham Pro; //имя шрифта (обязательно)
+@filename: GothaProReg; //название шрифта, так же используется в качестве id для шрифта в формате svg (обязательно, по умолчанию используется имя шрифта).
+@weight: normal;
+@style: normal;
+
+* {
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  outline: none;
+  box-sizing: border-box;
+  font-family: @family, sans-serif;
+}
+
+.content {
+  position: relative;
+  background: #fff;
+  z-index: 1;
+}
+
+/** Стили скроллинга **/
+::-webkit-scrollbar {
+  width: 2px;
+}
