@@ -12,7 +12,7 @@ class DataBase extends PDO
         $redis = Registry::get('redis');
         $this->config = unserialize($redis->get('config'));
         parent::__construct('pgsql:host=' . $this->config['db_host'] . ';port=5432;dbname=' . $this->config['db'], $this->config['db_username'], $this->config['db_password']);
-
+        $this->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     }
 
     /**
