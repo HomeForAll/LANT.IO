@@ -185,10 +185,22 @@ class SearchModel extends Model
             'filter_type'       => 'between',
         ],
 
-        // Лифт (int)
-        'lift'                 => [
-            'table_column_name' => 'elevator',
-            'filter_type'       => 'in',
+        // Грузвовой лифт (bool)
+        'lift_0'                 => [
+            'table_column_name' => 'lift_lifting',
+            'filter_type'       => 'bool',
+        ],
+
+        // Пассажирский лифт (bool)
+        'lift_1'                 => [
+            'table_column_name' => 'lift_passenger',
+            'filter_type'       => 'bool',
+        ],
+
+        // Без лифта (bool)
+        'lift_3'                 => [
+            'table_column_name' => 'lift_none',
+            'filter_type'       => 'bool',
         ],
 
         // Наличие мусоропровода (bool)
@@ -256,10 +268,34 @@ class SearchModel extends Model
             'filter_type'       => 'bool',
         ],
 
-        // Парковка (int)
-        'parking'             => [
-            'table_column_name' => 'parking',
-            'filter_type'       => 'in',
+        // Многоуровневый парикнг (bool)
+        'parking_0'             => [
+            'table_column_name' => 'parking_multilevel',
+            'filter_type'       => 'bool',
+        ],
+
+        // Подземная парковка (bool)
+        'parking_1'             => [
+            'table_column_name' => 'parking_underground',
+            'filter_type'       => 'bool',
+        ],
+
+        // Гаражный комплекс (bool)
+        'parking_2'             => [
+            'table_column_name' => 'parking_garage_complex',
+            'filter_type'       => 'bool',
+        ],
+
+        // Придомовый гараж (bool)
+        'parking_3'             => [
+            'table_column_name' => 'parking_lot_garage',
+            'filter_type'       => 'bool',
+        ],
+
+        // Парковка отсутствует (bool)
+        'parking_4'             => [
+            'table_column_name' => 'parking_none',
+            'filter_type'       => 'bool',
         ],
 
         // Материал стен (int)
@@ -388,10 +424,34 @@ class SearchModel extends Model
             'filter_type'       => 'bool',
         ],
 
-        // Участок (int)
-        'plot'                => [
-            'table_column_name' => 'site',
-            'filter_type'       => 'in',
+        // Ровный участок (bool)
+        'plot_0'                => [
+            'table_column_name' => 'plot_smooth',
+            'filter_type'       => 'bool',
+        ],
+
+        // Неровный участок (bool)
+        'plot_1'                => [
+            'table_column_name' => 'plot_uneven',
+            'filter_type'       => 'bool',
+        ],
+
+        // Участок на склоне (bool)
+        'plot_2'                => [
+            'table_column_name' => 'plot_on_the_slope',
+            'filter_type'       => 'bool',
+        ],
+
+        // Овраг (bool)
+        'plot_3'                => [
+            'table_column_name' => 'plot_of_ravine',
+            'filter_type'       => 'bool',
+        ],
+
+        // Заболоченный участок (bool)
+        'plot_4'                => [
+            'table_column_name' => 'plot_wetland',
+            'filter_type'       => 'bool',
         ],
 
         // Лесные деревья (bool)
@@ -481,6 +541,9 @@ class SearchModel extends Model
         'add_buildings',
         'on_plot',
         'documents',
+        'lift',
+        'plot',
+        'parking',
     ];
     // Полученные объявления
     private $Ads;
