@@ -66,5 +66,5 @@ return [
     'admin/users'             => 'main/admin/users',
 
     // API
-    'api/search' => 'main/AJAX/search',
+    'api/search' => 'main/API/search',
 ];
