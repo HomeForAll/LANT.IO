@@ -72,8 +72,7 @@ $this->title = 'Редактирование профиля';
     }
 </style>
 <h1>Редактирование профиля</h1>
-
-<form action="" method="post">
+<form enctype="multipart/form-data" action="" method="post">
     <table>
         <tr>
             <td>
@@ -327,29 +326,30 @@ $this->title = 'Редактирование профиля';
         <tr><td><br></td></tr>
         <tr>
             <td>
-                <?php if (isset($this->data[0]['profile_foto_id'])) echo "<img width='240' src='{$this->data[0]['profile_foto_id']}'>" ?>
+                <?php if (isset($this->data[0]['profile_foto_id'])) echo "<img width='240' src='/uploads/images/{$this->data[0]['profile_foto_id']}'>" ?>
             </td>
             <td width="200">
                 <table>
-                    <?php if ($this->data[0]['profile_foto_id'] != 'http://images.lant.io/profile_fotos/user_foto_id_default.jpg')
+                    <?php if ($this->data[0]['profile_foto_id'] != 'user_foto_id_default.jpg')
                     {
                         ?>
                         <tr>
                             <td width="200">
+                                <input type="hidden" name="MAX_FILE_SIZE" value="800000000" />
                                 <label for="uploadbtn" class="buttons" style="width: 200px">Изменить фотографию</label>
-                                <input style="opacity: 0; z-index: -1;" type="file" name="upload" id="uploadbtn">
+                                <input style="opacity: 0; z-index: -1;" type="file" name="profileIMG" id="uploadbtn">
                             </td>
                         </tr>
                     <?php } else { ?>
                         <tr>
                             <td width="200">
                                 <span style="font-size: 10pt">Допустимые форматы: JPEG, PNG, BMP</span>
-                                <input style="opacity: 1;" type="file" name="upload" id="uploadbtn">
+                                <input style="opacity: 1;" type="file" name="profileIMG" id="uploadbtn">
                                 <input type="submit" name="save_avatar" value="Сохранить"><br>
                             </td>
                         </tr>
                     <?php } ?>
-                    <?php if ($this->data[0]['profile_foto_id'] != 'http://images.lant.io/profile_fotos/user_foto_id_default.jpg')
+                    <?php if ($this->data[0]['profile_foto_id'] != 'user_foto_id_default.jpg')
                     {
                         ?>
                         <tr>
