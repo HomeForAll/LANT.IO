@@ -18,4 +18,15 @@ class APIController extends Controller
             echo json_encode($this->model('SearchModel')->getAds(), JSON_UNESCAPED_UNICODE);
         }
     }
+    
+    public function actionSearchAdsCount()
+    {
+        if (!empty($_GET)) {
+            $this->model('SearchModel')->fetchAds($_GET, SearchModel::COUNT);
+            echo json_encode($this->model('SearchModel')->getAds(), JSON_UNESCAPED_UNICODE);
+        } elseif (!empty($_POST)) {
+            $this->model('SearchModel')->fetchAds($_POST, SearchModel::COUNT);
+            echo json_encode($this->model('SearchModel')->getAds(), JSON_UNESCAPED_UNICODE);
+        }
+    }
 }

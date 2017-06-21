@@ -130,7 +130,7 @@
 <script src="/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="/bower_components/jquery-ui/jquery-ui.min.js"></script>
 <script src="/template/js/jquery.formstyler.min.js"></script>
-<script src="//api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
+<!--<script src="//api-maps.yandex.ru/2.1/?lang=ru_RU"></script>-->
 <script src="/template/js/mapController.js"></script>
 <script src="/template/js/jquery.bxslider.min.js"></script>
 <script src="/template/js/search_page/main.js"></script>

@@ -570,7 +570,6 @@ class SearchModel extends Model
         $this->build($type);
         
         //         Выполняем запрос и записываем результаты в $this->Ads
-        $this->sql .= " ORDER BY price LIMIT 100";
         $query     = $this->db->prepare($this->sql);
         $query->execute();
         $this->Ads = $query->fetchAll(PDO::FETCH_OBJ);
@@ -660,6 +659,11 @@ class SearchModel extends Model
         
         foreach ($this->filters as $filter) {
             $sql .= ' AND (' . $filter . ')';
+        }
+        
+        if ($queryType == self::SEARCH)
+        {
+            $sql .= " ORDER BY price LIMIT 100";
         }
         
         $this->sql = $sql;
