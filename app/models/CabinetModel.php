@@ -825,40 +825,7 @@ class CabinetModel extends Model
         }
         
         if (isset($_POST['save_avatar'])) {
-            ini_set('file_uploads', true);
-            ini_set('upload_max_filesize', '8M');
-            ini_set('upload_tmp_dir', ROOT_DIR . '/tmp');
-            ini_set('post_max_size', '10M');
-            
-            $uploads = ROOT_DIR . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . 'images';
-            
-            if (!empty($_FILES)) {
-                if (!($_FILES['profileIMG']['type'] === 'image/jpeg' || $_FILES['profileIMG']['type'] === 'image/png' || $_FILES['profileIMG']['type'] === 'image/gif')) {
-                    echo 'Ошибка загрузки картинки, файл не соответствует требуемому формату!';
-                    
-                    return;
-                }
-                
-                $lastPos   = strrpos($_FILES['profileIMG']['name'], '.');
-                $extension = substr($_FILES['profileIMG']['name'], $lastPos);
-                
-                $fileName = strtolower(md5(time()) . $extension);
-                
-                if (move_uploaded_file($_FILES['profileIMG']['tmp_name'], $uploads . DIRECTORY_SEPARATOR . $fileName)) {
-                    
-                    $query = $this->db->prepare('UPDATE users SET profile_foto_id = :file_name WHERE id = ' . $_SESSION['userID']);
-                    $query->execute([':file_name' => $fileName]);
-                    
-                    if ($query->rowCount()) {
-                        echo "Файл корректен и был успешно загружен.\n";
-                    } else {
-                        echo "Ошибка записи файла.\n";
-                        unlink($uploads . DIRECTORY_SEPARATOR . $fileName);
-                    }
-                } else {
-                    echo "Возможная атака с помощью файловой загрузки!\n";
-                }
-            }
+            $this->saveAvatar();
         }
         
         if (isset($_POST['delete_foto_id'])) // Установить default аватар профиля
@@ -948,6 +915,44 @@ class CabinetModel extends Model
             if (!isset($_POST['prom_offers'])) {
                 $stmt = $this->db->prepare("UPDATE users SET prom_offers = 0 WHERE id = :profile_id");
                 $stmt->execute([':profile_id' => $profile_id]);
+            }
+        }
+    }
+    
+    private function saveAvatar()
+    {
+        ini_set('file_uploads', true);
+        ini_set('upload_max_filesize', '8M');
+        ini_set('upload_tmp_dir', ROOT_DIR . '/tmp');
+        ini_set('post_max_size', '10M');
+    
+        $uploads = ROOT_DIR . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . 'images';
+    
+        if (!empty($_FILES)) {
+            if (!($_FILES['profileIMG']['type'] === 'image/jpeg' || $_FILES['profileIMG']['type'] === 'image/png' || $_FILES['profileIMG']['type'] === 'image/gif')) {
+                echo 'Ошибка загрузки картинки, файл не соответствует требуемому формату!';
+            
+                return;
+            }
+        
+            $lastPos   = strrpos($_FILES['profileIMG']['name'], '.');
+            $extension = substr($_FILES['profileIMG']['name'], $lastPos);
+        
+            $fileName = strtolower(md5(time()) . $extension);
+        
+            if (move_uploaded_file($_FILES['profileIMG']['tmp_name'], $uploads . DIRECTORY_SEPARATOR . $fileName)) {
+            
+                $query = $this->db->prepare('UPDATE users SET profile_foto_id = :file_name WHERE id = ' . $_SESSION['userID']);
+                $query->execute([':file_name' => $fileName]);
+            
+                if ($query->rowCount()) {
+                    echo "Файл корректен и был успешно загружен.\n";
+                } else {
+                    echo "Ошибка записи файла.\n";
+                    unlink($uploads . DIRECTORY_SEPARATOR . $fileName);
+                }
+            } else {
+                echo "Возможная атака с помощью файловой загрузки!\n";
             }
         }
     }

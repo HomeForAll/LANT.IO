@@ -335,9 +335,10 @@ $this->title = 'Редактирование профиля';
                         ?>
                         <tr>
                             <td width="200">
-                                <input type="hidden" name="MAX_FILE_SIZE" value="800000000" />
-                                <label for="uploadbtn" class="buttons" style="width: 200px">Изменить фотографию</label>
-                                <input style="opacity: 0; z-index: -1;" type="file" name="profileIMG" id="uploadbtn">
+                                <span style="font-size: 14pt"><b>Изменить аватар</b></span><br>
+                                <span style="font-size: 10pt">Допустимые форматы: JPEG, PNG, BMP</span>
+                                <input style="opacity: 1;" type="file" name="profileIMG" id="uploadbtn">
+                                <input type="submit" name="save_avatar" value="Сохранить"><br>
                             </td>
                         </tr>
                     <?php } else { ?>
