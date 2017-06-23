@@ -15,9 +15,8 @@ class AdminController extends Controller
 
     }
 
-    public function actionAdminNews()
+      public function actionAdminNews()
     {
-
         // Проверка доступа
         global $news_message, $news_error;
         $this->getAccessFor('admin');
@@ -26,13 +25,12 @@ class AdminController extends Controller
         $data = [];
 
         $this->ifAJAX(function () {
-
             if ('news_search' == $_POST['action']) {
                 $data = $this->model('AdminModel')->getDataFromPost();
 
                 //Кол-во объявлений
                 $data['news_number'] = $this->model('NewsModel')->
-                getNamberOfAllNews($data['time_start'], $data['time'], $data['space_type'],
+                getNamberOfAllNews($data['time'],$data['time_start'], $data['space_type'],
                     $data['operation_type'], $data['object_type'], 0, 0, 0, 0, $data['status'], $data['title_like']);
 
                 $data['one_page'] = $data['max_number'];
