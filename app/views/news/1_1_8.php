@@ -37,8 +37,10 @@
     </label>
     <div id="ymap" style="margin: 0 auto; width: 400px; height: 400px; background: #000;"></div>
 
-    <label for="distance_from_mkad_or_metro">Удаленность от МКАД/метро:</label><br>
-    <input id="distance_from_mkad_or_metro" name="distance_from_mkad_or_metro" <?php inputToInput("distance_from_mkad_or_metro"); ?> type="text" ><br>
+    <label for="distance_from_metro">Удаленность от метро:</label><br>
+    <input id="distance_from_metro"
+           name="distance_from_metro" <?php inputToInput("distance_from_metro"); ?> type="text"><br>
+
     <label for="object_located">Объект размещен</label><br>
     <select name="object_located" id="object_located">
         <option value="0">---</option>
@@ -131,41 +133,24 @@
     <label for="electricity">Кол-во кВт:</label><br>
     <input name="electricity" <?php inputToInput("electricity"); ?> type="text" >
     <label for="sanitation" >Водопровод и канализация</label><br>
-    <select name="sanitation" id="sanitation" >
-        <option value="0">---</option>
-        <option value="47" <?php inputToSelect('sanitation','47'); ?> >Есть</option>
-        <option value="84" <?php inputToSelect('sanitation','84'); ?> >Нет</option>
-    </select><br>
-    <label >Возможность проводки <input type="hidden" name="possible_to_post" value=""> <input type="checkbox" name="possible_to_post" <?php inputToCheckbox("possible_to_post"); ?> ></label><br>
-    <label >Описание <input type="text" name="sanitation_description" <?php inputToInput("sanitation_description"); ?> ></label><br>
-    <label for="sanitation" >Наличие санузлов</label><br>
-    <label for="">Количество:</label><br>
-    <input name="bathroom_number" <?php inputToInput("bathroom_number"); ?> type="text" >
-    <label for="">Расположение:</label><br>
-    <select name="bathroom_location" id="bathroom_location" >
-        <option value="0">---</option>
-        <option value="" <?php inputToSelect('bathroom_location',''); ?> >---</option>
-    </select><br>
-    <label >Описание <input type="text" name="bathroom_description" <?php inputToInput("bathroom_description"); ?> ></label><br>
-    <label for="parking">Парковка</label><br>
-    <select name="parking" id="parking">
-        <option value="0">---</option>
-        <option value="81" <?php inputToSelect('parking','81'); ?> >Многоуровневый паркинг</option>
-        <option value="132" <?php inputToSelect('parking','132'); ?> >Подземная парковка</option>
-        <option value="52" <?php inputToSelect('parking','52'); ?> >Гаражный комплекс</option>
-        <option value="7" <?php inputToSelect('parking','7'); ?> >Придомовой гараж</option>
-        <option value="82" <?php inputToSelect('parking','82'); ?> >Муниципальная</option>
-        <option value="5" <?php inputToSelect('parking','5'); ?> >Отсутствует</option>
-    </select><br>
-    <label for="municipal">Муниципальная</label><br>
-    <select name="municipal" id="municipal">
-        <option value="0">---</option>
-        <option value="94" <?php inputToSelect('municipal','94'); ?> >Платная</option>
-        <option value="51" <?php inputToSelect('municipal','51'); ?> >Бесплатная</option>
-    </select><br>
-    <label >Ограждение <input type="hidden" name="fencing" value=""> <input type="checkbox" name="fencing" <?php inputToCheckbox("fencing"); ?> ></label><br>
-    <label for="material">Материал</label><br>
-    <select name="material" id="material">
+    <input type="checkbox" name="sanitation" <?php inputToCheckbox("sanitation"); ?> ></label>
+    <input type="hidden" name="sanitation" value=""><br>
+
+
+    <span>Парковка</span><br>
+    <label>Многоуровневая парковка<input type="hidden" name="parking_multilevel" value="">
+        <input type="checkbox" name="parking_multilevel" <?php inputToCheckbox("parking_multilevel"); ?> ></label><br>
+    <label>Подземная парковка<input type="hidden" name="parking_underground" value="">
+        <input type="checkbox" name="parking_underground" <?php inputToCheckbox("parking_underground"); ?> ></label><br>
+    <label>Гаражный комплекс<input type="hidden" name="parking_garage_complex" value="">
+        <input type="checkbox" name="parking_garage_complex" <?php inputToCheckbox("parking_garage_complex"); ?> ></label><br>
+    <label>Придомовый гараж<input type="hidden" name="parking_lot_garage" value="">
+        <input type="checkbox" name="parking_lot_garage" <?php inputToCheckbox("parking_lot_garage"); ?> ></label><br>
+    <label>Отсутствует<input type="hidden" name="parking_none" value="">
+        <input type="checkbox" name="parking_none" <?php inputToCheckbox("parking_none"); ?> ></label><br>
+
+    <label for="fencing">Ограждение</label><br>
+    <select name="fencing" id="fencing">
         <option value="0">---</option>
         <option value="98" <?php inputToSelect('material','98'); ?> >Пластик</option>
         <option value="142" <?php inputToSelect('material','142'); ?> >Дерево</option>
@@ -187,8 +172,8 @@
 <fieldset>
     <legend>Документы</legend>
     <br>
-    <label for="documents_on_ownership">Документы на право владения </label>
-    <input type="file" name="documents_on_ownership" multiple accept=""/>
+    <label for="documents_on_tenure">Документы на право владения </label>
+    <input type="file" name="documents_on_tenure" multiple accept=""/>
     <label for="lease_contract">Договор аренды </label>
     <input type="file" name="lease_contract" multiple accept=""/>
     <br>

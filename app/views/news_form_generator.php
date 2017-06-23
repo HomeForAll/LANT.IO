@@ -9,8 +9,7 @@ $form_code = '';
 $element_list = [];
 
 //Генерация форм новостей на основе форм поиска
-if(!empty($this->data['news_form_generation_file'])) {
-
+if (!empty($this->data['news_form_generation_file'])) {
 
 
     if (!empty($this->data['news_form_generation_file']['elements_out_db'])) {
@@ -49,23 +48,31 @@ if(!empty($this->data['news_form_generation_file'])) {
 // обработка формы
 
     foreach ($this->data['news_form_generation_file']['form'] as $lines) {
-            ecHHo($lines);
-        }
+        ecHHo($lines);
     }
+}
 // -------------------
 
 //Генерация форм новостей на основе форм поиска
-if(!empty($this->data['news_form_with_php_code'])) {
-   ?> <h2> Обработка формы с php кодом</h2> <?php
+if (!empty($this->data['news_form_with_php_code'])) {
+    ?> <h2> Обработка формы с php кодом</h2> <?php
     foreach ($this->data['news_form_with_php_code'] as $lines) {
         ecHHo($lines);
     }
 }
 
+//Генерация views на основе форм поиска
+if (!empty($this->data['generating_news_views'])) {
+    foreach ($this->data['generating_news_views'] as $lines) {
+        ecHHo($lines);
+    }
+}
+// -------------------
 
 
-
-?><hr><hr> <?php
+?>
+<hr>
+<hr> <?php
 
 
 function ecHHo($code)
@@ -152,19 +159,7 @@ function inputToCheckbox($item = '')
     }
 }
 
-function addClassCheckbox($item = '')
-{
-    global $data_for_news;
-
-    if ($item != '') {
-        if (!empty($data_for_news[$item])) {
-            echo 'showСheckboxInput_show';
-        }
-    }
-}
-
-
-function inputToSelect($item = '', $selection = NULL)
+function inputToSelect($item = '', $selection = null)
 {
     global $data_for_news;
 
@@ -175,7 +170,7 @@ function inputToSelect($item = '', $selection = NULL)
     }
 }
 
-function inputToRadio($item = '', $selection = NULL)
+function inputToRadio($item = '', $selection = null)
 {
     global $data_for_news;
 
@@ -211,6 +206,10 @@ function addClassOtherInput($item = '', $arr = [])
 }
 
 ?>
+<h1>Общие админ функции</h1>
+<form id="admin" action="" method="post">
+    <input type="submit" name="see_error_file" value="Просмотреть лог файл ошибок">
+</form>
 <h1>Генератор форм для объявлений</h1>
 <?php
 //Вывод сообщений
@@ -244,9 +243,11 @@ if (!empty($this->data['message'])) {
     <input type="submit" name="show_index_select_opt" value="Исправления Индексов для списков">
     <hr>
     <h4>Генерация различного кода</h4>
-    <input type="submit" name="generation_news_table" value="Генерировать таблицу новостей БД">
+    <input type="submit" name="generation_news_base" value="Вывести таблицу новостей news_base">
+    <input type="submit" name="generation_news_table" value="Генерировать таблицу новостей БД на основе форм">
     <input type="submit" name="generation_news_table_2" value="Расхождения текущей БД со сгенерированной таблицой">
-    <input type="submit" name="generation_news_post_args" value="Генерировать $args - код фильтрации POST для getFormData модели news">
+    <input type="submit" name="generation_news_post_args"
+           value="Генерировать $args - код фильтрации POST для getFormData модели news">
     <input type="submit" name="all_forms_elements_and_options" value="Вывести ВСЕ элементы и списки в forms">
     <input type="submit" name="elements_eng_rus" value="Вывести все параметры в БД eng - rus">
     <hr>
@@ -254,9 +255,12 @@ if (!empty($this->data['message'])) {
     <label for="generation_file_name">Имя файла (типа: 2_1_1)</label>
     <p>При генерации, файл остается неизменным.</p>
     <input name="generation_file_name" type="text"><br>
-    <input type="submit" name="generating_news_forms_by_search_forms" value="Генерация форм новостей на основе форм поиска">
-    <input type="submit" name="inserting_php_code_for_filling_fields" value="Вставка php кода заполнения полей при редактировании">
-<p>При вставке php кода заполнения полей, желательно "причесать" файл</p>
+    <input type="submit" name="generating_news_forms_by_search_forms"
+           value="Генерация форм новостей на основе форм поиска">
+    <input type="submit" name="inserting_php_code_for_filling_fields"
+           value="Вставка php кода заполнения полей при редактировании">
+    <input type="submit" name="generating_news_views" value="Генерация кода для VIEWS">
+    <p>При вставке php кода заполнения полей, желательно "причесать" файл</p>
     <hr>
     <h4>Внесение изменений в файлы сайта</h4>
     <input type="submit" name="change_news_menu" value="Обновить меню в файле news_myad">
@@ -361,8 +365,6 @@ if (isset($this->data['show_index_select_opt'])) {
 <!-- Код для БД списки  конец-->
 
 
-
-
 <!-- Код для таблицы новостей БД -->
 <?php
 // новый код для таблицы
@@ -392,25 +394,24 @@ if (isset($this->data['news_table'])) {
 
 <!-- Код для таблицы новостей БД   конец-->
 <!-- Расхождения текущей БД со сгенерированной таблицой -->
-<?php if(!empty($this->data['news_table_test'])) { ?>
-<h3>Расхождения текущей БД со сгенерированной таблицой</h3>
+<?php if (!empty($this->data['news_table_test'])) { ?>
+    <h3>Расхождения текущей БД со сгенерированной таблицой</h3>
     <?php
-    foreach($this->data['news_table_test'] as $v){
-        echo "* ".$v.'<br>';
+    foreach ($this->data['news_table_test'] as $v) {
+        echo "* " . $v . '<br>';
     }
     ?>
 <?php } ?>
 
 
-<?php if(!empty($this->data['news_table_test_commands'])) { ?>
+<?php if (!empty($this->data['news_table_test_commands'])) { ?>
     <h3>Команды</h3>
     <?php
-    foreach($this->data['news_table_test_commands'] as $v){
-        echo $v.'<br>';
+    foreach ($this->data['news_table_test_commands'] as $v) {
+        echo $v . '<br>';
     }
     ?>
 <?php } ?>
-
 
 
 <!-- Расхождения текущей БД со сгенерированной таблицой  конец -->
@@ -646,8 +647,9 @@ if (isset($this->data['all_forms_elements_and_options'])) {
     foreach ($this->data['all_forms_elements_and_options'] as $id => $e) {
         echo $e['r_name'] . ' ( ' . $e['form_id'] . ' )  -  [' . $e['id'] . ']<br>';
         if (isset($e['options'])) {
-            foreach ($e['options'] as $opt)
+            foreach ($e['options'] as $opt) {
                 echo ' - ' . $opt['r_name'] . '<br>';
+            }
         }
     }
 }
@@ -660,8 +662,8 @@ if (isset($this->data['all_forms_elements_and_options'])) {
 <?php
 if (isset($this->data['args'])) {
     echo "static \$args = array(<br>";
-    foreach($this->data['args'] as $key => $value){
-        echo "'".$key."' => ".$value.",<br>";
+    foreach ($this->data['args'] as $key => $value) {
+        echo "'" . $key . "' => " . $value . ",<br>";
     }
     echo " );<br>";
 }
@@ -673,14 +675,14 @@ if (isset($this->data['args'])) {
 <?php
 if (isset($this->data['elements_eng_rus'])) {
     echo "<h2>Вывод элементов БД</h2>";
-    foreach($this->data['elements_eng_rus']['element'] as $key => $value){
-        echo "'".$key."' => '".$value."',<br>";
+    foreach ($this->data['elements_eng_rus']['element'] as $key => $value) {
+        echo "'" . $key . "' => '" . $value . "',<br>";
     }
     echo " );<br>";
 
     echo "<h2>Вывод опций БД</h2>";
-    foreach($this->data['elements_eng_rus']['options'] as $key => $value){
-        echo $key." => '".$value."',<br>";
+    foreach ($this->data['elements_eng_rus']['options'] as $key => $value) {
+        echo $key . " => '" . $value . "',<br>";
     }
     echo " );<br>";
 }
@@ -689,6 +691,71 @@ if (isset($this->data['elements_eng_rus'])) {
 <!-- Вывод элементов БД eng-rus    конец -->
 
 
+<!-- Вывод элементов БД news_base -->
+<?php
+if (isset($this->data['news_base'])) {
+
+    echo "<h2>Вывод таблицы news_base</h2>";
+
+    echo 'DROP TABLE IF EXISTS news_base CASCADE;<br>CREATE TABLE news_base<br>(<br>';
+    foreach ($this->data['news_base']['db'] as $name => $type) {
+        $color = 'black';
+        if ($type == 'character varying(255) DEFAULT NULL') {
+            $color = 'blue';
+        }
+        if ($type == 'boolean DEFAULT NULL') {
+            $color = 'green';
+        }
+        if ($type == 'smallint DEFAULT NULL') {
+            $color = 'brown';
+        }
+        if ($type == 'integer DEFAULT NULL') {
+            $color = 'red';
+        }
+        echo '<p style="color:' . $color . ';">' . $name . ' ' . $type . ",</p>";
+    }
+    echo '  CONSTRAINT news_base_pkey PRIMARY KEY (id_news)<br>)<br>
+  WITH (<br>  OIDS=FALSE<br>);<br>ALTER TABLE news_base<br>  OWNER TO postgres;<br><hr>';
+
+    echo "<h2>Вывод наименований переменных</h2>";
+    foreach ($this->data['news_base']['rus_eng'] as $eng => $rus) {
+        echo $rus . " => '" . $eng . "',<br>";
+    }
+    echo " );<br><hr><br><hr>";
+    ?>
+    <h3>Расхождения текущей БД с данной таблицей</h3>
+    <?php
+    if (!empty($this->data['news_base_test'])) {
+        foreach ($this->data['news_base_test'] as $v) {
+            echo "* " . $v . '<br>';
+        }?>
+        <h3>Команды</h3>
+        <?php
+    }
+
+    if (!empty($this->data['news_base_commands'])) {
+        foreach ($this->data['news_base_commands'] as $v) {
+            echo $v . '<br>';
+        }
+    }
+
+    if (!empty($this->data['news_base']['rus_eng'])){
+        ksort($this->data['news_base']['rus_eng']);
+        ?><hr><h2>Заголовки {для (NewsModel) prepareNewsView()}</h2><?php
+        foreach ($this->data['news_base']['rus_eng'] as $eng => $rus) {
+            echo "'".$eng . "' => '" . $rus . "',<br>";
+        }
+    }
+    if (!empty($this->data['news_base']['args'])) {
+        ?><hr><h2>Фильтры {args для (NewsModel) getFormData()}</h2><?php
+        foreach ($this->data['news_base']['args'] as $k => $v) {
+            echo "'".$k . "' => " . $v . ",<br>";
+        }
+    }
+
+}
+
+?>
 
 
 <script type="text/javascript" src="/template/js/jquery.validate.js"></script>

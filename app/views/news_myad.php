@@ -14,14 +14,10 @@
 
     //Вывод сообщений
     if (!empty($this->data['error'])) {
-        foreach ($this->data['error'] as $error) {
-            echo '<span style="color: red">' . $error . '</span><br>';
-        }
+            echo '<span style="color: red">' . $this->data['error'] . '</span><br>';
     }
     if (!empty($this->data['message'])) {
-        foreach ($this->data['message'] as $message) {
-            echo '<span style="color: green">' . $message . '</span><br>';
-        }
+            echo '<span style="color: green">' . $this->data['message']. '</span><br>';
     }
     ?>
 
@@ -133,11 +129,7 @@
         <?php }
         } ?>
     </table>
-    <!--            <input type="hidden" id="stat_arr" name="stat_arr" value="--><?php
-    //            if (!empty($this->data['stat_arr'])) {
-    //                echo $this->data['stat_arr'];
-    //            }
-    //            ?><!--"/>-->
+
     <input type="submit" name="submit_status" value="Изменить статус"> <input type="reset" value="Отмена">
 </form>
 </div>

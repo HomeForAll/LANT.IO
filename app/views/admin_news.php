@@ -204,7 +204,7 @@ $form_options['object_types'] = [1 => 'Квартира', 2 => 'Офисная �
 
     <div id="status_pages"></div>
     <!-- Список новостей для редактирования, изменения статуса или удаления -->
-    <div id="status_frm_wrap">
+    <div id="status_frm_wrap" style="font-size: 10px;">
 
 
         <form id="status_frm" action="" method="post">
