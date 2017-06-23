@@ -46,6 +46,7 @@ return [
     //    'auth/([A-Za-z]+)' => 'empty/user/OAuthInit/$1',
     
     'news/([0-9]+)'           => 'main/news/newsID/$1',
+    
     'news/editor'             => 'main/news/newsEditor',
     'news/myad'               => 'main/news/newsMyAD',
     'news/editor/([0-9]+)'    => 'main/news/newsEditor/$1',
