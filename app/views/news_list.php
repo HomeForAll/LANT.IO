@@ -122,35 +122,7 @@ function showNews($data)
 </form>
 
 <!-- Навигация -->
-<div id="news_pages">
-    Всего объявлений:<?php if (!empty($this->data['news_number'])) {
-        echo  $this->data['news_number'];
-    } ?>
-    <?php
-    for ($i = 1; $i < $this->data['news_number']; $i = $i + $this->data['max_number']) {
-        $j = $i + $this->data['max_number'] - 1;
-        if ($j > $this->data['news_number']) {
-            $j = $this->data['news_number'];
-        }
-        echo "<a href='" . $i . "' class='news_page'>[" . $i . '-' . $j . "] </a>";
-    }
-    ?>
-</div>
-<!--    <DIV>-->
-<!--        --><?php //echo $this->data['firstnews']; ?><!-- - --><?php //echo $this->data['lastnews']; ?>
-<!--        из: --><?php //echo $this->data['namber_of_all_rows']; ?>
-<!--        --><?php //if ($this->data['firstnews'] != 1) {
-//            echo '<a href="/news/page' . ($this->data['page'] - 1) . '"><<</a> ';
-//        } else {
-//            echo '<< ';
-//        }
-//        if ($this->data['lastnews'] != $this->data['namber_of_all_rows']) {
-//            echo ' <a href="/news/page' . ($this->data['page'] + 1) . '">>></a>';
-//        } else {
-//            echo ' >>';
-//        }
-//        ?>
-<!--    </DIV>-->
+<div id="news_pages"></div>
 
 <!-- Последние новости -->
 
