@@ -13,6 +13,7 @@ var productSearch, showAndHideTopMenu, boolean, rootBlock, showFilter, openMap =
         })
     };
 
+
 /** Через Socket.io обрабатываем запросы **/
 $(document).ready(function () {
     /*
@@ -954,8 +955,6 @@ $("#form_2").on('submit', function (e) {
     });
 });
 
-/** Дополнительная информаионная форма **/
-$('.open-close-ad').click(console.log('Запустили'));
 //---------------------------------------------------------
 
 /** Фильтр - Цена **/
