@@ -1,0 +1,116 @@
+@import "/template/css/main_page/fonts.min.css";
+@import "/template/css/main_page/adaptive.min.css";
+
+.visitor-statistics {
+  text-align: center;
+  background: #edecec;
+  padding-bottom: 34px;
+  &:before {
+    content: '';
+    display: block;
+    position: relative;
+    z-index: 0;
+    height: 100px;
+    background: linear-gradient(to top,rgba(255,255,255,0),rgba(0,0,0,.1));
+  }
+  ul {
+    list-style: none;
+    width: 1395px;
+    padding-right: 40px;
+    margin: 57px auto 0;
+  }
+  li {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 40px;
+    font-weight: 300;
+    width: 320px;
+    margin: auto 1px;
+    &:nth-child(1) {
+      font-size: 60px;
+      margin-right: 10px;
+      & p {
+        padding-left: 17px;
+        margin-top: 0;
+      }
+    }
+    & p {
+      margin-top: 5px;
+      font-weight: 300;
+      padding-left: 43px;
+      text-align: center;
+    }
+  }
+  img {
+    vertical-align: middle;
+    margin: auto 8px;
+  }
+  p {
+    position: relative;
+    font-size: 15px;
+    color: #353535;
+    z-index: 1;
+    margin-top: -36px;
+  }
+  span {
+    font-size: 28px;
+    color: #353535;
+    font-weight: 300;
+    cursor: pointer;
+    border-bottom: 1px solid #353535;
+    margin: auto 25px;
+  }
+}
+
+.schedule {
+  display: inline-block;
+  position: relative;
+  margin: auto;
+  width: 1395px;
+  a {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 12px;
+    color: #b7b7b7;
+    cursor: pointer;
+    width: 119px;
+    margin: 34px 20px 0 4px;
+  }
+  span {
+    display: inline-block;
+    border-radius: 100%;
+    vertical-align: bottom;
+    width: 18px;
+    height: 18px;
+    margin: 0 12px 0;
+  }
+}
+
+.schedule-interface {
+  position: relative;
+  margin: auto;
+  width: 1170px;
+  height: 225px;
+  padding-right: 32px;
+  background: url('/template/images/graf.png') no-repeat center top;
+  background-size: 100% 100%;
+}
+
+.year-schedule-interface {
+  position: relative;
+  margin: 36px 0 0 20px;
+  width: calc(100%);
+  height: calc(91%);
+  background: url('/template/images/oktober.png') no-repeat center;
+  background-size: 100% 100%;
+}
+
+#yellow {
+  background:#ffe35f;
+}
+#green {
+  background:#84e483;
+}
+#blue {
+  background:#a8cce6;
+}

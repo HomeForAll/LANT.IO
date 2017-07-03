@@ -4,59 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "243e40ab1c265a99541e9a1561cc2257",
+    "content-hash": "fd30174fb2136f5ee24ed06e4a46463b",
     "packages": [
-        {
-            "name": "foolz/sphinxql-query-builder",
-            "version": "1.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/FoolCode/SphinxQL-Query-Builder.git",
-                "reference": "dd8fc0370fb30919447056563c8c66ea0ff74075"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/FoolCode/SphinxQL-Query-Builder/zipball/dd8fc0370fb30919447056563c8c66ea0ff74075",
-                "reference": "dd8fc0370fb30919447056563c8c66ea0ff74075",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "replace": {
-                "foolz/sphinxql": "self.version"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "4.4.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Foolz\\SphinxQL\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "Foolz",
-                    "email": "support@foolz.us"
-                }
-            ],
-            "description": "A PHP query builder for SphinxQL. Uses MySQLi to connect to the Sphinx server.",
-            "homepage": "http://www.foolz.us",
-            "keywords": [
-                "database",
-                "query builder",
-                "search",
-                "sphinx",
-                "sphinxql",
-                "sql"
-            ],
-            "time": "2016-12-15T13:51:59+00:00"
-        },
         {
             "name": "ip2location/ip2location-php",
             "version": "8.0.2",

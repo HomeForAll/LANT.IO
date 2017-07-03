@@ -1,0 +1,66 @@
+@import "/template/css/main_page/fonts.min.css";
+@import "/template/css/main_page/adaptive.min.css";
+
+.information-for-the-user {
+  text-align: center;
+  background: url('/template/images/background-2.png') top center no-repeat;
+  background-size: cover;
+  ul {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: stretch;
+    flex-shrink: 3;
+    margin: auto;
+    justify-content: center;
+    padding: 46px 0 48px 0;
+    width: 1395px;
+  }
+  li {
+    align-content: center;
+    list-style: none;
+    box-shadow: 0 0 1px #fff;
+    font-size: 18px;
+    padding: 32px 10px 15px 90px;
+    line-height: 23px;
+    text-align: left;
+    width: 32.5%;
+    margin: 2px;
+    &:nth-child(1) {
+      background: url('/template/images/sec-2-1.png') left 25px top 55px no-repeat,
+      url('/template/images/sec-2-b-1.png') top center no-repeat;
+      background-size: auto, cover;
+    }
+    &:nth-child(2) {
+      background: url('/template/images/sec-2-2.png') left 35px top 50px no-repeat,
+      url('/template/images/sec-2-b-2.png') top center no-repeat;
+      background-size: auto, cover;
+    }
+    &:nth-child(3) {
+      background: url('/template/images/sec-2-4.png') left 15px top 68px no-repeat,
+      url('/template/images/sec-2-b-3.png') top center no-repeat;
+      background-size: auto, cover;
+    }
+    &:nth-child(4) {
+      background: url('/template/images/sec-2-5.png') left 0 top 42px no-repeat,
+      url('/template/images/sec-2-b-5.png') top center no-repeat;
+      background-size: auto, cover;
+    }
+    &:nth-child(5) {
+      background: url('/template/images/sec-2-8.png') left 8px top 55px no-repeat #fff;
+      background-size: auto;
+    }
+    &:nth-child(6) {
+      background: url('/template/images/sec-2-9.png') left 0 top 25px no-repeat #fff;
+      background-size: auto;
+    }
+    &:nth-child(n+10) {
+      background: #fff;
+    }
+  }
+  p {
+    font-size: 14px;
+    margin-top: 18px;
+    line-height: 20px;
+    color: #242321;
+  }
+}

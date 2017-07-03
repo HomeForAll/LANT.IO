@@ -1,0 +1,56 @@
+@import "/template/css/main_page/fonts.min.css";
+@import "/template/css/main_page/adaptive.min.css";
+
+.official-partners {
+  position: relative;
+  background: #f8f8f8;
+  padding: 42px 0 30px;
+}
+
+.partners {
+  text-align: center;
+  margin: auto;
+  width: 1440px;
+  h2 {
+    font-size: 20px;
+    font-weight: 300;
+    margin-bottom: 25px;
+  }
+  li {
+    cursor: pointer;
+  }
+}
+
+.left-button-2, .right-button-2 {
+  width: 5%;
+  padding: 0 12px;
+  text-align: right;
+  cursor: pointer;
+  img {
+    position: relative;
+    top: 40%;
+  }
+}
+
+.right-button-2 {
+  text-align: left;
+}
+
+.main-block-2 li {
+  &:before {
+    content: '';
+    display: block;
+    background: rgba(248, 248, 248, 0.85);
+    position: absolute;
+    left: 0;
+    right: 0;
+    cursor: pointer;
+    margin-bottom: calc(-55%);
+    height: 115px;
+    z-index: 5;
+  }
+  &:hover:before {
+    display: none;
+    z-index: -1;
+  }
+}
