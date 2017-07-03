@@ -23,12 +23,15 @@ class SiteController extends Controller
                         $res[$name] = 0;
                     }
                 }
-                $data['best_news'] = $this->model('NewsModel')->getBestNewsOfTime(8064,$res['space_type'],
+
+                $data['best_news'] = $this->model('NewsModel')->getBestNewsOfTime(8760,$res['space_type'],
                     $res['operation_type'], $res['object_type'], $res['price_from'], $res['price_to'],
                     $res['space_from'], $res['space_to'], 9);
-                $data['best_news_number'] = $this->model('NewsModel')->getNamberOfAllNews(8064,0, $res['space_type'],
+
+                $data['best_news_number'] = $this->model('NewsModel')->getNamberOfAllNews(8760,0, $res['space_type'],
                     $res['operation_type'], $res['object_type'], $res['price_from'], $res['price_to'],
                     $res['space_from'], $res['space_to']);
+
                 $data = $this->model('NewsModel')->prepareBestNewsOfTime($data);
                 echo json_encode($data, JSON_UNESCAPED_UNICODE);
                 die();
