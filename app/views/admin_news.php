@@ -135,14 +135,14 @@ $form_options['object_types'] = [1 => 'Квартира', 2 => 'Офисная �
             </option>
         </select>
         <br>
-        <label for="time_start">Дата окончания поиска (по умолчанию настоящее время):</label>
-        <input type="text" id="time_start" name="time_start" placeholder="2017-05-31">
+        <label for="time_to">Дата окончания поиска (по умолчанию настоящее время):</label>
+        <input type="text" id="time_to" name="time_to" placeholder="2017-05-31">
         <br>
-        <label for="time">За период</label>
-        <select name="time" id="time">
+        <label for="time_from">За период</label>
+        <select name="time_from" id="time_from">
             <option value="24"
-                <?php if (isset($this->data['time'])) {
-                    if ($this->data['time'] ==
+                <?php if (isset($this->data['time_from'])) {
+                    if ($this->data['time_from'] ==
                         24
                     ) {
                         echo 'selected';
@@ -150,27 +150,27 @@ $form_options['object_types'] = [1 => 'Квартира', 2 => 'Офисная �
                 } ?>>24 часа
             </option>
             <option value="168"
-                <?php if (isset($this->data['time'])) {
-                    if ($this->data['time'] ==
+                <?php if (isset($this->data['time_from'])) {
+                    if ($this->data['time_from'] ==
                         168
                     ) {
                         echo 'selected';
                     }
                 } ?>>1 неделя
             </option>
-            <option value="672"
-                <?php if (isset($this->data['time'])) {
-                    if ($this->data['time'] ==
-                        672
+            <option value="730"
+                <?php if (isset($this->data['time_from'])) {
+                    if ($this->data['time_from'] ==
+                        730
                     ) {
                         echo 'selected';
                     }
                 } ?>>1 месяц
             </option>
-            <option value="8064"
-                <?php if (isset($this->data['time'])) {
-                    if ($this->data['time'] ==
-                        8064
+            <option value="8760"
+                <?php if (isset($this->data['time_from'])) {
+                    if ($this->data['time_from'] ==
+                        8760
                     ) {
                         echo 'selected';
                     }
