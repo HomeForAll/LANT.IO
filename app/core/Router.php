@@ -6,7 +6,7 @@ class Router
     
     public function __construct()
     {
-        $redis = Registry::get('redis');
+        $redis        = Registry::get('redis');
         $this->routes = unserialize($redis->get('routes'));
     }
     
@@ -16,7 +16,7 @@ class Router
      */
     public function run()
     {
-                        //Обработчик ошибок
+        //Обработчик ошибок
         if (ERROR_HANDLER_STATUS != '0') {
             (new ErrorHandler())->register();
         }
@@ -26,7 +26,7 @@ class Router
             if (preg_match("~^{$uriPattern}$~", $uri)) {
                 
                 $options = $this->getOptions($uriPattern, $uri, $path);
-                $action = $options['action'];
+                $action  = $options['action'];
                 
                 if (file_exists(ROOT_DIR . '/app/controllers/' . $options['controller'] . '.php')) {
                     $controllerObject = new $options['controller']($options['template']);
@@ -67,26 +67,25 @@ class Router
     {
         $route    = preg_replace("~^{$pattern}$~", $path, $uri);
         $segments = explode('/', $route);
-
+        
         if (STATUS == '1') {
-            $db = new DataBase();
+            $db   = new DataBase();
             $stmt = $db->prepare("SELECT * FROM access WHERE key = :key");
             $stmt->bindParam(':key', $_SESSION['key']);
             $stmt->execute();
             $result = $stmt->fetch();
-
-
+            
             if (isset($_SESSION['access'])) {
                 if ($result['status'] == 1) {
-                    $template = array_shift($segments);
+                    $template   = array_shift($segments);
                     $controller = array_shift($segments);
-                    $action = array_shift($segments);
+                    $action     = array_shift($segments);
                 } else {
                     unset($_SESSION['access']);
                     unset($_SESSION['key']);
-                    $template = 'access';
+                    $template   = 'access';
                     $controller = 'site';
-                    $action = 'access';
+                    $action     = 'access';
                 }
             } else {
                 $template   = 'access';
@@ -99,11 +98,11 @@ class Router
             $action     = array_shift($segments);
         }
         
-        return array(
-            'template' => $template,
+        return [
+            'template'   => $template,
             'controller' => ucfirst($controller) . 'Controller',
-            'action' => 'action' . ucfirst($action),
-            'params' => $segments,
-        );
+            'action'     => 'action' . ucfirst($action),
+            'params'     => $segments,
+        ];
     }
 }
