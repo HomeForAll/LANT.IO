@@ -31,19 +31,19 @@ $(document).ready(function () {
             data: formResult,
             success: function (data) {
                 if (typeof data.news_number !== "undefined") {
-                    $('#status_pages').text('Всего объявлений:' + data.news_number + ' ');
-                    for (i = 1; i <= data.news_number; i = i + data.one_page) {
+                    $('#status_pages').text('Всего объявлений:' + data.news_number+' ');
+                    for (i = 1; i <= data.news_number; i = i+data.one_page) {
                         var i_end = i + data.one_page - 1;
                         if (i_end > data.news_number) i_end = data.news_number;
-                        if (i == (data.offset + 1)) {
+                        if(i == (data.offset+1)){
                             $('<b/>', {
-                                'text': ' [' + i + '-' + i_end + '] ',
+                                'text': ' ['+i+'-'+i_end+'] ',
                             }).appendTo($('#status_pages'));
-                        } else {
+                        }else {
                             $('<a/>', {
                                 'class': "status_page",
                                 'href': i,
-                                'text': ' [' + i + '-' + i_end + '] ',
+                                'text': ' ['+i+'-'+i_end+'] ',
                             }).appendTo($('#status_pages'));
                         }
                     }
@@ -88,6 +88,7 @@ $(document).ready(function () {
                                 'text': j
                             }).appendTo(ratingAdmin);
                         }
+                        ;
                         $('<td/>').html(ratingAdmin).appendTo(tr);
                         $('<td/>').html(news.rating_donate).appendTo(tr);
                         $('<td/>').html(news.rating_real).appendTo(tr);
@@ -108,6 +109,7 @@ $(document).ready(function () {
                             + news.rating_admin + ']').attr('selected', 'true');
                     });
                 }
+                ;
                 $(".status").on('change', changeStatus);
                 $(".rating_admin").on('change', changeRatingAdmin);
                 $(".status_page").on('click', statusPageAjax);
@@ -137,26 +139,28 @@ $(document).ready(function () {
             dataType: 'json',
             data: formResult,
             success: function (data) {
-                //Удаление старых сообщений
-                $('#news_message').empty();
-                $('#news_error').empty();
-                //Вывод сообщений
                 if (typeof data.news_message !== "undefined") {
-                    $('#news_message').append('<p>' + data.news_message + '</p>');
+                    $.each(data.news_message, function (i, message) {
+                        $('#news_message').append('<p>' + (i + 1) + ' - ' + message + '</p>');
+                    });
                 }
+                ;
                 if (typeof data.news_error !== "undefined") {
-                    $('#news_error').append('<p>' + data.news_error + '</p>');
+                    $.each(data.news_error, function (i, error) {
+                        $('#news_error').append('<p>' + (i + 1) + ' - ' + error + '</p>');
+                    });
                 }
+                ;
                 if (typeof data.news_delete_id !== "undefined") {
                     $.each(data.news_delete_id, function (i, id) {
                         $('.id_' + id).remove();
                     });
                 }
-                //Удаление скрытых input
-                $('#status_frm input[type=hidden]').remove();
+                ;
             }
         });
     };
+
 
     //Ajax запрос для изменения статуса
     $("#submit_status").click(function (e) {
@@ -169,11 +173,8 @@ $(document).ready(function () {
     var statusPageAjax = function (e) {
         e.preventDefault();
         var sorting = $('input[name=sorting]:checked').val();
-        var formResult = 'action=news_search&offset=' + ($(this).attr('href') - 1) + '&sorting=' + sorting + '&' + $('#show_news').serialize();
+        var formResult = 'action=news_search&offset='+($(this).attr('href')-1)+'&sorting=' + sorting + '&' + $('#show_news').serialize();
         sendAjaxNewsSearch(formResult);
     };
-
-    //Вызов и построение первоначальной таблицы
-    $("#submit_show_news").trigger('click');
 
 });

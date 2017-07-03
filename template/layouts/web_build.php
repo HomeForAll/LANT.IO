@@ -52,7 +52,7 @@ if (isset($this->data['script'])) {
 ?>
 <script>
 /*
-var socket = io('http://91.202.180.160:8089?user_id=<?php echo $user_id; ?>&hash=<?php echo $hash; ?>');
+var socket = io('http://91.202.180.160:8089?user_id=</*  ?php echo $user_id; ?>&hash=</*  ?php echo $hash; ?>');
 socket.on('connect', function () {
     console.log('Соединение установлено.');
 });
@@ -79,7 +79,7 @@ socket.on('disconnect', function () {
 
 function pressEnter(a) {
     a = a || window.event;
-    if (a.keyCode == 13 || a.which == 13)
+    if (a.keyCode === 13 || a.which === 13)
         a.preventDefault ? a.preventDefault() : a.returnValue = false
 }
 
@@ -92,7 +92,7 @@ function displayOperation() {
     var operation = $('#operation');
     var operationLabel = $('label[for=operation]');
 
-    if (subjectVal == '') {
+    if (subjectVal === '') {
         formOptions.html('');
         operation.css({
             display: 'none'
@@ -184,7 +184,7 @@ function getRegions() {
     </div>
 
 
-    <?php /*include_once ROOT_DIR . '/template/html/main_page/main_search/main_search.php'*/ ?>
+    <?php //include_once ROOT_DIR . '/template/html/main_page/main_search/main_search.php' ?>
     <?php //include_once ROOT_DIR . '/template/html/main_page/capabilities/capabilities.php' ?>
     <?php //include_once ROOT_DIR . '/template/html/main_page/main_statistic/main_statistic.php' ?>
     <?php //include_once ROOT_DIR . '/template/html/main_page/valuation/valuation.php' ?>

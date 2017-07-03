@@ -25,19 +25,6 @@
                         </div>
                     </div>
                 </li>
-                <li>
-                    <div class="select">
-                        <label for="">
-                            <span class="area">Площадь</span>
-                            <select name="0">
-                                <option value="">----------</option>
-                                <option>От 120 м2 До 230 м2</option>
-                                <option>От 120 м2 До 230 м2</option>
-                                <option>От 120 м2 До 230 м2</option>
-                            </select>
-                        </label>
-                    </div>
-                </li>
             </ul>
             <!-- Основной блок TOP апартаментов -->
             <div class="all-apartments-top">

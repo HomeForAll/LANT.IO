@@ -1,0 +1,73 @@
+@import "/template/css/main_page/top_apartments/top_apartments.min.css";
+@import "/template/css/search_block/top_result/top_result.min.css";
+@import "/template/css/ad_page/fonts.min.css";
+
+.top-block-today h2 {
+  text-align: center;
+  font-weight: 300;
+  padding: 15px 5px;
+  color: #343434;
+  font-size: 26px;
+}
+
+.top-block {
+  position: relative;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: stretch;
+  justify-content: center;
+  align-content: center;
+  border-radius: 0;
+  background: #fff;
+  margin: auto;
+  overflow: visible;
+  height: auto;
+}
+
+.result-all-apartments {
+  position: relative;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-self: stretch;
+  align-items: center;
+  padding-bottom: 50px;
+}
+
+.top-block:hover .left-wallpaper>a>img {
+  border: none;
+}
+
+.left-wallpaper {
+  position: relative;
+  width: 100%;
+  p {
+    left: 0;
+    right: 0;
+  }
+  &:before {
+    margin-left: calc(65%);
+    z-index: 2;
+  }
+  img {
+    position: relative;
+  }
+}
+
+.open-close-ad {
+  cursor: pointer;
+  border: none;
+  border-radius: 100%;
+}
+
+.price {
+  i {
+    font-size: 14px;
+  }
+  p {
+    font-weight: 300;
+  }
+  img {
+    vertical-align: baseline;
+  }
+}
