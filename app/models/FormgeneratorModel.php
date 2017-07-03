@@ -1,6 +1,6 @@
 <?php
 
-class FormgeneratorModel extends Model
+class FormGeneratorModel extends Model
 {
     use Cleaner;
 
@@ -8,10 +8,6 @@ class FormgeneratorModel extends Model
     {
         $this->db = new DataBase();
     }
-
-
-
-
 
     /**
      * Возвращает массив для формирования выбора форм
@@ -314,7 +310,7 @@ class FormgeneratorModel extends Model
 
     }
 
-    public function getAllUniqueFormsElements($table = 'form_elements', $rus = FALSE)
+    public function getAllUniqueFormsElements($table = 'form_elements', $rus = false)
     {
         if ($rus) {
             $eng = 'r';
@@ -587,23 +583,30 @@ class FormgeneratorModel extends Model
                 } else {
                     // Тип?
                     if (!preg_match('/' . $info["data_type"] . '/', $data[$info["column_name"]])) {
-                        array_push($result, $info["column_name"] . ' - [' . $info["data_type"] . '] -> [' . $data[$info["column_name"]] . ']');
-                        $type_commands = stristr($data[$info["column_name"]], ' DEFAUlT', TRUE);
-                        array_push($result['commands'], 'ALTER TABLE news_base ALTER COLUMN ' . $info["column_name"] . ' TYPE '
+                        array_push($result,
+                            $info["column_name"] . ' - [' . $info["data_type"] . '] -> [' . $data[$info["column_name"]] . ']');
+                        $type_commands = stristr($data[$info["column_name"]], ' DEFAUlT', true);
+                        array_push($result['commands'],
+                            'ALTER TABLE news_base ALTER COLUMN ' . $info["column_name"] . ' TYPE '
                             . $type_commands . ' USING ' . $info["column_name"] . '::' . $type_commands . ';');
                         // на случай  - ОШИБКА:  значение по умолчанию для колонки ... нельзя автоматически привести к типу ...
-                        $default_commands = substr(stristr($data[$info["column_name"]], 'DEFAUlT', FALSE), 7);
-                        array_push($result['commands'], '(?) ( ALTER TABLE news_base ALTER COLUMN ' . $info["column_name"] . ' SET DEFAULT '
+                        $default_commands = substr(stristr($data[$info["column_name"]], 'DEFAUlT', false), 7);
+                        array_push($result['commands'],
+                            '(?) ( ALTER TABLE news_base ALTER COLUMN ' . $info["column_name"] . ' SET DEFAULT '
                             . $default_commands . '; )');
                     }
 
                     // DEFAULT?
-                    if (is_null($info["column_default"])) $info["column_default"] = 'NULL';
+                    if (is_null($info["column_default"])) {
+                        $info["column_default"] = 'NULL';
+                    }
                     $default = explode(':', $info["column_default"])[0];
                     if (!preg_match('/' . $default . '/', $data[$info["column_name"]])) {
-                        array_push($result, $info["column_name"] . ' - [' . $default . '] -> [' . $data[$info["column_name"]] . ']');
-                        $default_commands = substr(stristr($data[$info["column_name"]], 'DEFAUlT', FALSE), 7);
-                        array_push($result['commands'], 'ALTER TABLE news_base ALTER COLUMN ' . $info["column_name"] . ' SET DEFAULT '
+                        array_push($result,
+                            $info["column_name"] . ' - [' . $default . '] -> [' . $data[$info["column_name"]] . ']');
+                        $default_commands = substr(stristr($data[$info["column_name"]], 'DEFAUlT', false), 7);
+                        array_push($result['commands'],
+                            'ALTER TABLE news_base ALTER COLUMN ' . $info["column_name"] . ' SET DEFAULT '
                             . $default_commands . ';');
                     }
                 }
@@ -719,7 +722,8 @@ class FormgeneratorModel extends Model
                 foreach ($v_c['subcategory'] as $k_sc => $v_sc) {
                     if (isset($v_sc['element'])) {
                         foreach ($v_sc['element'] as $k_e => $v_e) {
-                            $category[$k_c]['subcategory'][$k_sc]['element'][$k_e]['input_type'] = setInputType($v_e, $news_db);
+                            $category[$k_c]['subcategory'][$k_sc]['element'][$k_e]['input_type'] = setInputType($v_e,
+                                $news_db);
                         }
                     }
                 }
@@ -756,12 +760,16 @@ class FormgeneratorModel extends Model
                 $category['subcategory'][$k_s]['element'] = [];
                 //Новые элементы
                 $category['subcategory'][$k_s]['element'] = [
-                    ['r_name' => 'Пассажирский',
+                    [
+                        'r_name' => 'Пассажирский',
                         'e_name' => 'elevator_passangers',
-                        'input_type' => 'checkbox'],
-                    ['r_name' => 'Грузовой',
+                        'input_type' => 'checkbox'
+                    ],
+                    [
+                        'r_name' => 'Грузовой',
                         'e_name' => 'elevator_cargo',
-                        'input_type' => 'checkbox'],
+                        'input_type' => 'checkbox'
+                    ],
                 ];
             }
 
@@ -773,7 +781,8 @@ class FormgeneratorModel extends Model
                 $category['element'][$id_1] = [
                     'r_name' => 'Ограждение',
                     'e_name' => 'fencing',
-                    'input_type' => 'checkbox'];
+                    'input_type' => 'checkbox'
+                ];
                 $id_2 = notExistingID($category['element']);
                 $category['element'][$id_2] = [
                     'r_name' => 'Материал ограждения',
@@ -820,7 +829,8 @@ class FormgeneratorModel extends Model
                             'e_name' => 'plastic',
                             'value' => '98'
                         ],
-                    ]];
+                    ]
+                ];
             }
 
 
@@ -842,23 +852,28 @@ class FormgeneratorModel extends Model
                 $category['element'][($indx_e + 0)] = [
                     'r_name' => 'Страна',
                     'e_name' => 'country',
-                    'input_type' => 'text'];
+                    'input_type' => 'text'
+                ];
                 $category['element'][($indx_e + 1)] = [
                     'r_name' => 'Область',
                     'e_name' => 'area',
-                    'input_type' => 'text'];
+                    'input_type' => 'text'
+                ];
                 $category['element'][($indx_e + 2)] = [
                     'r_name' => 'Город',
                     'e_name' => 'city',
-                    'input_type' => 'text'];
+                    'input_type' => 'text'
+                ];
                 $category['element'][($indx_e + 3)] = [
                     'r_name' => 'Район',
                     'e_name' => 'region',
-                    'input_type' => 'text'];
+                    'input_type' => 'text'
+                ];
                 $category['element'][($indx_e + 4)] = [
                     'r_name' => 'Точный адрес',
                     'e_name' => 'address',
-                    'input_type' => 'text'];
+                    'input_type' => 'text'
+                ];
             }
 
             if ($name_e == 'availability_of_bathroom') {
@@ -895,15 +910,18 @@ class FormgeneratorModel extends Model
                             'e_name' => '4+',
                             'value' => '4'
                         ],
-                    ]];
+                    ]
+                ];
                 $category['element'][($indx_e + 1)] = [
                     'r_name' => 'Расположение санузлов',
                     'e_name' => 'location_of_bathroom',
-                    'input_type' => 'text'];
+                    'input_type' => 'text'
+                ];
                 $category['element'][($indx_e + 2)] = [
                     'r_name' => 'Описание санузлов',
                     'e_name' => 'description_of_bathroom',
-                    'input_type' => 'text'];
+                    'input_type' => 'text'
+                ];
             }
 
             if ($name_e == 'housing_and_communal_services') {
@@ -912,25 +930,35 @@ class FormgeneratorModel extends Model
                 //Новая подкатегория
                 if (isset($category['subcategory'])) {
                     $new_subcategory_id = notExistingID($category['subcategory']);
-                } else $new_subcategory_id = 1;
+                } else {
+                    $new_subcategory_id = 1;
+                }
 
                 $category['subcategory'][$new_subcategory_id] = [
                     'r_name' => 'Жилищно-коммунальные услуги',
                     'e_name' => 'housing_and_communal_services',
                     'id' => 0,
                     'element' => [
-                        ['r_name' => 'Отопление',
+                        [
+                            'r_name' => 'Отопление',
                             'e_name' => 'availability_of_heating',
-                            'input_type' => 'checkbox'],
-                        ['r_name' => 'Газ',
+                            'input_type' => 'checkbox'
+                        ],
+                        [
+                            'r_name' => 'Газ',
                             'e_name' => 'availability_of_gas',
-                            'input_type' => 'checkbox'],
-                        ['r_name' => 'Электричество',
+                            'input_type' => 'checkbox'
+                        ],
+                        [
+                            'r_name' => 'Электричество',
                             'e_name' => 'availability_of_electricity',
-                            'input_type' => 'checkbox'],
-                        ['r_name' => 'Водопровод',
+                            'input_type' => 'checkbox'
+                        ],
+                        [
+                            'r_name' => 'Водопровод',
                             'e_name' => 'availability_of_water_pipes',
-                            'input_type' => 'checkbox']
+                            'input_type' => 'checkbox'
+                        ]
                     ]
                 ];
 
@@ -947,7 +975,8 @@ class FormgeneratorModel extends Model
                 $category['element'][$indx_e] = [
                     'r_name' => 'Ограждение',
                     'e_name' => 'fencing',
-                    'input_type' => 'checkbox'];
+                    'input_type' => 'checkbox'
+                ];
                 // Добавляем список материал ограждения
                 $new_id = notExistingID($category['element']);
                 $category['element'][$new_id] = [
@@ -995,7 +1024,8 @@ class FormgeneratorModel extends Model
                             'e_name' => 'plastic',
                             'value' => '98'
                         ],
-                    ]];
+                    ]
+                ];
             }
 
             ksort($category['element']);
@@ -1054,7 +1084,8 @@ class FormgeneratorModel extends Model
                     if (isset($return_category[$k_c]['subcategory'][$k_s]['element'])) {
                         foreach ($return_category[$k_c]['subcategory'][$k_s]['element'] as $k_e => $v_e) {
                             if (in_array($v_e['e_name'], $e_new)) {
-                                $return_category[$k_c]['subcategory'][$k_s] = correctingElement($k_e, $v_e['e_name'], $return_category[$k_c]['subcategory'][$k_s]);
+                                $return_category[$k_c]['subcategory'][$k_s] = correctingElement($k_e, $v_e['e_name'],
+                                    $return_category[$k_c]['subcategory'][$k_s]);
                             }
                         }
                     }
@@ -1168,6 +1199,9 @@ class FormgeneratorModel extends Model
                 case 'integer':
                     $filt = 'FILTER_SANITIZE_NUMBER_INT';
                     break;
+                case 'bigint':
+                    $filt = 'FILTER_SANITIZE_NUMBER_INT';
+                    break;
                 case 'boolean':
                     $filt = 'FILTER_VALIDATE_BOOLEAN';
                     break;
@@ -1180,9 +1214,8 @@ class FormgeneratorModel extends Model
             //Удаление ненужных параметров
             unset($args['id_news']);
             unset($args['date']);
-
-
         }
+        ksort($args);
         return $args;
     }
 
@@ -1225,8 +1258,6 @@ class FormgeneratorModel extends Model
     //Получение данных из файла не доделано
     public function generatingNewsFormsBySearchForms($news_db, $generation_file_name)
     {
-
-
         $result = [];
         $file_name = 'app/views/news/' . $generation_file_name . '.php';
 
@@ -1326,6 +1357,92 @@ class FormgeneratorModel extends Model
     }
 
 
+    public function generatingNewsViews($form_options, $generation_file_name, $rus_eng)
+    {
+        // Определение переменных из файла
+        $db_vars = [];
+        $result = [];
+
+        $file_name = 'app/views/news/' . $generation_file_name . '.php';
+        $name_arr = explode('_', $generation_file_name);
+        $name = $form_options['space_types'][$name_arr[0]]['r_name'] . ' - '
+            . $form_options['operation_types'][$name_arr[1]]['r_name'] . ' - '
+            . $form_options['object_types'][$name_arr[2]]['r_name'];
+        $name = '<h3>' . $name . '</h3>';
+        array_push($result, $name);
+        array_push($result, '');
+        array_push($result, '<table style="padding: 5px;">');
+        array_push($result, '<?php');
+
+        if (file_exists($file_name)) {
+                $lines = file($file_name);
+
+            foreach ($lines as $key => $value) {
+                if (preg_match('/name="\w*.\w*"/', $value, $matches)) {
+                    $var_name = substr($matches[0], 6, -1);
+                    if (preg_match('/max$/', $var_name) OR preg_match('/min$/', $var_name)) {
+                        $var_name = substr($var_name, 0, -4);
+                    }
+
+                    $line = 'ecHHo(\'' . $var_name . '\' ,$this->data);';
+                    array_push($db_vars, $line);
+                    //Проверка на наличие параметра в базе данных
+                    if (!array_key_exists($var_name, $rus_eng)) {
+                        $message = 'Параметр: ' . $var_name . ' (в файле ' . $generation_file_name . ' стр.' . $key
+                            . ")\n Отсутствует в FormGeneratorModel->generationNewsBaseTable()";
+                        $db_vars = [$message];
+                        break;
+                    }
+
+                }
+                if (preg_match('/<legend[^>]*>([\s\S]*?)<\/legend>/', $value, $matches)) {
+                    array_push($db_vars, 'заглушка' . $key);
+                    $matches[0] = substr($matches[0], 8, -9);
+                    $line = 'ecHHo(\'' . $matches[0] . '\' ,$this->data ,\'h1\');';
+                    array_push($db_vars, $line);
+                }
+
+                if (preg_match("/<span[^>]*>(.*)<\/span>/", $value, $matches)) {
+                    //$matches[0] = substr($matches[0], 6, -7);
+                    preg_match('/>(.*)</', $matches[0], $h_name);
+                    $h_name[0] = substr($h_name[0], 1, -1);
+                    $line = 'ecHHo(\'' . $h_name[0] . '\' ,$this->data ,\'h2\');';
+                    array_push($db_vars, $line);
+                }
+            }
+
+            $db_vars = array_unique($db_vars);
+
+        }
+
+        foreach ($db_vars as $v) {
+            if (preg_match('/заглушка/', $v)) {
+                array_push($result, ' ');
+            } else {
+                array_push($result, $v);
+            }
+        }
+
+        array_push($result, '?>');
+        array_push($result, '</table>');
+
+//Запись в соотв. файл в news_views
+        foreach($result as $i => $r){
+            $result[$i] .= "\r\n";
+        }
+        $file_name_v = 'app/views/news_views/' . $generation_file_name . '_v.php';
+        if (file_exists($file_name_v)) {
+            file_put_contents($file_name_v, $result);
+            echo "<br> !!! Перезаписан файл ".$file_name_v;
+        } else {
+            echo "<br> Файла ".$file_name_v." не существует!";
+        }
+
+        return $result;
+
+    }
+
+
     public function cutLine($line, $start, $end)
     {
         if (preg_match("/$start/", $line)) {
@@ -1334,7 +1451,9 @@ class FormgeneratorModel extends Model
             $line_before = substr($line, 0, $start_pos);
             $line_after = substr($line, $end_pos);
             return $line_before . $line_after;
-        } else return $line;
+        } else {
+            return $line;
+        }
     }
 
     public function insertLineAfterName($line, $insert_line, $name = "name=\"")
@@ -1349,7 +1468,9 @@ class FormgeneratorModel extends Model
             $line_after = substr($line, $insert_pos);
             //Вставка отрезка
             return $line_before . ' ' . $insert_line . ' ' . $line_after;
-        } else return $line;
+        } else {
+            return $line;
+        }
     }
 
     public function getNameFromLine($line)
@@ -1359,7 +1480,7 @@ class FormgeneratorModel extends Model
             $name = substr($matches[0], 6, -1);
             return $name;
         } else {
-            return FALSE;
+            return false;
         }
 
     }
@@ -1516,7 +1637,7 @@ class FormgeneratorModel extends Model
             'bathroom_description' => 'Описание санузлов',
             'bathroom_location' => 'Расположение санузлов',
             'bathroom_number' => 'Количество санузлов',
-            'possible_to_post' => 'Возможность проводки',
+            //         'possible_to_post' => 'Возможность проводки',
             'sanitation_description' => 'Описание',
             'documents_on_tenure' => 'Документы на право владения',
             'additional_buildings' => 'Дополнительные строения',
@@ -1559,7 +1680,7 @@ class FormgeneratorModel extends Model
             'roofing' => 'Кровля',
             'rooms' => 'Комнаты',
             'sanitation' => 'Водопровод и канализация',
-            'security' => 'Безопасность',
+            'security' => 'Охрана',
             'select_area_on_city' => 'Выбрать область',
             'separated' => 'Раздельный',
             'site' => 'Участок',
@@ -1965,4 +2086,204 @@ class FormgeneratorModel extends Model
 
     }
 
+
+    public function generationNewsBaseTable()
+    {
+        $return = [];
+        //Тип переменных
+        $table = [
+            'id_news' => 'serial',
+            'space_type' => 'smallint',
+            'operation_type' => 'smallint',
+            'object_type' => 'smallint',
+
+            'user_id' => 'bigint',
+            'title' => 'character varying(255)',
+            'date' => 'timestamp with time zone',
+            'content' => 'text',
+            'status' => 'smallint',
+            'preview_img' => 'character varying(255)',
+            'photo_available' => 'boolean',
+            'tags' => 'character varying(255)',
+            'country' => 'character varying(255)',
+            'area' => 'character varying(255)',
+            'city' => 'character varying(255)',
+            'region' => 'character varying(255)',
+            'address' => 'character varying(255)',
+            'time_car' => 'integer',
+            'time_walk' => 'integer',
+            'metro_station' => 'smallint',
+
+            'rating_views' => 'integer',
+            'rating_admin' => 'smallint',
+            'rating_donate' => 'smallint',
+
+            'alcove' => 'boolean',
+            'availability_of_garbage_chute' => 'boolean',
+            'balcony' => 'integer',
+            'bargain' => 'boolean',
+            'barn' => 'boolean',
+            'bath' => 'boolean',
+            'bathroom_available' => 'boolean',
+            'bathroom' => 'boolean',
+            'bedroom' => 'boolean',
+            'building_type' => 'smallint',
+            'cctv' => 'boolean',
+            'ceiling_height' => 'integer',
+            'city' => 'character varying(255)',
+            'clarification_of_the_object_type' => 'smallint',
+            'common' => 'integer',
+            'concierge' => 'boolean',
+            'dining_room' => 'boolean',
+            'documents_on_tenure' => 'character varying(255)',
+            'electricity' => 'boolean',
+            'equipment' => 'boolean',
+            'fencing' => 'smallint',
+            'floor' => 'integer',
+            'forest_trees' => 'boolean',
+            'foundation' => 'smallint',
+            'furnish' => 'smallint',
+            'garden_trees' => 'boolean',
+            'gas' => 'boolean',
+            'guest_house' => 'boolean',
+            'hallway' => 'boolean',
+            'heating' => 'boolean',
+            'house' => 'character varying(255)',
+            'intercom' => 'boolean',
+            'kitchen' => 'boolean',
+            'lavatory' => 'integer',
+            'lease_contract' => 'character varying(255)',
+            'lease' => 'smallint',
+            'living_room' => 'boolean',
+            'lodge' => 'boolean',
+            'non_commission' => 'boolean',
+            'not_residential' => 'integer',
+            'number_of_floors' => 'integer',
+            'number_of_rooms' => 'integer',
+            'object_located' => 'smallint',
+            'planning_project' => 'character varying(255)',
+            'playground' => 'boolean',
+            'playroom' => 'boolean',
+            'price' => 'bigint',
+            'property_documents' => 'character varying(255)',
+            'residential' => 'integer',
+            'river' => 'boolean',
+            'roofing' => 'smallint',
+            'sanitation' => 'boolean',
+            'security' => 'boolean',
+            'signaling' => 'boolean',
+            'space' => 'integer',
+            'spring' => 'boolean',
+            'stairwells_status' => 'smallint',
+            'street' => 'character varying(255)',
+            'study' => 'boolean',
+            'swimming_pool' => 'boolean',
+            'three_d_project' => 'character varying(255)',
+            'type_of_construction' => 'smallint',
+            'type_of_house' => 'smallint',
+            'video' => 'character varying(255)',
+            'wall_material' => 'smallint',
+            'water_pipes' => 'boolean',
+            'waterfront' => 'boolean',
+            'wine_vault' => 'boolean',
+            'year_of_construction' => 'integer',
+
+            'cadastral_number' => 'character varying(255)',
+            'distance_from_metro' => 'integer',
+
+            'lift_lifting' => 'boolean',
+            'lift_passenger' => 'boolean',
+            'lift_none' => 'boolean',
+
+            'parking_multilevel' => 'boolean',
+            'parking_underground' => 'boolean',
+            'parking_garage_complex' => 'boolean',
+            'parking_lot_garage' => 'boolean',
+            'parking_none' => 'boolean',
+
+            'plot_smooth' => 'boolean',
+            'plot_uneven' => 'boolean',
+            'plot_on_the_slope' => 'boolean',
+            'plot_of_ravine' => 'boolean',
+            'plot_wetland' => 'boolean',
+
+//            'additional_buildings' => 'smallint',
+//            'availability_of_bathroom' => 'smallint',
+//            'bathroom_description' => 'character varying(255)',
+//            'bathroom_location' => 'smallint',
+//            'bathroom_number' => 'integer',
+
+//            'combined' => 'character varying(255)',
+//            'distance_from_metro' => 'integer',
+//            'distance_from_mkad_or_metro' => 'integer',
+//            'documents_on_ownership' => 'boolean',
+//            'doesnt_matter' => 'character varying(255)',
+//            'location_on' => 'smallint',
+//            'municipal' => 'smallint',
+//            'paid' => 'smallint',
+//            'possible_to_post' => 'boolean',
+//            'rooms' => 'smallint',
+//            'sanitation_description' => 'character varying(255)',
+//            'select_area_on_city' => 'smallint',
+//            'separated' => 'character varying(255)',
+//            'the_number_of_kilowatt' => 'integer',
+//            'total' => 'character varying(255)',
+        ];
+
+        //DEFAULT исключения
+        $default_exclusions = [
+            'id_news' => '',
+            'status' => 'DEFAULT 1',
+            'date' => 'NOT NULL DEFAULT current_timestamp',
+            'rating_views' => 'DEFAULT 0',
+            'rating_admin' => 'DEFAULT 0',
+            'rating_donate' => 'DEFAULT 0',
+        ];
+
+        //Добавление параметров по умолчанию
+        foreach ($table as $name => $type) {
+            // Исключения
+            if (isset($default_exclusions[$name])) {
+                $return['db'][$name] = $type . ' ' . $default_exclusions[$name];
+            } else {
+                $return['db'][$name] = $type . ' DEFAULT NULL';
+            }
+        }
+
+        $return['args'] = $this->generationNewsPostArgs($table);
+        return $return;
+    }
+
+    public function generationNewsBaseTableRusEng($data, $db)
+    {
+        $rus_eng = [];
+        foreach ($data as $k => $v) {
+            if (preg_match('/_h$/', $k)) {
+                $name = substr($k, 0, -2);
+                $rus_eng[$name] = $v;
+            }
+        }
+
+        foreach ($db as $k => $v) {
+            if (!isset($rus_eng[$k])) {
+                $rus_eng[$k] = "!!! не указан !!!";
+            }
+        }
+
+
+        asort($rus_eng);
+        return $rus_eng;
+    }
+
+    public function generationNewsBaseTableFilter($data)
+    {
+
+        foreach ($data as $k => $v) {
+
+        }
+
+        return $data;
+    }
+
 }
+
