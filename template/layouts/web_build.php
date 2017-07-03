@@ -9546,7 +9546,7 @@ if (isset($this->data['script_footer'])) {
     </div>
 </script>
 <script src="/template/js/main.min.js"></script>
-<script src="/template/js/mainPageNewsAjax.js"></script>
+<script src="/template/js/main.page.news.ajax.js"></script>
 <script src="/template/js/visitor-statistics.js"></script>
 </body>
 </html>
