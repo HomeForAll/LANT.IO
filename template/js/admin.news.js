@@ -137,6 +137,10 @@ $(document).ready(function () {
             dataType: 'json',
             data: formResult,
             success: function (data) {
+                //Удаление старых сообщений
+                $('#news_message').empty();
+                $('#news_error').empty();
+                //Вывод сообщений
                 if (typeof data.news_message !== "undefined") {
                     $('#news_message').append('<p>' + data.news_message + '</p>');
                 }
@@ -148,6 +152,8 @@ $(document).ready(function () {
                         $('.id_' + id).remove();
                     });
                 }
+                //Удаление скрытых input
+                $('#status_frm input[type=hidden]').remove();
             }
         });
     };
@@ -166,5 +172,8 @@ $(document).ready(function () {
         var formResult = 'action=news_search&offset=' + ($(this).attr('href') - 1) + '&sorting=' + sorting + '&' + $('#show_news').serialize();
         sendAjaxNewsSearch(formResult);
     };
+
+    //Вызов и построение первоначальной таблицы
+    $("#submit_show_news").trigger('click');
 
 });

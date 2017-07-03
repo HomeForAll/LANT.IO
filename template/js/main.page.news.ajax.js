@@ -135,7 +135,6 @@ $(document).ready(function () {
             });
         };
 
-
     $(".top-apartments .filter-apartment select").on('change', topAdsAjaxHandler);
     $(".closeCurrency").on('click', topAdsAjaxHandler);
     $(".property-type-apartment-settings").on('click', topAdsAjaxHandler);

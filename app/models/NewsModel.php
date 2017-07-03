@@ -25,6 +25,19 @@ class NewsModel extends Model
         return $str;
     }
 
+    /**
+     * Переводит время от настоящего момента (в часах) в дату стандарта ISO 8601
+     *
+     * @param int $time
+     * @return false|int|string
+     */
+    private function dateFormatForDB($time = 0)
+    {
+        $date = time() - ($time * 60 * 60);
+        $date = date('c', $date);
+        return $date;
+    }
+
 
     /**
      * Количество объявлений удовлетворяющих условиям
@@ -59,19 +72,15 @@ class NewsModel extends Model
 
         $sql = "SELECT COUNT(*) FROM news_base WHERE ";
 
-        if ($time_to != 0) {
-            $time_to = time() - $time_to * 60 * 60;
-            $time_to = date('c', $time_to);
-            $sql .= " (date <= :time_to) ";
-        } else {
-            $time_to = date('c', time());
-            $sql .= " (date <= :time_to) ";
-        }
         //Дата окончания поиска (по умолчанию настоящее время)
+        $time_to = $this->dateFormatForDB($time_to);
+        $sql .= " (date <= :time_to) ";
+        //Дата начала поиска
         if ($time_from != 0) {
-            $time_from = date('c', strtotime($time_from) + 86400);
+            $time_from = $this->dateFormatForDB($time_from);
             $sql .= "AND (date >= :time_from) ";
         }
+
         if ($status == 1) {
             // Только активные(видимые)
             $sql .= "AND (status = 1) ";
@@ -619,16 +628,18 @@ class NewsModel extends Model
 
 
     /**
-     * Получение пути к форме
-     * @param $data
-     * @return mixed
+     * @param array $data
+     * @param int $space_type
+     * @param int $operation_type
+     * @param int $object_type
+     * @return array
      */
-    public function getNewsForm($data)
+    public function getPathOfNewsForm($data, $space_type = 0, $operation_type = 0, $object_type = 0)
     {
-        if (isset($_POST['space_type']) && isset($_POST['operation_type']) && isset($_POST['object_type'])) {
-            $data['space_type'] = (int)$_POST['space_type'];
-            $data['operation_type'] = (int)$_POST['operation_type'];
-            $data['object_type'] = (int)$_POST['object_type'];
+        if (!empty($space_type) || !empty($operation_type) || !empty($object_type)) {
+            $data['space_type'] = $space_type;
+            $data['operation_type'] = $operation_type;
+            $data['object_type'] = $object_type;
         }
         $data['form_name'] = $data['space_type'] . '_' . $data['operation_type'] . '_' . $data['object_type'];
         $data['form_path'] = 'app/views/news/' . $data['form_name'] . '.php';
@@ -754,12 +765,12 @@ class NewsModel extends Model
      * Установка сессии для редактирования картинок
      * @param $news_to_edit
      */
-    public function setSessionForEditor($news_to_edit=[])
+    public function setSessionForEditor($news_to_edit = [])
     {
-        if(empty($news_to_edit)){
+        if (empty($news_to_edit)) {
             // Удаление сессии запоминания картинки
             $_SESSION['preview_img'] = [];
-        }else{
+        } else {
             //Запись имен картинок в базе, для перезаписи картинок при Update
             $_SESSION['preview_img'] = $news_to_edit["preview_img"];
         }
@@ -770,7 +781,7 @@ class NewsModel extends Model
      * @param $preview_img
      * @return bool
      */
-    public function getFormData($preview_img)
+    public function getFormDataFromPOST($preview_img)
     {
         $new_form_data = [];
 
@@ -790,110 +801,110 @@ class NewsModel extends Model
         array_filter($_POST, 'trim_value');
 
         static $args = array(
-          'address' => FILTER_SANITIZE_STRING,
-'alcove' => FILTER_VALIDATE_BOOLEAN,
-'area' => FILTER_SANITIZE_STRING,
-'availability_of_garbage_chute' => FILTER_VALIDATE_BOOLEAN,
-'balcony' => FILTER_SANITIZE_NUMBER_INT,
-'bargain' => FILTER_VALIDATE_BOOLEAN,
-'barn' => FILTER_VALIDATE_BOOLEAN,
-'bath' => FILTER_VALIDATE_BOOLEAN,
-'bathroom' => FILTER_VALIDATE_BOOLEAN,
-'bathroom_available' => FILTER_VALIDATE_BOOLEAN,
-'bedroom' => FILTER_VALIDATE_BOOLEAN,
-'building_type' => FILTER_SANITIZE_NUMBER_INT,
-'cadastral_number' => FILTER_SANITIZE_STRING,
-'cctv' => FILTER_VALIDATE_BOOLEAN,
-'ceiling_height' => FILTER_SANITIZE_NUMBER_INT,
-'city' => FILTER_SANITIZE_STRING,
-'clarification_of_the_object_type' => FILTER_SANITIZE_NUMBER_INT,
-'common' => FILTER_SANITIZE_NUMBER_INT,
-'concierge' => FILTER_VALIDATE_BOOLEAN,
-'content' => FILTER_SANITIZE_STRING,
-'country' => FILTER_SANITIZE_STRING,
-'dining_room' => FILTER_VALIDATE_BOOLEAN,
-'distance_from_metro' => FILTER_SANITIZE_NUMBER_INT,
-'documents_on_tenure' => FILTER_SANITIZE_STRING,
-'electricity' => FILTER_VALIDATE_BOOLEAN,
-'equipment' => FILTER_VALIDATE_BOOLEAN,
-'fencing' => FILTER_SANITIZE_NUMBER_INT,
-'floor' => FILTER_SANITIZE_NUMBER_INT,
-'forest_trees' => FILTER_VALIDATE_BOOLEAN,
-'foundation' => FILTER_SANITIZE_NUMBER_INT,
-'furnish' => FILTER_SANITIZE_NUMBER_INT,
-'garden_trees' => FILTER_VALIDATE_BOOLEAN,
-'gas' => FILTER_VALIDATE_BOOLEAN,
-'guest_house' => FILTER_VALIDATE_BOOLEAN,
-'hallway' => FILTER_VALIDATE_BOOLEAN,
-'heating' => FILTER_VALIDATE_BOOLEAN,
-'house' => FILTER_SANITIZE_STRING,
-'intercom' => FILTER_VALIDATE_BOOLEAN,
-'kitchen' => FILTER_VALIDATE_BOOLEAN,
-'lavatory' => FILTER_SANITIZE_NUMBER_INT,
-'lease' => FILTER_SANITIZE_NUMBER_INT,
-'lease_contract' => FILTER_SANITIZE_STRING,
-'lift_lifting' => FILTER_VALIDATE_BOOLEAN,
-'lift_none' => FILTER_VALIDATE_BOOLEAN,
-'lift_passenger' => FILTER_VALIDATE_BOOLEAN,
-'living_room' => FILTER_VALIDATE_BOOLEAN,
-'lodge' => FILTER_VALIDATE_BOOLEAN,
-'metro_station' => FILTER_SANITIZE_NUMBER_INT,
-'non_commission' => FILTER_VALIDATE_BOOLEAN,
-'not_residential' => FILTER_SANITIZE_NUMBER_INT,
-'number_of_floors' => FILTER_SANITIZE_NUMBER_INT,
-'number_of_rooms' => FILTER_SANITIZE_NUMBER_INT,
-'object_located' => FILTER_SANITIZE_NUMBER_INT,
-'object_type' => FILTER_SANITIZE_NUMBER_INT,
-'operation_type' => FILTER_SANITIZE_NUMBER_INT,
-'parking_garage_complex' => FILTER_VALIDATE_BOOLEAN,
-'parking_lot_garage' => FILTER_VALIDATE_BOOLEAN,
-'parking_multilevel' => FILTER_VALIDATE_BOOLEAN,
-'parking_none' => FILTER_VALIDATE_BOOLEAN,
-'parking_underground' => FILTER_VALIDATE_BOOLEAN,
-'photo_available' => FILTER_VALIDATE_BOOLEAN,
-'planning_project' => FILTER_SANITIZE_STRING,
-'playground' => FILTER_VALIDATE_BOOLEAN,
-'playroom' => FILTER_VALIDATE_BOOLEAN,
-'plot_of_ravine' => FILTER_VALIDATE_BOOLEAN,
-'plot_on_the_slope' => FILTER_VALIDATE_BOOLEAN,
-'plot_smooth' => FILTER_VALIDATE_BOOLEAN,
-'plot_uneven' => FILTER_VALIDATE_BOOLEAN,
-'plot_wetland' => FILTER_VALIDATE_BOOLEAN,
-'preview_img' => FILTER_SANITIZE_STRING,
-'price' => FILTER_SANITIZE_NUMBER_INT,
-'property_documents' => FILTER_SANITIZE_STRING,
-'rating_admin' => FILTER_SANITIZE_NUMBER_INT,
-'rating_donate' => FILTER_SANITIZE_NUMBER_INT,
-'rating_views' => FILTER_SANITIZE_NUMBER_INT,
-'region' => FILTER_SANITIZE_STRING,
-'residential' => FILTER_SANITIZE_NUMBER_INT,
-'river' => FILTER_VALIDATE_BOOLEAN,
-'roofing' => FILTER_SANITIZE_NUMBER_INT,
-'sanitation' => FILTER_VALIDATE_BOOLEAN,
-'security' => FILTER_VALIDATE_BOOLEAN,
-'signaling' => FILTER_VALIDATE_BOOLEAN,
-'space' => FILTER_SANITIZE_NUMBER_INT,
-'space_type' => FILTER_SANITIZE_NUMBER_INT,
-'spring' => FILTER_VALIDATE_BOOLEAN,
-'stairwells_status' => FILTER_SANITIZE_NUMBER_INT,
-'status' => FILTER_SANITIZE_NUMBER_INT,
-'street' => FILTER_SANITIZE_STRING,
-'study' => FILTER_VALIDATE_BOOLEAN,
-'swimming_pool' => FILTER_VALIDATE_BOOLEAN,
-'tags' => FILTER_SANITIZE_STRING,
-'three_d_project' => FILTER_SANITIZE_STRING,
-'time_car' => FILTER_SANITIZE_NUMBER_INT,
-'time_walk' => FILTER_SANITIZE_NUMBER_INT,
-'title' => FILTER_SANITIZE_STRING,
-'type_of_construction' => FILTER_SANITIZE_NUMBER_INT,
-'type_of_house' => FILTER_SANITIZE_NUMBER_INT,
-'user_id' => FILTER_SANITIZE_NUMBER_INT,
-'video' => FILTER_SANITIZE_STRING,
-'wall_material' => FILTER_SANITIZE_NUMBER_INT,
-'water_pipes' => FILTER_VALIDATE_BOOLEAN,
-'waterfront' => FILTER_VALIDATE_BOOLEAN,
-'wine_vault' => FILTER_VALIDATE_BOOLEAN,
-'year_of_construction' => FILTER_SANITIZE_NUMBER_INT
+            'address' => FILTER_SANITIZE_STRING,
+            'alcove' => FILTER_VALIDATE_BOOLEAN,
+            'area' => FILTER_SANITIZE_STRING,
+            'availability_of_garbage_chute' => FILTER_VALIDATE_BOOLEAN,
+            'balcony' => FILTER_SANITIZE_NUMBER_INT,
+            'bargain' => FILTER_VALIDATE_BOOLEAN,
+            'barn' => FILTER_VALIDATE_BOOLEAN,
+            'bath' => FILTER_VALIDATE_BOOLEAN,
+            'bathroom' => FILTER_VALIDATE_BOOLEAN,
+            'bathroom_available' => FILTER_VALIDATE_BOOLEAN,
+            'bedroom' => FILTER_VALIDATE_BOOLEAN,
+            'building_type' => FILTER_SANITIZE_NUMBER_INT,
+            'cadastral_number' => FILTER_SANITIZE_STRING,
+            'cctv' => FILTER_VALIDATE_BOOLEAN,
+            'ceiling_height' => FILTER_SANITIZE_NUMBER_INT,
+            'city' => FILTER_SANITIZE_STRING,
+            'clarification_of_the_object_type' => FILTER_SANITIZE_NUMBER_INT,
+            'common' => FILTER_SANITIZE_NUMBER_INT,
+            'concierge' => FILTER_VALIDATE_BOOLEAN,
+            'content' => FILTER_SANITIZE_STRING,
+            'country' => FILTER_SANITIZE_STRING,
+            'dining_room' => FILTER_VALIDATE_BOOLEAN,
+            'distance_from_metro' => FILTER_SANITIZE_NUMBER_INT,
+            'documents_on_tenure' => FILTER_SANITIZE_STRING,
+            'electricity' => FILTER_VALIDATE_BOOLEAN,
+            'equipment' => FILTER_VALIDATE_BOOLEAN,
+            'fencing' => FILTER_SANITIZE_NUMBER_INT,
+            'floor' => FILTER_SANITIZE_NUMBER_INT,
+            'forest_trees' => FILTER_VALIDATE_BOOLEAN,
+            'foundation' => FILTER_SANITIZE_NUMBER_INT,
+            'furnish' => FILTER_SANITIZE_NUMBER_INT,
+            'garden_trees' => FILTER_VALIDATE_BOOLEAN,
+            'gas' => FILTER_VALIDATE_BOOLEAN,
+            'guest_house' => FILTER_VALIDATE_BOOLEAN,
+            'hallway' => FILTER_VALIDATE_BOOLEAN,
+            'heating' => FILTER_VALIDATE_BOOLEAN,
+            'house' => FILTER_SANITIZE_STRING,
+            'intercom' => FILTER_VALIDATE_BOOLEAN,
+            'kitchen' => FILTER_VALIDATE_BOOLEAN,
+            'lavatory' => FILTER_SANITIZE_NUMBER_INT,
+            'lease' => FILTER_SANITIZE_NUMBER_INT,
+            'lease_contract' => FILTER_SANITIZE_STRING,
+            'lift_lifting' => FILTER_VALIDATE_BOOLEAN,
+            'lift_none' => FILTER_VALIDATE_BOOLEAN,
+            'lift_passenger' => FILTER_VALIDATE_BOOLEAN,
+            'living_room' => FILTER_VALIDATE_BOOLEAN,
+            'lodge' => FILTER_VALIDATE_BOOLEAN,
+            'metro_station' => FILTER_SANITIZE_NUMBER_INT,
+            'non_commission' => FILTER_VALIDATE_BOOLEAN,
+            'not_residential' => FILTER_SANITIZE_NUMBER_INT,
+            'number_of_floors' => FILTER_SANITIZE_NUMBER_INT,
+            'number_of_rooms' => FILTER_SANITIZE_NUMBER_INT,
+            'object_located' => FILTER_SANITIZE_NUMBER_INT,
+            'object_type' => FILTER_SANITIZE_NUMBER_INT,
+            'operation_type' => FILTER_SANITIZE_NUMBER_INT,
+            'parking_garage_complex' => FILTER_VALIDATE_BOOLEAN,
+            'parking_lot_garage' => FILTER_VALIDATE_BOOLEAN,
+            'parking_multilevel' => FILTER_VALIDATE_BOOLEAN,
+            'parking_none' => FILTER_VALIDATE_BOOLEAN,
+            'parking_underground' => FILTER_VALIDATE_BOOLEAN,
+            'photo_available' => FILTER_VALIDATE_BOOLEAN,
+            'planning_project' => FILTER_SANITIZE_STRING,
+            'playground' => FILTER_VALIDATE_BOOLEAN,
+            'playroom' => FILTER_VALIDATE_BOOLEAN,
+            'plot_of_ravine' => FILTER_VALIDATE_BOOLEAN,
+            'plot_on_the_slope' => FILTER_VALIDATE_BOOLEAN,
+            'plot_smooth' => FILTER_VALIDATE_BOOLEAN,
+            'plot_uneven' => FILTER_VALIDATE_BOOLEAN,
+            'plot_wetland' => FILTER_VALIDATE_BOOLEAN,
+            'preview_img' => FILTER_SANITIZE_STRING,
+            'price' => FILTER_SANITIZE_NUMBER_INT,
+            'property_documents' => FILTER_SANITIZE_STRING,
+            'rating_admin' => FILTER_SANITIZE_NUMBER_INT,
+            'rating_donate' => FILTER_SANITIZE_NUMBER_INT,
+            'rating_views' => FILTER_SANITIZE_NUMBER_INT,
+            'region' => FILTER_SANITIZE_STRING,
+            'residential' => FILTER_SANITIZE_NUMBER_INT,
+            'river' => FILTER_VALIDATE_BOOLEAN,
+            'roofing' => FILTER_SANITIZE_NUMBER_INT,
+            'sanitation' => FILTER_VALIDATE_BOOLEAN,
+            'security' => FILTER_VALIDATE_BOOLEAN,
+            'signaling' => FILTER_VALIDATE_BOOLEAN,
+            'space' => FILTER_SANITIZE_NUMBER_INT,
+            'space_type' => FILTER_SANITIZE_NUMBER_INT,
+            'spring' => FILTER_VALIDATE_BOOLEAN,
+            'stairwells_status' => FILTER_SANITIZE_NUMBER_INT,
+            'status' => FILTER_SANITIZE_NUMBER_INT,
+            'street' => FILTER_SANITIZE_STRING,
+            'study' => FILTER_VALIDATE_BOOLEAN,
+            'swimming_pool' => FILTER_VALIDATE_BOOLEAN,
+            'tags' => FILTER_SANITIZE_STRING,
+            'three_d_project' => FILTER_SANITIZE_STRING,
+            'time_car' => FILTER_SANITIZE_NUMBER_INT,
+            'time_walk' => FILTER_SANITIZE_NUMBER_INT,
+            'title' => FILTER_SANITIZE_STRING,
+            'type_of_construction' => FILTER_SANITIZE_NUMBER_INT,
+            'type_of_house' => FILTER_SANITIZE_NUMBER_INT,
+            'user_id' => FILTER_SANITIZE_NUMBER_INT,
+            'video' => FILTER_SANITIZE_STRING,
+            'wall_material' => FILTER_SANITIZE_NUMBER_INT,
+            'water_pipes' => FILTER_VALIDATE_BOOLEAN,
+            'waterfront' => FILTER_VALIDATE_BOOLEAN,
+            'wine_vault' => FILTER_VALIDATE_BOOLEAN,
+            'year_of_construction' => FILTER_SANITIZE_NUMBER_INT
         );
 
         $new_form_data = filter_input_array(INPUT_POST, $args);
@@ -951,10 +962,10 @@ class NewsModel extends Model
         }
         if ($stmt->execute()) {
             $this->setUserError('news_message',
-                'Новость: "' . $_POST['title'] . '" успешно добавлена');
+                'Новость: "' . $form_data['title'] . '" успешно добавлена');
         } else {
             $this->setUserError('news_error',
-                'Новость: "' . $_POST['title'] . '" не удалось добавить!');
+                'Новость: "' . $form_data['title'] . '" не удалось добавить!');
         }
     }
 
@@ -983,10 +994,10 @@ class NewsModel extends Model
         }
         if ($stmt->execute()) {
             $this->setUserError('news_message',
-                'Новость: "' . $_POST['title'] . '" успешно отредактирована!');
+                'Новость: "' . $form_data['title'] . '" успешно отредактирована!');
         } else {
             $this->setUserError('news_error',
-                'Новость: "' . $_POST['title'] . '" не удалось отредактировать!');
+                'Новость: "' . $form_data['title'] . '" не удалось отредактировать!');
         }
     }
 
@@ -1034,75 +1045,101 @@ class NewsModel extends Model
         return $message;
     }
 
-    /**
-     * Внесение изиенений статуса, рейтинга или удаления объявлений
-     * @return mixed
-     */
-    public function makeNewsStatus()
+    public function getNewsStatusFromPOST()
     {
         // Массив id объявлений подлежащих изменению
         $news_id_status = [];
         $news_id_rating = [];
+        $news_update_id = [];
         $news_delete_id = [];
-        $news_message = '';
-        $news_error = '';
         foreach ($_POST as $key => $value) {
             if (preg_match('/^change_status_/', $key)) {
-                $news_id = substr($key, 14);
-                array_push($news_id_status, (int)$news_id);
+                $id_news = substr($key, 14);
+                array_push($news_id_status, (int)$id_news);
             }
             if (preg_match('/^change_rating_/', $key)) {
-                $news_id = substr($key, 14);
-                array_push($news_id_rating, (int)$news_id);
-            }
-        }
-
-        //Обработка массива статусов
-        foreach ($news_id_status as $id_news) {
-            if (isset($_POST['status_' . $id_news])) {
-                $status = $_POST['status_' . $id_news];
-                //Удаление новости
-                if ($status == 3) {
-                    $delete = $this->makeNewsDelete($id_news);
-                    if (!empty($delete['news_message'])) {
-                        array_push($news_delete_id, $id_news);
-                        $news_message .= $delete['news_message'] . " <br>";
-                    } else {
-                        $news_error .= $delete['news_error'] . " <br>";
-                    }
-                } else {
-                    //UPDATE статуса
-                    if ($status == 2) {
-                        $status = 0;
-                    }
-                    $sql = "UPDATE news_base SET status = :status  WHERE id_news = :id_news";
-                    $stmt = $this->db->prepare($sql);
-                    $stmt->bindParam(':id_news', $id_news);
-                    $stmt->bindParam(':status', $status, PDO::PARAM_INT);
-                    if ($stmt->execute()) {
-                        $news_message .= "Изменён статус у новости c id = " . $id_news . " <br>";
-                    } else {
-                        $news_error .= "Статус у новости с id = " . $id_news . " не удалось изменить <br>";
-                    }
+                $id_news = (int)substr($key, 14);
+                if (isset($_POST['rating_admin_' . $id_news])) {
+                    $rating_admin = (int)$_POST['rating_admin_' . $id_news];
+                    $id_news = [
+                        'id' => $id_news,
+                        'rating_admin' => $rating_admin
+                    ];
+                    array_push($news_id_rating, $id_news);
                 }
             }
         }
 
+// Получение массивов на удаление и изменение статуса
+        foreach ($news_id_status as $id_news) {
+            if (isset($_POST['status_' . $id_news])) {
+                $status = $_POST['status_' . $id_news];
+                if ($status == 3) {
+                    array_push($news_delete_id, $id_news);
+                } else {
+                    if ($status == 2) {
+                        $status = 0;
+                    }
+                    $id_news_arr = [
+                        'id' => $id_news,
+                        'status' => $status
+                    ];
+                    array_push($news_update_id, $id_news_arr);
+                }
+            }
+        }
+        return [
+            'news_id_rating' => $news_id_rating,
+            'news_update_id' => $news_update_id,
+            'news_delete_id' => $news_delete_id
+        ];
+
+    }
+
+    /**
+     * Внесение изиенений статуса, рейтинга или удаления объявлений
+     * @return mixed
+     */
+    public function makeNewsStatus($news_update_id, $news_delete_id, $news_id_rating)
+    {
+        $news_message = '';
+        $news_error = '';
+
+        //Обработка массива удаления
+        foreach ($news_delete_id as $id_news) {
+            $delete = $this->makeNewsDelete($id_news);
+            if (!empty($delete['news_message'])) {
+                $news_message .= $delete['news_message'] . " <br>";
+            } else {
+                $news_error .= $delete['news_error'] . " <br>";
+            }
+        }
+
+        foreach ($news_update_id as $id_news) {
+            $sql = "UPDATE news_base SET status = :status  WHERE id_news = :id_news";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(':id_news', $id_news['id']);
+            $stmt->bindParam(':status', $id_news['status'], PDO::PARAM_INT);
+            if ($stmt->execute()) {
+                $news_message .= "Изменён статус у новости c id = " . $id_news['id'] . " <br>";
+            } else {
+                $news_error .= "Статус у новости с id = " . $id_news['id'] . " не удалось изменить <br>";
+            }
+        }
+
+
         //Обработка массива категории Лучшая новость rating_admin
         foreach ($news_id_rating as $id_news) {
-            if (isset($_POST['rating_admin_' . $id_news])) {
-                $rating_admin = (int)$_POST['rating_admin_' . $id_news];
-            }
             //Изменение category
             $sql = "UPDATE news_base SET rating_admin = :rating_admin  WHERE id_news = :id_news";
             $stmt = $this->db->prepare($sql);
-            $stmt->bindParam(':id_news', $id_news);
-            $stmt->bindParam(':rating_admin', $rating_admin, PDO::PARAM_INT);
+            $stmt->bindParam(':id_news', $id_news['id']);
+            $stmt->bindParam(':rating_admin', $id_news['rating_admin'], PDO::PARAM_INT);
             if ($stmt->execute()) {
                 // Добавление сообщения
-                $news_message .= "Изменение статуса Лучшее объявление для id = " . $id_news . "прошло успешно <br>";
+                $news_message .= "Изменение статуса Лучшее объявление для id = " . $id_news['id'] . "прошло успешно <br>";
             } else {
-                $news_error .= "Изменение статуса Лучшее объявление (id = " . $id_news . ") не удалось <br>";
+                $news_error .= "Изменение статуса Лучшее объявление (id = " . $id_news['id'] . ") не удалось <br>";
             }
         }
         //Сообщения
@@ -1148,9 +1185,8 @@ class NewsModel extends Model
         $data = [];
 
         //Заданное время начала поиска ($time - час)
-        $news_time = time() - $time * 60 * 60;
         //Текущая Дата в формате стандарта ISO 8601
-        $news_date = date('c', $news_time);
+        $news_date = $this->dateFormatForDB($time);
 
         $sql = "SELECT id_news, to_char(date,'YYYY-MM-DD HH24:MI:SS') as date, title, "
             . "space_type, operation_type, object_type, "
@@ -1611,17 +1647,16 @@ class NewsModel extends Model
         $title_like = '',
         $offset = 0
     ) {
-        //Заданное время начала поиска ($time - час)
-        $news_time = time() - $time * 60 * 60;
-        //Текущая Дата в формате стандарта ISO 8601
-        $news_date = date('c', $news_time);
+        //Заданное время начала поиска ($time - час) в формате стандарта ISO 8601
+        $news_date = $this->dateFormatForDB($time);
 
         //Дата окончания поиска (по умолчанию настоящее время)
         if (!empty($time_start)) {
-            $time_start = date('c', strtotime($time_start) + 86400);
+            $time_start = $this->dateFormatForDB($time_start);
         } else {
             $time_start = 0;
         }
+
 
         $sql = "SELECT id_news, to_char(date,'YYYY-MM-DD HH24:MI:SS') as date, title, space_type, operation_type, object_type, content, user_id, "
             . "preview_img, status, rating_views, rating_admin, rating_donate, (rating_views + rating_admin+rating_donate) as rating_real "
@@ -1680,7 +1715,6 @@ class NewsModel extends Model
 
         // Подкотовка данных для вывода
         $data = $this->prepareNewsPreview($data);
-        //$data['offset'] = $offset;
         return $data;
     }
 
@@ -1695,22 +1729,18 @@ class NewsModel extends Model
         $data = $this->explodePreviewImg($data);
 
 
-
-            // Данные индекс метро -> наименование
+        // Данные индекс метро -> наименование
         $metro_stations = [];
         $sql = "SELECT metro_id, metro_name, line_id "
-                . "FROM metro_stations "
-                . "WHERE working = 1";
-            $stmt = $this->db->prepare($sql);
-            $stmt->execute();
-            $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            . "FROM metro_stations "
+            . "WHERE working = 1";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            foreach($res as $m){
-                $metro_stations[$m['metro_id']] = $m["metro_name"];
-            }
-
-
-
+        foreach ($res as $m) {
+            $metro_stations[$m['metro_id']] = $m["metro_name"];
+        }
 
 
         foreach ($data as $key => $value) {
@@ -1734,10 +1764,9 @@ class NewsModel extends Model
             }
 
             //Перевод индекса метро в наименование
-            if(!empty($data[$key]['metro_station'])){
-            $data[$key]['metro_station'] = $metro_stations[$data[$key]['metro_station']];
+            if (!empty($data[$key]['metro_station']) && !empty($metro_stations[$data[$key]['metro_station']])) {
+                $data[$key]['metro_station'] = $metro_stations[$data[$key]['metro_station']];
             }
-
 
 
         }
@@ -1847,7 +1876,7 @@ class NewsModel extends Model
                             if (!empty($ad["preview_img"][0])) {
                                 echo 'uploads/images/' . $ad["preview_img"][0];
                             } else {
-                               // echo 'template/images/apartments/1.png';
+                                // echo 'template/images/apartments/1.png';
                             }
                             ?>" alt="apartments">
                         </a>
@@ -1980,12 +2009,13 @@ class NewsModel extends Model
             ?> </div> <?php
     }
 
-    public function prepareBestNewsOfTime($data){
+    public function prepareBestNewsOfTime($data)
+    {
 
-        foreach($data['best_news'] as $i => $news){
+        foreach ($data['best_news'] as $i => $news) {
             // Краткая пометка на картинке
-            $data['best_news'][$i]['short_explanation']='';
-            if(!empty($news['number_of_rooms'])){
+            $data['best_news'][$i]['short_explanation'] = '';
+            if (!empty($news['number_of_rooms'])) {
                 $data['best_news'][$i]['short_explanation'] .= $news["number_of_rooms"] . '-комн. ';
             }
             switch ($news["object_type"]) {
@@ -2038,37 +2068,38 @@ class NewsModel extends Model
 
             $data['best_news'][$i]['short_explanation'] .= ' ';
             if (!empty($news["space"])) {
-                $data['best_news'][$i]['short_explanation'] .=$news["space"] . ' м<sup>2</sup> ';
+                $data['best_news'][$i]['short_explanation'] .= $news["space"] . ' м<sup>2</sup> ';
             }
             // Перевод - период
-                switch ($news["lease"]) {
-                    case 37:
-                        $data['best_news'][$i]["lease"] .= 'день';
-                        break;
-                    case 138:
-                        $data['best_news'][$i]["lease"] .= 'нед.';
-                        break;
-                    case 79:
-                        $data['best_news'][$i]["lease"] .= 'мес.';
-                        break;
-                    case 145:
-                        $data['best_news'][$i]["lease"] .= 'год';
-                        break;
-                    case 80:
-                        $data['best_news'][$i]["lease"] .= 'неск. лет';
-                        break;
-                    default:
-                        $data['best_news'][$i]["lease"] .= 'пер.';
-                        break;
-                }
+            switch ($news["lease"]) {
+                case 37:
+                    $data['best_news'][$i]["lease"] .= 'день';
+                    break;
+                case 138:
+                    $data['best_news'][$i]["lease"] .= 'нед.';
+                    break;
+                case 79:
+                    $data['best_news'][$i]["lease"] .= 'мес.';
+                    break;
+                case 145:
+                    $data['best_news'][$i]["lease"] .= 'год';
+                    break;
+                case 80:
+                    $data['best_news'][$i]["lease"] .= 'неск. лет';
+                    break;
+                default:
+                    $data['best_news'][$i]["lease"] .= 'пер.';
+                    break;
+            }
 
         }
         // Надпись Смотреть еще
         if (!empty($data['best_news_number'])) {
-            $data['best_news_number_ending'] = $this->getNumEnding($data['best_news_number'], ['объявление', 'объявления', 'объявлений']);
+            $data['best_news_number_ending'] = $this->getNumEnding($data['best_news_number'],
+                ['объявление', 'объявления', 'объявлений']);
         }
         return $data;
-        }
+    }
 
 
     /**

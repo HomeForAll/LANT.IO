@@ -74,7 +74,7 @@ class NewsController extends Controller
                 //Записываем картинки на сервер ($preview_img = имена файлов)
                 $preview_img = $this->model('NewsModel')->saveNewsPictures();
                 //Приводим данные POST для добавления в БД
-                $form_data = $this->model('NewsModel')->getFormData($preview_img);
+                $form_data = $this->model('NewsModel')->getFormDataFromPOST($preview_img);
                 // Апдейт БД
                 $this->model('NewsModel')->makeNewsUpdate($news_to_edit_id, $form_data);
             }
@@ -94,6 +94,8 @@ class NewsController extends Controller
             if ($news_to_edit["user_id"] != $_SESSION['userID']) {
                 $this->getAccessFor('admin_news');
             }
+            $data = $this->model('NewsModel')->getPathOfNewsForm($news_to_edit, $news_to_edit['space_type'], $news_to_edit['operation_type'],
+                $news_to_edit['object_type']);
         } else {
             // Если это не конкретная новость:
             $this->model('NewsModel')->setSessionForEditor();
@@ -102,15 +104,16 @@ class NewsController extends Controller
                 //Записываем картинки на сервер ($preview_img = имена файлов)
                 $preview_img = $this->model('NewsModel')->saveNewsPictures();
                 //Приводим данные POST для добавления в БД
-                $form_data = $this->model('NewsModel')->getFormData($preview_img);
+                $form_data = $this->model('NewsModel')->getFormDataFromPOST($preview_img);
                 //Записываем в БД
                 $this->model('NewsModel')->makeNewsInsert($form_data);
                 //JSON формат новости и отсылка на RabbitMQ
                 $news_rabbitmq = json_encode($form_data);
                 $this->model('NewsModel')->sendNewNewsByRabbitMQ(json_encode($form_data));
             }
+            $data = $this->model('NewsModel')->getPathOfNewsForm($news_to_edit, $_POST['space_type'], $_POST['operation_type'],
+                $_POST['object_type']);
         }
-        $data = $this->model('NewsModel')->getNewsForm($news_to_edit);
         $data = $this->model('NewsModel')->getNewsMessageAndError($data);
         $this->view->render('news_editor', $data);
     }
@@ -121,7 +124,8 @@ class NewsController extends Controller
         $this->getAccessFor('myad');
         // Изменение статуса новостей и удаление
         if (!empty($_POST['submit_status'])) {
-            $this->model('NewsModel')->makeNewsStatus();
+            $stat = $this->model('NewsModel')->getNewsStatusFromPOST();
+            $this->model('NewsModel')->makeNewsStatus($stat['news_update_id'], $stat['news_delete_id'], $stat['news_id_rating']);
         }
         // Загрузка из БД списка всех новостей
         $data['news'] = $this->model('NewsModel')->getMyNewsList((int)$_SESSION['userID']);
