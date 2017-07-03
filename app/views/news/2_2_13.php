@@ -69,10 +69,9 @@
         <option value="33" <?php inputToSelect('clarification_of_the_object_type','33'); ?> >Незавершенное строительство</option>
         <option value="83" <?php inputToSelect('clarification_of_the_object_type','83'); ?> >Новостройка</option>
     </select><br>
-    <label >Ограждение <input type="hidden" name="fencing" value="">
-<input type="checkbox" name="fencing" <?php inputToCheckbox("fencing"); ?> ></label><br>
-    <label for="material">Материал</label><br>
-    <select name="material" id="material">
+
+    <label for="fencing">Ограждение</label><br>
+    <select name="fencing" id="fencing">
         <option value="0">---</option>
         <option value="143" <?php inputToSelect('material','143'); ?> >Кованая ограда</option>
         <option value="75" <?php inputToSelect('material','75'); ?> >Металлические прутья</option>

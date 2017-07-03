@@ -15,9 +15,8 @@ class AdminController extends Controller
 
     }
 
-    public function actionAdminNews()
+      public function actionAdminNews()
     {
-
         // Проверка доступа
         global $news_message, $news_error;
         $this->getAccessFor('admin');
@@ -26,26 +25,25 @@ class AdminController extends Controller
         $data = [];
 
         $this->ifAJAX(function () {
-
             if ('news_search' == $_POST['action']) {
                 $data = $this->model('AdminModel')->getDataFromPost();
 
                 //Кол-во объявлений
                 $data['news_number'] = $this->model('NewsModel')->
-                getNamberOfAllNews($data['time_start'], $data['time'], $data['space_type'],
+                getNamberOfAllNews($data['time_from'],$data['time_to'], $data['space_type'],
                     $data['operation_type'], $data['object_type'], 0, 0, 0, 0, $data['status'], $data['title_like']);
-
-                $data['one_page'] = $data['max_number'];
+               $data['one_page'] = $data['max_number'];
 
                 $data['news'] = $this->model('NewsModel')->
-                getRecentNewsList($data['time_start'], $data['time'], $data['max_number'], $data['space_type'],
+                getRecentNewsList($data['time_to'], $data['time_from'], $data['max_number'], $data['space_type'],
                     $data['operation_type'], $data['object_type'], $data['status'], $data['sorting'], $data['title_like'], $data['offset']);
 
                 echo json_encode($data);
                 die();
             }
             if ('submit_status' == $_POST['action']) {
-                $messege = $this->model('NewsModel')->makeNewsStatus();
+                $stat = $this->model('NewsModel')->getNewsStatusFromPOST();
+                $messege = $this->model('NewsModel')->makeNewsStatus($stat['news_update_id'], $stat['news_delete_id'], $stat['news_id_rating']);
                 echo json_encode($messege);
                 die();
             }
@@ -53,7 +51,8 @@ class AdminController extends Controller
 
         if (!empty($_POST['submit_status'])) {
             //Запись $_POST параметров в БД
-            $this->model('NewsModel')->makeNewsStatus();
+            $stat = $this->model('NewsModel')->getNewsStatusFromPOST();
+            $this->model('NewsModel')->makeNewsStatus($stat['news_update_id'], $stat['news_delete_id'], $stat['news_id_rating']);
         }
 
         if (!empty($_POST['test2'])) {

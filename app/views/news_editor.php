@@ -32,18 +32,6 @@ function inputToCheckbox($item = '') {
     }
 }
 
-function addClassCheckbox($item = '') {
-    global $data_for_news;
-
-    if ($item != '') {
-        if (!empty($data_for_news[$item])) {
-            echo 'showСheckboxInput_show';
-        }
-    }
-}
-
-
-
 function inputToSelect($item = '', $selection = NULL) {
     global $data_for_news;
 
@@ -89,14 +77,10 @@ function addClassOtherInput($item = '', $arr =[]) {
 <?php
 //Вывод сообщений
 if (!empty($this->data['error'])) {
-    foreach ($this->data['error'] as $error) {
-        echo '<span style="color: red">' . $error . '</span><br>';
-    }
+        echo '<span style="color: red">' . $this->data['error'] . '</span><br>';
 }
 if (!empty($this->data['message'])) {
-    foreach ($this->data['message'] as $message) {
-        echo '<span style="color: green">' . $message . '</span><br>';
-    }
+        echo '<span style="color: green">' . $this->data['message'] . '</span><br>';
 }
 
 // Вывод меню или формы
@@ -231,6 +215,10 @@ if (!isset($this->data['form_name'])){
     </form>
 
     <?php } // Вывод меню или формы (конец)?>
+
+
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+<script src="/template/js/mapController.js"></script>
 
     <script type="text/javascript" src="/template/js/jquery.validate.js"></script>
     <script type="text/javascript" src="/template/js/news_javascript.js"></script>

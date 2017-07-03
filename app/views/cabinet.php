@@ -56,7 +56,7 @@ if ($access['admin_users_panel']) {
 
     <a class="button" href="service">Услуги</a>
     <a class="button" href="service/admin">Добавление\Редактирование услуг</a>
-     <a class="button" href="admin">Административная панель</a>
+    <a class="button" href="admin/news">Административная панель объявлений</a>
     
 <?php
 if ($access['admin_service']) {

@@ -30,8 +30,10 @@
     <div id="ymap" style="margin: 0 auto; width: 400px; height: 400px; background: #000;"></div>
 
     <label >Кадастровый номер <input type="text" name="cadastral_number" <?php inputToInput("cadastral_number"); ?> ></label><br>
-    <label for="residential">Удаленность от МКАД/метро:</label><br>
-    <input id="residential" name="distance_from_mkad_or_metro" <?php inputToInput("distance_from_mkad_or_metro"); ?> type="text" ><br>
+    <label for="distance_from_metro">Удаленность от метро:</label><br>
+    <input id="distance_from_metro"
+           name="distance_from_metro" <?php inputToInput("distance_from_metro"); ?> type="text"><br>
+
     <label for="object_located">Объект размещен</label><br>
     <select name="object_located" id="object_located">
         <option value="0">---</option>
@@ -58,8 +60,8 @@
     <input id="residential" name="residential" <?php inputToInput("residential"); ?> type="text" ><br>
     <label for="not_residential">Нежилая:</label><br>
     <input id="not_residential" name="not_residential" <?php inputToInput("not_residential"); ?> type="text" ><br>
-    <label for="total">Общая:</label><br>
-    <input id="total" name="total" <?php inputToInput("total"); ?> type="text" ><br>
+    <label for="common">Общая:</label><br>
+    <input id="common" name="common" <?php inputToInput("common"); ?> type="text" ><br>
     <label for="balcony">Балкон:</label><br>
     <input id="balcony" name="balcony" <?php inputToInput("balcony"); ?> type="text" ><br>
     <label for="ceiling_height">Высота потолков:</label><br>
@@ -136,12 +138,11 @@
 <input type="checkbox" name="kitchen" <?php inputToCheckbox("kitchen"); ?> ></label><br>
     <label >Спальня <input type="hidden" name="bedroom" value="">
 <input type="checkbox" name="bedroom" <?php inputToCheckbox("bedroom"); ?> ></label><br>
-    <label for="equipment">Комплектация</label><br>
-    <select name="equipment" id="equipment">
-        <option value="0">---</option>
-        <option value="44" <?php inputToSelect('equipment','44'); ?> >Пустая</option>
-        <option value="45" <?php inputToSelect('equipment','45'); ?> >Укомплектованная</option>
-    </select><br>
+
+    <label>Комплектация - Укомплектованная<input type="hidden" name="equipment" value="">
+        <input type="checkbox" name="equipment" <?php inputToCheckbox("equipment"); ?> ></label><br>
+    <br></fieldset><br>
+
     <label for="furnish">Отделка</label><br>
     <select name="furnish" id="furnish">
         <option value="0">---</option>
@@ -188,15 +189,17 @@
 
 <fieldset>
     <legend>Участок</legend><br>
-    <label for="parking">Парковка</label><br>
-    <select name="parking" id="parking">
-        <option value="0">---</option>
-        <option value="5" <?php inputToSelect('parking','5'); ?> >Отсутствует</option>
-        <option value="7" <?php inputToSelect('parking','7'); ?> >Придомовой гараж</option>
-        <option value="52" <?php inputToSelect('parking','52'); ?> >Гаражный комплекс</option>
-        <option value="132" <?php inputToSelect('parking','132'); ?> >Подземная парковка</option>
-        <option value="81" <?php inputToSelect('parking','81'); ?> >Многоуровневый паркинг</option>
-    </select><br>
+    <span>Парковка</span><br>
+    <label>Многоуровневая парковка<input type="hidden" name="parking_multilevel" value="">
+        <input type="checkbox" name="parking_multilevel" <?php inputToCheckbox("parking_multilevel"); ?> ></label><br>
+    <label>Подземная парковка<input type="hidden" name="parking_underground" value="">
+        <input type="checkbox" name="parking_underground" <?php inputToCheckbox("parking_underground"); ?> ></label><br>
+    <label>Гаражный комплекс<input type="hidden" name="parking_garage_complex" value="">
+        <input type="checkbox" name="parking_garage_complex" <?php inputToCheckbox("parking_garage_complex"); ?> ></label><br>
+    <label>Придомовый гараж<input type="hidden" name="parking_lot_garage" value="">
+        <input type="checkbox" name="parking_lot_garage" <?php inputToCheckbox("parking_lot_garage"); ?> ></label><br>
+    <label>Отсутствует<input type="hidden" name="parking_none" value="">
+        <input type="checkbox" name="parking_none" <?php inputToCheckbox("parking_none"); ?> ></label><br>
     <span >Дополнительные строения</span><br>
     <label >Сторожка <input type="hidden" name="lodge" value="">
 <input type="checkbox" name="lodge" <?php inputToCheckbox("lodge"); ?> ></label><br>
@@ -214,15 +217,19 @@
 <input type="checkbox" name="barn" <?php inputToCheckbox("barn"); ?> ></label><br>
     <label >Беседка <input type="hidden" name="alcove" value="">
 <input type="checkbox" name="alcove" <?php inputToCheckbox("alcove"); ?> ></label><br>
-    <label for="site">Участок</label><br>
-    <select name="site" id="site">
-        <option value="0">---</option>
-        <option value="136" <?php inputToSelect('site','136'); ?> >Заболоченный</option>
-        <option value="103" <?php inputToSelect('site','103'); ?> >Овраг</option>
-        <option value="89" <?php inputToSelect('site','89'); ?> >На склоне</option>
-        <option value="133" <?php inputToSelect('site','133'); ?> >Неровный</option>
-        <option value="119" <?php inputToSelect('site','119'); ?> >Ровный</option>
-    </select><br>
+
+    <span>Участок</span><br>
+    <label>Участок Ровный<input type="hidden" name="plot_smooth" value="">
+        <input type="checkbox" name="plot_smooth" <?php inputToCheckbox("plot_smooth"); ?> ></label><br>
+    <label>Участок Неровный<input type="hidden" name="plot_uneven" value="">
+        <input type="checkbox" name="plot_uneven" <?php inputToCheckbox("plot_uneven"); ?> ></label><br>
+    <label>Участок На склоне<input type="hidden" name="plot_on_the_slope" value="">
+        <input type="checkbox" name="plot_on_the_slope" <?php inputToCheckbox("plot_on_the_slope"); ?> ></label><br>
+    <label>Участок Овраг<input type="hidden" name="plot_of_ravine" value="">
+        <input type="checkbox" name="plot_of_ravine" <?php inputToCheckbox("plot_of_ravine"); ?> ></label><br>
+    <label>Участок Заболоченный<input type="hidden" name="plot_wetland" value="">
+        <input type="checkbox" name="plot_wetland" <?php inputToCheckbox("plot_wetland"); ?> ></label><br>
+
     <span >На участке</span><br>
     <label >Берег водоема <input type="hidden" name="waterfront" value="">
 <input type="checkbox" name="waterfront" <?php inputToCheckbox("waterfront"); ?> ></label><br>
@@ -234,10 +241,9 @@
 <input type="checkbox" name="garden_trees" <?php inputToCheckbox("garden_trees"); ?> ></label><br>
     <label >Лесные деревья <input type="hidden" name="forest_trees" value="">
 <input type="checkbox" name="forest_trees" <?php inputToCheckbox("forest_trees"); ?> ></label><br>
-    <label >Ограждение <input type="hidden" name="fencing" value="">
-<input type="checkbox" name="fencing" <?php inputToCheckbox("fencing"); ?> ></label><br>
-    <label for="material">Материал</label><br>
-    <select name="material" id="material">
+
+    <label for="fencing">Ограждение</label><br>
+    <select name="fencing" id="fencing">
         <option value="0">---</option>
         <option value="143" <?php inputToSelect('material','143'); ?> >Кованая ограда</option>
         <option value="75" <?php inputToSelect('material','75'); ?> >Металлические прутья</option>

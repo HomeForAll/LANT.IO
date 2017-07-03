@@ -39,29 +39,23 @@ return [
 
     'oauth/([A-Za-z]+)/state/([0-9]+)' => 'empty/user/OAuth/$1/$2',
     'oauth/([A-Za-z]+)'                => 'empty/user/OAuth/$1',
-
-    'news/page([0-9]+)'       => 'main/news/news_list/$1',
-    'news/([0-9]+)'           => 'main/news/news_id/$1',
-    'news/editor'             => 'main/news/news_editor',
-    'news/myad'               => 'main/news/news_myad',
-    'news/editor/([0-9]+)'    => 'main/news/news_editor/$1',
-    'news/editor/(saleapart)' => 'main/news/news_editor/$1',
-    'news/editor/(salehouse)' => 'main/news/news_editor/$1',
-    'news/editor/(saleroom)'  => 'main/news/news_editor/$1',
-    'news/editor/(salepart)'  => 'main/news/news_editor/$1',
-    'news/editor/(saleland)'  => 'main/news/news_editor/$1',
-    'news/editor/(rentapart)' => 'main/news/news_editor/$1',
-    'news/editor/(renthouse)' => 'main/news/news_editor/$1',
-    'news/editor/(rentroom)'  => 'main/news/news_editor/$1',
-    'news/editor/(rentland)'  => 'main/news/news_editor/$1',
-    'news'                    => 'main/news/news_list',
-
+    
+    //    'auth/unset' => 'empty/user/OAuthDestroy',
+    //    'auth/unset/([A-Za-z]+)' => 'empty/user/OAuthDestroy/$1',
+    //    'auth/([A-Za-z]+)' => 'empty/user/OAuthInit/$1',
+    
+    'news/([0-9]+)'           => 'main/news/newsID/$1',
+    'news/editor'             => 'main/news/newsEditor',
+    'news/myad'               => 'main/news/newsMyAD',
+    'news/editor/([0-9]+)'    => 'main/news/newsEditor/$1',
+    'news'                    => 'main/news/newsList',
+    
     'service'       => 'main/service/serviceSub',
     'service/admin' => 'main/service/serviceAdmin',
 
     'admin'                   => 'main/admin/admin',
     'admin/news' => 'main/admin/adminNews',
-    'admin/newsformgenerator' => 'main/formgenerator/newsFormGenerator',
+    'admin/newsformgenerator' => 'main/formGenerator/newsFormGenerator',
     'admin/users/ban'         => 'main/admin/usersBan',
     'admin/users'             => 'main/admin/users',
 

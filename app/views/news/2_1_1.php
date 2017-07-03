@@ -43,9 +43,16 @@
 <!--        <option value="0">---</option>-->
 <!--    </select><br>-->
 <!--    <input id="metro_station" name="metro_station" --><?php //inputToInput("metro_station"); ?><!-- type="text"><br>-->
-    <?php $this->model('NewsModel')->renderMetroSelect($this->data['metro_station']); ?>
-    <label for="distance_from_metro">Удаленность от метро (мин):</label><br>
-    <input id="distance_from_metro" name="distance_from_metro" <?php inputToInput("distance_from_metro"); ?> type="text"><br>
+<!--    <input id="time_walk" name="time_walk" type="text" class="valid" aria-invalid="false">   -->
+    <?php
+    if(isset($this->data['metro_station'])){
+        $this->model('NewsModel')->renderMetroSelect($this->data['metro_station']);
+    }else{
+        $this->model('NewsModel')->renderMetroSelect();
+    }
+    ?>
+    <label for="time_walk">Удаленность от метро пешком (мин):</label><br>
+    <input id="time_walk" name="time_walk" <?php inputToInput("time_walk"); ?> type="text"><br>
     <label>Торг <input type="hidden" name="bargain" value="">
 <input type="checkbox" name="bargain" <?php inputToCheckbox("bargain"); ?> ></label><br>
     <label for="object_located">Объект размещен</label><br>
@@ -63,8 +70,8 @@
     <input id="residential" name="residential" <?php inputToInput("residential"); ?> type="text"><br>
     <label for="not_residential">Нежилая:</label><br>
     <input id="not_residential" name="not_residential" <?php inputToInput("not_residential"); ?> type="text"><br>
-    <label for="total">Общая:</label><br>
-    <input id="total" name="total" <?php inputToInput("total"); ?> type="text"><br>
+    <label for="common">Общая:</label><br>
+    <input id="common" name="common" <?php inputToInput("common"); ?> type="text"><br>
     <label for="balcony">Балкон:</label><br>
     <input id="balcony" name="balcony" <?php inputToInput("balcony"); ?> type="text"><br>
     <label for="number_of_rooms">Количество комнат</label><br>
@@ -117,27 +124,22 @@
         <option value="64" <?php inputToSelect('furnish','64'); ?> >Высококачественная отделка</option>
         <option value="46" <?php inputToSelect('furnish','46'); ?> >Эксклюзивного качества</option>
     </select><br>
-    <label for="equipment">Комплектация</label><br>
-    <select name="equipment" id="equipment">
-        <option value="0">---</option>
-        <option value="45" <?php inputToSelect('equipment','45'); ?> >Укомплектованная</option>
-        <option value="44" <?php inputToSelect('equipment','44'); ?> >Пустая</option>
-    </select><br>
+
+    <label>Комплектация - Укомплектованная<input type="hidden" name="equipment" value="">
+        <input type="checkbox" name="equipment" <?php inputToCheckbox("equipment"); ?> ></label><br>
     <br></fieldset><br>
+
 <fieldset>
     <legend>Характеристики дома</legend>
     <br>
     <b>Наличие лифта</b><br>
-    <select name="elevator" id="elevator">
-        <option value="0">---</option>
-        <option value="1" <?php inputToSelect('elevator','1'); ?> >Да</option>
-        <option value="0" <?php inputToSelect('elevator','0'); ?> >Нет</option>
-    </select><br>
-    <select name="elevator_yes" id="elevator_yes">
-        <option value="0">---</option>
-        <option value="95" <?php inputToSelect('elevator_yes','95'); ?> >Пассажирский</option>
-        <option value="23" <?php inputToSelect('elevator_yes','23'); ?> >Грузовой</option>
-    </select><br>
+     <label>Грузвовой лифт<input type="hidden" name="lift_lifting" value="">
+        <input type="checkbox" name="lift_lifting" <?php inputToCheckbox("lift_lifting"); ?> ></label><br>
+    <label>Пассажирский лифт<input type="hidden" name="lift_passenger" value="">
+        <input type="checkbox" name="lift_passenger" <?php inputToCheckbox("lift_passenger"); ?> ></label><br>
+    <label>Без лифта<input type="hidden" name="lift_none" value="">
+        <input type="checkbox" name="lift_none" <?php inputToCheckbox("lift_none"); ?> ></label><br>
+
     <label for="number_of_floors">Количество этажей:</label><br>
     <input id="number_of_floors" name="number_of_floors" <?php inputToInput("number_of_floors"); ?> type="text"><br>
     <label>Наличие мусоропровода <input type="hidden" name="availability_of_garbage_chute" value="">
@@ -152,15 +154,17 @@
         <option value="33" <?php inputToSelect('clarification_of_the_object_type','33'); ?> >Незавершенное строительство</option>
         <option value="83" <?php inputToSelect('clarification_of_the_object_type','83'); ?> >Новостройка</option>
     </select><br>
-    <label for="parking">Парковка</label><br>
-    <select name="parking" id="parking">
-        <option value="0">---</option>
-        <option value="5" <?php inputToSelect('parking','5'); ?> >Отсутствует</option>
-        <option value="7" <?php inputToSelect('parking','7'); ?> >Придомовой гараж</option>
-        <option value="52" <?php inputToSelect('parking','52'); ?> >Гаражный комплекс</option>
-        <option value="132" <?php inputToSelect('parking','132'); ?> >Подземная парковка</option>
-        <option value="81" <?php inputToSelect('parking','81'); ?> >Многоуровневый паркинг</option>
-    </select><br>
+    <span>Парковка</span><br>
+    <label>Многоуровневая парковка<input type="hidden" name="parking_multilevel" value="">
+        <input type="checkbox" name="parking_multilevel" <?php inputToCheckbox("parking_multilevel"); ?> ></label><br>
+    <label>Подземная парковка<input type="hidden" name="parking_underground" value="">
+        <input type="checkbox" name="parking_underground" <?php inputToCheckbox("parking_underground"); ?> ></label><br>
+    <label>Гаражный комплекс<input type="hidden" name="parking_garage_complex" value="">
+        <input type="checkbox" name="parking_garage_complex" <?php inputToCheckbox("parking_garage_complex"); ?> ></label><br>
+    <label>Придомовый гараж<input type="hidden" name="parking_lot_garage" value="">
+        <input type="checkbox" name="parking_lot_garage" <?php inputToCheckbox("parking_lot_garage"); ?> ></label><br>
+    <label>Отсутствует<input type="hidden" name="parking_none" value="">
+        <input type="checkbox" name="parking_none" <?php inputToCheckbox("parking_none"); ?> ></label><br>
     <label for="wall_material">Материал стен</label><br>
     <select name="wall_material" id="wall_material">
         <option value="0">---</option>

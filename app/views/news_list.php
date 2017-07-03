@@ -42,124 +42,106 @@ function showNews($data)
 
 ?>
 
-    <h2>Последние объявления за 24 часа!</h2>
-    <div class="last_news clearfix">
-        <?php
-        // Получение данных
-        $data_24 = $this->model('NewsModel')->getRecentNewsList(0, 24, 20, 0, 0, 0);
-        //Вывод
-        showNews($data_24);
+<h2>Последние объявления за 24 часа!</h2>
+<div class="last_news clearfix">
+    <?php
+    // Получение данных
+    $data_24 = $this->model('NewsModel')->getRecentNewsList(0, 24, 20, 0, 0, 0);
+    //Вывод
+    showNews($data_24);
 
-        ?>
+    ?>
 
-    </div>
-
-
-    <!-- Вывод листинга новостей 24 часа - конец -->
+</div>
 
 
-    <h2>Объявления</h2>
-    <!-- Выбор количества выводимых новостей -->
-    <form action="" method="post">
-        <label for="number_of_news">Количество выводимых объявлений:</label>
-        <select name="number_of_news">
-            <option value="2">2</option>
-            <option <?php
-            if (!empty($_POST['number_of_news'])) {
-                if ($_POST['number_of_news'] == 5) {
-                    echo 'selected';
-                }
-            }
-            ?> value="5">5
+<!-- Вывод листинга новостей 24 часа - конец -->
+
+
+<h2>Объявления</h2>
+<!-- Меню просмотра объявлений -->
+<form id="watch_news_list" action="" method="post">
+    <?php
+    $form_options = [];
+    $form_options['space_types'] = [1 => 'Нежилая', 2 => 'Жилая',];
+    $form_options['operation_types'] = [1 => 'Арендовать', 2 => 'Купить',];
+    $form_options['object_types'] = [
+        1 => 'Квартира',
+        2 => 'Офисная площадь',
+        3 => 'Торговая площадь',
+        4 => 'Офисная площадь с землей',
+        5 => 'Производственно-складские здания',
+        6 => 'Производственно-складские помещения ',
+        7 => 'Рынок/Ярмарка',
+        8 => 'Комплекс ОСЗ',
+        9 => 'ОСЗ',
+        10 => 'Торговое здание',
+        11 => 'Комната',
+        12 => 'Дом',
+        13 => 'Гараж/Машиноместо',
+        14 => 'Земельный участок',
+    ];
+
+    ?>
+    <legend>Поиск объявлений</legend>
+    <label for="space_type">Тип площади:</label>
+    <select name="space_type" id="space_type">
+        <option value="0">---</option>
+        <?php foreach ($form_options['space_types'] as $k => $options) { ?>
+            <option value="<?php echo $k; ?>">
+                <?php echo $options; ?>
             </option>
-            <option <?php
-            if (!empty($_POST['number_of_news'])) {
-                if ($_POST['number_of_news'] == 10) {
-                    echo 'selected';
-                }
-            }
-            ?> value="10">10
+        <?php } ?>
+    </select>
+    <label for="operation_type">Операция:</label>
+    <select name="operation_type" id="operation_type">
+        <option value="0">---</option>
+        <?php foreach ($form_options['operation_types'] as $k => $options) { ?>
+            <option value="<?php echo $k; ?>">
+                <?php echo $options; ?>
             </option>
-        </select>
-        <br>
-        <label class="news_table_category">
-            <h3>Категория объявлений: </h3>
-            <span>
-            Общие новости<input type="checkbox" name="news_table_category[1]"
-                                value="1" <?php if (!empty($this->data['news_table_category[1]'])) {
-                    echo 'checked';
-                } ?> >
-            Продажа комнат <input type="checkbox" name="news_table_category[11]"
-                                  value="11" <?php if (!empty($this->data['news_table_category[11]'])) {
-                    echo 'checked';
-                } ?> >
-            Продажа квартир <input type="checkbox" name="news_table_category[12]"
-                                   value="12" <?php if (!empty($this->data['news_table_category[12]'])) {
-                    echo 'checked';
-                } ?> >
-            Продажа домов <input type="checkbox" name="news_table_category[13]"
-                                 value="13" <?php if (!empty($this->data['news_table_category[13]'])) {
-                    echo 'checked';
-                } ?> >
-            Продажа участков <input type="checkbox" name="news_table_category[14]"
-                                    value="14" <?php if (!empty($this->data['news_table_category[14]'])) {
-                    echo 'checked';
-                } ?> >
-            Аренда комнат <input type="checkbox" name="news_table_category[21]"
-                                 value="21" <?php if (!empty($this->data['news_table_category[21]'])) {
-                    echo 'checked';
-                } ?> >
-            Аренда квартир <input type="checkbox" name="news_table_category[22]"
-                                  value="22" <?php if (!empty($this->data['news_table_category[22]'])) {
-                    echo 'checked';
-                } ?> >
-            Аренда домов <input type="checkbox" name="news_table_category[23]"
-                                value="23" <?php if (!empty($this->data['news_table_category[23]'])) {
-                    echo 'checked';
-                } ?> >
-            Аренда участков <input type="checkbox" name="news_table_category[24]"
-                                   value="24" <?php if (!empty($this->data['news_table_category[24]'])) {
-                    echo 'checked';
-                } ?> >
-        </span>
-        </label>
-        <br>
-        <input type="submit" name="watch_news_list" value="Смотреть">
-    </form>
+        <?php } ?>
+    </select>
+    <label for="object_type">Тип объекта:</label>
+    <select name="object_type" id="object_type">
+        <option value="0">---</option>
+        <?php foreach ($form_options['object_types'] as $k => $options) { ?>
+            <option value="<?php echo $k; ?>">
+                <?php echo $options; ?>
+            </option>
+        <?php } ?>
+    </select>
+    <br>
+    <label for="max_number">Количество выводимых объявлений</label>
+    <select name="max_number" id="max_number">
+        <option value="9">9</option>
+        <option value="18">18</option>
+        <option value="27">27</option>
+    </select>
+    <input type="submit" name="watch_news_list" value="Смотреть">
+</form>
 
-    <!-- Навигация -->
-    <DIV>
-        <?php echo $this->data['firstnews']; ?> - <?php echo $this->data['lastnews']; ?>
-        из: <?php echo $this->data['namber_of_all_rows']; ?>
-        <?php if ($this->data['firstnews'] != 1) {
-            echo '<a href="/news/page' . ($this->data['page'] - 1) . '"><<</a> ';
-        } else {
-            echo '<< ';
-        }
-        if ($this->data['lastnews'] != $this->data['namber_of_all_rows']) {
-            echo ' <a href="/news/page' . ($this->data['page'] + 1) . '">>></a>';
-        } else {
-            echo ' >>';
-        }
-        ?>
-    </DIV>
+<!-- Навигация -->
+<div id="news_pages"></div>
 
-    <!-- Последние новости -->
-    <div class="last_news clearfix">
-    <h3>Последние новости</h3>
+<!-- Последние новости -->
 
+<h3>Новости</h3>
+<div class="last_news clearfix">
+    <div id="news_list">
     <!-- Вывод листинга новостей -->
-
-        <?php
-        showNews($this->data['news']);
-        ?>
+    <?php
+    showNews($this->data['news']);
+    ?>
     </div>
+</div>
 
-    <!-- Просмотренные новости -->
-    <div class="last_viewed_news clearfix">
-        <?php
-        foreach ($this->data['last_viewed_news'] as $value) {
-            ?> <span>
+<!-- Просмотренные новости -->
+<div class="last_viewed_news clearfix">
+
+    <?php
+    foreach ($this->data['last_viewed_news'] as $value) {
+        ?> <span>
     <a href="/news/<?php if (!empty($value['id_news'])) {
         echo $value['id_news'];
     } ?>">
@@ -184,14 +166,17 @@ function showNews($data)
     </a>
 </span>
 
-            <?php
-        }
-        ?>
+        <?php
+    }
+    ?>
     </div>
-    <!-- Просмотренные новости - конец-->
+<!-- Просмотренные новости - конец-->
 
 <?php
-unset($value);
+//unset($value);
+?>
+
+<script type="text/javascript" src="/template/js/news.list.js"></script>
 
 
 

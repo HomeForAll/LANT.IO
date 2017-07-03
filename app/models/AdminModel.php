@@ -6,9 +6,9 @@ class AdminModel extends Model
     private $users        = [];
     private $block_result = false;
     
-    /**
+   /**
      * Возвращает массив первоначальных данных таблицы просмотра административной панели
-     * в зависимости от POST, SESSION и устанавливает SESSION
+     * в зависимости от POST
      *
      * @return array
      */
@@ -16,29 +16,35 @@ class AdminModel extends Model
     {
         $data = [];
         if (!empty($_POST)) {
-            if (!empty((int)$_POST['time'])) {
-                $data['time'] = (int)$_POST['time'];
+            if (!empty((int)$_POST['time_from'])) {
+                $data['time_from'] = (int)$_POST['time_from'];
             } else {
-                $data['time'] = 0;
+                $data['time_from'] = 0;
             }
-            if (!empty((int)$_POST['time_start'])) {
-                $time_start_arr = explode('-', $_POST['time_start']);
+            if (!empty((int)$_POST['time_to'])) {
+                $time_start_arr = explode('-', $_POST['time_to']);
                 if (isset($time_start_arr[0])) {
-                    $data['time_start'] = (int)$time_start_arr[0];
+                    $data['time_to'] = (int)$time_start_arr[0];
+                }else {
+                    $data['time_to'] = (int)$_POST['time_to'];
                 }
                 if (isset($time_start_arr[1])) {
-                    $data['time_start'] .= '-' . (int)$time_start_arr[1];
+                    $data['time_to'] .= '-' . (int)$time_start_arr[1];
                 } else {
-                    $data['time_start'] .= '-01-01';
+                    $data['time_to'] .= '-01';
                 }
                 if (isset($time_start_arr[2])) {
-                    $data['time_start'] .= '-' . (int)$time_start_arr[2];
+                    $data['time_to'] .= '-' . (int)$time_start_arr[2];
                 } else {
-                    $data['time_start'] .= '-01';
+                    $data['time_to'] .= '-01';
                 }
+                //Переводим в часы
+                $data['time_to'] = (time() - strtotime($data['time_to']))/60/60;
+
             } else {
-                $data['time_start'] = 0;
+                $data['time_to'] = 0;
             }
+
             if (!empty((int)$_POST['max_number'])) {
                 $data['max_number'] = (int)$_POST['max_number'];
             } else {
