@@ -16,8 +16,7 @@ class SocialNets extends LightOpenID
     {
         parent::__construct($currentURL);
 
-        $redis = Registry::get('redis');
-        $this->config = unserialize($redis->get('config'));
+        $this->config = Registry::get('config');
         // Запоминаем URL на котором сейчас находимся
         $this->currentURL = $currentURL;
         $this->steamApiKey = $this->config['steam_api_key'];

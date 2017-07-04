@@ -9,9 +9,8 @@ class DataBase extends PDO
 
     public function __construct()
     {
-        $redis = Registry::get('redis');
-        $this->config = unserialize($redis->get('config'));
-        parent::__construct('pgsql:host=' . $this->config['db_host'] . ';port=5432;dbname=' . $this->config['db'], $this->config['db_username'], $this->config['db_password']);
+        $config = Registry::get('config');
+        parent::__construct('pgsql:host=' . $config['db_host'] . ';port=5432;dbname=' . $config['db'], $config['db_username'], $config['db_password']);
         $this->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     }
 

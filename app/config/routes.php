@@ -62,4 +62,6 @@ return [
     // API
     'api/search' => 'main/API/search',
     'api/search/count' => 'main/API/SearchAdsCount',
+    'api/auth' => 'main/API/login',
+    'api/registration/([A-Za-z\_]+)' => 'main/API/registration/$1',
 ];

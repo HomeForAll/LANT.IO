@@ -6,8 +6,7 @@ class Router
     
     public function __construct()
     {
-        $redis        = Registry::get('redis');
-        $this->routes = unserialize($redis->get('routes'));
+        $this->routes = require ROOT_DIR . 'app' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'routes.php';
     }
     
     /**

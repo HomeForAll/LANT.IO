@@ -1,32 +1,76 @@
 <?php
+use Respect\Validation\Validator as v;
 
 class UserModel extends Model
 {
     use Cleaner;
 
+    const LOGIN_VALIDATION_ERROR = 0;
+    const LOGIN_OR_PASSWORD_INCORRECT_ERROR = 1;
+    const LOGIN_BANNED_ERROR = 2;
+    
     private $socialNets;
-
+    private $user;
+    private $errors = [];
+    
     public function __construct()
     {
         parent::__construct();
         $this->socialNets = new SocialNets('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
     }
 
-    public function doLogin()
+    public function login($login, $password)
     {
-        $data = $this->getUserData($_POST['login'], $_POST['password']);
-
-        if ($data && !$data['banned']) {
-            $this->atLogin($data['userID'], $data['status'], $data['firstName'], $data['lastName']);
+        $login = trim($login);
+        $login = str_replace(' ', '', $login);
+    
+        if (v::email()->validate($login)) {
+            $query = $this->db->prepare("SELECT * FROM users WHERE email = :login");
+        } elseif(v::phone()->validate($login)) {
+            $query = $this->db->prepare("SELECT * FROM users WHERE phone_number = :login");
+            $login = $this->extractPhoneNumber($login);
         } else {
-            $errors = '<span style="color: red;">Вы указали неверные сведения или ваш аккаунт заблокирован.</span><br>';
-
-            return $errors;
+            $this->errors[] = self::LOGIN_VALIDATION_ERROR;
+            
+            return 0;
+        }
+    
+        $query->execute([':login' => $login]);
+        $user = $query->fetch();
+    
+        if ($user) {
+            if (password_verify($password, $user['password'])) {
+                if (!$user['banned']) {
+                    $secret_key = Registry::get('config')['secret_key'];
+                    
+                    $_SESSION['authorized'] = true;
+                    $_SESSION['user'] = $user;
+                    
+                    // TODO: Удалить в будущем
+                    $_SESSION['userID'] = $user['id'];
+                    $_SESSION['firstName'] = $user['first_name'];
+                    $_SESSION['lastName'] = $user['last_name'];
+                    $_SESSION['status'] = $user['status'];
+                    
+                    $_SESSION['user_hash'] = hash('sha512', 'user_id=' . $user['id'] . 'secret_key=' . $secret_key);
+                    
+                    // TODO: Реализовать функицю не используя чужого API
+                    $this->activityWrite($user['id']);
+                    
+                    return 1;
+                }
+                
+                $this->errors[] = self::LOGIN_BANNED_ERROR;
+                
+                return 0;
+            }
         }
 
-        return false;
+        $this->errors[] = self::LOGIN_OR_PASSWORD_INCORRECT_ERROR;
+        
+        return 0;
     }
-
+    
     public function doRegistration()
     {
         $errors = $this->checkDataErrors();
@@ -167,51 +211,6 @@ class UserModel extends Model
         return !empty($errors) ? $errors : false;
     }
 
-    private function getUserData($login, $password)
-    {
-        $login = trim($login);
-        $login = str_replace(' ', '', $login);
-
-        if (filter_var($login, FILTER_VALIDATE_EMAIL)) {
-            $query = $this->db->prepare("SELECT * FROM users WHERE email = :login");
-        } else {
-            $query = $this->db->prepare("SELECT * FROM users WHERE phone_number = :login");
-            $login = $this->extractPhoneNumber($login);
-        }
-
-        $query->execute([':login' => $login]);
-        $result = $query->fetch();
-
-        if ($result) {
-            if (password_verify($password, $result['password'])) {
-                return [
-                    'userID'    => $result['id'],
-                    'status'    => $result['status'],
-                    'firstName' => $result['first_name'],
-                    'lastName'  => $result['last_name'],
-                    'banned' => $result['banned'],
-                ];
-            }
-        }
-
-        return false;
-    }
-
-    private function atLogin($userID, $userStatus, $firstName, $lastName)
-    {
-        $secret_key = 'secret';
-
-        $_SESSION['authorized'] = true;
-        $_SESSION['userID'] = $userID;
-        $_SESSION['firstName'] = $firstName;
-        $_SESSION['lastName'] = $lastName;
-        $_SESSION['user_hash'] = hash('sha512', 'user_id=' . $userID . 'secret_key=' . $secret_key);
-        $this->activityWrite($userID);
-        $_SESSION['status'] = $userStatus;
-        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/cabinet');
-        exit;
-    }
-
     public function activityWrite($userID)
     {
         $user_agent = $_SERVER["HTTP_USER_AGENT"];
@@ -255,7 +254,7 @@ class UserModel extends Model
 
         $geo = $found_match;
         $str_for_active = $browser . "," . date('d F \в H:i:s e') . "," . $ip . "," . $geo . ";";
-        $str_for_active = $str_for_active . $info[0][0];
+        $str_for_active = $str_for_active . $info[0]['active_text'];
         $str_for_active = trim($str_for_active, ';');
         $query = $this->db->prepare("UPDATE users SET active_text = :active WHERE id = :id");
         $query->execute([
@@ -349,7 +348,7 @@ class UserModel extends Model
                 $i_max++;
             }
             for ($i = 0; $i < $i_max; $i++) {
-                $massiv[$i] = $info[$i][0];
+                $massiv[$i] = $info[$i];
             }
             $flag_exist = 0;
             $name_session = session_id();
@@ -506,12 +505,30 @@ class UserModel extends Model
             'steam'  => 'steam_id',
         ];
 
-        $result = $this->db->select('*')->from('users')->where($services[$service], '=', trim($id))->execute();
+        // TODO: Убрать после удаления методов из DataBase::class
+        $user = $this->db->select('*')->from('users')->where($services[$service], '=', trim($id))->execute();
 
         $this->clearOAuth();
 
-        if ($result) {
-            $this->atLogin($result[0]['id'], $result[0]['status'], $result[0]['first_name'] . ' ' . $result[0]['last_name']);
+        if ($user) {
+            $secret_key = Registry::get('config')['secret_key'];
+    
+            $_SESSION['authorized'] = true;
+            $_SESSION['user'] = $user;
+    
+            // TODO: Удалить в будущем
+            $_SESSION['userID'] = $user['id'];
+            $_SESSION['firstName'] = $user['first_name'];
+            $_SESSION['lastName'] = $user['last_name'];
+            $_SESSION['status'] = $user['status'];
+    
+            $_SESSION['user_hash'] = hash('sha512', 'user_id=' . $userID . 'secret_key=' . $secret_key);
+    
+            // TODO: Реализовать функицю не используя чужого API
+            $this->activityWrite($userID);
+            
+            header('Location: http://' . $_SERVER['HTTP_HOST'] . '/cabinet');
+            exit;
         }
     }
 

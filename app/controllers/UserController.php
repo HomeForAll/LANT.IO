@@ -53,7 +53,7 @@ class UserController extends Controller
     public function actionLogin()
     {
         if (isset($_POST['submit'])) {
-            $this->view->render('login', $this->model('UserModel')->doLogin());
+            $this->view->render('login', $this->model('UserModel')->login($_POST['login'], $_POST['password']));
         } elseif (isset($_SESSION['OAuth_state'])) {
             if ($_SESSION['OAuth_state'] == 1) {
                 $this->model('UserModel')->OAuthLogin($_SESSION['OAuth_service'], $_SESSION['OAuth_user_id']);
