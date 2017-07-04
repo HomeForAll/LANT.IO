@@ -34,10 +34,12 @@ class APIController extends Controller
     public function actionLogin()
     {
         if (!empty($_GET)) {
-            $this->model('UserModel')->fetchAds($_GET, SearchModel::COUNT);
+            $this->model('UserModel')->login($_GET['login'], $_GET['password']);
         } elseif (!empty($_POST)) {
-            $this->model('UserModel')->fetchAds($_POST, SearchModel::COUNT);
+            $this->model('UserModel')->login($_POST['login'], $_POST['password']);
         }
+        
+        echo json_encode($this->model('UserModel')->getResponse(), JSON_UNESCAPED_UNICODE);
     }
     
     public function actionRegistration($step)
