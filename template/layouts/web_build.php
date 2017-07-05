@@ -6,6 +6,8 @@ $siteModel = $this->model('SiteModel');
 <head>
 <meta charset="UTF-8">
 <title><?php $this->title(); ?></title>
+<link rel="icon" type="image/png" href="/template/favicon.png">
+<link rel="shortcut icon" type="image/png" href="/template/favicon.png">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/template/css/main_page/main_search/main_search.min.css">
 <link rel="stylesheet" href="/template/css/main.css">
