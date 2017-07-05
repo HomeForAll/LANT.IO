@@ -57,7 +57,7 @@
 
         <div class="search-flex search-price elem">
             <label>от <input type="number" name="price[from]" value="1000"></label>
-            <label>до <input type="number" name="price[to]" value="10000"></label>
+            <label>до <input type="number" name="price[to]" value="2000000"></label>
             <img src="/template/img/ruble-svg.svg" alt="">
         </div>
         <div class="search-flex search-term elem"><select name="term">
