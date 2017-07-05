@@ -807,6 +807,25 @@ class UserModel extends Model
     {
     }
     
+    public function getUserInfo()
+    {
+        if (isset($_SESSION['user'])) {
+            $this->response = [
+                'id'     => $_SESSION['user']['id'],
+                'name'   => $_SESSION['user']['first_name'] . ' ' . $_SESSION['user']['last_name'],
+                'email'  => $_SESSION['user']['email'],
+                'status' => $_SESSION['user']['status'],
+                'hash'   => $_SESSION['user_hash'],
+            ];
+        } else {
+            $this->response = [
+                'id'     => session_id(),
+                'status' => -1,
+                'hash'   => hash('sha512', 'user_id=' . session_id() . 'secret_key=' . Registry::get('config')['secret_key']),
+            ];
+        }
+    }
+    
     public function getResponse()
     {
         if (empty($this->errors) && empty($this->response)) {

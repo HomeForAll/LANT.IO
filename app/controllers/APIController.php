@@ -100,4 +100,10 @@ class APIController extends Controller
         
         echo json_encode($this->model('UserModel')->getResponse(), JSON_UNESCAPED_UNICODE);
     }
+    
+    public function actionUser()
+    {
+        $this->model('UserModel')->getUserInfo();
+        echo json_encode($this->model('UserModel')->getResponse(), JSON_UNESCAPED_UNICODE);
+    }
 }

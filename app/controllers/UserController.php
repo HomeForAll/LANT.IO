@@ -72,6 +72,7 @@ class UserController extends Controller
         unset($_SESSION['authorized']);
         unset($_SESSION['userID']);
         unset($_SESSION['status']);
+        unset($_SESSION['user']);
         header('Location: http://' . $_SERVER['HTTP_HOST']);
         exit;
     }
