@@ -4,15 +4,26 @@ use Respect\Validation\Validator as v;
 class UserModel extends Model
 {
     use Cleaner;
-    
     // Коды ошибок
-    const LOGIN_VALIDATION_ERROR            = 1000;
-    const LOGIN_OR_PASSWORD_INCORRECT_ERROR = 1001;
-    const LOGIN_BANNED_ERROR                = 1002;
-    
+    const LOGIN_VALIDATION_ERROR                     = 1000;
+    const LOGIN_OR_PASSWORD_INCORRECT_ERROR          = 1001;
+    const LOGIN_BANNED_ERROR                         = 1002;
+    const REGISTRATION_OGRN_INCORRECT_ERROR          = 2000;
+    const REGISTRATION_INN_INCORRECT_ERROR           = 2001;
+    const REGISTRATION_USER_TYPE_INCORRECT_ERROR     = 2002;
+    const REGISTRATION_DOCUMENT_TYPE_INCORRECT_ERROR = 2003;
+    const REGISTRATION_BRAND_INCORRECT_ERROR         = 2004;
+    const REGISTRATION_COMPANY_INCORRECT_ERROR       = 2005;
+    const REGISTRATION_FIRST_NAME_INCORRECT_ERROR    = 2006;
+    const REGISTRATION_PHONE_INCORRECT_ERROR         = 2007;
+    const REGISTRATION_SMS_CODE_INCORRECT_ERROR      = 2008;
+    const REGISTRATION_EMAIL_INCORRECT_ERROR         = 2009;
+    const REGISTRATION_LARGE_PASSWORD_ERROR          = 2010;
+    const REGISTRATION_LAST_NAME_INCORRECT_ERROR     = 2011;
+    const REGISTRATION_MID_NAME_INCORRECT_ERROR      = 2012;
     private $socialNets;
-    private $authorized = false;
-    private $errors = [];
+    private $response = [];
+    private $errors   = [];
     
     public function __construct()
     {
@@ -60,7 +71,7 @@ class UserModel extends Model
                     
                     // TODO: Реализовать функицю не используя чужого API
                     $this->activityWrite($user['id']);
-                    $this->authorized = true;
+                    $this->response = true;
                     
                     return true;
                 }
@@ -230,15 +241,15 @@ class UserModel extends Model
         $user_agent = $_SERVER["HTTP_USER_AGENT"];
         if (strpos($user_agent, "Firefox") !== false) {
             $browser = "Firefox";
-        } elseif (strpos($user_agent, "Opera") !== false)
+        } elseif (strpos($user_agent, "Opera") !== false) {
             $browser = "Opera";
-        elseif (strpos($user_agent, "Chrome") !== false)
+        } elseif (strpos($user_agent, "Chrome") !== false) {
             $browser = "Chrome";
-        elseif (strpos($user_agent, "MSIE") !== false)
+        } elseif (strpos($user_agent, "MSIE") !== false) {
             $browser = "Internet Explorer";
-        elseif (strpos($user_agent, "Safari") !== false)
+        } elseif (strpos($user_agent, "Safari") !== false) {
             $browser = "Safari";
-        else $browser = "Неизвестный";
+        } else $browser = "Неизвестный";
         
         if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
             $ip = $_SERVER['HTTP_CLIENT_IP'];
@@ -571,27 +582,252 @@ class UserModel extends Model
         return $ip;
     }
     
-    public function getResponse()
+    //Новая регистрация
+    public function setUserType($type)
     {
-        if ($this->authorized) {
-            return [
-                'response' => 1,
+        if ($type == 'boss' || $type == 'user') {
+            $_SESSION['user_type'] = $type;
+            $this->response        = true;
+        } else {
+            $this->errors[] = [
+                'code'    => self::REGISTRATION_USER_TYPE_INCORRECT_ERROR,
+                'message' => 'Неправильный тип пользователя',
             ];
         }
+    }
     
-        if (empty($this->errors)) {
+    public function setDocumentType($type)
+    {
+        if ($type == 'inn' || $type == 'ogrn') {
+            $_SESSION['document_type'] = $type;
+            $this->response            = true;
+        } else {
+            $this->errors[] = [
+                'code'    => self::REGISTRATION_DOCUMENT_TYPE_INCORRECT_ERROR,
+                'message' => 'Неправильный тип документа',
+            ];
+        }
+    }
+    
+    public function setDocumentNumber($document)
+    {
+        if ($_SESSION['document_type'] == 'inn') {
+            if (v::numeric()->validate($document)) {
+                $_SESSION['document_number'] = $document;
+                $this->response              = true;
+            } else {
+                $this->errors[] = [
+                    'code'    => self::REGISTRATION_INN_INCORRECT_ERROR,
+                    'message' => 'Неправильный формат ИНН',
+                ];
+            }
+        } elseif ($_SESSION['document_type'] == 'ogrn') {
+            if ($this->checkOGRN($document)) {
+                $_SESSION['document_number'] = $document;
+                $this->response              = true;
+            } else {
+                $this->errors[] = [
+                    'code'    => self::REGISTRATION_OGRN_INCORRECT_ERROR,
+                    'message' => 'Неправильный формат ОГРН',
+                ];
+            }
+        }
+    }
+    
+    private function checkOGRN($ogrn)
+    {
+        if (!is_numeric($ogrn)) {
+            return false;
+        }
+        
+        $ogrn = $ogrn . '';
+        
+        if (strlen($ogrn) == 13 and $ogrn[12] != substr((substr($ogrn, 0, -1) % 11), -1)) {
+            return false;
+        } elseif (strlen($ogrn) == 15 and $ogrn[14] != substr(substr($ogrn, 0, -1) % 13, -1)) {
+            return false;
+        } elseif (strlen($ogrn) != 13 and strlen($ogrn) != 15) {
+            return false;
+        }
+        
+        return true;
+    }
+    
+    public function setCompanyData($brandName, $companyName)
+    {
+        if (v::regex('/^[а-яА-ЯёЁa-zA-Z0-9\"\']+$/')->validate($brandName)) {
+            $_SESSION['brand_name'] = $brandName;
+            $this->response         = true;
+        } else {
+            $this->errors[] = [
+                'code'    => self::REGISTRATION_BRAND_INCORRECT_ERROR,
+                'message' => 'Неправильный указано название бренда',
+            ];
+        }
+        
+        if (v::regex('/^[а-яА-ЯёЁa-zA-Z0-9\"\']+$/')->validate($companyName)) {
+            $_SESSION['company_name'] = $companyName;
+            $this->response           = true;
+        } else {
+            $this->errors[] = [
+                'code'    => self::REGISTRATION_COMPANY_INCORRECT_ERROR,
+                'message' => 'Неправильный указано название компании',
+            ];
+        }
+    }
+    
+    public function setFirstName($firstName)
+    {
+        if (v::regex('/^[а-яА-ЯёЁa-zA-Z]+$/')->validate($firstName)) {
+            $_SESSION['first_name'] = ucfirst($firstName);
+            $this->response         = true;
+        } else {
+            $this->errors[] = [
+                'code'    => self::REGISTRATION_FIRST_NAME_INCORRECT_ERROR,
+                'message' => 'Неправильный указано имя',
+            ];
+        }
+    }
+    
+    public function setPhone($phone)
+    {
+        if (v::phone()->validate($phone)) {
+            $_SESSION['phone'] = $phone;
+            $this->response    = true;
+        } else {
+            $this->errors[] = [
+                'code'    => self::REGISTRATION_PHONE_INCORRECT_ERROR,
+                'message' => 'Допущена ошибка при вооде телефона',
+            ];
+        }
+    }
+    
+    public function verifySMSCode($code)
+    {
+        $this->response = true;
+        //        $this->errors[] = [
+        //            'code'    => self::REGISTRATION_SMS_CODE_INCORRECT_ERROR,
+        //            'message' => 'Неправильный код из СМС',
+        //        ];
+    }
+    
+    public function setEmail($mail)
+    {
+        if (v::email()->validate($mail)) {
+            $_SESSION['email'] = $mail;
+            $this->response    = true;
+        } else {
+            $this->errors[] = [
+                'code'    => self::REGISTRATION_EMAIL_INCORRECT_ERROR,
+                'message' => 'Неверный формат Email',
+            ];
+        }
+    }
+    
+    public function setPassword($password)
+    {
+        if (strlen($password) <= 24) {
+            $_SESSION['password'] = $password;
+            $this->response       = true;
+        } else {
+            $this->errors[] = [
+                'code'    => self::REGISTRATION_LARGE_PASSWORD_ERROR,
+                'message' => 'Длина пароля не должна привышать 24 символа',
+            ];
+        }
+    }
+    
+    public function setLastName($lastName)
+    {
+        if (v::regex('/^[а-яА-ЯёЁa-zA-Z]+$/')->validate($lastName)) {
+            $_SESSION['last_name'] = $lastName;
+            $this->response        = true;
+        } else {
+            $this->errors[] = [
+                'code'    => self::REGISTRATION_LAST_NAME_INCORRECT_ERROR,
+                'message' => 'Неправильный указана фамилия',
+            ];
+        }
+    }
+    
+    public function setMidName($midName)
+    {
+        if (v::regex('/^[а-яА-ЯёЁa-zA-Z]+$/')->validate($midName)) {
+            $_SESSION['mid_name'] = $midName;
+            $this->response       = true;
+        } else {
+            $this->errors[] = [
+                'code'    => self::REGISTRATION_MID_NAME_INCORRECT_ERROR,
+                'message' => 'Неправильный указано имя',
+            ];
+        }
+    }
+    
+    // TODO: Реализовать загрузку фотографии
+    
+    public function getRegisterSummaries()
+    {
+        $this->response = [
+            'type'          => isset($_SESSION['user_type']) ? $_SESSION['user_type'] : null,
+            'document_type' => isset($_SESSION['document_type']) ? $_SESSION['document_type'] : null,
+            'document'      => isset($_SESSION['document_number']) ? $_SESSION['document_number'] : null,
+            'brand'         => isset($_SESSION['brand_name']) ? $_SESSION['brand_name'] : null,
+            'company'       => isset($_SESSION['company_name']) ? $_SESSION['company_name'] : null,
+            'name'          => isset($_SESSION['first_name']) ? $_SESSION['first_name'] : null,
+            'phone'         => isset($_SESSION['phone']) ? $_SESSION['phone'] : null,
+            'code'          => isset($_SESSION['code']) ? $_SESSION['code'] : null,
+            'email'         => isset($_SESSION['email']) ? $_SESSION['email'] : null,
+            'password'      => isset($_SESSION['password']) ? $_SESSION['password'] : null,
+            'surname'       => isset($_SESSION['last_name']) ? $_SESSION['last_name'] : null,
+            'midname'       => isset($_SESSION['mid_name']) ? $_SESSION['mid_name'] : null,
+            'photo'         => isset($_SESSION['photo']) ? $_SESSION['photo'] : null,
+        ];
+    }
+    
+    public function setRegisterSummaries()
+    {
+        $this->response = [
+            'type'          => isset($_SESSION['user_type']) ? $_SESSION['user_type'] : null,
+            'document_type' => isset($_SESSION['document_type']) ? $_SESSION['document_type'] : null,
+            'document'      => isset($_SESSION['document_number']) ? $_SESSION['document_number'] : null,
+            'brand'         => isset($_SESSION['brand_name']) ? $_SESSION['brand_name'] : null,
+            'company'       => isset($_SESSION['company_name']) ? $_SESSION['company_name'] : null,
+            'name'          => isset($_SESSION['first_name']) ? $_SESSION['first_name'] : null,
+            'phone'         => isset($_SESSION['phone']) ? $_SESSION['phone'] : null,
+            'code'          => isset($_SESSION['code']) ? $_SESSION['code'] : null,
+            'email'         => isset($_SESSION['email']) ? $_SESSION['email'] : null,
+            'password'      => isset($_SESSION['password']) ? $_SESSION['password'] : null,
+            'surname'       => isset($_SESSION['last_name']) ? $_SESSION['last_name'] : null,
+            'midname'       => isset($_SESSION['mid_name']) ? $_SESSION['mid_name'] : null,
+            'photo'         => isset($_SESSION['photo']) ? $_SESSION['photo'] : null,
+        ];
+    }
+    
+    public function registration()
+    {
+    }
+    
+    public function getResponse()
+    {
+        if (empty($this->errors) && empty($this->response)) {
             return [
                 'error' => [
                     [
                         'code'    => 0,
                         'message' => 'Неправильный запрос',
-                    ]
+                    ],
                 ],
             ];
         }
-    
-        return [
-            'error' => $this->errors,
-        ];
+        
+        if ($this->errors) {
+            return [
+                'error' => $this->errors,
+            ];
+        } else {
+            return [
+                'response' => $this->response,
+            ];
+        }
     }
 }

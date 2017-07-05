@@ -44,5 +44,60 @@ class APIController extends Controller
     
     public function actionRegistration($step)
     {
+        switch ($step[0]) {
+            case 'step_type_user':
+                if (isset($_POST['type'])) {
+                    $this->model('UserModel')->setUserType($_POST['type']);
+                }
+                break;
+            case 'step_type_document':
+                if (isset($_POST['document_type'])) {
+                    $this->model('UserModel')->setDocumentType($_POST['document_type']);
+                }
+                break;
+            case 'step_document':
+                if (isset($_POST['document'])) {
+                    $this->model('UserModel')->setDocumentNumber($_POST['document']);
+                }
+                break;
+            case 'step_company':
+                if (isset($_POST['brand']) && isset($_POST['company'])) {
+                    $this->model('UserModel')->setCompanyData($_POST['brand'], $_POST['company']);
+                }
+                break;
+            case 'step_name':
+                if (isset($_POST['name'])) {
+                    $this->model('UserModel')->setFirstName($_POST['name']);
+                }
+                break;
+            case 'step_phone':
+                if (isset($_POST['phone'])) {
+                    $this->model('UserModel')->setPhone($_POST['phone']);
+                }
+                break;
+            case 'step_code':
+                if (isset($_POST['code'])) {
+                    $this->model('UserModel')->verifySMSCode($_POST['code']);
+                }
+                break;
+            case 'step_email':
+                if (isset($_POST['email'])) {
+                    $this->model('UserModel')->setEmail($_POST['email']);
+                }
+                break;
+            case 'step_password':
+                if (isset($_POST['password'])) {
+                    $this->model('UserModel')->setPassword($_POST['password']);
+                }
+                break;
+            case 'step_summary':
+                if (!empty($_GET)) {
+                    $this->model('UserModel')->getRegisterSummaries();
+                } elseif (!empty($_POST)) {
+                }
+                break;
+        }
+        
+        echo json_encode($this->model('UserModel')->getResponse(), JSON_UNESCAPED_UNICODE);
     }
 }
