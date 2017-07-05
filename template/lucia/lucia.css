@@ -1,0 +1,66 @@
+html {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 100%;
+}
+*, *:before, *:after {
+    -webkit-box-sizing: inherit;
+    -moz-box-sizing: inherit;
+    -ms-box-sizing: inherit;
+    -o-box-sizing: inherit;
+    box-sizing: inherit;
+}
+body {
+    font-family: 'GothamPro';
+    font-size: 14px;
+    line-height: 1.3;
+    color: #333;
+}
+input, button {
+    font-family: inherit;
+    font-size: inherit;
+}
+ul, ol, li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+a {
+    color: #333;
+    color: currentColor;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+.cf {
+    zoom: 1;
+}
+.cf:before,.cf:after {
+    content: "";
+    display: table;
+}
+.cf:after {
+    clear:both;
+}
+
+.axfc {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+.axfs {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.axs {
+    font-size: .85em;
+}

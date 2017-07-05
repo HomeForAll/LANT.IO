@@ -1,0 +1,99 @@
+#section-footer {
+    background: #f7f7f7;
+    color: #5a5a5a;
+}
+
+#section-footer .intro {
+    margin: 0 auto;
+    width: 1000px;
+}
+#section-footer .fp-tableCell {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+#section-footer .footer-social {
+    background: #fff;
+}
+#section-footer .footer-social .wrap {
+    display: flex;
+    justify-content: space-between;
+}
+#section-footer .footer-social .wrap a {
+    display: flex;
+    flex-grow: 1;
+    margin-right: -1px;
+    height: 130px;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    border: 0 solid #f1f1f1;
+    border-width: 0 1px 0 1px;
+    color: #dedede;
+}
+#section-footer .footer-social .wrap a:hover {
+    color: #fff;
+}
+
+
+#section-footer .footer-social .wrap .footer-social-vk:hover {
+    background-image: linear-gradient(203deg, #7eb8f6, #6184a9);
+}
+#section-footer .footer-social .wrap .footer-social-fb:hover {
+    background-image: linear-gradient(203deg, #6b99f3, #3c5a95);
+}
+#section-footer .footer-social .wrap .footer-social-ig:hover {
+    background-image: linear-gradient(205deg, #3947ea, #7040d5 5%, #8f39c0 10%, #a730ab 15%, #b92597 20%, #c91683 25%, #d01e78 29%, #d7246c 34%, #de2b61 38%, #e43155 42%, #ea3749 47%, #ec4a48 52%, #ee5a48 58%, #f06947 63%, #f27645 69%, #f38344 74%, #f5934e 79%, #f7a259 85%, #f9b163 90%, #fac06e 95%, #facf79);
+}
+#section-footer .footer-social .wrap .footer-social-tw:hover {
+    background-image: linear-gradient(203deg, #7aedff, #35abd5);
+}
+#section-footer .footer-social .wrap .footer-social-tg:hover {
+    background-image: linear-gradient(203deg, #7ed8ff, #40a9d7);
+}
+#section-footer .footer-social .wrap .footer-social-yt:hover {
+    background-image: linear-gradient(203deg, #ff7071, #df2f30);
+}
+#section-footer .footer-social .wrap .footer-social-ok:hover {
+    background-image: linear-gradient(203deg, #ffcf7f, #f38231);
+}
+
+
+#section-footer .footer-info {
+    display: flex;
+    line-height: 1.5;
+    justify-content: space-between;
+}
+#section-footer .footer-info .block {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 34%;
+}
+#section-footer .bottom-line {
+    display: flex;
+    text-align: left;
+    padding: 35px 0;
+    font-size: 11px;
+    color: #acacac;
+    border-top: 1px solid #dcdcdc;
+    justify-content: space-between;
+}
+#section-footer .bottom-line .lantio img {
+    margin-bottom: 11px;
+}
+#section-footer .bottom-line ul {
+    font-size: 14px;
+    column-count: 2;
+}
+#section-footer .bottom-line ul li {
+    line-height: 2em;
+}
+#section-footer .footer-subscription .axfc {
+    margin-right: 36px;
+}
+#section-footer .footer-subscription h4 {
+    color: #b7cfaa;
+}
+#section-footer .footer-subscription p {
+    color: #959595;
+}

@@ -1,0 +1,18 @@
+
+@import "/template/GothamPro/styles.css";
+
+@import "/template/lucia/chosen.min.css";
+@import "/template/lucia/jquery.arcticmodal-0.3.css";
+@import "/template/lucia/jquery.fullPage.css";
+@import "/template/lucia/jquery.scrollbar.css";
+
+@import "/template/lucia/lucia.css";
+
+
+@import "/template/html/index/index.css";
+@import "/template/html/login/menu.css";
+@import "/template/html/login/login.css";
+@import "/template/html/search/search.css";
+@import "/template/html/ads/ads.css";
+
+@import "/template/html/footer/footer.css";

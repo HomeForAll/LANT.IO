@@ -1,0 +1,158 @@
+.axf {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: center;
+}
+
+.axfc {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.menu-user {
+    position: fixed;
+    left: auto;
+    right: 30px;
+    bottom: 20px;
+    top: auto;
+    z-index: 200;
+}
+
+
+.button-show-user-menu {
+    position: relative;
+    margin-right: 36px;
+    margin-left: auto;
+    background-color: #3e3e3e;
+    width: 64px;
+    height: 64px;
+    opacity: 0.8;
+    border-radius: 70px;
+    cursor: pointer;
+}
+
+.button-show-user-menu-icon,
+.button-show-user-menu-icon::after,
+.button-show-user-menu-icon::before {
+    position: relative;
+    content: '';
+    width: 32px;
+    height: 3px;
+    background: #fff;
+    transition: all 100ms linear;
+}
+.button-show-user-menu-icon::before {
+    position: absolute;
+    top: -8px;
+}
+.button-show-user-menu-icon::after {
+    position: absolute;
+    bottom: -8px;
+}
+
+.menu-user-show .button-show-user-menu-icon {
+    width: 0px; height: 3px;
+}
+.menu-user-show .button-show-user-menu-icon::before {
+    margin-left: -16px;
+    top: 0; transform: rotate(45deg);
+}
+.menu-user-show .button-show-user-menu-icon::after {
+    margin-left: -16px;
+    bottom: 0; transform: rotate(-45deg);
+}
+
+
+
+.menu-user-list {
+    position: relative;
+    position: absolute;
+    right: 2px;
+    bottom: 64px;
+    margin-bottom: 20px;
+}
+.menu-user-list:after,
+.menu-user-list:before {
+    content: '';
+    position: absolute;
+    right: 60px;
+    top: 100%;
+    width: 0;
+    height: 0;
+    border: solid transparent;
+    pointer-events: none;
+}
+.menu-user-list:after {
+    margin: 0 -5px;
+    border-width: 10px;
+    border-top-color: #363636;
+}
+
+.menu-user-list {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 100ms linear, margin 100ms linear, visibility 100ms linear;
+    margin-bottom: 0px;
+}
+
+.menu-user-show .menu-user-list {
+    opacity: 1;
+    visibility: visible;
+    margin-bottom: 20px;
+}
+
+
+
+.Rectangle-4 {
+    margin-top: 3px;
+    padding: 23px 21px;
+    width: 250px;
+    background-image: radial-gradient(circle at 28% -40%, #337537, rgba(19, 8, 8, 0.13), rgba(11, 5, 5, 0.1), rgba(0, 0, 0, 0)), linear-gradient(#363636, #363636);
+    background-size: 250%;
+    font-size: 14px;
+    color: #ffffff;
+    border-radius: 4px;
+    opacity: 0.9;
+    cursor: pointer;
+}
+
+.user-menu-notice {
+    background-image: radial-gradient(circle at 28% -40%, #753433, rgba(19, 8, 8, 0.16), rgba(11, 5, 5, 0.1), rgba(0, 0, 0, 0)), linear-gradient(#363636, #363636);
+    background-size: 250%;
+}
+.user-menu-message {
+    background-image: radial-gradient(circle at 28% -40%, #335575, rgba(19, 8, 8, 0.16), rgba(11, 5, 5, 0.1), rgba(0, 0, 0, 0)), linear-gradient(#363636, #363636);
+    background-size: 250%;
+}
+.user-menu-plus {
+    background-image: radial-gradient(circle at 28% -40%, #337537, rgba(19, 8, 8, 0.13), rgba(11, 5, 5, 0.1), rgba(0, 0, 0, 0)), linear-gradient(#363636, #363636);
+    background-size: 250%;
+}
+
+
+.Rectangle-4 img {
+    margin-right: 12px;
+}
+
+.Rectangle-4 .count {
+    margin-left: 12px;
+    padding: 3px 7px;
+    font-size: 12px;
+    border-radius: 100px;
+    background-color: #f75a5a;
+}
+
+.menu-user .user-info {
+    background: #363636;
+    padding: 17px 13px;
+}
+.menu-user .user-info img {
+    width: 35px;
+    height: 35px;
+    border-radius: 100px;
+}

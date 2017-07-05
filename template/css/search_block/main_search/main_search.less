@@ -13,211 +13,149 @@
   background: #f3f3f3;
 }
 
-.search-apartments {
-  position: relative;
-  display: flex;
-  flex-flow: row nowrap;
-  align-self: stretch;
-  width: 80%;
-  margin-bottom: 10px;
-  border-radius: 6px 0 0 6px;
-  font-size: 13px;
-  font-weight: 100;
-  z-index: 2;
-  div {
-    display: flex;
-    flex-flow: row;
-    justify-content: flex-start;
-    align-items: center;
-    align-self: stretch;
-  }
-}
-
-#metro {
-  width: 130px;
-}
-
-.city-filter {
-  width: 90%;
-  padding-left: 8px;
-  background: #fff;
-  div {
-    width: 33%;
-  }
-  div:nth-child(3) {
-    justify-content: flex-end;
-  }
-  label {
-    padding-left: 25px;
-    display: flex;
-    flex-flow: row;
-  }
-  a {
-    float: right;
-    cursor: pointer;
-    color: #bbbaba;
-  }
-  span {
-    display: flex;
-    padding-left: 25px;
-    background: url("/template/images/people.png") no-repeat center left 5px;
-    background-size: auto;
-    align-items: center;
-    color: #bbbaba;
-  }
-  input {
-    display: flex;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    font-weight: 300;
-    border: none;
-    padding: 15px;
-    color: #000;
-  }
-  input[type="placeholder"] {
-    color: #2b2b2b;
-  }
-}
-
-.search-city-menu {
-  width: 33%;
-  background: url("/template/images/s1.png") no-repeat center left 5px;
-  background-size: 20px;
-}
-
-.search-metro-menu {
-  background: url("/template/images/m.png") no-repeat center left 5px;
-  background-size: 20px;
-}
-
-.search-apartments-button {
-  width: 10%;
-  button {
-    background: #4f85c8;
-    border-radius: 0 6px 6px 0;
-    border: none;
-    cursor: pointer;
-    color: #fff;
-    width: 100px;
-    height: 100%;
-    &:hover {
-      background: #5c9cea;
-      transition: 1.5s;
-    }
-  }
-}
-
-.filters-search-page {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-around;
-}
-
-.checkbox-filters {
-  position: relative;
-  display: flex;
-  flex-flow: column;
-  align-items: flex-start;
-  align-self: stretch;
-  justify-content: center;
-  &:nth-child(-n+4):hover {
-    background: #fff;
-  }
-  &:hover .more-checkbox-setting {
-    display: flex;
-  }
-  &:nth-child(1) p {
-    background: url("/template/images/s3.png") no-repeat center left 5px, url("/template/images/pointer_bottom.png") no-repeat center right 4px;
-    background-size: auto;
-    padding-left: 25px;
-  }
-  button {
-    background: #f3f3f3;
-    border-radius: 30px;
-    margin-left: 10px;
-    font-weight: 100;
-    font-size: 13px;
-    padding: 2px 10px;
-    color: #6c6c6c;
-    border: 1px solid #c5c5c5;
-    cursor: pointer;
-    &:hover {
-      background: #d9d9d9;
-      transition: 1.5s;
-    }
-  }
-  p {
-    display: flex;
-    font-weight: 100;
-    align-items: center;
-    color: #a8a8a8;
-    font-size: 13px;
-    padding: 15px 22px;
-    background: url("/template/images/pointer_bottom.png") no-repeat center right 4px;
-    background-size: auto;
-  }
-  span {
-    display: flex;
-    align-self: center;
-    font-size: 14px;
-    color: #000;
-    font-weight: 200;
-    margin-left: 10px;
-  }
-  input[type="number"] {
-    font-weight: 500;
-    margin-left: 10px;
-    background: 0;
-    border: none;
-    width: 30px;
-    font-size: 25px;
-  }
-}
-
-.more-checkbox-setting {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: calc(100%);
-  display: none;
-  flex-flow: column;
-  align-items: flex-start;
-  list-style-type: none;
-  width: 100%;
-  background: #fff;
-  border-top: 1px solid #efefef;
-  z-index: 2;
-  &:hover {
-    display: flex;
-  }
-  li {
-    justify-content: space-around;
-    width: 100%;
-  }
-  input[type="checkbox"] {
-    margin-right: 6px;
-  }
-  label {
-    display: flex;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    padding: 6px 10px;
-    align-items: center;
-    width: 100%;
-    cursor: pointer;
-    color: #787777;
-    font-size: 13px;
-  }
-}
-
 .jq-selectbox {
   z-index: auto !important;
 }
 
-.result-all-apartments {
-  position: relative;
+.big-search-menu {
+  display: block;
+  width: auto;
+  background: #fff;
+}
+
+.button-style {
+  height: 76px;
+}
+
+.filter-button {
+  float: none!important;
+  margin: auto;
+  width: 120px!important;
+  height: 35px!important;
+  padding: 5px 10px!important;
+  border-radius: 30px!important;
+  border: 1px solid #dcdcdc!important;
+  background: #f3f3f3!important;
+  color: #6c6c6c!important;
+  position: relative !important;
+  display: block;
+  &:hover {
+    background: #bfbfbf!important;
+    transition: 1.5s!important;
+  }
+}
+
+.left-names-filter {
+  display: block;
+  position: absolute !important;
+  padding-top: 7px;
+  text-align: left;
+  margin: auto;
+  font-size: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.label-filter {
+  display: inline-block;
+  vertical-align: middle;
+  text-align: left;
+  width: 70%;
+}
+
+.filter-block-big-menu {
   display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 20px 0;
+  background: #f3f3f3;
+  li {
+    width: 26.5%;
+    padding: 10px;
+    margin: auto;
+    min-width: 80px;
+    border-right: 2px dotted #bebebe;
+    background: none;
+  }
+  input[type="number"] {
+    position: relative;
+    display: inline-block;
+    width: 45px;
+    height: 25px;
+    margin-left: 5px;
+    border: none;
+    background: none;
+    color: #000;
+    font-weight: bold;
+    font-size: 24px;
+  }
+  label {
+    position: relative;
+    display: block;
+    vertical-align: middle;
+    cursor: pointer;
+    padding: 6px 0 0 30px;
+    width: 70%;
+    min-width: 95px;
+    margin: auto;
+  }
+  & .select {
+    z-index: auto;
+    overflow: initial;
+    text-overflow: ellipsis;
+  }
+  & .select > li {
+    width: auto !important;
+    height: auto;
+  }
+}
+
+.menu-left-window {
+  width: 10% !important;
+}
+
+.number-button {
+  width: 60%;
+}
+
+.numbers {
+  position: relative;
+  vertical-align: middle;
+}
+
+.number {
+  position: relative;
+  display: inline-block !important;
+  vertical-align: middle;
+  width: 211px;
   z-index: 1;
+  button {
+    float: none !important;
+    background: #f3f3f3 !important;
+    border-radius: 30px !important;
+    color: #6c6c6c !important;
+    border: 1px solid #dedede !important;
+    font-size: 14px;
+    padding: 10px!important;
+    width: 110px !important;
+    margin: auto !important;
+    &:hover {
+      background: #adadad !important;
+    }
+  }
+  li {
+    display: block;
+    width: auto;
+  }
+}
+
+.search-more-precisely-search {
+  border: none;
+}
+
+.result-all-apartments {
+  display: flex;
   flex-flow: row wrap;
   justify-content: flex-start;
   align-items: center;
@@ -345,7 +283,7 @@
   background: #fff;
   p {
     overflow: hidden;
-    height: auto;
+    height: 60px;
     text-overflow: ellipsis;
   }
 }
@@ -353,7 +291,7 @@
 .price-and-view-the-apartment {
   position: relative;
   text-align: left;
-  padding: 10px;
+  padding: 20px 10px;
 }
 
 .decorate-number {
