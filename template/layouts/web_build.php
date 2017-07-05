@@ -43,7 +43,7 @@ $siteModel = $this->model('SiteModel');
         <?php include_once ROOT_DIR . '/template/html/search/search.php' ?>
     </div>
     <div class="section" id="section-ads">
-        <?php include_once ROOT_DIR . '/template/html/ads/ads.html' ?>
+        <?php include_once ROOT_DIR . '/template/html/catalog-ads/catalog-ads.html' ?>
     </div>
 
     <div class="section" id="section-footer">
@@ -104,7 +104,7 @@ $siteModel = $this->model('SiteModel');
 <script src="/template/html/login/menu.js"></script>
 <script src="/template/html/login/login.js"></script>
 <script src="/template/html/search/search.js"></script>
-<script src="/template/html/ads/ads.js"></script>
+<script src="/template/html/catalog-ads/catalog-ads.js"></script>
 
 
 <script src="/template/js/main_page/main.js"></script>

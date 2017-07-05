@@ -1,0 +1,161 @@
+#section-ads .fp-tableCell {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+}
+
+#section-ads .ads-list {
+    border-radius: 4px;
+    background-color: #f2f2f2;
+    box-shadow: 0 15px 40px 0 rgba(0, 0, 0, 0.13);
+    width: 1100px;
+    border: solid 1px #dddddd;
+
+}
+#section-ads .ads-list-out {
+    padding: 18px 30px;
+    padding: 12px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+#section-ads .ads-list .block {
+    flex-shrink: 1;
+    flex-basis: 25%;
+}
+#section-ads .ads-list .block .padd {
+    background: #fff;
+    margin: 8px;
+    border-radius: 4px;
+}
+#section-ads .ads-list .block img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 4px 4px 0 0;
+}
+#section-ads .ads-list .block .ads-photo {
+    width: 100%;
+    height: 140px;
+    border-radius: 4px 4px 0 0;
+    background-size: cover;
+}
+
+#section-ads .ads-param {
+    position: relative;
+    padding: 0 20px;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.62));
+    margin-top: -50px;
+    height: 50px;
+    color: #fff;
+    z-index: 1;
+}
+#section-ads .ads-list .ads-detail {
+    position: relative;
+    padding: 15px 20px;
+}
+
+#section-ads .ads-list .block .ads-price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #5d5d5d;
+    margin-bottom: 10px;
+}
+
+#section-ads .ads-list .block .ads-metro {
+    font-size: 12px;
+    color: #565656;
+    margin-bottom: 5px;
+}
+#section-ads .ads-list .block .ads-afoot {
+    font-size: 12px;
+    color: #999;
+}
+#section-ads .ads-list .block .ads-more {
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+    background-color: #f3f3f3;
+    width: 36px;
+    height: 36px;
+    color: #999;
+    border-radius: 36px;
+    cursor: pointer;
+}
+
+
+
+
+.dialog-ad {}
+.dialog-ad .dialog-ad-line {
+    display: flex;
+    margin-bottom: 12px;
+}
+.dialog-ad .dialog-ad-photo {
+    width: 360px;
+    height: 230px;
+    background-size: cover;
+    flex-shrink: 0;
+}
+.dialog-ad .dialog-ad-detail {
+    padding-left: 18px;
+}
+.dialog-ad-button-send,
+.dialog-ad-button-call {
+    padding: 12px 18px 13px;
+    margin-bottom: 6px;
+    width: 100%;
+    font-weight: 500;
+    color: #fff;
+    letter-spacing: 3px;
+    border-radius: 4px;
+    background-image: radial-gradient(circle at 70% -24%, #abd96e, #60b55e);
+    border: 0 none;
+    cursor: pointer;
+}
+.dialog-ad-button-call {
+    background-image: radial-gradient(circle at 70% -24%, #f0f377 2%, #e4b645);
+}
+.dialog-ad .dialog-ad-price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #5d5d5d;
+    margin: 12px 0;
+}
+
+.dialog-ad .dialog-ad-metro {
+    font-size: 12px;
+    color: #565656;
+    margin-bottom: 5px;
+}
+.dialog-ad .dialog-ad-afoot {
+    font-size: 12px;
+    color: #999;
+}
+
+.dialog-ad .user-info {
+    margin-bottom: 16px;
+    font-weight: bold;
+    color: #5d5d5d;
+}
+.dialog-ad .user-info img {
+    margin-right: 12px;
+    width: 35px;
+    height: 35px;
+    border-radius: 100px;
+}
+.dialog-ad .user-info .user-type {
+    font-weight: normal;
+    color: #999;
+}
+.dialog-ad .dialog-ad-param {
+    font-weight: bold;
+    color: #5d5d5d;
+    margin-bottom: 12px;
+}
+
+
+
+/**/
