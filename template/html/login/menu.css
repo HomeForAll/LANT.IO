@@ -147,12 +147,23 @@
     background-color: #f75a5a;
 }
 
-.menu-user .user-info {
+.menu-user .user-info,
+.menu-user .user-menu-reg {
     background: #363636;
     padding: 17px 13px;
 }
-.menu-user .user-info img {
+.menu-user .user-info img,
+.menu-user .user-menu-reg img {
     width: 35px;
     height: 35px;
     border-radius: 100px;
+}
+
+.menu-user .user-menu-reg {
+    font-size: 10px;
+    color: #767676;
+}
+.menu-user .user-menu-reg .menu-user-name {
+    font-size: 14px;
+    color: #ffffff;
 }

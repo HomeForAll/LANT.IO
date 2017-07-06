@@ -25,46 +25,37 @@ $siteModel = $this->model('SiteModel');
 }
 </style>
 <div id="hellopreloader"><div id="hellopreloader_preload"></div></div>
+<div id="page" style="display: none">
 
 <?php include_once ROOT_DIR . '/template/html/login/menu.html' ?>
 
-<ul id="scene" style="display: none">
+<ul id="scene">
     <li class="layer" data-depth="0.20"><img src="/template/images/paralax/home-1.png"></li>
     <li class="layer" data-depth="0.40"><img src="/template/images/paralax/home-2.png"></li>
     <li class="layer" data-depth="0.40"><img src="/template/images/paralax/tree-l.png"></li>
     <li class="layer" data-depth="0.60"><img src="/template/images/paralax/tree-r.png"></li>
     <li class="layer" data-depth="0.80"><img src="/template/images/paralax/back-1.png"></li>
 </ul>
-<div id="fullpage" style="display: none">
-    <div class="section" id="section-login">
+<div id="fullpage">
+    <div class="section" id="section-login" data-anchor="sectionLogin">
         <?php include_once ROOT_DIR . '/template/html/login/login.html' ?>
     </div>
-    <div class="section" id="section-search">
+    <div class="section active" id="section-search" data-anchor="sectionSearch">
         <?php include_once ROOT_DIR . '/template/html/search/search.php' ?>
     </div>
-    <div class="section" id="section-ads">
+    <div class="section" id="section-ads" data-anchor="sectionAds">
         <?php include_once ROOT_DIR . '/template/html/catalog-ads/catalog-ads.html' ?>
     </div>
 
-    <div class="section" id="section-footer">
+    <div class="section" id="section-footer" data-anchor="sectionFooter">
         <?php include_once ROOT_DIR . '/template/html/footer/footer.html' ?>
     </div>
 </div>
 
-
-<div class=content">
-
-
-
-    <div class="section-home-with-filters">
-    </div>
-
-    <?php include_once ROOT_DIR . '/template/html/main_page/top_apartments/top_apartments.php' ?>
-
-
 </div>
 
 
+<!--
 <script type="text/javascript">
     var hellopreloader = document.getElementById("hellopreloader_preload");
     function fadeOutnojquery(el) {
@@ -85,7 +76,7 @@ $siteModel = $this->model('SiteModel');
     document.getElementById('scene').style.display = "block";
     document.getElementById('fullpage').style.display = "block";
 </script>
-
+ -->
 <script src="/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="/bower_components/jquery-ui/jquery-ui.min.js"></script>
 <script src="/template/js/jquery.parallax.min.js"></script>
@@ -107,7 +98,7 @@ $siteModel = $this->model('SiteModel');
 <script src="/template/html/catalog-ads/catalog-ads.js"></script>
 
 
-<script src="/template/js/main_page/main.js"></script>
-<script src="/template/js/mainPageNewsAjax.js"></script>
+<!-- <script src="/template/js/main_page/main.js"></script> -->
+<!-- <script src="/template/js/mainPageNewsAjax.js"></script> -->
 </body>
 </html>

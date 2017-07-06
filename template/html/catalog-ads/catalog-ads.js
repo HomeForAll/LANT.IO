@@ -216,7 +216,8 @@ $(document).ready(function() {
                     renderAd(item)
                 });
                 $("#section-ads h3").html("Результаты поиска");
-                $.fn.fullpage.moveTo(3);
+                //$.fn.fullpage.moveTo(3);
+                $.fn.fullpage.moveTo('sectionAds');
             }
         });
     });
