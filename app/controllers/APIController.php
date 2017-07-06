@@ -106,4 +106,10 @@ class APIController extends Controller
         $this->model('UserModel')->getUserInfo();
         echo json_encode($this->model('UserModel')->getResponse(), JSON_UNESCAPED_UNICODE);
     }
+    
+    public function actionLogout()
+    {
+        $this->model('UserModel')->logout();
+        echo json_encode($this->model('UserModel')->getResponse(), JSON_UNESCAPED_UNICODE);
+    }
 }

@@ -826,6 +826,16 @@ class UserModel extends Model
         }
     }
     
+    public function logout()
+    {
+        unset($_SESSION['authorized']);
+        unset($_SESSION['userID']);
+        unset($_SESSION['status']);
+        unset($_SESSION['user']);
+        
+        $this->response = true;
+    }
+    
     public function getResponse()
     {
         if (empty($this->errors) && empty($this->response)) {

@@ -69,10 +69,7 @@ class UserController extends Controller
     
     public function actionLogout()
     {
-        unset($_SESSION['authorized']);
-        unset($_SESSION['userID']);
-        unset($_SESSION['status']);
-        unset($_SESSION['user']);
+        $this->model('UserModel')->logout();
         header('Location: http://' . $_SERVER['HTTP_HOST']);
         exit;
     }

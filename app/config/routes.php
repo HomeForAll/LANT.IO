@@ -63,6 +63,7 @@ return [
     'api/search' => 'main/API/search',
     'api/search/count' => 'main/API/SearchAdsCount',
     'api/auth' => 'main/API/login',
+    'api/logout' => 'main/API/logout',
     'api/registration/([A-Za-z\_]+)' => 'main/API/registration/$1',
     'api/user' => 'main/API/user',
 ];
