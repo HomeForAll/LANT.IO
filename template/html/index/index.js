@@ -34,7 +34,7 @@ function initIndexPage() {
         //navigationTooltips: ['First page', 'Second page', 'Third and last page'],
         normalScrollElements: '.scrollbar-inner, .arcticmodal-container_i',
     });
-    $.fn.fullpage.silentMoveTo(3);
+    //$.fn.fullpage.silentMoveTo(3);
 
     var lastScrollY = 0;
     $('.scrollbar-inner').scrollbar({
@@ -57,7 +57,6 @@ function initUserMenu(user) {
     if (user.status != -1) {
         $('.menu-user .user-menu-reg').remove();
         $('.menu-user .menu-user-name').text(user.name)
-        $('.menu-user .user-info img').prop('src', user.photo);
     } else {
         $('.menu-user .user-info').remove();
         $('.menu-user .user-menu-notice').remove();
