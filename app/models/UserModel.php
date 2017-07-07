@@ -24,18 +24,18 @@ class UserModel extends Model
     private $socialNets;
     private $response = [];
     private $errors   = [];
-    
+
     public function __construct()
     {
         parent::__construct();
         $this->socialNets = new SocialNets('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
     }
-    
+
     public function login($login, $password)
     {
         $login = trim($login);
         $login = str_replace(' ', '', $login);
-        
+
         if (v::email()->validate($login)) {
             $query = $this->db->prepare("SELECT * FROM users WHERE email = :login");
         } elseif (v::phone()->validate($login)) {
@@ -46,53 +46,53 @@ class UserModel extends Model
                 'code'    => self::LOGIN_VALIDATION_ERROR,
                 'message' => 'Неверный формат логина',
             ];
-            
+
             return false;
         }
-        
+
         $query->execute([':login' => $login]);
         $user = $query->fetch();
-        
+
         if ($user) {
             if (password_verify($password, $user['password'])) {
                 if (!$user['banned']) {
                     $secret_key = Registry::get('config')['secret_key'];
-                    
+
                     $_SESSION['authorized'] = true;
                     $_SESSION['user']       = $user;
-                    
+
                     // TODO: Удалить в будущем
                     $_SESSION['userID']    = $user['id'];
                     $_SESSION['firstName'] = $user['first_name'];
                     $_SESSION['lastName']  = $user['last_name'];
                     $_SESSION['status']    = $user['status'];
-                    
+
                     $_SESSION['user_hash'] = hash('sha512', 'user_id=' . $user['id'] . 'secret_key=' . $secret_key);
-                    
+
                     // TODO: Реализовать функицю не используя чужого API
                     $this->activityWrite($user['id']);
                     $this->response = true;
-                    
+
                     return true;
                 }
-                
+
                 $this->errors[] = [
                     'code'    => self::LOGIN_BANNED_ERROR,
                     'message' => 'Аккаунт заблокирован',
                 ];
-                
+
                 return false;
             }
         }
-        
+
         $this->errors[] = [
             'code'    => self::LOGIN_OR_PASSWORD_INCORRECT_ERROR,
             'message' => 'Пользователь не существует или была допущена ошибка при вводе логина и пароля',
         ];
-        
+
         return false;
     }
-    
+
     public function doRegistration()
     {
         $errors = $this->checkDataErrors();
@@ -102,31 +102,31 @@ class UserModel extends Model
             return $errors;
         }
     }
-    
+
     /**
      * @return array|bool
      */
     private function checkDataErrors()
     {
         $errors = [];
-        
+
         if (!empty($_SESSION['OAuth_state'])) {
             $email    = $_POST['email'];
             $phone    = $this->extractPhoneNumber($_POST['phone']);
             $password = $_POST['password'];
-            
+
             $email_errors    = $this->checkEmail($email);
             $phone_errors    = $this->checkPhone($phone);
             $password_errors = $this->checkPassword($password);
-            
+
             if ($email_errors) {
                 $errors['email'] = $email_errors;
             }
-            
+
             if ($phone_errors) {
                 $errors['phone'] = $phone_errors;
             }
-            
+
             if ($password_errors) {
                 $errors['password'] = $password_errors;
             }
@@ -138,7 +138,7 @@ class UserModel extends Model
             $birthday   = $_POST['birthday'];
             $phone      = $this->extractPhoneNumber($_POST['phoneNumber']);
             $password   = $_POST['password'];
-            
+
             $errors['first_name'] = $this->checkFirstName($first_name);
             $errors['last_name']  = $this->checkLastName($last_name);
             $errors['patronymic'] = $this->checkPatronymic($patronymic);
@@ -147,95 +147,95 @@ class UserModel extends Model
             $errors['phone']      = $this->checkPhone($phone);
             $errors['password']   = $this->checkPassword($password);
         }
-        
+
         return $errors['first_name'] || $errors['last_name'] || $errors['patronymic'] || $errors['email'] || $errors['birthday'] || $errors['phone'] || $errors['password'] ? $errors : false;
     }
-    
+
     private function checkFirstName($first_name)
     {
         $errors = [];
-        
+
         if ($first_name == '') {
             $errors[] = 'Вы должны указать имя.';
         }
-        
+
         return !empty($errors) ? $errors : false;
     }
-    
+
     private function checkLastName($last_name)
     {
         $errors = [];
-        
+
         if ($last_name == '') {
             $errors[] = 'Вы должны указать фамилию.';
         }
-        
+
         return !empty($errors) ? $errors : false;
     }
-    
+
     private function checkPatronymic($patronymic)
     {
         $errors = [];
-        
+
         if ($patronymic == '') {
             $errors[] = 'Вы должны указать отчество.';
         }
-        
+
         return !empty($errors) ? $errors : false;
     }
-    
+
     private function checkBirthday($birthday)
     {
         $errors = [];
-        
+
         if ($birthday == '') {
             $errors[] = 'Укажите дату рождения.';
         }
-        
+
         return !empty($errors) ? $errors : false;
     }
-    
+
     private function checkPhone($phone)
     {
         $errors = [];
-        
+
         if ($phone == '') {
             $errors[] = 'Телефон не может быть пустым.';
         }
-        
+
         return !empty($errors) ? $errors : false;
     }
-    
+
     private function checkEmail($email)
     {
         $errors = [];
-        
+
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $stmt = $this->db->prepare("SELECT * FROM users WHERE email = :email");
             $stmt->execute([':email' => $email]);
             $result = $stmt->fetch();
-            
+
             if ($result) {
                 $errors[] = 'Такой E-mail уже зарегистрирован.';
             }
         } else {
             $errors[] = 'Укажите корректный E-mail.';
         }
-        
+
         return !empty($errors) ? $errors : false;
     }
-    
+
     private function checkPassword($password)
     {
         $errors = [];
-        
+
         if ($password == '') {
             $errors[] = 'Вы не указали пароль.';
         }
-        
+
         return !empty($errors) ? $errors : false;
     }
-    
+
     public function activityWrite($userID)
     {
         $user_agent = $_SERVER["HTTP_USER_AGENT"];
@@ -250,7 +250,7 @@ class UserModel extends Model
         } elseif (strpos($user_agent, "Safari") !== false) {
             $browser = "Safari";
         } else $browser = "Неизвестный";
-        
+
         if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
             $ip = $_SERVER['HTTP_CLIENT_IP'];
         } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
@@ -258,11 +258,11 @@ class UserModel extends Model
         } else {
             $ip = $_SERVER['REMOTE_ADDR'];
         }
-        
+
         $stmt = $this->db->prepare("SELECT active_text FROM users WHERE id = {$userID}");
         $stmt->execute();
         $info = $stmt->fetchAll();
-        
+
         $found_match = "Unknown";
         if ($curl = curl_init()) {
             curl_setopt($curl, CURLOPT_URL, 'http://www.ip2location.com/demo?ip=' . $ip);
@@ -281,7 +281,7 @@ class UserModel extends Model
             $found_match = preg_replace("~\/images\/flags~", "http://www.ip2location.com/images/flags", $found_match);
             curl_close($curl);
         }
-        
+
         $geo            = $found_match;
         $str_for_active = $browser . "," . date('d F \в H:i:s e') . "," . $ip . "," . $geo . ";";
         $str_for_active = $str_for_active . $info[0]['active_text'];
@@ -293,10 +293,10 @@ class UserModel extends Model
                 ":id"     => $userID,
             ]
         );
-        
+
         $device      = new Detection\MobileDetect();
         $device_name = 'PC';
-        
+
         if ($device->isiPhone()) {
             $device_name = 'Iphone';
         }
@@ -360,12 +360,12 @@ class UserModel extends Model
         if ($device->isGenericTablet()) {
             $device_name = 'GenericTablet';
         }
-        
+
         $stmt = $this->db->prepare("SELECT name_session FROM sessions WHERE id_user = {$userID}");
         $stmt->execute();
-        
+
         $info = $stmt->fetchAll();
-        
+
         if (!isset($info[0])) {
             $name_session = session_id();
             $stmt         = $this->db->prepare("INSERT INTO sessions (name_session, id_user, device_name) VALUES (:name_session, :id_user, :device_name)");
@@ -384,12 +384,12 @@ class UserModel extends Model
             }
             $flag_exist   = 0;
             $name_session = session_id();
-            
+
             foreach ($massiv as $value)
                 if (session_id() == $value) {
                     $flag_exist = 1;
                 }
-            
+
             if ($flag_exist == 0) {
                 $stmt = $this->db->prepare("INSERT INTO sessions (name_session, id_user, device_name) VALUES (:name_session, :id_user, :device_name)");
                 $stmt->bindParam(':name_session', $name_session);
@@ -399,7 +399,7 @@ class UserModel extends Model
             }
         }
     }
-    
+
     public function saveUserData()
     {
         if (!empty($_SESSION['OAuth_state']) && $_SESSION['OAuth_state'] == 2) {
@@ -410,13 +410,13 @@ class UserModel extends Model
             $phone_number = trim($_POST['phone']);
             $password     = $_POST['password'];
             $service_id   = $_SESSION['OAuth_user_id'];
-            
+
             $name = $first_name . ' ' . $last_name;
-            
+
             $password_hash = password_hash($password, PASSWORD_DEFAULT);
-            
+
             $query = '';
-            
+
             switch ($_SESSION['OAuth_service']) {
                 case 'vk':
                     $query = $this->db->prepare("INSERT INTO users (first_name, last_name, phone_number, email, password, vk_id, vk_name, vk_avatar) VALUES (:firstName, :lastName, :phoneNumber, :email, :password, :serviceID, :serviceName, :serviceAvatar)");
@@ -440,7 +440,7 @@ class UserModel extends Model
                     $query = $this->db->prepare("INSERT INTO users (first_name, last_name, phone_number, email, password, steam_id, steam_name, steam_avatar) VALUES (:firstName, :lastName, :phoneNumber, :email, :password, :serviceID, :serviceName, :serviceAvatar)");
                     break;
             }
-            
+
             $query->execute(
                 [
                     ':firstName'     => $first_name,
@@ -453,10 +453,10 @@ class UserModel extends Model
                     ':serviceAvatar' => $avatar,
                 ]
             );
-            
+
             if ($query->rowCount()) {
                 $this->clearOAuth();
-                
+
                 return ['result' => true];
             }
         } else {
@@ -468,7 +468,7 @@ class UserModel extends Model
             $phone_number  = trim($_POST['phoneNumber']);
             $password      = $_POST['password'];
             $password_hash = password_hash($password, PASSWORD_DEFAULT);
-            
+
             $query = $this->db->prepare("INSERT INTO users (first_name, last_name, patronymic, birthday, phone_number, email, password) VALUES (:firstName, :lastName, :patronymic, :birthday, :phoneNumber, :email, :password)");
             $query->execute(
                 [
@@ -481,15 +481,15 @@ class UserModel extends Model
                     ':password'    => $password_hash,
                 ]
             );
-            
+
             if ($query->rowCount()) {
                 return ['result' => true];
             }
         }
-        
+
         return false;
     }
-    
+
     private function extractPhoneNumber($phone)
     {
         $phone = trim($phone);
@@ -497,14 +497,14 @@ class UserModel extends Model
         $phone = str_replace(')', '', $phone);
         $phone = str_replace('-', '', $phone);
         $phone = str_replace('+', '', $phone);
-        
+
         return $phone;
     }
-    
+
     public function getOAuthData($data)
     {
         $this->socialNets->setState(isset($_GET['state']) ? $_GET['state'] : $data[1]); // Если в GET запросе присутствует параметр "state", тогда используем его
-        
+
         switch ($data[0]) {
             case 'vk':
                 $this->socialNets->vk();
@@ -529,7 +529,7 @@ class UserModel extends Model
                 break;
         }
     }
-    
+
     public function OAuthLogin($service, $id)
     {
         $services = [
@@ -541,34 +541,34 @@ class UserModel extends Model
             'fb'     => 'facebook_id',
             'steam'  => 'steam_id',
         ];
-        
+
         // TODO: Убрать после удаления методов из DataBase::class
         $user = $this->db->select('*')->from('users')->where($services[$service], '=', trim($id))->execute();
-        
+
         $this->clearOAuth();
-        
+
         if ($user) {
             $secret_key = Registry::get('config')['secret_key'];
-            
+
             $_SESSION['authorized'] = true;
             $_SESSION['user']       = $user;
-            
+
             // TODO: Удалить в будущем
             $_SESSION['userID']    = $user['id'];
             $_SESSION['firstName'] = $user['first_name'];
             $_SESSION['lastName']  = $user['last_name'];
             $_SESSION['status']    = $user['status'];
-            
+
             $_SESSION['user_hash'] = hash('sha512', 'user_id=' . $userID . 'secret_key=' . $secret_key);
-            
+
             // TODO: Реализовать функицю не используя чужого API
             $this->activityWrite($userID);
-            
+
             header('Location: http://' . $_SERVER['HTTP_HOST'] . '/cabinet');
             exit;
         }
     }
-    
+
     public function getUserIP()
     {
         if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
@@ -578,10 +578,10 @@ class UserModel extends Model
         } else {
             $ip = $_SERVER['REMOTE_ADDR'];
         }
-        
+
         return $ip;
     }
-    
+
     //Новая регистрация
     public function setUserType($type)
     {
@@ -595,7 +595,7 @@ class UserModel extends Model
             ];
         }
     }
-    
+
     public function setDocumentType($type)
     {
         if ($type == 'inn' || $type == 'ogrn') {
@@ -608,7 +608,7 @@ class UserModel extends Model
             ];
         }
     }
-    
+
     public function setDocumentNumber($document)
     {
         if ($_SESSION['document_type'] == 'inn') {
@@ -633,15 +633,15 @@ class UserModel extends Model
             }
         }
     }
-    
+
     private function checkOGRN($ogrn)
     {
         if (!is_numeric($ogrn)) {
             return false;
         }
-        
+
         $ogrn = $ogrn . '';
-        
+
         if (strlen($ogrn) == 13 and $ogrn[12] != substr((substr($ogrn, 0, -1) % 11), -1)) {
             return false;
         } elseif (strlen($ogrn) == 15 and $ogrn[14] != substr(substr($ogrn, 0, -1) % 13, -1)) {
@@ -649,10 +649,10 @@ class UserModel extends Model
         } elseif (strlen($ogrn) != 13 and strlen($ogrn) != 15) {
             return false;
         }
-        
+
         return true;
     }
-    
+
     public function setCompanyData($brandName, $companyName)
     {
         if (v::regex('/^[а-яА-ЯёЁa-zA-Z0-9\"\']+$/')->validate($brandName)) {
@@ -664,7 +664,7 @@ class UserModel extends Model
                 'message' => 'Неправильный указано название бренда',
             ];
         }
-        
+
         if (v::regex('/^[а-яА-ЯёЁa-zA-Z0-9\"\']+$/')->validate($companyName)) {
             $_SESSION['company_name'] = $companyName;
             $this->response           = true;
@@ -675,7 +675,7 @@ class UserModel extends Model
             ];
         }
     }
-    
+
     public function setFirstName($firstName)
     {
         if (v::regex('/^[а-яА-ЯёЁa-zA-Z]+$/')->validate($firstName)) {
@@ -688,7 +688,7 @@ class UserModel extends Model
             ];
         }
     }
-    
+
     public function setPhone($phone)
     {
         if (v::phone()->validate($phone)) {
@@ -701,7 +701,7 @@ class UserModel extends Model
             ];
         }
     }
-    
+
     public function verifySMSCode($code)
     {
         $this->response = true;
@@ -710,7 +710,7 @@ class UserModel extends Model
         //            'message' => 'Неправильный код из СМС',
         //        ];
     }
-    
+
     public function setEmail($mail)
     {
         if (v::email()->validate($mail)) {
@@ -723,7 +723,7 @@ class UserModel extends Model
             ];
         }
     }
-    
+
     public function setPassword($password)
     {
         if (strlen($password) <= 24) {
@@ -736,7 +736,7 @@ class UserModel extends Model
             ];
         }
     }
-    
+
     public function setLastName($lastName)
     {
         if (v::regex('/^[а-яА-ЯёЁa-zA-Z]+$/')->validate($lastName)) {
@@ -749,7 +749,7 @@ class UserModel extends Model
             ];
         }
     }
-    
+
     public function setMidName($midName)
     {
         if (v::regex('/^[а-яА-ЯёЁa-zA-Z]+$/')->validate($midName)) {
@@ -762,9 +762,9 @@ class UserModel extends Model
             ];
         }
     }
-    
+
     // TODO: Реализовать загрузку фотографии
-    
+
     public function getRegisterSummaries()
     {
         $this->response = [
@@ -783,7 +783,7 @@ class UserModel extends Model
             'photo'         => isset($_SESSION['photo']) ? $_SESSION['photo'] : null,
         ];
     }
-    
+
     public function setRegisterSummaries()
     {
         $this->response = [
@@ -802,16 +802,19 @@ class UserModel extends Model
             'photo'         => isset($_SESSION['photo']) ? $_SESSION['photo'] : null,
         ];
     }
-    
+
     public function registration()
     {
     }
-    
+
     public function getUserInfo()
     {
         if (isset($_SESSION['user'])) {
+            // Необходимо переименовать поле в базе данных
+            $_SESSION['user']['photo'] = $_SESSION['user']['profile_foto_id'];
             $this->response = [
                 'id'     => $_SESSION['user']['id'],
+                'photo'  => $_SESSION['user']['photo'],
                 'name'   => $_SESSION['user']['first_name'] . ' ' . $_SESSION['user']['last_name'],
                 'email'  => $_SESSION['user']['email'],
                 'status' => $_SESSION['user']['status'],
@@ -825,17 +828,17 @@ class UserModel extends Model
             ];
         }
     }
-    
+
     public function logout()
     {
         unset($_SESSION['authorized']);
         unset($_SESSION['userID']);
         unset($_SESSION['status']);
         unset($_SESSION['user']);
-        
+
         $this->response = true;
     }
-    
+
     public function getResponse()
     {
         if (empty($this->errors) && empty($this->response)) {
@@ -848,7 +851,7 @@ class UserModel extends Model
                 ],
             ];
         }
-        
+
         if ($this->errors) {
             return [
                 'error' => $this->errors,
