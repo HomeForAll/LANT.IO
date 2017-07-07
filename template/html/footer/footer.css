@@ -22,6 +22,8 @@
 #section-footer .footer-social .wrap a {
     display: flex;
     flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
     margin-right: -1px;
     height: 130px;
     align-content: center;
@@ -30,31 +32,46 @@
     border: 0 solid #f1f1f1;
     border-width: 0 1px 0 1px;
     color: #dedede;
+    position: relative;
 }
 #section-footer .footer-social .wrap a:hover {
     color: #fff;
 }
+#section-footer .footer-social .wrap a::before {
+    content: '';
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-image: linear-gradient(203deg, #7eb8f6, #6184a9);
+    transition: opacity 100ms linear;
+    opacity: 0;
+}
+#section-footer .footer-social .wrap a:hover::before {
+    opacity: 1;
+    transition: opacity 10ms linear;
+}
 
+#section-footer .footer-social .wrap a svg {
+    z-index: 1;
+}
 
-#section-footer .footer-social .wrap .footer-social-vk:hover {
+#section-footer .footer-social .wrap .footer-social-vk:before {
     background-image: linear-gradient(203deg, #7eb8f6, #6184a9);
 }
-#section-footer .footer-social .wrap .footer-social-fb:hover {
+#section-footer .footer-social .wrap .footer-social-fb:before {
     background-image: linear-gradient(203deg, #6b99f3, #3c5a95);
 }
-#section-footer .footer-social .wrap .footer-social-ig:hover {
+#section-footer .footer-social .wrap .footer-social-ig:before {
     background-image: linear-gradient(205deg, #3947ea, #7040d5 5%, #8f39c0 10%, #a730ab 15%, #b92597 20%, #c91683 25%, #d01e78 29%, #d7246c 34%, #de2b61 38%, #e43155 42%, #ea3749 47%, #ec4a48 52%, #ee5a48 58%, #f06947 63%, #f27645 69%, #f38344 74%, #f5934e 79%, #f7a259 85%, #f9b163 90%, #fac06e 95%, #facf79);
 }
-#section-footer .footer-social .wrap .footer-social-tw:hover {
+#section-footer .footer-social .wrap .footer-social-tw:before {
     background-image: linear-gradient(203deg, #7aedff, #35abd5);
 }
-#section-footer .footer-social .wrap .footer-social-tg:hover {
+#section-footer .footer-social .wrap .footer-social-tg:before {
     background-image: linear-gradient(203deg, #7ed8ff, #40a9d7);
 }
-#section-footer .footer-social .wrap .footer-social-yt:hover {
+#section-footer .footer-social .wrap .footer-social-yt:before {
     background-image: linear-gradient(203deg, #ff7071, #df2f30);
 }
-#section-footer .footer-social .wrap .footer-social-ok:hover {
+#section-footer .footer-social .wrap .footer-social-ok:before {
     background-image: linear-gradient(203deg, #ffcf7f, #f38231);
 }
 
