@@ -46,54 +46,40 @@ class APIController extends Controller
     {
         switch ($step[0]) {
             case 'step_type_user':
-                if (isset($_POST['type'])) {
-                    $this->model('UserModel')->setUserType($_POST['type']);
-                }
+                $this->model('UserModel')->setUserType(isset($_POST['type']) ? $_POST['type'] : null);
                 break;
             case 'step_type_document':
-                if (isset($_POST['document_type'])) {
-                    $this->model('UserModel')->setDocumentType($_POST['document_type']);
-                }
+                $this->model('UserModel')->setDocumentType(isset($_POST['document_type']) ? $_POST['document_type'] : null);
                 break;
             case 'step_document':
-                if (isset($_POST['document'])) {
-                    $this->model('UserModel')->setDocumentNumber($_POST['document']);
-                }
+                $this->model('UserModel')->setDocumentNumber(isset($_POST['document']) ? $_POST['document'] : null);
                 break;
             case 'step_company':
-                if (isset($_POST['brand']) && isset($_POST['company'])) {
-                    $this->model('UserModel')->setCompanyData($_POST['brand'], $_POST['company']);
-                }
+                $this->model('UserModel')->setCompanyData(isset($_POST['brand']) ? $_POST['brand'] : null, isset($_POST['company']) ? $_POST['company'] : null);
                 break;
             case 'step_name':
-                if (isset($_POST['name'])) {
-                    $this->model('UserModel')->setFirstName($_POST['name']);
-                }
+                $this->model('UserModel')->setFirstName(isset($_POST['name']) ? $_POST['name'] : null);
                 break;
             case 'step_phone':
-                if (isset($_POST['phone'])) {
-                    $this->model('UserModel')->setPhone($_POST['phone']);
-                }
+                $this->model('UserModel')->setPhone(isset($_POST['phone']) ? $_POST['phone'] : null);
                 break;
             case 'step_code':
-                if (isset($_POST['code'])) {
-                    $this->model('UserModel')->verifySMSCode($_POST['code']);
-                }
+                $this->model('UserModel')->verifySMSCode(isset($_POST['code']) ? $_POST['code'] : null);
                 break;
             case 'step_email':
-                if (isset($_POST['email'])) {
-                    $this->model('UserModel')->setEmail($_POST['email']);
-                }
+                $this->model('UserModel')->setEmail(isset($_POST['email']) ? $_POST['email'] : null);
                 break;
             case 'step_password':
-                if (isset($_POST['password'])) {
-                    $this->model('UserModel')->setPassword($_POST['password']);
-                }
+                $this->model('UserModel')->setPassword(isset($_POST['password']) ? $_POST['password'] : null);
                 break;
             case 'step_summary':
-                if (!empty($_GET)) {
-                    $this->model('UserModel')->getRegisterSummaries();
-                } elseif (!empty($_POST)) {
+                if (!empty($_POST)) {
+                    $this->model('UserModel')->setSummaries();
+                    if ($this->model('UserModel')->getResponse() == true) {
+                        $this->model('UserModel')->registration();
+                    }
+                } else {
+                    $this->model('UserModel')->summaries();
                 }
                 break;
         }
