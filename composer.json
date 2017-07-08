@@ -4,6 +4,7 @@
         "predis/predis": "^1.1",
         "php-amqplib/php-amqplib": "^2.6",
         "liquid/liquid": "^1.2",
-        "respect/validation": "^1.1"
+        "respect/validation": "^1.1",
+        "verot/class.upload.php": "0.33"
     }
 }
