@@ -5,6 +5,7 @@ class CabinetModel extends Model
     use Cleaner;
 
     const IDSPERPAGE = 5;
+    const ADMINSTATUS = 8;
     private $mailer;
 
 
@@ -14,212 +15,353 @@ class CabinetModel extends Model
         $this->db = new DataBase();
     }
 
-    public function open_chat()
+    public function getChatMessages($idChat)
     {
         $redis = new Redis();
         $redis->connect('127.0.0.1');
         $start = round(microtime(true) * 1000);
         $end = $start - 1000000;
-        $dialog = 'dialog-' . $_SESSION['dialog_id'];
+        $dialog = 'dialog-' . $idChat;
         return $redis->zRangeByScore($dialog, $end, $start);
     }
 
-    public function delete_all_dialogs()
+    public function getChatInfo($id)
     {
-        $profile_id = $_SESSION['userID'];
-        $this->db->query("UPDATE dialogs SET show = 0 WHERE user_id= $profile_id");
-        return $this->getdialogs();
+        $name = $this->getDialogName($id);
+        return array(
+            'nameChat' => $name,
+            'idChat' => $id,
+        );
     }
 
-    public function return_dialog()
+    public function deleteAllDialogs() // Удалить все диалоги
     {
         $profile_id = $_SESSION['userID'];
-
-        $stmt = $this->db->prepare("SELECT * FROM dialogs WHERE user_id= $profile_id AND show= 0");
+        $stmt = $this->db->prepare("UPDATE dialogs SET show = 0 WHERE user_id= $profile_id");
         $stmt->execute();
-        $dialogs = $stmt->fetchAll();
+        return $this->getDialogs(true);
+    }
 
-        $i_max = 0;
-
-        foreach ($dialogs as $value) {
-            $i_max++;
-        }
-        $_SESSION['count_of_dialogs'] = $i_max;
-//$_SESSION['count_of_users'] = $i_max;   // CRITICAL MISTAKE EXPERCTED!!!!!!!!!!!!!!!!
-
-        foreach ($dialogs as $key => $value) {
-            $matrix[$key][0] = $value[0];
-            $this->db->query("UPDATE dialogs_properties SET date_of_delete = NULL WHERE id = {$matrix[$key][0]}");
-
-            $stmt = $this->db->prepare("SELECT name FROM dialogs_properties WHERE id = {$matrix[$key][0]}");
-            $stmt->execute();
-            $name = $stmt->fetchAll();
-
-            $matrix[$key][1] = $name[0][0];
-        }
-
-        if (isset($matrix)) {
-            $_SESSION['matrix_for_dialogs'] = $matrix;
-        }
-
-        for ($i = 0; $i <= $_SESSION['count_of_dialogs']; $i++) {
-            if (isset($_POST["return" . $i])) {
-                if (($_SESSION['matrix_for_dialogs'][$i][0])) {
-                    $this->db->query("UPDATE dialogs SET show = 1 WHERE id = {$_SESSION['matrix_for_dialogs'][$i][0]} AND user_id = {$profile_id}");
+    public function getAvatarDialogs($id)
+    {
+        $stmt = $this->db->prepare("SELECT owners FROM dialogs_properties WHERE id = $id");
+        $stmt->execute();
+        $owners = $stmt->fetchAll();
+        $owners = $owners[0]['owners'];
+        $massivOwners = explode(",", $owners);
+        if (count($massivOwners) == 2) {
+            foreach ($massivOwners as $item => $key) {
+                if ($key != $_SESSION['userID']) {
+                    $profile_foto_id = $this->getAvatarUser($key);
+                    return $profile_foto_id;
                 }
             }
-        }
-        return $this->getdialogs();
-    }
-
-    public function turn_back_dialog()
-    {
-        $profile_id = $_SESSION['userID'];
-        if (isset($_SESSION['last_deleted_dialog'])) {
-            $this->db->query("UPDATE dialogs SET show = 1 WHERE id = {$_SESSION['last_deleted_dialog']} AND user_id= $profile_id");
-            $this->db->query("UPDATE dialogs_properties SET date_of_delete = NULL WHERE id = {$_SESSION['last_deleted_dialog']}");
-            unset($_SESSION['last_deleted_dialog']);
-            unset($_SESSION['last_deleted_dialog_name']);
-        }
-        return $this->getdialogs();
-    }
-
-    public function getdialogs()
-    {
-        unset($_SESSION['deleted_dialogs_button']);
-        $_SESSION['count_of_dialogs'] = 0;
-        $profile_id = $_SESSION['userID'];
-
-        $stmt = $this->db->prepare("SELECT * FROM dialogs WHERE user_id= $profile_id AND show= 0");
-        $stmt->execute();
-        $dialogs = $stmt->fetchAll();
-        $i_max = 0;
-        foreach ($dialogs as $value) {
-            $i_max++;
-        }
-        $count_of_dialogs_deleted = $i_max;
-        $_SESSION['count_of_dialogs_deleted'] = $count_of_dialogs_deleted;
-
-        if (!isset($_POST['deleted_dialogs'])) {
-            $stmt = $this->db->prepare("SELECT * FROM dialogs WHERE user_id= $profile_id AND show= 1");
-            $stmt->execute();
-            $dialogs = $stmt->fetchAll();
         } else {
-            $stmt = $this->db->prepare("SELECT * FROM dialogs WHERE user_id= $profile_id AND show= 0");
+            $stmt = $this->db->prepare("SELECT avatar FROM dialogs_properties WHERE id = $id");
             $stmt->execute();
-            $dialogs = $stmt->fetchAll();
-        }
-        $i_max = 0;
-        foreach ($dialogs as $value) {
-            $i_max++;
-        }
-        $_SESSION['count_of_dialogs'] = $i_max;
-        //$_SESSION['count_of_users'] = $i_max;   // CRITICAL MISTAKE EXPERCTED!!!!!!!!!!!!!!!!
-
-        foreach ($dialogs as $key => $value) {
-            $matrix[$key][0] = $value[0];
-
-            if (isset($_POST['deleted_dialogs'])) {
-                $_SESSION['deleted_dialogs_button'] = 1;
-                $stmt = $this->db->prepare("SELECT date_of_delete FROM dialogs_properties WHERE id = {$matrix[$key][0]}");
-                $stmt->execute();
-                $date_of_delete = $stmt->fetchAll();
-
-                if (($date_of_delete[0]['date_of_delete'])) {
-
-                    $today = date('Y-m-d');
-
-                    $result = ($today < $date_of_delete[0]['date_of_delete']);
-                    if ($result == true) {
-                        $matrix[$key][2] = $date_of_delete[0]['date_of_delete'];
-                    } else {
-                        // DELETE DIALOG
-                    }
-                } else {
-                    $stmt = $this->db->prepare("SELECT owners FROM dialogs_properties WHERE id = {$matrix[$key][0]}");
-                    $stmt->execute();
-                    $owners = $stmt->fetchAll();
-
-                    $massiv_owners = $owners[0]['owners'];
-                    $massiv_owners = explode(",", $massiv_owners);
-
-                    $full_delete_dialog_flag = true;
-                    foreach ($massiv_owners as $value) {
-                        $stmt = $this->db->prepare("SELECT show FROM dialogs WHERE id = {$matrix[$key][0]} AND user_id = $value");
-                        $stmt->execute();
-                        $show = $stmt->fetchAll();
-
-                        if ($show[0]['show'] == 1) {
-                            $full_delete_dialog_flag = false;
-                        }
-                    }
-                    if ($full_delete_dialog_flag == true) {
-                        $inactiveDate = new DateTime();
-                        $inactiveDate->add(new DateInterval('P3M'));
-                        $date_of_delete = $inactiveDate->format('Y-m-d');
-                        $this->db->query("UPDATE dialogs_properties SET date_of_delete = '{$date_of_delete}' WHERE id = {$matrix[$key][0]}");
-                    }
-                }
-            }
-
-            $stmt = $this->db->prepare("SELECT name FROM dialogs_properties WHERE id = {$matrix[$key][0]}");
-            $stmt->execute();
-            $name = $stmt->fetchAll();
-
-            $stmt = $this->db->prepare("SELECT owners FROM dialogs_properties WHERE id = {$matrix[$key][0]}");
-            $stmt->execute();
-            $owners = $stmt->fetchAll();
-            $massiv_owners = $owners[0]['owners'];
-            $massiv_owners = explode(",", $massiv_owners);
-
-            if (isset($massiv_owners[2]))
-                $matrix[$key][1] = $name[0][0];
-            else {
-                foreach ($massiv_owners as $k => $z) {
-                    if ($z != $profile_id) {
-                        $stmt = $this->db->prepare("SELECT first_name FROM users WHERE id = {$z}");
-                        $stmt->execute();
-                        $name = $stmt->fetchAll();
-                        $matrix[$key][1] = $name[0][0];
-                        $matrix[$key][1] .= ' ';
-                        $stmt = $this->db->prepare("SELECT last_name FROM users WHERE id = {$z}");
-                        $stmt->execute();
-                        $name = $stmt->fetchAll();
-                        $matrix[$key][1] .= $name[0][0];
-                    }
-                }
-            }
-        }
-
-        if (isset($matrix)) {
-            $_SESSION['matrix_for_dialogs'] = $matrix;
-            return $matrix;
+            $avatar = $stmt->fetchAll();
+            $avatar = $avatar[0]['avatar'];
+            return $avatar;
         }
     }
 
-    public function delete_dialog($i)
+    public function getDialogs($flagOfDialog)
+    {
+        if ($flagOfDialog) {
+            $ids = $this->getDialogsIDs();
+        } else {
+            $ids = $this->getDeletedDialogsIDs();
+        }
+        if ($ids) {
+            $names = [];
+            $avatars = [];
+            $last_message = [];
+            $last_message_text = [];
+            $last_message_avatar = [];
+            $last_message_time = [];
+            $massiv = [];
+
+            $code = 'getDialogs';
+            foreach ($ids as $item => $key) {
+                $names[$item] = $this->getDialogName($key);
+                $avatars[$item] = $this->getAvatarDialogs($key);
+                $last_message[$item] = $this->getLastMessage($key);
+                $last_message_text[$item] = $last_message[$item]['text'];
+                $last_message_avatar[$item] = $last_message[$item]['avatar'];
+                $last_message_time[$item] = $last_message[$item]['time'];
+
+                $massiv[$item]['id'] = $ids[$item];
+                $massiv[$item]['title'] = $names[$item];
+                $massiv[$item]['photo'] = $avatars[$item];
+                $massiv[$item]['last_message'] = $last_message_text[$item];
+                $massiv[$item]['last_avatar'] = $last_message_avatar[$item];
+                $massiv[$item]['timestamp'] = $last_message_time[$item];
+            }
+            echo (json_encode($massiv, JSON_UNESCAPED_UNICODE));
+
+            return array(
+                'last_message_text' => $last_message_text,
+                'last_message_avatar' => $last_message_avatar,
+                'avatarsDialog' => $avatars,
+                'idsDialog' => $ids,
+                'namesDialog' => $names,
+                'code' => $code,
+            );
+        }
+        $code = 'dialogs_not_exist';
+        $this->setUserError('dialogs_not_exist', 'Диалогов нет!');
+        return array(
+            'code' => $code,
+        );
+        } // Получить диалоги true - активные, false - удаленные
+
+    public function getDialogsIDs()
+    {
+        $profile_id = $_SESSION['userID'];
+        //$profile_id = 23;
+        $stmt = $this->db->prepare("SELECT * FROM dialogs WHERE user_id= $profile_id AND show= 1");
+        $stmt->execute();
+        $dialogs = $stmt->fetchAll();
+
+        if ($dialogs) {
+            $dialogs_ids = [];
+            foreach ($dialogs as $item => $key) {
+                $dialogs_ids[$item] = $key['id'];
+            }
+            return $dialogs_ids;
+        }
+        return false;
+    } // Узнать все диалоги пользователя
+
+    public function getDeletedDialogsIDs()
+    {
+        $profile_id = $_SESSION['userID'];
+        $stmt = $this->db->prepare("SELECT * FROM dialogs WHERE user_id= $profile_id AND show= 0");
+        $stmt->execute();
+        $dialogs = $stmt->fetchAll();
+
+        if ($dialogs) {
+            $dialogs_ids = [];
+            foreach ($dialogs as $item => $key) {
+                $dialogs_ids[$item] = $key['id'];
+            }
+            return $dialogs_ids;
+        }
+        return false;
+    } // Узнать удаленные диалоги пользователя
+
+    public function getDialogName($id)
+    {
+        $stmt = $this->db->prepare("SELECT owners FROM dialogs_properties WHERE id = $id");
+        $stmt->execute();
+        $owners = $stmt->fetchAll();
+        $owners = $owners[0]['owners'];
+        $massivOwners = explode(",", $owners);
+        if (count($massivOwners) == 2) {
+            foreach ($massivOwners as $item => $key) {
+                if ($key != $_SESSION['userID']) {
+                    $name = $this->getNamesUsersForDialog($key);
+                    return $name;
+                }
+            }
+        }
+        $stmt = $this->db->prepare("SELECT name FROM dialogs_properties WHERE id = $id");
+        $stmt->execute();
+        $name = $stmt->fetchAll();
+        $name = $name[0]['name'];
+        $name = mb_substr($name,0,64, 'UTF-8');
+        return $name;
+    } // Узнать название диалога по id
+
+    public function getAvatarUser($id) // Возвращает ссылку на аватар пользователя по id
+    {
+        $stmt = $this->db->prepare("SELECT profile_foto_id FROM users WHERE id = $id");
+        $stmt->execute();
+        $profile_foto_id = $stmt->fetchAll();
+        $profile_foto_id = $profile_foto_id[0]['profile_foto_id'];
+        return $profile_foto_id;
+    }
+
+    public function getLastMessage($id)
+    {
+        $stmt = $this->db->prepare("SELECT max(id) FROM dialogs_messages WHERE chat_id = $id");
+        $stmt->execute();
+        $i = $stmt->fetchAll();
+        $i = $i[0]['max'];
+
+        if ($i != null) {
+            $stmt = $this->db->prepare("SELECT * FROM dialogs_messages WHERE id = $i");
+            $stmt->execute();
+            $info = $stmt->fetchAll();
+            $message = $info[0]['text'];
+            $time = $info[0]['date'];
+
+            $profile_foto_id = $this->getAvatarUser($info[0]['user_id']);
+            return array(
+                'time' => $time,
+                'text' => $message,
+                'avatar' => $profile_foto_id,
+            );
+        } else {
+            $time = 'empty';
+            $message = 'empty';
+            $profile_foto_id = 'empty';
+            return array(
+                'time' => $time,
+                'text' => $message,
+                'avatar' => $profile_foto_id,
+            );
+        }
+    }
+
+    public function getDeletedDialogs()
+    {
+        $dialogs = $this->getDialogs(false);
+        if (isset($dialogs['idsDialog'])) {
+            $dialogs = $dialogs['idsDialog'];
+            $code = 'deleted_dialogs';
+            $datesOfDelete = [];
+            foreach ($dialogs as $item => $key) {
+                $datesOfDelete[$item] = $this->getDateOfDelete($key);
+            }
+            return array(
+                'ids' => $dialogs['idsDialog'],
+                'names' => $dialogs['namesDialog'],
+                'datesOfDelete' => $datesOfDelete,
+                'code' => $code,
+            );
+        } else {
+            $code = 'deleted_dialogs_not_exist';
+            return array(
+                'code' => $code,
+            );
+        }
+    }
+
+    public function getIDsAdminsForDialog() // Узнать IDs Админов
+    {
+        $profile_id = $_SESSION['userID'];
+        $status = self::ADMINSTATUS;
+        $stmt = $this->db->prepare("SELECT id FROM users WHERE id != $profile_id AND status == $status");
+        $stmt->execute();
+        $users = $stmt->fetchAll();
+
+        if ($users) {
+            $usersForDialog = [];
+            foreach ($users as $item => $key) {
+                $usersForDialog[$item] = $key['id'];
+            }
+            return $usersForDialog;
+        }
+        return false;
+    }
+
+    public function getAdminsForDialog() // Получить пользователей для добавления в диалог
+    {
+        $ids = $this->getIdsAdminsForDialog();
+        if ($ids) {
+            $code = 'admins_for_dialogs';
+            $names = [];
+            foreach ($ids as $item => $key) {
+                $names[$item] = $this->getNamesUsersForDialog($key);
+            }
+            return array(
+                'idsAdminsForDialog' => $ids,
+                'namesAdminssForDialog' => $names,
+                'code' => $code,
+            );
+        }
+        $code = 'admins_for_dialogs_not_exist';
+        return array(
+            'code' => $code,
+        );
+    }
+
+    public function getDateOfDelete($id)
+    {
+        $stmt = $this->db->prepare("SELECT date_of_delete FROM dialogs_properties WHERE id = $id");
+        $stmt->execute();
+        $dateOfDelete = $stmt->fetchAll();
+        $dateOfDelete = $dateOfDelete[0]['date_of_delete'];
+        return $dateOfDelete;
+    }
+
+    public function createNameForDialog($id)
+    {
+        $profile_id = $_SESSION['userID'];
+        $stmt = $this->db->prepare("SELECT owners FROM dialogs_properties WHERE id = $id");
+        $stmt->execute();
+        $owners = $stmt->fetchAll();
+        $massivOwners = $owners[0]['owners'];
+        $massivOwners = explode(",", $massivOwners);
+
+        if (!isset($massivOwners[2]))
+        {
+            foreach ($massivOwners as $item => $key)
+            {
+                if ($key != $profile_id)
+                {
+                    $stmt = $this->db->prepare("SELECT first_name FROM users WHERE id = {$key}");
+                    $stmt->execute();
+                    $name = $stmt->fetchAll();
+                    $fullName = $name[0]['first_name'];
+                    $stmt = $this->db->prepare("SELECT last_name FROM users WHERE id = {$key}");
+                    $stmt->execute();
+                    $name = $stmt->fetchAll();
+                    $fullName .= ' ' . $name[0]['last_name'];
+                    $stmt = $this->db->prepare("UPDATE dialogs_properties SET name = :name WHERE id = :id");
+                    $stmt->execute(array(':name' => $fullName, ':id' => $id));
+                }
+            }
+        }
+        else {
+            foreach ($massivOwners as $item => $key) {
+                $stmt = $this->db->prepare("SELECT first_name FROM users WHERE id = {$key}");
+                $stmt->execute();
+                $name = $stmt->fetchAll();
+                $fullName = '';
+                if ($item = 0)
+                    $fullName = $name[0]['first_name'];
+                else
+                    $fullName.= ',' . $name[0]['first_name'];
+                $stmt = $this->db->prepare("UPDATE dialogs_properties SET name = :name WHERE id = :id");
+                $stmt->execute(array(':name' => $fullName, ':id' => $id));
+            }
+        }
+    } // Создать имя диалога по id
+
+    public function createDateOfDelete($id) // Создать дату удаления диалога по id, возвращает дату!
+    {
+        $inactiveDate = new DateTime();
+        $inactiveDate->add(new DateInterval('P3M'));
+        $dateOfDelete = $inactiveDate->format('Y-m-d');
+
+        $stmt = $this->db->prepare("UPDATE dialogs_properties SET date_of_delete = :date WHERE id = :id");
+        $stmt->execute(array(':date' => $dateOfDelete, ':id' => $id));
+        return $dateOfDelete;
+    }
+
+    public function cancelDateOfDelete($id) // Удалить дату удаления
+    {
+        $stmt = $this->db->prepare("UPDATE dialogs_properties SET date_of_delete = NULL WHERE id = :id");
+        $stmt->execute(array(':id' => $id));
+    }
+
+    public function deleteDialog($id)
     {
         $profile_id = $_SESSION['userID'];
 
-        if (!isset($_SESSION['last_deleted_dialog'])) {
-            if (($_SESSION['matrix_for_dialogs'][$i][0])) {
-                $matrix = $_SESSION['matrix_for_dialogs'][$i];
+        $stmt = $this->db->prepare("UPDATE dialogs SET show = :show WHERE id = :id AND user_id = :profile_id");
+        $stmt->execute(array(':show' => 0, ':id' => $id, ':profile_id' => $profile_id));
+        return $this->createDateOfDelete($id);
+    } // Удалить диалог по ID
 
-                $this->db->query("UPDATE dialogs SET show = 0 WHERE id = {$matrix[0]} AND user_id = {$profile_id}");
-
-                $_SESSION['last_deleted_dialog'] = $matrix[0];
-                $_SESSION['last_deleted_dialog_name'] = $matrix[1];
-            }
-        }
-        return $this->getdialogs();
-    }
-
-    public function CountOfUsersInDialogCheck($chat_owners)  // Проверка кол-ва пользователей в диалоге(исключая админов). На вход массив, на выход true, если превысило максимальное
+    public function countOfUsersInDialogCheck($chat_owners)  // Проверка кол-ва пользователей в диалоге(исключая админов). На вход массив, на выход false, если превысило максимальное
     {
-        $admin_status = 8;
+        $admin_status = self::ADMINSTATUS;
         $max_count_of_dialog_users = 5;
         $count_of_owners = 0;
-        $CountOfUsersInDialogCheck_flag = 0;
+        $countOfUsersInDialogCheck_flag = 1;
 
         foreach ($chat_owners as $key => $value) {
             $stmt = $this->db->prepare("SELECT status FROM users WHERE id = {$value}");
@@ -232,276 +374,160 @@ class CabinetModel extends Model
         }
 
         if ($count_of_owners >= $max_count_of_dialog_users) {
-            $CountOfUsersInDialogCheck_flag = 1;
+            $countOfUsersInDialogCheck_flag = 0;
         }
-        return $CountOfUsersInDialogCheck_flag;
+        return $countOfUsersInDialogCheck_flag;
     }
 
-    public function create_new_dialog()
+    public function getUsersForDialog() // Получить пользователей для добавления в диалог
     {
-        $_SESSION['count_of_users_in_dialog_error'] = 0;
-        unset($_SESSION['add_admin_button']);
-        $admin_status = 8;
+        $ids = $this->getIdsUsersForDialog();
+        if ($ids) {
+            $code = 'users_for_dialogs';
+            $names = [];
+            foreach ($ids as $item => $key) {
+                $names[$item] = $this->getNamesUsersForDialog($key);
+            }
+            return array(
+                'idsUsersForDialog' => $ids,
+                'namesUsersForDialog' => $names,
+                'code' => $code,
+            );
+        }
+        $code = 'users_for_dialogs_not_exist';
+        return array(
+            'code' => $code,
+        );
+    }
 
+    public function getNamesUsersForDialog($id)
+    {
+        $stmt = $this->db->prepare("SELECT first_name FROM users WHERE id = {$id}");
+        $stmt->execute();
+        $name = $stmt->fetchAll();
+        $fullName = $name[0]['first_name'];
+        $stmt = $this->db->prepare("SELECT last_name FROM users WHERE id = {$id}");
+        $stmt->execute();
+        $name = $stmt->fetchAll();
+        $fullName .= ' ' . $name[0]['last_name'];
+        return $fullName;
+    } // Узнать имя и фамилию пользователя по ID
+
+    public function getIdsUsersForDialog()
+    {
         $profile_id = $_SESSION['userID'];
-        if (isset($_POST['add_user']) || (isset($_POST['add_admin']))) {
-            $matrix = $_SESSION['matrix_for_dialogs'][$_SESSION['chat']];
-            $matrix = $matrix[0];
-            $stmt = $this->db->prepare("SELECT owners FROM dialogs_properties WHERE id = {$matrix}");
-            $stmt->execute();
-            $chat_owner = $stmt->fetchAll();
+        $status = self::ADMINSTATUS;
+        $stmt = $this->db->prepare("SELECT id FROM users WHERE id != $profile_id AND status != $status");
+        $stmt->execute();
+        $users = $stmt->fetchAll();
 
-            $chat_owners = explode(",", $chat_owner[0]['owners']);
+        if ($users) {
+            $usersForDialog = [];
+            foreach ($users as $item => $key) {
+                $usersForDialog[$item] = $key['id'];
+            }
+            return $usersForDialog;
+        }
+        return false;
+    } // Получить IDs пользователей
 
-            if ($this->CountOfUsersInDialogCheck($chat_owners) == 0) {
-                $query = 'SELECT * FROM users WHERE id != ';
-                foreach ($chat_owners as $value => $key) {
-                    if ($value == 0)
-                        $query .= $key;
-                    else
-                        $query .= ' AND id != ' . $key;
+    public function getOnlyNames($id)
+    {
+        $stmt = $this->db->prepare("SELECT first_name FROM users WHERE id = {$id}");
+        $stmt->execute();
+        $name = $stmt->fetchAll();
+        $fullName = $name[0]['first_name'];
+        return $fullName;
+    }// Узнать только имя по ID
+
+    public function checkDialogExist($owners) // Проверка существования диалога по строке owners = "1,2,3"
+    {
+        $stmt = $this->db->prepare("SELECT id FROM dialogs_properties WHERE owners = '{$owners}'");
+        $stmt->execute();
+        $id = $stmt->fetchAll();
+        if (!empty($id))
+            return $id[0]['id'];
+        else
+            return false;
+    }
+
+    public function addDialog($names, $ids)
+    {
+        $query = $this->db->prepare("INSERT INTO dialogs_properties (name, owners) VALUES (:name, :owners) RETURNING id");
+        $query->execute([
+            ':name' => $names,
+            ':owners' => $ids,
+        ]);
+        $result = $query->fetch();
+        $id = explode(',',$ids);
+        foreach ($id as $item => $key)
+        {
+            $query = $this->db->prepare("INSERT INTO dialogs (id, user_id, show) VALUES (:id, :user_id, 1)");
+            $query->execute([
+                ':id' => $result[0],
+                ':user_id' => $key,
+            ]);
+        }
+        return $this->getDialogs(true);
+    }
+
+    public function createNewDialog()
+    {
+        $profile_id = $_SESSION['userID'];
+        $i = 0;
+        $usersToAddMassiv = [];
+        foreach ($_POST as $item => $key)
+        {
+            if (($item != 'add_users') && ($item != 'chat_name') && ($item != 'search_user_for_dialog'))
+            {
+                $usersToAdd = explode("_", $item);
+                $usersToAddMassiv[$i] = $usersToAdd[1];
+                $i++;
+                $usersToAddMassiv[$i] = $profile_id;
+            }
+        }
+        if ($usersToAddMassiv) {
+            if ($this->countOfUsersInDialogCheck($usersToAddMassiv)) {
+                $ids = '';
+                $names = '';
+                sort($usersToAddMassiv);
+                foreach ($usersToAddMassiv as $item => $key)
+                {
+                    if ($item == 0) {
+                        $names = $this->getOnlyNames($key);
+                        $ids = $key;
+                    } else {
+                        $names .= ',' . $this->getOnlyNames($key);
+                        $ids .= ',' . $key;
+                    }
                 }
-
-                if (isset($_POST['add_admin'])) {
-                    $query .= ' AND status = ' . $admin_status;
-                    $_SESSION['add_admin_button'] = 1;
-                } else
-                    $query .= ' AND status != ' . $admin_status;
-
-                $stmt = $this->db->prepare($query);
+                if ($id = $this->checkDialogExist($ids)) // true - существует, false - нет
+                {
+                    header('Location: http://' . $_SERVER['HTTP_HOST'] . '/cabinet/chat' . $id);
+                    exit;
+                } else {
+                    if (isset($_POST['chat_name'])) {
+                        trim($_POST['chat_name']);
+                        if ($_POST['chat_name'] != '') {
+                            $names = $_POST['chat_name'];
+                        } else {
+                            $code = 'chat_name_incorrect';
+                        }
+                    }
+                    $this->addDialog($names, $ids);
+                }
             } else {
-                $_SESSION['count_of_users_in_dialog_error'] = 1;
+                $code = 'too_much_users_choosen';
+                return array(
+                    'code' => $code,
+                    $this->getUsersForDialog()
+                );
             }
         } else {
-            $stmt = $this->db->prepare("SELECT * FROM users WHERE id != {$profile_id} AND status != " . $admin_status);
-        }
-        if ($_SESSION['count_of_users_in_dialog_error'] == 0) {
-            $stmt->execute();
-            $users = $stmt->fetchAll();
-            $arrays_num = 0;
-            $i_max = 0;
-
-            foreach ($users as $value) {
-                $i_max++;
-            }
-
-            $matrix = [];
-
-            $_SESSION['count_of_users'] = $i_max;
-
-            foreach ($users as $key => $value) {
-                $matrix[$key][1] = $value[1];
-                $matrix[$key][2] = $value[2];
-                $arrays_num++;
-            }
-
-            if (isset($matrix)) {
-                $_SESSION['matrix_for_users'] = $matrix;
-                return $matrix;
-            }
-        }
-    }
-
-    public function add_dialog()
-    {
-        $_SESSION['count_of_users_in_dialog_error'] = 0;
-        unset($_SESSION['add_user_error']);
-        $profile_id = $_SESSION['userID'];
-        $count_of_owners = 0;
-        $massiv = [];
-        $flag_user_selected = false;
-        $count_of_dialogs = 0;
-        $massiv_dialogs = [];
-        $new_owners = '';
-
-        if (isset($_POST['add_user_yes'])) {
-            for ($i = 0; $i < $_SESSION['count_of_users']; $i++) {
-                $name = "add_user" . $i;
-
-                if (isset($_POST[$name])) {
-                    $stmt = $this->db->prepare("SELECT id FROM users WHERE first_name = '{$_SESSION['matrix_for_users'][$i][1]}' AND last_name = '{$_SESSION['matrix_for_users'][$i][2]}'");
-                    $stmt->execute();
-                    $user_dialog = $stmt->fetchAll();
-                    $names_of_users[$count_of_owners] = $_SESSION['matrix_for_users'][$i][1];
-                    $massiv[$count_of_owners] = $user_dialog[0][0];
-                    $count_of_owners++;
-                    $flag_user_selected = true;
-                }
-            }
-
-
-            if ($flag_user_selected == true) {
-                $matrix = $_SESSION['matrix_for_dialogs'][$_SESSION['chat']];
-                $matrix = $matrix[0];
-
-                $stmt = $this->db->prepare("SELECT owners FROM dialogs_properties WHERE id = {$matrix}");
-                $stmt->execute();
-                $users_dialog = $stmt->fetchAll();
-                $stmt = $this->db->prepare("SELECT name FROM dialogs_properties WHERE id = {$matrix}");
-                $stmt->execute();
-                $names_dialog = $stmt->fetchAll();
-
-                $array_users = explode(",", $users_dialog[0][0]);
-                $array_names = explode(",", $names_dialog[0][0]);
-
-                $count = 0;
-                $new_owners_names = '';
-
-                foreach ($array_users as $value => $key)
-                    $massiv[$count_of_owners + $value] = $key;
-
-                foreach ($array_names as $value => $key) {
-                    if (count($array_users) == 2) {
-                        $matrix = ($_SESSION['matrix_for_dialogs'][$_SESSION['chat']]);
-                        $matrix = $matrix[1];
-                        $name_parts = explode(' ', $matrix);
-                        $names_of_users[$count_of_owners + $value] = $name_parts[0];
-
-                        $stmt = $this->db->prepare("SELECT first_name FROM users WHERE id = {$profile_id}");
-                        $stmt->execute();
-                        $name = $stmt->fetchAll();
-
-                        $names_of_users[$count_of_owners + $value + 1] = $name[0]['first_name'];
-                    } else {
-                        $names_of_users[$count_of_owners + $value] = $key;
-                    }
-                }
-
-
-                sort($massiv);
-                foreach ($massiv as $value)
-                    $count++;
-
-                for ($j = 0; $j < $count; $j++) {
-                    if ($j == 0) {
-                        $new_owners = $massiv[$j];
-                        $new_owners_names = $names_of_users[$j];
-                    } else {
-                        $new_owners .= ',' . $massiv[$j];
-                        $new_owners_names .= ',' . $names_of_users[$j];
-                    }
-                }
-
-                // Добавить запись в базу.
-            } else {
-                $_SESSION['add_user_error'] = 1;
-                if (isset($_SESSION['add_admin_button']))
-                    $_POST['add_admin'] = 1;
-                else
-                    $_POST['add_user'] = 1;
-                return $this->create_new_dialog();
-            }
-        }
-
-
-        if (isset($_POST["add_users"])) {
-            for ($i = 0; $i < $_SESSION['count_of_users']; $i++) {
-                $name = "add" . $i;
-
-                if (isset($_POST[$name])) {
-                    $stmt = $this->db->prepare("SELECT id FROM users WHERE first_name = '{$_SESSION['matrix_for_users'][$i][1]}' AND last_name = '{$_SESSION['matrix_for_users'][$i][2]}'");
-                    $stmt->execute();
-                    $user_dialog = $stmt->fetchAll();
-                    $names_of_users[$count_of_owners] = $_SESSION['matrix_for_users'][$i][1];
-                    $massiv[$count_of_owners] = $user_dialog[0][0];
-                    $count_of_owners++;
-                    $massiv[$count_of_owners] = $profile_id;
-                    $flag_user_selected = true;
-                    $number_for_solo_dialog = $i;
-                }
-            }
-
-            if ($this->CountOfUsersInDialogCheck($massiv) == 0) {
-
-                if ($flag_user_selected == true) {
-                    $stmt = $this->db->prepare("SELECT * FROM users WHERE id = $profile_id");
-                    $stmt->execute();
-                    $user_owner = $stmt->fetchAll();
-                    $names_of_users[$count_of_owners] = ($user_owner[0]['first_name']);
-
-                    sort($massiv);
-
-                    $count = 0;
-                    $new_owners_names = '';
-                    foreach ($massiv as $value)
-                        $count++;
-                    for ($j = 0; $j < $count; $j++) {
-                        if ($j == 0) {
-                            $new_owners = $massiv[$j];
-                            $new_owners_names = $names_of_users[$j];
-                        } else {
-                            $new_owners .= ',' . $massiv[$j];
-                            $new_owners_names .= ',' . $names_of_users[$j];
-                        }
-                    }
-
-                    if ($count_of_owners == 1)
-                        $new_owners_names = $_SESSION['matrix_for_users'][$number_for_solo_dialog][1] . ' ' . $_SESSION['matrix_for_users'][$number_for_solo_dialog][2];
-
-                    $query = "SELECT id FROM dialogs WHERE ";
-                    $query .= "user_id = ";
-                    $query .= $profile_id;
-                    $stmt = $this->db->prepare($query);
-                    $stmt->execute();
-                    $dialog = $stmt->fetchAll();
-
-                    foreach ($dialog as $value)
-                        $count_of_dialogs++;
-
-                    for ($j = 0; $j < $count_of_dialogs; $j++) {
-                        $query = "SELECT owners FROM dialogs_properties WHERE id = {$dialog[$j][0]}";
-                        $stmt = $this->db->prepare($query);
-                        $stmt->execute();
-                        $flag_dialog_exist = $stmt->fetchAll();
-                        $massiv_dialogs[$j] = $flag_dialog_exist[0][0];
-                    }
-
-                    $flag = false;
-                    for ($j = 0; $j < $count_of_dialogs; $j++) {
-                        if ($new_owners == $massiv_dialogs[$j]) {
-                            $query = "SELECT id FROM dialogs_properties WHERE owners = '{$new_owners}'";
-                            $stmt = $this->db->prepare($query);
-                            $stmt->execute();
-                            $id = $stmt->fetchAll();
-                            foreach ($_SESSION['matrix_for_dialogs'] as $key => $value) {
-                                if ($value[0] == $id[0]['id']) {
-                                    $_SESSION['chat'] = $key;
-                                    header('Location: http://' . $_SERVER['HTTP_HOST'] . '/cabinet/chat');
-                                    exit;
-                                }
-                            }
-                        }
-                    }
-
-                    if ($flag == false) {
-                        $query = $this->db->prepare("INSERT INTO dialogs_properties (name, owners) VALUES (:name, :owners) RETURNING id");
-                        $query->execute([
-                            ':name' => $new_owners_names,
-                            ':owners' => $new_owners,
-                        ]);
-                        $result = $query->fetch();
-
-                        $query = $this->db->prepare("INSERT INTO dialogs (id, user_id, show) VALUES (:id, :user_id, :show)");
-                        foreach ($massiv as $key => $value) {
-                            $query->execute([
-                                ':id' => $result[0],
-                                ':user_id' => $massiv[$key],
-                                ':show' => 1,
-                            ]);
-                        }
-                        return $this->getdialogs();
-                    }
-                } else {
-                    $_SESSION['add_user_error'] = 1;
-                    $_POST['create_new_dialog'] = 1;
-                    return $this->create_new_dialog();
-                }
-            }
-            else {
-                $_SESSION['count_of_users_in_dialog_error'] = 1;
-                $_POST['create_new_dialog'] = 1;
-                return $this->create_new_dialog();
-            }
+            $code = 'users_not_choosen';
+            return array(
+                'code' => $code,
+            );
         }
     }
 

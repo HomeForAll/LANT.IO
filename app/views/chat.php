@@ -1,14 +1,10 @@
 <?php
 $this->title = 'Чат';
-$matrix = $this->data;
-$name_of_dialog = $_SESSION['matrix_for_dialogs'][$_SESSION['chat']];
-$dialog_id = $name_of_dialog[0];
-$persona_name = $_SESSION['personaName'];
-$name_of_dialog = $name_of_dialog[1];
-$i_max = $_SESSION['count_of_dialogs'];
-if (isset($_POST['add_user']) || (isset($_POST['add_admin']))) {
-    $i_max = $_SESSION['count_of_users'];
-}
+$dialog_id = $this->data['idChat'];
+$name_of_dialog = $this->data['nameChat'];
+$persona_name = $_SESSION['firstName'] . ' ' . $_SESSION['lastName'];
+$cabinetModel = $this->model('CabinetModel');
+
 ?>
 <script>
     var dialog = <?php echo $dialog_id; ?>,
@@ -176,50 +172,47 @@ if (isset($_POST['add_user']) || (isset($_POST['add_admin']))) {
 
 <h4><?php print_r($name_of_dialog) ?></h4>
 <form action="" method="post">
-    <?php if (!isset($_POST['add_user']) && (!isset($_POST['add_admin']))) { ?>
-        <input type=submit class="" name=add_user value="Добавить пользователя">
-        <input type=submit class="" name=delete_dialog_instantly value="Удалить диалог досрочно">
-        <input type=submit class="" name=add_admin value="Добавить администратора">
-    <?php } else { ?>
+    <input type=submit class="" name=add_user value="Добавить пользователя">
+    <input type=submit class="" name=delete_dialog_instantly value="Удалить диалог досрочно">
+    <input type=submit class="" name=add_admin value="Добавить администратора">
+
+    <?php if (isset($_POST['add_admin'])) { ?>
         <input type=submit class="" name=add_user_yes value="Добавить">
         <input type=submit class="" name=add_user_no value="Отмена">
-        <?php if (isset($_SESSION['add_user_error'])) { ?>
-            <td>
-                <span style="color: red">Не выбран!</span>
-            </td>
-        <?php } ?>
-    <?php }
-    if ($i_max != 0) {
+        <?php if ($this->data['code'] == 'idsAdminsForDialog') { ?>
+            <table>
+                <tr>
+                    <td>
+                        Админы
+                    </td>
+                    <td>
+                        <input name="search_admin_for_dialog" type="text" placeholder="Поиск...">
+                    </td>
+                </tr>
+            </table>
+            <?php
+            foreach ($this->data['idsAdminsForDialog'] as $item => $key) {
+                $id = 'addUser_' . $key;
+                $value = $this->data['namesAdminsForDialog'][$item] ?>
+                <table>
+                    <tr>
+                        <td>
+                            <?php echo '<label for="' . $id . '">' . $value . '</label>'; ?>
+                        </td>
+                        <td>
+                            <?php echo "<input type=checkbox id='$id' name='$id'>"; ?>
+                        </td>
+                    </tr>
+                </table>
+            <?php }
+        }
+    }
     ?>
-    <table>
-        <?php for ($n = 0;
-                   $n < $i_max;
-                   $n++) { ?>
-        <tr>
-            <td><br></td>
-        </tr>
-        <tr>
-            <td>
-                <?php
-                $new_value = '';
-                $value = isset($matrix[$n][1]) ? $matrix[$n][1] : array();
-                if (isset($_POST['add_user']) || (isset($_POST['add_admin']))) {
-                    $value = $matrix[$n][1] . ' ' . $matrix[$n][2];
-                    $name = "add_user" . $n;
-                    echo '<label class="buttons" style="float: left" for="' . $name . '">' . $value . '</label>';
-                    echo "<input type=checkbox id={$name} name={$name}>";
-                }
-                ?>
-            </td>
-            <?php } ?>
-        </tr>
-        <?php } ?>
-    </table>
 </form>
 
 <div id="messages">
     <?php
-    foreach ($this->data as $message) {
+    foreach ($cabinetModel->getChatMessages($this->data['idChat']) as $message) {
         $message = json_decode($message);
         ?>
         <div class="message">
