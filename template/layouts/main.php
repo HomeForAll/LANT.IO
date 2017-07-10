@@ -35,37 +35,37 @@
     }
     ?>
     <script>
-        var protectIO = io('http://<?php echo Registry::get('config')['ws_host']; ?>:<?php echo Registry::get('config')['ws_protect_port']; ?>?user_id=<?php echo $user_id; ?>&hash=<?php echo $hash; ?>');
-        var commonIO = io('http://<?php echo Registry::get('config')['ws_host']; ?>:<?php echo Registry::get('config')['ws_common_port']; ?>');
-
-        commonIO.on('connect', function () {
-            console.log('Соединение с commonIO  установлено.');
-        });
-
-        protectIO.on('connect', function () {
-            console.log('Соединение с protectIO установлено.');
-        });
-
-
-        protectIO.on('message', function (data) {
-            console.log('****************');
-            console.log('* Принято собщение: ');
-            console.log('*');
-            console.log('* ' + data.message);
-            console.log('****************');
-        });
-
-        protectIO.on('message_notify', function (data) {
-            console.log(data);
-        });
-
-        protectIO.on('error', function (data) {
-            console.log(data);
-        });
-
-        protectIO.on('disconnect', function () {
-            console.log('Разрыв соединения.');
-        });
+//        var protectIO = io('http://<?php //echo Registry::get('config')['ws_host']; ?>//:<?php //echo Registry::get('config')['ws_protect_port']; ?>//?user_id=<?php //echo $user_id; ?>//&hash=<?php //echo $hash; ?>//');
+//        var commonIO = io('http://<?php //echo Registry::get('config')['ws_host']; ?>//:<?php //echo Registry::get('config')['ws_common_port']; ?>//');
+//
+//        commonIO.on('connect', function () {
+//            console.log('Соединение с commonIO  установлено.');
+//        });
+//
+//        protectIO.on('connect', function () {
+//            console.log('Соединение с protectIO установлено.');
+//        });
+//
+//
+//        protectIO.on('message', function (data) {
+//            console.log('****************');
+//            console.log('* Принято собщение: ');
+//            console.log('*');
+//            console.log('* ' + data.message);
+//            console.log('****************');
+//        });
+//
+//        protectIO.on('message_notify', function (data) {
+//            console.log(data);
+//        });
+//
+//        protectIO.on('error', function (data) {
+//            console.log(data);
+//        });
+//
+//        protectIO.on('disconnect', function () {
+//            console.log('Разрыв соединения.');
+//        });
 
         /*$(window).on('load', function () {
          $("#loading-center").fadeOut(800, function () {
