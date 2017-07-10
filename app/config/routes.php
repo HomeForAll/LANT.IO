@@ -66,4 +66,6 @@ return [
     'api/logout' => 'main/API/logout',
     'api/registration/([A-Za-z\_]+)' => 'main/API/registration/$1',
     'api/user' => 'main/API/user',
+    'api/upload/news/images' => 'main/API/uploadAdImage',
+    'api/upload/user/avatar' => 'main/API/uploadAvatar',
 ];

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "77a4ffcb96dae0721c6e7bb9d4dc59e1",
+    "content-hash": "e8ae2477fb8384c3926682ad6de04ba0",
     "packages": [
         {
             "name": "liquid/liquid",
@@ -355,16 +355,16 @@
         },
         {
             "name": "verot/class.upload.php",
-            "version": "0.33",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/verot/class.upload.php.git",
-                "reference": "79125bcdcd17fda24ce7ff681f2066ae42097ec7"
+                "reference": "f776dd7f790831abe34df4ea73652f1b4bd812ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/verot/class.upload.php/zipball/79125bcdcd17fda24ce7ff681f2066ae42097ec7",
-                "reference": "79125bcdcd17fda24ce7ff681f2066ae42097ec7",
+                "url": "https://api.github.com/repos/verot/class.upload.php/zipball/f776dd7f790831abe34df4ea73652f1b4bd812ac",
+                "reference": "f776dd7f790831abe34df4ea73652f1b4bd812ac",
                 "shasum": ""
             },
             "require": {
@@ -392,13 +392,15 @@
                 "gd",
                 "upload"
             ],
-            "time": "2016-07-16T19:59:53+00:00"
+            "time": "2017-06-26 02:43:05"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "verot/class.upload.php": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

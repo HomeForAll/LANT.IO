@@ -1018,6 +1018,9 @@ class UserModel extends Model
         unset($_SESSION['userID']);
         unset($_SESSION['status']);
         unset($_SESSION['user']);
+        unset($_SESSION['firstName']);
+        unset($_SESSION['lastName']);
+        unset($_SESSION['user_hash']);
 
         $this->response = true;
     }

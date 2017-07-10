@@ -52,6 +52,9 @@ class UserController extends Controller
     
     public function actionLogin()
     {
+        var_dump($_SESSION);
+//        var_dump(password_hash('s_121994_S', PASSWORD_DEFAULT));
+//        var_dump(password_verify('s_121994_S', '$2y$10$SwUuv6UPCCiX0/t0BiaU5.iskqSxQISEc1U141HxMABz3MzvYWwFq'));
         if (isset($_POST['submit'])) {
             $this->view->render('login', $this->model('UserModel')->login($_POST['login'], $_POST['password']));
         } elseif (isset($_SESSION['OAuth_state'])) {

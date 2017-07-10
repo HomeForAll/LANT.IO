@@ -7,6 +7,7 @@ class APIController extends Controller
         parent::__construct($layout);
         $this->setModel(new SearchModel());
         $this->setModel(new UserModel());
+        $this->setModel(new UPloadModel());
     }
     
     public function actionSearch()
@@ -97,5 +98,15 @@ class APIController extends Controller
     {
         $this->model('UserModel')->logout();
         echo json_encode($this->model('UserModel')->getResponse(), JSON_UNESCAPED_UNICODE);
+    }
+    
+    public function actionUploadAdImage()
+    {
+        $this->model('UploadModel')->uploadImage();
+    }
+    
+    public function actionUploadAvatar()
+    {
+        $this->model('UploadModel')->uploadAvatar();
     }
 }
