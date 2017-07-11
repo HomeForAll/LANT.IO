@@ -867,26 +867,44 @@ class UserModel extends Model
         }
         
         if (isset($_POST['surname'])) {
-            $query = $this->db->prepare('UPDATE users SET first_name = :first_name WHERE id = :user_id');
+            $query = $this->db->prepare('UPDATE users SET last_name = :last_name WHERE id = :user_id');
             $query->execute(
                 [
-                    ':first_name' => $_POST['surname'],
+                    ':last_name' => $_POST['surname'],
                     ':user_id'    => $_SESSION['user']['id'],
                 ]
             );
         }
         
         if (isset($_POST['midname'])) {
-            $query = $this->db->prepare('UPDATE users SET first_name = :first_name WHERE id = :user_id');
+            $query = $this->db->prepare('UPDATE users SET patronymic = :midname WHERE id = :user_id');
             $query->execute(
                 [
-                    ':first_name' => $_POST['midname'],
+                    ':midname' => $_POST['midname'],
+                    ':user_id'    => $_SESSION['user']['id'],
+                ]
+            );
+        }
+    
+        if (isset($_POST['brand'])) {
+            $query = $this->db->prepare('UPDATE users SET brand_name = :brand_name WHERE id = :user_id');
+            $query->execute(
+                [
+                    ':brand_name' => $_POST['brand'],
                     ':user_id'    => $_SESSION['user']['id'],
                 ]
             );
         }
         
-        // TODO: Доделать сохранение аватарки
+        if (isset($_POST['company'])) {
+            $query = $this->db->prepare('UPDATE users SET company_name = :company_name WHERE id = :user_id');
+            $query->execute(
+                [
+                    ':company_name' => $_POST['company'],
+                    ':user_id'    => $_SESSION['user']['id'],
+                ]
+            );
+        }
     }
     
     public function registration()
