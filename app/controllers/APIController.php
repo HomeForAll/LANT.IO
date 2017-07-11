@@ -72,13 +72,13 @@ class APIController extends Controller
                 break;
             case 'step_password':
                 $this->model('UserModel')->setPassword(isset($_POST['password']) ? $_POST['password'] : null);
+                if ($this->model('UserModel')->getResponse() == true) {
+                    $this->model('UserModel')->registration();
+                }
                 break;
             case 'step_summary':
                 if (!empty($_POST)) {
                     $this->model('UserModel')->setSummaries();
-                    if ($this->model('UserModel')->getResponse() == true) {
-                        $this->model('UserModel')->registration();
-                    }
                 } else {
                     $this->model('UserModel')->summaries();
                 }

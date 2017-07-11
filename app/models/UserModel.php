@@ -25,18 +25,18 @@ class UserModel extends Model
     private $socialNets;
     private $response = [];
     private $errors   = [];
-
+    
     public function __construct()
     {
         parent::__construct();
         $this->socialNets = new SocialNets('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
     }
-
+    
     public function login($login, $password)
     {
         $login = trim($login);
         $login = str_replace(' ', '', $login);
-
+        
         if (v::email()->validate($login)) {
             $query = $this->db->prepare("SELECT * FROM users WHERE email = :login");
         } elseif (v::phone()->validate($login)) {
@@ -47,29 +47,29 @@ class UserModel extends Model
                 'code'    => self::LOGIN_VALIDATION_ERROR,
                 'message' => 'Неверный формат логина',
             ];
-
+            
             return false;
         }
-
+        
         $query->execute([':login' => $login]);
         $user = $query->fetch();
-
+        
         if ($user) {
             if (password_verify($password, $user['password'])) {
                 if (!$user['banned']) {
                     $secret_key = Registry::get('config')['secret_key'];
-
+                    
                     $_SESSION['authorized'] = true;
                     $_SESSION['user']       = $user;
-
+                    
                     // TODO: Удалить в будущем
                     $_SESSION['userID']    = $user['id'];
                     $_SESSION['firstName'] = $user['first_name'];
                     $_SESSION['lastName']  = $user['last_name'];
                     $_SESSION['status']    = $user['status'];
-
+                    
                     $_SESSION['user_hash'] = hash('sha512', 'user_id=' . $user['id'] . 'secret_key=' . $secret_key);
-
+                    
                     // TODO: Реализовать функицю не используя чужого API
                     $this->activityWrite($user['id']);
                     $this->response = true;
@@ -597,7 +597,7 @@ class UserModel extends Model
         
         if ($type == 'boss' || $type == 'user') {
             $_SESSION['registration']['user_type'] = $type;
-            $this->response        = true;
+            $this->response                        = true;
         } else {
             $this->errors[] = [
                 'code'    => self::REGISTRATION_USER_TYPE_INCORRECT_ERROR,
@@ -619,7 +619,7 @@ class UserModel extends Model
         
         if ($type == 'inn' || $type == 'ogrn') {
             $_SESSION['registration']['document_type'] = $type;
-            $this->response            = true;
+            $this->response                            = true;
         } else {
             $this->errors[] = [
                 'code'    => self::REGISTRATION_DOCUMENT_TYPE_INCORRECT_ERROR,
@@ -639,20 +639,20 @@ class UserModel extends Model
             return;
         }
         
-        if ($_SESSION['document_type'] == 'inn') {
+        if ($_SESSION['registration']['document_type'] == 'inn') {
             if (v::numeric()->validate($document)) {
                 $_SESSION['registration']['document_number'] = $document;
-                $this->response              = true;
+                $this->response                              = true;
             } else {
                 $this->errors[] = [
                     'code'    => self::REGISTRATION_INN_INCORRECT_ERROR,
                     'message' => 'Неправильный формат ИНН',
                 ];
             }
-        } elseif ($_SESSION['document_type'] == 'ogrn') {
+        } elseif ($_SESSION['registration']['document_type'] == 'ogrn') {
             if ($this->checkOGRN($document)) {
                 $_SESSION['registration']['document_number'] = $document;
-                $this->response              = true;
+                $this->response                              = true;
             } else {
                 $this->errors[] = [
                     'code'    => self::REGISTRATION_OGRN_INCORRECT_ERROR,
@@ -688,13 +688,13 @@ class UserModel extends Model
                 'code'    => self::REGISTRATION_EMPTY_PARAMETER_ERROR,
                 'message' => 'Пустой параметр в запросе',
             ];
-        
+            
             return;
         }
         
         if (v::regex('/^[а-яА-ЯёЁa-zA-Z0-9]+$/')->validate($brandName)) {
             $_SESSION['registration']['brand_name'] = $brandName;
-            $this->response         = true;
+            $this->response                         = true;
         } else {
             $this->errors[] = [
                 'code'    => self::REGISTRATION_BRAND_INCORRECT_ERROR,
@@ -704,7 +704,7 @@ class UserModel extends Model
         
         if (v::regex('/^[а-яА-ЯёЁa-zA-Z0-9]+$/')->validate($companyName)) {
             $_SESSION['registration']['company_name'] = $companyName;
-            $this->response           = true;
+            $this->response                           = true;
         } else {
             $this->errors[] = [
                 'code'    => self::REGISTRATION_COMPANY_INCORRECT_ERROR,
@@ -726,7 +726,7 @@ class UserModel extends Model
         
         if (v::regex('/^[а-яА-ЯёЁa-zA-Z]+$/')->validate($firstName)) {
             $_SESSION['registration']['first_name'] = ucfirst($firstName);
-            $this->response         = true;
+            $this->response                         = true;
         } else {
             $this->errors[] = [
                 'code'    => self::REGISTRATION_FIRST_NAME_INCORRECT_ERROR,
@@ -748,7 +748,7 @@ class UserModel extends Model
         
         if (v::phone()->validate($phone)) {
             $_SESSION['registration']['phone'] = $phone;
-            $this->response    = true;
+            $this->response                    = true;
         } else {
             $this->errors[] = [
                 'code'    => self::REGISTRATION_PHONE_INCORRECT_ERROR,
@@ -760,7 +760,7 @@ class UserModel extends Model
     public function verifySMSCode($code)
     {
         $_SESSION['registration']['code'] = $code;
-        $this->response   = true;
+        $this->response                   = true;
         //        $this->errors[] = [
         //            'code'    => self::REGISTRATION_SMS_CODE_INCORRECT_ERROR,
         //            'message' => 'Неправильный код из СМС',
@@ -780,7 +780,7 @@ class UserModel extends Model
         
         if (v::email()->validate($email)) {
             $_SESSION['registration']['email'] = $email;
-            $this->response    = true;
+            $this->response                    = true;
         } else {
             $this->errors[] = [
                 'code'    => self::REGISTRATION_EMAIL_INCORRECT_ERROR,
@@ -802,7 +802,7 @@ class UserModel extends Model
         
         if (strlen($password) <= 24) {
             $_SESSION['registration']['password'] = $password;
-            $this->response       = true;
+            $this->response                       = true;
         } else {
             $this->errors[] = [
                 'code'    => self::REGISTRATION_LARGE_PASSWORD_ERROR,
@@ -815,7 +815,7 @@ class UserModel extends Model
     {
         if (v::regex('/^[а-яА-ЯёЁa-zA-Z]+$/')->validate($lastName)) {
             $_SESSION['registration']['last_name'] = $lastName;
-            $this->response        = true;
+            $this->response                        = true;
         } else {
             $this->errors[] = [
                 'code'    => self::REGISTRATION_LAST_NAME_INCORRECT_ERROR,
@@ -828,7 +828,7 @@ class UserModel extends Model
     {
         if (v::regex('/^[а-яА-ЯёЁa-zA-Z]+$/')->validate($midName)) {
             $_SESSION['registration']['mid_name'] = $midName;
-            $this->response       = true;
+            $this->response                       = true;
         } else {
             $this->errors[] = [
                 'code'    => self::REGISTRATION_MID_NAME_INCORRECT_ERROR,
@@ -837,165 +837,179 @@ class UserModel extends Model
         }
     }
     
-    // TODO: Реализовать загрузку фотографии
-    
     public function summaries()
     {
-        if (isset($_SESSION['registration']['user_type'])) {
-            array_push($this->response, ['type' => $_SESSION['registration']['user_type']]);
-        }
-        
-        if (isset($_SESSION['registration']['document_type'])) {
-            array_push($this->response, ['document_type' => $_SESSION['registration']['document_type']]);
-        }
-    
-        if (isset($_SESSION['registration']['document_number'])) {
-            array_push($this->response, ['document' => $_SESSION['registration']['document_number']]);
-        }
-    
-        if (isset($_SESSION['registration']['brand_name'])) {
-            array_push($this->response, ['brand' => $_SESSION['registration']['brand_name']]);
-        }
-    
-        if (isset($_SESSION['registration']['company_name'])) {
-            array_push($this->response, ['company' => $_SESSION['registration']['company_name']]);
-        }
-        
-        if (isset($_SESSION['registration']['first_name'])) {
-            array_push($this->response, ['name' => $_SESSION['registration']['first_name']]);
-        }
-        
-        if (isset($_SESSION['registration']['phone'])) {
-            array_push($this->response, ['phone' => $_SESSION['registration']['phone']]);
-        }
-        
-        if (isset($_SESSION['registration']['email'])) {
-            array_push($this->response, ['email' => $_SESSION['registration']['email']]);
-        }
-        
-        if (isset($_SESSION['registration']['password'])) {
-            array_push($this->response, ['password' => $_SESSION['registration']['password']]);
-        }
-        
-        if (isset($_SESSION['registration']['last_name'])) {
-            array_push($this->response, ['surname' => $_SESSION['registration']['last_name']]);
-        }
-        
-        if (isset($_SESSION['registration']['mid_name'])) {
-            array_push($this->response, ['midname' => $_SESSION['registration']['mid_name']]);
-        }
-        
-        if (isset($_SESSION['registration']['photo'])) {
-            array_push($this->response, ['photo' => $_SESSION['registration']['photo']]);
+        if (isset($_SESSION['user'])) {
+            $name           = $_SESSION['user']['status'] == 0 ? $_SESSION['user']['first_name'] . ' ' . $_SESSION['user']['last_name'] : $_SESSION['user']['brand_name'];
+            $this->response = [
+                'id'              => $_SESSION['user']['id'],
+                'avatar_original' => $_SESSION['user']['avatar_original'],
+                'avatar_50'       => $_SESSION['user']['avatar_50'],
+                'avatar_100'      => $_SESSION['user']['avatar_100'],
+                'name'            => $name,
+                'email'           => $_SESSION['user']['email'],
+                'status'          => $_SESSION['user']['status'],
+                'hash'            => $_SESSION['user_hash'],
+            ];
         }
     }
     
     public function setSummaries()
     {
-        $this->setFirstName(isset($_POST['name']) ? $_POST['name'] : null);
-        $this->setLastName(isset($_POST['surname']) ? $_POST['surname'] : null);
-        $this->setPhone(isset($_POST['phone']) ? $_POST['phone'] : null);
-        $this->setMidName(isset($_POST['midname']) ? $_POST['midname'] : null);
-        $this->setEmail(isset($_POST['email']) ? $_POST['email'] : null);
+        if (isset($_POST['name'])) {
+            $query = $this->db->prepare('UPDATE users SET first_name = :first_name WHERE id = :user_id');
+            $query->execute(
+                [
+                    ':first_name' => $_POST['name'],
+                    ':user_id'    => $_SESSION['user']['id'],
+                ]
+            );
+        }
+        
+        if (isset($_POST['surname'])) {
+            $query = $this->db->prepare('UPDATE users SET first_name = :first_name WHERE id = :user_id');
+            $query->execute(
+                [
+                    ':first_name' => $_POST['surname'],
+                    ':user_id'    => $_SESSION['user']['id'],
+                ]
+            );
+        }
+        
+        if (isset($_POST['midname'])) {
+            $query = $this->db->prepare('UPDATE users SET first_name = :first_name WHERE id = :user_id');
+            $query->execute(
+                [
+                    ':first_name' => $_POST['midname'],
+                    ':user_id'    => $_SESSION['user']['id'],
+                ]
+            );
+        }
+        
+        // TODO: Доделать сохранение аватарки
     }
-
+    
     public function registration()
     {
-        $sql = 'INSERT INTO users ({%columns%}) VALUES ({%values%})';
+        $sql     = 'INSERT INTO users ({%columns%}) VALUES ({%values%}) RETURNING *';
         $columns = '';
-        $values = '';
+        $values  = '';
         
         $user_type = [
             'user' => 0,
             'boss' => 2,
         ];
-    
+        
         if (isset($_SESSION['registration']['user_type'])) {
-            $type = $_SESSION['registration']['user_type'];
+            $type    = $_SESSION['registration']['user_type'];
             $columns .= ",status";
-            $values .= ",{$user_type[$type]}";
+            $values  .= ",{$user_type[$type]}";
         }
-    
+        
         if (isset($_SESSION['registration']['document_type'])) {
             $columns .= ",document_type";
-            $values .= ",'{$_SESSION['registration']['document_type']}'";
+            $values  .= ",'{$_SESSION['registration']['document_type']}'";
         }
-    
+        
         if (isset($_SESSION['registration']['document_number'])) {
             $columns .= ",document_number";
-            $values .= ",'{$_SESSION['registration']['document_number']}'";
+            $values  .= ",'{$_SESSION['registration']['document_number']}'";
         }
-    
+        
         if (isset($_SESSION['registration']['brand_name'])) {
             $columns .= ",brand_name";
-            $values .= ",'{$_SESSION['registration']['brand_name']}'";
+            $values  .= ",'{$_SESSION['registration']['brand_name']}'";
         }
-    
+        
         if (isset($_SESSION['registration']['company_name'])) {
             $columns .= ",company_name";
-            $values .= ",'{$_SESSION['registration']['company_name']}'";
+            $values  .= ",'{$_SESSION['registration']['company_name']}'";
         }
-    
+        
         if (isset($_SESSION['registration']['first_name'])) {
             $columns .= ",first_name";
-            $values .= ",'{$_SESSION['registration']['first_name']}'";
+            $values  .= ",'{$_SESSION['registration']['first_name']}'";
         }
-    
+        
         if (isset($_SESSION['registration']['phone'])) {
             $columns .= ",phone_number";
-            $phone = $this->extractPhoneNumber($_SESSION['registration']['phone']);
-            $values .= ",{$phone}";
+            $phone   = $this->extractPhoneNumber($_SESSION['registration']['phone']);
+            $values  .= ",{$phone}";
         }
-    
+        
         if (isset($_SESSION['registration']['email'])) {
             $columns .= ",email";
-            $values .= ",'{$_SESSION['registration']['email']}'";
+            $values  .= ",'{$_SESSION['registration']['email']}'";
         }
-    
+        
         if (isset($_SESSION['registration']['password'])) {
-            $columns .= ",password";
+            $columns       .= ",password";
             $password_hash = password_hash($_SESSION['registration']['password'], PASSWORD_DEFAULT);
-            $values .= ",'{$password_hash}'";
+            $values        .= ",'{$password_hash}'";
         }
-    
+        
         if (isset($_SESSION['registration']['last_name'])) {
             $columns .= ",last_name";
-            $values .= ",'{$_SESSION['registration']['last_name']}'";
+            $values  .= ",'{$_SESSION['registration']['last_name']}'";
         }
-    
+        
         if (isset($_SESSION['registration']['mid_name'])) {
             $columns .= ",patronymic";
-            $values .= ",'{$_SESSION['registration']['mid_name']}'";
+            $values  .= ",'{$_SESSION['registration']['mid_name']}'";
         }
-    
+        
         if (isset($_SESSION['registration']['photo'])) {
             $columns .= ",profile_foto_id";
-            $values .= ",'{$_SESSION['registration']['photo']}'";
+            $values  .= ",'{$_SESSION['registration']['photo']}'";
         }
         
         $columns = substr($columns, 1);
-        $values = substr($values, 1);
+        $values  = substr($values, 1);
         
         pg_escape_string($values);
-    
+        
         $sql = str_replace('{%columns%}', $columns, $sql);
         $sql = str_replace('{%values%}', $values, $sql);
         
-        $this->db->query($sql);
+        $query = $this->db->query($sql);
         
         if ($this->db->errorCode() == '00000') {
+            $user = $query->fetch();
+            unset($user['password']);
             unset($_SESSION['registration']);
+            
+            $_SESSION['authorized'] = true;
+            
+            // TODO: Удалить в будущем
+            $_SESSION['userID']    = $user['id'];
+            $_SESSION['firstName'] = $user['first_name'];
+            $_SESSION['lastName']  = $user['last_name'];
+            $_SESSION['status']    = $user['status'];
+            
+            $name = $user['status'] == 0 ? $user['first_name'] . ' ' . $user['last_name'] : $user['brand_name'];
+            
+            $secret_key            = Registry::get('config')['secret_key'];
+            $_SESSION['user_hash'] = hash('sha512', 'user_id=' . $user['id'] . 'secret_key=' . $secret_key);
+            $this->response        = [
+                'id'              => $user['id'],
+                'avatar_original' => $user['avatar_original'],
+                'avatar_50'       => $user['avatar_50'],
+                'avatar_100'      => $user['avatar_100'],
+                'name'            => $name,
+                'email'           => $user['email'],
+                'status'          => $user['status'],
+                'hash'            => $_SESSION['user_hash'],
+            ];
         }
-        
         // TODO: Дописать обработку ошибки если пользователь не был записан в базу
     }
-
+    
     public function getUserInfo()
     {
         if (isset($_SESSION['user'])) {
             // Необходимо переименовать поле в базе данных
             $_SESSION['user']['photo'] = $_SESSION['user']['profile_foto_id'];
-            $this->response = [
+            $this->response            = [
                 'id'     => $_SESSION['user']['id'],
                 'photo'  => $_SESSION['user']['photo'],
                 'name'   => $_SESSION['user']['first_name'] . ' ' . $_SESSION['user']['last_name'],
@@ -1011,7 +1025,7 @@ class UserModel extends Model
             ];
         }
     }
-
+    
     public function logout()
     {
         unset($_SESSION['authorized']);
@@ -1021,10 +1035,10 @@ class UserModel extends Model
         unset($_SESSION['firstName']);
         unset($_SESSION['lastName']);
         unset($_SESSION['user_hash']);
-
+        
         $this->response = true;
     }
-
+    
     public function getResponse()
     {
         if (empty($this->errors) && empty($this->response)) {
