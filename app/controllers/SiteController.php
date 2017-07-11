@@ -13,33 +13,9 @@ class SiteController extends Controller
     {
         $data = [];
         $this->ifAJAX(function() {
-            if('top_apartments' == $_POST['action']){
-                $filter_result_arr = ['space_type', 'operation_type', 'object_type',
-                    'price_from', 'price_to', 'space_from', 'space_to'];
-                foreach($filter_result_arr as $name){
-                    if (isset($_POST[$name])) {
-                        $res[$name] = (int)$_POST[$name];
-                    } else {
-                        $res[$name] = 0;
-                    }
-                }
 
-                $data['best_news'] = $this->model('NewsModel')->getBestNewsOfTime(8760,$res['space_type'],
-                    $res['operation_type'], $res['object_type'], $res['price_from'], $res['price_to'],
-                    $res['space_from'], $res['space_to'], 9);
-
-                $data['best_news_number'] = $this->model('NewsModel')->getNamberOfAllNews(8760,0, $res['space_type'],
-                    $res['operation_type'], $res['object_type'], $res['price_from'], $res['price_to'],
-                    $res['space_from'], $res['space_to']);
-
-                $data = $this->model('NewsModel')->prepareBestNewsOfTime($data);
-                echo json_encode($data, JSON_UNESCAPED_UNICODE);
-                die();
-              //  $this->model('NewsModel')->renderBestNewsOfTime($data['best_news'], $data['best_news_number']);
-            }
+            
         });
-        $data['best_news'] = $this->model('NewsModel')->getBestNewsOfTime(8064);
-        $data['best_news_number'] = $this->model('NewsModel')->getNamberOfAllNews(8064,0);
         $this->view->render('index', $data);
     }
 
