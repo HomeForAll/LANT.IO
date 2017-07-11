@@ -7,7 +7,7 @@ class APIController extends Controller
         parent::__construct($layout);
         $this->setModel(new SearchModel());
         $this->setModel(new UserModel());
-        $this->setModel(new UPloadModel());
+        $this->setModel(new UploadModel());
     }
     
     public function actionSearch()
