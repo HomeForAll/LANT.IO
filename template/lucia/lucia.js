@@ -13,3 +13,12 @@ $.fn.serializeObject = function() {
     });
     return o;
 };
+
+$(function() {
+    $(document).ajaxStart(function(event) {
+        $('.ax-loading').show();
+    });
+    $(document).ajaxStop(function(event) {
+        $('.ax-loading').hide();
+    });
+});

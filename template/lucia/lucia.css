@@ -48,6 +48,46 @@ a:hover {
     clear:both;
 }
 
+.ax-loading {
+    content: '';
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    animation: button-spin 1s linear infinite;
+    border-color: #2bb24c #2bb24c transparent;
+    border-style: solid;
+    border-width: 2px;
+    box-shadow: 0 0 0 1px transparent;
+}
+.ax-loading {
+    top: 24px;
+    left: 24px;
+    width: 48px;
+    height: 48px;
+    border-color: #abd96e #abd96e transparent;
+    border-width: 3px;
+    animation: button-spin 500ms linear infinite;
+    z-index: 100;
+}
+
+/*.ax-loading {
+    background: rgba(0,0,0,.7);
+    border-color: #2bb24c #2bb24c transparent;
+    border-width: 4px;
+    box-shadow: 0 0 0 3px rgba(0,0,0,.7);
+    top: 50%;
+    left: 50%;
+    width: 64px;
+    height: 64px;
+    margin: -64px 0 0 -32px;
+    animation: button-spin 400ms linear infinite;
+}*/
+
+
+
 .axfc {
     display: flex;
     align-content: center;
@@ -63,4 +103,14 @@ a:hover {
 
 .axs {
     font-size: .85em;
+}
+
+
+@keyframes button-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }

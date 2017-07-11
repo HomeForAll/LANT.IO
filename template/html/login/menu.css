@@ -44,8 +44,17 @@
     width: 32px;
     height: 3px;
     background: #fff;
-    transition: all 100ms linear;
+    transition: top 100ms linear 100ms, bottom 100ms linear 100ms, transform 100ms linear 0ms;
+
+    /* [ none | <transition-property> ] || <transition-duration> ||
+<transition-timing-function> || <transition-delay>*/
 }
+.menu-user-show .button-show-user-menu-icon,
+.menu-user-show .button-show-user-menu-icon::after,
+.menu-user-show .button-show-user-menu-icon::before {
+    transition: top 100ms linear 0ms, bottom 100ms linear 0ms, transform 100ms linear 100ms;
+}
+
 .button-show-user-menu-icon::before {
     position: absolute;
     top: -8px;
@@ -152,6 +161,7 @@
     background: #363636;
     padding: 17px 13px;
 }
+.header-line .user-info img,
 .menu-user .user-info img,
 .menu-user .user-menu-reg img {
     width: 35px;
@@ -166,4 +176,17 @@
 .menu-user .user-menu-reg .menu-user-name {
     font-size: 14px;
     color: #ffffff;
+}
+
+.header-line .menu-user-status,
+.menu-user .menu-user-status {
+    font-size: 10px;
+}
+
+
+.header-line .user-info {
+    text-align: right;
+}
+.header-line .user-info img {
+    margin-left: 6px;
 }

@@ -24,6 +24,9 @@ $siteModel = $this->model('SiteModel');
     background-size: 123px, cover;
 }
 </style>
+<?php include_once ROOT_DIR . '/template/lucia/lucia.svg' ?>
+<div class="ax-loading"></div>
+
 <div id="hellopreloader"><div id="hellopreloader_preload"></div></div>
 <div id="page" style="display: none">
 
@@ -41,6 +44,25 @@ $siteModel = $this->model('SiteModel');
         <?php include_once ROOT_DIR . '/template/html/login/login.html' ?>
     </div>
     <div class="section active" id="section-search" data-anchor="sectionSearch">
+
+        <div class="header-line">
+            <div class="ax-wrapper axf">
+                <a href="/"><svg width="78px" height="35px"><use xlink:href="#logo-lantio" x="0" y="0"></use></svg></a>
+                <div class="header-space"></div>
+                <div>
+
+                        <div class="axf user-info">
+                            <div>
+                                <div class="menu-user-name">Никулин Александр</div>
+                                <div class="menu-user-status">Пользователь +</div>
+                            </div>
+                            <img src="/template/img/user.png" alt="">
+                        </div>
+                </div>
+            </div>
+        </div>
+
+
         <?php include_once ROOT_DIR . '/template/html/search/search.php' ?>
     </div>
     <div class="section" id="section-ads" data-anchor="sectionAds">
