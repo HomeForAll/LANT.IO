@@ -7,7 +7,26 @@ global $element_list;
 $data_for_news = $this->data;
 $form_code = '';
 $element_list = [];
+?>
 
+<!--/api/best_of_day-->
+<!--/api/best_of_week-->
+<!--/api/best_of_month-->
+
+<form id="test" action="/api/best_of_month" method="post">
+    <input type="text" name="space_types" value="0">space_types<br>
+    <input type="text" name="operation_types" value="0">operation_types<br>
+    <input type="text" name="object_types" value="0">object_types<br>
+    <input type="text" name="city" value="0">city<br>
+    <input type="text" name="price_from" value="0">price_from<br>
+    <input type="text" name="price_to" value="0">price_to<br>
+    <input type="text" name="space_from" value="0">space_from<br>
+    <input type="text" name="space_to" value="0">space_to<br>
+    <input type="text" name="count" value="0">count<br>
+    <input type="submit" name="best" value="Проба лучших объявлений">
+</form>
+
+<?php
 //Генерация форм новостей на основе форм поиска
 if (!empty($this->data['news_form_generation_file'])) {
 
@@ -207,6 +226,13 @@ function addClassOtherInput($item = '', $arr = [])
 
 ?>
 <h1>Общие админ функции</h1>
+<h4>заполнить колонку значениями:</h4>
+<form id="db" action="" method="post">
+    <input type="text" name="table" value="0">Таблица<br>
+    <input type="text" name="column" value="0">Колонка<br>
+    <input type="text" name="names_str" value="0">Значения через запятую<br>
+    <input type="submit" name="update_column" value="Внести изменения">
+</form>
 <form id="admin" action="" method="post">
     <input type="submit" name="see_error_file" value="Просмотреть лог файл ошибок">
 </form>
