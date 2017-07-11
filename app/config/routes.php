@@ -69,4 +69,5 @@ return [
     'api/user' => 'main/API/user',
     'api/upload/news/images' => 'main/API/uploadAdImage',
     'api/upload/user/avatar' => 'main/API/uploadAvatar',
+    'api/(best_of_[a-z]+)' => 'main/API/BestAds/$1'
 ];

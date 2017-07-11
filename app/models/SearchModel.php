@@ -22,10 +22,10 @@ class SearchModel extends Model
             'filter_type'       => 'between',
         ],
         
-        // Город (string)
+        // Город (int)
         'city'                 => [
             'table_column_name' => 'city',
-            'filter_type'       => '',
+            'filter_type'       => 'in',
         ],
         
         // Нет комиссии (bool)
