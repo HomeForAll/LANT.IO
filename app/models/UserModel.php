@@ -910,8 +910,9 @@ class UserModel extends Model
     public function registration()
     {
         $sql     = 'INSERT INTO users ({%columns%}) VALUES ({%values%}) RETURNING *';
-        $columns = '';
-        $values  = '';
+        $datetime = date("Y-m-d H:i:s");
+        $columns = "registration_timestamp";
+        $values  = "{$datetime}";
         
         $user_type = [
             'user' => 0,
@@ -980,9 +981,6 @@ class UserModel extends Model
             $columns .= ",profile_foto_id";
             $values  .= ",'{$_SESSION['registration']['photo']}'";
         }
-        
-        $columns = substr($columns, 1);
-        $values  = substr($values, 1);
         
         pg_escape_string($values);
         
