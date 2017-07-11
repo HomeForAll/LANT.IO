@@ -22,6 +22,9 @@ class UserModel extends Model
     const REGISTRATION_LAST_NAME_INCORRECT_ERROR     = 2011;
     const REGISTRATION_MID_NAME_INCORRECT_ERROR      = 2012;
     const REGISTRATION_EMPTY_PARAMETER_ERROR         = 2013;
+    const REGISTRATION_EMAIL_IS_EXIST_ERROR         = 2014;
+    const REGISTRATION_PHONE_IS_EXIST_ERROR         = 2015;
+    
     private $socialNets;
     private $response = [];
     private $errors   = [];
@@ -745,6 +748,19 @@ class UserModel extends Model
             
             return;
         }
+    
+        $stmt = $this->db->prepare("SELECT * FROM users WHERE phone_number = :phone");
+        $stmt->execute([':phone' => $phone]);
+        $exist = $stmt->fetch();
+    
+        if ($exist) {
+            $this->errors[] = [
+                'code'    => self::REGISTRATION_PHONE_IS_EXIST_ERROR,
+                'message' => 'Такой телефон уже зарегистрирован',
+            ];
+        
+            return;
+        }
         
         if (v::phone()->validate($phone)) {
             $_SESSION['registration']['phone'] = $phone;
@@ -775,6 +791,19 @@ class UserModel extends Model
                 'message' => 'Пустой параметр в запросе',
             ];
             
+            return;
+        }
+    
+        $stmt = $this->db->prepare("SELECT * FROM users WHERE email = :email");
+        $stmt->execute([':email' => $email]);
+        $exist = $stmt->fetch();
+    
+        if ($exist) {
+            $this->errors[] = [
+                'code'    => self::REGISTRATION_EMAIL_IS_EXIST_ERROR,
+                'message' => 'Такой Email уже зарегистрирован',
+            ];
+    
             return;
         }
         
