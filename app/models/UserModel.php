@@ -113,36 +113,217 @@ class UserModel extends Model
                 }
                 break;
             case 'day':
-                $query = $this->db->prepare("SELECT DISTINCT session_id FROM visitors_statistic WHERE date BETWEEN (now()-('24 hour')::interval) AND now()");
+                $query = $this->db->prepare("SELECT DISTINCT ON (session_id) * FROM visitors_statistic WHERE t_stamp BETWEEN (now()-('1 day')::interval) AND now()");
                 $query->execute();
                 $result = $query->fetchAll();
 
                 if ($result) {
+                    $data = [];
+                    $interval = 8640; // Секунд (2.4 часа)
+                    $begin_time = mktime(date("H") - 23, date("i") - 59, date("s") - 59);
+
+                    for ($i = 0; $i < 10; $i++) {
+                        $end = $begin_time + $interval;
+                        $count = 0;
+
+                        foreach ($result as $item) {
+                            $visit_time = strtotime($item['t_stamp']);
+
+                            if ($visit_time >= $begin_time && $visit_time <= $end) {
+                                $count++;
+                            }
+                        }
+
+                        array_push($data, $count);
+
+                        $begin_time = $end;
+                    }
+
                     $this->response = [
                         'count' => count($result),
+                        'data' => $data,
                     ];
                 }
                 break;
             case 'week':
-                $query = $this->db->prepare("SELECT DISTINCT session_id FROM visitors_statistic WHERE date BETWEEN (now()-('1 week')::interval) AND now()");
+                $query = $this->db->prepare("SELECT DISTINCT ON (session_id) * FROM visitors_statistic WHERE t_stamp BETWEEN (now()-('1 week')::interval) AND now()");
                 $query->execute();
                 $result = $query->fetchAll();
 
                 if ($result) {
+                    $data = [];
+                    $interval = 60480; // Секунд (16.8 часа, неделя / 10)
+                    $begin_time = mktime(date("H"), date("i"), date("s"), date("n"), date("j") - 7);
+
+                    for ($i = 0; $i < 10; $i++) {
+                        $end = $begin_time + $interval;
+                        $count = 0;
+
+                        foreach ($result as $item) {
+                            $visit_time = strtotime($item['t_stamp']);
+
+                            if ($visit_time >= $begin_time && $visit_time <= $end) {
+                                $count++;
+                            }
+                        }
+
+                        array_push($data, $count);
+
+                        $begin_time = $end;
+                    }
+
                     $this->response = [
                         'count' => count($result),
+                        'data' => $data,
                     ];
                 }
                 break;
             case 'month':
-                $query = $this->db->prepare("SELECT DISTINCT session_id FROM visitors_statistic WHERE date BETWEEN (now()-('1 month')::interval) AND now()");
+                $query = $this->db->prepare("SELECT DISTINCT ON (session_id) * FROM visitors_statistic WHERE t_stamp BETWEEN (now()-('1 month')::interval) AND now()");
+                $query->execute();
+                $result = $query->fetchAll();
+
+                $data = [];
+                $interval = 259200; // Секунд (3 дня, месяц / 10)
+                $begin_time = mktime(date("H"), date("i"), date("s"), date("n") - 1);
+
+                for ($i = 0; $i < 10; $i++) {
+                    $end = $begin_time + $interval;
+                    $count = 0;
+
+                    foreach ($result as $item) {
+                        $visit_time = strtotime($item['t_stamp']);
+
+                        if ($visit_time >= $begin_time && $visit_time <= $end) {
+                            $count++;
+                        }
+                    }
+
+                    array_push($data, $count);
+
+                    $begin_time = $end;
+                }
+
+                if ($result) {
+                    $this->response = [
+                        'count' => count($result),
+                        'data' => $data,
+                    ];
+                }
+                break;
+        }
+    }
+
+    public function getRegistered($period)
+    {
+        switch ($period) {
+            case 'now':
+                $query = $this->db->prepare("SELECT COUNT(*) FROM users");
+                $query->execute();
+                $result = $query->fetch();
+
+                if ($result) {
+                    $this->response = [
+                        'count' => (int)$result['count'],
+                    ];
+                }
+                break;
+            case 'day':
+                $query = $this->db->prepare("SELECT DISTINCT ON (id) * FROM users WHERE registration_timestamp BETWEEN (now()-('1 day')::interval) AND now()");
                 $query->execute();
                 $result = $query->fetchAll();
 
                 if ($result) {
-                    var_dump($result);
+                    $data = [];
+                    $interval = 8640; // Секунд (2.4 часа)
+                    $begin_time = mktime(date("H") - 23, date("i") - 59, date("s") - 59);
+
+                    for ($i = 0; $i < 10; $i++) {
+                        $end = $begin_time + $interval;
+                        $count = 0;
+
+                        foreach ($result as $item) {
+                            $visit_time = strtotime($item['registration_timestamp']);
+
+                            if ($visit_time >= $begin_time && $visit_time <= $end) {
+                                $count++;
+                            }
+                        }
+
+                        array_push($data, $count);
+
+                        $begin_time = $end;
+                    }
+
                     $this->response = [
                         'count' => count($result),
+                        'data' => $data,
+                    ];
+                }
+                break;
+            case 'week':
+                $query = $this->db->prepare("SELECT DISTINCT ON (id) * FROM users WHERE registration_timestamp BETWEEN (now()-('1 week')::interval) AND now()");
+                $query->execute();
+                $result = $query->fetchAll();
+
+                if ($result) {
+                    $data = [];
+                    $interval = 60480; // Секунд (16.8 часа, неделя / 10)
+                    $begin_time = mktime(date("H"), date("i"), date("s"), date("n"), date("j") - 7);
+
+                    for ($i = 0; $i < 10; $i++) {
+                        $end = $begin_time + $interval;
+                        $count = 0;
+
+                        foreach ($result as $item) {
+                            $visit_time = strtotime($item['registration_timestamp']);
+
+                            if ($visit_time >= $begin_time && $visit_time <= $end) {
+                                $count++;
+                            }
+                        }
+
+                        array_push($data, $count);
+
+                        $begin_time = $end;
+                    }
+
+                    $this->response = [
+                        'count' => count($result),
+                        'data' => $data,
+                    ];
+                }
+                break;
+            case 'month':
+                $query = $this->db->prepare("SELECT DISTINCT ON (id) * FROM users WHERE registration_timestamp BETWEEN (now()-('1 month')::interval) AND now()");
+                $query->execute();
+                $result = $query->fetchAll();
+
+                $data = [];
+                $interval = 259200; // Секунд (3 дня, месяц / 10)
+                $begin_time = mktime(date("H"), date("i"), date("s"), date("n") - 1);
+
+                for ($i = 0; $i < 10; $i++) {
+                    $end = $begin_time + $interval;
+                    $count = 0;
+
+                    foreach ($result as $item) {
+                        $visit_time = strtotime($item['registration_timestamp']);
+
+                        if ($visit_time >= $begin_time && $visit_time <= $end) {
+                            $count++;
+                        }
+                    }
+
+                    array_push($data, $count);
+
+                    $begin_time = $end;
+                }
+
+                if ($result) {
+                    $this->response = [
+                        'count' => count($result),
+                        'data' => $data,
                     ];
                 }
                 break;

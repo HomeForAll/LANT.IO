@@ -70,5 +70,6 @@ return [
     'api/upload/news/images' => 'main/API/uploadAdImage',
     'api/upload/user/avatar' => 'main/API/uploadAvatar',
     'api/(best_of_[a-z]+)' => 'main/API/BestAds/$1',
-    'api/stat/users/online/([A-Za-z]+)' => 'main/API/online/$1'
+    'api/stat/users/online/([A-Za-z]+)' => 'main/API/online/$1',
+    'api/stat/users/registered/([A-Za-z]+)' => 'main/API/registered/$1',
 ];
