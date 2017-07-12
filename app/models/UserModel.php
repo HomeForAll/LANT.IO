@@ -374,7 +374,7 @@ class UserModel extends Model
 
                         $this->response = [
                             'count' => count($result),
-                            'data' => $data,
+                            'data'  => $data,
                         ];
                     }
                     break;
@@ -407,7 +407,7 @@ class UserModel extends Model
 
                         $this->response = [
                             'count' => count($result),
-                            'data' => $data,
+                            'data'  => $data,
                         ];
                     }
                     break;
@@ -440,7 +440,7 @@ class UserModel extends Model
                     if ($result) {
                         $this->response = [
                             'count' => count($result),
-                            'data' => $data,
+                            'data'  => $data,
                         ];
                     }
                     break;
@@ -553,6 +553,14 @@ class UserModel extends Model
                     break;
             }
         }
+    }
+
+    public function getTrans($period)
+    {
+        $this->response = [
+            'count' => 0,
+            'data'  => [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        ];
     }
 
     public function doRegistration()

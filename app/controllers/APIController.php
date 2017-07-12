@@ -135,6 +135,12 @@ class APIController extends Controller
         echo json_encode($this->model('UserModel')->getResponse(), JSON_UNESCAPED_UNICODE);
     }
 
+    public function actionTrans($period)
+    {
+        $this->model('UserModel')->getTrans($period[0]);
+        echo json_encode($this->model('UserModel')->getResponse(), JSON_UNESCAPED_UNICODE);
+    }
+
     /**
      * Лучшие объявления на главной странице
      * За время ($param[0] = 'best_of_day' (...week или month))
