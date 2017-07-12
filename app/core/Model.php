@@ -9,13 +9,13 @@ class Model extends UserErrors
     function __construct()
     {
         $this->db = new DataBase();
-        $this->countStatistic();
+        $this->countVisitorsStatistic();
     }
 
     public function getUserFirstName($PDO, $userID)
     {
         $query = $this->db->prepare("SELECT first_name FROM users WHERE id = :userID");
-        $query->execute(array(':userID' => $userID));
+        $query->execute([':userID' => $userID]);
         $result = $query->fetch();
 
         return $result[0];
@@ -24,41 +24,51 @@ class Model extends UserErrors
     public function getUserLastName($PDO, $userID)
     {
         $query = $this->db->prepare("SELECT last_name FROM users WHERE id = :userID");
-        $query->execute(array(':userID' => $userID));
+        $query->execute([':userID' => $userID]);
         $result = $query->fetch();
 
         return $result[0];
     }
 
-    public function getUser($userID) {
+    public function getUser($userID)
+    {
         $query = $this->db->prepare("SELECT * FROM users WHERE id = :userID");
-        $query->execute(array(':userID' => $userID));
+        $query->execute([':userID' => $userID]);
         $result = $query->fetch();
 
         return $result;
     }
 
-    private function countStatistic()
+    private function countVisitorsStatistic()
     {
-        $ip = $_SERVER["REMOTE_ADDR"];
-        $date = date('Y-m-d');
+        if (isset($_COOKIE['visitor_session_id'])) {
+            $session_id = $_COOKIE['visitor_session_id'];
+        } else {
+            $session_id = sha1(microtime() . mt_rand(1, 100));
+            setcookie('visitor_session_id', $session_id, time() + 60 * 60 * 24 * 30);
+        }
 
-        $query = $this->db->prepare('SELECT * FROM ips WHERE ip = :ip AND date = :date_val');
-        $query->execute(array(':ip' => $ip, ':date_val' => $date));
+        $timestamp = date(DATE_ISO8601);
+        $date = date('Y-m-d');
+        $last_activity = date('H:i:s');
+
+        $query = $this->db->prepare('SELECT * FROM visitors_statistic WHERE session_id = :session_id AND date = :date_val');
+        $query->execute([
+            ':date_val'   => $date,
+            ':session_id' => $session_id,
+        ]);
+
         $result = $query->fetch();
 
         if ($result) {
-            $visits = $result['visits'] + 1;
-
-            $query = $this->db->prepare('UPDATE ips SET visits = :visits WHERE ip = :ip');
-            $query->execute(array(':ip' => $ip, ':visits' => $visits));
+            $query = $this->db->prepare('UPDATE visitors_statistic SET last_activity = :last_activity WHERE session_id = :session_id');
+            $query->execute([':session_id' => $session_id, ':last_activity' => $last_activity]);
 
             return $query->rowCount();
         } else {
-            $visits = 1;
 
-            $query = $this->db->prepare('INSERT INTO ips (ip, visits, date) VALUES (:ip, :visits, :date_val)');
-            $query->execute(array(':ip' => $ip, ':visits' => $visits, ':date_val' => $date));
+            $query = $this->db->prepare('INSERT INTO visitors_statistic (date, last_activity, session_id, t_stamp) VALUES (:date_val, :last_activity, :session_id, :t_stamp)');
+            $query->execute([':session_id' => $session_id, ':date_val' => $date, ':last_activity' => $last_activity, ':t_stamp' => $timestamp]);
 
             return $query->rowCount();
         }
@@ -82,7 +92,7 @@ class Model extends UserErrors
         $date = date('Y-m-d');
 
         $query = $this->db->prepare('SELECT count(*) FROM ips WHERE date = :date_val');
-        $query->execute(array(":date_val" => $date));
+        $query->execute([":date_val" => $date]);
         $result = $query->fetch();
 
         if ($result) {

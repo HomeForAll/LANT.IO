@@ -10,7 +10,7 @@ class APIController extends Controller
         $this->setModel(new UploadModel());
         $this->setModel(new NewsModel());
     }
-    
+
     public function actionSearch()
     {
         if (!empty($_GET)) {
@@ -20,7 +20,7 @@ class APIController extends Controller
         }
         echo json_encode($this->model('SearchModel')->getAds(), JSON_UNESCAPED_UNICODE);
     }
-    
+
     public function actionSearchAdsCount()
     {
         if (!empty($_GET)) {
@@ -32,7 +32,7 @@ class APIController extends Controller
         $ads = reset($ads);
         echo json_encode($ads, JSON_UNESCAPED_UNICODE);
     }
-    
+
     public function actionLogin()
     {
         if (!empty($_GET)) {
@@ -40,10 +40,10 @@ class APIController extends Controller
         } elseif (!empty($_POST)) {
             $this->model('UserModel')->login($_POST['login'], $_POST['password']);
         }
-        
+
         echo json_encode($this->model('UserModel')->getResponse(), JSON_UNESCAPED_UNICODE);
     }
-    
+
     public function actionRegistration($step)
     {
         switch ($step[0]) {
@@ -85,30 +85,36 @@ class APIController extends Controller
                 }
                 break;
         }
-        
+
         echo json_encode($this->model('UserModel')->getResponse(), JSON_UNESCAPED_UNICODE);
     }
-    
+
     public function actionUser()
     {
         $this->model('UserModel')->getUserInfo();
         echo json_encode($this->model('UserModel')->getResponse(), JSON_UNESCAPED_UNICODE);
     }
-    
+
     public function actionLogout()
     {
         $this->model('UserModel')->logout();
         echo json_encode($this->model('UserModel')->getResponse(), JSON_UNESCAPED_UNICODE);
     }
-    
+
     public function actionUploadAdImage()
     {
         $this->model('UploadModel')->uploadImage();
     }
-    
+
     public function actionUploadAvatar()
     {
         $this->model('UploadModel')->uploadAvatar();
+    }
+
+    public function actionOnline($period)
+    {
+        $this->model('UserModel')->getOnline($period[0]);
+        echo json_encode($this->model('UserModel')->getResponse(), JSON_UNESCAPED_UNICODE);
     }
 
     /**
@@ -146,6 +152,5 @@ class APIController extends Controller
         $data['best_ads'] = $this->model('NewsModel')->prepareNewsPreview($db_data, false, true);
 
        echo json_encode($this->model('NewsModel')->getResponse(), JSON_UNESCAPED_UNICODE);
-
     }
 }
