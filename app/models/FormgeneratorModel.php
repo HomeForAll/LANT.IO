@@ -2100,7 +2100,6 @@ class FormGeneratorModel extends Model
             'user_id' => 'bigint',
             'title' => 'character varying(255)',
             'date' => 'timestamp with time zone',
-            'date_best' => 'timestamp with time zone',
             'content' => 'text',
             'status' => 'smallint',
             'preview_img' => 'character varying(255)',
@@ -2131,7 +2130,7 @@ class FormGeneratorModel extends Model
             'building_type' => 'smallint',
             'cctv' => 'boolean',
             'ceiling_height' => 'integer',
-            'city' => 'integer',
+            'city' => 'character varying(255)',
             'clarification_of_the_object_type' => 'smallint',
             'common' => 'integer',
             'concierge' => 'boolean',
@@ -2207,9 +2206,6 @@ class FormGeneratorModel extends Model
             'plot_on_the_slope' => 'boolean',
             'plot_of_ravine' => 'boolean',
             'plot_wetland' => 'boolean',
-
-            'lat' => 'numeric(9,6)',
-            'lng' => 'numeric(9,6)',
 
 //            'additional_buildings' => 'smallint',
 //            'availability_of_bathroom' => 'smallint',
@@ -2287,53 +2283,6 @@ class FormGeneratorModel extends Model
         }
 
         return $data;
-    }
-
-    public function updateСolumnByData($table, $column, $names_str){
-        $names_arr = explode(',', $names_str);
-        $count_arr = count($names_arr);
-
-        //Проветка сущ-ия таблицы
-        $sql = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='public' AND TABLE_NAME='$table'";
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute();
-        if($stmt->fetchColumn()){
-            $sql = "SELECT column_name, column_default, data_type FROM INFORMATION_SCHEMA.COLUMNS"
-            ." WHERE table_name = '$table' AND column_name = '$column'";
-            $stmt = $this->db->prepare($sql);
-            $stmt->execute();
-            $res = $stmt->fetchAll();
-            if(!empty($res)){
-                $message = 'Изменения в колонке '.$column.'; Тип: '
-                    .$res[0]["data_type"].'; По умолчанию: '.$res[0]["column_default"].'<br>';
-                $sql = "UPDATE $table SET $column = ceil(random()*$count_arr)";
-                $stmt = $this->db->prepare($sql);
-                $return1 = $stmt->execute();
-                foreach($names_arr as $i => $name){
-                    echo "$i => $name<br>";
-                    $j = $i+1;
-                    $sql = "UPDATE $table SET $column = '$name' WHERE $column = '$j'";
-                    $stmt = $this->db->prepare($sql);
-                    $return2 = $stmt->execute();
-                }
-
-                if($return1 && $return2){
-                    return($message .=' Произошло успешно!');
-                }else{
-                    return($message .=' (!) Не удалось!');
-                }
-            }else {
-                return '(!) В таблице '.$table. ' не существует колонки: '.$column;
-            }
-
-        }else {
-            return '(!) В схеме public не существует таблицы: '.$table;
-        }
-
-
-
-
-        return 'Успешно обновилась колонка '.$column.'<br>Параметрами: '.$names_str;
     }
 
 }
