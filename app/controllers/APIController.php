@@ -129,6 +129,12 @@ class APIController extends Controller
         echo json_encode($this->model('UserModel')->getResponse(), JSON_UNESCAPED_UNICODE);
     }
 
+    public function actionAdsActiveNumber($period)
+    {
+        $this->model('UserModel')->getAdsActiveNumber($period[0]);
+        echo json_encode($this->model('UserModel')->getResponse(), JSON_UNESCAPED_UNICODE);
+    }
+
     /**
      * Лучшие объявления на главной странице
      * За время ($param[0] = 'best_of_day' (...week или month))

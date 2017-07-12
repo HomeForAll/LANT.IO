@@ -73,4 +73,5 @@ return [
     'api/stat/users/online/([A-Za-z]+)' => 'main/API/online/$1',
     'api/stat/users/registered/([A-Za-z]+)' => 'main/API/registered/$1',
     'api/stat/ads/get/([A-Za-z]+)' => 'main/API/adsNumber/$1',
+    'api/stat/ads/active/([A-Za-z]+)' => 'main/API/adsActiveNumber/$1',
 ];
