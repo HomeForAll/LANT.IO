@@ -131,8 +131,13 @@ class APIController extends Controller
      */
     public function actionBestAds($param)
     {
-        $request = $this->model('NewsModel')->getRequestForAds($_POST, $param);
+        if (!empty($_GET)) {
+            $request = $this->model('NewsModel')->getRequestForAds($_GET, $param);
+        } elseif (!empty($_POST)) {
+            $request = $this->model('NewsModel')->getRequestForAds($_POST, $param);
+        }
 
+        if(!empty($request)){
             //Количество объявлений [count_all]
             $this->model('NewsModel')->getNamberOfAllNews($request['time_from'],$request['time_to'], $request['space_type'],
                 $request['operation_type'], $request['object_type'], $request['price_from'], $request['price_to'],
@@ -144,7 +149,7 @@ class APIController extends Controller
 
         // Подготовка данных для вывода
         $data['best_ads'] = $this->model('NewsModel')->prepareNewsPreview($db_data, false, true);
-
+        }
        echo json_encode($this->model('NewsModel')->getResponse(), JSON_UNESCAPED_UNICODE);
 
     }
