@@ -50,7 +50,7 @@ function initIndexPage() {
             lastScrollY = y.scroll;
         }
     });
-    $.fn.fullpage.silentMoveTo(3);
+    //$.fn.fullpage.silentMoveTo(3);
 }
 
 function initUserMenu(user) {
