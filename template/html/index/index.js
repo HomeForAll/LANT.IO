@@ -125,20 +125,23 @@ $(function(){
             var current_state = current_step.find(".current_state").val();
             var error = current_step.find('.error');
             error.html('');
-
-            $.post('/api/registration/'+current_state, data, function(data) {
-                console.log(data);
-                data = JSON.parse(data);
-                if (data.response) {
-                    update();
-                } else if (data.error) {
-                    switch (data.error[0].code) {
-                        case 2013: error.html("Пожалуйста, заполните корректно информацию."); break;
-                        case 2006: error.html("Неверно указано имя."); break;
-                        default: error.html(data.error[0].message);
+            if (current_state == "step_type_user" || current_state == "step_type_document") {
+                update();
+            } else {
+                $.post('/api/registration/'+current_state, data, function(data) {
+                    console.log(data);
+                    data = JSON.parse(data);
+                    if (data.response) {
+                        update();
+                    } else if (data.error) {
+                        switch (data.error[0].code) {
+                            case 2013: error.html("Пожалуйста, заполните корректно информацию."); break;
+                            case 2006: error.html("Неверно указано имя."); break;
+                            default: error.html(data.error[0].message);
+                        }
                     }
-                }
-            });
+                });
+            }
             return false;
         },
 		transitions: {
