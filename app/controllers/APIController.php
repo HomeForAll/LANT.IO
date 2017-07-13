@@ -69,7 +69,7 @@ class APIController extends Controller
                 $this->model('UserModel')->verifySMSCode(isset($_POST['code']) ? $_POST['code'] : null);
                 break;
             case 'step_email':
-                $this->model('UserModel')->setEmail(isset($_GET['email']) ? $_GET['email'] : null);
+                $this->model('UserModel')->setEmail(isset($_POST['email']) ? $_POST['email'] : null);
                 break;
             case 'step_password':
                 $this->model('UserModel')->setPassword(isset($_POST['password']) ? $_POST['password'] : null);
