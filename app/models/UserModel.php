@@ -1352,11 +1352,11 @@ class UserModel extends Model
 
     public function setSummaries()
     {
-        if (isset($_POST['name'])) {
+        if (isset($_POST['firname'])) {
             $query = $this->db->prepare('UPDATE users SET first_name = :first_name WHERE id = :user_id');
             $query->execute(
                 [
-                    ':first_name' => $_POST['name'],
+                    ':first_name' => $_POST['firname'],
                     ':user_id'    => $_SESSION['user']['id'],
                 ]
             );
@@ -1406,9 +1406,8 @@ class UserModel extends Model
     public function registration()
     {
         $sql = 'INSERT INTO users ({%columns%}) VALUES ({%values%}) RETURNING *';
-        $datetime = date("Y-m-d H:i:s");
         $columns = "registration_timestamp";
-        $values = "{$datetime}";
+        $values = "now()";
 
         $user_type = [
             'user' => 0,
@@ -1484,11 +1483,12 @@ class UserModel extends Model
         $sql = str_replace('{%values%}', $values, $sql);
 
         $query = $this->db->query($sql);
+        var_dump($this->db->errorInfo());
 
         if ($this->db->errorCode() == '00000') {
             $user = $query->fetch();
             unset($user['password']);
-            unset($_SESSION['registration']);
+            //unset($_SESSION['registration']);
 
             $_SESSION['authorized'] = true;
 
