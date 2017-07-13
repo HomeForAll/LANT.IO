@@ -50,7 +50,7 @@ function initIndexPage() {
             lastScrollY = y.scroll;
         }
     });
-    //$.fn.fullpage.silentMoveTo(3);
+    //$.fn.fullpage.silentMoveTo(1);
 }
 
 function initUserMenu(user) {
@@ -82,7 +82,7 @@ function initUserMenu(user) {
 
 
 $(function(){
-    $(".dialog-registration :input").inputmask();
+    $(".dialog-registration :input").inputmask({autoUnmask: true});
 
 
     $("form#form-login").submit(function(event) {
@@ -98,20 +98,47 @@ $(function(){
             }
         });
     });
+    $("form[name=dialog-registratio]").submit(function(event) {
+        event.preventDefault();
+    });
 
     var dialog_registration_config = {
 		beforeBackward: function( event, state ) {
     		state.step.find("[name=type]").prop('checked', false);
         	state.step.find("[name=document]").prop('checked', false);
 		},
+        afterForward: function( event, state, update ) {
+            var current_index = state.stepIndex;
+            var current_step = dialog_registration.wizard("step", current_index);
+            var current_state = current_step.find(".current_state").val();
+            if (current_state == 'step_summary') {
+                $.getJSON('/api/registration/'+current_state, {}, function(data) {
+                    console.log(data);
+                });
+            }
+            //onsole.log(current_state);
+        },
 		beforeForward: function( event, state, update ) {
             var data =  dialog_registration.wizard("form").serializeObject();
-            var current_state = dialog_registration.wizard("step", state.stepIndex-1).find(".current_state").val();
-            $.post('/api/registration/'+current_state, data, function(data, textStatus, xhr) {
-                update();
+            var current_index = state.stepsActivated.slice(-2, -1).shift();
+            var current_step = dialog_registration.wizard("step", current_index);
+            var current_state = current_step.find(".current_state").val();
+            var error = current_step.find('.error');
+            error.html('');
+
+            $.post('/api/registration/'+current_state, data, function(data) {
+                console.log(data);
+                data = JSON.parse(data);
+                if (data.response) {
+                    update();
+                } else if (data.error) {
+                    switch (data.error[0].code) {
+                        case 2013: error.html("Пожалуйста, заполните корректно информацию."); break;
+                        case 2006: error.html("Неверно указано имя."); break;
+                        default: error.html(data.error[0].message);
+                    }
+                }
             });
-            setTimeout(function () {
-            }, 1000);
             return false;
         },
 		transitions: {
@@ -125,14 +152,17 @@ $(function(){
 			},
 		}
     };
+
     var dialog_registration = $("#dialog-registration").wizard(dialog_registration_config);
     $("#dialog-registration .registration-type-button").change(function(event) {
-        dialog_registration.wizard("forward");
+        //dialog_registration.wizard("forward");
+        dialog_registration.find(".forward").first().trigger('click');
     });
     $('.open-registration').click(function(event) {
         dialog_registration.find("[name=type]").prop('checked', false);
         dialog_registration.find("[name=document]").prop('checked', false);
         dialog_registration.wizard( "destroy" ).wizard(dialog_registration_config);
         $(".dialog-registration").arcticmodal();
+        dialog_registration.wizard("select", 7);
     });
 });
