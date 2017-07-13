@@ -108,3 +108,11 @@
 #section-ads .fp-tableCell {
     padding: 32px 0;
 }
+
+#section-statistic {
+    background: #f0f0f0 url("/template/images/section-stat.jpg") 50% 50% no-repeat;
+    background-size: cover;
+}
+#section-statistic .fp-tableCell {
+    padding: 32px 0;
+}

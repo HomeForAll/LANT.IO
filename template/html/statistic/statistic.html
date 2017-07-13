@@ -1,0 +1,90 @@
+
+
+<h3>СТАТИСТИКА</h3>
+
+
+<div class="wrap">
+    <div class="block block-users">
+        <form id="stat-block-users" data-api="api/stat/users/online/">
+            <h4>ПОЛЬЗОВАТЕЛИ</h4>
+            <div id="chart-line-1" class="chart-line" data-chart='{"fill":["#d4e36d","#3ead56"],"data":[1,1]}'></div>
+            <img src="/template/img/block-users.png" alt="">
+            <div class="count"><span>0</span> онлайн</div>
+
+            <div class="periods">
+                <input type="radio" id="stat-block-users-now" name="period" value="now">
+                <label class="period" for="stat-block-users-now">сейчас</label>
+
+                <input type="radio" id="stat-block-users-day" name="period" value="day">
+                <label class="period" for="stat-block-users-day">24 часа</label>
+
+                <input type="radio" id="stat-block-users-week" name="period" value="week">
+                <label class="period" for="stat-block-users-week">неделя</label>
+
+                <input type="radio" id="stat-block-users-month" name="period" value="month" checked="checked">
+                <label class="period" for="stat-block-users-month">месяц</label>
+            </div>
+
+            <div class="scrollbar-inner">
+                <div class="buttons">
+                    <button type="button" class="axfs" name="" data-api="api/stat/users/online/"><img src="/template/img/icon-stat-online.png"> Онлайн</button>
+                    <button type="button" class="axfs" name="" data-api="api/stat/users/registered/"><img src="/template/img/icon-stat-users.png"> Зарегистрировано</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="block block-ads">
+        <div id="stat-block-ads" data-api="api/stat/ads/get/">
+            <h4>ОБЪЯВЛЕНИЯ</h4>
+            <div id="chart-line-2" class="chart-line" data-chart='{"fill":["#6de0e3","#86ff9a"],"data":[1,1]}'></div>
+            <img src="/template/img/block-ads.png" alt="">
+            <div class="count"><span>0</span> выложено</div>
+
+            <div class="buttons">
+                <select name="city">
+                    <option value="1">Москва и область</option>
+                    <option value="2">Санкт-Петербург</option>
+                </select>
+            </div>
+            <div class="periods">
+                <input type="radio" id="stat-block-ads-day" name="period" value="day">
+                <label class="period" for="stat-block-ads-day">24 часа</label>
+
+                <input type="radio" id="stat-block-ads-week" name="period" value="week">
+                <label class="period" for="stat-block-ads-week">неделя</label>
+
+                <input type="radio" id="stat-block-ads-month" name="period" value="month" checked="checked">
+                <label class="period" for="stat-block-ads-month">месяц</label>
+            </div>
+
+            <div class="scrollbar-inner">
+                <div class="buttons">
+                    <button type="button" class="axfs" data-api="api/stat/ads/get/"><img src="/template/img/icon-stat-ads.png"> Всего объявлений</button>
+                    <button type="button" class="axfs" data-api="api/stat/ads/active/"><img src="/template/img/icon-stat-ads.png"> Активных объявлений</button>
+                    <button type="button" class="axfs" data-api="api/stat/ads/get/all/"><img src="/template/img/icon-stat-ads2.png"> За всю историю</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="block block-dealings">
+        <form>
+            <h4>СДЕЛКИ</h4>
+            <div id="chart-line-3" class="chart-line" data-chart='{"fill":["#e0e36d","#ffab86"],"data":[1,1,1]}'></div>
+            <img src="/template/img/block-dealings.png" alt="">
+            <div class="count"><span>0</span> закрыто</div>
+            <div class="buttons">
+                <select name="city">
+                    <option value="1">Москва и область</option>
+                    <option value="2">Санкт-Петербург</option>
+                </select>
+            </div>
+            <div class="scrollbar-inner">
+                <div class="buttons">
+                    <button type="button" class="axfs" data-api="stat/trans/close/get/all"><img src="/template/img/icon-stat-trans.png"> Всего сделок закрыто</button>
+                    <button type="button" class="axfs" data-api="stat/trans/close/get/"><img src="/template/img/icon-stat-trans.png"> Сделок закрыто за…</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

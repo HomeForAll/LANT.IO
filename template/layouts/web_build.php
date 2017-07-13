@@ -69,6 +69,10 @@ $siteModel = $this->model('SiteModel');
         <?php include_once ROOT_DIR . '/template/html/catalog-ads/catalog-ads.html' ?>
     </div>
 
+    <div class="section" id="section-statistic" data-anchor="sectionStat">
+        <?php include_once ROOT_DIR . '/template/html/statistic/statistic.html' ?>
+    </div>
+
     <div class="section" id="section-footer" data-anchor="sectionFooter">
         <?php include_once ROOT_DIR . '/template/html/footer/footer.html' ?>
     </div>
@@ -118,6 +122,7 @@ $siteModel = $this->model('SiteModel');
 <script src="/template/html/login/login.js"></script>
 <script src="/template/html/search/search.js"></script>
 <script src="/template/html/catalog-ads/catalog-ads.js"></script>
+<script src="/template/html/statistic/statistic.js"></script>
 
 
 <!-- <script src="/template/js/main_page/main.js"></script> -->

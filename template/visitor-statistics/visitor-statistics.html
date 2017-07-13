@@ -1,3 +1,14 @@
+React.createElement("div", null,
+  React.createElement("input", {type: "text", value: defaultValue}),
+  React.createElement("button", {onclick: "alert('clicked!');"}, "Click Me!"),
+  React.createElement("ul", null,
+    ['un', 'deux', 'trois'].map(function(number) {
+      return React.createElement("li", null, number);
+    })
+  )
+);
+
+
 
     <div class="visitor-statistics">
         <div class="container-w-2">
