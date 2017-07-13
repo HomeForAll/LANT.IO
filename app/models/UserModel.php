@@ -1492,6 +1492,7 @@ class UserModel extends Model
             $_SESSION['authorized'] = true;
 
             $_SESSION['user'] = $user;
+            $_SESSION['user']['photo'] = $_SESSION['user']['profile_foto_id'];
 
             // TODO: Удалить в будущем
             $_SESSION['userID'] = $user['id'];
