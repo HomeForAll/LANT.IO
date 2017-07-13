@@ -60,7 +60,7 @@ class APIController extends Controller
                 $this->model('UserModel')->setCompanyData(isset($_POST['brand']) ? $_POST['brand'] : null, isset($_POST['company']) ? $_POST['company'] : null);
                 break;
             case 'step_name':
-                $this->model('UserModel')->setFirstName(isset($_GET['name']) ? $_GET['name'] : null);
+                $this->model('UserModel')->setFirstName(isset($_POST['name']) ? $_POST['name'] : null);
                 break;
             case 'step_phone':
                 $this->model('UserModel')->setPhone(isset($_POST['phone']) ? $_POST['phone'] : null);
