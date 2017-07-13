@@ -82,7 +82,7 @@ function initUserMenu(user) {
 
 
 $(function(){
-    $(".dialog-registration :input").inputmask({autoUnmask: true});
+    $(".dialog-registration :input").inputmask(/*{autoUnmask: true}*/);
 
 
     $("form#form-login").submit(function(event) {
