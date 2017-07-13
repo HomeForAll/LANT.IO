@@ -72,7 +72,7 @@ class APIController extends Controller
                 $this->model('UserModel')->setEmail(isset($_POST['email']) ? $_POST['email'] : null);
                 break;
             case 'step_password':
-                $this->model('UserModel')->setPassword(isset($_GET['password']) ? $_GET['password'] : null);
+                $this->model('UserModel')->setPassword(isset($_POST['password']) ? $_POST['password'] : null);
                 if ($this->model('UserModel')->getResponse() == true) {
                     $this->model('UserModel')->registration();
                 }
