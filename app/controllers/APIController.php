@@ -51,10 +51,10 @@ class APIController extends Controller
                 $this->model('UserModel')->setUserType(isset($_POST['type']) ? $_POST['type'] : null);
                 break;
             case 'step_type_document':
-                $this->model('UserModel')->setDocumentType(isset($_POST['document_type']) ? $_POST['document_type'] : null);
+                $this->model('UserModel')->setDocumentType(isset($_POST['document']) ? $_POST['document'] : null);
                 break;
             case 'step_document':
-                $this->model('UserModel')->setDocumentNumber(isset($_POST['document']) ? $_POST['document'] : null);
+                $this->model('UserModel')->setDocumentNumber();
                 break;
             case 'step_company':
                 $this->model('UserModel')->setCompanyData(isset($_POST['brand']) ? $_POST['brand'] : null, isset($_POST['company']) ? $_POST['company'] : null);

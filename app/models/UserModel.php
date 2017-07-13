@@ -1097,9 +1097,9 @@ class UserModel extends Model
         }
     }
 
-    public function setDocumentNumber($document)
+    public function setDocumentNumber()
     {
-        if (empty($document)) {
+        if (empty($_POST['document_inn']) && empty($_POST['document_ogrn'])) {
             $this->errors[] = [
                 'code'    => self::REGISTRATION_EMPTY_PARAMETER_ERROR,
                 'message' => 'Пустой параметр в запросе',
@@ -1108,9 +1108,9 @@ class UserModel extends Model
             return;
         }
 
-        if ($_SESSION['registration']['document_type'] == 'inn') {
-            if (v::numeric()->validate($document)) {
-                $_SESSION['registration']['document_number'] = $document;
+        if (isset($_POST['document_inn'])) {
+            if (v::numeric()->validate($_POST['document_inn'])) {
+                $_SESSION['registration']['document_number'] = $_POST['document_inn'];
                 $this->response = true;
             } else {
                 $this->errors[] = [
@@ -1118,9 +1118,9 @@ class UserModel extends Model
                     'message' => 'Неправильный формат ИНН',
                 ];
             }
-        } elseif ($_SESSION['registration']['document_type'] == 'ogrn') {
-            if ($this->checkOGRN($document)) {
-                $_SESSION['registration']['document_number'] = $document;
+        } elseif (isset($_POST['document_ogrn'])) {
+            if ($this->checkOGRN($_POST['document_ogrn'])) {
+                $_SESSION['registration']['document_number'] = $_POST['document_ogrn'];
                 $this->response = true;
             } else {
                 $this->errors[] = [
