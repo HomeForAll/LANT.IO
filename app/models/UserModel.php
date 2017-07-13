@@ -1215,6 +1215,8 @@ class UserModel extends Model
             return;
         }
 
+        $phone = preg_replace('/[^0-9]+/', '', $phone);
+
         $stmt = $this->db->prepare("SELECT * FROM users WHERE phone_number = :phone");
         $stmt->execute([':phone' => $phone]);
         $exist = $stmt->fetch();
