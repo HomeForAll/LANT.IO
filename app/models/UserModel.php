@@ -1192,14 +1192,13 @@ class UserModel extends Model
 
             return;
         }
-
-        if (v::regex('/^[а-яА-ЯёЁa-zA-Z]+$/')->validate($firstName)) {
+        if (mb_ereg_match("^[а-яА-ЯёЁa-zA-Z]+$", $firstName)) {
             $_SESSION['registration']['first_name'] = ucfirst($firstName);
             $this->response = true;
         } else {
             $this->errors[] = [
                 'code'    => self::REGISTRATION_FIRST_NAME_INCORRECT_ERROR,
-                'message' => 'Неправильный указано имя',
+                'message' => 'Неправильно указано имя',
             ];
         }
     }
