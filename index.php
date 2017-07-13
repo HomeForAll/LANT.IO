@@ -10,6 +10,8 @@ defined('SERVER') or define('SERVER', 'nginx'); // 'apache' or 'nginx'
 defined('STATUS') or define('STATUS', '1'); // NORMAL: 0; DEV: 1;
 defined('ERROR_HANDLER_STATUS') or define('ERROR_HANDLER_STATUS', '2'); // не применять: 0; запись в error.log: 1; вывод на экран: 2
 
+date_default_timezone_set('Europe/Moscow');
+
 require_once ROOT_DIR . 'app' . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'Loader.php';
 require_once ROOT_DIR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 
