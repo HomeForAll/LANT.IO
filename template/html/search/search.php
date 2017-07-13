@@ -6,7 +6,7 @@
         <input id="tab1" type="radio" name="tabs" value="1" checked>
         <label for="tab1" class="search-tabs">Арендовать</label>
 
-        <input id="tab2" type="radio" name="tabs" value="2">
+        <input id="tab2" type="radio" name="tabs" value="0">
         <label for="tab2" class="search-tabs">Продажа</label>
 
 <!--        <input id="tab3" type="radio" name="tabs" value="3">-->
@@ -20,7 +20,7 @@
     <div class="search-main">
         <div class="search-city elem"><select name="city">
             <option value="0" icon="/template/img/loupe.png">Введите город…</option>
-            <option value="1" icon="/template/img/blazon.png">Москва и область</option>
+            <option value="1" icon="/template/img/blazon.png" selected>Москва и область</option>
             <option value="2" icon="/template/img/blazon.png">Санкт-Петербург</option>
         </select></div>
         <div class="search-type elem"><select name="type">
