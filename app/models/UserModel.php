@@ -1161,7 +1161,7 @@ class UserModel extends Model
             return;
         }
 
-        if (v::regex('/^[а-яА-ЯёЁa-zA-Z0-9]+$/')->validate($brandName)) {
+        if (mb_ereg_match("^[а-яА-ЯёЁa-zA-Z]+$", $brandName)) {
             $_SESSION['registration']['brand_name'] = $brandName;
             $this->response = true;
         } else {
@@ -1171,7 +1171,7 @@ class UserModel extends Model
             ];
         }
 
-        if (v::regex('/^[а-яА-ЯёЁa-zA-Z0-9]+$/')->validate($companyName)) {
+        if (mb_ereg_match("^[а-яА-ЯёЁa-zA-Z]+$", $companyName)) {
             $_SESSION['registration']['company_name'] = $companyName;
             $this->response = true;
         } else {
@@ -1487,9 +1487,11 @@ class UserModel extends Model
         if ($this->db->errorCode() == '00000') {
             $user = $query->fetch();
             unset($user['password']);
-            //unset($_SESSION['registration']);
+            unset($_SESSION['registration']);
 
             $_SESSION['authorized'] = true;
+
+            $_SESSION['user'] = $user;
 
             // TODO: Удалить в будущем
             $_SESSION['userID'] = $user['id'];
@@ -1517,6 +1519,7 @@ class UserModel extends Model
 
     public function getUserInfo()
     {
+        var_dump($_SESSION);
         if (isset($_SESSION['user'])) {
             // Необходимо переименовать поле в базе данных
             $_SESSION['user']['photo'] = $_SESSION['user']['profile_foto_id'];
