@@ -63,18 +63,18 @@ $siteModel = $this->model('SiteModel');
         </div>
 
 
-        <?php //include_once ROOT_DIR . '/template/html/search/search.php' ?>
+        <?php include_once ROOT_DIR . '/template/html/search/search.php' ?>
     </div>
     <div class="section" id="section-ads" data-anchor="sectionAds">
-        <?php //include_once ROOT_DIR . '/template/html/catalog-ads/catalog-ads.html' ?>
+        <?php include_once ROOT_DIR . '/template/html/catalog-ads/catalog-ads.html' ?>
     </div>
 
     <div class="section" id="section-statistic" data-anchor="sectionStat">
-        <?php //include_once ROOT_DIR . '/template/html/statistic/statistic.html' ?>
+        <?php include_once ROOT_DIR . '/template/html/statistic/statistic.html' ?>
     </div>
 
     <div class="section" id="section-footer" data-anchor="sectionFooter">
-        <?php //include_once ROOT_DIR . '/template/html/footer/footer.html' ?>
+        <?php include_once ROOT_DIR . '/template/html/footer/footer.html' ?>
     </div>
 </div>
 
