@@ -1483,7 +1483,6 @@ class UserModel extends Model
         $sql = str_replace('{%values%}', $values, $sql);
 
         $query = $this->db->query($sql);
-        var_dump($this->db->errorInfo());
 
         if ($this->db->errorCode() == '00000') {
             $user = $query->fetch();
