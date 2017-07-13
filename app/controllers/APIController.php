@@ -63,13 +63,13 @@ class APIController extends Controller
                 $this->model('UserModel')->setFirstName(isset($_POST['name']) ? $_POST['name'] : null);
                 break;
             case 'step_phone':
-                $this->model('UserModel')->setPhone(isset($_GET['phone']) ? $_GET['phone'] : null);
+                $this->model('UserModel')->setPhone(isset($_POST['phone']) ? $_POST['phone'] : null);
                 break;
             case 'step_code':
                 $this->model('UserModel')->verifySMSCode(isset($_POST['code']) ? $_POST['code'] : null);
                 break;
             case 'step_email':
-                $this->model('UserModel')->setEmail(isset($_POST['email']) ? $_POST['email'] : null);
+                $this->model('UserModel')->setEmail(isset($_GET['email']) ? $_GET['email'] : null);
                 break;
             case 'step_password':
                 $this->model('UserModel')->setPassword(isset($_POST['password']) ? $_POST['password'] : null);

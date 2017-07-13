@@ -1340,9 +1340,9 @@ class UserModel extends Model
             $name = $_SESSION['user']['status'] == 0 ? $_SESSION['user']['first_name'] . ' ' . $_SESSION['user']['last_name'] : $_SESSION['user']['brand_name'];
             $this->response = [
                 'id'              => $_SESSION['user']['id'],
-                'avatar_original' => $_SESSION['user']['avatar_original'],
-                'avatar_50'       => $_SESSION['user']['avatar_50'],
-                'avatar_100'      => $_SESSION['user']['avatar_100'],
+                'avatar_original' => isset($_SESSION['user']['avatar_original']) ? $_SESSION['user']['avatar_original'] : null,
+                'avatar_50'       => isset($_SESSION['user']['avatar_50']) ? $_SESSION['user']['avatar_50'] : null,
+                'avatar_100'      => isset($_SESSION['user']['avatar_100']) ? $_SESSION['user']['avatar_100'] : null,
                 'name'            => $name,
                 'email'           => $_SESSION['user']['email'],
                 'status'          => $_SESSION['user']['status'],
