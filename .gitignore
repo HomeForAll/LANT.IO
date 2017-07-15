@@ -1,3 +1,4 @@
 /.idea
 /vendor
 /app/config/paths.php
+/node_modules

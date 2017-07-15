@@ -5,3 +5,4 @@
 .git-ftp-include
 /.idea
 /app/config/paths.php
+/node_modules
