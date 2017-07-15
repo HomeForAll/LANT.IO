@@ -13,6 +13,10 @@ html {
     -o-box-sizing: inherit;
     box-sizing: inherit;
 }
+html, body {
+    margin: 0;
+    padding: 0;
+}
 body {
     font-family: 'GothamPro';
     font-size: 14px;
@@ -104,6 +108,34 @@ a:hover {
 .axs {
     font-size: .85em;
 }
+
+.scrollbar-inner {
+    overflow-y: scroll;
+}
+/* Let's get this party started */
+.scrollbar-inner::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+.scrollbar-inner::-webkit-scrollbar-track {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(0,0,0,0.5);
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: rgba(0,0,0,0.4);
+}
+
+
+
+
 
 
 @keyframes button-spin {
