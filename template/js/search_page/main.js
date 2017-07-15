@@ -18,7 +18,7 @@ var getSearchParameters = function() {
 $(document).ready(function () {
     $.ajax({
         method: 'POST',
-        url: 'http://localhost/api/search?tabs=1&city=0&type=2&area=50&price%5Bfrom%5D=1000&price%5Bto%5D=20000000&term=1&blah=&non-commission=1&count_rooms=&area_residential%5Bfrom%5D=&area_residential%5Bto%5D=&area_non_residential%5Bfrom%5D=&area_non_residential%5Bto%5D=&area_general%5Bfrom%5D=&area_general%5Bto%5D=&area_balcony%5Bfrom%5D=&area_balcony%5Bto%5D=&height_ceiling%5Bfrom%5D=&height_ceiling%5Bto%5D=&floor%5Bfrom%5D=&floor%5Bto%5D=&bathroom=&hosted=&rooms=&equipment=&decoration=&count_floors%5Bfrom%5D=&count_floors%5Bto%5D=&lift=&garbage=&object_type=&year_building%5Bfrom%5D=&year_building%5Bto%5D=&hc_services=&parking=&wall_material=&state_stairs=&security=&project=&project3d=&video=',
+        url: 'api/search',
         data: getSearchParameters(),
         success: function(form_data) {
             console.log('form_data-success', form_data);
@@ -35,7 +35,7 @@ $('#form_2').on('submit', function () {
     var newData = {};
     $.ajax({
         method: 'POST',
-        url: 'http://localhost/api/search?tabs=1&city=0&type=2&area=50&price%5Bfrom%5D=1000&price%5Bto%5D=20000000&term=1&blah=&non-commission=1&count_rooms=&area_residential%5Bfrom%5D=&area_residential%5Bto%5D=&area_non_residential%5Bfrom%5D=&area_non_residential%5Bto%5D=&area_general%5Bfrom%5D=&area_general%5Bto%5D=&area_balcony%5Bfrom%5D=&area_balcony%5Bto%5D=&height_ceiling%5Bfrom%5D=&height_ceiling%5Bto%5D=&floor%5Bfrom%5D=&floor%5Bto%5D=&bathroom=&hosted=&rooms=&equipment=&decoration=&count_floors%5Bfrom%5D=&count_floors%5Bto%5D=&lift=&garbage=&object_type=&year_building%5Bfrom%5D=&year_building%5Bto%5D=&hc_services=&parking=&wall_material=&state_stairs=&security=&project=&project3d=&video=',
+        url: 'api/search',
         data: getSearchParameters(),
         success: function(form_data) {
             renderAllApartments(form_data);
@@ -104,7 +104,7 @@ function renderAllApartments(data) {
             template = Handlebars.compile($source);
 
         //data[i].preview_img = data[i].preview_img.split('|')[0];
-        data[i].preview_img = '1.png';
+        //data[i].preview_img = '1.png';
 
         content += template(data[i]);
     }

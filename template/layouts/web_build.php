@@ -169,7 +169,7 @@ function getRegions() {
 <!-- Header -->
 <?php include_once ROOT_DIR . '/template/html/main_page/header/header.php' ?>
 <!-- Content -->
-<div class=content">
+<div class="content">
     <div class="main-message-block"></div>
 
     <ul id="scene">

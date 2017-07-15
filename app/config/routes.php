@@ -3,6 +3,8 @@
 return [
     ''            => 'web_build/site/index',
     'search'      => 'search_block/search/index',
+    'ad_page'      => 'ad_page/search/index',
+    'dark_profile'      => 'dark_profile/search/index',
 
     'registration'          => 'main/user/registration',
     'registration/([a-z]+)' => 'main/user/registration/$1',
