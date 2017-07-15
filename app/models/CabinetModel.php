@@ -2350,10 +2350,10 @@ class CabinetModel extends Model
         $ticket_query = $this->db->prepare('INSERT INTO tickets (user_id, question_title, question_message, question_type, question_deal_type) VALUES (:user_id, :question_title, :question_message, :question_type, :question_deal_type) RETURNING *');
         $ticket_query->execute([
             ':user_id'            => $_SESSION['user']['id'],
-            ':question_title'     => isset($_GET['question_title']) ? $_GET['question_title'] : null,
-            ':question_message'   => isset($_GET['question_message']) ? $_GET['question_message'] : null,
-            ':question_type'      => isset($_GET['question_type']) ? $_GET['question_type'] : null,
-            ':question_deal_type' => isset($_GET['question_deal_type']) ? $_GET['question_deal_type'] : null,
+            ':question_title'     => isset($_POST['question_title']) ? $_POST['question_title'] : null,
+            ':question_message'   => isset($_POST['question_message']) ? $_POST['question_message'] : null,
+            ':question_type'      => isset($_POST['question_type']) ? $_POST['question_type'] : null,
+            ':question_deal_type' => isset($_POST['question_deal_type']) ? $_POST['question_deal_type'] : null,
         ]);
 
         $ticket = $ticket_query->fetch();
