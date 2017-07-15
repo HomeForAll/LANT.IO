@@ -2252,9 +2252,10 @@ class CabinetModel extends Model
 
     public function getMyAds($count = 10, $offset = 0)
     {
-        if(!isset($_SESSION['user'])) {
+        if (!isset($_SESSION['user'])) {
             // TODO: Дописать обработку ошибки если пользователь не авторизован
             $this->response['error'] = 0;
+
             return;
         }
 
@@ -2269,8 +2270,8 @@ class CabinetModel extends Model
         $query = $this->db->prepare('SELECT * FROM news_base WHERE user_id = :user_id LIMIT :limit OFFSET :offset');
         $query->execute([
             ':user_id' => $_SESSION['user']['id'],
-            ':limit' => $count,
-            ':offset' => $offset,
+            ':limit'   => $count,
+            ':offset'  => $offset,
         ]);
 
         $ads = $query->fetchAll();
@@ -2287,19 +2288,21 @@ class CabinetModel extends Model
         if (!$ad_id) {
             // TODO: Обработка ошибки когда не задано id объявления
             $this->response['error'] = false;
+
             return;
         }
 
-        if(!isset($_SESSION['user'])) {
+        if (!isset($_SESSION['user'])) {
             // TODO: Дописать обработку ошибки если пользователь не авторизован
             $this->response['error'] = false;
+
             return;
         }
 
         $query = $this->db->prepare('INSERT INTO favorite_ads (user_id, ad_id) VALUES (:user_id, :ad_id)');
         $query->execute([
             ':user_id' => $_SESSION['user']['id'],
-            ':ad_id' => $ad_id,
+            ':ad_id'   => $ad_id,
         ]);
 
         if ($query->rowCount()) {
@@ -2311,9 +2314,10 @@ class CabinetModel extends Model
 
     public function getListFavorite($count = 6, $offset = 0)
     {
-        if(!isset($_SESSION['user'])) {
+        if (!isset($_SESSION['user'])) {
             // TODO: Дописать обработку ошибки если пользователь не авторизован
             $this->response['error'] = 0;
+
             return;
         }
 
@@ -2328,8 +2332,8 @@ class CabinetModel extends Model
         $query = $this->db->prepare('SELECT * FROM favorite_ads, news_base WHERE favorite_ads.ad_id = news_base.id_news AND favorite_ads.user_id = :user_id LIMIT :limit OFFSET :offset');
         $query->execute([
             ':user_id' => $_SESSION['user']['id'],
-            ':limit' => $count,
-            ':offset' => $offset,
+            ':limit'   => $count,
+            ':offset'  => $offset,
         ]);
 
         $ads = $query->fetchAll();
@@ -2338,6 +2342,37 @@ class CabinetModel extends Model
             $this->response['response'] = $ads;
         } else {
             $this->response['error'] = null;
+        }
+    }
+
+    public function newTicket()
+    {
+        $ticket_query = $this->db->prepare('INSERT INTO tickets (user_id, question_title, question_message, question_type, question_deal_type) VALUES (:user_id, :question_title, :question_message, :question_type, :question_deal_type) RETURNING *');
+        $ticket_query->execute([
+            ':user_id'            => $_SESSION['user']['id'],
+            ':question_title'     => isset($_POST['question_title']) ? $_POST['question_title'] : null,
+            ':question_message'   => isset($_POST['question_message']) ? $_POST['question_message'] : null,
+            ':question_type'      => isset($_POST['question_type']) ? $_POST['question_type'] : null,
+            ':question_deal_type' => isset($_POST['question_deal_type']) ? $_POST['question_deal_type'] : null,
+        ]);
+
+        $ticket = $ticket_query->fetch();
+
+        if ($ticket) {
+            $dialog_query = $this->db->prepare('INSERT INTO dialog_properties (name, owners, ticket_id) VALUES (\'Техническая поддержка\', :owners, :ticket_id) RETURNING id');
+            $dialog_query->execute([
+                ':owners'    => $_SESSION['user']['id'] . ',0',
+                ':ticket_id' => $ticket['id'],
+            ]);
+
+            $dialog_id = $dialog_query->fetch();
+
+            if ($dialog_id) {
+                $this->response['response'] = [
+                    'dialog_id' => $dialog_id,
+                    'ticket'    => $ticket,
+                ];
+            }
         }
     }
 

@@ -160,6 +160,12 @@ class APIController extends Controller
         echo json_encode($this->model('CabinetModel')->getResponse(), JSON_UNESCAPED_UNICODE);
     }
 
+    public function actionAddTicket()
+    {
+        $this->model('CabinetModel')->newTicket();
+        echo json_encode($this->model('CabinetModel')->getResponse(), JSON_UNESCAPED_UNICODE);
+    }
+
     /**
      * Лучшие объявления на главной странице
      * За время ($param[0] = 'best_of_day' (...week или month))

@@ -82,4 +82,5 @@ return [
     'api/item/my' => 'main/API/myAds',
     'api/favorite/add' => 'main/API/adInFavorite',
     'api/favorite/list' => 'main/API/listFavorite',
+    'api/support/add_ticket' => 'main/API/addTicket',
 ];
