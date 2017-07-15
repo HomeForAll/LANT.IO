@@ -3,17 +3,7 @@
     <!-- Если пользователь не зарегистрирован -->
     <div class="header">
         <div class="container-w-0">
-            <div class="user-is-not-registration">
-                <div class="logo-false"></div>
-                <div>
-                    <p>поиск по 23 параметрам</p>
-                    <button>редактирвоать</button>
-                </div>
-                <div>
-                    <a href="#">Дать объявление</a>
-                    <a href="#">Войти</a>
-                </div>
-            </div>
+
         </div>
     </div>
 <?php } else { ?>

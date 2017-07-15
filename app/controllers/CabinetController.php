@@ -16,82 +16,41 @@ class CabinetController extends Controller
         $this->view->render('cabinet', $data);
     }
 
-    public function actionChat()
+    public function actionChat($idChat)
     {
-        unset($_SESSION['add_user_error']);
-        $viewchat = $this->model('CabinetModel')->open_chat();
+        $idChat = $idChat[0];
+        $viewchat = $this->model('CabinetModel')->getChatInfo($idChat);
 
-        if (isset($_POST['add_admin'])) {
-            $viewchat = $this->model('CabinetModel')->create_new_dialog();
-        }
+        if (isset($_POST['add_admin']))
+            $viewchat = $this->model('CabinetModel')->getAdminsForDialog();
 
-        if(isset($_POST['add_user'])) {
-            $viewchat = $this->model('CabinetModel')->create_new_dialog();
-        }
-
-        if (isset($_POST['add_user_yes'])) {
-            $viewchat = $this->model('CabinetModel')->add_dialog();
-        }
 
         $this->view->render('chat', $viewchat);
     }
 
+    public function actionDeleteDialog($idDialog)
+    {
+        $idDialog = $idDialog[0];
+        $this->model('CabinetModel')->deleteDialog($idDialog);
+        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/cabinet/dialogs');
+        exit;
+    }
+
     public function actionDialogs()
     {
-        unset($_SESSION['add_user_error']);
-        $dialogs_page_defualt = $this->model('CabinetModel')->getdialogs();
+        $dialogs_page_defualt = $this->model('CabinetModel')->getDialogs(true);
         $viewdialogs = $dialogs_page_defualt;
+        if (isset($_POST['dialogs']))
+            $viewdialogs = $this->model('CabinetModel')->getDialogs(true);
 
-        for ($i = 0; $i <= $_SESSION['count_of_dialogs']; $i++) {
-            if (isset($_POST["delete" . $i])) {
-                $viewdialogs = $this->model('CabinetModel')->delete_dialog($i);;
-            }
-        }
+        if (isset($_POST['deleted_dialogs']))
+            $viewdialogs = $this->model('CabinetModel')->getDeletedDialogs();
 
-        for ($i = 0; $i < $_SESSION['count_of_dialogs_deleted']; $i++) {
-            if (isset($_POST["return" . $i])) {
-                $viewdialogs = $this->model('CabinetModel')->return_dialog($i);
-            }
-        }
+        if (isset($_POST['create_new_dialog']))
+            $viewdialogs = $this->model('CabinetModel')->getUsersForDialog();
 
-            for ($i = 0; $i < $_SESSION['count_of_dialogs']; $i++)
-            {
-                if (!isset($_SESSION['deleted_dialogs_button'])) {
-                    if (isset($_POST['chat' . $i])) {
-                        $_SESSION['chat'] = $i;
-                        $_SESSION['dialog_id'] = (integer)$_SESSION['matrix_for_dialogs'][$_SESSION['chat']][0];
-                        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/cabinet/chat');
-                        exit;
-                    }
-                }
-            }
-
-            if (isset($_POST['dialogs']))
-            {
-                unset($_SESSION['deleted_dialogs_button']);
-                $viewdialogs = $this->model('CabinetModel')->getdialogs();
-            }
-
-        if (isset($_POST['add_users'])) {
-            $viewdialogs = $this->model('CabinetModel')->add_dialog();
-        }
-
-        if (isset($_POST['delete_all_dialogs_yes']))
-            $viewdialogs = $this->model('CabinetModel')->delete_all_dialogs();
-
-        if (isset($_POST["turn_back_dialog"]))
-            $viewdialogs = $this->model('CabinetModel')->turn_back_dialog();
-
-        if (isset($_POST["create_new_dialog"])) {
-            $viewdialogs = $this->model('CabinetModel')->create_new_dialog();
-            unset($_SESSION['last_deleted_dialog']);
-            unset($_SESSION['last_deleted_dialog_name']);
-        }
-
-        if ($viewdialogs == $dialogs_page_defualt) {
-            unset($_SESSION['last_deleted_dialog']);
-            unset($_SESSION['last_deleted_dialog_name']);
-        }
+        if (isset($_POST['add_users']))
+            $viewdialogs = $this->model('CabinetModel')->createNewDialog();
 
         $this->view->render('dialogs', $viewdialogs);
     }
@@ -129,7 +88,6 @@ class CabinetController extends Controller
 
         $this->view->render('gadgets', $viewgadgets);
     }
-
 
     public function actionProfileEdit()
     {

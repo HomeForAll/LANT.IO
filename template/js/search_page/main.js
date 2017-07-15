@@ -1,35 +1,37 @@
 'use strict';
 
 var getSearchParameters = function() {
-    function transformToAssocArray(prmstr) {
+    function transformToAssocArray( prmstr ) {
         var params = {};
-        var prmarr = prmstr.split('&');
-        for(var i = 0; i < prmarr.length; i++) {
-            var tmparr = prmarr[i].split('=');
+        var prmarr = prmstr.split("&");
+        for ( var i = 0; i < prmarr.length; i++) {
+            var tmparr = prmarr[i].split("=");
             params[tmparr[0]] = tmparr[1];
         }
         return params;
     }
     var prmstr = window.location.search.substr(1);
-    return prmstr !== null && prmstr !== '' ? transformToAssocArray(prmstr) : {};
+    return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {};
 };
 
 /** Переходим в новую вкладку и получаем объявления **/
 $(document).ready(function () {
     $.ajax({
+<<<<<<< HEAD
         method: 'POST',
+=======
+        method: 'GET',
+>>>>>>> 7c9aa47d38556837d001550191973ddf92da9a56
         url: 'api/search',
         data: getSearchParameters(),
+        dataType: 'Json',
         success: function(form_data) {
-            console.log('form_data-success', form_data);
             renderAllApartments(form_data);
-        },
-        error: function (form_data) {
-            console.log('form_data - error', form_data);
         }
     });
 });
 
+<<<<<<< HEAD
 /** при нажатии отправить, рендерим формы **/
 $('#form_2').on('submit', function () {
     var newData = {};
@@ -90,26 +92,42 @@ $(function() {
     };
 });
 
+=======
+>>>>>>> 7c9aa47d38556837d001550191973ddf92da9a56
 /** Рендеринг форм **/
 function renderAllApartments(data) {
     var content = '',
         $resultAllApartments = $('.result-all-apartments');
 
     if (!data) {
+        console.log('Данные не полные');
         return false;
     }
 
     for (var i = 0; i < data.length; i++) {
-        var $source = $('#entry-template').html(),
+        var $source = $("#entry-template").html(),
             template = Handlebars.compile($source);
 
+        if (data[i].preview_img === undefined) {
+            return
+        }
+
         //data[i].preview_img = data[i].preview_img.split('|')[0];
+<<<<<<< HEAD
         //data[i].preview_img = '1.png';
+=======
+        data[i].preview_img = "5.png";
+>>>>>>> 7c9aa47d38556837d001550191973ddf92da9a56
 
         content += template(data[i]);
     }
     $resultAllApartments.html(content);
 }
+
+/** Select **/
+// $('select').styler({
+//     selectSearch: true
+// });
 
 /** Фильтр - Цена **/
 $(function () {
@@ -119,7 +137,7 @@ $(function () {
     /** Фильтры в доп.параметрах **/
     $amountBeforeMain.val('0');
     $amountAfterMain.val('20000');
-    $('#main-slider').slider({
+    $("#main-slider").slider({
         range: true,
         min: 0,
         max: 20000000,
@@ -166,4 +184,152 @@ $(function () {
             });
         }
     }, 1000);
+});
+
+/** Яндекс карты **/
+function yandexMap() {
+    var element = $('#address');
+
+    ymaps.ready(function () {
+        var map = new ymaps.Map("map", {
+            center: [55.76, 37.64],
+            zoom: 10,
+            controls: ['fullscreenControl', 'typeSelector', 'geolocationControl', 'zoomControl']
+        });
+
+        //myMap.geoObjects.add(
+        //    new ymaps.Placemark(
+        //        coords,
+        //        {
+        //            balloonContentHeader: geolocation.country, // страна
+        //            balloonContent: geolocation.city, // город
+        //            balloonContentFooter: geolocation.region // регион
+        //        }
+        //    )
+        //);
+
+        element.on('change', function () {
+            ymaps.geocode(element.val()).then(
+                function (res) {
+                    var object = res.geoObjects.get(0);
+
+                    map.geoObjects.removeAll();
+                    map.geoObjects.add(object);
+
+                    var bounds = object.properties.get('boundedBy');
+
+                    var coordinates = object.geometry.getCoordinates();
+                    var country = object.getCountry();
+                    var area = object.getAdministrativeAreas()[0];
+                    var city = object.getLocalities();
+                    var street = object.getThoroughfare();
+                    var house = object.getPremiseNumber();
+
+                    map.setBounds(bounds, {
+                        checkZoomRange: true
+                    });
+
+//              if ('country' in MapController.options) {
+//                  var countrySpan = $(MapController.options.country);
+//                  var countryInput = $('#country');
+//
+//                  countrySpan.text('');
+//                  countrySpan.text(country);
+//
+//                  countryInput.val('');
+//                  countryInput.val(country);
+//              }
+//
+//              if ('area' in MapController.options) {
+//                  var areaSpan = $(MapController.options.area);
+//                  var areaInput = $('#area');
+//
+//                  areaSpan.text('');
+//                  areaSpan.text(area);
+//
+//                  areaInput.val('');
+//                  areaInput.val(area);
+//              }
+//
+//              if ('city' in MapController.options) {
+//                  var citySpan = $(MapController.options.city);
+//                  var cityInput = $('#city');
+//
+//                  citySpan.text('');
+//                  citySpan.text(city);
+//
+//                  cityInput.val('');
+//                  cityInput.val(city);
+//              }
+//
+//              if ('street' in MapController.options) {
+//                  var streetSpan = $(MapController.options.street);
+//                  var streetInput = $('#street');
+//
+//                  streetSpan.text('');
+//                  streetSpan.text(street);
+//
+//                  streetInput.val('');
+//                  streetInput.val(street);
+//              }
+//
+//              if ('house' in MapController.options) {
+//                  var houseSpan = $(MapController.options.house);
+//                  var houseInput = $('#house');
+//
+//                  houseSpan.text('');
+//                  houseSpan.text(house);
+//
+//                  houseInput.val('');
+//                  houseInput.val(house);
+//              }
+
+                    ymaps.geocode(MapController.prototype.coordinates, {
+                        kind: 'district'
+                    }).then(
+                        function (res) {
+                            var object, region;
+
+//console.log(res.geoObjects.get(1));
+
+                            if (res.geoObjects.get(0) === undefined) {
+                                object = undefined;
+                            } else {
+                                object = res.geoObjects.get(0);
+                                region = object.properties.getAll().name;
+                            }
+
+                            var region = object.properties.getAll().name;
+
+                            if ('region' in MapController.options) {
+                                var regionSpan = $(MapController.options.region);
+                                var regionInput = $('#region');
+
+                                regionSpan.text('');
+                                regionSpan.text(region);
+
+                                regionInput.val('');
+                                regionInput.val(region);
+                            }
+                        });
+
+                    console.log(' --- Начало --- ');
+                    console.log("Адрес: " + object.getAddressLine());
+                    console.log("Страна: " + country);
+                    console.log("Регион: " + area);
+                    console.log("Город: " + city);
+                    console.log("Улица: " + street);
+                    console.log("Дом №: " + house);
+                    console.log("Координаты: " + coordinates);
+                    console.log(' --- Конец --- ');
+                })
+        });
+
+        window.suggests = new ymaps.SuggestView("address", {width: 300, offset: [0, 4], results: 20});
+    });
+}
+
+/** Поиск по городам **/
+ymaps.ready(function () {
+    new ymaps.SuggestView('address', {width: 300, offset: [0, 4], results: 20});
 });

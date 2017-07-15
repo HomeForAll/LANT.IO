@@ -13,7 +13,6 @@ var productSearch, showAndHideTopMenu, boolean, rootBlock, showFilter, openMap =
         })
     };
 
-
 /** Через Socket.io обрабатываем запросы **/
 $(document).ready(function () {
     /*
@@ -109,43 +108,14 @@ $('#scene').parallax({
 // $('select').styler({
 //     selectSearch: true
 // });
+ // $('.top-apartments select').styler({
+ //     selectSearch: true
+ // });
+
+
 //---------------------------------------------------------
 
-/** Слайдер **/
-$(document).ready(function () {
-    $('.bxslider').bxSlider({
-        slideWidth: 500, // ширина слайдера
-        minSlides: 1,
-        maxSlides: 2,
-        moveSlides: 2, // прокрутка по 2 блока
-        slideMargin: 10,
-        pager: false,
-        auto: true, // прокрутка
-        infiniteLoop: true // бесконечная прокрутка
-    });
-    $('.bxslider-partners').bxSlider({
-        slideWidth: 150,
-        minSlides: 1,
-        maxSlides: 5,
-        moveSlides: 2,
-        slideMargin: 50,
-        pager: false,
-        auto: true,
-        pause: 15000,
-        infiniteLoop: true
-    });
-    $('.apartments-wallpapers').bxSlider({
-        slideWidth: 70,
-        minSlides: 1,
-        maxSlides: 5,
-        moveSlides: 3,
-        slideMargin: 0,
-        pager: false,
-        pause: 20000,
-        auto: true,
-        infiniteLoop: true
-    });
-});
+
 //---------------------------------------------------------
 
 /** Отслежка и изменение расширенного и простого блока **/
@@ -955,6 +925,8 @@ $("#form_2").on('submit', function (e) {
     });
 });
 
+/** Дополнительная информаионная форма **/
+$('.open-close-ad').click(console.log('Запустили'));
 //---------------------------------------------------------
 
 /** Фильтр - Цена **/

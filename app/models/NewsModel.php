@@ -7,6 +7,9 @@ use PhpAmqpLib\Message\AMQPMessage;
 class NewsModel extends Model
 {
 
+    private $response = [];
+    private $errors = [];
+
     public function __construct()
     {
         $this->db = new DataBase;
@@ -40,6 +43,20 @@ class NewsModel extends Model
 
 
     /**
+     * Определение новое ли объявление
+     * @param $date - дата объявления в формате YYYY-MM-DD HH24:MI:SS
+     * @return bool - является ли объявление новым
+     */
+    private function checkAdsIsNew($date)
+    {
+        //Промежуток времени в часах, когда объявление считается новым
+        $delta_new_time = 24;
+        $time = strtotime($date);
+        return (((time() - $time) / 60 / 60) <= $delta_new_time);
+    }
+
+
+    /**
      * Количество объявлений удовлетворяющих условиям
      * @param int $time_from - за промежуток от времени в часах
      * (по умолчанию, за всё время)
@@ -52,6 +69,7 @@ class NewsModel extends Model
      * @param int $price_to - Цена до
      * @param int $space_from - Площадь от
      * @param int $space_to - Площадь до
+     * @param int $city - город
      * @param int $status - Статус (активное/не активное)
      * @param string $title_like
      * @return int - Количество объявлений
@@ -66,6 +84,7 @@ class NewsModel extends Model
         $price_to = 0,
         $space_from = 0,
         $space_to = 0,
+        $city = 0,
         $status = 1,
         $title_like = ''
     ) {
@@ -106,6 +125,9 @@ class NewsModel extends Model
         if ($space_to != 0) {
             $sql .= "AND (space <= :space_to) ";
         }
+        if ($city != 0) {
+            $sql .= "AND (city = :city) ";
+        }
         if ($title_like) {
             $title_like = $this->checkingString($title_like);
             $sql .= "AND (title LIKE '%" . $title_like . "%') ";
@@ -137,8 +159,13 @@ class NewsModel extends Model
         if ($space_to != 0) {
             $stmt->bindParam(':space_to', $space_to);
         }
+        if ($city != 0) {
+            $stmt->bindParam(':city', $city);
+        }
         $stmt->execute();
         $result = $stmt->fetchColumn();
+        //для Ajax запроса
+        $this->response['count_all'] = $result;
         return $result;
     }
 
@@ -1163,6 +1190,7 @@ class NewsModel extends Model
      * @param int $space_type - Тип площади
      * @param int $operation_type - Операция
      * @param int $object_type - Тип объекта
+     * @param int $city - Город
      * @param int $price_from - Цена от
      * @param int $price_to - Цена до
      * @param int $space_from - Площадь от
@@ -1170,12 +1198,14 @@ class NewsModel extends Model
      * @param int $max_number - Количество объявлений
      * @return array -
      * ['best_news'] - arr [0][1]... Данные Лучших объявлений
+     *
      */
     public function getBestNewsOfTime(
         $time = 24,
         $space_type = 0,
         $operation_type = 0,
         $object_type = 0,
+        $city = 0,
         $price_from = 0,
         $price_to = 0,
         $space_from = 0,
@@ -1189,9 +1219,9 @@ class NewsModel extends Model
         $news_date = $this->dateFormatForDB($time);
 
         $sql = "SELECT id_news, to_char(date,'YYYY-MM-DD HH24:MI:SS') as date, title, "
-            . "space_type, operation_type, object_type, "
+            . "space_type, operation_type, object_type, city,"
             . "content, user_id, preview_img, status, rating_admin, price, lease, space, "
-            . "number_of_rooms, metro_station, time_walk, time_car "
+            . "number_of_rooms, metro_station, time_walk, time_car, lat, lng "
             . "FROM news_base WHERE (date >= :date) ";
 
         // Только активные(видимые)
@@ -1205,6 +1235,9 @@ class NewsModel extends Model
         }
         if ($object_type != 0) {
             $sql .= "AND (object_type = :object_type) ";
+        }
+        if ($city != 0) {
+            $sql .= "AND (city = :city) ";
         }
         if ($price_from != 0) {
             $sql .= "AND (price >= :price_from) ";
@@ -1235,7 +1268,9 @@ class NewsModel extends Model
         if ($object_type != 0) {
             $stmt->bindParam(':object_type', $object_type);
         }
-
+        if ($city != 0) {
+            $stmt->bindParam(':city', $city);
+        }
         if ($price_from != 0) {
             $stmt->bindParam(':price_from', $price_from);
         }
@@ -1250,10 +1285,6 @@ class NewsModel extends Model
         }
         $stmt->execute();
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        // Подкотовка данных для вывода
-        $data = $this->prepareNewsPreview($data, false);
-
         return $data;
     }
 
@@ -1721,10 +1752,16 @@ class NewsModel extends Model
     /**
      * Подкотовка данных для вывода превью объявлений
      * @param $data - исходные данные объявлений из БД в виде arr[[0]=>arr, [1]=>arr...]
+     * @param bool $translate_indx - нужно ли переводить индексы
+     * @param bool $author_info - нужна ли информация об авторе
      * @return mixed - преобразованные данные
+     * Добавляет параметр ad_is_new - является ли объявление новым (bool)
+     * Добавляет данные об авторе
      */
-    private function prepareNewsPreview($data, $translate_indx = true)
+    public function prepareNewsPreview($data, $translate_indx = true, $author_info = false)
     {
+        $user_id_arr = [];
+
         //Строку файлов картинок преобразуем в массив $data['news'][number]['preview_img'][]
         $data = $this->explodePreviewImg($data);
 
@@ -1737,11 +1774,19 @@ class NewsModel extends Model
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
         $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
         foreach ($res as $m) {
             $metro_stations[$m['metro_id']] = $m["metro_name"];
         }
 
+        // Данные индекс города -> город
+        $city = [];
+        $sql = "SELECT id, city FROM city";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($res as $c) {
+            $city[$c['id']] = $c["city"];
+        }
 
         foreach ($data as $key => $value) {
             // Получение имен категорий
@@ -1768,9 +1813,57 @@ class NewsModel extends Model
                 $data[$key]['metro_station'] = $metro_stations[$data[$key]['metro_station']];
             }
 
+            //Перевод индекса города в наименование
+            if (!empty($data[$key]['city'])) {
+                $data[$key]['city'] = $city[$data[$key]['city']];
+            }
 
+            //Определение, является ли объявление новым (дата в формате 'YYYY-MM-DD HH24:MI:SS')
+            if (!empty($data[$key]['date'])) {
+                $data[$key]['ad_is_new'] = $this->checkAdsIsNew($data[$key]['date']);
+            }
+
+            //Массив id авторов
+            if (!empty($data[$key]['user_id']) && $author_info) {
+                $user_id_arr[$key] = $data[$key]['user_id'];
+            }
         }
-        return $data;
+        //Получение данных об авторах объявлений
+        if ($author_info) {
+            $author_arr = $this->getAuthorInfo($user_id_arr);
+
+            //Присваивание данных
+            foreach ($data as $key => $val) {
+                if (!empty($author_arr[$data[$key]["user_id"]])) {
+                    $data[$key] = $data[$key] + $author_arr[$data[$key]["user_id"]];
+                }
+            }
+        }
+        $this->response['best_ads'] = $data;
+    }
+
+    /**
+     * Возвращает массив параметров автора объявления
+     * @param $user_id_arr - массив id авторов (может быть послано просто (str) id)
+     * @return array - Массив с параметрами автора, и ключами = его id
+     */
+    private function getAuthorInfo($user_id_arr)
+    {
+        $author_arr = [];
+        if (!is_array($user_id_arr)) {
+            $user_id_arr = [$user_id_arr];
+        }
+        $user_id_arr_txt = implode(',', $user_id_arr);
+        $sql = "SELECT id, first_name, last_name, patronymic, profile_foto_id"
+            . " FROM users WHERE id IN($user_id_arr_txt)";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        $author_result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($author_result as $val) {
+            $author_arr[$val['id']] = $val;
+            unset($author_arr[$val['id']]['id']);
+        }
+        return $author_arr;
     }
 
     /**
@@ -2287,6 +2380,97 @@ class NewsModel extends Model
             <?php } ?>
         </select>
     <?php }
+
+    public function getResponse()
+    {
+        if (empty($this->errors) && empty($this->response)) {
+            return [
+                'error' => [
+                    [
+                        'code' => 0,
+                        'message' => 'Неправильный запрос',
+                    ],
+                ],
+            ];
+        }
+
+        if ($this->errors) {
+            return [
+                'error' => $this->errors,
+            ];
+        } else {
+            return [
+                'response' => $this->response,
+            ];
+        }
+    }
+
+    /**
+     * Возврвщает массив запроса из POST и param
+     * @param array $post
+     * @param array $param
+     * @return array
+     */
+    public function getRequestForAds($post, $param = [])
+    {
+        $request = [];
+        $request_param_int = [
+            'space_type',
+            'operation_type',
+            'object_type',
+            'time_from',
+            'time_to',
+            'price_from',
+            'price_to',
+            'space_from',
+            'space_to',
+            'city',
+            'status',
+            'count',
+            'offset'
+        ];
+        $request_param_str = [
+            'title_like'
+        ];
+        if (!empty($post)) {
+            foreach ($request_param_int as $name) {
+                if (isset($post[$name])) {
+                    $request[$name] = (int)$post[$name];
+                } else {
+                    $request[$name] = 0;
+                }
+            }
+            foreach ($request_param_str as $name) {
+                if (isset($post[$name])) {
+                    $request[$name] = $this->checkingString($post[$name]);
+                } else {
+                    $request[$name] = '';
+                }
+            }
+        }
+
+        if (isset($param[0])) {
+            // Определение времени в часах для лучших новостей на главной
+            if (preg_match("/best_of_/", $param[0])) {
+                $time_name = substr($param[0], 8);
+                switch ($time_name) {
+                    case 'day':
+                        $request['time_from'] = 24;
+                        break;
+                    case 'week':
+                        $request['time_from'] = 168;
+                        break;
+                    case 'month':
+                        $request['time_from'] = 720;
+                        break;
+                    default:
+                        $request['time_from'] = 24;
+                }
+            }
+        }
+
+        return $request;
+    }
 
 
 }

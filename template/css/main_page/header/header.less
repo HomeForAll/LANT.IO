@@ -41,6 +41,11 @@
   border-radius: 4px;
 }
 
+.container-w-0 {
+  width: 1050px;
+  margin: auto;
+}
+
 .navigation {
   display: block;
   position: fixed;
@@ -49,76 +54,6 @@
   bottom: 65px;
   right: 5px;
   z-index: 800;
-}
-
-.container-w-0 {
-  width: 1050px;
-  margin: auto;
-}
-
-.logo-false {
-  background: url("/template/images/logo-false.png") no-repeat center;
-  background-size: 70%;
-  flex-grow: 1;
-  width: 120px;
-  height: 20px;
-}
-
-.user-is-not-registration {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  align-self: center;
-  font-size: 13px;
-  color: #fff;
-  font-weight: 100;
-  align-content: stretch;
-  div {
-    display: flex;
-    justify-content: space-around;
-    align-self: stretch;
-    flex-flow: row nowrap;
-  }
-  div:nth-child(n+2) {
-    flex-grow: 3;
-  }
-  div:nth-child(2) {
-    justify-content: flex-start;
-  }
-  div:nth-child(3) {
-    justify-content: flex-end;
-  }
-  p, a {
-    display: flex;
-    justify-content: center;
-    align-self: center;
-  }
-  button {
-    display: flex;
-    border-radius: 30px;
-    margin-left: 30px;
-    border: none;
-    cursor: pointer;
-    padding: 5px 10px;
-    color: #fff;
-    background: #4f85c8;
-    &:hover {
-      background: #5b9eeb;
-      transition: 1.5s;
-    }
-  }
-  a {
-    color: #fff;
-    padding-left: 25px;
-  }
-  a:nth-child(1) {
-    background: url("/template/images/add-blue.png") no-repeat center left 5px;
-    background-size: auto;
-  }
-  a:nth-child(2) {
-    background: url("/template/images/add-green.png") no-repeat center left 5px;
-    background-size: auto;
-  }
 }
 
 .add-ad-and-user {
@@ -161,18 +96,17 @@
 .min-circle-notification:before {
   content: '10';
   position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   overflow: hidden;
   margin-left: 20px;
+  padding: 2px;
   text-align: center;
   line-height: 12px;
   font-size: 8px;
+  display: block;
   background: #f75a5a;
   border-radius: 100%;
-  width: 15px;
-  height: 15px;
+  width: 11px;
+  height: 11px;
 }
 
 .user-logo {

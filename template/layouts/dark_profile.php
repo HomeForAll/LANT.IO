@@ -7,10 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Edit Dark Profile</title>
     <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/template/html/edit_profile_dark/fonts.min.css">
     <link rel="stylesheet" href="/template/html/edit_profile_dark/header/header.min.css">
     <link rel="stylesheet" href="/template/html/edit_profile_dark/left_bar/left_bar.min.css">
     <link rel="stylesheet" href="/template/html/edit_profile_dark/user_profile/user_profile.min.css">
-    <link rel="stylesheet" href="/template/html/edit_profile_dark/fonts.min.css">
 </head>
 <body>
 <div class="content">

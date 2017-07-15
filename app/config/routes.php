@@ -6,6 +6,8 @@ return [
     'ad_page'      => 'ad_page/search/index',
     'dark_profile'      => 'dark_profile/search/index',
 
+    'profile' => 'profile/site/index',
+
     'registration'          => 'main/user/registration',
     'registration/([a-z]+)' => 'main/user/registration/$1',
     'login'                 => 'main/user/login',
@@ -23,7 +25,8 @@ return [
     'cabinet/forms/new' => 'main/cabinet/formsNew',
 
     'cabinet/dialogs'                 => 'main/cabinet/dialogs',
-    'cabinet/chat'                    => 'main/cabinet/chat',
+    'cabinet/chat([0-9]+)'            => 'main/cabinet/chat/$1',
+    'cabinet/deleteDialog([0-9]+)'    => 'main/cabinet/deleteDialog/$1',
     'cabinet/form/new'                => 'main/cabinet/createForm',
     'cabinet/form/edit/id/([0-9]+)'   => 'main/cabinet/editForm/$1',
     'cabinet/form/delete/id/([0-9]+)' => 'main/cabinet/deleteForm/$1',
@@ -41,17 +44,17 @@ return [
 
     'oauth/([A-Za-z]+)/state/([0-9]+)' => 'empty/user/OAuth/$1/$2',
     'oauth/([A-Za-z]+)'                => 'empty/user/OAuth/$1',
-    
+
     //    'auth/unset' => 'empty/user/OAuthDestroy',
     //    'auth/unset/([A-Za-z]+)' => 'empty/user/OAuthDestroy/$1',
     //    'auth/([A-Za-z]+)' => 'empty/user/OAuthInit/$1',
-    
+
     'news/([0-9]+)'           => 'main/news/newsID/$1',
     'news/editor'             => 'main/news/newsEditor',
     'news/myad'               => 'main/news/newsMyAD',
     'news/editor/([0-9]+)'    => 'main/news/newsEditor/$1',
     'news'                    => 'main/news/newsList',
-    
+
     'service'       => 'main/service/serviceSub',
     'service/admin' => 'main/service/serviceAdmin',
 
@@ -64,4 +67,16 @@ return [
     // API
     'api/search' => 'main/API/search',
     'api/search/count' => 'main/API/SearchAdsCount',
+    'api/auth' => 'main/API/login',
+    'api/logout' => 'main/API/logout',
+    'api/registration/([A-Za-z\_]+)' => 'main/API/registration/$1',
+    'api/user' => 'main/API/user',
+    'api/upload/news/images' => 'main/API/uploadAdImage',
+    'api/upload/user/avatar' => 'main/API/uploadAvatar',
+    'api/(best_of_[a-z]+)' => 'main/API/BestAds/$1',
+    'api/stat/users/online/([A-Za-z]+)' => 'main/API/online/$1',
+    'api/stat/users/registered/([A-Za-z]+)' => 'main/API/registered/$1',
+    'api/stat/ads/get/([A-Za-z]+)' => 'main/API/adsNumber/$1',
+    'api/stat/ads/active/([A-Za-z]+)' => 'main/API/adsActiveNumber/$1',
+    'api/stat/trans/close/get/([A-Za-z]+)' => 'main/API/trans/$1',
 ];

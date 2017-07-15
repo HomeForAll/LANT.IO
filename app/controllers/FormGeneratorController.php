@@ -21,6 +21,13 @@ class FormGeneratorController extends Controller
         // Получение данных для выбора форм
         $data['form_options'] = $this->model('FormGeneratorModel')->getFormOptionList();
 
+          //Внесение данных в колонку
+          if (!empty($_POST['update_column'])) {
+              array_push($data['message'], $this->model('FormGeneratorModel')->updateСolumnByData($_POST['table'], $_POST['column'], $_POST['names_str']));
+          }
+
+
+
         //Все уникальные элементы всех форм
         if (!empty($_POST['show_unique_forms_elements'])) {
             if (isset($_POST['rus'])) {

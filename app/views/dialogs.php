@@ -1,11 +1,7 @@
 <?php
 $this->title = 'Мои диалоги';
-$matrix = $this->data;
-$i_max = $_SESSION['count_of_dialogs'];
-$count_of_latters = 40;
-if (isset($_POST['create_new_dialog'])) {
-    $i_max = $_SESSION['count_of_users'];
-}?>
+$cabinetModel = $this->model('CabinetModel');
+?>
 <style>
     .buttons {
         float: left;
@@ -80,232 +76,116 @@ if (isset($_POST['create_new_dialog'])) {
         width: 200px;
     }
 </style>
-<?php
-if ($i_max != 0) {
-?>
-
 
 <form action="" method="post">
+    <?php if ($this->data['code'] == 'getDialogs')
+    { ?>
     <table>
         <tr>
             <td>
-                <input type=submit class="real_buttons" name=dialogs value="Диалоги">
+                <input type="submit" class="real_buttons" name="dialogs" value="Диалоги">
             </td>
             <td>
-                <input type=submit class="real_buttons" name=deleted_dialogs value="Удаленные диалоги">
+                <input type="submit" class="real_buttons" name="create_new_dialog" value="Создать новый диалог">
             </td>
-            <td>
-                <?php if (!isset($_POST['create_new_dialog'])) { ?>
-                    <input type=submit class="real_buttons" name=create_new_dialog value="Создать новый диалог">
-                <?php } else { ?>
-                    <input type=submit class="real_buttons" name=add_users value="Создать">
-                <?php } ?>
-            </td>
-            <?php if (isset($_SESSION['add_user_error'])) { ?>
-            <td>
-                <span style="color: red">Не выбран!</span>
-            </td>
-            <?php } ?>
+<!--            <td>-->
+<!--                <input type="submit" class="real_buttons" name="deleted_dialogs" value="Удаленные диалоги" disabled>-->
+<!--            </td>-->
         </tr>
-        <?php if(isset($_POST['create_new_dialog'])) { ?>
-        <h3>Вся история сообщений сохраняется и даже после удаления лично у вас, она всё равно хранится на сайте.
-            В связи с этим, всегда есть возможность вернуть удаленные диалоги.
-        </h3>
-        <?php }
-        ?>
-        <tr>
-            <td><br></td>
-        </tr>
-        <?php for ($n = 0; $n < $i_max; $n++) { ?>
-            <tr>
-                <td>
-                    <?php
-                    $new_value = '';
-                    $value = $matrix[$n][1];
-                    if (isset($_POST['create_new_dialog'])) {
-                        $value = $matrix[$n][1] . ' ' . $matrix[$n][2];
-                        $name = "add" . $n;
-                        echo '<label class="buttons" style="float: left" for="' . $name . '">' . $value . '</label>';
-                        echo "<input type=checkbox id={$name} name={$name}>";
-                    } else { ?>
-                        <?php
-                        $name = "chat" . $n;
-
-                        if (isset($_POST['deleted_dialogs'])) {
-                            $name = 'return' . $n;
-                            if (isset($value[$count_of_latters])) {
-                                for ($i = 0; $i <= $count_of_latters; $i++) {
-                                    $new_value .= $value[$i];
-                                }
-                                $new_value[$i-1] = '.';
-                                $new_value .= '..';
-                                echo "<input class=\"real_buttons\" style=\"float: left\" type=\"submit\" name='$name'
-                            value='$new_value'>";
-                            }
-                            else {
-                                echo "<input class=\"real_buttons\" style=\"float: left\" type=\"submit\" name='$name'  
-                            value='$value'>";
-                            }
-                        }
-                        else {
-                            if (isset($value[$count_of_latters])) {
-                                for ($i = 0; $i <= $count_of_latters; $i++) {
-                                    $new_value .= $value[$i];
-                                }
-                                $new_value[$i - 1] = '.';
-                                $new_value .= '..';
-                                echo "<input class=\"real_buttons\" style=\"float: left\" type=\"submit\" name='$name'
-                            value='$new_value'>";
-                            } else {
-                                echo "<input class=\"real_buttons\" style=\"float: left\" type=\"submit\" name='$name'  
-                            value='$value'>";
-                            }
-                        }
-                        ?>
-
-                    <?php } ?>
-                </td>
-                <?php if (!isset($_POST['create_new_dialog'])) { ?>
-
-                    <?php
-                    if (isset($_POST['deleted_dialogs'])) { ?>
-                        <td>
-                            <?php
-                            if (isset($matrix[$n][2])) {
-                                echo 'Будет удален ';
-                                echo $matrix[$n][2];
-                            } else {
-                                echo 'Актуально';
-                            }
-                            ?>
-                        </td>
-
-                    <?php }
-                } ?>
-                <td>
-                    <?php if (!isset($_POST['create_new_dialog'])) { ?>
-
-                        <?php
-                        if (!isset($_POST['deleted_dialogs'])) {
-                            $name = "delete" . $n;
-                            echo "<input class=\"real_buttons\" style=\"float: left; color: red\" type=submit name=$name
-                           value=X>";
-                        } else {
-                            $name = "return" . $n;
-                            echo "<input class=\"real_buttons\" style=\"float: left; color: limegreen\" type=submit name=$name
-                           value=Восстановить>";
-                        }
-                        ?>
-
-                    <?php } else {
-                        ?>
-                        <?php
-                        ?>
-                    <?php } ?>
-                </td>
-            </tr>
-            <tr>
-                <td><br></td>
-            </tr>
-        <?php } ?>
-        <tr>
-            <td>
-
-                <?php
-                if (isset($_SESSION['last_deleted_dialog'])) {
-                    $new_value = '';
-                    $value = $_SESSION['last_deleted_dialog_name'];
-                    $name = "last_deleted_dialog";
-                    if (isset($value[$count_of_latters])) {
-                        for ($i = 0; $i <= $count_of_latters; $i++) {
-                            $new_value .= $value[$i];
-                        }
-                        $new_value[$i-1] = '.';
-                        $new_value .= '..';
-                        echo "<input class=\"real_buttons\" style=\"float: left; background: red\" type=\"submit\" name='$name'
-                            value='$new_value'>";
-                    }
-                    else {
-                        echo "<input class=\"real_buttons\" style=\"float: left; background: red\" type=\"submit\" name='$name'
-                            value='$value'>";
-                    }
-                }
-                ?>
-
-            </td>
-            <td>
-                <?php
-                if (isset($_SESSION['last_deleted_dialog'])) {
-                if (!isset($_POST['create_new_dialog'])) { ?>
-
-                <?php
-                $name = "turn_back_dialog";
-                echo "<input class=\"real_buttons\" style=\"float: left; color: limegreen\" type=submit name=$name
-                           value=√>";
-                ?>
-
-        <tr>
-            <td><br></td>
-        </tr>
-    <?php }
-    } ?>
     </table>
-
+        <?php foreach ($this->data['idsDialog'] as $item => $key)
+    {
+        $id = 'chat' . $key;
+        $delete_id = 'delete_' . $key;
+        $name = $this->data['namesDialog'][$item]; ?>
+        <table>
+            <tr>
+                <td>
+                    <a class="button" href="/cabinet/chat<?php echo $key; ?>"><?php echo $name; ?></a>
+                </td>
+                <td>
+                    <a style="background: red" class="button" href="/cabinet/deleteDialog<?php echo $key; ?>">X</a>
+                </td>
+            </tr>
+        </table>
+    <?php } ?>
+        <table>
+            <tr>
+                <td>
+                    <input type="submit" class="real_buttons" style="background: red" name="delete_all_dialogs" value="Удалить все диалоги">
+                </td>
+            </tr>
+        </table>
+    <?php } ?>
+    <?php if ($this->data['code'] == 'dialogs_not_exist')
+    { ?>
+        <table>
+            <tr>
+                <td>
+                    <input type="submit" class="real_buttons" name="dialogs" value="Диалоги">
+                </td>
+                <td>
+                    <input type="submit" class="real_buttons" name="create_new_dialog" value="Создать новый диалог">
+                </td>
+                <td>
+                    <input type="submit" class="real_buttons" name="deleted_dialogs" value="Удаленные диалоги">
+                </td>
+            </tr>
+        </table>
+        <h4>Диалоги отсутствуют</h4>
+    <?php } ?>
+    <?php if ($this->data['code'] == 'users_for_dialogs')
+{ ?>
     <table>
         <tr>
             <td>
-                <?php
-                if (!isset($_POST['create_new_dialog'])) {
-                    if (!isset($_POST['delete_all_dialogs'])) {
-                        if (!isset($_POST['deleted_dialogs'])) {
-                            $name = "delete_all_dialogs";
-                            echo "<input class=\"real_buttons\" style=\"float: left; background: red\" type=submit name=$name
-                           value='Удалить все диалоги'>";
-                        }
-                    } else {
-                        echo 'Удалить все диалоги?';
-                    }
-                }
-                ?>
-                <?php
-                if (!isset($_POST['create_new_dialog'])) {
-                    if (isset($_POST['delete_all_dialogs'])) {
-                        $name = 'delete_all_dialogs_yes';
-                        echo "<input class=\"real_buttons\" style=\"float: left; color: limegreen;\" type=submit name=$name
-                           value='Угусики'>";
-                        $name = 'delete_all_dialogs_no';
-                        echo "<input class=\"real_buttons\" style=\"float: left; margin-left: 25px; color: red;\" type=submit name=$name
-                           value='Да ну нах'>";
-                    }
-                }
-                ?>
+                <input type="submit" class="real_buttons" name="dialogs" value="Диалоги">
+            </td>
+            <td>
+                <input type="submit" class="real_buttons" name="create_new_dialog" value="Создать новый диалог">
+            </td>
+            <td>
+                <input type="submit" class="real_buttons" name="deleted_dialogs" value="Удаленные диалоги">
             </td>
         </tr>
     </table>
-    <?php } else { ?>
-    <form action="" method="post">
-        <?php
-        if (!isset($_POST['deleted_dialogs'])) {
-            ?>
-            <h1>Диалогов нет</h1>
-            <table>
-                <tr>
-                    <td>
-                        <input type=submit class="real_buttons" name=create_new_dialog value="Создать новый диалог">
-                    </td>
-                    <td>
-                        <input type=submit class="real_buttons" name=deleted_dialogs value="Удаленные диалоги">
-                    </td>
-                </tr>
-            </table>
-            <?php
-        } else {
-            ?>
-            <h1>Удаленных диалогов нет</h1>
-            <input type=submit class="real_buttons" name=dialogs value="Диалоги">
-            <?php
-        }
-        }
-        ?>
-    </form>
+    <table>
+        <tr>
+            <td>
+                Название сделки
+            </td>
+            <td>
+                <input name="chat_name" type="text" placeholder="Название сделки">
+            </td>
+        </tr>
+    </table>
+    <br>
+    <table>
+        <tr>
+            <td>
+                Пользователи
+            </td>
+            <td>
+                <input name="search_user_for_dialog" type="text" placeholder="Поиск...">
+            </td>
+        </tr>
+    </table>
+    <?php
+    foreach ($this->data['idsUsersForDialog'] as $item => $key)
+    {
+        $id = 'addUser_' . $key;
+        $value = $this->data['namesUsersForDialog'][$item]?>
+    <table>
+        <tr>
+            <td>
+                <?php echo '<label for="' . $id . '">' . $value . '</label>'; ?>
+            </td>
+            <td>
+                <?php echo "<input type=checkbox id='$id' name='$id'>"; ?>
+            </td>
+        </tr>
+    </table>
+    <?php } ?>
+    <input type="submit" name="add_users" value="Создать">
+<?php } ?>
 </form>

@@ -15,7 +15,7 @@ class AdminController extends Controller
 
     }
 
-      public function actionAdminNews()
+     public function actionAdminNews()
     {
         // Проверка доступа
         global $news_message, $news_error;
@@ -30,20 +30,22 @@ class AdminController extends Controller
 
                 //Кол-во объявлений
                 $data['news_number'] = $this->model('NewsModel')->
-                getNamberOfAllNews($data['time_from'],$data['time_to'], $data['space_type'],
-                    $data['operation_type'], $data['object_type'], 0, 0, 0, 0, $data['status'], $data['title_like']);
-               $data['one_page'] = $data['max_number'];
+                getNamberOfAllNews($data['time_from'], $data['time_to'], $data['space_type'],
+                    $data['operation_type'], $data['object_type'], 0, 0, 0, 0, 0, $data['status'], $data['title_like']);
+                $data['one_page'] = $data['max_number'];
 
                 $data['news'] = $this->model('NewsModel')->
                 getRecentNewsList($data['time_to'], $data['time_from'], $data['max_number'], $data['space_type'],
-                    $data['operation_type'], $data['object_type'], $data['status'], $data['sorting'], $data['title_like'], $data['offset']);
+                    $data['operation_type'], $data['object_type'], $data['status'], $data['sorting'],
+                    $data['title_like'], $data['offset']);
 
                 echo json_encode($data);
                 die();
             }
             if ('submit_status' == $_POST['action']) {
                 $stat = $this->model('NewsModel')->getNewsStatusFromPOST();
-                $messege = $this->model('NewsModel')->makeNewsStatus($stat['news_update_id'], $stat['news_delete_id'], $stat['news_id_rating']);
+                $messege = $this->model('NewsModel')->makeNewsStatus($stat['news_update_id'], $stat['news_delete_id'],
+                    $stat['news_id_rating']);
                 echo json_encode($messege);
                 die();
             }
@@ -52,14 +54,15 @@ class AdminController extends Controller
         if (!empty($_POST['submit_status'])) {
             //Запись $_POST параметров в БД
             $stat = $this->model('NewsModel')->getNewsStatusFromPOST();
-            $this->model('NewsModel')->makeNewsStatus($stat['news_update_id'], $stat['news_delete_id'], $stat['news_id_rating']);
+            $this->model('NewsModel')->makeNewsStatus($stat['news_update_id'], $stat['news_delete_id'],
+                $stat['news_id_rating']);
         }
 
         if (!empty($_POST['test2'])) {
             $data['rabbitmq_message_newnews'] = $this->model('NewsModel')->getNewNewsByRabbitMQ();
         }
         // Таблица новостей по умолчанию
-        $data['news'] = $this->model('NewsModel')->getRecentNewsList(0, 24, 10, 0, 0, 0, FALSE, FALSE);
+        $data['news'] = $this->model('NewsModel')->getRecentNewsList(0, 24, 10, 0, 0, 0, false, false);
         $data['message'] = $news_message;
         $data['error'] = $news_error;
         $this->view->render('admin_news', $data);
