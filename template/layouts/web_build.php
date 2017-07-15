@@ -69,8 +69,29 @@ $siteModel = $this->model('SiteModel');
         <?php include_once ROOT_DIR . '/template/html/catalog-ads/catalog-ads.html' ?>
     </div>
 
+<<<<<<< HEAD
+</script>
+</head>
+<body>
+<!-- Header -->
+<?php include_once ROOT_DIR . '/template/html/main_page/header/header.php' ?>
+<!-- Content -->
+<div class="content">
+    <div class="main-message-block"></div>
+
+    <ul id="scene">
+        <li class="layer" data-depth="0.20"><img src="/template/images/paralax/home-1.png"></li>
+        <li class="layer" data-depth="0.40"><img src="/template/images/paralax/home-2.png"></li>
+        <li class="layer" data-depth="0.40"><img src="/template/images/paralax/tree-l.png"></li>
+        <li class="layer" data-depth="0.60"><img src="/template/images/paralax/tree-r.png"></li>
+        <li class="layer" data-depth="0.80"><img src="/template/images/paralax/back-1.png"></li>
+    </ul>
+    <div class="section-home-with-filters">
+    <?php include_once ROOT_DIR . '/template/html/search/search.php' ?>
+=======
     <div class="section" id="section-statistic" data-anchor="sectionStat">
         <?php include_once ROOT_DIR . '/template/html/statistic/statistic.html' ?>
+>>>>>>> 7c9aa47d38556837d001550191973ddf92da9a56
     </div>
 
     <div class="section" id="section-footer" data-anchor="sectionFooter">

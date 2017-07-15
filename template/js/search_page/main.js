@@ -17,7 +17,11 @@ var getSearchParameters = function() {
 /** Переходим в новую вкладку и получаем объявления **/
 $(document).ready(function () {
     $.ajax({
+<<<<<<< HEAD
+        method: 'POST',
+=======
         method: 'GET',
+>>>>>>> 7c9aa47d38556837d001550191973ddf92da9a56
         url: 'api/search',
         data: getSearchParameters(),
         dataType: 'Json',
@@ -27,6 +31,69 @@ $(document).ready(function () {
     });
 });
 
+<<<<<<< HEAD
+/** при нажатии отправить, рендерим формы **/
+$('#form_2').on('submit', function () {
+    var newData = {};
+    $.ajax({
+        method: 'POST',
+        url: 'api/search',
+        data: getSearchParameters(),
+        success: function(form_data) {
+            renderAllApartments(form_data);
+            newData += form_data;
+        }
+    });
+
+    /** Открываем дополнительную ифнормацию об объявлениях **/
+    $('.open-close-ad').on('click', function () {
+        var additionalInformationContent = '',
+            $moreInformationMainBlock = $('#show-more-information').html(),
+            addBlockInMain = Handlebars.compile($moreInformationMainBlock),
+            $resultAllApartments = $('.result-all-apartments');
+
+        additionalInformationContent += addBlockInMain(newData);
+        $resultAllApartments.html(additionalInformationContent);
+    });
+});
+
+/** Определяем нужные checkbox **/
+$(function() {
+    var $boxes = $('.checkbox-4 input:checkbox');
+
+    $('.checkbox-1 input:checkbox').on('click', function(e) {
+        $('#checkbox-price').html('От ' + e.target.value);
+    });
+    $('.checkbox-2 input:checkbox').on('click', function(e) {
+        $('#size-apartments').val(e.target.value);
+    });
+    $('.checkbox-3 input:checkbox').on('click', function(e) {
+        $('#checkbox-area').html(e.target.value);
+    });
+
+    $boxes.on('change', function(){
+        var theArray = [];
+        for (var i = 0; i < $boxes.length; i++) {
+            var box = $boxes[i];
+            if ($(box).prop('checked')) {
+                theArray[theArray.length] = $(box).val();
+            }
+        }
+        showValuesPrice(theArray);
+    });
+
+    var showValuesPrice = function(array) {
+        var text = '';
+        if(array.length === 0) text = 'Выбрано (0)';
+        for(var i = 0; i < array.length; i++) {
+            text = 'Выбрано (' + array.length + ')';
+        }
+        $('#checkbox-equipment').html(text);
+    };
+});
+
+=======
+>>>>>>> 7c9aa47d38556837d001550191973ddf92da9a56
 /** Рендеринг форм **/
 function renderAllApartments(data) {
     var content = '',
@@ -46,7 +113,11 @@ function renderAllApartments(data) {
         }
 
         //data[i].preview_img = data[i].preview_img.split('|')[0];
+<<<<<<< HEAD
+        //data[i].preview_img = '1.png';
+=======
         data[i].preview_img = "5.png";
+>>>>>>> 7c9aa47d38556837d001550191973ddf92da9a56
 
         content += template(data[i]);
     }
