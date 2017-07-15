@@ -1108,7 +1108,7 @@ class UserModel extends Model
             return;
         }
 
-        if (isset($_POST['document_inn'])) {
+        if (!empty($_POST['document_inn'])) {
             if (v::numeric()->validate($_POST['document_inn'])) {
                 $_SESSION['registration']['document_number'] = $_POST['document_inn'];
                 $this->response = true;
@@ -1118,8 +1118,8 @@ class UserModel extends Model
                     'message' => 'Неправильный формат ИНН',
                 ];
             }
-        } elseif (isset($_POST['document_ogrn'])) {
-            if ($this->checkOGRN($_POST['document_ogrn'])) {
+        } elseif (!empty($_POST['document_ogrn'])) {
+            if (v::numeric()->validate($_POST['document_ogrn'])) {
                 $_SESSION['registration']['document_number'] = $_POST['document_ogrn'];
                 $this->response = true;
             } else {
@@ -1129,25 +1129,6 @@ class UserModel extends Model
                 ];
             }
         }
-    }
-
-    private function checkOGRN($ogrn)
-    {
-        if (!is_numeric($ogrn)) {
-            return false;
-        }
-
-        $ogrn = $ogrn . '';
-
-        if (strlen($ogrn) == 13 and $ogrn[12] != substr((substr($ogrn, 0, -1) % 11), -1)) {
-            return false;
-        } elseif (strlen($ogrn) == 15 and $ogrn[14] != substr(substr($ogrn, 0, -1) % 13, -1)) {
-            return false;
-        } elseif (strlen($ogrn) != 13 and strlen($ogrn) != 15) {
-            return false;
-        }
-
-        return true;
     }
 
     public function setCompanyData($brandName, $companyName)
@@ -1520,7 +1501,6 @@ class UserModel extends Model
 
     public function getUserInfo()
     {
-        var_dump($_SESSION);
         if (isset($_SESSION['user'])) {
             // Необходимо переименовать поле в базе данных
             $_SESSION['user']['photo'] = $_SESSION['user']['profile_foto_id'];

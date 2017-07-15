@@ -6,7 +6,9 @@ class CabinetModel extends Model
 
     const IDSPERPAGE = 5;
     const ADMINSTATUS = 8;
+
     private $mailer;
+    private $response;
 
     public function __construct()
     {
@@ -21,16 +23,18 @@ class CabinetModel extends Model
         $start = round(microtime(true) * 1000);
         $end = $start - 1000000;
         $dialog = 'dialog-' . $idChat;
+
         return $redis->zRangeByScore($dialog, $end, $start);
     }
 
     public function getChatInfo($id)
     {
         $name = $this->getDialogName($id);
-        return array(
+
+        return [
             'nameChat' => $name,
-            'idChat' => $id,
-        );
+            'idChat'   => $id,
+        ];
     }
 
     public function deleteAllDialogs() // Удалить все диалоги
@@ -38,6 +42,7 @@ class CabinetModel extends Model
         $profile_id = $_SESSION['userID'];
         $stmt = $this->db->prepare("UPDATE dialogs SET show = 0 WHERE user_id= $profile_id");
         $stmt->execute();
+
         return $this->getDialogs(true);
     }
 
@@ -52,6 +57,7 @@ class CabinetModel extends Model
             foreach ($massivOwners as $item => $key) {
                 if ($key != $_SESSION['userID']) {
                     $profile_foto_id = $this->getAvatarUser($key);
+
                     return $profile_foto_id;
                 }
             }
@@ -60,6 +66,7 @@ class CabinetModel extends Model
             $stmt->execute();
             $avatar = $stmt->fetchAll();
             $avatar = $avatar[0]['avatar'];
+
             return $avatar;
         }
     }
@@ -96,23 +103,24 @@ class CabinetModel extends Model
                 $massiv[$item]['last_avatar'] = $last_message_avatar[$item];
                 $massiv[$item]['timestamp'] = $last_message_time[$item];
             }
-            echo (json_encode($massiv, JSON_UNESCAPED_UNICODE));
+            echo(json_encode($massiv, JSON_UNESCAPED_UNICODE));
 
-            return array(
-                'last_message_text' => $last_message_text,
+            return [
+                'last_message_text'   => $last_message_text,
                 'last_message_avatar' => $last_message_avatar,
-                'avatarsDialog' => $avatars,
-                'idsDialog' => $ids,
-                'namesDialog' => $names,
-                'code' => $code,
-            );
+                'avatarsDialog'       => $avatars,
+                'idsDialog'           => $ids,
+                'namesDialog'         => $names,
+                'code'                => $code,
+            ];
         }
         $code = 'dialogs_not_exist';
         $this->setUserError('dialogs_not_exist', 'Диалогов нет!');
-        return array(
+
+        return [
             'code' => $code,
-        );
-        } // Получить диалоги true - активные, false - удаленные
+        ];
+    } // Получить диалоги true - активные, false - удаленные
 
     public function getDialogsIDs()
     {
@@ -127,8 +135,10 @@ class CabinetModel extends Model
             foreach ($dialogs as $item => $key) {
                 $dialogs_ids[$item] = $key['id'];
             }
+
             return $dialogs_ids;
         }
+
         return false;
     } // Узнать все диалоги пользователя
 
@@ -144,8 +154,10 @@ class CabinetModel extends Model
             foreach ($dialogs as $item => $key) {
                 $dialogs_ids[$item] = $key['id'];
             }
+
             return $dialogs_ids;
         }
+
         return false;
     } // Узнать удаленные диалоги пользователя
 
@@ -160,6 +172,7 @@ class CabinetModel extends Model
             foreach ($massivOwners as $item => $key) {
                 if ($key != $_SESSION['userID']) {
                     $name = $this->getNamesUsersForDialog($key);
+
                     return $name;
                 }
             }
@@ -168,7 +181,8 @@ class CabinetModel extends Model
         $stmt->execute();
         $name = $stmt->fetchAll();
         $name = $name[0]['name'];
-        $name = mb_substr($name,0,64, 'UTF-8');
+        $name = mb_substr($name, 0, 64, 'UTF-8');
+
         return $name;
     } // Узнать название диалога по id
 
@@ -178,6 +192,7 @@ class CabinetModel extends Model
         $stmt->execute();
         $profile_foto_id = $stmt->fetchAll();
         $profile_foto_id = $profile_foto_id[0]['profile_foto_id'];
+
         return $profile_foto_id;
     }
 
@@ -196,20 +211,22 @@ class CabinetModel extends Model
             $time = $info[0]['date'];
 
             $profile_foto_id = $this->getAvatarUser($info[0]['user_id']);
-            return array(
-                'time' => $time,
-                'text' => $message,
+
+            return [
+                'time'   => $time,
+                'text'   => $message,
                 'avatar' => $profile_foto_id,
-            );
+            ];
         } else {
             $time = 'empty';
             $message = 'empty';
             $profile_foto_id = 'empty';
-            return array(
-                'time' => $time,
-                'text' => $message,
+
+            return [
+                'time'   => $time,
+                'text'   => $message,
                 'avatar' => $profile_foto_id,
-            );
+            ];
         }
     }
 
@@ -223,17 +240,19 @@ class CabinetModel extends Model
             foreach ($dialogs as $item => $key) {
                 $datesOfDelete[$item] = $this->getDateOfDelete($key);
             }
-            return array(
-                'ids' => $dialogs['idsDialog'],
-                'names' => $dialogs['namesDialog'],
+
+            return [
+                'ids'           => $dialogs['idsDialog'],
+                'names'         => $dialogs['namesDialog'],
                 'datesOfDelete' => $datesOfDelete,
-                'code' => $code,
-            );
+                'code'          => $code,
+            ];
         } else {
             $code = 'deleted_dialogs_not_exist';
-            return array(
+
+            return [
                 'code' => $code,
-            );
+            ];
         }
     }
 
@@ -250,8 +269,10 @@ class CabinetModel extends Model
             foreach ($users as $item => $key) {
                 $usersForDialog[$item] = $key['id'];
             }
+
             return $usersForDialog;
         }
+
         return false;
     }
 
@@ -264,16 +285,18 @@ class CabinetModel extends Model
             foreach ($ids as $item => $key) {
                 $names[$item] = $this->getNamesUsersForDialog($key);
             }
-            return array(
-                'idsAdminsForDialog' => $ids,
+
+            return [
+                'idsAdminsForDialog'    => $ids,
                 'namesAdminssForDialog' => $names,
-                'code' => $code,
-            );
+                'code'                  => $code,
+            ];
         }
         $code = 'admins_for_dialogs_not_exist';
-        return array(
+
+        return [
             'code' => $code,
-        );
+        ];
     }
 
     public function getDateOfDelete($id)
@@ -282,6 +305,7 @@ class CabinetModel extends Model
         $stmt->execute();
         $dateOfDelete = $stmt->fetchAll();
         $dateOfDelete = $dateOfDelete[0]['date_of_delete'];
+
         return $dateOfDelete;
     }
 
@@ -294,12 +318,9 @@ class CabinetModel extends Model
         $massivOwners = $owners[0]['owners'];
         $massivOwners = explode(",", $massivOwners);
 
-        if (!isset($massivOwners[2]))
-        {
-            foreach ($massivOwners as $item => $key)
-            {
-                if ($key != $profile_id)
-                {
+        if (!isset($massivOwners[2])) {
+            foreach ($massivOwners as $item => $key) {
+                if ($key != $profile_id) {
                     $stmt = $this->db->prepare("SELECT first_name FROM users WHERE id = {$key}");
                     $stmt->execute();
                     $name = $stmt->fetchAll();
@@ -309,11 +330,10 @@ class CabinetModel extends Model
                     $name = $stmt->fetchAll();
                     $fullName .= ' ' . $name[0]['last_name'];
                     $stmt = $this->db->prepare("UPDATE dialogs_properties SET name = :name WHERE id = :id");
-                    $stmt->execute(array(':name' => $fullName, ':id' => $id));
+                    $stmt->execute([':name' => $fullName, ':id' => $id]);
                 }
             }
-        }
-        else {
+        } else {
             foreach ($massivOwners as $item => $key) {
                 $stmt = $this->db->prepare("SELECT first_name FROM users WHERE id = {$key}");
                 $stmt->execute();
@@ -322,9 +342,9 @@ class CabinetModel extends Model
                 if ($item = 0)
                     $fullName = $name[0]['first_name'];
                 else
-                    $fullName.= ',' . $name[0]['first_name'];
+                    $fullName .= ',' . $name[0]['first_name'];
                 $stmt = $this->db->prepare("UPDATE dialogs_properties SET name = :name WHERE id = :id");
-                $stmt->execute(array(':name' => $fullName, ':id' => $id));
+                $stmt->execute([':name' => $fullName, ':id' => $id]);
             }
         }
     } // Создать имя диалога по id
@@ -336,14 +356,15 @@ class CabinetModel extends Model
         $dateOfDelete = $inactiveDate->format('Y-m-d');
 
         $stmt = $this->db->prepare("UPDATE dialogs_properties SET date_of_delete = :date WHERE id = :id");
-        $stmt->execute(array(':date' => $dateOfDelete, ':id' => $id));
+        $stmt->execute([':date' => $dateOfDelete, ':id' => $id]);
+
         return $dateOfDelete;
     }
 
     public function cancelDateOfDelete($id) // Удалить дату удаления
     {
         $stmt = $this->db->prepare("UPDATE dialogs_properties SET date_of_delete = NULL WHERE id = :id");
-        $stmt->execute(array(':id' => $id));
+        $stmt->execute([':id' => $id]);
     }
 
     public function deleteDialog($id)
@@ -351,7 +372,8 @@ class CabinetModel extends Model
         $profile_id = $_SESSION['userID'];
 
         $stmt = $this->db->prepare("UPDATE dialogs SET show = :show WHERE id = :id AND user_id = :profile_id");
-        $stmt->execute(array(':show' => 0, ':id' => $id, ':profile_id' => $profile_id));
+        $stmt->execute([':show' => 0, ':id' => $id, ':profile_id' => $profile_id]);
+
         return $this->createDateOfDelete($id);
     } // Удалить диалог по ID
 
@@ -375,6 +397,7 @@ class CabinetModel extends Model
         if ($count_of_owners >= $max_count_of_dialog_users) {
             $countOfUsersInDialogCheck_flag = 0;
         }
+
         return $countOfUsersInDialogCheck_flag;
     }
 
@@ -387,16 +410,18 @@ class CabinetModel extends Model
             foreach ($ids as $item => $key) {
                 $names[$item] = $this->getNamesUsersForDialog($key);
             }
-            return array(
-                'idsUsersForDialog' => $ids,
+
+            return [
+                'idsUsersForDialog'   => $ids,
                 'namesUsersForDialog' => $names,
-                'code' => $code,
-            );
+                'code'                => $code,
+            ];
         }
         $code = 'users_for_dialogs_not_exist';
-        return array(
+
+        return [
             'code' => $code,
-        );
+        ];
     }
 
     public function getNamesUsersForDialog($id)
@@ -409,6 +434,7 @@ class CabinetModel extends Model
         $stmt->execute();
         $name = $stmt->fetchAll();
         $fullName .= ' ' . $name[0]['last_name'];
+
         return $fullName;
     } // Узнать имя и фамилию пользователя по ID
 
@@ -425,8 +451,10 @@ class CabinetModel extends Model
             foreach ($users as $item => $key) {
                 $usersForDialog[$item] = $key['id'];
             }
+
             return $usersForDialog;
         }
+
         return false;
     } // Получить IDs пользователей
 
@@ -436,6 +464,7 @@ class CabinetModel extends Model
         $stmt->execute();
         $name = $stmt->fetchAll();
         $fullName = $name[0]['first_name'];
+
         return $fullName;
     }// Узнать только имя по ID
 
@@ -454,19 +483,19 @@ class CabinetModel extends Model
     {
         $query = $this->db->prepare("INSERT INTO dialogs_properties (name, owners) VALUES (:name, :owners) RETURNING id");
         $query->execute([
-            ':name' => $names,
+            ':name'   => $names,
             ':owners' => $ids,
         ]);
         $result = $query->fetch();
-        $id = explode(',',$ids);
-        foreach ($id as $item => $key)
-        {
+        $id = explode(',', $ids);
+        foreach ($id as $item => $key) {
             $query = $this->db->prepare("INSERT INTO dialogs (id, user_id, show) VALUES (:id, :user_id, 1)");
             $query->execute([
-                ':id' => $result[0],
+                ':id'      => $result[0],
                 ':user_id' => $key,
             ]);
         }
+
         return $this->getDialogs(true);
     }
 
@@ -475,10 +504,8 @@ class CabinetModel extends Model
         $profile_id = $_SESSION['userID'];
         $i = 0;
         $usersToAddMassiv = [];
-        foreach ($_POST as $item => $key)
-        {
-            if (($item != 'add_users') && ($item != 'chat_name') && ($item != 'search_user_for_dialog'))
-            {
+        foreach ($_POST as $item => $key) {
+            if (($item != 'add_users') && ($item != 'chat_name') && ($item != 'search_user_for_dialog')) {
                 $usersToAdd = explode("_", $item);
                 $usersToAddMassiv[$i] = $usersToAdd[1];
                 $i++;
@@ -490,8 +517,7 @@ class CabinetModel extends Model
                 $ids = '';
                 $names = '';
                 sort($usersToAddMassiv);
-                foreach ($usersToAddMassiv as $item => $key)
-                {
+                foreach ($usersToAddMassiv as $item => $key) {
                     if ($item == 0) {
                         $names = $this->getOnlyNames($key);
                         $ids = $key;
@@ -517,16 +543,18 @@ class CabinetModel extends Model
                 }
             } else {
                 $code = 'too_much_users_choosen';
-                return array(
+
+                return [
                     'code' => $code,
-                    $this->getUsersForDialog()
-                );
+                    $this->getUsersForDialog(),
+                ];
             }
         } else {
             $code = 'users_not_choosen';
-            return array(
+
+            return [
                 'code' => $code,
-            );
+            ];
         }
     }
 
@@ -553,11 +581,13 @@ class CabinetModel extends Model
 
         if (isset($matrix)) {
             $_SESSION['matrix_for_gadgets'] = $matrix;
+
             return $matrix;
         }
     }
 
-    public function close_all_sessions() {
+    public function close_all_sessions()
+    {
         $profile_id = $_SESSION['userID'];
         $stmt = $this->db->prepare("DELETE FROM sessions WHERE id_user = $profile_id");
         $stmt->execute();
@@ -581,6 +611,7 @@ class CabinetModel extends Model
                 }
             }
         }
+
         return $this->getgadgets();
     }
 
@@ -590,6 +621,7 @@ class CabinetModel extends Model
         $stmt = $this->db->prepare("SELECT * FROM users WHERE id = $profile_id");
         $stmt->execute();
         $info = $stmt->fetchAll();
+
         return $info;
     }
 
@@ -602,6 +634,7 @@ class CabinetModel extends Model
         $stmt = $this->db->prepare("SELECT SUM(rating_views) FROM news_base WHERE id = {$profile_id}");
         $stmt->execute();
         $count = $stmt->fetch();
+
         return $count;
     }
 
@@ -610,6 +643,7 @@ class CabinetModel extends Model
         $stmt = $this->db->prepare("SELECT balance FROM users WHERE id = {$profile_id}");
         $stmt->execute();
         $count = $stmt->fetch();
+
         return $count;
     }
 
@@ -622,6 +656,7 @@ class CabinetModel extends Model
         if ($str == '')
             return false;
         $str = ucfirst($str);
+
         return $str;
     }
 
@@ -632,11 +667,13 @@ class CabinetModel extends Model
         $str = preg_replace("/[^0-9]/", '', $str);
         if ($old_str != $str)
             return false;
+
         return $str;
     }
 
-    public function сheckBirthDay() { // Проверка дня рождения
-        $month = array(
+    public function сheckBirthDay()
+    { // Проверка дня рождения
+        $month = [
             "Январь",
             "Февраль",
             "Март",
@@ -648,7 +685,8 @@ class CabinetModel extends Model
             "Сентябрь",
             "Октябрь",
             "Ноябрь",
-            "Декабрь");
+            "Декабрь",
+        ];
 
         $_POST['sel_date'] = preg_replace("/[^0-9]/", '', $_POST['sel_date']);
         $day = $_POST['sel_date'];
@@ -684,6 +722,7 @@ class CabinetModel extends Model
                 return false;
             }
         }
+
         return true;
     } // Проверка даты рождения
 
@@ -694,6 +733,7 @@ class CabinetModel extends Model
         } else {
             return false;
         }
+
         return true;
     } // Проверка E-mail
 
@@ -708,6 +748,7 @@ class CabinetModel extends Model
         if ($str == '')
             return false;
         $str = ucfirst($str);
+
         return $str;
     }
 
@@ -719,49 +760,49 @@ class CabinetModel extends Model
         {
             if ($str = $this->сheckPersonalName($_POST['name'])) {
                 $stmt = $this->db->prepare("UPDATE users SET first_name = :first_name WHERE id = :profile_id");
-                $stmt->execute(array(':first_name' => $str, ':profile_id' => $profile_id));
+                $stmt->execute([':first_name' => $str, ':profile_id' => $profile_id]);
             } else {
                 Registry::set('name_profile_edit_error', 'Введено неверно!');
             }
             if ($str = $this->сheckPersonalName($_POST['surname'])) {
                 $stmt = $this->db->prepare("UPDATE users SET last_name = :surname WHERE id = :profile_id");
-                $stmt->execute(array(':surname' => $str, ':profile_id' => $profile_id));
+                $stmt->execute([':surname' => $str, ':profile_id' => $profile_id]);
             } else {
                 Registry::set('surname_profile_edit_error', 'Введено неверно!');
             }
             if ($str = $this->сheckPersonalName($_POST['patronymic'])) {
                 $stmt = $this->db->prepare("UPDATE users SET patronymic = :patronymic WHERE id = :profile_id");
-                $stmt->execute(array(':patronymic' => $str, ':profile_id' => $profile_id));
+                $stmt->execute([':patronymic' => $str, ':profile_id' => $profile_id]);
             } else {
                 Registry::set('patronymic_profile_edit_error', 'Введено неверно!');
             }
             if ($this->сheckBirthDay()) {
                 $stmt = $this->db->prepare("UPDATE users SET birthday = :year-:month-:day WHERE id = :profile_id");
-                $stmt->execute(array(':year' => $_POST['sel_year'], ':month' => $_POST['sel_month'], ':day' => $_POST['sel_date'], ':profile_id' => $profile_id));
+                $stmt->execute([':year' => $_POST['sel_year'], ':month' => $_POST['sel_month'], ':day' => $_POST['sel_date'], ':profile_id' => $profile_id]);
             } else {
                 Registry::set('date_profile_edit_error', 'Введено неверно!');
             }
             if ($str = $this->сheckNumbers($_POST['series'])) {
                 $stmt = $this->db->prepare("UPDATE users SET series = :series WHERE id = :profile_id");
-                $stmt->execute(array(':series' => $str, ':profile_id' => $profile_id));
+                $stmt->execute([':series' => $str, ':profile_id' => $profile_id]);
             } else {
                 Registry::set('series_profile_edit_error', 'Введено неверно!');
             }
             if ($str = $this->сheckNumbers($_POST['number'])) {
                 $stmt = $this->db->prepare("UPDATE users SET number = :number WHERE id = :profile_id");
-                $stmt->execute(array(':number' => $str, ':profile_id' => $profile_id));
+                $stmt->execute([':number' => $str, ':profile_id' => $profile_id]);
             } else {
                 Registry::set('number_profile_edit_error', 'Введено неверно!');
             }
             if ($str = $this->сheckNumbers($_POST['index'])) {
                 $stmt = $this->db->prepare("UPDATE users SET index = :index WHERE id = :profile_id");
-                $stmt->execute(array(':index' => $str, ':profile_id' => $profile_id));
+                $stmt->execute([':index' => $str, ':profile_id' => $profile_id]);
             } else {
                 Registry::set('index_profile_edit_error', 'Введено неверно!');
             }
             if ($str = $this->сheckPersonalName($_POST['city'])) {
                 $stmt = $this->db->prepare("UPDATE users SET city = :city WHERE id = :profile_id");
-                $stmt->execute(array(':city' => $str, ':profile_id' => $profile_id));
+                $stmt->execute([':city' => $str, ':profile_id' => $profile_id]);
             } else {
                 Registry::set('city_profile_edit_error', 'Введено неверно!');
             }
@@ -771,7 +812,7 @@ class CabinetModel extends Model
 
             if ($str = $this->сheckNumbers($_POST['flat'])) {
                 $stmt = $this->db->prepare("UPDATE users SET flat = :flat WHERE id = :profile_id");
-                $stmt->execute(array(':flat' => $str, ':profile_id' => $profile_id));
+                $stmt->execute([':flat' => $str, ':profile_id' => $profile_id]);
             } else {
                 Registry::set('flat_profile_edit_error', 'Введено неверно!');
             }
@@ -780,13 +821,13 @@ class CabinetModel extends Model
         if (isset($_POST['save_2'])) {
             if ($str = $this->сheckNumbers($_POST['phonenumber'])) {
                 $stmt = $this->db->prepare("UPDATE users SET phone_number = :phonenumber WHERE id = :profile_id");
-                $stmt->execute(array(':phonenumber' => $str, ':profile_id' => $profile_id));
+                $stmt->execute([':phonenumber' => $str, ':profile_id' => $profile_id]);
             } else {
                 Registry::set('phonenumber_profile_edit_error', 'Введено неверно!');
             }
             if ($this->сheckEmail($profile_id)) {
                 $stmt = $this->db->prepare("UPDATE users SET email = :email WHERE id = :profile_id");
-                $stmt->execute(array(':email' => $_POST['email'], ':profile_id' => $profile_id));
+                $stmt->execute([':email' => $_POST['email'], ':profile_id' => $profile_id]);
             } else {
                 Registry::set('email_profile_edit_error', 'Введено неверно!');
             }
@@ -802,11 +843,11 @@ class CabinetModel extends Model
                         $name = $social_net[1] . "_name";
                         $avatar = $social_net[1] . "_avatar";
                         $stmt = $this->db->prepare("UPDATE users SET :id = NULL WHERE id = :profile_id");
-                        $stmt->execute(array(':id' => $id, ':profile_id' => $profile_id));
+                        $stmt->execute([':id' => $id, ':profile_id' => $profile_id]);
                         $stmt = $this->db->prepare("UPDATE users SET :name = NULL WHERE id = :profile_id");
-                        $stmt->execute(array(':name' => $name, ':profile_id' => $profile_id));
+                        $stmt->execute([':name' => $name, ':profile_id' => $profile_id]);
                         $stmt = $this->db->prepare("UPDATE users SET :avatar = NULL WHERE id = :profile_id");
-                        $stmt->execute(array(':avatar' => $avatar, ':profile_id' => $profile_id));
+                        $stmt->execute([':avatar' => $avatar, ':profile_id' => $profile_id]);
                     }
                 }
             }
@@ -816,15 +857,14 @@ class CabinetModel extends Model
         {
         }
 
-        if (isset($_POST['update_foto_id']))
-        {
+        if (isset($_POST['update_foto_id'])) {
         }
 
         if (isset($_POST['delete_foto_id'])) // Установить default аватар профиля
         {
             $link = 'http://images.lant.io/profile_fotos/user_foto_id_default.jpg';
             $stmt = $this->db->prepare("UPDATE users SET profile_foto_id = :link WHERE id = :profile_id");
-            $stmt->execute(array(':link' => $link, ':profile_id' => $profile_id));
+            $stmt->execute([':link' => $link, ':profile_id' => $profile_id]);
         }
 
         if (isset($_POST['save_3'])) // Изменить пароль
@@ -838,7 +878,7 @@ class CabinetModel extends Model
             if (password_verify($_POST['old_pass'], $new_result)) {
                 $passwordHash = password_hash($_POST['new_pass'], PASSWORD_DEFAULT);
                 $stmt = $this->db->prepare("UPDATE users SET password = :password WHERE id = :profile_id");
-                $stmt->execute(array(':password' => $passwordHash, ':profile_id' => $profile_id));
+                $stmt->execute([':password' => $passwordHash, ':profile_id' => $profile_id]);
             } else {
                 Registry::set('password_profile_edit_error', 'Введено неверно!');
             }
@@ -848,26 +888,26 @@ class CabinetModel extends Model
         {
             $aboutme = $_POST['aboutme'];
             $stmt = $this->db->prepare("UPDATE users SET about_me = :aboutme WHERE id = :profile_id");
-            $stmt->execute(array(':aboutme' => $aboutme, ':profile_id' => $profile_id));
+            $stmt->execute([':aboutme' => $aboutme, ':profile_id' => $profile_id]);
         }
 
         if (isset($_POST['save_4'])) // Связь с сайтом
         {
             if (isset($_POST['phone_only'])) {
                 $stmt = $this->db->prepare("UPDATE users SET phone_only = 1 WHERE id = :profile_id");
-                $stmt->execute(array(':profile_id' => $profile_id));
+                $stmt->execute([':profile_id' => $profile_id]);
             }
             if (isset($_POST['site_only'])) {
                 $stmt = $this->db->prepare("UPDATE users SET site_only = 1 WHERE id = :profile_id");
-                $stmt->execute(array(':profile_id' => $profile_id));
+                $stmt->execute([':profile_id' => $profile_id]);
             }
             if (!isset($_POST['phone_only'])) {
                 $stmt = $this->db->prepare("UPDATE users SET phone_only = 0 WHERE id = :profile_id");
-                $stmt->execute(array(':profile_id' => $profile_id));
+                $stmt->execute([':profile_id' => $profile_id]);
             }
             if (!isset($_POST['site_only'])) {
                 $stmt = $this->db->prepare("UPDATE users SET site_only = 0 WHERE id = :profile_id");
-                $stmt->execute(array(':profile_id' => $profile_id));
+                $stmt->execute([':profile_id' => $profile_id]);
             }
         }
 
@@ -875,23 +915,23 @@ class CabinetModel extends Model
         {
             if (isset($_POST['new_dialog'])) {
                 $stmt = $this->db->prepare("UPDATE users SET new_dialog = 1 WHERE id = :profile_id");
-                $stmt->execute(array(':profile_id' => $profile_id));
+                $stmt->execute([':profile_id' => $profile_id]);
             }
             if (isset($_POST['close_ad'])) {
                 $stmt = $this->db->prepare("UPDATE users SET close_ad = 1 WHERE id = :profile_id");
-                $stmt->execute(array(':profile_id' => $profile_id));
+                $stmt->execute([':profile_id' => $profile_id]);
             }
             if (isset($_POST['prom_offers'])) {
                 $stmt = $this->db->prepare("UPDATE users SET prom_offers = 1 WHERE id = :profile_id");
-                $stmt->execute(array(':profile_id' => $profile_id));
+                $stmt->execute([':profile_id' => $profile_id]);
             }
             if (!isset($_POST['new_dialog'])) {
                 $stmt = $this->db->prepare("UPDATE users SET new_dialog = 0 WHERE id = :profile_id");
-                $stmt->execute(array(':profile_id' => $profile_id));
+                $stmt->execute([':profile_id' => $profile_id]);
             }
             if (!isset($_POST['close_ad'])) {
                 $stmt = $this->db->prepare("UPDATE users SET close_ad = 0 WHERE id = :profile_id");
-                $stmt->execute(array(':profile_id' => $profile_id));
+                $stmt->execute([':profile_id' => $profile_id]);
             }
             if (!isset($_POST['prom_offers'])) {
                 $stmt = $this->db->prepare("UPDATE users SET prom_offers = 0 WHERE id = :profile_id");
@@ -916,7 +956,7 @@ class CabinetModel extends Model
                 return;
             }
 
-            $lastPos   = strrpos($_FILES['profileIMG']['name'], '.');
+            $lastPos = strrpos($_FILES['profileIMG']['name'], '.');
             $extension = substr($_FILES['profileIMG']['name'], $lastPos);
 
             $fileName = strtolower(md5(time()) . $extension);
@@ -940,12 +980,12 @@ class CabinetModel extends Model
 
     private function geoip_client($ip, $opt, $sid)
     {
-// Делаем запрос к серверу
+        // Делаем запрос к серверу
         if ($xml = file_get_contents('http://geoip.top/cgi-bin/getdata.pl?ip=' . $ip . '&hex=' . $opt . '&sid=' . $sid)) {
             $xmlObj = new XmlToArray($xml); // преобразуем xml в массив
             $arrayData = $xmlObj->createArray();
 
-// если есть ошибки выбрасываем исключения
+            // если есть ошибки выбрасываем исключения
             if (isset($arrayData['GeoIP']['GeoAddr'][0]['Error'])) {
                 switch ($arrayData['GeoIP']['GeoAddr'][0]['Error']) {
                     case 0:
@@ -974,10 +1014,11 @@ class CabinetModel extends Model
                         break;
                 }
             }
-// возвращаем полученные данные в виде массива
+
+            // возвращаем полученные данные в виде массива
             return $arrayData['GeoIP']['GeoAddr'][0];
         } else {
-// если ответа от сервера не дождались вбрасываем исключение
+            // если ответа от сервера не дождались вбрасываем исключение
             throw new Exception('Geo_IP: Нет связи с сервером');
         }
     } // Геолокация
@@ -989,8 +1030,8 @@ class CabinetModel extends Model
                 foreach ($_SESSION['keys'] as $email => $key) {
                     $str = file_get_contents(ROOT_DIR . '/template/layouts/mail.php');
                     $phrase = $str;
-                    $old = array("KEY");
-                    $new = array($key);
+                    $old = ["KEY"];
+                    $new = [$key];
                     $newphrase = str_replace($old, $new, $phrase);
                     $headers = 'MIME-Version: 1.0' . "\r\n";
                     $headers .= 'Content-type: text/html; charset="utf-8"' . "\r\n";
@@ -1008,7 +1049,7 @@ class CabinetModel extends Model
                     }
                 }
             }
-//            print_r($this->db->errorInfo());
+            //            print_r($this->db->errorInfo());
             unset($_SESSION['keys']);
         }
     }
@@ -1032,7 +1073,7 @@ class CabinetModel extends Model
 
     private function composeKeysData($emails)
     {
-        $keys = array();
+        $keys = [];
 
         foreach ($emails as $email) {
             $keys[$email] = $this->getKey($email);
@@ -1044,7 +1085,7 @@ class CabinetModel extends Model
     private function handleEmails()
     {
         $explodedEmails = explode("\n", $_POST['emails']);
-        $emails = array();
+        $emails = [];
 
         $query = $this->db->prepare("SELECT * FROM access WHERE email_sent = :email");
         foreach ($explodedEmails as $email) {
@@ -1143,8 +1184,10 @@ class CabinetModel extends Model
                     $result .= $part;
                 }
             }
+
             return $result;
         }
+
         return false;
     }
 
@@ -1180,9 +1223,11 @@ class CabinetModel extends Model
                 $_SESSION['id_key_keyeditor'] = $id_key;
                 $_SESSION['array_keyeditor'] = $array[$id_key];
                 $_SESSION['sessioncheck'] = 1;
+
                 return $result;
             } else {
                 $result = "ID = $id_key отсутсвует!";
+
                 return $result;
             }
         }
@@ -1222,6 +1267,7 @@ class CabinetModel extends Model
                 return $result;
             } else {
                 $result = "KEY = $id_key отсутсвует!";
+
                 return $result;
             }
         }
@@ -1253,9 +1299,11 @@ class CabinetModel extends Model
                 $_SESSION['notice_id'] = $array[$id_key]['id'];
                 $_SESSION['id_key_keyeditor'] = $id_key;
                 $_SESSION['array_keyeditor'] = $array[$id_key];
+
                 return $result;
             }
         }
+
         return false;
     }
 
@@ -1264,8 +1312,10 @@ class CabinetModel extends Model
         if (isset($_POST['lock'])) {
             $this->db->query("UPDATE access SET status = 2 WHERE id = {$_SESSION['id_key_keyeditor']}");
             $result = "{$_SESSION['array_keyeditor']['key']} заблокирован!";
+
             return $result;
         }
+
         return false;
     }
 
@@ -1278,9 +1328,11 @@ class CabinetModel extends Model
             if ($checkdate > $today) {
                 $this->db->query("UPDATE access SET status = 1 WHERE id = {$_SESSION['id_key_keyeditor']}");
                 $result = "{$_SESSION['array_keyeditor']['key']} разблокирован!";
+
                 return $result;
             } else
                 $result = "Ключ просрочен!";
+
             return $result;
         }
     }
@@ -1293,7 +1345,7 @@ class CabinetModel extends Model
             $year = $_POST['sel_year'];
             $flag = true;
 
-            $month = array(
+            $month = [
                 "Январь",
                 "Февраль",
                 "Март",
@@ -1305,7 +1357,8 @@ class CabinetModel extends Model
                 "Сентябрь",
                 "Октябрь",
                 "Ноябрь",
-                "Декабрь");
+                "Декабрь",
+            ];
 
             $_POST['sel_date'] = preg_replace("/[^0-9]/", '', $_POST['sel_date']);
             $day = $_POST['sel_date'];
@@ -1358,10 +1411,12 @@ class CabinetModel extends Model
                 $date = "{$year}-{$month_num}-{$day}";
                 $this->db->query("UPDATE access SET inactive_date = '{$date}' WHERE id = {$_SESSION['id_key_keyeditor']}");
                 $result = "Срок действия ключа {$_SESSION['array_keyeditor']['key']} истекает {$date}";
+
                 return $result;
 
             } else {
                 $result = "Ошибка записи даты!";
+
                 return $result;
             }
         }
@@ -1372,8 +1427,10 @@ class CabinetModel extends Model
                 $result = "Email ключа {$_SESSION['array_keyeditor']['key']} изменен на {$email}";
             } else
                 $result = 'Email введ неверно!';
+
             return $result;
         }
+
         return false;
     }
 
@@ -1422,6 +1479,7 @@ class CabinetModel extends Model
                         $part .= "Status - " . '<font color=red>' . "Banned" . '</font>' . '<br>' . '<br>';
                     $result .= $part;
                 }
+
                 return $result;
             }
         }
@@ -1440,10 +1498,10 @@ class CabinetModel extends Model
 
         $forms = $query->fetchAll();
 
-        return array(
+        return [
             'forms' => $forms,
-            'data' => $this->getFormParams(),
-        );
+            'data'  => $this->getFormParams(),
+        ];
     }
 
     public function getForm($id)
@@ -1463,9 +1521,9 @@ class CabinetModel extends Model
 
         $query = $this->db->prepare("SELECT * FROM forms WHERE space_type = :space_type AND object_type = :object_type AND operation = :operation");
         $query->execute([
-            ':space_type' => $spaceType,
+            ':space_type'  => $spaceType,
             ':object_type' => $objectType,
-            ':operation' => $operationType,
+            ':operation'   => $operationType,
         ]);
 
         $result = $query->fetch();
@@ -1476,10 +1534,10 @@ class CabinetModel extends Model
 
         $query = $this->db->prepare("INSERT INTO forms (space_type, object_type, operation, user_id) VALUES (:space_type, :object_type, :operation, :user_id)");
         $query->execute([
-            ':space_type' => $spaceType,
+            ':space_type'  => $spaceType,
             ':object_type' => $objectType,
-            ':operation' => $operationType,
-            ':user_id' => $_SESSION['userID'],
+            ':operation'   => $operationType,
+            ':user_id'     => $_SESSION['userID'],
         ]);
 
         if ($query->rowCount()) {
@@ -1508,12 +1566,14 @@ class CabinetModel extends Model
     }
 
     /**
-     * Редактор форм поиска
+     * Редактор
+     * форм
+     * поиска
      */
 
     public function handleFormParams()
     {
-        $answer = array();
+        $answer = [];
 
         switch ($_POST['action']) {
             case 'saveParams':
@@ -1528,11 +1588,11 @@ class CabinetModel extends Model
 
                     if (isset($_POST['inputSpaceTypeRu'])) {
                         foreach ($_POST['inputSpaceTypeRu'] as $key => $value) {
-                            $data = array(
-                                'ru' => $value,
-                                'eng' => $_POST['inputSpaceTypeEng'][$key],
+                            $data = [
+                                'ru'       => $value,
+                                'eng'      => $_POST['inputSpaceTypeEng'][$key],
                                 'messages' => &$messages,
-                            );
+                            ];
 
                             array_walk($answer['data']['spaceTypes'], function ($spaceType, $k, $data) {
                                 if ($spaceType['r_name'] == $data['ru']) {
@@ -1550,11 +1610,11 @@ class CabinetModel extends Model
 
                     if (isset($_POST['inputOperationTypeRu'])) {
                         foreach ($_POST['inputOperationTypeRu'] as $key => $value) {
-                            $data = array(
-                                'ru' => $value,
-                                'eng' => $_POST['inputOperationTypeEng'][$key],
+                            $data = [
+                                'ru'       => $value,
+                                'eng'      => $_POST['inputOperationTypeEng'][$key],
                                 'messages' => &$messages,
-                            );
+                            ];
 
                             array_walk($answer['data']['operationTypes'], function ($operationType, $k, $data) {
                                 if ($operationType['r_name'] == $data['ru']) {
@@ -1572,11 +1632,11 @@ class CabinetModel extends Model
 
                     if (isset($_POST['inputObjectTypeRu'])) {
                         foreach ($_POST['inputObjectTypeRu'] as $key => $value) {
-                            $data = array(
-                                'ru' => $value,
-                                'eng' => $_POST['inputObjectTypeEng'][$key],
+                            $data = [
+                                'ru'       => $value,
+                                'eng'      => $_POST['inputObjectTypeEng'][$key],
                                 'messages' => &$messages,
-                            );
+                            ];
 
                             array_walk($answer['data']['objectTypes'], function ($objectType, $k, $data) {
                                 if ($objectType['r_name'] == $data['ru']) {
@@ -1657,11 +1717,11 @@ class CabinetModel extends Model
 
                     if (isset($_POST['categoriesRu'])) {
                         foreach ($_POST['categoriesRu'] as $key => $value) {
-                            $data = array(
-                                'ru' => $value,
-                                'eng' => $_POST['categoriesEng'][$key],
+                            $data = [
+                                'ru'       => $value,
+                                'eng'      => $_POST['categoriesEng'][$key],
                                 'messages' => &$messages,
-                            );
+                            ];
 
                             array_walk($answer['categories'], function ($category, $k, $data) {
                                 if ($category['r_name'] == $data['ru']) {
@@ -1703,11 +1763,11 @@ class CabinetModel extends Model
 
                     if (isset($_POST['subcategoriesRu'])) {
                         foreach ($_POST['subcategoriesRu'] as $key => $value) {
-                            $data = array(
-                                'ru' => $value,
-                                'eng' => $_POST['subcategoriesEng'][$key],
+                            $data = [
+                                'ru'       => $value,
+                                'eng'      => $_POST['subcategoriesEng'][$key],
                                 'messages' => &$messages,
-                            );
+                            ];
 
                             array_walk($answer['subcategories'], function ($subcategory, $k, $data) {
                                 if ($subcategory['r_name'] == $data['ru']) {
@@ -1791,11 +1851,11 @@ class CabinetModel extends Model
 
                     if (isset($_POST['rangeElementCategory'])) {
                         foreach ($_POST['rangeRName'] as $key => $value) {
-                            $data = array(
-                                'ru' => $value,
-                                'eng' => $_POST['rangeEName'][$key],
+                            $data = [
+                                'ru'       => $value,
+                                'eng'      => $_POST['rangeEName'][$key],
                                 'messages' => &$messages,
-                            );
+                            ];
 
                             array_walk($answer['elements'], function ($element, $k, $data) {
                                 if ($element['r_name'] == $data['ru']) {
@@ -1813,11 +1873,11 @@ class CabinetModel extends Model
 
                     if (isset($_POST['YORNElementCategory'])) {
                         foreach ($_POST['YORNRName'] as $key => $value) {
-                            $data = array(
-                                'ru' => $value,
-                                'eng' => $_POST['YORNEName'][$key],
+                            $data = [
+                                'ru'       => $value,
+                                'eng'      => $_POST['YORNEName'][$key],
                                 'messages' => &$messages,
-                            );
+                            ];
 
                             array_walk($answer['elements'], function ($element, $k, $data) {
                                 if ($element['r_name'] == $data['ru']) {
@@ -1835,11 +1895,11 @@ class CabinetModel extends Model
 
                     if (isset($_POST['listElementCategory'])) {
                         foreach ($_POST['listRName'] as $key => $value) {
-                            $data = array(
-                                'ru' => $value,
-                                'eng' => $_POST['listEName'][$key],
+                            $data = [
+                                'ru'       => $value,
+                                'eng'      => $_POST['listEName'][$key],
                                 'messages' => &$messages,
-                            );
+                            ];
 
                             array_walk($answer['elements'], function ($element, $k, $data) {
                                 if ($element['r_name'] == $data['ru']) {
@@ -1996,12 +2056,12 @@ class CabinetModel extends Model
 
     public function getFormParams()
     {
-        return array(
-            'userID' => $_SESSION['userID'],
-            'spaceTypes' => $this->getSpaceTypes(),
+        return [
+            'userID'         => $_SESSION['userID'],
+            'spaceTypes'     => $this->getSpaceTypes(),
             'operationTypes' => $this->getOperationTypes(),
-            'objectTypes' => $this->getObjectTypes(),
-        );
+            'objectTypes'    => $this->getObjectTypes(),
+        ];
     }
 
     public function getFormData($id)
@@ -2011,18 +2071,18 @@ class CabinetModel extends Model
         $form = $this->getForm($id);
         $user_id = $form[0]['user_id'];
 
-        return array(
-            'id' => $id,
-            'form' => $form,
-            'user' => $this->getUser($user_id),
-            'formParams' => $this->getFormParams(),
-            'categories' => $categories,
-            'categoriesJSON' => json_encode($categories, JSON_UNESCAPED_UNICODE),
-            'subcategories' => $subcategories,
+        return [
+            'id'                => $id,
+            'form'              => $form,
+            'user'              => $this->getUser($user_id),
+            'formParams'        => $this->getFormParams(),
+            'categories'        => $categories,
+            'categoriesJSON'    => json_encode($categories, JSON_UNESCAPED_UNICODE),
+            'subcategories'     => $subcategories,
             'subcategoriesJSON' => json_encode($subcategories, JSON_UNESCAPED_UNICODE),
-            'elements' => $this->getElements($id),
-            'elementsJSON' => json_encode($this->getElements($id), JSON_UNESCAPED_UNICODE),
-        );
+            'elements'          => $this->getElements($id),
+            'elementsJSON'      => json_encode($this->getElements($id), JSON_UNESCAPED_UNICODE),
+        ];
     }
 
     public function getUser($user_id)
@@ -2098,7 +2158,9 @@ class CabinetModel extends Model
     }
 
     /**
-     * Привязка социальных сетей
+     * Привязка
+     * социальных
+     * сетей
      */
 
     public function getCabinetData()
@@ -2107,9 +2169,9 @@ class CabinetModel extends Model
             $result = $this->setSocialNet($_SESSION['OAuth_service'], $_SESSION['OAuth_user_id'], $_SESSION['userID']);
         }
 
-        return array(
+        return [
             'social_nets' => $this->getSocialNets(),
-        );
+        ];
     }
 
     private function getSocialNets()
@@ -2186,5 +2248,101 @@ class CabinetModel extends Model
         }
 
         return $data;
+    }
+
+    public function getMyAds($count = 10, $offset = 0)
+    {
+        if(!isset($_SESSION['user'])) {
+            // TODO: Дописать обработку ошибки если пользователь не авторизован
+            $this->response['error'] = 0;
+            return;
+        }
+
+        if (isset($_GET['count'])) {
+            $count = $_GET['count'];
+        }
+
+        if (isset($_GET['offset'])) {
+            $offset = $_GET['offset'];
+        }
+
+        $query = $this->db->prepare('SELECT * FROM news_base WHERE user_id = :user_id LIMIT :limit OFFSET :offset');
+        $query->execute([
+            ':user_id' => $_SESSION['user']['id'],
+            ':limit' => $count,
+            ':offset' => $offset,
+        ]);
+
+        $ads = $query->fetchAll();
+
+        if ($ads) {
+            $this->response['response'] = $ads;
+        } else {
+            $this->response['error'] = null;
+        }
+    }
+
+    public function addAdInFavorite($ad_id)
+    {
+        if (!$ad_id) {
+            // TODO: Обработка ошибки когда не задано id объявления
+            $this->response['error'] = false;
+            return;
+        }
+
+        if(!isset($_SESSION['user'])) {
+            // TODO: Дописать обработку ошибки если пользователь не авторизован
+            $this->response['error'] = false;
+            return;
+        }
+
+        $query = $this->db->prepare('INSERT INTO favorite_ads (user_id, ad_id) VALUES (:user_id, :ad_id)');
+        $query->execute([
+            ':user_id' => $_SESSION['user']['id'],
+            ':ad_id' => $ad_id,
+        ]);
+
+        if ($query->rowCount()) {
+            $this->response['response'] = true;
+        } else {
+            $this->response['error'] = false;
+        }
+    }
+
+    public function getListFavorite($count = 6, $offset = 0)
+    {
+        if(!isset($_SESSION['user'])) {
+            // TODO: Дописать обработку ошибки если пользователь не авторизован
+            $this->response['error'] = 0;
+            return;
+        }
+
+        if (isset($_GET['count'])) {
+            $count = $_GET['count'];
+        }
+
+        if (isset($_GET['offset'])) {
+            $offset = $_GET['offset'];
+        }
+
+        $query = $this->db->prepare('SELECT * FROM favorite_ads, news_base WHERE favorite_ads.ad_id = news_base.id_news AND favorite_ads.user_id = :user_id LIMIT :limit OFFSET :offset');
+        $query->execute([
+            ':user_id' => $_SESSION['user']['id'],
+            ':limit' => $count,
+            ':offset' => $offset,
+        ]);
+
+        $ads = $query->fetchAll();
+
+        if ($ads) {
+            $this->response['response'] = $ads;
+        } else {
+            $this->response['error'] = null;
+        }
+    }
+
+    public function getResponse()
+    {
+        return $this->response;
     }
 }

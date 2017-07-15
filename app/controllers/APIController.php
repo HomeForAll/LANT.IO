@@ -9,6 +9,7 @@ class APIController extends Controller
         $this->setModel(new UserModel());
         $this->setModel(new UploadModel());
         $this->setModel(new NewsModel());
+        $this->setModel(new CabinetModel());
     }
 
     public function actionSearch()
@@ -139,6 +140,24 @@ class APIController extends Controller
     {
         $this->model('UserModel')->getTrans($period[0]);
         echo json_encode($this->model('UserModel')->getResponse(), JSON_UNESCAPED_UNICODE);
+    }
+
+    public function actionMyAds()
+    {
+        $this->model('CabinetModel')->getMyAds();
+        echo json_encode($this->model('CabinetModel')->getResponse(), JSON_UNESCAPED_UNICODE);
+    }
+
+    public function actionAdInFavorite()
+    {
+        $this->model('CabinetModel')->addAdInFavorite(isset($_POST['id']) ? $_POST['id'] : null);
+        echo json_encode($this->model('CabinetModel')->getResponse(), JSON_UNESCAPED_UNICODE);
+    }
+
+    public function actionListFavorite()
+    {
+        $this->model('CabinetModel')->getListFavorite(isset($_POST['id']) ? $_POST['id'] : null);
+        echo json_encode($this->model('CabinetModel')->getResponse(), JSON_UNESCAPED_UNICODE);
     }
 
     /**
