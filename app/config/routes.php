@@ -83,4 +83,6 @@ return [
     'api/favorite/add' => 'main/API/adInFavorite',
     'api/favorite/list' => 'main/API/listFavorite',
     'api/support/add_ticket' => 'main/API/addTicket',
+    'api/messages/dialogs' => 'main/API/getDialogs',
+    'api/messages/history' => 'main/API/getMessagesFromDB',
 ];
