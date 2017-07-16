@@ -1536,13 +1536,13 @@ class UserModel extends Model
 
     public function passwordRestore()
     {
-        switch (isset($_POST['step']) ? $_POST['step'] : false) {
+        switch (isset($_GET['step']) ? $_GET['step'] : false) {
             case '1':
-                $login = isset($_POST['login']) ? $_POST['login'] : null;
+                $login = isset($_GET['login']) ? $_GET['login'] : null;
 
                 if (strrpos($login, '@')) {
                     if (v::email()->validate($login)) {
-                        $query = $this->db->prepare('SELECT id, password FROM user WHERE email = :email');
+                        $query = $this->db->prepare('SELECT id, password FROM users WHERE email = :email');
                         $query->execute([
                             ':email' => $login,
                         ]);
@@ -1570,9 +1570,10 @@ class UserModel extends Model
                             $mail->SMTPAuth = true;
                             $mail->Username = "admin@lant.io";
                             $mail->Password = "ZSH1wb88";
+                            $mail->setLanguage('ru');
                             $mail->setFrom('admin@lant.io', 'LANT.IO');
-                            $mail->addAddress('badarancha.dmitry@gmail.com');
-                            $mail->Subject = 'Восстановление пароля';
+                            $mail->addAddress($login);
+                            $mail->Subject = 'Password restore';
                             $mail->msgHTML("Вы воспользовались формой восстановления пароля, перейдите по ссылке: {$restore_url}, что бы продолжить.");
 
                             if ($mail->send()) {
