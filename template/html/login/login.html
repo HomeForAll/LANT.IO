@@ -58,8 +58,18 @@
 </a>
     </div>
     <button type="button" class="open-registration">Регистрация</button>
-    <a href="#">Забыли пароль?</a>
+    <a href="#" class="open-restore">Забыли пароль?</a>
 </form>
+
+
+
+
+
+
+
+
+
+
 
 
 <div style="display: none">
@@ -219,6 +229,80 @@
 </div>
 </div>
 </div>
+
+
+
+
+<div style="display: none">
+    <div class="dialog-restore">
+        <div id="dialog-restore">
+            <form name="dialog-restore">
+
+                <div class="step" data-state="step_1">
+                    <input type="hidden" class="current_state" value="step_1">
+                    <div class="registration-title">Для восстановления пароля<br> введите ваш емайл или телефон.</div>
+                    <input type="text" name="login" placeholder="Введите емайл или телефон">
+                    <div class="error"></div>
+                    <div class="navigation">
+                        <button type="button" name="backward" class="backward disabled">Назад</button>
+                		<button type="button" name="forward" class="forward">Далее</button>
+                    </div>
+                </div>
+
+                <div class="branch" id="restore_phone">
+                    <div class="step">
+                        <input type="hidden" class="current_state" value="step_2">
+                        <div class="registration-title">Проверочный код из смс:</div>
+                        <input type="text" name="code" placeholder="Код из смс">
+                        <div class="error"></div>
+                        <div class="navigation">
+                            <button type="button" name="backward" class="backward">Назад</button>
+                            <button type="button" name="forward" class="forward">Далее</button>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <input type="hidden" class="current_state" value="step_3">
+                        <div class="registration-title">Пароль входа в систему:</div>
+                        <input type="text" name="password" placeholder="Введите пароль">
+                        <div class="error"></div>
+                        <div class="navigation">
+                            <button type="button" name="backward" class="backward">Назад</button>
+                    		<button type="button" name="forward" class="forward">Далее</button>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <input type="hidden" class="current_state" value="step_3">
+                        <div class="registration-title">Ваш пароль успешно изменен!</div>
+                        <div class="error"></div>
+                        <div class="navigation">
+                            <button type="button" name="backward" class="backward disabled">Назад</button>
+                    		<button type="button" name="forward" class="finish arcticmodal-close">ЗАВЕРШИТЬ</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="branch" id="restore_email">
+                    <div class="step">
+                        <input type="hidden" class="current_state" value="step_2">
+                        <div class="registration-title">Проверьте ваш почтовый ящик</div>
+                        <p>Сообщение с инструкцией для восстановления пароля отправлено на ваш почтовый ящик.</p>
+                        <div class="error"></div>
+                        <div class="navigation">
+                            <button type="button" name="backward" class="backward disabled">Назад</button>
+                            <button type="button" name="forward" class="finish arcticmodal-close">ЗАВЕРШИТЬ</button>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
 
 
 
