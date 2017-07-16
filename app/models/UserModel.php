@@ -1534,6 +1534,11 @@ class UserModel extends Model
         $this->response = true;
     }
 
+    public function passwordRestore()
+    {
+
+    }
+
     public function getResponse()
     {
         if (empty($this->errors) && empty($this->response)) {

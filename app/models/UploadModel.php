@@ -6,7 +6,7 @@ class UploadModel extends Model
     public function uploadImage()
     {
         $file_name = sha1(time() . mt_rand(1, 100));
-        $query     = $this->db->prepare('INSERT INTO ads_images (original, s_250_140, s_500_280, s_360_230, s_720_460, news_id) VALUES (:original, :250_140, :500_280, :360_230, :720_460, :news_id)');
+        $query     = $this->db->prepare('INSERT INTO ads_images (original, s_250_140, s_500_280, s_360_230, s_720_460, news_id) VALUES (:original, :250_140, :500_280, :360_230, :720_460, :news_id) RETURNING id');
         
         if (isset($_SERVER['HTTP_X_FILE_NAME']) && isset($_SERVER['CONTENT_LENGTH'])) {
             $response = [];
@@ -74,7 +74,16 @@ class UploadModel extends Model
                                 ':news_id'  => (int)$response['720_460'], // TODO: Убрать
                             ]
                         );
-                        
+
+                        $images = $query->fetch();
+
+                        if (!$images) {
+                            return;
+                            // TODO: Доделать обработку ошибки если картинки не добавлены
+                        }
+
+                        $response['id'] = $images['id'];
+
                         echo json_encode(['response' => $response], JSON_UNESCAPED_UNICODE);
                     }
                 }

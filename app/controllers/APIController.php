@@ -178,22 +178,77 @@ class APIController extends Controller
         echo json_encode($this->model('CabinetModel')->getResponse(), JSON_UNESCAPED_UNICODE);
     }
 
+    public function actionPasswordRestore()
+    {
+
+    }
+
     /**
-     * Лучшие объявления на главной странице
-     * За время ($param[0] = 'best_of_day' (...week или month))
-     * В $_POST могут передоваться:
-     * (int) space_type - Тип площади
-     * (int) operation_type - Операция
-     * (int) object_type - Тип объекта
-     * (int) city - Город
-     * (int) price_from; price_to - Цена от и до
-     * (int) space_from; space_to - Площадь от и до
-     * (int) count - кол-во выдаваемых объявлений
+     * Лучшие
+     * объявления
+     * на
+     * главной
+     * странице
+     * За
+     * время
+     * ($param[0]
+     * =
+     * 'best_of_day'
+     * (...week или month)) В $_POST могут передоваться:
+     * (int)
+     * space_type
+     * -
+     * Тип
+     * площади
+     * (int)
+     * operation_type
+     * -
+     * Операция
+     * (int)
+     * object_type
+     * -
+     * Тип
+     * объекта
+     * (int)
+     * city
+     * -
+     * Город
+     * (int)
+     * price_from;
+     * price_to
+     * -
+     * Цена
+     * от
+     * и
+     * до
+     * (int)
+     * space_from;
+     * space_to
+     * -
+     * Площадь
+     * от
+     * и
+     * до
+     * (int)
+     * count
+     * -
+     * кол-во
+     * выдаваемых
+     * объявлений
+     *
      * @param $param
+     *
      * @return
      * JSON
-     * best_ads - массив объявлений
-     * count_all - их общее кол-во
+     *     best_ads
+     *     -
+     *     массив
+     *     объявлений
+     *     count_all
+     *     -
+     *     их
+     *     общее
+     *     кол-во
      *
      */
     public function actionBestAds($param)
@@ -204,19 +259,19 @@ class APIController extends Controller
             $request = $this->model('NewsModel')->getRequestForAds($_POST, $param);
         }
 
-        if(!empty($request)){
+        if (!empty($request)) {
             //Количество объявлений [count_all]
-            $this->model('NewsModel')->getNamberOfAllNews($request['time_from'],$request['time_to'], $request['space_type'],
+            $this->model('NewsModel')->getNamberOfAllNews($request['time_from'], $request['time_to'], $request['space_type'],
                 $request['operation_type'], $request['object_type'], $request['price_from'], $request['price_to'],
                 $request['space_from'], $request['space_to'], $request['city']);
-        // Получение данных
-         $db_data = $this->model('NewsModel')->getBestNewsOfTime($request['time_from'],$request['space_type'],
-            $request['operation_type'], $request['object_type'], $request['city'], $request['price_from'], $request['price_to'],
-            $request['space_from'], $request['space_to'], $request['count']);
+            // Получение данных
+            $db_data = $this->model('NewsModel')->getBestNewsOfTime($request['time_from'], $request['space_type'],
+                $request['operation_type'], $request['object_type'], $request['city'], $request['price_from'], $request['price_to'],
+                $request['space_from'], $request['space_to'], $request['count']);
 
-        // Подготовка данных для вывода
-        $data['best_ads'] = $this->model('NewsModel')->prepareNewsPreview($db_data, false, true);
+            // Подготовка данных для вывода
+            $data['best_ads'] = $this->model('NewsModel')->prepareNewsPreview($db_data, false, true);
         }
-       echo json_encode($this->model('NewsModel')->getResponse(), JSON_UNESCAPED_UNICODE);
+        echo json_encode($this->model('NewsModel')->getResponse(), JSON_UNESCAPED_UNICODE);
     }
 }

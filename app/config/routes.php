@@ -85,4 +85,5 @@ return [
     'api/support/add_ticket' => 'main/API/addTicket',
     'api/messages/dialogs' => 'main/API/getDialogs',
     'api/messages/history' => 'main/API/getMessagesFromDB',
+    'api/restore' => 'main/API/passwordRestore',
 ];
