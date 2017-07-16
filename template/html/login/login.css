@@ -104,18 +104,22 @@
 
 
 
-.dialog-registration {
-    max-width: 500px;
+.dialog-registration,
+.dialog-restore {
+    max-width: 450px;
     position: relative;
     padding: 33px 57px 33px 57px;
     border-radius: 8px;
     background: #1b334a;
+    color: #ffffff;
     z-index: 5;
 }
-.dialog-registration .step {
+.dialog-registration .step,
+.dialog-restore .step {
     min-width: 300px;
 }
-.dialog-registration::after {
+.dialog-registration::after,
+.dialog-restore::after {
     content: "";
     position: absolute;
     background: #0b2e45;
@@ -123,7 +127,8 @@
     z-index: 2;
     border-radius: 0 0 8px 8px;
 }
-.dialog-registration::before {
+.dialog-registration::before,
+.dialog-restore::before {
     content: "";
     position: absolute;
     background: #092a40;
@@ -139,7 +144,8 @@
     margin-bottom: 20px;
 }
 
-.dialog-registration .navigation {
+.dialog-registration .navigation,
+.dialog-restore .navigation {
     /*padding: 33px 57px 33px 57px;*/
     margin: 33px -57px -33px;
     display: flex;
@@ -147,7 +153,10 @@
 }
 
 .dialog-registration .navigation .backward,
-.dialog-registration .navigation .forward {
+.dialog-registration .navigation .forward,
+.dialog-restore .navigation .backward,
+.dialog-restore .navigation .forward,
+.navigation .finish {
     width: 50%;
     padding: 17px;
     flex-shrink: 1;
@@ -156,17 +165,25 @@
     text-transform: uppercase;
     cursor: pointer;
 }
-.dialog-registration .navigation .backward {
+.dialog-registration .navigation .backward,
+.dialog-restore .navigation .backward {
     background: #1e3950;
     color: #4b6073;
     border-radius: 0 0 0 8px;
 }
-.dialog-registration .navigation .forward {
+.dialog-registration .navigation .forward,
+.dialog-restore .navigation .forward,
+.navigation .finish {
     background: #213c54;
     color: #fff;
     border-radius: 0 0 8px 0;
 }
-
+.navigation .backward.disabled {
+    opacity: 0;
+}
+.navigation .forward.disabled {
+    opacity: 0;
+}
 
 
 
@@ -211,7 +228,8 @@
     filter: grayscale(0%);
 }
 
-.dialog-registration input[type=text] {
+.dialog-registration input[type=text],
+.dialog-restore input[type=text] {
     padding: 10px 26px;
     margin-bottom: 9px;
     width: 100%;
@@ -225,7 +243,8 @@
     border: solid 1px rgba(255, 255, 255, 0.22);
 }
 
-.dialog-registration .error {
+.dialog-registration .error
+.dialog-restore .error{
     padding: 6px 16px 0;
     max-width: 300px;
     color: #d54949;

@@ -163,7 +163,8 @@
 }
 .header-line .user-info img,
 .menu-user .user-info img,
-.menu-user .user-menu-reg img {
+.menu-user .user-menu-reg img,
+.user-info img {
     width: 35px;
     height: 35px;
     border-radius: 100px;
@@ -179,14 +180,17 @@
 }
 
 .header-line .menu-user-status,
-.menu-user .menu-user-status {
+.menu-user .menu-user-status,
+.user-info__status {
     font-size: 10px;
 }
 
 
-.header-line .user-info {
+.header-line .user-info,
+.user-info {
     text-align: right;
 }
-.header-line .user-info img {
+.header-line .user-info img,
+.user-info img  {
     margin-left: 6px;
 }
