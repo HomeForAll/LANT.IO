@@ -83,6 +83,7 @@ return [
     'api/stat/ads/active/([A-Za-z]+)' => 'main/API/adsActiveNumber/$1',
     'api/stat/trans/close/get/([A-Za-z]+)' => 'main/API/trans/$1',
     'api/item/my' => 'main/API/myAds',
+    'api/items/add' => 'main/API/itemsAdd',
     'api/favorite/add' => 'main/API/adInFavorite',
     'api/favorite/list' => 'main/API/listFavorite',
     'api/support/add_ticket' => 'main/API/addTicket',
