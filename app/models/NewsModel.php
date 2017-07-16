@@ -6,6 +6,11 @@ use PhpAmqpLib\Message\AMQPMessage;
 
 class NewsModel extends Model
 {
+    // Коды ошибок
+    const DATA_BASE_INSERT_ERROR = 5000;
+    const DATA_BASE_UPDATE_ERROR = 5001;
+    const DATA_BASE_DELETE_ERROR = 5002;
+    const DATA_BASE_SELECT_ERROR = 5003;
 
     private $response = [];
     private $errors = [];
@@ -988,11 +993,18 @@ class NewsModel extends Model
             $stmt->bindParam($p, $form_data[$key]);
         }
         if ($stmt->execute()) {
-            $this->setUserError('news_message',
-                'Новость: "' . $form_data['title'] . '" успешно добавлена');
+//            $this->setUserError('news_message',
+//                'Новость: успешно добавлена');
+            //Для api
+            $this->response = true;
         } else {
-            $this->setUserError('news_error',
-                'Новость: "' . $form_data['title'] . '" не удалось добавить!');
+//            $this->setUserError('news_error',
+//                'Новость: "' . $form_data['title'] . '" не удалось добавить!');
+            //Для api
+            $this->errors[] = [
+                'code'    => self::DATA_BASE_INSERT_ERROR,
+                'message' => 'Ошибка базы данных',
+            ];
         }
     }
 
@@ -2470,6 +2482,152 @@ class NewsModel extends Model
         }
 
         return $request;
+    }
+
+    public function getRequestForItemsAddFromPOST($keys)
+    {
+        $form_data = [];
+        //Определение пользователя
+        if (!empty($_SESSION['userID'])) {
+            $user_id = (int)$_SESSION['userID'];
+        } else {
+            return false;
+        }
+
+        //Удаление пробелов и переводов строк в начале и в конце строк
+        function trim_value(&$value)
+        {
+            $value = trim($value);
+        }
+
+        array_filter($_POST, 'trim_value');
+        $args_db = array(
+            'address' => FILTER_SANITIZE_STRING,
+            'alcove' => FILTER_VALIDATE_BOOLEAN,
+            'area' => FILTER_SANITIZE_STRING,
+            'availability_of_garbage_chute' => FILTER_VALIDATE_BOOLEAN,
+            'balcony' => FILTER_SANITIZE_NUMBER_INT,
+            'bargain' => FILTER_VALIDATE_BOOLEAN,
+            'barn' => FILTER_VALIDATE_BOOLEAN,
+            'bath' => FILTER_VALIDATE_BOOLEAN,
+            'bathroom' => FILTER_VALIDATE_BOOLEAN,
+            'bathroom_available' => FILTER_VALIDATE_BOOLEAN,
+            'bedroom' => FILTER_VALIDATE_BOOLEAN,
+            'building_type' => FILTER_SANITIZE_NUMBER_INT,
+            'cadastral_number' => FILTER_SANITIZE_STRING,
+            'cctv' => FILTER_VALIDATE_BOOLEAN,
+            'ceiling_height' => FILTER_SANITIZE_NUMBER_INT,
+            'city' => FILTER_SANITIZE_STRING,
+            'clarification_of_the_object_type' => FILTER_SANITIZE_NUMBER_INT,
+            'common' => FILTER_SANITIZE_NUMBER_INT,
+            'concierge' => FILTER_VALIDATE_BOOLEAN,
+            'content' => FILTER_SANITIZE_STRING,
+            'country' => FILTER_SANITIZE_STRING,
+            'dining_room' => FILTER_VALIDATE_BOOLEAN,
+            'distance_from_metro' => FILTER_SANITIZE_NUMBER_INT,
+            'documents_on_tenure' => FILTER_SANITIZE_STRING,
+            'electricity' => FILTER_VALIDATE_BOOLEAN,
+            'equipment' => FILTER_VALIDATE_BOOLEAN,
+            'fencing' => FILTER_SANITIZE_NUMBER_INT,
+            'floor' => FILTER_SANITIZE_NUMBER_INT,
+            'forest_trees' => FILTER_VALIDATE_BOOLEAN,
+            'foundation' => FILTER_SANITIZE_NUMBER_INT,
+            'furnish' => FILTER_SANITIZE_NUMBER_INT,
+            'garden_trees' => FILTER_VALIDATE_BOOLEAN,
+            'gas' => FILTER_VALIDATE_BOOLEAN,
+            'guest_house' => FILTER_VALIDATE_BOOLEAN,
+            'hallway' => FILTER_VALIDATE_BOOLEAN,
+            'heating' => FILTER_VALIDATE_BOOLEAN,
+            'house' => FILTER_SANITIZE_STRING,
+            'intercom' => FILTER_VALIDATE_BOOLEAN,
+            'kitchen' => FILTER_VALIDATE_BOOLEAN,
+            'lavatory' => FILTER_SANITIZE_NUMBER_INT,
+            'lease' => FILTER_SANITIZE_NUMBER_INT,
+            'lease_contract' => FILTER_SANITIZE_STRING,
+            'lift_lifting' => FILTER_VALIDATE_BOOLEAN,
+            'lift_none' => FILTER_VALIDATE_BOOLEAN,
+            'lift_passenger' => FILTER_VALIDATE_BOOLEAN,
+            'living_room' => FILTER_VALIDATE_BOOLEAN,
+            'lodge' => FILTER_VALIDATE_BOOLEAN,
+            'metro_station' => FILTER_SANITIZE_NUMBER_INT,
+            'non_commission' => FILTER_VALIDATE_BOOLEAN,
+            'not_residential' => FILTER_SANITIZE_NUMBER_INT,
+            'number_of_floors' => FILTER_SANITIZE_NUMBER_INT,
+            'number_of_rooms' => FILTER_SANITIZE_NUMBER_INT,
+            'object_located' => FILTER_SANITIZE_NUMBER_INT,
+            'object_type' => FILTER_SANITIZE_NUMBER_INT,
+            'operation_type' => FILTER_SANITIZE_NUMBER_INT,
+            'parking_garage_complex' => FILTER_VALIDATE_BOOLEAN,
+            'parking_lot_garage' => FILTER_VALIDATE_BOOLEAN,
+            'parking_multilevel' => FILTER_VALIDATE_BOOLEAN,
+            'parking_none' => FILTER_VALIDATE_BOOLEAN,
+            'parking_underground' => FILTER_VALIDATE_BOOLEAN,
+            'photo_available' => FILTER_VALIDATE_BOOLEAN,
+            'planning_project' => FILTER_SANITIZE_STRING,
+            'playground' => FILTER_VALIDATE_BOOLEAN,
+            'playroom' => FILTER_VALIDATE_BOOLEAN,
+            'plot_of_ravine' => FILTER_VALIDATE_BOOLEAN,
+            'plot_on_the_slope' => FILTER_VALIDATE_BOOLEAN,
+            'plot_smooth' => FILTER_VALIDATE_BOOLEAN,
+            'plot_uneven' => FILTER_VALIDATE_BOOLEAN,
+            'plot_wetland' => FILTER_VALIDATE_BOOLEAN,
+            'preview_img' => FILTER_SANITIZE_STRING,
+            'price' => FILTER_SANITIZE_NUMBER_INT,
+            'property_documents' => FILTER_SANITIZE_STRING,
+            'rating_admin' => FILTER_SANITIZE_NUMBER_INT,
+            'rating_donate' => FILTER_SANITIZE_NUMBER_INT,
+            'rating_views' => FILTER_SANITIZE_NUMBER_INT,
+            'region' => FILTER_SANITIZE_STRING,
+            'residential' => FILTER_SANITIZE_NUMBER_INT,
+            'river' => FILTER_VALIDATE_BOOLEAN,
+            'roofing' => FILTER_SANITIZE_NUMBER_INT,
+            'sanitation' => FILTER_VALIDATE_BOOLEAN,
+            'security' => FILTER_VALIDATE_BOOLEAN,
+            'signaling' => FILTER_VALIDATE_BOOLEAN,
+            'space' => FILTER_SANITIZE_NUMBER_INT,
+            'space_type' => FILTER_SANITIZE_NUMBER_INT,
+            'spring' => FILTER_VALIDATE_BOOLEAN,
+            'stairwells_status' => FILTER_SANITIZE_NUMBER_INT,
+            'status' => FILTER_SANITIZE_NUMBER_INT,
+            'street' => FILTER_SANITIZE_STRING,
+            'study' => FILTER_VALIDATE_BOOLEAN,
+            'swimming_pool' => FILTER_VALIDATE_BOOLEAN,
+            'tags' => FILTER_SANITIZE_STRING,
+            'three_d_project' => FILTER_SANITIZE_STRING,
+            'time_car' => FILTER_SANITIZE_NUMBER_INT,
+            'time_walk' => FILTER_SANITIZE_NUMBER_INT,
+            'title' => FILTER_SANITIZE_STRING,
+            'type_of_construction' => FILTER_SANITIZE_NUMBER_INT,
+            'type_of_house' => FILTER_SANITIZE_NUMBER_INT,
+            'user_id' => FILTER_SANITIZE_NUMBER_INT,
+            'video' => FILTER_SANITIZE_STRING,
+            'wall_material' => FILTER_SANITIZE_NUMBER_INT,
+            'water_pipes' => FILTER_VALIDATE_BOOLEAN,
+            'waterfront' => FILTER_VALIDATE_BOOLEAN,
+            'wine_vault' => FILTER_VALIDATE_BOOLEAN,
+            'year_of_construction' => FILTER_SANITIZE_NUMBER_INT,
+            '' => FILTER_SANITIZE_NUMBER_INT
+        );
+
+        //Преобразование через keys
+        $args = [];
+        foreach ($keys as $k => $v) {
+            if (isset($args_db[$v['table_column_name']])) {
+                $args[$k] = $args_db[$v['table_column_name']];
+            } else {
+//              TODO: Ошибка в фильтре получения данных при записи объявления
+            }
+        }
+        $post_data = filter_input_array(INPUT_POST, $args);
+
+        //Удаление несуществующих параметров и преобразование обратно по $key
+        foreach ($post_data as $k => $v) {
+            if (!empty($v)) {
+                $form_data[$keys[$k]['table_column_name']] = $v;
+            }
+        }
+        $form_data['user_id'] = $user_id;
+        return $form_data;
     }
 
 
