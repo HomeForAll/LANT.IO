@@ -180,7 +180,8 @@ class APIController extends Controller
 
     public function actionPasswordRestore()
     {
-
+        $this->model('UserModel')->passwordRestore();
+        echo json_encode($this->model('UserModel')->getResponse(), JSON_UNESCAPED_UNICODE);
     }
 
     /**

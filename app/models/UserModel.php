@@ -1536,7 +1536,54 @@ class UserModel extends Model
 
     public function passwordRestore()
     {
+        switch (isset($_POST['step']) ? $_POST['step'] : false) {
+            case '1':
+                $login = isset($_POST['login']) ? $_POST['login'] : null;
 
+                if (strrpos($login, '@')) {
+                    if (v::email()->validate($login)) {
+                        $query = $this->db->prepare('SELECT id, password FROM user WHERE email = :email');
+                        $query->execute([
+                            ':email' => $login,
+                        ]);
+
+                        $user = $query->fetch();
+
+                        if ($user) {
+                            $restore_hash = sha1($user['id'] . $user['password'] . time());
+
+                            $query = $this->db->prepare('UPDATE users SET restore_hash = :restore_hash WHERE id = :user_id');
+                            $query->execute([
+                                ':restore_hash' => $restore_hash,
+                                ':user_id'      => $user['id'],
+                            ]);
+
+                            $restore_url = "https://{$_SERVER['HTTP_HOST']}/restore/{$restore_hash}:{$user['id']}";
+
+                            $smtp = new smtp('smtp.yandex.ru', 465);
+                            $smtp->auth('admin@lant.io', 'ZSH1wb88');
+                            $smtp->from('support@lant.io');
+                            $smtp->to($login);
+                            $smtp->subject('[LANT.IO] Восстановление пароля');
+                            $smtp->text('test');
+                            $smtp->send();
+                        } else {
+                            // TODO: Ошибка пользователь не найден
+                        }
+                    } else {
+                        // TODO: Ошибка email неверен
+                    }
+                } elseif (v::phone()->validate($login)) {
+                    // TODO: Доделать обработку для sms
+                } else {
+                    // TODO: Ошибка, телеон неверен
+                }
+                break;
+            case '2':
+                break;
+            case '3':
+                break;
+        }
     }
 
     public function getResponse()
