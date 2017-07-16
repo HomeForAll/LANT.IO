@@ -244,7 +244,7 @@ $(function(){
         });
         //dialog_restore.wizard("select", 7);
     });
-    $('.open-restore').click();
+    //$('.open-restore').click();
 
 
 
