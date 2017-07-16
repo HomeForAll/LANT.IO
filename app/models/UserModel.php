@@ -1536,9 +1536,9 @@ class UserModel extends Model
 
     public function passwordRestore()
     {
-        switch (isset($_GET['step']) ? $_GET['step'] : false) {
+        switch (isset($_POST['step']) ? $_POST['step'] : false) {
             case '1':
-                $login = isset($_GET['login']) ? $_GET['login'] : null;
+                $login = isset($_POST['login']) ? $_POST['login'] : null;
 
                 if (strrpos($login, '@')) {
                     if (v::email()->validate($login)) {
