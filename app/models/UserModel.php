@@ -1560,13 +1560,28 @@ class UserModel extends Model
 
                             $restore_url = "https://{$_SERVER['HTTP_HOST']}/restore/{$restore_hash}:{$user['id']}";
 
-                            $smtp = new smtp('smtp.yandex.ru', 465);
-                            $smtp->auth('admin@lant.io', 'ZSH1wb88');
-                            $smtp->from('support@lant.io');
-                            $smtp->to($login);
-                            $smtp->subject('[LANT.IO] Восстановление пароля');
-                            $smtp->text('test');
-                            $smtp->send();
+                            require_once ROOT_DIR . 'vendor' . DS . 'phpmailer' . DS . 'phpmailer' . DS . 'PHPMailerAutoload.php';
+
+                            $mail = new PHPMailer;
+                            $mail->isSMTP();
+                            $mail->Host = 'smtp.yandex.ru';
+                            $mail->Port = 465;
+                            $mail->SMTPSecure = 'ssl';
+                            $mail->SMTPAuth = true;
+                            $mail->Username = "admin@lant.io";
+                            $mail->Password = "ZSH1wb88";
+                            $mail->setFrom('admin@lant.io', 'LANT.IO');
+                            $mail->addAddress('badarancha.dmitry@gmail.com');
+                            $mail->Subject = 'Восстановление пароля';
+                            $mail->msgHTML("Вы воспользовались формой восстановления пароля, перейдите по ссылке: {$restore_url}, что бы продолжить.");
+
+                            if ($mail->send()) {
+                                $this->response['response'] = true;
+                            } else {
+                                $this->response['response'] = false;
+                                //echo "Mailer Error: " . $mail->ErrorInfo;
+                            }
+
                         } else {
                             // TODO: Ошибка пользователь не найден
                         }
