@@ -4,6 +4,7 @@ session_start();
 
 ini_set('display_errors', 0);
 ini_set ( "memory_limit", "300M");
+define('DS', DIRECTORY_SEPARATOR);
 defined('ROOT_DIR') or define('ROOT_DIR', __DIR__ . DIRECTORY_SEPARATOR);
 defined('CONFIG_DIR') or define('CONFIG_DIR', ROOT_DIR . 'app' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR);
 defined('SERVER') or define('SERVER', 'nginx'); // 'apache' or 'nginx'
