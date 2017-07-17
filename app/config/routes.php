@@ -14,6 +14,7 @@ return [
     'login'                 => 'main/user/login',
     'login/([A-Za-z]+)'     => 'main/user/OAuthInit/$1',
     'logout'                => 'main/user/logout',
+    'restore/([^:]+):([0-9]+)' => 'main/user/restore/$1/$2',
 
     'cabinet'                  => 'main/cabinet/cabinet',
     'cabinet/profile/edit'     => 'main/cabinet/profileEdit',
@@ -24,6 +25,8 @@ return [
     'cabinet/forms'            => 'main/cabinet/forms',
 
     'cabinet/forms/new' => 'main/cabinet/formsNew',
+
+
 
     'cabinet/dialogs'                 => 'main/cabinet/dialogs',
     'cabinet/chat([0-9]+)'            => 'main/cabinet/chat/$1',
@@ -81,10 +84,9 @@ return [
     'api/stat/ads/active/([A-Za-z]+)' => 'main/API/adsActiveNumber/$1',
     'api/stat/trans/close/get/([A-Za-z]+)' => 'main/API/trans/$1',
     'api/item/my' => 'main/API/myAds',
+    'api/items/add' => 'main/API/itemsAdd',
     'api/favorite/add' => 'main/API/adInFavorite',
     'api/favorite/list' => 'main/API/listFavorite',
     'api/support/add_ticket' => 'main/API/addTicket',
-    'api/messages/dialogs' => 'main/API/getDialogs',
-    'api/messages/history' => 'main/API/getMessagesFromDB',
-    'api/restore' => 'main/API/passwordRestore',
+    'api/restore' => 'main/API/PasswordRestore',
 ];

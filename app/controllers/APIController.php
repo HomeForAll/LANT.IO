@@ -180,77 +180,10 @@ class APIController extends Controller
 
     public function actionPasswordRestore()
     {
-
+        $this->model('UserModel')->passwordRestore();
+        echo json_encode($this->model('UserModel')->getResponse(), JSON_UNESCAPED_UNICODE);
     }
 
-    /**
-     * Лучшие
-     * объявления
-     * на
-     * главной
-     * странице
-     * За
-     * время
-     * ($param[0]
-     * =
-     * 'best_of_day'
-     * (...week или month)) В $_POST могут передоваться:
-     * (int)
-     * space_type
-     * -
-     * Тип
-     * площади
-     * (int)
-     * operation_type
-     * -
-     * Операция
-     * (int)
-     * object_type
-     * -
-     * Тип
-     * объекта
-     * (int)
-     * city
-     * -
-     * Город
-     * (int)
-     * price_from;
-     * price_to
-     * -
-     * Цена
-     * от
-     * и
-     * до
-     * (int)
-     * space_from;
-     * space_to
-     * -
-     * Площадь
-     * от
-     * и
-     * до
-     * (int)
-     * count
-     * -
-     * кол-во
-     * выдаваемых
-     * объявлений
-     *
-     * @param $param
-     *
-     * @return
-     * JSON
-     *     best_ads
-     *     -
-     *     массив
-     *     объявлений
-     *     count_all
-     *     -
-     *     их
-     *     общее
-     *     кол-во
-     *
-     */
     public function actionBestAds($param)
     {
         if (!empty($_GET)) {
@@ -272,6 +205,14 @@ class APIController extends Controller
             // Подготовка данных для вывода
             $data['best_ads'] = $this->model('NewsModel')->prepareNewsPreview($db_data, false, true);
         }
+        echo json_encode($this->model('NewsModel')->getResponse(), JSON_UNESCAPED_UNICODE);
+    }
+
+        public function actionItemsAdd($param)
+    {
+        $keys = $this->model('SearchModel')->getKeys();
+        $form_data = $this->model('NewsModel')->getRequestForItemsAddFromPOST($keys);
+        $this->model('NewsModel')->makeNewsInsert($form_data);
         echo json_encode($this->model('NewsModel')->getResponse(), JSON_UNESCAPED_UNICODE);
     }
 }

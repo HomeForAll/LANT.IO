@@ -734,23 +734,23 @@ class UserModel extends Model
         $info = $stmt->fetchAll();
 
         $found_match = "Unknown";
-        if ($curl = curl_init()) {
-            curl_setopt($curl, CURLOPT_URL, 'http://www.ip2location.com/demo?ip=' . $ip);
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($curl, CURLOPT_POST, true);
-            curl_setopt($curl, CURLOPT_POSTFIELDS, "ipaddress=$ip");
-            $out = curl_exec($curl);
-            $matches = [];
-            preg_match_all("~td.*</td>~i", $out, $matches);
-            $found_match = $matches[0][4];
-            preg_match_all("~>.*<~i", $found_match, $matches);
-            $found_match = $matches[0][0];
-            $found_match = ltrim($found_match, ">");
-            $found_match = rtrim($found_match, "<");
-            preg_match("~flags/.*.png~", $found_match, $flag_country);
-            $found_match = preg_replace("~\/images\/flags~", "http://www.ip2location.com/images/flags", $found_match);
-            curl_close($curl);
-        }
+        // if ($curl = curl_init()) {
+        //     curl_setopt($curl, CURLOPT_URL, 'http://www.ip2location.com/demo?ip=' . $ip);
+        //     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        //     curl_setopt($curl, CURLOPT_POST, true);
+        //     curl_setopt($curl, CURLOPT_POSTFIELDS, "ipaddress=$ip");
+        //     $out = curl_exec($curl);
+        //     $matches = [];
+        //     preg_match_all("~td.*</td>~i", $out, $matches);
+        //     $found_match = $matches[0][4];
+        //     preg_match_all("~>.*<~i", $found_match, $matches);
+        //     $found_match = $matches[0][0];
+        //     $found_match = ltrim($found_match, ">");
+        //     $found_match = rtrim($found_match, "<");
+        //     preg_match("~flags/.*.png~", $found_match, $flag_country);
+        //     $found_match = preg_replace("~\/images\/flags~", "http://www.ip2location.com/images/flags", $found_match);
+        //     curl_close($curl);
+        // }
 
         $geo = $found_match;
         $str_for_active = $browser . "," . date('d F \в H:i:s e') . "," . $ip . "," . $geo . ";";
@@ -1536,7 +1536,70 @@ class UserModel extends Model
 
     public function passwordRestore()
     {
+        switch (isset($_POST['step']) ? $_POST['step'] : false) {
+            case '1':
+                $login = isset($_POST['login']) ? $_POST['login'] : null;
 
+                if (strrpos($login, '@')) {
+                    if (v::email()->validate($login)) {
+                        $query = $this->db->prepare('SELECT id, password FROM users WHERE email = :email');
+                        $query->execute([
+                            ':email' => $login,
+                        ]);
+
+                        $user = $query->fetch();
+
+                        if ($user) {
+                            $restore_hash = sha1($user['id'] . $user['password'] . time());
+
+                            $query = $this->db->prepare('UPDATE users SET restore_hash = :restore_hash WHERE id = :user_id');
+                            $query->execute([
+                                ':restore_hash' => $restore_hash,
+                                ':user_id'      => $user['id'],
+                            ]);
+
+                            $restore_url = "https://{$_SERVER['HTTP_HOST']}/restore/{$restore_hash}:{$user['id']}";
+
+                            require_once ROOT_DIR . 'vendor' . DS . 'phpmailer' . DS . 'phpmailer' . DS . 'PHPMailerAutoload.php';
+
+                            $mail = new PHPMailer;
+                            $mail->isSMTP();
+                            $mail->Host = 'smtp.yandex.ru';
+                            $mail->Port = 465;
+                            $mail->SMTPSecure = 'ssl';
+                            $mail->SMTPAuth = true;
+                            $mail->Username = "admin@lant.io";
+                            $mail->Password = "ZSH1wb88";
+                            $mail->setLanguage('ru');
+                            $mail->setFrom('admin@lant.io', 'LANT.IO');
+                            $mail->addAddress($login);
+                            $mail->Subject = 'Password restore';
+                            $mail->msgHTML("Вы воспользовались формой восстановления пароля, перейдите по ссылке: {$restore_url}, что бы продолжить.");
+
+                            if ($mail->send()) {
+                                $this->response['response'] = true;
+                            } else {
+                                $this->response['response'] = false;
+                                //echo "Mailer Error: " . $mail->ErrorInfo;
+                            }
+
+                        } else {
+                            // TODO: Ошибка пользователь не найден
+                        }
+                    } else {
+                        // TODO: Ошибка email неверен
+                    }
+                } elseif (v::phone()->validate($login)) {
+                    // TODO: Доделать обработку для sms
+                } else {
+                    // TODO: Ошибка, телеон неверен
+                }
+                break;
+            case '2':
+                break;
+            case '3':
+                break;
+        }
     }
 
     public function getResponse()

@@ -166,6 +166,92 @@ $(function(){
         dialog_registration.find("[name=document]").prop('checked', false);
         dialog_registration.wizard( "destroy" ).wizard(dialog_registration_config);
         $(".dialog-registration").arcticmodal();
-        dialog_registration.wizard("select", 7);
+        //dialog_registration.wizard("select", 7);
     });
+
+
+    var dialog_restore_config = {
+        beforeForward: function( event, state, update ) {
+            var data =  dialog_restore.wizard("form").serializeObject();
+            var current_index = state.stepsActivated.slice(-2, -1).shift();
+            var current_step = dialog_restore.wizard("step", current_index);
+            var current_state = current_step.find(".current_state").val();
+            var error = current_step.find('.error');
+            error.html('');
+            if (current_state != 'step_1') {
+                $.post('/api/restore/'+current_state, data, function(data) {
+                    console.log(data);
+                    try {
+                        data = JSON.parse(data);
+                        if (data.response) {
+                            update();
+                        } else if (data.error) {
+                            switch (data.error[0].code) {
+                                default: error.html(data.error[0].message);
+                            }
+                        }
+                    } catch (e) {
+                        error.html(data);
+                    }
+                });
+                return false;
+            } else {
+                return true;
+            }
+        },
+        transitions: {
+            step_1: function( state, action ) {
+                var data =  dialog_restore.wizard("form").serializeObject();
+                var error = state.step.find('.error');
+                error.html('');
+
+                $.post('/api/restore/step_1', data, function(data) {
+                    console.log(data);
+                    try {
+                        data = JSON.parse(data);
+                        if (data.response) {
+                            //update();
+                            action(data.response.login_type);
+                        } else if (data.error) {
+                            switch (data.error[0].code) {
+                                default: error.html(data.error[0].message);
+                            }
+                        }
+                    } catch (e) {
+                        error.html(data);
+                    }
+                });
+
+                //setTimeout(function() {
+                //    action("restore_phone");
+                //}, 10);
+                //var branch = state.step.find("[name=type]:checked").val();
+                //return 'restore_phone';
+                //return branch;
+            }
+        }
+    };
+
+    var dialog_restore = $("#dialog-restore").wizard(dialog_restore_config);
+
+    $('.open-restore').click(function(event) {
+        dialog_restore.wizard( "destroy" ).wizard(dialog_restore_config);
+        var modal = $(".dialog-restore").arcticmodal();
+        modal.find('.finish').click(function(event) {
+            event.preventDefault();
+            console.log(1111111);
+            modal.arcticmodal('close');
+        });
+        //dialog_restore.wizard("select", 7);
+    });
+    //$('.open-restore').click();
+
+
+
+
+
+
+
+
+
 });

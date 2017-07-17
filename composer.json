@@ -5,6 +5,7 @@
         "php-amqplib/php-amqplib": "^2.6",
         "liquid/liquid": "^1.2",
         "respect/validation": "^1.1",
-        "verot/class.upload.php": "dev-master"
+        "verot/class.upload.php": "dev-master",
+        "phpmailer/phpmailer": "^5.2"
     }
 }

@@ -676,4 +676,9 @@ class SearchModel extends Model
     {
         return $this->Ads;
     }
+
+        public function getKeys()
+    {
+        return $this->keys;
+    }
 }

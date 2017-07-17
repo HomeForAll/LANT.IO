@@ -226,11 +226,8 @@ class CabinetModel extends Model
 
     public function getResponse()
     {
-
-            return [
-                'response' => $this->response,
-            ];
-        }
+        return $this->response;
+    }
 
 
     public function getDialogsIDs()
