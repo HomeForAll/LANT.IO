@@ -8,9 +8,9 @@ class UploadModel extends Model
         $file_name = sha1(time() . mt_rand(1, 100));
         $query     = $this->db->prepare('INSERT INTO ads_images (original, s_250_140, s_500_280, s_360_230, s_720_460) VALUES (:original, :250_140, :500_280, :360_230, :720_460) RETURNING id');
         
-        if (isset($_SERVER['HTTP_X_FILE_NAME']) && isset($_SERVER['CONTENT_LENGTH'])) {
+        if (isset($_FILES['file'])) {
             $response = [];
-            $handle   = new upload('php:'.$_SERVER['HTTP_X_FILE_NAME']);
+            $handle   = new upload($_FILES['file']);
             if ($handle->uploaded) {
                 if ($handle->file_is_image) {
                     $directory_pattern = 'uploads' . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . $file_name[0] . DIRECTORY_SEPARATOR . $file_name[0] . $file_name[1] . DIRECTORY_SEPARATOR . '{width_size}' . DIRECTORY_SEPARATOR;
@@ -95,7 +95,7 @@ class UploadModel extends Model
         $file_name = sha1(time() . mt_rand(1, 100));
         $query     = $this->db->prepare('UPDATE users SET avatar_original = :avatar_original, avatar_50 = :avatar_50, avatar_100 = :avatar_100 WHERE id = :user_id');
         
-        if (isset($_SERVER['HTTP_X_FILE_NAME']) && isset($_SERVER['CONTENT_LENGTH'])) {
+        if (isset($_FILES['file'])) {
             $response = [];
             
             if (!isset($_SESSION['user'])) {
@@ -107,7 +107,7 @@ class UploadModel extends Model
                 return;
             }
             
-            $handle   = new upload('php:'.$_SERVER['HTTP_X_FILE_NAME']);
+            $handle   = new upload($_FILES['file']);
             if ($handle->uploaded) {
                 if ($handle->file_is_image) {
                     $directory_pattern = 'uploads' . DIRECTORY_SEPARATOR . 'avatars' . DIRECTORY_SEPARATOR . $file_name[0] . DIRECTORY_SEPARATOR . $file_name[0] . $file_name[1] . DIRECTORY_SEPARATOR . '{size}' . DIRECTORY_SEPARATOR;
