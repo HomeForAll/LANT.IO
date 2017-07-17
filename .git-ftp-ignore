@@ -6,3 +6,4 @@
 /.idea
 /app/config/paths.php
 /node_modules
+git-ftp-push.sh
