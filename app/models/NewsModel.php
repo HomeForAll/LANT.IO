@@ -970,7 +970,7 @@ class NewsModel extends Model
      * Запись объявлений
      * @param $form_data
      */
-    public function makeNewsInsert($form_data)
+    public function makeNewsInsert($form_data, $photos)
     {
         //Запись информации в основную таблицу
         $sql = "INSERT INTO news_base (";
@@ -984,7 +984,7 @@ class NewsModel extends Model
             $sql = $sql . ':' . $key . ', ';
         }
         $sql = substr($sql, 0, -2);
-        $sql = $sql . ')';
+        $sql = $sql . ') RETURNING id_news';
         $stmt = $this->db->prepare($sql);
 
         //bindParam
@@ -992,7 +992,9 @@ class NewsModel extends Model
             $p = ':' . $key;
             $stmt->bindParam($p, $form_data[$key]);
         }
-        if ($stmt->execute()) {
+        $stmt->execute();
+        $id_news = $stmt->fetchColumn();
+        if ($id_news) {
 //            $this->setUserError('news_message',
 //                'Новость: успешно добавлена');
             //Для api
@@ -1002,9 +1004,24 @@ class NewsModel extends Model
 //                'Новость: "' . $form_data['title'] . '" не удалось добавить!');
             //Для api
             $this->errors[] = [
-                'code'    => self::DATA_BASE_INSERT_ERROR,
+                'code' => self::DATA_BASE_INSERT_ERROR,
                 'message' => 'Ошибка базы данных',
             ];
+        }
+
+        //Добавление индекса объявления для фото ads_images
+        if (!empty($photos)) {
+            if (is_array($photos)) {
+                $photos_list = '';
+                foreach ($photos as $p){
+                    $photos_list .= $p.', ';
+                }
+                $photos_list = substr($photos_list, 0, -2);
+                $sql = "UPDATE ads_images SET ad_id = '$id_news'"
+                    . " WHERE id IN ($photos_list) AND ad_id = 0";
+                $stmt = $this->db->prepare($sql);
+                $this->response = $stmt->execute();
+            }
         }
     }
 
@@ -2494,14 +2511,6 @@ class NewsModel extends Model
             return false;
         }
 
-        //Удаление пробелов и переводов строк в начале и в конце строк
-        function trim_value(&$value)
-        {
-            if (!is_array($value))
-            $value = trim($value);
-        }
-
-        array_filter($_POST, 'trim_value');
         $args_db = array(
             'address' => FILTER_SANITIZE_STRING,
             'alcove' => FILTER_VALIDATE_BOOLEAN,
@@ -2627,7 +2636,19 @@ class NewsModel extends Model
                 $form_data[$keys[$k]['table_column_name']] = $v;
             }
         }
+
+        //Добавление id Картинок
+        if (!empty($_POST['photos'])) {
+            if (is_array($_POST['photos'])) {
+                $photos = [];
+                foreach ($_POST['photos'] as $k => $v) {
+                    array_push($photos, (int)$v);
+                }
+            }
+        }
         $form_data['user_id'] = $user_id;
+        $form_data['ad'] = $form_data;
+        $form_data['photos'] = $photos;
         return $form_data;
     }
 
