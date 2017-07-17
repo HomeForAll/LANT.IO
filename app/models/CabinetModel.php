@@ -743,6 +743,13 @@ class CabinetModel extends Model
         $massiv['name_name'] = $info['first_name'];
         $massiv['name_surname'] = $info['last_name'];
         $massiv['name_patronymic'] = $info['patronymic'];
+
+        $date = explode('-',$info['birthday']);
+
+        $massiv['sel_year'] = $date[0];
+        $massiv['sel_month'] = $date[1];
+        $massiv['sel_date'] = $date[2];
+
         $massiv['name_birthday'] = $info['birthday'];
         $massiv['about_me'] = $info['aboutme'];
 
@@ -775,7 +782,7 @@ class CabinetModel extends Model
         $info = $this->getinfo();
         $info = $info[0];
 
-        $this->response = $info['password'];
+        $this->response = 'Ты молодец!';
     }
 
     public function getPersonalInfoSettings()
@@ -829,7 +836,7 @@ class CabinetModel extends Model
     {
         $old_str = $str;
         $str = trim($str);
-        $str = preg_replace("/[^0-9]/", '', $str);
+        $str = preg_replace("/[^0-9]/+", '', $str);
         if ($old_str != $str)
             return false;
         return $str;
@@ -912,121 +919,293 @@ class CabinetModel extends Model
 
     public function savePersonalInfo() // Редактирование профиля
     {
-        $profile_id = $_SESSION['userID'];
+        if (!isset($_SESSION['user']['id'])) {
+            $this->response['error'] = array(
+                'code' => '4014',
+                'message' => 'Пользователь неавторизован',
+            );
+            return;
+        }
+        $profile_id = $_SESSION['user']['id'];
+        $update = [];
 
-        if (isset($_POST['save_1'])) // Информация о пользователе
-        {
-            if ($str = $this->сheckPersonalName($_POST['name'])) {
-                $stmt = $this->db->prepare("UPDATE users SET first_name = :first_name WHERE id = :profile_id");
-                $stmt->execute(array(':first_name' => $str, ':profile_id' => $profile_id));
-            } else {
-                Registry::set('name_profile_edit_error', 'Введено неверно!');
+        if ($str = $this->сheckPersonalName($_POST['name_name'])) {
+            $update['name_name'] = $str;
+        } else {
+            $this->response['error'] = array(
+                    'code' => '4000',
+                    'message' => 'Имя введено неверно',
+                    'reqest' => $_POST,
+            );
+            return;
+        }
+        if ($str = $this->сheckPersonalName($_POST['name_surname'])) {
+            $update['name_surname'] = $str;
+        } else {
+            $this->response['error'] = array(
+                    'code' => '4001',
+                    'message' => 'Фамилия введена неверно',
+                    'reqest' => $_POST,
+            );
+            return;
+        }
+        if ($str = $this->сheckPersonalName($_POST['name_patronymic'])) {
+            $update['name_patronymic'] = $str;
+        } else {
+            $this->response['error'] = array(
+                    'code' => '4002',
+                    'message' => 'Отчество введено неверно',
+                    'reqest' => $_POST,
+            );
+            return;
+        }
+        if ($str = $this->сheckBirthDay()) {
+            $update['name_birthday'] = $_POST['sel_year'] . '-' . $_POST['sel_month'] . '-' . $_POST['sel_date'];
+        } else {
+            $this->response['error'] = array(
+                    'code' => '4003',
+                    'message' => 'Дата рождения введена неверно',
+                    'reqest' => $_POST,
+            );
+            return;
+        }
+        if ($str = $this->сheckNumbers($_POST['passport_series'])) {
+            $update['passport_series'] = $str;
+        } else {
+            $this->response['error'] = array(
+                    'code' => '4004',
+                    'message' => 'Серия паспорта введена неверно',
+                    'reqest' => $_POST,
+            );
+            return;
+        }
+        if ($str = $this->сheckNumbers($_POST['passport_number'])) {
+            $update['passport_number'] = $str;
+        } else {
+            $this->response['error'] = array(
+                    'code' => '4005',
+                    'message' => 'Номер паспорта введен неверно',
+                    'reqest' => $_POST,
+            );
+            return;
+        }
+        if ($str = $this->сheckNumbers($_POST['adress_index'])) {
+            $update['adress_index'] = $str;
+        } else {
+            $this->response['error'] = array(
+                    'code' => '4006',
+                    'message' => 'Индекс введен неверно',
+                    'reqest' => $_POST,
+            );
+            return;
+        }
+        if ($str = $this->сheckPersonalName($_POST['adress_city'])) {
+            $update['adress_city'] = $str;
+        } else {
+            $this->response['error'] = array(
+                    'code' => '4007',
+                    'message' => 'Город введен неверно',
+                    'reqest' => $_POST,
+            );
+            return;
+        }
+        if ($str = $this->сheckIllegalSymbols($_POST['adress_street'])) {
+            $update['adress_street'] = $str;
+        } else {
+            $this->response['error'] = array(
+                    'code' => '4008',
+                    'message' => 'Улица введен неверно',
+                    'reqest' => $_POST,
+            );
+            return;
+        }
+        if ($str = $this->сheckIllegalSymbols($_POST['adress_home'])) {
+            $update['adress_home'] = $str;
+        } else {
+            $this->response['error'] = array(
+                    'code' => '4009',
+                    'message' => 'Номер дома введен неверно',
+                    'reqest' => $_POST,
+            );
+            return;
+        }
+        if ($str = $this->сheckNumbers($_POST['adress_flat'])) {
+            $update['adress_flat'] = $str;
+        } else {
+            $this->response['error'] = array(
+                    'code' => '4010',
+                    'message' => 'Номер квартиры введен неверно',
+                    'reqest' => $_POST,
+            );
+            return;
+        }
+        if ($str = $this->сheckNumbers($_POST['contacts_number'])) {
+            if (strlen($str) == 11 && $str[0] == '8') {
+                $str[0] = 7;
             }
-            if ($str = $this->сheckPersonalName($_POST['surname'])) {
-                $stmt = $this->db->prepare("UPDATE users SET last_name = :surname WHERE id = :profile_id");
-                $stmt->execute(array(':surname' => $str, ':profile_id' => $profile_id));
-            } else {
-                Registry::set('surname_profile_edit_error', 'Введено неверно!');
-            }
-            if ($str = $this->сheckPersonalName($_POST['patronymic'])) {
-                $stmt = $this->db->prepare("UPDATE users SET patronymic = :patronymic WHERE id = :profile_id");
-                $stmt->execute(array(':patronymic' => $str, ':profile_id' => $profile_id));
-            } else {
-                Registry::set('patronymic_profile_edit_error', 'Введено неверно!');
-            }
-            if ($this->сheckBirthDay()) {
-                $stmt = $this->db->prepare("UPDATE users SET birthday = :year-:month-:day WHERE id = :profile_id");
-                $stmt->execute(array(':year' => $_POST['sel_year'], ':month' => $_POST['sel_month'], ':day' => $_POST['sel_date'], ':profile_id' => $profile_id));
-            } else {
-                Registry::set('date_profile_edit_error', 'Введено неверно!');
-            }
-            if ($str = $this->сheckNumbers($_POST['series'])) {
-                $stmt = $this->db->prepare("UPDATE users SET series = :series WHERE id = :profile_id");
-                $stmt->execute(array(':series' => $str, ':profile_id' => $profile_id));
-            } else {
-                Registry::set('series_profile_edit_error', 'Введено неверно!');
-            }
-            if ($str = $this->сheckNumbers($_POST['number'])) {
-                $stmt = $this->db->prepare("UPDATE users SET number = :number WHERE id = :profile_id");
-                $stmt->execute(array(':number' => $str, ':profile_id' => $profile_id));
-            } else {
-                Registry::set('number_profile_edit_error', 'Введено неверно!');
-            }
-            if ($str = $this->сheckNumbers($_POST['index'])) {
-                $stmt = $this->db->prepare("UPDATE users SET index = :index WHERE id = :profile_id");
-                $stmt->execute(array(':index' => $str, ':profile_id' => $profile_id));
-            } else {
-                Registry::set('index_profile_edit_error', 'Введено неверно!');
-            }
-            if ($str = $this->сheckPersonalName($_POST['city'])) {
-                $stmt = $this->db->prepare("UPDATE users SET city = :city WHERE id = :profile_id");
-                $stmt->execute(array(':city' => $str, ':profile_id' => $profile_id));
-            } else {
-                Registry::set('city_profile_edit_error', 'Введено неверно!');
-            }
-
-            var_dump($this->сheckIllegalSymbols($_POST['street']));
-            var_dump($this->сheckIllegalSymbols($_POST['home']));
-
-            if ($str = $this->сheckNumbers($_POST['flat'])) {
-                $stmt = $this->db->prepare("UPDATE users SET flat = :flat WHERE id = :profile_id");
-                $stmt->execute(array(':flat' => $str, ':profile_id' => $profile_id));
-            } else {
-                Registry::set('flat_profile_edit_error', 'Введено неверно!');
-            }
+            $update['contacts_number'] = $str;
+        } else {
+            $this->response['error'] = array(
+                    'code' => '4011',
+                    'message' => 'Номер телефона введен неверно',
+                    'reqest' => $_POST,
+            );
+            return;
+        }
+        if ($str = $this->сheckEmail($profile_id)) {
+            $update['contacts_email'] = $str;
+        } else {
+            $this->response['error'] = array(
+                'code' => '4012',
+                'message' => 'Email введен неверно',
+                'reqest' => $_POST,
+            );
+            return;
         }
 
-        if (isset($_POST['save_2'])) {
-            if ($str = $this->сheckNumbers($_POST['phonenumber'])) {
-                $stmt = $this->db->prepare("UPDATE users SET phone_number = :phonenumber WHERE id = :profile_id");
-                $stmt->execute(array(':phonenumber' => $str, ':profile_id' => $profile_id));
-            } else {
-                Registry::set('phonenumber_profile_edit_error', 'Введено неверно!');
-            }
-            if ($this->сheckEmail($profile_id)) {
-                $stmt = $this->db->prepare("UPDATE users SET email = :email WHERE id = :profile_id");
-                $stmt->execute(array(':email' => $_POST['email'], ':profile_id' => $profile_id));
-            } else {
-                Registry::set('email_profile_edit_error', 'Введено неверно!');
-            }
-        } // Контакты
+        $update['profile_id'] = $profile_id;
+        $this->saveUpdatePersonalInfo($update);
+        $this->response['response'] = true;
+    }
 
-        // Отвязка социальных сетей
-        if (isset($_POST['delete_vk']) || (isset($_POST['delete_steam'])) || (isset($_POST['delete_ok'])) || (isset($_POST['delete_ya'])) || (isset($_POST['delete_mail'])) || (isset($_POST['delete_facebook'])) || (isset($_POST['delete_google']))) {
-            foreach ($_POST as $key => $value) {
-                if ($value == 'Отвязать') {
-                    $social_net = explode("_", $key);
-                    if (isset($social_net[1])) {
-                        $id = $social_net[1] . "_id";
-                        $name = $social_net[1] . "_name";
-                        $avatar = $social_net[1] . "_avatar";
-                        $stmt = $this->db->prepare("UPDATE users SET :id = NULL WHERE id = :profile_id");
-                        $stmt->execute(array(':id' => $id, ':profile_id' => $profile_id));
-                        $stmt = $this->db->prepare("UPDATE users SET :name = NULL WHERE id = :profile_id");
-                        $stmt->execute(array(':name' => $name, ':profile_id' => $profile_id));
-                        $stmt = $this->db->prepare("UPDATE users SET :avatar = NULL WHERE id = :profile_id");
-                        $stmt->execute(array(':avatar' => $avatar, ':profile_id' => $profile_id));
-                    }
-                }
-            }
+
+//        // Отвязка социальных сетей
+//        if (isset($_POST['delete_vk']) || (isset($_POST['delete_steam'])) || (isset($_POST['delete_ok'])) || (isset($_POST['delete_ya'])) || (isset($_POST['delete_mail'])) || (isset($_POST['delete_facebook'])) || (isset($_POST['delete_google']))) {
+//            foreach ($_POST as $key => $value) {
+//                if ($value == 'Отвязать') {
+//                    $social_net = explode("_", $key);
+//                    if (isset($social_net[1])) {
+//                        $id = $social_net[1] . "_id";
+//                        $name = $social_net[1] . "_name";
+//                        $avatar = $social_net[1] . "_avatar";
+//                        $stmt = $this->db->prepare("UPDATE users SET :id = NULL WHERE id = :profile_id");
+//                        $stmt->execute(array(':id' => $id, ':profile_id' => $profile_id));
+//                        $stmt = $this->db->prepare("UPDATE users SET :name = NULL WHERE id = :profile_id");
+//                        $stmt->execute(array(':name' => $name, ':profile_id' => $profile_id));
+//                        $stmt = $this->db->prepare("UPDATE users SET :avatar = NULL WHERE id = :profile_id");
+//                        $stmt->execute(array(':avatar' => $avatar, ':profile_id' => $profile_id));
+//                    }
+//                }
+//            }
+//        }
+
+//        if (isset($_POST['check_with_passport'])) // Подтвердить паспортом
+//        {
+//        }
+//
+//        if (isset($_POST['update_foto_id']))
+//        {
+//        }
+//
+//        if (isset($_POST['delete_foto_id'])) // Установить default аватар профиля
+//        {
+//            $link = 'http://images.lant.io/profile_fotos/user_foto_id_default.jpg';
+//            $stmt = $this->db->prepare("UPDATE users SET profile_foto_id = :link WHERE id = :profile_id");
+//            $stmt->execute(array(':link' => $link, ':profile_id' => $profile_id));
+//        }
+
+
+//        if (isset($_POST['save_3'])) // Изменить пароль
+//        {
+//            $stmt = $this->db->prepare("SELECT password FROM users WHERE id = $profile_id");
+//            $stmt->execute();
+//            $result = $stmt->fetchAll();
+//
+//            $new_result = $result[0]['password'];
+//
+//            if (password_verify($_POST['old_pass'], $new_result)) {
+//                $passwordHash = password_hash($_POST['new_pass'], PASSWORD_DEFAULT);
+//                $stmt = $this->db->prepare("UPDATE users SET password = :password WHERE id = :profile_id");
+//                $stmt->execute(array(':password' => $passwordHash, ':profile_id' => $profile_id));
+//            } else {
+//                Registry::set('password_profile_edit_error', 'Введено неверно!');
+//            }
+//        }
+//
+//        if (isset($_POST['save_4'])) // Связь с сайтом
+//        {
+//            if (isset($_POST['phone_only'])) {
+//                $stmt = $this->db->prepare("UPDATE users SET phone_only = 1 WHERE id = :profile_id");
+//                $stmt->execute(array(':profile_id' => $profile_id));
+//            }
+//            if (isset($_POST['site_only'])) {
+//                $stmt = $this->db->prepare("UPDATE users SET site_only = 1 WHERE id = :profile_id");
+//                $stmt->execute(array(':profile_id' => $profile_id));
+//            }
+//            if (!isset($_POST['phone_only'])) {
+//                $stmt = $this->db->prepare("UPDATE users SET phone_only = 0 WHERE id = :profile_id");
+//                $stmt->execute(array(':profile_id' => $profile_id));
+//            }
+//            if (!isset($_POST['site_only'])) {
+//                $stmt = $this->db->prepare("UPDATE users SET site_only = 0 WHERE id = :profile_id");
+//                $stmt->execute(array(':profile_id' => $profile_id));
+//            }
+//        }
+//
+//        if (isset($_POST['save_5'])) // Уведомления от сайта
+//        {
+//            if (isset($_POST['new_dialog'])) {
+//                $stmt = $this->db->prepare("UPDATE users SET new_dialog = 1 WHERE id = :profile_id");
+//                $stmt->execute(array(':profile_id' => $profile_id));
+//            }
+//            if (isset($_POST['close_ad'])) {
+//                $stmt = $this->db->prepare("UPDATE users SET close_ad = 1 WHERE id = :profile_id");
+//                $stmt->execute(array(':profile_id' => $profile_id));
+//            }
+//            if (isset($_POST['prom_offers'])) {
+//                $stmt = $this->db->prepare("UPDATE users SET prom_offers = 1 WHERE id = :profile_id");
+//                $stmt->execute(array(':profile_id' => $profile_id));
+//            }
+//            if (!isset($_POST['new_dialog'])) {
+//                $stmt = $this->db->prepare("UPDATE users SET new_dialog = 0 WHERE id = :profile_id");
+//                $stmt->execute(array(':profile_id' => $profile_id));
+//            }
+//            if (!isset($_POST['close_ad'])) {
+//                $stmt = $this->db->prepare("UPDATE users SET close_ad = 0 WHERE id = :profile_id");
+//                $stmt->execute(array(':profile_id' => $profile_id));
+//            }
+//            if (!isset($_POST['prom_offers'])) {
+//                $stmt = $this->db->prepare("UPDATE users SET prom_offers = 0 WHERE id = :profile_id");
+//                $stmt->execute([':profile_id' => $profile_id]);
+//            }
+//        }
+
+
+    public function saveUpdatePersonalInfo($update)
+    {
+        $stmt = $this->db->prepare("UPDATE users SET first_name = :name_name, last_name = :name_surname, patronymic = :name_patronymic, birthday = :name_birthday, aboutme = :about_me,
+                                              series = :passport_series, number = :passport_number, 
+                                              index = :adress_index, city = :adress_city, street = :adress_street, home = :adress_home, flat = :adress_flat,
+                                              phonenumber = :contacts_number, email = :contacts_email
+                                              WHERE id = :profile_id");
+        $stmt->execute(array(
+            ':name_name' => $update['name_name'],
+            'name_surname' => $update['name_surname'],
+            'name_patronymic' => $update['name_patronymic'],
+            'name_birthday' => $update['name_birthday'],
+            'about_me' => $update['about_me'],
+            'passport_series' => $update['passport_series'],
+            'passport_number' => $update['passport_number'],
+            'adress_index' => $update['adress_index'],
+            'adress_city' => $update['adress_city'],
+            'adress_street' => $update['adress_street'],
+            'adress_home' => $update['adress_home'],
+            'adress_flat' => $update['adress_flat'],
+            'contacts_number' => $update['contacts_number'],
+            'contacts_email' => $update['contacts_email'],
+            ':profile_id' => $update['profile_id']));
+    }
+
+    public function savePassword()
+    {
+        if (!isset($_SESSION['user']['id'])) {
+            $this->response['error'] = array(
+                'code' => '4014',
+                'message' => 'Пользователь неавторизован',
+            );
+            return;
         }
-
-        if (isset($_POST['check_with_passport'])) // Подтвердить паспортом
-        {
-        }
-
-        if (isset($_POST['update_foto_id']))
-        {
-        }
-
-        if (isset($_POST['delete_foto_id'])) // Установить default аватар профиля
-        {
-            $link = 'http://images.lant.io/profile_fotos/user_foto_id_default.jpg';
-            $stmt = $this->db->prepare("UPDATE users SET profile_foto_id = :link WHERE id = :profile_id");
-            $stmt->execute(array(':link' => $link, ':profile_id' => $profile_id));
-        }
-
-        if (isset($_POST['save_3'])) // Изменить пароль
+        $profile_id = $_SESSION['user']['id'];
         {
             $stmt = $this->db->prepare("SELECT password FROM users WHERE id = $profile_id");
             $stmt->execute();
@@ -1039,64 +1218,14 @@ class CabinetModel extends Model
                 $stmt = $this->db->prepare("UPDATE users SET password = :password WHERE id = :profile_id");
                 $stmt->execute(array(':password' => $passwordHash, ':profile_id' => $profile_id));
             } else {
-                Registry::set('password_profile_edit_error', 'Введено неверно!');
+                $this->response['error'] = array(
+                        'code' => '4013',
+                        'message' => 'Пароль введен неверно',
+                );
+                return;
             }
         }
-
-        if (isset($_POST['save_aboutme']))  // О себе
-        {
-            $aboutme = $_POST['aboutme'];
-            $stmt = $this->db->prepare("UPDATE users SET about_me = :aboutme WHERE id = :profile_id");
-            $stmt->execute(array(':aboutme' => $aboutme, ':profile_id' => $profile_id));
-        }
-
-        if (isset($_POST['save_4'])) // Связь с сайтом
-        {
-            if (isset($_POST['phone_only'])) {
-                $stmt = $this->db->prepare("UPDATE users SET phone_only = 1 WHERE id = :profile_id");
-                $stmt->execute(array(':profile_id' => $profile_id));
-            }
-            if (isset($_POST['site_only'])) {
-                $stmt = $this->db->prepare("UPDATE users SET site_only = 1 WHERE id = :profile_id");
-                $stmt->execute(array(':profile_id' => $profile_id));
-            }
-            if (!isset($_POST['phone_only'])) {
-                $stmt = $this->db->prepare("UPDATE users SET phone_only = 0 WHERE id = :profile_id");
-                $stmt->execute(array(':profile_id' => $profile_id));
-            }
-            if (!isset($_POST['site_only'])) {
-                $stmt = $this->db->prepare("UPDATE users SET site_only = 0 WHERE id = :profile_id");
-                $stmt->execute(array(':profile_id' => $profile_id));
-            }
-        }
-
-        if (isset($_POST['save_5'])) // Уведомления от сайта
-        {
-            if (isset($_POST['new_dialog'])) {
-                $stmt = $this->db->prepare("UPDATE users SET new_dialog = 1 WHERE id = :profile_id");
-                $stmt->execute(array(':profile_id' => $profile_id));
-            }
-            if (isset($_POST['close_ad'])) {
-                $stmt = $this->db->prepare("UPDATE users SET close_ad = 1 WHERE id = :profile_id");
-                $stmt->execute(array(':profile_id' => $profile_id));
-            }
-            if (isset($_POST['prom_offers'])) {
-                $stmt = $this->db->prepare("UPDATE users SET prom_offers = 1 WHERE id = :profile_id");
-                $stmt->execute(array(':profile_id' => $profile_id));
-            }
-            if (!isset($_POST['new_dialog'])) {
-                $stmt = $this->db->prepare("UPDATE users SET new_dialog = 0 WHERE id = :profile_id");
-                $stmt->execute(array(':profile_id' => $profile_id));
-            }
-            if (!isset($_POST['close_ad'])) {
-                $stmt = $this->db->prepare("UPDATE users SET close_ad = 0 WHERE id = :profile_id");
-                $stmt->execute(array(':profile_id' => $profile_id));
-            }
-            if (!isset($_POST['prom_offers'])) {
-                $stmt = $this->db->prepare("UPDATE users SET prom_offers = 0 WHERE id = :profile_id");
-                $stmt->execute([':profile_id' => $profile_id]);
-            }
-        }
+        $this->response['response'] = true;
     }
 
     private function saveAvatar()

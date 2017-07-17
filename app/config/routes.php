@@ -99,4 +99,6 @@ return [
     'api/restore' => 'main/API/PasswordRestore',
     'api/profile/get/security' => 'main/API/getPersonalInfoSecurity',
     'api/profile/get/settings' => 'main/API/getPersonalInfoSettings',
+    'api/profile/save/profile' => 'main/API/savePersonalInfo',
+    'api/profile/save/security' => 'main/API/savePassword',
 ];

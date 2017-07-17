@@ -12,6 +12,18 @@ class APIController extends Controller
         $this->setModel(new CabinetModel());
     }
 
+    public function actionSavePersonalInfo()
+    {
+        $this->model('CabinetModel')->savePersonalInfo();
+        echo json_encode($this->model('CabinetModel')->getResponse(), JSON_UNESCAPED_UNICODE);
+    }
+
+    public function actionSavePassword()
+    {
+        $this->model('CabinetModel')->SavePassword();
+        echo json_encode($this->model('CabinetModel')->getResponse(), JSON_UNESCAPED_UNICODE);
+    }
+
     public function actionGetPersonalInfo()
     {
         $this->model('CabinetModel')->getProfileInfo();
