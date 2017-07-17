@@ -734,6 +734,65 @@ class CabinetModel extends Model
         return $info;
     }
 
+    public function getProfileInfo()
+    {
+        $info = $this->getinfo();
+        $info = $info[0];
+        $massiv = [];
+
+        $massiv['name_name'] = $info['first_name'];
+        $massiv['name_surname'] = $info['last_name'];
+        $massiv['name_patronymic'] = $info['patronymic'];
+        $massiv['name_birthday'] = $info['birthday'];
+        $massiv['about_me'] = $info['aboutme'];
+
+        $massiv['passport_series'] = isset($info['series']) ? $info['series'] : 'empty';
+        $massiv['passport_number'] = isset($info['number']) ? $info['number'] : 'empty';
+
+        $massiv['adress_index'] = isset($info['index']) ? $info['index'] : 'empty';
+        $massiv['adress_city'] = isset($info['city']) ? $info['city'] : 'empty';
+        $massiv['adress_street'] = isset($info['street']) ? $info['street'] : 'empty';
+        $massiv['adress_home'] = isset($info['home']) ? $info['home'] : 'empty';
+        $massiv['adress_flat'] = isset($info['flat']) ? $info['flat'] : 'empty';
+
+        $massiv['contacts_number'] = isset($info['phone_number']) ? $info['phone_number'] : 'empty';
+        $massiv['contacts_email'] = isset($info['email']) ? $info['email'] : 'empty';
+
+        $massiv['profile_foto_link'] = isset($info['profile_foto_id']) ? $info['profile_foto_id'] : 'empty';
+
+        $massiv['socialNet_VK'] = isset($info['vk_id']) ? 'https://vk.com/id' . $info['vk_id'] : 'empty';
+        $massiv['socialNet_OK'] = isset($info['ok_id']) ? 'https://ok.ru/profile/' . $info['ok_id'] : 'empty';
+        $massiv['socialNet_MAIL'] = isset($info['mail_id']) ? 'https://mail.ru/profile/' . $info['mail_id'] : 'empty';
+        $massiv['socialNet_YA'] = isset($info['ya_id']) ? 'https://passport.yandex.ru/profile/' . $info['ya_id'] : 'empty';
+        $massiv['socialNet_GOOGLE'] = isset($info['google_id']) ? 'https://plus.google.com/u/0/' . $info['ya_id'] : 'empty';
+        $massiv['socialNet_STEAM'] = isset($info['steam_id']) ? 'http://steamcommunity.com/profiles/' . $info['steam_id'] : 'empty';
+
+        $this->response = $massiv;
+    }
+
+    public function getProfileInfoSecurity()
+    {
+        $info = $this->getinfo();
+        $info = $info[0];
+
+        $this->response = $info['password'];
+    }
+
+    public function getPersonalInfoSettings()
+    {
+        $info = $this->getinfo();
+        $info = $info[0];
+        $massiv = [];
+
+        $massiv['connection_phone_only'] = isset($info['phone_only']) ? $info['phone_only'] : '1';
+        $massiv['connection_site_only'] = isset($info['site_only']) ? $info['site_only'] : '1';
+        $massiv['notification_new_dialog'] = isset($info['new_dialog']) ? $info['new_dialog'] : '1';
+        $massiv['notification_close_ad'] = isset($info['close_ad']) ? $info['close_ad'] : '1';
+        $massiv['notification_prom_offers'] = isset($info['prom_offers']) ? $info['prom_offers'] : '1';
+
+        $this->response = $massiv;
+    }
+
     public function showActivity()
     {
     }
@@ -841,16 +900,15 @@ class CabinetModel extends Model
     public function сheckIllegalSymbols($str) // Проверка на запрещенные символы, исключения "/" "."
     {
         $str = trim($str);
-        //$pattern = "~([0-9а-я./\s]+)~i";
-        //$pattern = "~([^0-9а-я\.\/])+~i";
-        $pattern = "/[^a-zA-Z@\.]/";
-        if (preg_match($pattern, $str, $matches))
-            return $matches;
+        if (!mb_ereg_match("^[а-яА-ЯёЁ\d\s\.\-\/]+$", $str))
+            return false;
         if ($str == '')
             return false;
         $str = ucfirst($str);
         return $str;
     }
+
+
 
     public function savePersonalInfo() // Редактирование профиля
     {

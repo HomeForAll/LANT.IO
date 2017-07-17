@@ -89,6 +89,11 @@ class CabinetController extends Controller
         $this->view->render('gadgets', $viewgadgets);
     }
 
+    public function actionGetProfileInfo()
+    {
+        $this->model('CabinetModel')->getPersonalInfoSettings();
+    }
+
     public function actionProfileEdit()
     {
         $this->model('CabinetModel')->savePersonalInfo();
