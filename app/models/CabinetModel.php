@@ -2356,7 +2356,15 @@ class CabinetModel extends Model
         $ads = $query->fetchAll();
 
         if ($ads) {
-            $this->response['response'] = $ads;
+            $count_query = $this->db->query("SELECT count(*) FROM news_base WHERE user_id = {$_SESSION['user']['id']}");
+            $result = $count_query->fetch();
+
+            $count = $result ? $result['count'] : null;
+
+            $this->response['response'] = [
+                'count' => (int)$count,
+                'items' => $ads,
+            ];
         } else {
             $this->response['error'] = null;
         }
