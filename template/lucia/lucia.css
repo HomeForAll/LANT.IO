@@ -6,12 +6,15 @@ html {
     box-sizing: border-box;
     height: 100%;
 }
-*, *:before, *:after {
+*, *:before, *:after, input, select, button {
     -webkit-box-sizing: inherit;
     -moz-box-sizing: inherit;
     -ms-box-sizing: inherit;
     -o-box-sizing: inherit;
     box-sizing: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
 }
 html, body {
     margin: 0;

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Uploader</title>
+
+</head>
+<body>
+
+
+<form>
+    <input id="upload" type="file" name="file" multiple>
+</form>
+
+<script src="/bower_components/jquery/dist/jquery.min.js" type="text/javascript"></script>
+<script src="/template/lucia/simpleUpload.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+$(function(){
+    $("#upload").change(function(event) {
+    	$(this).simpleUpload("/api/upload/news/images", {
+        	start: function(file){
+                console.log('Start:', file);
+        	},
+        	progress: function(progress) {
+        	},
+        	success: function(data) {
+                console.log('Success:', data);
+        	},
+        	error: function(error) {
+                console.log('Error:', error);
+        	}
+        });
+    });
+});
+</script>
+</body>
+</html>
