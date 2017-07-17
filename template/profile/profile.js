@@ -177,6 +177,9 @@ $("#profile-additems button").click(function(event) {
         dataType: 'Json',
         success: function(data) {
             console.log(data);
+            if (data.response) {
+                location = '/profile/items/';
+            }
             //location.reload();
         }
     });
