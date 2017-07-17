@@ -168,7 +168,7 @@ class APIController extends Controller
 
     public function actionAdOutFavorite()
     {
-        $this->model('CabinetModel')->removeAdInFavorite(isset($_GET['id']) ? $_GET['id'] : null);
+        $this->model('CabinetModel')->removeAdInFavorite(isset($_POST['id']) ? $_POST['id'] : null);
         echo json_encode($this->model('CabinetModel')->getResponse(), JSON_UNESCAPED_UNICODE);
     }
 
