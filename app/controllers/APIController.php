@@ -5,6 +5,7 @@ class APIController extends Controller
     public function __construct($layout)
     {
         parent::__construct($layout);
+        header("Content-Type: application/json; charset=utf-8");
         $this->setModel(new SearchModel());
         $this->setModel(new UserModel());
         $this->setModel(new UploadModel());
