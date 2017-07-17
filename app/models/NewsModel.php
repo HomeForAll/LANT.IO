@@ -2497,6 +2497,7 @@ class NewsModel extends Model
         //Удаление пробелов и переводов строк в начале и в конце строк
         function trim_value(&$value)
         {
+            if (!is_array($value))
             $value = trim($value);
         }
 

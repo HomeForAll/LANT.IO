@@ -62,6 +62,9 @@ function initUserMenu(user) {
 
         $('.header-line .menu-user-name').text(user.name)
         $('.header-line .user-info img').prop('src', user.photo);
+        $('.menu-user .user-info, .header-line .user-info').click(function(event) {
+            window.location = '/profile/';
+        });
     } else {
         $('.menu-user .user-info').remove();
         $('.header-line .user-info').remove();
@@ -98,6 +101,7 @@ $(function(){
             }
         });
     });
+
     $("form[name=dialog-registratio]").submit(function(event) {
         event.preventDefault();
     });

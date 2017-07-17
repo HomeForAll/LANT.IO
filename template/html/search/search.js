@@ -870,11 +870,12 @@ $(".search-main select[name=type]").change(function(){
                         $.each(item.value, function(id, item) {
                             $("<option>").val(id).html(item).appendTo(select);
                         });
+
                         var name = item.name;
                         select.chosen({
                             width: "320px",
                             placeholder_text_multiple: "Выберете параметры..."
-                        }).change(function(evt, params){
+                        }).change(function(evt, params) {
                             //console.log(select.val())
                             if (select.val() !== null) {
                                 $("input[name=" + name + "]").val(select.val().join(','));

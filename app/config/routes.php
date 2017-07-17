@@ -8,6 +8,7 @@ return [
     'profile_dark'      => 'profile_dark/search/index',
 
     'profile' => 'profile/site/index',
+    'profile/([a-z0-9\/]+)' => 'profile/site/index',
 
     'registration'          => 'main/user/registration',
     'registration/([a-z]+)' => 'main/user/registration/$1',
