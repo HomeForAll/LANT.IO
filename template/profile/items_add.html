@@ -1,0 +1,80 @@
+
+
+<div class="additems-hat">
+    <div class="additems-hat__title">ДОБАВЛЕНИЕ ОБЪЯВЛЕНИЯ</div>
+    <div class="additems-hat__sub">Заполните обязательные и дополнительные параметры</div>
+</div>
+
+<div class="additems-cards">
+    <form id="profile-additems">
+    <div class="additems-cards__panel">
+
+    <div id="additems-cards__tabs" class="additems-cards__tabs">
+        <div class="additems-cards__tab additems-cards__tab_default additems-cards__tab_select"> Базовые параметры </div>
+
+    </div>
+
+    <div id="additems-cards__cards" class="additems-cards__cards">
+        <div class="additems-cards__card additems-cards__card_default additems-cards__card_select">
+            <div class="afield">
+                <label class="afield__label">Тип объявления</label>
+                <select class="aselect__input" name="tabs">
+                    <option value="">Продажа</option>
+                    <option value="">Аренда</option>
+                </select>
+            </div>
+            <div class="afield">
+                <label class="afield__label">Тип недвижимости</label>
+                <select class="aselect__input" name="type">
+                    <option value="0" icon="/template/img/loupe.png">Выберете тип недвижимости…</option>
+                    <optgroup label="Жилая">
+                        <option value="1" icon="/template/img/kvartira-svg.svg">Квартира</option>
+                        <option value="2" icon="/template/img/dom-svg.svg">Дом</option>
+                        <option value="3" icon="/template/img/komnata-svg.svg">Комната</option>
+                        <option value="4" icon="/template/img/uchastok-svg.svg">Земельный Участок</option>
+                        <option value="5" icon="/template/img/garazh-svg.svg">Гараж/Машиноместо</option>
+                        <option value="6" icon="/template/img/invalid-name_2.svg">Доля</option>
+                        <option value="7" icon="/template/img/invalid-name_3.svg">Таунхаус</option>
+                    </optgroup>
+                    <optgroup label="Коммерческая">
+                        <option value="8" icon="/template/img/ofis-svg.svg">Офисная Площадь</option>
+                        <option value="9" icon="/template/img/kvartira-svg.svg">Отдельно Стоящее Здание</option>
+                        <option value="10" icon="/template/img/ozs-svg.svg">Комплекс ОСЗ</option>
+                        <option value="11" icon="/template/img/yarmarka-svg.svg">Рынок/Ярмарка</option>
+                        <option value="12" icon="/template/img/sklad-svg.svg">Производственно-Складские Помещения</option>
+                        <option value="13" icon="/template/img/proizvodstvo-svg.svg">Производственно-Складские Здания</option>
+                        <option value="14" icon="/template/img/turism-svg.svg">Недвижимость Для Туризма И Отдыха</option>
+                    </optgroup>
+                </select>
+            </div>
+            <div class="afield">
+                <label class="afield__label">Цена</label>
+                <input class="aselect__input" type="number" name="" value="">
+                <div class="afield__right">руб</div>
+            </div>
+            <div class="afield">
+                <label class="afield__label">Расположение</label>
+                <input class="aselect__input" type="text" name="" value="">
+            </div>
+
+            <div class="uploadr">
+                <label for="upload_photos" class="uploadr__button">+</label>
+                <input type="file" id="upload_photos" name="file" multiple style="display: none;">
+            </div>
+        </div>
+    </div>
+
+
+    </div>
+
+    <div class="additems-cards__buttons">
+        <button type="submit" name="status" value="1" class="additems-cards__button">
+            ОПУБЛИКОВАТЬ СЕЙЧАС
+        </button>
+        <button type="submit" name="status" value="0" class="additems-cards__button additems-cards__button_fill">
+            СОХРАНИТЬ БЕЗ ПУБЛИКАЦИИ
+        </button>
+    </div>
+
+    </form>
+</div>
