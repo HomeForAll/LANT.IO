@@ -4,11 +4,12 @@ RewriteEngine On
 RewriteBase /
 RewriteRule ^.htaccess$ - [F]
 
+RewriteCond %{SERVER_PORT} !^8080$
 RewriteCond %{SERVER_PORT} !^443$
 RewriteRule .* https://%{SERVER_NAME}%{REQUEST_URI} [R=301,L]
 
 RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
-RewriteRule ^(.*)$ https://%1/$1 [R=301,L]  
+RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
