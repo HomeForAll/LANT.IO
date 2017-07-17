@@ -2399,6 +2399,29 @@ class CabinetModel extends Model
         }
     }
 
+    public function removeAdInFavorite($ad_id)
+    {
+        if (!$ad_id) {
+            // TODO: Ошибка если не указан айди объявлений
+        }
+
+        if (!isset($_SESSION['user'])) {
+            // TODO: Ошибка если пользователь не авторизован
+        }
+
+        $query = $this->db->prepare('DELETE FROM favorite_ads WHERE user_id = :user_id AND ad_id = :ad_id');
+        $query->execute([
+            ':user_id' => $_SESSION['user']['id'],
+            ':ad_id' => $ad_id,
+        ]);
+
+        if ($query->rowCount()) {
+            $this->response['response'] = true;
+        } else {
+            $this->response['response'] = false;
+        }
+    }
+
     public function getListFavorite($count = 6, $offset = 0)
     {
         if (!isset($_SESSION['user'])) {

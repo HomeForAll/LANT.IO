@@ -86,6 +86,7 @@ return [
     'api/item/my' => 'main/API/myAds',
     'api/items/add' => 'main/API/itemsAdd',
     'api/favorite/add' => 'main/API/adInFavorite',
+    'api/favorite/remove' => 'main/API/adOutFavorite',
     'api/favorite/list' => 'main/API/listFavorite',
     'api/support/add_ticket' => 'main/API/addTicket',
     'api/restore' => 'main/API/PasswordRestore',
