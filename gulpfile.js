@@ -14,7 +14,7 @@ const gulp = require('gulp'),
 
 gulp.task('connect', function () {
     browserSync.init({
-        proxy: "http://localhost/", // проксирование вашего удаленного сервера, не важно на чем back-end
+        proxy: "https://localhost/", // проксирование вашего удаленного сервера, не важно на чем back-end
         logPrefix: 'localhost', // префикс для лога bs, маловажная настройка
         host: 'localhost', // можно использовать ip сервера
         port: 3000, // порт через который будет проксироваться сервер
@@ -30,7 +30,7 @@ gulp.task('connect', function () {
         'template/**/*.php'
     ], ['watchPhp']);
     gulp.watch([
-        'template/js/**/main.js'
+        'template/**/main.js'
     ], ['watchJs']);
 });
 
@@ -40,11 +40,11 @@ gulp.task('watchPhp', function () {
 
 gulp.task('watchJs', function (cb) {
     pump([
-        gulp.src('template/js/**/main.js'),
+        gulp.src('template/**/main.js'),
         plumber(),
         uglify(),
         rename({suffix: '.min'}),
-        gulp.dest('template/js/')
+        gulp.dest('template/')
     ], cb);
     browserSync.reload();
 });

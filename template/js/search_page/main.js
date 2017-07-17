@@ -11,17 +11,13 @@ var getSearchParameters = function() {
         return params;
     }
     var prmstr = window.location.search.substr(1);
-    return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {};
+    return prmstr !== null && prmstr !== "" ? transformToAssocArray(prmstr) : {};
 };
 
 /** Переходим в новую вкладку и получаем объявления **/
 $(document).ready(function () {
     $.ajax({
-<<<<<<< HEAD
-        method: 'POST',
-=======
         method: 'GET',
->>>>>>> 7c9aa47d38556837d001550191973ddf92da9a56
         url: 'api/search',
         data: getSearchParameters(),
         dataType: 'Json',
@@ -31,7 +27,6 @@ $(document).ready(function () {
     });
 });
 
-<<<<<<< HEAD
 /** при нажатии отправить, рендерим формы **/
 $('#form_2').on('submit', function () {
     var newData = {};
@@ -92,8 +87,6 @@ $(function() {
     };
 });
 
-=======
->>>>>>> 7c9aa47d38556837d001550191973ddf92da9a56
 /** Рендеринг форм **/
 function renderAllApartments(data) {
     var content = '',
@@ -108,16 +101,7 @@ function renderAllApartments(data) {
         var $source = $("#entry-template").html(),
             template = Handlebars.compile($source);
 
-        if (data[i].preview_img === undefined) {
-            return
-        }
-
-        //data[i].preview_img = data[i].preview_img.split('|')[0];
-<<<<<<< HEAD
-        //data[i].preview_img = '1.png';
-=======
         data[i].preview_img = "5.png";
->>>>>>> 7c9aa47d38556837d001550191973ddf92da9a56
 
         content += template(data[i]);
     }

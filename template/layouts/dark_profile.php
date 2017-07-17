@@ -21,5 +21,6 @@
     </div>
 </div>
 <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="/template/html/edit_profile_dark/user_profile/main.min.js"></script>
 </body>
 </html>

@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="/template/css/search_block/main_search/main_search.min.css">
     <link rel="stylesheet" href="/template/css/search_block/top_result/top_result.min.css">
     <link rel="stylesheet" href="/template/css/search_block/informationAboutOurService/informationAboutOurService.min.css">
-
     <link rel="stylesheet" href="/template/html/search/chosen.min.css">
     <link rel="stylesheet" href="/template/html/search/jquery.arcticmodal-0.3.css">
     <link rel="stylesheet" href="/template/html/search/search.min.css">
@@ -116,7 +115,7 @@
     </script>
 </head>
 <body>
-<div class=content">
+<div class="content">
     <?php include_once ROOT_DIR . '/template/html/search_page/header/header.php'?>
     <div class="search-and-filter">
         <div class="container-w-0">

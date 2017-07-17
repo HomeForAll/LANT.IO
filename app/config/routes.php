@@ -5,6 +5,7 @@ return [
     'search'      => 'search_block/search/index',
     'ad_page'      => 'ad_page/search/index',
     'dark_profile'      => 'dark_profile/search/index',
+    'profile_dark'      => 'profile_dark/search/index',
 
     'profile' => 'profile/site/index',
 
