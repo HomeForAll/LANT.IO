@@ -1504,14 +1504,19 @@ class UserModel extends Model
         if (isset($_SESSION['user'])) {
             // Необходимо переименовать поле в базе данных
             $_SESSION['user']['photo'] = $_SESSION['user']['profile_foto_id'];
-            $this->response = [
-                'id'     => $_SESSION['user']['id'],
-                'photo'  => $_SESSION['user']['photo'],
-                'name'   => $_SESSION['user']['first_name'] . ' ' . $_SESSION['user']['last_name'],
-                'email'  => $_SESSION['user']['email'],
-                'status' => $_SESSION['user']['status'],
-                'hash'   => $_SESSION['user_hash'],
-            ];
+
+            if (isset($_GET['extend']) ? $_GET['extend'] : null == '1') {
+                $this->response = $_SESSION['user'];
+            } else {
+                $this->response = [
+                    'id'     => $_SESSION['user']['id'],
+                    'photo'  => $_SESSION['user']['photo'],
+                    'name'   => $_SESSION['user']['first_name'] . ' ' . $_SESSION['user']['last_name'],
+                    'email'  => $_SESSION['user']['email'],
+                    'status' => $_SESSION['user']['status'],
+                    'hash'   => $_SESSION['user_hash'],
+                ];
+            }
         } else {
             $this->response = [
                 'id'     => session_id(),
