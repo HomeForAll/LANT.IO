@@ -101,4 +101,5 @@ return [
     'api/profile/get/settings' => 'main/API/getPersonalInfoSettings',
     'api/profile/save/profile' => 'main/API/savePersonalInfo',
     'api/profile/save/security' => 'main/API/savePassword',
+    'api/profile/save/settings' => 'main/API/savePersonalInfoSettings',
 ];

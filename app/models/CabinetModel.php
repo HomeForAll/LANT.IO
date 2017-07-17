@@ -1068,6 +1068,58 @@ class CabinetModel extends Model
         $this->response['response'] = true;
     }
 
+    public function savePersonalInfoSettings()
+    {
+        if (!isset($_SESSION['user']['id'])) {
+            $this->response['error'] = array(
+                'code' => '4014',
+                'message' => 'Пользователь неавторизован',
+            );
+            return;
+        }
+        $profile_id = $_SESSION['user']['id'];
+        if (isset($_POST['connection_new_dialog'])) {
+            $stmt = $this->db->prepare("UPDATE users SET new_dialog = 1 WHERE id = :profile_id");
+            $stmt->execute(array(':profile_id' => $profile_id));
+        }
+        if (isset($_POST['connection_close_ad'])) {
+            $stmt = $this->db->prepare("UPDATE users SET close_ad = 1 WHERE id = :profile_id");
+            $stmt->execute(array(':profile_id' => $profile_id));
+        }
+        if (isset($_POST['connection_prom_offers'])) {
+            $stmt = $this->db->prepare("UPDATE users SET prom_offers = 1 WHERE id = :profile_id");
+            $stmt->execute(array(':profile_id' => $profile_id));
+        }
+        if (!isset($_POST['connection_new_dialog'])) {
+            $stmt = $this->db->prepare("UPDATE users SET new_dialog = 0 WHERE id = :profile_id");
+            $stmt->execute(array(':profile_id' => $profile_id));
+        }
+        if (!isset($_POST['connection_close_ad'])) {
+            $stmt = $this->db->prepare("UPDATE users SET close_ad = 0 WHERE id = :profile_id");
+            $stmt->execute(array(':profile_id' => $profile_id));
+        }
+        if (!isset($_POST['connection_prom_offers'])) {
+            $stmt = $this->db->prepare("UPDATE users SET prom_offers = 0 WHERE id = :profile_id");
+            $stmt->execute([':profile_id' => $profile_id]);
+        }
+        if (isset($_POST['phone_only'])) {
+            $stmt = $this->db->prepare("UPDATE users SET phone_only = 1 WHERE id = :profile_id");
+            $stmt->execute(array(':profile_id' => $profile_id));
+        }
+        if (isset($_POST['site_only'])) {
+            $stmt = $this->db->prepare("UPDATE users SET site_only = 1 WHERE id = :profile_id");
+            $stmt->execute(array(':profile_id' => $profile_id));
+        }
+        if (!isset($_POST['phone_only'])) {
+            $stmt = $this->db->prepare("UPDATE users SET phone_only = 0 WHERE id = :profile_id");
+            $stmt->execute(array(':profile_id' => $profile_id));
+        }
+        if (!isset($_POST['site_only'])) {
+            $stmt = $this->db->prepare("UPDATE users SET site_only = 0 WHERE id = :profile_id");
+            $stmt->execute(array(':profile_id' => $profile_id));
+        }
+    }
+
 
 //        // Отвязка социальных сетей
 //        if (isset($_POST['delete_vk']) || (isset($_POST['delete_steam'])) || (isset($_POST['delete_ok'])) || (isset($_POST['delete_ya'])) || (isset($_POST['delete_mail'])) || (isset($_POST['delete_facebook'])) || (isset($_POST['delete_google']))) {
@@ -1103,73 +1155,6 @@ class CabinetModel extends Model
 //            $stmt = $this->db->prepare("UPDATE users SET profile_foto_id = :link WHERE id = :profile_id");
 //            $stmt->execute(array(':link' => $link, ':profile_id' => $profile_id));
 //        }
-
-
-//        if (isset($_POST['save_3'])) // Изменить пароль
-//        {
-//            $stmt = $this->db->prepare("SELECT password FROM users WHERE id = $profile_id");
-//            $stmt->execute();
-//            $result = $stmt->fetchAll();
-//
-//            $new_result = $result[0]['password'];
-//
-//            if (password_verify($_POST['old_pass'], $new_result)) {
-//                $passwordHash = password_hash($_POST['new_pass'], PASSWORD_DEFAULT);
-//                $stmt = $this->db->prepare("UPDATE users SET password = :password WHERE id = :profile_id");
-//                $stmt->execute(array(':password' => $passwordHash, ':profile_id' => $profile_id));
-//            } else {
-//                Registry::set('password_profile_edit_error', 'Введено неверно!');
-//            }
-//        }
-//
-//        if (isset($_POST['save_4'])) // Связь с сайтом
-//        {
-//            if (isset($_POST['phone_only'])) {
-//                $stmt = $this->db->prepare("UPDATE users SET phone_only = 1 WHERE id = :profile_id");
-//                $stmt->execute(array(':profile_id' => $profile_id));
-//            }
-//            if (isset($_POST['site_only'])) {
-//                $stmt = $this->db->prepare("UPDATE users SET site_only = 1 WHERE id = :profile_id");
-//                $stmt->execute(array(':profile_id' => $profile_id));
-//            }
-//            if (!isset($_POST['phone_only'])) {
-//                $stmt = $this->db->prepare("UPDATE users SET phone_only = 0 WHERE id = :profile_id");
-//                $stmt->execute(array(':profile_id' => $profile_id));
-//            }
-//            if (!isset($_POST['site_only'])) {
-//                $stmt = $this->db->prepare("UPDATE users SET site_only = 0 WHERE id = :profile_id");
-//                $stmt->execute(array(':profile_id' => $profile_id));
-//            }
-//        }
-//
-//        if (isset($_POST['save_5'])) // Уведомления от сайта
-//        {
-//            if (isset($_POST['new_dialog'])) {
-//                $stmt = $this->db->prepare("UPDATE users SET new_dialog = 1 WHERE id = :profile_id");
-//                $stmt->execute(array(':profile_id' => $profile_id));
-//            }
-//            if (isset($_POST['close_ad'])) {
-//                $stmt = $this->db->prepare("UPDATE users SET close_ad = 1 WHERE id = :profile_id");
-//                $stmt->execute(array(':profile_id' => $profile_id));
-//            }
-//            if (isset($_POST['prom_offers'])) {
-//                $stmt = $this->db->prepare("UPDATE users SET prom_offers = 1 WHERE id = :profile_id");
-//                $stmt->execute(array(':profile_id' => $profile_id));
-//            }
-//            if (!isset($_POST['new_dialog'])) {
-//                $stmt = $this->db->prepare("UPDATE users SET new_dialog = 0 WHERE id = :profile_id");
-//                $stmt->execute(array(':profile_id' => $profile_id));
-//            }
-//            if (!isset($_POST['close_ad'])) {
-//                $stmt = $this->db->prepare("UPDATE users SET close_ad = 0 WHERE id = :profile_id");
-//                $stmt->execute(array(':profile_id' => $profile_id));
-//            }
-//            if (!isset($_POST['prom_offers'])) {
-//                $stmt = $this->db->prepare("UPDATE users SET prom_offers = 0 WHERE id = :profile_id");
-//                $stmt->execute([':profile_id' => $profile_id]);
-//            }
-//        }
-
 
     public function saveUpdatePersonalInfo($update)
     {
