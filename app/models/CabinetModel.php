@@ -778,6 +778,21 @@ class CabinetModel extends Model
         $this->response = $info['password'];
     }
 
+    public function getPersonalInfoSettings()
+    {
+        $info = $this->getinfo();
+        $info = $info[0];
+        $massiv = [];
+
+        $massiv['connection_phone_only'] = isset($info['phone_only']) ? $info['phone_only'] : '1';
+        $massiv['connection_site_only'] = isset($info['site_only']) ? $info['site_only'] : '1';
+        $massiv['notification_new_dialog'] = isset($info['new_dialog']) ? $info['new_dialog'] : '1';
+        $massiv['notification_close_ad'] = isset($info['close_ad']) ? $info['close_ad'] : '1';
+        $massiv['notification_prom_offers'] = isset($info['prom_offers']) ? $info['prom_offers'] : '1';
+
+        $this->response = $massiv;
+    }
+
     public function showActivity()
     {
     }

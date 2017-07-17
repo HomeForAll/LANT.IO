@@ -91,7 +91,7 @@ class CabinetController extends Controller
 
     public function actionGetProfileInfo()
     {
-        $this->model('CabinetModel')->getProfileInfo();
+        $this->model('CabinetModel')->getPersonalInfoSettings();
     }
 
     public function actionProfileEdit()

@@ -96,5 +96,6 @@ return [
     'api/messages/history' => 'main/API/getMessagesFromDB',
     'api/profile/get/profile' => 'main/API/getPersonalInfo',
     'api/restore' => 'main/API/PasswordRestore',
-    'api/profile/get/security' => 'main/API/GetPersonalInfoSecurity',
+    'api/profile/get/security' => 'main/API/getPersonalInfoSecurity',
+    'api/profile/get/settings' => 'main/API/getPersonalInfoSettings',
 ];
