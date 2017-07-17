@@ -6,7 +6,7 @@ class UploadModel extends Model
     public function uploadImage()
     {
         $file_name = sha1(time() . mt_rand(1, 100));
-        $query     = $this->db->prepare('INSERT INTO ads_images (original, s_250_140, s_500_280, s_360_230, s_720_460) VALUES (:original, :250_140, :500_280, :360_230, :720_460) RETURNING id');
+        $query     = $this->db->prepare('INSERT INTO ads_images (original, s_250_140, s_500_280, s_360_230, s_720_460, ad_id) VALUES (:original, :250_140, :500_280, :360_230, :720_460, 0) RETURNING id');
         
         if (isset($_FILES['file'])) {
             $response = [];
