@@ -18,6 +18,12 @@ class APIController extends Controller
         echo json_encode($this->model('CabinetModel')->getResponse(), JSON_UNESCAPED_UNICODE);
     }
 
+    public function actionGetPersonalInfoSecurity()
+    {
+        $this->model('CabinetModel')->getProfileInfoSecurity();
+        echo json_encode($this->model('CabinetModel')->getResponse(), JSON_UNESCAPED_UNICODE);
+    }
+
     public function actionGetMessagesFromDB()
     {
         $this->model('CabinetModel')->getMessagesFromDB();

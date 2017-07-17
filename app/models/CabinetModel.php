@@ -770,6 +770,14 @@ class CabinetModel extends Model
         $this->response = $massiv;
     }
 
+    public function getProfileInfoSecurity()
+    {
+        $info = $this->getinfo();
+        $info = $info[0];
+
+        $this->response = $info['password'];
+    }
+
     public function showActivity()
     {
     }

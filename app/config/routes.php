@@ -17,8 +17,12 @@ return [
     'restore/([^:]+):([0-9]+)' => 'main/user/restore/$1/$2',
 
     'cabinet'                  => 'main/cabinet/cabinet',
-    'cabinet/profile/edit'     => 'main/cabinet/profileEdit',
+
+
+    'cabinet/profile/edit'     => 'main/cabinet/getProfileInfo',
+
     'cabinet/profile/activity' => 'main/cabinet/showactivity',
+
     'cabinet/profile/gadgets'  => 'main/cabinet/showgadgets',
     'cabinet/generator'        => 'main/cabinet/generator',
     'cabinet/keyeditor'        => 'main/cabinet/keyeditor',
@@ -92,4 +96,5 @@ return [
     'api/messages/history' => 'main/API/getMessagesFromDB',
     'api/profile/get/profile' => 'main/API/getPersonalInfo',
     'api/restore' => 'main/API/PasswordRestore',
+    'api/profile/get/security' => 'main/API/GetPersonalInfoSecurity',
 ];
