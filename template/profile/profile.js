@@ -67,10 +67,11 @@ $(function () {
 
 
 $.getJSON('/api/item/my', {count: 2}, function(json, textStatus) {
-    if (json.response) {
-        $.each(json.response, function(i, item) {
+    if (json.response && json.response.count > 0) {
+        $.each(json.response.items, function(i, item) {
             renderItems(item);
         });
+        $('.pblock__status_i').html("Смотреть еще "+json.response.count+" объявления");
     }
 });
 
@@ -80,6 +81,7 @@ $.getJSON('/api/favorite/list', {count: 3}, function(json, textStatus) {
         $.each(json.response.items, function(i, item) {
             renderFavorite(item);
         });
+        $('.pblock__status_v').html("Смотреть еще "+json.response.count+" объявления");
     }
 });
 

@@ -17,14 +17,14 @@
     <div id="additems-cards__cards" class="additems-cards__cards">
         <div class="additems-cards__card additems-cards__card_default additems-cards__card_select">
             <div class="afield">
-                <label class="afield__label">Тип объявления</label>
+                <label class="afield__label afield__required">Тип объявления</label>
                 <select class="aselect__input" name="tabs">
                     <option value="">Продажа</option>
                     <option value="">Аренда</option>
                 </select>
             </div>
             <div class="afield">
-                <label class="afield__label">Тип недвижимости</label>
+                <label class="afield__label afield__required">Тип недвижимости</label>
                 <select class="aselect__input" name="type">
                     <option value="0" icon="/template/img/loupe.png">Выберете тип недвижимости…</option>
                     <optgroup label="Жилая">
@@ -48,16 +48,17 @@
                 </select>
             </div>
             <div class="afield">
-                <label class="afield__label">Цена</label>
+                <label class="afield__label afield__required">Цена</label>
                 <input class="aselect__input" type="number" name="price" value="">
                 <div class="afield__right">руб</div>
             </div>
             <div class="afield">
-                <label class="afield__label">Расположение</label>
+                <label class="afield__label afield__required">Расположение</label>
                 <input class="aselect__input" type="text" name="address" value="">
             </div>
 
             <div class="uploadr">
+                <div class="uploadr__label afield__required">Фото недвижимости:</div>
                 <label for="upload_photos" class="uploadr__button">+</label>
                 <input type="file" id="upload_photos" name="file" multiple style="display: none;">
             </div>
