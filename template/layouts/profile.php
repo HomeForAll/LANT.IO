@@ -9,6 +9,7 @@
 </head>
 <body>
 <?php include_once ROOT_DIR . '/template/lucia/lucia.svg' ?>
+<div class="ax-loading"></div>
 
 
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="display: none;">
@@ -70,7 +71,12 @@
 <div class="profile-header">
     <a href="/" class="profile-header__logo"><svg width="67px" height="30px"><use xlink:href="#logo-lantio" x="0" y="0"></use></svg></a>
     <div class="profile-header__space"></div>
-    <div class="axf user-info">
+
+    <div class="pheader__icon pheader__icon_m"><div class="pheader__counter">3</div></div>
+    <div class="pheader__icon pheader__icon_n"><div class="pheader__counter">12</div></div>
+    <div class="pheader__icon pheader__icon_c"></div>
+
+    <div class="axf user-info pheader__user">
         <div>
             <div class="user-info__name">Никулин Александр</div>
             <div class="user-info__status">Пользователь +</div>
@@ -78,6 +84,8 @@
         <img src="/template/img/user.png" alt="">
     </div>
 </div>
+
+
 <div class="profile-main">
     <div class="profile-sidebar">
         <a href="/profile/" class="profile-sidebar__link">
