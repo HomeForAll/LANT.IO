@@ -10,11 +10,13 @@ class UploadModel extends Model
         
         if (!isset($_FILES['file'])) {
             echo json_encode(['error' => 'No files']);
+            return;
         } else {
             $response = [];
             $handle   = new upload($_FILES['file']);
             if (!$handle->uploaded) {
                 echo json_encode(['error' => $handle->error]);
+                return;
             } else {
                 if ($handle->file_is_image) {
                     $directory_pattern = 'uploads' . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . $file_name[0] . DIRECTORY_SEPARATOR . $file_name[0] . $file_name[1] . DIRECTORY_SEPARATOR . '{width_size}' . DIRECTORY_SEPARATOR;
@@ -68,6 +70,7 @@ class UploadModel extends Model
                     
                     if (!$handle->processed) {
                         echo json_encode(['error' => $handle->error]);
+                        return;
                     } else {
                         $handle->clean();
                         $query->execute(
@@ -91,7 +94,11 @@ class UploadModel extends Model
                         $response['id'] = $images['id'];
 
                         echo json_encode(['response' => $response], JSON_UNESCAPED_UNICODE);
+                        return;
                     }
+                } else {
+                    echo json_encode(['error' => $handle->error]);
+                    return;
                 }
             }
         }
