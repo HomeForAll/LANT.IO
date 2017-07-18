@@ -95,6 +95,7 @@ class UploadModel extends Model
                 }
             }
         }
+        echo json_encode(['error' => 'Хуй его знает']);
     }
     
     public function uploadAvatar()
