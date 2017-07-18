@@ -97,7 +97,11 @@ class UploadModel extends Model
                         return;
                     }
                 } else {
-                    echo json_encode(['error' => $handle->file_src_mime]);
+                    echo json_encode([
+                        'error' => $handle->file_src_mime,
+                        'info' => $handle->image_supported,
+                        'log' => $handle->log
+                    ]);
                     return;
                 }
             }
