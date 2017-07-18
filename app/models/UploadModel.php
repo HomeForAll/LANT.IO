@@ -66,7 +66,9 @@ class UploadModel extends Model
                     $handle->Process(ROOT_DIR . $upload_directory);
                     $response['250_140'] = DIRECTORY_SEPARATOR . $upload_directory . $handle->file_dst_name;
                     
-                    if ($handle->processed) {
+                    if (!$handle->processed) {
+                        echo json_encode(['error' => $handle->error]);
+                    } else {
                         $handle->clean();
                         $query->execute(
                             [
