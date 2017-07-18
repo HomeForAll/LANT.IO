@@ -2,7 +2,7 @@
     <div class="close-logo-profile">
         <div class="logo"></div>
         <div class="close">
-            <a><i class="fa fa-angle-left" aria-hidden="true"></i>Назад</a>
+            <a><i class="fa fa-angle-right" aria-hidden="true"></i>Открыть</a>
         </div>
         <div class="profile">
             <p>Просмотр профиля</p>
