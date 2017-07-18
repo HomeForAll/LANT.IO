@@ -236,12 +236,14 @@ class APIController extends Controller
 
         if (!empty($request)) {
             //Количество объявлений [count_all]
-            $this->model('NewsModel')->getNamberOfAllNews($request['time_from'], $request['time_to'], $request['space_type'],
+            $this->model('NewsModel')->getNamberOfAllNews($request['time_from'], $request['time_to'],
+                $request['space_type'],
                 $request['operation_type'], $request['object_type'], $request['price_from'], $request['price_to'],
                 $request['space_from'], $request['space_to'], $request['city']);
             // Получение данных
             $db_data = $this->model('NewsModel')->getBestNewsOfTime($request['time_from'], $request['space_type'],
-                $request['operation_type'], $request['object_type'], $request['city'], $request['price_from'], $request['price_to'],
+                $request['operation_type'], $request['object_type'], $request['city'], $request['price_from'],
+                $request['price_to'],
                 $request['space_from'], $request['space_to'], $request['count']);
 
             // Подготовка данных для вывода
@@ -250,11 +252,11 @@ class APIController extends Controller
         echo json_encode($this->model('NewsModel')->getResponse(), JSON_UNESCAPED_UNICODE);
     }
 
-        public function actionItemsAdd($param)
+    public function actionItemsAdd()
     {
         $keys = $this->model('SearchModel')->getKeys();
         $form_data = $this->model('NewsModel')->getRequestForItemsAddFromPOST($keys);
-        $this->model('NewsModel')->makeNewsInsert($form_data);
+        $this->model('NewsModel')->makeNewsInsert($form_data['ad'], $form_data['photos']);
         echo json_encode($this->model('NewsModel')->getResponse(), JSON_UNESCAPED_UNICODE);
     }
 }
