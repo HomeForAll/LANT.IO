@@ -8,10 +8,16 @@ class UploadModel extends Model
         $file_name = sha1(time() . mt_rand(1, 100));
         $query     = $this->db->prepare('INSERT INTO ads_images (original, s_250_140, s_500_280, s_360_230, s_720_460, ad_id) VALUES (:original, :250_140, :500_280, :360_230, :720_460, 0) RETURNING id');
         
-        if (isset($_FILES['file'])) {
+        if (!isset($_FILES['file'])) {
+            echo json_encode(['error' => 'No files']);
+            return;
+        } else {
             $response = [];
             $handle   = new upload($_FILES['file']);
-            if ($handle->uploaded) {
+            if (!$handle->uploaded) {
+                echo json_encode(['error' => $handle->error]);
+                return;
+            } else {
                 if ($handle->file_is_image) {
                     $directory_pattern = 'uploads' . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . $file_name[0] . DIRECTORY_SEPARATOR . $file_name[0] . $file_name[1] . DIRECTORY_SEPARATOR . '{width_size}' . DIRECTORY_SEPARATOR;
                     
@@ -62,7 +68,10 @@ class UploadModel extends Model
                     $handle->Process(ROOT_DIR . $upload_directory);
                     $response['250_140'] = DIRECTORY_SEPARATOR . $upload_directory . $handle->file_dst_name;
                     
-                    if ($handle->processed) {
+                    if (!$handle->processed) {
+                        echo json_encode(['error' => $handle->error]);
+                        return;
+                    } else {
                         $handle->clean();
                         $query->execute(
                             [
@@ -77,6 +86,7 @@ class UploadModel extends Model
                         $images = $query->fetch();
 
                         if (!$images) {
+                            echo json_encode(['error' => $query->errorInfo()]);
                             return;
                             // TODO: Доделать обработку ошибки если картинки не добавлены
                         }
@@ -84,10 +94,19 @@ class UploadModel extends Model
                         $response['id'] = $images['id'];
 
                         echo json_encode(['response' => $response], JSON_UNESCAPED_UNICODE);
+                        return;
                     }
+                } else {
+                    echo json_encode([
+                        'error' => $handle->file_src_mime,
+                        'info' => $handle->image_supported,
+                        'log' => $handle->log
+                    ]);
+                    return;
                 }
             }
         }
+        echo json_encode(['error' => 'Хуй его знает']);
     }
     
     public function uploadAvatar()
