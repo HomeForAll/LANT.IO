@@ -1505,6 +1505,7 @@ class UserModel extends Model
             // Необходимо переименовать поле в базе данных
             $_SESSION['user']['photo'] = $_SESSION['user']['profile_foto_id'];
             unset($_SESSION['user']['active_text']);
+            unset($_SESSION['user']['password']);
             if (isset($_GET['extend']) ? $_GET['extend'] : null == '1') {
                 $this->response = $_SESSION['user'];
             } else {
