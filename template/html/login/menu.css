@@ -158,6 +158,7 @@
 
 .menu-user .user-info,
 .menu-user .user-menu-reg {
+    position: relative;
     background: #363636;
     padding: 17px 13px;
 }
@@ -169,6 +170,19 @@
     height: 35px;
     border-radius: 100px;
 }
+.userinfo__logout {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 14px;
+    height: 14px;
+    z-index: 30;
+    color: #a54c4c;
+}
+.userinfo__logout:hover {
+    color: #fff;
+}
+
 
 .menu-user .user-menu-reg {
     font-size: 10px;
