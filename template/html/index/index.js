@@ -62,11 +62,19 @@ function initUserMenu(user) {
 
         $('.header-line .menu-user-name').text(user.name)
         $('.header-line .user-info img').prop('src', user.photo);
-        $('.menu-user .user-info, .header-line .user-info').click(function(event) {
+        $('.menu-user .user-info, .header-line .user-info').click(function(event, a) {
             window.location = '/profile/';
         });
 
-        $('.userinfo__logout').click(function(){
+        $('.userinfo__logout').click(function(event){
+            event.stopPropagation();
+            $.getJSON('/api/logout/', {}, function(data) {
+                if (data.response) {
+                    window.location = '/';
+                } else {
+                    
+                }
+            });
             window.location = '/logout/';
         });
     } else {
