@@ -744,11 +744,13 @@ class CabinetModel extends Model
         $massiv['name_surname'] = $info['last_name'];
         $massiv['name_patronymic'] = $info['patronymic'];
 
-        $date = explode('-',$info['birthday']);
+        if (isset($info['birthday'])) {
+            $date = explode('-',$info['birthday']);
 
-        $massiv['sel_year'] = $date[0];
-        $massiv['sel_month'] = $date[1];
-        $massiv['sel_date'] = $date[2];
+            $massiv['sel_year'] = $date[0];
+            $massiv['sel_month'] = $date[1];
+            $massiv['sel_date'] = $date[2];
+        }
 
         $massiv['name_birthday'] = $info['birthday'];
         $massiv['about_me'] = $info['aboutme'];

@@ -46,7 +46,7 @@ class UserModel extends Model
             $query = $this->db->prepare("SELECT * FROM users WHERE email = :login");
         } elseif (v::phone()->validate($login)) {
             $query = $this->db->prepare("SELECT * FROM users WHERE phone_number = :login");
-            $login = $this->extractPhoneNumber($login);
+            $login = preg_replace('~[^\d]+~', '', $login);
         } else {
             $this->error(self::LOGIN_INCORRECT_ERROR);
         }
@@ -68,6 +68,8 @@ class UserModel extends Model
                 $secret_key = Registry::get('config')['secret_key'];
 
                 $_SESSION['authorized'] = true;
+
+                unset($user['password']);
                 $_SESSION['user'] = $user;
 
                 // TODO: Удалить в будущем
@@ -1222,19 +1224,11 @@ class UserModel extends Model
 
     public function summaries()
     {
-        if (isset($_SESSION['user'])) {
-            $name = $_SESSION['user']['status'] == 0 ? $_SESSION['user']['first_name'] . ' ' . $_SESSION['user']['last_name'] : $_SESSION['user']['brand_name'];
-            $this->response = [
-                'id'              => $_SESSION['user']['id'],
-                'avatar_original' => isset($_SESSION['user']['avatar_original']) ? $_SESSION['user']['avatar_original'] : null,
-                'avatar_50'       => isset($_SESSION['user']['avatar_50']) ? $_SESSION['user']['avatar_50'] : null,
-                'avatar_100'      => isset($_SESSION['user']['avatar_100']) ? $_SESSION['user']['avatar_100'] : null,
-                'name'            => $name,
-                'email'           => $_SESSION['user']['email'],
-                'status'          => $_SESSION['user']['status'],
-                'hash'            => $_SESSION['user_hash'],
-            ];
+        if (!isset($_SESSION['user'])) {
+            $this->error(self::USER_NOT_AUTHORIZED_ERROR);
         }
+
+        $this->getUserInfo();
     }
 
     public function setSummaries()
@@ -1408,28 +1402,28 @@ class UserModel extends Model
     public function getUserInfo()
     {
         if (isset($_SESSION['user'])) {
-            // Необходимо переименовать поле в базе данных
-            $_SESSION['user']['photo'] = $_SESSION['user']['profile_foto_id'];
             unset($_SESSION['user']['active_text']);
-            unset($_SESSION['user']['password']);
+
             if (isset($_GET['extend']) ? $_GET['extend'] : null == '1') {
-                $this->response = $_SESSION['user'];
+                $this->response($_SESSION['user']);
             } else {
-                $this->response = [
-                    'id'     => $_SESSION['user']['id'],
-                    'photo'  => $_SESSION['user']['photo'],
-                    'name'   => $_SESSION['user']['first_name'] . ' ' . $_SESSION['user']['last_name'],
-                    'email'  => $_SESSION['user']['email'],
-                    'status' => $_SESSION['user']['status'],
-                    'hash'   => $_SESSION['user_hash'],
-                ];
+                $this->response([
+                    'id'              => $_SESSION['user']['id'],
+                    'avatar_original' => isset($_SESSION['user']['avatar_original']) ? $_SESSION['user']['avatar_original'] : null,
+                    'avatar_50'       => isset($_SESSION['user']['avatar_50']) ? $_SESSION['user']['avatar_50'] : null,
+                    'avatar_100'      => isset($_SESSION['user']['avatar_100']) ? $_SESSION['user']['avatar_100'] : null,
+                    'name'            => $_SESSION['user']['first_name'] . ' ' . $_SESSION['user']['last_name'],
+                    'email'           => $_SESSION['user']['email'],
+                    'status'          => $_SESSION['user']['status'],
+                    'hash'            => $_SESSION['user_hash'],
+                ]);
             }
         } else {
-            $this->response = [
+            $this->response([
                 'id'     => session_id(),
                 'status' => -1,
                 'hash'   => hash('sha512', 'user_id=' . session_id() . 'secret_key=' . Registry::get('config')['secret_key']),
-            ];
+            ]);
         }
     }
 
