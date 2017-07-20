@@ -40,6 +40,7 @@ class UserModel extends Model
     {
         $login = trim($login);
         $login = str_replace(' ', '', $login);
+        $query = '';
 
         if (v::email()->validate($login)) {
             $query = $this->db->prepare("SELECT * FROM users WHERE email = :login");
@@ -47,55 +48,46 @@ class UserModel extends Model
             $query = $this->db->prepare("SELECT * FROM users WHERE phone_number = :login");
             $login = $this->extractPhoneNumber($login);
         } else {
-            $this->errors[] = [
-                'code'    => self::LOGIN_VALIDATION_ERROR,
-                'message' => 'Неверный формат логина',
-            ];
-
-            return false;
+            $this->error(self::LOGIN_INCORRECT_ERROR);
         }
 
         $query->execute([':login' => $login]);
+
+        if ($query->errorCode() != '00000') {
+            $this->error(self::DB_SELECT_ERROR, $query->errorInfo());
+        }
+
         $user = $query->fetch();
 
         if ($user) {
-            if (password_verify($password, $user['password'])) {
-                if (!$user['banned']) {
-                    $secret_key = Registry::get('config')['secret_key'];
-
-                    $_SESSION['authorized'] = true;
-                    $_SESSION['user'] = $user;
-
-                    // TODO: Удалить в будущем
-                    $_SESSION['userID'] = $user['id'];
-                    $_SESSION['firstName'] = $user['first_name'];
-                    $_SESSION['lastName'] = $user['last_name'];
-                    $_SESSION['status'] = $user['status'];
-
-                    $_SESSION['user_hash'] = hash('sha512', 'user_id=' . $user['id'] . 'secret_key=' . $secret_key);
-
-                    // TODO: Реализовать функицю не используя чужого API
-                    $this->activityWrite($user['id']);
-                    $this->response = true;
-
-                    return true;
-                }
-
-                $this->errors[] = [
-                    'code'    => self::LOGIN_BANNED_ERROR,
-                    'message' => 'Аккаунт заблокирован',
-                ];
-
-                return false;
+            if ($user['banned']) {
+                $this->error(self::USER_BANNED_ERROR);
             }
+
+            if (password_verify($password, $user['password'])) {
+                $secret_key = Registry::get('config')['secret_key'];
+
+                $_SESSION['authorized'] = true;
+                $_SESSION['user'] = $user;
+
+                // TODO: Удалить в будущем
+                $_SESSION['userID'] = $user['id'];
+                $_SESSION['firstName'] = $user['first_name'];
+                $_SESSION['lastName'] = $user['last_name'];
+                $_SESSION['status'] = $user['status'];
+
+                $_SESSION['user_hash'] = hash('sha512', 'user_id=' . $user['id'] . 'secret_key=' . $secret_key);
+
+                // TODO: Реализовать функицю не используя чужого API
+                $this->activityWrite($user['id']);
+
+                $this->response(true);
+            }
+
+            $this->error(self::INCORRECT_AUTH_DATA_ERROR);
         }
 
-        $this->errors[] = [
-            'code'    => self::LOGIN_OR_PASSWORD_INCORRECT_ERROR,
-            'message' => 'Пользователь не существует или была допущена ошибка при вводе логина и пароля',
-        ];
-
-        return false;
+        $this->error(self::USER_NOT_EXIST_ERROR);
     }
 
     public function getOnline($period)
@@ -104,17 +96,27 @@ class UserModel extends Model
             case 'now':
                 $query = $this->db->prepare("SELECT count(session_id) FROM visitors_statistic WHERE last_activity BETWEEN (now() - ('5 min')::interval)::time AND now()::time AND date = now()::date");
                 $query->execute();
+
+                if ($query->errorCode() != '00000') {
+                    $this->error(self::DB_SELECT_ERROR, $query->errorInfo());
+                }
+
                 $result = $query->fetch();
 
                 if ($result) {
-                    $this->response = [
-                        'count' => (int)$result['count'],
-                    ];
+                    $this->response(['count' => (int)$result['count']]);
+                } else {
+                    $this->response(['count' => 0]);
                 }
                 break;
             case 'day':
                 $query = $this->db->prepare("SELECT DISTINCT ON (session_id) * FROM visitors_statistic WHERE t_stamp BETWEEN (now()-('1 day')::interval) AND now()");
                 $query->execute();
+
+                if ($query->errorCode() != '00000') {
+                    $this->error(self::DB_SELECT_ERROR, $query->errorInfo());
+                }
+
                 $result = $query->fetchAll();
 
                 if ($result) {
@@ -139,15 +141,25 @@ class UserModel extends Model
                         $begin_time = $end;
                     }
 
-                    $this->response = [
+                    $this->response([
                         'count' => count($result),
                         'data'  => $data,
-                    ];
+                    ]);
+                } else {
+                    $this->response([
+                        'count' => 0,
+                        'data'  => [],
+                    ]);
                 }
                 break;
             case 'week':
                 $query = $this->db->prepare("SELECT DISTINCT ON (session_id) * FROM visitors_statistic WHERE t_stamp BETWEEN (now()-('1 week')::interval) AND now()");
                 $query->execute();
+
+                if ($query->errorCode() != '00000') {
+                    $this->error(self::DB_SELECT_ERROR, $query->errorInfo());
+                }
+
                 $result = $query->fetchAll();
 
                 if ($result) {
@@ -172,43 +184,58 @@ class UserModel extends Model
                         $begin_time = $end;
                     }
 
-                    $this->response = [
+                    $this->response([
                         'count' => count($result),
                         'data'  => $data,
-                    ];
+                    ]);
+                } else {
+                    $this->response([
+                        'count' => 0,
+                        'data'  => [],
+                    ]);
                 }
                 break;
             case 'month':
                 $query = $this->db->prepare("SELECT DISTINCT ON (session_id) * FROM visitors_statistic WHERE t_stamp BETWEEN (now()-('1 month')::interval) AND now()");
                 $query->execute();
-                $result = $query->fetchAll();
 
-                $data = [];
-                $interval = 259200; // Секунд (3 дня, месяц / 10)
-                $begin_time = mktime(date("H"), date("i"), date("s"), date("n") - 1);
-
-                for ($i = 0; $i < 10; $i++) {
-                    $end = $begin_time + $interval;
-                    $count = 0;
-
-                    foreach ($result as $item) {
-                        $visit_time = strtotime($item['t_stamp']);
-
-                        if ($visit_time >= $begin_time && $visit_time <= $end) {
-                            $count++;
-                        }
-                    }
-
-                    array_push($data, $count);
-
-                    $begin_time = $end;
+                if ($query->errorCode() != '00000') {
+                    $this->error(self::DB_SELECT_ERROR, $query->errorInfo());
                 }
 
+                $result = $query->fetchAll();
+
                 if ($result) {
-                    $this->response = [
+                    $data = [];
+                    $interval = 259200; // Секунд (3 дня, месяц / 10)
+                    $begin_time = mktime(date("H"), date("i"), date("s"), date("n") - 1);
+
+                    for ($i = 0; $i < 10; $i++) {
+                        $end = $begin_time + $interval;
+                        $count = 0;
+
+                        foreach ($result as $item) {
+                            $visit_time = strtotime($item['t_stamp']);
+
+                            if ($visit_time >= $begin_time && $visit_time <= $end) {
+                                $count++;
+                            }
+                        }
+
+                        array_push($data, $count);
+
+                        $begin_time = $end;
+                    }
+
+                    $this->response([
                         'count' => count($result),
                         'data'  => $data,
-                    ];
+                    ]);
+                } else {
+                    $this->response([
+                        'count' => 0,
+                        'data'  => [],
+                    ]);
                 }
                 break;
         }
@@ -220,17 +247,31 @@ class UserModel extends Model
             case 'now':
                 $query = $this->db->prepare("SELECT COUNT(*) FROM users");
                 $query->execute();
+
+                if ($query->errorCode() != '00000') {
+                    $this->error(self::DB_SELECT_ERROR, $query->errorInfo());
+                }
+
                 $result = $query->fetch();
 
                 if ($result) {
-                    $this->response = [
+                    $this->response([
                         'count' => (int)$result['count'],
-                    ];
+                    ]);
+                } else {
+                    $this->response([
+                        'count' => 0,
+                    ]);
                 }
                 break;
             case 'day':
                 $query = $this->db->prepare("SELECT DISTINCT ON (id) * FROM users WHERE registration_timestamp BETWEEN (now()-('1 day')::interval) AND now()");
                 $query->execute();
+
+                if ($query->errorCode() != '00000') {
+                    $this->error(self::DB_SELECT_ERROR, $query->errorInfo());
+                }
+
                 $result = $query->fetchAll();
 
                 if ($result) {
@@ -255,15 +296,25 @@ class UserModel extends Model
                         $begin_time = $end;
                     }
 
-                    $this->response = [
+                    $this->response([
                         'count' => count($result),
                         'data'  => $data,
-                    ];
+                    ]);
+                } else {
+                    $this->response([
+                        'count' => 0,
+                        'data'  => [],
+                    ]);
                 }
                 break;
             case 'week':
                 $query = $this->db->prepare("SELECT DISTINCT ON (id) * FROM users WHERE registration_timestamp BETWEEN (now()-('1 week')::interval) AND now()");
                 $query->execute();
+
+                if ($query->errorCode() != '00000') {
+                    $this->error(self::DB_SELECT_ERROR, $query->errorInfo());
+                }
+
                 $result = $query->fetchAll();
 
                 if ($result) {
@@ -288,43 +339,58 @@ class UserModel extends Model
                         $begin_time = $end;
                     }
 
-                    $this->response = [
+                    $this->response([
                         'count' => count($result),
                         'data'  => $data,
-                    ];
+                    ]);
+                } else {
+                    $this->response([
+                        'count' => 0,
+                        'data'  => [],
+                    ]);
                 }
                 break;
             case 'month':
                 $query = $this->db->prepare("SELECT DISTINCT ON (id) * FROM users WHERE registration_timestamp BETWEEN (now()-('1 month')::interval) AND now()");
                 $query->execute();
-                $result = $query->fetchAll();
 
-                $data = [];
-                $interval = 259200; // Секунд (3 дня, месяц / 10)
-                $begin_time = mktime(date("H"), date("i"), date("s"), date("n") - 1);
-
-                for ($i = 0; $i < 10; $i++) {
-                    $end = $begin_time + $interval;
-                    $count = 0;
-
-                    foreach ($result as $item) {
-                        $visit_time = strtotime($item['registration_timestamp']);
-
-                        if ($visit_time >= $begin_time && $visit_time <= $end) {
-                            $count++;
-                        }
-                    }
-
-                    array_push($data, $count);
-
-                    $begin_time = $end;
+                if ($query->errorCode() != '00000') {
+                    $this->error(self::DB_SELECT_ERROR, $query->errorInfo());
                 }
 
+                $result = $query->fetchAll();
+
                 if ($result) {
-                    $this->response = [
+                    $data = [];
+                    $interval = 259200; // Секунд (3 дня, месяц / 10)
+                    $begin_time = mktime(date("H"), date("i"), date("s"), date("n") - 1);
+
+                    for ($i = 0; $i < 10; $i++) {
+                        $end = $begin_time + $interval;
+                        $count = 0;
+
+                        foreach ($result as $item) {
+                            $visit_time = strtotime($item['registration_timestamp']);
+
+                            if ($visit_time >= $begin_time && $visit_time <= $end) {
+                                $count++;
+                            }
+                        }
+
+                        array_push($data, $count);
+
+                        $begin_time = $end;
+                    }
+
+                    $this->response([
                         'count' => count($result),
                         'data'  => $data,
-                    ];
+                    ]);
+                } else {
+                    $this->response([
+                        'count' => 0,
+                        'data'  => [],
+                    ]);
                 }
                 break;
         }
@@ -337,17 +403,31 @@ class UserModel extends Model
                 case 'all':
                     $query = $this->db->prepare("SELECT COUNT(*) FROM news_base WHERE city = :city");
                     $query->execute([':city' => $_GET['city']]);
+
+                    if ($query->errorCode() != '00000') {
+                        $this->error(self::DB_SELECT_ERROR, $query->errorInfo());
+                    }
+
                     $result = $query->fetch();
 
                     if ($result) {
-                        $this->response = [
+                        $this->response([
                             'count' => (int)$result['count'],
-                        ];
+                        ]);
+                    } else {
+                        $this->response([
+                            'count' => 0,
+                        ]);
                     }
                     break;
                 case 'day':
                     $query = $this->db->prepare("SELECT * FROM news_base WHERE date BETWEEN (now()-('1 day')::interval) AND now() AND city = :city");
                     $query->execute([':city' => $_GET['city']]);
+
+                    if ($query->errorCode() != '00000') {
+                        $this->error(self::DB_SELECT_ERROR, $query->errorInfo());
+                    }
+
                     $result = $query->fetchAll();
 
                     if ($result) {
@@ -372,15 +452,25 @@ class UserModel extends Model
                             $begin_time = $end;
                         }
 
-                        $this->response = [
+                        $this->response([
                             'count' => count($result),
                             'data'  => $data,
-                        ];
+                        ]);
+                    } else {
+                        $this->response([
+                            'count' => 0,
+                            'data'  => [],
+                        ]);
                     }
                     break;
                 case 'week':
                     $query = $this->db->prepare("SELECT * FROM news_base WHERE date BETWEEN (now()-('1 week')::interval) AND now() AND city = :city");
                     $query->execute([':city' => $_GET['city']]);
+
+                    if ($query->errorCode() != '00000') {
+                        $this->error(self::DB_SELECT_ERROR, $query->errorInfo());
+                    }
+
                     $result = $query->fetchAll();
 
                     if ($result) {
@@ -405,43 +495,58 @@ class UserModel extends Model
                             $begin_time = $end;
                         }
 
-                        $this->response = [
+                        $this->response([
                             'count' => count($result),
                             'data'  => $data,
-                        ];
+                        ]);
+                    } else {
+                        $this->response([
+                            'count' => 0,
+                            'data'  => [],
+                        ]);
                     }
                     break;
                 case 'month':
                     $query = $this->db->prepare("SELECT * FROM news_base WHERE date BETWEEN (now()-('1 month')::interval) AND now() AND city = :city");
                     $query->execute([':city' => $_GET['city']]);
-                    $result = $query->fetchAll();
 
-                    $data = [];
-                    $interval = 259200; // Секунд (3 дня, месяц / 10)
-                    $begin_time = mktime(date("H"), date("i"), date("s"), date("n") - 1);
-
-                    for ($i = 0; $i < 10; $i++) {
-                        $end = $begin_time + $interval;
-                        $count = 0;
-
-                        foreach ($result as $item) {
-                            $visit_time = strtotime($item['date']);
-
-                            if ($visit_time >= $begin_time && $visit_time <= $end) {
-                                $count++;
-                            }
-                        }
-
-                        array_push($data, $count);
-
-                        $begin_time = $end;
+                    if ($query->errorCode() != '00000') {
+                        $this->error(self::DB_SELECT_ERROR, $query->errorInfo());
                     }
 
+                    $result = $query->fetchAll();
+
                     if ($result) {
-                        $this->response = [
+                        $data = [];
+                        $interval = 259200; // Секунд (3 дня, месяц / 10)
+                        $begin_time = mktime(date("H"), date("i"), date("s"), date("n") - 1);
+
+                        for ($i = 0; $i < 10; $i++) {
+                            $end = $begin_time + $interval;
+                            $count = 0;
+
+                            foreach ($result as $item) {
+                                $visit_time = strtotime($item['date']);
+
+                                if ($visit_time >= $begin_time && $visit_time <= $end) {
+                                    $count++;
+                                }
+                            }
+
+                            array_push($data, $count);
+
+                            $begin_time = $end;
+                        }
+
+                        $this->response([
                             'count' => count($result),
                             'data'  => $data,
-                        ];
+                        ]);
+                    } else {
+                        $this->response([
+                            'count' => 0,
+                            'data'  => [],
+                        ]);
                     }
                     break;
             }
@@ -455,6 +560,11 @@ class UserModel extends Model
                 case 'day':
                     $query = $this->db->prepare("SELECT * FROM news_base WHERE date BETWEEN (now()-('1 day')::interval) AND now() AND status > 0 AND city = :city");
                     $query->execute([':city' => $_GET['city']]);
+
+                    if ($query->errorCode() != '00000') {
+                        $this->error(self::DB_SELECT_ERROR, $query->errorInfo());
+                    }
+
                     $result = $query->fetchAll();
 
                     if ($result) {
@@ -479,15 +589,25 @@ class UserModel extends Model
                             $begin_time = $end;
                         }
 
-                        $this->response = [
+                        $this->response([
                             'count' => count($result),
                             'data'  => $data,
-                        ];
+                        ]);
+                    } else {
+                        $this->response([
+                            'count' => 0,
+                            'data'  => [],
+                        ]);
                     }
                     break;
                 case 'week':
                     $query = $this->db->prepare("SELECT * FROM news_base WHERE date BETWEEN (now()-('1 week')::interval) AND now() AND status > 0 AND city = :city");
                     $query->execute([':city' => $_GET['city']]);
+
+                    if ($query->errorCode() != '00000') {
+                        $this->error(self::DB_SELECT_ERROR, $query->errorInfo());
+                    }
+
                     $result = $query->fetchAll();
 
                     if ($result) {
@@ -512,54 +632,69 @@ class UserModel extends Model
                             $begin_time = $end;
                         }
 
-                        $this->response = [
+                        $this->response([
                             'count' => count($result),
                             'data'  => $data,
-                        ];
+                        ]);
+                    } else {
+                        $this->response([
+                            'count' => 0,
+                            'data'  => [],
+                        ]);
                     }
                     break;
                 case 'month':
                     $query = $this->db->prepare("SELECT * FROM news_base WHERE date BETWEEN (now()-('1 month')::interval) AND now() AND status > 0 AND city = :city");
                     $query->execute([':city' => $_GET['city']]);
-                    $result = $query->fetchAll();
 
-                    $data = [];
-                    $interval = 259200; // Секунд (3 дня, месяц / 10)
-                    $begin_time = mktime(date("H"), date("i"), date("s"), date("n") - 1);
-
-                    for ($i = 0; $i < 10; $i++) {
-                        $end = $begin_time + $interval;
-                        $count = 0;
-
-                        foreach ($result as $item) {
-                            $visit_time = strtotime($item['date']);
-
-                            if ($visit_time >= $begin_time && $visit_time <= $end) {
-                                $count++;
-                            }
-                        }
-
-                        array_push($data, $count);
-
-                        $begin_time = $end;
+                    if ($query->errorCode() != '00000') {
+                        $this->error(self::DB_SELECT_ERROR, $query->errorInfo());
                     }
 
+                    $result = $query->fetchAll();
+
                     if ($result) {
-                        $this->response = [
+                        $data = [];
+                        $interval = 259200; // Секунд (3 дня, месяц / 10)
+                        $begin_time = mktime(date("H"), date("i"), date("s"), date("n") - 1);
+
+                        for ($i = 0; $i < 10; $i++) {
+                            $end = $begin_time + $interval;
+                            $count = 0;
+
+                            foreach ($result as $item) {
+                                $visit_time = strtotime($item['date']);
+
+                                if ($visit_time >= $begin_time && $visit_time <= $end) {
+                                    $count++;
+                                }
+                            }
+
+                            array_push($data, $count);
+
+                            $begin_time = $end;
+                        }
+
+                        $this->response([
                             'count' => count($result),
                             'data'  => $data,
-                        ];
+                        ]);
+                    } else {
+                        $this->response([
+                            'count' => 0,
+                            'data'  => [],
+                        ]);
                     }
                     break;
             }
         }
     }
 
-    public function getTrans($period)
+    public function getTrans()
     {
         $this->response = [
             'count' => 0,
-            'data'  => [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            'data'  => [],
         ];
     }
 
