@@ -43,7 +43,8 @@ class Response
     const EMAIL_IS_EXIST_ERROR = 2013;
     const PHONE_IS_EXIST_ERROR = 2014;
 
-    // Загрузка файлов
+    // Восстановлени пароля
+    const EMAIL_MESSAGE_SEND_ERROR = 6000;
 
     protected $messages = [
         // Общие 1-1000:
@@ -78,6 +79,9 @@ class Response
         2014 => 'Такой телефон уже зарегистрирован',
 
         // Загрузка файлов 3000-4000:
+
+        // Восстановление пароля 6000-7000
+        6000 => 'Ошибка при отправке Email',
     ];
 
     public function __construct()

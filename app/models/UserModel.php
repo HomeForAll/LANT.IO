@@ -27,8 +27,6 @@ class UserModel extends Model
     const REGISTRATION_PHONE_IS_EXIST_ERROR = 2015;
 
     private $socialNets;
-    private $response = [];
-    private $errors = [];
 
     public function __construct()
     {
@@ -694,10 +692,10 @@ class UserModel extends Model
 
     public function getTrans()
     {
-        $this->response = [
+        $this->response([
             'count' => 0,
             'data'  => [],
-        ];
+        ]);
     }
 
     public function activityWrite($userID)
@@ -1448,7 +1446,7 @@ class UserModel extends Model
         unset($_SESSION['lastName']);
         unset($_SESSION['user_hash']);
 
-        $this->response = true;
+        $this->response(true);
     }
 
     public function passwordRestore()
@@ -1459,87 +1457,69 @@ class UserModel extends Model
 
                 if (strrpos($login, '@')) {
                     if (v::email()->validate($login)) {
-                        $query = $this->db->prepare('SELECT id, password FROM users WHERE email = :email');
-                        $query->execute([
-                            ':email' => $login,
-                        ]);
+                        $this->error(self::EMAIL_INCORRECT_ERROR);
+                    }
 
-                        $user = $query->fetch();
+                    $query = $this->db->prepare('SELECT id, password FROM users WHERE email = :email');
+                    $query->execute([
+                        ':email' => $login,
+                    ]);
 
-                        if ($user) {
-                            $restore_hash = sha1($user['id'] . $user['password'] . time());
+                    if ($query->errorCode() !== '00000') {
+                        $this->error(self::DB_SELECT_ERROR, $query->errorInfo());
+                    }
 
-                            $query = $this->db->prepare('UPDATE users SET restore_hash = :restore_hash WHERE id = :user_id');
-                            $query->execute([
-                                ':restore_hash' => $restore_hash,
-                                ':user_id'      => $user['id'],
-                            ]);
+                    $user = $query->fetch();
 
-                            $restore_url = "https://{$_SERVER['HTTP_HOST']}/restore/{$restore_hash}:{$user['id']}";
+                    if (!$user) {
+                        $this->error(self::USER_NOT_EXIST_ERROR);
+                    }
 
-                            require_once ROOT_DIR . 'vendor' . DS . 'phpmailer' . DS . 'phpmailer' . DS . 'PHPMailerAutoload.php';
+                    $restore_hash = sha1($user['id'] . $user['password'] . time());
 
-                            $mail = new PHPMailer;
-                            $mail->isSMTP();
-                            $mail->Host = 'smtp.yandex.ru';
-                            $mail->Port = 465;
-                            $mail->SMTPSecure = 'ssl';
-                            $mail->SMTPAuth = true;
-                            $mail->Username = "admin@lant.io";
-                            $mail->Password = "ZSH1wb88";
-                            $mail->setLanguage('ru');
-                            $mail->setFrom('admin@lant.io', 'LANT.IO');
-                            $mail->addAddress($login);
-                            $mail->Subject = 'Password restore';
-                            $mail->msgHTML("Вы воспользовались формой восстановления пароля, перейдите по ссылке: {$restore_url}, что бы продолжить.");
+                    $query = $this->db->prepare('UPDATE users SET restore_hash = :restore_hash WHERE id = :user_id');
+                    $query->execute([
+                        ':restore_hash' => $restore_hash,
+                        ':user_id'      => $user['id'],
+                    ]);
 
-                            if ($mail->send()) {
-                                $this->response['response'] = true;
-                            } else {
-                                $this->response['response'] = false;
-                                //echo "Mailer Error: " . $mail->ErrorInfo;
-                            }
+                    if ($query->errorCode() !== '00000') {
+                        $this->error(self::DB_UPDATE_ERROR, $query->errorInfo());
+                    }
 
-                        } else {
-                            // TODO: Ошибка пользователь не найден
-                        }
+                    $restore_url = "https://{$_SERVER['HTTP_HOST']}/restore/{$restore_hash}:{$user['id']}";
+
+                    require_once ROOT_DIR . 'vendor' . DS . 'phpmailer' . DS . 'phpmailer' . DS . 'PHPMailerAutoload.php';
+
+                    $mail = new PHPMailer;
+                    $mail->isSMTP();
+                    $mail->Host = 'smtp.yandex.ru';
+                    $mail->Port = 465;
+                    $mail->SMTPSecure = 'ssl';
+                    $mail->SMTPAuth = true;
+                    $mail->Username = "admin@lant.io";
+                    $mail->Password = "ZSH1wb88";
+                    $mail->setLanguage('ru');
+                    $mail->setFrom('admin@lant.io', 'LANT.IO');
+                    $mail->addAddress($login);
+                    $mail->Subject = 'Password restore';
+                    $mail->msgHTML("Вы воспользовались формой восстановления пароля, перейдите по ссылке: {$restore_url}, что бы продолжить.");
+
+                    if ($mail->send()) {
+                        $this->response(true);
                     } else {
-                        // TODO: Ошибка email неверен
+                        $this->error(self::EMAIL_MESSAGE_SEND_ERROR, $mail->ErrorInfo);
                     }
                 } elseif (v::phone()->validate($login)) {
                     // TODO: Доделать обработку для sms
                 } else {
-                    // TODO: Ошибка, телеон неверен
+                    $this->error(self::LOGIN_INCORRECT_ERROR);
                 }
                 break;
             case '2':
                 break;
             case '3':
                 break;
-        }
-    }
-
-    public function getResponse()
-    {
-        if (empty($this->errors) && empty($this->response)) {
-            return [
-                'error' => [
-                    [
-                        'code'    => 0,
-                        'message' => 'Неправильный запрос',
-                    ],
-                ],
-            ];
-        }
-
-        if ($this->errors) {
-            return [
-                'error' => $this->errors,
-            ];
-        } else {
-            return [
-                'response' => $this->response,
-            ];
         }
     }
 }
