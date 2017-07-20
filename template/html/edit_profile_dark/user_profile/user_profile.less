@@ -54,6 +54,47 @@
   justify-content: flex-start;
   flex-grow: 1;
   padding: 40px 20px;
+  input {
+    position: relative;
+    color: #fff;
+    width: 100%;
+    border: none;
+    padding: 10px 0;
+    background: none;
+    border-bottom: 1px solid #293848;
+  }
+  input[type=checkbox] {
+    position: absolute;
+    width: auto;
+    right: 0;
+    margin: auto;
+  }
+  label {
+    display: block;
+    position: relative;
+    font-size: 14px;
+    padding: 10px;
+    cursor: pointer;
+    color: #3d7f87;
+  }
+  p {
+    margin-top: 20px;
+    opacity: 0.1;
+    font-size: 20px;
+    color: #dfdfdf;
+  }
+  textarea {
+    display: block;
+    margin: 10px auto;
+    width: 100%;
+    padding: 10px;
+    height: auto;
+    color: #dfdfdf;
+    min-height: 50px;
+    resize: none;
+    background: 0 0;
+    border: 1px solid #293848;
+  }
 }
 
 .photo {
@@ -115,7 +156,6 @@
   flex-flow: row wrap;
   justify-content: center;
   align-self: stretch;
-  padding-left: 30px;
   align-items: flex-start;
   margin-top: 25px;
   a {
@@ -130,38 +170,10 @@
   position: relative;
   height: 80vh;
   overflow-y: scroll!important;
-  input::-webkit-input-placeholder {color: #fff;}
-  input::-moz-placeholder {color: #fff;}/* Firefox 19+ */
-  input:-moz-placeholder  {color: #fff;}/* Firefox 18- */
-  input:-ms-input-placeholder {color: #fff;}
-  input {
-    position: relative;
-    width: 100%;
-    border: none;
-    padding: 10px 0;
-    background: none;
-    border-bottom: 1px solid #293848;
-  }
-  label {
-    display: block;
-    position: relative;
-    font-size: 14px;
-    padding: 10px;
-    color: #3d7f87;
-  }
-  p {
-    margin-top: 20px;
-    opacity: 0.1;
-    font-size: 20px;
-    color: #dfdfdf;
-  }
 }
 
-.fio {
-  input::-webkit-input-placeholder {color: #47b2e5!important;}
-  input::-moz-placeholder {color: #47b2e5!important;}/* Firefox 19+ */
-  input:-moz-placeholder  {color: #47b2e5!important;}/* Firefox 18- */
-  input:-ms-input-placeholder {color: #47b2e5!important;}
+.fio input {
+  color: #47b2e5!important;
 }
 
 .bold-text {
