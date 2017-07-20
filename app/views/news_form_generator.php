@@ -26,6 +26,39 @@ $element_list = [];
     <input type="submit" name="best" value="Проба лучших объявлений">
 </form>
 
+<form id="test_ads_save" action="/api/items/add" method="post">
+    <input type="text" name="tabs" value="0">operation_type<br>
+    <input type="text" name="type" value="0">object_type<br>
+    <input type="text" name="city" value="0">city<br>
+    <input type="text" name="price" value="0">price<br>
+    <input type="text" name="bargain" value="0">bargain<br>
+    <input type="text" name="count_rooms" value="0">number_of_rooms<br>
+    <input type="text" name="area_residential" value="0">residential<br>
+    <input type="text" name="garbage" value="0">availability_of_garbage_chute<br>
+    <input type="submit" name="best" value="Проба Записи объявлений">
+</form>
+<script>
+    function addAds(formResult) {
+        alert(formResult);
+        $.ajax({
+            type:"POST",
+            data: formResult,
+            url:"/admin/newsformgenerator",
+            success:function(html){
+                console.log(html);
+            }
+        });
+    }
+    $("#test_ads_save input[type='submit']").click(function (e) {
+        e.preventDefault();
+        var photos = [1, 2, 3];
+        var add_buildings = [true, false, true, true, true, true, true];
+        var rooms = [true, false, true, true, true, true, true];
+        var formResult = {'action':'test','photos':photos, 'rooms':rooms, 'add_buildings':add_buildings};
+        addAds(formResult,photos);
+    });
+</script>
+
 <?php
 //Генерация форм новостей на основе форм поиска
 if (!empty($this->data['news_form_generation_file'])) {
