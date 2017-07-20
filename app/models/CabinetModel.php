@@ -753,7 +753,7 @@ class CabinetModel extends Model
         }
 
         $massiv['name_birthday'] = $info['birthday'];
-        $massiv['about_me'] = $info['aboutme'];
+        $massiv['about_me'] = $info['about_me'];
 
         $massiv['passport_series'] = isset($info['series']) ? $info['series'] : 'empty';
         $massiv['passport_number'] = isset($info['number']) ? $info['number'] : 'empty';
