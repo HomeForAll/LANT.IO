@@ -134,7 +134,7 @@ $(function(){
             } else {
                 $.post('/api/registration/'+current_state, data, function(data) {
                     console.log(data);
-                    data = JSON.parse(data);
+                    //data = JSON.parse(data);
                     if (data.response) {
                         update();
                     } else if (data.error) {
@@ -212,7 +212,7 @@ $(function(){
                 $.post('/api/restore/step_1', data, function(data) {
                     console.log(data);
                     try {
-                        data = JSON.parse(data);
+                        //data = JSON.parse(data);
                         if (data.response) {
                             //update();
                             action(data.response.login_type);
