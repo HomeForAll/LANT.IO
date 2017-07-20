@@ -90,8 +90,6 @@ class APIController extends Controller
         } elseif (!empty($_POST)) {
             $this->model('UserModel')->login($_POST['login'], $_POST['password']);
         }
-
-        echo json_encode($this->model('UserModel')->getResponse(), JSON_UNESCAPED_UNICODE);
     }
 
     public function actionRegistration($step)
@@ -135,20 +133,16 @@ class APIController extends Controller
                 }
                 break;
         }
-
-        echo json_encode($this->model('UserModel')->getResponse(), JSON_UNESCAPED_UNICODE);
     }
 
     public function actionUser()
     {
         $this->model('UserModel')->getUserInfo();
-        echo json_encode($this->model('UserModel')->getResponse(), JSON_UNESCAPED_UNICODE);
     }
 
     public function actionLogout()
     {
         $this->model('UserModel')->logout();
-        echo json_encode($this->model('UserModel')->getResponse(), JSON_UNESCAPED_UNICODE);
     }
 
     public function actionUploadAdImage()
@@ -164,31 +158,26 @@ class APIController extends Controller
     public function actionOnline($period)
     {
         $this->model('UserModel')->getOnline($period[0]);
-        echo json_encode($this->model('UserModel')->getResponse(), JSON_UNESCAPED_UNICODE);
     }
 
     public function actionRegistered($period)
     {
         $this->model('UserModel')->getRegistered($period[0]);
-        echo json_encode($this->model('UserModel')->getResponse(), JSON_UNESCAPED_UNICODE);
     }
 
     public function actionAdsNumber($period)
     {
         $this->model('UserModel')->getAdsNumber($period[0]);
-        echo json_encode($this->model('UserModel')->getResponse(), JSON_UNESCAPED_UNICODE);
     }
 
     public function actionAdsActiveNumber($period)
     {
         $this->model('UserModel')->getAdsActiveNumber($period[0]);
-        echo json_encode($this->model('UserModel')->getResponse(), JSON_UNESCAPED_UNICODE);
     }
 
     public function actionTrans($period)
     {
         $this->model('UserModel')->getTrans($period[0]);
-        echo json_encode($this->model('UserModel')->getResponse(), JSON_UNESCAPED_UNICODE);
     }
 
     public function actionMyAds()
@@ -224,7 +213,6 @@ class APIController extends Controller
     public function actionPasswordRestore()
     {
         $this->model('UserModel')->passwordRestore();
-        echo json_encode($this->model('UserModel')->getResponse(), JSON_UNESCAPED_UNICODE);
     }
 
     public function actionBestAds($param)
