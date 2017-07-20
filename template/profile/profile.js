@@ -94,7 +94,12 @@ $.getJSON('/api/favorite/list', {count: 3}, function(json, textStatus) {
 
 
 
-
+$(".additems-cards select.aselect__input").chosen({
+    //placeholder_text_multiple: "Выберете параметры...",
+    //placeholder_text: "Выберете параметры...",
+    disable_search_threshold: 20,
+    width: "100%"
+})
 
 
 
@@ -124,7 +129,9 @@ $(".additems-cards select[name=type].aselect__input").change(function(){
                 $("<div>").addClass("afield__label").html(item.title).appendTo(line);
 
                 if (item.type == 'checkbox') {
-                    var select = $("<select>").addClass("aselect__input").data("placeholder", "Выберете параметры...").appendTo(line);
+                    var select = $("<select>").addClass("aselect__input")
+                        .prop("name", item.name).data("placeholder", "Выберете параметры...")
+                        .appendTo(line);
                     if (item.multiple && item.multiple == true) {
                         select.prop("multiple", "multiple");
                     } else {
@@ -136,7 +143,8 @@ $(".additems-cards select[name=type].aselect__input").change(function(){
                     select.chosen({
                         placeholder_text_multiple: "Выберете параметры...",
                         placeholder_text: "Выберете параметры...",
-                        disable_search_threshold: 20
+                        disable_search_threshold: 20,
+                        width: "100%"
                     }).change(function(evt, params) {
                         //console.log(select.val())
                         if (select.val() !== null) {
@@ -161,6 +169,7 @@ $(".additems-cards select[name=type].aselect__input").change(function(){
 			.closest('.additems-cards').find('.additems-cards__card')
             .removeClass('additems-cards__card_select')
             .eq($(this).index()).addClass('additems-cards__card_select');
+        $('.additems-cards select').trigger("chosen:updated");
 	});
 });
 

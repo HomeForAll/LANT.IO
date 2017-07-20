@@ -398,17 +398,17 @@ body {
     flex: 1 1 auto;
 }
 .additems-cards__card {
-    /*display: none;*/
-    visibility: hidden;
-    height: 0;
+    display: none;
+    /* visibility: hidden; */
+    /* height: 0; */
     /*opacity: 0;
     transform: translateY(20px);
     transition: transform 100ms linear, opacity 100ms linear, visibility 100ms linear;*/
 }
 .additems-cards__card_select {
-    /*display: block;*/
-    height: auto;
-    visibility: visible;
+    display: block;
+    /* height: auto; */
+    /* visibility: visible; */
     /*transform: translateY(0px);
     opacity: 1;
     transition: opacity 100ms linear, visibility 100ms linear;
@@ -485,6 +485,7 @@ body {
     border: solid 1px #e7e7e7;
     border-radius: 4px;
     outline: 0;
+    -webkit-appearance: none;
 }
 .aselect__input:focus,
 .afield .chosen-container-active .chosen-choices,

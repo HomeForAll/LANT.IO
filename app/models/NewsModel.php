@@ -756,6 +756,47 @@ class NewsModel extends Model
     }
 
     /**
+     * Массив новостей => картинки из стоки записываются в массив
+     * @param $data_news - массив новостей
+     * @return mixed - исправленный массив новостей
+     */
+    private function getAdsImg($data_news)
+    {
+        $ad_id = [];
+        $photo =[];
+        //Массив id объявлений
+        foreach ($data_news as $k => $ad) {
+            $ad_id[$k] = $ad['id_news'];
+        }
+        $ad_id = implode(', ', $ad_id);
+        //Получение адресов картинок из БД
+        $sql = "SELECT id, original, s_250_140, s_500_280, s_360_230, s_720_460, ad_id"
+            . " FROM ads_images"
+        . " WHERE ad_id IN ($ad_id)";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if(!empty($result)){
+
+            foreach ($result as $p){
+                $p_arr = $p;
+                unset($p_arr['ad_id'], $p_arr['id']);
+                if(isset($photo[$p['ad_id']])){
+                    $photo[$p['ad_id']] = $photo[$p['ad_id']] + [$p['id'] => $p_arr];
+                }else {
+                    $photo[$p['ad_id']] = [$p['id'] => $p_arr];
+                }
+            }
+            //Присваивание данных обратно в массив объявлений
+            foreach ($data_news as $k => $ad) {
+                $data_news[$k]['preview_img'] = $photo[$ad['id_news']];
+            }
+        }
+        return $data_news;
+    }
+
+
+    /**
      * Получает список новостей из заданной табицы($table) или из всех таблиц новостей(по умолчанию)
      * отсортированный по дате
      * @param null $user_id
@@ -1787,12 +1828,12 @@ class NewsModel extends Model
      * Добавляет параметр ad_is_new - является ли объявление новым (bool)
      * Добавляет данные об авторе
      */
-    public function prepareNewsPreview($data, $translate_indx = true, $author_info = false)
+    public function prepareNewsPreview($data, $translate_indx = true, $author_info = false, $photos = true)
     {
         $user_id_arr = [];
 
-        //Строку файлов картинок преобразуем в массив $data['news'][number]['preview_img'][]
-        $data = $this->explodePreviewImg($data);
+        //Получение массив ссылок на картинки $data['news'][number]['preview_img'][]
+        $data = $this->getAdsImg($data);
 
 
         // Данные индекс метро -> наименование
@@ -2504,6 +2545,8 @@ class NewsModel extends Model
     public function getRequestForItemsAddFromPOST($keys)
     {
         $form_data = [];
+        $args = [];
+        $photos = [];
         //Определение пользователя
         if (!empty($_SESSION['userID'])) {
             $user_id = (int)$_SESSION['userID'];
@@ -2620,7 +2663,6 @@ class NewsModel extends Model
         );
 
         //Преобразование через keys
-        $args = [];
         foreach ($keys as $k => $v) {
             if (isset($args_db[$v['table_column_name']])) {
                 $args[$k] = $args_db[$v['table_column_name']];
@@ -2640,7 +2682,6 @@ class NewsModel extends Model
         //Добавление id Картинок
         if (!empty($_POST['photos'])) {
             if (is_array($_POST['photos'])) {
-                $photos = [];
                 foreach ($_POST['photos'] as $k => $v) {
                     array_push($photos, (int)$v);
                 }
