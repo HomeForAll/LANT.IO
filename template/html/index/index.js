@@ -65,6 +65,10 @@ function initUserMenu(user) {
         $('.menu-user .user-info, .header-line .user-info').click(function(event) {
             window.location = '/profile/';
         });
+
+        $('.userinfo__logout').click(function(){
+            window.location = '/logout/';
+        });
     } else {
         $('.menu-user .user-info').remove();
         $('.header-line .user-info').remove();
