@@ -3,7 +3,13 @@
 class Response
 {
     /**
-     * КОДЫ ОШИБоК С 0 ПО 6000 ЗАНЯТЫ
+     * КОДЫ
+     * ОШИБоК
+     * С
+     * [0]
+     * ПО
+     * [6000]
+     * ЗАНЯТЫ
      */
 
     // Общие
@@ -16,8 +22,9 @@ class Response
 
     // Авторизация
     const LOGIN_INCORRECT_ERROR = 1000;
-    const BAD_LOGIN_AND_PASSWORD_ERROR = 1001;
+    const INCORRECT_AUTH_DATA_ERROR = 1001;
     const USER_BANNED_ERROR = 1002;
+    const USER_NOT_EXIST_ERROR = 1003;
 
     // Регистрация
     const OGRN_INCORRECT_ERROR = 2000;
@@ -38,7 +45,7 @@ class Response
 
     // Загрузка файлов
 
-    private static $messages = [
+    protected $messages = [
         // Общие 1-1000:
         0    => 'Неправильный запрос к API',
         1    => 'Пользователь не авторизован',
@@ -51,6 +58,7 @@ class Response
         1000 => 'Неверный формат логина',
         1001 => 'Данные для входа неверны',
         1002 => 'Аккаунт заблокирован',
+        1003 => 'Пользователь не существует',
 
         // Регистрация 2000-3000:
         2000 => 'Неправильный формат ОГРН',
@@ -72,33 +80,39 @@ class Response
         // Загрузка файлов 3000-4000:
     ];
 
+    public function __construct()
+    {
+    }
+
     /**
      * @param int $code
+     * @param mixed $detail - дополнительная информация, которая поможет идентифицировать ошибку
      */
-    public static function error($code)
+    protected function error($code, $detail = null)
     {
         $code = (int)$code;
+        $content = [];
 
-        if (isset(static::$messages[$code])) {
-            $content = [
-                'error' => [
-                    'code'    => $code,
-                    'message' => static::$messages[$code],
-                ],
+        if (isset($this->messages[$code])) {
+            $content['error'] = [
+                'code'    => $code,
+                'message' => $this->messages[$code],
             ];
         } else {
-            $content = [
-                'error' => [
-                    'code'    => -1,
-                    'message' => 'Неопознанная ошибка',
-                ],
+            $content['error'] = [
+                'code'    => -666,
+                'message' => 'Неопознанная ошибка',
             ];
+        }
+
+        if ($detail) {
+            $content['error']['detail'] = $detail;
         }
 
         exit(json_encode($content, JSON_UNESCAPED_UNICODE));
     }
 
-    public static function send($data)
+    protected function response($data)
     {
         exit(json_encode(['response' => $data], JSON_UNESCAPED_UNICODE));
     }

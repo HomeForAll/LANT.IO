@@ -1,6 +1,6 @@
 <?php
 
-class Model extends UserErrors
+class Model extends Response
 {
     use PrintHelper;
 

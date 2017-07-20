@@ -2,7 +2,6 @@
 
 class UploadModel extends Model
 {
-    const NOT_AUTHORIZED_ERROR = 3001;
     public function uploadImage()
     {
         $file_name = sha1(time() . mt_rand(1, 100));
@@ -118,10 +117,7 @@ class UploadModel extends Model
             $response = [];
             
             if (!isset($_SESSION['user'])) {
-                echo json_encode(['error' => [
-                    'code'    => self::NOT_AUTHORIZED_ERROR,
-                    'message' => 'Пользователь не авторизован',
-                ]], JSON_UNESCAPED_UNICODE);
+                Response::error(Response::USER_NOT_AUTHORIZED_ERROR);
                 
                 return;
             }
