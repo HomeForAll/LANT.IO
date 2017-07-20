@@ -1241,6 +1241,10 @@ class UserModel extends Model
                     ':user_id'    => $_SESSION['user']['id'],
                 ]
             );
+
+            if ($query->errorCode() !== '00000') {
+                $this->error(self::DB_UPDATE_ERROR, $query->errorInfo());
+            }
         }
 
         if (isset($_POST['surname'])) {
@@ -1251,6 +1255,10 @@ class UserModel extends Model
                     ':user_id'   => $_SESSION['user']['id'],
                 ]
             );
+
+            if ($query->errorCode() !== '00000') {
+                $this->error(self::DB_UPDATE_ERROR, $query->errorInfo());
+            }
         }
 
         if (isset($_POST['midname'])) {
@@ -1261,6 +1269,10 @@ class UserModel extends Model
                     ':user_id' => $_SESSION['user']['id'],
                 ]
             );
+
+            if ($query->errorCode() !== '00000') {
+                $this->error(self::DB_UPDATE_ERROR, $query->errorInfo());
+            }
         }
 
         if (isset($_POST['brand'])) {
@@ -1271,6 +1283,10 @@ class UserModel extends Model
                     ':user_id'    => $_SESSION['user']['id'],
                 ]
             );
+
+            if ($query->errorCode() !== '00000') {
+                $this->error(self::DB_UPDATE_ERROR, $query->errorInfo());
+            }
         }
 
         if (isset($_POST['company'])) {
@@ -1281,6 +1297,10 @@ class UserModel extends Model
                     ':user_id'      => $_SESSION['user']['id'],
                 ]
             );
+
+            if ($query->errorCode() !== '00000') {
+                $this->error(self::DB_UPDATE_ERROR, $query->errorInfo());
+            }
         }
     }
 
@@ -1365,38 +1385,29 @@ class UserModel extends Model
 
         $query = $this->db->query($sql);
 
-        if ($this->db->errorCode() == '00000') {
-            $user = $query->fetch();
-            unset($user['password']);
-            unset($_SESSION['registration']);
-
-            $_SESSION['authorized'] = true;
-
-            $_SESSION['user'] = $user;
-            $_SESSION['user']['photo'] = $_SESSION['user']['profile_foto_id'];
-
-            // TODO: Удалить в будущем
-            $_SESSION['userID'] = $user['id'];
-            $_SESSION['firstName'] = $user['first_name'];
-            $_SESSION['lastName'] = $user['last_name'];
-            $_SESSION['status'] = $user['status'];
-
-            $name = $user['status'] == 0 ? $user['first_name'] . ' ' . $user['last_name'] : $user['brand_name'];
-
-            $secret_key = Registry::get('config')['secret_key'];
-            $_SESSION['user_hash'] = hash('sha512', 'user_id=' . $user['id'] . 'secret_key=' . $secret_key);
-            $this->response = [
-                'id'              => $user['id'],
-                'avatar_original' => $user['avatar_original'],
-                'avatar_50'       => $user['avatar_50'],
-                'avatar_100'      => $user['avatar_100'],
-                'name'            => $name,
-                'email'           => $user['email'],
-                'status'          => $user['status'],
-                'hash'            => $_SESSION['user_hash'],
-            ];
+        if ($this->db->errorCode() !== '00000') {
+            $this->error(self::DB_INSERT_ERROR);
         }
-        // TODO: Дописать обработку ошибки если пользователь не был записан в базу
+
+        $user = $query->fetch();
+        unset($user['password']);
+        unset($_SESSION['registration']);
+
+        $_SESSION['authorized'] = true;
+
+        $_SESSION['user'] = $user;
+        $_SESSION['user']['photo'] = $_SESSION['user']['profile_foto_id'];
+
+        // TODO: Удалить в будущем
+        $_SESSION['userID'] = $user['id'];
+        $_SESSION['firstName'] = $user['first_name'];
+        $_SESSION['lastName'] = $user['last_name'];
+        $_SESSION['status'] = $user['status'];
+
+        $secret_key = Registry::get('config')['secret_key'];
+        $_SESSION['user_hash'] = hash('sha512', 'user_id=' . $user['id'] . 'secret_key=' . $secret_key);
+
+        $this->getUserInfo();
     }
 
     public function getUserInfo()
