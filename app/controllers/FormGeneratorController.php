@@ -8,9 +8,21 @@ class FormGeneratorController extends Controller
         $this->checkAuth();
         $this->setModel(new FormGeneratorModel());
         $this->setModel(new NewsModel());
+        $this->setModel(new SearchModel());
     }
 
       public function actionNewsFormGenerator(){
+
+          $this->ifAJAX(function () {
+              $keys = $this->model('SearchModel')->getKeys();
+              $form_data = $this->model('NewsModel')->getRequestForItemsAddFromPOST($keys);
+              $this->model('NewsModel')->makeNewsInsert($form_data['ad'], $form_data['photos']);
+              echo json_encode($this->model('NewsModel')->getResponse(), JSON_UNESCAPED_UNICODE);
+
+  //                echo json_encode($_POST, JSON_UNESCAPED_UNICODE);
+                  die();
+
+          });
 //        !!!!
 //        Тип данных формируется в модели generationNewsElements()
 //        там же задаются все имена переменных для записи в БД
