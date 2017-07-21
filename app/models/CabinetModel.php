@@ -2506,10 +2506,7 @@ class CabinetModel extends Model
     public function getMyAds($count = 10, $offset = 0)
     {
         if (!isset($_SESSION['user'])) {
-            // TODO: Дописать обработку ошибки если пользователь не авторизован
-            $this->response['error'] = 0;
-
-            return;
+            $this->error(self::USER_NOT_AUTHORIZED_ERROR);
         }
 
         if (isset($_GET['count'])) {
@@ -2527,6 +2524,10 @@ class CabinetModel extends Model
             ':offset'  => $offset,
         ]);
 
+        if ($query->errorCode() !== '00000') {
+            $this->error(self::DB_SELECT_ERROR, $query->errorInfo());
+        }
+
         $ads = $query->fetchAll();
 
         if ($ads) {
@@ -2535,29 +2536,26 @@ class CabinetModel extends Model
 
             $count = $result ? $result['count'] : null;
 
-            $this->response['response'] = [
+            $this->response([
                 'count' => (int)$count,
                 'items' => $ads,
-            ];
+            ]);
         } else {
-            $this->response['error'] = null;
+           $this->response([
+                'count' => 0,
+                'items' => [],
+            ]);
         }
     }
 
     public function addAdInFavorite($ad_id)
     {
         if (!$ad_id) {
-            // TODO: Обработка ошибки когда не задано id объявления
-            $this->response['error'] = false;
-
-            return;
+            $this->error(self::BAD_REQUEST_ERROR);
         }
 
         if (!isset($_SESSION['user'])) {
-            // TODO: Дописать обработку ошибки если пользователь не авторизован
-            $this->response['error'] = false;
-
-            return;
+            $this->error(self::USER_NOT_AUTHORIZED_ERROR);
         }
 
         $query = $this->db->prepare('INSERT INTO favorite_ads (user_id, ad_id) VALUES (:user_id, :ad_id)');
@@ -2566,21 +2564,23 @@ class CabinetModel extends Model
             ':ad_id'   => $ad_id,
         ]);
 
+        if ($query->errorCode() !== '00000') {
+            $this->error(self::DB_INSERT_ERROR, $query->errorInfo());
+        }
+
         if ($query->rowCount()) {
-            $this->response['response'] = true;
-        } else {
-            $this->response['error'] = false;
+            $this->response(true);
         }
     }
 
     public function removeAdInFavorite($ad_id)
     {
         if (!$ad_id) {
-            // TODO: Ошибка если не указан айди объявлений
+            $this->error(self::BAD_REQUEST_ERROR);
         }
 
         if (!isset($_SESSION['user'])) {
-            // TODO: Ошибка если пользователь не авторизован
+            $this->error(self::USER_NOT_AUTHORIZED_ERROR);
         }
 
         $query = $this->db->prepare('DELETE FROM favorite_ads WHERE user_id = :user_id AND ad_id = :ad_id');
@@ -2589,20 +2589,19 @@ class CabinetModel extends Model
             ':ad_id' => $ad_id,
         ]);
 
+        if ($query->errorCode() !== '00000') {
+            $this->error(self::DB_DELETE_ERROR, $query->errorInfo());
+        }
+
         if ($query->rowCount()) {
-            $this->response['response'] = true;
-        } else {
-            $this->response['response'] = false;
+            $this->response(true);
         }
     }
 
     public function getListFavorite($count = 6, $offset = 0)
     {
         if (!isset($_SESSION['user'])) {
-            // TODO: Дописать обработку ошибки если пользователь не авторизован
-            $this->response['error'] = 0;
-
-            return;
+            $this->error(self::USER_NOT_AUTHORIZED_ERROR);
         }
 
         if (isset($_GET['count'])) {
@@ -2620,6 +2619,10 @@ class CabinetModel extends Model
             ':offset'  => $offset,
         ]);
 
+        if ($query->errorCode() !== '00000') {
+            $this->error(self::DB_SELECT_ERROR, $query->errorInfo());
+        }
+
         $ads = $query->fetchAll();
 
         if ($ads) {
@@ -2628,12 +2631,15 @@ class CabinetModel extends Model
 
             $count = $result ? $result['count'] : null;
 
-            $this->response['response'] = [
+            $this->response([
                 'count' => (int)$count,
                 'items' => $ads,
-            ];
+            ]);
         } else {
-            $this->response['error'] = null;
+            $this->response([
+                'count' => 0,
+                'items' => [],
+            ]);
         }
     }
 
