@@ -1518,7 +1518,7 @@ class UserModel extends Model
                     $mail->msgHTML("Вы воспользовались формой восстановления пароля, перейдите по ссылке: {$restore_url}, что бы продолжить.");
 
                     if ($mail->send()) {
-                        $this->response(['login_type' => 'restore_phone']);
+                        $this->response(['login_type' => 'restore_email']);
                     } else {
                         $this->error(self::EMAIL_MESSAGE_SEND_ERROR, $mail->ErrorInfo);
                     }
