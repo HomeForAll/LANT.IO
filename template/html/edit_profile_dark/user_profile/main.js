@@ -6,22 +6,15 @@ $(document).ready(function () {
     /** Получаем данные о пользователе **/
     $.ajax({
         method: 'GET',
-        url: 'api/profile/save/settings',
+        url: 'api/profile/get/profile',
         dataType: 'Json',
-        success: function (e) {
-            console.log('result - success', e);
+        success: function (data) {
+            console.log('result - success', data);
         },
-        error: function (e) {
-            console.log('result - error', e);
+        error: function (data) {
+            console.log('result - error', data);
         }
-    }).done(function (e) {
-        if(error) {
-            console.log('Мы незарегистрированы', e);
-            return false;
-        }
-
-        console.log('Мы зарегистрированы', e);
-    });
+    })
 });
 
 $(document).ready(function () {

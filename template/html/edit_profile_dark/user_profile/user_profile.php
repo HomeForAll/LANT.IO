@@ -39,7 +39,7 @@
                 <label>Дом<input type="text" value="Москва" name="home"></label>
                 <label>Квартира<input type="text" value="Москва" name="apartment"></label>
                 <p>Контакты:</p>
-                <label>Номер телефона<input data-inputmask="'mask': '+99(999)999-99-99'" type="text" name="number-phone" required></label>
+                <label>Номер телефона<input type="text" name="phone" placeholder="+7 (___) ___ - __ - __" data-inputmask="'mask': '+7 (999) 999 - 99 - 99'"></label>
                 <label>Email<input type="text" pattern="/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" name="email" required></label>
             </div>
         </div>
