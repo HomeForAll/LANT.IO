@@ -49,6 +49,10 @@ class Response
     const NOT_IMAGE_ERROR = 3002;
     const FILE_NOT_PROCESSED_ERROR = 3003;
 
+    //CabinetModel Диалоги
+    const INVALID_QWERY_ERROR = 4000;
+    const WRONG_PASSWORD_ERROR = 4001;
+
     // Восстановлени пароля
     const EMAIL_MESSAGE_SEND_ERROR = 6000;
 
@@ -89,6 +93,10 @@ class Response
         3001 => 'Файл небыл загружен',
         3002 => 'Файл не является картинкой',
         3003 => 'Файл не является картинкой',
+
+        //CabinetModel Диалоги 4000-5000:
+        4000 => 'Не валидный запрос',
+        4001 => 'Неправильный пароль',
 
         // Восстановление пароля 6000-7000
         6000 => 'Ошибка при отправке Email',

@@ -51,7 +51,7 @@ class APIController extends Controller
 
     public function actionGetMessagesFromDB()
     {
-        $this->model('CabinetModel')->getMessagesFromDB();
+        $this->model('CabinetModel')->getChatMessagesFromDB();
         echo json_encode($this->model('CabinetModel')->getResponse(), JSON_UNESCAPED_UNICODE);
     }
 
