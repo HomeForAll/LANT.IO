@@ -5,30 +5,7 @@ class UserModel extends Model
 {
     use Cleaner;
 
-    // Коды ошибок
-    const LOGIN_VALIDATION_ERROR = 1000;
-    const LOGIN_OR_PASSWORD_INCORRECT_ERROR = 1001;
-    const LOGIN_BANNED_ERROR = 1002;
-    const REGISTRATION_OGRN_INCORRECT_ERROR = 2000;
-    const REGISTRATION_INN_INCORRECT_ERROR = 2001;
-    const REGISTRATION_USER_TYPE_INCORRECT_ERROR = 2002;
-    const REGISTRATION_DOCUMENT_TYPE_INCORRECT_ERROR = 2003;
-    const REGISTRATION_BRAND_INCORRECT_ERROR = 2004;
-    const REGISTRATION_COMPANY_INCORRECT_ERROR = 2005;
-    const REGISTRATION_FIRST_NAME_INCORRECT_ERROR = 2006;
-    const REGISTRATION_PHONE_INCORRECT_ERROR = 2007;
-    const REGISTRATION_SMS_CODE_INCORRECT_ERROR = 2008;
-    const REGISTRATION_EMAIL_INCORRECT_ERROR = 2009;
-    const REGISTRATION_LARGE_PASSWORD_ERROR = 2010;
-    const REGISTRATION_LAST_NAME_INCORRECT_ERROR = 2011;
-    const REGISTRATION_MID_NAME_INCORRECT_ERROR = 2012;
-    const REGISTRATION_EMPTY_PARAMETER_ERROR = 2013;
-    const REGISTRATION_EMAIL_IS_EXIST_ERROR = 2014;
-    const REGISTRATION_PHONE_IS_EXIST_ERROR = 2015;
-
     private $socialNets;
-    private $response = [];
-    private $errors = [];
 
     public function __construct()
     {
@@ -694,10 +671,10 @@ class UserModel extends Model
 
     public function getTrans()
     {
-        $this->response = [
+        $this->response([
             'count' => 0,
             'data'  => [],
-        ];
+        ]);
     }
 
     public function activityWrite($userID)
@@ -1241,6 +1218,10 @@ class UserModel extends Model
                     ':user_id'    => $_SESSION['user']['id'],
                 ]
             );
+
+            if ($query->errorCode() !== '00000') {
+                $this->error(self::DB_UPDATE_ERROR, $query->errorInfo());
+            }
         }
 
         if (isset($_POST['surname'])) {
@@ -1251,6 +1232,10 @@ class UserModel extends Model
                     ':user_id'   => $_SESSION['user']['id'],
                 ]
             );
+
+            if ($query->errorCode() !== '00000') {
+                $this->error(self::DB_UPDATE_ERROR, $query->errorInfo());
+            }
         }
 
         if (isset($_POST['midname'])) {
@@ -1261,6 +1246,10 @@ class UserModel extends Model
                     ':user_id' => $_SESSION['user']['id'],
                 ]
             );
+
+            if ($query->errorCode() !== '00000') {
+                $this->error(self::DB_UPDATE_ERROR, $query->errorInfo());
+            }
         }
 
         if (isset($_POST['brand'])) {
@@ -1271,6 +1260,10 @@ class UserModel extends Model
                     ':user_id'    => $_SESSION['user']['id'],
                 ]
             );
+
+            if ($query->errorCode() !== '00000') {
+                $this->error(self::DB_UPDATE_ERROR, $query->errorInfo());
+            }
         }
 
         if (isset($_POST['company'])) {
@@ -1281,6 +1274,10 @@ class UserModel extends Model
                     ':user_id'      => $_SESSION['user']['id'],
                 ]
             );
+
+            if ($query->errorCode() !== '00000') {
+                $this->error(self::DB_UPDATE_ERROR, $query->errorInfo());
+            }
         }
     }
 
@@ -1365,38 +1362,29 @@ class UserModel extends Model
 
         $query = $this->db->query($sql);
 
-        if ($this->db->errorCode() == '00000') {
-            $user = $query->fetch();
-            unset($user['password']);
-            unset($_SESSION['registration']);
-
-            $_SESSION['authorized'] = true;
-
-            $_SESSION['user'] = $user;
-            $_SESSION['user']['photo'] = $_SESSION['user']['profile_foto_id'];
-
-            // TODO: Удалить в будущем
-            $_SESSION['userID'] = $user['id'];
-            $_SESSION['firstName'] = $user['first_name'];
-            $_SESSION['lastName'] = $user['last_name'];
-            $_SESSION['status'] = $user['status'];
-
-            $name = $user['status'] == 0 ? $user['first_name'] . ' ' . $user['last_name'] : $user['brand_name'];
-
-            $secret_key = Registry::get('config')['secret_key'];
-            $_SESSION['user_hash'] = hash('sha512', 'user_id=' . $user['id'] . 'secret_key=' . $secret_key);
-            $this->response = [
-                'id'              => $user['id'],
-                'avatar_original' => $user['avatar_original'],
-                'avatar_50'       => $user['avatar_50'],
-                'avatar_100'      => $user['avatar_100'],
-                'name'            => $name,
-                'email'           => $user['email'],
-                'status'          => $user['status'],
-                'hash'            => $_SESSION['user_hash'],
-            ];
+        if ($this->db->errorCode() !== '00000') {
+            $this->error(self::DB_INSERT_ERROR);
         }
-        // TODO: Дописать обработку ошибки если пользователь не был записан в базу
+
+        $user = $query->fetch();
+        unset($user['password']);
+        unset($_SESSION['registration']);
+
+        $_SESSION['authorized'] = true;
+
+        $_SESSION['user'] = $user;
+        $_SESSION['user']['photo'] = $_SESSION['user']['profile_foto_id'];
+
+        // TODO: Удалить в будущем
+        $_SESSION['userID'] = $user['id'];
+        $_SESSION['firstName'] = $user['first_name'];
+        $_SESSION['lastName'] = $user['last_name'];
+        $_SESSION['status'] = $user['status'];
+
+        $secret_key = Registry::get('config')['secret_key'];
+        $_SESSION['user_hash'] = hash('sha512', 'user_id=' . $user['id'] . 'secret_key=' . $secret_key);
+
+        $this->getUserInfo();
     }
 
     public function getUserInfo()
@@ -1437,7 +1425,7 @@ class UserModel extends Model
         unset($_SESSION['lastName']);
         unset($_SESSION['user_hash']);
 
-        $this->response = true;
+        $this->response(true);
     }
 
     public function passwordRestore()
@@ -1448,87 +1436,69 @@ class UserModel extends Model
 
                 if (strrpos($login, '@')) {
                     if (v::email()->validate($login)) {
-                        $query = $this->db->prepare('SELECT id, password FROM users WHERE email = :email');
-                        $query->execute([
-                            ':email' => $login,
-                        ]);
+                        $this->error(self::EMAIL_INCORRECT_ERROR);
+                    }
 
-                        $user = $query->fetch();
+                    $query = $this->db->prepare('SELECT id, password FROM users WHERE email = :email');
+                    $query->execute([
+                        ':email' => $login,
+                    ]);
 
-                        if ($user) {
-                            $restore_hash = sha1($user['id'] . $user['password'] . time());
+                    if ($query->errorCode() !== '00000') {
+                        $this->error(self::DB_SELECT_ERROR, $query->errorInfo());
+                    }
 
-                            $query = $this->db->prepare('UPDATE users SET restore_hash = :restore_hash WHERE id = :user_id');
-                            $query->execute([
-                                ':restore_hash' => $restore_hash,
-                                ':user_id'      => $user['id'],
-                            ]);
+                    $user = $query->fetch();
 
-                            $restore_url = "https://{$_SERVER['HTTP_HOST']}/restore/{$restore_hash}:{$user['id']}";
+                    if (!$user) {
+                        $this->error(self::USER_NOT_EXIST_ERROR);
+                    }
 
-                            require_once ROOT_DIR . 'vendor' . DS . 'phpmailer' . DS . 'phpmailer' . DS . 'PHPMailerAutoload.php';
+                    $restore_hash = sha1($user['id'] . $user['password'] . time());
 
-                            $mail = new PHPMailer;
-                            $mail->isSMTP();
-                            $mail->Host = 'smtp.yandex.ru';
-                            $mail->Port = 465;
-                            $mail->SMTPSecure = 'ssl';
-                            $mail->SMTPAuth = true;
-                            $mail->Username = "admin@lant.io";
-                            $mail->Password = "ZSH1wb88";
-                            $mail->setLanguage('ru');
-                            $mail->setFrom('admin@lant.io', 'LANT.IO');
-                            $mail->addAddress($login);
-                            $mail->Subject = 'Password restore';
-                            $mail->msgHTML("Вы воспользовались формой восстановления пароля, перейдите по ссылке: {$restore_url}, что бы продолжить.");
+                    $query = $this->db->prepare('UPDATE users SET restore_hash = :restore_hash WHERE id = :user_id');
+                    $query->execute([
+                        ':restore_hash' => $restore_hash,
+                        ':user_id'      => $user['id'],
+                    ]);
 
-                            if ($mail->send()) {
-                                $this->response['response'] = true;
-                            } else {
-                                $this->response['response'] = false;
-                                //echo "Mailer Error: " . $mail->ErrorInfo;
-                            }
+                    if ($query->errorCode() !== '00000') {
+                        $this->error(self::DB_UPDATE_ERROR, $query->errorInfo());
+                    }
 
-                        } else {
-                            // TODO: Ошибка пользователь не найден
-                        }
+                    $restore_url = "https://{$_SERVER['HTTP_HOST']}/restore/{$restore_hash}:{$user['id']}";
+
+                    require_once ROOT_DIR . 'vendor' . DS . 'phpmailer' . DS . 'phpmailer' . DS . 'PHPMailerAutoload.php';
+
+                    $mail = new PHPMailer;
+                    $mail->isSMTP();
+                    $mail->Host = 'smtp.yandex.ru';
+                    $mail->Port = 465;
+                    $mail->SMTPSecure = 'ssl';
+                    $mail->SMTPAuth = true;
+                    $mail->Username = "admin@lant.io";
+                    $mail->Password = "ZSH1wb88";
+                    $mail->setLanguage('ru');
+                    $mail->setFrom('admin@lant.io', 'LANT.IO');
+                    $mail->addAddress($login);
+                    $mail->Subject = 'Password restore';
+                    $mail->msgHTML("Вы воспользовались формой восстановления пароля, перейдите по ссылке: {$restore_url}, что бы продолжить.");
+
+                    if ($mail->send()) {
+                        $this->response(true);
                     } else {
-                        // TODO: Ошибка email неверен
+                        $this->error(self::EMAIL_MESSAGE_SEND_ERROR, $mail->ErrorInfo);
                     }
                 } elseif (v::phone()->validate($login)) {
                     // TODO: Доделать обработку для sms
                 } else {
-                    // TODO: Ошибка, телеон неверен
+                    $this->error(self::LOGIN_INCORRECT_ERROR);
                 }
                 break;
             case '2':
                 break;
             case '3':
                 break;
-        }
-    }
-
-    public function getResponse()
-    {
-        if (empty($this->errors) && empty($this->response)) {
-            return [
-                'error' => [
-                    [
-                        'code'    => 0,
-                        'message' => 'Неправильный запрос',
-                    ],
-                ],
-            ];
-        }
-
-        if ($this->errors) {
-            return [
-                'error' => $this->errors,
-            ];
-        } else {
-            return [
-                'response' => $this->response,
-            ];
         }
     }
 }

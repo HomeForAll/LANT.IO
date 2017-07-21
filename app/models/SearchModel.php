@@ -572,6 +572,11 @@ class SearchModel extends Model
         //         Выполняем запрос и записываем результаты в $this->Ads
         $query     = $this->db->prepare($this->sql);
         $query->execute();
+
+        if ($query->errorCode() !== '00000') {
+            $this->error(self::DB_SELECT_ERROR, $query->errorInfo());
+        }
+
         $this->Ads = $query->fetchAll(PDO::FETCH_OBJ);
     }
     

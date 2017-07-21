@@ -763,33 +763,35 @@ class NewsModel extends Model
     private function getAdsImg($data_news)
     {
         $ad_id = [];
-        $photo =[];
-        //Массив id объявлений
-        foreach ($data_news as $k => $ad) {
-            $ad_id[$k] = $ad['id_news'];
-        }
-        $ad_id = implode(', ', $ad_id);
-        //Получение адресов картинок из БД
-        $sql = "SELECT id, original, s_250_140, s_500_280, s_360_230, s_720_460, ad_id"
-            . " FROM ads_images"
-        . " WHERE ad_id IN ($ad_id)";
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        if(!empty($result)){
-
-            foreach ($result as $p){
-                $p_arr = $p;
-                unset($p_arr['ad_id'], $p_arr['id']);
-                if(isset($photo[$p['ad_id']])){
-                    $photo[$p['ad_id']] = $photo[$p['ad_id']] + [$p['id'] => $p_arr];
-                }else {
-                    $photo[$p['ad_id']] = [$p['id'] => $p_arr];
-                }
-            }
-            //Присваивание данных обратно в массив объявлений
+        $photo = [];
+        if (!empty($data_news)) {
+            //Массив id объявлений
             foreach ($data_news as $k => $ad) {
-                $data_news[$k]['preview_img'] = $photo[$ad['id_news']];
+                $ad_id[$k] = $ad['id_news'];
+            }
+            $ad_id = implode(', ', $ad_id);
+            //Получение адресов картинок из БД
+            $sql = "SELECT id, original, s_250_140, s_500_280, s_360_230, s_720_460, ad_id"
+                . " FROM ads_images"
+                . " WHERE ad_id IN ($ad_id)";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if (!empty($result)) {
+
+                foreach ($result as $p) {
+                    $p_arr = $p;
+                    unset($p_arr['ad_id'], $p_arr['id']);
+                    if (isset($photo[$p['ad_id']])) {
+                        $photo[$p['ad_id']] = $photo[$p['ad_id']] + [$p['id'] => $p_arr];
+                    } else {
+                        $photo[$p['ad_id']] = [$p['id'] => $p_arr];
+                    }
+                }
+                //Присваивание данных обратно в массив объявлений
+                foreach ($data_news as $k => $ad) {
+                    $data_news[$k]['preview_img'] = $photo[$ad['id_news']];
+                }
             }
         }
         return $data_news;
@@ -1054,8 +1056,8 @@ class NewsModel extends Model
         if (!empty($photos)) {
             if (is_array($photos)) {
                 $photos_list = '';
-                foreach ($photos as $p){
-                    $photos_list .= $p.', ';
+                foreach ($photos as $p) {
+                    $photos_list .= $p . ', ';
                 }
                 $photos_list = substr($photos_list, 0, -2);
                 $sql = "UPDATE ads_images SET ad_id = '$id_news'"
@@ -2547,12 +2549,26 @@ class NewsModel extends Model
         $form_data = [];
         $args = [];
         $photos = [];
+        $post = [];
+
+        //Преведение $_POST - разбиение массивов
+        foreach ($_POST as $name => $value) {
+            if (is_array($value) && ($name != 'photos')) {
+                foreach ($value as $k => $i) {
+                    $post[$name . '_' . $i] = 'true';
+                }
+            } else {
+                $post[$name] = $value;
+            }
+        }
+
         //Определение пользователя
         if (!empty($_SESSION['userID'])) {
             $user_id = (int)$_SESSION['userID'];
         } else {
             return false;
         }
+        $form_data['user_id'] = $user_id;
 
         $args_db = array(
             'address' => FILTER_SANITIZE_STRING,
@@ -2667,10 +2683,10 @@ class NewsModel extends Model
             if (isset($args_db[$v['table_column_name']])) {
                 $args[$k] = $args_db[$v['table_column_name']];
             } else {
-//              TODO: Ошибка в фильтре получения данных при записи объявления
+                   // TODO: Ошибка в фильтре получения данных при записи объявления
             }
         }
-        $post_data = filter_input_array(INPUT_POST, $args);
+        $post_data = filter_var_array($post, $args);
 
         //Удаление несуществующих параметров и преобразование обратно по $key
         foreach ($post_data as $k => $v) {
@@ -2687,10 +2703,10 @@ class NewsModel extends Model
                 }
             }
         }
-        $form_data['user_id'] = $user_id;
-        $form_data['ad'] = $form_data;
-        $form_data['photos'] = $photos;
-        return $form_data;
+
+        $return_data['ad'] = $form_data;
+        $return_data['photos'] = $photos;
+        return $return_data;
     }
 
 

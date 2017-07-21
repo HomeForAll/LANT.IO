@@ -752,29 +752,29 @@ class CabinetModel extends Model
             $massiv['sel_date'] = $date[2];
         }
 
-        $massiv['name_birthday'] = $info['birthday'];
-        $massiv['about_me'] = $info['about_me'];
+        $massiv['about_me'] = isset($info['about_me']) ? $info['about_me'] : '';
+        $massiv['name_birthday'] = isset($info['name_birthday']) ? $info['name_birthday'] : '';
 
-        $massiv['passport_series'] = isset($info['series']) ? $info['series'] : 'empty';
-        $massiv['passport_number'] = isset($info['number']) ? $info['number'] : 'empty';
+        $massiv['passport_series'] = isset($info['series']) ? $info['series'] : '';
+        $massiv['passport_number'] = isset($info['number']) ? $info['number'] : '';
 
-        $massiv['adress_index'] = isset($info['index']) ? $info['index'] : 'empty';
-        $massiv['adress_city'] = isset($info['city']) ? $info['city'] : 'empty';
-        $massiv['adress_street'] = isset($info['street']) ? $info['street'] : 'empty';
-        $massiv['adress_home'] = isset($info['home']) ? $info['home'] : 'empty';
-        $massiv['adress_flat'] = isset($info['flat']) ? $info['flat'] : 'empty';
+        $massiv['adress_index'] = isset($info['index']) ? $info['index'] : '';
+        $massiv['adress_city'] = isset($info['city']) ? $info['city'] : '';
+        $massiv['adress_street'] = isset($info['street']) ? $info['street'] : '';
+        $massiv['adress_home'] = isset($info['home']) ? $info['home'] : '';
+        $massiv['adress_flat'] = isset($info['flat']) ? $info['flat'] : '';
 
-        $massiv['contacts_number'] = isset($info['phone_number']) ? $info['phone_number'] : 'empty';
-        $massiv['contacts_email'] = isset($info['email']) ? $info['email'] : 'empty';
+        $massiv['contacts_number'] = isset($info['phone_number']) ? $info['phone_number'] : '';
+        $massiv['contacts_email'] = isset($info['email']) ? $info['email'] : '';
 
-        $massiv['profile_foto_link'] = isset($info['profile_foto_id']) ? $info['profile_foto_id'] : 'empty';
+        $massiv['profile_foto_link'] = isset($info['profile_foto_id']) ? $info['profile_foto_id'] : '';
 
-        $massiv['socialNet_VK'] = isset($info['vk_id']) ? 'https://vk.com/id' . $info['vk_id'] : 'empty';
-        $massiv['socialNet_OK'] = isset($info['ok_id']) ? 'https://ok.ru/profile/' . $info['ok_id'] : 'empty';
-        $massiv['socialNet_MAIL'] = isset($info['mail_id']) ? 'https://mail.ru/profile/' . $info['mail_id'] : 'empty';
-        $massiv['socialNet_YA'] = isset($info['ya_id']) ? 'https://passport.yandex.ru/profile/' . $info['ya_id'] : 'empty';
-        $massiv['socialNet_GOOGLE'] = isset($info['google_id']) ? 'https://plus.google.com/u/0/' . $info['ya_id'] : 'empty';
-        $massiv['socialNet_STEAM'] = isset($info['steam_id']) ? 'http://steamcommunity.com/profiles/' . $info['steam_id'] : 'empty';
+        $massiv['socialNet_VK'] = isset($info['vk_id']) ? 'https://vk.com/id' . $info['vk_id'] : '';
+        $massiv['socialNet_OK'] = isset($info['ok_id']) ? 'https://ok.ru/profile/' . $info['ok_id'] : '';
+        $massiv['socialNet_MAIL'] = isset($info['mail_id']) ? 'https://mail.ru/profile/' . $info['mail_id'] : '';
+        $massiv['socialNet_YA'] = isset($info['ya_id']) ? 'https://passport.yandex.ru/profile/' . $info['ya_id'] : '';
+        $massiv['socialNet_GOOGLE'] = isset($info['google_id']) ? 'https://plus.google.com/u/0/' . $info['ya_id'] : '';
+        $massiv['socialNet_STEAM'] = isset($info['steam_id']) ? 'http://steamcommunity.com/profiles/' . $info['steam_id'] : '';
 
         $this->response = $massiv;
     }

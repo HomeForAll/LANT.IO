@@ -44,6 +44,13 @@ class Response
     const PHONE_IS_EXIST_ERROR = 2014;
 
     // Загрузка файлов
+    const NO_FILE_ERROR = 3000;
+    const FILE_NOT_UPLOADED_ERROR = 3001;
+    const NOT_IMAGE_ERROR = 3002;
+    const FILE_NOT_PROCESSED_ERROR = 3003;
+
+    // Восстановлени пароля
+    const EMAIL_MESSAGE_SEND_ERROR = 6000;
 
     protected $messages = [
         // Общие 1-1000:
@@ -78,6 +85,13 @@ class Response
         2014 => 'Такой телефон уже зарегистрирован',
 
         // Загрузка файлов 3000-4000:
+        3000 => 'Отсутствуют файлы для загрузки',
+        3001 => 'Файл небыл загружен',
+        3002 => 'Файл не является картинкой',
+        3003 => 'Файл не является картинкой',
+
+        // Восстановление пароля 6000-7000
+        6000 => 'Ошибка при отправке Email',
     ];
 
     public function __construct()
