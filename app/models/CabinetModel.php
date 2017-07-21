@@ -1021,123 +1021,57 @@ class CabinetModel extends Model
         if ($str = $this->сheckPersonalName($_POST['name_name'])) {
             $update['name_name'] = $str;
         } else {
-            $this->response['error'] = [
-                'code'    => '4000',
-                'message' => 'Имя введено неверно',
-                'reqest'  => $_POST,
-            ];
-
-            return;
+            $this->error(self::WRONG_NAME_NAME);
         }
         if ($str = $this->сheckPersonalName($_POST['name_surname'])) {
             $update['name_surname'] = $str;
         } else {
-            $this->response['error'] = [
-                'code'    => '4001',
-                'message' => 'Фамилия введена неверно',
-                'reqest'  => $_POST,
-            ];
-
-            return;
+            $this->error(self::WRONG_NAME_SURNAME);
         }
         if ($str = $this->сheckPersonalName($_POST['name_patronymic'])) {
             $update['name_patronymic'] = $str;
         } else {
-            $this->response['error'] = [
-                'code'    => '4002',
-                'message' => 'Отчество введено неверно',
-                'reqest'  => $_POST,
-            ];
-
-            return;
+            $this->error(self::WRONG_NAME_PATRONYMIC);
         }
         if ($str = $this->сheckBirthDay()) {
             $update['name_birthday'] = $_POST['sel_year'] . '-' . $_POST['sel_month'] . '-' . $_POST['sel_date'];
         } else {
-            $this->response['error'] = [
-                'code'    => '4003',
-                'message' => 'Дата рождения введена неверно',
-                'reqest'  => $_POST,
-            ];
-
-            return;
+            $this->error(self::WRONG_BIRTHDAY);
         }
         if ($str = $this->сheckNumbers($_POST['passport_series'])) {
             $update['passport_series'] = $str;
         } else {
-            $this->response['error'] = [
-                'code'    => '4004',
-                'message' => 'Серия паспорта введена неверно',
-                'reqest'  => $_POST,
-            ];
-
-            return;
+            $this->error(self::WRONG_PASSPORT_SERIES);
         }
         if ($str = $this->сheckNumbers($_POST['passport_number'])) {
             $update['passport_number'] = $str;
         } else {
-            $this->response['error'] = [
-                'code'    => '4005',
-                'message' => 'Номер паспорта введен неверно',
-                'reqest'  => $_POST,
-            ];
-
-            return;
+            $this->error(self::WRONG_PASSPORT_NUMBER);
         }
         if ($str = $this->сheckNumbers($_POST['adress_index'])) {
             $update['adress_index'] = $str;
         } else {
-            $this->response['error'] = [
-                'code'    => '4006',
-                'message' => 'Индекс введен неверно',
-                'reqest'  => $_POST,
-            ];
-
-            return;
+            $this->error(self::WRONG_ADRESS_INDEX);
         }
         if ($str = $this->сheckPersonalName($_POST['adress_city'])) {
             $update['adress_city'] = $str;
         } else {
-            $this->response['error'] = [
-                'code'    => '4007',
-                'message' => 'Город введен неверно',
-                'reqest'  => $_POST,
-            ];
-
-            return;
+            $this->error(self::WRONG_ADRESS_CITY);
         }
         if ($str = $this->сheckIllegalSymbols($_POST['adress_street'])) {
             $update['adress_street'] = $str;
         } else {
-            $this->response['error'] = [
-                'code'    => '4008',
-                'message' => 'Улица введен неверно',
-                'reqest'  => $_POST,
-            ];
-
-            return;
+            $this->error(self::WRONG_ADRESS_STREET);
         }
         if ($str = $this->сheckIllegalSymbols($_POST['adress_home'])) {
             $update['adress_home'] = $str;
         } else {
-            $this->response['error'] = [
-                'code'    => '4009',
-                'message' => 'Номер дома введен неверно',
-                'reqest'  => $_POST,
-            ];
-
-            return;
+            $this->error(self::WRONG_ADRESS_HOME);
         }
         if ($str = $this->сheckNumbers($_POST['adress_flat'])) {
             $update['adress_flat'] = $str;
         } else {
-            $this->response['error'] = [
-                'code'    => '4010',
-                'message' => 'Номер квартиры введен неверно',
-                'reqest'  => $_POST,
-            ];
-
-            return;
+            $this->error(self::WRONG_ADRESS_FLAT);
         }
         if ($str = $this->сheckNumbers($_POST['contacts_number'])) {
             if (strlen($str) == 11 && $str[0] == '8') {
@@ -1145,24 +1079,12 @@ class CabinetModel extends Model
             }
             $update['contacts_number'] = $str;
         } else {
-            $this->response['error'] = [
-                'code'    => '4011',
-                'message' => 'Номер телефона введен неверно',
-                'reqest'  => $_POST,
-            ];
-
-            return;
+            $this->error(self::WRONG_PHONE_NUMBER);
         }
         if ($str = $this->сheckEmail($profile_id)) {
             $update['contacts_email'] = $str;
         } else {
-            $this->response['error'] = [
-                'code'    => '4012',
-                'message' => 'Email введен неверно',
-                'reqest'  => $_POST,
-            ];
-
-            return;
+            $this->error(self::WRONG_EMAIL);
         }
 
         $update['profile_id'] = $profile_id;
