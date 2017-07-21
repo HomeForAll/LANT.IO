@@ -19,6 +19,7 @@ class Response
     const DB_UPDATE_ERROR = 3;
     const DB_DELETE_ERROR = 4;
     const DB_SELECT_ERROR = 5;
+    const CURL_CONNECTION_LOST = 6;
 
     // Авторизация
     const LOGIN_INCORRECT_ERROR = 1000;
@@ -42,6 +43,8 @@ class Response
     const MID_NAME_INCORRECT_ERROR = 2012;
     const EMAIL_IS_EXIST_ERROR = 2013;
     const PHONE_IS_EXIST_ERROR = 2014;
+    const SMS_NOT_SENT_ERROR = 2015;
+    const SMS_API_REQUEST_FAILED_ERROR = 2016;
 
     // Загрузка файлов
     const NO_FILE_ERROR = 3000;
@@ -60,6 +63,7 @@ class Response
         3    => 'Возникла ошибка при обновлении в базе данных',
         4    => 'Возникла ошибка при удалении в базе данных',
         5    => 'Возникла ошибка при выборке из базы данных',
+        6    => 'CURL нет соединения с сервером',
 
         // Авторизация 1000-2000:
         1000 => 'Неверный формат логина',
@@ -83,6 +87,8 @@ class Response
         2012 => 'Неправильно указано отчество',
         2013 => 'Такой Email уже зарегистрирован',
         2014 => 'Такой телефон уже зарегистрирован',
+        2015 => 'SMS небыло отправлено',
+        2016 => 'Ошибка запроса к SMS.RU',
 
         // Загрузка файлов 3000-4000:
         3000 => 'Отсутствуют файлы для загрузки',
