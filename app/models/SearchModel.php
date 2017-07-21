@@ -579,21 +579,21 @@ class SearchModel extends Model
 
         $this->Ads = $query->fetchAll();
 
-        if ($type == self::SEARCH) {
-            $query = $this->db->prepare('SELECT * FROM ads_images WHERE ad_id = :ad_id');
-
-            foreach ($this->Ads as &$ad) {
-                $query->execute([
-                    ':ad_id' => $ad['id_news'],
-                ]);
-
-                if ($query->errorCode() !== '00000') {
-                    $this->error(self::DB_SELECT_ERROR, $query->errorInfo());
-                }
-
-                $ad['photos'] = $query->fetchAll();
-            }
-        }
+//        if ($type == self::SEARCH) {
+//            $query = $this->db->prepare('SELECT * FROM ads_images WHERE ad_id = :ad_id');
+//
+//            foreach ($this->Ads as &$ad) {
+//                $query->execute([
+//                    ':ad_id' => $ad['id_news'],
+//                ]);
+//
+//                if ($query->errorCode() !== '00000') {
+//                    $this->error(self::DB_SELECT_ERROR, $query->errorInfo());
+//                }
+//
+//                $ad['photos'] = $query->fetchAll();
+//            }
+//        }
     }
 
     /**
@@ -667,7 +667,7 @@ class SearchModel extends Model
 
         switch ($queryType) {
             case self::SEARCH:
-                $sql = 'SELECT * FROM news_base WHERE ';
+                $sql = 'SELECT * FROM news_base LEFT JOIN (SELECT DISTINCT ad_id AS tmid, * FROM ads_images) i ON (news_base.id_news = i.ad_id) WHERE ';
                 break;
             case self::COUNT:
                 $sql = 'SELECT COUNT(*) FROM news_base WHERE ';
