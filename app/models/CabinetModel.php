@@ -1356,16 +1356,38 @@ class CabinetModel extends Model
     {
         if (isset($_POST['handle'])) {
             if (isset($_POST['sendCheck'])) {
+                $mail = new PHPMailer;
+                $mail->isSMTP();
+                $mail->Host = 'smtp.yandex.ru';
+                $mail->Port = 465;
+                $mail->SMTPSecure = 'ssl';
+                $mail->SMTPAuth = true;
+                $mail->Username = "admin@lant.io";
+                $mail->Password = "ZSH1wb88";
+
                 foreach ($_SESSION['keys'] as $email => $key) {
                     $str = file_get_contents(ROOT_DIR . '/template/layouts/mail.php');
-                    $phrase = $str;
-                    $old = ["KEY"];
+                    $content = $str;
+                    $old = ["{KEY}"];
                     $new = [$key];
-                    $newphrase = str_replace($old, $new, $phrase);
-                    $headers = 'MIME-Version: 1.0' . "\r\n";
-                    $headers .= 'Content-type: text/html; charset="utf-8"' . "\r\n";
-                    $headers .= "From: Lant.io <noreply@lant.io>\r\n";
-                    mail($email, "Альфа ключ", $newphrase, $headers);
+                    $newContent = str_replace($old, $new, $content);
+                    $mail->setLanguage('ru');
+                    $mail->setFrom('admin@lant.io', 'LANT.IO');
+                    $mail->addAddress($email);
+                    $mail->addReplyTo('admin@lant.io');
+                    $mail->Subject = 'Beta Access';
+                    $mail->msgHTML($newContent);
+
+                    if ($mail->send()) {
+                        $mail->clearAddresses();
+                    } else {
+                        var_dump($mail->ErrorInfo);
+                    }
+
+                    //                    $headers = 'MIME-Version: 1.0' . "\r\n";
+//                    $headers .= 'Content-type: text/html; charset="utf-8"' . "\r\n";
+//                    $headers .= "From: Lant.io <noreply@lant.io>\r\n";
+//                    mail($email, "Альфа ключ", $newContent, $headers);
                 }
             }
             if (isset($_POST['dbCheck'])) {

@@ -34,7 +34,7 @@
                             <tr height="20px"></tr>
                             <tr align="center"
                                 style="color: #383838; font-family: Arial, sans-serif; font-weight: bold; font-size: 30pt; line-height: 30px;">
-                                <td> KEY </td>
+                                <td> {KEY} </td>
                             </tr>
                             <tr height="38px"></tr>
                             <tr>
