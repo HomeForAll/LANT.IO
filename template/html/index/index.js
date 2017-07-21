@@ -151,10 +151,10 @@ $(function(){
                     if (data.response) {
                         update();
                     } else if (data.error) {
-                        switch (data.error[0].code) {
+                        switch (data.error.code) {
                             case 2013: error.html("Пожалуйста, заполните корректно информацию."); break;
                             case 2006: error.html("Неверно указано имя."); break;
-                            default: error.html(data.error[0].message);
+                            default: error.html(data.error.message);
                         }
                     }
                 });
@@ -230,8 +230,8 @@ $(function(){
                             //update();
                             action(data.response.login_type);
                         } else if (data.error) {
-                            switch (data.error[0].code) {
-                                default: error.html(data.error[0].message);
+                            switch (data.error.code) {
+                                default: error.html(data.error.message);
                             }
                         }
                     } catch (e) {
