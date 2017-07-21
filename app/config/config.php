@@ -8,7 +8,11 @@ return [
     
     // Соль для генерации хеша
     'secret_key' => '',
-    
+
+    // SMS.RU
+
+    'sms_api_key' => 'D0120581-1205-4721-1620-0F3288F0F7E4',
+
     // WebSocket
     'ws_host'             => '127.0.0.1',
     'ws_protect_port'     => '8089',

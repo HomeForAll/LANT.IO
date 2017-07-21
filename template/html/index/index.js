@@ -151,10 +151,10 @@ $(function(){
                     if (data.response) {
                         update();
                     } else if (data.error) {
-                        switch (data.error[0].code) {
-                            case 2013: error.html("Пожалуйста, заполните корректно информацию."); break;
+                        switch (data.error.code) {
+                            //case 2013: error.html("Пожалуйста, заполните корректно информацию."); break;
                             case 2006: error.html("Неверно указано имя."); break;
-                            default: error.html(data.error[0].message);
+                            default: error.html(data.error.message);
                         }
                     }
                 });
@@ -199,12 +199,12 @@ $(function(){
                 $.post('/api/restore/'+current_state, data, function(data) {
                     console.log(data);
                     try {
-                        data = JSON.parse(data);
+                        //data = JSON.parse(data);
                         if (data.response) {
                             update();
                         } else if (data.error) {
-                            switch (data.error[0].code) {
-                                default: error.html(data.error[0].message);
+                            switch (data.error.code) {
+                                default: error.html(data.error.message);
                             }
                         }
                     } catch (e) {
@@ -230,8 +230,8 @@ $(function(){
                             //update();
                             action(data.response.login_type);
                         } else if (data.error) {
-                            switch (data.error[0].code) {
-                                default: error.html(data.error[0].message);
+                            switch (data.error.code) {
+                                default: error.html(data.error.message);
                             }
                         }
                     } catch (e) {

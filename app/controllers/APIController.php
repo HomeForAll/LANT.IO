@@ -205,9 +205,9 @@ class APIController extends Controller
         $this->model('CabinetModel')->newTicket();
     }
 
-    public function actionPasswordRestore()
+    public function actionPasswordRestore($step)
     {
-        $this->model('UserModel')->passwordRestore();
+        $this->model('UserModel')->passwordRestore($step[0]);
     }
 
     public function actionBestAds($param)
