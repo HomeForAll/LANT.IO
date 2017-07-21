@@ -188,25 +188,21 @@ class APIController extends Controller
     public function actionAdInFavorite()
     {
         $this->model('CabinetModel')->addAdInFavorite(isset($_POST['id']) ? $_POST['id'] : null);
-        echo json_encode($this->model('CabinetModel')->getResponse(), JSON_UNESCAPED_UNICODE);
     }
 
     public function actionAdOutFavorite()
     {
         $this->model('CabinetModel')->removeAdInFavorite(isset($_POST['id']) ? $_POST['id'] : null);
-        echo json_encode($this->model('CabinetModel')->getResponse(), JSON_UNESCAPED_UNICODE);
     }
 
     public function actionListFavorite()
     {
         $this->model('CabinetModel')->getListFavorite(isset($_POST['id']) ? $_POST['id'] : null);
-        echo json_encode($this->model('CabinetModel')->getResponse(), JSON_UNESCAPED_UNICODE);
     }
 
     public function actionAddTicket()
     {
         $this->model('CabinetModel')->newTicket();
-        echo json_encode($this->model('CabinetModel')->getResponse(), JSON_UNESCAPED_UNICODE);
     }
 
     public function actionPasswordRestore()
