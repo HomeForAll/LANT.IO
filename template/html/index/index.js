@@ -70,12 +70,13 @@ function initUserMenu(user) {
             event.stopPropagation();
             $.getJSON('/api/logout/', {}, function(data) {
                 if (data.response) {
-                    window.location = '/';
+                    //window.location = '/';
+                    location.reload();
                 } else {
 
                 }
             });
-            window.location = '/logout/';
+            // window.location = '/logout/';
         });
     } else {
         $('.menu-user .user-info').remove();
