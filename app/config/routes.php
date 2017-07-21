@@ -97,7 +97,7 @@ return [
     'api/messages/dialogs' => 'main/API/getDialogs',
     'api/messages/history' => 'main/API/getMessagesFromDB',
     'api/profile/get/profile' => 'main/API/getPersonalInfo',
-    'api/restore' => 'main/API/PasswordRestore',
+    'api/restore/step_([0-9])' => 'main/API/PasswordRestore/$1',
     'api/profile/get/security' => 'main/API/getPersonalInfoSecurity',
     'api/profile/get/settings' => 'main/API/getPersonalInfoSettings',
     'api/profile/save/profile' => 'main/API/savePersonalInfo',

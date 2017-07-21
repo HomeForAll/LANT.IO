@@ -1461,14 +1461,14 @@ class UserModel extends Model
         $this->response(true);
     }
 
-    public function passwordRestore()
+    public function passwordRestore($step)
     {
-        switch (isset($_POST['step']) ? $_POST['step'] : false) {
+        switch ($step) {
             case '1':
                 $login = isset($_POST['login']) ? $_POST['login'] : null;
 
                 if (strrpos($login, '@')) {
-                    if (v::email()->validate($login)) {
+                    if (!v::email()->validate($login)) {
                         $this->error(self::EMAIL_INCORRECT_ERROR);
                     }
 
