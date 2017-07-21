@@ -153,7 +153,7 @@ $(".additems-cards select[name=type].aselect__input").change(function(){
                     });
                 }
                 if (item.type == 'from-to') {
-                    $("<input>").addClass("aselect__input").appendTo(line);
+                    $("<input>").addClass("aselect__input").prop("name", item.name).appendTo(line);
                 }
                 if (item.cost && item.cost != "") {
                     $("<div>").addClass("afield__right").html(item.cost).appendTo(line);

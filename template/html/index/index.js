@@ -72,7 +72,7 @@ function initUserMenu(user) {
                 if (data.response) {
                     window.location = '/';
                 } else {
-                    
+
                 }
             });
             window.location = '/logout/';
@@ -261,9 +261,6 @@ $(function(){
         //dialog_restore.wizard("select", 7);
     });
     //$('.open-restore').click();
-
-
-
 
 
 
