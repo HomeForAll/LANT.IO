@@ -41,50 +41,70 @@ class CabinetModel extends Model
             $count = $_GET['count'];
         }
 
+        if (!is_numeric($count)) {
+            $this->error(self::INVALID_QWERY_ERROR);
+        }
+
         if (isset($_GET['offset'])) {
             $offset = $_GET['offset'];
         }
 
+        if (!is_numeric($offset)) {
+            $this->error(self::INVALID_QWERY_ERROR);
+        }
+
         if (isset($_GET['id'])) {
-            $stmt = $this->db->prepare("SELECT * FROM dialogs_messages WHERE chat_id = $id");
-            $stmt->execute();
-            $messages = $stmt->fetchAll();
+            if (!is_numeric($_GET['id'])) {
+                $this->error(self::INVALID_QWERY_ERROR);
+            }
 
-            $i = 0;
-            $ids = [];
-            $new_messages = array_reverse($messages);
-            $messages = $new_messages;
+                $id = $_GET['id'];
 
-            foreach ($messages as $item => $key) {
-                if (($item >= $offset)) {
-                    if ($item != count($messages)) {
-                        if ($i != $count) {
-                            $ids[$i] = $messages[$item]['id'];
-                            $i++;
+                $stmt = $this->db->prepare("SELECT * FROM dialogs_messages WHERE chat_id = $id");
+                $stmt->execute();
+                if ($stmt->errorCode() != '00000') {
+                    $this->error(self::DB_SELECT_ERROR, $stmt->errorInfo());
+                }
+                $messages = $stmt->fetchAll();
+
+                $i = 0;
+                $ids = [];
+
+                if ($messages) {
+                    $new_messages = array_reverse($messages);
+                    $messages = $new_messages;
+
+                    foreach ($messages as $item => $key) {
+                        if (($item >= $offset)) {
+                            if ($item != count($messages)) {
+                                if ($i != $count) {
+                                    $ids[$i] = $messages[$item]['id'];
+                                    $i++;
+                                }
+                            }
                         }
                     }
-                }
-            }
 
-            $messages = [];
-            if ($ids) {
-                foreach ($ids as $item => $key) {
-                    $messages[$item]['id'] = $key['id'];
-                    $messages[$item]['chat_id'] = $key['chat_id'];
-                    $messages[$item]['from_id'] = $key['user_id'];
-                    $messages[$item]['message'] = $key['text'];
-                    $massiv[$item]['photo'] = $this->getAvatarDialogs($key['user_id']);
-                    $messages[$item]['attachment'] = $key['attachement'];
-                    $messages[$item]['type'] = $key['type_attachement'];
-                    $messages[$item]['time'] = $key['date'];
-                    $messages[$item]['read_state'] = $key['read_state'];
-                    $messages[$item]['out'] = $key['out'];
-                }
-            }
+                    $messages = [];
+                    if ($ids) {
+                        foreach ($ids as $item => $key) {
+                            $messages[$item]['id'] = $key['id'];
+                            $messages[$item]['chat_id'] = $key['chat_id'];
+                            $messages[$item]['from_id'] = $key['user_id'];
+                            $messages[$item]['message'] = $key['text'];
+                            $massiv[$item]['photo'] = $this->getAvatarDialogs($key['user_id']);
+                            $messages[$item]['attachment'] = $key['attachement'];
+                            $messages[$item]['type'] = $key['type_attachement'];
+                            $messages[$item]['time'] = $key['date'];
+                            $messages[$item]['read_state'] = $key['read_state'];
+                            $messages[$item]['out'] = $key['out'];
+                        }
+                    }
 
-            $this->response = $messages;
+                    $this->response = $messages;
+                }
         } else {
-            $this->response = 'error';
+            $this->response(array());
         }
     }
 
@@ -93,6 +113,9 @@ class CabinetModel extends Model
         $profile_id = $_SESSION['userID'];
         $stmt = $this->db->prepare("UPDATE dialogs SET show = 0 WHERE user_id= $profile_id");
         $stmt->execute();
+        if ($stmt->errorCode() != '00000') {
+            $this->error(self::DB_UPDATE_ERROR, $stmt->errorInfo());
+        }
 
         return $this->getDialogs(true);
     }
@@ -101,6 +124,9 @@ class CabinetModel extends Model
     {
         $stmt = $this->db->prepare("SELECT owners FROM dialogs_properties WHERE id = $id");
         $stmt->execute();
+        if ($stmt->errorCode() != '00000') {
+            $this->error(self::DB_SELECT_ERROR, $stmt->errorInfo());
+        }
         $owners = $stmt->fetchAll();
         $owners = $owners[0]['owners'];
         $massivOwners = explode(",", $owners);
@@ -115,12 +141,15 @@ class CabinetModel extends Model
         } else {
             $stmt = $this->db->prepare("SELECT avatar FROM dialogs_properties WHERE id = $id");
             $stmt->execute();
+            if ($stmt->errorCode() != '00000') {
+                $this->error(self::DB_SELECT_ERROR, $stmt->errorInfo());
+            }
             $avatar = $stmt->fetchAll();
             $avatar = $avatar[0]['avatar'];
             if ($avatar[0]['avatar'] != null)
                 $avatar = $avatar[0]['avatar'];
             else
-                $avatar = 'empty';
+                $avatar = '';
 
             return $avatar;
         }
@@ -149,16 +178,19 @@ class CabinetModel extends Model
             foreach ($ids as $item => $key) {
                 $stmt = $this->db->prepare("SELECT max(date) FROM dialogs_messages WHERE chat_id = $key");
                 $stmt->execute();
+                if ($stmt->errorCode() != '00000') {
+                    $this->error(self::DB_SELECT_ERROR, $stmt->errorInfo());
+                }
                 $timestamp = $stmt->fetchAll();
                 if ($timestamp[0]['max'] != null)
                     $massiv_to_sort['timestamp'][$item] = $timestamp[0]['max'];
                 else
-                    $massiv_to_sort['timestamp'][$item] = 'empty';
+                    $massiv_to_sort['timestamp'][$item] = '';
             }
 
             for ($i = 0; $i <= count($massiv_to_sort['ids']); $i++) {
                 for ($j = $i + 1; $j < count($massiv_to_sort['ids']); $j++) {
-                    if (($massiv_to_sort['timestamp'][$j] != 'empty') && ($massiv_to_sort['timestamp'][$i] != 'empty')) {
+                    if (($massiv_to_sort['timestamp'][$j] != '') && ($massiv_to_sort['timestamp'][$i] != '')) {
                         if ($massiv_to_sort['timestamp'][$j] > $massiv_to_sort['timestamp'][$i]) {
                             $temp_timestamp = $massiv_to_sort['timestamp'][$i];
                             $temp_ids = $massiv_to_sort['ids'][$i];
@@ -211,21 +243,7 @@ class CabinetModel extends Model
             }
             $this->response = $massiv;
         } else {
-            // $this->response = array(
-            //                'last_message_text' => $last_message_text,
-            //                'last_message_avatar' => $last_message_avatar,
-            //                'avatarsDialog' => $avatars,
-            //                'idsDialog' => $ids,
-            //                'namesDialog' => $names,
-            //                'code' => $code,
-            // );
-
-            $code = 'dialogs_not_exist';
-            $this->setUserError('dialogs_not_exist', 'Диалогов нет!');
-
-            return [
-                'code' => $code,
-            ];
+            $this->response(array());
         }
     } // Получить диалоги true - активные, false - удаленные
 
@@ -241,6 +259,9 @@ class CabinetModel extends Model
         //$profile_id = 23;
         $stmt = $this->db->prepare("SELECT * FROM dialogs WHERE user_id= $profile_id AND show= 1");
         $stmt->execute();
+        if ($stmt->errorCode() != '00000') {
+            $this->error(self::DB_SELECT_ERROR, $stmt->errorInfo());
+        }
         $dialogs = $stmt->fetchAll();
 
         if ($dialogs) {
@@ -260,6 +281,9 @@ class CabinetModel extends Model
         $profile_id = $_SESSION['userID'];
         $stmt = $this->db->prepare("SELECT * FROM dialogs WHERE user_id= $profile_id AND show= 0");
         $stmt->execute();
+        if ($stmt->errorCode() != '00000') {
+            $this->error(self::DB_SELECT_ERROR, $stmt->errorInfo());
+        }
         $dialogs = $stmt->fetchAll();
 
         if ($dialogs) {
@@ -278,6 +302,9 @@ class CabinetModel extends Model
     {
         $stmt = $this->db->prepare("SELECT owners FROM dialogs_properties WHERE id = $id");
         $stmt->execute();
+        if ($stmt->errorCode() != '00000') {
+            $this->error(self::DB_SELECT_ERROR, $stmt->errorInfo());
+        }
         $owners = $stmt->fetchAll();
         $owners = $owners[0]['owners'];
         $massivOwners = explode(",", $owners);
@@ -292,6 +319,9 @@ class CabinetModel extends Model
         }
         $stmt = $this->db->prepare("SELECT name FROM dialogs_properties WHERE id = $id");
         $stmt->execute();
+        if ($stmt->errorCode() != '00000') {
+            $this->error(self::DB_SELECT_ERROR, $stmt->errorInfo());
+        }
         $name = $stmt->fetchAll();
         $name = $name[0]['name'];
         $name = mb_substr($name, 0, 64, 'UTF-8');
@@ -303,12 +333,15 @@ class CabinetModel extends Model
     {
         $stmt = $this->db->prepare("SELECT profile_foto_id FROM users WHERE id = $id");
         $stmt->execute();
+        if ($stmt->errorCode() != '00000') {
+            $this->error(self::DB_SELECT_ERROR, $stmt->errorInfo());
+        }
         $profile_foto_id = $stmt->fetchAll();
 
         if (isset($profile_foto_id[0]['profile_foto_id'])) {
             $profile_foto_id = $profile_foto_id[0]['profile_foto_id'];
         } else {
-            $profile_foto_id = 'empty';
+            $profile_foto_id = '';
         }
 
         return $profile_foto_id;
@@ -318,12 +351,18 @@ class CabinetModel extends Model
     {
         $stmt = $this->db->prepare("SELECT max(id) FROM dialogs_messages WHERE chat_id = $id");
         $stmt->execute();
+        if ($stmt->errorCode() != '00000') {
+            $this->error(self::DB_SELECT_ERROR, $stmt->errorInfo());
+        }
         $i = $stmt->fetchAll();
         $i = $i[0]['max'];
 
         if ($i != null) {
             $stmt = $this->db->prepare("SELECT * FROM dialogs_messages WHERE id = $i");
             $stmt->execute();
+            if ($stmt->errorCode() != '00000') {
+                $this->error(self::DB_SELECT_ERROR, $stmt->errorInfo());
+            }
             $info = $stmt->fetchAll();
             $user_id = $info[0]['user_id'];
             $message = $info[0]['text'];
@@ -342,12 +381,12 @@ class CabinetModel extends Model
                 'avatar'     => $profile_foto_id,
             ];
         } else {
-            $type = 'empty';
-            $attachment = 'empty';
-            $user_id = 'empty';
-            $time = 'empty';
-            $message = 'empty';
-            $profile_foto_id = 'empty';
+            $type = '';
+            $attachment = '';
+            $user_id = '';
+            $time = '';
+            $message = '';
+            $profile_foto_id = '';
 
             return [
                 'attachment' => $attachment,
@@ -560,15 +599,21 @@ class CabinetModel extends Model
     {
         $stmt = $this->db->prepare("SELECT first_name FROM users WHERE id = {$id}");
         $stmt->execute();
+        if ($stmt->errorCode() != '00000') {
+            $this->error(self::DB_SELECT_ERROR, $stmt->errorInfo());
+        }
         $name = $stmt->fetchAll();
         if (isset($name[0]['first_name'])) {
             $fullName = $name[0]['first_name'];
             $stmt = $this->db->prepare("SELECT last_name FROM users WHERE id = {$id}");
             $stmt->execute();
+            if ($stmt->errorCode() != '00000') {
+                $this->error(self::DB_SELECT_ERROR, $stmt->errorInfo());
+            }
             $name = $stmt->fetchAll();
             $fullName .= ' ' . $name[0]['last_name'];
         } else {
-            $fullName = 'empty';
+            $fullName = '';
         }
 
         return $fullName;
@@ -580,6 +625,9 @@ class CabinetModel extends Model
         $status = self::ADMINSTATUS;
         $stmt = $this->db->prepare("SELECT id FROM users WHERE id != $profile_id AND status != $status");
         $stmt->execute();
+        if ($stmt->errorCode() != '00000') {
+            $this->error(self::DB_SELECT_ERROR, $stmt->errorInfo());
+        }
         $users = $stmt->fetchAll();
 
         if ($users) {
@@ -598,6 +646,9 @@ class CabinetModel extends Model
     {
         $stmt = $this->db->prepare("SELECT first_name FROM users WHERE id = {$id}");
         $stmt->execute();
+        if ($stmt->errorCode() != '00000') {
+            $this->error(self::DB_SELECT_ERROR, $stmt->errorInfo());
+        }
         $name = $stmt->fetchAll();
         $fullName = $name[0]['first_name'];
 
@@ -609,6 +660,9 @@ class CabinetModel extends Model
         //$owners = sort($owners);
         $stmt = $this->db->prepare("SELECT id FROM dialogs_properties WHERE owners = '{$owners}'");
         $stmt->execute();
+        if ($stmt->errorCode() != '00000') {
+            $this->error(self::DB_SELECT_ERROR, $stmt->errorInfo());
+        }
         $id = $stmt->fetchAll();
         if (!empty($id))
             return $id[0]['id'];
@@ -757,6 +811,9 @@ class CabinetModel extends Model
         $profile_id = $_SESSION['userID'];
         $stmt = $this->db->prepare("SELECT * FROM users WHERE id = $profile_id");
         $stmt->execute();
+        if ($stmt->errorCode() != '00000') {
+            $this->error(self::DB_SELECT_ERROR, $stmt->errorInfo());
+        }
         $info = $stmt->fetchAll();
 
         return $info;
@@ -812,7 +869,7 @@ class CabinetModel extends Model
         $info = $this->getinfo();
         $info = $info[0];
 
-        $this->response = 'Ты молодец!';
+        $this->response(array());
     }
 
     public function getPersonalInfoSettings()
@@ -933,9 +990,7 @@ class CabinetModel extends Model
 
     public function сheckEmail($profile_id)
     {
-        if (filter_var(trim($_POST['email']), FILTER_VALIDATE_EMAIL)) {
-            $this->db->query("UPDATE users SET email = '{$_POST['email']}' WHERE id = $profile_id");
-        } else {
+        if (!filter_var(trim($_POST['email']), FILTER_VALIDATE_EMAIL)) {
             return false;
         }
 
@@ -958,12 +1013,7 @@ class CabinetModel extends Model
     public function savePersonalInfo() // Редактирование профиля
     {
         if (!isset($_SESSION['user']['id'])) {
-            $this->response['error'] = [
-                'code'    => '4014',
-                'message' => 'Пользователь неавторизован',
-            ];
-
-            return;
+            $this->error(self::USER_NOT_AUTHORIZED_ERROR);
         }
         $profile_id = $_SESSION['user']['id'];
         $update = [];
@@ -971,123 +1021,57 @@ class CabinetModel extends Model
         if ($str = $this->сheckPersonalName($_POST['name_name'])) {
             $update['name_name'] = $str;
         } else {
-            $this->response['error'] = [
-                'code'    => '4000',
-                'message' => 'Имя введено неверно',
-                'reqest'  => $_POST,
-            ];
-
-            return;
+            $this->error(self::WRONG_NAME_NAME);
         }
         if ($str = $this->сheckPersonalName($_POST['name_surname'])) {
             $update['name_surname'] = $str;
         } else {
-            $this->response['error'] = [
-                'code'    => '4001',
-                'message' => 'Фамилия введена неверно',
-                'reqest'  => $_POST,
-            ];
-
-            return;
+            $this->error(self::WRONG_NAME_SURNAME);
         }
         if ($str = $this->сheckPersonalName($_POST['name_patronymic'])) {
             $update['name_patronymic'] = $str;
         } else {
-            $this->response['error'] = [
-                'code'    => '4002',
-                'message' => 'Отчество введено неверно',
-                'reqest'  => $_POST,
-            ];
-
-            return;
+            $this->error(self::WRONG_NAME_PATRONYMIC);
         }
         if ($str = $this->сheckBirthDay()) {
             $update['name_birthday'] = $_POST['sel_year'] . '-' . $_POST['sel_month'] . '-' . $_POST['sel_date'];
         } else {
-            $this->response['error'] = [
-                'code'    => '4003',
-                'message' => 'Дата рождения введена неверно',
-                'reqest'  => $_POST,
-            ];
-
-            return;
+            $this->error(self::WRONG_BIRTHDAY);
         }
         if ($str = $this->сheckNumbers($_POST['passport_series'])) {
             $update['passport_series'] = $str;
         } else {
-            $this->response['error'] = [
-                'code'    => '4004',
-                'message' => 'Серия паспорта введена неверно',
-                'reqest'  => $_POST,
-            ];
-
-            return;
+            $this->error(self::WRONG_PASSPORT_SERIES);
         }
         if ($str = $this->сheckNumbers($_POST['passport_number'])) {
             $update['passport_number'] = $str;
         } else {
-            $this->response['error'] = [
-                'code'    => '4005',
-                'message' => 'Номер паспорта введен неверно',
-                'reqest'  => $_POST,
-            ];
-
-            return;
+            $this->error(self::WRONG_PASSPORT_NUMBER);
         }
         if ($str = $this->сheckNumbers($_POST['adress_index'])) {
             $update['adress_index'] = $str;
         } else {
-            $this->response['error'] = [
-                'code'    => '4006',
-                'message' => 'Индекс введен неверно',
-                'reqest'  => $_POST,
-            ];
-
-            return;
+            $this->error(self::WRONG_ADRESS_INDEX);
         }
         if ($str = $this->сheckPersonalName($_POST['adress_city'])) {
             $update['adress_city'] = $str;
         } else {
-            $this->response['error'] = [
-                'code'    => '4007',
-                'message' => 'Город введен неверно',
-                'reqest'  => $_POST,
-            ];
-
-            return;
+            $this->error(self::WRONG_ADRESS_CITY);
         }
         if ($str = $this->сheckIllegalSymbols($_POST['adress_street'])) {
             $update['adress_street'] = $str;
         } else {
-            $this->response['error'] = [
-                'code'    => '4008',
-                'message' => 'Улица введен неверно',
-                'reqest'  => $_POST,
-            ];
-
-            return;
+            $this->error(self::WRONG_ADRESS_STREET);
         }
         if ($str = $this->сheckIllegalSymbols($_POST['adress_home'])) {
             $update['adress_home'] = $str;
         } else {
-            $this->response['error'] = [
-                'code'    => '4009',
-                'message' => 'Номер дома введен неверно',
-                'reqest'  => $_POST,
-            ];
-
-            return;
+            $this->error(self::WRONG_ADRESS_HOME);
         }
         if ($str = $this->сheckNumbers($_POST['adress_flat'])) {
             $update['adress_flat'] = $str;
         } else {
-            $this->response['error'] = [
-                'code'    => '4010',
-                'message' => 'Номер квартиры введен неверно',
-                'reqest'  => $_POST,
-            ];
-
-            return;
+            $this->error(self::WRONG_ADRESS_FLAT);
         }
         if ($str = $this->сheckNumbers($_POST['contacts_number'])) {
             if (strlen($str) == 11 && $str[0] == '8') {
@@ -1095,24 +1079,12 @@ class CabinetModel extends Model
             }
             $update['contacts_number'] = $str;
         } else {
-            $this->response['error'] = [
-                'code'    => '4011',
-                'message' => 'Номер телефона введен неверно',
-                'reqest'  => $_POST,
-            ];
-
-            return;
+            $this->error(self::WRONG_PHONE_NUMBER);
         }
         if ($str = $this->сheckEmail($profile_id)) {
             $update['contacts_email'] = $str;
         } else {
-            $this->response['error'] = [
-                'code'    => '4012',
-                'message' => 'Email введен неверно',
-                'reqest'  => $_POST,
-            ];
-
-            return;
+            $this->error(self::WRONG_EMAIL);
         }
 
         $update['profile_id'] = $profile_id;
@@ -1123,52 +1095,78 @@ class CabinetModel extends Model
     public function savePersonalInfoSettings()
     {
         if (!isset($_SESSION['user']['id'])) {
-            $this->response['error'] = [
-                'code'    => '4014',
-                'message' => 'Пользователь неавторизован',
-            ];
-
-            return;
+            $this->error(self::USER_NOT_AUTHORIZED_ERROR);
         }
+
         $profile_id = $_SESSION['user']['id'];
         if (isset($_POST['connection_new_dialog'])) {
             $stmt = $this->db->prepare("UPDATE users SET new_dialog = 1 WHERE id = :profile_id");
+            if ($stmt->errorCode() != '00000') {
+                $this->error(self::DB_UPDATE_ERROR, $stmt->errorInfo());
+            }
             $stmt->execute([':profile_id' => $profile_id]);
         }
         if (isset($_POST['connection_close_ad'])) {
             $stmt = $this->db->prepare("UPDATE users SET close_ad = 1 WHERE id = :profile_id");
+            if ($stmt->errorCode() != '00000') {
+                $this->error(self::DB_UPDATE_ERROR, $stmt->errorInfo());
+            }
             $stmt->execute([':profile_id' => $profile_id]);
         }
         if (isset($_POST['connection_prom_offers'])) {
             $stmt = $this->db->prepare("UPDATE users SET prom_offers = 1 WHERE id = :profile_id");
+            if ($stmt->errorCode() != '00000') {
+                $this->error(self::DB_UPDATE_ERROR, $stmt->errorInfo());
+            }
             $stmt->execute([':profile_id' => $profile_id]);
         }
         if (!isset($_POST['connection_new_dialog'])) {
             $stmt = $this->db->prepare("UPDATE users SET new_dialog = 0 WHERE id = :profile_id");
+            if ($stmt->errorCode() != '00000') {
+                $this->error(self::DB_UPDATE_ERROR, $stmt->errorInfo());
+            }
             $stmt->execute([':profile_id' => $profile_id]);
         }
         if (!isset($_POST['connection_close_ad'])) {
             $stmt = $this->db->prepare("UPDATE users SET close_ad = 0 WHERE id = :profile_id");
+            if ($stmt->errorCode() != '00000') {
+                $this->error(self::DB_UPDATE_ERROR, $stmt->errorInfo());
+            }
             $stmt->execute([':profile_id' => $profile_id]);
         }
         if (!isset($_POST['connection_prom_offers'])) {
             $stmt = $this->db->prepare("UPDATE users SET prom_offers = 0 WHERE id = :profile_id");
+            if ($stmt->errorCode() != '00000') {
+                $this->error(self::DB_UPDATE_ERROR, $stmt->errorInfo());
+            }
             $stmt->execute([':profile_id' => $profile_id]);
         }
         if (isset($_POST['phone_only'])) {
             $stmt = $this->db->prepare("UPDATE users SET phone_only = 1 WHERE id = :profile_id");
+            if ($stmt->errorCode() != '00000') {
+                $this->error(self::DB_UPDATE_ERROR, $stmt->errorInfo());
+            }
             $stmt->execute([':profile_id' => $profile_id]);
         }
         if (isset($_POST['site_only'])) {
             $stmt = $this->db->prepare("UPDATE users SET site_only = 1 WHERE id = :profile_id");
+            if ($stmt->errorCode() != '00000') {
+                $this->error(self::DB_UPDATE_ERROR, $stmt->errorInfo());
+            }
             $stmt->execute([':profile_id' => $profile_id]);
         }
         if (!isset($_POST['phone_only'])) {
             $stmt = $this->db->prepare("UPDATE users SET phone_only = 0 WHERE id = :profile_id");
+            if ($stmt->errorCode() != '00000') {
+                $this->error(self::DB_UPDATE_ERROR, $stmt->errorInfo());
+            }
             $stmt->execute([':profile_id' => $profile_id]);
         }
         if (!isset($_POST['site_only'])) {
             $stmt = $this->db->prepare("UPDATE users SET site_only = 0 WHERE id = :profile_id");
+            if ($stmt->errorCode() != '00000') {
+                $this->error(self::DB_UPDATE_ERROR, $stmt->errorInfo());
+            }
             $stmt->execute([':profile_id' => $profile_id]);
         }
     }
@@ -1233,22 +1231,23 @@ class CabinetModel extends Model
             'contacts_email'  => $update['contacts_email'],
             ':profile_id'     => $update['profile_id'],
         ]);
+        if ($stmt->errorCode() != '00000') {
+            $this->error(self::DB_UPDATE_ERROR, $stmt->errorInfo());
+        }
     }
 
     public function savePassword()
     {
         if (!isset($_SESSION['user']['id'])) {
-            $this->response['error'] = [
-                'code'    => '4014',
-                'message' => 'Пользователь неавторизован',
-            ];
-
-            return;
+            $this->error(self::USER_NOT_AUTHORIZED_ERROR);
         }
         $profile_id = $_SESSION['user']['id'];
         {
             $stmt = $this->db->prepare("SELECT password FROM users WHERE id = $profile_id");
             $stmt->execute();
+            if ($stmt->errorCode() != '00000') {
+                $this->error(self::DB_SELECT_ERROR, $stmt->errorInfo());
+            }
             $result = $stmt->fetchAll();
 
             $new_result = $result[0]['password'];
@@ -1257,13 +1256,11 @@ class CabinetModel extends Model
                 $passwordHash = password_hash($_POST['new_pass'], PASSWORD_DEFAULT);
                 $stmt = $this->db->prepare("UPDATE users SET password = :password WHERE id = :profile_id");
                 $stmt->execute([':password' => $passwordHash, ':profile_id' => $profile_id]);
+                if ($stmt->errorCode() != '00000') {
+                    $this->error(self::DB_UPDATE_ERROR, $stmt->errorInfo());
+                }
             } else {
-                $this->response['error'] = [
-                    'code'    => '4013',
-                    'message' => 'Пароль введен неверно',
-                ];
-
-                return;
+                $this->error(self::WRONG_PASSWORD_ERROR);
             }
         }
         $this->response['response'] = true;
