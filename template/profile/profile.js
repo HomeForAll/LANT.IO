@@ -1,11 +1,14 @@
 $(function () {
 
 
-    $.getJSON("/api/user", {}, function(data) {
-        if (data.response) {
-            $('.profile-userinfo_photo, .user-info img').prop('src', data.response.photo);
-            $('.profile-userinfo_welcome').html("Здравствуйте, "+data.response.name+"!");
-            $('.user-info .user-info__name').html(data.response.name);
+    $.getJSON("/api/user", {}, function(user) {
+        if (user.response) {
+            if (user.response.avatar_50)
+            $('.user-info img').prop('src', user.response.avatar_50);
+            if (user.response.avatar_100)
+            $('.profile-userinfo_photo').prop('src', user.response.avatar_100);
+            $('.profile-userinfo_welcome').html("Здравствуйте, "+user.response.name+"!");
+            $('.user-info .user-info__name').html(user.response.name);
         }
     });
 
