@@ -243,8 +243,8 @@
     border: solid 1px rgba(255, 255, 255, 0.22);
 }
 
-.dialog-registration .error
-.dialog-restore .error{
+.dialog-registration .error,
+.dialog-restore .error {
     padding: 6px 16px 0;
     max-width: 300px;
     color: #d54949;

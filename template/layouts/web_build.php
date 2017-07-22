@@ -109,6 +109,7 @@ $siteModel = $this->model('SiteModel');
 
 <script src="/template/lucia/jquery.inputmask.bundle.min.js"></script>
 <script src="/template/lucia/phone-codes/phone.min.js"></script>
+<script src="/template/lucia/validate.js"></script>
 <script src="/template/lucia/jquery.wizard.js"></script>
 <script src="/template/lucia/jquery.arcticmodal-0.3.min.js"></script>
 <script src="/template/lucia/chosen.jquery.min.js"></script>
