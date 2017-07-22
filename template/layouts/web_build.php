@@ -53,10 +53,10 @@ $siteModel = $this->model('SiteModel');
 
                         <div class="axf user-info">
                             <div>
-                                <div class="menu-user-name">Никулин Александр</div>
+                                <div class="menu-user-name">...</div>
                                 <div class="menu-user-status">Пользователь +</div>
                             </div>
-                            <img src="/template/img/user.png" alt="">
+                            <img src="/template/img/photo_dm.png" alt="">
                         </div>
                 </div>
             </div>

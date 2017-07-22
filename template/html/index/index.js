@@ -57,11 +57,13 @@ function initUserMenu(user) {
     if (user.status != -1) {
         $('.menu-user .user-menu-reg').remove();
         $('.menu-user .menu-user-name').text(user.name)
-        $('.menu-user .user-info img').prop('src', user.photo);
+        if (user.avatar_50)
+        $('.menu-user .user-info img').prop('src', user.avatar_50);
 
 
         $('.header-line .menu-user-name').text(user.name)
-        $('.header-line .user-info img').prop('src', user.photo);
+        if (user.avatar_50)
+        $('.header-line .user-info img').prop('src', user.avatar_50);
         $('.menu-user .user-info, .header-line .user-info').click(function(event, a) {
             window.location = '/profile/';
         });

@@ -78,10 +78,10 @@
 
     <div class="axf user-info pheader__user">
         <div>
-            <div class="user-info__name">Никулин Александр</div>
+            <div class="user-info__name">...</div>
             <div class="user-info__status">Пользователь +</div>
         </div>
-        <img src="/template/img/user.png" alt="">
+        <img src="/template/img/photo_dm.png" alt="">
     </div>
 </div>
 
