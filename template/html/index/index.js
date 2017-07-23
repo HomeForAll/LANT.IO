@@ -34,8 +34,9 @@ function initIndexPage() {
         //navigationTooltips: ['First page', 'Second page', 'Third and last page'],
         normalScrollElements: '.scrollbar-inner, .arcticmodal-container_i',
     });
-    // $.fn.fullpage.silentMoveTo(3);
+    $.fn.fullpage.silentMoveTo(1);
 
+    
     var lastScrollY = 0;
     $('.scrollbar-inner').scrollbar({
         onScroll: function(y, x){
@@ -121,6 +122,33 @@ $(function(){
         event.preventDefault();
     });
 
+    var constraints = {
+        name: {
+            presence: {message: "^Пожалуйста, укажите ваше имя."}
+        },
+        document_inn: {},
+        document_ogrn: {},
+        brand: {},
+        company: {},
+        phone: {
+            presence: {message: "^Введите телефон."}
+        },
+        code: {
+            presence: {message: "^Введите полученный код из смс."}
+        },
+        email: {
+            presence: {message: "^Укажите вашу электронную почту."}
+        },
+        password: {},
+        //code: {},
+    };
+
+    $('#tbut').click(function(){
+        var input = $('#tteesstt').find('input');
+        var errors = validate(input, constraints);// || {};
+        console.log(errors)
+    });
+
     var dialog_registration_config = {
 		beforeBackward: function( event, state ) {
     		state.step.find("[name=type]").prop('checked', false);
@@ -137,32 +165,50 @@ $(function(){
             }
             //onsole.log(current_state);
         },
+
 		beforeForward: function( event, state, update ) {
             var data =  dialog_registration.wizard("form").serializeObject();
             var current_index = state.stepsActivated.slice(-2, -1).shift();
             var current_step = dialog_registration.wizard("step", current_index);
             var current_state = current_step.find(".current_state").val();
             var error = current_step.find('.error');
+            var inputs = current_step.find('input').serializeObject();
+            var _constraints = {};
+            $.each(inputs, function(name) {
+                if (constraints[name])
+                _constraints[name] = constraints[name];
+            });
+
+            //console.log('serialize', inputs.serializeObject())
+
             error.html('');
-            if (current_state == "step_type_user" || current_state == "step_type_document") {
-                update();
-            } else {
-                $.post('/api/registration/'+current_state, data, function(data) {
-                    console.log(data);
-                    //data = JSON.parse(data);
-                    if (data.response) {
-                        update();
-                    } else if (data.error) {
-                        switch (data.error.code) {
-                            //case 2013: error.html("Пожалуйста, заполните корректно информацию."); break;
-                            case 2006: error.html("Неверно указано имя."); break;
-                            default: error.html(data.error.message);
-                        }
-                    }
+            
+            var errors = validate(inputs, _constraints);
+            console.log(errors);
+            if (errors) {
+                $.each(inputs, function(name) {
+                    $.each(errors[name], function(i, _error) {
+                        error.html(_error);
+                    });
                 });
+            } else {
+                if (current_state == "step_type_user" || current_state == "step_type_document") {
+                    update();
+                } else {
+                    $.post('/api/registration/'+current_state, data, function(data) {
+                        console.log(data);
+                        if (data.response) {
+                            update();
+                        } else if (data.error) {
+                            error.html(data.error.message);
+                        }
+                    });
+                }
             }
             return false;
         },
+
+
 		transitions: {
 			step_type_user: function( state, action ) {
 				var branch = state.step.find("[name=type]:checked").val();
