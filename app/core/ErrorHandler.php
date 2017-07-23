@@ -2,7 +2,8 @@
 
 class ErrorHandler
 {
-    const ERROR_FILENAME = '/errors.log';
+    const ERROR_FILENAME = '/log/errors.log';
+    const ERROR_FILENAME_HTML = '/log/errors.html';
 
     /**
      * Register this error handler.
@@ -26,6 +27,7 @@ class ErrorHandler
         $errline,
         $flag = 0
     ) {
+        // строка пути к файлу ошибки
         $errfile_2 = substr($errfile, strpos($errfile, ROOT_DIR) + strlen(ROOT_DIR));
 
         switch ($errno) {
@@ -75,12 +77,10 @@ class ErrorHandler
 
         // добавляем описание исключения в лог-файл
         if (ERROR_HANDLER_STATUS == '1') {
-            //Формат записи:
-            $exception = date('Y-m-d [H:i:s]') . ' - [' . $errno . "] " . $errstr . "\r\n  "
-                . "(line: " . $errline . " ) -> " . $errfile_2;
 
+            //Если фатальная ошибка
             if ($flag == 1) {
-                $exception .= " - Фатальная ошибка!";
+                $fatal_error = " - Фатальная ошибка!";
                 // выводим пользовалелю понятное сообщение
                 ?>
                 <div style="width: 500px; height: 150px; position: relative; margin: auto; padding: 30px; background-color: #ffff66; font-size: 30; text-align: center;">
@@ -91,17 +91,8 @@ class ErrorHandler
                 </div>
                 <?php
             }
-
-            $file = fopen(ROOT_DIR . self::ERROR_FILENAME, "a+");
-            if (!$file) {
-                echo "Ошибка открытия errors.log файла";
-            } else {
-                $exception = "* " . $exception . "\r\n\r\n";
-                if (!fwrite($file, $exception)) {
-                    echo "Ошибка записи errors.log файла";
-                };
-            }
-            fclose($file);
+            $this->writeLOG($errno, $errstr, $errfile_2, $errline, $fatal_error);
+            $this->writeHTML($errno, $errstr, $errfile_2, $errline, $fatal_error);
 
             //Вывод ошибки на экран
         } elseif (ERROR_HANDLER_STATUS == '2') {
@@ -151,5 +142,42 @@ class ErrorHandler
         $this->handleError($e->getCode(), get_class($e) . '("' . $e->getMessage() . '")', $e->getFile(),
             $e->getLine(), 1);
         return true;
+    }
+
+
+    private function writeLOG($errno, $errstr, $errfile, $errline, $fatal_error)
+    {
+        $file = fopen(ROOT_DIR . self::ERROR_FILENAME, "a+");
+        //Формат записи:
+        $exception = "* " . date('Y-m-d [H:i:s]') . ' - [' . $errno . "] " . $errstr . "\r\n  "
+            . "(line: " . $errline . " ) -> " . $errfile . " " . $fatal_error . "\r\n\r\n";
+
+        if ($file) {
+            fwrite($file, $exception);
+            fclose($file);
+        }
+
+    }
+
+    private function writeHTML($errno, $errstr, $errfile, $errline, $fatal_error)
+    {
+        $file = fopen(ROOT_DIR . self::ERROR_FILENAME_HTML, "a+");
+
+        $exception = "<div style='padding: 10px; background-color: #fff8e1; margin: 10px;'>" . "\r\n"
+            . "<span style='color: blue; padding: 5px;'>" . date('Y-m-d [H:i:s]') . "</span>" . "\r\n"
+            . "<span style='background-color: #ffc582; padding: 2px 5px;'>$errno</span>" . "\r\n"
+            . "<span style='color: #c21535; padding: 5px;'>$errstr</span>" . "\r\n"
+            . "<span style='background-color: #e3f2f8; padding: 2px 5px;'>стр. <b>$errline</b></span>" . "\r\n"
+            . "<span style='background-color: #e3f2f8; padding: 2px 5px;'>$errfile</span>" . "\r\n";
+        if (!empty($fatal_error)) {
+            $exception .= "<span style='background-color: #c21535; padding: 2px 5px; color: #fff8e1;'><b>$fatal_error</b></span>";
+        }
+        $exception .= "</div>" . "\r\n\r\n";
+
+        if ($file) {
+            fwrite($file, $exception);
+            fclose($file);
+        }
+
     }
 }

@@ -1125,17 +1125,50 @@ class UserModel extends Model
         }
 
         $_SESSION['registration']['phone'] = $phone;
+
+        $code = mt_rand(1, 9) . mt_rand(0, 9) . mt_rand(0, 9) . mt_rand(0, 9) . mt_rand(0, 9) . mt_rand(0, 9);
+
+        $ch = curl_init("https://sms.ru/sms/send");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
+            "api_id" => Registry::get('config')['sms_api_key'],
+            "to"     => $phone, // До 100 штук до раз
+            "msg"    => "Ваш код: {$code}",
+            "json"   => 1 // Для получения более развернутого ответа от сервера
+        ]));
+
+        $body = curl_exec($ch);
+        curl_close($ch);
+
+        $json = json_decode($body);
+
+        if ($json) {
+            if ($json->status == "OK") {
+                foreach ($json->sms as $phone => $data) {
+                    if ($data->status !== "OK") { // Сообщение отправлено
+                        $this->error(self::SMS_NOT_SENT_ERROR, $data->status_text);
+                    }
+                }
+
+                $_SESSION['registration']['code'] = $code;
+            } else {
+                $this->error(self::SMS_API_REQUEST_FAILED_ERROR, $json->status_text);
+            }
+        } else {
+            $this->error(self::CURL_CONNECTION_LOST);
+        }
+
         $this->response(true);
     }
 
     public function verifySMSCode($code)
     {
-        $_SESSION['registration']['code'] = $code;
+        if (!v::numeric()->validate($code) || $_SESSION['registration']['code'] != $code) {
+            $this->error(self::SMS_CODE_INCORRECT_ERROR);
+        }
+
         $this->response(true);
-        //        $this->errors[] = [
-        //            'code'    => self::REGISTRATION_SMS_CODE_INCORRECT_ERROR,
-        //            'message' => 'Неправильный код из СМС',
-        //        ];
     }
 
     public function setEmail($email)
@@ -1428,14 +1461,14 @@ class UserModel extends Model
         $this->response(true);
     }
 
-    public function passwordRestore()
+    public function passwordRestore($step)
     {
-        switch (isset($_POST['step']) ? $_POST['step'] : false) {
+        switch ($step) {
             case '1':
                 $login = isset($_POST['login']) ? $_POST['login'] : null;
 
                 if (strrpos($login, '@')) {
-                    if (v::email()->validate($login)) {
+                    if (!v::email()->validate($login)) {
                         $this->error(self::EMAIL_INCORRECT_ERROR);
                     }
 
@@ -1485,7 +1518,7 @@ class UserModel extends Model
                     $mail->msgHTML("Вы воспользовались формой восстановления пароля, перейдите по ссылке: {$restore_url}, что бы продолжить.");
 
                     if ($mail->send()) {
-                        $this->response(true);
+                        $this->response(['login_type' => 'restore_email']);
                     } else {
                         $this->error(self::EMAIL_MESSAGE_SEND_ERROR, $mail->ErrorInfo);
                     }

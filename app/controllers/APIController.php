@@ -51,7 +51,7 @@ class APIController extends Controller
 
     public function actionGetMessagesFromDB()
     {
-        $this->model('CabinetModel')->getMessagesFromDB();
+        $this->model('CabinetModel')->getChatMessagesFromDB();
         echo json_encode($this->model('CabinetModel')->getResponse(), JSON_UNESCAPED_UNICODE);
     }
 
@@ -205,9 +205,9 @@ class APIController extends Controller
         $this->model('CabinetModel')->newTicket();
     }
 
-    public function actionPasswordRestore()
+    public function actionPasswordRestore($step)
     {
-        $this->model('UserModel')->passwordRestore();
+        $this->model('UserModel')->passwordRestore($step[0]);
     }
 
     public function actionBestAds($param)

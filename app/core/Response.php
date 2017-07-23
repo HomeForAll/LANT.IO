@@ -19,6 +19,7 @@ class Response
     const DB_UPDATE_ERROR = 3;
     const DB_DELETE_ERROR = 4;
     const DB_SELECT_ERROR = 5;
+    const CURL_CONNECTION_LOST = 6;
 
     // Авторизация
     const LOGIN_INCORRECT_ERROR = 1000;
@@ -42,12 +43,33 @@ class Response
     const MID_NAME_INCORRECT_ERROR = 2012;
     const EMAIL_IS_EXIST_ERROR = 2013;
     const PHONE_IS_EXIST_ERROR = 2014;
+    const SMS_NOT_SENT_ERROR = 2015;
+    const SMS_API_REQUEST_FAILED_ERROR = 2016;
 
     // Загрузка файлов
     const NO_FILE_ERROR = 3000;
     const FILE_NOT_UPLOADED_ERROR = 3001;
     const NOT_IMAGE_ERROR = 3002;
     const FILE_NOT_PROCESSED_ERROR = 3003;
+
+    //CabinetModel Диалоги и Профиль
+    const INVALID_QWERY_ERROR = 4000;
+    const WRONG_PASSWORD_ERROR = 4001;
+    const WRONG_NAME_NAME = 4002;
+    const WRONG_NAME_SURNAME = 4003;
+    const WRONG_NAME_PATRONYMIC = 4004;
+    const WRONG_BIRTHDAY = 4005;
+    const WRONG_PASSPORT_SERIES = 4006;
+    const WRONG_PASSPORT_NUMBER = 4007;
+    const WRONG_ADRESS_INDEX = 4008;
+    const WRONG_ADRESS_CITY = 4009;
+    const WRONG_ADRESS_STREET = 4010;
+    const WRONG_ADRESS_HOME = 4011;
+    const WRONG_ADRESS_FLAT = 4012;
+    const WRONG_PHONE_NUMBER = 4013;
+    const WRONG_EMAIL = 4014;
+
+
 
     // Восстановлени пароля
     const EMAIL_MESSAGE_SEND_ERROR = 6000;
@@ -60,6 +82,7 @@ class Response
         3    => 'Возникла ошибка при обновлении в базе данных',
         4    => 'Возникла ошибка при удалении в базе данных',
         5    => 'Возникла ошибка при выборке из базы данных',
+        6    => 'CURL нет соединения с сервером',
 
         // Авторизация 1000-2000:
         1000 => 'Неверный формат логина',
@@ -83,12 +106,31 @@ class Response
         2012 => 'Неправильно указано отчество',
         2013 => 'Такой Email уже зарегистрирован',
         2014 => 'Такой телефон уже зарегистрирован',
+        2015 => 'SMS небыло отправлено',
+        2016 => 'Ошибка запроса к SMS.RU',
 
         // Загрузка файлов 3000-4000:
         3000 => 'Отсутствуют файлы для загрузки',
         3001 => 'Файл небыл загружен',
         3002 => 'Файл не является картинкой',
         3003 => 'Файл не является картинкой',
+
+        //CabinetModel Диалоги 4000-5000:
+        4000 => 'Не валидный запрос',
+        4001 => 'Неправильный пароль',
+        4002 => 'Неверно введено имя',
+        4003 => 'Неверно введена фамилия',
+        4004 => 'Неверно введено отчество',
+        4005 => 'Неверно введена дата рождения',
+        4006 => 'Неверно введена серия паспорта',
+        4007 => 'Неверно введен номер паспорта',
+        4008 => 'Неверно введен индекс',
+        4009 => 'Неверно введен город',
+        4010 => 'Неверно введена улица',
+        4011 => 'Неверно введен номер дома',
+        4012 => 'Неверно введена номер квартиры',
+        4013 => 'Неверно введен номер телефона',
+        4014 => 'Неверно введен Email',
 
         // Восстановление пароля 6000-7000
         6000 => 'Ошибка при отправке Email',

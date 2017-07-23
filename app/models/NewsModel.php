@@ -93,9 +93,7 @@ class NewsModel extends Model
         $status = 1,
         $title_like = ''
     ) {
-
         $sql = "SELECT COUNT(*) FROM news_base WHERE ";
-
         //Дата окончания поиска (по умолчанию настоящее время)
         $time_to = $this->dateFormatForDB($time_to);
         $sql .= " (date <= :time_to) ";
@@ -104,7 +102,6 @@ class NewsModel extends Model
             $time_from = $this->dateFormatForDB($time_from);
             $sql .= "AND (date >= :time_from) ";
         }
-
         if ($status == 1) {
             // Только активные(видимые)
             $sql .= "AND (status = 1) ";
@@ -191,8 +188,8 @@ class NewsModel extends Model
         $stmt->execute();
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // разбиваем имена и передаем их в массиве
-        $data['preview_img'] = explode('|', $data['preview_img']);
+        // Получение фото
+        $data = getAdsPhotos($data);
         return $data;
     }
 
@@ -745,22 +742,7 @@ class NewsModel extends Model
      * @param $data_news - массив новостей
      * @return mixed - исправленный массив новостей
      */
-    private function explodePreviewImg($data_news)
-    {
-
-        foreach ($data_news as $k => $news_array) {
-            $data_news[$k]['preview_img'] = explode('|',
-                $news_array['preview_img']);
-        }
-        return $data_news;
-    }
-
-    /**
-     * Массив новостей => картинки из стоки записываются в массив
-     * @param $data_news - массив новостей
-     * @return mixed - исправленный массив новостей
-     */
-    private function getAdsImg($data_news)
+    private function getAdsPhotos($data_news)
     {
         $ad_id = [];
         $photo = [];
@@ -778,19 +760,19 @@ class NewsModel extends Model
             $stmt->execute();
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             if (!empty($result)) {
-
                 foreach ($result as $p) {
-                    $p_arr = $p;
-                    unset($p_arr['ad_id'], $p_arr['id']);
-                    if (isset($photo[$p['ad_id']])) {
-                        $photo[$p['ad_id']] = $photo[$p['ad_id']] + [$p['id'] => $p_arr];
-                    } else {
-                        $photo[$p['ad_id']] = [$p['id'] => $p_arr];
+                    $ad_id = $p['ad_id'];
+                    unset($p['ad_id']);
+                    if (!isset($photo[$ad_id])) {
+                        $photo[$ad_id] = [];
                     }
+                    array_push($photo[$ad_id], $p);
                 }
                 //Присваивание данных обратно в массив объявлений
                 foreach ($data_news as $k => $ad) {
-                    $data_news[$k]['preview_img'] = $photo[$ad['id_news']];
+                    if (isset($photo[$ad['id_news']])) {
+                        $data_news[$k]['photos'] = $photo[$ad['id_news']];
+                    }
                 }
             }
         }
@@ -831,25 +813,25 @@ class NewsModel extends Model
             return false;
         }
         //преобразование картинок в массив
-        $result = $this->explodePreviewImg($result);
+        $result = $this->getAdsPhotos($result);
 
         return $result;
     }
 
-    /**
-     * Установка сессии для редактирования картинок
-     * @param $news_to_edit
-     */
-    public function setSessionForEditor($news_to_edit = [])
-    {
-        if (empty($news_to_edit)) {
-            // Удаление сессии запоминания картинки
-            $_SESSION['preview_img'] = [];
-        } else {
-            //Запись имен картинок в базе, для перезаписи картинок при Update
-            $_SESSION['preview_img'] = $news_to_edit["preview_img"];
-        }
-    }
+//    /**
+//     * Установка сессии для редактирования картинок
+//     * @param $news_to_edit
+//     */
+//    public function setSessionForEditor($news_to_edit = [])
+//    {
+//        if (empty($news_to_edit)) {
+//            // Удаление сессии запоминания картинки
+//            $_SESSION['preview_img'] = [];
+//        } else {
+//            //Запись имен картинок в базе, для перезаписи картинок при Update
+//            $_SESSION['preview_img'] = $news_to_edit["preview_img"];
+//        }
+//    }
 
     /**
      * Получение и обработка данных из форм редактора объявлений
@@ -1360,197 +1342,197 @@ class NewsModel extends Model
         return $data;
     }
 
-    /**
-     * Возвращает строку имен (через '|') больших картинок
-     * (имя эскиза s_имя больш)
-     *
-     * @return mixed|string
-     */
-    public function saveNewsPictures()
-    {
-        global $news_error;
-
-        $blacklistOfFile = array(".php", ".phtml", ".php3", ".php4"); // Запрещенный формат файлов
-        $imgMaxSize = 3050000; // Максимальный размер картинок в байтах
-        $return_image_arr = []; //подготовительный массив для сохранения порядка следования
-        $return_image_names = ''; // Возвращаемая строка имен картинок
-
-        if (!empty($_FILES)) {
-            //Получаем имена полей "image_name_?" ввода картинок переданных POST
-            $image_name_keys = preg_grep("/^image_name_/", array_keys($_FILES));
-
-            //отсееваем и записываем имена уже существующих картинок
-            foreach ($image_name_keys as $k => $v) {
-                if (preg_match("/_saved_/", $v)) {
-                    // определяеи номер (отнимаем 1 т.к. для массива)
-                    $i = (int)substr($v, 11, 2) - 1;
-                    // определяем имя файла
-//                 $f_name =strstr($v, 'news_') ;
-                    //переделываем 4 знак конца в точку
-//                 $f_name = substr_repla($f_name, '.', -4, 1);
-                    // добавляем в подготовельный массив под номером
-                    $return_image_arr[$i] = $_SESSION['preview_img'][$i];
-
-                    //удаляем ссылку на поле ввода, что бы исключить обработку
-                    unset($image_name_keys[$k]);
-                }
-            }
-
-            foreach ($image_name_keys as $image_name_key) {
-
-                //Генерируем случайное имя картинки
-                $name_rand = md5(time()) . rand(10, 99); // Базовая часть
-                $name_big = 'news_' . $name_rand; // Новое имя для большой картинки
-                $name_small = 's_' . $name_big; // Новое имя для маленькой картинки
-                // Загрузка картинки в директоритю и получение ссылки на нее
-                // Проверяем тип файла
-                // Допустимый формат файлов .jpeg .png .gif
-                if ($_FILES[$image_name_key]['type'] == 'image/jpeg') {
-                    $type = '.jpg';
-                } elseif ($_FILES[$image_name_key]['type'] == 'image/png') {
-                    $type = '.png';
-                } elseif ($_FILES[$image_name_key]['type'] == 'image/gif') {
-                    $type = '.gif';
-                } else {
-                    array_push($news_error,
-                        'Файл:"' . $_FILES[$image_name_key]['name'] . '" не загружен. Можно загружать только картинки с расширением jpeg, png, gif.');
-                    continue;
-                }
-                // Расширения новых имен:
-                $name_big = $name_big . $type;
-                $name_small = $name_small . $type;
-
-                // Проверка на недопустимые форматы
-                foreach ($blacklistOfFile as $item) {
-                    if (preg_match("/$item\$/i",
-                        $_FILES[$image_name_key]['name'])) {
-                        array_push($news_error,
-                            'Файл:"' . $_FILES[$image_name_key]['name'] . '" не загружен. PHP файлы не разрешены для загрузки.');
-                        continue;
-                    }
-                }
-                // Проверяем размер файла
-                if ($_FILES[$image_name_key]['size'] > $imgMaxSize) {
-                    array_push($news_error,
-                        'Файл:"' . $_FILES[$image_name_key]['name'] . '" не загружен. Слишком большой размер файла картинки.');
-                    continue;
-                }
-
-                //Изменение размеров и запись
-                $this->newsPicturesResize($_FILES[$image_name_key], 'big',
-                    $name_big);
-                $this->newsPicturesResize($_FILES[$image_name_key], 'small',
-                    $name_small);
-
-                //Запись в подгот. массив под номером ключа соотв. имени
-                // Определяем номер (отнимаем 1 т.к. для массива)
-                $i = (int)substr($image_name_key, 11, 2) - 1;
-
-                $return_image_arr[$i] = $name_big;
-//                if (empty($return_image_names)) {
-//                    $return_image_names = $name_big;
-//                } else {
-//                    $return_image_names = $return_image_names . '|' . $name_big;
+//    /**
+//     * Возвращает строку имен (через '|') больших картинок
+//     * (имя эскиза s_имя больш)
+//     *
+//     * @return mixed|string
+//     */
+//    public function saveNewsPictures()
+//    {
+//        global $news_error;
+//
+//        $blacklistOfFile = array(".php", ".phtml", ".php3", ".php4"); // Запрещенный формат файлов
+//        $imgMaxSize = 3050000; // Максимальный размер картинок в байтах
+//        $return_image_arr = []; //подготовительный массив для сохранения порядка следования
+//        $return_image_names = ''; // Возвращаемая строка имен картинок
+//
+//        if (!empty($_FILES)) {
+//            //Получаем имена полей "image_name_?" ввода картинок переданных POST
+//            $image_name_keys = preg_grep("/^image_name_/", array_keys($_FILES));
+//
+//            //отсееваем и записываем имена уже существующих картинок
+//            foreach ($image_name_keys as $k => $v) {
+//                if (preg_match("/_saved_/", $v)) {
+//                    // определяеи номер (отнимаем 1 т.к. для массива)
+//                    $i = (int)substr($v, 11, 2) - 1;
+//                    // определяем имя файла
+////                 $f_name =strstr($v, 'news_') ;
+//                    //переделываем 4 знак конца в точку
+////                 $f_name = substr_repla($f_name, '.', -4, 1);
+//                    // добавляем в подготовельный массив под номером
+//                    $return_image_arr[$i] = $_SESSION['preview_img'][$i];
+//
+//                    //удаляем ссылку на поле ввода, что бы исключить обработку
+//                    unset($image_name_keys[$k]);
 //                }
-            }
-
-            // Получаем строку имен файлов из массива
-            sort($return_image_arr);
-            foreach ($return_image_arr as $value) {
-                if (empty($return_image_names)) {
-                    $return_image_names = $value;
-                } else {
-                    $return_image_names = $return_image_names . '|' . $value;
-                }
-            }
-        }
-
-// Удаление всех картинок находящихся в БД, но не переданных на апдейт
-        if (!empty($_SESSION['preview_img'][0])) {
-            //Расхождение массива $_SESSION['preview_img'] от $return_image_arr
-            $img_arr_for_delete = array_diff($_SESSION['preview_img'], $return_image_arr);
-
-            foreach ($img_arr_for_delete as $value) {
-                if (file_exists('uploads/images/' . $value)) {
-                    unlink('uploads/images/' . $value);
-                }
-                if (file_exists('uploads/images/s_' . $value)) {
-                    unlink('uploads/images/s_' . $value);
-                }
-            }
-        }
-
-        return $return_image_names;
-    }
-
-    /**
-     * Изменение размеров картинки на эскиз ($type = 'small') и нормальные ($type = 'big')
-     * и сохраниение во временной папке  $tmpPath
-     * Запись результата в  $imgPath
-     * @param $file
-     * @param string $type
-     * @param $new_name
-     * @return bool
-     */
-    private function newsPicturesResize($file, $type = 'big', $new_name)
-    {
-        global $news_error, $tmpPath;
-
-        $imgPath = 'uploads/images/'; // Путь к папке загрузки картинок
-        $tmpPath = 'tmp/'; // Путь к папке временных файлов
-
-        $h_max_big_size = 800; //Всота для большой картинки
-        $h_max_small_size = 200; //Всота для эскиза
-        $quality = 80; // качество изображения (по умолчанию 80%)
-        // Создание исходного изображения на основе исходного файла
-        if ($file['type'] == 'image/jpeg') {
-            $src = imagecreatefromjpeg($file['tmp_name']);
-        } elseif ($file['type'] == 'image/png') {
-            $src = imagecreatefrompng($file['tmp_name']);
-        } elseif ($file['type'] == 'image/gif') {
-            $src = imagecreatefromgif($file['tmp_name']);
-        } else {
-            return false;
-        }
-
-        //Определение размеров изображения
-        $w_src = imagesx($src);
-        $h_src = imagesy($src);
-
-        // В зависимости от типа (эскиз или большое изображение) устанавливаем ограничение по ширине.
-        if ($type == 'small') {
-            $h_max = $h_max_small_size;
-        } else {
-            $h_max = $h_max_big_size;
-        }
-        // Если высота больше заданной
-        if ($h_src > $h_max) {
-            // Вычисление пропорций
-            $ratio = $h_src / $h_max;
-            $w_dest = round($w_src / $ratio);
-            $h_dest = round($h_src / $ratio);
-            // Создаём пустую картинку
-            $dest = imagecreatetruecolor($w_dest, $h_dest);
-            // Копируем старое изображение в новое с изменением параметров
-            imagecopyresampled($dest, $src, 0, 0, 0, 0, $w_dest, $h_dest,
-                $w_src, $h_src);
-            // Вывод картинки и очистка памяти
-            $this->picturesSaveAndClear($file, $dest, $new_name, $quality);
-            imagedestroy($dest);
-            imagedestroy($src);
-        } else {
-            // Вывод картинки и очистка памяти
-            $this->picturesSaveAndClear($file, $src, $new_name, $quality);
-            imagedestroy($src);
-        }
-
-        // Загрузка файла и вывод сообщения
-        if (!@copy($tmpPath . $new_name, $imgPath . $new_name)) {
-            array_push($news_error, 'Произошла ошибка при загрузке картинки');
-        }
-        //Удаляем временный файл
-        unlink($tmpPath . $new_name);
-    }
+//            }
+//
+//            foreach ($image_name_keys as $image_name_key) {
+//
+//                //Генерируем случайное имя картинки
+//                $name_rand = md5(time()) . rand(10, 99); // Базовая часть
+//                $name_big = 'news_' . $name_rand; // Новое имя для большой картинки
+//                $name_small = 's_' . $name_big; // Новое имя для маленькой картинки
+//                // Загрузка картинки в директоритю и получение ссылки на нее
+//                // Проверяем тип файла
+//                // Допустимый формат файлов .jpeg .png .gif
+//                if ($_FILES[$image_name_key]['type'] == 'image/jpeg') {
+//                    $type = '.jpg';
+//                } elseif ($_FILES[$image_name_key]['type'] == 'image/png') {
+//                    $type = '.png';
+//                } elseif ($_FILES[$image_name_key]['type'] == 'image/gif') {
+//                    $type = '.gif';
+//                } else {
+//                    array_push($news_error,
+//                        'Файл:"' . $_FILES[$image_name_key]['name'] . '" не загружен. Можно загружать только картинки с расширением jpeg, png, gif.');
+//                    continue;
+//                }
+//                // Расширения новых имен:
+//                $name_big = $name_big . $type;
+//                $name_small = $name_small . $type;
+//
+//                // Проверка на недопустимые форматы
+//                foreach ($blacklistOfFile as $item) {
+//                    if (preg_match("/$item\$/i",
+//                        $_FILES[$image_name_key]['name'])) {
+//                        array_push($news_error,
+//                            'Файл:"' . $_FILES[$image_name_key]['name'] . '" не загружен. PHP файлы не разрешены для загрузки.');
+//                        continue;
+//                    }
+//                }
+//                // Проверяем размер файла
+//                if ($_FILES[$image_name_key]['size'] > $imgMaxSize) {
+//                    array_push($news_error,
+//                        'Файл:"' . $_FILES[$image_name_key]['name'] . '" не загружен. Слишком большой размер файла картинки.');
+//                    continue;
+//                }
+//
+//                //Изменение размеров и запись
+//                $this->newsPicturesResize($_FILES[$image_name_key], 'big',
+//                    $name_big);
+//                $this->newsPicturesResize($_FILES[$image_name_key], 'small',
+//                    $name_small);
+//
+//                //Запись в подгот. массив под номером ключа соотв. имени
+//                // Определяем номер (отнимаем 1 т.к. для массива)
+//                $i = (int)substr($image_name_key, 11, 2) - 1;
+//
+//                $return_image_arr[$i] = $name_big;
+////                if (empty($return_image_names)) {
+////                    $return_image_names = $name_big;
+////                } else {
+////                    $return_image_names = $return_image_names . '|' . $name_big;
+////                }
+//            }
+//
+//            // Получаем строку имен файлов из массива
+//            sort($return_image_arr);
+//            foreach ($return_image_arr as $value) {
+//                if (empty($return_image_names)) {
+//                    $return_image_names = $value;
+//                } else {
+//                    $return_image_names = $return_image_names . '|' . $value;
+//                }
+//            }
+//        }
+//
+//// Удаление всех картинок находящихся в БД, но не переданных на апдейт
+//        if (!empty($_SESSION['preview_img'][0])) {
+//            //Расхождение массива $_SESSION['preview_img'] от $return_image_arr
+//            $img_arr_for_delete = array_diff($_SESSION['preview_img'], $return_image_arr);
+//
+//            foreach ($img_arr_for_delete as $value) {
+//                if (file_exists('uploads/images/' . $value)) {
+//                    unlink('uploads/images/' . $value);
+//                }
+//                if (file_exists('uploads/images/s_' . $value)) {
+//                    unlink('uploads/images/s_' . $value);
+//                }
+//            }
+//        }
+//
+//        return $return_image_names;
+//    }
+//
+//    /**
+//     * Изменение размеров картинки на эскиз ($type = 'small') и нормальные ($type = 'big')
+//     * и сохраниение во временной папке  $tmpPath
+//     * Запись результата в  $imgPath
+//     * @param $file
+//     * @param string $type
+//     * @param $new_name
+//     * @return bool
+//     */
+//    private function newsPicturesResize($file, $type = 'big', $new_name)
+//    {
+//        global $news_error, $tmpPath;
+//
+//        $imgPath = 'uploads/images/'; // Путь к папке загрузки картинок
+//        $tmpPath = 'tmp/'; // Путь к папке временных файлов
+//
+//        $h_max_big_size = 800; //Всота для большой картинки
+//        $h_max_small_size = 200; //Всота для эскиза
+//        $quality = 80; // качество изображения (по умолчанию 80%)
+//        // Создание исходного изображения на основе исходного файла
+//        if ($file['type'] == 'image/jpeg') {
+//            $src = imagecreatefromjpeg($file['tmp_name']);
+//        } elseif ($file['type'] == 'image/png') {
+//            $src = imagecreatefrompng($file['tmp_name']);
+//        } elseif ($file['type'] == 'image/gif') {
+//            $src = imagecreatefromgif($file['tmp_name']);
+//        } else {
+//            return false;
+//        }
+//
+//        //Определение размеров изображения
+//        $w_src = imagesx($src);
+//        $h_src = imagesy($src);
+//
+//        // В зависимости от типа (эскиз или большое изображение) устанавливаем ограничение по ширине.
+//        if ($type == 'small') {
+//            $h_max = $h_max_small_size;
+//        } else {
+//            $h_max = $h_max_big_size;
+//        }
+//        // Если высота больше заданной
+//        if ($h_src > $h_max) {
+//            // Вычисление пропорций
+//            $ratio = $h_src / $h_max;
+//            $w_dest = round($w_src / $ratio);
+//            $h_dest = round($h_src / $ratio);
+//            // Создаём пустую картинку
+//            $dest = imagecreatetruecolor($w_dest, $h_dest);
+//            // Копируем старое изображение в новое с изменением параметров
+//            imagecopyresampled($dest, $src, 0, 0, 0, 0, $w_dest, $h_dest,
+//                $w_src, $h_src);
+//            // Вывод картинки и очистка памяти
+//            $this->picturesSaveAndClear($file, $dest, $new_name, $quality);
+//            imagedestroy($dest);
+//            imagedestroy($src);
+//        } else {
+//            // Вывод картинки и очистка памяти
+//            $this->picturesSaveAndClear($file, $src, $new_name, $quality);
+//            imagedestroy($src);
+//        }
+//
+//        // Загрузка файла и вывод сообщения
+//        if (!@copy($tmpPath . $new_name, $imgPath . $new_name)) {
+//            array_push($news_error, 'Произошла ошибка при загрузке картинки');
+//        }
+//        //Удаляем временный файл
+//        unlink($tmpPath . $new_name);
+//    }
 
 
     /**
@@ -1640,7 +1622,7 @@ class NewsModel extends Model
                 }
             }
             //запрос в бд
-            $sql = 'SELECT id_news, title, preview_img '
+            $sql = 'SELECT id_news'
                 . 'FROM news_base WHERE ';
 
 
@@ -1658,17 +1640,8 @@ class NewsModel extends Model
             }
             $stmt->execute();
             $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            // нахождение первой картинки в preview_img
-            foreach ($res as $key => $value) {
-                if (!empty($value['preview_img'])) {
-                    //               $p = strpos($value['preview_img'], '|');
-                    //               $res[$key]['preview_img'] = substr($value['preview_img'], $p);
-                    if (!($res[$key]['preview_img'] = strstr($value['preview_img'], '|', true))) {
-                        $res[$key]['preview_img'] = $value['preview_img'];
-                    }
-
-                }
-            }
+            // нахождение фото
+            $res = $this->getAdsPhotos($res);
             //сортировка массива в соответствии с COOKIE
 
             foreach ($cook_last_v_news as $key => $value) {
@@ -1762,7 +1735,7 @@ class NewsModel extends Model
 
 
         $sql = "SELECT id_news, to_char(date,'YYYY-MM-DD HH24:MI:SS') as date, title, space_type, operation_type, object_type, content, user_id, "
-            . "preview_img, status, rating_views, rating_admin, rating_donate, (rating_views + rating_admin+rating_donate) as rating_real "
+            . "status, rating_views, rating_admin, rating_donate, (rating_views + rating_admin+rating_donate) as rating_real "
             . "FROM news_base WHERE (date >= :date) ";
 
         if ($time_start) {
@@ -1834,8 +1807,8 @@ class NewsModel extends Model
     {
         $user_id_arr = [];
 
-        //Получение массив ссылок на картинки $data['news'][number]['preview_img'][]
-        $data = $this->getAdsImg($data);
+        //Получение массив ссылок на картинки $data['news'][number]['photos'][]
+        $data = $this->getAdsPhotos($data);
 
 
         // Данные индекс метро -> наименование
@@ -2021,157 +1994,6 @@ class NewsModel extends Model
         $channel->close();
         $connection->close();
         return $rabbitmq_message_newnews;
-    }
-
-    /**
-     * @param $best_news
-     * @param $best_news_number
-     */
-    public function renderBestNewsOfTime($best_news, $best_news_number)
-    {
-        ?>
-        <div class="all-apartments-top">
-            <?php
-            foreach ($best_news as $ad) {
-                ?>
-                <div class="top-block">
-                    <div class="left-wallpaper">
-                        <a href="/news/<?php echo $ad["id_news"]; ?>">
-                            <img src="../../<?php
-                            if (!empty($ad["preview_img"][0])) {
-                                echo 'uploads/images/' . $ad["preview_img"][0];
-                            } else {
-                                // echo 'template/images/apartments/1.png';
-                            }
-                            ?>" alt="apartments">
-                        </a>
-                        <p><?php
-                            if (!empty($ad["number_of_rooms"])) {
-                                echo $ad["number_of_rooms"] . '-комн. ';
-                            }
-                            switch ($ad["object_type"]) {
-                                case 1;
-                                    echo 'кв.';
-                                    break;
-                                case 2;
-                                    echo 'оф.пл.';
-                                    break;
-                                case 3;
-                                    echo 'торг.пл.';
-                                    break;
-                                case 4;
-                                    echo 'оф.пл. с землей';
-                                    break;
-                                case 5;
-                                    echo 'пр/скл зд.';
-                                    break;
-                                case 6;
-                                    echo 'пр/скл пом. ';
-                                    break;
-                                case 7;
-                                    echo 'рынок';
-                                    break;
-                                case 8;
-                                    echo 'к. ОСЗ';
-                                    break;
-                                case 9;
-                                    echo 'ОСЗ';
-                                    break;
-                                case 10;
-                                    echo 'торг. зд.';
-                                    break;
-                                case 11;
-                                    echo 'комн.';
-                                    break;
-                                case 12;
-                                    echo 'дом';
-                                    break;
-                                case 13;
-                                    echo 'гараж';
-                                    break;
-                                case 14;
-                                    echo 'з/у';
-                                    break;
-                                default;
-                                    echo 'объект';
-                                    break;
-                            }
-                            echo ' ';
-                            if (!empty($ad["space"])) {
-                                echo $ad["space"] . 'м<sup>2</sup> ';
-                            }
-                            ?></p>
-                    </div>
-                    <div class="right-information-block">
-                        <span><?php if (!empty($ad["title"])) {
-                                echo $ad["title"];
-                            } ?></span>
-                        <p><?php if (!empty($ad["content"])) {
-                                echo $ad["content"];
-                            } ?></p>
-                        <div class="price-and-view-the-apartment">
-                            <div class="price">
-                                <p><?php if (!empty($ad["metro_station"])) {
-                                        ?><img src="../../template/images/m.png" alt="metro"><?php
-                                        echo $ad["metro_station"];
-                                    }
-                                    if (!empty($ad["time_walk"])) {
-                                        ?><span><img src="../../template/images/people.png" alt=""><?php
-                                        echo $ad["time_walk"];
-                                        ?>мин</span><?php } ?></p><span class="decorate-number"><?php
-                                    if (!empty($ad["price"])) {
-                                        echo $ad["price"];
-                                    }
-                                    ?><i class="fa fa-rub" aria-hidden="true"></i><sub><?php
-                                        if (!empty($ad["lease"])) {
-                                            echo '/';
-                                            switch ($ad["lease"]) {
-                                                case 37;
-                                                    echo 'день';
-                                                    break;
-                                                case 138;
-                                                    echo 'нед.';
-                                                    break;
-                                                case 79;
-                                                    echo 'мес.';
-                                                    break;
-                                                case 145;
-                                                    echo 'год';
-                                                    break;
-                                                case 80;
-                                                    echo 'неск. лет';
-                                                    break;
-                                                default;
-                                                    echo 'период';
-                                                    break;
-                                            }
-                                        }
-                                        ?></sub></span></div>
-                            <div class="view-the-apartment">
-                                <a href="#"><img src="../../template/images/show.png" alt="show"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <?php
-            }
-            ?>
-        </div>
-        <div class="see-more">
-            <?php
-            if (!empty($best_news_number)) {
-                $ending = $this->getNumEnding($best_news_number, ['объявление', 'объявления', 'объявлений']);
-
-                if ($best_news_number <= 9) { ?>
-                    <p>Всего <?php echo $best_news_number . ' ' . $ending; ?>.</p>
-                <?php } else { ?>
-                    <p>Еще<span><?php echo $best_news_number . '</span> ' . $ending; ?></p>
-                    <a href="#">Смотреть все</a>
-                <?php }
-            } else { ?>
-                <p>К сожалению, ничего не найдено.</p>
-            <?php }
-            ?> </div> <?php
     }
 
     public function prepareBestNewsOfTime($data)
@@ -2683,7 +2505,7 @@ class NewsModel extends Model
             if (isset($args_db[$v['table_column_name']])) {
                 $args[$k] = $args_db[$v['table_column_name']];
             } else {
-                   // TODO: Ошибка в фильтре получения данных при записи объявления
+                // TODO: Ошибка в фильтре получения данных при записи объявления
             }
         }
         $post_data = filter_var_array($post, $args);
