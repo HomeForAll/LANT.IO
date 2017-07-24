@@ -3,13 +3,73 @@ $(function () {
 
     $.getJSON("/api/user", {}, function(user) {
         if (user.response) {
-            if (user.response.avatar_50)
-            $('.user-info img').prop('src', user.response.avatar_50);
+            if (user.response.avatar_50) 
+                $('.user-info img').prop('src', user.response.avatar_50);
             if (user.response.avatar_100)
-            $('.profile-userinfo_photo').prop('src', user.response.avatar_100);
+                $('.profile-userinfo_photo').prop('src', user.response.avatar_100);
             $('.profile-userinfo_welcome').html("Здравствуйте, "+user.response.name+"!");
             $('.user-info .user-info__name').html(user.response.name);
         }
+    });
+
+    $(".profile-userinfo_uploadphoto input").change(function(event) {
+        $(this).simpleUpload("/api/upload/user/avatar", {
+            allowedExts: ["jpg", "jpeg", "jpe", "jif", "jfif", "jfi", "png", "gif"],
+            allowedTypes: ["image/pjpeg", "image/jpeg", "image/png", "image/x-png", "image/gif", "image/x-gif"],
+            start: function(file) {
+                // console.log('Start:', file);
+                // this.block = $('<div class="uploadr__block"></div>');
+                // this.progressBar = $('<div class="uploadr__progress"></div>');
+                // this.cancelButton = $('<div class="uploadr__cancel"></div>');
+                // var that = this;
+                // this.cancelButton.click(function(){
+                //     that.upload.cancel();
+                // });
+                // this.block.append(this.progressBar).append(this.cancelButton);
+                // $('.uploadr__button').before(this.block);
+            },
+            progress: function(progress) {
+                // this.progressBar.width(progress + "%");
+            },
+            success: function(data) {
+                console.log('success', data);
+                // var that = this;
+                // this.progressBar.remove();
+                // this.cancelButton.click(function(){ that.block.remove() });
+                // if (data.response && data.response['250_140']) {
+                //     data.response['250_140'] = data.response['250_140'].replace(/\\/g, '/');
+                //     this.block.css('background-image', 'url('+data.response['250_140']+')');
+                //     var formatDiv = $('<input type="hidden" name="photos[]" value="">').val(data.response.id);
+                //     this.block.append(formatDiv);
+                // } else {
+                //     //our application returned an error
+                //     var error = data.error.message;
+                //     var errorDiv = $('<div class="error"></div>').text(error);
+                //     this.block.append(errorDiv);
+                // }
+            },
+            error: function(error) {
+                console.log('error', error);
+                // this.progressBar.remove();
+                // // this.cancelButton.click(function(){
+                // // 	this.block.fadeOut(400, function(){
+                // // 		$(this).remove();
+                // // 	});
+                // // });
+                // //this.cancelButton.remove();
+                // var error = error.message;
+                // var errorDiv = $('<div class="error"></div>').text(error);
+                // this.block.append(errorDiv);
+            },
+            cancel: function(){
+                // //upload cancelled
+                // this.block.remove();
+                // // this.block.fadeOut(400, function(){
+                // // 	$(this).remove();
+                // // });
+            }
+        });
+
     });
 
     var renderItems = function(data) {

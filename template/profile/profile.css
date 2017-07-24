@@ -141,12 +141,37 @@ body {
     align-items: center;
     margin-bottom: 2em;
 }
-.profile-userinfo_photo {
+.profile-userinfo_wrapphoto {
+    position: relative;
+}
+.profile-userinfo_photo,
+.profile-userinfo_uploadphoto {
     background: #fff;
     width: 96px; height: 96px;
     border: 2px solid #fff;
     border-radius: 100px;
     margin-right: 1.5em;
+}
+.profile-userinfo_uploadphoto {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.3);
+    border-color: transparent;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    z-index: 2;
+    cursor: pointer;
+    display: none;
+}
+.profile-userinfo_uploadphoto input {
+    display: none;
+}
+.profile-userinfo_wrapphoto:hover .profile-userinfo_uploadphoto {
+    display: flex;
 }
 .profile-userinfo_welcome {
     letter-spacing: 2px;
