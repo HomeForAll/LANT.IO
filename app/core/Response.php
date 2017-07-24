@@ -20,6 +20,7 @@ class Response
     const DB_DELETE_ERROR = 4;
     const DB_SELECT_ERROR = 5;
     const CURL_CONNECTION_LOST = 6;
+    const NOT_ARRAY = 7;
 
     // Авторизация
     const LOGIN_INCORRECT_ERROR = 1000;
@@ -69,7 +70,12 @@ class Response
     const WRONG_PHONE_NUMBER = 4013;
     const WRONG_EMAIL = 4014;
 
-
+    //Объявления
+    const DB_EXECUTE_ERROR = 5000;
+    const DATE_INCORRECT_ERROR = 5001;
+    const METRO_STATION_INCORRECT_CODE_ERROR = 5002;
+    const CITY_INCORRECT_CODE_ERROR = 5003;
+    const MISSING_VALUES_IN_AD_RECORDING_POST_FILTER = 5004;
 
     // Восстановлени пароля
     const EMAIL_MESSAGE_SEND_ERROR = 6000;
@@ -89,6 +95,7 @@ class Response
         4    => 'Возникла ошибка при удалении в базе данных',
         5    => 'Возникла ошибка при выборке из базы данных',
         6    => 'CURL нет соединения с сервером',
+        7    => 'Тип данных не является массивом',
 
         // Авторизация 1000-2000:
         1000 => 'Логин введен неверно',
@@ -137,6 +144,13 @@ class Response
         4012 => 'Неверно введена номер квартиры',
         4013 => 'Неверно введен номер телефона',
         4014 => 'Неверно введен Email',
+
+         // Объявления 5000-6000
+        5000 => 'Ошибка при отправке Email',
+        5001 => 'Неправильная дата',
+        5002 => 'Нет соответствующего индекса станции метро в БД',
+        5003 => 'Нет соответствующего индекса города в БД',
+        5004 => 'Нет соответствия POST данным фильтра при записи объявления',
 
         // Восстановление пароля 6000-7000
         6000 => 'Ошибка при отправке Email',
