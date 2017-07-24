@@ -135,9 +135,13 @@ class APIController extends Controller
         }
     }
 
-    public function actionUser()
+    public function actionUser($userID = null)
     {
-        $this->model('UserModel')->getUserInfo();
+        if ($userID) {
+            $userID = $userID[0];
+        }
+
+        $this->model('UserModel')->getUserInfo($userID);
     }
 
     public function actionLogout()
@@ -242,5 +246,20 @@ class APIController extends Controller
         $form_data = $this->model('NewsModel')->getRequestForItemsAddFromPOST($keys);
         $this->model('NewsModel')->makeNewsInsert($form_data['ad'], $form_data['photos']);
         echo json_encode($this->model('NewsModel')->getResponse(), JSON_UNESCAPED_UNICODE);
+    }
+
+    public function actionCreateGASecret()
+    {
+        $this->model('UserModel')->createGoogleAuthenticatorSecretCode();
+    }
+
+    public function actionSaveGA()
+    {
+        $this->model('UserModel')->verifyAndSaveGoogleAuthenticator();
+    }
+
+    public function actionVerifyGACode()
+    {
+        $this->model('UserModel')->verifyGoogleAuthenticatorCode();
     }
 }

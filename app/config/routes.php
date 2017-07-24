@@ -79,6 +79,7 @@ return [
     'api/auth' => 'main/API/login',
     'api/logout' => 'main/API/logout',
     'api/registration/([A-Za-z\_]+)' => 'main/API/registration/$1',
+    'api/user/([0-9]+)' => 'main/API/user/$1',
     'api/user' => 'main/API/user',
     'api/upload/news/images' => 'main/API/uploadAdImage',
     'api/upload/user/avatar' => 'main/API/uploadAvatar',
@@ -103,4 +104,7 @@ return [
     'api/profile/save/profile' => 'main/API/savePersonalInfo',
     'api/profile/save/security' => 'main/API/savePassword',
     'api/profile/save/settings' => 'main/API/savePersonalInfoSettings',
+    'api/authenticator/create/secret' => 'main/API/createGASecret',
+    'api/authenticator/save' => 'main/API/saveGA',
+    'api/authenticator/verify' => 'main/API/verifyGACode',
 ];
