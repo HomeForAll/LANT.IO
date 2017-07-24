@@ -180,6 +180,10 @@ class UploadModel extends Model
 
         $response['100_100'] = DIRECTORY_SEPARATOR . $upload_directory . $handle->file_dst_name;
 
+        $response['original'] = str_replace("\\", "/", $response['original']);
+        $response['50_50'] = str_replace("\\", "/", $response['50_50']);
+        $response['100_100'] = str_replace("\\", "/", $response['100_100']);
+
         $handle->clean();
 
         $query->execute(
