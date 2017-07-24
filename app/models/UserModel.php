@@ -1238,6 +1238,7 @@ class UserModel extends Model
             $this->error(self::USER_NOT_AUTHORIZED_ERROR);
         }
 
+        $_GET['extend'] = '0';
         $this->getUserInfo();
     }
 
@@ -1420,30 +1421,55 @@ class UserModel extends Model
         $this->getUserInfo();
     }
 
-    public function getUserInfo()
+    public function getUserInfo($userID = null)
     {
-        if (isset($_SESSION['user'])) {
-            unset($_SESSION['user']['active_text']);
+        $query = $this->db->prepare('SELECT * FROM users WHERE id = :user_id');
 
-            if (isset($_GET['extend']) ? $_GET['extend'] : null == '1') {
-                $this->response($_SESSION['user']);
-            } else {
-                $this->response([
-                    'id'              => $_SESSION['user']['id'],
-                    'avatar_original' => isset($_SESSION['user']['avatar_original']) ? $_SESSION['user']['avatar_original'] : null,
-                    'avatar_50'       => isset($_SESSION['user']['avatar_50']) ? $_SESSION['user']['avatar_50'] : null,
-                    'avatar_100'      => isset($_SESSION['user']['avatar_100']) ? $_SESSION['user']['avatar_100'] : null,
-                    'name'            => $_SESSION['user']['first_name'] . ' ' . $_SESSION['user']['last_name'],
-                    'email'           => $_SESSION['user']['email'],
-                    'status'          => $_SESSION['user']['status'],
-                    'hash'            => $_SESSION['user_hash'],
-                ]);
+        if ($userID) {
+            $query->execute([':user_id' => $userID]);
+
+            if ($query->errorCode() !== '00000') {
+                $this->error(self::DB_SELECT_ERROR, $query->errorInfo());
             }
-        } else {
+
+            $user = $query->fetch();
+            unset($user['active_text']);
+            unset($user['password']);
+
+            $this->response($user);
+        }
+
+        if (!isset($_SESSION['user']['id'])) {
             $this->response([
                 'id'     => session_id(),
                 'status' => -1,
                 'hash'   => hash('sha512', 'user_id=' . session_id() . 'secret_key=' . Registry::get('config')['secret_key']),
+            ]);
+        }
+
+        $query->execute([':user_id' => $_SESSION['user']['id']]);
+
+        if ($query->errorCode() !== '00000') {
+            $this->error(self::DB_SELECT_ERROR, $query->errorInfo());
+        }
+
+        $user = $query->fetch();
+
+        unset($user['active_text']);
+        unset($user['password']);
+
+        if (isset($_GET['extend']) ? $_GET['extend'] : null == '1') {
+            $this->response($user);
+        } else {
+            $this->response([
+                'id'              => $user['id'],
+                'avatar_original' => isset($user['avatar_original']) ? $user['avatar_original'] : null,
+                'avatar_50'       => isset($user['avatar_50']) ? $user['avatar_50'] : null,
+                'avatar_100'      => isset($user['avatar_100']) ? $user['avatar_100'] : null,
+                'name'            => $user['first_name'] . ' ' . $user['last_name'],
+                'email'           => $user['email'],
+                'status'          => $user['status'],
+                'hash'            => $_SESSION['user_hash'],
             ]);
         }
     }

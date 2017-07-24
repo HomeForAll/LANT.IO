@@ -135,9 +135,9 @@ class APIController extends Controller
         }
     }
 
-    public function actionUser()
+    public function actionUser($userID = null)
     {
-        $this->model('UserModel')->getUserInfo();
+        $this->model('UserModel')->getUserInfo($userID[0]);
     }
 
     public function actionLogout()

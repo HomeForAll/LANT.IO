@@ -79,6 +79,7 @@ return [
     'api/auth' => 'main/API/login',
     'api/logout' => 'main/API/logout',
     'api/registration/([A-Za-z\_]+)' => 'main/API/registration/$1',
+    'api/user/([0-9]+)' => 'main/API/user/$1',
     'api/user' => 'main/API/user',
     'api/upload/news/images' => 'main/API/uploadAdImage',
     'api/upload/user/avatar' => 'main/API/uploadAvatar',
