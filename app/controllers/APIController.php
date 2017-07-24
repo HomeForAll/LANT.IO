@@ -247,4 +247,19 @@ class APIController extends Controller
         $this->model('NewsModel')->makeNewsInsert($form_data['ad'], $form_data['photos']);
         echo json_encode($this->model('NewsModel')->getResponse(), JSON_UNESCAPED_UNICODE);
     }
+
+    public function actionCreateGASecret()
+    {
+        $this->model('UserModel')->createGoogleAuthenticatorSecretCode();
+    }
+
+    public function actionSaveGA()
+    {
+        $this->model('UserModel')->verifyAndSaveGoogleAuthenticator();
+    }
+
+    public function actionVerifyGACode()
+    {
+        $this->model('UserModel')->verifyGoogleAuthenticatorCode();
+    }
 }

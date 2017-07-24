@@ -1,4 +1,5 @@
 <?php
+
 use Respect\Validation\Validator as v;
 
 class UserModel extends Model
@@ -42,6 +43,14 @@ class UserModel extends Model
             }
 
             if (password_verify($password, $user['password'])) {
+                if ($user['ga_secret_key']) {
+                    $_SESSION['user']['tmp_hash'] = hash('SHA256', mt_rand(1, 10000) . time());
+                    $this->response([
+                        'google_authenticator' => true,
+                        'tmp_hash' => $_SESSION['user']['tmp_hash'],
+                        ]);
+                }
+
                 $secret_key = Registry::get('config')['secret_key'];
 
                 $_SESSION['authorized'] = true;
@@ -1209,7 +1218,6 @@ class UserModel extends Model
         }
 
         $_SESSION['registration']['password'] = $password;
-        $this->response(true);
     }
 
     public function setLastName($lastName)
@@ -1318,8 +1326,9 @@ class UserModel extends Model
     public function registration()
     {
         $sql = 'INSERT INTO users ({%columns%}) VALUES ({%values%}) RETURNING *';
-        $columns = "registration_timestamp";
-        $values = "now()";
+        $activate_hash = time() . sha1(time() . mt_rand(1, 15000));
+        $columns = "registration_timestamp, activate_hash";
+        $values = "now(), {$activate_hash}";
 
         $user_type = [
             'user' => 0,
@@ -1404,10 +1413,33 @@ class UserModel extends Model
         unset($user['password']);
         unset($_SESSION['registration']);
 
+        $activate_url = "https://{$_SERVER['HTTP_HOST']}/confirm/email/{$activate_hash}:{$user['id']}";
+
         $_SESSION['authorized'] = true;
 
-        $_SESSION['user'] = $user;
-        $_SESSION['user']['photo'] = $_SESSION['user']['profile_foto_id'];
+        $_SESSION['user']['id'] = $user['id'];
+        $_SESSION['user']['email'] = $user['email'];
+        $_SESSION['user']['phone'] = $user['phone_number'];
+
+        require_once ROOT_DIR . 'vendor' . DS . 'phpmailer' . DS . 'phpmailer' . DS . 'PHPMailerAutoload.php';
+
+        $mail = new PHPMailer;
+        $mail->isSMTP();
+        $mail->Host = 'smtp.yandex.ru';
+        $mail->Port = 465;
+        $mail->SMTPSecure = 'ssl';
+        $mail->SMTPAuth = true;
+        $mail->Username = "admin@lant.io";
+        $mail->Password = "ZSH1wb88";
+        $mail->setLanguage('ru');
+        $mail->setFrom('admin@lant.io', 'LANT.IO');
+        $mail->addAddress($user['email']);
+        $mail->Subject = 'New account';
+        $mail->msgHTML("Здравствуйте {$user['first_name']}, для потверждения Email кликните по этой ссылке: {$activate_url}");
+
+        if (!$mail->send()) {
+            $this->error(self::EMAIL_MESSAGE_SEND_ERROR, $mail->ErrorInfo);
+        }
 
         // TODO: Удалить в будущем
         $_SESSION['userID'] = $user['id'];
@@ -1558,6 +1590,102 @@ class UserModel extends Model
                 break;
             case '3':
                 break;
+        }
+    }
+
+    public function createGoogleAuthenticatorSecretCode()
+    {
+        if (!isset($_SESSION['user']['id'])) {
+            $this->error(self::USER_NOT_AUTHORIZED_ERROR);
+        }
+
+        $ga = new PHPGangsta_GoogleAuthenticator();
+        $_SESSION['user']['ga_secret'] = $ga->createSecret();
+        $this->response([
+            'qr_img_url' => $ga->getQRCodeGoogleUrl("LANT.IO ({$_SESSION['user']['email']})", $_SESSION['user']['ga_secret']),
+            'secret_key' => $_SESSION['user']['ga_secret'],
+        ]);
+    }
+
+    public function verifyGoogleAuthenticatorCode()
+    {
+        if (!isset($_POST['login']) || !isset($_POST['code']) || !isset($_POST['tmp_hash'])) {
+            $this->error(self::BAD_REQUEST_ERROR);
+        }
+
+        if (!isset($_SESSION['user']['tmp_hash'])) {
+            $this->error(self::TMP_HASH_NOT_EXIST_ERROR);
+        }
+
+        if ($_SESSION['user']['tmp_hash'] !== $_POST['tmp_hash']) {
+            $this->error(self::TMP_HASH_INCORRECT_ERROR);
+        }
+
+        $ga = new PHPGangsta_GoogleAuthenticator();
+        $query = '';
+
+        if (v::phone()->validate($_POST['login'])) {
+            $query = $this->db->prepare('SELECT id, ga_secret_key FROM users WHERE phone_number = :phone');
+            $query->execute([':phone' => $_POST['login']]);
+        } elseif (v::email()->validate($_POST['login'])) {
+            $query = $this->db->prepare('SELECT id, ga_secret_key FROM users WHERE email = :email');
+            $query->execute([':email' => $_POST['login']]);
+        } else {
+            $this->error(self::LOGIN_INCORRECT_ERROR);
+        }
+
+        if ($query->errorCode() !== '00000') {
+            $this->error(self::DB_SELECT_ERROR, $query->errorInfo());
+        }
+
+        $user = $query->fetch();
+
+        if (!$user) {
+            $this->error(self::USER_NOT_EXIST_ERROR);
+        }
+
+        if (!$ga->verifyCode($user['ga_secret_key'], $_POST['code'])) {
+            $this->error(self::GA_CODE_INCORRECT_ERROR);
+        }
+
+        $_SESSION['user']['id'] = $user['id'];
+        $_SESSION['user_hash'] = hash('sha512', 'user_id=' . $user['id'] . 'secret_key=' . Registry::get('config')['secret_key']);
+
+        $this->response(true);
+    }
+
+    public function verifyAndSaveGoogleAuthenticator()
+    {
+        if (!isset($_SESSION['user']['id'])) {
+            $this->response(self::USER_NOT_AUTHORIZED_ERROR);
+        }
+
+        if (!isset($_POST['code'])) {
+            $this->response(self::BAD_REQUEST_ERROR);
+        }
+
+        if (!isset($_SESSION['user']['ga_secret'])) {
+            $this->error(self::GA_SECRET_KEY_NOT_EXIST_ERROR);
+        }
+
+        $ga = new PHPGangsta_GoogleAuthenticator();
+
+        if ($ga->verifyCode($_SESSION['user']['ga_secret'], $_POST['code'])) {
+            $query = $this->db->prepare('UPDATE users SET ga_secret_key = :secret WHERE id = :user_id');
+            $query->execute([
+                ':secret'  => $_SESSION['user']['ga_secret'],
+                ':user_id' => $_SESSION['user']['id'],
+            ]);
+
+            if ($query->errorCode() !== '00000') {
+                $this->error(self::DB_UPDATE_ERROR, $query->errorInfo());
+            }
+
+            unset($_SESSION['user']['ga_secret']);
+
+            $this->response(true);
+        } else {
+            $this->error(self::GA_CODE_INCORRECT_ERROR);
         }
     }
 }

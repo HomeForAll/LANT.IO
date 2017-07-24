@@ -74,6 +74,12 @@ class Response
     // Восстановлени пароля
     const EMAIL_MESSAGE_SEND_ERROR = 6000;
 
+    // Настройки профиля
+    const GA_SECRET_KEY_NOT_EXIST_ERROR = 7000;
+    const GA_CODE_INCORRECT_ERROR = 7001;
+    const TMP_HASH_NOT_EXIST_ERROR = 7002;
+    const TMP_HASH_INCORRECT_ERROR = 7002;
+
     protected $messages = [
         // Общие 1-1000:
         0    => 'Неправильный запрос к API',
@@ -85,7 +91,7 @@ class Response
         6    => 'CURL нет соединения с сервером',
 
         // Авторизация 1000-2000:
-        1000 => 'Неверный формат логина',
+        1000 => 'Логин введен неверно',
         1001 => 'Данные для входа неверны',
         1002 => 'Аккаунт заблокирован',
         1003 => 'Пользователь не существует',
@@ -134,6 +140,12 @@ class Response
 
         // Восстановление пароля 6000-7000
         6000 => 'Ошибка при отправке Email',
+
+        // Настройки профиля 7000-8000
+        7000 => 'Сначала необходимо создать Google Authenticator SECRET KEY',
+        7001 => 'Неверный Google Authenticator код',
+        7002 => 'Отсутствует временный хеш',
+        7003 => 'Неверный временный хеш',
     ];
 
     public function __construct()

@@ -6,6 +6,8 @@
         "liquid/liquid": "^1.2",
         "respect/validation": "^1.1",
         "verot/class.upload.php": "dev-master",
-        "phpmailer/phpmailer": "^5.2"
+        "phpmailer/phpmailer": "^5.2",
+        "phpgangsta/googleauthenticator": "dev-master",
+        "phpunit/phpunit": "5.7.21"
     }
 }
