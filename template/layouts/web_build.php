@@ -53,10 +53,10 @@ $siteModel = $this->model('SiteModel');
 
                         <div class="axf user-info">
                             <div>
-                                <div class="menu-user-name">Никулин Александр</div>
+                                <div class="menu-user-name">...</div>
                                 <div class="menu-user-status">Пользователь +</div>
                             </div>
-                            <img src="/template/img/user.png" alt="">
+                            <img src="/template/img/photo_dm.png" alt="">
                         </div>
                 </div>
             </div>
@@ -109,6 +109,7 @@ $siteModel = $this->model('SiteModel');
 
 <script src="/template/lucia/jquery.inputmask.bundle.min.js"></script>
 <script src="/template/lucia/phone-codes/phone.min.js"></script>
+<script src="/template/lucia/validate.js"></script>
 <script src="/template/lucia/jquery.wizard.js"></script>
 <script src="/template/lucia/jquery.arcticmodal-0.3.min.js"></script>
 <script src="/template/lucia/chosen.jquery.min.js"></script>
