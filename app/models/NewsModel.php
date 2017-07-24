@@ -6,12 +6,6 @@ use PhpAmqpLib\Message\AMQPMessage;
 
 class NewsModel extends Model
 {
-    // Коды ошибок
-    const DATA_BASE_INSERT_ERROR = 5000;
-    const DATA_BASE_UPDATE_ERROR = 5001;
-    const DATA_BASE_DELETE_ERROR = 5002;
-    const DATA_BASE_SELECT_ERROR = 5003;
-
     private $response = [];
     private $errors = [];
 
@@ -22,7 +16,9 @@ class NewsModel extends Model
 
     /**
      * Проверка строки на вредоносные элементы
+     *
      * @param $str
+     *
      * @return string
      */
     private function checkingString($str)
@@ -30,6 +26,7 @@ class NewsModel extends Model
         $str = trim($str);
         $str = strip_tags($str);
         $str = htmlspecialchars($str);
+
         return $str;
     }
 
@@ -37,19 +34,26 @@ class NewsModel extends Model
      * Переводит время от настоящего момента (в часах) в дату стандарта ISO 8601
      *
      * @param int $time
+     *
      * @return false|int|string
      */
     private function dateFormatForDB($time = 0)
     {
         $date = time() - ($time * 60 * 60);
+        if ($date < 0) {
+            $this->error(self::DATE_INCORRECT_ERROR);
+        }
         $date = date('c', $date);
+
         return $date;
     }
 
 
     /**
      * Определение новое ли объявление
+     *
      * @param $date - дата объявления в формате YYYY-MM-DD HH24:MI:SS
+     *
      * @return bool - является ли объявление новым
      */
     private function checkAdsIsNew($date)
@@ -57,12 +61,14 @@ class NewsModel extends Model
         //Промежуток времени в часах, когда объявление считается новым
         $delta_new_time = 24;
         $time = strtotime($date);
+
         return (((time() - $time) / 60 / 60) <= $delta_new_time);
     }
 
 
     /**
      * Количество объявлений удовлетворяющих условиям
+     *
      * @param int $time_from - за промежуток от времени в часах
      * (по умолчанию, за всё время)
      * @param int $time_to - за промежуток до времени в часах
@@ -77,6 +83,7 @@ class NewsModel extends Model
      * @param int $city - город
      * @param int $status - Статус (активное/не активное)
      * @param string $title_like
+     *
      * @return int - Количество объявлений
      */
     public function getNamberOfAllNews(
@@ -92,7 +99,8 @@ class NewsModel extends Model
         $city = 0,
         $status = 1,
         $title_like = ''
-    ) {
+    )
+    {
         $sql = "SELECT COUNT(*) FROM news_base WHERE ";
         //Дата окончания поиска (по умолчанию настоящее время)
         $time_to = $this->dateFormatForDB($time_to);
@@ -164,16 +172,21 @@ class NewsModel extends Model
         if ($city != 0) {
             $stmt->bindParam(':city', $city);
         }
-        $stmt->execute();
+        if (!$stmt->execute()) {
+            $this->error(self::DB_SELECT_ERROR);
+        }
         $result = $stmt->fetchColumn();
         //для Ajax запроса
         $this->response['count_all'] = $result;
+
         return $result;
     }
 
     /**
      * Получить все данные объявления по его id
+     *
      * @param $id
+     *
      * @return mixed - массив данных, адреса картинок - ввиде массива ['preview_img']
      */
     public function getNewsById($id)
@@ -185,11 +198,14 @@ class NewsModel extends Model
             . " WHERE id_news = :id";
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':id', $id);
-        $stmt->execute();
+        if (!$stmt->execute()) {
+            $this->error(self::DB_SELECT_ERROR);
+        }
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
         // Получение фото
         $data = getAdsPhotos($data);
+
         return $data;
     }
 
@@ -198,6 +214,7 @@ class NewsModel extends Model
      * Параметры по умолчанию:
      * $last_viewed_news_namber - количество хранящихся последних просмотров
      * $last_viewed_news_time - время хранения куки
+     *
      * @param $id_news
      * @param $user_ip
      */
@@ -205,7 +222,7 @@ class NewsModel extends Model
     {
         // Установление куки о просмотренной странице
         $last_viewed_news_namber = 5; // 5 новостей
-        $last_viewed_news_time = 0.00694; // время хранения (дней) 0.00694 = 10мин
+        $last_viewed_news_time = 1; // время хранения (дней) 0.00694 = 10мин
 
         $last_viewed_news_namber--;
         $last_viewed_news_time = $last_viewed_news_time * 60 * 60 * 24;
@@ -235,7 +252,9 @@ class NewsModel extends Model
                 $stmt = $this->db->prepare($sql);
                 $stmt->bindParam(':id_news', $id_news);
                 $stmt->bindParam(':user_ip', $user_ip);
-                $stmt->execute();
+                if (!$stmt->execute()) {
+                    $this->error(self::DB_SELECT_ERROR);
+                }
                 if (!$stmt->fetchColumn()) {
                     //Если нет => Запись IP
                     if (isset($_SESSION['userID'])) {
@@ -258,12 +277,16 @@ class NewsModel extends Model
                     if ($userID) {
                         $stmt->bindParam(':user_id', $userID);
                     }
-                    $stmt->execute();
+                    if (!$stmt->execute()) {
+                        $this->error(self::DB_INSERT_ERROR);
+                    }
                     //Увеличение рейтинга просмотров
                     $sql = "UPDATE news_base SET rating_views = rating_views + 1 WHERE id_news = :id_news";
                     $stmt = $this->db->prepare($sql);
                     $stmt->bindParam(':id_news', $id_news);
-                    $stmt->execute();
+                    if (!$stmt->execute()) {
+                        $this->error(self::DB_UPDATE_ERROR);
+                    }
                 }
             }
         }
@@ -280,380 +303,384 @@ class NewsModel extends Model
         }
     }
 
-    /**
-     * Подготовка объявлений- удаление пустых данных и перевод индексов
-     * @param $news
-     * @return array
-     */
-    public function prepareNewsView($news)
-    {
-        //новый массив данных новости
-        $new_data = [];
-        //Удаление несуществующих параметров
-        // и Перевод чисел в слова
-        foreach ($news as $key => $val) {
-            if (!empty($val)) {
-                $new_data[$key] = $news[$key];
-                if (is_int($new_data[$key])) {
-                    $new_data[$key] = $this->translateIndex($new_data[$key], $key);
-                }
-                if (is_bool($new_data[$key])) {
-                    if ($new_data[$key]) {
-                        $new_data[$key] = 'Да';
-                    } else {
-                        $new_data[$key] = 'Нет';
-                    }
-                }
-            }
-        }
-
-
-        //!!! Заголовки !!!
-        $header = array(
-            'id_news' => 'Индекс объявления',
-            'form_name' => 'Имя формы',
-            'space_type' => 'Тип площади',
-            'operation_type' => 'Операция',
-            'object_type' => 'Тип объекта',
-            'rating_views' => 'Рейтинг просмотров',
-            'rating_admin' => 'Рейтинг администрации',
-            'rating_donate' => 'Рейтинг по оплате',
-            'status' => 'Статус',
-            'user_id' => 'ID пользователя',
-            'title' => 'Название новости',
-            'date' => 'Дата',
-            'content' => 'Контент',
-            'photo_available' => 'Наличие фотографий',
-            'tags' => 'Тег',
-            'country' => 'Страна',
-            'area' => 'Область',
-            'city' => 'Город',
-            'region' => 'Регион',
-            'address' => 'Адрес',
-            'gas' => 'Газ',
-            'heating' => 'Отопление',
-            'water_pipes' => 'Водопровод',
-            'elevator_passangers' => 'Пассажирский лифт',
-            'elevator_cargo' => 'Грузовой лифт',
-            'bathroom' => 'Ванная',
-            'dining_room' => 'Столовая',
-            'study' => 'Рабочий кабинет',
-            'playroom' => 'Детская',
-            'hallway' => 'Прихожая',
-            'living_room' => 'Гостиная',
-            'kitchen' => 'Кухня',
-            'bedroom' => 'Спальня',
-            'signaling' => 'Сигнализация',
-            'cctv' => 'Видеонаблюдение',
-            'intercom' => 'Домофон',
-            'concierge' => 'Консьерж',
-            'common' => 'Общая',
-            'resedential' => 'Жилая',
-
-            'bathroom_description' => 'Описание санузлов',
-            'bathroom_location' => 'Расположение санузлов',
-            'bathroom_number' => 'Количество санузлов',
-            'possible_to_post' => 'Возможность проводки',
-            'sanitation_description' => 'Описание',
-            'documents_on_tenure' => 'Документы на право владения',
-            'additional_buildings' => 'Дополнительные строения',
-            'availability_of_bathroom' => 'Наличие санузлов',
-            'availability_of_garbage_chute' => 'Наличие мусоропровода',
-            'balcony' => 'Балкон',
-            'bargain' => 'Торг',
-            'building_type' => 'Тип здания',
-            'cadastral_number' => 'Кадастровый номер',
-            'ceiling_height' => 'Высота потолков',
-            'clarification_of_the_object_type' => 'Уточнение вида объектов',
-            'combined' => 'Совмещенный',
-            'distance_from_metro' => 'Удаленность от метро',
-            'distance_from_mkad_or_metro' => 'Удаленность от МКАД/метро',
-            'documents_on_ownership' => 'Документы на право владения',
-            'doesnt_matter' => 'Не важно',
-            'electricity' => 'Электричество',
-            'equipment' => 'Комплектация',
-            'fencing' => 'Ограждение',
-            'floor' => 'Этаж',
-            'foundation' => 'Фундамент',
-            'furnish' => 'Отделка',
-            'lavatory' => 'Санузел',
-            'lease' => 'Срок аренды',
-            'lease_contract' => 'Договор аренды',
-            'location_on' => 'На участке',
-            'material' => 'Материал',
-            'metro_station' => 'Станция метро',
-            'municipal' => 'Муниципальная',
-            'not_residential' => 'Нежилая',
-            'number_of_floors' => 'Количество этажей',
-            'number_of_rooms' => 'Количество комнат',
-            'object_located' => 'Объект размещен',
-            'paid' => 'Платная ',
-
-            'planning_project' => 'Проект планировки',
-            'price' => 'Стоимость',
-            'property_documents' => 'Документы на собственность',
-            'residential' => 'Жилая',
-            'roofing' => 'Кровля',
-            'rooms' => 'Комнаты',
-            'sanitation' => 'Водопровод и канализация',
-            'security' => 'Охрана',
-            'select_area_on_city' => 'Выбрать область',
-            'separated' => 'Раздельный',
-            'site' => 'Участок',
-            'space' => 'Площадь',
-            'stairwells_status' => 'Состояние лестничных клеток',
-            'the_number_of_kilowatt' => 'Количество киловатт',
-            'three_d_project' => '3d проект',
-            'type_of_construction' => 'Вид постройки',
-            'type_of_house' => 'Тип дома',
-            'video' => 'Видео',
-            'wall_material' => 'Материал стен',
-            'year_of_construction' => 'Год постройки/окончания строительства',
-            'time_walk' => 'Время от метро пешком',
-            'time_car' => 'Время от метро на транспорте',
-            'bathroom_available' => 'Наличие санузла',
-            'alcove' => 'Беседка',
-            'barn' => 'Сарай',
-            'bath' => 'Баня',
-            'forest_trees' => 'Лесные деревья',
-            'garden_trees' => 'Садовые деревья',
-            'guest_house' => 'Гостевой дом',
-            'lodge' => 'Сторожка',
-            'playground' => 'Детская площадка',
-            'river' => 'Река',
-            'spring' => 'Родник',
-            'swimming_pool' => 'Бассейн',
-            'waterfront' => 'Берег водоёма',
-            'wine_vault' => 'Винный погреб',
-            'preview_img' => 'Фото',
-            'non_commission' => 'Нет комиссии',
-            'house' => 'Дом',
-            'street' => 'Улица',
-
-            'lift_lifting' => 'Грузвовой лифт',
-            'lift_passenger' => 'Пассажирский лифт',
-            'lift_none' => 'Без лифта',
-
-            'parking_multilevel' => 'Парковка - Многоуровневая парковка',
-            'parking_underground' => 'Парковка - Подземная парковка',
-            'parking_garage_complex' => 'Парковка - Гаражный комплекс',
-            'parking_lot_garage' => 'Парковка - Придомовый гараж',
-            'parking_none' => 'Парковка Отсутствует',
-
-            'plot_smooth' => 'Участок Ровный',
-            'plot_uneven' => 'Участок Неровный',
-            'plot_on_the_slope' => 'Участок На склоне',
-            'plot_of_ravine' => 'Участок Овраг',
-            'plot_wetland' => 'Участок Заболоченный',
-        );
-
-
-        //Опции !!!
-        $options = array(
-            '0' => 'Не указано',
-            '1' => '1',
-            '2' => '2',
-            '3' => '3',
-            '4' => '4+',
-            '144' => 'c',
-            '69' => 'gh',
-            '48' => 'z',
-            '8' => 'Административное',
-            '15' => 'Баня',
-            '126' => 'Бассейн',
-            '141' => 'Без ремонта',
-            '140' => 'Без фундамента',
-            '135' => 'Берег водоёма',
-            '10' => 'Беседка',
-            '18' => 'Бескобетонная черепица',
-            '51' => 'Бесплатная',
-            '31' => 'Бетон',
-            '80' => 'Более года',
-            '16' => 'Ванная',
-            '131' => 'Вид постройки',
-            '25' => 'Видеонаблюдение',
-            '139' => 'Винный погреб',
-            '137' => 'Водопровод',
-            '114' => 'Водопровод и канализация',
-            '13' => 'Возможен',
-            '101' => 'Возможность проводки',
-            '127' => 'Временная',
-            '26' => 'Выбрать место на карте',
-            '64' => 'Высококачественная отделка',
-            '54' => 'Газ',
-            '55' => 'Газосиликатные блоки',
-            '52' => 'Гаражный комплекс',
-            '145' => 'Год',
-            '146' => 'Год постройки\окончания строительства',
-            '60' => 'Гостевой дом',
-            '71' => 'Гостиная',
-            '23' => 'Грузовой',
-            '147' => 'Да',
-            '37' => 'День',
-            '142' => 'Дерево',
-            '100' => 'Детская',
-            '99' => 'Детская площадка',
-            '66' => 'Домофон',
-            '91' => 'Другое',
-            '42' => 'Дуплекс',
-            '47' => 'Есть',
-            '67' => 'Железо',
-            '105' => 'Железобетон',
-            '32' => 'Железобетонные панели',
-            '108' => 'Жилое',
-            '136' => 'Заболоченный',
-            '59' => 'Земли под размещение промышленных и коммерческих объектов',
-            '122' => 'Камень',
-            '19' => 'Кирпич',
-            '56' => 'Клееный брус',
-            '143' => 'Кованая ограда',
-            '87' => 'Кол-во кВт',
-            '86' => 'Количество',
-            '128' => 'Количество киловат',
-            '111' => 'Комнаты',
-            '30' => 'Консьерж',
-            '35' => 'Коттедж',
-            '68' => 'Кухня',
-            '24' => 'Лафет',
-            '109' => 'Ленточный',
-            '50' => 'Лесные деревья',
-            '74' => 'Максимум',
-            '34' => 'Медь',
-            '79' => 'Месяц',
-            '75' => 'Металлические прутья',
-            '76' => 'Металлочерепица',
-            '77' => 'Минимум',
-            '81' => 'Многоуровневый паркинг',
-            '78' => 'Монолит',
-            '120' => 'Монолитная плита',
-            '82' => 'Муниципальная',
-            '89' => 'На склоне',
-            '12' => 'Наличие санузлов',
-            '41' => 'Не важно',
-            '85' => 'Невозможен',
-            '138' => 'Неделя',
-            '33' => 'Незавершенное строительство',
-            '65' => 'Незавершенный ремонт',
-            '133' => 'Неровный',
-            '84' => 'Нет',
-            '83' => 'Новостройка',
-            '134' => 'Обычная отделка',
-            '103' => 'Овраг',
-            '36' => 'Округ',
-            '88' => 'Ондулин',
-            '90' => 'Опен спэйс',
-            '39' => 'Описание',
-            '63' => 'Отопление',
-            '5' => 'Отсутствует',
-            '115' => 'Охрана',
-            '112' => 'Оцилиндрованное бревно',
-            '95' => 'Пассажирский',
-            '96' => 'Пеноблок',
-            '113' => 'Пескобетонная черепица',
-            '97' => 'Планируется',
-            '98' => 'Пластик',
-            '94' => 'Платная',
-            '132' => 'Подземная парковка',
-            '61' => 'Полгода',
-            '7' => 'Придомовой гараж',
-            '11' => 'Прилагается',
-            '62' => 'Прихожая',
-            '102' => 'Профилированный брус',
-            '38' => 'Профнастил',
-            '44' => 'Пустая',
-            '124' => 'Рабочий кабинет',
-            '116' => 'Раздельный',
-            '104' => 'Район',
-            '72' => 'Расположение',
-            '110' => 'Река',
-            '22' => 'Риэлтором',
-            '119' => 'Ровный',
-            '121' => 'Родник',
-            '58' => 'Ростверк',
-            '27' => 'Рубленое дерево',
-            '53' => 'Садовые деревья',
-            '14' => 'Сарай',
-            '9' => 'Сельскохозяйственные земли',
-            '117' => 'Сигнализация',
-            '21' => 'Собственником',
-            '93' => 'Собственность более 5 лет',
-            '92' => 'Собственность менее 5 лет',
-            '29' => 'Совмещенный',
-            '123' => 'Солома',
-            '17' => 'Спальня',
-            '40' => 'Столовая',
-            '73' => 'Сторожка',
-            '130' => 'Таунхаус',
-            '20' => 'Тип здания',
-            '6' => 'Точный адрес',
-            '106' => 'Требуется косметический ремонт',
-            '107' => 'Требуется ремонт',
-            '45' => 'Укомплектованная',
-            '70' => 'Участок с подрядом',
-            '49' => 'Фахверк',
-            '57' => 'Хорошая отделка',
-            '129' => 'Черепица',
-            '125' => 'Шведская плита',
-            '118' => 'Шифер',
-            '28' => 'Шлакоблоки',
-            '46' => 'Эксклюзивного качества',
-        );
-
-        // Цифровые элементы
-        $integer_elements = [
-            'id_news',
-            'user_id',
-            'common',
-            'resedential',
-            'not_residential',
-            'bathroom_number',
-            'balcony',
-            'ceiling_height',
-            'distance_from_metro',
-            'distance_from_mkad_or_metro',
-            'floor',
-            'not_residentia',
-            'number_of_floors',
-            'number_of_rooms',
-            'price',
-            'the_number_of_kilowatt',
-            'year_of_construction',
-            'time_walk'
-        ];
-        //Присваивание значениям опций - перевода
-        foreach ($new_data as $key => $val) {
-            if (is_int($val) && !in_array($key, $integer_elements)) {
-                if (isset($options[$val])) {
-                    $new_data[$key] = $options[$val];
-                } else {
-                    if ($key = 'metro_station') {
-                        //Станции метро
-                        $sql = "SELECT metro_id, metro_name, line_id "
-                            . "FROM metro_stations "
-                            . "WHERE working = 1 AND metro_id =" . (int)$val;
-                        $stmt = $this->db->prepare($sql);
-                        $stmt->execute();
-                        $metro_stations = $stmt->fetch(PDO::FETCH_ASSOC);
-
-                        $new_data[$key] = $metro_stations['metro_name'];
-
-                    } else {
-                        $new_data[$key] = '!!! неизвестная опция  = ' . $val;
-                    }
-                }
-
-            }
-        }
-
-        //Присваивание заголовков
-        foreach ($new_data as $key => $val) {
-            if (!empty($header[$key])) {
-                $new_data[$key . '_h'] = $header[$key];
-            }
-        }
-
-        return $new_data;
-    }
+    //    /**
+    //     * Подготовка объявлений- удаление пустых данных и перевод индексов
+    //     *
+    //     * @param $news
+    //     *
+    //     * @return array
+    //     */
+    //    public function prepareNewsView($news)
+    //    {
+    //        //новый массив данных новости
+    //        $new_data = [];
+    //        //Удаление несуществующих параметров
+    //        // и Перевод чисел в слова
+    //        foreach ($news as $key => $val) {
+    //            if (!empty($val)) {
+    //                $new_data[$key] = $news[$key];
+    //                if (is_int($new_data[$key])) {
+    //                    $new_data[$key] = $this->translateIndex($new_data[$key], $key);
+    //                }
+    //                if (is_bool($new_data[$key])) {
+    //                    if ($new_data[$key]) {
+    //                        $new_data[$key] = 'Да';
+    //                    } else {
+    //                        $new_data[$key] = 'Нет';
+    //                    }
+    //                }
+    //            }
+    //        }
+    //
+    //
+    //        //!!! Заголовки !!!
+    //        $header = [
+    //            'id_news'             => 'Индекс объявления',
+    //            'form_name'           => 'Имя формы',
+    //            'space_type'          => 'Тип площади',
+    //            'operation_type'      => 'Операция',
+    //            'object_type'         => 'Тип объекта',
+    //            'rating_views'        => 'Рейтинг просмотров',
+    //            'rating_admin'        => 'Рейтинг администрации',
+    //            'rating_donate'       => 'Рейтинг по оплате',
+    //            'status'              => 'Статус',
+    //            'user_id'             => 'ID пользователя',
+    //            'title'               => 'Название новости',
+    //            'date'                => 'Дата',
+    //            'content'             => 'Контент',
+    //            'photo_available'     => 'Наличие фотографий',
+    //            'tags'                => 'Тег',
+    //            'country'             => 'Страна',
+    //            'area'                => 'Область',
+    //            'city'                => 'Город',
+    //            'region'              => 'Регион',
+    //            'address'             => 'Адрес',
+    //            'gas'                 => 'Газ',
+    //            'heating'             => 'Отопление',
+    //            'water_pipes'         => 'Водопровод',
+    //            'elevator_passangers' => 'Пассажирский лифт',
+    //            'elevator_cargo'      => 'Грузовой лифт',
+    //            'bathroom'            => 'Ванная',
+    //            'dining_room'         => 'Столовая',
+    //            'study'               => 'Рабочий кабинет',
+    //            'playroom'            => 'Детская',
+    //            'hallway'             => 'Прихожая',
+    //            'living_room'         => 'Гостиная',
+    //            'kitchen'             => 'Кухня',
+    //            'bedroom'             => 'Спальня',
+    //            'signaling'           => 'Сигнализация',
+    //            'cctv'                => 'Видеонаблюдение',
+    //            'intercom'            => 'Домофон',
+    //            'concierge'           => 'Консьерж',
+    //            'common'              => 'Общая',
+    //            'resedential'         => 'Жилая',
+    //
+    //            'bathroom_description'             => 'Описание санузлов',
+    //            'bathroom_location'                => 'Расположение санузлов',
+    //            'bathroom_number'                  => 'Количество санузлов',
+    //            'possible_to_post'                 => 'Возможность проводки',
+    //            'sanitation_description'           => 'Описание',
+    //            'documents_on_tenure'              => 'Документы на право владения',
+    //            'additional_buildings'             => 'Дополнительные строения',
+    //            'availability_of_bathroom'         => 'Наличие санузлов',
+    //            'availability_of_garbage_chute'    => 'Наличие мусоропровода',
+    //            'balcony'                          => 'Балкон',
+    //            'bargain'                          => 'Торг',
+    //            'building_type'                    => 'Тип здания',
+    //            'cadastral_number'                 => 'Кадастровый номер',
+    //            'ceiling_height'                   => 'Высота потолков',
+    //            'clarification_of_the_object_type' => 'Уточнение вида объектов',
+    //            'combined'                         => 'Совмещенный',
+    //            'distance_from_metro'              => 'Удаленность от метро',
+    //            'distance_from_mkad_or_metro'      => 'Удаленность от МКАД/метро',
+    //            'documents_on_ownership'           => 'Документы на право владения',
+    //            'doesnt_matter'                    => 'Не важно',
+    //            'electricity'                      => 'Электричество',
+    //            'equipment'                        => 'Комплектация',
+    //            'fencing'                          => 'Ограждение',
+    //            'floor'                            => 'Этаж',
+    //            'foundation'                       => 'Фундамент',
+    //            'furnish'                          => 'Отделка',
+    //            'lavatory'                         => 'Санузел',
+    //            'lease'                            => 'Срок аренды',
+    //            'lease_contract'                   => 'Договор аренды',
+    //            'location_on'                      => 'На участке',
+    //            'material'                         => 'Материал',
+    //            'metro_station'                    => 'Станция метро',
+    //            'municipal'                        => 'Муниципальная',
+    //            'not_residential'                  => 'Нежилая',
+    //            'number_of_floors'                 => 'Количество этажей',
+    //            'number_of_rooms'                  => 'Количество комнат',
+    //            'object_located'                   => 'Объект размещен',
+    //            'paid'                             => 'Платная ',
+    //
+    //            'planning_project'       => 'Проект планировки',
+    //            'price'                  => 'Стоимость',
+    //            'property_documents'     => 'Документы на собственность',
+    //            'residential'            => 'Жилая',
+    //            'roofing'                => 'Кровля',
+    //            'rooms'                  => 'Комнаты',
+    //            'sanitation'             => 'Водопровод и канализация',
+    //            'security'               => 'Охрана',
+    //            'select_area_on_city'    => 'Выбрать область',
+    //            'separated'              => 'Раздельный',
+    //            'site'                   => 'Участок',
+    //            'space'                  => 'Площадь',
+    //            'stairwells_status'      => 'Состояние лестничных клеток',
+    //            'the_number_of_kilowatt' => 'Количество киловатт',
+    //            'three_d_project'        => '3d проект',
+    //            'type_of_construction'   => 'Вид постройки',
+    //            'type_of_house'          => 'Тип дома',
+    //            'video'                  => 'Видео',
+    //            'wall_material'          => 'Материал стен',
+    //            'year_of_construction'   => 'Год постройки/окончания строительства',
+    //            'time_walk'              => 'Время от метро пешком',
+    //            'time_car'               => 'Время от метро на транспорте',
+    //            'bathroom_available'     => 'Наличие санузла',
+    //            'alcove'                 => 'Беседка',
+    //            'barn'                   => 'Сарай',
+    //            'bath'                   => 'Баня',
+    //            'forest_trees'           => 'Лесные деревья',
+    //            'garden_trees'           => 'Садовые деревья',
+    //            'guest_house'            => 'Гостевой дом',
+    //            'lodge'                  => 'Сторожка',
+    //            'playground'             => 'Детская площадка',
+    //            'river'                  => 'Река',
+    //            'spring'                 => 'Родник',
+    //            'swimming_pool'          => 'Бассейн',
+    //            'waterfront'             => 'Берег водоёма',
+    //            'wine_vault'             => 'Винный погреб',
+    //            'preview_img'            => 'Фото',
+    //            'non_commission'         => 'Нет комиссии',
+    //            'house'                  => 'Дом',
+    //            'street'                 => 'Улица',
+    //
+    //            'lift_lifting'   => 'Грузвовой лифт',
+    //            'lift_passenger' => 'Пассажирский лифт',
+    //            'lift_none'      => 'Без лифта',
+    //
+    //            'parking_multilevel'     => 'Парковка - Многоуровневая парковка',
+    //            'parking_underground'    => 'Парковка - Подземная парковка',
+    //            'parking_garage_complex' => 'Парковка - Гаражный комплекс',
+    //            'parking_lot_garage'     => 'Парковка - Придомовый гараж',
+    //            'parking_none'           => 'Парковка Отсутствует',
+    //
+    //            'plot_smooth'       => 'Участок Ровный',
+    //            'plot_uneven'       => 'Участок Неровный',
+    //            'plot_on_the_slope' => 'Участок На склоне',
+    //            'plot_of_ravine'    => 'Участок Овраг',
+    //            'plot_wetland'      => 'Участок Заболоченный',
+    //        ];
+    //
+    //
+    //        //Опции !!!
+    //        $options = [
+    //            '0'   => 'Не указано',
+    //            '1'   => '1',
+    //            '2'   => '2',
+    //            '3'   => '3',
+    //            '4'   => '4+',
+    //            '144' => 'c',
+    //            '69'  => 'gh',
+    //            '48'  => 'z',
+    //            '8'   => 'Административное',
+    //            '15'  => 'Баня',
+    //            '126' => 'Бассейн',
+    //            '141' => 'Без ремонта',
+    //            '140' => 'Без фундамента',
+    //            '135' => 'Берег водоёма',
+    //            '10'  => 'Беседка',
+    //            '18'  => 'Бескобетонная черепица',
+    //            '51'  => 'Бесплатная',
+    //            '31'  => 'Бетон',
+    //            '80'  => 'Более года',
+    //            '16'  => 'Ванная',
+    //            '131' => 'Вид постройки',
+    //            '25'  => 'Видеонаблюдение',
+    //            '139' => 'Винный погреб',
+    //            '137' => 'Водопровод',
+    //            '114' => 'Водопровод и канализация',
+    //            '13'  => 'Возможен',
+    //            '101' => 'Возможность проводки',
+    //            '127' => 'Временная',
+    //            '26'  => 'Выбрать место на карте',
+    //            '64'  => 'Высококачественная отделка',
+    //            '54'  => 'Газ',
+    //            '55'  => 'Газосиликатные блоки',
+    //            '52'  => 'Гаражный комплекс',
+    //            '145' => 'Год',
+    //            '146' => 'Год постройки\окончания строительства',
+    //            '60'  => 'Гостевой дом',
+    //            '71'  => 'Гостиная',
+    //            '23'  => 'Грузовой',
+    //            '147' => 'Да',
+    //            '37'  => 'День',
+    //            '142' => 'Дерево',
+    //            '100' => 'Детская',
+    //            '99'  => 'Детская площадка',
+    //            '66'  => 'Домофон',
+    //            '91'  => 'Другое',
+    //            '42'  => 'Дуплекс',
+    //            '47'  => 'Есть',
+    //            '67'  => 'Железо',
+    //            '105' => 'Железобетон',
+    //            '32'  => 'Железобетонные панели',
+    //            '108' => 'Жилое',
+    //            '136' => 'Заболоченный',
+    //            '59'  => 'Земли под размещение промышленных и коммерческих объектов',
+    //            '122' => 'Камень',
+    //            '19'  => 'Кирпич',
+    //            '56'  => 'Клееный брус',
+    //            '143' => 'Кованая ограда',
+    //            '87'  => 'Кол-во кВт',
+    //            '86'  => 'Количество',
+    //            '128' => 'Количество киловат',
+    //            '111' => 'Комнаты',
+    //            '30'  => 'Консьерж',
+    //            '35'  => 'Коттедж',
+    //            '68'  => 'Кухня',
+    //            '24'  => 'Лафет',
+    //            '109' => 'Ленточный',
+    //            '50'  => 'Лесные деревья',
+    //            '74'  => 'Максимум',
+    //            '34'  => 'Медь',
+    //            '79'  => 'Месяц',
+    //            '75'  => 'Металлические прутья',
+    //            '76'  => 'Металлочерепица',
+    //            '77'  => 'Минимум',
+    //            '81'  => 'Многоуровневый паркинг',
+    //            '78'  => 'Монолит',
+    //            '120' => 'Монолитная плита',
+    //            '82'  => 'Муниципальная',
+    //            '89'  => 'На склоне',
+    //            '12'  => 'Наличие санузлов',
+    //            '41'  => 'Не важно',
+    //            '85'  => 'Невозможен',
+    //            '138' => 'Неделя',
+    //            '33'  => 'Незавершенное строительство',
+    //            '65'  => 'Незавершенный ремонт',
+    //            '133' => 'Неровный',
+    //            '84'  => 'Нет',
+    //            '83'  => 'Новостройка',
+    //            '134' => 'Обычная отделка',
+    //            '103' => 'Овраг',
+    //            '36'  => 'Округ',
+    //            '88'  => 'Ондулин',
+    //            '90'  => 'Опен спэйс',
+    //            '39'  => 'Описание',
+    //            '63'  => 'Отопление',
+    //            '5'   => 'Отсутствует',
+    //            '115' => 'Охрана',
+    //            '112' => 'Оцилиндрованное бревно',
+    //            '95'  => 'Пассажирский',
+    //            '96'  => 'Пеноблок',
+    //            '113' => 'Пескобетонная черепица',
+    //            '97'  => 'Планируется',
+    //            '98'  => 'Пластик',
+    //            '94'  => 'Платная',
+    //            '132' => 'Подземная парковка',
+    //            '61'  => 'Полгода',
+    //            '7'   => 'Придомовой гараж',
+    //            '11'  => 'Прилагается',
+    //            '62'  => 'Прихожая',
+    //            '102' => 'Профилированный брус',
+    //            '38'  => 'Профнастил',
+    //            '44'  => 'Пустая',
+    //            '124' => 'Рабочий кабинет',
+    //            '116' => 'Раздельный',
+    //            '104' => 'Район',
+    //            '72'  => 'Расположение',
+    //            '110' => 'Река',
+    //            '22'  => 'Риэлтором',
+    //            '119' => 'Ровный',
+    //            '121' => 'Родник',
+    //            '58'  => 'Ростверк',
+    //            '27'  => 'Рубленое дерево',
+    //            '53'  => 'Садовые деревья',
+    //            '14'  => 'Сарай',
+    //            '9'   => 'Сельскохозяйственные земли',
+    //            '117' => 'Сигнализация',
+    //            '21'  => 'Собственником',
+    //            '93'  => 'Собственность более 5 лет',
+    //            '92'  => 'Собственность менее 5 лет',
+    //            '29'  => 'Совмещенный',
+    //            '123' => 'Солома',
+    //            '17'  => 'Спальня',
+    //            '40'  => 'Столовая',
+    //            '73'  => 'Сторожка',
+    //            '130' => 'Таунхаус',
+    //            '20'  => 'Тип здания',
+    //            '6'   => 'Точный адрес',
+    //            '106' => 'Требуется косметический ремонт',
+    //            '107' => 'Требуется ремонт',
+    //            '45'  => 'Укомплектованная',
+    //            '70'  => 'Участок с подрядом',
+    //            '49'  => 'Фахверк',
+    //            '57'  => 'Хорошая отделка',
+    //            '129' => 'Черепица',
+    //            '125' => 'Шведская плита',
+    //            '118' => 'Шифер',
+    //            '28'  => 'Шлакоблоки',
+    //            '46'  => 'Эксклюзивного качества',
+    //        ];
+    //
+    //        // Цифровые элементы
+    //        $integer_elements = [
+    //            'id_news',
+    //            'user_id',
+    //            'common',
+    //            'resedential',
+    //            'not_residential',
+    //            'bathroom_number',
+    //            'balcony',
+    //            'ceiling_height',
+    //            'distance_from_metro',
+    //            'distance_from_mkad_or_metro',
+    //            'floor',
+    //            'not_residentia',
+    //            'number_of_floors',
+    //            'number_of_rooms',
+    //            'price',
+    //            'the_number_of_kilowatt',
+    //            'year_of_construction',
+    //            'time_walk',
+    //        ];
+    //        //Присваивание значениям опций - перевода
+    //        foreach ($new_data as $key => $val) {
+    //            if (is_int($val) && !in_array($key, $integer_elements)) {
+    //                if (isset($options[$val])) {
+    //                    $new_data[$key] = $options[$val];
+    //                } else {
+    //                    if ($key = 'metro_station') {
+    //                        //Станции метро
+    //                        $sql = "SELECT metro_id, metro_name, line_id "
+    //                            . "FROM metro_stations "
+    //                            . "WHERE working = 1 AND metro_id =" . (int)$val;
+    //                        $stmt = $this->db->prepare($sql);
+    //                        if (!$stmt->execute()){
+    //                            $this->error(self::DB_SELECT_ERROR);
+    //                        }
+    //                        $metro_stations = $stmt->fetch(PDO::FETCH_ASSOC);
+    //
+    //                        $new_data[$key] = $metro_stations['metro_name'];
+    //
+    //                    } else {
+    //                        $new_data[$key] = '!!! неизвестная опция  = ' . $val;
+    //                    }
+    //                }
+    //
+    //            }
+    //        }
+    //
+    //        //Присваивание заголовков
+    //        foreach ($new_data as $key => $val) {
+    //            if (!empty($header[$key])) {
+    //                $new_data[$key . '_h'] = $header[$key];
+    //            }
+    //        }
+    //
+    //        return $new_data;
+    //    }
 
 
     /**
@@ -661,6 +688,7 @@ class NewsModel extends Model
      * @param int $space_type
      * @param int $operation_type
      * @param int $object_type
+     *
      * @return array
      */
     public function getPathOfNewsForm($data, $space_type = 0, $operation_type = 0, $object_type = 0)
@@ -672,24 +700,30 @@ class NewsModel extends Model
         }
         $data['form_name'] = $data['space_type'] . '_' . $data['operation_type'] . '_' . $data['object_type'];
         $data['form_path'] = 'app/views/news/' . $data['form_name'] . '.php';
+
         return $data;
     }
 
     /**
      * Получение сообщений
+     *
      * @param $data
+     *
      * @return mixed
      */
     public function getNewsMessageAndError($data)
     {
         $data['message'] = $this->getUserError('news_message');
         $data['error'] = $this->getUserError('news_error');
+
         return $data;
     }
 
     /**
      * Список объявлений
+     *
      * @param int $page - страница новостей
+     *
      * @return array - выборка всех данных новостей в виде массива
      */
     public function getNewsList($space_type = 0, $operation_type = 0, $object_type = 0, $max_number = 0, $offset = 0)
@@ -728,7 +762,9 @@ class NewsModel extends Model
         if ($object_type != 0) {
             $stmt->bindParam(':object_type', $object_type);
         }
-        $stmt->execute();
+        if (!$stmt->execute()) {
+            $this->error(self::DB_EXECUTE_ERROR);
+        }
         $data['news'] = $stmt->fetchAll();
 
         // Подкотовка данных для вывода
@@ -739,7 +775,9 @@ class NewsModel extends Model
 
     /**
      * Массив новостей => картинки из стоки записываются в массив
+     *
      * @param $data_news - массив новостей
+     *
      * @return mixed - исправленный массив новостей
      */
     private function getAdsPhotos($data_news)
@@ -757,7 +795,9 @@ class NewsModel extends Model
                 . " FROM ads_images"
                 . " WHERE ad_id IN ($ad_id)";
             $stmt = $this->db->prepare($sql);
-            $stmt->execute();
+            if (!$stmt->execute()) {
+                $this->error(self::DB_EXECUTE_ERROR);
+            }
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             if (!empty($result)) {
                 foreach ($result as $p) {
@@ -776,6 +816,7 @@ class NewsModel extends Model
                 }
             }
         }
+
         return $data_news;
     }
 
@@ -783,7 +824,9 @@ class NewsModel extends Model
     /**
      * Получает список новостей из заданной табицы($table) или из всех таблиц новостей(по умолчанию)
      * отсортированный по дате
+     *
      * @param null $user_id
+     *
      * @return array|bool
      */
     public function getMyNewsList($user_id = null)
@@ -801,7 +844,9 @@ class NewsModel extends Model
             if ($user_id !== 'admin') {
                 $stmt->bindParam(':user_id', $user_id);
             }
-            $stmt->execute();
+            if (!$stmt->execute()) {
+                $this->error(self::DB_EXECUTE_ERROR);
+            }
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             // преобразуем категории в слова
             foreach ($result as &$news) {
@@ -818,24 +863,26 @@ class NewsModel extends Model
         return $result;
     }
 
-//    /**
-//     * Установка сессии для редактирования картинок
-//     * @param $news_to_edit
-//     */
-//    public function setSessionForEditor($news_to_edit = [])
-//    {
-//        if (empty($news_to_edit)) {
-//            // Удаление сессии запоминания картинки
-//            $_SESSION['preview_img'] = [];
-//        } else {
-//            //Запись имен картинок в базе, для перезаписи картинок при Update
-//            $_SESSION['preview_img'] = $news_to_edit["preview_img"];
-//        }
-//    }
+    //    /**
+    //     * Установка сессии для редактирования картинок
+    //     * @param $news_to_edit
+    //     */
+    //    public function setSessionForEditor($news_to_edit = [])
+    //    {
+    //        if (empty($news_to_edit)) {
+    //            // Удаление сессии запоминания картинки
+    //            $_SESSION['preview_img'] = [];
+    //        } else {
+    //            //Запись имен картинок в базе, для перезаписи картинок при Update
+    //            $_SESSION['preview_img'] = $news_to_edit["preview_img"];
+    //        }
+    //    }
 
     /**
      * Получение и обработка данных из форм редактора объявлений
+     *
      * @param $preview_img
+     *
      * @return bool
      */
     public function getFormDataFromPOST($preview_img)
@@ -857,112 +904,112 @@ class NewsModel extends Model
 
         array_filter($_POST, 'trim_value');
 
-        static $args = array(
-            'address' => FILTER_SANITIZE_STRING,
-            'alcove' => FILTER_VALIDATE_BOOLEAN,
-            'area' => FILTER_SANITIZE_STRING,
-            'availability_of_garbage_chute' => FILTER_VALIDATE_BOOLEAN,
-            'balcony' => FILTER_SANITIZE_NUMBER_INT,
-            'bargain' => FILTER_VALIDATE_BOOLEAN,
-            'barn' => FILTER_VALIDATE_BOOLEAN,
-            'bath' => FILTER_VALIDATE_BOOLEAN,
-            'bathroom' => FILTER_VALIDATE_BOOLEAN,
-            'bathroom_available' => FILTER_VALIDATE_BOOLEAN,
-            'bedroom' => FILTER_VALIDATE_BOOLEAN,
-            'building_type' => FILTER_SANITIZE_NUMBER_INT,
-            'cadastral_number' => FILTER_SANITIZE_STRING,
-            'cctv' => FILTER_VALIDATE_BOOLEAN,
-            'ceiling_height' => FILTER_SANITIZE_NUMBER_INT,
-            'city' => FILTER_SANITIZE_STRING,
+        static $args = [
+            'address'                          => FILTER_SANITIZE_STRING,
+            'alcove'                           => FILTER_VALIDATE_BOOLEAN,
+            'area'                             => FILTER_SANITIZE_STRING,
+            'availability_of_garbage_chute'    => FILTER_VALIDATE_BOOLEAN,
+            'balcony'                          => FILTER_SANITIZE_NUMBER_INT,
+            'bargain'                          => FILTER_VALIDATE_BOOLEAN,
+            'barn'                             => FILTER_VALIDATE_BOOLEAN,
+            'bath'                             => FILTER_VALIDATE_BOOLEAN,
+            'bathroom'                         => FILTER_VALIDATE_BOOLEAN,
+            'bathroom_available'               => FILTER_VALIDATE_BOOLEAN,
+            'bedroom'                          => FILTER_VALIDATE_BOOLEAN,
+            'building_type'                    => FILTER_SANITIZE_NUMBER_INT,
+            'cadastral_number'                 => FILTER_SANITIZE_STRING,
+            'cctv'                             => FILTER_VALIDATE_BOOLEAN,
+            'ceiling_height'                   => FILTER_SANITIZE_NUMBER_INT,
+            'city'                             => FILTER_SANITIZE_STRING,
             'clarification_of_the_object_type' => FILTER_SANITIZE_NUMBER_INT,
-            'common' => FILTER_SANITIZE_NUMBER_INT,
-            'concierge' => FILTER_VALIDATE_BOOLEAN,
-            'content' => FILTER_SANITIZE_STRING,
-            'country' => FILTER_SANITIZE_STRING,
-            'dining_room' => FILTER_VALIDATE_BOOLEAN,
-            'distance_from_metro' => FILTER_SANITIZE_NUMBER_INT,
-            'documents_on_tenure' => FILTER_SANITIZE_STRING,
-            'electricity' => FILTER_VALIDATE_BOOLEAN,
-            'equipment' => FILTER_VALIDATE_BOOLEAN,
-            'fencing' => FILTER_SANITIZE_NUMBER_INT,
-            'floor' => FILTER_SANITIZE_NUMBER_INT,
-            'forest_trees' => FILTER_VALIDATE_BOOLEAN,
-            'foundation' => FILTER_SANITIZE_NUMBER_INT,
-            'furnish' => FILTER_SANITIZE_NUMBER_INT,
-            'garden_trees' => FILTER_VALIDATE_BOOLEAN,
-            'gas' => FILTER_VALIDATE_BOOLEAN,
-            'guest_house' => FILTER_VALIDATE_BOOLEAN,
-            'hallway' => FILTER_VALIDATE_BOOLEAN,
-            'heating' => FILTER_VALIDATE_BOOLEAN,
-            'house' => FILTER_SANITIZE_STRING,
-            'intercom' => FILTER_VALIDATE_BOOLEAN,
-            'kitchen' => FILTER_VALIDATE_BOOLEAN,
-            'lavatory' => FILTER_SANITIZE_NUMBER_INT,
-            'lease' => FILTER_SANITIZE_NUMBER_INT,
-            'lease_contract' => FILTER_SANITIZE_STRING,
-            'lift_lifting' => FILTER_VALIDATE_BOOLEAN,
-            'lift_none' => FILTER_VALIDATE_BOOLEAN,
-            'lift_passenger' => FILTER_VALIDATE_BOOLEAN,
-            'living_room' => FILTER_VALIDATE_BOOLEAN,
-            'lodge' => FILTER_VALIDATE_BOOLEAN,
-            'metro_station' => FILTER_SANITIZE_NUMBER_INT,
-            'non_commission' => FILTER_VALIDATE_BOOLEAN,
-            'not_residential' => FILTER_SANITIZE_NUMBER_INT,
-            'number_of_floors' => FILTER_SANITIZE_NUMBER_INT,
-            'number_of_rooms' => FILTER_SANITIZE_NUMBER_INT,
-            'object_located' => FILTER_SANITIZE_NUMBER_INT,
-            'object_type' => FILTER_SANITIZE_NUMBER_INT,
-            'operation_type' => FILTER_SANITIZE_NUMBER_INT,
-            'parking_garage_complex' => FILTER_VALIDATE_BOOLEAN,
-            'parking_lot_garage' => FILTER_VALIDATE_BOOLEAN,
-            'parking_multilevel' => FILTER_VALIDATE_BOOLEAN,
-            'parking_none' => FILTER_VALIDATE_BOOLEAN,
-            'parking_underground' => FILTER_VALIDATE_BOOLEAN,
-            'photo_available' => FILTER_VALIDATE_BOOLEAN,
-            'planning_project' => FILTER_SANITIZE_STRING,
-            'playground' => FILTER_VALIDATE_BOOLEAN,
-            'playroom' => FILTER_VALIDATE_BOOLEAN,
-            'plot_of_ravine' => FILTER_VALIDATE_BOOLEAN,
-            'plot_on_the_slope' => FILTER_VALIDATE_BOOLEAN,
-            'plot_smooth' => FILTER_VALIDATE_BOOLEAN,
-            'plot_uneven' => FILTER_VALIDATE_BOOLEAN,
-            'plot_wetland' => FILTER_VALIDATE_BOOLEAN,
-            'preview_img' => FILTER_SANITIZE_STRING,
-            'price' => FILTER_SANITIZE_NUMBER_INT,
-            'property_documents' => FILTER_SANITIZE_STRING,
-            'rating_admin' => FILTER_SANITIZE_NUMBER_INT,
-            'rating_donate' => FILTER_SANITIZE_NUMBER_INT,
-            'rating_views' => FILTER_SANITIZE_NUMBER_INT,
-            'region' => FILTER_SANITIZE_STRING,
-            'residential' => FILTER_SANITIZE_NUMBER_INT,
-            'river' => FILTER_VALIDATE_BOOLEAN,
-            'roofing' => FILTER_SANITIZE_NUMBER_INT,
-            'sanitation' => FILTER_VALIDATE_BOOLEAN,
-            'security' => FILTER_VALIDATE_BOOLEAN,
-            'signaling' => FILTER_VALIDATE_BOOLEAN,
-            'space' => FILTER_SANITIZE_NUMBER_INT,
-            'space_type' => FILTER_SANITIZE_NUMBER_INT,
-            'spring' => FILTER_VALIDATE_BOOLEAN,
-            'stairwells_status' => FILTER_SANITIZE_NUMBER_INT,
-            'status' => FILTER_SANITIZE_NUMBER_INT,
-            'street' => FILTER_SANITIZE_STRING,
-            'study' => FILTER_VALIDATE_BOOLEAN,
-            'swimming_pool' => FILTER_VALIDATE_BOOLEAN,
-            'tags' => FILTER_SANITIZE_STRING,
-            'three_d_project' => FILTER_SANITIZE_STRING,
-            'time_car' => FILTER_SANITIZE_NUMBER_INT,
-            'time_walk' => FILTER_SANITIZE_NUMBER_INT,
-            'title' => FILTER_SANITIZE_STRING,
-            'type_of_construction' => FILTER_SANITIZE_NUMBER_INT,
-            'type_of_house' => FILTER_SANITIZE_NUMBER_INT,
-            'user_id' => FILTER_SANITIZE_NUMBER_INT,
-            'video' => FILTER_SANITIZE_STRING,
-            'wall_material' => FILTER_SANITIZE_NUMBER_INT,
-            'water_pipes' => FILTER_VALIDATE_BOOLEAN,
-            'waterfront' => FILTER_VALIDATE_BOOLEAN,
-            'wine_vault' => FILTER_VALIDATE_BOOLEAN,
-            'year_of_construction' => FILTER_SANITIZE_NUMBER_INT
-        );
+            'common'                           => FILTER_SANITIZE_NUMBER_INT,
+            'concierge'                        => FILTER_VALIDATE_BOOLEAN,
+            'content'                          => FILTER_SANITIZE_STRING,
+            'country'                          => FILTER_SANITIZE_STRING,
+            'dining_room'                      => FILTER_VALIDATE_BOOLEAN,
+            'distance_from_metro'              => FILTER_SANITIZE_NUMBER_INT,
+            'documents_on_tenure'              => FILTER_SANITIZE_STRING,
+            'electricity'                      => FILTER_VALIDATE_BOOLEAN,
+            'equipment'                        => FILTER_VALIDATE_BOOLEAN,
+            'fencing'                          => FILTER_SANITIZE_NUMBER_INT,
+            'floor'                            => FILTER_SANITIZE_NUMBER_INT,
+            'forest_trees'                     => FILTER_VALIDATE_BOOLEAN,
+            'foundation'                       => FILTER_SANITIZE_NUMBER_INT,
+            'furnish'                          => FILTER_SANITIZE_NUMBER_INT,
+            'garden_trees'                     => FILTER_VALIDATE_BOOLEAN,
+            'gas'                              => FILTER_VALIDATE_BOOLEAN,
+            'guest_house'                      => FILTER_VALIDATE_BOOLEAN,
+            'hallway'                          => FILTER_VALIDATE_BOOLEAN,
+            'heating'                          => FILTER_VALIDATE_BOOLEAN,
+            'house'                            => FILTER_SANITIZE_STRING,
+            'intercom'                         => FILTER_VALIDATE_BOOLEAN,
+            'kitchen'                          => FILTER_VALIDATE_BOOLEAN,
+            'lavatory'                         => FILTER_SANITIZE_NUMBER_INT,
+            'lease'                            => FILTER_SANITIZE_NUMBER_INT,
+            'lease_contract'                   => FILTER_SANITIZE_STRING,
+            'lift_lifting'                     => FILTER_VALIDATE_BOOLEAN,
+            'lift_none'                        => FILTER_VALIDATE_BOOLEAN,
+            'lift_passenger'                   => FILTER_VALIDATE_BOOLEAN,
+            'living_room'                      => FILTER_VALIDATE_BOOLEAN,
+            'lodge'                            => FILTER_VALIDATE_BOOLEAN,
+            'metro_station'                    => FILTER_SANITIZE_NUMBER_INT,
+            'non_commission'                   => FILTER_VALIDATE_BOOLEAN,
+            'not_residential'                  => FILTER_SANITIZE_NUMBER_INT,
+            'number_of_floors'                 => FILTER_SANITIZE_NUMBER_INT,
+            'number_of_rooms'                  => FILTER_SANITIZE_NUMBER_INT,
+            'object_located'                   => FILTER_SANITIZE_NUMBER_INT,
+            'object_type'                      => FILTER_SANITIZE_NUMBER_INT,
+            'operation_type'                   => FILTER_SANITIZE_NUMBER_INT,
+            'parking_garage_complex'           => FILTER_VALIDATE_BOOLEAN,
+            'parking_lot_garage'               => FILTER_VALIDATE_BOOLEAN,
+            'parking_multilevel'               => FILTER_VALIDATE_BOOLEAN,
+            'parking_none'                     => FILTER_VALIDATE_BOOLEAN,
+            'parking_underground'              => FILTER_VALIDATE_BOOLEAN,
+            'photo_available'                  => FILTER_VALIDATE_BOOLEAN,
+            'planning_project'                 => FILTER_SANITIZE_STRING,
+            'playground'                       => FILTER_VALIDATE_BOOLEAN,
+            'playroom'                         => FILTER_VALIDATE_BOOLEAN,
+            'plot_of_ravine'                   => FILTER_VALIDATE_BOOLEAN,
+            'plot_on_the_slope'                => FILTER_VALIDATE_BOOLEAN,
+            'plot_smooth'                      => FILTER_VALIDATE_BOOLEAN,
+            'plot_uneven'                      => FILTER_VALIDATE_BOOLEAN,
+            'plot_wetland'                     => FILTER_VALIDATE_BOOLEAN,
+            'preview_img'                      => FILTER_SANITIZE_STRING,
+            'price'                            => FILTER_SANITIZE_NUMBER_INT,
+            'property_documents'               => FILTER_SANITIZE_STRING,
+            'rating_admin'                     => FILTER_SANITIZE_NUMBER_INT,
+            'rating_donate'                    => FILTER_SANITIZE_NUMBER_INT,
+            'rating_views'                     => FILTER_SANITIZE_NUMBER_INT,
+            'region'                           => FILTER_SANITIZE_STRING,
+            'residential'                      => FILTER_SANITIZE_NUMBER_INT,
+            'river'                            => FILTER_VALIDATE_BOOLEAN,
+            'roofing'                          => FILTER_SANITIZE_NUMBER_INT,
+            'sanitation'                       => FILTER_VALIDATE_BOOLEAN,
+            'security'                         => FILTER_VALIDATE_BOOLEAN,
+            'signaling'                        => FILTER_VALIDATE_BOOLEAN,
+            'space'                            => FILTER_SANITIZE_NUMBER_INT,
+            'space_type'                       => FILTER_SANITIZE_NUMBER_INT,
+            'spring'                           => FILTER_VALIDATE_BOOLEAN,
+            'stairwells_status'                => FILTER_SANITIZE_NUMBER_INT,
+            'status'                           => FILTER_SANITIZE_NUMBER_INT,
+            'street'                           => FILTER_SANITIZE_STRING,
+            'study'                            => FILTER_VALIDATE_BOOLEAN,
+            'swimming_pool'                    => FILTER_VALIDATE_BOOLEAN,
+            'tags'                             => FILTER_SANITIZE_STRING,
+            'three_d_project'                  => FILTER_SANITIZE_STRING,
+            'time_car'                         => FILTER_SANITIZE_NUMBER_INT,
+            'time_walk'                        => FILTER_SANITIZE_NUMBER_INT,
+            'title'                            => FILTER_SANITIZE_STRING,
+            'type_of_construction'             => FILTER_SANITIZE_NUMBER_INT,
+            'type_of_house'                    => FILTER_SANITIZE_NUMBER_INT,
+            'user_id'                          => FILTER_SANITIZE_NUMBER_INT,
+            'video'                            => FILTER_SANITIZE_STRING,
+            'wall_material'                    => FILTER_SANITIZE_NUMBER_INT,
+            'water_pipes'                      => FILTER_VALIDATE_BOOLEAN,
+            'waterfront'                       => FILTER_VALIDATE_BOOLEAN,
+            'wine_vault'                       => FILTER_VALIDATE_BOOLEAN,
+            'year_of_construction'             => FILTER_SANITIZE_NUMBER_INT,
+        ];
 
         $new_form_data = filter_input_array(INPUT_POST, $args);
         $new_form_data['user_id'] = $user_id;
@@ -993,6 +1040,7 @@ class NewsModel extends Model
 
     /**
      * Запись объявлений
+     *
      * @param $form_data
      */
     public function makeNewsInsert($form_data, $photos)
@@ -1017,41 +1065,39 @@ class NewsModel extends Model
             $p = ':' . $key;
             $stmt->bindParam($p, $form_data[$key]);
         }
-        $stmt->execute();
+        if (!$stmt->execute()) {
+            $this->error(self::DB_EXECUTE_ERROR);
+        }
         $id_news = $stmt->fetchColumn();
         if ($id_news) {
-//            $this->setUserError('news_message',
-//                'Новость: успешно добавлена');
-            //Для api
-            $this->response = true;
+            //Добавление индекса объявления для фото ads_images
+            if (!empty($photos)) {
+                if (is_array($photos)) {
+                    $photos_list = '';
+                    foreach ($photos as $p) {
+                        $photos_list .= $p . ', ';
+                    }
+                    $photos_list = substr($photos_list, 0, -2);
+                    $sql = "UPDATE ads_images SET ad_id = '$id_news'"
+                        . " WHERE id IN ($photos_list) AND ad_id = 0";
+                    $stmt = $this->db->prepare($sql);
+                    if ($stmt->execute()) {
+                        $this->response = true;
+                    } else {
+                        $this->error(self::DB_EXECUTE_ERROR);
+                    }
+                }
+            }
         } else {
-//            $this->setUserError('news_error',
-//                'Новость: "' . $form_data['title'] . '" не удалось добавить!');
-            //Для api
-            $this->errors[] = [
-                'code' => self::DATA_BASE_INSERT_ERROR,
-                'message' => 'Ошибка базы данных',
-            ];
+            $this->error(self::DB_EXECUTE_ERROR);
         }
 
-        //Добавление индекса объявления для фото ads_images
-        if (!empty($photos)) {
-            if (is_array($photos)) {
-                $photos_list = '';
-                foreach ($photos as $p) {
-                    $photos_list .= $p . ', ';
-                }
-                $photos_list = substr($photos_list, 0, -2);
-                $sql = "UPDATE ads_images SET ad_id = '$id_news'"
-                    . " WHERE id IN ($photos_list) AND ad_id = 0";
-                $stmt = $this->db->prepare($sql);
-                $this->response = $stmt->execute();
-            }
-        }
+
     }
 
     /**
      * Внесение исправлений а БД
+     *
      * @param $news_to_edit_id
      * @param $form_data
      */
@@ -1074,17 +1120,17 @@ class NewsModel extends Model
             $stmt->bindParam($p, $form_data[$key]);
         }
         if ($stmt->execute()) {
-            $this->setUserError('news_message',
-                'Новость: "' . $form_data['title'] . '" успешно отредактирована!');
+            $this->response = true;
         } else {
-            $this->setUserError('news_error',
-                'Новость: "' . $form_data['title'] . '" не удалось отредактировать!');
+            $this->error(self::DB_EXECUTE_ERROR);
         }
     }
 
     /**
      * Удаление объявления
+     *
      * @param $id
+     *
      * @return array
      */
     private function makeNewsDelete($id)
@@ -1095,7 +1141,9 @@ class NewsModel extends Model
         $sql = "SELECT preview_img FROM news_base WHERE id_news = :id";
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
+        if (!$stmt->execute()) {
+            $this->error(self::DB_EXECUTE_ERROR);
+        }
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
         if (!empty($data['preview_img'])) {
             // разбиваем имена в массив
@@ -1111,7 +1159,9 @@ class NewsModel extends Model
         $sql = "DELETE FROM news_views WHERE id_news = :id";
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':id', $id);
-        $stmt->execute();
+        if (!$stmt->execute()) {
+            $this->error(self::DB_EXECUTE_ERROR);
+        }
         //Удаление объявления
         $sql = "DELETE FROM news_base WHERE id_news = :id";
         $stmt = $this->db->prepare($sql);
@@ -1122,7 +1172,11 @@ class NewsModel extends Model
             $message['news_message'] = 'Удалена новость c id = ' . $id;
         } else {
             $message['news_error'] = 'Новость с id = ' . $id . ' не удалось удалить';
+
+            $this->error(self::DB_EXECUTE_ERROR);
+
         }
+
         return $message;
     }
 
@@ -1143,15 +1197,15 @@ class NewsModel extends Model
                 if (isset($_POST['rating_admin_' . $id_news])) {
                     $rating_admin = (int)$_POST['rating_admin_' . $id_news];
                     $id_news = [
-                        'id' => $id_news,
-                        'rating_admin' => $rating_admin
+                        'id'           => $id_news,
+                        'rating_admin' => $rating_admin,
                     ];
                     array_push($news_id_rating, $id_news);
                 }
             }
         }
 
-// Получение массивов на удаление и изменение статуса
+        // Получение массивов на удаление и изменение статуса
         foreach ($news_id_status as $id_news) {
             if (isset($_POST['status_' . $id_news])) {
                 $status = $_POST['status_' . $id_news];
@@ -1162,23 +1216,25 @@ class NewsModel extends Model
                         $status = 0;
                     }
                     $id_news_arr = [
-                        'id' => $id_news,
-                        'status' => $status
+                        'id'     => $id_news,
+                        'status' => $status,
                     ];
                     array_push($news_update_id, $id_news_arr);
                 }
             }
         }
+
         return [
             'news_id_rating' => $news_id_rating,
             'news_update_id' => $news_update_id,
-            'news_delete_id' => $news_delete_id
+            'news_delete_id' => $news_delete_id,
         ];
 
     }
 
     /**
      * Внесение изиенений статуса, рейтинга или удаления объявлений
+     *
      * @return mixed
      */
     public function makeNewsStatus($news_update_id, $news_delete_id, $news_id_rating)
@@ -1205,6 +1261,9 @@ class NewsModel extends Model
                 $news_message .= "Изменён статус у новости c id = " . $id_news['id'] . " <br>";
             } else {
                 $news_error .= "Статус у новости с id = " . $id_news['id'] . " не удалось изменить <br>";
+
+                $this->error(self::DB_EXECUTE_ERROR);
+
             }
         }
 
@@ -1221,6 +1280,7 @@ class NewsModel extends Model
                 $news_message .= "Изменение статуса Лучшее объявление для id = " . $id_news['id'] . "прошло успешно <br>";
             } else {
                 $news_error .= "Изменение статуса Лучшее объявление (id = " . $id_news['id'] . ") не удалось <br>";
+                $this->error(self::DB_EXECUTE_ERROR);
             }
         }
         //Сообщения
@@ -1234,12 +1294,14 @@ class NewsModel extends Model
         $data['news_message'] = $news_message;
         $data['news_error'] = $news_error;
         $data['news_delete_id'] = $news_delete_id;
+
         return $data;
     }
 
 
     /**
      * Лучшие объявления за 24 часа
+     *
      * @param int $time - за промежуток времени
      * @param int $space_type - Тип площади
      * @param int $operation_type - Операция
@@ -1250,6 +1312,7 @@ class NewsModel extends Model
      * @param int $space_from - Площадь от
      * @param int $space_to - Площадь до
      * @param int $max_number - Количество объявлений
+     *
      * @return array -
      * ['best_news'] - arr [0][1]... Данные Лучших объявлений
      *
@@ -1265,7 +1328,8 @@ class NewsModel extends Model
         $space_from = 0,
         $space_to = 0,
         $max_number = 9
-    ) {
+    )
+    {
         $data = [];
 
         //Заданное время начала поиска ($time - час)
@@ -1337,210 +1401,215 @@ class NewsModel extends Model
         if ($space_to != 0) {
             $stmt->bindParam(':space_to', $space_to);
         }
-        $stmt->execute();
+        if (!$stmt->execute()) {
+            $this->error(self::DB_EXECUTE_ERROR);
+        }
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
         return $data;
     }
 
-//    /**
-//     * Возвращает строку имен (через '|') больших картинок
-//     * (имя эскиза s_имя больш)
-//     *
-//     * @return mixed|string
-//     */
-//    public function saveNewsPictures()
-//    {
-//        global $news_error;
-//
-//        $blacklistOfFile = array(".php", ".phtml", ".php3", ".php4"); // Запрещенный формат файлов
-//        $imgMaxSize = 3050000; // Максимальный размер картинок в байтах
-//        $return_image_arr = []; //подготовительный массив для сохранения порядка следования
-//        $return_image_names = ''; // Возвращаемая строка имен картинок
-//
-//        if (!empty($_FILES)) {
-//            //Получаем имена полей "image_name_?" ввода картинок переданных POST
-//            $image_name_keys = preg_grep("/^image_name_/", array_keys($_FILES));
-//
-//            //отсееваем и записываем имена уже существующих картинок
-//            foreach ($image_name_keys as $k => $v) {
-//                if (preg_match("/_saved_/", $v)) {
-//                    // определяеи номер (отнимаем 1 т.к. для массива)
-//                    $i = (int)substr($v, 11, 2) - 1;
-//                    // определяем имя файла
-////                 $f_name =strstr($v, 'news_') ;
-//                    //переделываем 4 знак конца в точку
-////                 $f_name = substr_repla($f_name, '.', -4, 1);
-//                    // добавляем в подготовельный массив под номером
-//                    $return_image_arr[$i] = $_SESSION['preview_img'][$i];
-//
-//                    //удаляем ссылку на поле ввода, что бы исключить обработку
-//                    unset($image_name_keys[$k]);
-//                }
-//            }
-//
-//            foreach ($image_name_keys as $image_name_key) {
-//
-//                //Генерируем случайное имя картинки
-//                $name_rand = md5(time()) . rand(10, 99); // Базовая часть
-//                $name_big = 'news_' . $name_rand; // Новое имя для большой картинки
-//                $name_small = 's_' . $name_big; // Новое имя для маленькой картинки
-//                // Загрузка картинки в директоритю и получение ссылки на нее
-//                // Проверяем тип файла
-//                // Допустимый формат файлов .jpeg .png .gif
-//                if ($_FILES[$image_name_key]['type'] == 'image/jpeg') {
-//                    $type = '.jpg';
-//                } elseif ($_FILES[$image_name_key]['type'] == 'image/png') {
-//                    $type = '.png';
-//                } elseif ($_FILES[$image_name_key]['type'] == 'image/gif') {
-//                    $type = '.gif';
-//                } else {
-//                    array_push($news_error,
-//                        'Файл:"' . $_FILES[$image_name_key]['name'] . '" не загружен. Можно загружать только картинки с расширением jpeg, png, gif.');
-//                    continue;
-//                }
-//                // Расширения новых имен:
-//                $name_big = $name_big . $type;
-//                $name_small = $name_small . $type;
-//
-//                // Проверка на недопустимые форматы
-//                foreach ($blacklistOfFile as $item) {
-//                    if (preg_match("/$item\$/i",
-//                        $_FILES[$image_name_key]['name'])) {
-//                        array_push($news_error,
-//                            'Файл:"' . $_FILES[$image_name_key]['name'] . '" не загружен. PHP файлы не разрешены для загрузки.');
-//                        continue;
-//                    }
-//                }
-//                // Проверяем размер файла
-//                if ($_FILES[$image_name_key]['size'] > $imgMaxSize) {
-//                    array_push($news_error,
-//                        'Файл:"' . $_FILES[$image_name_key]['name'] . '" не загружен. Слишком большой размер файла картинки.');
-//                    continue;
-//                }
-//
-//                //Изменение размеров и запись
-//                $this->newsPicturesResize($_FILES[$image_name_key], 'big',
-//                    $name_big);
-//                $this->newsPicturesResize($_FILES[$image_name_key], 'small',
-//                    $name_small);
-//
-//                //Запись в подгот. массив под номером ключа соотв. имени
-//                // Определяем номер (отнимаем 1 т.к. для массива)
-//                $i = (int)substr($image_name_key, 11, 2) - 1;
-//
-//                $return_image_arr[$i] = $name_big;
-////                if (empty($return_image_names)) {
-////                    $return_image_names = $name_big;
-////                } else {
-////                    $return_image_names = $return_image_names . '|' . $name_big;
-////                }
-//            }
-//
-//            // Получаем строку имен файлов из массива
-//            sort($return_image_arr);
-//            foreach ($return_image_arr as $value) {
-//                if (empty($return_image_names)) {
-//                    $return_image_names = $value;
-//                } else {
-//                    $return_image_names = $return_image_names . '|' . $value;
-//                }
-//            }
-//        }
-//
-//// Удаление всех картинок находящихся в БД, но не переданных на апдейт
-//        if (!empty($_SESSION['preview_img'][0])) {
-//            //Расхождение массива $_SESSION['preview_img'] от $return_image_arr
-//            $img_arr_for_delete = array_diff($_SESSION['preview_img'], $return_image_arr);
-//
-//            foreach ($img_arr_for_delete as $value) {
-//                if (file_exists('uploads/images/' . $value)) {
-//                    unlink('uploads/images/' . $value);
-//                }
-//                if (file_exists('uploads/images/s_' . $value)) {
-//                    unlink('uploads/images/s_' . $value);
-//                }
-//            }
-//        }
-//
-//        return $return_image_names;
-//    }
-//
-//    /**
-//     * Изменение размеров картинки на эскиз ($type = 'small') и нормальные ($type = 'big')
-//     * и сохраниение во временной папке  $tmpPath
-//     * Запись результата в  $imgPath
-//     * @param $file
-//     * @param string $type
-//     * @param $new_name
-//     * @return bool
-//     */
-//    private function newsPicturesResize($file, $type = 'big', $new_name)
-//    {
-//        global $news_error, $tmpPath;
-//
-//        $imgPath = 'uploads/images/'; // Путь к папке загрузки картинок
-//        $tmpPath = 'tmp/'; // Путь к папке временных файлов
-//
-//        $h_max_big_size = 800; //Всота для большой картинки
-//        $h_max_small_size = 200; //Всота для эскиза
-//        $quality = 80; // качество изображения (по умолчанию 80%)
-//        // Создание исходного изображения на основе исходного файла
-//        if ($file['type'] == 'image/jpeg') {
-//            $src = imagecreatefromjpeg($file['tmp_name']);
-//        } elseif ($file['type'] == 'image/png') {
-//            $src = imagecreatefrompng($file['tmp_name']);
-//        } elseif ($file['type'] == 'image/gif') {
-//            $src = imagecreatefromgif($file['tmp_name']);
-//        } else {
-//            return false;
-//        }
-//
-//        //Определение размеров изображения
-//        $w_src = imagesx($src);
-//        $h_src = imagesy($src);
-//
-//        // В зависимости от типа (эскиз или большое изображение) устанавливаем ограничение по ширине.
-//        if ($type == 'small') {
-//            $h_max = $h_max_small_size;
-//        } else {
-//            $h_max = $h_max_big_size;
-//        }
-//        // Если высота больше заданной
-//        if ($h_src > $h_max) {
-//            // Вычисление пропорций
-//            $ratio = $h_src / $h_max;
-//            $w_dest = round($w_src / $ratio);
-//            $h_dest = round($h_src / $ratio);
-//            // Создаём пустую картинку
-//            $dest = imagecreatetruecolor($w_dest, $h_dest);
-//            // Копируем старое изображение в новое с изменением параметров
-//            imagecopyresampled($dest, $src, 0, 0, 0, 0, $w_dest, $h_dest,
-//                $w_src, $h_src);
-//            // Вывод картинки и очистка памяти
-//            $this->picturesSaveAndClear($file, $dest, $new_name, $quality);
-//            imagedestroy($dest);
-//            imagedestroy($src);
-//        } else {
-//            // Вывод картинки и очистка памяти
-//            $this->picturesSaveAndClear($file, $src, $new_name, $quality);
-//            imagedestroy($src);
-//        }
-//
-//        // Загрузка файла и вывод сообщения
-//        if (!@copy($tmpPath . $new_name, $imgPath . $new_name)) {
-//            array_push($news_error, 'Произошла ошибка при загрузке картинки');
-//        }
-//        //Удаляем временный файл
-//        unlink($tmpPath . $new_name);
-//    }
+    //    /**
+    //     * Возвращает строку имен (через '|') больших картинок
+    //     * (имя эскиза s_имя больш)
+    //     *
+    //     * @return mixed|string
+    //     */
+    //    public function saveNewsPictures()
+    //    {
+    //        global $news_error;
+    //
+    //        $blacklistOfFile = array(".php", ".phtml", ".php3", ".php4"); // Запрещенный формат файлов
+    //        $imgMaxSize = 3050000; // Максимальный размер картинок в байтах
+    //        $return_image_arr = []; //подготовительный массив для сохранения порядка следования
+    //        $return_image_names = ''; // Возвращаемая строка имен картинок
+    //
+    //        if (!empty($_FILES)) {
+    //            //Получаем имена полей "image_name_?" ввода картинок переданных POST
+    //            $image_name_keys = preg_grep("/^image_name_/", array_keys($_FILES));
+    //
+    //            //отсееваем и записываем имена уже существующих картинок
+    //            foreach ($image_name_keys as $k => $v) {
+    //                if (preg_match("/_saved_/", $v)) {
+    //                    // определяеи номер (отнимаем 1 т.к. для массива)
+    //                    $i = (int)substr($v, 11, 2) - 1;
+    //                    // определяем имя файла
+    ////                 $f_name =strstr($v, 'news_') ;
+    //                    //переделываем 4 знак конца в точку
+    ////                 $f_name = substr_repla($f_name, '.', -4, 1);
+    //                    // добавляем в подготовельный массив под номером
+    //                    $return_image_arr[$i] = $_SESSION['preview_img'][$i];
+    //
+    //                    //удаляем ссылку на поле ввода, что бы исключить обработку
+    //                    unset($image_name_keys[$k]);
+    //                }
+    //            }
+    //
+    //            foreach ($image_name_keys as $image_name_key) {
+    //
+    //                //Генерируем случайное имя картинки
+    //                $name_rand = md5(time()) . rand(10, 99); // Базовая часть
+    //                $name_big = 'news_' . $name_rand; // Новое имя для большой картинки
+    //                $name_small = 's_' . $name_big; // Новое имя для маленькой картинки
+    //                // Загрузка картинки в директоритю и получение ссылки на нее
+    //                // Проверяем тип файла
+    //                // Допустимый формат файлов .jpeg .png .gif
+    //                if ($_FILES[$image_name_key]['type'] == 'image/jpeg') {
+    //                    $type = '.jpg';
+    //                } elseif ($_FILES[$image_name_key]['type'] == 'image/png') {
+    //                    $type = '.png';
+    //                } elseif ($_FILES[$image_name_key]['type'] == 'image/gif') {
+    //                    $type = '.gif';
+    //                } else {
+    //                    array_push($news_error,
+    //                        'Файл:"' . $_FILES[$image_name_key]['name'] . '" не загружен. Можно загружать только картинки с расширением jpeg, png, gif.');
+    //                    continue;
+    //                }
+    //                // Расширения новых имен:
+    //                $name_big = $name_big . $type;
+    //                $name_small = $name_small . $type;
+    //
+    //                // Проверка на недопустимые форматы
+    //                foreach ($blacklistOfFile as $item) {
+    //                    if (preg_match("/$item\$/i",
+    //                        $_FILES[$image_name_key]['name'])) {
+    //                        array_push($news_error,
+    //                            'Файл:"' . $_FILES[$image_name_key]['name'] . '" не загружен. PHP файлы не разрешены для загрузки.');
+    //                        continue;
+    //                    }
+    //                }
+    //                // Проверяем размер файла
+    //                if ($_FILES[$image_name_key]['size'] > $imgMaxSize) {
+    //                    array_push($news_error,
+    //                        'Файл:"' . $_FILES[$image_name_key]['name'] . '" не загружен. Слишком большой размер файла картинки.');
+    //                    continue;
+    //                }
+    //
+    //                //Изменение размеров и запись
+    //                $this->newsPicturesResize($_FILES[$image_name_key], 'big',
+    //                    $name_big);
+    //                $this->newsPicturesResize($_FILES[$image_name_key], 'small',
+    //                    $name_small);
+    //
+    //                //Запись в подгот. массив под номером ключа соотв. имени
+    //                // Определяем номер (отнимаем 1 т.к. для массива)
+    //                $i = (int)substr($image_name_key, 11, 2) - 1;
+    //
+    //                $return_image_arr[$i] = $name_big;
+    ////                if (empty($return_image_names)) {
+    ////                    $return_image_names = $name_big;
+    ////                } else {
+    ////                    $return_image_names = $return_image_names . '|' . $name_big;
+    ////                }
+    //            }
+    //
+    //            // Получаем строку имен файлов из массива
+    //            sort($return_image_arr);
+    //            foreach ($return_image_arr as $value) {
+    //                if (empty($return_image_names)) {
+    //                    $return_image_names = $value;
+    //                } else {
+    //                    $return_image_names = $return_image_names . '|' . $value;
+    //                }
+    //            }
+    //        }
+    //
+    //// Удаление всех картинок находящихся в БД, но не переданных на апдейт
+    //        if (!empty($_SESSION['preview_img'][0])) {
+    //            //Расхождение массива $_SESSION['preview_img'] от $return_image_arr
+    //            $img_arr_for_delete = array_diff($_SESSION['preview_img'], $return_image_arr);
+    //
+    //            foreach ($img_arr_for_delete as $value) {
+    //                if (file_exists('uploads/images/' . $value)) {
+    //                    unlink('uploads/images/' . $value);
+    //                }
+    //                if (file_exists('uploads/images/s_' . $value)) {
+    //                    unlink('uploads/images/s_' . $value);
+    //                }
+    //            }
+    //        }
+    //
+    //        return $return_image_names;
+    //    }
+    //
+    //    /**
+    //     * Изменение размеров картинки на эскиз ($type = 'small') и нормальные ($type = 'big')
+    //     * и сохраниение во временной папке  $tmpPath
+    //     * Запись результата в  $imgPath
+    //     * @param $file
+    //     * @param string $type
+    //     * @param $new_name
+    //     * @return bool
+    //     */
+    //    private function newsPicturesResize($file, $type = 'big', $new_name)
+    //    {
+    //        global $news_error, $tmpPath;
+    //
+    //        $imgPath = 'uploads/images/'; // Путь к папке загрузки картинок
+    //        $tmpPath = 'tmp/'; // Путь к папке временных файлов
+    //
+    //        $h_max_big_size = 800; //Всота для большой картинки
+    //        $h_max_small_size = 200; //Всота для эскиза
+    //        $quality = 80; // качество изображения (по умолчанию 80%)
+    //        // Создание исходного изображения на основе исходного файла
+    //        if ($file['type'] == 'image/jpeg') {
+    //            $src = imagecreatefromjpeg($file['tmp_name']);
+    //        } elseif ($file['type'] == 'image/png') {
+    //            $src = imagecreatefrompng($file['tmp_name']);
+    //        } elseif ($file['type'] == 'image/gif') {
+    //            $src = imagecreatefromgif($file['tmp_name']);
+    //        } else {
+    //            return false;
+    //        }
+    //
+    //        //Определение размеров изображения
+    //        $w_src = imagesx($src);
+    //        $h_src = imagesy($src);
+    //
+    //        // В зависимости от типа (эскиз или большое изображение) устанавливаем ограничение по ширине.
+    //        if ($type == 'small') {
+    //            $h_max = $h_max_small_size;
+    //        } else {
+    //            $h_max = $h_max_big_size;
+    //        }
+    //        // Если высота больше заданной
+    //        if ($h_src > $h_max) {
+    //            // Вычисление пропорций
+    //            $ratio = $h_src / $h_max;
+    //            $w_dest = round($w_src / $ratio);
+    //            $h_dest = round($h_src / $ratio);
+    //            // Создаём пустую картинку
+    //            $dest = imagecreatetruecolor($w_dest, $h_dest);
+    //            // Копируем старое изображение в новое с изменением параметров
+    //            imagecopyresampled($dest, $src, 0, 0, 0, 0, $w_dest, $h_dest,
+    //                $w_src, $h_src);
+    //            // Вывод картинки и очистка памяти
+    //            $this->picturesSaveAndClear($file, $dest, $new_name, $quality);
+    //            imagedestroy($dest);
+    //            imagedestroy($src);
+    //        } else {
+    //            // Вывод картинки и очистка памяти
+    //            $this->picturesSaveAndClear($file, $src, $new_name, $quality);
+    //            imagedestroy($src);
+    //        }
+    //
+    //        // Загрузка файла и вывод сообщения
+    //        if (!@copy($tmpPath . $new_name, $imgPath . $new_name)) {
+    //            array_push($news_error, 'Произошла ошибка при загрузке картинки');
+    //        }
+    //        //Удаляем временный файл
+    //        unlink($tmpPath . $new_name);
+    //    }
 
 
     /**
      * Вывод картинки во временную директорию
+     *
      * @param $file
      * @param $dest
      * @param $name
      * @param $quality
+     *
      * @return bool
      */
     public function picturesSaveAndClear($file, $dest, $name, $quality)
@@ -1561,50 +1630,54 @@ class NewsModel extends Model
     /**
      * Принимает индекс и имя переменной
      * Возвращает значение соответствующее индексу
+     *
      * @param int $index
      * @param string $names_type
+     *
      * @return int
      */
     private function translateIndex($index = 0, $names_type = '')
     {
         // Проверочный массив
-        static $test_array = array(
-            'space_type' => array(
+        static $test_array = [
+            'space_type'     => [
                 1 => 'Нежилая',
-                2 => 'Жилая'
-            ),
-            'operation_type' => array(
+                2 => 'Жилая',
+            ],
+            'operation_type' => [
                 1 => 'Арендовать',
-                2 => 'Купить'
-            ),
-            'object_type' => array(
-                1 => 'Квартира',
-                2 => 'Офисная площадь',
-                3 => 'Торговая площадь',
-                4 => 'Офисная площадь с землей',
-                5 => 'Производственно-складские здания',
-                6 => 'Производственно-складские помещения ',
-                7 => 'Рынок/Ярмарка',
-                8 => 'Комплекс ОСЗ',
-                9 => 'ОСЗ',
+                2 => 'Купить',
+            ],
+            'object_type'    => [
+                1  => 'Квартира',
+                2  => 'Офисная площадь',
+                3  => 'Торговая площадь',
+                4  => 'Офисная площадь с землей',
+                5  => 'Производственно-складские здания',
+                6  => 'Производственно-складские помещения ',
+                7  => 'Рынок/Ярмарка',
+                8  => 'Комплекс ОСЗ',
+                9  => 'ОСЗ',
                 10 => 'Торговое здание',
                 11 => 'Комната',
                 12 => 'Дом',
                 13 => 'Гараж/Машиноместо',
-                14 => 'Земельный участок'
-            ),
-        );
-// Определение значения
+                14 => 'Земельный участок',
+            ],
+        ];
+        // Определение значения
         if (!empty($index) && !empty($names_type)) {
             if (isset($test_array[$names_type][$index])) {
                 $index = $test_array[$names_type][$index];
             }
         }
+
         return $index;
     }
 
     /**
      * Последние просмотренные объявления
+     *
      * @return array
      */
     public function getLastViewedNews()
@@ -1629,7 +1702,7 @@ class NewsModel extends Model
             foreach ($cook_last_v_news as $key => $value) {
                 $sql = $sql . 'id_news = :id' . $key . ' OR ';
             }
-//              удаление последнего OR
+            //              удаление последнего OR
             $sql = substr($sql, 0, -4);
 
             $stmt = $this->db->prepare($sql);
@@ -1638,7 +1711,9 @@ class NewsModel extends Model
                 $stmt->bindParam($name, $cook_last_v_news[$key]);
 
             }
-            $stmt->execute();
+            if (!$stmt->execute()) {
+                $this->error(self::DB_EXECUTE_ERROR);
+            }
             $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
             // нахождение фото
             $res = $this->getAdsPhotos($res);
@@ -1654,6 +1729,7 @@ class NewsModel extends Model
         } else {
             $result[0]['title'] = 'За последнее время вы ни чего не просматривали';
         }
+
         return $result;
     }
 
@@ -1661,6 +1737,7 @@ class NewsModel extends Model
      * Возвращает список всех chekbox (boolean) параметров из Базы данных
      * это нужно для проверки при перезаписи объявления
      * список контролируется из административной панели
+     *
      * @return array
      */
     public function checkboxList()
@@ -1692,14 +1769,16 @@ class NewsModel extends Model
             'fencing',
             'lease_contract',
             'property_documents',
-            'security'
+            'security',
         ];
+
         return $all_checkbox_list;
     }
 
 
     /**
      * Возвращает список последних объявлений
+     *
      * @param int $time_start - период до начала поиска в часах
      * @param int $time - период до конца поиска в часах
      * @param int $max_numder - количество объявлений
@@ -1709,6 +1788,7 @@ class NewsModel extends Model
      * @param bool $status - Статус (только Видимые (true))
      * @param var $sorting - Сортировка (имя столбца)
      * @param var $title_like - Строка поиска по названию
+     *
      * @return array
      */
     public function getRecentNewsList(
@@ -1722,7 +1802,8 @@ class NewsModel extends Model
         $sorting = '',
         $title_like = '',
         $offset = 0
-    ) {
+    )
+    {
         //Заданное время начала поиска ($time - час) в формате стандарта ISO 8601
         $news_date = $this->dateFormatForDB($time);
 
@@ -1786,19 +1867,24 @@ class NewsModel extends Model
         if ($object_type != 0) {
             $stmt->bindParam(':object_type', $object_type);
         }
-        $stmt->execute();
+        if (!$stmt->execute()) {
+            $this->error(self::DB_EXECUTE_ERROR);
+        }
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         // Подкотовка данных для вывода
         $data = $this->prepareNewsPreview($data);
+
         return $data;
     }
 
     /**
      * Подкотовка данных для вывода превью объявлений
+     *
      * @param $data - исходные данные объявлений из БД в виде arr[[0]=>arr, [1]=>arr...]
      * @param bool $translate_indx - нужно ли переводить индексы
      * @param bool $author_info - нужна ли информация об авторе
+     *
      * @return mixed - преобразованные данные
      * Добавляет параметр ad_is_new - является ли объявление новым (bool)
      * Добавляет данные об авторе
@@ -1817,7 +1903,9 @@ class NewsModel extends Model
             . "FROM metro_stations "
             . "WHERE working = 1";
         $stmt = $this->db->prepare($sql);
-        $stmt->execute();
+        if (!$stmt->execute()) {
+            $this->error(self::DB_SELECT_ERROR);
+        }
         $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
         foreach ($res as $m) {
             $metro_stations[$m['metro_id']] = $m["metro_name"];
@@ -1827,7 +1915,9 @@ class NewsModel extends Model
         $city = [];
         $sql = "SELECT id, city FROM city";
         $stmt = $this->db->prepare($sql);
-        $stmt->execute();
+        if (!$stmt->execute()) {
+            $this->error(self::DB_SELECT_ERROR);
+        }
         $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
         foreach ($res as $c) {
             $city[$c['id']] = $c["city"];
@@ -1856,16 +1946,22 @@ class NewsModel extends Model
             //Перевод индекса метро в наименование
             if (!empty($data[$key]['metro_station']) && !empty($metro_stations[$data[$key]['metro_station']])) {
                 $data[$key]['metro_station'] = $metro_stations[$data[$key]['metro_station']];
+            } else {
+                $this->error(self::METRO_STATION_INCORRECT_CODE_ERROR);
             }
 
             //Перевод индекса города в наименование
             if (!empty($data[$key]['city'])) {
                 $data[$key]['city'] = $city[$data[$key]['city']];
+            } else {
+                $this->error(self::CITY_INCORRECT_CODE_ERROR);
             }
 
             //Определение, является ли объявление новым (дата в формате 'YYYY-MM-DD HH24:MI:SS')
             if (!empty($data[$key]['date'])) {
                 $data[$key]['ad_is_new'] = $this->checkAdsIsNew($data[$key]['date']);
+            } else {
+                $this->error(self::DATE_INCORRECT_ERROR);
             }
 
             //Массив id авторов
@@ -1889,7 +1985,9 @@ class NewsModel extends Model
 
     /**
      * Возвращает массив параметров автора объявления
+     *
      * @param $user_id_arr - массив id авторов (может быть послано просто (str) id)
+     *
      * @return array - Массив с параметрами автора, и ключами = его id
      */
     private function getAuthorInfo($user_id_arr)
@@ -1902,12 +2000,15 @@ class NewsModel extends Model
         $sql = "SELECT id, first_name, last_name, patronymic, profile_foto_id"
             . " FROM users WHERE id IN($user_id_arr_txt)";
         $stmt = $this->db->prepare($sql);
-        $stmt->execute();
+        if (!$stmt->execute()) {
+            $this->error(self::DB_EXECUTE_ERROR);
+        }
         $author_result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         foreach ($author_result as $val) {
             $author_arr[$val['id']] = $val;
             unset($author_arr[$val['id']]['id']);
         }
+
         return $author_arr;
     }
 
@@ -1930,13 +2031,14 @@ class NewsModel extends Model
         $channel->queue_declare('newNews', false, true, false, false);
 
         //delivery_mode - сообщение постоянно, чтобы не потерялось при падении сервера
-        $msg = new AMQPMessage($message, array('delivery_mode' => 2));
+        $msg = new AMQPMessage($message, ['delivery_mode' => 2]);
         //$msg - (сообщение, обмен, ключ очереди)
         //$channel->basic_publish($msg, 'ex_newNews');
         $channel->basic_publish($msg, '', 'newNews');
 
         $channel->close();
         $connection->close();
+
         return;
     }
 
@@ -1974,9 +2076,9 @@ class NewsModel extends Model
         // функция обратного вызова
         $channel->basic_consume('newNews', '', false, true, false, false, $callback);
 
-//        while(count($channel->callbacks)) {
-//            $channel->wait();
-//        }
+        //        while(count($channel->callbacks)) {
+        //            $channel->wait();
+        //        }
 
 
         // wait function works only with sockets, we have to catch the exception
@@ -1987,12 +2089,14 @@ class NewsModel extends Model
             } catch (\PhpAmqpLib\Exception\AMQPTimeoutException $e) {
                 $channel->close();
                 $connection->close();
+
                 return $rabbitmq_message_newnews;
             }
         }
 
         $channel->close();
         $connection->close();
+
         return $rabbitmq_message_newnews;
     }
 
@@ -2085,6 +2189,7 @@ class NewsModel extends Model
             $data['best_news_number_ending'] = $this->getNumEnding($data['best_news_number'],
                 ['объявление', 'объявления', 'объявлений']);
         }
+
         return $data;
     }
 
@@ -2097,9 +2202,14 @@ class NewsModel extends Model
         ?>
 
         <?php for ($i = 0; (!empty($data['news'][$i])); $i++) { ?>
-        <tr align="center" class="status_frm_data id_<?php echo $data['news'][$i]['id_news']; ?>">
-            <td><i> <?php echo $data['news'][$i]['id_news']; ?></i></td>
-            <td><i> <?php echo $data['news'][$i]['date']; ?></i></td>
+        <tr align="center"
+            class="status_frm_data id_<?php echo $data['news'][$i]['id_news']; ?>">
+            <td>
+                <i> <?php echo $data['news'][$i]['id_news']; ?></i>
+            </td>
+            <td>
+                <i> <?php echo $data['news'][$i]['date']; ?></i>
+            </td>
             <td>
                 <a href="/news/editor/<?php echo $data['news'][$i]['id_news'];
                 ?>"><?php echo $data['news'][$i]['title']; ?> </a>
@@ -2108,14 +2218,20 @@ class NewsModel extends Model
             <td><?php echo $data['news'][$i]['space_type']; ?></td>
             <td><?php echo $data['news'][$i]['operation_type']; ?></td>
             <td><?php echo $data['news'][$i]['object_type']; ?></td>
-            <td><input type="radio" class="status" name="status_<?php echo $data['news'][$i]['id_news']; ?>"
+            <td>
+                <input type="radio"
+                       class="status"
+                       name="status_<?php echo $data['news'][$i]['id_news']; ?>"
                        value="1" <?php
                 if ($data['news'][$i]['status'] === 1) {
                     echo "checked";
                 }
                 ?> >
             </td>
-            <td><input type="radio" class="status" name="status_<?php echo $data['news'][$i]['id_news']; ?>"
+            <td>
+                <input type="radio"
+                       class="status"
+                       name="status_<?php echo $data['news'][$i]['id_news']; ?>"
                        value="0" <?php
                 if ($data['news'][$i]['status'] === 0) {
                     echo "checked";
@@ -2123,7 +2239,9 @@ class NewsModel extends Model
                 ?> >
             </td>
             <td> <?php echo $data['news'][$i]['rating_views']; ?> </td>
-            <td><select class="rating_admin" name="rating_admin_<?php echo $data['news'][$i]['id_news']; ?>">
+            <td>
+                <select class="rating_admin"
+                        name="rating_admin_<?php echo $data['news'][$i]['id_news']; ?>">
                     <?php
                     for ($j = 0; $j < 10; $j++) {
                         ?>
@@ -2138,7 +2256,10 @@ class NewsModel extends Model
             </td>
             <td> <?php echo $data['news'][$i]['rating_donate']; ?> </td>
             <td> <?php echo $data['news'][$i]['rating_real']; ?> </td>
-            <td><input type="radio" class="status" name="status_<?php echo $data['news'][$i]['id_news']; ?>"
+            <td>
+                <input type="radio"
+                       class="status"
+                       name="status_<?php echo $data['news'][$i]['id_news']; ?>"
                        value="3">
             </td>
         </tr>
@@ -2149,9 +2270,11 @@ class NewsModel extends Model
 
     /**
      * Функция возвращает окончание для множественного числа слова на основании числа и массива окончаний
+     *
      * @param $number Integer Число на основе которого нужно сформировать окончание
      * @param $endingArray Array Массив слов или окончаний для чисел (1, 4, 5),
      *         например array('яблоко', 'яблока', 'яблок')
+     *
      * @return String
      */
     public function getNumEnding($number, $endingArray)
@@ -2174,6 +2297,7 @@ class NewsModel extends Model
                     $ending = $endingArray[2];
             }
         }
+
         return $ending;
     }
 
@@ -2186,15 +2310,15 @@ class NewsModel extends Model
         $form_options['space_types'] = [1 => 'Нежилая', 2 => 'Жилая',];
         $form_options['operation_types'] = [1 => 'Арендовать', 2 => 'Купить',];
         $form_options['object_types'] = [
-            1 => 'Квартира',
-            2 => 'Офисная площадь',
-            3 => 'Торговая площадь',
-            4 => 'Офисная площадь с землей',
-            5 => 'Производственно-складские здания',
-            6 => 'Производственно-складские помещения ',
-            7 => 'Рынок/Ярмарка',
-            8 => 'Комплекс ОСЗ',
-            9 => 'ОСЗ',
+            1  => 'Квартира',
+            2  => 'Офисная площадь',
+            3  => 'Торговая площадь',
+            4  => 'Офисная площадь с землей',
+            5  => 'Производственно-складские здания',
+            6  => 'Производственно-складские помещения ',
+            7  => 'Рынок/Ярмарка',
+            8  => 'Комплекс ОСЗ',
+            9  => 'ОСЗ',
             10 => 'Торговое здание',
             11 => 'Комната',
             12 => 'Дом',
@@ -2203,10 +2327,21 @@ class NewsModel extends Model
         ];
         ?>
 
-        <form id="add_news" action="/news/editor" method="post">
-            <legend>Выбор категории для создания нового объявления</legend>
-            <label for="space_type">Тип площади:</label>
-            <select name="space_type" id="space_type">
+        <form id="add_news"
+              action="/news/editor"
+              method="post">
+            <legend>
+                Выбор
+                категории
+                для
+                создания
+                нового
+                объявления
+            </legend>
+            <label for="space_type">Тип
+                площади:</label>
+            <select name="space_type"
+                    id="space_type">
                 <?php foreach ($form_options['space_types'] as $k => $options) { ?>
                     <option value="<?php echo $k; ?>">
                         <?php echo $options; ?>
@@ -2215,7 +2350,8 @@ class NewsModel extends Model
             </select>
             <br>
             <label for="operation_type">Операция:</label>
-            <select name="operation_type" id="operation_type">
+            <select name="operation_type"
+                    id="operation_type">
                 <?php foreach ($form_options['operation_types'] as $k => $options) { ?>
                     <option value="<?php echo $k; ?>">
                         <?php echo $options; ?>
@@ -2223,8 +2359,10 @@ class NewsModel extends Model
                 <?php } ?>
             </select>
             <br>
-            <label for="object_type">Тип объекта:</label>
-            <select name="object_type" id="object_type">
+            <label for="object_type">Тип
+                объекта:</label>
+            <select name="object_type"
+                    id="object_type">
                 <?php foreach ($form_options['object_types'] as $k => $options) { ?>
                     <option value="<?php echo $k; ?>">
                         <?php echo $options; ?>
@@ -2232,9 +2370,12 @@ class NewsModel extends Model
                 <?php } ?>
             </select>
 
-            <input type="submit" name="submit_add_news" value="Добавить новость">
+            <input type="submit"
+                   name="submit_add_news"
+                   value="Добавить новость">
         </form>
-        <script type="text/javascript" src="/template/js/news.editor.menu.js"></script>
+        <script type="text/javascript"
+                src="/template/js/news.editor.menu.js"></script>
         <?php
     }
 
@@ -2247,13 +2388,17 @@ class NewsModel extends Model
             . "FROM metro_stations "
             . "WHERE working = 1";
         $stmt = $this->db->prepare($sql);
-        $stmt->execute();
+        if (!$stmt->execute()) {
+            $this->error(self::DB_EXECUTE_ERROR);
+        }
         $metro_stations = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $sql = "SELECT line_id, line_number, line_name "
             . "FROM metro_line ";
         $stmt = $this->db->prepare($sql);
-        $stmt->execute();
+        if (!$stmt->execute()) {
+            $this->error(self::DB_EXECUTE_ERROR);
+        }
         $line_arr = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $line = [];
         foreach ($line_arr as $k => $v) {
@@ -2261,8 +2406,11 @@ class NewsModel extends Model
         }
 
         ?>
-        <label for="metro_station">Станция метро</label><br>
-        <select name="metro_station" id="metro_station">
+        <label for="metro_station">Станция
+            метро</label>
+        <br>
+        <select name="metro_station"
+                id="metro_station">
             <?php foreach ($metro_stations as $k => $metro) { ?>
                 <option value="<?php echo $metro['metro_id']; ?>" <?php
                 if ($metro_id == $metro['metro_id']) {
@@ -2281,7 +2429,7 @@ class NewsModel extends Model
             return [
                 'error' => [
                     [
-                        'code' => 0,
+                        'code'    => 0,
                         'message' => 'Неправильный запрос',
                     ],
                 ],
@@ -2301,8 +2449,10 @@ class NewsModel extends Model
 
     /**
      * Возврвщает массив запроса из POST и param
+     *
      * @param array $post
      * @param array $param
+     *
      * @return array
      */
     public function getRequestForAds($post, $param = [])
@@ -2321,10 +2471,10 @@ class NewsModel extends Model
             'city',
             'status',
             'count',
-            'offset'
+            'offset',
         ];
         $request_param_str = [
-            'title_like'
+            'title_like',
         ];
         if (!empty($post)) {
             foreach ($request_param_int as $name) {
@@ -2388,124 +2538,126 @@ class NewsModel extends Model
         if (!empty($_SESSION['userID'])) {
             $user_id = (int)$_SESSION['userID'];
         } else {
+            $this->error(self::USER_NOT_AUTHORIZED_ERROR);
+
             return false;
         }
         $form_data['user_id'] = $user_id;
 
-        $args_db = array(
-            'address' => FILTER_SANITIZE_STRING,
-            'alcove' => FILTER_VALIDATE_BOOLEAN,
-            'area' => FILTER_SANITIZE_STRING,
-            'availability_of_garbage_chute' => FILTER_VALIDATE_BOOLEAN,
-            'balcony' => FILTER_SANITIZE_NUMBER_INT,
-            'bargain' => FILTER_VALIDATE_BOOLEAN,
-            'barn' => FILTER_VALIDATE_BOOLEAN,
-            'bath' => FILTER_VALIDATE_BOOLEAN,
-            'bathroom' => FILTER_VALIDATE_BOOLEAN,
-            'bathroom_available' => FILTER_VALIDATE_BOOLEAN,
-            'bedroom' => FILTER_VALIDATE_BOOLEAN,
-            'building_type' => FILTER_SANITIZE_NUMBER_INT,
-            'cadastral_number' => FILTER_SANITIZE_STRING,
-            'cctv' => FILTER_VALIDATE_BOOLEAN,
-            'ceiling_height' => FILTER_SANITIZE_NUMBER_INT,
-            'city' => FILTER_SANITIZE_STRING,
+        $args_db = [
+            'address'                          => FILTER_SANITIZE_STRING,
+            'alcove'                           => FILTER_VALIDATE_BOOLEAN,
+            'area'                             => FILTER_SANITIZE_STRING,
+            'availability_of_garbage_chute'    => FILTER_VALIDATE_BOOLEAN,
+            'balcony'                          => FILTER_SANITIZE_NUMBER_INT,
+            'bargain'                          => FILTER_VALIDATE_BOOLEAN,
+            'barn'                             => FILTER_VALIDATE_BOOLEAN,
+            'bath'                             => FILTER_VALIDATE_BOOLEAN,
+            'bathroom'                         => FILTER_VALIDATE_BOOLEAN,
+            'bathroom_available'               => FILTER_VALIDATE_BOOLEAN,
+            'bedroom'                          => FILTER_VALIDATE_BOOLEAN,
+            'building_type'                    => FILTER_SANITIZE_NUMBER_INT,
+            'cadastral_number'                 => FILTER_SANITIZE_STRING,
+            'cctv'                             => FILTER_VALIDATE_BOOLEAN,
+            'ceiling_height'                   => FILTER_SANITIZE_NUMBER_INT,
+            'city'                             => FILTER_SANITIZE_STRING,
             'clarification_of_the_object_type' => FILTER_SANITIZE_NUMBER_INT,
-            'common' => FILTER_SANITIZE_NUMBER_INT,
-            'concierge' => FILTER_VALIDATE_BOOLEAN,
-            'content' => FILTER_SANITIZE_STRING,
-            'country' => FILTER_SANITIZE_STRING,
-            'dining_room' => FILTER_VALIDATE_BOOLEAN,
-            'distance_from_metro' => FILTER_SANITIZE_NUMBER_INT,
-            'documents_on_tenure' => FILTER_SANITIZE_STRING,
-            'electricity' => FILTER_VALIDATE_BOOLEAN,
-            'equipment' => FILTER_VALIDATE_BOOLEAN,
-            'fencing' => FILTER_SANITIZE_NUMBER_INT,
-            'floor' => FILTER_SANITIZE_NUMBER_INT,
-            'forest_trees' => FILTER_VALIDATE_BOOLEAN,
-            'foundation' => FILTER_SANITIZE_NUMBER_INT,
-            'furnish' => FILTER_SANITIZE_NUMBER_INT,
-            'garden_trees' => FILTER_VALIDATE_BOOLEAN,
-            'gas' => FILTER_VALIDATE_BOOLEAN,
-            'guest_house' => FILTER_VALIDATE_BOOLEAN,
-            'hallway' => FILTER_VALIDATE_BOOLEAN,
-            'heating' => FILTER_VALIDATE_BOOLEAN,
-            'house' => FILTER_SANITIZE_STRING,
-            'intercom' => FILTER_VALIDATE_BOOLEAN,
-            'kitchen' => FILTER_VALIDATE_BOOLEAN,
-            'lavatory' => FILTER_SANITIZE_NUMBER_INT,
-            'lease' => FILTER_SANITIZE_NUMBER_INT,
-            'lease_contract' => FILTER_SANITIZE_STRING,
-            'lift_lifting' => FILTER_VALIDATE_BOOLEAN,
-            'lift_none' => FILTER_VALIDATE_BOOLEAN,
-            'lift_passenger' => FILTER_VALIDATE_BOOLEAN,
-            'living_room' => FILTER_VALIDATE_BOOLEAN,
-            'lodge' => FILTER_VALIDATE_BOOLEAN,
-            'metro_station' => FILTER_SANITIZE_NUMBER_INT,
-            'non_commission' => FILTER_VALIDATE_BOOLEAN,
-            'not_residential' => FILTER_SANITIZE_NUMBER_INT,
-            'number_of_floors' => FILTER_SANITIZE_NUMBER_INT,
-            'number_of_rooms' => FILTER_SANITIZE_NUMBER_INT,
-            'object_located' => FILTER_SANITIZE_NUMBER_INT,
-            'object_type' => FILTER_SANITIZE_NUMBER_INT,
-            'operation_type' => FILTER_SANITIZE_NUMBER_INT,
-            'parking_garage_complex' => FILTER_VALIDATE_BOOLEAN,
-            'parking_lot_garage' => FILTER_VALIDATE_BOOLEAN,
-            'parking_multilevel' => FILTER_VALIDATE_BOOLEAN,
-            'parking_none' => FILTER_VALIDATE_BOOLEAN,
-            'parking_underground' => FILTER_VALIDATE_BOOLEAN,
-            'photo_available' => FILTER_VALIDATE_BOOLEAN,
-            'planning_project' => FILTER_SANITIZE_STRING,
-            'playground' => FILTER_VALIDATE_BOOLEAN,
-            'playroom' => FILTER_VALIDATE_BOOLEAN,
-            'plot_of_ravine' => FILTER_VALIDATE_BOOLEAN,
-            'plot_on_the_slope' => FILTER_VALIDATE_BOOLEAN,
-            'plot_smooth' => FILTER_VALIDATE_BOOLEAN,
-            'plot_uneven' => FILTER_VALIDATE_BOOLEAN,
-            'plot_wetland' => FILTER_VALIDATE_BOOLEAN,
-            'preview_img' => FILTER_SANITIZE_STRING,
-            'price' => FILTER_SANITIZE_NUMBER_INT,
-            'property_documents' => FILTER_SANITIZE_STRING,
-            'rating_admin' => FILTER_SANITIZE_NUMBER_INT,
-            'rating_donate' => FILTER_SANITIZE_NUMBER_INT,
-            'rating_views' => FILTER_SANITIZE_NUMBER_INT,
-            'region' => FILTER_SANITIZE_STRING,
-            'residential' => FILTER_SANITIZE_NUMBER_INT,
-            'river' => FILTER_VALIDATE_BOOLEAN,
-            'roofing' => FILTER_SANITIZE_NUMBER_INT,
-            'sanitation' => FILTER_VALIDATE_BOOLEAN,
-            'security' => FILTER_VALIDATE_BOOLEAN,
-            'signaling' => FILTER_VALIDATE_BOOLEAN,
-            'space' => FILTER_SANITIZE_NUMBER_INT,
-            'space_type' => FILTER_SANITIZE_NUMBER_INT,
-            'spring' => FILTER_VALIDATE_BOOLEAN,
-            'stairwells_status' => FILTER_SANITIZE_NUMBER_INT,
-            'status' => FILTER_SANITIZE_NUMBER_INT,
-            'street' => FILTER_SANITIZE_STRING,
-            'study' => FILTER_VALIDATE_BOOLEAN,
-            'swimming_pool' => FILTER_VALIDATE_BOOLEAN,
-            'tags' => FILTER_SANITIZE_STRING,
-            'three_d_project' => FILTER_SANITIZE_STRING,
-            'time_car' => FILTER_SANITIZE_NUMBER_INT,
-            'time_walk' => FILTER_SANITIZE_NUMBER_INT,
-            'title' => FILTER_SANITIZE_STRING,
-            'type_of_construction' => FILTER_SANITIZE_NUMBER_INT,
-            'type_of_house' => FILTER_SANITIZE_NUMBER_INT,
-            'user_id' => FILTER_SANITIZE_NUMBER_INT,
-            'video' => FILTER_SANITIZE_STRING,
-            'wall_material' => FILTER_SANITIZE_NUMBER_INT,
-            'water_pipes' => FILTER_VALIDATE_BOOLEAN,
-            'waterfront' => FILTER_VALIDATE_BOOLEAN,
-            'wine_vault' => FILTER_VALIDATE_BOOLEAN,
-            'year_of_construction' => FILTER_SANITIZE_NUMBER_INT,
-            '' => FILTER_SANITIZE_NUMBER_INT
-        );
+            'common'                           => FILTER_SANITIZE_NUMBER_INT,
+            'concierge'                        => FILTER_VALIDATE_BOOLEAN,
+            'content'                          => FILTER_SANITIZE_STRING,
+            'country'                          => FILTER_SANITIZE_STRING,
+            'dining_room'                      => FILTER_VALIDATE_BOOLEAN,
+            'distance_from_metro'              => FILTER_SANITIZE_NUMBER_INT,
+            'documents_on_tenure'              => FILTER_SANITIZE_STRING,
+            'electricity'                      => FILTER_VALIDATE_BOOLEAN,
+            'equipment'                        => FILTER_VALIDATE_BOOLEAN,
+            'fencing'                          => FILTER_SANITIZE_NUMBER_INT,
+            'floor'                            => FILTER_SANITIZE_NUMBER_INT,
+            'forest_trees'                     => FILTER_VALIDATE_BOOLEAN,
+            'foundation'                       => FILTER_SANITIZE_NUMBER_INT,
+            'furnish'                          => FILTER_SANITIZE_NUMBER_INT,
+            'garden_trees'                     => FILTER_VALIDATE_BOOLEAN,
+            'gas'                              => FILTER_VALIDATE_BOOLEAN,
+            'guest_house'                      => FILTER_VALIDATE_BOOLEAN,
+            'hallway'                          => FILTER_VALIDATE_BOOLEAN,
+            'heating'                          => FILTER_VALIDATE_BOOLEAN,
+            'house'                            => FILTER_SANITIZE_STRING,
+            'intercom'                         => FILTER_VALIDATE_BOOLEAN,
+            'kitchen'                          => FILTER_VALIDATE_BOOLEAN,
+            'lavatory'                         => FILTER_SANITIZE_NUMBER_INT,
+            'lease'                            => FILTER_SANITIZE_NUMBER_INT,
+            'lease_contract'                   => FILTER_SANITIZE_STRING,
+            'lift_lifting'                     => FILTER_VALIDATE_BOOLEAN,
+            'lift_none'                        => FILTER_VALIDATE_BOOLEAN,
+            'lift_passenger'                   => FILTER_VALIDATE_BOOLEAN,
+            'living_room'                      => FILTER_VALIDATE_BOOLEAN,
+            'lodge'                            => FILTER_VALIDATE_BOOLEAN,
+            'metro_station'                    => FILTER_SANITIZE_NUMBER_INT,
+            'non_commission'                   => FILTER_VALIDATE_BOOLEAN,
+            'not_residential'                  => FILTER_SANITIZE_NUMBER_INT,
+            'number_of_floors'                 => FILTER_SANITIZE_NUMBER_INT,
+            'number_of_rooms'                  => FILTER_SANITIZE_NUMBER_INT,
+            'object_located'                   => FILTER_SANITIZE_NUMBER_INT,
+            'object_type'                      => FILTER_SANITIZE_NUMBER_INT,
+            'operation_type'                   => FILTER_SANITIZE_NUMBER_INT,
+            'parking_garage_complex'           => FILTER_VALIDATE_BOOLEAN,
+            'parking_lot_garage'               => FILTER_VALIDATE_BOOLEAN,
+            'parking_multilevel'               => FILTER_VALIDATE_BOOLEAN,
+            'parking_none'                     => FILTER_VALIDATE_BOOLEAN,
+            'parking_underground'              => FILTER_VALIDATE_BOOLEAN,
+            'photo_available'                  => FILTER_VALIDATE_BOOLEAN,
+            'planning_project'                 => FILTER_SANITIZE_STRING,
+            'playground'                       => FILTER_VALIDATE_BOOLEAN,
+            'playroom'                         => FILTER_VALIDATE_BOOLEAN,
+            'plot_of_ravine'                   => FILTER_VALIDATE_BOOLEAN,
+            'plot_on_the_slope'                => FILTER_VALIDATE_BOOLEAN,
+            'plot_smooth'                      => FILTER_VALIDATE_BOOLEAN,
+            'plot_uneven'                      => FILTER_VALIDATE_BOOLEAN,
+            'plot_wetland'                     => FILTER_VALIDATE_BOOLEAN,
+            'preview_img'                      => FILTER_SANITIZE_STRING,
+            'price'                            => FILTER_SANITIZE_NUMBER_INT,
+            'property_documents'               => FILTER_SANITIZE_STRING,
+            'rating_admin'                     => FILTER_SANITIZE_NUMBER_INT,
+            'rating_donate'                    => FILTER_SANITIZE_NUMBER_INT,
+            'rating_views'                     => FILTER_SANITIZE_NUMBER_INT,
+            'region'                           => FILTER_SANITIZE_STRING,
+            'residential'                      => FILTER_SANITIZE_NUMBER_INT,
+            'river'                            => FILTER_VALIDATE_BOOLEAN,
+            'roofing'                          => FILTER_SANITIZE_NUMBER_INT,
+            'sanitation'                       => FILTER_VALIDATE_BOOLEAN,
+            'security'                         => FILTER_VALIDATE_BOOLEAN,
+            'signaling'                        => FILTER_VALIDATE_BOOLEAN,
+            'space'                            => FILTER_SANITIZE_NUMBER_INT,
+            'space_type'                       => FILTER_SANITIZE_NUMBER_INT,
+            'spring'                           => FILTER_VALIDATE_BOOLEAN,
+            'stairwells_status'                => FILTER_SANITIZE_NUMBER_INT,
+            'status'                           => FILTER_SANITIZE_NUMBER_INT,
+            'street'                           => FILTER_SANITIZE_STRING,
+            'study'                            => FILTER_VALIDATE_BOOLEAN,
+            'swimming_pool'                    => FILTER_VALIDATE_BOOLEAN,
+            'tags'                             => FILTER_SANITIZE_STRING,
+            'three_d_project'                  => FILTER_SANITIZE_STRING,
+            'time_car'                         => FILTER_SANITIZE_NUMBER_INT,
+            'time_walk'                        => FILTER_SANITIZE_NUMBER_INT,
+            'title'                            => FILTER_SANITIZE_STRING,
+            'type_of_construction'             => FILTER_SANITIZE_NUMBER_INT,
+            'type_of_house'                    => FILTER_SANITIZE_NUMBER_INT,
+            'user_id'                          => FILTER_SANITIZE_NUMBER_INT,
+            'video'                            => FILTER_SANITIZE_STRING,
+            'wall_material'                    => FILTER_SANITIZE_NUMBER_INT,
+            'water_pipes'                      => FILTER_VALIDATE_BOOLEAN,
+            'waterfront'                       => FILTER_VALIDATE_BOOLEAN,
+            'wine_vault'                       => FILTER_VALIDATE_BOOLEAN,
+            'year_of_construction'             => FILTER_SANITIZE_NUMBER_INT,
+            ''                                 => FILTER_SANITIZE_NUMBER_INT,
+        ];
 
         //Преобразование через keys
         foreach ($keys as $k => $v) {
             if (isset($args_db[$v['table_column_name']])) {
                 $args[$k] = $args_db[$v['table_column_name']];
             } else {
-                // TODO: Ошибка в фильтре получения данных при записи объявления
+                $this->error(self::MISSING_VALUES_IN_AD_RECORDING_POST_FILTER);
             }
         }
         $post_data = filter_var_array($post, $args);
@@ -2523,11 +2675,14 @@ class NewsModel extends Model
                 foreach ($_POST['photos'] as $k => $v) {
                     array_push($photos, (int)$v);
                 }
+            } else {
+                $this->error(self::NOT_ARRAY);
             }
         }
 
         $return_data['ad'] = $form_data;
         $return_data['photos'] = $photos;
+
         return $return_data;
     }
 
