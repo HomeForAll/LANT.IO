@@ -6,5 +6,6 @@
 /.idea
 /app/config/paths.php
 /node_modules
+/uploads
 git-ftp-push.sh
 .vscode/settings.json

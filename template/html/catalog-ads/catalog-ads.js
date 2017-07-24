@@ -147,20 +147,7 @@ $(document).ready(function() {
 
     var renderAd = function(data) {
         var ad = $("<div>").addClass("block").appendTo("#ads-list");
-        var ad = $("<div>").addClass("padd").appendTo(ad);
-        //var img = $("<img>").prop("src", "/uploads/images/"+data.preview_img).appendTo(ad);
-
-        $("<div>").addClass('ads-photo').css("background-image", "url(/uploads/images/"+data.preview_img+")").appendTo(ad);
-        $("<div>").addClass("ads-param").addClass("axfs").html("2 ком. кв 135 м2").appendTo(ad);
-        var ad = $("<div>").addClass("ads-detail").appendTo(ad);
-
-        $("<div>").addClass('ads-price').html(data.price + " руб./месяц").appendTo(ad);
-        $("<div>").addClass('ads-metro').html('<svg width="19" height="13"><use xlink:href="#i-metro" x="0" y="0"></use></svg> Бауманская').appendTo(ad);
-        $("<div>").addClass('ads-afoot').html('<svg width="8" height="12"><use xlink:href="#i-afoot" x="0" y="0"></use></svg> '+data.not_residential+' мин').appendTo(ad);
-
-        $("<div>").addClass('ads-more').addClass("axfc")
-            .html('<svg width="20" height="12"><use xlink:href="#i-eye" x="0" y="0"></use></svg>')
-            .appendTo(ad).click(function(event) {
+        var ad = $("<div>").addClass("padd").appendTo(ad).click(function(event) {
                 var dialog = $("<div>").addClass('dialog-ad').prop('title', data.price + " руб./месяц");
                 var line = $("<div>").addClass("dialog-ad-line").appendTo(dialog);
                 $("<div>").addClass('dialog-ad-photo')
@@ -189,6 +176,17 @@ $(document).ready(function() {
                     width: 630,
                 });
             });;
+        var img = $("<img>").prop("src", data.s_250_140).appendTo(ad);
+
+        // $("<div>").addClass('ads-photo').css("background-image", "url(/uploads/images/"+data.preview_img+")").appendTo(ad);
+
+        $("<div>").addClass("ads-param").addClass("axfs").html(data.number_of_rooms + " ком. кв " + data.space + " м2").appendTo(ad);
+        var ad = $("<div>").addClass("ads-detail").appendTo(ad);
+
+        $("<div>").addClass('ads-price').html(data.price + " руб./месяц").appendTo(ad);
+        $("<div>").addClass('ads-metro').html('<svg width="19" height="13"><use xlink:href="#i-metro" x="0" y="0"></use></svg> Бауманская').appendTo(ad);
+        $("<div>").addClass('ads-afoot').html('<svg width="8" height="12"><use xlink:href="#i-afoot" x="0" y="0"></use></svg> '+data.not_residential+' мин').appendTo(ad);
+
     };
 
     $.ajax({
