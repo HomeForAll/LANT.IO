@@ -78,9 +78,4 @@ class UserController extends Controller
     {
         $this->model('UserModel')->getOAuthData($data);
     }
-
-    public function actionRestore()
-    {
-
-    }
 }

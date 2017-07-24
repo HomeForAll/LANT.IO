@@ -104,4 +104,7 @@ return [
     'api/profile/save/profile' => 'main/API/savePersonalInfo',
     'api/profile/save/security' => 'main/API/savePassword',
     'api/profile/save/settings' => 'main/API/savePersonalInfoSettings',
+    'api/authenticator/create/secret' => 'main/API/createGASecret',
+    'api/authenticator/save' => 'main/API/saveGA',
+    'api/authenticator/verify' => 'main/API/verifyGACode',
 ];
