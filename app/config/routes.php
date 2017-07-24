@@ -3,9 +3,9 @@
 return [
     ''            => 'web_build/site/index',
     'search'      => 'search_block/search/index',
-    'ad_page'      => 'ad_page/search/index',
-    'dark_profile'      => 'dark_profile/search/index',
-    'profile_dark'      => 'profile_dark/search/index',
+    'ad_page'      => 'ad_page/site/index',
+    'dark_profile'      => 'dark_profile/site/index',
+    'profile_dark'      => 'profile_dark/site/index',
 
     'profile' => 'profile/site/index',
     'profile/([a-z0-9\/]+)' => 'profile/site/index',
