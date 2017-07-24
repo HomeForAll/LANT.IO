@@ -126,20 +126,33 @@ $(function(){
         name: {
             presence: {message: "^Пожалуйста, укажите ваше имя."}
         },
-        document_inn: {},
-        document_ogrn: {},
-        brand: {},
-        company: {},
+        document_inn: {
+
+        },
+        document_ogrn: {
+
+        },
+        brand: {
+
+        },
+        company: {
+
+        },
         phone: {
             presence: {message: "^Введите телефон."}
         },
         code: {
-            presence: {message: "^Введите полученный код из смс."}
+            presence: {message: "^Введите полученный код из смс."},
+            numericality: {message: "^Введите корректный код из смс."},
+            length: {is: 6, message: "^Введите корректный код из смс."}
         },
         email: {
-            presence: {message: "^Укажите вашу электронную почту."}
+            presence: {message: "^Укажите вашу электронную почту."},
+            email: { message: "^Введите правильную электронную почту." }
         },
-        password: {},
+        password: {
+            presence: {message: "^Придумайте и введите пароль."}
+        },
         //code: {},
     };
 
@@ -198,7 +211,11 @@ $(function(){
                     $.post('/api/registration/'+current_state, data, function(data) {
                         console.log(data);
                         if (data.response) {
-                            update();
+                            if (current_state == "step_password") {
+                                location.reload();
+                            } else {
+                                update();
+                            }
                         } else if (data.error) {
                             error.html(data.error.message);
                         }
