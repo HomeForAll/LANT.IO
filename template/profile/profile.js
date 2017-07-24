@@ -33,6 +33,9 @@ $(function () {
             },
             success: function(data) {
                 console.log('success', data);
+                if (data.response) {
+                    location.reload();
+                }
                 // var that = this;
                 // this.progressBar.remove();
                 // this.cancelButton.click(function(){ that.block.remove() });
