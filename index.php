@@ -8,7 +8,7 @@ define('DS', DIRECTORY_SEPARATOR);
 defined('ROOT_DIR') or define('ROOT_DIR', __DIR__ . DIRECTORY_SEPARATOR);
 defined('CONFIG_DIR') or define('CONFIG_DIR', ROOT_DIR . 'app' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR);
 defined('SERVER') or define('SERVER', 'nginx'); // 'apache' or 'nginx'
-defined('STATUS') or define('STATUS', '1'); // NORMAL: 0; DEV: 1;
+defined('STATUS') or define('STATUS', '0'); // NORMAL: 0; DEV: 1;
 defined('ERROR_HANDLER_STATUS') or define('ERROR_HANDLER_STATUS', '1'); // не применять: 0; запись в error.log: 1; вывод на экран: 2
 
 date_default_timezone_set('Europe/Moscow');

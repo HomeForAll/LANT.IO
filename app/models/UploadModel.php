@@ -130,7 +130,7 @@ class UploadModel extends Model
         $handle = new upload($_FILES['file']);
 
         if (!$handle->uploaded) {
-            $this->error(self::FILE_NOT_UPLOADED_ERROR);
+            $this->error(self::FILE_NOT_UPLOADED_ERROR, $handle->error);
         }
 
         if (!$handle->file_is_image) {
