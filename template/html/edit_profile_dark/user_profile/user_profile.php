@@ -1,15 +1,16 @@
 <div class="user-profile">
-    <div class="top-title">
-        <a class="hash-tabs">Личная информация</a>
-        <a class="hash-tabs">Безопасность</a>
-        <a class="hash-tabs">Настройка сервиса</a>
-        <button id="save-profile">СОХРАНИТЬ</button>
-    </div>
-    <form action="" id="user_edit_1">
+    <form action="" id="edit-profile">
+        <div class="top-title">
+            <a class="hash-tabs">Личная информация</a>
+            <a class="hash-tabs">Безопасность</a>
+            <a class="hash-tabs">Настройка сервиса</a>
+            <button type="submit" id="save-profile">СОХРАНИТЬ</button>
+        </div>
         <div class="user-all-information">
             <div class="photo-user">
                 <div class="photo">
                     <div class="img-user">
+                        <img src="/template/img/fiz.png" alt="user">
                         <div>
                             <a href="#" class="repeat"></a>
                             <a href="#" class="basket"></a>
@@ -17,41 +18,54 @@
                     </div>
                 </div>
                 <div class="subscribe">
-                    <a href="#" class="vk"></a>
-                    <a href="#" class="facebook"></a>
-                    <a href="#" class="google-plus"></a>
+                    <a href="#" class="vk" name="socialNet_VK"></a>
+                    <a href="#" class="facebook" name="socialNet_YA"></a>
+                    <a href="#" class="google-plus" name="socialNet_GOOGLE"></a>
                 </div>
             </div>
             <div class="user-data">
                 <div class="fio">
-                    <label for="">Имя<input disabled class="bold-text" type="text" placeholder="Александр" name="name"></label>
-                    <label for="">Отчество<input disabled class="bold-text" type="text" placeholder="Иванович" name="middle_name"></label>
-                    <label for="">Фамилия<input disabled class="bold-text" type="text" placeholder="Никулин" name="surname"></label>
+                    <label>Имя<input placeholder="Иван" class="bold-text" pattern="/^[А-ЯЁ][а-яё]+(-[А-ЯЁ][а-яё]+)? [А-ЯЁ][а-яё]+( [А-ЯЁ][а-яё]+)?$/" name="name_name" /></label>
+                    <label>Отчество<input placeholder="Сердюков" class="bold-text" pattern="/^[А-ЯЁ][а-яё]+(-[А-ЯЁ][а-яё]+)? [А-ЯЁ][а-яё]+( [А-ЯЁ][а-яё]+)?$/" name="name_patronymic" /></label>
+                    <label>Фамилия<input placeholder="Петрович" class="bold-text" pattern="/^[А-ЯЁ][а-яё]+(-[А-ЯЁ][а-яё]+)? [А-ЯЁ][а-яё]+( [А-ЯЁ][а-яё]+)?$/" name="name_surname" /></label>
+                    <label>Дата рождения<input type="date" placeholder="20.02.1984" class="bold-text" name="name_birthday" /></label>
                 </div>
                 <div class="contact-information">
-                    <p>Контактная информация</p>
-                    <label for="">email<input disabled type="text" placeholder="niksenges@gmail.com" name="email"></label>
-                    <label for="">номер телефона<input disabled type="text" placeholder="+7 927 688-33-40" name="number_phone"></label>
                     <p>Паспортные данные</p>
-                    <label for="">серия<input disabled type="text" placeholder="2423" name="series"></label>
-                    <label for="">номер<input disabled type="text" placeholder="233635" name="passport-id"></label>
+                    <label>серия<input data-inputmask="'mask': '99-99'" placeholder="00-00" name="passport_series" /></label>
+                    <label>номер<input data-inputmask="'mask': '999-999'" placeholder="000-000" name="passport_number" /></label>
                     <p>Адрес регистрации</p>
-                    <label for="">индекс<input disabled type="text" placeholder="125353" name="index"></label>
-                    <label for="">город<input disabled type="text" placeholder="Москва" name="city"></label>
+                    <label>индекс<input placeholder="000000" data-inputmask="'mask': '999999'" name="adress_index" /></label>
+                    <label>город<input placeholder="Белгород" pattern="[a-zA-Zа-яА-Я]{20}" name="adress_city" /></label>
+                    <label>Улица<input placeholder="Пушкина" pattern="[a-zA-Zа-яА-Я]{20}" name="adress_street" /></label>
+                    <label>Дом<input placeholder="343" pattern="[0-9]{4}" name="adress_home" /></label>
+                    <label>Квартира<input placeholder="15" pattern="[0-9]{4}" name="adress_flat" /></label>
+                    <p>Контакты:</p>
+                    <label>Номер телефона<input name="contacts_number" placeholder="+7 (___) ___ - __ - __" data-inputmask="'mask': '+7(999)999-99-99'" /></label>
+                    <label>Email<input data-inputmask="'mask: '*{1,20}[.*{1,20}][.*{1,20}][.*{1,20}]@*{1,20}[.*{2,6}][.*{1,2}]'" placeholder="mail@mail.ru" name="contacts_email" /></label>
                 </div>
             </div>
         </div>
-    </form>
-    <form action="" id="user_edit_2">
         <div class="user-all-information">
-            <h2>Text - title</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus at, dolores eius id ipsam iste maxime necessitatibus non, numquam optio provident, quas repellat tempora ullam veritatis vero voluptas voluptatem? A accusamus aliquid consequatur earum error eum impedit, maiores modi necessitatibus nostrum perferendis porro possimus qui quo ratione, rem sit vel.</p>
+            <div class="contact-information">
+                <p>Параметры безопасности:</p>
+                <label>Старый пароль<input placeholder="Введите пароль" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" name="series" /></label>
+                <label>Новый пароль<input placeholder="Введите пароль" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" name="passport-id" /></label>
+                <label>Информация о себе<textarea name="about_me" placeholder=""></textarea></label>
+            </div>
         </div>
-    </form>
-    <form action="" id="user_edit_3">
         <div class="user-all-information">
-            <h2>Text - title</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus dolores, doloribus earum explicabo ipsa numquam officia quaerat, quam quisquam quo saepe sit veritatis. Accusantium amet, aut consectetur delectus dignissimos dolore est laudantium minus nam neque nisi nulla placeat provident quo, recusandae saepe sequi soluta tenetur vel veritatis. Ipsa, provident sequi?</p>
+            <div class="contact-information">
+                <p>Настройки оповещений и связи:</p>
+                <label>Через телефон<input type="checkbox" name="phone-settings"></label>
+                <label>Через сайт<input type="checkbox" name="site-settings"></label>
+                <p>Уведомления от сайта:</p>
+                <label>Уведомления о новом диалоге<input type="checkbox" name="notification-settings"></label>
+                <label>Уведомление о закрытии объявления,<br> помеченного как “избранное”<input type="checkbox" name="notification-close-settings"></label>
+                <label>Рекламные предложения<input type="checkbox" name="ap-settings"></label>
+                <label>Список активности<input type="checkbox" name="active-user-settings"></label>
+                <label>Список подключенных устройств<input type="checkbox" name="root-device-settings"></label>
+            </div>
         </div>
     </form>
 </div>

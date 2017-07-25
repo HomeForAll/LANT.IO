@@ -13,7 +13,7 @@ $(document).ready(function () {
             $(this).find('a').append('<i class="fa fa-angle-left" aria-hidden="true"></i>Назад');
         } else {
             $('.left-bar').fadeOut();
-            $(this).find('a').append('<i class="fa fa-angle-right" aria-hidden="true"></i>Открыть');
+            $(this).find('a').append('Открыть<i class="fa fa-angle-right" aria-hidden="true"></i>');
         }
 
     })

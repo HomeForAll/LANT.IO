@@ -15,7 +15,7 @@
             <a class="combined-shape"><span>205 coins</span></a>
         </div>
         <div class="profile-user">
-            <a href="#">Никулин Александр<img src="/template/images/user.png" alt="user"></a>
+            <a>Your Name<img id="user-header" src="/template/img/fiz.png" alt="user"></a>
             <span><img src="/template/images/crown.png" alt="crown">Пользователь +</span>
         </div>
     </div>
