@@ -667,7 +667,7 @@ class SearchModel extends Model
 
         switch ($queryType) {
             case self::SEARCH:
-                $sql = 'SELECT * FROM news_base LEFT JOIN (SELECT DISTINCT ad_id AS tmid, * FROM ads_images) i ON (news_base.id_news = i.ad_id) WHERE ';
+                $sql = 'SELECT * FROM news_base LEFT JOIN (SELECT DISTINCT ON(ad_id) * FROM ads_images) i ON (news_base.id_news = i.ad_id) WHERE ';
                 break;
             case self::COUNT:
                 $sql = 'SELECT COUNT(*) FROM news_base WHERE ';

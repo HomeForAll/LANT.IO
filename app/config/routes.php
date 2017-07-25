@@ -107,4 +107,6 @@ return [
     'api/authenticator/create/secret' => 'main/API/createGASecret',
     'api/authenticator/save' => 'main/API/saveGA',
     'api/authenticator/verify' => 'main/API/verifyGACode',
+    'api/sms/send/code' => 'main/API/sendSMSCode',
+    'api/sms/auth/activate' => 'main/API/verifySMSActivateCode',
 ];

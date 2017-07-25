@@ -121,9 +121,7 @@ class APIController extends Controller
                 break;
             case 'step_password':
                 $this->model('UserModel')->setPassword(isset($_POST['password']) ? $_POST['password'] : null);
-                if ($this->model('UserModel')->getResponse() == true) {
-                    $this->model('UserModel')->registration();
-                }
+                $this->model('UserModel')->registration();
                 break;
             case 'step_summary':
                 if (!empty($_POST)) {
@@ -261,5 +259,15 @@ class APIController extends Controller
     public function actionVerifyGACode()
     {
         $this->model('UserModel')->verifyGoogleAuthenticatorCode();
+    }
+
+    public function actionSendSMSCode()
+    {
+        $this->model('UserModel')->sendSMSCode();
+    }
+
+    public function actionVerifySMSActivateCode()
+    {
+        $this->model('UserModel')->verifySMSCodeAndActivate();
     }
 }

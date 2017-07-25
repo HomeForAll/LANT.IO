@@ -85,6 +85,7 @@ class Response
     const GA_CODE_INCORRECT_ERROR = 7001;
     const TMP_HASH_NOT_EXIST_ERROR = 7002;
     const TMP_HASH_INCORRECT_ERROR = 7002;
+    const PHONE_NOT_EXIST_ERROR = 7003;
 
     protected $messages = [
         // Общие 1-1000:
@@ -160,6 +161,7 @@ class Response
         7001 => 'Неверный Google Authenticator код',
         7002 => 'Отсутствует временный хеш',
         7003 => 'Неверный временный хеш',
+        7004 => 'Отсутствует телефон',
     ];
 
     public function __construct()

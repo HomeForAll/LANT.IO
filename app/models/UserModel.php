@@ -43,12 +43,25 @@ class UserModel extends Model
             }
 
             if (password_verify($password, $user['password'])) {
-                if ($user['ga_secret_key']) {
-                    $_SESSION['user']['tmp_hash'] = hash('SHA256', mt_rand(1, 10000) . time());
-                    $this->response([
-                        'google_authenticator' => true,
-                        'tmp_hash' => $_SESSION['user']['tmp_hash'],
+                switch ($user['auth_2factor']) {
+                    case 1:
+
+
+                        $_SESSION['sms_code'] = $code;
+
+                        $_SESSION['user']['tmp_hash'] = hash('SHA256', mt_rand(1, 10000) . time());
+                        $this->response([
+                            'auth_type' => 'sms',
+                            'tmp_hash'  => $_SESSION['user']['tmp_hash'],
                         ]);
+                        break;
+                    case 2:
+                        $_SESSION['user']['tmp_hash'] = hash('SHA256', mt_rand(1, 10000) . time());
+                        $this->response([
+                            'auth_type' => 'ga',
+                            'tmp_hash'  => $_SESSION['user']['tmp_hash'],
+                        ]);
+                        break;
                 }
 
                 $secret_key = Registry::get('config')['secret_key'];
@@ -1160,7 +1173,7 @@ class UserModel extends Model
                     }
                 }
 
-                $_SESSION['registration']['code'] = $code;
+                $_SESSION['sms_code'] = $code;
             } else {
                 $this->error(self::SMS_API_REQUEST_FAILED_ERROR, $json->status_text);
             }
@@ -1173,7 +1186,7 @@ class UserModel extends Model
 
     public function verifySMSCode($code)
     {
-        if (!v::numeric()->validate($code) || $_SESSION['registration']['code'] != $code) {
+        if (!v::numeric()->validate($code) || $_SESSION['sms_code'] != $code) {
             $this->error(self::SMS_CODE_INCORRECT_ERROR);
         }
 
@@ -1328,7 +1341,7 @@ class UserModel extends Model
         $sql = 'INSERT INTO users ({%columns%}) VALUES ({%values%}) RETURNING *';
         $activate_hash = time() . sha1(time() . mt_rand(1, 15000));
         $columns = "registration_timestamp, activate_hash";
-        $values = "now(), {$activate_hash}";
+        $values = "now(), '{$activate_hash}'";
 
         $user_type = [
             'user' => 0,
@@ -1368,7 +1381,7 @@ class UserModel extends Model
 
         if (isset($_SESSION['registration']['phone'])) {
             $columns .= ",phone_number";
-            $phone = $this->extractPhoneNumber($_SESSION['registration']['phone']);
+            $phone = preg_replace('~[^0-9]+~', '', $_SESSION['registration']['phone']);
             $values .= ",{$phone}";
         }
 
@@ -1398,29 +1411,12 @@ class UserModel extends Model
             $values .= ",'{$_SESSION['registration']['photo']}'";
         }
 
-        pg_escape_string($values);
-
         $sql = str_replace('{%columns%}', $columns, $sql);
         $sql = str_replace('{%values%}', $values, $sql);
 
-        $query = $this->db->query($sql);
+        pg_escape_string($sql);
 
-        if ($this->db->errorCode() !== '00000') {
-            $this->error(self::DB_INSERT_ERROR);
-        }
-
-        $user = $query->fetch();
-        unset($user['password']);
-        unset($_SESSION['registration']);
-
-        $activate_url = "https://{$_SERVER['HTTP_HOST']}/confirm/email/{$activate_hash}:{$user['id']}";
-
-        $_SESSION['authorized'] = true;
-
-        $_SESSION['user']['id'] = $user['id'];
-        $_SESSION['user']['email'] = $user['email'];
-        $_SESSION['user']['phone'] = $user['phone_number'];
-
+        $activate_url = "https://{$_SERVER['HTTP_HOST']}/confirm/email/{$activate_hash}:{$_SESSION['registration']['email']}";
         require_once ROOT_DIR . 'vendor' . DS . 'phpmailer' . DS . 'phpmailer' . DS . 'PHPMailerAutoload.php';
 
         $mail = new PHPMailer;
@@ -1433,13 +1429,29 @@ class UserModel extends Model
         $mail->Password = "ZSH1wb88";
         $mail->setLanguage('ru');
         $mail->setFrom('admin@lant.io', 'LANT.IO');
-        $mail->addAddress($user['email']);
+        $mail->addAddress($_SESSION['registration']['email']);
         $mail->Subject = 'New account';
         $mail->msgHTML("Здравствуйте {$user['first_name']}, для потверждения Email кликните по этой ссылке: {$activate_url}");
 
         if (!$mail->send()) {
             $this->error(self::EMAIL_MESSAGE_SEND_ERROR, $mail->ErrorInfo);
         }
+
+        $query = $this->db->query($sql);
+
+        if ($this->db->errorCode() !== '00000') {
+            $this->error(self::DB_INSERT_ERROR, $this->db->errorInfo());
+        }
+
+        $user = $query->fetch();
+        unset($user['password']);
+        unset($_SESSION['registration']);
+
+        $_SESSION['authorized'] = true;
+
+        $_SESSION['user']['id'] = $user['id'];
+        $_SESSION['user']['email'] = $user['email'];
+        $_SESSION['user']['phone'] = $user['phone_number'];
 
         // TODO: Удалить в будущем
         $_SESSION['userID'] = $user['id'];
@@ -1648,6 +1660,7 @@ class UserModel extends Model
             $this->error(self::GA_CODE_INCORRECT_ERROR);
         }
 
+        $_SESSION['authorized'] = true;
         $_SESSION['user']['id'] = $user['id'];
         $_SESSION['user_hash'] = hash('sha512', 'user_id=' . $user['id'] . 'secret_key=' . Registry::get('config')['secret_key']);
 
@@ -1671,7 +1684,7 @@ class UserModel extends Model
         $ga = new PHPGangsta_GoogleAuthenticator();
 
         if ($ga->verifyCode($_SESSION['user']['ga_secret'], $_POST['code'])) {
-            $query = $this->db->prepare('UPDATE users SET ga_secret_key = :secret WHERE id = :user_id');
+            $query = $this->db->prepare('UPDATE users SET ga_secret_key = :secret, auth_2factor = 2 WHERE id = :user_id');
             $query->execute([
                 ':secret'  => $_SESSION['user']['ga_secret'],
                 ':user_id' => $_SESSION['user']['id'],
@@ -1687,5 +1700,91 @@ class UserModel extends Model
         } else {
             $this->error(self::GA_CODE_INCORRECT_ERROR);
         }
+    }
+
+    public function sendActivateSMSCode()
+    {
+        if (!isset($_SESSION['user']['id'])) {
+            $this->error(self::USER_NOT_AUTHORIZED_ERROR);
+        }
+
+        $query = $this->db->prepare('SELECT phone_number FROM users WHERE id = :user_id');
+        $query->execute([':user_id' => $_SESSION['user']['id']]);
+
+        if ($query->errorCode() !== '00000') {
+            $this->error(self::DB_SELECT_ERROR, $query->errorInfo());
+        }
+
+        $user = $query->fetch();
+
+        if (!isset($user['phone_number'])) {
+            $this->error(self::PHONE_NOT_EXIST_ERROR);
+        }
+
+        $this->sendSMSCode($user['phone_number']);
+    }
+
+    public function sendSMSCode($phone)
+    {
+        $code = mt_rand(1, 9) . mt_rand(0, 9) . mt_rand(0, 9) . mt_rand(0, 9) . mt_rand(0, 9) . mt_rand(0, 9);
+
+        $ch = curl_init("https://sms.ru/sms/send");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
+            "api_id" => Registry::get('config')['sms_api_key'],
+            "to"     => $phone, // До 100 штук до раз
+            "msg"    => "Ваш код: {$code}",
+            "json"   => 1 // Для получения более развернутого ответа от сервера
+        ]));
+
+        $body = curl_exec($ch);
+        curl_close($ch);
+
+        $json = json_decode($body);
+
+        if ($json) {
+            if ($json->status == "OK") {
+                foreach ($json->sms as $phone => $data) {
+                    if ($data->status !== "OK") { // Сообщение отправлено
+                        $this->error(self::SMS_NOT_SENT_ERROR, $data->status_text);
+                    }
+                }
+
+                $_SESSION['registration']['code'] = $code;
+            } else {
+                $this->error(self::SMS_API_REQUEST_FAILED_ERROR, $json->status_text);
+            }
+        } else {
+            $this->error(self::CURL_CONNECTION_LOST);
+        }
+
+        return $code;
+    }
+
+    public function verifySMSCodeAndActivate()
+    {
+        if (!isset($_GET['code'])) {
+            $this->error(self::BAD_REQUEST_ERROR);
+        }
+
+        if (!isset($_SESSION['user']['id'])) {
+            $this->error(self::USER_NOT_AUTHORIZED_ERROR);
+        }
+
+        if (!v::numeric()->validate($_GET['code']) || $_SESSION['user']['code'] != $_GET['code']) {
+            $this->error(self::SMS_CODE_INCORRECT_ERROR);
+        }
+
+        $query = $this->db->prepare('UPDATE users SET auth_2factor = 1 WHERE id = :user_id');
+        $query->execute([':user_id' => $_SESSION['user']['id']]);
+
+        if ($query->errorCode() !== '00000') {
+            $this->error(self::DB_UPDATE_ERROR, $query->errorInfo());
+        }
+
+        unset($_SESSION['user']['code']);
+
+        $this->response(true);
     }
 }
