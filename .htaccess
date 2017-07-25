@@ -1,5 +1,21 @@
 AddDefaultCharset utf-8
 
+#Глобалы нам не нужны
+php_flag register_globals off
+
+#Слешировать кавычки также не требуется
+#php_flag magic_quotes_gpc off
+
+#Запретим получать урлы при помощи fopen()
+#php_admin_value allow_url_fopen off
+
+
+php_value memory_limit 32M
+php_value upload_max_filesize 32M
+php_value post_max_size 32M
+php_value max_execution_time 100000
+php_value max_input_time 100000
+
 RewriteEngine On
 RewriteBase /
 RewriteRule ^.htaccess$ - [F]
