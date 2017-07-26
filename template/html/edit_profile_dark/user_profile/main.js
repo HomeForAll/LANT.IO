@@ -10,10 +10,7 @@ $(document).ready(function () {
         dataType: 'Json',
         success: function (data) {
 
-            if (!data) {
-                console.log('Нет данных');
-                return false;
-            }
+            if (!data) return false;
 
             $('input[name="name_name"]').val(data.name_name);
             $('input[name="name_patronymic"]').val(data.name_patronymic);
@@ -29,16 +26,15 @@ $(document).ready(function () {
             $('input[name="contacts_number"]').val(data.contacts_number);
             $('input[name="contacts_email"]').val(data.contacts_email);
 
-            console.log('result - success', data);
+            console.log('Данные получены', data);
         },
         error: function (data) {
-            console.log('result - error', data);
+            console.log('Данные не получены', data);
         }
     });
 
     /** Получаем API для header **/
     $.getJSON("/api/user", {}, function(user) {
-        console.log('result - user', user);
         if (!user) {
             $('.img-user img').attr('src', user.response.avatar_original);
             $('.profile-user a').html(user.response.name + '<img src="'+ user.response.avatar_50 +'">');
@@ -48,22 +44,24 @@ $(document).ready(function () {
     $('#edit-profile').submit(function (e) {
         e.preventDefault();
         var data = $(this).serialize();
-        console.log('data', data);
+        console.log('Собрали на отправку ', data);
 
         $.ajax({
             method: 'POST',
             url: '/api/profile/save/profile',
             dataType: 'Json',
             data: data,
-            success: function (data) {
+            success: function (e) {
                 if (data.response) {
-                    console.log('Данные сохранены', data);
+                    console.log('Данные отправлены', data);
+                    console.log('Данные отправлены - e - ', e);
                 } else {
                     console.log('Ошибка', data);
                 }
             },
-            error: function () {
-                console.log('данные не сохранены', data);
+            error: function (e) {
+                console.log('Данные не отправлены', data);
+                console.log('Данные не отправлены - e - ', e);
             }
         });
     });
