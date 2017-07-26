@@ -19,3 +19,21 @@
 * 2017-07-26 [12:42:55] - [Warning] Illegal string offset 'code'
   (line: 137 ) -> app\views\dialogs.php 
 
+* 2017-07-26 [19:07:02] - [Warning] Illegal string offset 'code'
+  (line: 81 ) -> app\views\dialogs.php 
+
+* 2017-07-26 [19:07:02] - [Warning] Illegal string offset 'code'
+  (line: 120 ) -> app\views\dialogs.php 
+
+* 2017-07-26 [19:07:02] - [Warning] Illegal string offset 'code'
+  (line: 137 ) -> app\views\dialogs.php 
+
+* 2017-07-26 [19:07:09] - [Warning] Illegal string offset 'code'
+  (line: 81 ) -> app\views\dialogs.php 
+
+* 2017-07-26 [19:07:09] - [Warning] Illegal string offset 'code'
+  (line: 120 ) -> app\views\dialogs.php 
+
+* 2017-07-26 [19:07:09] - [Warning] Illegal string offset 'code'
+  (line: 137 ) -> app\views\dialogs.php 
+

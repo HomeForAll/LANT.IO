@@ -1024,6 +1024,7 @@ class CabinetModel extends Model
 
     public function savePersonalInfo() // Редактирование профиля
     {
+        echo $_POST['name_birthday'];
         if (!isset($_SESSION['user']['id'])) {
             $this->error(self::USER_NOT_AUTHORIZED_ERROR);
         }
