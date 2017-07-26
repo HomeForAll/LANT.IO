@@ -155,7 +155,7 @@ class CabinetModel extends Model
         }
     }
 
-    public function getDialogs($offset = 0, $count = 25, $flagOfDialog = 1)
+    public function getDialogs($offset = 0, $count = 25)
     {
         if (isset($_GET['count'])) {
             $count = $_GET['count'];
@@ -165,6 +165,8 @@ class CabinetModel extends Model
             $offset = $_GET['offset'];
         }
 
+
+        $flagOfDialog = 1; // Сделанно в целях безапасности, по мере необходимости удаленных диалогов должно быть убранно
         if ($flagOfDialog) {
             $ids = $this->getDialogsIDs();
         } else {
@@ -172,7 +174,6 @@ class CabinetModel extends Model
         }
 
         if ($ids) {
-            $massiv = [];
             $massiv_to_sort['ids'] = $ids;
 
             foreach ($ids as $item => $key) {
@@ -933,7 +934,7 @@ class CabinetModel extends Model
         return $str;
     }
 
-    public function сheckBirthDay()
+    public function сheckBirthDay($str)
     { // Проверка дня рождения
         $month = [
             "Январь",
@@ -950,21 +951,25 @@ class CabinetModel extends Model
             "Декабрь",
         ];
 
-        $_POST['sel_date'] = preg_replace("/[^0-9]/", '', $_POST['sel_date']);
-        $day = $_POST['sel_date'];
-        if (($_POST['sel_date'] > 31) || ($_POST['sel_date'] < 1))
+        $date = explode('.', $str);
+
+        $date[0] = preg_replace("/[^0-9]/", '', $date[0]);
+        $day = $date[0];
+        if (($day > 31) || ($day < 1))
             return false;
 
-        $_POST['sel_year'] = preg_replace("/[^0-9]/", '', $_POST['sel_year']);
-        if (($_POST['sel_year'] > date('Y')) || ($_POST['sel_year'] < 1920))
+        $date[2] = preg_replace("/[^0-9]/", '', $date[2]);
+        $year = $date[2];
+        if (($year > date('Y')) || ($year < 1920))
             return false;
 
+        $month_choosen = $date[1];
         $month_num = 0;
         for ($i = 0; $i < 12; $i++) {
-            $var1 = $_POST['sel_month'];
+            $var1 = $month_choosen;
             $var2 = $month[$i];
             if (strcasecmp($var1, $var2) == 0) {
-                $_POST['sel_month'] = $i + 1;
+                $month_choosen = $i + 1;
                 $month_num = $i + 1;
                 break;
             } else {
@@ -1033,8 +1038,8 @@ class CabinetModel extends Model
         } else {
             $this->error(self::WRONG_NAME_PATRONYMIC);
         }
-        if ($str = $this->сheckBirthDay()) {
-            $update['name_birthday'] = $_POST['sel_year'] . '-' . $_POST['sel_month'] . '-' . $_POST['sel_date'];
+        if ($str = $this->сheckBirthDay($_POST['name_birthday'])) {
+            $update['name_birthday'] = $str;
         } else {
             $this->error(self::WRONG_BIRTHDAY);
         }
