@@ -1,5 +1,7 @@
 <?php
 
+use Respect\Validation\Validator as v;
+
 class CabinetModel extends Model
 {
     use Cleaner;
@@ -934,6 +936,13 @@ class CabinetModel extends Model
         return $str;
     }
 
+    public function checkDate($str)
+    {
+        if (!v::Date()->validate($str))
+            return false;
+        return $str;
+    }
+
     public function сheckBirthDay($str)
     { // Проверка дня рождения
         $month = [
@@ -950,6 +959,9 @@ class CabinetModel extends Model
             "Ноябрь",
             "Декабрь",
         ];
+
+        if ($str == '')
+            return false;
 
         $date = explode('.', $str);
 
@@ -989,7 +1001,7 @@ class CabinetModel extends Model
                 return false;
             }
         }
-        $date = $date[0] . $date[1] . $date[2];
+        $date = $date[0] . '.' . $date[1] . '.' . $date[2];
 
         return $date;
     } // Проверка даты рождения
@@ -1039,7 +1051,7 @@ class CabinetModel extends Model
         } else {
             $this->error(self::WRONG_NAME_PATRONYMIC);
         }
-        if ($str = $this->сheckBirthDay($_POST['name_birthday'])) {
+        if ($str = $this->checkDate($_POST['name_birthday'])) {
             $update['name_birthday'] = $str;
         } else {
             $this->error(self::WRONG_BIRTHDAY);

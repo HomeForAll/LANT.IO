@@ -1,3 +1,21 @@
 * 2017-07-22 [11:57:10] - [Notice] Undefined variable: d
   (line: 3 ) -> app\views\news_list.php 
 
+* 2017-07-26 [12:22:56] - [Notice] Undefined index: name_name
+  (line: 1027 ) -> app\models\CabinetModel.php 
+
+* 2017-07-26 [12:26:47] - [Parse Error] syntax error, unexpected '.2001' (T_DNUMBER)
+  (line: 41 ) -> app\controllers\CabinetController.php  - Фатальная ошибка!
+
+* 2017-07-26 [12:26:50] - [Parse Error] syntax error, unexpected '.2001' (T_DNUMBER)
+  (line: 41 ) -> app\controllers\CabinetController.php  - Фатальная ошибка!
+
+* 2017-07-26 [12:42:55] - [Warning] Illegal string offset 'code'
+  (line: 81 ) -> app\views\dialogs.php 
+
+* 2017-07-26 [12:42:55] - [Warning] Illegal string offset 'code'
+  (line: 120 ) -> app\views\dialogs.php 
+
+* 2017-07-26 [12:42:55] - [Warning] Illegal string offset 'code'
+  (line: 137 ) -> app\views\dialogs.php 
+

@@ -38,7 +38,7 @@ class CabinetController extends Controller
 
     public function actionDialogs()
     {
-        $dialogs_page_defualt = $this->model('CabinetModel')->getDialogs(true);
+        $dialogs_page_defualt = $this->model('CabinetModel')->сheckBirthDay('21.12.1997');
         $viewdialogs = $dialogs_page_defualt;
         if (isset($_POST['dialogs']))
             $viewdialogs = $this->model('CabinetModel')->getDialogs(true);
