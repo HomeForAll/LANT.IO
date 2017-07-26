@@ -923,7 +923,7 @@ class CabinetModel extends Model
     {
         $old_str = $str;
         $str = trim($str);
-        $str = preg_replace("/[^0-9]/+", '', $str);
+        $str = preg_replace("/[^0-9]+/", '', $str);
         if ($old_str != $str)
             return false;
 
