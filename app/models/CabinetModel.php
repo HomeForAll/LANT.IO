@@ -989,8 +989,9 @@ class CabinetModel extends Model
                 return false;
             }
         }
+        $date = $date[0] . $date[1] . $date[2];
 
-        return true;
+        return $date;
     } // Проверка даты рождения
 
     public function сheckEmail($profile_id)
