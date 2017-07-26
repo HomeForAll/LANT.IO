@@ -909,7 +909,7 @@ class CabinetModel extends Model
     public function сheckPersonalName($str) // Проверка ФИО пользователя
     {
         $str = trim($str);
-        $pattern = "/([a-z0-9])+/i";
+        $pattern = "/([a-z0-9]+)/i";
         if (preg_match($pattern, $str, $matches))
             return false;
         if ($str == '')
