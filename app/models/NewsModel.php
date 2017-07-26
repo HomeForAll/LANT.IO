@@ -257,8 +257,8 @@ class NewsModel extends Model
                 }
                 if (!$stmt->fetchColumn()) {
                     //Если нет => Запись IP
-                    if (isset($_SESSION['userID'])) {
-                        $userID = (int)$_SESSION['userID'];
+                    if (isset($_SESSION['user']['id'])) {
+                        $userID = (int)$_SESSION['user']['id'];
                     } else {
                         $userID = false;
                     }
@@ -890,8 +890,8 @@ class NewsModel extends Model
         $new_form_data = [];
 
         //Определение пользователя
-        if (!empty($_SESSION['userID'])) {
-            $user_id = (int)$_SESSION['userID'];
+        if (!empty($_SESSION['user']['id'])) {
+            $user_id = (int)$_SESSION['user']['id'];
         } else {
             return false;
         }
@@ -2535,8 +2535,8 @@ class NewsModel extends Model
         }
 
         //Определение пользователя
-        if (!empty($_SESSION['userID'])) {
-            $user_id = (int)$_SESSION['userID'];
+        if (!empty($_SESSION['user']['id'])) {
+            $user_id = (int)$_SESSION['user']['id'];
         } else {
             $this->error(self::USER_NOT_AUTHORIZED_ERROR);
 

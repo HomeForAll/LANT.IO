@@ -91,7 +91,7 @@ class NewsController extends Controller
             }
 
             //Проверка на владельца новости и уровня доступа к редактированию
-            if ($news_to_edit["user_id"] != $_SESSION['userID']) {
+            if ($news_to_edit["user_id"] != $_SESSION['user']['id']) {
                 $this->getAccessFor('admin_news');
             }
             $data = $this->model('NewsModel')->getPathOfNewsForm($news_to_edit, $news_to_edit['space_type'], $news_to_edit['operation_type'],
@@ -128,7 +128,7 @@ class NewsController extends Controller
             $this->model('NewsModel')->makeNewsStatus($stat['news_update_id'], $stat['news_delete_id'], $stat['news_id_rating']);
         }
         // Загрузка из БД списка всех новостей
-        $data['news'] = $this->model('NewsModel')->getMyNewsList((int)$_SESSION['userID']);
+        $data['news'] = $this->model('NewsModel')->getMyNewsList((int)$_SESSION['user']['id']);
         $data = $this->model('NewsModel')->getNewsMessageAndError($data);
         $this->view->render('news_myad', $data);
     }

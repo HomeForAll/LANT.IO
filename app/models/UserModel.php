@@ -72,7 +72,7 @@ class UserModel extends Model
                 $_SESSION['user'] = $user;
 
                 // TODO: Удалить в будущем
-                $_SESSION['userID'] = $user['id'];
+                $_SESSION['user']['id'] = $user['id'];
                 $_SESSION['firstName'] = $user['first_name'];
                 $_SESSION['lastName'] = $user['last_name'];
                 $_SESSION['status'] = $user['status'];
@@ -1007,7 +1007,7 @@ class UserModel extends Model
             $_SESSION['user'] = $user;
 
             // TODO: Удалить в будущем
-            $_SESSION['userID'] = $user['id'];
+            $_SESSION['user']['id'] = $user['id'];
             $_SESSION['firstName'] = $user['first_name'];
             $_SESSION['lastName'] = $user['last_name'];
             $_SESSION['status'] = $user['status'];
@@ -1454,7 +1454,7 @@ class UserModel extends Model
         $_SESSION['user']['phone'] = $user['phone_number'];
 
         // TODO: Удалить в будущем
-        $_SESSION['userID'] = $user['id'];
+        $_SESSION['user']['id'] = $user['id'];
         $_SESSION['firstName'] = $user['first_name'];
         $_SESSION['lastName'] = $user['last_name'];
         $_SESSION['status'] = $user['status'];
@@ -1521,7 +1521,7 @@ class UserModel extends Model
     public function logout()
     {
         unset($_SESSION['authorized']);
-        unset($_SESSION['userID']);
+        unset($_SESSION['user']['id']);
         unset($_SESSION['status']);
         unset($_SESSION['user']);
         unset($_SESSION['firstName']);

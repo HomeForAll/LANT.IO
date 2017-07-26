@@ -111,8 +111,8 @@ class ServiceModel extends Model
     public function getFormData($user = 0)
     {
         //Определение пользователя
-        if (!empty($_SESSION['userID'])) {
-            $author_name = (int)$_SESSION['userID'];
+        if (!empty($_SESSION['user']['id'])) {
+            $author_name = (int)$_SESSION['user']['id'];
         } else {
             return false;
         }

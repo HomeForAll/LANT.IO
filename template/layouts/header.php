@@ -1,7 +1,7 @@
 <?php
 $this->setModel(new Model);
 $model = $this->model('Model');
-$user = $model->getUser($_SESSION['userID']);
+$user = $model->getUser($_SESSION['user']['id']);
 ?>
 
 <!-- Для импорта содержания из другого домена требуется поддержка CORS for html -->

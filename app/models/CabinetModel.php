@@ -112,7 +112,7 @@ class CabinetModel extends Model
 
     public function deleteAllDialogs() // Удалить все диалоги
     {
-        $profile_id = $_SESSION['userID'];
+        $profile_id = $_SESSION['user']['id'];
         $stmt = $this->db->prepare("UPDATE dialogs SET show = 0 WHERE user_id= $profile_id");
         $stmt->execute();
         if ($stmt->errorCode() != '00000') {
@@ -134,7 +134,7 @@ class CabinetModel extends Model
         $massivOwners = explode(",", $owners);
         if (count($massivOwners) == 2) {
             foreach ($massivOwners as $item => $key) {
-                if ($key != $_SESSION['userID']) {
+                if ($key != $_SESSION['user']['id']) {
                     $profile_foto_id = $this->getAvatarUser($key);
 
                     return $profile_foto_id;
@@ -258,7 +258,7 @@ class CabinetModel extends Model
 
     public function getDialogsIDs()
     {
-        $profile_id = $_SESSION['userID'];
+        $profile_id = $_SESSION['user']['id'];
         //$profile_id = 23;
         $stmt = $this->db->prepare("SELECT * FROM dialogs WHERE user_id= $profile_id AND show= 1");
         $stmt->execute();
@@ -281,7 +281,7 @@ class CabinetModel extends Model
 
     public function getDeletedDialogsIDs()
     {
-        $profile_id = $_SESSION['userID'];
+        $profile_id = $_SESSION['user']['id'];
         $stmt = $this->db->prepare("SELECT * FROM dialogs WHERE user_id= $profile_id AND show= 0");
         $stmt->execute();
         if ($stmt->errorCode() != '00000') {
@@ -313,7 +313,7 @@ class CabinetModel extends Model
         $massivOwners = explode(",", $owners);
         if (count($massivOwners) == 2) {
             foreach ($massivOwners as $item => $key) {
-                if ($key != $_SESSION['userID']) {
+                if ($key != $_SESSION['user']['id']) {
                     $name = $this->getNamesUsersForDialog($key);
 
                     return $name;
@@ -430,7 +430,7 @@ class CabinetModel extends Model
 
     public function getIDsAdminsForDialog() // Узнать IDs Админов
     {
-        $profile_id = $_SESSION['userID'];
+        $profile_id = $_SESSION['user']['id'];
         $status = self::ADMINSTATUS;
         $stmt = $this->db->prepare("SELECT id FROM users WHERE id != $profile_id AND status == $status");
         $stmt->execute();
@@ -483,7 +483,7 @@ class CabinetModel extends Model
 
     public function createNameForDialog($id)
     {
-        $profile_id = $_SESSION['userID'];
+        $profile_id = $_SESSION['user']['id'];
         $stmt = $this->db->prepare("SELECT owners FROM dialogs_properties WHERE id = $id");
         $stmt->execute();
         $owners = $stmt->fetchAll();
@@ -541,7 +541,7 @@ class CabinetModel extends Model
 
     public function deleteDialog($id)
     {
-        $profile_id = $_SESSION['userID'];
+        $profile_id = $_SESSION['user']['id'];
 
         $stmt = $this->db->prepare("UPDATE dialogs SET show = :show WHERE id = :id AND user_id = :profile_id");
         $stmt->execute([':show' => 0, ':id' => $id, ':profile_id' => $profile_id]);
@@ -624,7 +624,7 @@ class CabinetModel extends Model
 
     public function getIdsUsersForDialog()
     {
-        $profile_id = $_SESSION['userID'];
+        $profile_id = $_SESSION['user']['id'];
         $status = self::ADMINSTATUS;
         $stmt = $this->db->prepare("SELECT id FROM users WHERE id != $profile_id AND status != $status");
         $stmt->execute();
@@ -695,7 +695,7 @@ class CabinetModel extends Model
 
     public function createNewDialog()
     {
-        $profile_id = $_SESSION['userID'];
+        $profile_id = $_SESSION['user']['id'];
         $i = 0;
         $usersToAddMassiv = [];
         foreach ($_POST as $item => $key) {
@@ -754,7 +754,7 @@ class CabinetModel extends Model
 
     public function getgadgets()
     {
-        $profile_id = $_SESSION['userID'];
+        $profile_id = $_SESSION['user']['id'];
 
         $stmt = $this->db->prepare("SELECT * FROM sessions WHERE id_user = $profile_id");
         $stmt->execute();
@@ -782,7 +782,7 @@ class CabinetModel extends Model
 
     public function close_all_sessions()
     {
-        $profile_id = $_SESSION['userID'];
+        $profile_id = $_SESSION['user']['id'];
         $stmt = $this->db->prepare("DELETE FROM sessions WHERE id_user = $profile_id");
         $stmt->execute();
         session_destroy();
@@ -792,7 +792,7 @@ class CabinetModel extends Model
 
     public function delete_gadget()
     {
-        $profile_id = $_SESSION['userID'];
+        $profile_id = $_SESSION['user']['id'];
         for ($i = 0; $i <= $_SESSION['count_of_delete_buttons_for_gadgets']; $i++) {
             if (isset($_POST["delete" . $i])) {
                 $matrix = $_SESSION['matrix_for_gadgets'][$i];
@@ -811,7 +811,7 @@ class CabinetModel extends Model
 
     public function getinfo()
     {
-        $profile_id = $_SESSION['userID'];
+        $profile_id = $_SESSION['user']['id'];
         $stmt = $this->db->prepare("SELECT * FROM users WHERE id = $profile_id");
         $stmt->execute();
         if ($stmt->errorCode() != '00000') {
@@ -1307,7 +1307,7 @@ class CabinetModel extends Model
 
             if (move_uploaded_file($_FILES['profileIMG']['tmp_name'], $uploads . DIRECTORY_SEPARATOR . $fileName)) {
 
-                $query = $this->db->prepare('UPDATE users SET profile_foto_id = :file_name WHERE id = ' . $_SESSION['userID']);
+                $query = $this->db->prepare('UPDATE users SET profile_foto_id = :file_name WHERE id = ' . $_SESSION['user']['id']);
                 $query->execute([':file_name' => $fileName]);
 
                 if ($query->rowCount()) {
@@ -1853,13 +1853,13 @@ class CabinetModel extends Model
 
     public function getForms()
     {
-        //$_SESSION['userID'] = 11;
+        //$_SESSION['user']['id'] = 11;
         if ($_SESSION['status'] > 4) {
             $query = $this->db->prepare("SELECT * FROM forms");
             $query->execute();
         } else {
             $query = $this->db->prepare("SELECT * FROM forms WHERE user_id = :user_id");
-            $query->execute([':user_id' => $_SESSION['userID']]);
+            $query->execute([':user_id' => $_SESSION['user']['id']]);
         }
 
         $forms = $query->fetchAll();
@@ -1903,7 +1903,7 @@ class CabinetModel extends Model
             ':space_type'  => $spaceType,
             ':object_type' => $objectType,
             ':operation'   => $operationType,
-            ':user_id'     => $_SESSION['userID'],
+            ':user_id'     => $_SESSION['user']['id'],
         ]);
 
         if ($query->rowCount()) {
@@ -2423,7 +2423,7 @@ class CabinetModel extends Model
     public function getFormParams()
     {
         return [
-            'userID'         => $_SESSION['userID'],
+            'userID'         => $_SESSION['user']['id'],
             'spaceTypes'     => $this->getSpaceTypes(),
             'operationTypes' => $this->getOperationTypes(),
             'objectTypes'    => $this->getObjectTypes(),
@@ -2532,7 +2532,7 @@ class CabinetModel extends Model
     public function getCabinetData()
     {
         if (isset($_SESSION['OAuth_state']) && $_SESSION['OAuth_state'] == 3) {
-            $result = $this->setSocialNet($_SESSION['OAuth_service'], $_SESSION['OAuth_user_id'], $_SESSION['userID']);
+            $result = $this->setSocialNet($_SESSION['OAuth_service'], $_SESSION['OAuth_user_id'], $_SESSION['user']['id']);
         }
 
         return [
@@ -2542,7 +2542,7 @@ class CabinetModel extends Model
 
     private function getSocialNets()
     {
-        return $this->db->select('vk_id, ok_id, mail_id, ya_id, google_id, steam_id, facebook_id')->from('users')->where('id', '=', $_SESSION['userID'])->execute();
+        return $this->db->select('vk_id, ok_id, mail_id, ya_id, google_id, steam_id, facebook_id')->from('users')->where('id', '=', $_SESSION['user']['id'])->execute();
     }
 
     private function setSocialNet($service, $service_id, $user_id)
@@ -2588,7 +2588,7 @@ class CabinetModel extends Model
 
     public function getBalanceHistory()
     {
-        $user_id = (int)$_SESSION['userID'];
+        $user_id = (int)$_SESSION['user']['id'];
         // Преобразование данных формы в дату
         $calendar_start = $_POST["calendar_start"];
         $calendar_end = $_POST["calendar_end"];

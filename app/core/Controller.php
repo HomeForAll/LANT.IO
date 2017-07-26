@@ -12,7 +12,7 @@ class Controller extends Access
     {
         $this->view  = View::instance($layout);
 
-        if (isset($_SESSION['userID']) ){
+        if (isset($_SESSION['user']['id']) ){
             $this->access = $this->checkAccessLevel();
         }
     }

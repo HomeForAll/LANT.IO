@@ -13,7 +13,7 @@ class ServiceController extends Controller
         $this->checkAuth();
         $this->setModel(new ServiceModel());
         
-        $this->user = $_SESSION['userID'];
+        $this->user = $_SESSION['user']['id'];
         $this->status = $this->getAccessLevel();
         $this->service_message = [];
 

@@ -95,7 +95,7 @@ class Access
 
     public function getAccessFor($access_category = NULL){
         //Если нет ID
-        if (empty($_SESSION['userID'])) {
+        if (empty($_SESSION['user']['id'])) {
             $this->view->render('login');
             return;
         }

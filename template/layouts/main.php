@@ -23,7 +23,7 @@
     <script src="/template/js/socket.io.min.js"></script>
     <?php
     $hash = isset($_SESSION['user_hash']) ? $_SESSION['user_hash'] : '';
-    $user_id = isset($_SESSION['userID']) ? $_SESSION['userID'] : '';
+    $user_id = isset($_SESSION['user']['id']) ? $_SESSION['user']['id'] : '';
     $email = isset($_SESSION['email']) ? $_SESSION['email'] : '';
     ?>
     <?php

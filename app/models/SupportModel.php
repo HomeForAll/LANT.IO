@@ -19,7 +19,7 @@ class SupportModel extends Model
             {
                 array_push($matrix, $item);
             }
-            if ($item['answerer_user_id'] == $_SESSION['userID'])
+            if ($item['answerer_user_id'] == $_SESSION['user']['id'])
             {
                 array_push($matrix, $item);
             }
@@ -87,7 +87,7 @@ class SupportModel extends Model
 
     public function addTicket()
     {
-        $userID = isset($_SESSION['userID']) ? $_SESSION['userID'] : 0;
+        $userID = isset($_SESSION['user']['id']) ? $_SESSION['user']['id'] : 0;
 
         if ($userID) {
             $firstName = $this->getUserFirstName($this->db, $userID);
@@ -128,7 +128,7 @@ class SupportModel extends Model
     }
 
     public function addMessage($ticketID) {
-        $userID = isset($_SESSION['userID']) ? $_SESSION['userID'] : 0;
+        $userID = isset($_SESSION['user']['id']) ? $_SESSION['user']['id'] : 0;
 
         if ($userID) {
 
@@ -144,7 +144,7 @@ class SupportModel extends Model
 
             if (($_SESSION['status'] >= 5)) {
                 $flag = 'true';
-                $cursor = $this->db->query("UPDATE tickets SET answerer_user_id ={$_SESSION['userID']} WHERE id = {$ticketID[0]}");
+                $cursor = $this->db->query("UPDATE tickets SET answerer_user_id ={$_SESSION['user']['id']} WHERE id = {$ticketID[0]}");
                 $cursor = $this->db->query("UPDATE tickets SET answerer_user_name = '{$userName}' WHERE id = {$ticketID[0]}");
             }
             else
