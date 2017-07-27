@@ -200,6 +200,7 @@ $(document).ready(function() {
             });
         }
     });
+    
 
     $("form#search").on("submit", function( event ) {
         event.preventDefault();
