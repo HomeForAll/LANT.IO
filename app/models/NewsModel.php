@@ -257,8 +257,8 @@ class NewsModel extends Model
                 }
                 if (!$stmt->fetchColumn()) {
                     //Если нет => Запись IP
-                    if (isset($_SESSION['user']['id'])) {
-                        $userID = (int)$_SESSION['user']['id'];
+                    if (isset($_SESSION['userID'])) {
+                        $userID = (int)$_SESSION['userID'];
                     } else {
                         $userID = false;
                     }
@@ -890,8 +890,8 @@ class NewsModel extends Model
         $new_form_data = [];
 
         //Определение пользователя
-        if (!empty($_SESSION['user']['id'])) {
-            $user_id = (int)$_SESSION['user']['id'];
+        if (!empty($_SESSION['userID'])) {
+            $user_id = (int)$_SESSION['userID'];
         } else {
             return false;
         }
@@ -1336,11 +1336,14 @@ class NewsModel extends Model
         //Текущая Дата в формате стандарта ISO 8601
         $news_date = $this->dateFormatForDB($time);
 
-        $sql = "SELECT id_news, to_char(date,'YYYY-MM-DD HH24:MI:SS') as date, title, "
-            . "space_type, operation_type, object_type, city,"
-            . "content, user_id, preview_img, status, rating_admin, price, lease, space, "
-            . "number_of_rooms, metro_station, time_walk, time_car, lat, lng "
-            . "FROM news_base WHERE (date >= :date) ";
+        $sql = "SELECT id_news, to_char(date,'YYYY-MM-DD HH24:MI:SS') as date, title,"
+            . " space_type, operation_type, object_type, city,"
+            . " content, user_id, status,  price, lease, space,"
+            . " (rating_views + rating_admin+rating_donate) as rating,"
+            . " number_of_rooms, metro_station, time_walk, time_car, lat, lng"
+            . " FROM news_base n LEFT JOIN (SELECT DISTINCT ON(ad_id) * FROM ads_images) i"
+            . " ON (n.id_news = i.ad_id) "
+            . " WHERE (date >= :date) ";
 
         // Только активные(видимые)
         $sql .= "AND (status = 1) ";
@@ -1370,7 +1373,7 @@ class NewsModel extends Model
             $sql .= "AND (space <= :space_to) ";
         }
 
-        $sql .= " ORDER BY rating_admin DESC"
+        $sql .= " ORDER BY rating DESC"
             . " LIMIT :max_number";
 
         $stmt = $this->db->prepare($sql);
@@ -1896,21 +1899,6 @@ class NewsModel extends Model
         //Получение массив ссылок на картинки $data['news'][number]['photos'][]
         $data = $this->getAdsPhotos($data);
 
-
-        // Данные индекс метро -> наименование
-        $metro_stations = [];
-        $sql = "SELECT metro_id, metro_name, line_id "
-            . "FROM metro_stations "
-            . "WHERE working = 1";
-        $stmt = $this->db->prepare($sql);
-        if (!$stmt->execute()) {
-            $this->error(self::DB_SELECT_ERROR);
-        }
-        $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($res as $m) {
-            $metro_stations[$m['metro_id']] = $m["metro_name"];
-        }
-
         // Данные индекс города -> город
         $city = [];
         $sql = "SELECT id, city FROM city";
@@ -1943,18 +1931,13 @@ class NewsModel extends Model
                 }
             }
 
-            //Перевод индекса метро в наименование
-            if (!empty($data[$key]['metro_station']) && !empty($metro_stations[$data[$key]['metro_station']])) {
-                $data[$key]['metro_station'] = $metro_stations[$data[$key]['metro_station']];
-            } else {
-                $this->error(self::METRO_STATION_INCORRECT_CODE_ERROR);
-            }
+
 
             //Перевод индекса города в наименование
             if (!empty($data[$key]['city'])) {
                 $data[$key]['city'] = $city[$data[$key]['city']];
             } else {
-                $this->error(self::CITY_INCORRECT_CODE_ERROR);
+              //  $this->error(self::CITY_INCORRECT_CODE_ERROR);
             }
 
             //Определение, является ли объявление новым (дата в формате 'YYYY-MM-DD HH24:MI:SS')
@@ -1980,6 +1963,8 @@ class NewsModel extends Model
                 }
             }
         }
+        //Перевод станций метро
+        $data = $this->translateMetroStations($data);
         $this->response['best_ads'] = $data;
     }
 
@@ -2038,7 +2023,6 @@ class NewsModel extends Model
 
         $channel->close();
         $connection->close();
-
         return;
     }
 
@@ -2302,7 +2286,7 @@ class NewsModel extends Model
     }
 
     /**
-     *
+     * ! Меню бэкенда
      */
     public function renderNewsEditorMenu()
     {
@@ -2380,6 +2364,7 @@ class NewsModel extends Model
     }
 
     /**
+     * ! Для форм бэкенда
      * @param int $metro_id
      */
     public function renderMetroSelect($metro_id = 0)
@@ -2535,8 +2520,8 @@ class NewsModel extends Model
         }
 
         //Определение пользователя
-        if (!empty($_SESSION['user']['id'])) {
-            $user_id = (int)$_SESSION['user']['id'];
+        if (!empty($_SESSION['userID'])) {
+            $user_id = (int)$_SESSION['userID'];
         } else {
             $this->error(self::USER_NOT_AUTHORIZED_ERROR);
 
@@ -2685,6 +2670,39 @@ class NewsModel extends Model
 
         return $return_data;
     }
+
+    private function  translateMetroStations($data){
+        if(isset($data)){
+            // Данные индекс метро -> наименование
+            $metro_stations = [];
+            $sql = "SELECT metro_id, metro_name, line_id "
+                . "FROM metro_stations "
+                . "WHERE working = 1";
+            $stmt = $this->db->prepare($sql);
+            if (!$stmt->execute()) {
+                $this->error(self::DB_SELECT_ERROR);
+            }
+            $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($res as $m) {
+                $metro_stations[$m['metro_id']] = [
+                    'metro_name' => $m["metro_name"],
+                    'line_id' => $m['line_id']
+                ];
+            }
+
+            foreach($data as $key => $value){
+                //Перевод индекса метро в наименование
+                if (!empty($data[$key]['metro_station']) && !empty($metro_stations[$data[$key]['metro_station']])) {
+                    $data[$key]['metro_line'] = $metro_stations[$data[$key]['metro_station']]['line_id'];
+                    $data[$key]['metro_station'] = $metro_stations[$data[$key]['metro_station']]['metro_name'];
+                } else {
+                    // $this->error(self::METRO_STATION_INCORRECT_CODE_ERROR);
+                }
+            }
+        }
+        return $data;
+    }
+
 
 
 }
