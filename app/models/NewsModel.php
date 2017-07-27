@@ -2370,8 +2370,7 @@ class NewsModel extends Model
     public function renderMetroSelect($metro_id = 0)
     {
         $sql = "SELECT metro_id, metro_name, line_id "
-            . "FROM metro_stations "
-            . "WHERE working = 1";
+            . "FROM metro_stations ";
         $stmt = $this->db->prepare($sql);
         if (!$stmt->execute()) {
             $this->error(self::DB_EXECUTE_ERROR);
@@ -2676,8 +2675,7 @@ class NewsModel extends Model
             // Данные индекс метро -> наименование
             $metro_stations = [];
             $sql = "SELECT metro_id, metro_name, line_id "
-                . "FROM metro_stations "
-                . "WHERE working = 1";
+                . "FROM metro_stations ";
             $stmt = $this->db->prepare($sql);
             if (!$stmt->execute()) {
                 $this->error(self::DB_SELECT_ERROR);
