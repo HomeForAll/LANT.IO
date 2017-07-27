@@ -99,21 +99,23 @@
 <form name="dialog-registration">
 
     <div class="step" data-state="step_type_user">
-        <input type="hidden" class="current_state" value="step_type_user">
-        <div class="registration-title">Вы хотите зарегистрироваться как:</div>
+        <div class="adialog__inner">
+            <input type="hidden" class="current_state" value="step_type_user">
+            <div class="registration-title">Вы хотите зарегистрироваться как:</div>
 
-        <label class="registration-type-button">
-            <input type="radio" name="type" value="boss">
-            <span><img src="template/img/av-boss-hover.svg" alt=""></span> Юр. лицо
-        </label>
+            <label class="registration-type-button">
+                <input type="radio" name="type" value="boss">
+                <span><img src="template/img/av-boss-hover.svg" alt=""></span> Юр. лицо
+            </label>
 
-        <label class="registration-type-button">
-            <input type="radio" name="type" value="user">
-            <span><img src="template/img/av-user-hover.svg" alt=""></span> Физ. лицо
-        </label>
+            <label class="registration-type-button">
+                <input type="radio" name="type" value="user">
+                <span><img src="template/img/av-user-hover.svg" alt=""></span> Физ. лицо
+            </label>
 
-        <div class="error"></div>
-        <div class="navigation" style="display: none" >
+            <div class="error"></div>
+        </div>
+        <div class="navigation" style="visibility: hidden" >
             <button type="button" name="backward" class="backward">Назад</button>
             <button type="button" name="forward" class="forward">Далее</button>
         </div>
@@ -121,17 +123,19 @@
 
 	<div class="branch" id="boss">
         <div class="step" data-state="step_type_document">
-            <input type="hidden" class="current_state" value="step_type_document">
-            <div class="registration-title">Проверить компанию с помощью:</div>
-            <label class="registration-type-button registration-type-document">
-                <input type="radio" name="document" value="inn">
-                <span><img src="template/html/login/inn.png" alt=""></span> ИНН
-            </label>
-            <label class="registration-type-button registration-type-document">
-                <input type="radio" name="document" value="ogrn">
-                <span><img src="template/html/login/ogrn.png" alt=""></span> ОГРН
-            </label>
-            <div class="error"></div>
+            <div class="adialog__inner">
+                <input type="hidden" class="current_state" value="step_type_document">
+                <div class="registration-title">Проверить компанию с помощью:</div>
+                <label class="registration-type-button registration-type-document">
+                    <input type="radio" name="document" value="inn">
+                    <span><img src="template/html/login/inn.png" alt=""></span> ИНН
+                </label>
+                <label class="registration-type-button registration-type-document">
+                    <input type="radio" name="document" value="ogrn">
+                    <span><img src="template/html/login/ogrn.png" alt=""></span> ОГРН
+                </label>
+                <div class="error"></div>
+            </div>
             <div class="navigation">
                 <button type="button" name="backward" class="backward">Назад</button>
         		<button type="button" name="forward" class="forward" style="display: none">Далее</button>
@@ -139,10 +143,12 @@
         </div>
     	<div class="branch" id="inn">
             <div class="step" data-state="end_boss">
-                <input type="hidden" class="current_state" value="step_document">
-                <div class="registration-title">Укажите ИНН:</div>
-                <input type="text" name="document_inn" placeholder="ИНН">
-                <div class="error"></div>
+                <div class="adialog__inner">
+                    <input type="hidden" class="current_state" value="step_document">
+                    <div class="registration-title">Укажите ИНН:</div>
+                    <input type="text" name="document_inn" placeholder="ИНН">
+                    <div class="error"></div>
+                </div>
                 <div class="navigation">
                     <button type="button" name="backward" class="backward">Назад</button>
             		<button type="button" name="forward" class="forward">Далее</button>
@@ -151,10 +157,12 @@
         </div>
     	<div class="branch" id="ogrn">
             <div class="step" data-state="end_boss">
-                <input type="hidden" class="current_state" value="step_document">
-                <div class="registration-title">Укажите ОГРН:</div>
-                <input type="text" name="document_ogrn" placeholder="ОГРН">
-                <div class="error"></div>
+                <div class="adialog__inner">
+                    <input type="hidden" class="current_state" value="step_document">
+                    <div class="registration-title">Укажите ОГРН:</div>
+                    <input type="text" name="document_ogrn" placeholder="ОГРН">
+                    <div class="error"></div>
+                </div>
                 <div class="navigation">
                     <button type="button" name="backward" class="backward">Назад</button>
             		<button type="button" name="forward" class="forward">Далее</button>
@@ -162,11 +170,13 @@
             </div>
         </div>
         <div class="step" id="end_boss" data-state="end">
-            <input type="hidden" class="current_state" value="step_company">
-            <div class="registration-title">Введите название вашей компании:</div>
-            <input type="text" name="brand" placeholder="Название бренда">
-            <input type="text" name="company" placeholder="Фактическое название">
-            <div class="error"></div>
+            <div class="adialog__inner">
+                <input type="hidden" class="current_state" value="step_company">
+                <div class="registration-title">Введите название вашей компании:</div>
+                <input type="text" name="brand" placeholder="Название бренда">
+                <input type="text" name="company" placeholder="Фактическое название">
+                <div class="error"></div>
+            </div>
             <div class="navigation">
                 <button type="button" name="backward" class="backward">Назад</button>
         		<button type="button" name="forward" class="forward">Далее</button>
@@ -176,42 +186,50 @@
 
     <div class="branch" id="user">
         <div class="step" data-state="end">
-            <input type="hidden" class="current_state" value="step_name">
-            <div class="registration-title">Пожалуйста представьтесь:</div>
-            <input type="text" name="name" placeholder="Ваше имя" required="required">
-            <div class="error"></div>
+            <div class="adialog__inner">
+                <input type="hidden" class="current_state" value="step_name">
+                <div class="registration-title">Пожалуйста представьтесь:</div>
+                <input type="text" name="name" placeholder="Ваше имя" required="required">
+                <div class="error"></div>
+            </div>
             <div class="navigation">
                 <button type="button" name="backward" class="backward">Назад</button>
-        		<button type="button" name="forward" class="forward">Далее</button>
+                <button type="button" name="forward" class="forward">Далее</button>
             </div>
         </div>
     </div>
 
     <div class="step" id="end">
-        <input type="hidden" class="current_state" value="step_phone">
-        <div class="registration-title">Номер мобильного телефона:</div>
-        <input type="text" name="phone" placeholder="+7 (___) ___ - __ - __" data-inputmask="'mask': '+7 (999) 999 - 99 - 99'">
-        <div class="error"></div>
+        <div class="adialog__inner">
+            <input type="hidden" class="current_state" value="step_phone">
+            <div class="registration-title">Номер мобильного телефона:</div>
+            <input type="text" name="phone" placeholder="+7 (___) ___ - __ - __" data-inputmask="'mask': '+7 (999) 999 - 99 - 99'">
+            <div class="error"></div>
+        </div>
         <div class="navigation">
             <button type="button" name="backward" class="backward">Назад</button>
     		<button type="button" name="forward" class="forward">Далее</button>
         </div>
     </div>
     <div class="step">
-        <input type="hidden" class="current_state" value="step_code">
-        <div class="registration-title">Проверочный код из смс:</div>
-        <input type="text" name="code" placeholder="Код из смс">
-        <div class="error"></div>
+        <div class="adialog__inner">
+            <input type="hidden" class="current_state" value="step_code">
+            <div class="registration-title">Проверочный код из смс:</div>
+            <input type="text" name="code" placeholder="Код из смс">
+            <div class="error"></div>
+        </div>
         <div class="navigation">
             <button type="button" name="backward" class="backward">Назад</button>
     		<button type="button" name="forward" class="forward">Далее</button>
         </div>
     </div>
     <div class="step">
-        <input type="hidden" class="current_state" value="step_email">
-        <div class="registration-title">Ваш емайл:</div>
-        <input type="text" name="email" placeholder="Введите email адрес">
-        <div class="error"></div>
+        <div class="adialog__inner">
+            <input type="hidden" class="current_state" value="step_email">
+            <div class="registration-title">Ваш емайл:</div>
+            <input type="text" name="email" placeholder="Введите email адрес">
+            <div class="error"></div>
+        </div>
         <div class="navigation">
             <button type="button" name="backward" class="backward">Назад</button>
     		<button type="button" name="forward" class="forward">Далее</button>
@@ -220,10 +238,12 @@
 
 
     <div class="step">
-        <input type="hidden" class="current_state" value="step_password">
-        <div class="registration-title">Пароль входа в систему:</div>
-        <input type="text" name="password" placeholder="Введите пароль">
-        <div class="error"></div>
+        <div class="adialog__inner">
+            <input type="hidden" class="current_state" value="step_password">
+            <div class="registration-title">Пароль входа в систему:</div>
+            <input type="text" name="password" placeholder="Введите пароль">
+            <div class="error"></div>
+        </div>
         <div class="navigation">
             <button type="button" name="backward" class="backward">Назад</button>
     		<button type="button" name="forward" class="forward">ЗАВЕРШИТЬ</button>

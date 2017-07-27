@@ -152,6 +152,18 @@ $.getJSON('/api/favorite/list', {count: 3}, function(json, textStatus) {
 });
 
 
+$('.pheader__logout').click(function(event){
+    event.stopPropagation();
+    $.getJSON('/api/logout/', {}, function(data) {
+        if (data.response) {
+            window.location = '/';
+            // location.reload();
+        } else {
+
+        }
+    });
+});
+
 
 
 
