@@ -2,7 +2,7 @@
 
 
 
-<form id="form-login" class="">
+<form id="form-login" class="formlogin">
     <h3>Вход в систему</h3>
     <div class="login-input">
         <input type="text" name="login" value="" placeholder="Логин">
@@ -17,7 +17,7 @@
         </svg>
     </div>
 
-    <button>Войти</button>
+    <button class="abutton">Войти</button>
     или через
     <div class="login-from-socials">
         <a href="#" class="login-social login-from-vk">
@@ -57,7 +57,7 @@
 </svg>
 </a>
     </div>
-    <button type="button" class="open-registration">Регистрация</button>
+    <button type="button" class="abutton open-registration">Регистрация</button>
     <a href="#" class="open-restore">Забыли пароль?</a>
 </form>
 
@@ -73,6 +73,21 @@
 
 
 
+<div style="display: none"> 
+<div class="adialog dialog-2factor">
+<div id="dialog-2factor">
+<form name="dialog-2factor">
+    <div class="registration-title">Код подтверждения</div>
+    <input class="adialog__input" type="text" name="code" placeholder="Введите проверочный код" />
+    <input type="hidden" name="hash" value="" />
+    <div class="error"></div>
+    <div class="adialog__nav">
+        <button type="submit" name="forward" class="forward adialog__nbutton">Далее</button>
+    </div>
+</form>
+</div>
+</div>
+</div> 
 
 
 

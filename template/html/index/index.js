@@ -97,7 +97,20 @@ function initUserMenu(user) {
     }
 }
 
-
+var getFirstError = function (errors) {
+    var getFirstProperty = function (errors) {
+        for (var i in errors) {
+            return errors[i];
+            break;
+        }
+        return false;
+    };
+    errors = getFirstProperty(errors);
+    if (errors && errors.length > 0) {
+        return errors[0];
+    }
+    return false;
+};
 
 
 $(function(){
@@ -113,10 +126,49 @@ $(function(){
             dataType: 'Json',
             success: function(data) {
                 console.log(data);
-                location.reload();
+                if (data.response.auth_type == 'ga') {
+                    // tmp_hash
+                    //$(".dialog-2factor").find('.error').html(data.response.tmp_hash);
+                    $(".dialog-2factor").find('input[name=hash]').val(data.response.tmp_hash);
+                    $(".dialog-2factor").arcticmodal();
+                } else if (data.response.auth_type == 'sms') {
+                    // tmp_hash
+                } else if (data.response == true) {
+                    //location.reload();
+                }
             }
         });
     });
+    $("form[name=dialog-2factor]").submit(function(event) {
+        event.preventDefault();
+        var data = $(this).serializeObject();
+        var error =  $(this).find('.error').html('');
+        var errors = getFirstError(validate(data, {
+            code: {
+                presence: {message: "^Введите полученный код подтверждения."},
+                numericality: {message: "^Введите корректный код подтверждения."},
+                length: {is: 6, message: "^Введите корректный код подтверждения."}
+            }
+        }));
+        if (errors) {
+            error.html(errors);
+        } else {
+            $.post('/api/authenticator/verify', data, function(data) {
+                console.log(data);
+                if (data.response) {
+                    //location.reload();
+                } else if (data.error) {
+                    error.html(data.error.message);
+                }
+            });
+
+        }
+        console.log(errors);
+        console.log(data);
+    });
+   
+
+
 
     $("form[name=dialog-registratio]").submit(function(event) {
         event.preventDefault();

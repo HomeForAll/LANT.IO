@@ -15,7 +15,9 @@
                 if (chart) {
                     $.extend(chart.opts, options)
                 } else {
-                    chart = new statChart($this, $.extend({}, {width: "100%", height: "200px"}, $this.data("chart"), options));
+                    var data = $this.data("chart");
+                    chart = new statChart($this, $.extend({}, {width: "100%", height: "200px"}, data, options));
+
                     $this.data("_chart", chart);
                     var resizeTracker;
                     $(window).resize(function () {
@@ -60,6 +62,10 @@
             );
         }
         this.$svg.empty().attr({height: this.opts.height, width: this.opts.width});
+
+        if (!this.opts.data || this.opts.data.length == 0) {
+            this.opts.data = [1,1,1,1,1,1,1];
+        }
 
         for (var i=0; i < this.opts.data.length; i++) {
             this.opts.data[i]++;

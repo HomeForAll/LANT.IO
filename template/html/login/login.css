@@ -53,22 +53,55 @@
     color: #2c2c2c;
 }
 
-#form-login button {
+.formlogin .abutton {
     display: block;
     margin: 14px 0;
     width: 100%;
     padding: 15px 15px 14px;
     border-radius: 4px;
-  background-image: radial-gradient(circle at 70% -24%, #abd96e, #60b55e);
-  border: 0 none;
-  color: #fff;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  cursor: pointer;
+    background-image: radial-gradient(circle at 70% -24%, #abd96e, #60b55e);
+    border: 0 none;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    cursor: pointer;
 }
+
+
+.abutton {
+    padding: 15px 15px 14px;
+    background-image: radial-gradient(circle at 70% -24%, #abd96e, #60b55e);
+    border: 0 none;
+    transition: all 200ms linear; 
+    /* transform: scale(1, 1); */
+    /* box-shadow: inset  0 0 0 #60b55e; */
+     background-position: 0 0; 
+     background-size: 100% 100%; 
+    /* background-repeat: no-repeat; */
+}
+.abutton:hover {
+    /* transform: scale(1.02, 1.02); */
+     background-position: 100% 100%; 
+    /* box-shadow: inset 0 0 0px 1px #fff;  */
+     background-size: 300% 300%; 
+}
+
+.open-restore {
+    transition: color 100ms linear;
+}
+.open-restore:hover {
+    color: #fff;
+}
+
 #form-login button.open-registration {
     background: rgba(255, 255, 255, 0.08);
 }
+#form-login button.open-registration:hover {
+    background: rgba(235, 235, 255, 0.15);
+}
+
+
+
 .login-from-socials {
     margin: 14px 0;
     /*display: flex;
@@ -202,6 +235,7 @@
     display: none;
 }
 .registration-type-button:hover {
+    /*  */
 }
 .registration-type-button span {
     display: block;
@@ -248,4 +282,71 @@
     padding: 6px 16px 0;
     max-width: 300px;
     color: #d54949;
+}
+
+
+.adialog {
+    background: #1b334a;
+    color: #ffffff;
+    max-width: 450px;
+    min-width: 400px;
+    position: relative;
+    padding: 33px 57px 33px 57px;
+    border-radius: 6px;
+    box-shadow: 0 0 28px 0 rgba(0, 0, 10, 0.7);
+}
+.adialog__nav {
+    margin: 33px -57px -33px;
+    display: flex;
+}
+
+.adialog__input {
+    padding: 10px 26px;
+    margin-bottom: 9px;
+    width: 100%;
+    display: block;
+    border-radius: 4px;
+    background-color: #ffffff;
+    border: solid 1px rgba(255, 255, 255, 0.22);
+}
+
+.adialog__nbutton {
+    width: 100%;
+    padding: 17px;
+    flex-shrink: 1;
+    border: 0 none;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    background: #213c54;
+    color: #fff;
+    border-radius: 0 0 6px 6px;
+}
+
+
+.dialog-registration .navigation .backward,
+.dialog-registration .navigation .forward,
+.dialog-restore .navigation .backward,
+.dialog-restore .navigation .forward,
+.navigation .finish {
+    width: 50%;
+    padding: 17px;
+    flex-shrink: 1;
+    border: 0 none;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.dialog-registration .navigation .backward,
+.dialog-restore .navigation .backward {
+    background: #1e3950;
+    color: #4b6073;
+    border-radius: 0 0 0 8px;
+}
+
+
+
+.d2factor {
+
+
 }
