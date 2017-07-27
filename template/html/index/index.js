@@ -162,7 +162,7 @@ $(function(){
             $.post('/api/authenticator/verify', data, function(data) {
                 console.log(data);
                 if (data.response) {
-                    //location.reload();
+                    location.reload();
                 } else if (data.error) {
                     error.html(data.error.message);
                 }
