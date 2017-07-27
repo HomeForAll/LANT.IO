@@ -46,7 +46,7 @@ class UserModel extends Model
                 switch ($user['auth_2factor']) {
                     case 1:
 
-
+                        $code = mt_rand(100000, 999999);
                         $_SESSION['sms_code'] = $code;
 
                         $_SESSION['user']['tmp_hash'] = hash('SHA256', mt_rand(1, 10000) . time());
@@ -1148,7 +1148,7 @@ class UserModel extends Model
 
         $_SESSION['registration']['phone'] = $phone;
 
-        $code = mt_rand(1, 9) . mt_rand(0, 9) . mt_rand(0, 9) . mt_rand(0, 9) . mt_rand(0, 9) . mt_rand(0, 9);
+        $code = mt_rand(100000, 999999);
 
         $ch = curl_init("https://sms.ru/sms/send");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -1621,7 +1621,7 @@ class UserModel extends Model
 
     public function verifyGoogleAuthenticatorCode()
     {
-        if (!isset($_POST['login']) || !isset($_POST['code']) || !isset($_POST['tmp_hash'])) {
+        if (!isset($_POST['login']) || !isset($_POST['code']) || !isset($_POST['hash'])) {
             $this->error(self::BAD_REQUEST_ERROR);
         }
 
@@ -1629,7 +1629,7 @@ class UserModel extends Model
             $this->error(self::TMP_HASH_NOT_EXIST_ERROR);
         }
 
-        if ($_SESSION['user']['tmp_hash'] !== $_POST['tmp_hash']) {
+        if ($_SESSION['user']['tmp_hash'] !== $_POST['hash']) {
             $this->error(self::TMP_HASH_INCORRECT_ERROR);
         }
 
@@ -1726,7 +1726,7 @@ class UserModel extends Model
 
     public function sendSMSCode($phone)
     {
-        $code = mt_rand(1, 9) . mt_rand(0, 9) . mt_rand(0, 9) . mt_rand(0, 9) . mt_rand(0, 9) . mt_rand(0, 9);
+        $code = mt_rand(100000, 999999);
 
         $ch = curl_init("https://sms.ru/sms/send");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
