@@ -136,8 +136,11 @@ $(function(){
                     $(".dialog-2factor").arcticmodal();
                 } else if (data.response.auth_type == 'sms') {
                     // tmp_hash
+                    $(".dialog-2factor").find('input[name=login]').val(data_login.login);
+                    $(".dialog-2factor").find('input[name=hash]').val(data.response.tmp_hash);
+                    $(".dialog-2factor").arcticmodal();
                 } else if (data.response == true) {
-                    //location.reload();
+                    location.reload();
                 }
             }
         });
