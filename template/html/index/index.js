@@ -119,22 +119,25 @@ $(function(){
 
     $("form#form-login").submit(function(event) {
         event.preventDefault();
+        var data_login = $(this).serializeObject();
         $.ajax({
             method: 'post',
             url: '/api/auth',
-            data: $(this).serializeObject(),
+            data: data_login,
             dataType: 'Json',
             success: function(data) {
+                console.log(data_login);
                 console.log(data);
                 if (data.response.auth_type == 'ga') {
                     // tmp_hash
                     //$(".dialog-2factor").find('.error').html(data.response.tmp_hash);
+                    $(".dialog-2factor").find('input[name=login]').val(data_login.login);
                     $(".dialog-2factor").find('input[name=hash]').val(data.response.tmp_hash);
                     $(".dialog-2factor").arcticmodal();
                 } else if (data.response.auth_type == 'sms') {
                     // tmp_hash
                 } else if (data.response == true) {
-                    location.reload();
+                    //location.reload();
                 }
             }
         });

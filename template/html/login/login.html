@@ -78,8 +78,9 @@
 <div id="dialog-2factor">
 <form name="dialog-2factor">
     <div class="registration-title">Код подтверждения</div>
-    <input class="adialog__input" type="text" name="code" placeholder="Введите проверочный код" />
+    <input type="hidden" name="login" value="" />
     <input type="hidden" name="hash" value="" />
+    <input class="adialog__input" type="text" name="code" placeholder="Введите проверочный код" />
     <div class="error"></div>
     <div class="adialog__nav">
         <button type="submit" name="forward" class="forward adialog__nbutton">Далее</button>
