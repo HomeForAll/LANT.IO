@@ -104,18 +104,7 @@ $siteModel = $this->model('SiteModel');
 </script>
  -->
 <script src="/bower_components/jquery/dist/jquery.min.js"></script>
-<script src="/template/lucia/jquery-ui.min.js"></script>
-<script src="/template/js/jquery.parallax.min.js"></script>
-
-<script src="/template/lucia/jquery.inputmask.bundle.min.js"></script>
-<script src="/template/lucia/phone-codes/phone.min.js"></script>
-<script src="/template/lucia/validate.js"></script>
-<script src="/template/lucia/jquery.wizard.js"></script>
-<script src="/template/lucia/jquery.arcticmodal-0.3.min.js"></script>
-<script src="/template/lucia/chosen.jquery.min.js"></script>
-<script src="/template/lucia/jquery.tokeninput.js"></script>
-<script src="/template/lucia/jquery.fullPage.js"></script>
-<script src="/template/lucia/jquery.scrollbar.js"></script>
+<script src="/template/lucia/vendor.js"></script>
 <script src="/template/lucia/lucia.js"></script>
 
 <script src="/template/html/index/index.js"></script>

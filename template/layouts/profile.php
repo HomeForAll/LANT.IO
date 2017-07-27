@@ -129,9 +129,8 @@ if (preg_match("/profile\/([a-z0-9\/]+)/i", $_SERVER['REQUEST_URI'], $match)
     </div>
 </div>
 <script src="/bower_components/jquery/dist/jquery.min.js"></script>
-<script src="/template/lucia/jquery-ui.min.js"></script>
-<script src="/template/lucia/chosen.jquery.min.js"></script>
-<script src="/template/lucia/simpleUpload.js" type="text/javascript"></script>
+<script src="/template/lucia/vendor.js"></script>
+<script src="/template/lucia/lucia.js"></script>
 <script src="/template/lucia/params.js"></script>
 <script src="/template/lucia/lucia.js"></script>
 <script src="/template/profile/profile.js"></script>
