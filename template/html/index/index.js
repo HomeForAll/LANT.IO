@@ -34,7 +34,7 @@ function initIndexPage() {
         //navigationTooltips: ['First page', 'Second page', 'Third and last page'],
         normalScrollElements: '.scrollbar-inner, .arcticmodal-container_i',
     });
-    $.fn.fullpage.silentMoveTo(1);
+    // $.fn.fullpage.silentMoveTo(1);
 
     
     var lastScrollY = 0;
