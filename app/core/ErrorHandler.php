@@ -80,7 +80,7 @@ class ErrorHandler
 
             //Если фатальная ошибка
             if ($flag == 1) {
-                $fatal_error = " - Фатальная ошибка!";
+                $fatal_error = " - FATAL ERROR!";
                 // выводим пользовалелю понятное сообщение
                 ?>
                 <div style="width: 500px; height: 150px; position: relative; margin: auto; padding: 30px; background-color: #ffff66; font-size: 30; text-align: center;">
