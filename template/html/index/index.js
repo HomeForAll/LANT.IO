@@ -134,7 +134,7 @@ $(function(){
                 } else if (data.response.auth_type == 'sms') {
                     // tmp_hash
                 } else if (data.response == true) {
-                    //location.reload();
+                    location.reload();
                 }
             }
         });
