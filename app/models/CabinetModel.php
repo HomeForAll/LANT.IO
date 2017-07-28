@@ -372,17 +372,7 @@ class CabinetModel extends Model
             $time = $info[0]['date'];
             $attachment = $info[0]['attachment'];
             $type = $info[0]['type_attachment'];
-
             $profile_foto_id = $this->getAvatarUser($info[0]['user_id']);
-
-            return [
-                'attachment' => $attachment,
-                'type'       => $type,
-                'user_id'    => $user_id,
-                'time'       => $time,
-                'text'       => $message,
-                'avatar'     => $profile_foto_id,
-            ];
         } else {
             $type = '';
             $attachment = '';
@@ -390,16 +380,16 @@ class CabinetModel extends Model
             $time = '';
             $message = '';
             $profile_foto_id = '';
-
-            return [
-                'attachment' => $attachment,
-                'type'       => $type,
-                'user_id'    => $user_id,
-                'time'       => $time,
-                'text'       => $message,
-                'avatar'     => $profile_foto_id,
-            ];
         }
+
+        return [
+            'attachment' => $attachment,
+            'type'       => $type,
+            'user_id'    => $user_id,
+            'time'       => $time,
+            'text'       => $message,
+            'avatar'     => $profile_foto_id,
+        ];
     }
 
     public function getDeletedDialogs()
@@ -618,7 +608,6 @@ class CabinetModel extends Model
         } else {
             $fullName = '';
         }
-
         return $fullName;
     } // Узнать имя и фамилию пользователя по ID
 
@@ -923,10 +912,21 @@ class CabinetModel extends Model
     {
         $old_str = $str;
         $str = trim($str);
-        $str = preg_replace("/[^0-9]+/", '', $str);
+        $str = preg_replace('~([^0-9]+)~', '', $str);
+        //$str = preg_replace("/[^0-9]+/", '', $str);
         if ($old_str != $str)
             return false;
+        return $str;
+    }
 
+    public function checkPassportNumbers($str) // Проверка пасспортных символов
+    {
+        $old_str = $str;
+        $str = trim($str);
+        $str = preg_replace('~([^0-9]+)~', '', $str);
+        //$str = preg_replace("/[^0-9]+/", '', $str);
+        if ($old_str != $str)
+            return false;
         return $str;
     }
 
@@ -1050,12 +1050,12 @@ class CabinetModel extends Model
         } else {
             $this->error(self::WRONG_BIRTHDAY);
         }
-        if ($str = $this->сheckNumbers($_POST['passport_series'])) {
+        if ($str = $this->checkPassportNumbers($_POST['passport_series'])) {
             $update['passport_series'] = $str;
         } else {
             $this->error(self::WRONG_PASSPORT_SERIES);
         }
-        if ($str = $this->сheckNumbers($_POST['passport_number'])) {
+        if ($str = $this->checkPassportNumbers($_POST['passport_number'])) {
             $update['passport_number'] = $str;
         } else {
             $this->error(self::WRONG_PASSPORT_NUMBER);
