@@ -13,5 +13,5 @@ function hide_email($email)
     $len = strlen($name);
     $show = floor($len / 3);
 
-    return substr($name, 0, $show) . str_repeat('*', $show-$len) . "@" . end($em);   
+    return substr($name, 0, $show) . str_repeat('*', $len-$show) . "@" . end($em);   
 }
