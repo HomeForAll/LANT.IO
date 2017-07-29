@@ -13,8 +13,9 @@ defined('ERROR_HANDLER_STATUS') or define('ERROR_HANDLER_STATUS', '1'); // не 
 
 date_default_timezone_set('Europe/Moscow');
 
-require_once ROOT_DIR . 'app' . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'Loader.php';
-require_once ROOT_DIR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
+require_once ROOT_DIR . 'app' . DS . 'core' . DS . 'Loader.php';
+require_once ROOT_DIR . 'app' . DS . 'core' . DS . 'Functions.php';
+require_once ROOT_DIR . 'vendor' . DS . 'autoload.php';
 
 Loader::getPaths(); // загружаем карту классов из файла
 
