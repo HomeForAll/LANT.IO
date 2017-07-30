@@ -1,10 +1,10 @@
 
-#section-statistic {}
+/* #section-statistic {}
 
 #section-statistic {
-    /*background: #f4f4f4;
-    background-image: linear-gradient(180deg, #f6f6f6, #e1e1e1);*/
-}
+    background: #f4f4f4;
+     background-image: linear-gradient(180deg, #f6f6f6, #e1e1e1); 
+} */
 #section-statistic .fp-tableCell {
     display: flex;
     justify-content: flex-start;
@@ -61,10 +61,10 @@
 #section-statistic .block-users .count {
     color: #b2c966;
 }
-#section-statistic .block-ads h4 {
+#section-statistic .block-items h4 {
     color: #71daa4;
 }
-#section-statistic .block-ads .count {
+#section-statistic .block-items .count {
     color: #6ddfe2;
 }
 #section-statistic .block-dealings h4 {

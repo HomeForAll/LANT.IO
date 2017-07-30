@@ -37,6 +37,7 @@
 * 2017-07-26 [19:07:09] - [Warning] Illegal string offset 'code'
   (line: 137 ) -> app\views\dialogs.php 
 
+<<<<<<< HEAD
 * 2017-07-28 [10:07:08] - [Notice] Undefined index: user
   (line: 814 ) -> app\models\CabinetModel.php 
 
@@ -63,4 +64,44 @@
 
 * 2017-07-30 [10:51:58] - [Notice] Undefined index: user
   (line: 803 ) -> app\models\CabinetModel.php 
+=======
+* 2017-07-28 [19:27:06] - [Notice] Undefined index: name_name
+  (line: 1 ) ->  
+
+* 2017-07-28 [19:42:53] - [Notice] Undefined index: passport_number
+  (line: 1 ) ->  
+
+* 2017-07-28 [19:52:27] - [Warning] Illegal string offset 'code'
+  (line: 81 ) -> app\views\dialogs.php 
+
+* 2017-07-28 [19:52:27] - [Warning] Illegal string offset 'code'
+  (line: 120 ) -> app\views\dialogs.php 
+
+* 2017-07-28 [19:52:27] - [Warning] Illegal string offset 'code'
+  (line: 137 ) -> app\views\dialogs.php 
+
+* 2017-07-28 [19:53:06] - [Warning] Illegal string offset 'code'
+  (line: 81 ) -> app\views\dialogs.php 
+
+* 2017-07-28 [19:53:06] - [Warning] Illegal string offset 'code'
+  (line: 120 ) -> app\views\dialogs.php 
+
+* 2017-07-28 [19:53:06] - [Warning] Illegal string offset 'code'
+  (line: 137 ) -> app\views\dialogs.php 
+
+* 2017-07-28 [19:53:15] - [Warning] Illegal string offset 'code'
+  (line: 81 ) -> app\views\dialogs.php 
+
+* 2017-07-28 [19:53:15] - [Warning] Illegal string offset 'code'
+  (line: 120 ) -> app\views\dialogs.php 
+
+* 2017-07-28 [19:53:15] - [Warning] Illegal string offset 'code'
+  (line: 137 ) -> app\views\dialogs.php 
+
+* 2017-07-28 [19:55:05] - [Notice] Undefined index: adress_home
+  (line: 1 ) ->  
+
+* 2017-07-28 [19:55:16] - [Notice] Undefined index: contacts_number
+  (line: 1 ) ->  
+>>>>>>> 1c76933e2172c5d7a977f7e6732df3963aa08f9a
 

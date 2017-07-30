@@ -910,10 +910,9 @@ class CabinetModel extends Model
 
     public function сheckNumbers($str) // Проверка числового значения
     {
-        $old_str = $str;
         $str = trim($str);
+        $old_str = $str;
         $str = preg_replace('~([^0-9]+)~', '', $str);
-        //$str = preg_replace("/[^0-9]+/", '', $str);
         if ($old_str != $str)
             return false;
         return $str;
@@ -921,10 +920,9 @@ class CabinetModel extends Model
 
     public function checkPassportNumbers($str) // Проверка пасспортных символов
     {
-        $old_str = $str;
         $str = trim($str);
-        $str = preg_replace('~([^0-9]+)~', '', $str);
-        //$str = preg_replace("/[^0-9]+/", '', $str);
+        $old_str = $str;
+        $str = preg_replace('~([^0-9\-]+)~', '', $str);
         if ($old_str != $str)
             return false;
         return $str;
@@ -1000,13 +998,12 @@ class CabinetModel extends Model
         return $date;
     } // Проверка даты рождения
 
-    public function сheckEmail($profile_id)
+    public function сheckEmail($str)
     {
-        if (!filter_var(trim($_POST['email']), FILTER_VALIDATE_EMAIL)) {
+        if (!filter_var(trim($str), FILTER_VALIDATE_EMAIL)) {
             return false;
         }
-
-        return true;
+        return $str;
     } // Проверка E-mail
 
     public function сheckIllegalSymbols($str) // Проверка на запрещенные символы, исключения "/" "."
@@ -1018,6 +1015,14 @@ class CabinetModel extends Model
             return false;
         $str = ucfirst($str);
 
+        return $str;
+    }
+
+    public function checkPhoneNumber($str)
+    {
+        $str = trim($str);
+        if (!v::phone()->validate($str))
+            return false;
         return $str;
     }
 
@@ -1085,15 +1090,16 @@ class CabinetModel extends Model
         } else {
             $this->error(self::WRONG_ADRESS_FLAT);
         }
-        if ($str = $this->сheckNumbers($_POST['contacts_number'])) {
-            if (strlen($str) == 11 && $str[0] == '8') {
+        if ($str = $this->checkPhoneNumber($_POST['contacts_number'])) {
+                $str = preg_replace('~([^0-9]+)~', '', $str);
+            if (strlen($str) == 11) {
                 $str[0] = 7;
             }
             $update['contacts_number'] = $str;
         } else {
             $this->error(self::WRONG_PHONE_NUMBER);
         }
-        if ($str = $this->сheckEmail($profile_id)) {
+        if ($str = $this->сheckEmail($_POST['email'])) {
             $update['contacts_email'] = $str;
         } else {
             $this->error(self::WRONG_EMAIL);

@@ -3,7 +3,10 @@ $(function () {
 
     $.getJSON("/api/user", {}, function(user) {
         if (user.response) {
-            if (user.response.avatar_50) 
+            if (user.response.status == -1) {
+                window.location = '/';
+            }
+            if (user.response.avatar_50)
                 $('.user-info img').prop('src', user.response.avatar_50);
             if (user.response.avatar_100)
                 $('.profile-userinfo_photo').prop('src', user.response.avatar_100);
@@ -151,6 +154,18 @@ $.getJSON('/api/favorite/list', {count: 3}, function(json, textStatus) {
     }
 });
 
+
+$('.pheader__logout').click(function(event){
+    event.stopPropagation();
+    $.getJSON('/api/logout/', {}, function(data) {
+        if (data.response) {
+            window.location = '/';
+            // location.reload();
+        } else {
+
+        }
+    });
+});
 
 
 

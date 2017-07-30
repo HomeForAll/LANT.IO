@@ -65,9 +65,23 @@ body {
 }
 .pheader__user {
     margin-left: 2em;
+    margin-right: 2em;
 }
 
-
+.pheader__iconsvg {
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    color: #356376;
+    transition: color 100ms linear;
+}
+.pheader__iconsvg:hover {
+    color: #fff;
+}
+.pheader__iconsvg svg {
+    width: 28px;
+    height: 28px;
+}
 
 
 

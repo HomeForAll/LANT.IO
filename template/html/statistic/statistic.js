@@ -81,68 +81,68 @@ $(function(){
 
 
 
-    $("#stat-block-ads button").click(function(event) {
+    $("#stat-block-items button").click(function(event) {
         event.preventDefault();
         var api = $(this).data('api');
-        $("#stat-block-ads").data('api', api);
-        var period = $("#stat-block-ads [name=period]:checked").val();
-        var city = $("#stat-block-ads [name=city]").val();
+        $("#stat-block-items").data('api', api);
+        var period = $("#stat-block-items [name=period]:checked").val();
+        var city = $("#stat-block-items [name=city]").val();
         if (api == "api/stat/ads/get/all/") {
             period = '';
-            $("#stat-block-ads .periods").hide();
+            $("#stat-block-items .periods").hide();
         } else {
-            $("#stat-block-ads .periods").show();
+            $("#stat-block-items .periods").show();
         }
 
         $.getJSON(api+period, {"city": city}, function(data) {
             if (data.response) {
-                $("#section-statistic .block-ads .count span").text(data.response.count);
-                $("#section-statistic .block-ads .chart-line").statChartDraw({data: data.response.data});
+                $("#section-statistic .block-items .count span").text(data.response.count);
+                $("#section-statistic .block-items .chart-line").statChartDraw({data: data.response.data});
             } else {
-                $("#section-statistic .block-ads .count span").text(0);
-                $("#section-statistic .block-ads .chart-line").statChartDraw({data: [0,0,0]});
+                $("#section-statistic .block-items .count span").text(0);
+                $("#section-statistic .block-items .chart-line").statChartDraw({data: [0,0,0]});
             }
         });
     });
-    $("#stat-block-ads button").first().trigger('click');
-    $("#stat-block-ads [name=period]").change(function(event) {
-        var api = $("#stat-block-ads").data('api');
-        var period = $("#stat-block-ads [name=period]:checked").val();
-        var city = $("#stat-block-ads [name=city]").val();
+    $("#stat-block-items button").first().trigger('click');
+    $("#stat-block-items [name=period]").change(function(event) {
+        var api = $("#stat-block-items").data('api');
+        var period = $("#stat-block-items [name=period]:checked").val();
+        var city = $("#stat-block-items [name=city]").val();
         if (api == "api/stat/ads/get/all/") {
             period = '';
-            $("#stat-block-ads .periods").hide();
+            $("#stat-block-items .periods").hide();
         } else {
-            $("#stat-block-ads .periods").show();
+            $("#stat-block-items .periods").show();
         }
         $.getJSON(api+period, {"city": city}, function(data) {
             if (data.response) {
-                $("#section-statistic .block-ads .count span").text(data.response.count);
-                $("#section-statistic .block-ads .chart-line").statChartDraw({data: data.response.data});
+                $("#section-statistic .block-items .count span").text(data.response.count);
+                $("#section-statistic .block-items .chart-line").statChartDraw({data: data.response.data});
             } else {
-                $("#section-statistic .block-ads .count span").text(0);
-                $("#section-statistic .block-ads .chart-line").statChartDraw({data: [0,0,0]});
+                $("#section-statistic .block-items .count span").text(0);
+                $("#section-statistic .block-items .chart-line").statChartDraw({data: [0,0,0]});
             }
         });
 
     });
-    $("#stat-block-ads [name=city]").change(function(event) {
-        var api = $("#stat-block-ads").data('api');
-        var period = $("#stat-block-ads [name=period]:checked").val();
-        var city = $("#stat-block-ads [name=city]").val();
+    $("#stat-block-items [name=city]").change(function(event) {
+        var api = $("#stat-block-items").data('api');
+        var period = $("#stat-block-items [name=period]:checked").val();
+        var city = $("#stat-block-items [name=city]").val();
         if (api == "api/stat/ads/get/all/") {
             period = '';
-            $("#stat-block-ads .periods").hide();
+            $("#stat-block-items .periods").hide();
         } else {
-            $("#stat-block-ads .periods").show();
+            $("#stat-block-items .periods").show();
         }
         $.getJSON(api+period, {"city": city}, function(data) {
             if (data.response) {
-                $("#section-statistic .block-ads .count span").text(data.response.count);
-                $("#section-statistic .block-ads .chart-line").statChartDraw({data: data.response.data});
+                $("#section-statistic .block-items .count span").text(data.response.count);
+                $("#section-statistic .block-items .chart-line").statChartDraw({data: data.response.data});
             } else {
-                $("#section-statistic .block-ads .count span").text(0);
-                $("#section-statistic .block-ads .chart-line").statChartDraw({data: [0,0,0]});
+                $("#section-statistic .block-items .count span").text(0);
+                $("#section-statistic .block-items .chart-line").statChartDraw({data: [0,0,0]});
             }
         });
     });

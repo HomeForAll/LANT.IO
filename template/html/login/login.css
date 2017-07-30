@@ -139,7 +139,7 @@
 
 .dialog-registration,
 .dialog-restore {
-    max-width: 450px;
+    max-width: 480px;
     position: relative;
     padding: 33px 57px 33px 57px;
     border-radius: 8px;
@@ -149,7 +149,7 @@
 }
 .dialog-registration .step,
 .dialog-restore .step {
-    min-width: 300px;
+    min-width: 320px;
 }
 .dialog-registration::after,
 .dialog-restore::after {
@@ -234,9 +234,8 @@
 .registration-type-button input[type=radio] {
     display: none;
 }
-.registration-type-button:hover {
-    /*  */
-}
+/* .registration-type-button:hover {
+} */
 .registration-type-button span {
     display: block;
     background: #263a4d;
@@ -289,7 +288,7 @@
     background: #1b334a;
     color: #ffffff;
     max-width: 450px;
-    min-width: 400px;
+    min-width: 430px;
     position: relative;
     padding: 33px 57px 33px 57px;
     border-radius: 6px;
@@ -346,7 +345,10 @@
 
 
 
-.d2factor {
+ /* .d2factor {
+} */
 
-
+.adialog__inner {
+    
+     min-height: 185px; 
 }
