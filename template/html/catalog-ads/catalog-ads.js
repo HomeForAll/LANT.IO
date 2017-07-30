@@ -210,8 +210,8 @@ $(document).ready(function() {
 
         $("#ads-list").children().remove();
         $.getJSON('/api/' + period, {count: 30}, function(json, textStatus) {
-            if (json.response && json.response.count_all > 0) {
-                $.each(json.response.best_ads, function(i, item) {
+            if (json.response && json.response.count > 0) {
+                $.each(json.response.items, function(i, item) {
                     renderAd(item);
                     //renderFavorite(item);
                 });
