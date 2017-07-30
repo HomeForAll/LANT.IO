@@ -37,3 +37,30 @@
 * 2017-07-26 [19:07:09] - [Warning] Illegal string offset 'code'
   (line: 137 ) -> app\views\dialogs.php 
 
+* 2017-07-28 [10:07:08] - [Notice] Undefined index: user
+  (line: 814 ) -> app\models\CabinetModel.php 
+
+* 2017-07-30 [09:54:16] - [Notice] Undefined index: user
+  (line: 803 ) -> app\models\CabinetModel.php 
+
+* 2017-07-30 [09:54:55] - [Notice] Undefined index: user
+  (line: 803 ) -> app\models\CabinetModel.php 
+
+* 2017-07-30 [09:55:05] - [Notice] Undefined index: user
+  (line: 803 ) -> app\models\CabinetModel.php 
+
+* 2017-07-30 [09:55:28] - [Notice] Undefined index: user
+  (line: 803 ) -> app\models\CabinetModel.php 
+
+* 2017-07-30 [10:00:26] - [Notice] Undefined index: user
+  (line: 803 ) -> app\models\CabinetModel.php 
+
+* 2017-07-30 [10:51:02] - [Notice] Undefined index: user
+  (line: 803 ) -> app\models\CabinetModel.php 
+
+* 2017-07-30 [10:51:55] - [Notice] Undefined index: user
+  (line: 803 ) -> app\models\CabinetModel.php 
+
+* 2017-07-30 [10:51:58] - [Notice] Undefined index: user
+  (line: 803 ) -> app\models\CabinetModel.php 
+

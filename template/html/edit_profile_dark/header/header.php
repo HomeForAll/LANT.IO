@@ -15,7 +15,7 @@
             <a class="combined-shape"><span>205 coins</span></a>
         </div>
         <div class="profile-user">
-            <a>Your Name<img id="user-header" src="/template/img/fiz.png" alt="user"></a>
+            <div><a>Your Name</a><img id="user-header" src="/template/img/fiz.png" alt="user"></div>
             <span><img src="/template/images/crown.png" alt="crown">Пользователь +</span>
         </div>
     </div>
