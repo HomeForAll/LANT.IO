@@ -221,7 +221,7 @@ class APIController extends Controller
         }
 
         if (!empty($request)) {
-            //Количество объявлений [count_all]
+            //Общее количество объявлений [count]
             $this->model('NewsModel')->getNamberOfAllNews($request['time_from'], $request['time_to'],
                 $request['space_type'],
                 $request['operation_type'], $request['object_type'], $request['price_from'], $request['price_to'],
@@ -233,7 +233,7 @@ class APIController extends Controller
                 $request['space_from'], $request['space_to'], $request['count']);
 
             // Подготовка данных для вывода
-            $data['best_ads'] = $this->model('NewsModel')->prepareNewsPreview($db_data, false, true);
+            $data['items'] = $this->model('NewsModel')->prepareNewsPreview($db_data, false, true, false);
         }
         echo json_encode($this->model('NewsModel')->getResponse(), JSON_UNESCAPED_UNICODE);
     }

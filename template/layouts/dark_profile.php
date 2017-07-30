@@ -26,5 +26,6 @@
 <script src="/bower_components/inputmask/dist/inputmask/phone-codes/phone.js"></script>
 <script src="/bower_components/inputmask/dist/inputmask/phone-codes/phone-ru.js"></script>
 <script src="/template/html/edit_profile_dark/user_profile/main.min.js"></script>
+<script src="/template/html/edit_profile_dark/header/main.min.js"></script>
 </body>
 </html>

@@ -8,10 +8,14 @@ class NewsModel extends Model
 {
     private $response = [];
     private $errors = [];
+    private $user_id;
 
     public function __construct()
     {
         $this->db = new DataBase;
+        if (isset($_SESSION['user']['id'])) {
+            $this->user_id = (int)$_SESSION['user']['id'];
+        }
     }
 
     /**
@@ -177,7 +181,7 @@ class NewsModel extends Model
         }
         $result = $stmt->fetchColumn();
         //для Ajax запроса
-        $this->response['count_all'] = $result;
+        $this->response['count'] = $result;
 
         return $result;
     }
@@ -1336,14 +1340,26 @@ class NewsModel extends Model
         //Текущая Дата в формате стандарта ISO 8601
         $news_date = $this->dateFormatForDB($time);
 
-        $sql = "SELECT id_news, to_char(date,'YYYY-MM-DD HH24:MI:SS') as date, title,"
-            . " space_type, operation_type, object_type, city,"
-            . " content, user_id, status,  price, lease, space,"
-            . " (rating_views + rating_admin+rating_donate) as rating,"
-            . " number_of_rooms, metro_station, time_walk, time_car, lat, lng"
-            . " FROM news_base n LEFT JOIN (SELECT DISTINCT ON(ad_id) * FROM ads_images) i"
-            . " ON (n.id_news = i.ad_id) "
-            . " WHERE (date >= :date) ";
+        $sql = "SELECT n.id_news, to_char(n.date,'YYYY-MM-DD HH24:MI:SS') as date, n.title,"
+            . " n.space_type, n.operation_type, n.object_type, n.city,"
+            . " n.content, n.user_id, n.status,  n.price, n.lease, n.space,"
+            . " (n.rating_views + n.rating_admin+n.rating_donate) as rating,"
+            . " n.number_of_rooms, n.metro_station, n.time_walk, n.time_car, n.lat, n.lng,"
+            . " i.original, i.s_250_140, i.s_500_280, i.s_360_230, i.s_720_460, i.ad_id,";
+
+        //Включение в запрос поля favorite если это зарегистрированный пользователь
+        if(!empty($this->user_id)){
+            $sql .=  "  f.ad_id as favorite";
+        }
+
+        $sql .=  " FROM news_base n LEFT JOIN ads_images i"
+            . " ON (n.id_news = i.ad_id)";
+
+        //Включение в запрос поля favorite если это зарегистрированный пользователь
+        if(!empty($this->user_id)){
+            $sql .=  " LEFT JOIN favorite_ads f ON (n.id_news = f.ad_id AND f.user_id = ".$this->user_id.")";
+        }
+        $sql .= " WHERE (n.date >= :date)";
 
         // Только активные(видимые)
         $sql .= "AND (status = 1) ";
@@ -1408,7 +1424,6 @@ class NewsModel extends Model
             $this->error(self::DB_EXECUTE_ERROR);
         }
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
         return $data;
     }
 
@@ -1897,7 +1912,9 @@ class NewsModel extends Model
         $user_id_arr = [];
 
         //Получение массив ссылок на картинки $data['news'][number]['photos'][]
-        $data = $this->getAdsPhotos($data);
+        if($photos){
+            $data = $this->getAdsPhotos($data);
+        }
 
         // Данные индекс города -> город
         $city = [];
@@ -1931,7 +1948,8 @@ class NewsModel extends Model
                 }
             }
 
-
+            //Приведение favorite к 1 или 0
+            !empty($data[$key]['favorite']) ? $data[$key]['favorite'] = 1 : $data[$key]['favorite'] = 0;
 
             //Перевод индекса города в наименование
             if (!empty($data[$key]['city'])) {
@@ -1965,7 +1983,7 @@ class NewsModel extends Model
         }
         //Перевод станций метро
         $data = $this->translateMetroStations($data);
-        $this->response['best_ads'] = $data;
+        $this->response['items'] = $data;
     }
 
     /**

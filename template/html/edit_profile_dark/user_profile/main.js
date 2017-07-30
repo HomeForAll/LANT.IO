@@ -25,19 +25,9 @@ $(document).ready(function () {
             $('input[name="adress_flat"]').val(data.adress_flat);
             $('input[name="contacts_number"]').val(data.contacts_number);
             $('input[name="contacts_email"]').val(data.contacts_email);
-
-            console.log('Данные получены', data);
         },
         error: function (data) {
             console.log('Данные не получены', data);
-        }
-    });
-
-    /** Получаем API для header **/
-    $.getJSON("/api/user", {}, function(user) {
-        if (!user) {
-            $('.img-user img').attr('src', user.response.avatar_original);
-            $('.profile-user a').html(user.response.name + '<img src="'+ user.response.avatar_50 +'">');
         }
     });
 

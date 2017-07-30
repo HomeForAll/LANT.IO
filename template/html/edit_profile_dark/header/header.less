@@ -6,7 +6,7 @@
   padding-right: 25px;
   flex-flow: row nowrap;
   justify-content: space-between;
-  border-bottom: 1px solid #344056;
+  border-bottom: 1px solid rgba(181, 185, 191, 0.3);
   background: #344056;
 }
 
@@ -49,9 +49,9 @@
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-end;
-  align-self: stretch;
+  align-self: center;
+  align-items: stretch;
   flex-grow: 10;
-  align-items: center;
   i {
     cursor: pointer;
     font-size: 18px;
@@ -72,6 +72,7 @@
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-around;
+  align-items: center;
 }
 
 .combined-shape {
@@ -98,35 +99,43 @@
 }
 
 .profile-user {
+  position: relative;
   display: flex;
+  width: 180px;
   flex-flow: column wrap;
-  justify-content: space-around;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
   padding: 0 15px;
-  a {
-    width: 100%;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    font-size: 12px;
-    color: #fff;
-    & > img {
-      margin-left: 8px;
-      width: 37px;
-      height: 37px;
-      border-radius: 100%;
-    }
-  }
   span {
     cursor: pointer;
     border-radius: 30px;
-    margin: 2px auto;
+    margin: -8px auto auto 0;
     padding: .5px 5px;
-    background: linear-gradient(-90deg, #41a24f, #94c85e);
+    background: linear-gradient(-90deg,#41a24f,#94c85e);
+    position: relative;
+  }
+  a {
+    overflow: hidden;
+    width: 100%;
+    text-overflow: ellipsis;
   }
   img {
     width: 9px;
     height: 7px;
+  }
+  div {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    width: 100%;
+    color: #fff;
+    & > img {
+      width: 37px!important;
+      height: 37px!important;
+      border-radius: 100%;
+    }
   }
 }
 
