@@ -3,7 +3,10 @@ $(function () {
 
     $.getJSON("/api/user", {}, function(user) {
         if (user.response) {
-            if (user.response.avatar_50) 
+            if (user.response.status == -1) {
+                window.location = '/';
+            }
+            if (user.response.avatar_50)
                 $('.user-info img').prop('src', user.response.avatar_50);
             if (user.response.avatar_100)
                 $('.profile-userinfo_photo').prop('src', user.response.avatar_100);
