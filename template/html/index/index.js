@@ -81,6 +81,9 @@ function initUserMenu(user) {
             });
             // window.location = '/logout/';
         });
+        $('.menu-user .user-menu-plus').click(function(event) {
+            window.location = '/profile/items/add';
+        });
     } else {
         $('.menu-user .user-info').remove();
         $('.header-line .user-info').remove();
