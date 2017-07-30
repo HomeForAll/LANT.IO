@@ -1,10 +1,10 @@
 
-#section-statistic {}
+/* #section-statistic {}
 
 #section-statistic {
-    /*background: #f4f4f4;
-    background-image: linear-gradient(180deg, #f6f6f6, #e1e1e1);*/
-}
+    background: #f4f4f4;
+     background-image: linear-gradient(180deg, #f6f6f6, #e1e1e1); 
+} */
 #section-statistic .fp-tableCell {
     display: flex;
     justify-content: flex-start;
