@@ -146,6 +146,9 @@ $(document).ready(function() {
 
 
     var renderAd = function(data) {
+        if (!data.s_250_140) {
+            data.s_250_140 = "/template/img/250x140.jpg";
+        }
         var ad = $("<div>").addClass("block").appendTo("#ads-list");
         var ad = $("<div>").addClass("padd").appendTo(ad).click(function(event) {
                 var dialog = $("<div>").addClass('dialog-ad').prop('title', data.price + " руб./месяц");
@@ -189,17 +192,33 @@ $(document).ready(function() {
 
     };
 
-    $.ajax({
-        method: 'POST',
-        url: 'api/search',
-        data: {tabs: 1},
-        dataType: 'Json',
-        success: function(form_data) {
-            $.each(form_data, function(i, item) {
-                renderAd(item)
-            });
-        }
+    // $.ajax({
+    //     method: 'POST',
+    //     url: 'api/search',
+    //     data: {tabs: 1},
+    //     dataType: 'Json',
+    //     success: function(form_data) {
+    //         $.each(form_data, function(i, item) {
+    //             renderAd(item)
+    //         });
+    //     }
+    // });
+
+    $('.itemstabs input[name=items_best]').change(function() {
+        var period = $(".itemstabs input[name=items_best]:checked").val();
+        console.log(period);
+
+        $("#ads-list").children().remove();
+        $.getJSON('/api/' + period, {count: 30}, function(json, textStatus) {
+            if (json.response && json.response.count_all > 0) {
+                $.each(json.response.best_ads, function(i, item) {
+                    renderAd(item);
+                    //renderFavorite(item);
+                });
+            }
+        });
     });
+    $(".itemstabs input[name=items_best]:checked").trigger('change');
     
 
     $("form#search").on("submit", function( event ) {

@@ -30,10 +30,13 @@
     margin: 8px;
     border-radius: 4px;
     cursor: pointer;
+    /* border: 1px solid transparent; */
 }
 #section-ads .ads-list .block .padd:hover {
     /* background: #eee; */
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.13);
+    /* border: 1px solid #abd96e; */
+    /* background-image: radial-gradient(circle at 70% -24%, #abd96e, #60b55e); */
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.13), 0 0 0px 1px #abd96e;
 }
 #section-ads .ads-list .block img {
     display: block;
