@@ -2655,10 +2655,15 @@ class CabinetModel extends Model
             $count_query = $this->db->query("SELECT count(*) FROM news_base WHERE user_id = {$_SESSION['user']['id']}");
             $result = $count_query->fetch();
 
-            $count = $result ? $result['count'] : null;
+            $count_active_query = $this->db->query("SELECT count(*) FROM news_base WHERE user_id = {$_SESSION['user']['id']} AND status > 0");
+            $active_result = $count_active_query->fetch();
+
+            $count = $result ? $result['count'] : 0;
+            $active_count = $active_result ? $active_result['count'] : 0;
 
             $this->response([
                 'count' => (int)$count,
+                'count_active' => (int)$active_count,
                 'items' => $ads,
             ]);
         } else {
