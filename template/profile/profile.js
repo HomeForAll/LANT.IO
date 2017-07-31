@@ -101,12 +101,25 @@ $(function () {
         var actions = $("<div>").addClass("profile-item__actions").appendTo(ad);
         $("<img>").addClass('profile-item__action').prop('src', '/template/img/item-icon-edit.svg').appendTo(actions);
         $("<img>").addClass('profile-item__action').prop('src', '/template/img/item-icon-del.svg').appendTo(actions);
-        $("<img>").addClass('profile-item__action').prop('src', '/template/img/item-icon-activ.svg').appendTo(actions);
+
+        $("<img>").addClass('profile-item__action').prop('src', '/template/img/item-icon-activ.svg').appendTo(actions).click(function(){
+            if (actions.find('.profile-item__activ').hasClass('profile-item__noactiv')) {
+                $.getJSON("/api/items.setActive", {id: data.id_news}, function(user) {
+                    if (user.response) 
+                        actions.find('.profile-item__activ').toggleClass('profile-item__noactiv');
+                });
+            } else {
+                $.getJSON("/api/items.setUnActive", {id: data.id_news}, function(user) {
+                    if (user.response) 
+                        actions.find('.profile-item__activ').toggleClass('profile-item__noactiv');
+                });
+            }
+        });
 
         if (data.status == 1) {
             $("<span>").addClass('profile-item__activ').html("активно").appendTo(actions);
         } else {
-            $("<span>").addClass('profile-item__noactiv').html("не активно").appendTo(actions);
+            $("<span>").addClass('profile-item__activ').addClass('profile-item__noactiv').html("не активно").appendTo(actions);
         }
 
 
