@@ -141,7 +141,7 @@ $(function () {
 
 
 
-$.getJSON('/api/item/my', {count: 2}, function(json, textStatus) {
+$.getJSON('/api/items/my', {count: 2}, function(json, textStatus) {
     if (json.response && json.response.count > 0) {
         $.each(json.response.items, function(i, item) {
             renderItems(item);
