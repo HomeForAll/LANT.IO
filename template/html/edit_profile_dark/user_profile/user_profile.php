@@ -41,8 +41,8 @@
                     <label>Дом<input placeholder="343" pattern="^[0-9]{4}+$" name="adress_home" /></label>
                     <label>Квартира<input placeholder="15" pattern="^[0-9]{4}+$" name="adress_flat" /></label>
                     <p>Контакты:</p>
-                    <label>Номер телефона<input name="contacts_number" placeholder="+7 (___) ___ - __ - __" data-inputmask="'mask': '+7(999)999-99-99'" /></label>
-                    <label>Email<input data-inputmask="'mask: '*{1,20}[.*{1,20}][.*{1,20}][.*{1,20}]@*{1,20}[.*{2,6}][.*{1,2}]'" placeholder="mail@mail.ru" name="contacts_email" /></label>
+                    <label>Номер телефона<input type="text" name="phone" placeholder="+7 (___) ___ - __ - __" data-inputmask="'mask': '+7 (999) 999 - 99 - 99'"></label>
+                    <label>Email<input data-inputmask="'mask: '*{1,20}[.*{1,20}][.*{1,20}][.*{1,20}]@*{1,20}[.*{2,6}][.*{1,2}]'" placeholder="example@mail.ru" name="contacts_email" /></label>
                 </div>
             </div>
         </div>

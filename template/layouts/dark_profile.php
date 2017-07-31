@@ -11,10 +11,12 @@
     <link rel="stylesheet" href="/template/html/edit_profile_dark/header/header.min.css">
     <link rel="stylesheet" href="/template/html/edit_profile_dark/left_bar/left_bar.min.css">
     <link rel="stylesheet" href="/template/html/edit_profile_dark/user_profile/user_profile.min.css">
+    <link rel="stylesheet" href="/template/html/login/menu.css">
 </head>
 <body>
 <div class="content">
     <?php include_once ROOT_DIR . '/template/html/edit_profile_dark/header/header.php' ?>
+    <?php include_once ROOT_DIR . '/template/html/login/menu.html' ?>
     <div class="left-bar-and-user-profile">
         <?php include_once ROOT_DIR . '/template/html/edit_profile_dark/left_bar/left_bar.php' ?>
         <?php include_once ROOT_DIR . '/template/html/edit_profile_dark/user_profile/user_profile.php' ?>
@@ -25,6 +27,7 @@
 <script src="/bower_components/inputmask/dist/inputmask/bindings/inputmask.binding.js"></script>
 <script src="/bower_components/inputmask/dist/inputmask/phone-codes/phone.js"></script>
 <script src="/bower_components/inputmask/dist/inputmask/phone-codes/phone-ru.js"></script>
+<script src="/template/html/login/menu.js"></script>
 <script src="/template/html/edit_profile_dark/user_profile/main.min.js"></script>
 <script src="/template/html/edit_profile_dark/header/main.min.js"></script>
 </body>

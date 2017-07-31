@@ -20,22 +20,6 @@ $user = $model->getUser($_SESSION['user']['id']);
             </div>
         </div>
     </div>
-<!--    <div id="wrapper">-->
-<!--        <div id="navigation">-->
-<!--            <ul>-->
-<!--                <li><a href="/news">Объявления</a></li>-->
-<!--                <li><a href="/search">Поиск</a></li>-->
-<!--                --><?php //if (isset($_SESSION['authorized'])) { ?>
-<!--                    <li><a href="/cabinet">Личный кабинет</a></li>-->
-<!--                    <li><a href="/logout">Выход</a></li>-->
-<!--                --><?php //} else { ?>
-<!--                    <li><a href="/registration">Регистрация</a></li>-->
-<!--                    <li><a href="/login">Вход</a></li>-->
-<!--                --><?php //} ?>
-<!--            </ul>-->
-<!--            <button class="show-and-hide-menu"><i class="fa fa-bars" aria-hidden="true"></i></button>-->
-<!--        </div>-->
-<!--    </div>-->
 <?php } else { ?>
     <div id="navigation-true">
         <div class="container-w-0">

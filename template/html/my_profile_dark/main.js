@@ -21,7 +21,7 @@ $(document).ready(function () {
 
             console.log('data', data);
 
-            if (!data) return false;
+            if (data.status !== 1) return false;
 
             $('input[name="name_birthday"]').val(data.name_birthday);
             $('input[name="passport_series"]').val(data.passport_series);
@@ -31,7 +31,7 @@ $(document).ready(function () {
             $('input[name="adress_street"]').val(data.adress_street);
             $('input[name="adress_home"]').val(data.adress_home);
             $('input[name="adress_flat"]').val(data.adress_flat);
-            $('input[name="contacts_number"]').val(data.contacts_number);
+            //$('input[name="contacts_number"]').val(data.contacts_number);
             $('input[name="contacts_email"]').val(data.contacts_email);
         },
         error: function (data) {
