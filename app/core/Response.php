@@ -196,7 +196,7 @@ class Response
         exit(json_encode($content, JSON_UNESCAPED_UNICODE));
     }
 
-    protected function response($data)
+    protected function response($data = true)
     {
         exit(json_encode(['response' => $data], JSON_UNESCAPED_UNICODE));
     }

@@ -109,4 +109,6 @@ return [
     'api/authenticator/verify' => 'main/API/verifyGACode',
     'api/sms/send/code' => 'main/API/sendSMSCode',
     'api/sms/auth/activate' => 'main/API/verifySMSActivateCode',
+    'api/items.setActive' => 'main/API/itemActive',
+    'api/items.setUnActive' => 'main/API/itemUnActive',
 ];
