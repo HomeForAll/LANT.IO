@@ -100,18 +100,37 @@ $(function () {
 
         var actions = $("<div>").addClass("profile-item__actions").appendTo(ad);
         $("<img>").addClass('profile-item__action').prop('src', '/template/img/item-icon-edit.svg').appendTo(actions);
-        $("<img>").addClass('profile-item__action').prop('src', '/template/img/item-icon-del.svg').appendTo(actions);
+
+        $("<img>").addClass('profile-item__action').prop('src', '/template/img/item-icon-del.svg').appendTo(actions).click(function(){
+            if (window.confirm('Действительно хотите удалить?')) {
+                $.getJSON("/api/items.delete", {id: data.id_news}, function(user) {
+                    if (user.response) {
+                        $.getJSON('/api/items/my', {count: 2}, function(json, textStatus) {
+                            if (json.response && json.response.count > 0) {
+                                $('.profile-items').html('');
+                                $.each(json.response.items, function(i, item) {
+                                    renderItems(item);
+                                });
+                                $('.pblock__status_i').html("Смотреть еще "+json.response.count+" объявления");
+                            }
+                        });
+                    }
+                });
+            }
+        });
 
         $("<img>").addClass('profile-item__action').prop('src', '/template/img/item-icon-activ.svg').appendTo(actions).click(function(){
             if (actions.find('.profile-item__activ').hasClass('profile-item__noactiv')) {
                 $.getJSON("/api/items.setActive", {id: data.id_news}, function(user) {
                     if (user.response) 
-                        actions.find('.profile-item__activ').toggleClass('profile-item__noactiv');
+                        actions.find('.profile-item__activ')
+                        .toggleClass('profile-item__noactiv').html('активно');
                 });
             } else {
                 $.getJSON("/api/items.setUnActive", {id: data.id_news}, function(user) {
                     if (user.response) 
-                        actions.find('.profile-item__activ').toggleClass('profile-item__noactiv');
+                        actions.find('.profile-item__activ')
+                        .toggleClass('profile-item__noactiv').html('не активно');
                 });
             }
         });
