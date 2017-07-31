@@ -177,7 +177,7 @@ class NewsModel extends Model
             $stmt->bindParam(':city', $city);
         }
         if (!$stmt->execute()) {
-            $this->error(self::DB_SELECT_ERROR);
+            $this->error(self::DB_SELECT_ERROR, $stmt->errorInfo());
         }
         $result = $stmt->fetchColumn();
         //для Ajax запроса
@@ -767,7 +767,7 @@ class NewsModel extends Model
             $stmt->bindParam(':object_type', $object_type);
         }
         if (!$stmt->execute()) {
-            $this->error(self::DB_EXECUTE_ERROR);
+            $this->error(self::DB_EXECUTE_ERROR, $stmt->errorInfo());
         }
         $data['news'] = $stmt->fetchAll();
 
@@ -2006,7 +2006,7 @@ class NewsModel extends Model
             . " FROM users WHERE id IN($user_id_arr_txt)";
         $stmt = $this->db->prepare($sql);
         if (!$stmt->execute()) {
-            $this->error(self::DB_EXECUTE_ERROR);
+            $this->error(self::DB_EXECUTE_ERROR, $stmt->errorInfo());
         }
         $author_result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         foreach ($author_result as $val) {
