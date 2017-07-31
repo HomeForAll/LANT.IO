@@ -105,3 +105,9 @@
   (line: 1 ) ->  
 >>>>>>> 1c76933e2172c5d7a977f7e6732df3963aa08f9a
 
+* 2017-07-30 [12:32:03] - [Warning] Missing argument 1 for CabinetModel::checkPassportNumbers(), called in D:\OpenServer\OpenServer\domains\localhost\app\controllers\CabinetController.php on line 41 and defined
+  (line: 921 ) -> app\models\CabinetModel.php 
+
+* 2017-07-30 [12:32:04] - [Notice] Undefined variable: str
+  (line: 923 ) -> app\models\CabinetModel.php 
+
