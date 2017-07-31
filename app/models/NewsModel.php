@@ -1345,11 +1345,11 @@ class NewsModel extends Model
             . " n.content, n.user_id, n.status,  n.price, n.lease, n.space,"
             . " (n.rating_views + n.rating_admin+n.rating_donate) as rating,"
             . " n.number_of_rooms, n.metro_station, n.time_walk, n.time_car, n.lat, n.lng,"
-            . " i.original, i.s_250_140, i.s_500_280, i.s_360_230, i.s_720_460, i.ad_id,";
+            . " i.original, i.s_250_140, i.s_500_280, i.s_360_230, i.s_720_460, i.ad_id";
 
         //Включение в запрос поля favorite если это зарегистрированный пользователь
         if(!empty($this->user_id)){
-            $sql .=  "  f.ad_id as favorite";
+            $sql .=  ", f.ad_id as favorite";
         }
 
         $sql .=  " FROM news_base n LEFT JOIN (SELECT DISTINCT ON(ad_id) * FROM ads_images) i"
@@ -1911,6 +1911,10 @@ class NewsModel extends Model
      */
     public function prepareNewsPreview($data, $translate_indx = true, $author_info = false, $photos = true)
     {
+        if(empty($data)) {
+            $this->response['items'] = [];
+            return;
+        }
         $user_id_arr = [];
 
         //Получение массив ссылок на картинки $data['news'][number]['photos'][]
@@ -1923,7 +1927,7 @@ class NewsModel extends Model
         $sql = "SELECT id, city FROM city";
         $stmt = $this->db->prepare($sql);
         if (!$stmt->execute()) {
-            $this->error(self::DB_SELECT_ERROR);
+            $this->error(self::DB_SELECT_ERROR, $stmt->errorInfo());
         }
         $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
         foreach ($res as $c) {
