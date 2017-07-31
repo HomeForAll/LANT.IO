@@ -1352,7 +1352,7 @@ class NewsModel extends Model
             $sql .=  "  f.ad_id as favorite";
         }
 
-        $sql .=  " FROM news_base n LEFT JOIN ads_images i"
+        $sql .=  " FROM news_base n LEFT JOIN (SELECT DISTINCT ON(ad_id) * FROM ads_images) i"
             . " ON (n.id_news = i.ad_id)";
 
         //Включение в запрос поля favorite если это зарегистрированный пользователь
@@ -1420,10 +1420,12 @@ class NewsModel extends Model
         if ($space_to != 0) {
             $stmt->bindParam(':space_to', $space_to);
         }
+
         if (!$stmt->execute()) {
-            $this->error(self::DB_EXECUTE_ERROR);
+            $this->error(self::DB_EXECUTE_ERROR, $stmt->errorInfo());
         }
-        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $data = $stmt->fetchAll();
+
         return $data;
     }
 
