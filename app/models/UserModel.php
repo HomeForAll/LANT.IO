@@ -1787,29 +1787,4 @@ class UserModel extends Model
 
         $this->response(true);
     }
-
-    public function setItemActive()
-    {
-        if (!isset($_REQUEST['id'])) {
-            $this->error(self::BAD_REQUEST_ERROR);
-        }
-
-        $query = $this->db->prepare('UPDATE news_base SET status = 1 WHERE id_news = :id');
-        $query->execute([':id' => $_REQUEST['id']]);
-    }
-
-    public function setItemUnActive()
-    {
-        if (!isset($_REQUEST['id'])) {
-            $this->error(self::BAD_REQUEST_ERROR);
-        }
-
-        $query = $this->db->prepare('UPDATE news_base SET status = 0 WHERE id_news = :id');
-        $query->execute([':id' => $_REQUEST['id']]);
-    }
-
-    public function deleteItem()
-    {
-
-    }
 }

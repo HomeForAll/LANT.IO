@@ -909,110 +909,110 @@ class NewsModel extends Model
         array_filter($_POST, 'trim_value');
 
         static $args = [
-            'address'                          => FILTER_SANITIZE_STRING,
-            'alcove'                           => FILTER_VALIDATE_BOOLEAN,
-            'area'                             => FILTER_SANITIZE_STRING,
-            'availability_of_garbage_chute'    => FILTER_VALIDATE_BOOLEAN,
-            'balcony'                          => FILTER_SANITIZE_NUMBER_INT,
-            'bargain'                          => FILTER_VALIDATE_BOOLEAN,
-            'barn'                             => FILTER_VALIDATE_BOOLEAN,
-            'bath'                             => FILTER_VALIDATE_BOOLEAN,
-            'bathroom'                         => FILTER_VALIDATE_BOOLEAN,
-            'bathroom_available'               => FILTER_VALIDATE_BOOLEAN,
-            'bedroom'                          => FILTER_VALIDATE_BOOLEAN,
-            'building_type'                    => FILTER_SANITIZE_NUMBER_INT,
-            'cadastral_number'                 => FILTER_SANITIZE_STRING,
-            'cctv'                             => FILTER_VALIDATE_BOOLEAN,
-            'ceiling_height'                   => FILTER_SANITIZE_NUMBER_INT,
-            'city'                             => FILTER_SANITIZE_STRING,
+            'address' => FILTER_SANITIZE_STRING,
+            'alcove' => FILTER_VALIDATE_BOOLEAN,
+            'area' => FILTER_SANITIZE_STRING,
+            'availability_of_garbage_chute' => FILTER_VALIDATE_BOOLEAN,
+            'balcony' => FILTER_SANITIZE_NUMBER_INT,
+            'bargain' => FILTER_VALIDATE_BOOLEAN,
+            'barn' => FILTER_VALIDATE_BOOLEAN,
+            'bath' => FILTER_VALIDATE_BOOLEAN,
+            'bathroom' => FILTER_VALIDATE_BOOLEAN,
+            'bathroom_available' => FILTER_VALIDATE_BOOLEAN,
+            'bedroom' => FILTER_VALIDATE_BOOLEAN,
+            'building_type' => FILTER_SANITIZE_NUMBER_INT,
+            'cadastral_number' => FILTER_SANITIZE_STRING,
+            'cctv' => FILTER_VALIDATE_BOOLEAN,
+            'ceiling_height' => FILTER_SANITIZE_NUMBER_INT,
+            'city' => FILTER_SANITIZE_STRING,
             'clarification_of_the_object_type' => FILTER_SANITIZE_NUMBER_INT,
-            'common'                           => FILTER_SANITIZE_NUMBER_INT,
-            'concierge'                        => FILTER_VALIDATE_BOOLEAN,
-            'content'                          => FILTER_SANITIZE_STRING,
-            'country'                          => FILTER_SANITIZE_STRING,
-            'dining_room'                      => FILTER_VALIDATE_BOOLEAN,
-            'distance_from_metro'              => FILTER_SANITIZE_NUMBER_INT,
-            'documents_on_tenure'              => FILTER_SANITIZE_STRING,
-            'electricity'                      => FILTER_VALIDATE_BOOLEAN,
-            'equipment'                        => FILTER_VALIDATE_BOOLEAN,
-            'fencing'                          => FILTER_SANITIZE_NUMBER_INT,
-            'floor'                            => FILTER_SANITIZE_NUMBER_INT,
-            'forest_trees'                     => FILTER_VALIDATE_BOOLEAN,
-            'foundation'                       => FILTER_SANITIZE_NUMBER_INT,
-            'furnish'                          => FILTER_SANITIZE_NUMBER_INT,
-            'garden_trees'                     => FILTER_VALIDATE_BOOLEAN,
-            'gas'                              => FILTER_VALIDATE_BOOLEAN,
-            'guest_house'                      => FILTER_VALIDATE_BOOLEAN,
-            'hallway'                          => FILTER_VALIDATE_BOOLEAN,
-            'heating'                          => FILTER_VALIDATE_BOOLEAN,
-            'house'                            => FILTER_SANITIZE_STRING,
-            'intercom'                         => FILTER_VALIDATE_BOOLEAN,
-            'kitchen'                          => FILTER_VALIDATE_BOOLEAN,
-            'lavatory'                         => FILTER_SANITIZE_NUMBER_INT,
-            'lease'                            => FILTER_SANITIZE_NUMBER_INT,
-            'lease_contract'                   => FILTER_SANITIZE_STRING,
-            'lift_lifting'                     => FILTER_VALIDATE_BOOLEAN,
-            'lift_none'                        => FILTER_VALIDATE_BOOLEAN,
-            'lift_passenger'                   => FILTER_VALIDATE_BOOLEAN,
-            'living_room'                      => FILTER_VALIDATE_BOOLEAN,
-            'lodge'                            => FILTER_VALIDATE_BOOLEAN,
-            'metro_station'                    => FILTER_SANITIZE_NUMBER_INT,
-            'non_commission'                   => FILTER_VALIDATE_BOOLEAN,
-            'not_residential'                  => FILTER_SANITIZE_NUMBER_INT,
-            'number_of_floors'                 => FILTER_SANITIZE_NUMBER_INT,
-            'number_of_rooms'                  => FILTER_SANITIZE_NUMBER_INT,
-            'object_located'                   => FILTER_SANITIZE_NUMBER_INT,
-            'object_type'                      => FILTER_SANITIZE_NUMBER_INT,
-            'operation_type'                   => FILTER_SANITIZE_NUMBER_INT,
-            'parking_garage_complex'           => FILTER_VALIDATE_BOOLEAN,
-            'parking_lot_garage'               => FILTER_VALIDATE_BOOLEAN,
-            'parking_multilevel'               => FILTER_VALIDATE_BOOLEAN,
-            'parking_none'                     => FILTER_VALIDATE_BOOLEAN,
-            'parking_underground'              => FILTER_VALIDATE_BOOLEAN,
-            'photo_available'                  => FILTER_VALIDATE_BOOLEAN,
-            'planning_project'                 => FILTER_SANITIZE_STRING,
-            'playground'                       => FILTER_VALIDATE_BOOLEAN,
-            'playroom'                         => FILTER_VALIDATE_BOOLEAN,
-            'plot_of_ravine'                   => FILTER_VALIDATE_BOOLEAN,
-            'plot_on_the_slope'                => FILTER_VALIDATE_BOOLEAN,
-            'plot_smooth'                      => FILTER_VALIDATE_BOOLEAN,
-            'plot_uneven'                      => FILTER_VALIDATE_BOOLEAN,
-            'plot_wetland'                     => FILTER_VALIDATE_BOOLEAN,
-            'preview_img'                      => FILTER_SANITIZE_STRING,
-            'price'                            => FILTER_SANITIZE_NUMBER_INT,
-            'property_documents'               => FILTER_SANITIZE_STRING,
-            'rating_admin'                     => FILTER_SANITIZE_NUMBER_INT,
-            'rating_donate'                    => FILTER_SANITIZE_NUMBER_INT,
-            'rating_views'                     => FILTER_SANITIZE_NUMBER_INT,
-            'region'                           => FILTER_SANITIZE_STRING,
-            'residential'                      => FILTER_SANITIZE_NUMBER_INT,
-            'river'                            => FILTER_VALIDATE_BOOLEAN,
-            'roofing'                          => FILTER_SANITIZE_NUMBER_INT,
-            'sanitation'                       => FILTER_VALIDATE_BOOLEAN,
-            'security'                         => FILTER_VALIDATE_BOOLEAN,
-            'signaling'                        => FILTER_VALIDATE_BOOLEAN,
-            'space'                            => FILTER_SANITIZE_NUMBER_INT,
-            'space_type'                       => FILTER_SANITIZE_NUMBER_INT,
-            'spring'                           => FILTER_VALIDATE_BOOLEAN,
-            'stairwells_status'                => FILTER_SANITIZE_NUMBER_INT,
-            'status'                           => FILTER_SANITIZE_NUMBER_INT,
-            'street'                           => FILTER_SANITIZE_STRING,
-            'study'                            => FILTER_VALIDATE_BOOLEAN,
-            'swimming_pool'                    => FILTER_VALIDATE_BOOLEAN,
-            'tags'                             => FILTER_SANITIZE_STRING,
-            'three_d_project'                  => FILTER_SANITIZE_STRING,
-            'time_car'                         => FILTER_SANITIZE_NUMBER_INT,
-            'time_walk'                        => FILTER_SANITIZE_NUMBER_INT,
-            'title'                            => FILTER_SANITIZE_STRING,
-            'type_of_construction'             => FILTER_SANITIZE_NUMBER_INT,
-            'type_of_house'                    => FILTER_SANITIZE_NUMBER_INT,
-            'user_id'                          => FILTER_SANITIZE_NUMBER_INT,
-            'video'                            => FILTER_SANITIZE_STRING,
-            'wall_material'                    => FILTER_SANITIZE_NUMBER_INT,
-            'water_pipes'                      => FILTER_VALIDATE_BOOLEAN,
-            'waterfront'                       => FILTER_VALIDATE_BOOLEAN,
-            'wine_vault'                       => FILTER_VALIDATE_BOOLEAN,
-            'year_of_construction'             => FILTER_SANITIZE_NUMBER_INT,
+            'common' => FILTER_SANITIZE_NUMBER_INT,
+            'concierge' => FILTER_VALIDATE_BOOLEAN,
+            'content' => FILTER_SANITIZE_STRING,
+            'country' => FILTER_SANITIZE_STRING,
+            'dining_room' => FILTER_VALIDATE_BOOLEAN,
+            'distance_from_metro' => FILTER_SANITIZE_NUMBER_INT,
+            'documents_on_tenure' => FILTER_SANITIZE_STRING,
+            'electricity' => FILTER_VALIDATE_BOOLEAN,
+            'equipment' => FILTER_VALIDATE_BOOLEAN,
+            'fencing' => FILTER_SANITIZE_NUMBER_INT,
+            'floor' => FILTER_SANITIZE_NUMBER_INT,
+            'forest_trees' => FILTER_VALIDATE_BOOLEAN,
+            'foundation' => FILTER_SANITIZE_NUMBER_INT,
+            'furnish' => FILTER_SANITIZE_NUMBER_INT,
+            'garden_trees' => FILTER_VALIDATE_BOOLEAN,
+            'gas' => FILTER_VALIDATE_BOOLEAN,
+            'guest_house' => FILTER_VALIDATE_BOOLEAN,
+            'hallway' => FILTER_VALIDATE_BOOLEAN,
+            'heating' => FILTER_VALIDATE_BOOLEAN,
+            'house' => FILTER_SANITIZE_STRING,
+            'intercom' => FILTER_VALIDATE_BOOLEAN,
+            'kitchen' => FILTER_VALIDATE_BOOLEAN,
+            'lavatory' => FILTER_SANITIZE_NUMBER_INT,
+            'lease' => FILTER_SANITIZE_NUMBER_INT,
+            'lease_contract' => FILTER_SANITIZE_STRING,
+            'lift_lifting' => FILTER_VALIDATE_BOOLEAN,
+            'lift_none' => FILTER_VALIDATE_BOOLEAN,
+            'lift_passenger' => FILTER_VALIDATE_BOOLEAN,
+            'living_room' => FILTER_VALIDATE_BOOLEAN,
+            'lodge' => FILTER_VALIDATE_BOOLEAN,
+            'metro_station' => FILTER_SANITIZE_NUMBER_INT,
+            'non_commission' => FILTER_VALIDATE_BOOLEAN,
+            'not_residential' => FILTER_SANITIZE_NUMBER_INT,
+            'number_of_floors' => FILTER_SANITIZE_NUMBER_INT,
+            'number_of_rooms' => FILTER_SANITIZE_NUMBER_INT,
+            'object_located' => FILTER_SANITIZE_NUMBER_INT,
+            'object_type' => FILTER_SANITIZE_NUMBER_INT,
+            'operation_type' => FILTER_SANITIZE_NUMBER_INT,
+            'parking_garage_complex' => FILTER_VALIDATE_BOOLEAN,
+            'parking_lot_garage' => FILTER_VALIDATE_BOOLEAN,
+            'parking_multilevel' => FILTER_VALIDATE_BOOLEAN,
+            'parking_none' => FILTER_VALIDATE_BOOLEAN,
+            'parking_underground' => FILTER_VALIDATE_BOOLEAN,
+            'photo_available' => FILTER_VALIDATE_BOOLEAN,
+            'planning_project' => FILTER_SANITIZE_STRING,
+            'playground' => FILTER_VALIDATE_BOOLEAN,
+            'playroom' => FILTER_VALIDATE_BOOLEAN,
+            'plot_of_ravine' => FILTER_VALIDATE_BOOLEAN,
+            'plot_on_the_slope' => FILTER_VALIDATE_BOOLEAN,
+            'plot_smooth' => FILTER_VALIDATE_BOOLEAN,
+            'plot_uneven' => FILTER_VALIDATE_BOOLEAN,
+            'plot_wetland' => FILTER_VALIDATE_BOOLEAN,
+            'preview_img' => FILTER_SANITIZE_STRING,
+            'price' => FILTER_SANITIZE_NUMBER_INT,
+            'property_documents' => FILTER_SANITIZE_STRING,
+            'rating_admin' => FILTER_SANITIZE_NUMBER_INT,
+            'rating_donate' => FILTER_SANITIZE_NUMBER_INT,
+            'rating_views' => FILTER_SANITIZE_NUMBER_INT,
+            'region' => FILTER_SANITIZE_STRING,
+            'residential' => FILTER_SANITIZE_NUMBER_INT,
+            'river' => FILTER_VALIDATE_BOOLEAN,
+            'roofing' => FILTER_SANITIZE_NUMBER_INT,
+            'sanitation' => FILTER_VALIDATE_BOOLEAN,
+            'security' => FILTER_VALIDATE_BOOLEAN,
+            'signaling' => FILTER_VALIDATE_BOOLEAN,
+            'space' => FILTER_SANITIZE_NUMBER_INT,
+            'space_type' => FILTER_SANITIZE_NUMBER_INT,
+            'spring' => FILTER_VALIDATE_BOOLEAN,
+            'stairwells_status' => FILTER_SANITIZE_NUMBER_INT,
+            'status' => FILTER_SANITIZE_NUMBER_INT,
+            'street' => FILTER_SANITIZE_STRING,
+            'study' => FILTER_VALIDATE_BOOLEAN,
+            'swimming_pool' => FILTER_VALIDATE_BOOLEAN,
+            'tags' => FILTER_SANITIZE_STRING,
+            'three_d_project' => FILTER_SANITIZE_STRING,
+            'time_car' => FILTER_SANITIZE_NUMBER_INT,
+            'time_walk' => FILTER_SANITIZE_NUMBER_INT,
+            'title' => FILTER_SANITIZE_STRING,
+            'type_of_construction' => FILTER_SANITIZE_NUMBER_INT,
+            'type_of_house' => FILTER_SANITIZE_NUMBER_INT,
+            'user_id' => FILTER_SANITIZE_NUMBER_INT,
+            'video' => FILTER_SANITIZE_STRING,
+            'wall_material' => FILTER_SANITIZE_NUMBER_INT,
+            'water_pipes' => FILTER_VALIDATE_BOOLEAN,
+            'waterfront' => FILTER_VALIDATE_BOOLEAN,
+            'wine_vault' => FILTER_VALIDATE_BOOLEAN,
+            'year_of_construction' => FILTER_SANITIZE_NUMBER_INT,
         ];
 
         $new_form_data = filter_input_array(INPUT_POST, $args);
@@ -1201,7 +1201,7 @@ class NewsModel extends Model
                 if (isset($_POST['rating_admin_' . $id_news])) {
                     $rating_admin = (int)$_POST['rating_admin_' . $id_news];
                     $id_news = [
-                        'id'           => $id_news,
+                        'id' => $id_news,
                         'rating_admin' => $rating_admin,
                     ];
                     array_push($news_id_rating, $id_news);
@@ -1220,7 +1220,7 @@ class NewsModel extends Model
                         $status = 0;
                     }
                     $id_news_arr = [
-                        'id'     => $id_news,
+                        'id' => $id_news,
                         'status' => $status,
                     ];
                     array_push($news_update_id, $id_news_arr);
@@ -1348,16 +1348,16 @@ class NewsModel extends Model
             . " i.original, i.s_250_140, i.s_500_280, i.s_360_230, i.s_720_460, i.ad_id,";
 
         //Включение в запрос поля favorite если это зарегистрированный пользователь
-        if(!empty($this->user_id)){
-            $sql .=  "  f.ad_id as favorite";
+        if (!empty($this->user_id)) {
+            $sql .= "  f.ad_id as favorite";
         }
 
-        $sql .=  " FROM news_base n LEFT JOIN (SELECT DISTINCT ON(ad_id) * FROM ads_images) i"
+        $sql .= " FROM news_base n LEFT JOIN (SELECT DISTINCT ON(ad_id) * FROM ads_images) i"
             . " ON (n.id_news = i.ad_id)";
 
         //Включение в запрос поля favorite если это зарегистрированный пользователь
-        if(!empty($this->user_id)){
-            $sql .=  " LEFT JOIN favorite_ads f ON (n.id_news = f.ad_id AND f.user_id = ".$this->user_id.")";
+        if (!empty($this->user_id)) {
+            $sql .= " LEFT JOIN favorite_ads f ON (n.id_news = f.ad_id AND f.user_id = " . $this->user_id . ")";
         }
         $sql .= " WHERE (n.date >= :date)";
 
@@ -1660,7 +1660,7 @@ class NewsModel extends Model
     {
         // Проверочный массив
         static $test_array = [
-            'space_type'     => [
+            'space_type' => [
                 1 => 'Нежилая',
                 2 => 'Жилая',
             ],
@@ -1668,16 +1668,16 @@ class NewsModel extends Model
                 1 => 'Арендовать',
                 2 => 'Купить',
             ],
-            'object_type'    => [
-                1  => 'Квартира',
-                2  => 'Офисная площадь',
-                3  => 'Торговая площадь',
-                4  => 'Офисная площадь с землей',
-                5  => 'Производственно-складские здания',
-                6  => 'Производственно-складские помещения ',
-                7  => 'Рынок/Ярмарка',
-                8  => 'Комплекс ОСЗ',
-                9  => 'ОСЗ',
+            'object_type' => [
+                1 => 'Квартира',
+                2 => 'Офисная площадь',
+                3 => 'Торговая площадь',
+                4 => 'Офисная площадь с землей',
+                5 => 'Производственно-складские здания',
+                6 => 'Производственно-складские помещения ',
+                7 => 'Рынок/Ярмарка',
+                8 => 'Комплекс ОСЗ',
+                9 => 'ОСЗ',
                 10 => 'Торговое здание',
                 11 => 'Комната',
                 12 => 'Дом',
@@ -1914,7 +1914,7 @@ class NewsModel extends Model
         $user_id_arr = [];
 
         //Получение массив ссылок на картинки $data['news'][number]['photos'][]
-        if($photos){
+        if ($photos) {
             $data = $this->getAdsPhotos($data);
         }
 
@@ -1957,7 +1957,7 @@ class NewsModel extends Model
             if (!empty($data[$key]['city'])) {
                 $data[$key]['city'] = $city[$data[$key]['city']];
             } else {
-              //  $this->error(self::CITY_INCORRECT_CODE_ERROR);
+                //  $this->error(self::CITY_INCORRECT_CODE_ERROR);
             }
 
             //Определение, является ли объявление новым (дата в формате 'YYYY-MM-DD HH24:MI:SS')
@@ -2314,15 +2314,15 @@ class NewsModel extends Model
         $form_options['space_types'] = [1 => 'Нежилая', 2 => 'Жилая',];
         $form_options['operation_types'] = [1 => 'Арендовать', 2 => 'Купить',];
         $form_options['object_types'] = [
-            1  => 'Квартира',
-            2  => 'Офисная площадь',
-            3  => 'Торговая площадь',
-            4  => 'Офисная площадь с землей',
-            5  => 'Производственно-складские здания',
-            6  => 'Производственно-складские помещения ',
-            7  => 'Рынок/Ярмарка',
-            8  => 'Комплекс ОСЗ',
-            9  => 'ОСЗ',
+            1 => 'Квартира',
+            2 => 'Офисная площадь',
+            3 => 'Торговая площадь',
+            4 => 'Офисная площадь с землей',
+            5 => 'Производственно-складские здания',
+            6 => 'Производственно-складские помещения ',
+            7 => 'Рынок/Ярмарка',
+            8 => 'Комплекс ОСЗ',
+            9 => 'ОСЗ',
             10 => 'Торговое здание',
             11 => 'Комната',
             12 => 'Дом',
@@ -2433,7 +2433,7 @@ class NewsModel extends Model
             return [
                 'error' => [
                     [
-                        'code'    => 0,
+                        'code' => 0,
                         'message' => 'Неправильный запрос',
                     ],
                 ],
@@ -2549,111 +2549,111 @@ class NewsModel extends Model
         $form_data['user_id'] = $user_id;
 
         $args_db = [
-            'address'                          => FILTER_SANITIZE_STRING,
-            'alcove'                           => FILTER_VALIDATE_BOOLEAN,
-            'area'                             => FILTER_SANITIZE_STRING,
-            'availability_of_garbage_chute'    => FILTER_VALIDATE_BOOLEAN,
-            'balcony'                          => FILTER_SANITIZE_NUMBER_INT,
-            'bargain'                          => FILTER_VALIDATE_BOOLEAN,
-            'barn'                             => FILTER_VALIDATE_BOOLEAN,
-            'bath'                             => FILTER_VALIDATE_BOOLEAN,
-            'bathroom'                         => FILTER_VALIDATE_BOOLEAN,
-            'bathroom_available'               => FILTER_VALIDATE_BOOLEAN,
-            'bedroom'                          => FILTER_VALIDATE_BOOLEAN,
-            'building_type'                    => FILTER_SANITIZE_NUMBER_INT,
-            'cadastral_number'                 => FILTER_SANITIZE_STRING,
-            'cctv'                             => FILTER_VALIDATE_BOOLEAN,
-            'ceiling_height'                   => FILTER_SANITIZE_NUMBER_INT,
-            'city'                             => FILTER_SANITIZE_STRING,
+            'address' => FILTER_SANITIZE_STRING,
+            'alcove' => FILTER_VALIDATE_BOOLEAN,
+            'area' => FILTER_SANITIZE_STRING,
+            'availability_of_garbage_chute' => FILTER_VALIDATE_BOOLEAN,
+            'balcony' => FILTER_SANITIZE_NUMBER_INT,
+            'bargain' => FILTER_VALIDATE_BOOLEAN,
+            'barn' => FILTER_VALIDATE_BOOLEAN,
+            'bath' => FILTER_VALIDATE_BOOLEAN,
+            'bathroom' => FILTER_VALIDATE_BOOLEAN,
+            'bathroom_available' => FILTER_VALIDATE_BOOLEAN,
+            'bedroom' => FILTER_VALIDATE_BOOLEAN,
+            'building_type' => FILTER_SANITIZE_NUMBER_INT,
+            'cadastral_number' => FILTER_SANITIZE_STRING,
+            'cctv' => FILTER_VALIDATE_BOOLEAN,
+            'ceiling_height' => FILTER_SANITIZE_NUMBER_INT,
+            'city' => FILTER_SANITIZE_STRING,
             'clarification_of_the_object_type' => FILTER_SANITIZE_NUMBER_INT,
-            'common'                           => FILTER_SANITIZE_NUMBER_INT,
-            'concierge'                        => FILTER_VALIDATE_BOOLEAN,
-            'content'                          => FILTER_SANITIZE_STRING,
-            'country'                          => FILTER_SANITIZE_STRING,
-            'dining_room'                      => FILTER_VALIDATE_BOOLEAN,
-            'distance_from_metro'              => FILTER_SANITIZE_NUMBER_INT,
-            'documents_on_tenure'              => FILTER_SANITIZE_STRING,
-            'electricity'                      => FILTER_VALIDATE_BOOLEAN,
-            'equipment'                        => FILTER_VALIDATE_BOOLEAN,
-            'fencing'                          => FILTER_SANITIZE_NUMBER_INT,
-            'floor'                            => FILTER_SANITIZE_NUMBER_INT,
-            'forest_trees'                     => FILTER_VALIDATE_BOOLEAN,
-            'foundation'                       => FILTER_SANITIZE_NUMBER_INT,
-            'furnish'                          => FILTER_SANITIZE_NUMBER_INT,
-            'garden_trees'                     => FILTER_VALIDATE_BOOLEAN,
-            'gas'                              => FILTER_VALIDATE_BOOLEAN,
-            'guest_house'                      => FILTER_VALIDATE_BOOLEAN,
-            'hallway'                          => FILTER_VALIDATE_BOOLEAN,
-            'heating'                          => FILTER_VALIDATE_BOOLEAN,
-            'house'                            => FILTER_SANITIZE_STRING,
-            'intercom'                         => FILTER_VALIDATE_BOOLEAN,
-            'kitchen'                          => FILTER_VALIDATE_BOOLEAN,
-            'lavatory'                         => FILTER_SANITIZE_NUMBER_INT,
-            'lease'                            => FILTER_SANITIZE_NUMBER_INT,
-            'lease_contract'                   => FILTER_SANITIZE_STRING,
-            'lift_lifting'                     => FILTER_VALIDATE_BOOLEAN,
-            'lift_none'                        => FILTER_VALIDATE_BOOLEAN,
-            'lift_passenger'                   => FILTER_VALIDATE_BOOLEAN,
-            'living_room'                      => FILTER_VALIDATE_BOOLEAN,
-            'lodge'                            => FILTER_VALIDATE_BOOLEAN,
-            'metro_station'                    => FILTER_SANITIZE_NUMBER_INT,
-            'non_commission'                   => FILTER_VALIDATE_BOOLEAN,
-            'not_residential'                  => FILTER_SANITIZE_NUMBER_INT,
-            'number_of_floors'                 => FILTER_SANITIZE_NUMBER_INT,
-            'number_of_rooms'                  => FILTER_SANITIZE_NUMBER_INT,
-            'object_located'                   => FILTER_SANITIZE_NUMBER_INT,
-            'object_type'                      => FILTER_SANITIZE_NUMBER_INT,
-            'operation_type'                   => FILTER_SANITIZE_NUMBER_INT,
-            'parking_garage_complex'           => FILTER_VALIDATE_BOOLEAN,
-            'parking_lot_garage'               => FILTER_VALIDATE_BOOLEAN,
-            'parking_multilevel'               => FILTER_VALIDATE_BOOLEAN,
-            'parking_none'                     => FILTER_VALIDATE_BOOLEAN,
-            'parking_underground'              => FILTER_VALIDATE_BOOLEAN,
-            'photo_available'                  => FILTER_VALIDATE_BOOLEAN,
-            'planning_project'                 => FILTER_SANITIZE_STRING,
-            'playground'                       => FILTER_VALIDATE_BOOLEAN,
-            'playroom'                         => FILTER_VALIDATE_BOOLEAN,
-            'plot_of_ravine'                   => FILTER_VALIDATE_BOOLEAN,
-            'plot_on_the_slope'                => FILTER_VALIDATE_BOOLEAN,
-            'plot_smooth'                      => FILTER_VALIDATE_BOOLEAN,
-            'plot_uneven'                      => FILTER_VALIDATE_BOOLEAN,
-            'plot_wetland'                     => FILTER_VALIDATE_BOOLEAN,
-            'preview_img'                      => FILTER_SANITIZE_STRING,
-            'price'                            => FILTER_SANITIZE_NUMBER_INT,
-            'property_documents'               => FILTER_SANITIZE_STRING,
-            'rating_admin'                     => FILTER_SANITIZE_NUMBER_INT,
-            'rating_donate'                    => FILTER_SANITIZE_NUMBER_INT,
-            'rating_views'                     => FILTER_SANITIZE_NUMBER_INT,
-            'region'                           => FILTER_SANITIZE_STRING,
-            'residential'                      => FILTER_SANITIZE_NUMBER_INT,
-            'river'                            => FILTER_VALIDATE_BOOLEAN,
-            'roofing'                          => FILTER_SANITIZE_NUMBER_INT,
-            'sanitation'                       => FILTER_VALIDATE_BOOLEAN,
-            'security'                         => FILTER_VALIDATE_BOOLEAN,
-            'signaling'                        => FILTER_VALIDATE_BOOLEAN,
-            'space'                            => FILTER_SANITIZE_NUMBER_INT,
-            'space_type'                       => FILTER_SANITIZE_NUMBER_INT,
-            'spring'                           => FILTER_VALIDATE_BOOLEAN,
-            'stairwells_status'                => FILTER_SANITIZE_NUMBER_INT,
-            'status'                           => FILTER_SANITIZE_NUMBER_INT,
-            'street'                           => FILTER_SANITIZE_STRING,
-            'study'                            => FILTER_VALIDATE_BOOLEAN,
-            'swimming_pool'                    => FILTER_VALIDATE_BOOLEAN,
-            'tags'                             => FILTER_SANITIZE_STRING,
-            'three_d_project'                  => FILTER_SANITIZE_STRING,
-            'time_car'                         => FILTER_SANITIZE_NUMBER_INT,
-            'time_walk'                        => FILTER_SANITIZE_NUMBER_INT,
-            'title'                            => FILTER_SANITIZE_STRING,
-            'type_of_construction'             => FILTER_SANITIZE_NUMBER_INT,
-            'type_of_house'                    => FILTER_SANITIZE_NUMBER_INT,
-            'user_id'                          => FILTER_SANITIZE_NUMBER_INT,
-            'video'                            => FILTER_SANITIZE_STRING,
-            'wall_material'                    => FILTER_SANITIZE_NUMBER_INT,
-            'water_pipes'                      => FILTER_VALIDATE_BOOLEAN,
-            'waterfront'                       => FILTER_VALIDATE_BOOLEAN,
-            'wine_vault'                       => FILTER_VALIDATE_BOOLEAN,
-            'year_of_construction'             => FILTER_SANITIZE_NUMBER_INT,
-            ''                                 => FILTER_SANITIZE_NUMBER_INT,
+            'common' => FILTER_SANITIZE_NUMBER_INT,
+            'concierge' => FILTER_VALIDATE_BOOLEAN,
+            'content' => FILTER_SANITIZE_STRING,
+            'country' => FILTER_SANITIZE_STRING,
+            'dining_room' => FILTER_VALIDATE_BOOLEAN,
+            'distance_from_metro' => FILTER_SANITIZE_NUMBER_INT,
+            'documents_on_tenure' => FILTER_SANITIZE_STRING,
+            'electricity' => FILTER_VALIDATE_BOOLEAN,
+            'equipment' => FILTER_VALIDATE_BOOLEAN,
+            'fencing' => FILTER_SANITIZE_NUMBER_INT,
+            'floor' => FILTER_SANITIZE_NUMBER_INT,
+            'forest_trees' => FILTER_VALIDATE_BOOLEAN,
+            'foundation' => FILTER_SANITIZE_NUMBER_INT,
+            'furnish' => FILTER_SANITIZE_NUMBER_INT,
+            'garden_trees' => FILTER_VALIDATE_BOOLEAN,
+            'gas' => FILTER_VALIDATE_BOOLEAN,
+            'guest_house' => FILTER_VALIDATE_BOOLEAN,
+            'hallway' => FILTER_VALIDATE_BOOLEAN,
+            'heating' => FILTER_VALIDATE_BOOLEAN,
+            'house' => FILTER_SANITIZE_STRING,
+            'intercom' => FILTER_VALIDATE_BOOLEAN,
+            'kitchen' => FILTER_VALIDATE_BOOLEAN,
+            'lavatory' => FILTER_SANITIZE_NUMBER_INT,
+            'lease' => FILTER_SANITIZE_NUMBER_INT,
+            'lease_contract' => FILTER_SANITIZE_STRING,
+            'lift_lifting' => FILTER_VALIDATE_BOOLEAN,
+            'lift_none' => FILTER_VALIDATE_BOOLEAN,
+            'lift_passenger' => FILTER_VALIDATE_BOOLEAN,
+            'living_room' => FILTER_VALIDATE_BOOLEAN,
+            'lodge' => FILTER_VALIDATE_BOOLEAN,
+            'metro_station' => FILTER_SANITIZE_NUMBER_INT,
+            'non_commission' => FILTER_VALIDATE_BOOLEAN,
+            'not_residential' => FILTER_SANITIZE_NUMBER_INT,
+            'number_of_floors' => FILTER_SANITIZE_NUMBER_INT,
+            'number_of_rooms' => FILTER_SANITIZE_NUMBER_INT,
+            'object_located' => FILTER_SANITIZE_NUMBER_INT,
+            'object_type' => FILTER_SANITIZE_NUMBER_INT,
+            'operation_type' => FILTER_SANITIZE_NUMBER_INT,
+            'parking_garage_complex' => FILTER_VALIDATE_BOOLEAN,
+            'parking_lot_garage' => FILTER_VALIDATE_BOOLEAN,
+            'parking_multilevel' => FILTER_VALIDATE_BOOLEAN,
+            'parking_none' => FILTER_VALIDATE_BOOLEAN,
+            'parking_underground' => FILTER_VALIDATE_BOOLEAN,
+            'photo_available' => FILTER_VALIDATE_BOOLEAN,
+            'planning_project' => FILTER_SANITIZE_STRING,
+            'playground' => FILTER_VALIDATE_BOOLEAN,
+            'playroom' => FILTER_VALIDATE_BOOLEAN,
+            'plot_of_ravine' => FILTER_VALIDATE_BOOLEAN,
+            'plot_on_the_slope' => FILTER_VALIDATE_BOOLEAN,
+            'plot_smooth' => FILTER_VALIDATE_BOOLEAN,
+            'plot_uneven' => FILTER_VALIDATE_BOOLEAN,
+            'plot_wetland' => FILTER_VALIDATE_BOOLEAN,
+            'preview_img' => FILTER_SANITIZE_STRING,
+            'price' => FILTER_SANITIZE_NUMBER_INT,
+            'property_documents' => FILTER_SANITIZE_STRING,
+            'rating_admin' => FILTER_SANITIZE_NUMBER_INT,
+            'rating_donate' => FILTER_SANITIZE_NUMBER_INT,
+            'rating_views' => FILTER_SANITIZE_NUMBER_INT,
+            'region' => FILTER_SANITIZE_STRING,
+            'residential' => FILTER_SANITIZE_NUMBER_INT,
+            'river' => FILTER_VALIDATE_BOOLEAN,
+            'roofing' => FILTER_SANITIZE_NUMBER_INT,
+            'sanitation' => FILTER_VALIDATE_BOOLEAN,
+            'security' => FILTER_VALIDATE_BOOLEAN,
+            'signaling' => FILTER_VALIDATE_BOOLEAN,
+            'space' => FILTER_SANITIZE_NUMBER_INT,
+            'space_type' => FILTER_SANITIZE_NUMBER_INT,
+            'spring' => FILTER_VALIDATE_BOOLEAN,
+            'stairwells_status' => FILTER_SANITIZE_NUMBER_INT,
+            'status' => FILTER_SANITIZE_NUMBER_INT,
+            'street' => FILTER_SANITIZE_STRING,
+            'study' => FILTER_VALIDATE_BOOLEAN,
+            'swimming_pool' => FILTER_VALIDATE_BOOLEAN,
+            'tags' => FILTER_SANITIZE_STRING,
+            'three_d_project' => FILTER_SANITIZE_STRING,
+            'time_car' => FILTER_SANITIZE_NUMBER_INT,
+            'time_walk' => FILTER_SANITIZE_NUMBER_INT,
+            'title' => FILTER_SANITIZE_STRING,
+            'type_of_construction' => FILTER_SANITIZE_NUMBER_INT,
+            'type_of_house' => FILTER_SANITIZE_NUMBER_INT,
+            'user_id' => FILTER_SANITIZE_NUMBER_INT,
+            'video' => FILTER_SANITIZE_STRING,
+            'wall_material' => FILTER_SANITIZE_NUMBER_INT,
+            'water_pipes' => FILTER_VALIDATE_BOOLEAN,
+            'waterfront' => FILTER_VALIDATE_BOOLEAN,
+            'wine_vault' => FILTER_VALIDATE_BOOLEAN,
+            'year_of_construction' => FILTER_SANITIZE_NUMBER_INT,
+            '' => FILTER_SANITIZE_NUMBER_INT,
         ];
 
         //Преобразование через keys
@@ -2690,8 +2690,9 @@ class NewsModel extends Model
         return $return_data;
     }
 
-    private function  translateMetroStations($data){
-        if(isset($data)){
+    private function translateMetroStations($data)
+    {
+        if (isset($data)) {
             // Данные индекс метро -> наименование
             $metro_stations = [];
             $sql = "SELECT metro_id, metro_name, line_id "
@@ -2708,7 +2709,7 @@ class NewsModel extends Model
                 ];
             }
 
-            foreach($data as $key => $value){
+            foreach ($data as $key => $value) {
                 //Перевод индекса метро в наименование
                 if (!empty($data[$key]['metro_station']) && !empty($metro_stations[$data[$key]['metro_station']])) {
                     $data[$key]['metro_line'] = $metro_stations[$data[$key]['metro_station']]['line_id'];
@@ -2721,6 +2722,112 @@ class NewsModel extends Model
         return $data;
     }
 
+    public function setItemActive()
+    {
+        if (!isset($_REQUEST['id'])) {
+            $this->error(self::BAD_REQUEST_ERROR);
+        }
 
+        if (!isset($_SESSION['user']['id'])) {
+            $this->error(self::USER_NOT_AUTHORIZED_ERROR);
+        }
 
+        $query = $this->db->prepare('SELECT id_news FROM news_base WHERE user_id = :user_id AND id_news = :news_id');
+        $query->execute([
+            ':user_id' => $_SESSION['user']['id'],
+            ':news_id' => $_REQUEST['id'],
+        ]);
+
+        if ($query->errorCode() !== '00000') {
+            $this->error(self::DB_UPDATE_ERROR, $query->errorInfo());
+        }
+
+        if (!$query->fetch()) {
+            $this->error(self::CHANGE_NOT_YOUR_DATA_ERROR);
+        }
+
+        $query = $this->db->prepare('UPDATE news_base SET status = 1 WHERE id_news = :id');
+        $query->execute([':id' => $_REQUEST['id']]);
+
+        if ($query->errorCode() !== '00000') {
+            $this->error(self::DB_UPDATE_ERROR, $query->errorInfo());
+        }
+
+        $this->response();
+    }
+
+    public function setItemUnActive()
+    {
+        if (!isset($_REQUEST['id'])) {
+            $this->error(self::BAD_REQUEST_ERROR);
+        }
+
+        if (!isset($_SESSION['user']['id'])) {
+            $this->error(self::USER_NOT_AUTHORIZED_ERROR);
+        }
+
+        $query = $this->db->prepare('SELECT id_news FROM news_base WHERE user_id = :user_id AND id_news = :news_id');
+        $query->execute([
+            ':user_id' => $_SESSION['user']['id'],
+            ':news_id' => $_REQUEST['id'],
+        ]);
+
+        if ($query->errorCode() !== '00000') {
+            $this->error(self::DB_UPDATE_ERROR, $query->errorInfo());
+        }
+
+        if (!$query->fetch()) {
+            $this->error(self::CHANGE_NOT_YOUR_DATA_ERROR);
+        }
+
+        $query = $this->db->prepare('UPDATE news_base SET status = 0 WHERE id_news = :id');
+        $query->execute([':id' => $_REQUEST['id']]);
+
+        if ($query->errorCode() !== '00000') {
+            $this->error(self::DB_UPDATE_ERROR, $query->errorInfo());
+        }
+
+        $this->response();
+    }
+
+    public function deleteItem()
+    {
+        if (!isset($_REQUEST['id'])) {
+            $this->error(self::BAD_REQUEST_ERROR);
+        }
+
+        if (!isset($_SESSION['user']['id'])) {
+            $this->error(self::USER_NOT_AUTHORIZED_ERROR);
+        }
+
+        $query = $this->db->prepare('SELECT id_news FROM news_base WHERE user_id = :user_id AND id_news = :news_id');
+        $query->execute([
+            ':user_id' => $_SESSION['user']['id'],
+            ':news_id' => $_REQUEST['id'],
+        ]);
+
+        if ($query->errorCode() !== '00000') {
+            $this->error(self::DB_UPDATE_ERROR, $query->errorInfo());
+        }
+
+        if (!$query->fetch()) {
+            $this->error(self::CHANGE_NOT_YOUR_DATA_ERROR);
+        }
+
+        $query = $this->db->prepare('DELETE FROM news_base WHERE id_news = :id');
+        $query->execute([':id' => $_REQUEST['id']]);
+
+        if ($query->errorCode() !== '00000') {
+            $this->error(self::DB_UPDATE_ERROR, $query->errorInfo());
+        }
+
+        $query = $this->db->prepare('DELETE FROM ads_images WHERE ad_id = :id');
+        $query->execute([':id' => $_REQUEST['id']]);
+
+        if ($query->errorCode() !== '00000') {
+            $this->error(self::DB_UPDATE_ERROR, $query->errorInfo());
+        }
+
+        $this->response();
+    }
 }

@@ -111,4 +111,5 @@ return [
     'api/sms/auth/activate' => 'main/API/verifySMSActivateCode',
     'api/items.setActive' => 'main/API/itemActive',
     'api/items.setUnActive' => 'main/API/itemUnActive',
+    'api/items.delete' => 'main/API/itemDelete',
 ];

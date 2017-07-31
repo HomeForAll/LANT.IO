@@ -21,6 +21,8 @@ class Response
     const DB_SELECT_ERROR = 5;
     const CURL_CONNECTION_LOST = 6;
     const NOT_ARRAY = 7;
+    const CHANGE_NOT_YOUR_DATA_ERROR = 8;
+
 
     // Авторизация
     const LOGIN_INCORRECT_ERROR = 1000;
@@ -97,6 +99,7 @@ class Response
         5 => 'Возникла ошибка при выборке из базы данных',
         6 => 'CURL нет соединения с сервером',
         7 => 'Тип данных не является массивом',
+        8 => 'Обнаружена попытка модифицировать чужие данные',
 
         // Авторизация 1000-2000:
         1000 => 'Логин введен неверно',
@@ -170,8 +173,9 @@ class Response
 
     /**
      * @param int $code
+     * @param mixed $detail - детальная информация о ошибке
      */
-    protected function error($code)
+    protected function error($code, $detail = null)
     {
         $code = (int)$code;
         $content = [];
@@ -189,6 +193,10 @@ class Response
         }
 
         if (DEBUG) {
+            if ($detail) {
+                array_push($content, $detail);
+            }
+
             $content['error']['trace'] = debug_backtrace();
         }
 

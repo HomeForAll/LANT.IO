@@ -280,4 +280,9 @@ class APIController extends Controller
     {
         $this->model('NewsModel')->setItemUnActive();
     }
+
+    public function actionItemDelete()
+    {
+        $this->model('NewsModel')->deleteItem();
+    }
 }
