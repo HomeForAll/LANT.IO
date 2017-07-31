@@ -38,7 +38,7 @@ class CabinetController extends Controller
 
     public function actionDialogs()
     {
-        $dialogs_page_defualt = $this->model('CabinetModel')->checkPhoneNumber();
+        $dialogs_page_defualt = $this->model('CabinetModel')->checkPhoneNumber('+7(916)114-82-95');
         $viewdialogs = $dialogs_page_defualt;
         if (isset($_POST['dialogs']))
             $viewdialogs = $this->model('CabinetModel')->getDialogs(true);

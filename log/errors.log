@@ -105,3 +105,50 @@
   (line: 1 ) ->  
 >>>>>>> 1c76933e2172c5d7a977f7e6732df3963aa08f9a
 
+<<<<<<< HEAD
+* 2017-07-30 [18:43:50] - [Notice] Undefined index: user
+  (line: 803 ) -> app\models\CabinetModel.php 
+
+* 2017-07-30 [18:53:11] - [Notice] Undefined index: contacts_number
+  (line: 1093 ) -> app\models\CabinetModel.php 
+
+* 2017-07-30 [18:55:47] - [Notice] Undefined index: contacts_number
+  (line: 1093 ) -> app\models\CabinetModel.php 
+
+* 2017-07-30 [18:56:01] - [Notice] Undefined index: contacts_number
+  (line: 1093 ) -> app\models\CabinetModel.php 
+
+* 2017-07-30 [18:56:21] - [Notice] Undefined index: contacts_number
+  (line: 1093 ) -> app\models\CabinetModel.php 
+
+* 2017-07-30 [18:56:39] - [Notice] Undefined index: contacts_number
+  (line: 1093 ) -> app\models\CabinetModel.php 
+
+* 2017-07-30 [19:00:07] - [Notice] Undefined index: contacts_number
+  (line: 1093 ) -> app\models\CabinetModel.php 
+
+* 2017-07-30 [19:00:50] - [Notice] Undefined index: contacts_number
+  (line: 1093 ) -> app\models\CabinetModel.php 
+
+* 2017-07-31 [10:18:42] - [Notice] Undefined index: user
+  (line: 803 ) -> app\models\CabinetModel.php 
+
+* 2017-07-31 [10:24:25] - [Notice] Undefined index: contacts_number
+  (line: 1093 ) -> app\models\CabinetModel.php 
+
+* 2017-07-31 [11:19:23] - [Notice] Undefined index: contacts_number
+  (line: 1093 ) -> app\models\CabinetModel.php 
+
+* 2017-07-31 [11:42:09] - [Notice] Undefined index: contacts_number
+  (line: 1093 ) -> app\models\CabinetModel.php 
+
+* 2017-07-31 [12:45:11] - [Notice] Undefined index: contacts_number
+  (line: 1093 ) -> app\models\CabinetModel.php 
+=======
+* 2017-07-30 [12:32:03] - [Warning] Missing argument 1 for CabinetModel::checkPassportNumbers(), called in D:\OpenServer\OpenServer\domains\localhost\app\controllers\CabinetController.php on line 41 and defined
+  (line: 921 ) -> app\models\CabinetModel.php 
+
+* 2017-07-30 [12:32:04] - [Notice] Undefined variable: str
+  (line: 923 ) -> app\models\CabinetModel.php 
+>>>>>>> 5d78bee71de236e50c4b5b646efcdafe9a66c371
+

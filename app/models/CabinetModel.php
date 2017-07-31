@@ -1021,8 +1021,11 @@ class CabinetModel extends Model
     public function checkPhoneNumber($str)
     {
         $str = trim($str);
-        if (!v::phone()->validate($str))
+        $str = str_replace(' ', '', $str);
+        if (!mb_ereg_match("((8|\+7)(|\-)?)?(\(?\d{3}\)?(|\-)?)?[\d\- ]{7,10}$", $str))
             return false;
+//        if (!v::phone()->validate($str))
+//            return false;
         return $str;
     }
 
@@ -1090,7 +1093,7 @@ class CabinetModel extends Model
         } else {
             $this->error(self::WRONG_ADRESS_FLAT);
         }
-        if ($str = $this->checkPhoneNumber($_POST['contacts_number'])) {
+        if ($str = $this->checkPhoneNumber($_POST['phone'])) {
                 $str = preg_replace('~([^0-9]+)~', '', $str);
             if (strlen($str) == 11) {
                 $str[0] = 7;
@@ -1099,7 +1102,7 @@ class CabinetModel extends Model
         } else {
             $this->error(self::WRONG_PHONE_NUMBER);
         }
-        if ($str = $this->сheckEmail($_POST['email'])) {
+        if ($str = $this->сheckEmail($_POST['contacts_email'])) {
             $update['contacts_email'] = $str;
         } else {
             $this->error(self::WRONG_EMAIL);
@@ -1227,10 +1230,13 @@ class CabinetModel extends Model
 
     public function saveUpdatePersonalInfo($update)
     {
-        $stmt = $this->db->prepare("UPDATE users SET first_name = :name_name, last_name = :name_surname, patronymic = :name_patronymic, birthday = :name_birthday, aboutme = :about_me,
+        $update['passport_series'] = str_replace('-', '', $update['passport_series']);
+        $update['passport_number'] = str_replace('-', '', $update['passport_number']);
+
+        $stmt = $this->db->prepare("UPDATE users SET first_name = :name_name, last_name = :name_surname, patronymic = :name_patronymic, birthday = :name_birthday, about_me = :about_me,
                                               series = :passport_series, number = :passport_number, 
                                               index = :adress_index, city = :adress_city, street = :adress_street, home = :adress_home, flat = :adress_flat,
-                                              phonenumber = :contacts_number, email = :contacts_email
+                                              phone_number = :contacts_number, email = :contacts_email
                                               WHERE id = :profile_id");
         $stmt->execute([
             ':name_name'      => $update['name_name'],
