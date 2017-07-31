@@ -1021,8 +1021,10 @@ class CabinetModel extends Model
     public function checkPhoneNumber($str)
     {
         $str = trim($str);
-        if (!v::phone()->validate($str))
+        if (!mb_ereg_match("((8|\+7)(|\-)?)?(\(?\d{3}\)?(|\-)?)?[\d\- ]{7,10}$", $str))
             return false;
+//        if (!v::phone()->validate($str))
+//            return false;
         return $str;
     }
 
