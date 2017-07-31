@@ -2513,7 +2513,7 @@ class NewsModel extends Model
                         $request['time_from'] = 168;
                         break;
                     case 'month':
-                        $request['time_from'] = 720;
+                        $request['time_from'] = 8640;
                         break;
                     default:
                         $request['time_from'] = 24;
