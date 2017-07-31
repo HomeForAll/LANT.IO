@@ -79,11 +79,14 @@ $(function () {
     });
 
     var renderItems = function(data) {
+        if (!data.s_250_140) {
+            data.s_250_140 = "/template/img/250x140.jpg";
+        }
         var ad = $("<div>").addClass("profile-item").appendTo(".profile-items");
         //var ad = $("<div>").addClass("padd").appendTo(ad);
         //var img = $("<img>").prop("src", "/uploads/images/"+data.preview_img).appendTo(ad);
 
-        $("<div>").addClass('profile-item__photo').css("background-image", "url(/uploads/images/"+data.preview_img+")").appendTo(ad);
+        $("<div>").addClass('profile-item__photo').css("background-image", "url("+data.s_250_140+")").appendTo(ad);
         $("<div>").addClass("profile-item__param").addClass("axfs").html("2 ком. кв 135 м2").appendTo(ad);
 
         var detail = $("<div>").addClass("profile-item__detail").appendTo(ad);
@@ -113,11 +116,14 @@ $(function () {
     };
 
     var renderFavorite = function(data) {
+        if (!data.s_250_140) {
+            data.s_250_140 = "/template/img/250x140.jpg";
+        }
         var ad = $("<div>").addClass("profile-item").appendTo(".profile-favorites");
         //var ad = $("<div>").addClass("padd").appendTo(ad);
         //var img = $("<img>").prop("src", "/uploads/images/"+data.preview_img).appendTo(ad);
 
-        $("<div>").addClass('profile-item__photo').css("background-image", "url(/uploads/images/"+data.preview_img+")").appendTo(ad);
+        $("<div>").addClass('profile-item__photo').css("background-image", "url("+data.s_250_140+")").appendTo(ad);
         $("<div>").addClass("profile-item__param").addClass("axfs").html("2 ком. кв 135 м2").appendTo(ad);
 
         var ad = $("<div>").addClass("profile-item__detail").appendTo(ad);
@@ -338,6 +344,61 @@ $("#upload_photos").change(function(event) {
 
 
 
+
+
+
+
+/*
+Дата рождения
+
+Паспортные данные:
+Серия номер
+Адрес регистрации:
+Индекс
+Город
+Улица
+Дом
+Квартира
+
+Контакты:
+Номер телефона
+Email
+*/
+
+
+    var profile_my = $('#profile_my');
+    if (profile_my.length) {
+        $.getJSON("/api/user", {extend: 1}, function(user) {
+            if (user.response) {
+                user.response.middle_name = user.response.patronymic;
+                user.response.bdate = user.response.birthday;
+                var html = '';
+
+                html += `
+                <img src="${user.response.avatar_100}" />
+                <div>${user.response.first_name} ${user.response.middle_name} ${user.response.last_name}<div>
+
+                <div>Дата рождения</div><div>${user.response.bdate}</div>
+
+
+                <div>О себе</div>
+                <div>${user.response.about_me}</div>
+                `;
+
+
+                profile_my.html(html);
+            }
+        });
+    }
+
+
+
+    // if (user.response.avatar_50)
+    //     $('.user-info img').prop('src', user.response.avatar_50);
+    // if (user.response.avatar_100)
+    //     $('.profile-userinfo_photo').prop('src', user.response.avatar_100);
+    // $('.profile-userinfo_welcome').html("Здравствуйте, "+user.response.name+"!");
+    // $('.user-info .user-info__name').html(user.response.name);
 
 
 
