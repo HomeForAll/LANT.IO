@@ -2636,7 +2636,9 @@ class CabinetModel extends Model
             $offset = $_GET['offset'];
         }
 
-        $query = $this->db->prepare('SELECT * FROM news_base WHERE user_id = :user_id LIMIT :limit OFFSET :offset');
+        $query = $this->db->prepare("SELECT news_base.*, i.*, (CASE WHEN f.user_id IS NOT NULL THEN 1 ELSE 0 END) AS favorite FROM news_base 
+                                               LEFT JOIN (SELECT DISTINCT ON(ad_id) * FROM ads_images) i ON (news_base.id_news = i.ad_id) 
+                                               LEFT JOIN favorite_ads f ON (f.ad_id = news_base.id_news AND f.user_id = :user_id) WHERE news_base.user_id = :user_id LIMIT :limit OFFSET :offset");
         $query->execute([
             ':user_id' => $_SESSION['user']['id'],
             ':limit'   => $count,
@@ -2731,7 +2733,7 @@ class CabinetModel extends Model
             $offset = $_GET['offset'];
         }
 
-        $query = $this->db->prepare('SELECT * FROM favorite_ads, news_base WHERE favorite_ads.ad_id = news_base.id_news AND favorite_ads.user_id = :user_id LIMIT :limit OFFSET :offset');
+        $query = $this->db->prepare('SELECT * FROM favorite_ads, news_base LEFT JOIN (SELECT DISTINCT ON(ad_id) * FROM ads_images) i ON (news_base.id_news = i.ad_id) WHERE favorite_ads.ad_id = news_base.id_news AND favorite_ads.user_id = :user_id LIMIT :limit OFFSET :offset');
         $query->execute([
             ':user_id' => $_SESSION['user']['id'],
             ':limit'   => $count,

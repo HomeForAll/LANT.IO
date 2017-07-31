@@ -673,7 +673,7 @@ class SearchModel extends Model
 
         switch ($queryType) {
             case self::SEARCH:
-                $sql = "SELECT news_base.*, (CASE WHEN f.user_id IS NOT NULL THEN 1 ELSE 0 END) AS favorite FROM news_base 
+                $sql = "SELECT news_base.*, i.*, (CASE WHEN f.user_id IS NOT NULL THEN 1 ELSE 0 END) AS favorite FROM news_base 
                         LEFT JOIN (SELECT DISTINCT ON(ad_id) * FROM ads_images) i ON (news_base.id_news = i.ad_id) 
                         LEFT JOIN favorite_ads f ON (f.ad_id = news_base.id_news AND f.user_id = {$user_id}) WHERE ";
                 break;
