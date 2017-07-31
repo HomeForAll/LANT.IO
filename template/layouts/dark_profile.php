@@ -15,7 +15,7 @@
 </head>
 <body>
 <div class="content">
-    <?php include_once ROOT_DIR . '/template/html/edit_profile_dark/header/header.php' ?>
+    <!-- <?php include_once ROOT_DIR . '/template/html/edit_profile_dark/header/header.php' ?> -->
     <?php include_once ROOT_DIR . '/template/html/login/menu.html' ?>
     <div class="left-bar-and-user-profile">
         <?php include_once ROOT_DIR . '/template/html/edit_profile_dark/left_bar/left_bar.php' ?>
