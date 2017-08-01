@@ -2743,7 +2743,7 @@ class NewsModel extends Model
                         $data[$key]['line_name'] = $metro_line[$line_id]['line_name'];
                     }
                     if($line_color){
-                        $data[$key]['line_color'] = $metro_line[$line_id]['line_color'];
+                        $data[$key]['metro_color'] = $metro_line[$line_id]['line_color'];
                     }
 
                     $data[$key]['metro_station'] = $metro_stations[$data[$key]['metro_station']]['metro_name'];
