@@ -94,7 +94,7 @@ $(function () {
         var price = $("<div>").addClass('profile-item__price').html((data.price * 1).toLocaleString('ru-RU')).appendTo(detail);
         $("<span>").addClass('profile-item__price_info').html("<span class=\"rub\">руб.</span>/месяц").appendTo(price);
 
-        $("<div>").addClass('profile-item__metro').html('<svg width="19" height="13"><use xlink:href="#i-metro" x="0" y="0"></use></svg> Бауманская').appendTo(detail);
+        $("<div>").addClass('profile-item__metro').html(`<svg style="color: ${data.metro_color}" width="19" height="13"><use xlink:href="#i-metro" x="0" y="0"></use></svg> ${data.metro_station}`).appendTo(detail);
         $("<div>").addClass('profile-item__afoot').html('<svg width="8" height="12"><use xlink:href="#i-afoot" x="0" y="0"></use></svg> '+data.not_residential+' мин').appendTo(detail);
         //
 
@@ -163,7 +163,7 @@ $(function () {
         var price = $("<div>").addClass('profile-item__price').html((data.price * 1).toLocaleString('ru-RU')).appendTo(ad);
         $("<span>").addClass('profile-item__price_info').html("<span class=\"rub\">руб.</span>/месяц").appendTo(price);
 
-        $("<div>").addClass('profile-item__metro').html('<svg width="19" height="13"><use xlink:href="#i-metro" x="0" y="0"></use></svg> Бауманская').appendTo(ad);
+        $("<div>").addClass('profile-item__metro').html(`<svg style="color: ${data.metro_color}" width="19" height="13"><use xlink:href="#i-metro" x="0" y="0"></use></svg> ${data.metro_station}`).appendTo(ad);
         $("<div>").addClass('profile-item__afoot').html('<svg width="8" height="12"><use xlink:href="#i-afoot" x="0" y="0"></use></svg> '+data.not_residential+' мин').appendTo(ad);
         //
         // $("<div>").addClass('ads-more').addClass("axfc")

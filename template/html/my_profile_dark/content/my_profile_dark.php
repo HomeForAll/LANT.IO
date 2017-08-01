@@ -28,12 +28,11 @@
             <label>Индекс<input name="adress_index" disabled type="text" placeholder="129534"></label>
             <label>Город<input name="adress_city" disabled type="text" placeholder="Москва"></label>
             <label>Улица<input name="adress_street" disabled type="text" placeholder="Лукашенко"></label>
-            <label>Дом<input name="adress_home" disabled type="text" placeholder="4"></label>
-            <label>Квартира<input name="adress_flat" disabled type="text" placeholder="12"></label><br>
+            <label>Дом<input name="adress_home" pattern="^[0-9]+" disabled type="text" placeholder="4"></label>
+            <label>Квартира<input name="adress_flat" pattern="^[0-9]+" disabled type="text" placeholder="12"></label><br>
             <label>Контакты::<input disabled type="text" placeholder=""></label>
-            <label>Номер телефона<input disabled type="text" name="phone" placeholder="+7 (___) ___ - __ - __" data-inputmask="'mask': '+7 (999) 999 - 99 - 99'"></label>
-            <label>Email:<input name="contacts_email" disabled type="text" placeholder="example@mail.ru"></label>
-        </div>
+            <label>Номер телефона<input disabled type="text" name="contacts_number" placeholder="+7 (___) ___ - __ - __" data-inputmask="'mask': '+7 (999) 999 - 99 - 99'"></label>
+            <label>Email<input data-inputmask="'mask': '*{1,20}[.*{1,20}][.*{1,20}][.*{1,20}]@*{1,20}[.*{2,6}][.*{1,2}]'" placeholder="example@mail.ru" name="contacts_email" /></label>        </div>
         <div class="about-me">
             <span>О себе</span>
             <p class="message">Lasik, an acronym for Laser-assisted, is a form of refractive laser eye surgery procedure performed by ophthalmologists intended for correcting vision. The procedure is usually a preferred alternative to photorefractive keratectomy, PRK, as it requires less time for full recovery, and the patient experiences less pain overall.

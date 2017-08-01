@@ -145,6 +145,9 @@ $(function(){
                 } else if (data.response == true) {
                     location.reload();
                 }
+                if (data.error) {
+                    location.reload();
+                }
             }
         });
     });
