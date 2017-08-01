@@ -261,14 +261,19 @@ class APIController extends Controller
         $this->model('UserModel')->verifyGoogleAuthenticatorCode();
     }
 
-    public function actionSendSMSCode()
+    public function actionSendActivateSMSCode()
     {
-        $this->model('UserModel')->sendSMSCode();
+        $this->model('UserModel')->sendSMSCodeForEnable2FA();
     }
 
     public function actionVerifySMSActivateCode()
     {
-        $this->model('UserModel')->verifySMSCodeAndActivate();
+        $this->model('UserModel')->verifySMSCodeAndActivate2FA();
+    }
+
+    public function actionAuthBySMSCode()
+    {
+        $this->model('UserModel')->verifySMSCodeAndAuth();
     }
 
     public function actionItemActive()

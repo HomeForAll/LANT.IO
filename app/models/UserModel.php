@@ -45,11 +45,11 @@ class UserModel extends Model
             if (password_verify($password, $user['password'])) {
                 switch ($user['auth_2factor']) {
                     case 1:
-
-                        $code = mt_rand(100000, 999999);
-                        $_SESSION['sms_code'] = $code;
+                        $handler = new SMSHandler($user['phone_number']);
+                        $handler->sendCode();
 
                         $_SESSION['user']['tmp_hash'] = hash('SHA256', mt_rand(1, 10000) . time());
+
                         $this->response([
                             'auth_type' => 'sms',
                             'tmp_hash' => $_SESSION['user']['tmp_hash'],
@@ -1184,15 +1184,6 @@ class UserModel extends Model
         $this->response(true);
     }
 
-    public function verifySMSCode($code)
-    {
-        if (!v::numeric()->validate($code) || $_SESSION['sms_code'] != $code) {
-            $this->error(self::SMS_CODE_INCORRECT_ERROR);
-        }
-
-        $this->response(true);
-    }
-
     public function setEmail($email)
     {
         if (empty($email)) {
@@ -1702,7 +1693,7 @@ class UserModel extends Model
         }
     }
 
-    public function sendActivateSMSCode()
+    public function sendSMSCodeForEnable2FA()
     {
         if (!isset($_SESSION['user']['id'])) {
             $this->error(self::USER_NOT_AUTHORIZED_ERROR);
@@ -1721,50 +1712,14 @@ class UserModel extends Model
             $this->error(self::PHONE_NOT_EXIST_ERROR);
         }
 
-        $this->sendSMSCode($user['phone_number']);
+        $handler = new SMSHandler($user['phone_number']);
+        $handler->sendCode();
+        $this->response();
     }
 
-    public function sendSMSCode($phone)
+    public function verifySMSCodeAndActivate2FA()
     {
-        $code = mt_rand(100000, 999999);
-
-        $ch = curl_init("https://sms.ru/sms/send");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
-            "api_id" => Registry::get('config')['sms_api_key'],
-            "to" => $phone, // До 100 штук до раз
-            "msg" => "Ваш код: {$code}",
-            "json" => 1 // Для получения более развернутого ответа от сервера
-        ]));
-
-        $body = curl_exec($ch);
-        curl_close($ch);
-
-        $json = json_decode($body);
-
-        if ($json) {
-            if ($json->status == "OK") {
-                foreach ($json->sms as $phone => $data) {
-                    if ($data->status !== "OK") { // Сообщение отправлено
-                        $this->error(self::SMS_NOT_SENT_ERROR, $data->status_text);
-                    }
-                }
-
-                $_SESSION['registration']['code'] = $code;
-            } else {
-                $this->error(self::SMS_API_REQUEST_FAILED_ERROR, $json->status_text);
-            }
-        } else {
-            $this->error(self::CURL_CONNECTION_LOST);
-        }
-
-        return $code;
-    }
-
-    public function verifySMSCodeAndActivate()
-    {
-        if (!isset($_GET['code'])) {
+        if (!isset($_REQUEST['code'])) {
             $this->error(self::BAD_REQUEST_ERROR);
         }
 
@@ -1772,9 +1727,8 @@ class UserModel extends Model
             $this->error(self::USER_NOT_AUTHORIZED_ERROR);
         }
 
-        if (!v::numeric()->validate($_GET['code']) || $_SESSION['user']['code'] != $_GET['code']) {
-            $this->error(self::SMS_CODE_INCORRECT_ERROR);
-        }
+        $handler = new SMSHandler();
+        $handler->verifyCode($_REQUEST['code']);
 
         $query = $this->db->prepare('UPDATE users SET auth_2factor = 1 WHERE id = :user_id');
         $query->execute([':user_id' => $_SESSION['user']['id']]);
@@ -1783,7 +1737,53 @@ class UserModel extends Model
             $this->error(self::DB_UPDATE_ERROR, $query->errorInfo());
         }
 
-        unset($_SESSION['user']['code']);
+        unset($_SESSION['sms_code']);
+
+        $this->response(true);
+    }
+
+    public function verifySMSCodeAndAuth()
+    {
+        if (!isset($_REQUEST['login']) || !isset($_REQUEST['code']) || !isset($_REQUEST['hash'])) {
+            $this->error(self::BAD_REQUEST_ERROR);
+        }
+
+        if (!isset($_SESSION['user']['tmp_hash'])) {
+            $this->error(self::TMP_HASH_NOT_EXIST_ERROR);
+        }
+
+        if ($_SESSION['user']['tmp_hash'] !== $_REQUEST['hash']) {
+            $this->error(self::TMP_HASH_INCORRECT_ERROR);
+        }
+
+        $handler = new SMSHandler();
+        $query = '';
+
+        if (v::phone()->validate($_REQUEST['login'])) {
+            $query = $this->db->prepare('SELECT id FROM users WHERE phone_number = :phone');
+            $query->execute([':phone' => $_REQUEST['login']]);
+        } elseif (v::email()->validate($_REQUEST['login'])) {
+            $query = $this->db->prepare('SELECT id FROM users WHERE email = :email');
+            $query->execute([':email' => $_REQUEST['login']]);
+        } else {
+            $this->error(self::LOGIN_INCORRECT_ERROR);
+        }
+
+        if ($query->errorCode() !== '00000') {
+            $this->error(self::DB_SELECT_ERROR, $query->errorInfo());
+        }
+
+        $user = $query->fetch();
+
+        if (!$user) {
+            $this->error(self::USER_NOT_EXIST_ERROR);
+        }
+
+        $handler->verifyCode($_REQUEST['code']);
+
+        $_SESSION['authorized'] = true;
+        $_SESSION['user']['id'] = $user['id'];
+        $_SESSION['user_hash'] = hash('sha512', 'user_id=' . $user['id'] . 'secret_key=' . Registry::get('config')['secret_key']);
 
         $this->response(true);
     }
