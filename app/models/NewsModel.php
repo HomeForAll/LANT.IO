@@ -1344,6 +1344,7 @@ class NewsModel extends Model
             . " n.space_type, n.operation_type, n.object_type, n.city,"
             . " n.content, n.user_id, n.status,  n.price, n.lease, n.space,"
             . " (n.rating_views + n.rating_admin+n.rating_donate) as rating,"
+            . " n.not_residential,"
             . " n.number_of_rooms, n.metro_station, n.time_walk, n.time_car, n.lat, n.lng,"
             . " i.original, i.s_250_140, i.s_500_280, i.s_360_230, i.s_720_460, i.ad_id";
 
@@ -1988,7 +1989,7 @@ class NewsModel extends Model
             }
         }
         //Перевод станций метро
-        $data = $this->translateMetroStations($data);
+        $data = $this->translateMetroStations($data, false, false, true);
         $this->response['items'] = $data;
     }
 
@@ -2694,10 +2695,11 @@ class NewsModel extends Model
         return $return_data;
     }
 
-    private function  translateMetroStations($data){
+    private function  translateMetroStations($data, $line_number = false, $line_name = false, $line_color = false){
         if(isset($data)){
             // Данные индекс метро -> наименование
             $metro_stations = [];
+            $metro_line = [];
             $sql = "SELECT metro_id, metro_name, line_id "
                 . "FROM metro_stations ";
             $stmt = $this->db->prepare($sql);
@@ -2712,10 +2714,38 @@ class NewsModel extends Model
                 ];
             }
 
+            if($line_number OR $line_name OR $line_color){
+                $sql = "SELECT line_id";
+                if($line_number) $sql .= ", line_number";
+                if($line_name) $sql .= ", line_name";
+                if($line_color) $sql .= ", line_color";
+                $sql .= " FROM metro_line";
+                $stmt = $this->db->prepare($sql);
+                if (!$stmt->execute()) {
+                    $this->error(self::DB_SELECT_ERROR);
+                }
+                $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($res as $m) {
+                    if($line_number) $metro_line[$m['line_id']]['line_number'] = $m["line_number"];
+                    if($line_name) $metro_line[$m['line_id']]['line_name'] = $m["line_name"];
+                    if($line_color) $metro_line[$m['line_id']]['line_color'] = $m["line_color"];
+                }
+            }
+
             foreach($data as $key => $value){
                 //Перевод индекса метро в наименование
                 if (!empty($data[$key]['metro_station']) && !empty($metro_stations[$data[$key]['metro_station']])) {
-                    $data[$key]['metro_line'] = $metro_stations[$data[$key]['metro_station']]['line_id'];
+                    $line_id = $metro_stations[$data[$key]['metro_station']]['line_id'];
+                    if($line_number){
+                        $data[$key]['metro_line'] = $metro_line[$line_id]['line_number'];
+                    }
+                    if($line_name){
+                        $data[$key]['line_name'] = $metro_line[$line_id]['line_name'];
+                    }
+                    if($line_color){
+                        $data[$key]['line_color'] = $metro_line[$line_id]['line_color'];
+                    }
+
                     $data[$key]['metro_station'] = $metro_stations[$data[$key]['metro_station']]['metro_name'];
                 } else {
                     // $this->error(self::METRO_STATION_INCORRECT_CODE_ERROR);
