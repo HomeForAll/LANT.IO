@@ -312,6 +312,18 @@ $(function(){
         //dialog_registration.wizard("select", 7);
     });
 
+    $("#dialog-registration input[name=name]").suggestions({
+        token: "0ae4135972ef44bfe9eadfac7eee7b8c821b1c17",
+        type: "NAME",
+        params: {
+            parts: ["NAME"]
+        },
+        /* Вызывается, когда пользователь выбирает одну из подсказок */
+        onSelect: function(suggestion) {
+            console.log(suggestion);
+        }
+    });
+
 
     var dialog_restore_config = {
         beforeForward: function( event, state, update ) {
