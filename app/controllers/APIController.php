@@ -233,7 +233,7 @@ class APIController extends Controller
                 $request['space_from'], $request['space_to'], $request['count']);
 
             // Подготовка данных для вывода
-            $data['items'] = $this->model('NewsModel')->prepareNewsPreview($db_data, false, true, false);
+            $this->model('NewsModel')->prepareNewsPreview($db_data, false, true, false);
         }
         echo json_encode($this->model('NewsModel')->getResponse(), JSON_UNESCAPED_UNICODE);
     }
@@ -290,4 +290,19 @@ class APIController extends Controller
     {
         $this->model('NewsModel')->deleteItem();
     }
+
+    public function actionItemGetById()
+    {
+        if (!empty($_GET['id'])) {
+            $id = (int)$_GET['id'];
+        } elseif (!empty($_POST['id'])) {
+            $id = (int)$_POST['id'];
+        }
+
+        if(!empty($id)){
+            $this->model('NewsModel')->getAdById($id);
+        }
+        echo json_encode($this->model('NewsModel')->getResponse(), JSON_UNESCAPED_UNICODE);
+    }
+
 }
