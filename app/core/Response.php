@@ -194,7 +194,7 @@ class Response
 
         if (DEBUG) {
             if ($detail) {
-                array_push($content, $detail);
+                $content['error']['detail'] = $detail;
             }
 
             $content['error']['trace'] = debug_backtrace();
