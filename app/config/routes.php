@@ -113,4 +113,5 @@ return [
     'api/items.setActive' => 'main/API/itemActive',
     'api/items.setUnActive' => 'main/API/itemUnActive',
     'api/items.delete' => 'main/API/itemDelete',
+    'api/items.getById' => 'main/API/itemGetById',
 ];
