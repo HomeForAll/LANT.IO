@@ -152,3 +152,30 @@
   (line: 923 ) -> app\models\CabinetModel.php 
 >>>>>>> 5d78bee71de236e50c4b5b646efcdafe9a66c371
 
+* 2017-07-31 [14:53:45] - [Notice] Undefined index: contacts_number
+  (line: 1095 ) -> app\models\CabinetModel.php 
+
+* 2017-07-31 [18:07:51] - [Notice] Undefined index: contacts_number
+  (line: 1095 ) -> app\models\CabinetModel.php 
+
+* 2017-07-31 [18:08:01] - [Notice] Undefined index: contacts_number
+  (line: 1095 ) -> app\models\CabinetModel.php 
+
+* 2017-07-31 [18:09:08] - [Notice] Undefined index: contacts_number
+  (line: 1095 ) -> app\models\CabinetModel.php 
+
+* 2017-08-01 [11:49:07] - [Notice] Undefined index: user
+  (line: 803 ) -> app\models\CabinetModel.php 
+
+* 2017-08-01 [12:22:09] - [Notice] Undefined index: user
+  (line: 803 ) -> app\models\CabinetModel.php 
+
+* 2017-08-01 [12:22:54] - [Notice] Undefined index: user
+  (line: 803 ) -> app\models\CabinetModel.php 
+
+* 2017-08-01 [12:24:42] - [Notice] Undefined index: user
+  (line: 803 ) -> app\models\CabinetModel.php 
+
+* 2017-08-01 [12:25:44] - [Notice] Undefined index: user
+  (line: 803 ) -> app\models\CabinetModel.php 
+
