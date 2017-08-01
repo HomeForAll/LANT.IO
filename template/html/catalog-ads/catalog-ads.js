@@ -198,9 +198,38 @@ $(document).ready(function() {
         $("<div>").addClass("ads-param").addClass("axfs").html(data.number_of_rooms + " ком. кв " + data.space + " м2").appendTo(ad);
         var ad = $("<div>").addClass("ads-detail").appendTo(ad);
 
-        $("<div>").addClass('ads-price').html(data.price + " руб./месяц").appendTo(ad);
+        $("<div>").addClass('ads-price').html(data.price + " <span class=\"rub\">руб.</span>/месяц").appendTo(ad);
+
+
         $("<div>").addClass('ads-metro').html('<svg width="19" height="13"><use xlink:href="#i-metro" x="0" y="0"></use></svg> Бауманская').appendTo(ad);
         $("<div>").addClass('ads-afoot').html('<svg width="8" height="12"><use xlink:href="#i-afoot" x="0" y="0"></use></svg> '+data.not_residential+' мин').appendTo(ad);
+
+        var addClass = data.favorite ? 'ritem__favorite_on' : ''
+        var html = `
+            
+            <div class="ads-more ${addClass}"><svg width="24" height="24"><use xlink:href="#lnr-star" x="0" y="0"></use></svg></div>
+        `;
+        $(ad).append(html);
+        $(ad).find('.ads-more').click(function(event) {
+            event.stopPropagation();
+            var thas = $(this);
+            if (thas.hasClass('ritem__favorite_on')) {
+                $.post("/api/favorite/remove", {id: data.id_news}, function(r) {
+                    if (r.response) {
+                        data.favorite = 0;
+                        thas.toggleClass('ritem__favorite_on');
+                    }
+                });
+            } else {
+                $.post("/api/favorite/add", {id: data.id_news}, function(r) {
+                    if (r.response) {
+                        data.favorite = 1;
+                        thas.toggleClass('ritem__favorite_on');
+                    }
+                });
+            }
+
+        });
 
     };
 
