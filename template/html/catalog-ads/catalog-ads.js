@@ -171,7 +171,7 @@ $(document).ready(function() {
                 $("<div>").addClass('dialog-ad-price')
                     .html(data.price + " руб./месяц").appendTo(detail);
                 $("<div>").addClass('dialog-ad-metro')
-                    .html('<svg width="19" height="13"><use xlink:href="#i-metro" x="0" y="0"></use></svg> Бауманская').appendTo(detail);
+                    .html(`<svg width="19" height="13"><use xlink:href="#i-metro" x="0" y="0"></use></svg> ${data.metro_station}`).appendTo(detail);
                 $("<div>").addClass('dialog-ad-afoot')
                     .html('<svg width="8" height="12"><use xlink:href="#i-afoot" x="0" y="0"></use></svg> '+data.not_residential+' мин').appendTo(detail);
 
@@ -201,7 +201,7 @@ $(document).ready(function() {
         $("<div>").addClass('ads-price').html(data.price + " <span class=\"rub\">руб.</span>/месяц").appendTo(ad);
 
 
-        $("<div>").addClass('ads-metro').html('<svg width="19" height="13"><use xlink:href="#i-metro" x="0" y="0"></use></svg> Бауманская').appendTo(ad);
+        $("<div>").addClass('ads-metro').html(`<svg width="19" height="13"><use xlink:href="#i-metro" x="0" y="0"></use></svg> ${data.metro_station}`).appendTo(ad);
         $("<div>").addClass('ads-afoot').html('<svg width="8" height="12"><use xlink:href="#i-afoot" x="0" y="0"></use></svg> '+data.not_residential+' мин').appendTo(ad);
 
         var addClass = data.favorite ? 'ritem__favorite_on' : ''
