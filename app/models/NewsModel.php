@@ -212,7 +212,7 @@ class NewsModel extends Model
             // Получение фото
             $data = $this->getAdsPhotos([$data])[0];
             // Автор
-            $data = $data + $this->getAuthorInfo($data["user_id"]);
+            $data = $data + $this->getAuthorInfo($data["user_id"], false, true, true);
             //Перевод города
             $data["city"] = $this->translateCity($data["city"]);
             //Перевод метро
@@ -1997,7 +1997,7 @@ class NewsModel extends Model
         }
         //Получение данных об авторах объявлений
         if ($author_info) {
-            $author_arr = $this->getAuthorInfo($user_id_arr);
+            $author_arr = $this->getAuthorInfo($user_id_arr, true);
 
             //Присваивание данных
             foreach ($data as $key => $val) {
@@ -2020,7 +2020,7 @@ class NewsModel extends Model
      *
      * @return array - Массив с параметрами автора, и ключами = его id
      */
-    private function getAuthorInfo($user_id)
+    private function getAuthorInfo($user_id, $profile_foto_id = false, $avatar = false, $status = false)
     {
         $author_arr = [];
         if (!is_array($user_id)) {
@@ -2029,8 +2029,11 @@ class NewsModel extends Model
             $user_id_arr = $user_id;
         }
         $user_id_arr_txt = implode(',', $user_id_arr);
-        $sql = "SELECT id, first_name, last_name, patronymic, profile_foto_id"
-            . " FROM users WHERE id IN($user_id_arr_txt)";
+        $sql = "SELECT id, first_name, last_name, patronymic";
+        if($profile_foto_id) $sql .= ", profile_foto_id";
+        if($avatar) $sql .= ", avatar_original, avatar_50, avatar_100";
+        if($status) $sql .= ", status as user_status";
+        $sql .= " FROM users WHERE id IN($user_id_arr_txt)";
         $stmt = $this->db->prepare($sql);
         if (!$stmt->execute()) {
             $this->error(self::DB_EXECUTE_ERROR, $stmt->errorInfo());
