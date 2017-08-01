@@ -665,9 +665,17 @@ class SearchModel extends Model
     {
         $sql = '';
 
+        if (isset($_SESSION['user']['id'])) {
+            $user_id = $_SESSION['user']['id'];
+        } else {
+            $user_id = 0;
+        }
+
         switch ($queryType) {
             case self::SEARCH:
-                $sql = 'SELECT * FROM news_base LEFT JOIN (SELECT DISTINCT ON(ad_id) * FROM ads_images) i ON (news_base.id_news = i.ad_id) WHERE ';
+                $sql = "SELECT news_base.*, i.*, (CASE WHEN f.user_id IS NOT NULL THEN 1 ELSE 0 END) AS favorite FROM news_base 
+                        LEFT JOIN (SELECT DISTINCT ON(ad_id) * FROM ads_images) i ON (news_base.id_news = i.ad_id) 
+                        LEFT JOIN favorite_ads f ON (f.ad_id = news_base.id_news AND f.user_id = {$user_id}) WHERE ";
                 break;
             case self::COUNT:
                 $sql = 'SELECT COUNT(*) FROM news_base WHERE ';

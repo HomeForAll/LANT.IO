@@ -270,4 +270,19 @@ class APIController extends Controller
     {
         $this->model('UserModel')->verifySMSCodeAndActivate();
     }
+
+    public function actionItemActive()
+    {
+        $this->model('NewsModel')->setItemActive();
+    }
+
+    public function actionItemUnActive()
+    {
+        $this->model('NewsModel')->setItemUnActive();
+    }
+
+    public function actionItemDelete()
+    {
+        $this->model('NewsModel')->deleteItem();
+    }
 }

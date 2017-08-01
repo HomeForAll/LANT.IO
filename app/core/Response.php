@@ -21,6 +21,8 @@ class Response
     const DB_SELECT_ERROR = 5;
     const CURL_CONNECTION_LOST = 6;
     const NOT_ARRAY = 7;
+    const CHANGE_NOT_YOUR_DATA_ERROR = 8;
+
 
     // Авторизация
     const LOGIN_INCORRECT_ERROR = 1000;
@@ -89,14 +91,15 @@ class Response
 
     protected $messages = [
         // Общие 1-1000:
-        0    => 'Неправильный запрос к API',
-        1    => 'Пользователь не авторизован',
-        2    => 'Ошибка записи в базу данных',
-        3    => 'Возникла ошибка при обновлении в базе данных',
-        4    => 'Возникла ошибка при удалении в базе данных',
-        5    => 'Возникла ошибка при выборке из базы данных',
-        6    => 'CURL нет соединения с сервером',
-        7    => 'Тип данных не является массивом',
+        0 => 'Неправильный запрос к API',
+        1 => 'Пользователь не авторизован',
+        2 => 'Ошибка записи в базу данных',
+        3 => 'Возникла ошибка при обновлении в базе данных',
+        4 => 'Возникла ошибка при удалении в базе данных',
+        5 => 'Возникла ошибка при выборке из базы данных',
+        6 => 'CURL нет соединения с сервером',
+        7 => 'Тип данных не является массивом',
+        8 => 'Обнаружена попытка модифицировать чужие данные',
 
         // Авторизация 1000-2000:
         1000 => 'Логин введен неверно',
@@ -146,8 +149,8 @@ class Response
         4013 => 'Неверно введен номер телефона',
         4014 => 'Неверно введен Email',
 
-         // Объявления 5000-6000
-        5000 => 'Ошибка при отправке Email',
+        // Объявления 5000-6000
+        5000 => 'Ошибка при запросе в БД',
         5001 => 'Неправильная дата',
         5002 => 'Нет соответствующего индекса станции метро в БД',
         5003 => 'Нет соответствующего индекса города в БД',
@@ -170,7 +173,7 @@ class Response
 
     /**
      * @param int $code
-     * @param mixed $detail - дополнительная информация, которая поможет идентифицировать ошибку
+     * @param mixed $detail - детальная информация о ошибке
      */
     protected function error($code, $detail = null)
     {
@@ -179,24 +182,29 @@ class Response
 
         if (isset($this->messages[$code])) {
             $content['error'] = [
-                'code'    => $code,
+                'code' => $code,
                 'message' => $this->messages[$code],
             ];
         } else {
             $content['error'] = [
-                'code'    => -666,
+                'code' => -666,
                 'message' => 'Неопознанная ошибка',
             ];
         }
 
-        if ($detail) {
-            $content['error']['detail'] = $detail;
+        if (DEBUG) {
+            if ($detail) {
+                array_push($content, $detail);
+            }
+
+            $content['error']['trace'] = debug_backtrace();
         }
+
 
         exit(json_encode($content, JSON_UNESCAPED_UNICODE));
     }
 
-    protected function response($data)
+    protected function response($data = true)
     {
         exit(json_encode(['response' => $data], JSON_UNESCAPED_UNICODE));
     }

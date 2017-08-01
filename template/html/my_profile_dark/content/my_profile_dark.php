@@ -56,7 +56,7 @@
                 There are also concerns about possible Lasik-related problems with night vision, to the extent that some armed forces around the world advise aspiring air force and special forces personnel not to have the surgery.
             </p>
         </div>
-        <a href="/dark_profile" class="profile-button">РЕДАКТИРОВАТЬ ПРОФИЛЬ</a>
+        <a href="/profile/edit" class="profile-button">РЕДАКТИРОВАТЬ ПРОФИЛЬ</a>
     </div>
     <div class="active-ads">
         <p>У меня 12 активных объявления</p>

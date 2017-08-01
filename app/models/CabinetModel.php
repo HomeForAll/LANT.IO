@@ -1021,6 +1021,7 @@ class CabinetModel extends Model
     public function checkPhoneNumber($str)
     {
         $str = trim($str);
+        $str = str_replace(' ', '', $str);
         if (!mb_ereg_match("((8|\+7)(|\-)?)?(\(?\d{3}\)?(|\-)?)?[\d\- ]{7,10}$", $str))
             return false;
 //        if (!v::phone()->validate($str))
@@ -1092,7 +1093,7 @@ class CabinetModel extends Model
         } else {
             $this->error(self::WRONG_ADRESS_FLAT);
         }
-        if ($str = $this->checkPhoneNumber($_POST['contacts_number'])) {
+        if ($str = $this->checkPhoneNumber($_POST['phone'])) {
                 $str = preg_replace('~([^0-9]+)~', '', $str);
             if (strlen($str) == 11) {
                 $str[0] = 7;
@@ -1101,7 +1102,7 @@ class CabinetModel extends Model
         } else {
             $this->error(self::WRONG_PHONE_NUMBER);
         }
-        if ($str = $this->сheckEmail($_POST['email'])) {
+        if ($str = $this->сheckEmail($_POST['contacts_email'])) {
             $update['contacts_email'] = $str;
         } else {
             $this->error(self::WRONG_EMAIL);
@@ -1229,10 +1230,13 @@ class CabinetModel extends Model
 
     public function saveUpdatePersonalInfo($update)
     {
-        $stmt = $this->db->prepare("UPDATE users SET first_name = :name_name, last_name = :name_surname, patronymic = :name_patronymic, birthday = :name_birthday, aboutme = :about_me,
+        $update['passport_series'] = str_replace('-', '', $update['passport_series']);
+        $update['passport_number'] = str_replace('-', '', $update['passport_number']);
+
+        $stmt = $this->db->prepare("UPDATE users SET first_name = :name_name, last_name = :name_surname, patronymic = :name_patronymic, birthday = :name_birthday, about_me = :about_me,
                                               series = :passport_series, number = :passport_number, 
                                               index = :adress_index, city = :adress_city, street = :adress_street, home = :adress_home, flat = :adress_flat,
-                                              phonenumber = :contacts_number, email = :contacts_email
+                                              phone_number = :contacts_number, email = :contacts_email
                                               WHERE id = :profile_id");
         $stmt->execute([
             ':name_name'      => $update['name_name'],
@@ -2632,7 +2636,9 @@ class CabinetModel extends Model
             $offset = $_GET['offset'];
         }
 
-        $query = $this->db->prepare('SELECT * FROM news_base WHERE user_id = :user_id LIMIT :limit OFFSET :offset');
+        $query = $this->db->prepare("SELECT news_base.*, i.*, (CASE WHEN f.user_id IS NOT NULL THEN 1 ELSE 0 END) AS favorite FROM news_base 
+                                               LEFT JOIN (SELECT DISTINCT ON(ad_id) * FROM ads_images) i ON (news_base.id_news = i.ad_id) 
+                                               LEFT JOIN favorite_ads f ON (f.ad_id = news_base.id_news AND f.user_id = :user_id) WHERE news_base.user_id = :user_id LIMIT :limit OFFSET :offset");
         $query->execute([
             ':user_id' => $_SESSION['user']['id'],
             ':limit'   => $count,
@@ -2649,10 +2655,15 @@ class CabinetModel extends Model
             $count_query = $this->db->query("SELECT count(*) FROM news_base WHERE user_id = {$_SESSION['user']['id']}");
             $result = $count_query->fetch();
 
-            $count = $result ? $result['count'] : null;
+            $count_active_query = $this->db->query("SELECT count(*) FROM news_base WHERE user_id = {$_SESSION['user']['id']} AND status > 0");
+            $active_result = $count_active_query->fetch();
+
+            $count = $result ? $result['count'] : 0;
+            $active_count = $active_result ? $active_result['count'] : 0;
 
             $this->response([
                 'count' => (int)$count,
+                'count_active' => (int)$active_count,
                 'items' => $ads,
             ]);
         } else {
@@ -2727,7 +2738,7 @@ class CabinetModel extends Model
             $offset = $_GET['offset'];
         }
 
-        $query = $this->db->prepare('SELECT * FROM favorite_ads, news_base WHERE favorite_ads.ad_id = news_base.id_news AND favorite_ads.user_id = :user_id LIMIT :limit OFFSET :offset');
+        $query = $this->db->prepare('SELECT * FROM favorite_ads, news_base LEFT JOIN (SELECT DISTINCT ON(ad_id) * FROM ads_images) i ON (news_base.id_news = i.ad_id) WHERE favorite_ads.ad_id = news_base.id_news AND favorite_ads.user_id = :user_id LIMIT :limit OFFSET :offset');
         $query->execute([
             ':user_id' => $_SESSION['user']['id'],
             ':limit'   => $count,

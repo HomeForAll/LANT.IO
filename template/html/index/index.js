@@ -81,6 +81,9 @@ function initUserMenu(user) {
             });
             // window.location = '/logout/';
         });
+        $('.menu-user .user-menu-plus').click(function(event) {
+            window.location = '/profile/items/add';
+        });
     } else {
         $('.menu-user .user-info').remove();
         $('.header-line .user-info').remove();
@@ -307,6 +310,18 @@ $(function(){
         dialog_registration.wizard( "destroy" ).wizard(dialog_registration_config);
         $(".dialog-registration").arcticmodal();
         //dialog_registration.wizard("select", 7);
+    });
+
+    $("#dialog-registration input[name=name]").suggestions({
+        token: "0ae4135972ef44bfe9eadfac7eee7b8c821b1c17",
+        type: "NAME",
+        params: {
+            parts: ["NAME"]
+        },
+        /* Вызывается, когда пользователь выбирает одну из подсказок */
+        onSelect: function(suggestion) {
+            console.log(suggestion);
+        }
     });
 
 

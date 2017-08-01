@@ -153,12 +153,15 @@ $(document).ready(function() {
         var ad = $("<div>").addClass("padd").appendTo(ad).click(function(event) {
                 var dialog = $("<div>").addClass('dialog-ad').prop('title', data.price + " руб./месяц");
                 var line = $("<div>").addClass("dialog-ad-line").appendTo(dialog);
+
                 $("<div>").addClass('dialog-ad-photo')
-                    .css("background-image", "url(/uploads/images/"+data.preview_img+")").appendTo(line);
+                    .css("background-image", "url("+data.s_360_230+")").appendTo(line);
+
                 var detail = $("<div>").addClass("dialog-ad-detail").appendTo(line);
                 var user = $("<div>").addClass('axf').addClass('user-info').appendTo(detail);
                 $("<img>").prop("src", "/template/img/user.png").appendTo(user);
                 var user = $("<div>").appendTo(user);
+
                 $("<div>").html("Никулин Александр").appendTo(user);
                 $("<div>").addClass('user-type').html("частное лицо").appendTo(user);
                 $("<button>").addClass('dialog-ad-button-send')
@@ -171,14 +174,23 @@ $(document).ready(function() {
                     .html('<svg width="19" height="13"><use xlink:href="#i-metro" x="0" y="0"></use></svg> Бауманская').appendTo(detail);
                 $("<div>").addClass('dialog-ad-afoot')
                     .html('<svg width="8" height="12"><use xlink:href="#i-afoot" x="0" y="0"></use></svg> '+data.not_residential+' мин').appendTo(detail);
-                $("<div>").addClass("dialog-ad-param").html("2 ком. кв 135 м2").appendTo(dialog);
+
+                $("<div>").addClass("dialog-ad-param").html(data.number_of_rooms + " ком. кв " + data.space + " м2").appendTo(dialog);
+
                 $("<div>").html(data.content).appendTo(dialog);
+
+                var html = `
+                    <div class="idialog__buttonfull">Смотреть полностью</div>
+                    <div class="idialog__buttonfull">Показать карту</div>
+                `;
+                $(dialog).append(html);
+
                 dialog.dialog({
                     resizable: false,
                     height: "auto",
                     width: 630,
                 });
-            });;
+            });
         var img = $("<img>").prop("src", data.s_250_140).appendTo(ad);
 
         // $("<div>").addClass('ads-photo').css("background-image", "url(/uploads/images/"+data.preview_img+")").appendTo(ad);
@@ -186,9 +198,38 @@ $(document).ready(function() {
         $("<div>").addClass("ads-param").addClass("axfs").html(data.number_of_rooms + " ком. кв " + data.space + " м2").appendTo(ad);
         var ad = $("<div>").addClass("ads-detail").appendTo(ad);
 
-        $("<div>").addClass('ads-price').html(data.price + " руб./месяц").appendTo(ad);
+        $("<div>").addClass('ads-price').html(data.price + " <span class=\"rub\">руб.</span>/месяц").appendTo(ad);
+
+
         $("<div>").addClass('ads-metro').html('<svg width="19" height="13"><use xlink:href="#i-metro" x="0" y="0"></use></svg> Бауманская').appendTo(ad);
         $("<div>").addClass('ads-afoot').html('<svg width="8" height="12"><use xlink:href="#i-afoot" x="0" y="0"></use></svg> '+data.not_residential+' мин').appendTo(ad);
+
+        var addClass = data.favorite ? 'ritem__favorite_on' : ''
+        var html = `
+            
+            <div class="ads-more ${addClass}"><svg width="24" height="24"><use xlink:href="#lnr-star" x="0" y="0"></use></svg></div>
+        `;
+        $(ad).append(html);
+        $(ad).find('.ads-more').click(function(event) {
+            event.stopPropagation();
+            var thas = $(this);
+            if (thas.hasClass('ritem__favorite_on')) {
+                $.post("/api/favorite/remove", {id: data.id_news}, function(r) {
+                    if (r.response) {
+                        data.favorite = 0;
+                        thas.toggleClass('ritem__favorite_on');
+                    }
+                });
+            } else {
+                $.post("/api/favorite/add", {id: data.id_news}, function(r) {
+                    if (r.response) {
+                        data.favorite = 1;
+                        thas.toggleClass('ritem__favorite_on');
+                    }
+                });
+            }
+
+        });
 
     };
 
@@ -205,21 +246,31 @@ $(document).ready(function() {
     // });
 
     $('.itemstabs input[name=items_best]').change(function() {
+        $(".itemslist__besttab").show();
+        $(".itemslist__resulttab").hide();
         var period = $(".itemstabs input[name=items_best]:checked").val();
-        console.log(period);
 
-        $("#ads-list").children().remove();
         $.getJSON('/api/' + period, {count: 30}, function(json, textStatus) {
-            if (json.response && json.response.count_all > 0) {
-                $.each(json.response.best_ads, function(i, item) {
+            $("#ads-list").children().remove();
+            if (json.response && json.response.count > 0) {
+                $.each(json.response.items, function(i, item) {
                     renderAd(item);
                     //renderFavorite(item);
                 });
+            } else {
+                var ad = $("<div>").addClass("itemslist__empty").html('К сожалению, лучшие объявлений за данный период отсутствуют.').appendTo("#ads-list");
             }
         });
     });
     $(".itemstabs input[name=items_best]:checked").trigger('change');
     
+    $('.itemstabs_backbest').click(function(){
+        $(".itemstabs input[name=items_best]:checked").trigger('change');
+        $("#section-ads h3").html("ЛУЧШИЕ ОБЪЯВЛЕНИЯ");
+    });
+    $('.itemstabs_changesearch').click(function(){
+        $.fn.fullpage.moveTo('sectionSearch');
+    });
 
     $("form#search").on("submit", function( event ) {
         event.preventDefault();
@@ -228,12 +279,21 @@ $(document).ready(function() {
             url: 'api/search',
             data: $("form#search").serializeObject(),
             dataType: 'Json',
-            success: function(form_data) {
+            success: function(json) {
                 $("#ads-list").children().remove();
-                $.each(form_data, function(i, item) {
-                    renderAd(item)
-                });
+
+                //if (json.response && json.response.count > 0) {
+                if (json.length > 0) {
+                    $.each(json, function(i, item) {
+                        renderAd(item)
+                    });
+                } else {
+                    var ad = $("<div>").addClass("itemslist__empty").html('К сожалению, поиск не дал результатов.').appendTo("#ads-list");
+                }
+
                 $("#section-ads h3").html("Результаты поиска");
+                $(".itemslist__besttab").hide();
+                $(".itemslist__resulttab").show();
                 //$.fn.fullpage.moveTo(3);
                 $.fn.fullpage.moveTo('sectionAds');
             }

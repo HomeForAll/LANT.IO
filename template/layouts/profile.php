@@ -99,7 +99,7 @@
         <a href="/profile/" class="profile-sidebar__link">
             <svg width="22" height="16"><use xlink:href="#sidebar-icon-1" x="0" y="0"></use></svg>
             Личный кабинет</a>
-        <a class="profile-sidebar__link">
+        <a href="/profile/my" class="profile-sidebar__link">
             <svg width="22" height="16"><use xlink:href="#sidebar-icon-2" x="0" y="0"></use></svg>
             Мой профиль</a>
         <a  href="/profile/items" class="profile-sidebar__link">
@@ -126,7 +126,13 @@
 if (preg_match("/profile\/([a-z0-9\/]+)/i", $_SERVER['REQUEST_URI'], $match)
     && ($match = str_replace('/', '_', $match[1]))
     && file_exists(ROOT_DIR . "/template/profile/{$match}.html")) {
-    include_once ROOT_DIR . "/template/profile/{$match}.html";
+        if ($match == 'my') {
+            include_once ROOT_DIR . "/template/layouts/profile_dark.php";
+        } else if ($match == 'edit') {
+            include_once ROOT_DIR . "/template/layouts/dark_profile.php";
+        } else {
+            include_once ROOT_DIR . "/template/profile/{$match}.html";
+        }
 } else {
     include_once ROOT_DIR . "/template/profile/dashboard.html";
 }

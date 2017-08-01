@@ -3,12 +3,30 @@ var leftBar = false;
 
 $(document).ready(function () {
 
+    /** Проверяем регистрацию пользователя **/
+    $.ajax({
+       method: 'GET',
+       url: '/api/user',
+       dataType: 'Json',
+       success: function (dataStatus) {
+           var regBlock = $('.user-menu-reg');
+
+           console.log('dataStatus', dataStatus.response.status);
+
+           if (dataStatus.response.status === -1) {
+               
+           }
+       }
+    });
+
     /** Получаем данные о пользователе **/
     $.ajax({
         method: 'GET',
         url: '/api/profile/get/profile',
         dataType: 'Json',
         success: function (data) {
+
+            console.log('data', data);
 
             if (!data) return false;
 

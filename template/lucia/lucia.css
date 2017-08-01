@@ -207,3 +207,16 @@ a:hover {
         transform: rotate(360deg);
     }
 }
+
+
+.rub {
+    font-family: 'PTRouble';
+    text-indent: -9999px;
+    display: inline-block;
+}
+.rub::after {
+    content: 'у'; 
+    display: inline-block;
+    float: right;
+    text-indent: 0px;
+} 

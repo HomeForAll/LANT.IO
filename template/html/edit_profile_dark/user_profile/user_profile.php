@@ -40,8 +40,9 @@
                     <label>Улица<input placeholder="Пушкина" pattern="^[А-Яа-яA-Za-zЁё\s]+$" name="adress_street" /></label>
                     <label>Дом<input placeholder="343" pattern="^[0-9]{4}+$" name="adress_home" /></label>
                     <label>Квартира<input placeholder="15" pattern="^[0-9]{4}+$" name="adress_flat" /></label>
+                    <label>Информация о себе<textarea name="about_me" placeholder=""></textarea></label>
                     <p>Контакты:</p>
-                    <label>Номер телефона<input type="text" name="phone" placeholder="+7 (___) ___ - __ - __" data-inputmask="'mask': '+7 (999) 999 - 99 - 99'"></label>
+                    <label>Номер телефона<input type="text" name="phone" placeholder="+7(___)___-__-__" data-inputmask="'mask': '+7(999)999-99-99'"></label>
                     <label>Email<input data-inputmask="'mask: '*{1,20}[.*{1,20}][.*{1,20}][.*{1,20}]@*{1,20}[.*{2,6}][.*{1,2}]'" placeholder="example@mail.ru" name="contacts_email" /></label>
                 </div>
             </div>
@@ -51,7 +52,6 @@
                 <p>Параметры безопасности:</p>
                 <label>Старый пароль<input type="password" placeholder="Введите пароль" name="series" /></label>
                 <label>Новый пароль<input type="password" placeholder="Введите пароль" name="passport-id" /></label>
-                <label>Информация о себе<textarea name="about_me" placeholder=""></textarea></label>
             </div>
         </div>
         <div class="user-all-information">

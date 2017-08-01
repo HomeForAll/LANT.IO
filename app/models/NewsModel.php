@@ -177,7 +177,7 @@ class NewsModel extends Model
             $stmt->bindParam(':city', $city);
         }
         if (!$stmt->execute()) {
-            $this->error(self::DB_SELECT_ERROR);
+            $this->error(self::DB_SELECT_ERROR, $stmt->errorInfo());
         }
         $result = $stmt->fetchColumn();
         //для Ajax запроса
@@ -767,7 +767,7 @@ class NewsModel extends Model
             $stmt->bindParam(':object_type', $object_type);
         }
         if (!$stmt->execute()) {
-            $this->error(self::DB_EXECUTE_ERROR);
+            $this->error(self::DB_EXECUTE_ERROR, $stmt->errorInfo());
         }
         $data['news'] = $stmt->fetchAll();
 
@@ -1345,14 +1345,14 @@ class NewsModel extends Model
             . " n.content, n.user_id, n.status,  n.price, n.lease, n.space,"
             . " (n.rating_views + n.rating_admin+n.rating_donate) as rating,"
             . " n.number_of_rooms, n.metro_station, n.time_walk, n.time_car, n.lat, n.lng,"
-            . " i.original, i.s_250_140, i.s_500_280, i.s_360_230, i.s_720_460, i.ad_id,";
+            . " i.original, i.s_250_140, i.s_500_280, i.s_360_230, i.s_720_460, i.ad_id";
 
         //Включение в запрос поля favorite если это зарегистрированный пользователь
         if(!empty($this->user_id)){
-            $sql .=  "  f.ad_id as favorite";
+            $sql .=  ", f.ad_id as favorite";
         }
 
-        $sql .=  " FROM news_base n LEFT JOIN ads_images i"
+        $sql .=  " FROM news_base n LEFT JOIN (SELECT DISTINCT ON(ad_id) * FROM ads_images) i"
             . " ON (n.id_news = i.ad_id)";
 
         //Включение в запрос поля favorite если это зарегистрированный пользователь
@@ -1420,10 +1420,12 @@ class NewsModel extends Model
         if ($space_to != 0) {
             $stmt->bindParam(':space_to', $space_to);
         }
+
         if (!$stmt->execute()) {
-            $this->error(self::DB_EXECUTE_ERROR);
+            $this->error(self::DB_EXECUTE_ERROR, $stmt->errorInfo());
         }
-        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $data = $stmt->fetchAll();
+
         return $data;
     }
 
@@ -1909,6 +1911,10 @@ class NewsModel extends Model
      */
     public function prepareNewsPreview($data, $translate_indx = true, $author_info = false, $photos = true)
     {
+        if(empty($data)) {
+            $this->response['items'] = [];
+            return;
+        }
         $user_id_arr = [];
 
         //Получение массив ссылок на картинки $data['news'][number]['photos'][]
@@ -2004,7 +2010,7 @@ class NewsModel extends Model
             . " FROM users WHERE id IN($user_id_arr_txt)";
         $stmt = $this->db->prepare($sql);
         if (!$stmt->execute()) {
-            $this->error(self::DB_EXECUTE_ERROR);
+            $this->error(self::DB_EXECUTE_ERROR, $stmt->errorInfo());
         }
         $author_result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         foreach ($author_result as $val) {
@@ -2507,7 +2513,7 @@ class NewsModel extends Model
                         $request['time_from'] = 168;
                         break;
                     case 'month':
-                        $request['time_from'] = 720;
+                        $request['time_from'] = 8640;
                         break;
                     default:
                         $request['time_from'] = 24;
@@ -2719,6 +2725,112 @@ class NewsModel extends Model
         return $data;
     }
 
+    public function setItemActive()
+    {
+        if (!isset($_REQUEST['id'])) {
+            $this->error(self::BAD_REQUEST_ERROR);
+        }
 
+        if (!isset($_SESSION['user']['id'])) {
+            $this->error(self::USER_NOT_AUTHORIZED_ERROR);
+        }
 
+        $query = $this->db->prepare('SELECT id_news FROM news_base WHERE user_id = :user_id AND id_news = :news_id');
+        $query->execute([
+            ':user_id' => $_SESSION['user']['id'],
+            ':news_id' => $_REQUEST['id'],
+        ]);
+
+        if ($query->errorCode() !== '00000') {
+            $this->error(self::DB_UPDATE_ERROR, $query->errorInfo());
+        }
+
+        if (!$query->fetch()) {
+            $this->error(self::CHANGE_NOT_YOUR_DATA_ERROR);
+        }
+
+        $query = $this->db->prepare('UPDATE news_base SET status = 1 WHERE id_news = :id');
+        $query->execute([':id' => $_REQUEST['id']]);
+
+        if ($query->errorCode() !== '00000') {
+            $this->error(self::DB_UPDATE_ERROR, $query->errorInfo());
+        }
+
+        $this->response();
+    }
+
+    public function setItemUnActive()
+    {
+        if (!isset($_REQUEST['id'])) {
+            $this->error(self::BAD_REQUEST_ERROR);
+        }
+
+        if (!isset($_SESSION['user']['id'])) {
+            $this->error(self::USER_NOT_AUTHORIZED_ERROR);
+        }
+
+        $query = $this->db->prepare('SELECT id_news FROM news_base WHERE user_id = :user_id AND id_news = :news_id');
+        $query->execute([
+            ':user_id' => $_SESSION['user']['id'],
+            ':news_id' => $_REQUEST['id'],
+        ]);
+
+        if ($query->errorCode() !== '00000') {
+            $this->error(self::DB_UPDATE_ERROR, $query->errorInfo());
+        }
+
+        if (!$query->fetch()) {
+            $this->error(self::CHANGE_NOT_YOUR_DATA_ERROR);
+        }
+
+        $query = $this->db->prepare('UPDATE news_base SET status = 0 WHERE id_news = :id');
+        $query->execute([':id' => $_REQUEST['id']]);
+
+        if ($query->errorCode() !== '00000') {
+            $this->error(self::DB_UPDATE_ERROR, $query->errorInfo());
+        }
+
+        $this->response();
+    }
+
+    public function deleteItem()
+    {
+        if (!isset($_REQUEST['id'])) {
+            $this->error(self::BAD_REQUEST_ERROR);
+        }
+
+        if (!isset($_SESSION['user']['id'])) {
+            $this->error(self::USER_NOT_AUTHORIZED_ERROR);
+        }
+
+        $query = $this->db->prepare('SELECT id_news FROM news_base WHERE user_id = :user_id AND id_news = :news_id');
+        $query->execute([
+            ':user_id' => $_SESSION['user']['id'],
+            ':news_id' => $_REQUEST['id'],
+        ]);
+
+        if ($query->errorCode() !== '00000') {
+            $this->error(self::DB_UPDATE_ERROR, $query->errorInfo());
+        }
+
+        if (!$query->fetch()) {
+            $this->error(self::CHANGE_NOT_YOUR_DATA_ERROR);
+        }
+
+        $query = $this->db->prepare('DELETE FROM news_base WHERE id_news = :id');
+        $query->execute([':id' => $_REQUEST['id']]);
+
+        if ($query->errorCode() !== '00000') {
+            $this->error(self::DB_UPDATE_ERROR, $query->errorInfo());
+        }
+
+        $query = $this->db->prepare('DELETE FROM ads_images WHERE ad_id = :id');
+        $query->execute([':id' => $_REQUEST['id']]);
+
+        if ($query->errorCode() !== '00000') {
+            $this->error(self::DB_UPDATE_ERROR, $query->errorInfo());
+        }
+
+        $this->response();
+    }
 }
