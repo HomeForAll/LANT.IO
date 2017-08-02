@@ -10,11 +10,14 @@ $(document).ready(function () {
         dataType: 'Json',
         success: function (data) {
 
+            console.log('Нужный параметр - ', data);
+
             if (!data) return false;
 
             $('input[name="name_name"]').val(data.name_name);
             $('input[name="name_patronymic"]').val(data.name_patronymic);
             $('input[name="name_surname"]').val(data.name_surname);
+            $('input[name="name_birthday"]').val(data.name_birthday);
             $('input[name="passport_series"]').val(data.passport_series);
             $('input[name="passport_number"]').val(data.passport_number);
             $('input[name="adress_index"]').val(data.adress_index);
@@ -49,7 +52,7 @@ $(document).ready(function () {
             error: function () {
                 console.log('Данные не отправлены', data);
             }
-        });
+        })
     });
 });
 
