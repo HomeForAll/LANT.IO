@@ -179,6 +179,8 @@ $.getJSON('/api/items/my', {count: 2}, function(json, textStatus) {
             renderItems(item);
         });
         $('.pblock__status_i').html("Смотреть еще "+json.response.count+" объявления");
+        $('.ptiles__status_a').html(`активных ${json.response.count_active}`);
+        $('.ptiles__status_c').html(`всего ${json.response.count}`);
     }
 });
 
@@ -189,6 +191,7 @@ $.getJSON('/api/favorite/list', {count: 3}, function(json, textStatus) {
             renderFavorite(item);
         });
         $('.pblock__status_v').html("Смотреть еще "+json.response.count+" объявления");
+        $('.ptiles__status_v').html(`${json.response.count} объявлений`);
     }
 });
 
