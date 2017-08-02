@@ -10,6 +10,8 @@ $(document).ready(function () {
         dataType: 'Json',
         success: function (data) {
 
+            console.log('Нужный параметр - ', data);
+
             if (!data) return false;
 
             $('input[name="name_name"]').val(data.name_name);
@@ -23,6 +25,7 @@ $(document).ready(function () {
             $('input[name="adress_street"]').val(data.adress_street);
             $('input[name="adress_home"]').val(data.adress_home);
             $('input[name="adress_flat"]').val(data.adress_flat);
+            $('input[name="about_me"]').val(data.about_me);
             $('input[name="contacts_number"]').val(data.contacts_number);
             $('input[name="contacts_email"]').val(data.contacts_email);
         },
@@ -34,26 +37,22 @@ $(document).ready(function () {
     $('#edit-profile').submit(function (e) {
         e.preventDefault();
         var data = $(this).serialize();
-        console.log('Собрали на отправку ', data);
+
+        console.log('Собранные данные', data);
 
         $.ajax({
             method: 'POST',
             url: '/api/profile/save/profile',
             dataType: 'Json',
             data: data,
-            success: function (e) {
-                if (data.response) {
-                    console.log('Данные отправлены', data);
-                    console.log('Данные отправлены - e - ', e);
-                } else {
-                    console.log('Ошибка', data);
-                }
+            success: function () {
+                console.log('Данные отправлены', data);
+                //location.reload(true);
             },
-            error: function (e) {
+            error: function () {
                 console.log('Данные не отправлены', data);
-                console.log('Данные не отправлены - e - ', e);
             }
-        });
+        })
     });
 });
 

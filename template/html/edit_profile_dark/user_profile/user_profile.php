@@ -25,10 +25,10 @@
             </div>
             <div class="user-data">
                 <div class="fio">
-                    <label>Имя<input placeholder="Иван" class="bold-text" pattern="^[А-Яа-яA-Za-zЁё\s]+$" name="name_name" /></label>
-                    <label>Отчество<input placeholder="Сердюков" class="bold-text" pattern="^[А-Яа-яA-Za-zЁё\s]+$" name="name_patronymic" /></label>
-                    <label>Фамилия<input placeholder="Петрович" class="bold-text" pattern="^[А-Яа-яA-Za-zЁё\s]+$" name="name_surname" /></label>
-                    <label>Дата рождения<input type="date" placeholder="20.02.1984" class="bold-text" name="name_birthday" /></label>
+                    <label>Имя<input placeholder="Иван" class="bold-text" pattern="^[А-Яа-яA-Za-zЁё\s]+" name="name_name" /></label>
+                    <label>Отчество<input placeholder="Сердюков" class="bold-text" pattern="^[А-Яа-яA-Za-zЁё\s]+" name="name_patronymic" /></label>
+                    <label>Фамилия<input placeholder="Петрович" class="bold-text" pattern="^[А-Яа-яA-Za-zЁё\s]+" name="name_surname" /></label>
+                    <label>Дата рождения<input type="date" class="bold-text" name="name_birthday" /></label>
                 </div>
                 <div class="contact-information">
                     <p>Паспортные данные</p>
@@ -36,13 +36,14 @@
                     <label>номер<input data-inputmask="'mask': '999-999'" placeholder="000-000" name="passport_number" /></label>
                     <p>Адрес регистрации</p>
                     <label>индекс<input placeholder="000000" data-inputmask="'mask': '999999'" name="adress_index" /></label>
-                    <label>город<input placeholder="Белгород" pattern="^[А-Яа-яA-Za-zЁё\s]+$" name="adress_city" /></label>
-                    <label>Улица<input placeholder="Пушкина" pattern="^[А-Яа-яA-Za-zЁё\s]+$" name="adress_street" /></label>
-                    <label>Дом<input placeholder="343" pattern="^[0-9]{4}+$" name="adress_home" /></label>
-                    <label>Квартира<input placeholder="15" pattern="^[0-9]{4}+$" name="adress_flat" /></label>
+                    <label>город<input placeholder="Белгород" pattern="^[А-Яа-яA-Za-zЁё\s]+" name="adress_city" /></label>
+                    <label>Улица<input placeholder="Пушкина" pattern="^[А-Яа-яA-Za-zЁё\s]+" name="adress_street" /></label>
+                    <label>Дом<input placeholder="343" pattern="^[0-9]+$" name="adress_home" /></label>
+                    <label>Квартира<input placeholder="15" pattern="^[0-9]+$" name="adress_flat" /></label>
+                    <label>Информация о себе<textarea name="about_me"></textarea></label>
                     <p>Контакты:</p>
-                    <label>Номер телефона<input type="text" name="phone" placeholder="+7 (___) ___ - __ - __" data-inputmask="'mask': '+7 (999) 999 - 99 - 99'"></label>
-                    <label>Email<input data-inputmask="'mask: '*{1,20}[.*{1,20}][.*{1,20}][.*{1,20}]@*{1,20}[.*{2,6}][.*{1,2}]'" placeholder="example@mail.ru" name="contacts_email" /></label>
+                    <label>Номер телефона<input type="text" name="contacts_number" placeholder="+7(___)___-__-__" data-inputmask="'mask': '+7(999)999-99-99'"></label>
+                    <label>Email<input data-inputmask="'mask': '*{1,20}@*{1,20}[.*{2,6}]'" placeholder="example@mail.ru" name="contacts_email" /></label>
                 </div>
             </div>
         </div>
@@ -51,7 +52,6 @@
                 <p>Параметры безопасности:</p>
                 <label>Старый пароль<input type="password" placeholder="Введите пароль" name="series" /></label>
                 <label>Новый пароль<input type="password" placeholder="Введите пароль" name="passport-id" /></label>
-                <label>Информация о себе<textarea name="about_me" placeholder=""></textarea></label>
             </div>
         </div>
         <div class="user-all-information">
