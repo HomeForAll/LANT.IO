@@ -193,7 +193,7 @@ class NewsModel extends Model
      *
      * @return mixed - массив данных, адреса картинок - ввиде массива ['preview_img']
      */
-    public function getNewsById($id)
+    public function getAdById($id)
     {
 
         // Считываем базовую информацию по id
@@ -207,10 +207,42 @@ class NewsModel extends Model
         }
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // Получение фото
-        $data = getAdsPhotos($data);
 
-        return $data;
+        if (!empty($data)) {
+            // Получение фото
+            $data = $this->getAdsPhotos([$data])[0];
+            // Автор
+            $data = $data + $this->getAuthorInfo($data["user_id"], false, true, true);
+            //Перевод города
+            $data["city"] = $this->translateCity($data["city"]);
+            //Перевод метро
+            $data = $data + $this->translateMetroStations($data["metro_station"], true, true, true);
+            // Проверка favorite
+            if(!empty($this->user_id)){
+                $sql = "SELECT COUNT(*) FROM favorite_ads WHERE ad_id = :id AND user_id = :user_id";
+                $stmt = $this->db->prepare($sql);
+                $stmt->bindParam(':id', $id);
+                $stmt->bindParam(':user_id', $this->user_id);
+                if (!$stmt->execute()) {
+                    $this->error(self::DB_SELECT_ERROR, $stmt->errorInfo());
+                }
+                $result = $stmt->fetchColumn();
+                if(!empty($result)){
+                    $data['favorite'] = 1;
+                }else{
+                    $data['favorite'] = 0;
+                }
+            }else{
+                $data['favorite'] = 0;
+            }
+
+        } else {
+            $this->errors = "Несуществующее id";
+        }
+
+
+        $this->response = $data;
+
     }
 
     /**
@@ -1349,16 +1381,16 @@ class NewsModel extends Model
             . " i.original, i.s_250_140, i.s_500_280, i.s_360_230, i.s_720_460, i.ad_id";
 
         //Включение в запрос поля favorite если это зарегистрированный пользователь
-        if(!empty($this->user_id)){
-            $sql .=  ", f.ad_id as favorite";
+        if (!empty($this->user_id)) {
+            $sql .= ", f.ad_id as favorite";
         }
 
-        $sql .=  " FROM news_base n LEFT JOIN (SELECT DISTINCT ON(ad_id) * FROM ads_images) i"
+        $sql .= " FROM news_base n LEFT JOIN (SELECT DISTINCT ON(ad_id) * FROM ads_images) i"
             . " ON (n.id_news = i.ad_id)";
 
         //Включение в запрос поля favorite если это зарегистрированный пользователь
-        if(!empty($this->user_id)){
-            $sql .=  " LEFT JOIN favorite_ads f ON (n.id_news = f.ad_id AND f.user_id = ".$this->user_id.")";
+        if (!empty($this->user_id)) {
+            $sql .= " LEFT JOIN favorite_ads f ON (n.id_news = f.ad_id AND f.user_id = " . $this->user_id . ")";
         }
         $sql .= " WHERE (n.date >= :date)";
 
@@ -1905,6 +1937,7 @@ class NewsModel extends Model
      * @param $data - исходные данные объявлений из БД в виде arr[[0]=>arr, [1]=>arr...]
      * @param bool $translate_indx - нужно ли переводить индексы
      * @param bool $author_info - нужна ли информация об авторе
+     * @param bool $photos - нужны ли все фото
      *
      * @return mixed - преобразованные данные
      * Добавляет параметр ad_is_new - является ли объявление новым (bool)
@@ -1912,28 +1945,18 @@ class NewsModel extends Model
      */
     public function prepareNewsPreview($data, $translate_indx = true, $author_info = false, $photos = true)
     {
-        if(empty($data)) {
+        if (empty($data)) {
             $this->response['items'] = [];
+
             return;
         }
         $user_id_arr = [];
 
         //Получение массив ссылок на картинки $data['news'][number]['photos'][]
-        if($photos){
+        if ($photos) {
             $data = $this->getAdsPhotos($data);
         }
 
-        // Данные индекс города -> город
-        $city = [];
-        $sql = "SELECT id, city FROM city";
-        $stmt = $this->db->prepare($sql);
-        if (!$stmt->execute()) {
-            $this->error(self::DB_SELECT_ERROR);
-        }
-        $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($res as $c) {
-            $city[$c['id']] = $c["city"];
-        }
 
         foreach ($data as $key => $value) {
             // Получение имен категорий
@@ -1958,12 +1981,7 @@ class NewsModel extends Model
             //Приведение favorite к 1 или 0
             !empty($data[$key]['favorite']) ? $data[$key]['favorite'] = 1 : $data[$key]['favorite'] = 0;
 
-            //Перевод индекса города в наименование
-            if (!empty($data[$key]['city'])) {
-                $data[$key]['city'] = $city[$data[$key]['city']];
-            } else {
-              //  $this->error(self::CITY_INCORRECT_CODE_ERROR);
-            }
+
 
             //Определение, является ли объявление новым (дата в формате 'YYYY-MM-DD HH24:MI:SS')
             if (!empty($data[$key]['date'])) {
@@ -1979,7 +1997,7 @@ class NewsModel extends Model
         }
         //Получение данных об авторах объявлений
         if ($author_info) {
-            $author_arr = $this->getAuthorInfo($user_id_arr);
+            $author_arr = $this->getAuthorInfo($user_id_arr, true);
 
             //Присваивание данных
             foreach ($data as $key => $val) {
@@ -1990,36 +2008,54 @@ class NewsModel extends Model
         }
         //Перевод станций метро
         $data = $this->translateMetroStations($data, false, false, true);
+        //Перевод городов
+        $data = $this->translateCity($data);
         $this->response['items'] = $data;
     }
 
     /**
      * Возвращает массив параметров автора объявления
      *
-     * @param $user_id_arr - массив id авторов (может быть послано просто (str) id)
+     * @param $user_id - массив id авторов (может быть послано просто (str) id)
      *
      * @return array - Массив с параметрами автора, и ключами = его id
      */
-    private function getAuthorInfo($user_id_arr)
+    private function getAuthorInfo($user_id, $profile_foto_id = false, $avatar = false, $status = false)
     {
         $author_arr = [];
-        if (!is_array($user_id_arr)) {
-            $user_id_arr = [$user_id_arr];
+        if (!is_array($user_id)) {
+            $user_id_arr = [$user_id];
+        }else{
+            $user_id_arr = $user_id;
         }
         $user_id_arr_txt = implode(',', $user_id_arr);
-        $sql = "SELECT id, first_name, last_name, patronymic, profile_foto_id"
-            . " FROM users WHERE id IN($user_id_arr_txt)";
+        $sql = "SELECT id, first_name, last_name, patronymic";
+        if($profile_foto_id) $sql .= ", profile_foto_id";
+        if($avatar) $sql .= ", avatar_original, avatar_50, avatar_100";
+        if($status) $sql .= ", status as user_status";
+        $sql .= " FROM users WHERE id IN($user_id_arr_txt)";
         $stmt = $this->db->prepare($sql);
         if (!$stmt->execute()) {
             $this->error(self::DB_EXECUTE_ERROR, $stmt->errorInfo());
         }
         $author_result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($author_result as $val) {
-            $author_arr[$val['id']] = $val;
-            unset($author_arr[$val['id']]['id']);
+
+        if(!empty($author_result)){
+            foreach ($author_result as $val) {
+                $author_arr[$val['id']] = $val;
+                unset($author_arr[$val['id']]['id']);
+            }
+
+            if (!is_array($user_id)) {
+                return $author_arr[$user_id];
+            }else{
+                return $author_arr;
+            }
+        }else {
+            return [];
         }
 
-        return $author_arr;
+
     }
 
     /**
@@ -2048,6 +2084,7 @@ class NewsModel extends Model
 
         $channel->close();
         $connection->close();
+
         return;
     }
 
@@ -2390,6 +2427,7 @@ class NewsModel extends Model
 
     /**
      * ! Для форм бэкенда
+     *
      * @param int $metro_id
      */
     public function renderMetroSelect($metro_id = 0)
@@ -2695,8 +2733,70 @@ class NewsModel extends Model
         return $return_data;
     }
 
-    private function  translateMetroStations($data, $line_number = false, $line_name = false, $line_color = false){
-        if(isset($data)){
+    /**
+     * @param $data - arr - массив объявлений или str - id города
+     *
+     * @return mixed
+     */
+    private function translateCity($data){
+
+        if (!is_array($data)){
+            $id = (int)$data;
+            $sql = "SELECT city FROM city WHERE id = ".$id;
+            $stmt = $this->db->prepare($sql);
+            if (!$stmt->execute()) {
+                $this->error(self::DB_SELECT_ERROR, $stmt->errorInfo());
+            }
+            return $stmt->fetchColumn();
+        }
+        // Данные индекс города -> город
+        $city = [];
+        $sql = "SELECT id, city FROM city";
+        $stmt = $this->db->prepare($sql);
+        if (!$stmt->execute()) {
+            $this->error(self::DB_SELECT_ERROR, $stmt->errorInfo());
+        }
+        $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($res as $c) {
+            $city[$c['id']] = $c["city"];
+        }
+        foreach ($data as $key => $value) {
+            //Перевод индекса города в наименование
+            if (!empty($data[$key]['city'])) {
+                $data[$key]['city'] = $city[$data[$key]['city']];
+            } else {
+                //  $this->error(self::CITY_INCORRECT_CODE_ERROR);
+            }
+        }
+        return $data;
+    }
+
+    /**
+     * @param $data - arr объявлений или str - id станции
+     * @param bool $line_number - надо выводить номер линии
+     * @param bool $line_name - надо выводить имя линии
+     * @param bool $line_color - надо выводить цвет линии
+     *
+     * @return mixed
+     */
+    private function translateMetroStations($data, $line_number = false, $line_name = false, $line_color = false)
+    {
+        if (isset($data)) {
+            if(!is_array($data)){
+                $metro_id = (int)$data;
+                $sql = "SELECT s.metro_name";
+                if ($line_number) $sql .= ", l.line_number as metro_line";
+                if ($line_name) $sql .= ", l.line_name as metro_line_name";
+                if ($line_color) $sql .= ", l.line_color as metro_color";
+                $sql .= " FROM metro_stations s"
+                    . " LEFT JOIN metro_line l ON(s.line_id = l.line_id)"
+                    . " WHERE metro_id = ".$metro_id;
+                $stmt = $this->db->prepare($sql);
+                if (!$stmt->execute()) {
+                    $this->error(self::DB_SELECT_ERROR, $stmt->errorInfo());
+                }
+                return $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
+            }
             // Данные индекс метро -> наименование
             $metro_stations = [];
             $metro_line = [];
@@ -2704,43 +2804,43 @@ class NewsModel extends Model
                 . "FROM metro_stations ";
             $stmt = $this->db->prepare($sql);
             if (!$stmt->execute()) {
-                $this->error(self::DB_SELECT_ERROR);
+                $this->error(self::DB_SELECT_ERROR, $stmt->errorInfo());
             }
             $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
             foreach ($res as $m) {
                 $metro_stations[$m['metro_id']] = [
                     'metro_name' => $m["metro_name"],
-                    'line_id' => $m['line_id']
+                    'line_id'    => $m['line_id'],
                 ];
             }
 
-            if($line_number OR $line_name OR $line_color){
+            if ($line_number OR $line_name OR $line_color) {
                 $sql = "SELECT line_id";
-                if($line_number) $sql .= ", line_number";
-                if($line_name) $sql .= ", line_name";
-                if($line_color) $sql .= ", line_color";
+                if ($line_number) $sql .= ", line_number";
+                if ($line_name) $sql .= ", line_name";
+                if ($line_color) $sql .= ", line_color";
                 $sql .= " FROM metro_line";
                 $stmt = $this->db->prepare($sql);
                 if (!$stmt->execute()) {
-                    $this->error(self::DB_SELECT_ERROR);
+                    $this->error(self::DB_SELECT_ERROR, $stmt->errorInfo());
                 }
                 $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($res as $m) {
-                    if($line_number) $metro_line[$m['line_id']]['line_number'] = $m["line_number"];
-                    if($line_name) $metro_line[$m['line_id']]['line_name'] = $m["line_name"];
-                    if($line_color) $metro_line[$m['line_id']]['line_color'] = $m["line_color"];
+                    if ($line_number) $metro_line[$m['line_id']]['line_number'] = $m["line_number"];
+                    if ($line_name) $metro_line[$m['line_id']]['line_name'] = $m["line_name"];
+                    if ($line_color) $metro_line[$m['line_id']]['line_color'] = $m["line_color"];
                 }
             }
 
-            foreach($data as $key => $value){
+            foreach ($data as $key => $value) {
                 //Перевод индекса метро в наименование
                 if (!empty($data[$key]['metro_station']) && !empty($metro_stations[$data[$key]['metro_station']])) {
                     $line_id = $metro_stations[$data[$key]['metro_station']]['line_id'];
-                    if($line_number){
+                    if ($line_number) {
                         $data[$key]['metro_line'] = $metro_line[$line_id]['line_number'];
                     }
-                    if($line_name){
-                        $data[$key]['line_name'] = $metro_line[$line_id]['line_name'];
+                    if ($line_name) {
+                        $data[$key]['metro_line_name'] = $metro_line[$line_id]['line_name'];
                     }
                     if($line_color){
                         $data[$key]['metro_color'] = $metro_line[$line_id]['line_color'];
@@ -2752,6 +2852,7 @@ class NewsModel extends Model
                 }
             }
         }
+
         return $data;
     }
 
