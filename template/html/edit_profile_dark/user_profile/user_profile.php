@@ -38,8 +38,8 @@
                     <label>индекс<input placeholder="000000" data-inputmask="'mask': '999999'" name="adress_index" /></label>
                     <label>город<input placeholder="Белгород" pattern="^[А-Яа-яA-Za-zЁё\s]+" name="adress_city" /></label>
                     <label>Улица<input placeholder="Пушкина" pattern="^[А-Яа-яA-Za-zЁё\s]+" name="adress_street" /></label>
-                    <label>Дом<input placeholder="343" pattern="^[0-9]+" name="adress_home" /></label>
-                    <label>Квартира<input placeholder="15" pattern="^[0-9]+" name="adress_flat" /></label>
+                    <label>Дом<input placeholder="343" pattern="^[0-9]+$" name="adress_home" /></label>
+                    <label>Квартира<input placeholder="15" pattern="^[0-9]+$" name="adress_flat" /></label>
                     <label>Информация о себе<textarea name="about_me" placeholder=""></textarea></label>
                     <p>Контакты:</p>
                     <label>Номер телефона<input type="text" name="contacts_number" placeholder="+7(___)___-__-__" data-inputmask="'mask': '+7(999)999-99-99'"></label>
