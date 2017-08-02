@@ -47,7 +47,7 @@ $(document).ready(function () {
             data: data,
             success: function () {
                 console.log('Данные отправлены', data);
-                location.reload(true);
+                //location.reload(true);
             },
             error: function () {
                 console.log('Данные не отправлены', data);
