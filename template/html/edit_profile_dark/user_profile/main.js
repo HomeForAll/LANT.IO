@@ -34,11 +34,22 @@ $(document).ready(function () {
         }
     });
 
+    /** Отправляем данные **/
     $('#edit-profile').submit(function (e) {
         e.preventDefault();
         var data = $(this).serialize();
 
         console.log('Собранные данные', data);
+
+        if ($('.user-data input').val() === '') {
+            $('.header').append('<div class="message">Зарегистрируйтесь</div>');
+            setTimeout(function () {
+                $('.message').fadeOut('slow', function () {
+                    $(this).remove();
+                })
+            }, 5000);
+            return false;
+        }
 
         $.ajax({
             method: 'POST',
@@ -47,7 +58,12 @@ $(document).ready(function () {
             data: data,
             success: function () {
                 console.log('Данные отправлены', data);
-                //location.reload(true);
+                $('.header').append('<div class="message">сохранено</div>');
+                setTimeout(function () {
+                    $('.message').fadeOut('slow', function () {
+                        $(this).remove();
+                    })
+                }, 5000);
             },
             error: function () {
                 console.log('Данные не отправлены', data);
