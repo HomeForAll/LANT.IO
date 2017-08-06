@@ -1,7 +1,7 @@
 <?php
 return [
     // DataBase
-    'db_host'             => '91.202.180.160',
+    'db_host'             => '127.0.0.1',
     'db_username'         => 'postgres',
     'db_password'         => 'ZSH1wb88',
     'db'                  => 'site',

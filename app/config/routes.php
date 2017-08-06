@@ -81,6 +81,7 @@ return [
     'api/registration/([A-Za-z\_]+)' => 'main/API/registration/$1',
     'api/user/([0-9]+)' => 'main/API/user/$1',
     'api/user' => 'main/API/user',
+    'api/user.getFiles' => 'main/API/getMyFiles',
     'api/upload/news/images' => 'main/API/uploadAdImage',
     'api/upload/user/avatar' => 'main/API/uploadAvatar',
     'api/(best_of_[a-z]+)' => 'main/API/BestAds/$1',
@@ -113,5 +114,6 @@ return [
     'api/items.setActive' => 'main/API/itemActive',
     'api/items.setUnActive' => 'main/API/itemUnActive',
     'api/items.delete' => 'main/API/itemDelete',
+    'api/upload.File' => 'main/API/uploadFile',
     'api/items.getById' => 'main/API/itemGetById',
 ];

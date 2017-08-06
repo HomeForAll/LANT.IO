@@ -1,0 +1,3168 @@
+* 2017-07-22 [11:57:10] - [Notice] Undefined variable: d
+  (line: 3 ) -> app\views\news_list.php 
+
+* 2017-07-26 [12:22:56] - [Notice] Undefined index: name_name
+  (line: 1027 ) -> app\models\CabinetModel.php 
+
+* 2017-07-26 [12:26:47] - [Parse Error] syntax error, unexpected '.2001' (T_DNUMBER)
+  (line: 41 ) -> app\controllers\CabinetController.php  - Фатальная ошибка!
+
+* 2017-07-26 [12:26:50] - [Parse Error] syntax error, unexpected '.2001' (T_DNUMBER)
+  (line: 41 ) -> app\controllers\CabinetController.php  - Фатальная ошибка!
+
+* 2017-07-26 [12:42:55] - [Warning] Illegal string offset 'code'
+  (line: 81 ) -> app\views\dialogs.php 
+
+* 2017-07-26 [12:42:55] - [Warning] Illegal string offset 'code'
+  (line: 120 ) -> app\views\dialogs.php 
+
+* 2017-07-26 [12:42:55] - [Warning] Illegal string offset 'code'
+  (line: 137 ) -> app\views\dialogs.php 
+
+* 2017-07-26 [19:07:02] - [Warning] Illegal string offset 'code'
+  (line: 81 ) -> app\views\dialogs.php 
+
+* 2017-07-26 [19:07:02] - [Warning] Illegal string offset 'code'
+  (line: 120 ) -> app\views\dialogs.php 
+
+* 2017-07-26 [19:07:02] - [Warning] Illegal string offset 'code'
+  (line: 137 ) -> app\views\dialogs.php 
+
+* 2017-07-26 [19:07:09] - [Warning] Illegal string offset 'code'
+  (line: 81 ) -> app\views\dialogs.php 
+
+* 2017-07-26 [19:07:09] - [Warning] Illegal string offset 'code'
+  (line: 120 ) -> app\views\dialogs.php 
+
+* 2017-07-26 [19:07:09] - [Warning] Illegal string offset 'code'
+  (line: 137 ) -> app\views\dialogs.php 
+
+<<<<<<< HEAD
+* 2017-07-28 [10:07:08] - [Notice] Undefined index: user
+  (line: 814 ) -> app\models\CabinetModel.php 
+
+* 2017-07-30 [09:54:16] - [Notice] Undefined index: user
+  (line: 803 ) -> app\models\CabinetModel.php 
+
+* 2017-07-30 [09:54:55] - [Notice] Undefined index: user
+  (line: 803 ) -> app\models\CabinetModel.php 
+
+* 2017-07-30 [09:55:05] - [Notice] Undefined index: user
+  (line: 803 ) -> app\models\CabinetModel.php 
+
+* 2017-07-30 [09:55:28] - [Notice] Undefined index: user
+  (line: 803 ) -> app\models\CabinetModel.php 
+
+* 2017-07-30 [10:00:26] - [Notice] Undefined index: user
+  (line: 803 ) -> app\models\CabinetModel.php 
+
+* 2017-07-30 [10:51:02] - [Notice] Undefined index: user
+  (line: 803 ) -> app\models\CabinetModel.php 
+
+* 2017-07-30 [10:51:55] - [Notice] Undefined index: user
+  (line: 803 ) -> app\models\CabinetModel.php 
+
+* 2017-07-30 [10:51:58] - [Notice] Undefined index: user
+  (line: 803 ) -> app\models\CabinetModel.php 
+=======
+* 2017-07-28 [19:27:06] - [Notice] Undefined index: name_name
+  (line: 1 ) ->  
+
+* 2017-07-28 [19:42:53] - [Notice] Undefined index: passport_number
+  (line: 1 ) ->  
+
+* 2017-07-28 [19:52:27] - [Warning] Illegal string offset 'code'
+  (line: 81 ) -> app\views\dialogs.php 
+
+* 2017-07-28 [19:52:27] - [Warning] Illegal string offset 'code'
+  (line: 120 ) -> app\views\dialogs.php 
+
+* 2017-07-28 [19:52:27] - [Warning] Illegal string offset 'code'
+  (line: 137 ) -> app\views\dialogs.php 
+
+* 2017-07-28 [19:53:06] - [Warning] Illegal string offset 'code'
+  (line: 81 ) -> app\views\dialogs.php 
+
+* 2017-07-28 [19:53:06] - [Warning] Illegal string offset 'code'
+  (line: 120 ) -> app\views\dialogs.php 
+
+* 2017-07-28 [19:53:06] - [Warning] Illegal string offset 'code'
+  (line: 137 ) -> app\views\dialogs.php 
+
+* 2017-07-28 [19:53:15] - [Warning] Illegal string offset 'code'
+  (line: 81 ) -> app\views\dialogs.php 
+
+* 2017-07-28 [19:53:15] - [Warning] Illegal string offset 'code'
+  (line: 120 ) -> app\views\dialogs.php 
+
+* 2017-07-28 [19:53:15] - [Warning] Illegal string offset 'code'
+  (line: 137 ) -> app\views\dialogs.php 
+
+* 2017-07-28 [19:55:05] - [Notice] Undefined index: adress_home
+  (line: 1 ) ->  
+
+* 2017-07-28 [19:55:16] - [Notice] Undefined index: contacts_number
+  (line: 1 ) ->  
+>>>>>>> 1c76933e2172c5d7a977f7e6732df3963aa08f9a
+
+<<<<<<< HEAD
+* 2017-07-30 [18:43:50] - [Notice] Undefined index: user
+  (line: 803 ) -> app\models\CabinetModel.php 
+
+* 2017-07-30 [18:53:11] - [Notice] Undefined index: contacts_number
+  (line: 1093 ) -> app\models\CabinetModel.php 
+
+* 2017-07-30 [18:55:47] - [Notice] Undefined index: contacts_number
+  (line: 1093 ) -> app\models\CabinetModel.php 
+
+* 2017-07-30 [18:56:01] - [Notice] Undefined index: contacts_number
+  (line: 1093 ) -> app\models\CabinetModel.php 
+
+* 2017-07-30 [18:56:21] - [Notice] Undefined index: contacts_number
+  (line: 1093 ) -> app\models\CabinetModel.php 
+
+* 2017-07-30 [18:56:39] - [Notice] Undefined index: contacts_number
+  (line: 1093 ) -> app\models\CabinetModel.php 
+
+* 2017-07-30 [19:00:07] - [Notice] Undefined index: contacts_number
+  (line: 1093 ) -> app\models\CabinetModel.php 
+
+* 2017-07-30 [19:00:50] - [Notice] Undefined index: contacts_number
+  (line: 1093 ) -> app\models\CabinetModel.php 
+
+* 2017-07-31 [10:18:42] - [Notice] Undefined index: user
+  (line: 803 ) -> app\models\CabinetModel.php 
+
+* 2017-07-31 [10:24:25] - [Notice] Undefined index: contacts_number
+  (line: 1093 ) -> app\models\CabinetModel.php 
+
+* 2017-07-31 [11:19:23] - [Notice] Undefined index: contacts_number
+  (line: 1093 ) -> app\models\CabinetModel.php 
+
+* 2017-07-31 [11:42:09] - [Notice] Undefined index: contacts_number
+  (line: 1093 ) -> app\models\CabinetModel.php 
+
+* 2017-07-31 [12:45:11] - [Notice] Undefined index: contacts_number
+  (line: 1093 ) -> app\models\CabinetModel.php 
+=======
+* 2017-07-30 [12:32:03] - [Warning] Missing argument 1 for CabinetModel::checkPassportNumbers(), called in D:\OpenServer\OpenServer\domains\localhost\app\controllers\CabinetController.php on line 41 and defined
+  (line: 921 ) -> app\models\CabinetModel.php 
+
+* 2017-07-30 [12:32:04] - [Notice] Undefined variable: str
+  (line: 923 ) -> app\models\CabinetModel.php 
+>>>>>>> 5d78bee71de236e50c4b5b646efcdafe9a66c371
+
+* 2017-07-31 [14:29:51] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [14:29:52] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [14:29:54] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [14:29:56] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [14:30:17] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [14:30:31] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [14:30:57] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [14:31:27] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [14:31:28] - [Notice] Undefined index: contacts_number
+  (line: 1095 ) -> app\models\CabinetModel.php 
+
+* 2017-07-31 [14:31:40] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [14:31:41] - [Notice] Undefined index: contacts_number
+  (line: 1095 ) -> app\models\CabinetModel.php 
+
+* 2017-07-31 [14:31:55] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [14:31:56] - [Notice] Undefined index: contacts_number
+  (line: 1095 ) -> app\models\CabinetModel.php 
+
+* 2017-07-31 [14:32:07] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [14:32:08] - [Notice] Undefined index: contacts_number
+  (line: 1095 ) -> app\models\CabinetModel.php 
+
+* 2017-07-31 [14:35:56] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [14:35:57] - [Notice] Undefined index: contacts_number
+  (line: 1096 ) -> app\models\CabinetModel.php 
+
+* 2017-07-31 [14:37:09] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [14:37:10] - [Notice] Undefined index: contacts_number
+  (line: 1096 ) -> app\models\CabinetModel.php 
+
+* 2017-07-31 [14:37:18] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [14:37:19] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [14:37:20] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [14:42:23] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [14:42:30] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [14:43:18] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [14:44:27] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [14:44:29] - [Notice] Undefined index: contacts_number
+  (line: 1096 ) -> app\models\CabinetModel.php 
+
+* 2017-07-31 [14:44:44] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [14:44:58] - [Notice] Undefined index: contacts_number
+  (line: 1096 ) -> app\models\CabinetModel.php 
+
+* 2017-07-31 [14:45:20] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [14:45:22] - [Notice] Undefined index: contacts_number
+  (line: 1096 ) -> app\models\CabinetModel.php 
+
+* 2017-07-31 [14:46:13] - [Notice] Undefined index: contacts_number
+  (line: 1 ) -> l()'d code 
+
+* 2017-07-31 [14:46:27] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [14:46:46] - [Notice] Undefined index: email
+  (line: 1105 ) -> app\models\CabinetModel.php 
+
+* 2017-07-31 [14:47:25] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [14:47:32] - [Notice] Undefined index: email
+  (line: 1105 ) -> app\models\CabinetModel.php 
+
+* 2017-07-31 [14:48:43] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [14:48:45] - [Notice] Undefined index: about_me
+  (line: 1243 ) -> app\models\CabinetModel.php 
+
+* 2017-07-31 [14:50:17] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [14:50:19] - [Notice] Undefined index: about_me
+  (line: 1243 ) -> app\models\CabinetModel.php 
+
+* 2017-07-31 [14:50:36] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [14:50:38] - [Notice] Undefined index: about_me
+  (line: 1243 ) -> app\models\CabinetModel.php 
+
+* 2017-07-31 [14:52:15] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [14:52:17] - [Notice] Undefined index: about_me
+  (line: 1245 ) -> app\models\CabinetModel.php 
+
+* 2017-07-31 [14:52:57] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [14:52:59] - [Notice] Undefined index: about_me
+  (line: 1246 ) -> app\models\CabinetModel.php 
+
+* 2017-07-31 [14:53:07] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [14:53:09] - [Notice] Undefined index: about_me
+  (line: 1246 ) -> app\models\CabinetModel.php 
+
+* 2017-07-31 [14:53:22] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [14:54:15] - [Notice] Undefined index: about_me
+  (line: 1246 ) -> app\models\CabinetModel.php 
+
+* 2017-07-31 [14:54:20] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [14:54:22] - [Notice] Undefined index: about_me
+  (line: 1246 ) -> app\models\CabinetModel.php 
+
+* 2017-07-31 [15:01:34] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:01:37] - [Notice] Undefined index: about_me
+  (line: 1246 ) -> app\models\CabinetModel.php 
+
+* 2017-07-31 [15:07:08] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:07:09] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:07:11] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:07:13] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:07:43] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:07:44] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:07:46] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:08:17] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:08:18] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:08:20] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:08:39] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:08:41] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:08:42] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:10:12] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:10:13] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:10:15] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:10:17] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:10:18] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:10:19] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:10:21] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:10:23] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:10:36] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:10:37] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:10:39] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:10:41] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:10:42] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:44:46] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:45:40] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:46:26] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:48:11] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:48:13] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:48:15] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:48:17] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:48:19] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:48:23] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:57:34] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:57:35] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:57:37] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:57:39] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:57:41] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:57:43] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:57:45] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:57:46] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:57:48] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:57:50] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:57:52] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:57:53] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:57:55] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:58:13] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:58:14] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:58:17] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:58:19] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:58:47] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:58:48] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:58:50] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:58:52] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:58:57] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:58:58] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:59:00] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [15:59:02] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:00:31] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:00:32] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:00:34] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:00:36] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:00:47] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:00:49] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:00:51] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:00:52] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:00:54] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:00:57] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:00:59] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:01:00] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:01:02] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:01:04] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:01:06] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:01:08] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:01:10] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:01:12] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:01:13] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:01:15] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:01:17] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:01:19] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:01:20] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:01:22] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:01:24] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:01:29] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:01:30] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:01:32] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:01:34] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:01:38] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:01:39] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:01:41] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:01:43] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:01:46] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:01:47] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:01:49] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:01:51] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:01:53] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:01:55] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:01:56] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:02:23] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:02:24] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:02:26] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:02:27] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:02:32] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:02:33] - [Warning] finfo_open(C:\OSPanel\modules\php\PHP-7.1-x64\extras\magic): failed to open stream: No such file or directory
+  (line: 2382 ) -> vendor\verot\class.upload.php\src\class.upload.php 
+
+* 2017-07-31 [16:02:33] - [Warning] finfo_open(C:\OSPanel\modules\php\PHP-7.1-x64\extras\magic): failed to open stream: No such file or directory
+  (line: 2382 ) -> vendor\verot\class.upload.php\src\class.upload.php 
+
+* 2017-07-31 [16:02:33] - [Warning] finfo_open(): Failed to load magic database at 'C:\OSPanel\modules\php\PHP-7.1-x64\extras\magic'.
+  (line: 2382 ) -> vendor\verot\class.upload.php\src\class.upload.php 
+
+* 2017-07-31 [16:02:35] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:02:36] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:02:38] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:02:39] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:02:57] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:02:58] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:03:00] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:03:02] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:03:04] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:03:04] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:03:05] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:03:07] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:03:09] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:03:11] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:03:12] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:03:14] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:03:16] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:03:17] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:03:19] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:03:21] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:03:31] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:03:32] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:03:34] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:03:36] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:03:40] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:06:51] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:18:01] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:18:02] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:18:04] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:18:06] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:18:15] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:18:17] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:18:19] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:18:20] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:18:47] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:18:49] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:18:51] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:18:53] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:20:10] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:22:26] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:27:11] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:27:52] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:27:54] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:27:56] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:27:58] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:29:34] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:29:35] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:29:37] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:29:39] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:29:41] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:29:43] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:29:44] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:29:46] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:29:48] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:29:50] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:30:19] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:30:20] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:30:22] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:30:24] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:30:26] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:30:45] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:31:17] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:31:19] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:31:21] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:31:23] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:31:42] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:31:44] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:31:45] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:31:47] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:33:32] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:33:33] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:33:35] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:33:36] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:34:15] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:34:17] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:34:18] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:34:20] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:35:52] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:35:53] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:35:55] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:35:56] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:36:02] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:36:03] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:36:05] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:36:06] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:36:08] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:36:10] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:36:11] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:36:12] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:36:14] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:36:16] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:36:17] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:36:21] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:36:22] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:36:24] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:36:26] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:36:28] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:36:29] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:36:31] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:36:33] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:36:35] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:47:34] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:47:36] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:47:37] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:47:40] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:47:41] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:47:43] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:47:44] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:47:45] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:47:45] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:47:47] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:47:49] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:47:51] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:48:21] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:48:26] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:49:57] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:49:59] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:50:01] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:50:03] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:50:05] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:50:51] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:50:52] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:50:54] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:50:56] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:50:58] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:59:12] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:59:14] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:59:15] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:59:18] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [16:59:19] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:00:05] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:00:07] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:00:09] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:00:11] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:00:12] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:00:30] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:00:32] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:00:33] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:00:36] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:00:37] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:01:17] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:01:19] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:01:20] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:01:23] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:01:24] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:03:23] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:03:25] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:03:27] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:03:29] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:03:31] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:03:46] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:11:38] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:12:23] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:13:54] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:15:31] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:16:25] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:20:06] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:21:34] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:23:10] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:23:12] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:23:14] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:23:14] - [Unknown error (7)] PDOException("SQLSTATE[08006] [7] could not connect to server: No route to host (0x00002751/10065)
+	Is the server running on host "91.202.180.160" and accepting
+	TCP/IP connections on port 5432?")
+  (line: 13 ) -> app\core\DataBase.php  - FATAL ERROR!
+
+* 2017-07-31 [17:23:15] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:23:15] - [Unknown error (7)] PDOException("SQLSTATE[08006] [7] could not connect to server: No route to host (0x00002751/10065)
+	Is the server running on host "91.202.180.160" and accepting
+	TCP/IP connections on port 5432?")
+  (line: 13 ) -> app\core\DataBase.php  - FATAL ERROR!
+
+* 2017-07-31 [17:23:15] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:23:15] - [Unknown error (7)] PDOException("SQLSTATE[08006] [7] could not connect to server: No route to host (0x00002751/10065)
+	Is the server running on host "91.202.180.160" and accepting
+	TCP/IP connections on port 5432?")
+  (line: 13 ) -> app\core\DataBase.php  - FATAL ERROR!
+
+* 2017-07-31 [17:23:16] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:23:16] - [Unknown error (7)] PDOException("SQLSTATE[08006] [7] could not connect to server: No route to host (0x00002751/10065)
+	Is the server running on host "91.202.180.160" and accepting
+	TCP/IP connections on port 5432?")
+  (line: 13 ) -> app\core\DataBase.php  - FATAL ERROR!
+
+* 2017-07-31 [17:26:19] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:26:21] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:26:23] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:26:25] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:26:27] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:29:03] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:29:05] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:29:07] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:29:09] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:29:11] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:29:53] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:29:55] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:29:57] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:29:59] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:30:01] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:30:26] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:30:29] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:30:31] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:30:33] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:30:35] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:30:36] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:31:20] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:31:37] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:32:41] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:33:39] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:33:52] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:35:40] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:36:07] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:36:08] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:36:10] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:36:13] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:36:15] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:36:42] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:36:44] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:36:46] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:36:48] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:36:50] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:36:59] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:37:49] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:38:54] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:39:41] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:44:39] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:46:00] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:49:33] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:50:09] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:50:54] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:51:16] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:52:28] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:55:13] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:55:33] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:55:45] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [17:56:58] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [18:01:07] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [18:01:27] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [18:06:42] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [18:10:11] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [18:26:11] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [18:26:13] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [18:26:15] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [18:26:17] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [18:26:20] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [18:32:52] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [18:41:55] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [18:42:11] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [18:59:47] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [18:59:49] - [Unknown error (0)] Error("Call to undefined method NewsModel::setItemActive()")
+  (line: 276 ) -> app\controllers\APIController.php  - FATAL ERROR!
+
+* 2017-07-31 [19:40:23] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [19:40:25] - [Unknown error (0)] Error("Call to a member function fetch() on boolean")
+  (line: 2782 ) -> app\models\NewsModel.php  - FATAL ERROR!
+
+* 2017-07-31 [19:41:58] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [19:42:00] - [Unknown error (0)] ArgumentCountError("Too few arguments to function Response::error(), 1 passed in C:\OSPanel\domains\lant.loc\app\models\NewsModel.php on line 2783 and exactly 2 expected")
+  (line: 178 ) -> app\core\Response.php  - FATAL ERROR!
+
+* 2017-07-31 [19:42:36] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [19:43:18] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [19:47:46] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [19:48:31] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [19:49:32] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [19:50:25] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [19:50:47] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [19:55:45] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [19:55:47] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [19:55:49] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [19:55:51] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [19:55:53] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [19:55:55] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [19:55:56] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [19:55:58] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [19:56:00] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [19:56:02] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [19:56:04] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [19:56:05] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [19:56:07] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [19:56:09] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [19:56:14] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [19:56:17] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [19:57:37] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [20:01:22] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [20:01:24] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [20:01:26] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [20:01:28] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [20:01:30] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [20:48:07] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [20:48:09] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [20:48:11] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [20:48:13] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [20:48:15] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [20:49:28] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [20:49:30] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [20:49:32] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [20:49:34] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [20:49:36] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [20:51:56] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [20:51:58] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [20:52:00] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [20:52:03] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [20:52:05] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [20:53:15] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [20:53:17] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [20:53:19] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [20:53:21] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [20:53:23] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [20:53:25] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [20:53:27] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [20:53:29] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [20:53:31] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [20:53:34] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [20:53:35] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [20:57:44] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [20:57:46] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [20:57:48] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [20:57:50] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [20:57:52] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [20:57:55] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [20:58:43] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:03:16] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:03:18] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:03:20] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:03:22] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:03:24] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:03:38] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:03:41] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:03:44] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:04:09] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:04:11] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:04:12] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:04:14] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:04:39] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:04:40] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:04:42] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:04:44] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:04:47] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:04:48] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:04:50] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:04:52] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:04:54] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:04:56] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:04:58] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:05:00] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:05:01] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:05:03] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:05:05] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:05:07] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:05:09] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:05:55] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:05:56] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:05:58] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:06:00] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:06:30] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:06:31] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:06:33] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:06:35] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:06:42] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:06:47] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:07:06] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:07:08] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:07:21] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:07:22] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:07:24] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:07:26] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:07:29] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:07:31] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:07:33] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:07:35] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:07:37] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:07:43] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:07:45] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:07:47] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:07:50] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:07:51] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:07:54] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:07:58] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:08:01] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:08:15] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:08:20] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:08:23] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:09:12] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:09:14] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:09:16] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:09:18] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:09:20] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:09:37] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:09:39] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:09:40] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:09:43] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:09:45] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:09:47] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:10:05] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:10:07] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:10:08] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:10:10] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:10:13] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:10:14] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:10:16] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:10:18] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:10:20] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:10:39] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:10:42] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:10:57] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:10:59] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:11:00] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:11:03] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:11:05] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:11:07] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:11:08] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:11:10] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:11:12] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:12:36] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:12:45] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:12:47] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:12:49] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:12:51] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:12:52] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:12:54] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:12:56] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:13:03] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:13:03] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:13:04] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:13:07] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:13:08] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:13:10] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:13:12] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:13:14] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:13:15] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:13:17] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:13:19] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:13:22] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:13:24] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:13:26] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:13:28] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:13:29] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:13:31] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:13:33] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:13:35] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:13:36] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:13:38] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:13:40] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:13:48] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:13:50] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:13:52] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:13:53] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:14:24] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:14:25] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:14:27] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:14:29] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:14:50] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:14:51] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:14:53] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:14:55] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:15:12] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [21:15:13] - [Warning] finfo_open(C:\OSPanel\modules\php\PHP-7.1-x64\extras\magic): failed to open stream: No such file or directory
+  (line: 2382 ) -> vendor\verot\class.upload.php\src\class.upload.php 
+
+* 2017-07-31 [21:15:13] - [Warning] finfo_open(C:\OSPanel\modules\php\PHP-7.1-x64\extras\magic): failed to open stream: No such file or directory
+  (line: 2382 ) -> vendor\verot\class.upload.php\src\class.upload.php 
+
+* 2017-07-31 [21:15:13] - [Warning] finfo_open(): Failed to load magic database at 'C:\OSPanel\modules\php\PHP-7.1-x64\extras\magic'.
+  (line: 2382 ) -> vendor\verot\class.upload.php\src\class.upload.php 
+
+* 2017-07-31 [23:26:07] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [23:26:09] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [23:26:10] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [23:26:13] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-07-31 [23:26:14] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [00:15:50] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [00:15:51] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [00:15:53] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [00:15:55] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [00:15:57] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [00:15:59] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [10:26:40] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [10:26:43] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [10:26:45] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [10:26:47] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [10:26:49] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [10:26:54] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [10:26:55] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [10:26:57] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [10:26:58] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [10:27:00] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [10:27:01] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [10:27:03] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [10:27:05] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [10:27:06] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [10:27:08] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [10:27:10] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [10:27:12] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [10:27:14] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [10:27:16] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [10:27:17] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [10:27:19] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [10:27:21] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [10:27:29] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [10:27:30] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [10:27:32] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [10:27:34] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [10:27:35] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [10:27:37] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [10:27:38] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [10:27:41] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [10:27:42] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [11:29:42] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [11:29:44] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [11:29:45] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [11:29:48] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [11:29:50] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [11:29:52] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [11:29:53] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [11:29:54] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [11:29:56] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [12:16:15] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [12:19:04] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [12:19:06] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [12:19:08] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [12:19:10] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [12:19:12] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [12:19:23] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [12:20:07] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [12:21:25] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [12:21:27] - [Unknown error (0)] Error("Class 'v' not found")
+  (line: 56 ) -> app\core\SMSHandler.php  - FATAL ERROR!
+
+* 2017-08-01 [12:23:16] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [12:24:11] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [12:25:53] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [12:27:07] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [12:27:41] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [12:48:05] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [12:48:20] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [12:48:22] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [12:48:23] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [12:48:25] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [12:48:27] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [12:48:29] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [12:52:21] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [12:52:23] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [12:52:24] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [12:52:27] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [12:52:28] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:01:04] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:01:06] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:01:07] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:01:10] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:01:11] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:01:13] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:01:14] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:01:15] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:01:17] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:01:19] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:04:07] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:04:08] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:04:09] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:04:11] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:04:13] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:04:35] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:04:43] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:04:51] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:04:59] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:05:06] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:05:15] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:05:16] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:05:17] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:05:19] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:05:31] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:05:32] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:05:33] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:05:35] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:05:37] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:05:44] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:06:05] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:06:11] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:06:15] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:06:17] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:06:21] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:06:28] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:06:33] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:06:36] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:06:43] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:06:48] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:06:49] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:06:51] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:06:53] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:06:57] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:06:58] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:07:00] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:07:02] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:07:03] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:07:08] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:07:11] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:07:12] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:07:13] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:07:15] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:07:38] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:07:39] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:07:41] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:07:43] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:07:45] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:11:53] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:11:55] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:12:04] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:26:12] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:26:13] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:26:15] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:26:16] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:26:46] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:26:47] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:26:49] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:26:51] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:26:52] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:31:51] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:31:54] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:34:27] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:34:28] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:34:30] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:34:32] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:34:39] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:34:40] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:34:41] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:34:43] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:34:45] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:34:56] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:34:59] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:35:04] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:35:05] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:35:07] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:35:08] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:35:37] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:35:37] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:35:39] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:35:41] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:35:47] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:35:48] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:35:49] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:35:52] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:35:53] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:37:06] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:46:38] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:46:45] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:48:24] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:48:33] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:48:56] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:49:27] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:51:15] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:52:01] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:54:42] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:55:34] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:55:36] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:55:37] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:55:39] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:55:41] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:56:00] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:57:16] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:58:27] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:58:50] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:59:10] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [13:59:39] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:00:09] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:00:15] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:00:31] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:00:32] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:00:34] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:00:36] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:00:38] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:00:44] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:01:02] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:04:30] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:04:31] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:04:33] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:04:35] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:04:51] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:04:52] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:04:54] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:04:56] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:07:56] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:07:57] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:07:59] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:08:01] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:08:07] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:08:08] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:08:09] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:08:11] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:08:13] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:08:23] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:08:28] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:08:35] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:08:38] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:08:42] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:08:43] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:08:44] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:08:46] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:09:04] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:09:07] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:09:08] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:09:10] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:09:11] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:10:24] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:10:26] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:11:43] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:11:44] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:11:45] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:11:47] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:11:52] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:11:53] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:11:55] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:11:56] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:11:58] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:12:00] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:12:01] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:12:03] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:12:04] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:12:06] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:12:07] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:12:09] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:12:11] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:12:13] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:12:14] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:12:15] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:12:17] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:14:19] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:14:20] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:14:22] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:14:24] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:14:25] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:15:36] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-01 [14:18:47] - [Warning] finfo_open(C:\OSPanel\modules\php\PHP-7.1-x64\extras\magic): failed to open stream: No such file or directory
+  (line: 2382 ) -> vendor\verot\class.upload.php\src\class.upload.php 
+
+* 2017-08-01 [14:18:47] - [Warning] finfo_open(C:\OSPanel\modules\php\PHP-7.1-x64\extras\magic): failed to open stream: No such file or directory
+  (line: 2382 ) -> vendor\verot\class.upload.php\src\class.upload.php 
+
+* 2017-08-01 [14:18:47] - [Warning] finfo_open(): Failed to load magic database at 'C:\OSPanel\modules\php\PHP-7.1-x64\extras\magic'.
+  (line: 2382 ) -> vendor\verot\class.upload.php\src\class.upload.php 
+
+* 2017-08-02 [20:31:15] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:31:16] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:31:18] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:31:21] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:31:22] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:31:24] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:31:25] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:31:27] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:31:29] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:32:55] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:32:57] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:32:58] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:33:00] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:33:02] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:33:04] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:33:06] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:33:10] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:33:11] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:33:13] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:33:15] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:33:17] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:33:19] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:33:50] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:33:51] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:33:53] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:33:55] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:35:29] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:35:30] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:35:32] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:35:36] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:35:39] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:35:40] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:35:42] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:35:44] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:35:46] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:35:48] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:35:49] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:35:51] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:35:52] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:35:54] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:35:56] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:37:27] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:37:28] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:37:30] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:37:32] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:37:34] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:37:36] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:37:37] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:37:39] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:37:41] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:37:59] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:38:00] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:38:01] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:38:04] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:38:06] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:38:07] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:38:10] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:38:12] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:38:14] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:38:16] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:38:23] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:38:26] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:38:33] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:38:47] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:38:47] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:38:48] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:38:49] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:38:51] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:38:53] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:39:22] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:39:23] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:39:25] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:39:27] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:39:29] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:39:36] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:42:25] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:42:26] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:42:27] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:42:30] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:42:32] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:43:07] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:43:09] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:43:35] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:43:36] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:43:38] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:43:40] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:43:57] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:43:58] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:44:00] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:44:03] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:44:05] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:44:54] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:44:55] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:44:56] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:44:58] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:45:20] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:45:21] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:45:23] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:45:25] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:45:27] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:45:44] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:45:45] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:45:47] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-02 [20:45:49] - [Notice] Undefined index: status
+  (line: 39 ) -> app\core\Access.php 
+
+* 2017-08-06 [16:03:04] - [Warning] finfo_open(C:\OSPanel\modules\php\PHP-7.1-x64\extras\magic): failed to open stream: No such file or directory
+  (line: 2382 ) -> vendor\verot\class.upload.php\src\class.upload.php 
+
+* 2017-08-06 [16:03:04] - [Warning] finfo_open(C:\OSPanel\modules\php\PHP-7.1-x64\extras\magic): failed to open stream: No such file or directory
+  (line: 2382 ) -> vendor\verot\class.upload.php\src\class.upload.php 
+
+* 2017-08-06 [16:03:04] - [Warning] finfo_open(): Failed to load magic database at 'C:\OSPanel\modules\php\PHP-7.1-x64\extras\magic'.
+  (line: 2382 ) -> vendor\verot\class.upload.php\src\class.upload.php 
+
+* 2017-08-06 [16:06:50] - [Warning] finfo_open(C:\OSPanel\modules\php\PHP-7.1-x64\extras\magic): failed to open stream: No such file or directory
+  (line: 2382 ) -> vendor\verot\class.upload.php\src\class.upload.php 
+
+* 2017-08-06 [16:06:50] - [Warning] finfo_open(C:\OSPanel\modules\php\PHP-7.1-x64\extras\magic): failed to open stream: No such file or directory
+  (line: 2382 ) -> vendor\verot\class.upload.php\src\class.upload.php 
+
+* 2017-08-06 [16:06:50] - [Warning] finfo_open(): Failed to load magic database at 'C:\OSPanel\modules\php\PHP-7.1-x64\extras\magic'.
+  (line: 2382 ) -> vendor\verot\class.upload.php\src\class.upload.php 
+
+* 2017-08-06 [16:07:30] - [Warning] finfo_open(C:\OSPanel\modules\php\PHP-7.1-x64\extras\magic): failed to open stream: No such file or directory
+  (line: 2382 ) -> vendor\verot\class.upload.php\src\class.upload.php 
+
+* 2017-08-06 [16:07:30] - [Warning] finfo_open(C:\OSPanel\modules\php\PHP-7.1-x64\extras\magic): failed to open stream: No such file or directory
+  (line: 2382 ) -> vendor\verot\class.upload.php\src\class.upload.php 
+
+* 2017-08-06 [16:07:30] - [Warning] finfo_open(): Failed to load magic database at 'C:\OSPanel\modules\php\PHP-7.1-x64\extras\magic'.
+  (line: 2382 ) -> vendor\verot\class.upload.php\src\class.upload.php 
+
+* 2017-08-06 [16:08:30] - [Warning] finfo_open(C:\OSPanel\modules\php\PHP-7.1-x64\extras\magic): failed to open stream: No such file or directory
+  (line: 2382 ) -> vendor\verot\class.upload.php\src\class.upload.php 
+
+* 2017-08-06 [16:08:31] - [Warning] finfo_open(C:\OSPanel\modules\php\PHP-7.1-x64\extras\magic): failed to open stream: No such file or directory
+  (line: 2382 ) -> vendor\verot\class.upload.php\src\class.upload.php 
+
+* 2017-08-06 [16:08:31] - [Warning] finfo_open(): Failed to load magic database at 'C:\OSPanel\modules\php\PHP-7.1-x64\extras\magic'.
+  (line: 2382 ) -> vendor\verot\class.upload.php\src\class.upload.php 
+
+* 2017-08-06 [16:08:31] - [Notice] Undefined index: link
+  (line: 150 ) -> app\models\UploadModel.php 
+
+* 2017-08-06 [16:08:42] - [Warning] finfo_open(C:\OSPanel\modules\php\PHP-7.1-x64\extras\magic): failed to open stream: No such file or directory
+  (line: 2382 ) -> vendor\verot\class.upload.php\src\class.upload.php 
+
+* 2017-08-06 [16:08:42] - [Warning] finfo_open(C:\OSPanel\modules\php\PHP-7.1-x64\extras\magic): failed to open stream: No such file or directory
+  (line: 2382 ) -> vendor\verot\class.upload.php\src\class.upload.php 
+
+* 2017-08-06 [16:08:42] - [Warning] finfo_open(): Failed to load magic database at 'C:\OSPanel\modules\php\PHP-7.1-x64\extras\magic'.
+  (line: 2382 ) -> vendor\verot\class.upload.php\src\class.upload.php 
+
+* 2017-08-06 [16:08:42] - [Notice] Undefined index: link
+  (line: 150 ) -> app\models\UploadModel.php 
+
+* 2017-08-06 [16:09:43] - [Warning] finfo_open(C:\OSPanel\modules\php\PHP-7.1-x64\extras\magic): failed to open stream: No such file or directory
+  (line: 2382 ) -> vendor\verot\class.upload.php\src\class.upload.php 
+
+* 2017-08-06 [16:09:43] - [Warning] finfo_open(C:\OSPanel\modules\php\PHP-7.1-x64\extras\magic): failed to open stream: No such file or directory
+  (line: 2382 ) -> vendor\verot\class.upload.php\src\class.upload.php 
+
+* 2017-08-06 [16:09:43] - [Warning] finfo_open(): Failed to load magic database at 'C:\OSPanel\modules\php\PHP-7.1-x64\extras\magic'.
+  (line: 2382 ) -> vendor\verot\class.upload.php\src\class.upload.php 
+
+* 2017-08-06 [16:11:00] - [Warning] finfo_open(C:\OSPanel\modules\php\PHP-7.1-x64\extras\magic): failed to open stream: No such file or directory
+  (line: 2382 ) -> vendor\verot\class.upload.php\src\class.upload.php 
+
+* 2017-08-06 [16:11:00] - [Warning] finfo_open(C:\OSPanel\modules\php\PHP-7.1-x64\extras\magic): failed to open stream: No such file or directory
+  (line: 2382 ) -> vendor\verot\class.upload.php\src\class.upload.php 
+
+* 2017-08-06 [16:11:00] - [Warning] finfo_open(): Failed to load magic database at 'C:\OSPanel\modules\php\PHP-7.1-x64\extras\magic'.
+  (line: 2382 ) -> vendor\verot\class.upload.php\src\class.upload.php 
+
+* 2017-08-06 [16:12:55] - [Warning] finfo_open(C:\OSPanel\modules\php\PHP-7.1-x64\extras\magic): failed to open stream: No such file or directory
+  (line: 2382 ) -> vendor\verot\class.upload.php\src\class.upload.php 
+
+* 2017-08-06 [16:12:55] - [Warning] finfo_open(C:\OSPanel\modules\php\PHP-7.1-x64\extras\magic): failed to open stream: No such file or directory
+  (line: 2382 ) -> vendor\verot\class.upload.php\src\class.upload.php 
+
+* 2017-08-06 [16:12:55] - [Warning] finfo_open(): Failed to load magic database at 'C:\OSPanel\modules\php\PHP-7.1-x64\extras\magic'.
+  (line: 2382 ) -> vendor\verot\class.upload.php\src\class.upload.php 
+
+* 2017-08-06 [16:17:19] - [Warning] finfo_open(C:\OSPanel\modules\php\PHP-7.1-x64\extras\magic): failed to open stream: No such file or directory
+  (line: 2382 ) -> vendor\verot\class.upload.php\src\class.upload.php 
+
+* 2017-08-06 [16:17:19] - [Warning] finfo_open(C:\OSPanel\modules\php\PHP-7.1-x64\extras\magic): failed to open stream: No such file or directory
+  (line: 2382 ) -> vendor\verot\class.upload.php\src\class.upload.php 
+
+* 2017-08-06 [16:17:19] - [Warning] finfo_open(): Failed to load magic database at 'C:\OSPanel\modules\php\PHP-7.1-x64\extras\magic'.
+  (line: 2382 ) -> vendor\verot\class.upload.php\src\class.upload.php 
+
+* 2017-08-06 [16:17:40] - [Warning] finfo_open(C:\OSPanel\modules\php\PHP-7.1-x64\extras\magic): failed to open stream: No such file or directory
+  (line: 2382 ) -> vendor\verot\class.upload.php\src\class.upload.php 
+
+* 2017-08-06 [16:17:40] - [Warning] finfo_open(C:\OSPanel\modules\php\PHP-7.1-x64\extras\magic): failed to open stream: No such file or directory
+  (line: 2382 ) -> vendor\verot\class.upload.php\src\class.upload.php 
+
+* 2017-08-06 [16:17:40] - [Warning] finfo_open(): Failed to load magic database at 'C:\OSPanel\modules\php\PHP-7.1-x64\extras\magic'.
+  (line: 2382 ) -> vendor\verot\class.upload.php\src\class.upload.php 
+

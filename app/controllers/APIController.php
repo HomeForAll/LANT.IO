@@ -305,4 +305,14 @@ class APIController extends Controller
         echo json_encode($this->model('NewsModel')->getResponse(), JSON_UNESCAPED_UNICODE);
     }
 
+
+    public function actionUploadFile()
+    {
+        $this->model('UploadModel')->uploadFile();
+    }
+
+    public function actionGetMyFiles()
+    {
+        $this->model('UserModel')->getUserFiles();
+    }
 }

@@ -1787,4 +1787,25 @@ class UserModel extends Model
 
         $this->response(true);
     }
+
+    public function getUserFiles()
+    {
+        if (!isset($_SESSION['user']['id'])) {
+            $this->error(self::USER_NOT_AUTHORIZED_ERROR);
+        }
+
+        $query = $this->db->prepare('SELECT * FROM files WHERE user_id = :user_id');
+        $query->execute([':user_id' => $_SESSION['user']['id']]);
+
+        if ($query->errorCode() !== '00000') {
+            $this->error(self::DB_SELECT_ERROR, $query->errorInfo());
+        }
+
+        $files = $query->fetchAll();
+
+        $this->response([
+            'count' => count($files),
+            'items' => $files,
+        ]);
+    }
 }
