@@ -6,6 +6,3 @@
 /git-ftp-push.sh
 .vscode/settings.json
 /template/lucia/vendor/
-/log/
-log/errors.html
-log/errors.log
