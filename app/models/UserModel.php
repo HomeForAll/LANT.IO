@@ -1331,8 +1331,8 @@ class UserModel extends Model
     {
         $sql = 'INSERT INTO users ({%columns%}) VALUES ({%values%}) RETURNING *';
         $activate_hash = time() . sha1(time() . mt_rand(1, 15000));
-        $columns = "registration_timestamp, activate_hash";
-        $values = "now(), '{$activate_hash}'";
+        $columns = "registration_timestamp, activate_hash,welcome";
+        $values = "now(), '{$activate_hash}', 1";
 
         $user_type = [
             'user' => 0,
@@ -1422,7 +1422,7 @@ class UserModel extends Model
         $mail->setFrom('admin@lant.io', 'LANT.IO');
         $mail->addAddress($_SESSION['registration']['email']);
         $mail->Subject = 'New account';
-        $mail->msgHTML("Здравствуйте {$user['first_name']}, для потверждения Email кликните по этой ссылке: {$activate_url}");
+        $mail->msgHTML("Здравствуйте, для потверждения Email кликните по этой ссылке: {$activate_url}");
 
         if (!$mail->send()) {
             $this->error(self::EMAIL_MESSAGE_SEND_ERROR, $mail->ErrorInfo);
@@ -1786,5 +1786,26 @@ class UserModel extends Model
         $_SESSION['user_hash'] = hash('sha512', 'user_id=' . $user['id'] . 'secret_key=' . Registry::get('config')['secret_key']);
 
         $this->response(true);
+    }
+
+    public function getUserFiles()
+    {
+        if (!isset($_SESSION['user']['id'])) {
+            $this->error(self::USER_NOT_AUTHORIZED_ERROR);
+        }
+
+        $query = $this->db->prepare('SELECT * FROM files WHERE user_id = :user_id');
+        $query->execute([':user_id' => $_SESSION['user']['id']]);
+
+        if ($query->errorCode() !== '00000') {
+            $this->error(self::DB_SELECT_ERROR, $query->errorInfo());
+        }
+
+        $files = $query->fetchAll();
+
+        $this->response([
+            'count' => count($files),
+            'items' => $files,
+        ]);
     }
 }

@@ -112,6 +112,62 @@ class UploadModel extends Model
         $this->response($response);
     }
 
+    public function uploadFile()
+    {
+        if (!isset($_SESSION['user']['id'])) {
+            $this->error(self::USER_NOT_AUTHORIZED_ERROR);
+        }
+
+        if (!isset($_FILES['file'])) {
+            $this->error(self::NO_FILE_ERROR);
+        }
+
+        $file_name = sha1(time() . mt_rand(1, 100));
+        $query = $this->db->prepare('INSERT INTO files (name, link, user_id, size) VALUES (:file_name, :link, :user_id, :file_size) RETURNING id');
+
+        $response = [];
+        $handle = new upload($_FILES['file']);
+
+        if (!$handle->uploaded) {
+            $this->error(self::FILE_NOT_UPLOADED_ERROR);
+        }
+
+        $directory = 'uploads' . '/' . 'files' . '/' . $file_name[0] . '/' . $file_name[0] . $file_name[1] . '/';
+        $old_file_name = $handle->file_src_name;
+        $file_size = $handle->file_src_size;
+
+        $handle->file_new_name_body = $file_name;
+        $handle->Process(ROOT_DIR . $directory);
+
+        if (!$handle->processed) {
+            $this->error(self::FILE_NOT_PROCESSED_ERROR, $handle->error);
+        }
+
+        $link = '/' . $directory . $handle->file_dst_name;
+
+        $handle->clean();
+
+        $query->execute(
+            [
+                ':file_name' => $old_file_name,
+                ':link'  => $link,
+                ':user_id'  => $_SESSION['user']['id'],
+                ':file_size'  => $file_size,
+            ]
+        );
+
+        if ($query->errorCode() !== '00000') {
+            $this->error(self::DB_INSERT_ERROR, $query->errorInfo());
+        }
+
+        $file = $query->fetch();
+        $response['id'] = $file['id'];
+        $response['name'] = $old_file_name;
+        $response['link'] = $link;
+        $response['size'] = $file_size;
+        $this->response($response);
+    }
+
     public function uploadAvatar()
     {
         if (!isset($_FILES['file'])) {

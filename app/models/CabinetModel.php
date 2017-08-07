@@ -1093,7 +1093,7 @@ class CabinetModel extends Model
         } else {
             $this->error(self::WRONG_ADRESS_FLAT);
         }
-        if ($str = $this->checkPhoneNumber($_POST['phone'])) {
+        if ($str = $this->checkPhoneNumber($_POST['contacts_number'])) {
                 $str = preg_replace('~([^0-9]+)~', '', $str);
             if (strlen($str) == 11) {
                 $str[0] = 7;
