@@ -20,10 +20,9 @@ class Router
             (new ErrorHandler())->register();
         }
         $uri = $this->getURI();
-        
         foreach ($this->routes as $uriPattern => $path) {
-            if (preg_match("~^{$uriPattern}$~", $uri)) {
-                
+			var_dump($uriPattern);
+            if (preg_match("~^{$uriPattern}$~", $uri, $m)) {
                 $options = $this->getOptions($uriPattern, $uri, $path);
                 $action  = $options['action'];
                 
@@ -31,10 +30,11 @@ class Router
                     $controllerObject = new $options['controller']($options['template']);
                     $controllerObject->$action($options['params']);
                 }
+				break;
             }
         }
     }
-    
+
     /**
      * Возвращает URI или false, если строка запроса пустая
      *
@@ -43,14 +43,13 @@ class Router
     private function getURI()
     {
         if (!empty($_SERVER['REQUEST_URI'])) {
-            $url = parse_url(urldecode($_SERVER['REQUEST_URI']), PHP_URL_PATH);
+            $url = trim(array_shift(explode('?', urldecode($_SERVER['REQUEST_URI']))), '/');
             if (SERVER == 'nginx') {
-                return trim(str_replace('index.php', '', trim($url, '/')), '/');
+                return trim(str_replace('index.php', '', $url), '/');
             } elseif (SERVER == 'apache') {
-                return trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
+                return $url;
             }
         }
-        
         return false;
     }
     
