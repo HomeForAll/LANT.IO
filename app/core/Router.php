@@ -21,7 +21,6 @@ class Router
         }
         $uri = $this->getURI();
         foreach ($this->routes as $uriPattern => $path) {
-			var_dump($uriPattern);
             if (preg_match("~^{$uriPattern}$~", $uri, $m)) {
                 $options = $this->getOptions($uriPattern, $uri, $path);
                 $action  = $options['action'];
