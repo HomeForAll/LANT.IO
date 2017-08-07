@@ -1,4 +1,5 @@
 <?php
+session_cache_limiter('private');
 session_set_cookie_params(604800);
 session_start();
 
