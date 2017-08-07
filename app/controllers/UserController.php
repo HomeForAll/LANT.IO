@@ -67,6 +67,11 @@ class UserController extends Controller
         }
     }
 
+    public function actionRestore()
+    {
+        $this->view->render('restore');
+	}
+
     public function actionLogout()
     {
         $this->model('UserModel')->logout();
