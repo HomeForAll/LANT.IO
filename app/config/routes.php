@@ -15,7 +15,7 @@ return [
     'login'                 => 'main/user/login',
     'login/([A-Za-z]+)'     => 'main/user/OAuthInit/$1',
     'logout'                => 'main/user/logout',
-    'restore/([^:]+):([0-9]+)' => 'main/user/restore/$1/$2',
+    'restore/([^:]+):([0-9]+)' => 'restore/user/restore/$1/$2',
 
     'cabinet'                  => 'main/cabinet/cabinet',
 
