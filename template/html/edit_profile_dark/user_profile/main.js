@@ -30,6 +30,7 @@ function authenticator() {
             keyHidden.value = data.response.code;
             key.value = data.response.secret_key;
 
+            /** Отправляем уже сгенирированный QR-код **/
             submitBtn.onclick = function () {
                 $.ajax({
                     method: 'POST',
