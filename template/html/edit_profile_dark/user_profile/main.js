@@ -1,7 +1,76 @@
 'use strict';
 var leftBar = false;
 
+/** Двух этапная аутентификация **/
+function authenticator() {
+    $.ajax({
+        method: 'GET',
+        url: '/api/authenticator/create/secret',
+        dataType: 'Json',
+        success: function (data) {
+
+            console.log('data.response - ', data.response);
+
+            var mainSearchAuthenticator = document.createElement('div'),
+                title = document.createElement('div'),
+                imageKey = document.createElement('img'),
+                key = document.createElement('input'),
+                keyHidden = document.createElement('input'),
+                submitBtn = document.createElement('button');
+
+            mainSearchAuthenticator.className = 'authenticator-cl';
+
+            title.innerHTML = 'Введите код<i class="fa fa-times" onclick="$(function() {$(\'.search-authenticator\').remove();})" aria-hidden="true"></i>';
+            submitBtn.innerHTML = 'Отправить';
+
+            imageKey.setAttribute('src', data.response.qr_img_url);
+            key.setAttribute('placeholder', 'Проверочный код');
+            key.setAttribute('type', 'text');
+
+            keyHidden.value = data.response.code;
+            key.value = data.response.secret_key;
+
+            submitBtn.onclick = function () {
+                $.ajax({
+                    method: 'POST',
+                    url: '/api/authenticator/save',
+                    data: {
+                        secret_key: key.value,
+                        code: keyHidden.value
+                    },
+                    dataType: 'Json',
+                    success: function () {
+                        console.log('secret_key - ', key.value);
+                        console.log('code - ', keyHidden.value);
+                    }
+                })
+            };
+
+            mainSearchAuthenticator.className = 'search-authenticator';
+
+            $('.content').prepend(mainSearchAuthenticator);
+            mainSearchAuthenticator.append(title, imageKey, keyHidden, key, submitBtn);
+        },
+        error: function (data) {
+            console.log('Нет данных для утентификации ', data);
+        }
+    });
+}
+
 $(document).ready(function () {
+
+    /** Двух этапная аутентификация **/
+    $.ajax({
+        method: 'GET',
+        url: '/api/user?extend=1',
+        dataType: 'Json',
+        success: function (test) {
+            console.log('Данные утентификации test - ', test.response);
+        },
+        error: function (test) {
+            console.log('Нет данных для утентификации test - ', test);
+        }
+    });
 
     /** Получаем данные о пользователе **/
     $.ajax({
@@ -9,8 +78,6 @@ $(document).ready(function () {
         url: '/api/profile/get/profile',
         dataType: 'Json',
         success: function (data) {
-
-            console.log('Нужный параметр - ', data);
 
             if (!data) return false;
 
@@ -39,8 +106,6 @@ $(document).ready(function () {
         e.preventDefault();
         var data = $(this).serialize();
 
-        console.log('Собранные данные', data);
-
         if ($('.user-data input').val() === '') {
             $('.header').append('<div class="message">Зарегистрируйтесь</div>');
             setTimeout(function () {
@@ -57,8 +122,7 @@ $(document).ready(function () {
             dataType: 'Json',
             data: data,
             success: function () {
-                console.log('Данные отправлены', data);
-                $('.header').append('<div class="message">сохранено</div>');
+                $('.header').append('<div class="message">отправлено</div>');
                 setTimeout(function () {
                     $('.message').fadeOut('slow', function () {
                         $(this).remove();
