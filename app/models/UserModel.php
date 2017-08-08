@@ -1676,7 +1676,7 @@ class UserModel extends Model
 
         $ga = new PHPGangsta_GoogleAuthenticator();
 
-        if ($ga->verifyCode($_SESSION['user']['ga_secret'], $_REQUEST['code'])) {
+        if ($ga->verifyCode($_SESSION['user']['ga_secret'], $_REQUEST['code'], 2)) {
             $query = $this->db->prepare('UPDATE users SET ga_secret_key = :secret, auth_2factor = 2 WHERE id = :user_id');
             $query->execute([
                 ':secret' => $_SESSION['user']['ga_secret'],
