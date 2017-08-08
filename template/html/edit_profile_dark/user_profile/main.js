@@ -3,6 +3,7 @@ var leftBar = false;
 
 /** Двух этапная аутентификация **/
 function authenticator() {
+    $('.search-authenticator').remove();
     $.ajax({
         method: 'GET',
         url: '/api/authenticator/create/secret',
@@ -24,10 +25,12 @@ function authenticator() {
             submitBtn.innerHTML = 'Отправить';
 
             imageKey.setAttribute('src', data.response.qr_img_url);
-            key.setAttribute('placeholder', 'Проверочный код');
-            key.setAttribute('type', 'text');
+            key.setAttribute('type', 'hidden');
+            key.setAttribute('placeholder', 'Hash');
+            keyHidden.setAttribute('type', 'text');
+            keyHidden.setAttribute('pattern', '^[0-9]+$');
+            keyHidden.setAttribute('required', 'required');
 
-            keyHidden.value = data.response.code;
             key.value = data.response.secret_key;
 
             /** Отправляем уже сгенирированный QR-код **/
@@ -39,11 +42,21 @@ function authenticator() {
                         secret_key: key.value,
                         code: keyHidden.value
                     },
-                    dataType: 'Json',
-                    success: function () {
-                        console.log('secret_key - ', key.value);
-                        console.log('code - ', keyHidden.value);
-                    }
+                    dataType: 'Json'
+                }).done(function () {
+                    var authenticatorTrue = document.createElement('div');
+
+                    authenticatorTrue.className = 'authenticator-true';
+                    authenticatorTrue.innerHTML = 'Аутентификация подключена';
+
+                    keyHidden.value = '';
+                    $('.contact-information button').html('Поключено');
+                    mainSearchAuthenticator.innerHTML = '';
+                    mainSearchAuthenticator.prepend(authenticatorTrue);
+
+                    setTimeout(function () {
+                        mainSearchAuthenticator.style.display = 'none';
+                    }, 4000);
                 })
             };
 
@@ -51,9 +64,10 @@ function authenticator() {
 
             $('.content').prepend(mainSearchAuthenticator);
             mainSearchAuthenticator.append(title, imageKey, keyHidden, key, submitBtn);
+
         },
         error: function (data) {
-            console.log('Нет данных для утентификации ', data);
+            console.log('Нет данных для аутентификации ', data);
         }
     });
 }
@@ -65,11 +79,18 @@ $(document).ready(function () {
         method: 'GET',
         url: '/api/user?extend=1',
         dataType: 'Json',
-        success: function (test) {
-            console.log('Данные утентификации test - ', test.response);
+        success: function (data) {
+            console.log('Данные утентификации test - ', data.response);
+
+            if (data.response.auth_2factor === 2) {
+                console.log('Вы уже подключили 2-ую аутентификацию');
+
+                $('.contact-information button').html('Поключено').attr('disabled', 'disabled');
+
+            }
         },
-        error: function (test) {
-            console.log('Нет данных для утентификации test - ', test);
+        error: function (data) {
+            console.log('Нет данных для утентификации test - ', data.response);
         }
     });
 
