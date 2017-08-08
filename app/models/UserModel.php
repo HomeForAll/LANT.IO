@@ -1603,7 +1603,9 @@ class UserModel extends Model
         }
 
         $ga = new PHPGangsta_GoogleAuthenticator();
-        $_SESSION['user']['ga_secret'] = $ga->createSecret();
+		if (!isset($_SESSION['user']['ga_secret'])) {
+        	$_SESSION['user']['ga_secret'] = $ga->createSecret();
+		}
         $this->response([
             'qr_img_url' => $ga->getQRCodeGoogleUrl("LANT.IO ({$_SESSION['user']['email']})", $_SESSION['user']['ga_secret']),
             'secret_key' => $_SESSION['user']['ga_secret'],
@@ -1664,7 +1666,7 @@ class UserModel extends Model
             $this->response(self::USER_NOT_AUTHORIZED_ERROR);
         }
 
-        if (!isset($_POST['code'])) {
+        if (!isset($_REQUEST['code'])) {
             $this->response(self::BAD_REQUEST_ERROR);
         }
 
@@ -1674,7 +1676,7 @@ class UserModel extends Model
 
         $ga = new PHPGangsta_GoogleAuthenticator();
 
-        if ($ga->verifyCode($_SESSION['user']['ga_secret'], $_POST['code'])) {
+        if ($ga->verifyCode($_SESSION['user']['ga_secret'], $_REQUEST['code'])) {
             $query = $this->db->prepare('UPDATE users SET ga_secret_key = :secret, auth_2factor = 2 WHERE id = :user_id');
             $query->execute([
                 ':secret' => $_SESSION['user']['ga_secret'],
