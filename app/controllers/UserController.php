@@ -82,5 +82,17 @@ class UserController extends Controller
     public function actionOAuth($data = null)
     {
         $this->model('UserModel')->getOAuthData($data);
+        $user_id = $this->model('UserModel')->socialNetUserIDCheck();
+
+                if (!empty($user_id)) {
+                    $this->model('UserModel')->socialNetLogin($user_id);
+                    $this->model('UserModel')->socialNetRedirect();
+                } else{
+                    $user_id = $this->model('UserModel')->socialNetRegistration();
+                    $this->model('UserModel')->socialNetLogin($user_id);
+                    $this->model('UserModel')->socialNetRedirect();
+//                    header('Location: ' . $this->config['registration_url']);
+//                    exit;
+                }
     }
 }
