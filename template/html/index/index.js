@@ -134,11 +134,13 @@ $(function(){
                 if (data.response.auth_type == 'ga') {
                     // tmp_hash
                     //$(".dialog-2factor").find('.error').html(data.response.tmp_hash);
+                    $(".dialog-2factor").find('input[name=url]').val('/api/authenticator/verify');
                     $(".dialog-2factor").find('input[name=login]').val(data_login.login);
                     $(".dialog-2factor").find('input[name=hash]').val(data.response.tmp_hash);
                     $(".dialog-2factor").arcticmodal();
                 } else if (data.response.auth_type == 'sms') {
                     // tmp_hash
+                    $(".dialog-2factor").find('input[name=url]').val('/api/sms.AuthByCode');
                     $(".dialog-2factor").find('input[name=login]').val(data_login.login);
                     $(".dialog-2factor").find('input[name=hash]').val(data.response.tmp_hash);
                     $(".dialog-2factor").arcticmodal();
@@ -165,7 +167,7 @@ $(function(){
         if (errors) {
             error.html(errors);
         } else {
-            $.post('/api/authenticator/verify', data, function(data) {
+            $.post(data.url, data, function(data) {
                 console.log(data);
                 if (data.response) {
                     location.reload();
