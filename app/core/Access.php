@@ -36,7 +36,12 @@ class Access
      */
     public function checkAccessLevel()
     {
-        $user_st = (int)$_SESSION['status'];
+        if(isset($_SESSION['status'])){
+            $user_st = (int)$_SESSION['status'];
+        }else{
+            $user_st = 0;
+        }
+
 
        //статус пользователя в Базе Данных
         $user = [];

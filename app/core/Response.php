@@ -48,6 +48,7 @@ class Response
     const PHONE_IS_EXIST_ERROR = 2014;
     const SMS_NOT_SENT_ERROR = 2015;
     const SMS_API_REQUEST_FAILED_ERROR = 2016;
+    const SOCIAL_NET_DATA_ERROR = 2017;
 
     // Загрузка файлов
     const NO_FILE_ERROR = 3000;
@@ -125,6 +126,7 @@ class Response
         2014 => 'Такой телефон уже зарегистрирован',
         2015 => 'SMS небыло отправлено',
         2016 => 'Ошибка запроса к SMS.RU',
+        2017 => 'Ошибка при получении данных от соц. сетей',
 
         // Загрузка файлов 3000-4000:
         3000 => 'Отсутствуют файлы для загрузки',

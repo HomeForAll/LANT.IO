@@ -52,6 +52,7 @@
                 <p>Параметры безопасности:</p>
                 <label>Старый пароль<input type="password" placeholder="Введите пароль" name="series" /></label>
                 <label>Новый пароль<input type="password" placeholder="Введите пароль" name="passport-id" /></label>
+                <label>Двух этапная аутентификация<button onclick="authenticator();">Поключить</button></label>
             </div>
         </div>
         <div class="user-all-information">

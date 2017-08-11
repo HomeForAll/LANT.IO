@@ -1,7 +1,98 @@
 'use strict';
 var leftBar = false;
 
+/** Двух этапная аутентификация **/
+function authenticator() {
+    $('.search-authenticator').remove();
+    $.ajax({
+        method: 'GET',
+        url: '/api/authenticator/create/secret',
+        dataType: 'Json',
+        success: function (data) {
+
+            console.log('data.response - ', data.response);
+
+            var mainSearchAuthenticator = document.createElement('div'),
+                title = document.createElement('div'),
+                imageKey = document.createElement('img'),
+                key = document.createElement('input'),
+                keyHidden = document.createElement('input'),
+                submitBtn = document.createElement('button');
+
+            mainSearchAuthenticator.className = 'authenticator-cl';
+
+            title.innerHTML = 'Введите код<i class="fa fa-times" onclick="$(function() {$(\'.search-authenticator\').remove();})" aria-hidden="true"></i>';
+            submitBtn.innerHTML = 'Отправить';
+
+            imageKey.setAttribute('src', data.response.qr_img_url);
+            key.setAttribute('type', 'hidden');
+            key.setAttribute('placeholder', 'Hash');
+            keyHidden.setAttribute('type', 'text');
+            keyHidden.setAttribute('pattern', '^[0-9]+$');
+            keyHidden.setAttribute('required', 'required');
+
+            key.value = data.response.secret_key;
+
+            /** Отправляем уже сгенирированный QR-код **/
+            submitBtn.onclick = function () {
+                $.ajax({
+                    method: 'POST',
+                    url: '/api/authenticator/save',
+                    data: {
+                        secret_key: key.value,
+                        code: keyHidden.value
+                    },
+                    dataType: 'Json'
+                }).done(function () {
+                    var authenticatorTrue = document.createElement('div');
+
+                    authenticatorTrue.className = 'authenticator-true';
+                    authenticatorTrue.innerHTML = 'Аутентификация подключена';
+
+                    keyHidden.value = '';
+                    $('.contact-information button').html('Поключено');
+                    mainSearchAuthenticator.innerHTML = '';
+                    mainSearchAuthenticator.prepend(authenticatorTrue);
+
+                    setTimeout(function () {
+                        mainSearchAuthenticator.style.display = 'none';
+                    }, 4000);
+                })
+            };
+
+            mainSearchAuthenticator.className = 'search-authenticator';
+
+            $('.content').prepend(mainSearchAuthenticator);
+            mainSearchAuthenticator.append(title, imageKey, keyHidden, key, submitBtn);
+
+        },
+        error: function (data) {
+            console.log('Нет данных для аутентификации ', data);
+        }
+    });
+}
+
 $(document).ready(function () {
+
+    /** Двух этапная аутентификация **/
+    $.ajax({
+        method: 'GET',
+        url: '/api/user?extend=1',
+        dataType: 'Json',
+        success: function (data) {
+            console.log('Данные утентификации test - ', data.response);
+
+            if (data.response.auth_2factor === 2) {
+                console.log('Вы уже подключили 2-ую аутентификацию');
+
+                $('.contact-information button').html('Поключено').attr('disabled', 'disabled');
+
+            }
+        },
+        error: function (data) {
+            console.log('Нет данных для утентификации test - ', data.response);
+        }
+    });
 
     /** Получаем данные о пользователе **/
     $.ajax({
@@ -9,8 +100,6 @@ $(document).ready(function () {
         url: '/api/profile/get/profile',
         dataType: 'Json',
         success: function (data) {
-
-            console.log('Нужный параметр - ', data);
 
             if (!data) return false;
 
@@ -39,8 +128,6 @@ $(document).ready(function () {
         e.preventDefault();
         var data = $(this).serialize();
 
-        console.log('Собранные данные', data);
-
         if ($('.user-data input').val() === '') {
             $('.header').append('<div class="message">Зарегистрируйтесь</div>');
             setTimeout(function () {
@@ -57,8 +144,7 @@ $(document).ready(function () {
             dataType: 'Json',
             data: data,
             success: function () {
-                console.log('Данные отправлены', data);
-                $('.header').append('<div class="message">сохранено</div>');
+                $('.header').append('<div class="message">отправлено</div>');
                 setTimeout(function () {
                     $('.message').fadeOut('slow', function () {
                         $(this).remove();

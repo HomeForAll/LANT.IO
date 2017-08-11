@@ -7,6 +7,8 @@ class UserModel extends Model
     use Cleaner;
 
     private $socialNets;
+    private $socialNetData;
+    private $socialNetReturnURL;
 
     public function __construct()
     {
@@ -52,14 +54,14 @@ class UserModel extends Model
 
                         $this->response([
                             'auth_type' => 'sms',
-                            'tmp_hash' => $_SESSION['user']['tmp_hash'],
+                            'tmp_hash'  => $_SESSION['user']['tmp_hash'],
                         ]);
                         break;
                     case 2:
                         $_SESSION['user']['tmp_hash'] = hash('SHA256', mt_rand(1, 10000) . time());
                         $this->response([
                             'auth_type' => 'ga',
-                            'tmp_hash' => $_SESSION['user']['tmp_hash'],
+                            'tmp_hash'  => $_SESSION['user']['tmp_hash'],
                         ]);
                         break;
                 }
@@ -144,12 +146,12 @@ class UserModel extends Model
 
                     $this->response([
                         'count' => count($result),
-                        'data' => $data,
+                        'data'  => $data,
                     ]);
                 } else {
                     $this->response([
                         'count' => 0,
-                        'data' => [],
+                        'data'  => [],
                     ]);
                 }
                 break;
@@ -187,12 +189,12 @@ class UserModel extends Model
 
                     $this->response([
                         'count' => count($result),
-                        'data' => $data,
+                        'data'  => $data,
                     ]);
                 } else {
                     $this->response([
                         'count' => 0,
-                        'data' => [],
+                        'data'  => [],
                     ]);
                 }
                 break;
@@ -230,12 +232,12 @@ class UserModel extends Model
 
                     $this->response([
                         'count' => count($result),
-                        'data' => $data,
+                        'data'  => $data,
                     ]);
                 } else {
                     $this->response([
                         'count' => 0,
-                        'data' => [],
+                        'data'  => [],
                     ]);
                 }
                 break;
@@ -299,12 +301,12 @@ class UserModel extends Model
 
                     $this->response([
                         'count' => count($result),
-                        'data' => $data,
+                        'data'  => $data,
                     ]);
                 } else {
                     $this->response([
                         'count' => 0,
-                        'data' => [],
+                        'data'  => [],
                     ]);
                 }
                 break;
@@ -342,12 +344,12 @@ class UserModel extends Model
 
                     $this->response([
                         'count' => count($result),
-                        'data' => $data,
+                        'data'  => $data,
                     ]);
                 } else {
                     $this->response([
                         'count' => 0,
-                        'data' => [],
+                        'data'  => [],
                     ]);
                 }
                 break;
@@ -385,12 +387,12 @@ class UserModel extends Model
 
                     $this->response([
                         'count' => count($result),
-                        'data' => $data,
+                        'data'  => $data,
                     ]);
                 } else {
                     $this->response([
                         'count' => 0,
-                        'data' => [],
+                        'data'  => [],
                     ]);
                 }
                 break;
@@ -455,12 +457,12 @@ class UserModel extends Model
 
                         $this->response([
                             'count' => count($result),
-                            'data' => $data,
+                            'data'  => $data,
                         ]);
                     } else {
                         $this->response([
                             'count' => 0,
-                            'data' => [],
+                            'data'  => [],
                         ]);
                     }
                     break;
@@ -498,12 +500,12 @@ class UserModel extends Model
 
                         $this->response([
                             'count' => count($result),
-                            'data' => $data,
+                            'data'  => $data,
                         ]);
                     } else {
                         $this->response([
                             'count' => 0,
-                            'data' => [],
+                            'data'  => [],
                         ]);
                     }
                     break;
@@ -541,12 +543,12 @@ class UserModel extends Model
 
                         $this->response([
                             'count' => count($result),
-                            'data' => $data,
+                            'data'  => $data,
                         ]);
                     } else {
                         $this->response([
                             'count' => 0,
-                            'data' => [],
+                            'data'  => [],
                         ]);
                     }
                     break;
@@ -592,12 +594,12 @@ class UserModel extends Model
 
                         $this->response([
                             'count' => count($result),
-                            'data' => $data,
+                            'data'  => $data,
                         ]);
                     } else {
                         $this->response([
                             'count' => 0,
-                            'data' => [],
+                            'data'  => [],
                         ]);
                     }
                     break;
@@ -635,12 +637,12 @@ class UserModel extends Model
 
                         $this->response([
                             'count' => count($result),
-                            'data' => $data,
+                            'data'  => $data,
                         ]);
                     } else {
                         $this->response([
                             'count' => 0,
-                            'data' => [],
+                            'data'  => [],
                         ]);
                     }
                     break;
@@ -678,12 +680,12 @@ class UserModel extends Model
 
                         $this->response([
                             'count' => count($result),
-                            'data' => $data,
+                            'data'  => $data,
                         ]);
                     } else {
                         $this->response([
                             'count' => 0,
-                            'data' => [],
+                            'data'  => [],
                         ]);
                     }
                     break;
@@ -695,7 +697,7 @@ class UserModel extends Model
     {
         $this->response([
             'count' => 0,
-            'data' => [],
+            'data'  => [],
         ]);
     }
 
@@ -753,7 +755,7 @@ class UserModel extends Model
         $query->execute(
             [
                 ":active" => $str_for_active,
-                ":id" => $userID,
+                ":id"     => $userID,
             ]
         );
 
@@ -907,13 +909,13 @@ class UserModel extends Model
 
             $query->execute(
                 [
-                    ':firstName' => $first_name,
-                    ':lastName' => $last_name,
-                    ':phoneNumber' => $phone_number,
-                    ':email' => $email,
-                    ':password' => $password_hash,
-                    ':serviceID' => $service_id,
-                    ':serviceName' => $name,
+                    ':firstName'     => $first_name,
+                    ':lastName'      => $last_name,
+                    ':phoneNumber'   => $phone_number,
+                    ':email'         => $email,
+                    ':password'      => $password_hash,
+                    ':serviceID'     => $service_id,
+                    ':serviceName'   => $name,
                     ':serviceAvatar' => $avatar,
                 ]
             );
@@ -936,13 +938,13 @@ class UserModel extends Model
             $query = $this->db->prepare("INSERT INTO users (first_name, last_name, patronymic, birthday, phone_number, email, password) VALUES (:firstName, :lastName, :patronymic, :birthday, :phoneNumber, :email, :password)");
             $query->execute(
                 [
-                    ':firstName' => $first_name,
-                    ':lastName' => $last_name,
-                    ':patronymic' => $patronymic,
-                    ':birthday' => $birthday,
+                    ':firstName'   => $first_name,
+                    ':lastName'    => $last_name,
+                    ':patronymic'  => $patronymic,
+                    ':birthday'    => $birthday,
                     ':phoneNumber' => $phone_number,
-                    ':email' => $email,
-                    ':password' => $password_hash,
+                    ':email'       => $email,
+                    ':password'    => $password_hash,
                 ]
             );
 
@@ -957,42 +959,168 @@ class UserModel extends Model
     public function getOAuthData($data)
     {
         $this->socialNets->setState(isset($_GET['state']) ? $_GET['state'] : $data[1]); // Если в GET запросе присутствует параметр "state", тогда используем его
-
         switch ($data[0]) {
             case 'vk':
-                $this->socialNets->vk();
+                $this->socialNetData = $this->socialNets->vk();
+                $this->socialNetData["service"] = 'vk';
                 break;
             case 'ok':
-                $this->socialNets->ok();
+                $this->socialNetData = $this->socialNets->ok();
+                $this->socialNetData["service"] = 'ok';
                 break;
             case 'mail':
-                $this->socialNets->mail();
+                $this->socialNetData = $this->socialNets->mail();
+                $this->socialNetData["service"] = 'mail';
                 break;
             case 'ya':
-                $this->socialNets->ya();
+                $this->socialNetData = $this->socialNets->ya();
+                $this->socialNetData["service"] = 'ya';
                 break;
             case 'google':
-                $this->socialNets->google();
+                $this->socialNetData = $this->socialNets->google();
+                $this->socialNetData["service"] = 'google';
                 break;
             case 'fb':
-                $this->socialNets->fb();
+                $this->socialNetData = $this->socialNets->fb();
+                $this->socialNetData["service"] = 'facebook';
                 break;
             case 'steam':
-                $this->socialNets->steam();
+                $this->socialNetData = $this->socialNets->steam();
+                $this->socialNetData["service"] = 'steam';
                 break;
+            default:
+                //TODO: ошибка данных, при регистрации через соц. сети
         }
+
+        return;
+    }
+
+    public function socialNetUserIDCheck()
+    {
+        $service = $this->socialNetData['service'];
+        if ($service) {
+            $sql = 'SELECT id'
+                . ' FROM users'
+                . ' WHERE ' . $service . '_id = :user_id';
+
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindParam(':user_id', $this->socialNetData["user_id"], PDO::PARAM_INT);
+            if (!$stmt->execute()) {
+                $this->error(self::DB_SELECT_ERROR);
+            }
+            $user_id = $stmt->fetchColumn();
+        } else {
+            //TODO: ошибка данных, полученых при регистрации через соц. сети
+        }
+
+        return $user_id;
+    }
+
+    public function socialNetLogin($user_id)
+    {
+        if (empty($user_id)) {
+            $this->error(self::LOGIN_INCORRECT_ERROR, $stmt->errorInfo());
+        }
+        $_SESSION['user']['id'] = $user_id;
+        $_SESSION['authorized'] = true;
+    }
+
+    public function socialNetRegistration()
+    {
+        if (empty($this->socialNetData)) {
+            $this->error(self::SOCIAL_NET_DATA_ERROR, $stmt->errorInfo());
+        }
+        //Запись полученных данных от соц. сети в БД и получение нового user_id
+        //Приведение данных и имен для записи
+        $social_net = [];
+        $social_net[$this->socialNetData['service'] . '_id'] = (string)$this->socialNetData['user_id'];
+        if (!empty($this->socialNetData['first_name'])) {
+            $social_net[$this->socialNetData['service'] . '_name'] = $this->socialNetData['first_name'];
+            $social_net['first_name'] = $this->socialNetData['first_name'];
+        }
+        if (!empty($this->socialNetData['last_name'])) {
+            $social_net[$this->socialNetData['service'] . '_name'] .= ' ' . $this->socialNetData['last_name'];
+            $social_net['last_name'] = $this->socialNetData['last_name'];
+        }
+        if (!empty($this->socialNetData['avatar'])) {
+            $social_net[$this->socialNetData['service'] . '_avatar'] = $this->socialNetData['avatar'];
+        }
+        if (!empty($this->socialNetData['birthday'])) {
+            $social_net['birthday'] = $this->socialNetData['birthday'];
+        }
+        if (!empty($this->socialNetData['phone_number'])) {
+            $social_net['phone_number'] = $this->socialNetData['phone_number'];
+        }
+        if (!empty($this->socialNetData['email'])) {
+            $social_net['email'] = $this->socialNetData['email'];
+        }
+
+        $sql = "INSERT INTO users (";
+        foreach ($social_net as $key => $val) {
+            $sql = $sql . $key . ', ';
+        }
+        // удаляем последнюю запятую
+        $sql .= 'phone_number, email, password, welcome';
+        $sql = $sql . ') VALUES (';
+        foreach ($social_net as $key => $val) {
+            $sql = $sql . ':' . $key . ', ';
+        }
+        if (isset($social_net['phone_number'])) {
+            $sql .= $social_net['phone_number'] . ', ';
+        } else {
+            $sql .= '0, ';
+        }
+        if (isset($social_net['email'])) {
+            $sql .= $social_net['email'] . ', ';
+        } else {
+            $sql .= '0, ';
+        }
+        $sql .= '0,' . time();
+        $sql = $sql . ') RETURNING id';
+        $stmt = $this->db->prepare($sql);
+
+        foreach ($social_net as $key => $val) {
+            $p = ':' . $key;
+            $stmt->bindParam($p, $social_net[$key]);
+        }
+        if (isset($social_net['first_name'])) {
+            $stmt->bindParam(':first_name', $social_net['first_name']);
+        }
+        if (isset($social_net['last_name'])) {
+            $stmt->bindParam(':last_name', $social_net['last_name']);
+        }
+        if (isset($social_net['birthday'])) {
+            $stmt->bindParam(':birthday', $social_net['birthday']);
+        }
+
+
+        if (!$stmt->execute()) {
+            $this->error(self::DB_EXECUTE_ERROR);
+        }
+        $user_id = $stmt->fetchColumn();
+
+        return $user_id;
+    }
+
+    public function socialNetRedirect()
+    {
+        if (!$this->socialNetReturnURL) {
+            $this->socialNetReturnURL = 'http://' . $_SERVER['HTTP_HOST'];
+        }
+        header('Location: ' . $this->socialNetReturnURL);
+        exit;
     }
 
     public function OAuthLogin($service, $id)
     {
         $services = [
-            'vk' => 'vk_id',
-            'ok' => 'ok_id',
-            'mail' => 'mail_id',
-            'ya' => 'ya_id',
+            'vk'     => 'vk_id',
+            'ok'     => 'ok_id',
+            'mail'   => 'mail_id',
+            'ya'     => 'ya_id',
             'google' => 'google_id',
-            'fb' => 'facebook_id',
-            'steam' => 'steam_id',
+            'fb'     => 'facebook_id',
+            'steam'  => 'steam_id',
         ];
 
         // TODO: Убрать после удаления методов из DataBase::class
@@ -1155,9 +1283,9 @@ class UserModel extends Model
         curl_setopt($ch, CURLOPT_TIMEOUT, 30);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
             "api_id" => Registry::get('config')['sms_api_key'],
-            "to" => $phone, // До 100 штук до раз
-            "msg" => "Ваш код: {$code}",
-            "json" => 1 // Для получения более развернутого ответа от сервера
+            "to"     => $phone, // До 100 штук до раз
+            "msg"    => "Ваш код: {$code}",
+            "json"   => 1 // Для получения более развернутого ответа от сервера
         ]));
 
         $body = curl_exec($ch);
@@ -1261,7 +1389,7 @@ class UserModel extends Model
             $query->execute(
                 [
                     ':first_name' => $_POST['firname'],
-                    ':user_id' => $_SESSION['user']['id'],
+                    ':user_id'    => $_SESSION['user']['id'],
                 ]
             );
 
@@ -1275,7 +1403,7 @@ class UserModel extends Model
             $query->execute(
                 [
                     ':last_name' => $_POST['surname'],
-                    ':user_id' => $_SESSION['user']['id'],
+                    ':user_id'   => $_SESSION['user']['id'],
                 ]
             );
 
@@ -1303,7 +1431,7 @@ class UserModel extends Model
             $query->execute(
                 [
                     ':brand_name' => $_POST['brand'],
-                    ':user_id' => $_SESSION['user']['id'],
+                    ':user_id'    => $_SESSION['user']['id'],
                 ]
             );
 
@@ -1317,7 +1445,7 @@ class UserModel extends Model
             $query->execute(
                 [
                     ':company_name' => $_POST['company'],
-                    ':user_id' => $_SESSION['user']['id'],
+                    ':user_id'      => $_SESSION['user']['id'],
                 ]
             );
 
@@ -1476,9 +1604,9 @@ class UserModel extends Model
 
         if (!isset($_SESSION['user']['id'])) {
             $this->response([
-                'id' => session_id(),
+                'id'     => session_id(),
                 'status' => -1,
-                'hash' => hash('sha512', 'user_id=' . session_id() . 'secret_key=' . Registry::get('config')['secret_key']),
+                'hash'   => hash('sha512', 'user_id=' . session_id() . 'secret_key=' . Registry::get('config')['secret_key']),
             ]);
         }
 
@@ -1497,14 +1625,14 @@ class UserModel extends Model
             $this->response($user);
         } else {
             $this->response([
-                'id' => $user['id'],
+                'id'              => $user['id'],
                 'avatar_original' => isset($user['avatar_original']) ? $user['avatar_original'] : null,
-                'avatar_50' => isset($user['avatar_50']) ? $user['avatar_50'] : null,
-                'avatar_100' => isset($user['avatar_100']) ? $user['avatar_100'] : null,
-                'name' => $user['first_name'] . ' ' . $user['last_name'],
-                'email' => $user['email'],
-                'status' => $user['status'],
-                'hash' => $_SESSION['user_hash'],
+                'avatar_50'       => isset($user['avatar_50']) ? $user['avatar_50'] : null,
+                'avatar_100'      => isset($user['avatar_100']) ? $user['avatar_100'] : null,
+                'name'            => $user['first_name'] . ' ' . $user['last_name'],
+                'email'           => $user['email'],
+                'status'          => $user['status'],
+                'hash'            => $_SESSION['user_hash'],
             ]);
         }
     }
@@ -1553,7 +1681,7 @@ class UserModel extends Model
                     $query = $this->db->prepare('UPDATE users SET restore_hash = :restore_hash WHERE id = :user_id');
                     $query->execute([
                         ':restore_hash' => $restore_hash,
-                        ':user_id' => $user['id'],
+                        ':user_id'      => $user['id'],
                     ]);
 
                     if ($query->errorCode() !== '00000') {
@@ -1679,7 +1807,7 @@ class UserModel extends Model
         if ($ga->verifyCode($_SESSION['user']['ga_secret'], $_REQUEST['code'], 2)) {
             $query = $this->db->prepare('UPDATE users SET ga_secret_key = :secret, auth_2factor = 2 WHERE id = :user_id');
             $query->execute([
-                ':secret' => $_SESSION['user']['ga_secret'],
+                ':secret'  => $_SESSION['user']['ga_secret'],
                 ':user_id' => $_SESSION['user']['id'],
             ]);
 
