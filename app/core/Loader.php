@@ -1,5 +1,4 @@
 <?php
-
 class Loader
 {
     private static $paths = array();

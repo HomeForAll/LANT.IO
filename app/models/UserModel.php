@@ -1019,7 +1019,7 @@ class UserModel extends Model
     public function socialNetLogin($user_id)
     {
         if (empty($user_id)) {
-            $this->error(self::LOGIN_INCORRECT_ERROR, $stmt->errorInfo());
+            $this->error(self::LOGIN_INCORRECT_ERROR);
         }
         $_SESSION['user']['id'] = $user_id;
         $_SESSION['authorized'] = true;
@@ -1028,7 +1028,7 @@ class UserModel extends Model
     public function socialNetRegistration()
     {
         if (empty($this->socialNetData)) {
-            $this->error(self::SOCIAL_NET_DATA_ERROR, $stmt->errorInfo());
+            $this->error(self::SOCIAL_NET_DATA_ERROR);
         }
         //Запись полученных данных от соц. сети в БД и получение нового user_id
         //Приведение данных и имен для записи
@@ -1646,6 +1646,13 @@ class UserModel extends Model
         unset($_SESSION['firstName']);
         unset($_SESSION['lastName']);
         unset($_SESSION['user_hash']);
+
+        unset($_SESSION['OAuth_user_id']);
+        unset($_SESSION['OAuth_avatar']);
+        unset($_SESSION['OAuth_first_name']);
+        unset($_SESSION['OAuth_last_name']);
+        unset($_SESSION['OAuth_service']);
+        unset($_SESSION['OAuth_state']);
 
         $this->response(true);
     }
