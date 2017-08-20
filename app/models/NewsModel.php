@@ -1369,14 +1369,16 @@ class NewsModel extends Model
         $data = [];
 
         //Заданное время начала поиска ($time - час)
-        //Текущая Дата в формате стандарта ISO 8601
-        $news_date = $this->dateFormatForDB($time);
+        $news_date = time() - ($time * 60 * 60);
+        if ($news_date < 0) {
+            $this->error(self::DATE_INCORRECT_ERROR);
+        }
+        //$news_date = $this->dateFormatForDB($time);
 
         $sql = "SELECT n.id_news, to_char(n.date,'YYYY-MM-DD HH24:MI:SS') as date, n.title,"
             . " n.space_type, n.operation_type, n.object_type, n.city,"
             . " n.content, n.user_id, n.status,  n.price, n.lease, n.space,"
-            . " (n.rating_views + n.rating_admin+n.rating_donate) as rating,"
-            . " n.not_residential,"
+            . " n.not_residential, n.date_best, n.rating_best,"
             . " n.number_of_rooms, n.metro_station, n.time_walk, n.time_car, n.lat, n.lng,"
             . " i.original, i.s_250_140, i.s_500_280, i.s_360_230, i.s_720_460, i.ad_id";
 
@@ -1392,10 +1394,10 @@ class NewsModel extends Model
         if (!empty($this->user_id)) {
             $sql .= " LEFT JOIN favorite_ads f ON (n.id_news = f.ad_id AND f.user_id = " . $this->user_id . ")";
         }
-        $sql .= " WHERE (n.date >= :date)";
+        $sql .= " WHERE (n.date_best >= :date)";
 
         // Только активные(видимые)
-        $sql .= "AND (status = 1) ";
+        $sql .= "AND (status > 0) ";
 
         if ($space_type != 0) {
             $sql .= "AND (space_type = :space_type) ";
@@ -1422,7 +1424,7 @@ class NewsModel extends Model
             $sql .= "AND (space <= :space_to) ";
         }
 
-        $sql .= " ORDER BY rating DESC"
+        $sql .= " ORDER BY n.rating_best DESC"
             . " LIMIT :max_number";
 
         $stmt = $this->db->prepare($sql);
