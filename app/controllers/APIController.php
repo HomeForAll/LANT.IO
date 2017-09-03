@@ -240,9 +240,17 @@ class APIController extends Controller
 
     public function actionItemsAdd()
     {
-        $keys = $this->model('SearchModel')->getKeys();
+        $keys = $this->model('SearchModel')->getKeys(); /* Массив соответствия ключа к названию колонки в таблице */
         $form_data = $this->model('NewsModel')->getRequestForItemsAddFromPOST($keys);
         $this->model('NewsModel')->makeNewsInsert($form_data['ad'], $form_data['photos']);
+        echo json_encode($this->model('NewsModel')->getResponse(), JSON_UNESCAPED_UNICODE);
+    }
+
+    public function actionItemsUpdate()
+    {
+        $keys = $this->model('SearchModel')->getKeys(); /* Массив соответствия ключа к названию колонки в таблице */
+        $form_data = $this->model('NewsModel')->getRequestForItemsAddFromPOST($keys);
+        $this->model('NewsModel')->makeNewsUpdate($form_data['id_news'], $form_data['ad'], $form_data['photos']);
         echo json_encode($this->model('NewsModel')->getResponse(), JSON_UNESCAPED_UNICODE);
     }
 
@@ -299,7 +307,7 @@ class APIController extends Controller
             $id = (int)$_POST['id'];
         }
 
-        if(!empty($id)){
+        if (!empty($id)) {
             $this->model('NewsModel')->getAdById($id);
         }
         echo json_encode($this->model('NewsModel')->getResponse(), JSON_UNESCAPED_UNICODE);
