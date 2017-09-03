@@ -79,6 +79,8 @@ class Response
     const METRO_STATION_INCORRECT_CODE_ERROR = 5002;
     const CITY_INCORRECT_CODE_ERROR = 5003;
     const MISSING_VALUES_IN_AD_RECORDING_POST_FILTER = 5004;
+    const MISSING_ADD_ID = 5005;
+    const ADDS_IMAGES_EXECUTE_ERROR = 5006;
 
     // Восстановлени пароля
     const EMAIL_MESSAGE_SEND_ERROR = 6000;
@@ -157,6 +159,8 @@ class Response
         5002 => 'Нет соответствующего индекса станции метро в БД',
         5003 => 'Нет соответствующего индекса города в БД',
         5004 => 'Нет соответствия POST данным фильтра при записи объявления',
+        5005 => 'Нет ID объявления',
+        5006 => 'Ошибка при запросе добалвения ID в ads_images',
 
         // Восстановление пароля 6000-7000
         6000 => 'Ошибка при отправке Email',
