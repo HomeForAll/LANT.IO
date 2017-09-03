@@ -92,6 +92,7 @@ return [
     'api/stat/trans/close/get/([A-Za-z]+)' => 'main/API/trans/$1',
     'api/items/my' => 'main/API/myAds',
     'api/items/add' => 'main/API/itemsAdd',
+    'api/items/update' => 'main/API/itemsUpdate',
     'api/favorite/add' => 'main/API/adInFavorite',
     'api/favorite/remove' => 'main/API/adOutFavorite',
     'api/favorite/list' => 'main/API/listFavorite',
